@@ -28,8 +28,8 @@
       <list type="bullet">
         <item>
           <para
-            >Apply the <see cref="T:System.Runtime.InteropServices.WindowsRuntime.ReadOnlyArrayAttribute" /> attribute if you intend the contents of the array to be used for input only. </para
-          >
+            >Apply the <see cref="T:System.Runtime.InteropServices.WindowsRuntime.ReadOnlyArrayAttribute" /> attribute if you intend the contents of the array to be used for input only.
+          </para>
         </item>
         <item>
           <para
@@ -45,13 +45,13 @@
       >
       <block subset="none" type="note">
         <para
-          >Parameters that have the <see cref="T:System.Runtime.InteropServices.WindowsRuntime.WriteOnlyArrayAttribute" /> attribute behave differently depending on whether the caller is written in native code or managed code. If the caller is native code (JavaScript or cppwrt), the called method can't make any assumptions about the contents of the original array. For example, the array the method receives might not be initialized, or might contain default values. The method is expected to set the values of all the elements in the array. </para
-        >
+          >Parameters that have the <see cref="T:System.Runtime.InteropServices.WindowsRuntime.WriteOnlyArrayAttribute" /> attribute behave differently depending on whether the caller is written in native code or managed code. If the caller is native code (JavaScript or cppwrt), the called method can't make any assumptions about the contents of the original array. For example, the array the method receives might not be initialized, or might contain default values. The method is expected to set the values of all the elements in the array.
+        </para>
         <para>If the caller is managed code, the caller's original array is passed to the called method, as it would be in any method call in the .NET Framework. Array contents are mutable in managed code, so the method can selectively read and change those values. This is important to remember because it affects unit tests written for a wrt component. If the tests are written in managed code, the contents of an array will appear to be mutable during testing, and the results are likely to be different if the method is called from native code later. </para>
       </block>
       <para
-        >Applying this attribute to an out parameter or to a parameter that has the <see cref="T:System.Runtime.InteropServices.InAttribute" /> attribute causes an error when the module is exported. Applying the attribute to a parameter that has the <see cref="T:System.Runtime.InteropServices.OutAttribute" /> attribute causes an error unless the parameter also has the Visual Basic ByRef modifier. In that case, the attribute is redundant but allowed. </para
-      >
+        >Applying this attribute to an out parameter or to a parameter that has the <see cref="T:System.Runtime.InteropServices.InAttribute" /> attribute causes an error when the module is exported. Applying the attribute to a parameter that has the <see cref="T:System.Runtime.InteropServices.OutAttribute" /> attribute causes an error unless the parameter also has the Visual Basic ByRef modifier. In that case, the attribute is redundant but allowed.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -75,8 +75,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.WindowsRuntime.WriteOnlyArrayAttribute" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.WindowsRuntime.WriteOnlyArrayAttribute" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>

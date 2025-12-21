@@ -26,23 +26,23 @@
         >The collection dynamically increases in size as objects are added. Indexes in this collection are zero-based. Use the <see cref="P:System.Web.UI.Design.TemplateGroupCollection.Count" /> property to determine how many groups are in the collection.</para
       >
       <para
-        >Additionally, use the <see cref="T:System.Web.UI.Design.TemplateGroupCollection" /> methods and properties to provide the following functionality: </para
-      >
+        >Additionally, use the <see cref="T:System.Web.UI.Design.TemplateGroupCollection" /> methods and properties to provide the following functionality:
+      </para>
       <list type="bullet">
         <item>
           <para
-            >The <see cref="M:System.Web.UI.Design.TemplateGroupCollection.Add(System.Web.UI.Design.TemplateGroup)" /> method to add a single group to the collection. </para
-          >
+            >The <see cref="M:System.Web.UI.Design.TemplateGroupCollection.Add(System.Web.UI.Design.TemplateGroup)" /> method to add a single group to the collection.
+          </para>
         </item>
         <item>
           <para
-            >The <see cref="M:System.Web.UI.Design.TemplateGroupCollection.Insert(System.Int32,System.Web.UI.Design.TemplateGroup)" /> method to add a group at a particular index within the collection. </para
-          >
+            >The <see cref="M:System.Web.UI.Design.TemplateGroupCollection.Insert(System.Int32,System.Web.UI.Design.TemplateGroup)" /> method to add a group at a particular index within the collection.
+          </para>
         </item>
         <item>
           <para
-            >The <see cref="M:System.Web.UI.Design.TemplateGroupCollection.Remove(System.Web.UI.Design.TemplateGroup)" /> method to remove a group. </para
-          >
+            >The <see cref="M:System.Web.UI.Design.TemplateGroupCollection.Remove(System.Web.UI.Design.TemplateGroup)" /> method to remove a group.
+          </para>
         </item>
         <item>
           <para
@@ -51,13 +51,13 @@
         </item>
         <item>
           <para
-            >The <see cref="M:System.Web.UI.Design.TemplateGroupCollection.Contains(System.Web.UI.Design.TemplateGroup)" /> method to determine whether a particular group is already in the collection. </para
-          >
+            >The <see cref="M:System.Web.UI.Design.TemplateGroupCollection.Contains(System.Web.UI.Design.TemplateGroup)" /> method to determine whether a particular group is already in the collection.
+          </para>
         </item>
         <item>
           <para
-            >The <see cref="M:System.Web.UI.Design.TemplateGroupCollection.IndexOf(System.Web.UI.Design.TemplateGroup)" /> method to retrieve the index of a group within the collection. </para
-          >
+            >The <see cref="M:System.Web.UI.Design.TemplateGroupCollection.IndexOf(System.Web.UI.Design.TemplateGroup)" /> method to retrieve the index of a group within the collection.
+          </para>
         </item>
         <item>
           <para
@@ -66,11 +66,11 @@
         </item>
         <item>
           <para
-            >The <see cref="M:System.Web.UI.Design.TemplateGroupCollection.AddRange(System.Web.UI.Design.TemplateGroupCollection)" /> method to add multiple groups to the collection. </para
-          >
+            >The <see cref="M:System.Web.UI.Design.TemplateGroupCollection.AddRange(System.Web.UI.Design.TemplateGroupCollection)" /> method to add multiple groups to the collection.
+          </para>
           <para
-            >You can add multiple groups either as an array of groups or as a <see cref="T:System.Web.UI.Design.TemplateGroupCollection" /> object that you retrieve through the <see cref="P:System.Web.UI.Design.ControlDesigner.TemplateGroups" /> property of another control designer. </para
-          >
+            >You can add multiple groups either as an array of groups or as a <see cref="T:System.Web.UI.Design.TemplateGroupCollection" /> object that you retrieve through the <see cref="P:System.Web.UI.Design.ControlDesigner.TemplateGroups" /> property of another control designer.
+          </para>
         </item>
         <item>
           <para
@@ -478,16 +478,16 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified <see cref="T:System.Web.UI.Design.TemplateGroup" /> object from the collection. </para
-          >
+            >Removes the specified <see cref="T:System.Web.UI.Design.TemplateGroup" /> object from the collection.
+          </para>
         </summary>
         <param name="group">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.UI.Design.TemplateGroup" /> to remove from the collection. </param
-        >
+          />The <see cref="T:System.Web.UI.Design.TemplateGroup" /> to remove from the collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RemoveAt">

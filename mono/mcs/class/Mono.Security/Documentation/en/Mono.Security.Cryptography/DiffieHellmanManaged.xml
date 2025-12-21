@@ -68,8 +68,8 @@
           >
           <para
             >A <see cref="T:System.Security.Cryptography.CryptographicException" /> is thrown if <paramref name="p" /> or <paramref name="g" /> is invalid.
-</para
-          >
+
+          </para>
         </remarks>
       </Docs>
       <AssemblyInfo>
@@ -109,8 +109,8 @@
           >
           <para
             >A <see cref="T:System.Security.Cryptography.CryptographicException" /> is thrown if <paramref name="p" /> or <paramref name="g" /> is invalid.
-</para
-          >
+
+          </para>
         </remarks>
       </Docs>
       <AssemblyInfo>

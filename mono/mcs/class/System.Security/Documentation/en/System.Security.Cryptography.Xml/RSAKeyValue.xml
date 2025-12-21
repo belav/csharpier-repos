@@ -36,8 +36,8 @@
         >Use the <see cref="T:System.Security.Cryptography.Xml.RSAKeyValue" /> class whenever you want to add a public key to your XML digital signature.</para
       >
       <para
-        >If a key is not explicitly supplied to the constructor, a new <see cref="T:System.Security.Cryptography.RSA" /> key pair is randomly generated. </para
-      >
+        >If a key is not explicitly supplied to the constructor, a new <see cref="T:System.Security.Cryptography.RSA" /> key pair is randomly generated.
+      </para>
       <para>For more information about the &lt;RSAKeyValue&gt; element, see the W3C specification at www.w3.org/TR/xmldsig-core/.</para>
     </remarks>
     <summary>
@@ -107,8 +107,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The instance of an implementation of <see cref="T:System.Security.Cryptography.RSA" /> that holds the public key. </param
-        >
+          />The instance of an implementation of <see cref="T:System.Security.Cryptography.RSA" /> that holds the public key.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetXml">
@@ -213,8 +213,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML element from which to load the <see cref="T:System.Security.Cryptography.RSA" /> key clause. </param
-        >
+          />The XML element from which to load the <see cref="T:System.Security.Cryptography.RSA" /> key clause.
+        </param>
       </Docs>
     </Member>
   </Members>

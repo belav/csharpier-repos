@@ -90,8 +90,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.DirectoryServices.ResultPropertyValueCollection.Contains(System.Object)" /> method determines whether a specified property value is in this collection.          </para
-          >
+            >The <see cref="M:System.DirectoryServices.ResultPropertyValueCollection.Contains(System.Object)" /> method determines whether a specified property value is in this collection.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -122,8 +122,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.DirectoryServices.ResultPropertyValueCollection.CopyTo(System.Object[],System.Int32)" /> method copies the property values from this collection to an array, starting at a particular index of the array.          </para
-          >
+            >The <see cref="M:System.DirectoryServices.ResultPropertyValueCollection.CopyTo(System.Object[],System.Int32)" /> method copies the property values from this collection to an array, starting at a particular index of the array.
+          </para>
         </summary>
         <param name="index">
           <attribution
@@ -148,8 +148,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.DirectoryServices.ResultPropertyValueCollection.IndexOf(System.Object)" /> method retrieves the index of a specified property value in this collection.          </para
-          >
+            >The <see cref="M:System.DirectoryServices.ResultPropertyValueCollection.IndexOf(System.Object)" /> method retrieves the index of a specified property value in this collection.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -191,8 +191,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Contains the values of a <see cref="T:System.DirectoryServices.SearchResult" /> property.          </para
-      >
+        >Contains the values of a <see cref="T:System.DirectoryServices.SearchResult" /> property.
+      </para>
     </summary>
   </Docs>
 </Type>

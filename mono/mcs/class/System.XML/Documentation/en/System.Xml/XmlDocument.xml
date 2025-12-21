@@ -113,8 +113,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XmlImplementation to use. </param
-        >
+          />The XmlImplementation to use.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -150,12 +150,8 @@
           >
         </summary>
         <param name="nt">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The XmlNameTable to use. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The XmlNameTable to use.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="BaseURI">
@@ -232,8 +228,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to recursively clone the subtree under the specified node; false to clone only the node itself. </param
-        >
+          />true to recursively clone the subtree under the specified node; false to clone only the node itself.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateAttribute">
@@ -279,8 +275,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The qualified name of the attribute. If the name contains a colon, the <see cref="P:System.Xml.XmlNode.Prefix" /> property reflects the part of the name preceding the first colon and the <see cref="P:System.Xml.XmlDocument.LocalName" /> property reflects the part of the name following the first colon. The <see cref="P:System.Xml.XmlNode.NamespaceURI" /> remains empty unless the prefix is a recognized built-in prefix such as xmlns. In this case NamespaceURI has a value of http://www.w3.org/2000/xmlns/. </param
-        >
+          />The qualified name of the attribute. If the name contains a colon, the <see cref="P:System.Xml.XmlNode.Prefix" /> property reflects the part of the name preceding the first colon and the <see cref="P:System.Xml.XmlDocument.LocalName" /> property reflects the part of the name following the first colon. The <see cref="P:System.Xml.XmlNode.NamespaceURI" /> remains empty unless the prefix is a recognized built-in prefix such as xmlns. In this case NamespaceURI has a value of http://www.w3.org/2000/xmlns/.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateAttribute">
@@ -327,15 +323,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The qualified name of the attribute. If the name contains a colon then the <see cref="P:System.Xml.XmlNode.Prefix" /> property will reflect the part of the name preceding the colon and the <see cref="P:System.Xml.XmlDocument.LocalName" /> property will reflect the part of the name after the colon. </param
-        >
+          />The qualified name of the attribute. If the name contains a colon then the <see cref="P:System.Xml.XmlNode.Prefix" /> property will reflect the part of the name preceding the colon and the <see cref="P:System.Xml.XmlDocument.LocalName" /> property will reflect the part of the name after the colon.
+        </param>
         <param name="namespaceURI">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespaceURI of the attribute. If the qualified name includes a prefix of xmlns, then this parameter must be http://www.w3.org/2000/xmlns/. </param
-        >
+          />The namespaceURI of the attribute. If the qualified name includes a prefix of xmlns, then this parameter must be http://www.w3.org/2000/xmlns/.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateAttribute">
@@ -384,22 +380,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The prefix of the attribute (if any). String.Empty and null are equivalent. </param
-        >
+          />The prefix of the attribute (if any). String.Empty and null are equivalent.
+        </param>
         <param name="localName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the attribute. </param
-        >
+          />The local name of the attribute.
+        </param>
         <param name="namespaceURI">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the attribute (if any). String.Empty and null are equivalent. If <paramref name="prefix" /> is xmlns, then this parameter must be http://www.w3.org/2000/xmlns/; otherwise an exception is thrown. </param
-        >
+          />The namespace URI of the attribute (if any). String.Empty and null are equivalent. If <paramref name="prefix" /> is xmlns, then this parameter must be http://www.w3.org/2000/xmlns/; otherwise an exception is thrown.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateCDataSection">
@@ -444,8 +440,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The content of the new XmlCDataSection. </param
-        >
+          />The content of the new XmlCDataSection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateComment">
@@ -490,8 +486,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The content of the new XmlComment. </param
-        >
+          />The content of the new XmlComment.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateDefaultAttribute">
@@ -535,22 +531,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The prefix of the attribute (if any). </param
-        >
+          />The prefix of the attribute (if any).
+        </param>
         <param name="localName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the attribute. </param
-        >
+          />The local name of the attribute.
+        </param>
         <param name="namespaceURI">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the attribute (if any). </param
-        >
+          />The namespace URI of the attribute (if any).
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateDocumentFragment">
@@ -632,12 +628,8 @@
           <para>The new XmlDocumentType.</para>
         </returns>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />Name of the document type. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />Name of the document type.
+        </param>
         <param name="publicId">
           <attribution
             license="cc4"
@@ -657,8 +649,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The DTD internal subset of the document type or null. </param
-        >
+          />The DTD internal subset of the document type or null.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateElement">
@@ -702,8 +694,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The qualified name of the element. If the name contains a colon then the <see cref="P:System.Xml.XmlNode.Prefix" /> property reflects the part of the name preceding the colon and the <see cref="P:System.Xml.XmlDocument.LocalName" /> property reflects the part of the name after the colon. The qualified name cannot include a prefix of'xmlns'. </param
-        >
+          />The qualified name of the element. If the name contains a colon then the <see cref="P:System.Xml.XmlNode.Prefix" /> property reflects the part of the name preceding the colon and the <see cref="P:System.Xml.XmlDocument.LocalName" /> property reflects the part of the name after the colon. The qualified name cannot include a prefix of'xmlns'.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateElement">
@@ -755,15 +747,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The qualified name of the element. If the name contains a colon then the <see cref="P:System.Xml.XmlNode.Prefix" /> property will reflect the part of the name preceding the colon and the <see cref="P:System.Xml.XmlDocument.LocalName" /> property will reflect the part of the name after the colon. The qualified name cannot include a prefix of'xmlns'. </param
-        >
+          />The qualified name of the element. If the name contains a colon then the <see cref="P:System.Xml.XmlNode.Prefix" /> property will reflect the part of the name preceding the colon and the <see cref="P:System.Xml.XmlDocument.LocalName" /> property will reflect the part of the name after the colon. The qualified name cannot include a prefix of'xmlns'.
+        </param>
         <param name="namespaceURI">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element. </param
-        >
+          />The namespace URI of the element.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateElement">
@@ -816,22 +808,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The prefix of the new element (if any). String.Empty and null are equivalent. </param
-        >
+          />The prefix of the new element (if any). String.Empty and null are equivalent.
+        </param>
         <param name="localName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the new element. </param
-        >
+          />The local name of the new element.
+        </param>
         <param name="namespaceURI">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the new element (if any). String.Empty and null are equivalent. </param
-        >
+          />The namespace URI of the new element (if any). String.Empty and null are equivalent.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateEntityReference">
@@ -888,8 +880,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the entity reference. </param
-        >
+          />The name of the entity reference.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateNavigator">
@@ -969,8 +961,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlNode" /> you want the navigator initially positioned on. </param
-        >
+          />The <see cref="T:System.Xml.XmlNode" /> you want the navigator initially positioned on.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateNode">
@@ -1457,22 +1449,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />String version of the <see cref="T:System.Xml.XmlNodeType" /> of the new node. This parameter must be one of the values listed in the table below. </param
-        >
+          />String version of the <see cref="T:System.Xml.XmlNodeType" /> of the new node. This parameter must be one of the values listed in the table below.
+        </param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The qualified name of the new node. If the name contains a colon, it is parsed into <see cref="P:System.Xml.XmlNode.Prefix" /> and <see cref="P:System.Xml.XmlDocument.LocalName" /> components. </param
-        >
+          />The qualified name of the new node. If the name contains a colon, it is parsed into <see cref="P:System.Xml.XmlNode.Prefix" /> and <see cref="P:System.Xml.XmlDocument.LocalName" /> components.
+        </param>
         <param name="namespaceURI">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the new node. </param
-        >
+          />The namespace URI of the new node.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateNode">
@@ -1848,22 +1840,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XmlNodeType of the new node. </param
-        >
+          />The XmlNodeType of the new node.
+        </param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The qualified name of the new node. If the name contains a colon then it is parsed into <see cref="P:System.Xml.XmlNode.Prefix" /> and <see cref="P:System.Xml.XmlDocument.LocalName" /> components. </param
-        >
+          />The qualified name of the new node. If the name contains a colon then it is parsed into <see cref="P:System.Xml.XmlNode.Prefix" /> and <see cref="P:System.Xml.XmlDocument.LocalName" /> components.
+        </param>
         <param name="namespaceURI">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the new node. </param
-        >
+          />The namespace URI of the new node.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateNode">
@@ -2240,29 +2232,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XmlNodeType of the new node. </param
-        >
+          />The XmlNodeType of the new node.
+        </param>
         <param name="prefix">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The prefix of the new node. </param
-        >
+          />The prefix of the new node.
+        </param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the new node. </param
-        >
+          />The local name of the new node.
+        </param>
         <param name="namespaceURI">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the new node. </param
-        >
+          />The namespace URI of the new node.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateProcessingInstruction">
@@ -2308,15 +2300,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the processing instruction. </param
-        >
+          />The name of the processing instruction.
+        </param>
         <param name="data">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data for the processing instruction. </param
-        >
+          />The data for the processing instruction.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateSignificantWhitespace">
@@ -2359,8 +2351,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string must contain only the following characters &amp;#20; &amp;#10; &amp;#13; and &amp;#9; </param
-        >
+          />The string must contain only the following characters &amp;#20; &amp;#10; &amp;#13; and &amp;#9;
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateTextNode">
@@ -2403,8 +2395,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text for the Text node. </param
-        >
+          />The text for the Text node.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateWhitespace">
@@ -2447,8 +2439,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string must contain only the following characters &amp;#20; &amp;#10; &amp;#13; and &amp;#9; </param
-        >
+          />The string must contain only the following characters &amp;#20; &amp;#10; &amp;#13; and &amp;#9;
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateXmlDeclaration">
@@ -2495,12 +2487,8 @@
           <para>The new XmlDeclaration node.</para>
         </returns>
         <param name="version">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The version must be "1.0". </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The version must be "1.0".
+        </param>
         <param name="encoding">
           <attribution
             license="cc4"
@@ -2513,8 +2501,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value must be either "yes" or "no". If this is null or String.Empty, the Save method does not write a standalone attribute on the XML declaration. </param
-        >
+          />The value must be either "yes" or "no". If this is null or String.Empty, the Save method does not write a standalone attribute on the XML declaration.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DocumentElement">
@@ -2630,12 +2618,8 @@
           <para>The XmlElement with the matching ID or null if no matching element is found.</para>
         </returns>
         <param name="elementId">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The attribute ID to match. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The attribute ID to match.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetElementsByTagName">
@@ -2686,8 +2670,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The qualified name to match. It is matched against the Name property of the matching node. The special value "*" matches all tags. </param
-        >
+          />The qualified name to match. It is matched against the Name property of the matching node. The special value "*" matches all tags.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetElementsByTagName">
@@ -2739,15 +2723,11 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The LocalName to match. The special value "*" matches all tags. </param
-        >
+          />The LocalName to match. The special value "*" matches all tags.
+        </param>
         <param name="namespaceURI">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />NamespaceURI to match. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />NamespaceURI to match.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Implementation">
@@ -2844,13 +2824,13 @@
               </term>
               <description>
                 <para
-                  >The <see cref="P:System.Xml.XmlAttribute.Specified" /> property is set to true on the generated <see cref="T:System.Xml.XmlAttribute" />. The descendants of the source XmlAttribute are recursively imported and the resulting nodes reassembled to form the corresponding subtree. </para
-                >
+                  >The <see cref="P:System.Xml.XmlAttribute.Specified" /> property is set to true on the generated <see cref="T:System.Xml.XmlAttribute" />. The descendants of the source XmlAttribute are recursively imported and the resulting nodes reassembled to form the corresponding subtree.
+                </para>
               </description>
               <description>
                 <para
-                  >The <paramref name="deep" /> parameter does not apply to XmlAttribute nodes; they always carry their children with them when imported. </para
-                >
+                  >The <paramref name="deep" /> parameter does not apply to XmlAttribute nodes; they always carry their children with them when imported.
+                </para>
               </description>
             </item>
             <item>
@@ -2918,13 +2898,13 @@
               </term>
               <description>
                 <para
-                  >Because the source and destination documents could have the entities defined differently, this method only copies the <see cref="T:System.Xml.XmlEntityReference" /> node. The replacement text is not included. If the destination document has the entity defined, its value is assigned. </para
-                >
+                  >Because the source and destination documents could have the entities defined differently, this method only copies the <see cref="T:System.Xml.XmlEntityReference" /> node. The replacement text is not included. If the destination document has the entity defined, its value is assigned.
+                </para>
               </description>
               <description>
                 <para
-                  >Because the source and destination documents could have the entities defined differently, this method only copies the <see cref="T:System.Xml.XmlEntityReference" /> node. The replacement text is not included. If the destination document has the entity defined, its value is assigned. </para
-                >
+                  >Because the source and destination documents could have the entities defined differently, this method only copies the <see cref="T:System.Xml.XmlEntityReference" /> node. The replacement text is not included. If the destination document has the entity defined, its value is assigned.
+                </para>
               </description>
             </item>
             <item>
@@ -3005,19 +2985,15 @@
           <para>The imported <see cref="T:System.Xml.XmlNode" />.</para>
         </returns>
         <param name="node">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The node being imported. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The node being imported.
+        </param>
         <param name="deep">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to perform a deep clone; otherwise, false. </param
-        >
+          />true to perform a deep clone; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="InnerText">
@@ -3183,8 +3159,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream containing the XML document to load. </param
-        >
+          />The stream containing the XML document to load.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Load">
@@ -3234,8 +3210,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The TextReader used to feed the XML data into the document. </param
-        >
+          />The TextReader used to feed the XML data into the document.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Load">
@@ -3343,8 +3319,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XmlReader used to feed the XML data into the document. </param
-        >
+          />The XmlReader used to feed the XML data into the document.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="LoadXml">
@@ -3388,8 +3364,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />String containing the XML document to load. </param
-        >
+          />String containing the XML document to load.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="LocalName">
@@ -3808,8 +3784,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads one XmlNode from the given reader and positions the reader on the next node. This method creates the type of XmlNode matching the <see cref="P:System.Xml.XmlNode.NodeType" /> on which the reader is currently positioned. (If the reader is in the initial state, ReadNode advances the reader to the first node and then operates on that node.) </para
-          >
+            >Reads one XmlNode from the given reader and positions the reader on the next node. This method creates the type of XmlNode matching the <see cref="P:System.Xml.XmlNode.NodeType" /> on which the reader is currently positioned. (If the reader is in the initial state, ReadNode advances the reader to the first node and then operates on that node.)
+          </para>
           <para>If the reader is positioned on the start of an element, ReadNode reads all the attributes and any child nodes, up to and including the end tag of the current node. The XmlNode returned contains the sub-tree representing everything read. The reader is positioned immediately after the end tag.</para>
           <para>ReadNode can also read attributes, but in this case it does not advance the reader to the next attribute. This allows you to write the following C# code: </para>
           <code> XmlDocument doc = new XmlDocument();
@@ -3833,8 +3809,8 @@
           <para>The new XmlNode or null if no more nodes exist.</para>
         </returns>
         <param name="reader">
-          <attribution license="cc4" from="Microsoft" modified="false" />The XML source </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The XML source
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Save">
@@ -3886,8 +3862,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream to which you want to save. </param
-        >
+          />The stream to which you want to save.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Save">
@@ -3931,8 +3907,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The TextWriter to which you want to save. </param
-        >
+          />The TextWriter to which you want to save.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Save">
@@ -3981,8 +3957,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The location of the file where you want to save the document. </param
-        >
+          />The location of the file where you want to save the document.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Save">
@@ -4033,8 +4009,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XmlWriter to which you want to save. </param
-        >
+          />The XmlWriter to which you want to save.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SchemaInfo">
@@ -4301,8 +4277,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XmlWriter to which you want to save. </param
-        >
+          />The XmlWriter to which you want to save.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteTo">
@@ -4347,8 +4323,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XmlWriter to which you want to save. </param
-        >
+          />The XmlWriter to which you want to save.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="XmlResolver">

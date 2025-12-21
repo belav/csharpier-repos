@@ -33,8 +33,8 @@
       <para>A visual designer can use a designer category to inform a development environment of the type of designer that will be implemented. If no designer category is provided on a class, a development environment may or may not allow the class to be designed. A category can be created for any name.</para>
       <para>When you mark a class with this attribute, it is set to a constant member. When you want to check the value of this attribute in your code, you must specify the constant member. The Description column in the table below lists the constant member that each value is set to.</para>
       <para
-        >The <see cref="T:System.ComponentModel.DesignerCategoryAttribute" /> class defines the following common categories: </para
-      >
+        >The <see cref="T:System.ComponentModel.DesignerCategoryAttribute" /> class defines the following common categories:
+      </para>
       <list type="table">
         <listheader>
           <item>
@@ -52,8 +52,8 @@
           </term>
           <description>
             <para
-              >Designers that are used with components. The attribute is set to the constant member <see cref="F:System.ComponentModel.DesignerCategoryAttribute.Component" />. </para
-            >
+              >Designers that are used with components. The attribute is set to the constant member <see cref="F:System.ComponentModel.DesignerCategoryAttribute.Component" />.
+            </para>
           </description>
         </item>
         <item>
@@ -62,8 +62,8 @@
           </term>
           <description>
             <para
-              >Designers that are used with forms. The attribute is set to the constant member <see cref="F:System.ComponentModel.DesignerCategoryAttribute.Form" />. </para
-            >
+              >Designers that are used with forms. The attribute is set to the constant member <see cref="F:System.ComponentModel.DesignerCategoryAttribute.Form" />.
+            </para>
           </description>
         </item>
         <item>
@@ -72,8 +72,8 @@
           </term>
           <description>
             <para
-              >Designers that are used with designers. The attribute is set to the constant member <see cref="F:System.ComponentModel.DesignerCategoryAttribute.Generic" />. </para
-            >
+              >Designers that are used with designers. The attribute is set to the constant member <see cref="F:System.ComponentModel.DesignerCategoryAttribute.Generic" />.
+            </para>
           </description>
         </item>
         <item>
@@ -146,12 +146,8 @@
           >
         </summary>
         <param name="category">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the category. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the category.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Category">
@@ -267,8 +263,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to test the value equality of. </param
-        >
+          />The object to test the value equality of.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Form">

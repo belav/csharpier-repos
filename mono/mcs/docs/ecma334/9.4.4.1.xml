@@ -15,6 +15,6 @@
   <paragraph
     >The type of a <non_terminal where="9.4.4.1"
       >boolean-literal</non_terminal
-    > is <keyword>bool</keyword>. </paragraph
-  >
+    > is <keyword>bool</keyword>.
+  </paragraph>
 </clause>

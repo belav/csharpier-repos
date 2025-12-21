@@ -42,8 +42,8 @@
         <para
           >Never hard-code a password within your source code.  Hard-coded passwords can be retrieved from an assembly by using the <format type="text/html">
             <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a>
-          </format>, by using a hexadecimal editor, or by simply opening up the assembly in a text editor such as Notepad.exe. </para
-        >
+          </format>, by using a hexadecimal editor, or by simply opening up the assembly in a text editor such as Notepad.exe.
+        </para>
       </block>
     </remarks>
     <summary>
@@ -90,8 +90,8 @@
             <para
               >Never hard-code a password within your source code.  Hard-coded passwords can be retrieved from an assembly by using the <format type="text/html">
                 <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a>
-              </format>, by using a hexadecimal editor, or by simply opening up the assembly in a text editor such as Notepad.exe. </para
-            >
+              </format>, by using a hexadecimal editor, or by simply opening up the assembly in a text editor such as Notepad.exe.
+            </para>
           </block>
         </remarks>
         <summary>
@@ -105,15 +105,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The password used to derive the key. </param
-        >
+          />The password used to derive the key.
+        </param>
         <param name="salt">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key salt used to derive the key. </param
-        >
+          />The key salt used to derive the key.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -152,8 +152,8 @@
             <para
               >Never hard-code a password within your source code.  Hard-coded passwords can be retrieved from an assembly by using the <format type="text/html">
                 <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a>
-              </format>, by using a hexadecimal editor, or by simply opening up the assembly in a text editor such as Notepad.exe. </para
-            >
+              </format>, by using a hexadecimal editor, or by simply opening up the assembly in a text editor such as Notepad.exe.
+            </para>
           </block>
         </remarks>
         <summary>
@@ -167,15 +167,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The password used to derive the key. </param
-        >
+          />The password used to derive the key.
+        </param>
         <param name="saltSize">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The size of the random salt that you want the class to generate. </param
-        >
+          />The size of the random salt that you want the class to generate.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -215,8 +215,8 @@
             <para
               >Never hard-code a password within your source code.  Hard-coded passwords can be retrieved from an assembly by using the <format type="text/html">
                 <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a>
-              </format>, by using a hexadecimal editor, or by simply opening up the assembly in a text editor such as Notepad.exe. </para
-            >
+              </format>, by using a hexadecimal editor, or by simply opening up the assembly in a text editor such as Notepad.exe.
+            </para>
           </block>
         </remarks>
         <summary>
@@ -230,8 +230,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The password used to derive the key. </param
-        >
+          />The password used to derive the key.
+        </param>
         <param name="salt">
           <attribution
             license="cc4"
@@ -244,8 +244,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of iterations for the operation. </param
-        >
+          />The number of iterations for the operation.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -285,8 +285,8 @@
             <para
               >Never hard-code a password within your source code.  Hard-coded passwords can be retrieved from an assembly by using the <format type="text/html">
                 <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a>
-              </format>, by using a hexadecimal editor, or by simply opening up the assembly in a text editor such as Notepad.exe. </para
-            >
+              </format>, by using a hexadecimal editor, or by simply opening up the assembly in a text editor such as Notepad.exe.
+            </para>
           </block>
         </remarks>
         <summary>
@@ -300,22 +300,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The password used to derive the key. </param
-        >
+          />The password used to derive the key.
+        </param>
         <param name="salt">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key salt used to derive the key. </param
-        >
+          />The key salt used to derive the key.
+        </param>
         <param name="iterations">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of iterations for the operation. </param
-        >
+          />The number of iterations for the operation.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -355,8 +355,8 @@
             <para
               >Never hard-code a password within your source code.  Hard-coded passwords can be retrieved from an assembly by using the <format type="text/html">
                 <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a>
-              </format>, by using a hexadecimal editor, or by simply opening up the assembly in a text editor such as Notepad.exe. </para
-            >
+              </format>, by using a hexadecimal editor, or by simply opening up the assembly in a text editor such as Notepad.exe.
+            </para>
           </block>
         </remarks>
         <summary>
@@ -370,22 +370,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The password used to derive the key. </param
-        >
+          />The password used to derive the key.
+        </param>
         <param name="saltSize">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The size of the random salt that you want the class to generate. </param
-        >
+          />The size of the random salt that you want the class to generate.
+        </param>
         <param name="iterations">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of iterations for the operation. </param
-        >
+          />The number of iterations for the operation.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Dispose">
@@ -425,8 +425,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetBytes">
@@ -467,8 +467,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of pseudo-random key bytes to generate. </param
-        >
+          />The number of pseudo-random key bytes to generate.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IterationCount">

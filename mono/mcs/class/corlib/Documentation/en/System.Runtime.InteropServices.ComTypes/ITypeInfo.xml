@@ -171,36 +171,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The ID of the member function whose DLL entry description is to be returned. </param
-        >
+          />The ID of the member function whose DLL entry description is to be returned.
+        </param>
         <param name="invKind">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Runtime.InteropServices.ComTypes.INVOKEKIND" /> values that specifies the kind of member identified by <paramref name="memid" />. </param
-        >
+          />One of the <see cref="T:System.Runtime.InteropServices.ComTypes.INVOKEKIND" /> values that specifies the kind of member identified by <paramref name="memid" />.
+        </param>
         <param name="pBstrDllName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />If not null, the function sets <paramref name="pBstrDllName" /> to a BSTR that contains the name of the DLL. </param
-        >
+          />If not null, the function sets <paramref name="pBstrDllName" /> to a BSTR that contains the name of the DLL.
+        </param>
         <param name="pBstrName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />If not null, the function sets <paramref name="lpbstrName" /> to a BSTR that contains the name of the entry point. </param
-        >
+          />If not null, the function sets <paramref name="lpbstrName" /> to a BSTR that contains the name of the entry point.
+        </param>
         <param name="pwOrdinal">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />If not null, and the function is defined by an ordinal, then <paramref name="lpwOrdinal" /> is set to point to the ordinal. </param
-        >
+          />If not null, and the function is defined by an ordinal, then <paramref name="lpwOrdinal" /> is set to point to the ordinal.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetDocumentation">
@@ -300,19 +300,11 @@
           <para>Maps between member names and member IDs, and parameter names and parameter IDs.</para>
         </summary>
         <param name="rgszNames">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />An array of names to map. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />An array of names to map.
+        </param>
         <param name="cNames">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The count of names to map. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The count of names to map.
+        </param>
         <param name="pMemId">
           <attribution
             license="cc4"
@@ -640,8 +632,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A reference to the FUNCDESC structure to release. </param
-        >
+          />A reference to the FUNCDESC structure to release.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ReleaseTypeAttr">
@@ -678,8 +670,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A reference to the TYPEATTR structure to release. </param
-        >
+          />A reference to the TYPEATTR structure to release.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ReleaseVarDesc">
@@ -716,8 +708,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A reference to the VARDESC structure to release. </param
-        >
+          />A reference to the VARDESC structure to release.
+        </param>
       </Docs>
     </Member>
   </Members>

@@ -75,8 +75,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to create an escaped identifier for. </param
-        >
+          />The string to create an escaped identifier for.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateValidIdentifier">
@@ -117,8 +117,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to generate a valid identifier for. </param
-        >
+          />The string to generate a valid identifier for.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GenerateCodeFromCompileUnit">
@@ -329,8 +329,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeTypeReference" /> that indicates the type to return. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeTypeReference" /> that indicates the type to return.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsValidIdentifier">
@@ -373,8 +373,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to test for being a valid identifier. </param
-        >
+          />The value to test for being a valid identifier.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Supports">
@@ -420,8 +420,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The capabilities to test the generator for. </param
-        >
+          />The capabilities to test the generator for.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ValidateIdentifier">
@@ -458,8 +458,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The identifier to validate. </param
-        >
+          />The identifier to validate.
+        </param>
       </Docs>
     </Member>
   </Members>

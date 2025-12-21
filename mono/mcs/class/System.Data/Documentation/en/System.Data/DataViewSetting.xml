@@ -147,8 +147,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating the sort to apply in the <see cref="T:System.Data.DataView" />. </para
-          >
+            >Gets or sets a value indicating the sort to apply in the <see cref="T:System.Data.DataView" />.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>

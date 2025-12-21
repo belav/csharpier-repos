@@ -14,8 +14,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.TraceContextEventArgs" /> class is used by the <see cref="T:System.Web.TraceContext" /> class to provide access to trace records after all the tracing information is gathered during HTTP request processing. By adding an event handler delegate to handle the <see cref="E:System.Web.TraceContext.TraceFinished" /> event, you can process the records, record them to your own data store, or provide them as input to a profiling tool. </para
-      >
+        >The <see cref="T:System.Web.TraceContextEventArgs" /> class is used by the <see cref="T:System.Web.TraceContext" /> class to provide access to trace records after all the tracing information is gathered during HTTP request processing. By adding an event handler delegate to handle the <see cref="E:System.Web.TraceContext.TraceFinished" /> event, you can process the records, record them to your own data store, or provide them as input to a profiling tool.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -73,8 +73,8 @@
             >Every call to the <see cref="Overload:System.Web.TraceContext.Write" /> and <see cref="Overload:System.Web.TraceContext.Warn" /> methods generates a <see cref="T:System.Web.TraceContextRecord" /> object that is added to the <see cref="P:System.Web.TraceContextEventArgs.TraceRecords" /> messages collection. The <see cref="Overload:System.Web.TraceContext.Warn" /> method call sets the <see cref="P:System.Web.TraceContextRecord.IsWarning" /> property to true, while the other method calls set it to false.</para
           >
           <para
-            >You can iterate through the <see cref="P:System.Web.TraceContextEventArgs.TraceRecords" /> messages and examine records with specific categories or messages, and whether they are warnings. </para
-          >
+            >You can iterate through the <see cref="P:System.Web.TraceContextEventArgs.TraceRecords" /> messages and examine records with specific categories or messages, and whether they are warnings.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

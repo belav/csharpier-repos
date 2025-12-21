@@ -66,8 +66,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The output <see cref="T:System.IO.Stream" /> to which the writer writes. </param
-        >
+          />The output <see cref="T:System.IO.Stream" /> to which the writer writes.
+        </param>
         <param name="encoding">
           <attribution
             license="cc4"

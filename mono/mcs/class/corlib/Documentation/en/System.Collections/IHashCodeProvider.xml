@@ -87,8 +87,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> for which a hash code is to be returned. </param
-        >
+          />The <see cref="T:System.Object" /> for which a hash code is to be returned.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

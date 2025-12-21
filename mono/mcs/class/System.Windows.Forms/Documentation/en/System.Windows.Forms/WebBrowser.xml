@@ -40,8 +40,8 @@
       >
       <block subset="none" type="note">
         <para
-          >The <see cref="T:System.Windows.Forms.WebBrowser" /> control is resource-intensive. Be sure to call the <see cref="M:System.ComponentModel.Component.Dispose" /> method when you are finished using the control to ensure that all resources are released in a timely fashion. You must call the <see cref="M:System.ComponentModel.Component.Dispose" /> method on the same thread that attached the events, which should always be the message or user-interface (UI) thread. </para
-        >
+          >The <see cref="T:System.Windows.Forms.WebBrowser" /> control is resource-intensive. Be sure to call the <see cref="M:System.ComponentModel.Component.Dispose" /> method when you are finished using the control to ensure that all resources are released in a timely fashion. You must call the <see cref="M:System.ComponentModel.Component.Dispose" /> method on the same thread that attached the events, which should always be the message or user-interface (UI) thread.
+        </para>
       </block>
       <para
         >The <see cref="T:System.Windows.Forms.WebBrowser" /> control cannot be used by partially trusted code. For more information, see <format type="text/html">
@@ -51,8 +51,8 @@
         </format>.</para
       >
       <para
-        >The <see cref="T:System.Windows.Forms.WebBrowser" /> control has several properties, methods, and events related to navigation. The following members let you navigate the control to a specific URL, move backward and forward through the navigation history list, and load the home page and search page of the current user: </para
-      >
+        >The <see cref="T:System.Windows.Forms.WebBrowser" /> control has several properties, methods, and events related to navigation. The following members let you navigate the control to a specific URL, move backward and forward through the navigation history list, and load the home page and search page of the current user:
+      </para>
       <list type="bullet">
         <item>
           <para>
@@ -114,8 +114,8 @@
       </block>
       <block subset="none" type="note">
         <para
-          >The <see cref="T:System.Windows.Forms.WebBrowser" /> class can only be used in threads set to single thread apartment (STA) mode. To use this class, ensure that your Main method is marked with the <see cref="T:System.STAThreadAttribute" /> attribute. </para
-        >
+          >The <see cref="T:System.Windows.Forms.WebBrowser" /> class can only be used in threads set to single thread apartment (STA) mode. To use this class, ensure that your Main method is marked with the <see cref="T:System.STAThreadAttribute" /> attribute.
+        </para>
       </block>
     </remarks>
     <summary>
@@ -428,8 +428,8 @@
             >This method is useful if you are familiar with OLE development using the unmanaged WebBrowser ActiveX control and you want to extend the functionality of the Windows Forms <see cref="T:System.Windows.Forms.WebBrowser" /> control, which is a managed wrapper for the ActiveX control. You can use this extensibility, for example, to customize the browser shortcut menu and shortcut keys or to provide a custom security configuration for hosted documents.</para
           >
           <para
-            >To use this feature, implement classes that inherit from the <see cref="T:System.Windows.Forms.WebBrowser" /> and <see cref="T:System.Windows.Forms.WebBrowser.WebBrowserSite" /> classes. The unmanaged WebBrowser ActiveX control uses the protected <see cref="M:System.Windows.Forms.WebBrowser.CreateWebBrowserSiteBase" /> method to retrieve extensibility interfaces implemented by the <see cref="T:System.Windows.Forms.WebBrowser.WebBrowserSite" /> class. Override the <see cref="M:System.Windows.Forms.WebBrowser.CreateWebBrowserSiteBase" /> method to return an instance of your own class that inherits from the <see cref="T:System.Windows.Forms.WebBrowser.WebBrowserSite" /> class. The <see cref="T:System.Windows.Forms.WebBrowser.WebBrowserSite" /> class provides default implementations of the OLE IDocHostUIHandler interface. You can provide your own implementation of this interface or implement any other WebBrowser ActiveX control interface in order to customize the behavior of the control. </para
-          >
+            >To use this feature, implement classes that inherit from the <see cref="T:System.Windows.Forms.WebBrowser" /> and <see cref="T:System.Windows.Forms.WebBrowser.WebBrowserSite" /> classes. The unmanaged WebBrowser ActiveX control uses the protected <see cref="M:System.Windows.Forms.WebBrowser.CreateWebBrowserSiteBase" /> method to retrieve extensibility interfaces implemented by the <see cref="T:System.Windows.Forms.WebBrowser.WebBrowserSite" /> class. Override the <see cref="M:System.Windows.Forms.WebBrowser.CreateWebBrowserSiteBase" /> method to return an instance of your own class that inherits from the <see cref="T:System.Windows.Forms.WebBrowser.WebBrowserSite" /> class. The <see cref="T:System.Windows.Forms.WebBrowser.WebBrowserSite" /> class provides default implementations of the OLE IDocHostUIHandler interface. You can provide your own implementation of this interface or implement any other WebBrowser ActiveX control interface in order to customize the behavior of the control.
+          </para>
           <block subset="none" type="note">
             <para>If you provide your own implementation for any IDocHostUIHandler members, you must implement all the members of that interface.</para>
           </block>
@@ -529,16 +529,16 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see cref="T:System.Windows.Forms.WebBrowser" /> and optionally releases the managed resources. </para
-          >
+            >Releases the unmanaged resources used by the <see cref="T:System.Windows.Forms.WebBrowser" /> and optionally releases the managed resources.
+          </para>
         </summary>
         <param name="disposing">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Document">
@@ -599,8 +599,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Windows.Forms.WebBrowser" /> control navigates to a new document whenever one of the following properties is set or methods is called: </para
-          >
+            >The <see cref="T:System.Windows.Forms.WebBrowser" /> control navigates to a new document whenever one of the following properties is set or methods is called:
+          </para>
           <list type="bullet">
             <item>
               <para>
@@ -681,8 +681,8 @@
           >
           <block subset="none" type="note">
             <para
-              >This property contains the contents of the current document, even if another document has been requested. If you set the value of this property and then immediately retrieve it again, the value retrieved may be different than the value set if the <see cref="T:System.Windows.Forms.WebBrowser" /> control has not had time to load the new content. You can retrieve the new value in a <see cref="E:System.Windows.Forms.WebBrowser.DocumentCompleted" /> event handler. </para
-            >
+              >This property contains the contents of the current document, even if another document has been requested. If you set the value of this property and then immediately retrieve it again, the value retrieved may be different than the value set if the <see cref="T:System.Windows.Forms.WebBrowser" /> control has not had time to load the new content. You can retrieve the new value in a <see cref="E:System.Windows.Forms.WebBrowser.DocumentCompleted" /> event handler.
+            </para>
           </block>
           <para
             >To access the contents of a Web page as a string, use the <see cref="P:System.Windows.Forms.WebBrowser.DocumentText" /> property. You can also access the page contents using the HTML document object model (DOM) through the <see cref="P:System.Windows.Forms.WebBrowser.Document" /> property.</para
@@ -722,8 +722,8 @@
           >
           <block subset="none" type="note">
             <para
-              >This property contains the text of the current document, even if another document has been requested. If you set the value of this property and then immediately retrieve it again, the value retrieved may be different than the value set if the <see cref="T:System.Windows.Forms.WebBrowser" /> control has not had time to load the new content. You can retrieve the new value in a <see cref="E:System.Windows.Forms.WebBrowser.DocumentCompleted" /> event handler. Alternatively, you can block the thread until the document is loaded by calling the <see cref="Overload:System.Threading.Thread.Sleep" /> method in a loop until the <see cref="P:System.Windows.Forms.WebBrowser.DocumentText" /> property returns the value that you originally set it to. </para
-            >
+              >This property contains the text of the current document, even if another document has been requested. If you set the value of this property and then immediately retrieve it again, the value retrieved may be different than the value set if the <see cref="T:System.Windows.Forms.WebBrowser" /> control has not had time to load the new content. You can retrieve the new value in a <see cref="E:System.Windows.Forms.WebBrowser.DocumentCompleted" /> event handler. Alternatively, you can block the thread until the document is loaded by calling the <see cref="Overload:System.Threading.Thread.Sleep" /> method in a loop until the <see cref="P:System.Windows.Forms.WebBrowser.DocumentText" /> property returns the value that you originally set it to.
+            </para>
           </block>
           <para
             >To access the contents of a Web page as a <see cref="T:System.IO.Stream" />, use the <see cref="P:System.Windows.Forms.WebBrowser.DocumentStream" /> property. You can also access the page contents using the HTML document object model (DOM) through the <see cref="P:System.Windows.Forms.WebBrowser.Document" /> property.</para
@@ -1253,8 +1253,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Uri" /> representing the URL of the document to load. </param
-        >
+          />A <see cref="T:System.Uri" /> representing the URL of the document to load.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Navigate">
@@ -1397,8 +1397,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to load the document into a new browser window; false to load the document into the <see cref="T:System.Windows.Forms.WebBrowser" /> control. </param
-        >
+          />true to load the document into a new browser window; false to load the document into the <see cref="T:System.Windows.Forms.WebBrowser" /> control.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Navigate">
@@ -1448,8 +1448,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the frame in which to load the document. </param
-        >
+          />The name of the frame in which to load the document.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Navigate">
@@ -1602,8 +1602,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Windows.Forms.WebBrowser" /> control navigates to a new document whenever one of the following properties is set or methods is called: </para
-          >
+            >The <see cref="T:System.Windows.Forms.WebBrowser" /> control navigates to a new document whenever one of the following properties is set or methods is called:
+          </para>
           <list type="bullet">
             <item>
               <para>
@@ -1682,8 +1682,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Windows.Forms.WebBrowser" /> control navigates to a new document whenever one of the following properties is set or methods is called: </para
-          >
+            >The <see cref="T:System.Windows.Forms.WebBrowser" /> control navigates to a new document whenever one of the following properties is set or methods is called:
+          </para>
           <list type="bullet">
             <item>
               <para>
@@ -1793,11 +1793,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this property to enable communication between a Web page hosted by the <see cref="T:System.Windows.Forms.WebBrowser" /> control and the application that contains the <see cref="T:System.Windows.Forms.WebBrowser" /> control. This property lets you integrate dynamic HTML (DHTML) code with your client application code. The object specified for this property is available to Web page script as the window.external object, which is a built-in DOM object provided for host access. </para
-          >
+            >Use this property to enable communication between a Web page hosted by the <see cref="T:System.Windows.Forms.WebBrowser" /> control and the application that contains the <see cref="T:System.Windows.Forms.WebBrowser" /> control. This property lets you integrate dynamic HTML (DHTML) code with your client application code. The object specified for this property is available to Web page script as the window.external object, which is a built-in DOM object provided for host access.
+          </para>
           <para
-            >You can set this property to any COM-visible object for which you want its public properties and methods available to scripting code. You can make a class COM-visible by marking it with the <see cref="T:System.Runtime.InteropServices.ComVisibleAttribute" />. </para
-          >
+            >You can set this property to any COM-visible object for which you want its public properties and methods available to scripting code. You can make a class COM-visible by marking it with the <see cref="T:System.Runtime.InteropServices.ComVisibleAttribute" />.
+          </para>
           <para
             >To call functions defined in your Web page from your client application code, use the <see cref="M:System.Windows.Forms.HtmlDocument.InvokeScript(System.String,System.Object[])" /> method of the <see cref="T:System.Windows.Forms.HtmlDocument" /> object you can retrieve from the <see cref="P:System.Windows.Forms.WebBrowser.Document" /> property.</para
           >
@@ -1856,8 +1856,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnCanGoForwardChanged">
@@ -1898,8 +1898,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnDocumentCompleted">
@@ -1940,8 +1940,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.WebBrowserDocumentCompletedEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.WebBrowserDocumentCompletedEventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnDocumentTitleChanged">
@@ -1982,8 +1982,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnEncryptionLevelChanged">
@@ -2024,8 +2024,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnFileDownload">
@@ -2063,8 +2063,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.ComponentModel.CancelEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.ComponentModel.CancelEventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnNavigated">
@@ -2103,8 +2103,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.WebBrowserNavigatedEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.WebBrowserNavigatedEventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnNavigating">
@@ -2143,8 +2143,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.WebBrowserNavigatingEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.WebBrowserNavigatingEventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnNewWindow">
@@ -2183,8 +2183,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.ComponentModel.CancelEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.ComponentModel.CancelEventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnProgressChanged">
@@ -2225,8 +2225,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.WebBrowserProgressChangedEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.WebBrowserProgressChangedEventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnStatusTextChanged">
@@ -2267,8 +2267,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Padding">
@@ -2327,8 +2327,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Although you can get or set the value of the <see cref="P:System.Windows.Forms.WebBrowser.Padding" /> property and respond to changes by handling this event, the Padding property is not meaningful for this control. </para
-          >
+            >Although you can get or set the value of the <see cref="P:System.Windows.Forms.WebBrowser.Padding" /> property and respond to changes by handling this event, the Padding property is not meaningful for this control.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2502,8 +2502,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.WebBrowserRefreshOption" /> values. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.WebBrowserRefreshOption" /> values.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ScriptErrorsSuppressed">
@@ -2817,15 +2817,15 @@
             >Setting this property is equivalent to calling the <see cref="Overload:System.Windows.Forms.WebBrowser.Navigate" /> method and passing it the specified URL.</para
           >
           <para
-            >The <see cref="T:System.Windows.Forms.WebBrowser" /> control maintains a history list of all the Web pages visited during a browsing session. When you set the <see cref="P:System.Windows.Forms.WebBrowser.Url" /> property, the <see cref="T:System.Windows.Forms.WebBrowser" /> control navigates to the specified URL and adds it to the end of the history list. </para
-          >
+            >The <see cref="T:System.Windows.Forms.WebBrowser" /> control maintains a history list of all the Web pages visited during a browsing session. When you set the <see cref="P:System.Windows.Forms.WebBrowser.Url" /> property, the <see cref="T:System.Windows.Forms.WebBrowser" /> control navigates to the specified URL and adds it to the end of the history list.
+          </para>
           <para
-            >The <see cref="T:System.Windows.Forms.WebBrowser" /> control stores Web pages from recently visited sites in a cache on the local hard disk. Each page can specify an expiration date indicating how long it will remain in the cache. When the control navigates to a page, it saves time by displaying a cached version, if one is available, rather than downloading the page again. Use the <see cref="Overload:System.Windows.Forms.WebBrowser.Refresh" /> method to force the <see cref="T:System.Windows.Forms.WebBrowser" /> control to reload the current page by downloading it, ensuring that the control displays the latest version. </para
-          >
+            >The <see cref="T:System.Windows.Forms.WebBrowser" /> control stores Web pages from recently visited sites in a cache on the local hard disk. Each page can specify an expiration date indicating how long it will remain in the cache. When the control navigates to a page, it saves time by displaying a cached version, if one is available, rather than downloading the page again. Use the <see cref="Overload:System.Windows.Forms.WebBrowser.Refresh" /> method to force the <see cref="T:System.Windows.Forms.WebBrowser" /> control to reload the current page by downloading it, ensuring that the control displays the latest version.
+          </para>
           <block subset="none" type="note">
             <para
-              >This property contains the URL of the current document, even if another document has been requested. If you set the value of this property and then immediately retrieve it again, the value retrieved may be different than the value set if the <see cref="T:System.Windows.Forms.WebBrowser" /> control has not had time to load the new document. You can retrieve the new value in a <see cref="E:System.Windows.Forms.WebBrowser.DocumentCompleted" /> event handler. </para
-            >
+              >This property contains the URL of the current document, even if another document has been requested. If you set the value of this property and then immediately retrieve it again, the value retrieved may be different than the value set if the <see cref="T:System.Windows.Forms.WebBrowser" /> control has not had time to load the new document. You can retrieve the new value in a <see cref="E:System.Windows.Forms.WebBrowser.DocumentCompleted" /> event handler.
+            </para>
           </block>
         </remarks>
         <summary>

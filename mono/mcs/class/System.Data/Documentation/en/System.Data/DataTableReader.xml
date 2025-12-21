@@ -32,8 +32,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Data.DataTableReader" /> obtains the contents of one or more <see cref="T:System.Data.DataTable" /> objects in the form of one or more read-only, forward-only result sets. </para
-      >
+        >The <see cref="T:System.Data.DataTableReader" /> obtains the contents of one or more <see cref="T:System.Data.DataTable" /> objects in the form of one or more read-only, forward-only result sets.
+      </para>
     </summary>
   </Docs>
   <Members>
@@ -86,8 +86,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array of <see cref="T:System.Data.DataTable" /> objects that supplies the results for the new <see cref="T:System.Data.DataTableReader" /> object. </param
-        >
+          />The array of <see cref="T:System.Data.DataTable" /> objects that supplies the results for the new <see cref="T:System.Data.DataTableReader" /> object.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -262,29 +262,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index within the field from which to start the read operation. </param
-        >
+          />The index within the field from which to start the read operation.
+        </param>
         <param name="buffer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The buffer into which to read the stream of bytes. </param
-        >
+          />The buffer into which to read the stream of bytes.
+        </param>
         <param name="bufferIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index within the buffer at which to start placing the data. </param
-        >
+          />The index within the buffer at which to start placing the data.
+        </param>
         <param name="length">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum length to copy into the buffer. </param
-        >
+          />The maximum length to copy into the buffer.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -360,29 +360,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index within the field from which to start the read operation. </param
-        >
+          />The index within the field from which to start the read operation.
+        </param>
         <param name="buffer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The buffer into which to read the stream of chars. </param
-        >
+          />The buffer into which to read the stream of chars.
+        </param>
         <param name="bufferIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index within the buffer at which to start placing the data. </param
-        >
+          />The index within the buffer at which to start placing the data.
+        </param>
         <param name="length">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum length to copy into the buffer. </param
-        >
+          />The maximum length to copy into the buffer.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -403,8 +403,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Data.DataTableReader.GetDataTypeName(System.Int32)" /> method always returns the type of the underlying <see cref="T:System.Data.DataColumn" /> instead of a provider-specific type. </para
-          >
+            >The <see cref="M:System.Data.DataTableReader.GetDataTypeName(System.Int32)" /> method always returns the type of the underlying <see cref="T:System.Data.DataColumn" /> instead of a provider-specific type.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -542,11 +542,11 @@
             >At first, the enumerator is positioned before the first element in the collection. At this position, calling <see cref="P:System.Collections.IEnumerator.Current" /> throws an exception. Therefore, you must call MoveNext to advance the enumerator to the first element of the collection before reading the value of Current.</para
           >
           <para
-            >Current returns a <see cref="T:System.Data.Common.DbDataRecord" />, and returns the same object until either <see cref="M:System.Collections.IEnumerator.MoveNext" /> or <see cref="M:System.Collections.IEnumerator.Reset" /> is called. MoveNext sets Current to the next element. </para
-          >
+            >Current returns a <see cref="T:System.Data.Common.DbDataRecord" />, and returns the same object until either <see cref="M:System.Collections.IEnumerator.MoveNext" /> or <see cref="M:System.Collections.IEnumerator.Reset" /> is called. MoveNext sets Current to the next element.
+          </para>
           <para
-            >After the end of the collection is passed, the enumerator is positioned after the last element in the collection, and calling MoveNext returns false. If the last call to MoveNext returned false, calling Current throws an exception. In addition, because the <see cref="T:System.Data.DataTableReader" /> provides forward-only access to its data, calling the <see cref="M:System.Collections.IEnumerator.Reset" /> method of the IEnumerator throws a <see cref="T:System.NotSupportedException" />. </para
-          >
+            >After the end of the collection is passed, the enumerator is positioned after the last element in the collection, and calling MoveNext returns false. If the last call to MoveNext returned false, calling Current throws an exception. In addition, because the <see cref="T:System.Data.DataTableReader" /> provides forward-only access to its data, calling the <see cref="M:System.Collections.IEnumerator.Reset" /> method of the IEnumerator throws a <see cref="T:System.NotSupportedException" />.
+          </para>
           <para
             >The <see cref="T:System.Data.DataTableReader" /> provides a stable enumerator. This means that even if row deletions or additions occur within the underlying data, the enumerator returned by a call to <see cref="M:System.Data.DataTableReader.GetEnumerator" /> is still valid.</para
           >
@@ -775,8 +775,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The GetName and <see cref="M:System.Data.DataTableReader.GetOrdinal(System.String)" /> methods provide inverse functionality. That is, calling GetOrdinal on the return value of calling GetName should return the original parameter passed to GetName; the same applies to calling the procedures in the opposite order. </para
-          >
+            >The GetName and <see cref="M:System.Data.DataTableReader.GetOrdinal(System.String)" /> methods provide inverse functionality. That is, calling GetOrdinal on the return value of calling GetName should return the original parameter passed to GetName; the same applies to calling the procedures in the opposite order.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -805,8 +805,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Because most of the methods provided by the <see cref="T:System.Data.DataTableReader" /> class must be provided with an ordinal column number, you can use the GetOrdinal method to retrieve the column number, given the name of the column. </para
-          >
+            >Because most of the methods provided by the <see cref="T:System.Data.DataTableReader" /> class must be provided with an ordinal column number, you can use the GetOrdinal method to retrieve the column number, given the name of the column.
+          </para>
           <para>GetOrdinal performs a case-sensitive lookup first. If it fails, a second case-insensitive search is made. If the column number is not found an IndexOutOfRangeException is thrown.</para>
           <para>GetOrdinal is kana-width insensitive.</para>
           <para>Because ordinal-based lookups are more efficient than named lookups, it is inefficient to call GetOrdinal within a loop. Save time by calling GetOrdinal one time and assigning the results to an integer variable for use within the loop</para>
@@ -820,12 +820,8 @@
           <para>The zero-based column ordinal.</para>
         </returns>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the column. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the column.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -934,8 +930,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of objects to be filled in with type information for the columns in the <see cref="T:System.Data.DataTableReader" />. </param
-        >
+          />An array of objects to be filled in with type information for the columns in the <see cref="T:System.Data.DataTableReader" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1254,8 +1250,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Although you can call <see cref="M:System.Data.DataTableReader.IsDBNull(System.Int32)" /> to see if there are null values before calling this method, you do not have to do this. </para
-          >
+            >Although you can call <see cref="M:System.Data.DataTableReader.IsDBNull(System.Int32)" /> to see if there are null values before calling this method, you do not have to do this.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

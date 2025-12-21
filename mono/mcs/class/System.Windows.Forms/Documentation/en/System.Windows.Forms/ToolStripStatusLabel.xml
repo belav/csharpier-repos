@@ -29,8 +29,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a panel in a <see cref="T:System.Windows.Forms.StatusStrip" /> control. </para
-      >
+        >Represents a panel in a <see cref="T:System.Windows.Forms.StatusStrip" /> control.
+      </para>
     </summary>
   </Docs>
   <Members>
@@ -44,8 +44,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripStatusLabel" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripStatusLabel" /> class.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -67,8 +67,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripStatusLabel" /> class that displays the specified image. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripStatusLabel" /> class that displays the specified image.
+          </para>
         </summary>
         <param name="image">
           <attribution
@@ -446,8 +446,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <see cref="T:System.Windows.Forms.ToolStripStatusLabel" /> automatically fills the available space on the <see cref="T:System.Windows.Forms.StatusStrip" /> as the form is resized. </para
-          >
+            >Gets or sets a value indicating whether the <see cref="T:System.Windows.Forms.ToolStripStatusLabel" /> automatically fills the available space on the <see cref="T:System.Windows.Forms.StatusStrip" /> as the form is resized.
+          </para>
         </summary>
       </Docs>
     </Member>

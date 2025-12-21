@@ -12,8 +12,8 @@
     >. An unboxing operation consists of first checking that the object instance is a boxed value of the given <non_terminal
       where="11.1"
       >value-type</non_terminal
-    >, and then copying the value out of the instance. </paragraph
-  >
+    >, and then copying the value out of the instance.
+  </paragraph>
   <paragraph
     >Referring to the imaginary boxing class described in the previous section, an unboxing conversion of an object box to a <non_terminal
       where="11.1"

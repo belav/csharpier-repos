@@ -40,8 +40,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.Workspace" /> class.  </para
-          >
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.Workspace" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -232,8 +232,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
 Returns <see cref="T:System.ServiceModel.Syndication.ResourceCollectionInfo" />.
-</para
-          >
+
+          </para>
         </returns>
       </Docs>
     </Member>
@@ -323,8 +323,8 @@ Returns <see cref="T:System.ServiceModel.Syndication.ResourceCollectionInfo" />.
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
 Returns <see cref="T:System.Boolean" />.
-</para
-          >
+
+          </para>
         </returns>
         <param name="name">
           <attribution
@@ -386,8 +386,8 @@ Returns <see cref="T:System.Boolean" />.
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
 Returns <see cref="T:System.Boolean" />.
-</para
-          >
+
+          </para>
         </returns>
         <param name="reader">
           <attribution

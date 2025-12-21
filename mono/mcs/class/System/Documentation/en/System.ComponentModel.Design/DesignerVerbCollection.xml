@@ -101,8 +101,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.ComponentModel.Design.DesignerVerb" /> array that indicates the verbs to contain within the collection. </param
-        >
+          />A <see cref="T:System.ComponentModel.Design.DesignerVerb" /> array that indicates the verbs to contain within the collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Add">
@@ -143,8 +143,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ComponentModel.Design.DesignerVerb" /> to add to the collection. </param
-        >
+          />The <see cref="T:System.ComponentModel.Design.DesignerVerb" /> to add to the collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddRange">
@@ -179,8 +179,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.ComponentModel.Design.DesignerVerb" /> objects to add to the collection. </param
-        >
+          />An array of <see cref="T:System.ComponentModel.Design.DesignerVerb" /> objects to add to the collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddRange">
@@ -215,8 +215,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.ComponentModel.Design.DesignerVerbCollection" /> to add to the collection. </param
-        >
+          />A <see cref="T:System.ComponentModel.Design.DesignerVerbCollection" /> to add to the collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Contains">
@@ -257,8 +257,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ComponentModel.Design.DesignerVerb" /> to search for in the collection. </param
-        >
+          />The <see cref="T:System.ComponentModel.Design.DesignerVerb" /> to search for in the collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CopyTo">
@@ -296,15 +296,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array to copy collection members to. </param
-        >
+          />The array to copy collection members to.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The destination index to begin copying to. </param
-        >
+          />The destination index to begin copying to.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IndexOf">
@@ -345,8 +345,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ComponentModel.Design.DesignerVerb" /> whose index to get in the collection. </param
-        >
+          />The <see cref="T:System.ComponentModel.Design.DesignerVerb" /> whose index to get in the collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Insert">
@@ -384,15 +384,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index in the collection at which to insert the verb. </param
-        >
+          />The index in the collection at which to insert the verb.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ComponentModel.Design.DesignerVerb" /> to insert in the collection. </param
-        >
+          />The <see cref="T:System.ComponentModel.Design.DesignerVerb" /> to insert in the collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Item">
@@ -486,15 +486,11 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index at which to insert an item. </param
-        >
+          />The index at which to insert an item.
+        </param>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The object to insert. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The object to insert.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnRemove">
@@ -533,15 +529,11 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index at which to remove the item. </param
-        >
+          />The index at which to remove the item.
+        </param>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The object to remove. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The object to remove.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnSet">
@@ -581,14 +573,14 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index at which to set the item. </param
-        >
+          />The index at which to set the item.
+        </param>
         <param name="oldValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />The old object. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The old object.
+        </param>
         <param name="newValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />The new object. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The new object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnValidate">
@@ -619,12 +611,8 @@
           <para>Raises the Validate event.</para>
         </summary>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The object to validate. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The object to validate.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Remove">
@@ -661,8 +649,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ComponentModel.Design.DesignerVerb" /> to remove from the collection. </param
-        >
+          />The <see cref="T:System.ComponentModel.Design.DesignerVerb" /> to remove from the collection.
+        </param>
       </Docs>
     </Member>
   </Members>

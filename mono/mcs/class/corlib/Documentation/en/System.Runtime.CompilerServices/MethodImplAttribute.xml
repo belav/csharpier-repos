@@ -111,8 +111,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitmask representing the desired <see cref="T:System.Runtime.CompilerServices.MethodImplOptions" /> value which specifies properties of the attributed method. </param
-        >
+          />A bitmask representing the desired <see cref="T:System.Runtime.CompilerServices.MethodImplOptions" /> value which specifies properties of the attributed method.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -158,8 +158,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Runtime.CompilerServices.MethodImplOptions" /> value specifying properties of the attributed method. </param
-        >
+          />A <see cref="T:System.Runtime.CompilerServices.MethodImplOptions" /> value specifying properties of the attributed method.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

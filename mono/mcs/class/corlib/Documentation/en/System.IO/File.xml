@@ -208,8 +208,8 @@
             </item>
             <item>
               <para
-                >The contents of a collection that implements an <see cref="T:System.Collections.Generic.IEnumerable`1" /> of strings. </para
-              >
+                >The contents of a collection that implements an <see cref="T:System.Collections.Generic.IEnumerable`1" /> of strings.
+              </para>
             </item>
           </list>
         </remarks>
@@ -279,15 +279,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file to append the specified string to. </param
-        >
+          />The file to append the specified string to.
+        </param>
         <param name="contents">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to append to the file. </param
-        >
+          />The string to append to the file.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AppendAllText">
@@ -330,22 +330,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file to append the specified string to. </param
-        >
+          />The file to append the specified string to.
+        </param>
         <param name="contents">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to append to the file. </param
-        >
+          />The string to append to the file.
+        </param>
         <param name="encoding">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character encoding to use. </param
-        >
+          />The character encoding to use.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AppendText">
@@ -437,8 +437,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The path to the file to append to. </param
-        >
+          />The path to the file to append to.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -475,12 +475,12 @@
           <para> An I/O error occurred.</para>
         </exception>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="sourceFileName " />or <paramref name="destFileName " />is <see langword="null" />. </exception
-        >
+          <paramref name="sourceFileName " />or <paramref name="destFileName " />is <see langword="null" />.
+        </exception>
         <exception cref="T:System.ArgumentException">
           <para>
-            <paramref name="sourceFileName " />or <paramref name="destFileName " />is a zero-length string, contains only white space, or contains one or more implementation-specific invalid characters. </para
-          >
+            <paramref name="sourceFileName " />or <paramref name="destFileName " />is a zero-length string, contains only white space, or contains one or more implementation-specific invalid characters.
+          </para>
           <para>-or-</para>
           <para>
             <paramref name="sourceFileName " />or <paramref name="destFileName" /> specifies a directory.</para
@@ -525,15 +525,15 @@
           <para>Copies an existing file to a new file. Overwriting a file of the same name is not allowed.</para>
         </summary>
         <param name="sourceFileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The file to copy. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The file to copy.
+        </param>
         <param name="destFileName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the destination file. This cannot be a directory or an existing file. </param
-        >
+          />The name of the destination file. This cannot be a directory or an existing file.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -573,8 +573,8 @@
           <para> An I/O error occurred.</para>
         </exception>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="sourceFileName " />or <paramref name="destFileName " />is <see langword="null" />. </exception
-        >
+          <paramref name="sourceFileName " />or <paramref name="destFileName " />is <see langword="null" />.
+        </exception>
         <exception cref="T:System.ArgumentException">
           <para>
             <paramref name="sourceFileName" /> or <paramref name="destFileName" /> is a zero-length string, contains only white space, or contains one or more invalid characters.</para
@@ -625,22 +625,22 @@
           <para>Copies an existing file to a new file. Overwriting a file of the same name is allowed.</para>
         </summary>
         <param name="sourceFileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The file to copy. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The file to copy.
+        </param>
         <param name="destFileName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the destination file. This cannot be a directory. </param
-        >
+          />The name of the destination file. This cannot be a directory.
+        </param>
         <param name="overwrite">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if the destination file can be overwritten; otherwise, false. </param
-        >
+          />true if the destination file can be overwritten; otherwise, false.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -733,8 +733,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The path and name of the file to create. </param
-        >
+          />The path and name of the file to create.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -823,19 +823,15 @@
           >
         </returns>
         <param name="path">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the file. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the file.
+        </param>
         <param name="bufferSize">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes buffered for reads and writes to the file. </param
-        >
+          />The number of bytes buffered for reads and writes to the file.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -889,19 +885,15 @@
           <para>A new file with the specified buffer size.</para>
         </returns>
         <param name="path">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the file. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the file.
+        </param>
         <param name="bufferSize">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes buffered for reads and writes to the file. </param
-        >
+          />The number of bytes buffered for reads and writes to the file.
+        </param>
         <param name="options">
           <attribution
             license="cc4"
@@ -960,19 +952,15 @@
           <para>A new file with the specified buffer size, file options, and file security.</para>
         </returns>
         <param name="path">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the file. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the file.
+        </param>
         <param name="bufferSize">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes buffered for reads and writes to the file. </param
-        >
+          />The number of bytes buffered for reads and writes to the file.
+        </param>
         <param name="options">
           <attribution
             license="cc4"
@@ -1074,8 +1062,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file to be opened for writing. </param
-        >
+          />The file to be opened for writing.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1101,8 +1089,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.IO.File.Decrypt(System.String)" /> method allows you to decrypt a file that was encrypted using the <see cref="M:System.IO.File.Encrypt(System.String)" /> method.  The <see cref="M:System.IO.File.Decrypt(System.String)" /> method can decrypt only files that were encrypted using the current user account. </para
-          >
+            >The <see cref="M:System.IO.File.Decrypt(System.String)" /> method allows you to decrypt a file that was encrypted using the <see cref="M:System.IO.File.Encrypt(System.String)" /> method.  The <see cref="M:System.IO.File.Decrypt(System.String)" /> method can decrypt only files that were encrypted using the current user account.
+          </para>
           <para
             >The <see cref="M:System.IO.File.Decrypt(System.String)" /> method requires exclusive access to the file being decrypted, and will raise an exception if another process is using the file. If the file is not encrypted, <see cref="M:System.IO.File.Decrypt(System.String)" /> will return a nonzero value, which indicates success.</para
           >
@@ -1280,8 +1268,8 @@
             >The <see cref="M:System.IO.File.Exists(System.String)" /> method should not be used for path validation, this method merely checks if the file specified in <paramref name="path" /> exists. Passing an invalid path to <see cref="M:System.IO.File.Exists(System.String)" /> returns false. To check whether the path contains any invalid characters, you can call the <see cref="M:System.IO.Path.GetInvalidPathChars" /> method to retrieve the characters that are invalid for the file system. You can also create a regular expression to test the whether the path is valid for your environment. For examples of acceptable paths, see <see cref="T:System.IO.File" />.</para
           >
           <para
-            >Be aware that another process can potentially do something with the file in between the time you call the <see cref="M:System.IO.File.Exists(System.String)" /> method and perform another operation on the file, such as <see cref="M:System.IO.File.Delete(System.String)" />. </para
-          >
+            >Be aware that another process can potentially do something with the file in between the time you call the <see cref="M:System.IO.File.Exists(System.String)" /> method and perform another operation on the file, such as <see cref="M:System.IO.File.Delete(System.String)" />.
+          </para>
           <para
             >The <paramref name="path" /> parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see cref="M:System.IO.Directory.GetCurrentDirectory" />.</para
           >
@@ -1303,8 +1291,8 @@
           >
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />The file to check. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The file to check.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1357,8 +1345,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Security.AccessControl.FileSecurity" /> object that encapsulates the access control rules for the file described by the <paramref name="path" /> parameter.     </para
-          >
+            >A <see cref="T:System.Security.AccessControl.FileSecurity" /> object that encapsulates the access control rules for the file described by the <paramref name="path" /> parameter.
+          </para>
         </returns>
         <param name="path">
           <attribution
@@ -1422,8 +1410,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Security.AccessControl.FileSecurity" /> object that encapsulates the access control rules for the file described by the <paramref name="path" /> parameter.     </para
-          >
+            >A <see cref="T:System.Security.AccessControl.FileSecurity" /> object that encapsulates the access control rules for the file described by the <paramref name="path" /> parameter.
+          </para>
         </returns>
         <param name="path">
           <attribution
@@ -1483,12 +1471,8 @@
           <para>The <see cref="T:System.IO.FileAttributes" /> of the file on the path.</para>
         </returns>
         <param name="path">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The path to the file. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The path to the file.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetCreationTime">
@@ -1574,8 +1558,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file or directory for which to obtain creation date and time information. </param
-        >
+          />The file or directory for which to obtain creation date and time information.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1631,8 +1615,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file or directory for which to obtain creation date and time information. </param
-        >
+          />The file or directory for which to obtain creation date and time information.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetLastAccessTime">
@@ -1717,8 +1701,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file or directory for which to obtain access date and time information. </param
-        >
+          />The file or directory for which to obtain access date and time information.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1776,8 +1760,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file or directory for which to obtain access date and time information. </param
-        >
+          />The file or directory for which to obtain access date and time information.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetLastWriteTime">
@@ -1862,8 +1846,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file or directory for which to obtain write date and time information. </param
-        >
+          />The file or directory for which to obtain write date and time information.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1921,8 +1905,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file or directory for which to obtain write date and time information. </param
-        >
+          />The file or directory for which to obtain write date and time information.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Move">
@@ -1956,12 +1940,12 @@
           <paramref name="destFileName" /> already exists or is a directory.</exception
         >
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="sourceFileName " />or <paramref name="destFileName " />is <see langword="null" />. </exception
-        >
+          <paramref name="sourceFileName " />or <paramref name="destFileName " />is <see langword="null" />.
+        </exception>
         <exception cref="T:System.ArgumentException">
           <para>
-            <paramref name="sourceFileName " />or <paramref name="destFileName " />is a zero-length string, contains only white space, or contains one or more implementation-specific invalid characters. </para
-          >
+            <paramref name="sourceFileName " />or <paramref name="destFileName " />is a zero-length string, contains only white space, or contains one or more implementation-specific invalid characters.
+          </para>
         </exception>
         <exception cref="T:System.Security.SecurityException"
           >The caller does not have the required permission.</exception
@@ -2012,15 +1996,11 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the file to move. </param
-        >
+          />The name of the file to move.
+        </param>
         <param name="destFileName">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The new path for the file. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The new path for the file.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2094,8 +2074,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.FileMode" /> value that specifies whether a file is created if one does not exist, and determines whether the contents of existing files are retained or overwritten. </param
-        >
+          />A <see cref="T:System.IO.FileMode" /> value that specifies whether a file is created if one does not exist, and determines whether the contents of existing files are retained or overwritten.
+        </param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -2120,15 +2100,15 @@
           >
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />The file to open. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The file to open.
+        </param>
         <param name="mode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.FileMode" /> value that specifies whether a file is created if one does not exist, and determines whether the contents of existing files are retained or overwritten. </param
-        >
+          />A <see cref="T:System.IO.FileMode" /> value that specifies whether a file is created if one does not exist, and determines whether the contents of existing files are retained or overwritten.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2207,15 +2187,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.FileMode" /> value that specifies whether a file is created if one does not exist, and determines whether the contents of existing files are retained or overwritten. </param
-        >
+          />A <see cref="T:System.IO.FileMode" /> value that specifies whether a file is created if one does not exist, and determines whether the contents of existing files are retained or overwritten.
+        </param>
         <param name="access">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.FileAccess" /> value that specifies the operations that can be performed on the file. </param
-        >
+          />A <see cref="T:System.IO.FileAccess" /> value that specifies the operations that can be performed on the file.
+        </param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -2235,22 +2215,22 @@
           >
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />The file to open. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The file to open.
+        </param>
         <param name="mode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.FileMode" /> value that specifies whether a file is created if one does not exist, and determines whether the contents of existing files are retained or overwritten. </param
-        >
+          />A <see cref="T:System.IO.FileMode" /> value that specifies whether a file is created if one does not exist, and determines whether the contents of existing files are retained or overwritten.
+        </param>
         <param name="access">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.FileAccess" /> value that specifies the operations that can be performed on the file. </param
-        >
+          />A <see cref="T:System.IO.FileAccess" /> value that specifies the operations that can be performed on the file.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2330,22 +2310,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.FileMode" /> value that specifies whether a file is created if one does not exist, and determines whether the contents of existing files are retained or overwritten. </param
-        >
+          />A <see cref="T:System.IO.FileMode" /> value that specifies whether a file is created if one does not exist, and determines whether the contents of existing files are retained or overwritten.
+        </param>
         <param name="access">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.FileAccess" /> value that specifies the operations that can be performed on the file. </param
-        >
+          />A <see cref="T:System.IO.FileAccess" /> value that specifies the operations that can be performed on the file.
+        </param>
         <param name="share">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.FileShare" /> value specifying the type of access other threads have to the file. </param
-        >
+          />A <see cref="T:System.IO.FileShare" /> value specifying the type of access other threads have to the file.
+        </param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -2370,29 +2350,29 @@
           >
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />The file to open. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The file to open.
+        </param>
         <param name="mode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.FileMode" /> value that specifies whether a file is created if one does not exist, and determines whether the contents of existing files are retained or overwritten. </param
-        >
+          />A <see cref="T:System.IO.FileMode" /> value that specifies whether a file is created if one does not exist, and determines whether the contents of existing files are retained or overwritten.
+        </param>
         <param name="access">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.FileAccess" /> value that specifies the operations that can be performed on the file. </param
-        >
+          />A <see cref="T:System.IO.FileAccess" /> value that specifies the operations that can be performed on the file.
+        </param>
         <param name="share">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.FileShare" /> value specifying the type of access other threads have to the file. </param
-        >
+          />A <see cref="T:System.IO.FileShare" /> value specifying the type of access other threads have to the file.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2476,8 +2456,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file to be opened for reading. </param
-        >
+          />The file to be opened for reading.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2561,8 +2541,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file to be opened for reading. </param
-        >
+          />The file to be opened for reading.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2651,8 +2631,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file to be opened for writing. </param
-        >
+          />The file to be opened for writing.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2692,8 +2672,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file to open for reading. </param
-        >
+          />The file to open for reading.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ReadAllLines">
@@ -2733,8 +2713,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file to open for reading. </param
-        >
+          />The file to open for reading.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ReadAllLines">
@@ -2778,15 +2758,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file to open for reading. </param
-        >
+          />The file to open for reading.
+        </param>
         <param name="encoding">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The encoding applied to the contents of the file. </param
-        >
+          />The encoding applied to the contents of the file.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ReadAllText">
@@ -2813,8 +2793,8 @@
           <para>This method opens a file, reads each line of the file, and then adds each line as an element of a string. It then closes the file. A line is defined as a sequence of characters followed by a carriage return ('\r'), a line feed ('\n'), or a carriage return immediately followed by a line feed. The resulting string does not contain the terminating carriage return and/or line feed.</para>
           <para>This method attempts to automatically detect the encoding of a file based on the presence of byte order marks. Encoding formats UTF-8 and UTF-32 (both big-endian and little-endian) can be detected.</para>
           <para
-            >Use the <see cref="M:System.IO.File.ReadAllText(System.String,System.Text.Encoding)" /> method overload when reading files that might contain imported text, because unrecognized characters may not be read correctly.  </para
-          >
+            >Use the <see cref="M:System.IO.File.ReadAllText(System.String,System.Text.Encoding)" /> method overload when reading files that might contain imported text, because unrecognized characters may not be read correctly.
+          </para>
           <para>The file handle is guaranteed to be closed by this method, even if exceptions are raised.</para>
         </remarks>
         <summary>
@@ -2830,8 +2810,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file to open for reading. </param
-        >
+          />The file to open for reading.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ReadAllText">
@@ -2879,15 +2859,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file to open for reading. </param
-        >
+          />The file to open for reading.
+        </param>
         <param name="encoding">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The encoding applied to the contents of the file. </param
-        >
+          />The encoding applied to the contents of the file.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ReadLines">
@@ -2913,8 +2893,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.IO.File.ReadLines(System.String)" /> and <see cref="M:System.IO.File.ReadAllLines(System.String)" /> methods differ as follows: When you use <see cref="M:System.IO.File.ReadLines(System.String)" />, you can start enumerating the collection of strings before the whole collection is returned; when you use <see cref="M:System.IO.File.ReadAllLines(System.String)" />, you must wait for the whole array of strings be returned before you can access the array. Therefore, when you are working with very large files, <see cref="M:System.IO.File.ReadLines(System.String)" /> can be more efficient. </para
-          >
+            >The <see cref="M:System.IO.File.ReadLines(System.String)" /> and <see cref="M:System.IO.File.ReadAllLines(System.String)" /> methods differ as follows: When you use <see cref="M:System.IO.File.ReadLines(System.String)" />, you can start enumerating the collection of strings before the whole collection is returned; when you use <see cref="M:System.IO.File.ReadAllLines(System.String)" />, you must wait for the whole array of strings be returned before you can access the array. Therefore, when you are working with very large files, <see cref="M:System.IO.File.ReadLines(System.String)" /> can be more efficient.
+          </para>
           <para
             >You can use the <see cref="M:System.IO.File.ReadLines(System.String)" /> method to do the following:</para
           >
@@ -2979,8 +2959,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Use this method to specify an encoding to use read the file.</para>
           <para
-            >The <see cref="M:System.IO.File.ReadLines(System.String,System.Text.Encoding)" /> and <see cref="M:System.IO.File.ReadAllLines(System.String,System.Text.Encoding)" /> methods differ as follows: When you use <see cref="M:System.IO.File.ReadLines(System.String,System.Text.Encoding)" />, you can start enumerating the collection of strings before the whole collection is returned. When you use <see cref="M:System.IO.File.ReadAllLines(System.String,System.Text.Encoding)" />, you must wait for the whole array of strings be returned before you can access the array. Therefore, when you are working with very large files, <see cref="M:System.IO.File.ReadLines(System.String,System.Text.Encoding)" /> can be more efficient. </para
-          >
+            >The <see cref="M:System.IO.File.ReadLines(System.String,System.Text.Encoding)" /> and <see cref="M:System.IO.File.ReadAllLines(System.String,System.Text.Encoding)" /> methods differ as follows: When you use <see cref="M:System.IO.File.ReadLines(System.String,System.Text.Encoding)" />, you can start enumerating the collection of strings before the whole collection is returned. When you use <see cref="M:System.IO.File.ReadAllLines(System.String,System.Text.Encoding)" />, you must wait for the whole array of strings be returned before you can access the array. Therefore, when you are working with very large files, <see cref="M:System.IO.File.ReadLines(System.String,System.Text.Encoding)" /> can be more efficient.
+          </para>
           <para
             >You can use the <see cref="M:System.IO.File.ReadLines(System.String,System.Text.Encoding)" />  method to do the following:</para
           >
@@ -3021,8 +3001,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The encoding that is applied to the contents of the file. </param
-        >
+          />The encoding that is applied to the contents of the file.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Replace">
@@ -3116,8 +3096,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.IO.File.Replace(System.String,System.String,System.String,System.Boolean)" /> method replaces the contents of a specified file with the contents of another file.  It also creates a backup of the file that was replaced. </para
-          >
+            >The <see cref="M:System.IO.File.Replace(System.String,System.String,System.String,System.Boolean)" /> method replaces the contents of a specified file with the contents of another file.  It also creates a backup of the file that was replaced.
+          </para>
           <para
             >If the <paramref name="sourceFileName" /> and <paramref name="destinationFileName" /> are on different volumes, this method will raise an exception. If the <paramref name="destinationBackupFileName" /> is on a different volume from the source file, the backup file will be deleted.</para
           >
@@ -3155,8 +3135,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to ignore merge errors (such as attributes and access control lists (ACLs)) from the replaced file to the replacement file; otherwise, false. </param
-        >
+          />true to ignore merge errors (such as attributes and access control lists (ACLs)) from the replaced file to the replacement file; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetAccessControl">
@@ -3185,8 +3165,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.IO.File.SetAccessControl(System.String,System.Security.AccessControl.FileSecurity)" /> method applies access control list (ACL) entries to a file that represents the noninherited ACL list. </para
-          >
+            >The <see cref="M:System.IO.File.SetAccessControl(System.String,System.Security.AccessControl.FileSecurity)" /> method applies access control list (ACL) entries to a file that represents the noninherited ACL list.
+          </para>
           <block subset="none" type="note">
             <para
               >The ACL specified for the <paramref name="fileSecurity" /> parameter replaces the existing ACL for the file. To add permissions for a new user, use the <see cref="Overload:System.IO.File.GetAccessControl" /> method to obtain the existing ACL, modify it, and then use <see cref="M:System.IO.File.SetAccessControl(System.String,System.Security.AccessControl.FileSecurity)" /> to apply it back to the file.</para
@@ -3228,8 +3208,8 @@
             </item>
             <item>
               <para
-                >Set the destination <see cref="T:System.Security.AccessControl.FileSecurity" /> object to the destination file using the <see cref="M:System.IO.File.SetAccessControl(System.String,System.Security.AccessControl.FileSecurity)" /> method. </para
-              >
+                >Set the destination <see cref="T:System.Security.AccessControl.FileSecurity" /> object to the destination file using the <see cref="M:System.IO.File.SetAccessControl(System.String,System.Security.AccessControl.FileSecurity)" /> method.
+              </para>
             </item>
           </list>
           <para
@@ -3287,8 +3267,8 @@
             >The <paramref name="path" /> parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see cref="M:System.IO.Directory.GetCurrentDirectory" />.</para
           >
           <para
-            >Certain file attributes, such as <see cref="F:System.IO.FileAttributes.Hidden" /> and <see cref="F:System.IO.FileAttributes.ReadOnly" />, can be combined. Other attributes, such as <see cref="F:System.IO.FileAttributes.Normal" />, must be used alone.  </para
-          >
+            >Certain file attributes, such as <see cref="F:System.IO.FileAttributes.Hidden" /> and <see cref="F:System.IO.FileAttributes.ReadOnly" />, can be combined. Other attributes, such as <see cref="F:System.IO.FileAttributes.Normal" />, must be used alone.
+          </para>
           <para
             >It is not possible to change the compression status of a <see cref="T:System.IO.File" /> object using the <see cref="M:System.IO.File.SetAttributes(System.String,System.IO.FileAttributes)" /> method.</para
           >
@@ -3305,19 +3285,15 @@
           >
         </summary>
         <param name="path">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The path to the file. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The path to the file.
+        </param>
         <param name="fileAttributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the enumeration values. </param
-        >
+          />A bitwise combination of the enumeration values.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetCreationTime">
@@ -3395,15 +3371,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file for which to set the creation date and time information. </param
-        >
+          />The file for which to set the creation date and time information.
+        </param>
         <param name="creationTime">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.DateTime" /> containing the value to set for the creation date and time of <paramref name="path" />. This value is expressed in local time. </param
-        >
+          />A <see cref="T:System.DateTime" /> containing the value to set for the creation date and time of <paramref name="path" />. This value is expressed in local time.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -3451,15 +3427,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file for which to set the creation date and time information. </param
-        >
+          />The file for which to set the creation date and time information.
+        </param>
         <param name="creationTimeUtc">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.DateTime" /> containing the value to set for the creation date and time of <paramref name="path" />. This value is expressed in UTC time. </param
-        >
+          />A <see cref="T:System.DateTime" /> containing the value to set for the creation date and time of <paramref name="path" />. This value is expressed in UTC time.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetLastAccessTime">
@@ -3539,15 +3515,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file for which to set the access date and time information. </param
-        >
+          />The file for which to set the access date and time information.
+        </param>
         <param name="lastAccessTime">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.DateTime" /> containing the value to set for the last access date and time of <paramref name="path" />. This value is expressed in local time. </param
-        >
+          />A <see cref="T:System.DateTime" /> containing the value to set for the last access date and time of <paramref name="path" />. This value is expressed in local time.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -3594,15 +3570,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file for which to set the access date and time information. </param
-        >
+          />The file for which to set the access date and time information.
+        </param>
         <param name="lastAccessTimeUtc">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.DateTime" /> containing the value to set for the last access date and time of <paramref name="path" />. This value is expressed in UTC time. </param
-        >
+          />A <see cref="T:System.DateTime" /> containing the value to set for the last access date and time of <paramref name="path" />. This value is expressed in UTC time.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetLastWriteTime">
@@ -3682,15 +3658,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file for which to set the date and time information. </param
-        >
+          />The file for which to set the date and time information.
+        </param>
         <param name="lastWriteTime">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.DateTime" /> containing the value to set for the last write date and time of <paramref name="path" />. This value is expressed in local time. </param
-        >
+          />A <see cref="T:System.DateTime" /> containing the value to set for the last write date and time of <paramref name="path" />. This value is expressed in local time.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -3737,15 +3713,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file for which to set the date and time information. </param
-        >
+          />The file for which to set the date and time information.
+        </param>
         <param name="lastWriteTimeUtc">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.DateTime" /> containing the value to set for the last write date and time of <paramref name="path" />. This value is expressed in UTC time. </param
-        >
+          />A <see cref="T:System.DateTime" /> containing the value to set for the last write date and time of <paramref name="path" />. This value is expressed in UTC time.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteAllBytes">
@@ -3780,19 +3756,15 @@
           <para>Creates a new file, writes the specified byte array to the file, and then closes the file. If the target file already exists, it is overwritten.</para>
         </summary>
         <param name="path">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The file to write to. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The file to write to.
+        </param>
         <param name="bytes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The bytes to write to the file. </param
-        >
+          />The bytes to write to the file.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteAllLines">
@@ -3885,19 +3857,15 @@
           <para>Creates a new file, write the specified string array to the file, and then closes the file. </para>
         </summary>
         <param name="path">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The file to write to. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The file to write to.
+        </param>
         <param name="contents">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string array to write to the file. </param
-        >
+          />The string array to write to the file.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteAllLines">
@@ -4005,19 +3973,15 @@
           <para>Creates a new file, writes the specified string array to the file by using the specified encoding, and then closes the file. </para>
         </summary>
         <param name="path">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The file to write to. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The file to write to.
+        </param>
         <param name="contents">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string array to write to the file. </param
-        >
+          />The string array to write to the file.
+        </param>
         <param name="encoding">
           <attribution
             license="cc4"
@@ -4062,19 +4026,15 @@
           <para>Creates a new file, writes the specified string to the file, and then closes the file. If the target file already exists, it is overwritten.</para>
         </summary>
         <param name="path">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The file to write to. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The file to write to.
+        </param>
         <param name="contents">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to write to the file. </param
-        >
+          />The string to write to the file.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteAllText">
@@ -4110,19 +4070,15 @@
           <para>Creates a new file, writes the specified string to the file using the specified encoding, and then closes the file. If the target file already exists, it is overwritten.</para>
         </summary>
         <param name="path">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The file to write to. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The file to write to.
+        </param>
         <param name="contents">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to write to the file. </param
-        >
+          />The string to write to the file.
+        </param>
         <param name="encoding">
           <attribution
             license="cc4"

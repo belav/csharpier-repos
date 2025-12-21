@@ -72,8 +72,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.MenuStrip" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.MenuStrip" /> class.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -106,8 +106,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <see cref="T:System.Windows.Forms.MenuStrip" /> supports overflow functionality. </para
-          >
+            >Gets or sets a value indicating whether the <see cref="T:System.Windows.Forms.MenuStrip" /> supports overflow functionality.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -402,8 +402,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -430,8 +430,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -575,8 +575,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether ToolTips are shown for the <see cref="T:System.Windows.Forms.MenuStrip" />. </para
-          >
+            >Gets or sets a value indicating whether ToolTips are shown for the <see cref="T:System.Windows.Forms.MenuStrip" />.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -601,8 +601,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <see cref="T:System.Windows.Forms.MenuStrip" /> stretches from end to end in its container. </para
-          >
+            >Gets or sets a value indicating whether the <see cref="T:System.Windows.Forms.MenuStrip" /> stretches from end to end in its container.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>

@@ -385,8 +385,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The string is in the form "SqlError:", followed by the <see cref="P:System.Data.SqlClient.SqlError.Message" />, and the stack trace. For example: </para
-          >
+            >The string is in the form "SqlError:", followed by the <see cref="P:System.Data.SqlClient.SqlError.Message" />, and the stack trace. For example:
+          </para>
           <para>SqlError:UserId or Password not valid. &lt;stack trace&gt; </para>
         </remarks>
         <summary>

@@ -14,11 +14,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Implement the <see cref="T:System.ServiceModel.Dispatcher.IInstanceProvider" /> interface to control the creation and recycling of service objects when one is requested or disposed by an <see cref="T:System.ServiceModel.InstanceContext" /> object. </para
-      >
+        >Implement the <see cref="T:System.ServiceModel.Dispatcher.IInstanceProvider" /> interface to control the creation and recycling of service objects when one is requested or disposed by an <see cref="T:System.ServiceModel.InstanceContext" /> object.
+      </para>
       <para
-        >Once the <see cref="T:System.ServiceModel.Dispatcher.IInstanceProvider" /> interface is implemented, you must assign your custom instance provider object to the <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.InstanceProvider" /> property using either an endpoint behavior (a <see cref="T:System.ServiceModel.Description.IEndpointBehavior" /> object) or a contract behavior (a <see cref="T:System.ServiceModel.Description.IContractBehavior" /> object). </para
-      >
+        >Once the <see cref="T:System.ServiceModel.Dispatcher.IInstanceProvider" /> interface is implemented, you must assign your custom instance provider object to the <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.InstanceProvider" /> property using either an endpoint behavior (a <see cref="T:System.ServiceModel.Description.IEndpointBehavior" /> object) or a contract behavior (a <see cref="T:System.ServiceModel.Description.IContractBehavior" /> object).
+      </para>
       <para
         >If the insertion mechanism is an endpoint behavior you can also implement a <see cref="T:System.ServiceModel.Configuration.BehaviorExtensionElement" /> object that can insert your custom behavior using a configuration file. If the insertion mechanism is a contract behavior, you can insert the behavior programmatically prior to the opening of the service host or you can implement a custom attribute. (For an example of the contract behavior approach, see the Example section.)</para
       >

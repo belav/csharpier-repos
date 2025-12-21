@@ -109,15 +109,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeTypeReference" /> that indicates the data type of the object to create. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeTypeReference" /> that indicates the data type of the object to create.
+        </param>
         <param name="parameters">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.CodeDom.CodeExpression" /> objects that indicates the parameters to use to create the object. </param
-        >
+          />An array of <see cref="T:System.CodeDom.CodeExpression" /> objects that indicates the parameters to use to create the object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -159,15 +159,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the data type of object to create. </param
-        >
+          />The name of the data type of object to create.
+        </param>
         <param name="parameters">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.CodeDom.CodeExpression" /> objects that indicates the parameters to use to create the object. </param
-        >
+          />An array of <see cref="T:System.CodeDom.CodeExpression" /> objects that indicates the parameters to use to create the object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -209,15 +209,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data type of the object to create. </param
-        >
+          />The data type of the object to create.
+        </param>
         <param name="parameters">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.CodeDom.CodeExpression" /> objects that indicates the parameters to use to create the object. </param
-        >
+          />An array of <see cref="T:System.CodeDom.CodeExpression" /> objects that indicates the parameters to use to create the object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateType">

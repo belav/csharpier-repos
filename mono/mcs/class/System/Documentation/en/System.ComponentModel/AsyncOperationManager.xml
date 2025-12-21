@@ -103,8 +103,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object used to associate a piece of client state, such as a task ID, with a particular asynchronous operation. </param
-        >
+          />An object used to associate a piece of client state, such as a task ID, with a particular asynchronous operation.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SynchronizationContext">

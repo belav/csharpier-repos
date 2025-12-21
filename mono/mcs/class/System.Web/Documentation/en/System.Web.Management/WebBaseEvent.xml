@@ -63,8 +63,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The description of the event. </param
-        >
+          />The description of the event.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -104,8 +104,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The description of the raised event. </param
-        >
+          />The description of the raised event.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

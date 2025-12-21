@@ -30,11 +30,11 @@
         >This interface allows the implementation of customized equality comparison for collections. That is, you can create your own definition of equality for type <paramref name="T" />, and specify that this definition be used with a collection type that accepts the <see cref="T:System.Collections.Generic.IEqualityComparer`1" /> generic interface. In the .NET Framework, constructors of the <see cref="T:System.Collections.Generic.Dictionary`2" /> generic collection type accept this interface.</para
       >
       <para
-        >A default implementation of this interface is provided by the <see cref="P:System.Collections.Generic.EqualityComparer`1.Default" /> property of the <see cref="T:System.Collections.Generic.EqualityComparer`1" /> generic class. The <see cref="T:System.StringComparer" /> class implements <see cref="T:System.Collections.Generic.IEqualityComparer`1" /> of type <see cref="T:System.String" />. </para
-      >
+        >A default implementation of this interface is provided by the <see cref="P:System.Collections.Generic.EqualityComparer`1.Default" /> property of the <see cref="T:System.Collections.Generic.EqualityComparer`1" /> generic class. The <see cref="T:System.StringComparer" /> class implements <see cref="T:System.Collections.Generic.IEqualityComparer`1" /> of type <see cref="T:System.String" />.
+      </para>
       <para
-        >This interface supports only equality comparisons. Customization of comparisons for sorting and ordering is provided by the <see cref="T:System.Collections.Generic.IComparer`1" /> generic interface. </para
-      >
+        >This interface supports only equality comparisons. Customization of comparisons for sorting and ordering is provided by the <see cref="T:System.Collections.Generic.IComparer`1" /> generic interface.
+      </para>
       <para
         >We recommend that you derive from the <see cref="T:System.Collections.Generic.EqualityComparer`1" /> class instead of implementing the <see cref="T:System.Collections.Generic.IEqualityComparer`1" /> interface, because the <see cref="T:System.Collections.Generic.EqualityComparer`1" /> class tests for equality using the <see cref="M:System.IEquatable`1.Equals(`0)" /> method instead of the <see cref="M:System.Object.Equals(System.Object)" /> method. This is consistent with the Contains, IndexOf, LastIndexOf, and Remove methods of the <see cref="T:System.Collections.Generic.Dictionary`2" /> class and other generic collections.</para
       >
@@ -114,6 +114,8 @@ y.Equals(z) implies x.Equals(z); for any values x, y and z for  which these expr
    Hash functions are used with <see langword="hashtables" />. A good hash function
    algorithm rarely generates hash codes that collide. For more information about
    hash functions, see <paramref name="The Art of Computer Programming" />
+
+              
 
               
 

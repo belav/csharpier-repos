@@ -80,8 +80,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte array value of the IP address. </param
-        >
+          />The byte array value of the IP address.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -128,8 +128,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The long value of the IP address. For example, the value 0x2414188f in big-endian format would be the IP address "143.24.20.36". </param
-        >
+          />The long value of the IP address. For example, the value 0x2414188f in big-endian format would be the IP address "143.24.20.36".
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -170,15 +170,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte array value of the IP address. </param
-        >
+          />The byte array value of the IP address.
+        </param>
         <param name="scopeid">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The long value of the scope identifier. </param
-        >
+          />The long value of the scope identifier.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Address">
@@ -385,8 +385,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Net.IPAddress" /> instance to compare to the current instance. </param
-        >
+          />An <see cref="T:System.Net.IPAddress" /> instance to compare to the current instance.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -501,8 +501,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number to convert, expressed in host byte order. </param
-        >
+          />The number to convert, expressed in host byte order.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -549,8 +549,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number to convert, expressed in host byte order. </param
-        >
+          />The number to convert, expressed in host byte order.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -597,8 +597,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number to convert, expressed in host byte order. </param
-        >
+          />The number to convert, expressed in host byte order.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -822,8 +822,8 @@
           >
         </returns>
         <param name="address">
-          <attribution license="cc4" from="Microsoft" modified="false" />An IP address. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />An IP address.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -910,8 +910,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number to convert, expressed in network byte order. </param
-        >
+          />The number to convert, expressed in network byte order.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -958,8 +958,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number to convert, expressed in network byte order. </param
-        >
+          />The number to convert, expressed in network byte order.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1009,8 +1009,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number to convert, expressed in network byte order. </param
-        >
+          />The number to convert, expressed in network byte order.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1149,8 +1149,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string that contains an IP address in dotted-quad notation for IPv4 and in colon-hexadecimal notation for IPv6. </param
-        >
+          />A string that contains an IP address in dotted-quad notation for IPv4 and in colon-hexadecimal notation for IPv6.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

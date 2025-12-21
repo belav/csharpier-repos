@@ -63,8 +63,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The message displayed to the client when the exception is thrown. </param
-        >
+          />The message displayed to the client when the exception is thrown.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -93,15 +93,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The message displayed to the client when the exception is thrown. </param
-        >
+          />The message displayed to the client when the exception is thrown.
+        </param>
         <param name="innerException">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="P:System.Exception.InnerException" />, if any, that threw the current exception. </param
-        >
+          />The <see cref="P:System.Exception.InnerException" />, if any, that threw the current exception.
+        </param>
       </Docs>
     </Member>
   </Members>

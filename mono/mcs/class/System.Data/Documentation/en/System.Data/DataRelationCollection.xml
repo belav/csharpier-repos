@@ -35,8 +35,8 @@
         >A <see cref="T:System.Data.DataRelationCollection" /> object enables navigation between related parent/child <see cref="T:System.Data.DataTable" /> objects.</para
       >
       <para
-        >You create a <see cref="T:System.Data.DataRelationCollection" /> object by defining it as a property of either the <see cref="T:System.Data.DataSet" /> or the <see cref="T:System.Data.DataTable" />, instead of by directly using a constructor. (Use the <see cref="P:System.Data.DataSet.Relations" /> property of the <see cref="T:System.Data.DataSet" />, or the <see cref="P:System.Data.DataTable.ParentRelations" /> property of the <see cref="T:System.Data.DataTable" />.) </para
-      >
+        >You create a <see cref="T:System.Data.DataRelationCollection" /> object by defining it as a property of either the <see cref="T:System.Data.DataSet" /> or the <see cref="T:System.Data.DataTable" />, instead of by directly using a constructor. (Use the <see cref="P:System.Data.DataSet.Relations" /> property of the <see cref="T:System.Data.DataSet" />, or the <see cref="P:System.Data.DataTable.ParentRelations" /> property of the <see cref="T:System.Data.DataTable" />.)
+      </para>
       <para
         >To access the collection, use the <see cref="P:System.Data.DataSet.Relations" /> property of the <see cref="T:System.Data.DataSet" /> object.</para
       >
@@ -62,8 +62,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Data.DataRelationCollection" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Data.DataRelationCollection" /> class.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -101,8 +101,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The DataRelation to add to the collection. </param
-        >
+          />The DataRelation to add to the collection.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -144,15 +144,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The parent column of the relation. </param
-        >
+          />The parent column of the relation.
+        </param>
         <param name="childColumn">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The child column of the relation. </param
-        >
+          />The child column of the relation.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -194,15 +194,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The parent columns of the relation. </param
-        >
+          />The parent columns of the relation.
+        </param>
         <param name="childColumns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The child columns of the relation. </param
-        >
+          />The child columns of the relation.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -241,26 +241,22 @@
           <para>The created relation.</para>
         </returns>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the relation. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the relation.
+        </param>
         <param name="parentColumn">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The parent column of the relation. </param
-        >
+          />The parent column of the relation.
+        </param>
         <param name="childColumn">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The child column of the relation. </param
-        >
+          />The child column of the relation.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -306,22 +302,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the DataRelation to create. </param
-        >
+          />The name of the DataRelation to create.
+        </param>
         <param name="parentColumns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of parent <see cref="T:System.Data.DataColumn" /> objects. </param
-        >
+          />An array of parent <see cref="T:System.Data.DataColumn" /> objects.
+        </param>
         <param name="childColumns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of child DataColumn objects. </param
-        >
+          />An array of child DataColumn objects.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -361,33 +357,29 @@
           <para>The created relation.</para>
         </returns>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the relation. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the relation.
+        </param>
         <param name="parentColumn">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The parent column of the relation. </param
-        >
+          />The parent column of the relation.
+        </param>
         <param name="childColumn">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The child column of the relation. </param
-        >
+          />The child column of the relation.
+        </param>
         <param name="createConstraints">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to create constraints; otherwise false. (The default is true). </param
-        >
+          />true to create constraints; otherwise false. (The default is true).
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -431,29 +423,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the DataRelation to create. </param
-        >
+          />The name of the DataRelation to create.
+        </param>
         <param name="parentColumns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of parent <see cref="T:System.Data.DataColumn" /> objects. </param
-        >
+          />An array of parent <see cref="T:System.Data.DataColumn" /> objects.
+        </param>
         <param name="childColumns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of child DataColumn objects. </param
-        >
+          />An array of child DataColumn objects.
+        </param>
         <param name="createConstraints">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to create a constraint; otherwise false. </param
-        >
+          />true to create a constraint; otherwise false.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -521,8 +513,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array of <see cref="T:System.Data.DataRelation" /> objects to add to the collection. </param
-        >
+          />The array of <see cref="T:System.Data.DataRelation" /> objects to add to the collection.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -560,8 +552,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The relation to perform the check against. </param
-        >
+          />The relation to perform the check against.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -635,8 +627,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the relation to find. </param
-        >
+          />The name of the relation to find.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -738,8 +730,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The relation to search for. </param
-        >
+          />The relation to search for.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -772,8 +764,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the relation to find. </param
-        >
+          />The name of the relation to find.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -858,8 +850,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.ComponentModel.CollectionChangeEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.ComponentModel.CollectionChangeEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -888,8 +880,8 @@
           <para
             >Raising an event invokes the event handler through a delegate. For an overview, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -902,8 +894,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.ComponentModel.CollectionChangeEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.ComponentModel.CollectionChangeEventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Remove">
@@ -930,12 +922,8 @@
           <para>Removes the specified relation from the collection.</para>
         </summary>
         <param name="relation">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The relation to remove. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The relation to remove.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -967,8 +955,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the relation to remove. </param
-        >
+          />The name of the relation to remove.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1000,8 +988,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the relation to remove. </param
-        >
+          />The index of the relation to remove.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1033,8 +1021,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The DataRelation object to verify. </param
-        >
+          />The DataRelation object to verify.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

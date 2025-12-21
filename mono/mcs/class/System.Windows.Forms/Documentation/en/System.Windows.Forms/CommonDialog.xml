@@ -124,29 +124,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The handle to the dialog box window. </param
-        >
+          />The handle to the dialog box window.
+        </param>
         <param name="msg">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The message being received. </param
-        >
+          />The message being received.
+        </param>
         <param name="wparam">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Additional information about the message. </param
-        >
+          />Additional information about the message.
+        </param>
         <param name="lparam">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Additional information about the message. </param
-        >
+          />Additional information about the message.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -178,8 +178,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Windows.Forms.HelpEventArgs" /> that provides the event data. </param
-        >
+          />An <see cref="T:System.Windows.Forms.HelpEventArgs" /> that provides the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -219,29 +219,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The window handle of the message to send. </param
-        >
+          />The window handle of the message to send.
+        </param>
         <param name="msg">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The Win32 message to send. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The Win32 message to send.
+        </param>
         <param name="wparam">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <paramref name="wparam" /> to send with the message. </param
-        >
+          />The <paramref name="wparam" /> to send with the message.
+        </param>
         <param name="lparam">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <paramref name="lparam" /> to send with the message. </param
-        >
+          />The <paramref name="lparam" /> to send with the message.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -299,8 +295,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A value that represents the window handle of the owner window for the common dialog box. </param
-        >
+          />A value that represents the window handle of the owner window for the common dialog box.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -374,8 +370,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Any object that implements <see cref="T:System.Windows.Forms.IWin32Window" /> that represents the top-level window that will own the modal dialog box. </param
-        >
+          />Any object that implements <see cref="T:System.Windows.Forms.IWin32Window" /> that represents the top-level window that will own the modal dialog box.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

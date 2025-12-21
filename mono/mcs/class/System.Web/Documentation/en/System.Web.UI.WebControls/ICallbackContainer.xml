@@ -46,8 +46,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implementations of the <see cref="M:System.Web.UI.WebControls.ICallbackContainer.GetCallbackScript(System.Web.UI.WebControls.IButtonControl,System.String)" /> method should return a script that, when run on the client, will initiate a callback to the Web server. </para
-          >
+            >Implementations of the <see cref="M:System.Web.UI.WebControls.ICallbackContainer.GetCallbackScript(System.Web.UI.WebControls.IButtonControl,System.String)" /> method should return a script that, when run on the client, will initiate a callback to the Web server.
+          </para>
           <para
             >The <paramref name="argument" /> parameter is passed to the <see cref="M:System.Web.UI.ICallbackEventHandler.RaiseCallbackEvent(System.String)" /> method that handles the callback.</para
           >

@@ -100,29 +100,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The fault code for the new instance of <see cref="T:System.Runtime.Serialization.Formatters.SoapFault" />. The fault code identifies the type of the fault that occurred. </param
-        >
+          />The fault code for the new instance of <see cref="T:System.Runtime.Serialization.Formatters.SoapFault" />. The fault code identifies the type of the fault that occurred.
+        </param>
         <param name="faultString">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The fault string for the new instance of <see cref="T:System.Runtime.Serialization.Formatters.SoapFault" />. The fault string provides a human readable explanation of the fault. </param
-        >
+          />The fault string for the new instance of <see cref="T:System.Runtime.Serialization.Formatters.SoapFault" />. The fault string provides a human readable explanation of the fault.
+        </param>
         <param name="faultActor">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URI of the object that generated the fault. </param
-        >
+          />The URI of the object that generated the fault.
+        </param>
         <param name="serverFault">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The description of a common language runtime exception. This information is also present in the <see cref="P:System.Runtime.Serialization.Formatters.SoapFault.Detail" /> property. </param
-        >
+          />The description of a common language runtime exception. This information is also present in the <see cref="P:System.Runtime.Serialization.Formatters.SoapFault.Detail" /> property.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Detail">
@@ -266,15 +266,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> to populate with data. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> to populate with data.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The destination (see <see cref="T:System.Runtime.Serialization.StreamingContext" />) for the current serialization. </param
-        >
+          />The destination (see <see cref="T:System.Runtime.Serialization.StreamingContext" />) for the current serialization.
+        </param>
       </Docs>
     </Member>
   </Members>

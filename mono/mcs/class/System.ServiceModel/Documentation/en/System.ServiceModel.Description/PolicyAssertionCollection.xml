@@ -29,8 +29,8 @@
         >Use the <see cref="T:System.ServiceModel.Description.PolicyAssertionCollection" /> class to group together policy assertions and to enumerate or modify a group of assertions.</para
       >
       <para
-        >The <see cref="T:System.ServiceModel.Description.PolicyAssertionCollection" /> is used most frequently as a return value for the methods of the <see cref="T:System.ServiceModel.Description.PolicyConversionContext" /> class. </para
-      >
+        >The <see cref="T:System.ServiceModel.Description.PolicyAssertionCollection" /> is used most frequently as a return value for the methods of the <see cref="T:System.ServiceModel.Description.PolicyConversionContext" /> class.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -54,8 +54,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.PolicyAssertionCollection" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.PolicyAssertionCollection" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -84,8 +84,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.PolicyAssertionCollection" /> class using the specified <see cref="T:System.Xml.XmlElement" /> objects. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.PolicyAssertionCollection" /> class using the specified <see cref="T:System.Xml.XmlElement" /> objects.
+          </para>
         </summary>
       </Docs>
     </Member>

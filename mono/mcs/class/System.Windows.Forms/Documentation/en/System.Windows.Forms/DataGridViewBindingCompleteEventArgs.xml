@@ -20,8 +20,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="E:System.Windows.Forms.DataGridView.DataBindingComplete" /> event is raised when the contents of the data source change or when the value of the <see cref="P:System.Windows.Forms.DataGridView.DataSource" />, <see cref="P:System.Windows.Forms.DataGridView.DataMember" />, or <see cref="P:System.Windows.Forms.Control.BindingContext" /> property of the <see cref="T:System.Windows.Forms.DataGridView" /> control changes. </para
-      >
+        >The <see cref="E:System.Windows.Forms.DataGridView.DataBindingComplete" /> event is raised when the contents of the data source change or when the value of the <see cref="P:System.Windows.Forms.DataGridView.DataSource" />, <see cref="P:System.Windows.Forms.DataGridView.DataMember" />, or <see cref="P:System.Windows.Forms.Control.BindingContext" /> property of the <see cref="T:System.Windows.Forms.DataGridView" /> control changes.
+      </para>
       <para
         >This class describes the change made by the <see cref="T:System.Windows.Forms.CurrencyManager" /> to its underlying list.</para
       >

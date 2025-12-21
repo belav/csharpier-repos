@@ -32,8 +32,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Data.Odbc.OdbcCommand" /> class provides the following methods for executing commands against a data source: </para
-      >
+        >The <see cref="T:System.Data.Odbc.OdbcCommand" /> class provides the following methods for executing commands against a data source:
+      </para>
       <list type="table">
         <listheader>
           <item>
@@ -179,12 +179,8 @@
           >
         </summary>
         <param name="cmdText">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The text of the query. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The text of the query.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -210,19 +206,15 @@
           >
         </summary>
         <param name="cmdText">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The text of the query. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The text of the query.
+        </param>
         <param name="connection">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Data.Odbc.OdbcConnection" /> object that represents the connection to a data source. </param
-        >
+          />An <see cref="T:System.Data.Odbc.OdbcConnection" /> object that represents the connection to a data source.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -297,8 +289,8 @@
               </term>
               <description>
                 <para
-                  >A new <see cref="T:System.Data.Odbc.OdbcConnection" /> that is the value for the <paramref name="connection" /> parameter. </para
-                >
+                  >A new <see cref="T:System.Data.Odbc.OdbcConnection" /> that is the value for the <paramref name="connection" /> parameter.
+                </para>
               </description>
             </item>
           </list>
@@ -311,26 +303,22 @@
           >
         </summary>
         <param name="cmdText">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The text of the query. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The text of the query.
+        </param>
         <param name="connection">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Data.Odbc.OdbcConnection" /> object that represents the connection to a data source. </param
-        >
+          />An <see cref="T:System.Data.Odbc.OdbcConnection" /> object that represents the connection to a data source.
+        </param>
         <param name="transaction">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The transaction in which the <see cref="T:System.Data.Odbc.OdbcCommand" /> executes. </param
-        >
+          />The transaction in which the <see cref="T:System.Data.Odbc.OdbcCommand" /> executes.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -421,27 +409,27 @@
             >You cannot set the <see cref="P:System.Data.Odbc.OdbcCommand.Connection" />, <see cref="P:System.Data.Odbc.OdbcCommand.CommandType" /> and <see cref="P:System.Data.Odbc.OdbcCommand.CommandText" /> properties if the current connection is performing an execute or fetch operation.</para
           >
           <para
-            >The ODBC.NET Provider does not support named parameters for passing parameters to an SQL statement or a stored procedure called by an <see cref="T:System.Data.Odbc.OdbcCommand" /> when <see cref="P:System.Data.Odbc.OdbcCommand.CommandType" /> is set to Text. In this case, the question mark (?) placeholder must be used. For example: </para
-          >
+            >The ODBC.NET Provider does not support named parameters for passing parameters to an SQL statement or a stored procedure called by an <see cref="T:System.Data.Odbc.OdbcCommand" /> when <see cref="P:System.Data.Odbc.OdbcCommand.CommandType" /> is set to Text. In this case, the question mark (?) placeholder must be used. For example:
+          </para>
           <code>SELECT * FROM Customers WHERE CustomerID = ?</code>
           <para
             >Therefore, the order in which <see cref="T:System.Data.Odbc.OdbcParameter" /> objects are added to the <see cref="T:System.Data.Odbc.OdbcParameterCollection" /> must directly correspond to the position of the question mark placeholder for the parameter.</para
           >
           <para
-            >If a parameter contains a null value, the .NET Framework Data Provider for ODBC still binds that parameter, but uses a default parameter, if one has been defined by using SQL_DEFAULT_PARAM, instead of the null value. For example, the <see cref="T:System.Data.Odbc.OdbcParameterCollection" />: </para
-          >
+            >If a parameter contains a null value, the .NET Framework Data Provider for ODBC still binds that parameter, but uses a default parameter, if one has been defined by using SQL_DEFAULT_PARAM, instead of the null value. For example, the <see cref="T:System.Data.Odbc.OdbcParameterCollection" />:
+          </para>
           <code>{1, null, 2}</code>
           <para
-            >passed into the <see cref="P:System.Data.Odbc.OdbcCommand.CommandText" /> property: </para
-          >
+            >passed into the <see cref="P:System.Data.Odbc.OdbcCommand.CommandText" /> property:
+          </para>
           <code>{call sp(?, ?, ?)}</code>
           <para
-            >causes the .NET Framework Data Provider for ODBC binding the first parameter to the value 1, the third parameter to the value 2, and the second parameter as SQL_DEFAULT_PARAM. However, this behavior is driver-dependent. If the driver does not support this functionality, just do not pass in a value for the parameter. For example, use the <see cref="T:System.Data.Odbc.OdbcParameterCollection" />: </para
-          >
+            >causes the .NET Framework Data Provider for ODBC binding the first parameter to the value 1, the third parameter to the value 2, and the second parameter as SQL_DEFAULT_PARAM. However, this behavior is driver-dependent. If the driver does not support this functionality, just do not pass in a value for the parameter. For example, use the <see cref="T:System.Data.Odbc.OdbcParameterCollection" />:
+          </para>
           <code>{1, 2}</code>
           <para
-            >and set the <see cref="P:System.Data.Odbc.OdbcCommand.CommandText" /> property to the following: </para
-          >
+            >and set the <see cref="P:System.Data.Odbc.OdbcCommand.CommandText" /> property to the following:
+          </para>
           <code>{call sp(?, null, ?)}</code>
           <block subset="none" type="note">
             <para>If a parameter is omitted, the comma delimiting it from other parameters must still appear. If an input or input/output parameter is omitted, the procedure uses the default value of the parameter. Another way to specify the default value of an input or input/output parameter is to set the value of the length/indicator buffer bound to the parameter to SQL_DEFAULT_PARAM.</para>
@@ -507,8 +495,8 @@
             >The <see cref="P:System.Data.Odbc.OdbcCommand.Connection" />, <see cref="P:System.Data.Odbc.OdbcCommand.CommandType" /> and <see cref="P:System.Data.Odbc.OdbcCommand.CommandText" /> properties cannot be set if the current connection is performing an execute or fetch operation.</para
           >
           <para
-            >The .NET Framework Data Provider for ODBC does not support passing named parameters to an SQL statement or to a stored procedure called by an <see cref="T:System.Data.Odbc.OdbcCommand" />. In either of these cases, use the question mark (?) placeholder. For example: </para
-          >
+            >The .NET Framework Data Provider for ODBC does not support passing named parameters to an SQL statement or to a stored procedure called by an <see cref="T:System.Data.Odbc.OdbcCommand" />. In either of these cases, use the question mark (?) placeholder. For example:
+          </para>
           <code>SELECT * FROM Customers WHERE CustomerID = ?</code>
           <para
             >The order in which <see cref="T:System.Data.Odbc.OdbcParameter" /> objects are added to the <see cref="T:System.Data.Odbc.OdbcParameterCollection" /> must directly correspond to the position of the question mark placeholder for the parameter.</para
@@ -882,8 +870,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the System.Data.CommandBehavior values. </param
-        >
+          />One of the System.Data.CommandBehavior values.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -937,12 +925,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When <see cref="P:System.Data.Odbc.OdbcCommand.CommandType" /> is set to Text, the .NET Framework Data Provider for ODBC does not support passing named parameters to an SQL statement or to a stored procedure called by an <see cref="T:System.Data.Odbc.OdbcCommand" />. In either of these cases, use the question mark (?) placeholder. For example: </para
-          >
+            >When <see cref="P:System.Data.Odbc.OdbcCommand.CommandType" /> is set to Text, the .NET Framework Data Provider for ODBC does not support passing named parameters to an SQL statement or to a stored procedure called by an <see cref="T:System.Data.Odbc.OdbcCommand" />. In either of these cases, use the question mark (?) placeholder. For example:
+          </para>
           <code>SELECT * FROM Customers WHERE CustomerID = ?</code>
           <para
-            >The order in which <see cref="T:System.Data.Odbc.OdbcParameter" /> objects are added to the <see cref="T:System.Data.Odbc.OdbcParameterCollection" /> must directly correspond to the position of the question mark placeholder for the parameter in the command text. </para
-          >
+            >The order in which <see cref="T:System.Data.Odbc.OdbcParameter" /> objects are added to the <see cref="T:System.Data.Odbc.OdbcParameterCollection" /> must directly correspond to the position of the question mark placeholder for the parameter in the command text.
+          </para>
           <block subset="none" type="note">
             <para>If the parameters in the collection do not match the requirements of the query to be executed, an error may result.</para>
           </block>

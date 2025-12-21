@@ -20,8 +20,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see cref="T:System.ServiceModel.Description.MetadataExchangeClient" /> to download metadata. Typically, a <see cref="T:System.ServiceModel.Description.MetadataExchangeClient" /> is configured for a metadata request and then passed to the <see cref="M:System.ServiceModel.Description.MetadataResolver.Resolve(System.Collections.Generic.IEnumerable{System.ServiceModel.Description.ContractDescription},System.Uri,System.ServiceModel.Description.MetadataExchangeClientMode)" /> or <see cref="M:System.ServiceModel.Description.MetadataResolver.Resolve(System.Collections.Generic.IEnumerable{System.ServiceModel.Description.ContractDescription},System.Uri,System.ServiceModel.Description.MetadataExchangeClientMode,System.ServiceModel.Description.MetadataExchangeClient)" /> method for the <see cref="T:System.ServiceModel.Description.MetadataResolver" /> to use to download metadata. </para
-      >
+        >Use the <see cref="T:System.ServiceModel.Description.MetadataExchangeClient" /> to download metadata. Typically, a <see cref="T:System.ServiceModel.Description.MetadataExchangeClient" /> is configured for a metadata request and then passed to the <see cref="M:System.ServiceModel.Description.MetadataResolver.Resolve(System.Collections.Generic.IEnumerable{System.ServiceModel.Description.ContractDescription},System.Uri,System.ServiceModel.Description.MetadataExchangeClientMode)" /> or <see cref="M:System.ServiceModel.Description.MetadataResolver.Resolve(System.Collections.Generic.IEnumerable{System.ServiceModel.Description.ContractDescription},System.Uri,System.ServiceModel.Description.MetadataExchangeClientMode,System.ServiceModel.Description.MetadataExchangeClient)" /> method for the <see cref="T:System.ServiceModel.Description.MetadataResolver" /> to use to download metadata.
+      </para>
       <para
         >However, you can use the <see cref="T:System.ServiceModel.Description.MetadataExchangeClient" /> directly to retrieve metadata as a <see cref="T:System.ServiceModel.Description.MetadataSet" /> that contains <see cref="T:System.ServiceModel.Description.MetadataSection" /> objects.</para
       >
@@ -99,8 +99,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.MetadataExchangeClient" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.MetadataExchangeClient" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -164,8 +164,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.MetadataExchangeClient" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.MetadataExchangeClient" /> class.
+          </para>
         </summary>
         <param name="address">
           <attribution
@@ -200,8 +200,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.MetadataExchangeClient" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.MetadataExchangeClient" /> class.
+          </para>
         </summary>
         <param name="endpointConfigurationName">
           <attribution
@@ -239,8 +239,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.MetadataExchangeClient" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.MetadataExchangeClient" /> class.
+          </para>
         </summary>
         <param name="address">
           <attribution
@@ -464,8 +464,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Ends one of the asynchronous <see cref="Overload:System.ServiceModel.Description.MetadataExchangeClient.BeginGetMetadata" /> methods to return the downloaded metadata. </para
-          >
+            >Ends one of the asynchronous <see cref="Overload:System.ServiceModel.Description.MetadataExchangeClient.BeginGetMetadata" /> methods to return the downloaded metadata.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

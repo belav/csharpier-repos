@@ -93,8 +93,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to capture the file name, line number, and column number of the stack frame; otherwise, false. </param
-        >
+          />true to capture the file name, line number, and column number of the stack frame; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -126,8 +126,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of frames up the stack to skip. </param
-        >
+          />The number of frames up the stack to skip.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -163,15 +163,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of frames up the stack to skip. </param
-        >
+          />The number of frames up the stack to skip.
+        </param>
         <param name="fNeedFileInfo">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to capture the file name, line number, and column number of the stack frame; otherwise, false. </param
-        >
+          />true to capture the file name, line number, and column number of the stack frame; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -203,15 +203,15 @@
           >
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The file name. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The file name.
+        </param>
         <param name="lineNumber">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The line number in the specified file. </param
-        >
+          />The line number in the specified file.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -247,22 +247,22 @@
           >
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The file name. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The file name.
+        </param>
         <param name="lineNumber">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The line number in the specified file. </param
-        >
+          />The line number in the specified file.
+        </param>
         <param name="colNumber">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The column number in the specified file. </param
-        >
+          />The column number in the specified file.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetFileColumnNumber">
@@ -402,8 +402,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The method that is currently executing may be inherited from a base class, although it is called in a derived class. In this case, the <see cref="P:System.Reflection.MemberInfo.ReflectedType" /> property of the <see cref="T:System.Reflection.MethodBase" /> object that is returned by <see cref="M:System.Diagnostics.StackFrame.GetMethod" /> identifies the base class, not the derived class.  </para
-          >
+            >The method that is currently executing may be inherited from a base class, although it is called in a derived class. In this case, the <see cref="P:System.Reflection.MemberInfo.ReflectedType" /> property of the <see cref="T:System.Reflection.MethodBase" /> object that is returned by <see cref="M:System.Diagnostics.StackFrame.GetMethod" /> identifies the base class, not the derived class.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

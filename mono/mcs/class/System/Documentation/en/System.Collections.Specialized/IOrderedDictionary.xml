@@ -32,8 +32,8 @@
         >Each pair must have a unique key that is not null, but the value can be null and does not have to be unique. The <see cref="T:System.Collections.Specialized.IOrderedDictionary" /> interface allows the contained keys and values to be enumerated, but it does not imply any particular sort order.</para
       >
       <para
-        >The foreach statement of the C# language (For Each in Visual Basic) requires the type of each element in the collection. Because each element of the <see cref="T:System.Collections.IDictionary" /> is a key/value pair, the element type is not the type of the key or the type of the value. Instead, the element type is <see cref="T:System.Collections.DictionaryEntry" />, as the following example shows. </para
-      >
+        >The foreach statement of the C# language (For Each in Visual Basic) requires the type of each element in the collection. Because each element of the <see cref="T:System.Collections.IDictionary" /> is a key/value pair, the element type is not the type of the key or the type of the value. Instead, the element type is <see cref="T:System.Collections.DictionaryEntry" />, as the following example shows.
+      </para>
       <para>code reference: System.Collections.Specialized.IOrderedDictionary_Implementation#03</para>
       <para>The foreach statement is a wrapper around the enumerator, which allows only reading from, not writing to, the collection.</para>
     </remarks>

@@ -25,8 +25,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Methods and types that are marked with this attribute can be used in calls to <see cref="T:System.Diagnostics.Contracts.Contract" /> methods. Pure methods do not make any visible state changes. This attribute is not enforced by the current analysis tools; you should use this attribute only if you are sure that the methods are pure. </para
-      >
+        >Methods and types that are marked with this attribute can be used in calls to <see cref="T:System.Diagnostics.Contracts.Contract" /> methods. Pure methods do not make any visible state changes. This attribute is not enforced by the current analysis tools; you should use this attribute only if you are sure that the methods are pure.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -50,8 +50,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Diagnostics.Contracts.PureAttribute" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.Contracts.PureAttribute" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>

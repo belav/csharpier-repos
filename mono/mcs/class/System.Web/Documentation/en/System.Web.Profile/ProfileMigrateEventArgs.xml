@@ -14,8 +14,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.Profile.ProfileMigrateEventArgs" /> object provides event information to the <see cref="E:System.Web.Profile.ProfileModule.MigrateAnonymous" /> event of the <see cref="T:System.Web.Profile.ProfileModule" /> class. The <see cref="T:System.Web.Profile.ProfileMigrateEventArgs" /> object provides access to the <see cref="T:System.Web.HttpContext" /> of the current request and the anonymous user identifier for the anonymous profile in the <see cref="P:System.Web.Profile.ProfileMigrateEventArgs.AnonymousID" /> property. </para
-      >
+        >The <see cref="T:System.Web.Profile.ProfileMigrateEventArgs" /> object provides event information to the <see cref="E:System.Web.Profile.ProfileModule.MigrateAnonymous" /> event of the <see cref="T:System.Web.Profile.ProfileModule" /> class. The <see cref="T:System.Web.Profile.ProfileMigrateEventArgs" /> object provides access to the <see cref="T:System.Web.HttpContext" /> of the current request and the anonymous user identifier for the anonymous profile in the <see cref="P:System.Web.Profile.ProfileMigrateEventArgs.AnonymousID" /> property.
+      </para>
       <para
         >You can use the <see cref="E:System.Web.Profile.ProfileModule.MigrateAnonymous" /> event to copy profile property values from an anonymous profile to an authenticated profile when a user who has been anonymously using your application logs in.</para
       >

@@ -22,8 +22,8 @@
       <para
         >For more information about handling events, see <format type="text/html">
           <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-        </format>. </para
-      >
+        </format>.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -81,8 +81,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Windows.Forms.DataGridViewAutoSizeModeEventArgs" /> class is used with the <see cref="E:System.Windows.Forms.DataGridView.AutoSizeRowsModeChanged" /> and <see cref="E:System.Windows.Forms.DataGridView.RowHeadersWidthSizeModeChanged" /> events, so this property relates specifically to the previous state of either the <see cref="P:System.Windows.Forms.DataGridView.AutoSizeRowsMode" /> or <see cref="P:System.Windows.Forms.DataGridView.RowHeadersWidthSizeMode" /> property </para
-          >
+            >The <see cref="T:System.Windows.Forms.DataGridViewAutoSizeModeEventArgs" /> class is used with the <see cref="E:System.Windows.Forms.DataGridView.AutoSizeRowsModeChanged" /> and <see cref="E:System.Windows.Forms.DataGridView.RowHeadersWidthSizeModeChanged" /> events, so this property relates specifically to the previous state of either the <see cref="P:System.Windows.Forms.DataGridView.AutoSizeRowsMode" /> or <see cref="P:System.Windows.Forms.DataGridView.RowHeadersWidthSizeMode" /> property
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

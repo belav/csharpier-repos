@@ -38,8 +38,8 @@
         >You can add items to a <see cref="T:System.Collections.Generic.List`1" /> by using the <see cref="M:System.Collections.Generic.List`1.Add(`0)" /> or <see cref="M:System.Collections.Generic.List`1.AddRange(System.Collections.Generic.IEnumerable{`0})" /> methods.</para
       >
       <para
-        >The <see cref="T:System.Collections.Generic.List`1" /> class uses both an equality comparer and an ordering comparer. </para
-      >
+        >The <see cref="T:System.Collections.Generic.List`1" /> class uses both an equality comparer and an ordering comparer.
+      </para>
       <list type="bullet">
         <item>
           <para
@@ -74,8 +74,8 @@
         >In deciding whether to use the <see cref="T:System.Collections.Generic.List`1" /> or <see cref="T:System.Collections.ArrayList" /> class, both of which have similar functionality, remember that the <see cref="T:System.Collections.Generic.List`1" /> class performs better in most cases and is type safe. If a reference type is used for type <paramref name="T" /> of the <see cref="T:System.Collections.Generic.List`1" /> class, the behavior of the two classes is identical. However, if a value type is used for type <paramref name="T" />, you need to consider implementation and boxing issues.</para
       >
       <para
-        >If a value type is used for type <paramref name="T" />, the compiler generates an implementation of the <see cref="T:System.Collections.Generic.List`1" /> class specifically for that value type. That means a list element of a <see cref="T:System.Collections.Generic.List`1" /> object does not have to be boxed before the element can be used, and after about 500 list elements are created the memory saved not boxing list elements is greater than the memory used to generate the class implementation. </para
-      >
+        >If a value type is used for type <paramref name="T" />, the compiler generates an implementation of the <see cref="T:System.Collections.Generic.List`1" /> class specifically for that value type. That means a list element of a <see cref="T:System.Collections.Generic.List`1" /> object does not have to be boxed before the element can be used, and after about 500 list elements are created the memory saved not boxing list elements is greater than the memory used to generate the class implementation.
+      </para>
       <para
         >Make certain the value type used for type <paramref name="T" /> implements the <see cref="T:System.IEquatable`1" /> generic interface. If not, methods such as <see cref="M:System.Collections.Generic.List`1.Contains(`0)" /> must call the <see cref="M:System.Object.Equals(System.Object)" /> method, which boxes the affected list element. If the value type implements the <see cref="T:System.IComparable" /> interface and you own the source code, also implement the <see cref="T:System.IComparable`1" /> generic interface to prevent the <see cref="Overload:System.Collections.Generic.List`1.BinarySearch" /> and <see cref="Overload:System.Collections.Generic.List`1.Sort" /> methods from boxing list elements. If you do not own the source code, pass an <see cref="T:System.Collections.Generic.IComparer`1" /> object to the <see cref="Overload:System.Collections.Generic.List`1.BinarySearch" /> and <see cref="Overload:System.Collections.Generic.List`1.Sort" /> methods</para
       >

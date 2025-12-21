@@ -102,12 +102,8 @@
           >
         </summary>
         <param name="category">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the category. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the category.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Action">
@@ -402,8 +398,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to test the value equality of. </param
-        >
+          />The object to test the value equality of.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Focus">
@@ -533,8 +529,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The identifer for the category to look up. </param
-        >
+          />The identifer for the category to look up.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsDefaultAttribute">

@@ -104,8 +104,8 @@
                 <a href="42d9dc2a-8fcc-4ff3-b002-4ff260ef3dc5"
                   >Security Considerations for Reflection</a
                 >
-              </format>.) </para
-            >
+              </format>.)
+            </para>
             <para>To use this functionality, your application should target the net_v35_long or later. </para>
           </block>
         </remarks>
@@ -122,15 +122,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of a file that contains an assembly where the type named <paramref name="typeName" /> is sought. </param
-        >
+          />The name of a file that contains an assembly where the type named <paramref name="typeName" /> is sought.
+        </param>
         <param name="typeName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the preferred type. </param
-        >
+          />The name of the preferred type.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateComInstanceFrom">
@@ -178,8 +178,8 @@
                 <a href="42d9dc2a-8fcc-4ff3-b002-4ff260ef3dc5"
                   >Security Considerations for Reflection</a
                 >
-              </format>.) </para
-            >
+              </format>.)
+            </para>
             <para>To use this functionality, your application should target the net_v35_long or later. </para>
           </block>
         </remarks>
@@ -196,29 +196,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of a file that contains an assembly where the type named <paramref name="typeName" /> is sought. </param
-        >
+          />The name of a file that contains an assembly where the type named <paramref name="typeName" /> is sought.
+        </param>
         <param name="typeName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the preferred type. </param
-        >
+          />The name of the preferred type.
+        </param>
         <param name="hashValue">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value of the computed hash code. </param
-        >
+          />The value of the computed hash code.
+        </param>
         <param name="hashAlgorithm">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The hash algorithm used for hashing files and generating the strong name. </param
-        >
+          />The hash algorithm used for hashing files and generating the strong name.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateInstance">
@@ -298,8 +298,8 @@
                 <a href="42d9dc2a-8fcc-4ff3-b002-4ff260ef3dc5"
                   >Security Considerations for Reflection</a
                 >
-              </format>.) </para
-            >
+              </format>.)
+            </para>
             <para>To use this functionality, your application should target the net_v35_long or later. </para>
           </block>
         </remarks>
@@ -316,8 +316,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of object to create. </param
-        >
+          />The type of object to create.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateInstance">
@@ -419,16 +419,16 @@
               <a href="772ac6f4-64d2-4cfb-92fd-58096dcd6c34">How the Runtime Locates Assemblies</a>
             </format>. For information on using the application configuration file to define assembly locations, see <format type="text/html">
               <a href="1cb92bd7-6bab-44cf-8fd3-36303ce84fea">Specifying an Assembly's Location</a>
-            </format>. If <paramref name="assemblyName" /> is found, it is loaded in the default context. </para
-          >
+            </format>. If <paramref name="assemblyName" /> is found, it is loaded in the default context.
+          </para>
           <block subset="none" type="note">
             <para
               >Starting with the net_v20sp1_long, this method can be used to create nonpublic types if the caller has been granted <see cref="T:System.Security.Permissions.ReflectionPermission" /> with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" /> flag and if the grant set of the assembly that contains the nonpublic types is restricted to the caller’s grant set or to a subset thereof. (See <format type="text/html">
                 <a href="42d9dc2a-8fcc-4ff3-b002-4ff260ef3dc5"
                   >Security Considerations for Reflection</a
                 >
-              </format>.) </para
-            >
+              </format>.)
+            </para>
             <para>To use this functionality, your application should target the net_v35_long or later. </para>
           </block>
         </remarks>
@@ -445,15 +445,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the assembly where the type named <paramref name="typeName" /> is sought. For more information, see the Remarks section. If <paramref name="assemblyName" /> is null, the executing assembly is searched. </param
-        >
+          />The name of the assembly where the type named <paramref name="typeName" /> is sought. For more information, see the Remarks section. If <paramref name="assemblyName" /> is null, the executing assembly is searched.
+        </param>
         <param name="typeName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The fully qualified name of the preferred type. </param
-        >
+          />The fully qualified name of the preferred type.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateInstance">
@@ -487,8 +487,8 @@
                 <a href="42d9dc2a-8fcc-4ff3-b002-4ff260ef3dc5"
                   >Security Considerations for Reflection</a
                 >
-              </format>.) </para
-            >
+              </format>.)
+            </para>
             <para>To use this functionality, your application should target the net_v35_long or later. </para>
           </block>
         </remarks>
@@ -505,15 +505,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of object to create. </param
-        >
+          />The type of object to create.
+        </param>
         <param name="nonPublic">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if a public or nonpublic default constructor can match; false if only a public default constructor can match. </param
-        >
+          />true if a public or nonpublic default constructor can match; false if only a public default constructor can match.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateInstance">
@@ -554,8 +554,8 @@
                 <a href="42d9dc2a-8fcc-4ff3-b002-4ff260ef3dc5"
                   >Security Considerations for Reflection</a
                 >
-              </format>.) </para
-            >
+              </format>.)
+            </para>
             <para>To use this functionality, your application should target the net_v35_long or later. </para>
           </block>
         </remarks>
@@ -572,15 +572,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of object to create. </param
-        >
+          />The type of object to create.
+        </param>
         <param name="args">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of arguments that match in number, order, and type the parameters of the constructor to invoke. If <paramref name="args" /> is an empty array or null, the constructor that takes no parameters (the default constructor) is invoked. </param
-        >
+          />An array of arguments that match in number, order, and type the parameters of the constructor to invoke. If <paramref name="args" /> is an empty array or null, the constructor that takes no parameters (the default constructor) is invoked.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateInstance">
@@ -644,15 +644,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the assembly where the type named <paramref name="typeName" /> is sought. If <paramref name="assemblyName" /> is null, the executing assembly is searched. </param
-        >
+          />The name of the assembly where the type named <paramref name="typeName" /> is sought. If <paramref name="assemblyName" /> is null, the executing assembly is searched.
+        </param>
         <param name="typeName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The fully qualified name of the preferred type. </param
-        >
+          />The fully qualified name of the preferred type.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateInstance">
@@ -695,8 +695,8 @@
                 <a href="42d9dc2a-8fcc-4ff3-b002-4ff260ef3dc5"
                   >Security Considerations for Reflection</a
                 >
-              </format>.) </para
-            >
+              </format>.)
+            </para>
             <para>To use this functionality, your application should target the net_v35_long or later. </para>
           </block>
         </remarks>
@@ -713,22 +713,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the assembly where the type named <paramref name="typeName" /> is sought. If <paramref name="assemblyName" /> is null, the executing assembly is searched. </param
-        >
+          />The name of the assembly where the type named <paramref name="typeName" /> is sought. If <paramref name="assemblyName" /> is null, the executing assembly is searched.
+        </param>
         <param name="typeName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The fully qualified name of the preferred type. </param
-        >
+          />The fully qualified name of the preferred type.
+        </param>
         <param name="activationAttributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of one or more attributes that can participate in activation. This is typically an array that contains a single <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> object. The <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> specifies the URL that is required to activate a remote object.  </param
-        >
+          />An array of one or more attributes that can participate in activation. This is typically an array that contains a single <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> object. The <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> specifies the URL that is required to activate a remote object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateInstance">
@@ -769,8 +769,8 @@
                 <a href="42d9dc2a-8fcc-4ff3-b002-4ff260ef3dc5"
                   >Security Considerations for Reflection</a
                 >
-              </format>.) </para
-            >
+              </format>.)
+            </para>
             <para>To use this functionality, your application should target the net_v35_long or later. </para>
           </block>
         </remarks>
@@ -787,22 +787,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of object to create. </param
-        >
+          />The type of object to create.
+        </param>
         <param name="args">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of arguments that match in number, order, and type the parameters of the constructor to invoke. If <paramref name="args" /> is an empty array or null, the constructor that takes no parameters (the default constructor) is invoked. </param
-        >
+          />An array of arguments that match in number, order, and type the parameters of the constructor to invoke. If <paramref name="args" /> is an empty array or null, the constructor that takes no parameters (the default constructor) is invoked.
+        </param>
         <param name="activationAttributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of one or more attributes that can participate in activation. This is typically an array that contains a single <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> object. The <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> specifies the URL that is required to activate a remote object.  </param
-        >
+          />An array of one or more attributes that can participate in activation. This is typically an array that contains a single <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> object. The <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> specifies the URL that is required to activate a remote object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateInstance">
@@ -840,8 +840,8 @@
                 <a href="42d9dc2a-8fcc-4ff3-b002-4ff260ef3dc5"
                   >Security Considerations for Reflection</a
                 >
-              </format>.) </para
-            >
+              </format>.)
+            </para>
             <para>To use this functionality, your application should target the net_v35_long or later. </para>
           </block>
         </remarks>
@@ -858,36 +858,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of object to create. </param
-        >
+          />The type of object to create.
+        </param>
         <param name="bindingAttr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A combination of zero or more bit flags that affect the search for the <paramref name="type" /> constructor. If <paramref name="bindingAttr" /> is zero, a case-sensitive search for public constructors is conducted. </param
-        >
+          />A combination of zero or more bit flags that affect the search for the <paramref name="type" /> constructor. If <paramref name="bindingAttr" /> is zero, a case-sensitive search for public constructors is conducted.
+        </param>
         <param name="binder">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that uses <paramref name="bindingAttr" /> and <paramref name="args" /> to seek and identify the <paramref name="type" /> constructor. If <paramref name="binder" /> is null, the default binder is used. </param
-        >
+          />An object that uses <paramref name="bindingAttr" /> and <paramref name="args" /> to seek and identify the <paramref name="type" /> constructor. If <paramref name="binder" /> is null, the default binder is used.
+        </param>
         <param name="args">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of arguments that match in number, order, and type the parameters of the constructor to invoke. If <paramref name="args" /> is an empty array or null, the constructor that takes no parameters (the default constructor) is invoked. </param
-        >
+          />An array of arguments that match in number, order, and type the parameters of the constructor to invoke. If <paramref name="args" /> is an empty array or null, the constructor that takes no parameters (the default constructor) is invoked.
+        </param>
         <param name="culture">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Culture-specific information that governs the coercion of <paramref name="args" /> to the formal types declared for the <paramref name="type" /> constructor. If <paramref name="culture" /> is null, the <see cref="T:System.Globalization.CultureInfo" /> for the current thread is used. </param
-        >
+          />Culture-specific information that governs the coercion of <paramref name="args" /> to the formal types declared for the <paramref name="type" /> constructor. If <paramref name="culture" /> is null, the <see cref="T:System.Globalization.CultureInfo" /> for the current thread is used.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateInstance">
@@ -931,8 +931,8 @@
                 <a href="42d9dc2a-8fcc-4ff3-b002-4ff260ef3dc5"
                   >Security Considerations for Reflection</a
                 >
-              </format>.) </para
-            >
+              </format>.)
+            </para>
             <para>To use this functionality, your application should target the net_v35_long or later. </para>
           </block>
         </remarks>
@@ -949,43 +949,43 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of object to create. </param
-        >
+          />The type of object to create.
+        </param>
         <param name="bindingAttr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A combination of zero or more bit flags that affect the search for the <paramref name="type" /> constructor. If <paramref name="bindingAttr" /> is zero, a case-sensitive search for public constructors is conducted. </param
-        >
+          />A combination of zero or more bit flags that affect the search for the <paramref name="type" /> constructor. If <paramref name="bindingAttr" /> is zero, a case-sensitive search for public constructors is conducted.
+        </param>
         <param name="binder">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that uses <paramref name="bindingAttr" /> and <paramref name="args" /> to seek and identify the <paramref name="type" /> constructor. If <paramref name="binder" /> is null, the default binder is used. </param
-        >
+          />An object that uses <paramref name="bindingAttr" /> and <paramref name="args" /> to seek and identify the <paramref name="type" /> constructor. If <paramref name="binder" /> is null, the default binder is used.
+        </param>
         <param name="args">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of arguments that match in number, order, and type the parameters of the constructor to invoke. If <paramref name="args" /> is an empty array or null, the constructor that takes no parameters (the default constructor) is invoked. </param
-        >
+          />An array of arguments that match in number, order, and type the parameters of the constructor to invoke. If <paramref name="args" /> is an empty array or null, the constructor that takes no parameters (the default constructor) is invoked.
+        </param>
         <param name="culture">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Culture-specific information that governs the coercion of <paramref name="args" /> to the formal types declared for the <paramref name="type" /> constructor. If <paramref name="culture" /> is null, the <see cref="T:System.Globalization.CultureInfo" /> for the current thread is used. </param
-        >
+          />Culture-specific information that governs the coercion of <paramref name="args" /> to the formal types declared for the <paramref name="type" /> constructor. If <paramref name="culture" /> is null, the <see cref="T:System.Globalization.CultureInfo" /> for the current thread is used.
+        </param>
         <param name="activationAttributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of one or more attributes that can participate in activation. This is typically an array that contains a single <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> object. The <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> specifies the URL that is required to activate a remote object.  </param
-        >
+          />An array of one or more attributes that can participate in activation. This is typically an array that contains a single <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> object. The <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> specifies the URL that is required to activate a remote object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateInstance">
@@ -1031,8 +1031,8 @@
                 <a href="42d9dc2a-8fcc-4ff3-b002-4ff260ef3dc5"
                   >Security Considerations for Reflection</a
                 >
-              </format>.) </para
-            >
+              </format>.)
+            </para>
             <para>To use this functionality, your application should target the net_v35_long or later. </para>
           </block>
         </remarks>
@@ -1049,57 +1049,57 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the assembly where the type named <paramref name="typeName" /> is sought. If <paramref name="assemblyName" /> is null, the executing assembly is searched. </param
-        >
+          />The name of the assembly where the type named <paramref name="typeName" /> is sought. If <paramref name="assemblyName" /> is null, the executing assembly is searched.
+        </param>
         <param name="typeName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The fully qualified name of the preferred type. </param
-        >
+          />The fully qualified name of the preferred type.
+        </param>
         <param name="ignoreCase">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to specify that the search for <paramref name="typeName" /> is not case-sensitive; false to specify that the search is case-sensitive. </param
-        >
+          />true to specify that the search for <paramref name="typeName" /> is not case-sensitive; false to specify that the search is case-sensitive.
+        </param>
         <param name="bindingAttr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A combination of zero or more bit flags that affect the search for the <paramref name="typeName" /> constructor. If <paramref name="bindingAttr" /> is zero, a case-sensitive search for public constructors is conducted. </param
-        >
+          />A combination of zero or more bit flags that affect the search for the <paramref name="typeName" /> constructor. If <paramref name="bindingAttr" /> is zero, a case-sensitive search for public constructors is conducted.
+        </param>
         <param name="binder">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that uses <paramref name="bindingAttr" /> and <paramref name="args" /> to seek and identify the <paramref name="typeName" /> constructor. If <paramref name="binder" /> is null, the default binder is used. </param
-        >
+          />An object that uses <paramref name="bindingAttr" /> and <paramref name="args" /> to seek and identify the <paramref name="typeName" /> constructor. If <paramref name="binder" /> is null, the default binder is used.
+        </param>
         <param name="args">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of arguments that match in number, order, and type the parameters of the constructor to invoke. If <paramref name="args" /> is an empty array or null, the constructor that takes no parameters (the default constructor) is invoked. </param
-        >
+          />An array of arguments that match in number, order, and type the parameters of the constructor to invoke. If <paramref name="args" /> is an empty array or null, the constructor that takes no parameters (the default constructor) is invoked.
+        </param>
         <param name="culture">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Culture-specific information that governs the coercion of <paramref name="args" /> to the formal types declared for the <paramref name="typeName" /> constructor. If <paramref name="culture" /> is null, the <see cref="T:System.Globalization.CultureInfo" /> for the current thread is used. </param
-        >
+          />Culture-specific information that governs the coercion of <paramref name="args" /> to the formal types declared for the <paramref name="typeName" /> constructor. If <paramref name="culture" /> is null, the <see cref="T:System.Globalization.CultureInfo" /> for the current thread is used.
+        </param>
         <param name="activationAttributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of one or more attributes that can participate in activation. This is typically an array that contains a single <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> object. The <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> specifies the URL that is required to activate a remote object. </param
-        >
+          />An array of one or more attributes that can participate in activation. This is typically an array that contains a single <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> object. The <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> specifies the URL that is required to activate a remote object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateInstance">
@@ -1173,57 +1173,57 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the assembly where the type named <paramref name="typeName" /> is sought. If <paramref name="assemblyName" /> is null, the executing assembly is searched. </param
-        >
+          />The name of the assembly where the type named <paramref name="typeName" /> is sought. If <paramref name="assemblyName" /> is null, the executing assembly is searched.
+        </param>
         <param name="typeName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The fully qualified name of the preferred type. </param
-        >
+          />The fully qualified name of the preferred type.
+        </param>
         <param name="ignoreCase">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to specify that the search for <paramref name="typeName" /> is not case-sensitive; false to specify that the search is case-sensitive. </param
-        >
+          />true to specify that the search for <paramref name="typeName" /> is not case-sensitive; false to specify that the search is case-sensitive.
+        </param>
         <param name="bindingAttr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A combination of zero or more bit flags that affect the search for the <paramref name="typeName" /> constructor. If <paramref name="bindingAttr" /> is zero, a case-sensitive search for public constructors is conducted. </param
-        >
+          />A combination of zero or more bit flags that affect the search for the <paramref name="typeName" /> constructor. If <paramref name="bindingAttr" /> is zero, a case-sensitive search for public constructors is conducted.
+        </param>
         <param name="binder">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that uses <paramref name="bindingAttr" /> and <paramref name="args" /> to seek and identify the <paramref name="typeName" /> constructor. If <paramref name="binder" /> is null, the default binder is used. </param
-        >
+          />An object that uses <paramref name="bindingAttr" /> and <paramref name="args" /> to seek and identify the <paramref name="typeName" /> constructor. If <paramref name="binder" /> is null, the default binder is used.
+        </param>
         <param name="args">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of arguments that match in number, order, and type the parameters of the constructor to invoke. If <paramref name="args" /> is an empty array or null, the constructor that takes no parameters (the default constructor) is invoked. </param
-        >
+          />An array of arguments that match in number, order, and type the parameters of the constructor to invoke. If <paramref name="args" /> is an empty array or null, the constructor that takes no parameters (the default constructor) is invoked.
+        </param>
         <param name="culture">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Culture-specific information that governs the coercion of <paramref name="args" /> to the formal types declared for the <paramref name="typeName" /> constructor. If <paramref name="culture" /> is null, the <see cref="T:System.Globalization.CultureInfo" /> for the current thread is used. </param
-        >
+          />Culture-specific information that governs the coercion of <paramref name="args" /> to the formal types declared for the <paramref name="typeName" /> constructor. If <paramref name="culture" /> is null, the <see cref="T:System.Globalization.CultureInfo" /> for the current thread is used.
+        </param>
         <param name="activationAttributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of one or more attributes that can participate in activation. This is typically an array that contains a single <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> object. The <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> specifies the URL that is required to activate a remote object.  </param
-        >
+          />An array of one or more attributes that can participate in activation. This is typically an array that contains a single <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> object. The <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> specifies the URL that is required to activate a remote object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateInstance">
@@ -1277,8 +1277,8 @@
                 <a href="42d9dc2a-8fcc-4ff3-b002-4ff260ef3dc5"
                   >Security Considerations for Reflection</a
                 >
-              </format>.) </para
-            >
+              </format>.)
+            </para>
             <para>To use this functionality, your application should target the net_v35_long or later. </para>
           </block>
         </remarks>
@@ -1295,64 +1295,64 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the assembly where the type named <paramref name="typeName" /> is sought. If <paramref name="assemblyName" /> is null, the executing assembly is searched. </param
-        >
+          />The name of the assembly where the type named <paramref name="typeName" /> is sought. If <paramref name="assemblyName" /> is null, the executing assembly is searched.
+        </param>
         <param name="typeName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The fully qualified name of the preferred type. </param
-        >
+          />The fully qualified name of the preferred type.
+        </param>
         <param name="ignoreCase">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to specify that the search for <paramref name="typeName" /> is not case-sensitive; false to specify that the search is case-sensitive. </param
-        >
+          />true to specify that the search for <paramref name="typeName" /> is not case-sensitive; false to specify that the search is case-sensitive.
+        </param>
         <param name="bindingAttr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A combination of zero or more bit flags that affect the search for the <paramref name="typeName" /> constructor. If <paramref name="bindingAttr" /> is zero, a case-sensitive search for public constructors is conducted. </param
-        >
+          />A combination of zero or more bit flags that affect the search for the <paramref name="typeName" /> constructor. If <paramref name="bindingAttr" /> is zero, a case-sensitive search for public constructors is conducted.
+        </param>
         <param name="binder">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that uses <paramref name="bindingAttr" /> and <paramref name="args" /> to seek and identify the <paramref name="typeName" /> constructor. If <paramref name="binder" /> is null, the default binder is used. </param
-        >
+          />An object that uses <paramref name="bindingAttr" /> and <paramref name="args" /> to seek and identify the <paramref name="typeName" /> constructor. If <paramref name="binder" /> is null, the default binder is used.
+        </param>
         <param name="args">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of arguments that match in number, order, and type the parameters of the constructor to invoke. If <paramref name="args" /> is an empty array or null, the constructor that takes no parameters (the default constructor) is invoked. </param
-        >
+          />An array of arguments that match in number, order, and type the parameters of the constructor to invoke. If <paramref name="args" /> is an empty array or null, the constructor that takes no parameters (the default constructor) is invoked.
+        </param>
         <param name="culture">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Culture-specific information that governs the coercion of <paramref name="args" /> to the formal types declared for the <paramref name="typeName" /> constructor. If <paramref name="culture" /> is null, the <see cref="T:System.Globalization.CultureInfo" /> for the current thread is used. </param
-        >
+          />Culture-specific information that governs the coercion of <paramref name="args" /> to the formal types declared for the <paramref name="typeName" /> constructor. If <paramref name="culture" /> is null, the <see cref="T:System.Globalization.CultureInfo" /> for the current thread is used.
+        </param>
         <param name="activationAttributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of one or more attributes that can participate in activation. This is typically an array that contains a single <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> object. The <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> specifies the URL that is required to activate a remote object.  </param
-        >
+          />An array of one or more attributes that can participate in activation. This is typically an array that contains a single <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> object. The <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> specifies the URL that is required to activate a remote object.
+        </param>
         <param name="securityInfo">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Information used to make security policy decisions and grant code permissions. </param
-        >
+          />Information used to make security policy decisions and grant code permissions.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateInstance">
@@ -1428,64 +1428,64 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the assembly where the type named <paramref name="typeName" /> is sought. If <paramref name="assemblyName" /> is null, the executing assembly is searched. </param
-        >
+          />The name of the assembly where the type named <paramref name="typeName" /> is sought. If <paramref name="assemblyName" /> is null, the executing assembly is searched.
+        </param>
         <param name="typeName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The fully qualified name of the preferred type. </param
-        >
+          />The fully qualified name of the preferred type.
+        </param>
         <param name="ignoreCase">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to specify that the search for <paramref name="typeName" /> is not case-sensitive; false to specify that the search is case-sensitive. </param
-        >
+          />true to specify that the search for <paramref name="typeName" /> is not case-sensitive; false to specify that the search is case-sensitive.
+        </param>
         <param name="bindingAttr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A combination of zero or more bit flags that affect the search for the <paramref name="typeName" /> constructor. If <paramref name="bindingAttr" /> is zero, a case-sensitive search for public constructors is conducted. </param
-        >
+          />A combination of zero or more bit flags that affect the search for the <paramref name="typeName" /> constructor. If <paramref name="bindingAttr" /> is zero, a case-sensitive search for public constructors is conducted.
+        </param>
         <param name="binder">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that uses <paramref name="bindingAttr" /> and <paramref name="args" /> to seek and identify the <paramref name="typeName" /> constructor. If <paramref name="binder" /> is null, the default binder is used. </param
-        >
+          />An object that uses <paramref name="bindingAttr" /> and <paramref name="args" /> to seek and identify the <paramref name="typeName" /> constructor. If <paramref name="binder" /> is null, the default binder is used.
+        </param>
         <param name="args">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of arguments that match in number, order, and type the parameters of the constructor to invoke. If <paramref name="args" /> is an empty array or null, the constructor that takes no parameters (the default constructor) is invoked. </param
-        >
+          />An array of arguments that match in number, order, and type the parameters of the constructor to invoke. If <paramref name="args" /> is an empty array or null, the constructor that takes no parameters (the default constructor) is invoked.
+        </param>
         <param name="culture">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Culture-specific information that governs the coercion of <paramref name="args" /> to the formal types declared for the <paramref name="typeName" /> constructor. If <paramref name="culture" /> is null, the <see cref="T:System.Globalization.CultureInfo" /> for the current thread is used. </param
-        >
+          />Culture-specific information that governs the coercion of <paramref name="args" /> to the formal types declared for the <paramref name="typeName" /> constructor. If <paramref name="culture" /> is null, the <see cref="T:System.Globalization.CultureInfo" /> for the current thread is used.
+        </param>
         <param name="activationAttributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of one or more attributes that can participate in activation. This is typically an array that contains a single <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> object. The <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> specifies the URL that is required to activate a remote object.  </param
-        >
+          />An array of one or more attributes that can participate in activation. This is typically an array that contains a single <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> object. The <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> specifies the URL that is required to activate a remote object.
+        </param>
         <param name="securityAttributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Information used to make security policy decisions and grant code permissions. </param
-        >
+          />Information used to make security policy decisions and grant code permissions.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateInstance&lt;T&gt;">
@@ -1511,12 +1511,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Activator.CreateInstance``1" /> generic method is used by compilers to implement the instantiation of types specified by type parameters. For example, in the following generic method, the implementation of new T() (gcnew T() in C++) uses the <see cref="M:System.Activator.CreateInstance``1" /> generic method. </para
-          >
+            >The <see cref="M:System.Activator.CreateInstance``1" /> generic method is used by compilers to implement the instantiation of types specified by type parameters. For example, in the following generic method, the implementation of new T() (gcnew T() in C++) uses the <see cref="M:System.Activator.CreateInstance``1" /> generic method.
+          </para>
           <para>code reference: System.Activation.CreateInstance~~1#1</para>
           <para
-            >In general, there is no use for the <see cref="M:System.Activator.CreateInstance``1" /> in application code, because the type must be known at compile time. If the type is known at compile time, normal instantiation syntax can be used (new operator in C#, New in Visual Basic, gcnew in C++). </para
-          >
+            >In general, there is no use for the <see cref="M:System.Activator.CreateInstance``1" /> in application code, because the type must be known at compile time. If the type is known at compile time, normal instantiation syntax can be used (new operator in C#, New in Visual Basic, gcnew in C++).
+          </para>
           <para
             >There are no overloads of the <see cref="M:System.Activator.CreateInstance``1" /> generic method that take argument lists, because the non-generic overloads of <see cref="M:System.Activator.CreateInstance(System.ActivationContext)" /> already provide late-bound constructor resolution.</para
           >
@@ -1583,15 +1583,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of a file that contains an assembly where the type named <paramref name="typeName" /> is sought. </param
-        >
+          />The name of a file that contains an assembly where the type named <paramref name="typeName" /> is sought.
+        </param>
         <param name="typeName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the preferred type. </param
-        >
+          />The name of the preferred type.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateInstanceFrom">
@@ -1658,15 +1658,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of a file that contains an assembly where the type named <paramref name="typeName" /> is sought. </param
-        >
+          />The name of a file that contains an assembly where the type named <paramref name="typeName" /> is sought.
+        </param>
         <param name="typeName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the preferred type. </param
-        >
+          />The name of the preferred type.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateInstanceFrom">
@@ -1720,22 +1720,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of a file that contains an assembly where the type named <paramref name="typeName" /> is sought. </param
-        >
+          />The name of a file that contains an assembly where the type named <paramref name="typeName" /> is sought.
+        </param>
         <param name="typeName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the preferred type. </param
-        >
+          />The name of the preferred type.
+        </param>
         <param name="activationAttributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of one or more attributes that can participate in activation. This is typically an array that contains a single <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> object. The <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> specifies the URL that is required to activate a remote object.  </param
-        >
+          />An array of one or more attributes that can participate in activation. This is typically an array that contains a single <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> object. The <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> specifies the URL that is required to activate a remote object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateInstanceFrom">
@@ -1792,57 +1792,57 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of a file that contains an assembly where the type named <paramref name="typeName" /> is sought. </param
-        >
+          />The name of a file that contains an assembly where the type named <paramref name="typeName" /> is sought.
+        </param>
         <param name="typeName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the preferred type. </param
-        >
+          />The name of the preferred type.
+        </param>
         <param name="ignoreCase">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to specify that the search for <paramref name="typeName" /> is not case-sensitive; false to specify that the search is case-sensitive. </param
-        >
+          />true to specify that the search for <paramref name="typeName" /> is not case-sensitive; false to specify that the search is case-sensitive.
+        </param>
         <param name="bindingAttr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A combination of zero or more bit flags that affect the search for the <paramref name="typeName" /> constructor. If <paramref name="bindingAttr" /> is zero, a case-sensitive search for public constructors is conducted. </param
-        >
+          />A combination of zero or more bit flags that affect the search for the <paramref name="typeName" /> constructor. If <paramref name="bindingAttr" /> is zero, a case-sensitive search for public constructors is conducted.
+        </param>
         <param name="binder">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that uses <paramref name="bindingAttr" /> and <paramref name="args" /> to seek and identify the <paramref name="typeName" /> constructor. If <paramref name="binder" /> is null, the default binder is used. </param
-        >
+          />An object that uses <paramref name="bindingAttr" /> and <paramref name="args" /> to seek and identify the <paramref name="typeName" /> constructor. If <paramref name="binder" /> is null, the default binder is used.
+        </param>
         <param name="args">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of arguments that match in number, order, and type the parameters of the constructor to invoke. If <paramref name="args" /> is an empty array or null, the constructor that takes no parameters (the default constructor) is invoked. </param
-        >
+          />An array of arguments that match in number, order, and type the parameters of the constructor to invoke. If <paramref name="args" /> is an empty array or null, the constructor that takes no parameters (the default constructor) is invoked.
+        </param>
         <param name="culture">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Culture-specific information that governs the coercion of <paramref name="args" /> to the formal types declared for the <paramref name="typeName" /> constructor. If <paramref name="culture" /> is null, the <see cref="T:System.Globalization.CultureInfo" /> for the current thread is used. </param
-        >
+          />Culture-specific information that governs the coercion of <paramref name="args" /> to the formal types declared for the <paramref name="typeName" /> constructor. If <paramref name="culture" /> is null, the <see cref="T:System.Globalization.CultureInfo" /> for the current thread is used.
+        </param>
         <param name="activationAttributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of one or more attributes that can participate in activation. This is typically an array that contains a single <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> object. The <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> specifies the URL that is required to activate a remote object. </param
-        >
+          />An array of one or more attributes that can participate in activation. This is typically an array that contains a single <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> object. The <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> specifies the URL that is required to activate a remote object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateInstanceFrom">
@@ -1910,57 +1910,57 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of a file that contains an assembly where the type named <paramref name="typeName" /> is sought. </param
-        >
+          />The name of a file that contains an assembly where the type named <paramref name="typeName" /> is sought.
+        </param>
         <param name="typeName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the preferred type. </param
-        >
+          />The name of the preferred type.
+        </param>
         <param name="ignoreCase">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to specify that the search for <paramref name="typeName" /> is not case-sensitive; false to specify that the search is case-sensitive. </param
-        >
+          />true to specify that the search for <paramref name="typeName" /> is not case-sensitive; false to specify that the search is case-sensitive.
+        </param>
         <param name="bindingAttr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A combination of zero or more bit flags that affect the search for the <paramref name="typeName" /> constructor. If <paramref name="bindingAttr" /> is zero, a case-sensitive search for public constructors is conducted. </param
-        >
+          />A combination of zero or more bit flags that affect the search for the <paramref name="typeName" /> constructor. If <paramref name="bindingAttr" /> is zero, a case-sensitive search for public constructors is conducted.
+        </param>
         <param name="binder">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that uses <paramref name="bindingAttr" /> and <paramref name="args" /> to seek and identify the <paramref name="typeName" /> constructor. If <paramref name="binder" /> is null, the default binder is used. </param
-        >
+          />An object that uses <paramref name="bindingAttr" /> and <paramref name="args" /> to seek and identify the <paramref name="typeName" /> constructor. If <paramref name="binder" /> is null, the default binder is used.
+        </param>
         <param name="args">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of arguments that match in number, order, and type the parameters of the constructor to invoke. If <paramref name="args" /> is an empty array or null, the constructor that takes no parameters (the default constructor) is invoked. </param
-        >
+          />An array of arguments that match in number, order, and type the parameters of the constructor to invoke. If <paramref name="args" /> is an empty array or null, the constructor that takes no parameters (the default constructor) is invoked.
+        </param>
         <param name="culture">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Culture-specific information that governs the coercion of <paramref name="args" /> to the formal types declared for the <paramref name="typeName" /> constructor. If <paramref name="culture" /> is null, the <see cref="T:System.Globalization.CultureInfo" /> for the current thread is used. </param
-        >
+          />Culture-specific information that governs the coercion of <paramref name="args" /> to the formal types declared for the <paramref name="typeName" /> constructor. If <paramref name="culture" /> is null, the <see cref="T:System.Globalization.CultureInfo" /> for the current thread is used.
+        </param>
         <param name="activationAttributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of one or more attributes that can participate in activation. This is typically an array that contains a single <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> object. The <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> specifies the URL that is required to activate a remote object. </param
-        >
+          />An array of one or more attributes that can participate in activation. This is typically an array that contains a single <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> object. The <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> specifies the URL that is required to activate a remote object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateInstanceFrom">
@@ -2025,64 +2025,64 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of a file that contains an assembly where the type named <paramref name="typeName" /> is sought. </param
-        >
+          />The name of a file that contains an assembly where the type named <paramref name="typeName" /> is sought.
+        </param>
         <param name="typeName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the preferred type. </param
-        >
+          />The name of the preferred type.
+        </param>
         <param name="ignoreCase">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to specify that the search for <paramref name="typeName" /> is not case-sensitive; false to specify that the search is case-sensitive. </param
-        >
+          />true to specify that the search for <paramref name="typeName" /> is not case-sensitive; false to specify that the search is case-sensitive.
+        </param>
         <param name="bindingAttr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A combination of zero or more bit flags that affect the search for the <paramref name="typeName" /> constructor. If <paramref name="bindingAttr" /> is zero, a case-sensitive search for public constructors is conducted. </param
-        >
+          />A combination of zero or more bit flags that affect the search for the <paramref name="typeName" /> constructor. If <paramref name="bindingAttr" /> is zero, a case-sensitive search for public constructors is conducted.
+        </param>
         <param name="binder">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that uses <paramref name="bindingAttr" /> and <paramref name="args" /> to seek and identify the <paramref name="typeName" /> constructor. If <paramref name="binder" /> is null, the default binder is used. </param
-        >
+          />An object that uses <paramref name="bindingAttr" /> and <paramref name="args" /> to seek and identify the <paramref name="typeName" /> constructor. If <paramref name="binder" /> is null, the default binder is used.
+        </param>
         <param name="args">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of arguments that match in number, order, and type the parameters of the constructor to invoke. If <paramref name="args" /> is an empty array or null, the constructor that takes no parameters (the default constructor) is invoked. </param
-        >
+          />An array of arguments that match in number, order, and type the parameters of the constructor to invoke. If <paramref name="args" /> is an empty array or null, the constructor that takes no parameters (the default constructor) is invoked.
+        </param>
         <param name="culture">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Culture-specific information that governs the coercion of <paramref name="args" /> to the formal types declared for the <paramref name="typeName" /> constructor. If <paramref name="culture" /> is null, the <see cref="T:System.Globalization.CultureInfo" /> for the current thread is used. </param
-        >
+          />Culture-specific information that governs the coercion of <paramref name="args" /> to the formal types declared for the <paramref name="typeName" /> constructor. If <paramref name="culture" /> is null, the <see cref="T:System.Globalization.CultureInfo" /> for the current thread is used.
+        </param>
         <param name="activationAttributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of one or more attributes that can participate in activation. This is typically an array that contains a single <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> object. The <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> specifies the URL that is required to activate a remote object.  </param
-        >
+          />An array of one or more attributes that can participate in activation. This is typically an array that contains a single <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> object. The <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> specifies the URL that is required to activate a remote object.
+        </param>
         <param name="securityInfo">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Information used to make security policy decisions and grant code permissions. </param
-        >
+          />Information used to make security policy decisions and grant code permissions.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateInstanceFrom">
@@ -2166,64 +2166,64 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of a file that contains an assembly where the type named <paramref name="typeName" /> is sought. </param
-        >
+          />The name of a file that contains an assembly where the type named <paramref name="typeName" /> is sought.
+        </param>
         <param name="typeName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the preferred type. </param
-        >
+          />The name of the preferred type.
+        </param>
         <param name="ignoreCase">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to specify that the search for <paramref name="typeName" /> is not case-sensitive; false to specify that the search is case-sensitive. </param
-        >
+          />true to specify that the search for <paramref name="typeName" /> is not case-sensitive; false to specify that the search is case-sensitive.
+        </param>
         <param name="bindingAttr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A combination of zero or more bit flags that affect the search for the <paramref name="typeName" /> constructor. If <paramref name="bindingAttr" /> is zero, a case-sensitive search for public constructors is conducted. </param
-        >
+          />A combination of zero or more bit flags that affect the search for the <paramref name="typeName" /> constructor. If <paramref name="bindingAttr" /> is zero, a case-sensitive search for public constructors is conducted.
+        </param>
         <param name="binder">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that uses <paramref name="bindingAttr" /> and <paramref name="args" /> to seek and identify the <paramref name="typeName" /> constructor. If <paramref name="binder" /> is null, the default binder is used. </param
-        >
+          />An object that uses <paramref name="bindingAttr" /> and <paramref name="args" /> to seek and identify the <paramref name="typeName" /> constructor. If <paramref name="binder" /> is null, the default binder is used.
+        </param>
         <param name="args">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of arguments that match in number, order, and type the parameters of the constructor to invoke. If <paramref name="args" /> is an empty array or null, the constructor that takes no parameters (the default constructor) is invoked. </param
-        >
+          />An array of arguments that match in number, order, and type the parameters of the constructor to invoke. If <paramref name="args" /> is an empty array or null, the constructor that takes no parameters (the default constructor) is invoked.
+        </param>
         <param name="culture">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Culture-specific information that governs the coercion of <paramref name="args" /> to the formal types declared for the <paramref name="typeName" /> constructor. If <paramref name="culture" /> is null, the <see cref="T:System.Globalization.CultureInfo" /> for the current thread is used. </param
-        >
+          />Culture-specific information that governs the coercion of <paramref name="args" /> to the formal types declared for the <paramref name="typeName" /> constructor. If <paramref name="culture" /> is null, the <see cref="T:System.Globalization.CultureInfo" /> for the current thread is used.
+        </param>
         <param name="activationAttributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of one or more attributes that can participate in activation. This is typically an array that contains a single <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> object. The <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> specifies the URL that is required to activate a remote object.  </param
-        >
+          />An array of one or more attributes that can participate in activation. This is typically an array that contains a single <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> object. The <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> specifies the URL that is required to activate a remote object.
+        </param>
         <param name="securityAttributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Information used to make security policy decisions and grant code permissions. </param
-        >
+          />Information used to make security policy decisions and grant code permissions.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetObject">
@@ -2266,15 +2266,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the well-known object to which you want to connect. </param
-        >
+          />The type of the well-known object to which you want to connect.
+        </param>
         <param name="url">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URL of the well-known object. </param
-        >
+          />The URL of the well-known object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetObject">
@@ -2321,22 +2321,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the well-known object to which you want to connect. </param
-        >
+          />The type of the well-known object to which you want to connect.
+        </param>
         <param name="url">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URL of the well-known object. </param
-        >
+          />The URL of the well-known object.
+        </param>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Channel-specific data or null. </param
-        >
+          />Channel-specific data or null.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.Runtime.InteropServices._Activator.GetIDsOfNames">

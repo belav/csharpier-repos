@@ -131,8 +131,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.Stream" /> that represents the stream the <see cref="T:System.Diagnostics.TextWriterTraceListener" /> writes to. </param
-        >
+          />A <see cref="T:System.IO.Stream" /> that represents the stream the <see cref="T:System.Diagnostics.TextWriterTraceListener" /> writes to.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -172,8 +172,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.TextWriter" /> that receives the output from the <see cref="T:System.Diagnostics.TextWriterTraceListener" />. </param
-        >
+          />A <see cref="T:System.IO.TextWriter" /> that receives the output from the <see cref="T:System.Diagnostics.TextWriterTraceListener" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -210,8 +210,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the file the <see cref="T:System.Diagnostics.TextWriterTraceListener" /> writes to. </param
-        >
+          />The name of the file the <see cref="T:System.Diagnostics.TextWriterTraceListener" /> writes to.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -252,15 +252,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.Stream" /> that represents the stream the <see cref="T:System.Diagnostics.TextWriterTraceListener" /> writes to. </param
-        >
+          />A <see cref="T:System.IO.Stream" /> that represents the stream the <see cref="T:System.Diagnostics.TextWriterTraceListener" /> writes to.
+        </param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the new instance. </param
-        >
+          />The name of the new instance.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -296,15 +296,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.TextWriter" /> that receives the output from the <see cref="T:System.Diagnostics.TextWriterTraceListener" />. </param
-        >
+          />A <see cref="T:System.IO.TextWriter" /> that receives the output from the <see cref="T:System.Diagnostics.TextWriterTraceListener" />.
+        </param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the new instance. </param
-        >
+          />The name of the new instance.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -345,15 +345,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the file the <see cref="T:System.Diagnostics.TextWriterTraceListener" /> writes to. </param
-        >
+          />The name of the file the <see cref="T:System.Diagnostics.TextWriterTraceListener" /> writes to.
+        </param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the new instance. </param
-        >
+          />The name of the new instance.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Close">
@@ -480,8 +480,8 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />A message to write. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A message to write.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteLine">
@@ -511,8 +511,8 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />A message to write. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A message to write.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Writer">

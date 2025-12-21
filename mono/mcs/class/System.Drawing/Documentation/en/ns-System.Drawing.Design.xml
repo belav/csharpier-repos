@@ -4,8 +4,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="N:System.Drawing.Design" /> namespace contains classes that extend design-time user interface (UI) logic and drawing. </para
-      >
+        >The <see cref="N:System.Drawing.Design" /> namespace contains classes that extend design-time user interface (UI) logic and drawing.
+      </para>
     </summary>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />

@@ -100,12 +100,8 @@
           >
         </summary>
         <param name="label">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the label. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the label.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -137,19 +133,15 @@
           >
         </summary>
         <param name="label">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the label. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the label.
+        </param>
         <param name="statement">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.CodeDom.CodeStatement" /> to associate with the label. </param
-        >
+          />The <see cref="T:System.CodeDom.CodeStatement" /> to associate with the label.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Label">

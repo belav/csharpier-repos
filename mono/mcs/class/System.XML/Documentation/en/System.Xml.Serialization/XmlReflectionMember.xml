@@ -21,8 +21,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Xml.Serialization.XmlReflectionMember" /> class is not used directly. Instead, it is used: </para
-      >
+        >The <see cref="T:System.Xml.Serialization.XmlReflectionMember" /> class is not used directly. Instead, it is used:
+      </para>
       <list type="bullet">
         <item>
           <para
@@ -81,8 +81,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlReflectionMember" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlReflectionMember" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -110,8 +110,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that indicates whether the <see cref="T:System.Xml.Serialization.XmlReflectionMember" /> represents a Web service method return value, as opposed to an output parameter. </para
-          >
+            >Gets or sets a value that indicates whether the <see cref="T:System.Xml.Serialization.XmlReflectionMember" /> represents a Web service method return value, as opposed to an output parameter.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -171,8 +171,8 @@
             >You do not need to use the <see cref="T:System.Xml.Serialization.XmlReflectionMember" /> class and its properties directly.</para
           >
           <para
-            >See the <see cref="T:System.Xml.Serialization.XmlMembersMapping" /> class for the cases when a member corresponds to a part element defined in a Web Services Description Language (WSDL) document. Note, however, that with a wrapped binding between a WSDL operation and a .NET Framework method (indicated by the <see cref="F:System.Web.Services.Protocols.SoapParameterStyle.Wrapped" /> enumeration member), the method parameters and return value do not appear in the WSDL document. </para
-          >
+            >See the <see cref="T:System.Xml.Serialization.XmlMembersMapping" /> class for the cases when a member corresponds to a part element defined in a Web Services Description Language (WSDL) document. Note, however, that with a wrapped binding between a WSDL operation and a .NET Framework method (indicated by the <see cref="F:System.Web.Services.Protocols.SoapParameterStyle.Wrapped" /> enumeration member), the method parameters and return value do not appear in the WSDL document.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -241,8 +241,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see cref="T:System.Xml.Serialization.SoapAttributes" /> with the collection of SOAP-related attributes that have been applied to the member code entity. </para
-          >
+            >Gets or sets a <see cref="T:System.Xml.Serialization.SoapAttributes" /> with the collection of SOAP-related attributes that have been applied to the member code entity.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -277,8 +277,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets an <see cref="T:System.Xml.Serialization.XmlAttributes" /> with the collection of <see cref="T:System.Xml.Serialization.XmlSerializer" />-related attributes that have been applied to the member code entity. </para
-          >
+            >Gets or sets an <see cref="T:System.Xml.Serialization.XmlAttributes" /> with the collection of <see cref="T:System.Xml.Serialization.XmlSerializer" />-related attributes that have been applied to the member code entity.
+          </para>
         </summary>
       </Docs>
     </Member>

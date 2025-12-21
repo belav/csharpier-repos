@@ -207,8 +207,8 @@
               <a href="fedf234e-b7c4-4644-a9e8-c1c0870b043b"
                 >Cross-Page Posting in an ASP.NET Web Page</a
               >
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -443,8 +443,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the group of controls for which the <see cref="T:System.Web.UI.PostBackOptions" /> object causes validation when it posts back to the server. </para
-          >
+            >Gets or sets the group of controls for which the <see cref="T:System.Web.UI.PostBackOptions" /> object causes validation when it posts back to the server.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>

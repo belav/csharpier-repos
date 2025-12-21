@@ -39,8 +39,8 @@
       <para>You can use this delegate to represent a method that can be passed as a parameter without explicitly declaring a custom delegate. The encapsulated method must correspond to the method signature that is defined by this delegate. This means that the encapsulated method must have three parameters, each of which is passed to it by value, and that it must return a value.</para>
       <block subset="none" type="note">
         <para
-          >To reference a method that has three parameters and returns void (or in Visual Basic, that is declared as a Sub rather than as a Function), use the generic <see cref="T:System.Action`3" /> delegate instead. </para
-        >
+          >To reference a method that has three parameters and returns void (or in Visual Basic, that is declared as a Sub rather than as a Function), use the generic <see cref="T:System.Action`3" /> delegate instead.
+        </para>
       </block>
       <para
         >When you use the <see cref="T:System.Func`4" /> delegate, you do not have to explicitly define a delegate that encapsulates a method with three parameters. For example, the following code explicitly declares a generic delegate named ParseNumber and assigns a reference to the <see cref="M:System.Int32.Parse(System.String,System.Globalization.NumberStyles,System.IFormatProvider)" /> method to its delegate instance.</para

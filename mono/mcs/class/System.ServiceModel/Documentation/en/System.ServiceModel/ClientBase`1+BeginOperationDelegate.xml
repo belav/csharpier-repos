@@ -48,15 +48,15 @@
         </format> on your behalf. For an example, see the Example section.</para
       >
       <para
-        >The <see cref="T:System.ServiceModel.ClientBase`1" /> class can be used quickly and easily by developers who prefer objects to the use of the interfaces and the <see cref="T:System.ServiceModel.ChannelFactory`1" /> class. In all cases this class wraps or exposes the methods and functionality of the <see cref="T:System.ServiceModel.ChannelFactory`1" /> class and the <see cref="T:System.ServiceModel.IClientChannel" /> interface. </para
-      >
+        >The <see cref="T:System.ServiceModel.ClientBase`1" /> class can be used quickly and easily by developers who prefer objects to the use of the interfaces and the <see cref="T:System.ServiceModel.ChannelFactory`1" /> class. In all cases this class wraps or exposes the methods and functionality of the <see cref="T:System.ServiceModel.ChannelFactory`1" /> class and the <see cref="T:System.ServiceModel.IClientChannel" /> interface.
+      </para>
       <para
         >As when using the <see cref="T:System.ServiceModel.ServiceHost" /> class, you can create the class and modify the endpoint, channel factory, or security information prior to making any calls or calling <see cref="M:System.ServiceModel.ClientBase`1.Open" />. crdefault <format type="text/html">
           <a href="f60d9bc5-8ade-4471-8ecf-5a07a936c82d">WCF Client Overview</a>
         </format> and <format type="text/html">
           <a href="d780af9f-73c5-42db-9e52-077a5e4de7fe">Accessing Services Using a WCF Client</a>
-        </format>. </para
-      >
+        </format>.
+      </para>
       <para>Special note for Managed C++ users deriving from this class:</para>
       <list type="bullet">
         <item>

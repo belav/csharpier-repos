@@ -17,13 +17,13 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.Configuration.ProfileGroupSettings" /> class provides a way to programmatically create, access, and modify groups of properties added to the group subsection of the profile section of a configuration file. </para
-      >
+        >The <see cref="T:System.Web.Configuration.ProfileGroupSettings" /> class provides a way to programmatically create, access, and modify groups of properties added to the group subsection of the profile section of a configuration file.
+      </para>
       <para
         >The profile section of the configuration file specifies a schema for user profiles. At run time, the ASP.NET compilation system uses the information specified in the profile section to generate a class called ProfileCommon, which is derived from <see cref="T:System.Web.Profile.ProfileBase" />. The ProfileCommon class definition is based on the properties defined in the properties subsection of the profile section of the configuration file. An instance of this class is created for each user profile, and you can access the individual profile values in your code through the <see cref="P:System.Web.HttpContext.Profile" /> property. For more information about the profile features added to vstecasplong, see <format type="text/html">
           <a href="89439440-92ea-48c3-a4bd-dea40307899d">ASP.NET Profile Properties Overview</a>
-        </format>. </para
-      >
+        </format>.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

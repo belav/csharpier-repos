@@ -83,8 +83,7 @@ public static void PrintValues( IEnumerable myList ) {
     Console.WriteLine(); 
   } 
 }
-</code
-      >
+</code>
       <para>The output is </para>
       <para>
         <c>
@@ -118,8 +117,8 @@ public static void PrintValues( IEnumerable myList ) {
       >
       <para>Elements in this collection can be accessed using an integer index.  Indexes in this collection are zero-based.</para>
       <para
-        >The <see cref="T:System.Collections.ArrayList" /> collection accepts null as a valid value, allows duplicate elements. </para
-      >
+        >The <see cref="T:System.Collections.ArrayList" /> collection accepts null as a valid value, allows duplicate elements.
+      </para>
       <para
         >Using multidimensional arrays as elements in an <see cref="T:System.Collections.ArrayList" /> collection is not supported.</para
       >
@@ -220,8 +219,8 @@ public static void PrintValues( IEnumerable myList ) {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Collections.ICollection" /> whose elements are copied to the new list. </param
-        >
+          />The <see cref="T:System.Collections.ICollection" /> whose elements are copied to the new list.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -272,8 +271,8 @@ public static void PrintValues( IEnumerable myList ) {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of elements that the new list can initially store. </param
-        >
+          />The number of elements that the new list can initially store.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -399,8 +398,8 @@ public static void PrintValues( IEnumerable myList ) {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to be added to the end of the <see cref="T:System.Collections.ArrayList" />. The value can be null. </param
-        >
+          />The <see cref="T:System.Object" /> to be added to the end of the <see cref="T:System.Collections.ArrayList" />. The value can be null.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -462,8 +461,8 @@ public static void PrintValues( IEnumerable myList ) {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Collections.ICollection" /> whose elements should be added to the end of the <see cref="T:System.Collections.ArrayList" />. The collection itself cannot be null, but it can contain elements that are null. </param
-        >
+          />The <see cref="T:System.Collections.ICollection" /> whose elements should be added to the end of the <see cref="T:System.Collections.ArrayList" />. The collection itself cannot be null, but it can contain elements that are null.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -535,8 +534,8 @@ public static void PrintValues( IEnumerable myList ) {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to locate. The value can be null. </param
-        >
+          />The <see cref="T:System.Object" /> to locate. The value can be null.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -618,8 +617,8 @@ public static void PrintValues( IEnumerable myList ) {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to locate. The value can be null. </param
-        >
+          />The <see cref="T:System.Object" /> to locate. The value can be null.
+        </param>
         <param name="comparer">
           <attribution
             license="cc4"
@@ -719,22 +718,22 @@ public static void PrintValues( IEnumerable myList ) {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based starting index of the range to search. </param
-        >
+          />The zero-based starting index of the range to search.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The length of the range to search. </param
-        >
+          />The length of the range to search.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to locate. The value can be null. </param
-        >
+          />The <see cref="T:System.Object" /> to locate. The value can be null.
+        </param>
         <param name="comparer">
           <attribution
             license="cc4"
@@ -925,8 +924,8 @@ public static void PrintValues( IEnumerable myList ) {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to locate in the <see cref="T:System.Collections.ArrayList" />. The value can be null. </param
-        >
+          />The <see cref="T:System.Object" /> to locate in the <see cref="T:System.Collections.ArrayList" />. The value can be null.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -990,8 +989,8 @@ public static void PrintValues( IEnumerable myList ) {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The one-dimensional <see cref="T:System.Array" /> that is the destination of the elements copied from <see cref="T:System.Collections.ArrayList" />. The <see cref="T:System.Array" /> must have zero-based indexing. </param
-        >
+          />The one-dimensional <see cref="T:System.Array" /> that is the destination of the elements copied from <see cref="T:System.Collections.ArrayList" />. The <see cref="T:System.Array" /> must have zero-based indexing.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1064,15 +1063,15 @@ public static void PrintValues( IEnumerable myList ) {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The one-dimensional <see cref="T:System.Array" /> that is the destination of the elements copied from <see cref="T:System.Collections.ArrayList" />. The <see cref="T:System.Array" /> must have zero-based indexing. </param
-        >
+          />The one-dimensional <see cref="T:System.Array" /> that is the destination of the elements copied from <see cref="T:System.Collections.ArrayList" />. The <see cref="T:System.Array" /> must have zero-based indexing.
+        </param>
         <param name="arrayIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index in <paramref name="array" /> at which copying begins. </param
-        >
+          />The zero-based index in <paramref name="array" /> at which copying begins.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1157,29 +1156,29 @@ public static void PrintValues( IEnumerable myList ) {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index in the source <see cref="T:System.Collections.ArrayList" /> at which copying begins. </param
-        >
+          />The zero-based index in the source <see cref="T:System.Collections.ArrayList" /> at which copying begins.
+        </param>
         <param name="array">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The one-dimensional <see cref="T:System.Array" /> that is the destination of the elements copied from <see cref="T:System.Collections.ArrayList" />. The <see cref="T:System.Array" /> must have zero-based indexing. </param
-        >
+          />The one-dimensional <see cref="T:System.Array" /> that is the destination of the elements copied from <see cref="T:System.Collections.ArrayList" />. The <see cref="T:System.Array" /> must have zero-based indexing.
+        </param>
         <param name="arrayIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index in <paramref name="array" /> at which copying begins. </param
-        >
+          />The zero-based index in <paramref name="array" /> at which copying begins.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of elements to copy. </param
-        >
+          />The number of elements to copy.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1278,8 +1277,8 @@ public static void PrintValues( IEnumerable myList ) {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Collections.ArrayList" /> to wrap. </param
-        >
+          />The <see cref="T:System.Collections.ArrayList" /> to wrap.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1328,8 +1327,8 @@ public static void PrintValues( IEnumerable myList ) {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Collections.IList" /> to wrap. </param
-        >
+          />The <see cref="T:System.Collections.IList" /> to wrap.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetEnumerator">
@@ -1463,15 +1462,15 @@ public static void PrintValues( IEnumerable myList ) {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based starting index of the <see cref="T:System.Collections.ArrayList" /> section that the enumerator should refer to. </param
-        >
+          />The zero-based starting index of the <see cref="T:System.Collections.ArrayList" /> section that the enumerator should refer to.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of elements in the <see cref="T:System.Collections.ArrayList" /> section that the enumerator should refer to. </param
-        >
+          />The number of elements in the <see cref="T:System.Collections.ArrayList" /> section that the enumerator should refer to.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1509,8 +1508,8 @@ public static void PrintValues( IEnumerable myList ) {
         </exception>
         <exception cref="T:System.ArgumentException">
           <para>
-            <see cref="P:System.Collections.ArrayList.Count" /> of the current instance - <paramref name="index" /> &lt; <paramref name="count" />. </para
-          >
+            <see cref="P:System.Collections.ArrayList.Count" /> of the current instance - <paramref name="index" /> &lt; <paramref name="count" />.
+          </para>
         </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1536,15 +1535,15 @@ public static void PrintValues( IEnumerable myList ) {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based <see cref="T:System.Collections.ArrayList" /> index at which the range starts. </param
-        >
+          />The zero-based <see cref="T:System.Collections.ArrayList" /> index at which the range starts.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of elements in the range. </param
-        >
+          />The number of elements in the range.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1603,8 +1602,8 @@ public static void PrintValues( IEnumerable myList ) {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to locate in the <see cref="T:System.Collections.ArrayList" />. The value can be null. </param
-        >
+          />The <see cref="T:System.Object" /> to locate in the <see cref="T:System.Collections.ArrayList" />. The value can be null.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1674,8 +1673,8 @@ public static void PrintValues( IEnumerable myList ) {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to locate in the <see cref="T:System.Collections.ArrayList" />. The value can be null. </param
-        >
+          />The <see cref="T:System.Object" /> to locate in the <see cref="T:System.Collections.ArrayList" />. The value can be null.
+        </param>
         <param name="startIndex">
           <attribution
             license="cc4"
@@ -1757,8 +1756,8 @@ public static void PrintValues( IEnumerable myList ) {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to locate in the <see cref="T:System.Collections.ArrayList" />. The value can be null. </param
-        >
+          />The <see cref="T:System.Object" /> to locate in the <see cref="T:System.Collections.ArrayList" />. The value can be null.
+        </param>
         <param name="startIndex">
           <attribution
             license="cc4"
@@ -1771,8 +1770,8 @@ public static void PrintValues( IEnumerable myList ) {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of elements in the section to search. </param
-        >
+          />The number of elements in the section to search.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1840,15 +1839,15 @@ public static void PrintValues( IEnumerable myList ) {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index at which <paramref name="value" /> should be inserted. </param
-        >
+          />The zero-based index at which <paramref name="value" /> should be inserted.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to insert. The value can be null. </param
-        >
+          />The <see cref="T:System.Object" /> to insert. The value can be null.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1921,15 +1920,15 @@ public static void PrintValues( IEnumerable myList ) {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index at which the new elements should be inserted. </param
-        >
+          />The zero-based index at which the new elements should be inserted.
+        </param>
         <param name="c">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Collections.ICollection" /> whose elements should be inserted into the <see cref="T:System.Collections.ArrayList" />. The collection itself cannot be null, but it can contain elements that are null. </param
-        >
+          />The <see cref="T:System.Collections.ICollection" /> whose elements should be inserted into the <see cref="T:System.Collections.ArrayList" />. The collection itself cannot be null, but it can contain elements that are null.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1955,8 +1954,8 @@ public static void PrintValues( IEnumerable myList ) {
           <para>
             <see langword="true" /> if the
 <see cref="P:System.Collections.ArrayList.Capacity" /> of the current instance cannot be changed;
-   otherwise, <see langword="false" />. </para
-          >
+   otherwise, <see langword="false" />.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2162,8 +2161,8 @@ public static void PrintValues( IEnumerable myList ) {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to locate in the <see cref="T:System.Collections.ArrayList" />. The value can be null. </param
-        >
+          />The <see cref="T:System.Object" /> to locate in the <see cref="T:System.Collections.ArrayList" />. The value can be null.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2233,15 +2232,15 @@ public static void PrintValues( IEnumerable myList ) {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to locate in the <see cref="T:System.Collections.ArrayList" />. The value can be null. </param
-        >
+          />The <see cref="T:System.Object" /> to locate in the <see cref="T:System.Collections.ArrayList" />. The value can be null.
+        </param>
         <param name="startIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based starting index of the backward search. </param
-        >
+          />The zero-based starting index of the backward search.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2320,22 +2319,22 @@ public static void PrintValues( IEnumerable myList ) {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to locate in the <see cref="T:System.Collections.ArrayList" />. The value can be null. </param
-        >
+          />The <see cref="T:System.Object" /> to locate in the <see cref="T:System.Collections.ArrayList" />. The value can be null.
+        </param>
         <param name="startIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based starting index of the backward search. </param
-        >
+          />The zero-based starting index of the backward search.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of elements in the section to search. </param
-        >
+          />The number of elements in the section to search.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2366,8 +2365,8 @@ public static void PrintValues( IEnumerable myList ) {
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="list" /> is <see langword="null" />. </exception
-        >
+          <paramref name="list" /> is <see langword="null" />.
+        </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -2391,8 +2390,8 @@ public static void PrintValues( IEnumerable myList ) {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Collections.ArrayList" /> to wrap. </param
-        >
+          />The <see cref="T:System.Collections.ArrayList" /> to wrap.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2441,8 +2440,8 @@ public static void PrintValues( IEnumerable myList ) {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Collections.IList" /> to wrap. </param
-        >
+          />The <see cref="T:System.Collections.IList" /> to wrap.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Remove">
@@ -2495,8 +2494,8 @@ public static void PrintValues( IEnumerable myList ) {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to remove from the <see cref="T:System.Collections.ArrayList" />. The value can be null. </param
-        >
+          />The <see cref="T:System.Object" /> to remove from the <see cref="T:System.Collections.ArrayList" />. The value can be null.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2554,8 +2553,8 @@ public static void PrintValues( IEnumerable myList ) {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index of the element to remove. </param
-        >
+          />The zero-based index of the element to remove.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2615,15 +2614,15 @@ public static void PrintValues( IEnumerable myList ) {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based starting index of the range of elements to remove. </param
-        >
+          />The zero-based starting index of the range of elements to remove.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of elements to remove. </param
-        >
+          />The number of elements to remove.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2683,15 +2682,15 @@ public static void PrintValues( IEnumerable myList ) {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to copy multiple times in the new <see cref="T:System.Collections.ArrayList" />. The value can be null. </param
-        >
+          />The <see cref="T:System.Object" /> to copy multiple times in the new <see cref="T:System.Collections.ArrayList" />. The value can be null.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of times <paramref name="value" /> should be copied. </param
-        >
+          />The number of times <paramref name="value" /> should be copied.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2789,15 +2788,15 @@ public static void PrintValues( IEnumerable myList ) {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based starting index of the range to reverse. </param
-        >
+          />The zero-based starting index of the range to reverse.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of elements in the range to reverse. </param
-        >
+          />The number of elements in the range to reverse.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2864,15 +2863,15 @@ public static void PrintValues( IEnumerable myList ) {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based <see cref="T:System.Collections.ArrayList" /> index at which to start copying the elements of <paramref name="c" />. </param
-        >
+          />The zero-based <see cref="T:System.Collections.ArrayList" /> index at which to start copying the elements of <paramref name="c" />.
+        </param>
         <param name="c">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Collections.ICollection" /> whose elements to copy to the <see cref="T:System.Collections.ArrayList" />. The collection itself cannot be null, but it can contain elements that are null. </param
-        >
+          />The <see cref="T:System.Collections.ICollection" /> whose elements to copy to the <see cref="T:System.Collections.ArrayList" />. The collection itself cannot be null, but it can contain elements that are null.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2956,8 +2955,8 @@ public static void PrintValues( IEnumerable myList ) {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="M:System.Collections.ArrayList.Sort(System.Collections.IComparer)" /> method to  sort a list of objects with a custom comparer that implements the <see cref="T:System.Collections.IComparer" /> interface. If you pass null for <paramref name="comparer" />, this method uses the <see cref="T:System.IComparable" /> implementation of each element. In this case, you must make sure that the objects contained in the list implement the <see cref="T:System.Collections.IComparer" /> interface or an exception will occur. </para
-          >
+            >Use the <see cref="M:System.Collections.ArrayList.Sort(System.Collections.IComparer)" /> method to  sort a list of objects with a custom comparer that implements the <see cref="T:System.Collections.IComparer" /> interface. If you pass null for <paramref name="comparer" />, this method uses the <see cref="T:System.IComparable" /> implementation of each element. In this case, you must make sure that the objects contained in the list implement the <see cref="T:System.Collections.IComparer" /> interface or an exception will occur.
+          </para>
           <para
             >In addition, using the <see cref="T:System.IComparable" /> implementation means the list performs a comparison sort (also called an unstable sort); that is, if two elements are equal, their order might not be preserved. In contrast, a stable sort preserves the order of elements that are equal. To perform a stable sort, you must implement a custom <see cref="T:System.Collections.IComparer" /> interface.</para
           >
@@ -3048,15 +3047,15 @@ public static void PrintValues( IEnumerable myList ) {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based starting index of the range to sort. </param
-        >
+          />The zero-based starting index of the range to sort.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The length of the range to sort. </param
-        >
+          />The length of the range to sort.
+        </param>
         <param name="comparer">
           <attribution
             license="cc4"
@@ -3094,8 +3093,8 @@ public static void PrintValues( IEnumerable myList ) {
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="list" /> is <see langword="null" />. </exception
-        >
+          <paramref name="list" /> is <see langword="null" />.
+        </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -3120,8 +3119,8 @@ public static void PrintValues( IEnumerable myList ) {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Collections.ArrayList" /> to synchronize. </param
-        >
+          />The <see cref="T:System.Collections.ArrayList" /> to synchronize.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -3171,8 +3170,8 @@ public static void PrintValues( IEnumerable myList ) {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Collections.IList" /> to synchronize. </param
-        >
+          />The <see cref="T:System.Collections.IList" /> to synchronize.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SyncRoot">

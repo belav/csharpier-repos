@@ -168,8 +168,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of elements to skip in the enumeration. </param
-        >
+          />The number of elements to skip in the enumeration.
+        </param>
       </Docs>
     </Member>
   </Members>

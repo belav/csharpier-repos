@@ -46,8 +46,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.ServiceMetadataPublishingElement" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.ServiceMetadataPublishingElement" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -205,8 +205,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see cref="P:System.ServiceModel.Configuration.ServiceMetadataPublishingElement.HttpGetUrl" /> property is not specified, the address at which the metadata is published is the service address plus a "?wsdl". For example, if the service address is "http://localhost:8080/CalculatorService", the HTTP/Get metadata address is "http://localhost:8080/CalculatorService?wsdl". </para
-          >
+            >If the <see cref="P:System.ServiceModel.Configuration.ServiceMetadataPublishingElement.HttpGetUrl" /> property is not specified, the address at which the metadata is published is the service address plus a "?wsdl". For example, if the service address is "http://localhost:8080/CalculatorService", the HTTP/Get metadata address is "http://localhost:8080/CalculatorService?wsdl".
+          </para>
           <para>If this property is false, or the address of the service is not based on HTTP or HTTPS, “?wsdl” is ignored. </para>
         </remarks>
         <summary>
@@ -324,8 +324,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see cref="P:System.ServiceModel.Configuration.ServiceMetadataPublishingElement.HttpsGetUrl" /> property is not specified, the address at which the metadata is published is the service address plus a "?wsdl". For example, if the service address is "https://localhost:8080/CalculatorService", the HTTP/Get metadata address is "https://localhost:8080/CalculatorService?wsdl". </para
-          >
+            >If the <see cref="P:System.ServiceModel.Configuration.ServiceMetadataPublishingElement.HttpsGetUrl" /> property is not specified, the address at which the metadata is published is the service address plus a "?wsdl". For example, if the service address is "https://localhost:8080/CalculatorService", the HTTP/Get metadata address is "https://localhost:8080/CalculatorService?wsdl".
+          </para>
           <para>If this property is false, or the address of the service is not based on HTTP or HTTPS, “?wsdl” is ignored. </para>
         </remarks>
         <summary>

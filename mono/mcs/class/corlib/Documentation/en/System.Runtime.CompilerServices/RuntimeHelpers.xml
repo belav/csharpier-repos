@@ -128,15 +128,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first object to compare. </param
-        >
+          />The first object to compare.
+        </param>
         <param name="o2">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second object to compare. </param
-        >
+          />The second object to compare.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ExecuteCodeWithGuaranteedCleanup">
@@ -199,8 +199,8 @@
           >
           <block subset="none" type="note">
             <para
-              >Although the <see cref="M:System.Runtime.CompilerServices.RuntimeHelpers.GetHashCode(System.Object)" /> method returns identical hash codes for identical object references, you should not use this method to test for object identity, because this hash code does not uniquely identify an object reference. To test for object identify (that is, to test that two objects reference the same object in memory), call the <see cref="M:System.Object.ReferenceEquals(System.Object,System.Object)" /> method. Nor should you use <see cref="M:System.Runtime.CompilerServices.RuntimeHelpers.GetHashCode(System.Object)" /> to test whether two strings represent equal object references, because the string is interned. To test for string interning, call the <see cref="M:System.String.IsInterned(System.String)" /> method. </para
-            >
+              >Although the <see cref="M:System.Runtime.CompilerServices.RuntimeHelpers.GetHashCode(System.Object)" /> method returns identical hash codes for identical object references, you should not use this method to test for object identity, because this hash code does not uniquely identify an object reference. To test for object identify (that is, to test that two objects reference the same object in memory), call the <see cref="M:System.Object.ReferenceEquals(System.Object,System.Object)" /> method. Nor should you use <see cref="M:System.Runtime.CompilerServices.RuntimeHelpers.GetHashCode(System.Object)" /> to test whether two strings represent equal object references, because the string is interned. To test for string interning, call the <see cref="M:System.String.IsInterned(System.String)" /> method.
+            </para>
           </block>
           <para
             >The <see cref="M:System.Object.GetHashCode" /> and <see cref="M:System.Runtime.CompilerServices.RuntimeHelpers.GetHashCode(System.Object)" /> methods differ as follows:</para
@@ -215,14 +215,14 @@
               <para>
                 <see cref="M:System.Runtime.CompilerServices.RuntimeHelpers.GetHashCode(System.Object)" /> returns a hash code that indicates object identity. That is, two string variables whose contents are identical and that represent a string that is interned (see the <format type="text/html">
                   <a href="#interning">String Interning</a>
-                </format> section) or that represent a single string in memory return identical hash codes. </para
-              >
+                </format> section) or that represent a single string in memory return identical hash codes.
+              </para>
             </item>
           </list>
           <block subset="none" type="note">
             <para
-              >Note that <see cref="M:System.Runtime.CompilerServices.RuntimeHelpers.GetHashCode(System.Object)" /> always returns identical hash codes for equal object references. However, the reverse is not true: equal hash codes do not indicate equal object references. A particular hash code value is not unique to a particular object reference; different object references can generate identical hash codes. </para
-            >
+              >Note that <see cref="M:System.Runtime.CompilerServices.RuntimeHelpers.GetHashCode(System.Object)" /> always returns identical hash codes for equal object references. However, the reverse is not true: equal hash codes do not indicate equal object references. A particular hash code value is not unique to a particular object reference; different object references can generate identical hash codes.
+            </para>
           </block>
           <para>This method is used by compilers.</para>
           <format type="text/html">
@@ -257,8 +257,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object to retrieve the hash code for. </param
-        >
+          />An object to retrieve the hash code for.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetObjectValue">
@@ -313,8 +313,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value type to be boxed. </param
-        >
+          />The value type to be boxed.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="InitializeArray">
@@ -357,15 +357,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array to be initialized. </param
-        >
+          />The array to be initialized.
+        </param>
         <param name="fldHandle">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A field handle that specifies the location of the data used to initialize the array. </param
-        >
+          />A field handle that specifies the location of the data used to initialize the array.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -434,8 +434,8 @@ in the string.</para
             >Note that no intermediate language opcodes, except NOP, are allowed between a call to the <see cref="M:System.Runtime.CompilerServices.RuntimeHelpers.PrepareConstrainedRegions" /> method and the try block. For more information about CERs, see the classes in the <see cref="N:System.Runtime.ConstrainedExecution" /> namespace.</para
           >
           <para
-            >CERs that are marked using the <see cref="M:System.Runtime.CompilerServices.RuntimeHelpers.PrepareConstrainedRegions" /> method do not work perfectly when a <see cref="T:System.StackOverflowException" /> is generated from the try block. For more information, see the <see cref="M:System.Runtime.CompilerServices.RuntimeHelpers.ExecuteCodeWithGuaranteedCleanup(System.Runtime.CompilerServices.RuntimeHelpers.TryCode,System.Runtime.CompilerServices.RuntimeHelpers.CleanupCode,System.Object)" /> method.  </para
-          >
+            >CERs that are marked using the <see cref="M:System.Runtime.CompilerServices.RuntimeHelpers.PrepareConstrainedRegions" /> method do not work perfectly when a <see cref="T:System.StackOverflowException" /> is generated from the try block. For more information, see the <see cref="M:System.Runtime.CompilerServices.RuntimeHelpers.ExecuteCodeWithGuaranteedCleanup(System.Runtime.CompilerServices.RuntimeHelpers.TryCode,System.Runtime.CompilerServices.RuntimeHelpers.CleanupCode,System.Object)" /> method.
+          </para>
           <para
             >The <see cref="M:System.Runtime.CompilerServices.RuntimeHelpers.PrepareConstrainedRegions" /> method calls the <see cref="M:System.Runtime.CompilerServices.RuntimeHelpers.ProbeForSufficientStack" /> method.</para
           >
@@ -684,8 +684,8 @@ in the string.</para
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A type handle that specifies the class constructor method to run. </param
-        >
+          />A type handle that specifies the class constructor method to run.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

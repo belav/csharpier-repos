@@ -38,12 +38,12 @@
         >The <see cref="T:System.Web.UI.WebControls.TreeView" /> control stores its <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" /> objects in the <see cref="P:System.Web.UI.WebControls.TreeView.DataBindings" /> property and applies the bindings to the data source to create a one-to-one relationship between the tree hierarchy and the data source hierarchy. For each data item in the data source, the <see cref="T:System.Web.UI.WebControls.TreeView" /> control attempts to match the data item to a <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" /> object in order to create the corresponding <see cref="T:System.Web.UI.WebControls.TreeNode" /> object.</para
       >
       <para
-        >When creating a <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" /> object, you must specify the criteria for binding. The criteria indicates when a data item should be bound to a node. You can specify the <see cref="P:System.Web.UI.WebControls.TreeNodeBinding.Depth" /> or <see cref="P:System.Web.UI.WebControls.TreeNodeBinding.DataMember" /> property, or both properties. There is a slight performance gain by specifying both. A node depth specifies the node level that gets bound. For example, the following <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" /> declaration binds the Name and ID fields of the data source to the <see cref="P:System.Web.UI.WebControls.TreeNode.Text" /> and <see cref="P:System.Web.UI.WebControls.TreeNode.Value" /> properties, respectively, of all nodes with a depth of 0: </para
-      >
+        >When creating a <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" /> object, you must specify the criteria for binding. The criteria indicates when a data item should be bound to a node. You can specify the <see cref="P:System.Web.UI.WebControls.TreeNodeBinding.Depth" /> or <see cref="P:System.Web.UI.WebControls.TreeNodeBinding.DataMember" /> property, or both properties. There is a slight performance gain by specifying both. A node depth specifies the node level that gets bound. For example, the following <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" /> declaration binds the Name and ID fields of the data source to the <see cref="P:System.Web.UI.WebControls.TreeNode.Text" /> and <see cref="P:System.Web.UI.WebControls.TreeNode.Value" /> properties, respectively, of all nodes with a depth of 0:
+      </para>
       <code>&lt;asp:TreeNodeBinding Depth="0" TextField="Name" ValueField="ID"&gt;</code>
       <para
-        >A data member specifies the type of the data item in the underlying data source, but can represent different information depending on the data source. Each data item in a hierarchical data source (represented by a <see cref="T:System.Web.UI.IHierarchyData" /> interface) exposes a <see cref="P:System.Web.UI.IHierarchyData.Type" /> property, which specifies the type of the data item. For example, the data member for an XML element specifies the name of the element. When a data source contains multiple data item types, the data member specifies which data item type to use. The following <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" /> declaration binds the &lt;Book&gt; elements of an <see cref="T:System.Web.UI.WebControls.XmlDataSource" /> control to all the nodes in the tree, regardless of the location in the hierarchy: </para
-      >
+        >A data member specifies the type of the data item in the underlying data source, but can represent different information depending on the data source. Each data item in a hierarchical data source (represented by a <see cref="T:System.Web.UI.IHierarchyData" /> interface) exposes a <see cref="P:System.Web.UI.IHierarchyData.Type" /> property, which specifies the type of the data item. For example, the data member for an XML element specifies the name of the element. When a data source contains multiple data item types, the data member specifies which data item type to use. The following <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" /> declaration binds the &lt;Book&gt; elements of an <see cref="T:System.Web.UI.WebControls.XmlDataSource" /> control to all the nodes in the tree, regardless of the location in the hierarchy:
+      </para>
       <code>&lt;asp:TreeNodeBinding DataMember="Book" TextField="Title" ValueField= "ISBN"&gt;</code>
       <para
         >Once the binding criteria is established, you can then bind a property of a <see cref="T:System.Web.UI.WebControls.TreeNode" /> object that can be bound to a value. You can bind to a field of a data item or to a static value. When bound to a static value, all <see cref="T:System.Web.UI.WebControls.TreeNode" /> objects to which the <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" /> object is applied share the same value.</para
@@ -75,8 +75,8 @@
           </term>
           <description>
             <para
-              >The field to bind to the <see cref="P:System.Web.UI.WebControls.TreeNode.ImageUrl" /> property of a <see cref="T:System.Web.UI.WebControls.TreeNode" /> object. </para
-            >
+              >The field to bind to the <see cref="P:System.Web.UI.WebControls.TreeNode.ImageUrl" /> property of a <see cref="T:System.Web.UI.WebControls.TreeNode" /> object.
+            </para>
           </description>
         </item>
         <item>
@@ -99,8 +99,8 @@
           </term>
           <description>
             <para
-              >The field to bind to the <see cref="P:System.Web.UI.WebControls.TreeNodeBinding.NavigateUrl" /> property of a <see cref="T:System.Web.UI.WebControls.TreeNode" /> object. </para
-            >
+              >The field to bind to the <see cref="P:System.Web.UI.WebControls.TreeNodeBinding.NavigateUrl" /> property of a <see cref="T:System.Web.UI.WebControls.TreeNode" /> object.
+            </para>
           </description>
         </item>
         <item>
@@ -111,8 +111,8 @@
           </term>
           <description>
             <para
-              >The field to bind to the <see cref="P:System.Web.UI.WebControls.TreeNode.Text" /> property of a <see cref="T:System.Web.UI.WebControls.TreeNode" /> object. </para
-            >
+              >The field to bind to the <see cref="P:System.Web.UI.WebControls.TreeNode.Text" /> property of a <see cref="T:System.Web.UI.WebControls.TreeNode" /> object.
+            </para>
           </description>
         </item>
         <item>
@@ -123,8 +123,8 @@
           </term>
           <description>
             <para
-              >The field to bind to the <see cref="P:System.Web.UI.WebControls.TreeNode.ToolTip" /> property of a <see cref="T:System.Web.UI.WebControls.TreeNode" /> object. </para
-            >
+              >The field to bind to the <see cref="P:System.Web.UI.WebControls.TreeNode.ToolTip" /> property of a <see cref="T:System.Web.UI.WebControls.TreeNode" /> object.
+            </para>
           </description>
         </item>
         <item>
@@ -135,8 +135,8 @@
           </term>
           <description>
             <para
-              >The field to bind to the <see cref="P:System.Web.UI.WebControls.TreeNode.Value" /> property of a <see cref="T:System.Web.UI.WebControls.TreeNode" /> object. </para
-            >
+              >The field to bind to the <see cref="P:System.Web.UI.WebControls.TreeNode.Value" /> property of a <see cref="T:System.Web.UI.WebControls.TreeNode" /> object.
+            </para>
           </description>
         </item>
       </list>
@@ -162,8 +162,8 @@
           </term>
           <description>
             <para
-              >The static value to bind to the <see cref="P:System.Web.UI.WebControls.TreeNode.ImageUrl" /> property of a <see cref="T:System.Web.UI.WebControls.TreeNode" /> object. </para
-            >
+              >The static value to bind to the <see cref="P:System.Web.UI.WebControls.TreeNode.ImageUrl" /> property of a <see cref="T:System.Web.UI.WebControls.TreeNode" /> object.
+            </para>
           </description>
         </item>
         <item>
@@ -186,8 +186,8 @@
           </term>
           <description>
             <para
-              >The static value to bind to the <see cref="P:System.Web.UI.WebControls.TreeNode.NavigateUrl" /> property of a <see cref="T:System.Web.UI.WebControls.TreeNode" /> object. </para
-            >
+              >The static value to bind to the <see cref="P:System.Web.UI.WebControls.TreeNode.NavigateUrl" /> property of a <see cref="T:System.Web.UI.WebControls.TreeNode" /> object.
+            </para>
           </description>
         </item>
         <item>
@@ -198,8 +198,8 @@
           </term>
           <description>
             <para
-              >The static value to bind to the <see cref="P:System.Web.UI.WebControls.TreeNode.PopulateOnDemand" /> property of a <see cref="T:System.Web.UI.WebControls.TreeNode" /> object. </para
-            >
+              >The static value to bind to the <see cref="P:System.Web.UI.WebControls.TreeNode.PopulateOnDemand" /> property of a <see cref="T:System.Web.UI.WebControls.TreeNode" /> object.
+            </para>
           </description>
         </item>
         <item>
@@ -210,8 +210,8 @@
           </term>
           <description>
             <para
-              >The static value to bind to the <see cref="P:System.Web.UI.WebControls.TreeNode.SelectAction" /> property of a <see cref="T:System.Web.UI.WebControls.TreeNode" /> object. </para
-            >
+              >The static value to bind to the <see cref="P:System.Web.UI.WebControls.TreeNode.SelectAction" /> property of a <see cref="T:System.Web.UI.WebControls.TreeNode" /> object.
+            </para>
           </description>
         </item>
         <item>
@@ -222,8 +222,8 @@
           </term>
           <description>
             <para
-              >The static value to bind to the <see cref="P:System.Web.UI.WebControls.TreeNode.ShowCheckBox" /> property of a <see cref="T:System.Web.UI.WebControls.TreeNode" /> object. </para
-            >
+              >The static value to bind to the <see cref="P:System.Web.UI.WebControls.TreeNode.ShowCheckBox" /> property of a <see cref="T:System.Web.UI.WebControls.TreeNode" /> object.
+            </para>
           </description>
         </item>
         <item>
@@ -234,8 +234,8 @@
           </term>
           <description>
             <para
-              >The static value to bind to the <see cref="P:System.Web.UI.WebControls.TreeNode.Target" /> property of a <see cref="T:System.Web.UI.WebControls.TreeNode" /> object. </para
-            >
+              >The static value to bind to the <see cref="P:System.Web.UI.WebControls.TreeNode.Target" /> property of a <see cref="T:System.Web.UI.WebControls.TreeNode" /> object.
+            </para>
           </description>
         </item>
         <item>
@@ -246,8 +246,8 @@
           </term>
           <description>
             <para
-              >The static value to bind to the <see cref="P:System.Web.UI.WebControls.TreeNode.Text" /> property of a <see cref="T:System.Web.UI.WebControls.TreeNode" /> object. </para
-            >
+              >The static value to bind to the <see cref="P:System.Web.UI.WebControls.TreeNode.Text" /> property of a <see cref="T:System.Web.UI.WebControls.TreeNode" /> object.
+            </para>
           </description>
         </item>
         <item>
@@ -258,8 +258,8 @@
           </term>
           <description>
             <para
-              >The static value to bind to the <see cref="P:System.Web.UI.WebControls.TreeNode.ToolTip" /> property of a <see cref="T:System.Web.UI.WebControls.TreeNode" /> object. </para
-            >
+              >The static value to bind to the <see cref="P:System.Web.UI.WebControls.TreeNode.ToolTip" /> property of a <see cref="T:System.Web.UI.WebControls.TreeNode" /> object.
+            </para>
           </description>
         </item>
         <item>
@@ -270,14 +270,14 @@
           </term>
           <description>
             <para
-              >The static value to bind to the <see cref="P:System.Web.UI.WebControls.TreeNode.Value" /> property of a <see cref="T:System.Web.UI.WebControls.TreeNode" /> object. </para
-            >
+              >The static value to bind to the <see cref="P:System.Web.UI.WebControls.TreeNode.Value" /> property of a <see cref="T:System.Web.UI.WebControls.TreeNode" /> object.
+            </para>
           </description>
         </item>
       </list>
       <para
-        >If conflicting <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" /> objects are defined, the <see cref="T:System.Web.UI.WebControls.TreeView" /> control applies the tree node bindings in the following order of precedence: </para
-      >
+        >If conflicting <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" /> objects are defined, the <see cref="T:System.Web.UI.WebControls.TreeView" /> control applies the tree node bindings in the following order of precedence:
+      </para>
       <list type="ordered">
         <item>
           <para
@@ -296,8 +296,8 @@
         </item>
         <item>
           <para
-            >The <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" /> object that defines neither the depth nor the data member. (This type of tree node binding is applied to all nodes in the tree.) </para
-          >
+            >The <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" /> object that defines neither the depth nor the data member. (This type of tree node binding is applied to all nodes in the tree.)
+          </para>
         </item>
         <item>
           <para
@@ -357,12 +357,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A data member specifies the type of the data item in the underlying data source, but can represent different information depending on the data source. Each data item in a hierarchical data source (represented by a <see cref="T:System.Web.UI.IHierarchyData" /> object) exposes a <see cref="P:System.Web.UI.IHierarchyData.Type" /> property, which specifies the type of the data item. For example, the data member for an XML element specifies the name of the element. When a data source contains multiple data item types, the data member specifies which data item type to use. The following <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" /> declaration binds the &lt;Book&gt; elements of an <see cref="T:System.Web.UI.WebControls.XmlDataSource" /> control to all the nodes in the tree, regardless of the location in the hierarchy: </para
-          >
+            >A data member specifies the type of the data item in the underlying data source, but can represent different information depending on the data source. Each data item in a hierarchical data source (represented by a <see cref="T:System.Web.UI.IHierarchyData" /> object) exposes a <see cref="P:System.Web.UI.IHierarchyData.Type" /> property, which specifies the type of the data item. For example, the data member for an XML element specifies the name of the element. When a data source contains multiple data item types, the data member specifies which data item type to use. The following <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" /> declaration binds the &lt;Book&gt; elements of an <see cref="T:System.Web.UI.WebControls.XmlDataSource" /> control to all the nodes in the tree, regardless of the location in the hierarchy:
+          </para>
           <code>&lt;asp:TreeNodeBinding DataMember="Book" TextField="Title" ValueField= "ISBN"&gt;</code>
           <para
-            >When creating a <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" /> object, you must specify the criteria for binding. The criteria indicates when a data item should be bound to a node. You can specify the <see cref="P:System.Web.UI.WebControls.TreeNodeBinding.Depth" /> or <see cref="P:System.Web.UI.WebControls.TreeNodeBinding.DataMember" /> property, or both properties. There is a slight performance gain by specifying both. </para
-          >
+            >When creating a <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" /> object, you must specify the criteria for binding. The criteria indicates when a data item should be bound to a node. You can specify the <see cref="P:System.Web.UI.WebControls.TreeNodeBinding.Depth" /> or <see cref="P:System.Web.UI.WebControls.TreeNodeBinding.DataMember" /> property, or both properties. There is a slight performance gain by specifying both.
+          </para>
           <para
             >Once the binding criteria is established, you can then bind a property of a <see cref="T:System.Web.UI.WebControls.TreeNode" /> object that can be bound to a value. You can bind to a field of a data item or to a static value. When bound to a static value, all <see cref="T:System.Web.UI.WebControls.TreeNode" /> objects to which the <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" /> object is applied share the same value.</para
           >
@@ -396,12 +396,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A node depth specifies the node level that gets bound. For example, the following <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" /> declaration binds the Name and ID fields of the data source to the <see cref="P:System.Web.UI.WebControls.TreeNode.Text" /> and <see cref="P:System.Web.UI.WebControls.TreeNode.Value" /> properties, respectively, of all nodes with a depth of 0: </para
-          >
+            >A node depth specifies the node level that gets bound. For example, the following <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" /> declaration binds the Name and ID fields of the data source to the <see cref="P:System.Web.UI.WebControls.TreeNode.Text" /> and <see cref="P:System.Web.UI.WebControls.TreeNode.Value" /> properties, respectively, of all nodes with a depth of 0:
+          </para>
           <code>&lt;asp:TreeNodeBinding Depth="0" TextField="Name" ValueField="ID"&gt;</code>
           <para
-            >When creating a <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" /> object, you must specify the criteria for binding. The criteria indicates when a data item should be bound to a node. You can specify the <see cref="P:System.Web.UI.WebControls.TreeNodeBinding.Depth" /> or <see cref="P:System.Web.UI.WebControls.TreeNodeBinding.DataMember" /> property, or both properties. There is a slight performance gain by specifying both. </para
-          >
+            >When creating a <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" /> object, you must specify the criteria for binding. The criteria indicates when a data item should be bound to a node. You can specify the <see cref="P:System.Web.UI.WebControls.TreeNodeBinding.Depth" /> or <see cref="P:System.Web.UI.WebControls.TreeNodeBinding.DataMember" /> property, or both properties. There is a slight performance gain by specifying both.
+          </para>
           <para
             >Once the binding criteria is established, you can then bind a property of a <see cref="T:System.Web.UI.WebControls.TreeNode" /> object that can be bound to a value. You can bind to a field of a data item or to a static value. When bound to a static value, all <see cref="T:System.Web.UI.WebControls.TreeNode" /> objects to which the <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" /> object is applied share the same value.</para
           >
@@ -1223,8 +1223,8 @@
             <para
               > The <see cref="P:System.Web.UI.WebControls.TreeNodeBinding.Target" /> property renders as a target attribute. The target attribute on anchor elements is not allowed in the XHTML 1.1 document type definition. Do not set the <see cref="P:System.Web.UI.WebControls.TreeNodeBinding.Target" /> property, if the rendered output for the <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" /> control must be XHTML 1.1 compliant. For more information, see <format type="text/html">
                 <a href="1b78d416-66bb-43a5-ac77-c703aab55b97">ASP.NET and XHTML Compliance</a>
-              </format>. </para
-            >
+              </format>.
+            </para>
             <para
               >When creating accessible Web pages, you should avoid using the <see cref="P:System.Web.UI.WebControls.TreeNodeBinding.Target" /> property to target another window. For more information, see <format type="text/html">
                 <a href="9b5f3e05-e88d-4248-a5f4-9e64850fa0ae">ASP.NET Accessibility</a>
@@ -1267,8 +1267,8 @@
             >When the <see cref="T:System.Web.UI.WebControls.TreeView" /> control is bound to a data source, use the <see cref="P:System.Web.UI.WebControls.TreeNodeBinding.TargetField" /> property to specify the field name to bind to the <see cref="P:System.Web.UI.WebControls.TreeNode.Target" /> property of a <see cref="T:System.Web.UI.WebControls.TreeNode" /> object. The <see cref="P:System.Web.UI.WebControls.TreeNode.Target" /> property is used to specify the window or frame in which to display the Web content that is linked to a node when that node is clicked.</para
           >
           <para
-            >This binding relationship affects all <see cref="T:System.Web.UI.WebControls.TreeNode" /> objects to which the <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" /> object is applied. </para
-          >
+            >This binding relationship affects all <see cref="T:System.Web.UI.WebControls.TreeNode" /> objects to which the <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" /> object is applied.
+          </para>
           <block subset="none" type="note">
             <para
               >You can selectively override the <see cref="P:System.Web.UI.WebControls.TreeNodeBinding.TargetField" /> property by setting the <see cref="P:System.Web.UI.WebControls.TreeNode.Target" /> property of each node directly.</para

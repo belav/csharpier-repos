@@ -31,8 +31,8 @@
         >The <see cref="T:System.Diagnostics.DebuggerTypeProxyAttribute" /> attribute is used to specify a display proxy for a type, allowing a developer to tailor the view for the type.  This attribute can be used at the assembly level as well, in which case the <see cref="P:System.Diagnostics.DebuggerTypeProxyAttribute.Target" /> property specifies the type for which the proxy will be used. In general, this attribute specifies a private nested type that occurs within the type to which the attribute is applied.  An expression evaluator that supports type viewers checks for this attribute when a type is displayed. If the attribute is found, the expression evaluator substitutes the display proxy type for the type the attribute is applied to.</para
       >
       <para
-        >When the <see cref="T:System.Diagnostics.DebuggerBrowsableAttribute" /> is present, the debugger variable window displays only the public members of the proxy type. Private members are not displayed. The behavior of the data window is not changed by attribute-enhanced views. </para
-      >
+        >When the <see cref="T:System.Diagnostics.DebuggerBrowsableAttribute" /> is present, the debugger variable window displays only the public members of the proxy type. Private members are not displayed. The behavior of the data window is not changed by attribute-enhanced views.
+      </para>
       <para
         >To avoid unnecessary performance penalties, expression evaluators should not examine the attributes on the display proxy of the type unless the type is expanded, either through the user clicking the plus sign (+) next to the type in a data window, or through the application of the <see cref="T:System.Diagnostics.DebuggerBrowsableAttribute" /> attribute. Therefore, it is recommended that no attributes be applied to the display type. Attributes can and should be applied within the body of the display type.</para
       >
@@ -66,8 +66,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Diagnostics.DebuggerTypeProxyAttribute" /> class using the type name of the proxy. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.DebuggerTypeProxyAttribute" /> class using the type name of the proxy.
+          </para>
         </summary>
         <param name="typeName">
           <attribution
@@ -101,8 +101,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Diagnostics.DebuggerTypeProxyAttribute" /> class using the type of the proxy. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.DebuggerTypeProxyAttribute" /> class using the type of the proxy.
+          </para>
         </summary>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />The proxy type.</param

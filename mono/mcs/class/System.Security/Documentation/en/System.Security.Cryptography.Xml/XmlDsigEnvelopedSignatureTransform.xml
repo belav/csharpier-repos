@@ -37,8 +37,8 @@
       >
       <para>Although you can create and insert a signature into an XML document, verifying the modified document using the embedded signature will fail because the document now has additional elements.  This transform removes the &lt;Signature&gt; element and allows you to verify the document using its original form.</para>
       <para
-        >Use the <see cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" /> class whenever you create an enveloped signature.  </para
-      >
+        >Use the <see cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" /> class whenever you create an enveloped signature.
+      </para>
       <para>For more information about the enveloped signature transform, see Section 6.6.4 of the XMLDSIG specification, which is available from the W3C at www.w3.org/TR/xmldsig-core/.</para>
     </remarks>
     <summary>
@@ -103,8 +103,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to include comments; otherwise, false. </param
-        >
+          />true to include comments; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetInnerXml">
@@ -221,8 +221,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the output to return. <see cref="T:System.Xml.XmlNodeList" /> is the only valid type for this parameter. </param
-        >
+          />The type of the output to return. <see cref="T:System.Xml.XmlNodeList" /> is the only valid type for this parameter.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="InputTypes">
@@ -293,8 +293,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlNodeList" /> to load into the current <see cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" /> object. </param
-        >
+          />An <see cref="T:System.Xml.XmlNodeList" /> to load into the current <see cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" /> object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="LoadInput">
@@ -333,8 +333,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The input to load into the current <see cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" /> object. </param
-        >
+          />The input to load into the current <see cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" /> object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OutputTypes">

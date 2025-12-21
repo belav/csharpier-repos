@@ -49,8 +49,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.WebControls.DataBoundControlDesigner" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.WebControls.DataBoundControlDesigner" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -340,8 +340,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Override the <see cref="M:System.Web.UI.Design.WebControls.DataBoundControlDesigner.PreFilterProperties(System.Collections.IDictionary)" /> method to perform any additional actions required when the data source of the underlying data-bound control changes. </para
-          >
+            >Override the <see cref="M:System.Web.UI.Design.WebControls.DataBoundControlDesigner.PreFilterProperties(System.Collections.IDictionary)" /> method to perform any additional actions required when the data source of the underlying data-bound control changes.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -427,8 +427,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see cref="M:System.Web.UI.Design.IDataBindingSchemaProvider.RefreshSchema(System.Boolean)" />. </para
-          >
+            >For a description of this member, see <see cref="M:System.Web.UI.Design.IDataBindingSchemaProvider.RefreshSchema(System.Boolean)" />.
+          </para>
         </summary>
         <param name="preferSilent">
           <attribution

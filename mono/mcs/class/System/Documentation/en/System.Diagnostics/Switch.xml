@@ -102,19 +102,15 @@
           >
         </summary>
         <param name="displayName">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the switch. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the switch.
+        </param>
         <param name="description">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The description for the switch. </param
-        >
+          />The description for the switch.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -146,23 +142,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Diagnostics.Switch" /> class, specifying the display name, description, and default value for the switch. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.Switch" /> class, specifying the display name, description, and default value for the switch.
+          </para>
         </summary>
         <param name="displayName">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the switch. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the switch.
+        </param>
         <param name="description">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The description of the switch. </param
-        >
+          />The description of the switch.
+        </param>
         <param name="defaultSwitchValue">
           <attribution
             license="cc4"

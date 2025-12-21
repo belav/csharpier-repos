@@ -22,14 +22,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You can use the <see cref="T:System.Web.UI.WebControls.QueryStringParameter" /> class to bind the value of a field that is passed as part of an HTTP request query string to a parameter that is used in a parameterized query or command. The field is retrieved from the <see cref="P:System.Web.HttpRequest.QueryString" /> collection. </para
-      >
+        >You can use the <see cref="T:System.Web.UI.WebControls.QueryStringParameter" /> class to bind the value of a field that is passed as part of an HTTP request query string to a parameter that is used in a parameterized query or command. The field is retrieved from the <see cref="P:System.Web.HttpRequest.QueryString" /> collection.
+      </para>
       <para
         >Controls that bind data to the parameter might throw an exception if a <see cref="T:System.Web.UI.WebControls.QueryStringParameter" /> object is referenced, but no corresponding query-string name/value pair is passed. Similarly, they might display no data if the query-string field name is passed without a corresponding value. To avoid these situations, set the <see cref="P:System.Web.UI.WebControls.Parameter.DefaultValue" /> property where appropriate.</para
       >
       <para
-        >The <see cref="T:System.Web.UI.WebControls.QueryStringParameter" /> class provides the <see cref="P:System.Web.UI.WebControls.QueryStringParameter.QueryStringField" /> property, which identifies the name of the query string value to bind to. It also provides the properties that are inherited from the <see cref="T:System.Web.UI.WebControls.Parameter" /> class. </para
-      >
+        >The <see cref="T:System.Web.UI.WebControls.QueryStringParameter" /> class provides the <see cref="P:System.Web.UI.WebControls.QueryStringParameter.QueryStringField" /> property, which identifies the name of the query string value to bind to. It also provides the properties that are inherited from the <see cref="T:System.Web.UI.WebControls.Parameter" /> class.
+      </para>
       <block subset="none" type="note">
         <para
           >The <see cref="T:System.Web.UI.WebControls.QueryStringParameter" /> class does not validate the value that is passed; it provides the raw value. However, you can validate the value of a <see cref="T:System.Web.UI.WebControls.QueryStringParameter" /> object in a data source control. To do so, handle the Selecting, Updating, Inserting, or Deleting event of the data source control and check the parameter value in the event handler. If the value of the parameter does not pass the validation tests, you can cancel the data operation by setting the <see cref="P:System.ComponentModel.CancelEventArgs.Cancel" /> property of the associated <see cref="T:System.ComponentModel.CancelEventArgs" /> class to true.</para
@@ -120,8 +120,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Web.UI.WebControls.QueryStringParameter" /> instance from which the current instance is initialized. </param
-        >
+          />A <see cref="T:System.Web.UI.WebControls.QueryStringParameter" /> instance from which the current instance is initialized.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -152,19 +152,15 @@
           >
         </summary>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the parameter. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the parameter.
+        </param>
         <param name="queryStringField">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the query-string field that the parameter object is bound to. The default is an empty string (""). </param
-        >
+          />The name of the query-string field that the parameter object is bound to. The default is an empty string ("").
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -196,26 +192,22 @@
           >
         </summary>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the parameter. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the parameter.
+        </param>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type that the parameter represents. The default is <see cref="F:System.TypeCode.Object" />. </param
-        >
+          />The type that the parameter represents. The default is <see cref="F:System.TypeCode.Object" />.
+        </param>
         <param name="queryStringField">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the query-string field that the parameter object is bound to. The default is an empty string (""). </param
-        >
+          />The name of the query-string field that the parameter object is bound to. The default is an empty string ("").
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -288,8 +280,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An object that represents the current value of the parameter. If the context or the request is null, the <see cref="M:System.Web.UI.WebControls.QueryStringParameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" /> method returns null. </para
-          >
+            >An object that represents the current value of the parameter. If the context or the request is null, the <see cref="M:System.Web.UI.WebControls.QueryStringParameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" /> method returns null.
+          </para>
         </returns>
         <param name="control">
           <attribution

@@ -105,15 +105,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of a <see cref="T:System.Net.Cookie" />. The following characters must not be used inside <paramref name="name" />: equal sign, semicolon, comma, newline (\n), return (\r), tab (\t), and space character. The dollar sign character ("$") cannot be the first character. </param
-        >
+          />The name of a <see cref="T:System.Net.Cookie" />. The following characters must not be used inside <paramref name="name" />: equal sign, semicolon, comma, newline (\n), return (\r), tab (\t), and space character. The dollar sign character ("$") cannot be the first character.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value of a <see cref="T:System.Net.Cookie" />. The following characters must not be used inside <paramref name="value" />: semicolon, comma. </param
-        >
+          />The value of a <see cref="T:System.Net.Cookie" />. The following characters must not be used inside <paramref name="value" />: semicolon, comma.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -164,22 +164,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of a <see cref="T:System.Net.Cookie" />. The following characters must not be used inside <paramref name="name" />: equal sign, semicolon, comma, newline (\n), return (\r), tab (\t), and space character. The dollar sign character ("$") cannot be the first character. </param
-        >
+          />The name of a <see cref="T:System.Net.Cookie" />. The following characters must not be used inside <paramref name="name" />: equal sign, semicolon, comma, newline (\n), return (\r), tab (\t), and space character. The dollar sign character ("$") cannot be the first character.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value of a <see cref="T:System.Net.Cookie" />. The following characters must not be used inside <paramref name="value" />: semicolon, comma. </param
-        >
+          />The value of a <see cref="T:System.Net.Cookie" />. The following characters must not be used inside <paramref name="value" />: semicolon, comma.
+        </param>
         <param name="path">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The subset of URIs on the origin server to which this <see cref="T:System.Net.Cookie" /> applies. The default value is "/". </param
-        >
+          />The subset of URIs on the origin server to which this <see cref="T:System.Net.Cookie" /> applies. The default value is "/".
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -231,29 +231,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of a <see cref="T:System.Net.Cookie" />. The following characters must not be used inside <paramref name="name" />: equal sign, semicolon, comma, newline (\n), return (\r), tab (\t), and space character. The dollar sign character ("$") cannot be the first character. </param
-        >
+          />The name of a <see cref="T:System.Net.Cookie" />. The following characters must not be used inside <paramref name="name" />: equal sign, semicolon, comma, newline (\n), return (\r), tab (\t), and space character. The dollar sign character ("$") cannot be the first character.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value of a <see cref="T:System.Net.Cookie" /> object. The following characters must not be used inside <paramref name="value" />: semicolon, comma. </param
-        >
+          />The value of a <see cref="T:System.Net.Cookie" /> object. The following characters must not be used inside <paramref name="value" />: semicolon, comma.
+        </param>
         <param name="path">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The subset of URIs on the origin server to which this <see cref="T:System.Net.Cookie" /> applies. The default value is "/". </param
-        >
+          />The subset of URIs on the origin server to which this <see cref="T:System.Net.Cookie" /> applies. The default value is "/".
+        </param>
         <param name="domain">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The optional internet domain for which this <see cref="T:System.Net.Cookie" /> is valid. The default value is the host this <see cref="T:System.Net.Cookie" /> has been received from. </param
-        >
+          />The optional internet domain for which this <see cref="T:System.Net.Cookie" /> is valid. The default value is the host this <see cref="T:System.Net.Cookie" /> has been received from.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Comment">
@@ -401,8 +401,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A reference to a <see cref="T:System.Net.Cookie" />. </param
-        >
+          />A reference to a <see cref="T:System.Net.Cookie" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Expired">
@@ -454,8 +454,8 @@
             >Setting the <see cref="P:System.Net.Cookie.Expires" /> property to <see cref="F:System.DateTime.MinValue" /> makes this a session <see cref="T:System.Net.Cookie" />, which is its default value.</para
           >
           <para
-            >The <see cref="T:System.DateTimeKind" /> property of <see cref="P:System.Net.Cookie.Expires" /> is used to determine if the <see cref="T:System.Net.Cookie" /> is set in <see cref="F:System.DateTimeKind.Local" /> or <see cref="F:System.DateTimeKind.Utc" />. If the <see cref="T:System.DateTimeKind" /> property is set to <see cref="F:System.DateTimeKind.Unspecified" />, then <see cref="F:System.DateTimeKind.Utc" /> is assumed. </para
-          >
+            >The <see cref="T:System.DateTimeKind" /> property of <see cref="P:System.Net.Cookie.Expires" /> is used to determine if the <see cref="T:System.Net.Cookie" /> is set in <see cref="F:System.DateTimeKind.Local" /> or <see cref="F:System.DateTimeKind.Utc" />. If the <see cref="T:System.DateTimeKind" /> property is set to <see cref="F:System.DateTimeKind.Unspecified" />, then <see cref="F:System.DateTimeKind.Utc" /> is assumed.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -537,8 +537,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Net.Cookie.Name" /> property must be initialized before using an instance of the <see cref="T:System.Net.Cookie" /> class. </para
-          >
+            >The <see cref="P:System.Net.Cookie.Name" /> property must be initialized before using an instance of the <see cref="T:System.Net.Cookie" /> class.
+          </para>
           <para>The following characters are reserved and cannot be used for this attribute value: equal sign, semicolon, comma, new line (\n), return (\r), tab (\t), and space character. The dollar sign ($) character cannot be the first character.</para>
         </remarks>
         <summary>
@@ -742,8 +742,8 @@
             >The default value for the <see cref="P:System.Net.Cookie.Version" /> property is 0, complying with the original Netscape specification. If the value is explicitly set to 1, then this <see cref="T:System.Net.Cookie" /> must conform to RFC 2109. Note that if a <see cref="T:System.Net.Cookie" /> was created automatically by receiving a Set-Cookie2 HTTP response header, the conformance is set to RFC 2965.</para
           >
           <para
-            >An attempt to set the <see cref="P:System.Net.Cookie.Version" /> property to a value less than zero will throw an exception. </para
-          >
+            >An attempt to set the <see cref="P:System.Net.Cookie.Version" /> property to a value less than zero will throw an exception.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

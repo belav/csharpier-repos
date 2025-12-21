@@ -329,8 +329,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor uses the <paramref name="BindingSource" /> parameter to initialize the <see cref="P:System.Windows.Forms.BindingNavigator.BindingSource" /> property. It also adds the standard set of navigational buttons and sets their corresponding properties, such as <see cref="P:System.Windows.Forms.BindingNavigator.CountItem" /> and <see cref="P:System.Windows.Forms.BindingNavigator.MoveNextItem" />. </para
-          >
+            >This constructor uses the <paramref name="BindingSource" /> parameter to initialize the <see cref="P:System.Windows.Forms.BindingNavigator.BindingSource" /> property. It also adds the standard set of navigational buttons and sets their corresponding properties, such as <see cref="P:System.Windows.Forms.BindingNavigator.CountItem" /> and <see cref="P:System.Windows.Forms.BindingNavigator.MoveNextItem" />.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -403,8 +403,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Windows.Forms.BindingNavigator.AddStandardItems" /> method adds the standard set of user interface <see cref="T:System.Windows.Forms.ToolStripItem" /> objects to the <see cref="T:System.Windows.Forms.BindingNavigator" /> tool strip for basic navigation operations, such as <ui>Move First</ui>, <ui>Move Last</ui>, and <ui>Add New</ui>. </para
-          >
+            >The <see cref="M:System.Windows.Forms.BindingNavigator.AddStandardItems" /> method adds the standard set of user interface <see cref="T:System.Windows.Forms.ToolStripItem" /> objects to the <see cref="T:System.Windows.Forms.BindingNavigator" /> tool strip for basic navigation operations, such as <ui>Move First</ui>, <ui>Move Last</ui>, and <ui>Add New</ui>.
+          </para>
           <para
             >Override <see cref="M:System.Windows.Forms.BindingNavigator.AddStandardItems" /> in derived classes to define additional or alternative tool strip items. To ensure optimal design-time support for your derived class, make sure each item has a meaningful value in its <see cref="P:System.Windows.Forms.ToolStripItem.Name" /> property. At design time, this will be used to generate a unique name for the corresponding member variable. The item's <see cref="P:System.Windows.Forms.ToolStripItem.Name" /> property will then be updated to match the name given to the member variable.</para
           >
@@ -548,8 +548,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a string used to format the information displayed in the <see cref="P:System.Windows.Forms.BindingNavigator.CountItem" /> control. </para
-          >
+            >Gets or sets a string used to format the information displayed in the <see cref="P:System.Windows.Forms.BindingNavigator.CountItem" /> control.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -620,16 +620,16 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see cref="T:System.Windows.Forms.BindingNavigator" /> and optionally releases the managed resources. </para
-          >
+            >Releases the unmanaged resources used by the <see cref="T:System.Windows.Forms.BindingNavigator" /> and optionally releases the managed resources.
+          </para>
         </summary>
         <param name="disposing">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="EndInit">
@@ -769,8 +769,8 @@
             >This property is null if it was not previously set and it is accessed before the <see cref="M:System.Windows.Forms.BindingNavigator.AddStandardItems" /> method is implicitly or explicitly called.</para
           >
           <para
-            >The <see cref="T:System.Windows.Forms.BindingNavigator" /> control will disable the<ui> Move Next</ui> button under the following run-time circumstances: the <see cref="P:System.Windows.Forms.BindingNavigator.BindingSource" /> property is null or the <see cref="P:System.Windows.Forms.BindingSource.Position" /> property is greater than or equal to the <see cref="P:System.Windows.Forms.BindingSource.Count" /> property. </para
-          >
+            >The <see cref="T:System.Windows.Forms.BindingNavigator" /> control will disable the<ui> Move Next</ui> button under the following run-time circumstances: the <see cref="P:System.Windows.Forms.BindingNavigator.BindingSource" /> property is null or the <see cref="P:System.Windows.Forms.BindingSource.Position" /> property is greater than or equal to the <see cref="P:System.Windows.Forms.BindingSource.Count" /> property.
+          </para>
           <para
             >In the default implementation, this property represents a control of type <see cref="T:System.Windows.Forms.ToolStripButton" />.</para
           >
@@ -844,8 +844,8 @@
           <list type="bullet">
             <item>
               <para
-                >Sets the internal members using the current <see cref="T:System.Windows.Forms.BindingSource" /> state. </para
-              >
+                >Sets the internal members using the current <see cref="T:System.Windows.Forms.BindingSource" /> state.
+              </para>
             </item>
             <item>
               <para

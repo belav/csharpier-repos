@@ -17,8 +17,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Runtime.Serialization.XsdDataContractImporter" /> is used to generate code from XML schema using the dnprdnshort CodeDOM. To generate an XML schema from an assembly, use the <see cref="T:System.Runtime.Serialization.XsdDataContractExporter" />. </para
-      >
+        >The <see cref="T:System.Runtime.Serialization.XsdDataContractImporter" /> is used to generate code from XML schema using the dnprdnshort CodeDOM. To generate an XML schema from an assembly, use the <see cref="T:System.Runtime.Serialization.XsdDataContractExporter" />.
+      </para>
       <para
         >For more information about importing and exporting schemas, see <format type="text/html">
           <a href="0da32b50-ccd9-463a-844c-7fe803d3bf44">Schema Import and Export</a>
@@ -30,8 +30,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the options that can be set on an <see cref="T:System.Runtime.Serialization.XsdDataContractImporter" />. </para
-      >
+        >Represents the options that can be set on an <see cref="T:System.Runtime.Serialization.XsdDataContractImporter" />.
+      </para>
     </summary>
   </Docs>
   <Members>
@@ -278,8 +278,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Collections.Generic.IList`1" /> containing types referenced in generated code. </para
-          >
+            >Gets a <see cref="T:System.Collections.Generic.IList`1" /> containing types referenced in generated code.
+          </para>
         </summary>
       </Docs>
     </Member>

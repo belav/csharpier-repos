@@ -41,11 +41,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.Windows.Forms.ToolStrip" /> is the base class for <see cref="T:System.Windows.Forms.MenuStrip" />, <see cref="T:System.Windows.Forms.StatusStrip" />, and <see cref="T:System.Windows.Forms.ContextMenuStrip" />. </para
-      >
+        <see cref="T:System.Windows.Forms.ToolStrip" /> is the base class for <see cref="T:System.Windows.Forms.MenuStrip" />, <see cref="T:System.Windows.Forms.StatusStrip" />, and <see cref="T:System.Windows.Forms.ContextMenuStrip" />.
+      </para>
       <para
-        >Use <see cref="T:System.Windows.Forms.ToolStrip" /> and its associated classes in new Windows Forms applications to create toolbars that can have a Windows XP, Office, Internet Explorer, or custom appearance and behavior, all with or without themes, and with support for overflow and run-time item reordering. <see cref="T:System.Windows.Forms.ToolStrip" /> controls also offer a rich design-time experience that includes in-place activation and editing, custom layout, and sharing of horizontal or vertical space within a specified <see cref="T:System.Windows.Forms.ToolStripContainer" />. </para
-      >
+        >Use <see cref="T:System.Windows.Forms.ToolStrip" /> and its associated classes in new Windows Forms applications to create toolbars that can have a Windows XP, Office, Internet Explorer, or custom appearance and behavior, all with or without themes, and with support for overflow and run-time item reordering. <see cref="T:System.Windows.Forms.ToolStrip" /> controls also offer a rich design-time experience that includes in-place activation and editing, custom layout, and sharing of horizontal or vertical space within a specified <see cref="T:System.Windows.Forms.ToolStripContainer" />.
+      </para>
       <para
         >The <see cref="T:System.Windows.Forms.ToolStrip" /> class provides many members that manage painting, mouse and keyboard input, and drag-and-drop functionality. Use the <see cref="T:System.Windows.Forms.ToolStripRenderer" /> class with the <see cref="T:System.Windows.Forms.ToolStripManager" /> class to gain even more control and customizability over the painting and layout style of all <see cref="T:System.Windows.Forms.ToolStrip" /> controls on a Windows Form.</para
       >
@@ -252,8 +252,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether multiple <see cref="T:System.Windows.Forms.MenuStrip" />, <see cref="T:System.Windows.Forms.ToolStripDropDownMenu" />, <see cref="T:System.Windows.Forms.ToolStripMenuItem" />, and other types can be combined. </para
-          >
+            >Gets or sets a value indicating whether multiple <see cref="T:System.Windows.Forms.MenuStrip" />, <see cref="T:System.Windows.Forms.ToolStripDropDownMenu" />, <see cref="T:System.Windows.Forms.ToolStripMenuItem" />, and other types can be combined.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -512,8 +512,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -570,8 +570,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1004,8 +1004,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1304,8 +1304,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Dock">
@@ -1366,8 +1366,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1585,8 +1585,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.Point" /> at which to search for the <see cref="T:System.Windows.Forms.ToolStripItem" />. </param
-        >
+          />The <see cref="T:System.Drawing.Point" /> at which to search for the <see cref="T:System.Windows.Forms.ToolStripItem" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1625,15 +1625,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The horizontal coordinate, in pixels, from the left edge of the client area. </param
-        >
+          />The horizontal coordinate, in pixels, from the left edge of the client area.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The vertical coordinate, in pixels, from the top edge of the client area. </param
-        >
+          />The vertical coordinate, in pixels, from the top edge of the client area.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1955,8 +1955,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="T:System.Windows.Forms.ToolStripItemImageScaling" /> property to control the default size of an image. Use <see cref="F:System.Windows.Forms.ToolStripItemImageScaling.SizeToFit" /> to make the size of the image on a <see cref="T:System.Windows.Forms.ToolStripItem" /> to automatically adjust to fit on a <see cref="T:System.Windows.Forms.ToolStrip" /> while retaining the original image proportions. </para
-          >
+            >Use the <see cref="T:System.Windows.Forms.ToolStripItemImageScaling" /> property to control the default size of an image. Use <see cref="F:System.Windows.Forms.ToolStripItemImageScaling.SizeToFit" /> to make the size of the image on a <see cref="T:System.Windows.Forms.ToolStripItem" /> to automatically adjust to fit on a <see cref="T:System.Windows.Forms.ToolStrip" /> while retaining the original image proportions.
+          </para>
           <para
             >The <see cref="P:System.Windows.Forms.ToolStripItem.Image" />, <see cref="P:System.Windows.Forms.ToolStripItem.ImageAlign" />, <see cref="P:System.Windows.Forms.ToolStripItem.ImageIndex" />, <see cref="P:System.Windows.Forms.ToolStripItem.ImageKey" />, and <see cref="P:System.Windows.Forms.ToolStripItem.ImageScaling" /> properties pertain to various aspects of image handling. Use images in <see cref="T:System.Windows.Forms.ToolStrip" /> controls by setting these properties directly or by setting the run-time–only <see cref="P:System.Windows.Forms.ToolStrip.ImageList" /> property.</para
           >
@@ -2022,8 +2022,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the user is currently moving the <see cref="T:System.Windows.Forms.ToolStrip" /> from one <see cref="T:System.Windows.Forms.ToolStripContainer" /> to another. </para
-          >
+            >Gets a value indicating whether the user is currently moving the <see cref="T:System.Windows.Forms.ToolStrip" /> from one <see cref="T:System.Windows.Forms.ToolStripContainer" /> to another.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -2264,8 +2264,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When items do not fit within the <see cref="T:System.Windows.Forms.ToolStrip" />, an overflow button automatically appears. The <see cref="P:System.Windows.Forms.ToolStripItem.Overflow" /> property setting determines whether an item appears in the overflow area always, as needed, or never. </para
-          >
+            >When items do not fit within the <see cref="T:System.Windows.Forms.ToolStrip" />, an overflow button automatically appears. The <see cref="P:System.Windows.Forms.ToolStripItem.Overflow" /> property setting determines whether an item appears in the overflow area always, as needed, or never.
+          </para>
           <para
             >Inspect the <see cref="P:System.Windows.Forms.ToolStripItem.Placement" /> property in the <see cref="E:System.Windows.Forms.ToolStrip.LayoutCompleted" /> event to determine whether an item was placed on the main <see cref="T:System.Windows.Forms.ToolStrip" />, the overflow <see cref="T:System.Windows.Forms.ToolStrip" />, or if it is not currently showing at all. The typical reasons why an item is not displayed are that the item did not fit on the main <see cref="T:System.Windows.Forms.ToolStrip" /> and its <see cref="P:System.Windows.Forms.ToolStripItem.Overflow" /> property was set to <see cref="F:System.Windows.Forms.ToolStripItemOverflow.Never" />.</para
           >
@@ -2536,8 +2536,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2642,8 +2642,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2685,8 +2685,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2797,8 +2797,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.ToolStripItemClickedEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.ToolStripItemClickedEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2878,8 +2878,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.LayoutEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.LayoutEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -3002,8 +3002,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -3040,8 +3040,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -3113,8 +3113,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.MouseEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.MouseEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -3151,8 +3151,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -3192,8 +3192,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.MouseEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.MouseEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -3233,8 +3233,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.MouseEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.MouseEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -3274,8 +3274,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.PaintEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.PaintEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -3317,8 +3317,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.PaintEventArgs" /> that contains information about the control to paint. </param
-        >
+          />A <see cref="T:System.Windows.Forms.PaintEventArgs" /> that contains information about the control to paint.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -3366,8 +3366,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.PaintEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.PaintEventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnRendererChanged">
@@ -3389,8 +3389,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
           <para
             >The <see cref="M:System.Windows.Forms.ToolStrip.OnRendererChanged(System.EventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
           >
@@ -3449,8 +3449,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -3521,8 +3521,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.Windows.Forms.Control.TabStopChanged" /> event. </para
-          >
+            >Raises the <see cref="E:System.Windows.Forms.Control.TabStopChanged" /> event.
+          </para>
         </summary>
         <param name="e">
           <attribution
@@ -3575,8 +3575,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -3731,8 +3731,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.Keys" /> values that represents the key to process. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.Keys" /> values that represents the key to process.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ProcessMnemonic">
@@ -3754,8 +3754,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Windows.Forms.ToolStrip.ProcessMnemonic(System.Char)" /> method is called to give a control the opportunity to process a mnemonic character. This method should determine whether the control is in a state to process mnemonics and whether the given character represents a mnemonic. If so, the method should perform the action associated with the mnemonic and return true. If not, the method should return false. </para
-          >
+            >The <see cref="M:System.Windows.Forms.ToolStrip.ProcessMnemonic(System.Char)" /> method is called to give a control the opportunity to process a mnemonic character. This method should determine whether the control is in a state to process mnemonics and whether the given character represents a mnemonic. If so, the method should perform the action associated with the mnemonic and return true. If not, the method should return false.
+          </para>
           <para
             >Implementations of this method often use the <see cref="M:System.Windows.Forms.Control.IsMnemonic(System.Char,System.String)" /> method to determine whether the given character matches a mnemonic in the control's text.</para
           >
@@ -3772,12 +3772,8 @@
           <para>true if the character was processed as a mnemonic by the control; otherwise, false.</para>
         </returns>
         <param name="charCode">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The character to process. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The character to process.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Renderer">
@@ -4173,15 +4169,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.ToolStripItem" /> whose <see cref="P:System.Windows.Forms.Control.Parent" /> property is to be changed. </param
-        >
+          />The <see cref="T:System.Windows.Forms.ToolStripItem" /> whose <see cref="P:System.Windows.Forms.Control.Parent" /> property is to be changed.
+        </param>
         <param name="parent">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.ToolStrip" /> that is the parent of the <see cref="T:System.Windows.Forms.ToolStripItem" /> referred to by the <paramref name="item" /> parameter. </param
-        >
+          />The <see cref="T:System.Windows.Forms.ToolStrip" /> that is the parent of the <see cref="T:System.Windows.Forms.ToolStripItem" /> referred to by the <paramref name="item" /> parameter.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -4216,8 +4212,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if the <see cref="T:System.Windows.Forms.ToolStripItem" /> is visible; otherwise, false. </param
-        >
+          />true if the <see cref="T:System.Windows.Forms.ToolStripItem" /> is visible; otherwise, false.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -4246,8 +4242,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether ToolTips are to be displayed on <see cref="T:System.Windows.Forms.ToolStrip" /> items. </para
-          >
+            >Gets or sets a value indicating whether ToolTips are to be displayed on <see cref="T:System.Windows.Forms.ToolStrip" /> items.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>

@@ -90,8 +90,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name to use as the name of the <see cref="T:System.Xml.XmlQualifiedName" /> object. </param
-        >
+          />The local name to use as the name of the <see cref="T:System.Xml.XmlQualifiedName" /> object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -124,15 +124,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name to use as the name of the <see cref="T:System.Xml.XmlQualifiedName" /> object. </param
-        >
+          />The local name to use as the name of the <see cref="T:System.Xml.XmlQualifiedName" /> object.
+        </param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace for the <see cref="T:System.Xml.XmlQualifiedName" /> object. </param
-        >
+          />The namespace for the <see cref="T:System.Xml.XmlQualifiedName" /> object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Empty">
@@ -185,8 +185,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified <see cref="T:System.Xml.XmlQualifiedName" /> object is equal to the current <see cref="T:System.Xml.XmlQualifiedName" /> object. </para
-          >
+            >Determines whether the specified <see cref="T:System.Xml.XmlQualifiedName" /> object is equal to the current <see cref="T:System.Xml.XmlQualifiedName" /> object.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -197,8 +197,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlQualifiedName" /> to compare. </param
-        >
+          />The <see cref="T:System.Xml.XmlQualifiedName" /> to compare.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -335,15 +335,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlQualifiedName" /> to compare. </param
-        >
+          />An <see cref="T:System.Xml.XmlQualifiedName" /> to compare.
+        </param>
         <param name="b">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlQualifiedName" /> to compare. </param
-        >
+          />An <see cref="T:System.Xml.XmlQualifiedName" /> to compare.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="op_Inequality">
@@ -383,15 +383,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlQualifiedName" /> to compare. </param
-        >
+          />An <see cref="T:System.Xml.XmlQualifiedName" /> to compare.
+        </param>
         <param name="b">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlQualifiedName" /> to compare. </param
-        >
+          />An <see cref="T:System.Xml.XmlQualifiedName" /> to compare.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ToString">
@@ -459,19 +459,15 @@
           >
         </returns>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the object. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the object.
+        </param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of the object. </param
-        >
+          />The namespace of the object.
+        </param>
       </Docs>
     </Member>
   </Members>

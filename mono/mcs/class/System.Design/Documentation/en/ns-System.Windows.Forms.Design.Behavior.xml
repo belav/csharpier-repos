@@ -18,8 +18,8 @@
         </item>
         <item>
           <para
-            >An <see cref="T:System.Windows.Forms.Design.Behavior.Adorner" /> class for managing a collection of <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" /> objects. </para
-          >
+            >An <see cref="T:System.Windows.Forms.Design.Behavior.Adorner" /> class for managing a collection of <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" /> objects.
+          </para>
         </item>
         <item>
           <para

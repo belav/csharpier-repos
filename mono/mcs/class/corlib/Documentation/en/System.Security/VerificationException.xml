@@ -114,8 +114,8 @@
             >This constructor initializes the <see cref="!:System.Security.VerificationException.Message" /> property of the new 
    instance using <paramref name="message. " />If <paramref name="message" /> is <see langword="null" />,
    the <see cref="!:System.Security.VerificationException.Message" /> property is initialized to the system-supplied
-   message provided by the constructor that takes no arguments. </para
-          >
+   message provided by the constructor that takes no arguments.
+          </para>
           <para
             > The <see cref="!:System.Security.VerificationException.InnerException" />
 property is initialized to <see langword="null" /> .</para
@@ -132,8 +132,8 @@ property is initialized to <see langword="null" /> .</para
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A message indicating the reason the exception occurred. </param
-        >
+          />A message indicating the reason the exception occurred.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -172,15 +172,15 @@ property is initialized to <see langword="null" /> .</para
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that holds the serialized object data. </param
-        >
+          />The object that holds the serialized object data.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The contextual information about the source or destination. </param
-        >
+          />The contextual information about the source or destination.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -260,15 +260,15 @@ property is initialized to <see langword="null" /> .</para
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The error message that explains the reason for the exception. </param
-        >
+          />The error message that explains the reason for the exception.
+        </param>
         <param name="innerException">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The exception that is the cause of the current exception. If the <paramref name="innerException" /> parameter is not null, the current exception is raised in a catch block that handles the inner exception. </param
-        >
+          />The exception that is the cause of the current exception. If the <paramref name="innerException" /> parameter is not null, the current exception is raised in a catch block that handles the inner exception.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

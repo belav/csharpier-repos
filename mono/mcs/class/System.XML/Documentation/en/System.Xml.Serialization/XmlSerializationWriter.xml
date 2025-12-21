@@ -992,12 +992,8 @@
           />The constants of the enumeration.</param
         >
         <param name="typeName">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the type </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the type
+        </param>
       </Docs>
     </Member>
     <Member MemberName="FromTime">
@@ -4981,8 +4977,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.  </para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -5023,8 +5019,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.  </para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

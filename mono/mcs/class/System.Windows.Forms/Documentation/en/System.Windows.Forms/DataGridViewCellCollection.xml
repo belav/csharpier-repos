@@ -130,8 +130,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to populate a <see cref="T:System.Windows.Forms.DataGridViewRow" /> with cells before you add the row to a <see cref="T:System.Windows.Forms.DataGridView" /> control. Once you add the row to a control, the number of cells it contains always matches the number of columns in the control, so this method is no longer useful. </para
-          >
+            >Use this method to populate a <see cref="T:System.Windows.Forms.DataGridViewRow" /> with cells before you add the row to a <see cref="T:System.Windows.Forms.DataGridView" /> control. Once you add the row to a control, the number of cells it contains always matches the number of columns in the control, so this method is no longer useful.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -166,8 +166,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to alter the collection before you add the containing row to a <see cref="T:System.Windows.Forms.DataGridView" /> control. Once you add the row to a control, the number of cells it contains always matches the number of columns in the control, so this method is no longer useful. </para
-          >
+            >Use this method to alter the collection before you add the containing row to a <see cref="T:System.Windows.Forms.DataGridView" /> control. Once you add the row to a control, the number of cells it contains always matches the number of columns in the control, so this method is no longer useful.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -330,8 +330,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to alter the collection before you add the containing row to a <see cref="T:System.Windows.Forms.DataGridView" /> control. Once you add the row to a control, the number of cells it contains always matches the number of columns in the control, so this method is no longer useful. </para
-          >
+            >Use this method to alter the collection before you add the containing row to a <see cref="T:System.Windows.Forms.DataGridView" /> control. Once you add the row to a control, the number of cells it contains always matches the number of columns in the control, so this method is no longer useful.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -462,8 +462,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.ComponentModel.CollectionChangeEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.ComponentModel.CollectionChangeEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -486,8 +486,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to alter the collection before you add the containing row to a <see cref="T:System.Windows.Forms.DataGridView" /> control. Once you add the row to a control, the number of cells it contains always matches the number of columns in the control, so this method is no longer useful. </para
-          >
+            >Use this method to alter the collection before you add the containing row to a <see cref="T:System.Windows.Forms.DataGridView" /> control. Once you add the row to a control, the number of cells it contains always matches the number of columns in the control, so this method is no longer useful.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -519,8 +519,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to alter the collection before you add the containing row to a <see cref="T:System.Windows.Forms.DataGridView" /> control. Once you add the row to a control, the number of cells it contains always matches the number of columns in the control, so this method is no longer useful. </para
-          >
+            >Use this method to alter the collection before you add the containing row to a <see cref="T:System.Windows.Forms.DataGridView" /> control. Once you add the row to a control, the number of cells it contains always matches the number of columns in the control, so this method is no longer useful.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -679,8 +679,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index at which value should be inserted. </param
-        >
+          />The zero-based index at which value should be inserted.
+        </param>
         <param name="value">
           <attribution
             license="cc4"

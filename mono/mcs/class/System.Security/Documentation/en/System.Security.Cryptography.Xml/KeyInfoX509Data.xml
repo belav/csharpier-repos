@@ -224,8 +224,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> object to add to the <see cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" /> object. </param
-        >
+          />The <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> object to add to the <see cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" /> object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddIssuerSerial">
@@ -255,8 +255,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>For identification, each X.509v3 certificate carries the name of the certification authority that issued the certificate paired with a unique serial number assigned by the certification authority.</para>
           <para
-            >The <see cref="M:System.Security.Cryptography.Xml.KeyInfoX509Data.AddIssuerSerial(System.String,System.String)" /> method adds information about an issuer name and serial number pair to a list of <see cref="T:System.Security.Cryptography.Xml.X509IssuerSerial" /> objects that are accessible through the <see cref="P:System.Security.Cryptography.Xml.KeyInfoX509Data.IssuerSerials" /> property. </para
-          >
+            >The <see cref="M:System.Security.Cryptography.Xml.KeyInfoX509Data.AddIssuerSerial(System.String,System.String)" /> method adds information about an issuer name and serial number pair to a list of <see cref="T:System.Security.Cryptography.Xml.X509IssuerSerial" /> objects that are accessible through the <see cref="P:System.Security.Cryptography.Xml.KeyInfoX509Data.IssuerSerials" /> property.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -269,15 +269,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The issuer name portion of the pair to add to the <see cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" /> object. </param
-        >
+          />The issuer name portion of the pair to add to the <see cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" /> object.
+        </param>
         <param name="serialNumber">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The serial number portion of the pair to add to the <see cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" /> object. </param
-        >
+          />The serial number portion of the pair to add to the <see cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" /> object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddSubjectKeyId">
@@ -314,8 +314,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A byte array that represents the subject key identifier (SKI) to add to the <see cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" /> object. </param
-        >
+          />A byte array that represents the subject key identifier (SKI) to add to the <see cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" /> object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddSubjectKeyId">
@@ -391,8 +391,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the entity that was issued an X.509 certificate to add to the <see cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" /> object. </param
-        >
+          />The name of the entity that was issued an X.509 certificate to add to the <see cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" /> object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Certificates">
@@ -562,8 +562,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlElement" /> object that specifies the state of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" /> object. </param
-        >
+          />The <see cref="T:System.Xml.XmlElement" /> object that specifies the state of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" /> object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SubjectKeyIds">

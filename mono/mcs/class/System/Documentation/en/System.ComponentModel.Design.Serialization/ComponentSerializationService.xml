@@ -21,8 +21,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.ComponentModel.Design.Serialization.ComponentSerializationService" /> serializes a set of components or serializable objects into a serialization store. The store can then be deserialized later. The <see cref="T:System.ComponentModel.Design.Serialization.ComponentSerializationService" /> class differs from other serialization schemes in that the serialization format is opaque, and it allows for partial serialization of objects. For example, you can choose to serialize only selected properties for an object. </para
-      >
+        >The <see cref="T:System.ComponentModel.Design.Serialization.ComponentSerializationService" /> serializes a set of components or serializable objects into a serialization store. The store can then be deserialized later. The <see cref="T:System.ComponentModel.Design.Serialization.ComponentSerializationService" /> class differs from other serialization schemes in that the serialization format is opaque, and it allows for partial serialization of objects. For example, you can choose to serialize only selected properties for an object.
+      </para>
       <para
         >This class is abstract. Typically, a <see cref="T:System.ComponentModel.Design.Serialization.DesignerLoader" /> will provide a concrete implementation of this class and add it as a service to its <see cref="T:System.ComponentModel.Design.DesignSurface" />. This allows objects to be serialized in the format best suited for them.</para
       >
@@ -53,8 +53,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Serialization.ComponentSerializationService" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Serialization.ComponentSerializationService" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -516,8 +516,8 @@
             >Standard serialization, as implemented through the <see cref="M:System.ComponentModel.Design.Serialization.ComponentSerializationService.Serialize(System.ComponentModel.Design.Serialization.SerializationStore,System.Object)" /> method, only serializes values that differ from the component's default state. This provides the most compact serialization mechanism but assumes that a newly created object will be used during deserialization. If an existing object is used, the resulting deserialized object is not guaranteed to duplicate the original state of the serialized object; the properties that contained default values during serialization will not be reset back to their defaults during deserialization.</para
           >
           <para
-            >The <see cref="M:System.ComponentModel.Design.Serialization.ComponentSerializationService.SerializeAbsolute(System.ComponentModel.Design.Serialization.SerializationStore,System.Object)" /> method does not use this shortcut. It serializes all properties of the source object so that deserialization can restore all the object's properties, regardless of default state. </para
-          >
+            >The <see cref="M:System.ComponentModel.Design.Serialization.ComponentSerializationService.SerializeAbsolute(System.ComponentModel.Design.Serialization.SerializationStore,System.Object)" /> method does not use this shortcut. It serializes all properties of the source object so that deserialization can restore all the object's properties, regardless of default state.
+          </para>
           <para>This method is particularly useful for serializing collections, because the order of the constituent items within the collection can change. In this circumstance, the safest process to restore the original state of the entire collection is to overwrite all the items with all their original property values.</para>
         </remarks>
         <summary>
@@ -628,8 +628,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.ComponentModel.Design.Serialization.ComponentSerializationService.SerializeMemberAbsolute(System.ComponentModel.Design.Serialization.SerializationStore,System.Object,System.ComponentModel.MemberDescriptor)" /> method serializes the <paramref name="member" /> on <paramref name="owningObject" />, even if <paramref name="member" /> contains the default property value. </para
-          >
+            >The <see cref="M:System.ComponentModel.Design.Serialization.ComponentSerializationService.SerializeMemberAbsolute(System.ComponentModel.Design.Serialization.SerializationStore,System.Object,System.ComponentModel.MemberDescriptor)" /> method serializes the <paramref name="member" /> on <paramref name="owningObject" />, even if <paramref name="member" /> contains the default property value.
+          </para>
           <para
             >Note that for some members, containing the default value and restoring the setting of the same value to the member are different concepts. For example, if a property inherits its value from a parent object when no local value is set, setting the value back to the property may not be what is desired. The <see cref="M:System.ComponentModel.Design.Serialization.ComponentSerializationService.SerializeMemberAbsolute(System.ComponentModel.Design.Serialization.SerializationStore,System.Object,System.ComponentModel.MemberDescriptor)" /> method takes this into account and would clear the state of the property in this case.</para
           >

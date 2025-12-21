@@ -163,8 +163,7 @@ class FieldAttributesExample
    }
 
 }
-      </code
-          >
+      </code>
           <para>The output is</para>
           <c>
             <para>Field MyPublicInstanceField is: </para>
@@ -274,8 +273,8 @@ class FieldAttributesExample
           <para
             > The <see cref="T:System.Type" /> of the field
    reflected by the current instance.
-   </para
-          >
+
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -332,8 +331,8 @@ class FieldAttributesExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.RuntimeFieldHandle" /> structure that contains the handle to the internal metadata representation of a field. </param
-        >
+          />A <see cref="T:System.RuntimeFieldHandle" /> structure that contains the handle to the internal metadata representation of a field.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetFieldFromHandle">
@@ -609,8 +608,8 @@ class FieldAttributesExample
           >The field reflected by the current instance is declared neither directly in <paramref name="obj" /> nor in any class from which <paramref name="obj" /> derives.</exception
         >
         <exception cref="T:System.Reflection.TargetException"
-          >The field reflected by the current instance is non-static, and <paramref name="obj" /> is <see langword="null" />. </exception
-        >
+          >The field reflected by the current instance is non-static, and <paramref name="obj" /> is <see langword="null" />.
+        </exception>
         <permission cref="T:System.Security.Permissions.ReflectionPermission"
           >Requires permission to access non-public members of a type in loaded assemblies. See <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.MemberAccess" />.</permission
         >
@@ -628,8 +627,8 @@ class FieldAttributesExample
                 <a href="42d9dc2a-8fcc-4ff3-b002-4ff260ef3dc5"
                   >Security Considerations for Reflection</a
                 >
-              </format>.) </para
-            >
+              </format>.)
+            </para>
             <para>To use this functionality, your application should target the net_v35_long or later.</para>
           </block>
         </remarks>
@@ -646,8 +645,8 @@ class FieldAttributesExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object whose field value will be returned. </param
-        >
+          />The object whose field value will be returned.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -692,8 +691,8 @@ class FieldAttributesExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.TypedReference" /> structure that encapsulates a managed pointer to a location and a runtime representation of the type that might be stored at that location. </param
-        >
+          />A <see cref="T:System.TypedReference" /> structure that encapsulates a managed pointer to a location and a runtime representation of the type that might be stored at that location.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsAssembly">
@@ -1053,8 +1052,8 @@ class FieldAttributesExample
           <para>Using these properties is much simpler than examining the security annotations of an assembly and its types and members, checking the current trust level, and attempting to duplicate the runtime's rules.</para>
           <block subset="none" type="note">
             <para
-              >For partial-trust assemblies, the value of this property depends on the current trust level of the assembly. If the assembly is loaded into a partially trusted application domain (for example, into a sandboxed application domain), then the runtime ignores the security annotations of the assembly. The assembly and all its types are treated as transparent. The runtime pays attention to the security annotations of a partial-trust assembly only when that assembly is loaded into a fully trusted application domain (for example, into the default application domain of a desktop application). By contrast, a trusted assembly (that is, a strong-named assembly that is installed in the global assembly cache) is always loaded with full trust regardless of the trust level of the application domain, so its current trust level is always fully trusted. You can determine the current trust levels of assemblies and application domains by using the <see cref="P:System.Reflection.Assembly.IsFullyTrusted" /> and <see cref="P:System.AppDomain.IsFullyTrusted" /> properties. </para
-            >
+              >For partial-trust assemblies, the value of this property depends on the current trust level of the assembly. If the assembly is loaded into a partially trusted application domain (for example, into a sandboxed application domain), then the runtime ignores the security annotations of the assembly. The assembly and all its types are treated as transparent. The runtime pays attention to the security annotations of a partial-trust assembly only when that assembly is loaded into a fully trusted application domain (for example, into the default application domain of a desktop application). By contrast, a trusted assembly (that is, a strong-named assembly that is installed in the global assembly cache) is always loaded with full trust regardless of the trust level of the application domain, so its current trust level is always fully trusted. You can determine the current trust levels of assemblies and application domains by using the <see cref="P:System.Reflection.Assembly.IsFullyTrusted" /> and <see cref="P:System.AppDomain.IsFullyTrusted" /> properties.
+            </para>
           </block>
           <para
             >For more information about reflection and transparency, see <format type="text/html">
@@ -1154,8 +1153,8 @@ class FieldAttributesExample
           <para>Using these properties is much simpler than examining the security annotations of an assembly and its types and members, checking the current trust level, and attempting to duplicate the runtime's rules.</para>
           <block subset="none" type="note">
             <para
-              >For partial-trust assemblies, the value of this property depends on the current trust level of the assembly. If the assembly is loaded into a partially trusted application domain (for example, into a sandboxed application domain), then the runtime ignores the security annotations of the assembly. The assembly and all its types are treated as transparent. The runtime pays attention to the security annotations of a partial-trust assembly only when that assembly is loaded into a fully trusted application domain (for example, into the default application domain of a desktop application). By contrast, a trusted assembly (that is, a strong-named assembly that is installed in the global assembly cache) is always loaded with full trust regardless of the trust level of the application domain, so its current trust level is always fully trusted. You can determine the current trust levels of assemblies and application domains by using the <see cref="P:System.Reflection.Assembly.IsFullyTrusted" /> and <see cref="P:System.AppDomain.IsFullyTrusted" /> properties. </para
-            >
+              >For partial-trust assemblies, the value of this property depends on the current trust level of the assembly. If the assembly is loaded into a partially trusted application domain (for example, into a sandboxed application domain), then the runtime ignores the security annotations of the assembly. The assembly and all its types are treated as transparent. The runtime pays attention to the security annotations of a partial-trust assembly only when that assembly is loaded into a fully trusted application domain (for example, into the default application domain of a desktop application). By contrast, a trusted assembly (that is, a strong-named assembly that is installed in the global assembly cache) is always loaded with full trust regardless of the trust level of the application domain, so its current trust level is always fully trusted. You can determine the current trust levels of assemblies and application domains by using the <see cref="P:System.Reflection.Assembly.IsFullyTrusted" /> and <see cref="P:System.AppDomain.IsFullyTrusted" /> properties.
+            </para>
           </block>
           <para
             >For more information about reflection and transparency, see <format type="text/html">
@@ -1255,8 +1254,8 @@ class FieldAttributesExample
           <para>Using these properties is much simpler than examining the security annotations of an assembly and its types and members, checking the current trust level, and attempting to duplicate the runtime's rules.</para>
           <block subset="none" type="note">
             <para
-              >For partial-trust assemblies, the value of this property depends on the current trust level of the assembly. If the assembly is loaded into a partially trusted application domain (for example, into a sandboxed application domain), then the runtime ignores the security annotations of the assembly. The assembly and all its types are treated as transparent. The runtime pays attention to the security annotations of a partial-trust assembly only when that assembly is loaded into a fully trusted application domain (for example, into the default application domain of a desktop application). By contrast, a trusted assembly (that is, a strong-named assembly that is installed in the global assembly cache) is always loaded with full trust regardless of the trust level of the application domain, so its current trust level is always fully trusted. You can determine the current trust levels of assemblies and application domains by using the <see cref="P:System.Reflection.Assembly.IsFullyTrusted" /> and <see cref="P:System.AppDomain.IsFullyTrusted" /> properties. </para
-            >
+              >For partial-trust assemblies, the value of this property depends on the current trust level of the assembly. If the assembly is loaded into a partially trusted application domain (for example, into a sandboxed application domain), then the runtime ignores the security annotations of the assembly. The assembly and all its types are treated as transparent. The runtime pays attention to the security annotations of a partial-trust assembly only when that assembly is loaded into a fully trusted application domain (for example, into the default application domain of a desktop application). By contrast, a trusted assembly (that is, a strong-named assembly that is installed in the global assembly cache) is always loaded with full trust regardless of the trust level of the application domain, so its current trust level is always fully trusted. You can determine the current trust levels of assemblies and application domains by using the <see cref="P:System.Reflection.Assembly.IsFullyTrusted" /> and <see cref="P:System.AppDomain.IsFullyTrusted" /> properties.
+            </para>
           </block>
           <para
             >For more information about reflection and transparency, see <format type="text/html">
@@ -1514,8 +1513,8 @@ class FieldAttributesExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to assign to the field. </param
-        >
+          />The value to assign to the field.
+        </param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -1530,8 +1529,8 @@ class FieldAttributesExample
                 <a href="42d9dc2a-8fcc-4ff3-b002-4ff260ef3dc5"
                   >Security Considerations for Reflection</a
                 >
-              </format>.) </para
-            >
+              </format>.)
+            </para>
             <para>To use this functionality, your application should target the net_v35_long or later.</para>
           </block>
         </remarks>
@@ -1544,15 +1543,15 @@ class FieldAttributesExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object whose field value will be set. </param
-        >
+          />The object whose field value will be set.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to assign to the field. </param
-        >
+          />The value to assign to the field.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1608,22 +1607,22 @@ class FieldAttributesExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A field of Binder that specifies the type of binding that is desired (for example, Binder.CreateInstance or Binder.ExactBinding). </param
-        >
+          />A field of Binder that specifies the type of binding that is desired (for example, Binder.CreateInstance or Binder.ExactBinding).
+        </param>
         <param name="binder">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A set of properties that enables the binding, coercion of argument types, and invocation of members through reflection. If <paramref name="binder" /> is null, then Binder.DefaultBinding is used. </param
-        >
+          />A set of properties that enables the binding, coercion of argument types, and invocation of members through reflection. If <paramref name="binder" /> is null, then Binder.DefaultBinding is used.
+        </param>
         <param name="culture">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The software preferences of a particular culture. </param
-        >
+          />The software preferences of a particular culture.
+        </param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -1638,8 +1637,8 @@ class FieldAttributesExample
                 <a href="42d9dc2a-8fcc-4ff3-b002-4ff260ef3dc5"
                   >Security Considerations for Reflection</a
                 >
-              </format>.) </para
-            >
+              </format>.)
+            </para>
             <para>To use this functionality, your application should target the net_v35_long or later.</para>
           </block>
         </remarks>
@@ -1652,36 +1651,36 @@ class FieldAttributesExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object whose field value will be set. </param
-        >
+          />The object whose field value will be set.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to assign to the field. </param
-        >
+          />The value to assign to the field.
+        </param>
         <param name="invokeAttr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A field of Binder that specifies the type of binding that is desired (for example, Binder.CreateInstance or Binder.ExactBinding). </param
-        >
+          />A field of Binder that specifies the type of binding that is desired (for example, Binder.CreateInstance or Binder.ExactBinding).
+        </param>
         <param name="binder">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A set of properties that enables the binding, coercion of argument types, and invocation of members through reflection. If <paramref name="binder" /> is null, then Binder.DefaultBinding is used. </param
-        >
+          />A set of properties that enables the binding, coercion of argument types, and invocation of members through reflection. If <paramref name="binder" /> is null, then Binder.DefaultBinding is used.
+        </param>
         <param name="culture">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The software preferences of a particular culture. </param
-        >
+          />The software preferences of a particular culture.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1721,8 +1720,8 @@ class FieldAttributesExample
                 <a href="42d9dc2a-8fcc-4ff3-b002-4ff260ef3dc5"
                   >Security Considerations for Reflection</a
                 >
-              </format>.) </para
-            >
+              </format>.)
+            </para>
             <para>To use this functionality, your application should target the net_v35_long or later.</para>
           </block>
         </remarks>
@@ -1735,15 +1734,15 @@ class FieldAttributesExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.TypedReference" /> structure that encapsulates a managed pointer to a location and a runtime representation of the type that can be stored at that location. </param
-        >
+          />A <see cref="T:System.TypedReference" /> structure that encapsulates a managed pointer to a location and a runtime representation of the type that can be stored at that location.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to assign to the field. </param
-        >
+          />The value to assign to the field.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.Runtime.InteropServices._FieldInfo.GetIDsOfNames">

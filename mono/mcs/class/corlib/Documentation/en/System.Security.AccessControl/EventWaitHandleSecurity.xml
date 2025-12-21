@@ -32,8 +32,8 @@
       >
       <block subset="none" type="note">
         <para
-          >An <see cref="T:System.Threading.EventWaitHandle" /> object can represent a local wait handle or a named system wait handle. Windows access control security is meaningful only for named system wait handles. </para
-        >
+          >An <see cref="T:System.Threading.EventWaitHandle" /> object can represent a local wait handle or a named system wait handle. Windows access control security is meaningful only for named system wait handles.
+        </para>
       </block>
       <para
         >The <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />, <see cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />, and <see cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" /> classes hide the implementation details of ACLs and ACEs. They allow you to ignore the seventeen different ACE types and the complexity of correctly maintaining inheritance and propagation of access rights. These objects are also designed to prevent the following common access control errors:</para
@@ -46,8 +46,8 @@
         </item>
         <item>
           <para
-            >Violating the canonical ordering of ACEs. If the ACE list in the DACL is not kept in the canonical order, users might inadvertently be given access to the secured object. For example, denied access rights must always appear before allowed access rights. <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" /> objects maintain the correct order internally. </para
-          >
+            >Violating the canonical ordering of ACEs. If the ACE list in the DACL is not kept in the canonical order, users might inadvertently be given access to the secured object. For example, denied access rights must always appear before allowed access rights. <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" /> objects maintain the correct order internally.
+          </para>
         </item>
         <item>
           <para>Manipulating security descriptor flags, which should be under resource manager control only. </para>
@@ -72,8 +72,8 @@
         </item>
       </list>
       <para
-        >To modify Windows access control security for a named wait handle, use the <see cref="M:System.Threading.EventWaitHandle.GetAccessControl" /> method to get the <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" /> object. Modify the security object by adding and removing rules, and then use the <see cref="M:System.Threading.EventWaitHandle.SetAccessControl(System.Security.AccessControl.EventWaitHandleSecurity)" /> method to reattach it. </para
-      >
+        >To modify Windows access control security for a named wait handle, use the <see cref="M:System.Threading.EventWaitHandle.GetAccessControl" /> method to get the <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" /> object. Modify the security object by adding and removing rules, and then use the <see cref="M:System.Threading.EventWaitHandle.SetAccessControl(System.Security.AccessControl.EventWaitHandleSecurity)" /> method to reattach it.
+      </para>
       <block subset="none" type="note">
         <para
           >Changes you make to an <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" /> object do not affect the access levels of the named wait handle until you call the <see cref="M:System.Threading.EventWaitHandle.SetAccessControl(System.Security.AccessControl.EventWaitHandleSecurity)" /> method to assign the altered security object to the named wait handle.</para
@@ -500,8 +500,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" /> is searched for a rule that has the same user and the same <see cref="T:System.Security.AccessControl.AccessControlType" /> value as <paramref name="rule" />. If no such rule is found, no action is taken, and the method returns false. If matching rules are found, their inheritance and compatibility flags are checked for compatibility with the flags specified in <paramref name="rule" />. If no compatible rule is found, no action is taken, and the method returns false. If a rule with compatible flags is found, the rights specified in <paramref name="rule" /> are removed from the compatible rule, and the method returns true. If <paramref name="rule" /> specifies rights not contained in the compatible rule, no action is taken with respect to those rights. If all rights are removed from the compatible rule, the entire rule is removed from the current <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" /> object. </para
-          >
+            >The current <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" /> is searched for a rule that has the same user and the same <see cref="T:System.Security.AccessControl.AccessControlType" /> value as <paramref name="rule" />. If no such rule is found, no action is taken, and the method returns false. If matching rules are found, their inheritance and compatibility flags are checked for compatibility with the flags specified in <paramref name="rule" />. If no compatible rule is found, no action is taken, and the method returns false. If a rule with compatible flags is found, the rights specified in <paramref name="rule" /> are removed from the compatible rule, and the method returns true. If <paramref name="rule" /> specifies rights not contained in the compatible rule, no action is taken with respect to those rights. If all rights are removed from the compatible rule, the entire rule is removed from the current <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" /> object.
+          </para>
           <block subset="none" type="note">
             <para
               >Although you can specify inheritance and propagation flags for event access rules, by creating them with the <see cref="M:System.Security.AccessControl.EventWaitHandleSecurity.AccessRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AccessControlType)" /> method, this is not recommended. Inheritance and propagation have no meaning for named events, and they make the maintenance of access rules more complicated.</para
@@ -599,8 +599,8 @@
           >
           <block subset="none" type="note">
             <para
-              >A rule represents one or more underlying access control entries (ACE), and these entries are split or combined as necessary when you modify the access security rules for a user. Thus, a rule might no longer exist in the specific form it had when it was added, and in that case the <see cref="M:System.Security.AccessControl.EventWaitHandleSecurity.RemoveAccessRuleSpecific(System.Security.AccessControl.EventWaitHandleAccessRule)" /> method cannot remove it. </para
-            >
+              >A rule represents one or more underlying access control entries (ACE), and these entries are split or combined as necessary when you modify the access security rules for a user. Thus, a rule might no longer exist in the specific form it had when it was added, and in that case the <see cref="M:System.Security.AccessControl.EventWaitHandleSecurity.RemoveAccessRuleSpecific(System.Security.AccessControl.EventWaitHandleAccessRule)" /> method cannot remove it.
+            </para>
           </block>
         </remarks>
         <summary>
@@ -641,8 +641,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" /> is searched for an audit rule that has the same user as <paramref name="rule" />. If no such rule is found, no action is taken, and the method returns false. If matching rules are found, their inheritance and compatibility flags are checked for compatibility with the flags specified in <paramref name="rule" />. If no compatible rule is found, no action is taken, and the method returns false. If a rule with compatible flags is found, the rights specified in <paramref name="rule" /> are removed from the compatible rule, and the method returns true. If <paramref name="rule" /> specifies rights not contained in the compatible rule, no action is taken with respect to those rights. If all rights are removed from the compatible rule, the entire rule is removed from the current <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" /> object. </para
-          >
+            >The current <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" /> is searched for an audit rule that has the same user as <paramref name="rule" />. If no such rule is found, no action is taken, and the method returns false. If matching rules are found, their inheritance and compatibility flags are checked for compatibility with the flags specified in <paramref name="rule" />. If no compatible rule is found, no action is taken, and the method returns false. If a rule with compatible flags is found, the rights specified in <paramref name="rule" /> are removed from the compatible rule, and the method returns true. If <paramref name="rule" /> specifies rights not contained in the compatible rule, no action is taken with respect to those rights. If all rights are removed from the compatible rule, the entire rule is removed from the current <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" /> object.
+          </para>
           <block subset="none" type="note">
             <para
               >Although you can specify inheritance and propagation flags for event audit rules, by creating them with the <see cref="M:System.Security.AccessControl.EventWaitHandleSecurity.AuditRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AuditFlags)" /> method, this is not recommended. Inheritance and propagation have no meaning for named events, and they make the maintenance of audit rules more complicated.</para
@@ -736,8 +736,8 @@
           >
           <block subset="none" type="note">
             <para
-              >A rule represents one or more underlying access control entries (ACE), and these entries are split or combined as necessary when you modify the audit security rules for a user. Thus, a rule might no longer exist in the specific form it had when it was added, and in that case the <see cref="M:System.Security.AccessControl.EventWaitHandleSecurity.RemoveAuditRuleSpecific(System.Security.AccessControl.EventWaitHandleAuditRule)" /> method cannot remove it. </para
-            >
+              >A rule represents one or more underlying access control entries (ACE), and these entries are split or combined as necessary when you modify the audit security rules for a user. Thus, a rule might no longer exist in the specific form it had when it was added, and in that case the <see cref="M:System.Security.AccessControl.EventWaitHandleSecurity.RemoveAuditRuleSpecific(System.Security.AccessControl.EventWaitHandleAuditRule)" /> method cannot remove it.
+            </para>
           </block>
         </remarks>
         <summary>

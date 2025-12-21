@@ -57,15 +57,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of an instance associated with the performance counter. </param
-        >
+          />The name of an instance associated with the performance counter.
+        </param>
         <param name="sample">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Diagnostics.CounterSample" /> taken from the instance specified by the <paramref name="instanceName" /> parameter. </param
-        >
+          />A <see cref="T:System.Diagnostics.CounterSample" /> taken from the instance specified by the <paramref name="instanceName" /> parameter.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="InstanceName">

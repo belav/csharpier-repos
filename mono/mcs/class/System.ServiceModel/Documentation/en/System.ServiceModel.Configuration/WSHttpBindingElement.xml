@@ -43,8 +43,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.WSHttpBindingElement" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.WSHttpBindingElement" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -66,8 +66,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.WSHttpBindingElement" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.WSHttpBindingElement" /> class.
+          </para>
         </summary>
         <param name="name">
           <attribution
@@ -98,8 +98,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Setting <see cref="P:System.ServiceModel.BaseHttpBinding.AllowCookies" /> to true is useful when a client is interacting with one web service that uses cookies.  If you are accessing multiple services with the same cookie, set <see cref="P:System.ServiceModel.BaseHttpBinding.AllowCookies" /> to false and you will have to manually add the cookie header to each outgoing message. The following code shows how to do this: </para
-          >
+            >Setting <see cref="P:System.ServiceModel.BaseHttpBinding.AllowCookies" /> to true is useful when a client is interacting with one web service that uses cookies.  If you are accessing multiple services with the same cookie, set <see cref="P:System.ServiceModel.BaseHttpBinding.AllowCookies" /> to false and you will have to manually add the cookie header to each outgoing message. The following code shows how to do this:
+          </para>
           <code>MyWebServiceClient client = new MyWebServiceClient();
 
         using (new OperationContextScope(client.InnerChannel))

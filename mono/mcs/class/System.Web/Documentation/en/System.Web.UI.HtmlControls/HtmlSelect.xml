@@ -147,8 +147,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The parsed child control to add. </param
-        >
+          />The parsed child control to add.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -207,8 +207,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Web.UI.ControlCollection" /> to contain the current server control's child server controls. </para
-          >
+            >A <see cref="T:System.Web.UI.ControlCollection" /> to contain the current server control's child server controls.
+          </para>
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -393,8 +393,8 @@
             >The <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" /> class provides two properties for specifying the data source to bind to. The <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSource" /> property allows you to bind an <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" /> control to any collection that implements the <see cref="T:System.Collections.IEnumerable" /> or <see cref="T:System.ComponentModel.IListSource" /> interfaces (such as <see cref="T:System.Data.DataView" />, <see cref="T:System.Collections.ArrayList" />, or <see cref="T:System.Collections.Generic.List`1" />). When you use the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSource" /> property to specify the data source, you must explicitly call the <see cref="M:System.Web.UI.Control.DataBind" /> method to bind the control and its <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataValueField" /> property to the data source.</para
           >
           <para
-            >The <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" /> property allows you to bind an <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" /> control to a data source control that represents a data source. When you use the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" /> property to specify the data source, the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" /> control and its <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataValueField" /> property automatically bind to the data source control. Therefore, you do not need to explicitly call the <see cref="M:System.Web.UI.Control.DataBind" /> method. </para
-          >
+            >The <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" /> property allows you to bind an <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" /> control to a data source control that represents a data source. When you use the <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" /> property to specify the data source, the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" /> control and its <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataValueField" /> property automatically bind to the data source control. Therefore, you do not need to explicitly call the <see cref="M:System.Web.UI.Control.DataBind" /> method.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -546,8 +546,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether a <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" /> property is defined for the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" /> control. </para
-          >
+            >Gets a value indicating whether a <see cref="P:System.Web.UI.HtmlControls.HtmlSelect.DataSourceID" /> property is defined for the <see cref="T:System.Web.UI.HtmlControls.HtmlSelect" /> control.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -816,8 +816,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -924,8 +924,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnLoad">
@@ -958,8 +958,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnPagePreLoad">
@@ -1012,8 +1012,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1066,8 +1066,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1449,8 +1449,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see cref="M:System.Web.UI.IPostBackDataHandler.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />. </para
-          >
+            >For a description of this member, see <see cref="M:System.Web.UI.IPostBackDataHandler.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1498,8 +1498,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see cref="M:System.Web.UI.IPostBackDataHandler.RaisePostDataChangedEvent" />. </para
-          >
+            >For a description of this member, see <see cref="M:System.Web.UI.IPostBackDataHandler.RaisePostDataChangedEvent" />.
+          </para>
         </summary>
       </Docs>
     </Member>

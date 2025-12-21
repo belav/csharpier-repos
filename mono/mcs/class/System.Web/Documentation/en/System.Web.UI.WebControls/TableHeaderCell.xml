@@ -80,8 +80,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.UI.WebControls.TableHeaderCell.AbbreviatedText" /> property is rendered as the abbr attribute of the HTML th element. The abbr attribute is used by screen readers to read a shortened version of a header for each cell in the table. The <see cref="P:System.Web.UI.WebControls.TableHeaderCell.AbbreviatedText" /> property is significant for browsers that render abbreviated text in place of the content for the <see cref="T:System.Web.UI.WebControls.TableHeaderCell" /> control. </para
-          >
+            >The <see cref="P:System.Web.UI.WebControls.TableHeaderCell.AbbreviatedText" /> property is rendered as the abbr attribute of the HTML th element. The abbr attribute is used by screen readers to read a shortened version of a header for each cell in the table. The <see cref="P:System.Web.UI.WebControls.TableHeaderCell.AbbreviatedText" /> property is significant for browsers that render abbreviated text in place of the content for the <see cref="T:System.Web.UI.WebControls.TableHeaderCell" /> control.
+          </para>
           <para>The value of this property is stored in view state.</para>
         </remarks>
         <summary>
@@ -151,8 +151,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The categories can be any string values that are pertinent to the table. The <see cref="P:System.Web.UI.WebControls.TableHeaderCell.CategoryText" /> property is rendered as the axis attribute of the HTML th element, which is used to group table cells into conceptual categories. The categories are rendered in HTML as a comma-delimited list.   </para
-          >
+            >The categories can be any string values that are pertinent to the table. The <see cref="P:System.Web.UI.WebControls.TableHeaderCell.CategoryText" /> property is rendered as the axis attribute of the HTML th element, which is used to group table cells into conceptual categories. The categories are rendered in HTML as a comma-delimited list.
+          </para>
           <para>The value of this property is stored in view state.</para>
         </remarks>
         <summary>

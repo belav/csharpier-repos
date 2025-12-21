@@ -17,8 +17,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see cref="M:System.GC.RegisterForFullGCNotification(System.Int32,System.Int32)" /> method to register for a full garbage collection notification. Then use the <see cref="M:System.GC.WaitForFullGCApproach" /> method or the <see cref="M:System.GC.WaitForFullGCComplete" /> method to return a <see cref="T:System.GCNotificationStatus" /> enumeration that contains the status of the notification. </para
-      >
+        >Use the <see cref="M:System.GC.RegisterForFullGCNotification(System.Int32,System.Int32)" /> method to register for a full garbage collection notification. Then use the <see cref="M:System.GC.WaitForFullGCApproach" /> method or the <see cref="M:System.GC.WaitForFullGCComplete" /> method to return a <see cref="T:System.GCNotificationStatus" /> enumeration that contains the status of the notification.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

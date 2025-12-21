@@ -248,8 +248,8 @@
         <h2>Using Buttons with UpdatePanel Controls</h2>
       </format>
       <para
-        >Partial-page rendering makes it possible to refresh portions of a page without a postback. <see cref="T:System.Web.UI.UpdatePanel" /> controls enable you to mark parts of the page that participate in partial-page rendering. By default, the behavior of controls inside an <see cref="T:System.Web.UI.UpdatePanel" /> control, including <see cref="T:System.Web.UI.WebControls.Button" /> controls, is to perform an asynchronous postback instead of a postback. This refreshes only the contents of the <see cref="T:System.Web.UI.UpdatePanel" /> control from which the postback originates. </para
-      >
+        >Partial-page rendering makes it possible to refresh portions of a page without a postback. <see cref="T:System.Web.UI.UpdatePanel" /> controls enable you to mark parts of the page that participate in partial-page rendering. By default, the behavior of controls inside an <see cref="T:System.Web.UI.UpdatePanel" /> control, including <see cref="T:System.Web.UI.WebControls.Button" /> controls, is to perform an asynchronous postback instead of a postback. This refreshes only the contents of the <see cref="T:System.Web.UI.UpdatePanel" /> control from which the postback originates.
+      </para>
       <para
         >In addition to the scenario of a <see cref="T:System.Web.UI.WebControls.Button" /> control that is inside an <see cref="T:System.Web.UI.UpdatePanel" /> control, you can use <see cref="T:System.Web.UI.WebControls.Button" /> controls with <see cref="T:System.Web.UI.UpdatePanel" /> controls in the following scenarios:</para
       >
@@ -382,8 +382,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Web.UI.HtmlTextWriter" /> that contains the output stream to render on the client. </param
-        >
+          />An <see cref="T:System.Web.UI.HtmlTextWriter" /> that contains the output stream to render on the client.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -674,8 +674,8 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />The event data. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -759,8 +759,8 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />The event data. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -823,14 +823,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.UI.WebControls.Button.PostBackUrl" /> property allows you to perform a cross-page post using the <see cref="T:System.Web.UI.WebControls.Button" /> control. </para
-          >
+            >The <see cref="P:System.Web.UI.WebControls.Button.PostBackUrl" /> property allows you to perform a cross-page post using the <see cref="T:System.Web.UI.WebControls.Button" /> control.
+          </para>
           <block subset="none" type="note">
             <para
               >Only correctly specified paths work with this property. For example, relative paths (Test/default.aspx), absolute paths (https://localhost/WebApp/default.aspx) and virtual (~\Test\default.aspx) work correctly. Incorrectly formed paths such as "/Test/default.aspx" or "\Test\default.aspx" do not work. See <format type="text/html">
                 <a href="2447f50c-b849-483c-8093-85ed53e7a5bd">ASP.NET Web Site Paths</a>
-              </format> for a discussion on creating correct paths. </para
-            >
+              </format> for a discussion on creating correct paths.
+            </para>
           </block>
           <para
             >Set the <see cref="P:System.Web.UI.WebControls.Button.PostBackUrl" /> property to the URL of the Web page to post to when the <see cref="T:System.Web.UI.WebControls.Button" /> control is clicked. For example, specifying Page2.aspx causes the page that contains the <see cref="T:System.Web.UI.WebControls.Button" /> control to post to Page2.aspx. If you do not specify a value for the <see cref="P:System.Web.UI.WebControls.Button.PostBackUrl" /> property, the page posts back to itself.</para
@@ -887,8 +887,8 @@ End Sub</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This event is used internally by the <see cref="T:System.Web.UI.WebControls.Button" /> control, when it is clicked, to raise a <see cref="E:System.Web.UI.WebControls.Button.Click" /> event, and if defined, a <see cref="E:System.Web.UI.WebControls.Button.Command" /> event. </para
-          >
+            >This event is used internally by the <see cref="T:System.Web.UI.WebControls.Button" /> control, when it is clicked, to raise a <see cref="E:System.Web.UI.WebControls.Button.Click" /> event, and if defined, a <see cref="E:System.Web.UI.WebControls.Button.Command" /> event.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -956,8 +956,8 @@ End Sub</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This event is used internally by the <see cref="T:System.Web.UI.WebControls.Button" /> control, when it is clicked, to raise a <see cref="E:System.Web.UI.WebControls.Button.Click" /> event, and if defined, a <see cref="E:System.Web.UI.WebControls.Button.Command" /> event. </para
-          >
+            >This event is used internally by the <see cref="T:System.Web.UI.WebControls.Button" /> control, when it is clicked, to raise a <see cref="E:System.Web.UI.WebControls.Button.Click" /> event, and if defined, a <see cref="E:System.Web.UI.WebControls.Button.Command" /> event.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

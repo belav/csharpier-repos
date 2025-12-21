@@ -56,8 +56,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.Rss20FeedFormatter" /> class. </para
-          >
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.Rss20FeedFormatter" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -82,8 +82,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.Rss20FeedFormatter" /> class with the specified <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" /> instance. </para
-          >
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.Rss20FeedFormatter" /> class with the specified <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" /> instance.
+          </para>
         </summary>
         <param name="feedToWrite">
           <attribution
@@ -117,8 +117,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.Rss20FeedFormatter" /> class. </para
-          >
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.Rss20FeedFormatter" /> class.
+          </para>
         </summary>
         <param name="feedTypeToCreate">
           <attribution

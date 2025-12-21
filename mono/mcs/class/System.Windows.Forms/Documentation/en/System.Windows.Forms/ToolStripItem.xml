@@ -81,8 +81,8 @@
           </term>
           <description>
             <para
-              >A text label typically used in a status bar or <see cref="T:System.Windows.Forms.ToolStrip" /> as a comment or title. </para
-            >
+              >A text label typically used in a status bar or <see cref="T:System.Windows.Forms.ToolStrip" /> as a comment or title.
+            </para>
           </description>
         </item>
         <item>
@@ -109,8 +109,8 @@
               >A <see cref="T:System.Windows.Forms.ToolStripComboBox" /> is a text box in which the user can enter text, along with a list from which the user can select text to fill the text box.</para
             >
             <para
-              >A <see cref="T:System.Windows.Forms.ToolStripTextBox" /> enables the user to enter text. </para
-            >
+              >A <see cref="T:System.Windows.Forms.ToolStripTextBox" /> enables the user to enter text.
+            </para>
             <para
               >A <see cref="T:System.Windows.Forms.ToolStripProgressBar" /> represents a Windows progress bar control contained in a <see cref="T:System.Windows.Forms.StatusStrip" />.</para
             >
@@ -133,8 +133,8 @@
               >A <see cref="T:System.Windows.Forms.ToolStripSplitButton" /> is a combination of a regular button and a drop-down button.</para
             >
             <para
-              >A <see cref="T:System.Windows.Forms.ToolStripDropDownButton" /> is a button that supports drop-down functionality. </para
-            >
+              >A <see cref="T:System.Windows.Forms.ToolStripDropDownButton" /> is a button that supports drop-down functionality.
+            </para>
           </description>
         </item>
         <item>
@@ -239,8 +239,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripItem" /> class with the specified display text, image, event handler, and name. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripItem" /> class with the specified display text, image, event handler, and name.
+          </para>
         </summary>
         <param name="text">
           <attribution
@@ -354,8 +354,8 @@
           >
           <block subset="none" type="note">
             <para
-              >Not all objects have default actions, and some objects might have a default action that is related to its <see cref="P:System.Windows.Forms.AccessibleObject.Value" /> property, such as in the following examples: </para
-            >
+              >Not all objects have default actions, and some objects might have a default action that is related to its <see cref="P:System.Windows.Forms.AccessibleObject.Value" /> property, such as in the following examples:
+            </para>
           </block>
           <list type="bullet">
             <item>
@@ -371,8 +371,8 @@
             </item>
             <item>
               <para
-                >A label or a text box control that shows <ui>Printer</ui> has no default action, but would have a value of "Printer." </para
-              >
+                >A label or a text box control that shows <ui>Printer</ui> has no default action, but would have a value of "Printer."
+              </para>
             </item>
           </list>
           <para>For more information about properties of accessible objects, see "Content of Descriptive Properties" in the "Active Accessibility" section of the MSDN Library, at http://msdn.microsoft.com/library.</para>
@@ -412,8 +412,8 @@
             >An object's <see cref="P:System.Windows.Forms.ToolStripItem.AccessibleDescription" /> property provides a textual description about an object's visual appearance. The description is primarily used to provide greater context for low-vision or blind users, but can also be used for context searching or other applications.</para
           >
           <para
-            >The <see cref="P:System.Windows.Forms.ToolStripItem.AccessibleDescription" /> property is needed if the description is not obvious, or if it is not redundant based on the object's <see cref="P:System.Windows.Forms.ToolStripItem.AccessibleName" />, <see cref="P:System.Windows.Forms.ToolStripItem.AccessibleRole" />, <see cref="P:System.Windows.Forms.AccessibleObject.State" />, and <see cref="P:System.Windows.Forms.AccessibleObject.Value" /> properties. For example, a button labeled <ui>OK</ui> would not need additional information, but a button that shows a picture of a cactus would. The <see cref="P:System.Windows.Forms.ToolStripItem.AccessibleName" /> and <see cref="P:System.Windows.Forms.ToolStripItem.AccessibleRole" /> and, perhaps, <see cref="P:System.Windows.Forms.AccessibleObject.Help" /> properties for the cactus button would describe its purpose, but the <see cref="P:System.Windows.Forms.ToolStripItem.AccessibleDescription" /> property would convey information that is less tangible, such as "A button that shows a picture of a cactus." </para
-          >
+            >The <see cref="P:System.Windows.Forms.ToolStripItem.AccessibleDescription" /> property is needed if the description is not obvious, or if it is not redundant based on the object's <see cref="P:System.Windows.Forms.ToolStripItem.AccessibleName" />, <see cref="P:System.Windows.Forms.ToolStripItem.AccessibleRole" />, <see cref="P:System.Windows.Forms.AccessibleObject.State" />, and <see cref="P:System.Windows.Forms.AccessibleObject.Value" /> properties. For example, a button labeled <ui>OK</ui> would not need additional information, but a button that shows a picture of a cactus would. The <see cref="P:System.Windows.Forms.ToolStripItem.AccessibleName" /> and <see cref="P:System.Windows.Forms.ToolStripItem.AccessibleRole" /> and, perhaps, <see cref="P:System.Windows.Forms.AccessibleObject.Help" /> properties for the cactus button would describe its purpose, but the <see cref="P:System.Windows.Forms.ToolStripItem.AccessibleDescription" /> property would convey information that is less tangible, such as "A button that shows a picture of a cactus."
+          </para>
           <para>For more information about properties of accessible objects, see "Content of Descriptive Properties" in the "Active Accessibility" section of the MSDN Library, at http://msdn.microsoft.com/library.</para>
           <para
             >For samples, see the <see cref="T:System.Windows.Forms.AccessibleObject" /> class.</para
@@ -696,8 +696,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether to use the <see cref="P:System.Windows.Forms.ToolStripItem.Text" /> property or the <see cref="P:System.Windows.Forms.ToolStripItem.ToolTipText" /> property for the <see cref="T:System.Windows.Forms.ToolStripItem" /> ToolTip. </para
-          >
+            >Gets or sets a value indicating whether to use the <see cref="P:System.Windows.Forms.ToolStripItem.Text" /> property or the <see cref="P:System.Windows.Forms.ToolStripItem.ToolTipText" /> property for the <see cref="T:System.Windows.Forms.ToolStripItem" /> ToolTip.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -756,8 +756,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -858,8 +858,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.Windows.Forms.ToolStripItem.BackgroundImage" /> property to place a graphic image onto an item. </para
-          >
+            >Use the <see cref="P:System.Windows.Forms.ToolStripItem.BackgroundImage" /> property to place a graphic image onto an item.
+          </para>
           <block subset="none" type="note">
             <para>Images with translucent or transparent colors are not supported by Windows Forms controls as background images.</para>
             <para
@@ -1301,8 +1301,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1389,19 +1389,15 @@
           <para>One of the <see cref="T:System.Windows.Forms.DragDropEffects" /> values.</para>
         </returns>
         <param name="data">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The object to be dragged. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The object to be dragged.
+        </param>
         <param name="allowedEffects">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The drag operations that can occur. </param
-        >
+          />The drag operations that can occur.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DoubleClick">
@@ -1445,8 +1441,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <see cref="T:System.Windows.Forms.ToolStripItem" /> can be activated by double-clicking the mouse. </para
-          >
+            >Gets or sets a value indicating whether the <see cref="T:System.Windows.Forms.ToolStripItem" /> can be activated by double-clicking the mouse.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1479,8 +1475,8 @@
           <para
             >The <see cref="P:System.Windows.Forms.DragEventArgs.X" /> and <see cref="P:System.Windows.Forms.DragEventArgs.Y" /> properties of the <see cref="T:System.Windows.Forms.DragEventArgs" /> are in screen coordinates, not client coordinates. For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1543,8 +1539,8 @@
             >If there is a change in the keyboard or mouse button state, the <see cref="E:System.Windows.Forms.ToolStripItem.QueryContinueDrag" /> event is raised and determines whether to continue the drag, to drop the data, or to cancel the operation based on the value of the <see cref="P:System.Windows.Forms.QueryContinueDragEventArgs.Action" /> property of the event's <see cref="T:System.Windows.Forms.QueryContinueDragEventArgs" />.</para
           >
           <para
-            >If the value of <see cref="T:System.Windows.Forms.DragAction" /> is <see cref="F:System.Windows.Forms.DragAction.Continue" />, the <see cref="E:System.Windows.Forms.ToolStripItem.DragOver" /> event is raised to continue the operation and the <see cref="E:System.Windows.Forms.ToolStripItem.GiveFeedback" /> event is raised with the new effect so appropriate visual feedback can be set. For a list of valid drop effects, see the <see cref="T:System.Windows.Forms.DragDropEffects" /> enumeration. </para
-          >
+            >If the value of <see cref="T:System.Windows.Forms.DragAction" /> is <see cref="F:System.Windows.Forms.DragAction.Continue" />, the <see cref="E:System.Windows.Forms.ToolStripItem.DragOver" /> event is raised to continue the operation and the <see cref="E:System.Windows.Forms.ToolStripItem.GiveFeedback" /> event is raised with the new effect so appropriate visual feedback can be set. For a list of valid drop effects, see the <see cref="T:System.Windows.Forms.DragDropEffects" /> enumeration.
+          </para>
           <para
             >The <see cref="E:System.Windows.Forms.ToolStripItem.DragOver" /> and <see cref="E:System.Windows.Forms.ToolStripItem.GiveFeedback" /> events are paired so that as the mouse moves across the drop target, the user is given the most up-to-date feedback on the mouse's position, as follows:</para
           >
@@ -1629,8 +1625,8 @@
             >If there is a change in the keyboard or mouse button state, the <see cref="E:System.Windows.Forms.ToolStripItem.QueryContinueDrag" /> event is raised and determines whether to continue the drag, to drop the data, or to cancel the operation based on the value of the <see cref="P:System.Windows.Forms.QueryContinueDragEventArgs.Action" /> property of the event's <see cref="T:System.Windows.Forms.QueryContinueDragEventArgs" />.</para
           >
           <para
-            >If the value of <see cref="T:System.Windows.Forms.DragAction" /> is <see cref="F:System.Windows.Forms.DragAction.Continue" />, the <see cref="E:System.Windows.Forms.ToolStripItem.DragOver" /> event is raised to continue the operation and the <see cref="E:System.Windows.Forms.ToolStripItem.GiveFeedback" /> event is raised with the new effect so appropriate visual feedback can be set. For a list of valid drop effects, see the <see cref="T:System.Windows.Forms.DragDropEffects" /> enumeration. </para
-          >
+            >If the value of <see cref="T:System.Windows.Forms.DragAction" /> is <see cref="F:System.Windows.Forms.DragAction.Continue" />, the <see cref="E:System.Windows.Forms.ToolStripItem.DragOver" /> event is raised to continue the operation and the <see cref="E:System.Windows.Forms.ToolStripItem.GiveFeedback" /> event is raised with the new effect so appropriate visual feedback can be set. For a list of valid drop effects, see the <see cref="T:System.Windows.Forms.DragDropEffects" /> enumeration.
+          </para>
           <para
             >The <see cref="E:System.Windows.Forms.ToolStripItem.DragOver" /> and <see cref="E:System.Windows.Forms.ToolStripItem.GiveFeedback" /> events are paired so that as the mouse moves across the drop target, the user is given the most up-to-date feedback on the mouse's position, as follows:</para
           >
@@ -1708,8 +1704,8 @@
             >If there is a change in the keyboard or mouse button state, the <see cref="E:System.Windows.Forms.ToolStripItem.QueryContinueDrag" /> event is raised and determines whether to continue the drag, to drop the data, or to cancel the operation based on the value of the <see cref="P:System.Windows.Forms.QueryContinueDragEventArgs.Action" /> property of the event's <see cref="T:System.Windows.Forms.QueryContinueDragEventArgs" />.</para
           >
           <para
-            >If the value of <see cref="T:System.Windows.Forms.DragAction" /> is <see cref="F:System.Windows.Forms.DragAction.Continue" />, the <see cref="E:System.Windows.Forms.ToolStripItem.DragOver" /> event is raised to continue the operation and the <see cref="E:System.Windows.Forms.ToolStripItem.GiveFeedback" /> event is raised with the new effect so appropriate visual feedback can be set. For a list of valid drop effects, see the <see cref="T:System.Windows.Forms.DragDropEffects" /> enumeration. </para
-          >
+            >If the value of <see cref="T:System.Windows.Forms.DragAction" /> is <see cref="F:System.Windows.Forms.DragAction.Continue" />, the <see cref="E:System.Windows.Forms.ToolStripItem.DragOver" /> event is raised to continue the operation and the <see cref="E:System.Windows.Forms.ToolStripItem.GiveFeedback" /> event is raised with the new effect so appropriate visual feedback can be set. For a list of valid drop effects, see the <see cref="T:System.Windows.Forms.DragDropEffects" /> enumeration.
+          </para>
           <para
             >The <see cref="E:System.Windows.Forms.ToolStripItem.DragOver" /> and <see cref="E:System.Windows.Forms.ToolStripItem.GiveFeedback" /> events are paired so that as the mouse moves across the drop target, the user is given the most up-to-date feedback on the mouse's position, as follows:</para
           >
@@ -1753,8 +1749,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the parent control of the <see cref="T:System.Windows.Forms.ToolStripItem" /> is enabled. </para
-          >
+            >Gets or sets a value indicating whether the parent control of the <see cref="T:System.Windows.Forms.ToolStripItem" /> is enabled.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1950,8 +1946,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The custom-sized area for a control. </param
-        >
+          />The custom-sized area for a control.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2012,8 +2008,8 @@
             >If there is a change in the keyboard or mouse button state, the <see cref="E:System.Windows.Forms.ToolStripItem.QueryContinueDrag" /> event is raised and determines whether to continue the drag, to drop the data, or to cancel the operation based on the value of the <see cref="P:System.Windows.Forms.QueryContinueDragEventArgs.Action" /> property of the event's <see cref="T:System.Windows.Forms.QueryContinueDragEventArgs" />.</para
           >
           <para
-            >If the value of <see cref="T:System.Windows.Forms.DragAction" /> is <see cref="F:System.Windows.Forms.DragAction.Continue" />, the <see cref="E:System.Windows.Forms.ToolStripItem.DragOver" /> event is raised to continue the operation and the <see cref="E:System.Windows.Forms.ToolStripItem.GiveFeedback" /> event is raised with the new effect so appropriate visual feedback can be set. For a list of valid drop effects, see the <see cref="T:System.Windows.Forms.DragDropEffects" /> enumeration. </para
-          >
+            >If the value of <see cref="T:System.Windows.Forms.DragAction" /> is <see cref="F:System.Windows.Forms.DragAction.Continue" />, the <see cref="E:System.Windows.Forms.ToolStripItem.DragOver" /> event is raised to continue the operation and the <see cref="E:System.Windows.Forms.ToolStripItem.GiveFeedback" /> event is raised with the new effect so appropriate visual feedback can be set. For a list of valid drop effects, see the <see cref="T:System.Windows.Forms.DragDropEffects" /> enumeration.
+          </para>
           <para
             >The <see cref="E:System.Windows.Forms.ToolStripItem.DragOver" /> and <see cref="E:System.Windows.Forms.ToolStripItem.GiveFeedback" /> events are paired so that as the mouse moves across the drop target, the user is given the most up-to-date feedback on the mouse's position, as follows:</para
           >
@@ -2457,8 +2453,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Drawing.Rectangle" /> that represents the region to invalidate. </param
-        >
+          />A <see cref="T:System.Drawing.Rectangle" /> that represents the region to invalidate.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2515,12 +2511,8 @@
           <para>true if the character should be sent directly to the item and not preprocessed; otherwise, false.</para>
         </returns>
         <param name="charCode">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The character to test. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The character to test.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsInputKey">
@@ -2558,8 +2550,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.Keys" /> values. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.Keys" /> values.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsOnDropDown">
@@ -2580,8 +2572,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the container of the current <see cref="T:System.Windows.Forms.Control" /> is a <see cref="T:System.Windows.Forms.ToolStripDropDown" />. </para
-          >
+            >Gets a value indicating whether the container of the current <see cref="T:System.Windows.Forms.Control" /> is a <see cref="T:System.Windows.Forms.ToolStripDropDown" />.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -3119,8 +3111,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -3162,8 +3154,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -3236,8 +3228,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -3279,8 +3271,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -3324,8 +3316,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -3374,8 +3366,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.DragEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.DragEventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnDragEnter">
@@ -3421,8 +3413,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.DragEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.DragEventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnDragLeave">
@@ -3465,8 +3457,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnDragOver">
@@ -3512,8 +3504,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.DragEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.DragEventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnEnabledChanged">
@@ -3552,8 +3544,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -3590,8 +3582,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -3638,8 +3630,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -3693,8 +3685,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.GiveFeedbackEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.GiveFeedbackEventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnLayout">
@@ -3774,8 +3766,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -3817,8 +3809,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.MouseEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.MouseEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -3857,8 +3849,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -3897,8 +3889,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -3937,8 +3929,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -3980,8 +3972,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.MouseEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.MouseEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -4021,8 +4013,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.MouseEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.MouseEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -4053,16 +4045,16 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.Windows.Forms.ToolStripItem.OwnerChanged" /> event. </para
-          >
+            >Raises the <see cref="E:System.Windows.Forms.ToolStripItem.OwnerChanged" /> event.
+          </para>
         </summary>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -4152,8 +4144,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.PaintEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.PaintEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -4202,8 +4194,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnParentChanged">
@@ -4241,15 +4233,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The original parent of the item. </param
-        >
+          />The original parent of the item.
+        </param>
         <param name="newParent">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new parent of the item. </param
-        >
+          />The new parent of the item.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -4293,8 +4285,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnParentForeColorChanged">
@@ -4340,8 +4332,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnParentRightToLeftChanged">
@@ -4387,8 +4379,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnQueryContinueDrag">
@@ -4437,8 +4429,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.QueryContinueDragEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.QueryContinueDragEventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnRightToLeftChanged">
@@ -4479,8 +4471,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnTextChanged">
@@ -4516,8 +4508,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -4564,8 +4556,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -4666,8 +4658,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see cref="P:System.Windows.Forms.ToolStripItem.Owner" /> property changes. </para
-          >
+            >Occurs when the <see cref="P:System.Windows.Forms.ToolStripItem.Owner" /> property changes.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -4924,8 +4916,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called during message preprocessing to handle the ENTER and SPACEBAR keys in order to raise the <see cref="E:System.Windows.Forms.ToolStripItem.Click" /> event. This method is called only if the <see cref="M:System.Windows.Forms.Control.IsInputKey(System.Windows.Forms.Keys)" /> method indicates that the item is not processing the key. </para
-          >
+            >This method is called during message preprocessing to handle the ENTER and SPACEBAR keys in order to raise the <see cref="E:System.Windows.Forms.ToolStripItem.Click" /> event. This method is called only if the <see cref="M:System.Windows.Forms.Control.IsInputKey(System.Windows.Forms.Keys)" /> method indicates that the item is not processing the key.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -4940,8 +4932,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.Keys" /> values that represents the key to process. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.Keys" /> values that represents the key to process.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ProcessMnemonic">
@@ -4976,12 +4968,8 @@
           <para>true in all cases.</para>
         </returns>
         <param name="charCode">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The character to process. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The character to process.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="QueryAccessibilityHelp">
@@ -5071,8 +5059,8 @@
             >If there is a change in the keyboard or mouse button state, the <see cref="E:System.Windows.Forms.ToolStripItem.QueryContinueDrag" /> event is raised and determines whether to continue the drag, to drop the data, or to cancel the operation based on the value of the <see cref="P:System.Windows.Forms.QueryContinueDragEventArgs.Action" /> property of the event's <see cref="T:System.Windows.Forms.QueryContinueDragEventArgs" />.</para
           >
           <para
-            >If the value of <see cref="T:System.Windows.Forms.DragAction" /> is Continue, the <see cref="E:System.Windows.Forms.ToolStripItem.DragOver" /> event is raised to continue the operation and the <see cref="E:System.Windows.Forms.ToolStripItem.GiveFeedback" /> event is raised with the new effect so appropriate visual feedback can be set. For a list of valid drop effects, see the <see cref="T:System.Windows.Forms.DragDropEffects" /> enumeration. </para
-          >
+            >If the value of <see cref="T:System.Windows.Forms.DragAction" /> is Continue, the <see cref="E:System.Windows.Forms.ToolStripItem.DragOver" /> event is raised to continue the operation and the <see cref="E:System.Windows.Forms.ToolStripItem.GiveFeedback" /> event is raised with the new effect so appropriate visual feedback can be set. For a list of valid drop effects, see the <see cref="T:System.Windows.Forms.DragDropEffects" /> enumeration.
+          </para>
           <para
             >The <see cref="E:System.Windows.Forms.ToolStripItem.DragOver" /> and <see cref="E:System.Windows.Forms.ToolStripItem.GiveFeedback" /> events are paired so that as the mouse moves across the drop target, the user is given the most up-to-date feedback on the mouse's position, as follows:</para
           >
@@ -5525,8 +5513,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the <see cref="T:System.Windows.Forms.ToolStripItem" /> to the specified visible state. </para
-          >
+            >Sets the <see cref="T:System.Windows.Forms.ToolStripItem" /> to the specified visible state.
+          </para>
         </summary>
         <param name="visible">
           <attribution
@@ -5623,8 +5611,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.DragEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.DragEventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.Windows.Forms.IDropTarget.OnDragEnter">
@@ -5870,8 +5858,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
           <block subset="none" type="note">
             <para
               >Changing the <see cref="P:System.Windows.Forms.Control.Enabled" /> property of a <see cref="T:System.Windows.Forms.ToolStrip" /> does not raise the <see cref="E:System.Windows.Forms.ToolStripItem.TextChanged" /> event. Raise this event with specific property settings.</para

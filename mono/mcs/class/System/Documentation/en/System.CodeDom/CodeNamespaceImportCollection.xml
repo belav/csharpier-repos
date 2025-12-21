@@ -68,8 +68,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeNamespaceImportCollection" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeNamespaceImportCollection" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -107,8 +107,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.CodeDom.CodeNamespaceImport" /> object to add to the collection. </param
-        >
+          />The <see cref="T:System.CodeDom.CodeNamespaceImport" /> object to add to the collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddRange">
@@ -145,8 +145,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type <see cref="T:System.CodeDom.CodeNamespaceImport" /> that contains the objects to add to the collection. </param
-        >
+          />An array of type <see cref="T:System.CodeDom.CodeNamespaceImport" /> that contains the objects to add to the collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Clear">
@@ -563,8 +563,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines the index of a specific item in the <see cref="T:System.Collections.IList" />. </para
-          >
+            >Determines the index of a specific item in the <see cref="T:System.Collections.IList" />.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -610,8 +610,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts an item in the <see cref="T:System.Collections.IList" /> at the specified position. </para
-          >
+            >Inserts an item in the <see cref="T:System.Collections.IList" /> at the specified position.
+          </para>
         </summary>
         <param name="index">
           <attribution
@@ -737,8 +737,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the first occurrence of a specific object from the <see cref="T:System.Collections.IList" />. </para
-          >
+            >Removes the first occurrence of a specific object from the <see cref="T:System.Collections.IList" />.
+          </para>
         </summary>
         <param name="value">
           <attribution
@@ -777,8 +777,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the element at the specified index of the <see cref="T:System.Collections.IList" />. </para
-          >
+            >Removes the element at the specified index of the <see cref="T:System.Collections.IList" />.
+          </para>
         </summary>
         <param name="index">
           <attribution

@@ -84,15 +84,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The existing <see cref="T:System.Drawing.Font" /> from which to create the new <see cref="T:System.Drawing.Font" />. </param
-        >
+          />The existing <see cref="T:System.Drawing.Font" /> from which to create the new <see cref="T:System.Drawing.Font" />.
+        </param>
         <param name="newStyle">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.FontStyle" /> to apply to the new <see cref="T:System.Drawing.Font" />. Multiple values of the <see cref="T:System.Drawing.FontStyle" /> enumeration can be combined with the OR operator. </param
-        >
+          />The <see cref="T:System.Drawing.FontStyle" /> to apply to the new <see cref="T:System.Drawing.Font" />. Multiple values of the <see cref="T:System.Drawing.FontStyle" /> enumeration can be combined with the OR operator.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -120,23 +120,23 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new <see cref="T:System.Drawing.Font" /> using a specified size. </para
-          >
+            >Initializes a new <see cref="T:System.Drawing.Font" /> using a specified size.
+          </para>
         </summary>
         <param name="family">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.FontFamily" /> of the new <see cref="T:System.Drawing.Font" />. </param
-        >
+          />The <see cref="T:System.Drawing.FontFamily" /> of the new <see cref="T:System.Drawing.Font" />.
+        </param>
         <param name="emSize">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The em-size, in points, of the new font. </param
-        >
+          />The em-size, in points, of the new font.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -161,23 +161,23 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new <see cref="T:System.Drawing.Font" /> using a specified size. </para
-          >
+            >Initializes a new <see cref="T:System.Drawing.Font" /> using a specified size.
+          </para>
         </summary>
         <param name="familyName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string representation of the <see cref="T:System.Drawing.FontFamily" /> for the new <see cref="T:System.Drawing.Font" />. </param
-        >
+          />A string representation of the <see cref="T:System.Drawing.FontFamily" /> for the new <see cref="T:System.Drawing.Font" />.
+        </param>
         <param name="emSize">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The em-size, in points, of the new font. </param
-        >
+          />The em-size, in points, of the new font.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -206,30 +206,30 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new <see cref="T:System.Drawing.Font" /> using a specified size and style. </para
-          >
+            >Initializes a new <see cref="T:System.Drawing.Font" /> using a specified size and style.
+          </para>
         </summary>
         <param name="family">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.FontFamily" /> of the new <see cref="T:System.Drawing.Font" />. </param
-        >
+          />The <see cref="T:System.Drawing.FontFamily" /> of the new <see cref="T:System.Drawing.Font" />.
+        </param>
         <param name="emSize">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The em-size, in points, of the new font. </param
-        >
+          />The em-size, in points, of the new font.
+        </param>
         <param name="style">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.FontStyle" /> of the new font. </param
-        >
+          />The <see cref="T:System.Drawing.FontStyle" /> of the new font.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -266,22 +266,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.FontFamily" /> of the new <see cref="T:System.Drawing.Font" />. </param
-        >
+          />The <see cref="T:System.Drawing.FontFamily" /> of the new <see cref="T:System.Drawing.Font" />.
+        </param>
         <param name="emSize">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The em-size of the new font in the units specified by the <paramref name="unit" /> parameter. </param
-        >
+          />The em-size of the new font in the units specified by the <paramref name="unit" /> parameter.
+        </param>
         <param name="unit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.GraphicsUnit" /> of the new font. </param
-        >
+          />The <see cref="T:System.Drawing.GraphicsUnit" /> of the new font.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -310,30 +310,30 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new <see cref="T:System.Drawing.Font" /> using a specified size and style. </para
-          >
+            >Initializes a new <see cref="T:System.Drawing.Font" /> using a specified size and style.
+          </para>
         </summary>
         <param name="familyName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string representation of the <see cref="T:System.Drawing.FontFamily" /> for the new <see cref="T:System.Drawing.Font" />. </param
-        >
+          />A string representation of the <see cref="T:System.Drawing.FontFamily" /> for the new <see cref="T:System.Drawing.Font" />.
+        </param>
         <param name="emSize">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The em-size, in points, of the new font. </param
-        >
+          />The em-size, in points, of the new font.
+        </param>
         <param name="style">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.FontStyle" /> of the new font. </param
-        >
+          />The <see cref="T:System.Drawing.FontStyle" /> of the new font.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -370,22 +370,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string representation of the <see cref="T:System.Drawing.FontFamily" /> for the new <see cref="T:System.Drawing.Font" />. </param
-        >
+          />A string representation of the <see cref="T:System.Drawing.FontFamily" /> for the new <see cref="T:System.Drawing.Font" />.
+        </param>
         <param name="emSize">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The em-size of the new font in the units specified by the <paramref name="unit" /> parameter. </param
-        >
+          />The em-size of the new font in the units specified by the <paramref name="unit" /> parameter.
+        </param>
         <param name="unit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.GraphicsUnit" /> of the new font. </param
-        >
+          />The <see cref="T:System.Drawing.GraphicsUnit" /> of the new font.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -418,29 +418,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.FontFamily" /> of the new <see cref="T:System.Drawing.Font" />. </param
-        >
+          />The <see cref="T:System.Drawing.FontFamily" /> of the new <see cref="T:System.Drawing.Font" />.
+        </param>
         <param name="emSize">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The em-size of the new font in the units specified by the <paramref name="unit" /> parameter. </param
-        >
+          />The em-size of the new font in the units specified by the <paramref name="unit" /> parameter.
+        </param>
         <param name="style">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.FontStyle" /> of the new font. </param
-        >
+          />The <see cref="T:System.Drawing.FontStyle" /> of the new font.
+        </param>
         <param name="unit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.GraphicsUnit" /> of the new font. </param
-        >
+          />The <see cref="T:System.Drawing.GraphicsUnit" /> of the new font.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -478,29 +478,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string representation of the <see cref="T:System.Drawing.FontFamily" /> for the new <see cref="T:System.Drawing.Font" />. </param
-        >
+          />A string representation of the <see cref="T:System.Drawing.FontFamily" /> for the new <see cref="T:System.Drawing.Font" />.
+        </param>
         <param name="emSize">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The em-size of the new font in the units specified by the <paramref name="unit" /> parameter. </param
-        >
+          />The em-size of the new font in the units specified by the <paramref name="unit" /> parameter.
+        </param>
         <param name="style">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.FontStyle" /> of the new font. </param
-        >
+          />The <see cref="T:System.Drawing.FontStyle" /> of the new font.
+        </param>
         <param name="unit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.GraphicsUnit" /> of the new font. </param
-        >
+          />The <see cref="T:System.Drawing.GraphicsUnit" /> of the new font.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -539,36 +539,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.FontFamily" /> of the new <see cref="T:System.Drawing.Font" />. </param
-        >
+          />The <see cref="T:System.Drawing.FontFamily" /> of the new <see cref="T:System.Drawing.Font" />.
+        </param>
         <param name="emSize">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The em-size of the new font in the units specified by the <paramref name="unit" /> parameter. </param
-        >
+          />The em-size of the new font in the units specified by the <paramref name="unit" /> parameter.
+        </param>
         <param name="style">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.FontStyle" /> of the new font. </param
-        >
+          />The <see cref="T:System.Drawing.FontStyle" /> of the new font.
+        </param>
         <param name="unit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.GraphicsUnit" /> of the new font. </param
-        >
+          />The <see cref="T:System.Drawing.GraphicsUnit" /> of the new font.
+        </param>
         <param name="gdiCharSet">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Byte" /> that specifies a </param
-        >
+          />A <see cref="T:System.Byte" /> that specifies a
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -607,36 +607,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string representation of the <see cref="T:System.Drawing.FontFamily" /> for the new <see cref="T:System.Drawing.Font" />. </param
-        >
+          />A string representation of the <see cref="T:System.Drawing.FontFamily" /> for the new <see cref="T:System.Drawing.Font" />.
+        </param>
         <param name="emSize">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The em-size of the new font in the units specified by the <paramref name="unit" /> parameter. </param
-        >
+          />The em-size of the new font in the units specified by the <paramref name="unit" /> parameter.
+        </param>
         <param name="style">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.FontStyle" /> of the new font. </param
-        >
+          />The <see cref="T:System.Drawing.FontStyle" /> of the new font.
+        </param>
         <param name="unit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.GraphicsUnit" /> of the new font. </param
-        >
+          />The <see cref="T:System.Drawing.GraphicsUnit" /> of the new font.
+        </param>
         <param name="gdiCharSet">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Byte" /> that specifies a ndptecgdi character set to use for this font. </param
-        >
+          />A <see cref="T:System.Byte" /> that specifies a ndptecgdi character set to use for this font.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -676,43 +676,43 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.FontFamily" /> of the new <see cref="T:System.Drawing.Font" />. </param
-        >
+          />The <see cref="T:System.Drawing.FontFamily" /> of the new <see cref="T:System.Drawing.Font" />.
+        </param>
         <param name="emSize">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The em-size of the new font in the units specified by the <paramref name="unit" /> parameter. </param
-        >
+          />The em-size of the new font in the units specified by the <paramref name="unit" /> parameter.
+        </param>
         <param name="style">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.FontStyle" /> of the new font. </param
-        >
+          />The <see cref="T:System.Drawing.FontStyle" /> of the new font.
+        </param>
         <param name="unit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.GraphicsUnit" /> of the new font. </param
-        >
+          />The <see cref="T:System.Drawing.GraphicsUnit" /> of the new font.
+        </param>
         <param name="gdiCharSet">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Byte" /> that specifies a </param
-        >
+          />A <see cref="T:System.Byte" /> that specifies a
+        </param>
         <param name="gdiVerticalFont">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A Boolean value indicating whether the new font is derived from a ndptecgdi vertical font. </param
-        >
+          />A Boolean value indicating whether the new font is derived from a ndptecgdi vertical font.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -752,43 +752,43 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string representation of the <see cref="T:System.Drawing.FontFamily" /> for the new <see cref="T:System.Drawing.Font" />. </param
-        >
+          />A string representation of the <see cref="T:System.Drawing.FontFamily" /> for the new <see cref="T:System.Drawing.Font" />.
+        </param>
         <param name="emSize">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The em-size of the new font in the units specified by the <paramref name="unit" /> parameter. </param
-        >
+          />The em-size of the new font in the units specified by the <paramref name="unit" /> parameter.
+        </param>
         <param name="style">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.FontStyle" /> of the new font. </param
-        >
+          />The <see cref="T:System.Drawing.FontStyle" /> of the new font.
+        </param>
         <param name="unit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.GraphicsUnit" /> of the new font. </param
-        >
+          />The <see cref="T:System.Drawing.GraphicsUnit" /> of the new font.
+        </param>
         <param name="gdiCharSet">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Byte" /> that specifies a ndptecgdi character set to use for this font. </param
-        >
+          />A <see cref="T:System.Byte" /> that specifies a ndptecgdi character set to use for this font.
+        </param>
         <param name="gdiVerticalFont">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A Boolean value indicating whether the new <see cref="T:System.Drawing.Font" /> is derived from a ndptecgdi vertical font. </param
-        >
+          />A Boolean value indicating whether the new <see cref="T:System.Drawing.Font" /> is derived from a ndptecgdi vertical font.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -864,8 +864,8 @@
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format> and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
           <block subset="none" type="note">
             <para
               >Always call <see cref="M:System.Drawing.Font.Dispose" /> before you release your last reference to the <see cref="T:System.Drawing.Font" />. Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Drawing.Font" /> object's Finalize method.</para
@@ -910,8 +910,8 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object to test. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The object to test.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -999,8 +999,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A handle to a device context. </param
-        >
+          />A handle to a device context.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1036,8 +1036,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A Windows handle to a ndptecgdi font. </param
-        >
+          />A Windows handle to a ndptecgdi font.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1081,8 +1081,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Object" /> that represents the ndptecgdi LOGFONT structure from which to create the <see cref="T:System.Drawing.Font" />. </param
-        >
+          />An <see cref="T:System.Object" /> that represents the ndptecgdi LOGFONT structure from which to create the <see cref="T:System.Drawing.Font" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1127,15 +1127,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Object" /> that represents the ndptecgdi LOGFONT structure from which to create the <see cref="T:System.Drawing.Font" />. </param
-        >
+          />An <see cref="T:System.Object" /> that represents the ndptecgdi LOGFONT structure from which to create the <see cref="T:System.Drawing.Font" />.
+        </param>
         <param name="hdc">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A handle to a device context that contains additional information about the <paramref name="lf" /> structure. </param
-        >
+          />A handle to a device context that contains additional information about the <paramref name="lf" /> structure.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1153,8 +1153,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property returns 1, unless a different character set is specified in the <see cref="M:System.Drawing.Font.#ctor(System.String,System.Single,System.Drawing.FontStyle,System.Drawing.GraphicsUnit,System.Byte)" /> constructor. This property takes a value from the list defined in the Windows SDK header file WinGDI.h. The character sets and byte values are listed in the following table. </para
-          >
+            >This property returns 1, unless a different character set is specified in the <see cref="M:System.Drawing.Font.#ctor(System.String,System.Single,System.Drawing.FontStyle,System.Drawing.GraphicsUnit,System.Byte)" /> constructor. This property takes a value from the list defined in the Windows SDK header file WinGDI.h. The character sets and byte values are listed in the following table.
+          </para>
           <list type="table">
             <listheader>
               <item>
@@ -1415,8 +1415,8 @@
             >The line spacing of a <see cref="T:System.Drawing.Font" /> is the vertical distance between the base lines of two consecutive lines of text. Thus, the line spacing includes the blank space between lines along with the height of the character itself.</para
           >
           <para
-            >If the <see cref="P:System.Drawing.Font.Unit" /> property of the font is set to anything other than <see cref="F:System.Drawing.GraphicsUnit.Pixel" />, the height (in pixels) is calculated using the vertical resolution of the screen display. For example, suppose the font unit is inches and the font size is 0.3. Also suppose that for the corresponding font family, the em-height is 2048 and the line spacing is 2355. For a screen display that has a vertical resolution of 96 dots per inch, you can calculate the height as follows: </para
-          >
+            >If the <see cref="P:System.Drawing.Font.Unit" /> property of the font is set to anything other than <see cref="F:System.Drawing.GraphicsUnit.Pixel" />, the height (in pixels) is calculated using the vertical resolution of the screen display. For example, suppose the font unit is inches and the font size is 0.3. Also suppose that for the corresponding font family, the em-height is 2048 and the line spacing is 2355. For a screen display that has a vertical resolution of 96 dots per inch, you can calculate the height as follows:
+          </para>
           <para>2355*(0.3/2048)*96 = 33.11719 </para>
         </remarks>
         <summary>
@@ -1452,19 +1452,19 @@
             >The line spacing of a <see cref="T:System.Drawing.Font" /> is the vertical distance between the base lines of two consecutive lines of text. Thus, the line spacing includes the blank space between lines along with the height of the character itself.</para
           >
           <para
-            >If the <see cref="P:System.Drawing.Font.Unit" /> property of the font is set to anything other than <see cref="F:System.Drawing.GraphicsUnit.Pixel" />, the height, in pixels, is calculated using the vertical resolution of the specified <see cref="T:System.Drawing.Graphics" /> object. For example, suppose the font unit is inches and the font size is 0.3. Also suppose that for the corresponding font family, the em-height is 2048 and the line spacing is 2355. If the <see cref="T:System.Drawing.Graphics" /> object has a <see cref="P:System.Drawing.Font.Unit" /> property value of <see cref="F:System.Drawing.GraphicsUnit.Pixel" /> and a <see cref="P:System.Drawing.Graphics.DpiY" /> property value of 96 dots per inch, the height is calculated as follows: </para
-          >
+            >If the <see cref="P:System.Drawing.Font.Unit" /> property of the font is set to anything other than <see cref="F:System.Drawing.GraphicsUnit.Pixel" />, the height, in pixels, is calculated using the vertical resolution of the specified <see cref="T:System.Drawing.Graphics" /> object. For example, suppose the font unit is inches and the font size is 0.3. Also suppose that for the corresponding font family, the em-height is 2048 and the line spacing is 2355. If the <see cref="T:System.Drawing.Graphics" /> object has a <see cref="P:System.Drawing.Font.Unit" /> property value of <see cref="F:System.Drawing.GraphicsUnit.Pixel" /> and a <see cref="P:System.Drawing.Graphics.DpiY" /> property value of 96 dots per inch, the height is calculated as follows:
+          </para>
           <para>2355*(0.3/2048)*96 = 33.1171875 </para>
           <para
-            >Continuing with the same example, suppose the <see cref="P:System.Drawing.Font.Unit" /> property of the <see cref="T:System.Drawing.Graphics" /> object is set to <see cref="F:System.Drawing.GraphicsUnit.Millimeter" /> rather than <see cref="F:System.Drawing.GraphicsUnit.Pixel" />. Then (using 1 inch = 25.4 millimeters) the height, in millimeters, is calculated as follows: </para
-          >
+            >Continuing with the same example, suppose the <see cref="P:System.Drawing.Font.Unit" /> property of the <see cref="T:System.Drawing.Graphics" /> object is set to <see cref="F:System.Drawing.GraphicsUnit.Millimeter" /> rather than <see cref="F:System.Drawing.GraphicsUnit.Pixel" />. Then (using 1 inch = 25.4 millimeters) the height, in millimeters, is calculated as follows:
+          </para>
           <para>2355*(0.3/2048)25.4 = 8.762256 </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the line spacing, in the current unit of a specified <see cref="T:System.Drawing.Graphics" />, of this font. </para
-          >
+            >Returns the line spacing, in the current unit of a specified <see cref="T:System.Drawing.Graphics" />, of this font.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1475,8 +1475,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Drawing.Graphics" /> that holds the vertical resolution, in dots per inch, of the display device as well as settings for page unit and page scale. </param
-        >
+          />A <see cref="T:System.Drawing.Graphics" /> that holds the vertical resolution, in dots per inch, of the display device as well as settings for page unit and page scale.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1496,8 +1496,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see cref="P:System.Drawing.Font.Unit" /> property of the font is set to anything other than <see cref="F:System.Drawing.GraphicsUnit.Pixel" />, the height (in pixels) is calculated using the vertical resolution of the screen display. For example, suppose the font unit is inches and the font size is 0.3. Also suppose that for the corresponding font family, the em-height is 2048 and the line spacing is 2355. If the specified vertical resolution is 96 dots per inch, the height is calculated as follows: </para
-          >
+            >If the <see cref="P:System.Drawing.Font.Unit" /> property of the font is set to anything other than <see cref="F:System.Drawing.GraphicsUnit.Pixel" />, the height (in pixels) is calculated using the vertical resolution of the screen display. For example, suppose the font unit is inches and the font size is 0.3. Also suppose that for the corresponding font family, the em-height is 2048 and the line spacing is 2355. If the specified vertical resolution is 96 dots per inch, the height is calculated as follows:
+          </para>
           <para>2355*(0.3/2048)*96 = 33.1171875 </para>
         </remarks>
         <summary>
@@ -1515,8 +1515,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The vertical resolution, in dots per inch, used to calculate the height of the font. </param
-        >
+          />The vertical resolution, in dots per inch, used to calculate the height of the font.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1535,8 +1535,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The line spacing is the vertical distance between the base lines of two consecutive lines of text. Thus, the line spacing includes the blank space between lines along with the height of the character itself.</para>
           <para
-            >If the <see cref="P:System.Drawing.Font.Unit" /> property of the font is set to anything other than <see cref="F:System.Drawing.GraphicsUnit.Pixel" />, the height (in pixels) is calculated using the vertical resolution of the screen display. For example, suppose the font unit is inches and the font size is 0.3. Also suppose that for the corresponding font family, the em-height is 2048 and the line spacing is 2355. For a screen display that has a vertical resolution of 96 dots per inch, you can calculate the height as follows: </para
-          >
+            >If the <see cref="P:System.Drawing.Font.Unit" /> property of the font is set to anything other than <see cref="F:System.Drawing.GraphicsUnit.Pixel" />, the height (in pixels) is calculated using the vertical resolution of the screen display. For example, suppose the font unit is inches and the font size is 0.3. Also suppose that for the corresponding font family, the em-height is 2048 and the line spacing is 2355. For a screen display that has a vertical resolution of 96 dots per inch, you can calculate the height as follows:
+          </para>
           <para>2355*(0.3/2048)*96 = 33.11719 </para>
           <para
             >The value returned by the <see cref="M:System.Drawing.Font.GetHeight" /> method would be 33.11719, and the value returned by the <see cref="P:System.Drawing.Font.Height" /> property would be 34. The <see cref="P:System.Drawing.Font.Height" /> property is the value returned by <see cref="M:System.Drawing.Font.GetHeight" />, rounded up to the nearest integer.</para
@@ -1582,8 +1582,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the font is a member of <see cref="T:System.Drawing.SystemFonts" />. </para
-          >
+            >Gets a value indicating whether the font is a member of <see cref="T:System.Drawing.SystemFonts" />.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -1865,8 +1865,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Object" /> that represents the LOGFONT structure that this method creates. </param
-        >
+          />An <see cref="T:System.Object" /> that represents the LOGFONT structure that this method creates.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1907,15 +1907,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Object" /> that represents the LOGFONT structure that this method creates. </param
-        >
+          />An <see cref="T:System.Object" /> that represents the LOGFONT structure that this method creates.
+        </param>
         <param name="graphics">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Drawing.Graphics" /> that provides additional information for the LOGFONT structure. </param
-        >
+          />A <see cref="T:System.Drawing.Graphics" /> that provides additional information for the LOGFONT structure.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

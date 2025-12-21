@@ -190,8 +190,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to compare with this instance. </param
-        >
+          />The object to compare with this instance.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="FilterTypeName">
@@ -300,15 +300,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The delegate used to filter the classes. </param
-        >
+          />The delegate used to filter the classes.
+        </param>
         <param name="filterCriteria">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An Object used to filter the classes. </param
-        >
+          />An Object used to filter the classes.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="FullyQualifiedName">
@@ -335,6 +335,8 @@
    the full path of the module reflected by the current instance. If the assembly
    that contains the module reflected by the current instance was loaded from
    a <see cref="T:System.Byte" />
+
+            
 
             
 
@@ -405,8 +407,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />This argument is ignored for objects of this type. </param
-        >
+          />This argument is ignored for objects of this type.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttributes">
@@ -446,15 +448,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of attribute to get. </param
-        >
+          />The type of attribute to get.
+        </param>
         <param name="inherit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />This argument is ignored for objects of this type. </param
-        >
+          />This argument is ignored for objects of this type.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttributesData">
@@ -541,8 +543,8 @@
           <para>A FieldInfo object having the specified name, or null if the field does not exist.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The field name. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The field name.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -593,15 +595,15 @@
           <para>A FieldInfo object having the specified name and binding attributes, or null if the field does not exist.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The field name. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The field name.
+        </param>
         <param name="bindingAttr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the BindingFlags bit flags used to control the search. </param
-        >
+          />One of the BindingFlags bit flags used to control the search.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -764,8 +766,8 @@
           <para>A MethodInfo object having the specified name, or null if the method does not exist.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The method name. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The method name.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -822,15 +824,15 @@
           <para>A MethodInfo object in accordance with the specified criteria, or null if the method does not exist.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The method name. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The method name.
+        </param>
         <param name="types">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The parameter types to search for. </param
-        >
+          />The parameter types to search for.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -871,43 +873,43 @@
           <para>A MethodInfo object in accordance with the specified criteria, or null if the method does not exist.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The method name. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The method name.
+        </param>
         <param name="bindingAttr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the BindingFlags bit flags used to control the search. </param
-        >
+          />One of the BindingFlags bit flags used to control the search.
+        </param>
         <param name="binder">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that implements Binder, containing properties related to this method. </param
-        >
+          />An object that implements Binder, containing properties related to this method.
+        </param>
         <param name="callConvention">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The calling convention for the method. </param
-        >
+          />The calling convention for the method.
+        </param>
         <param name="types">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The parameter types to search for. </param
-        >
+          />The parameter types to search for.
+        </param>
         <param name="modifiers">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of parameter modifiers used to make binding work with parameter signatures in which the types have been modified. </param
-        >
+          />An array of parameter modifiers used to make binding work with parameter signatures in which the types have been modified.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetMethodImpl">
@@ -947,43 +949,43 @@
           <para>A MethodInfo object containing implementation information as specified, or null if the method does not exist.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The method name. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The method name.
+        </param>
         <param name="bindingAttr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the BindingFlags bit flags used to control the search. </param
-        >
+          />One of the BindingFlags bit flags used to control the search.
+        </param>
         <param name="binder">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that implements Binder, containing properties related to this method. </param
-        >
+          />An object that implements Binder, containing properties related to this method.
+        </param>
         <param name="callConvention">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The calling convention for the method. </param
-        >
+          />The calling convention for the method.
+        </param>
         <param name="types">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The parameter types to search for. </param
-        >
+          />The parameter types to search for.
+        </param>
         <param name="modifiers">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of parameter modifiers used to make binding work with parameter signatures in which the types have been modified. </param
-        >
+          />An array of parameter modifiers used to make binding work with parameter signatures in which the types have been modified.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetMethods">
@@ -1111,15 +1113,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The information and data needed to serialize or deserialize an object. </param
-        >
+          />The information and data needed to serialize or deserialize an object.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The context for the serialization. </param
-        >
+          />The context for the serialization.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetPEKind">
@@ -1238,8 +1240,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the type to locate. The name must be fully qualified with the namespace. </param
-        >
+          />The name of the type to locate. The name must be fully qualified with the namespace.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetType">
@@ -1298,15 +1300,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the type to locate. The name must be fully qualified with the namespace. </param
-        >
+          />The name of the type to locate. The name must be fully qualified with the namespace.
+        </param>
         <param name="ignoreCase">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true for case-insensitive search; otherwise, false. </param
-        >
+          />true for case-insensitive search; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetType">
@@ -1371,22 +1373,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the type to locate. The name must be fully qualified with the namespace. </param
-        >
+          />The name of the type to locate. The name must be fully qualified with the namespace.
+        </param>
         <param name="throwOnError">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to throw an exception if the type cannot be found; false to return null. </param
-        >
+          />true to throw an exception if the type cannot be found; false to return null.
+        </param>
         <param name="ignoreCase">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true for case-insensitive search; otherwise, false. </param
-        >
+          />true for case-insensitive search; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetTypes">
@@ -1469,15 +1471,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of custom attribute to test for. </param
-        >
+          />The type of custom attribute to test for.
+        </param>
         <param name="inherit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />This argument is ignored for objects of this type. </param
-        >
+          />This argument is ignored for objects of this type.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsResource">
@@ -1531,8 +1533,8 @@
                 >ECMA C# and Common Language Infrastructure Standards</see
               > on MSDN and <see cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
-              > on the ECMA Web site. </para
-            >
+              > on the ECMA Web site.
+            </para>
           </block>
         </remarks>
         <summary>
@@ -1569,8 +1571,8 @@
                 >ECMA C# and Common Language Infrastructure Standards</see
               > on MSDN and <see cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
-              > on the ECMA Web site. </para
-            >
+              > on the ECMA Web site.
+            </para>
           </block>
         </remarks>
         <summary>
@@ -1632,8 +1634,8 @@
                 >ECMA C# and Common Language Infrastructure Standards</see
               > on MSDN and <see cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
-              > on the ECMA Web site. </para
-            >
+              > on the ECMA Web site.
+            </para>
           </block>
         </remarks>
         <summary>
@@ -1666,6 +1668,8 @@
    name of the module reflected by the current instance, with the path component
    removed. If the assembly that contains the module reflected by the current
    instance was loaded from a <see cref="T:System.Byte" />
+
+            
 
             
 
@@ -1728,8 +1732,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first object to compare. </param
-        >
+          />The first object to compare.
+        </param>
         <param name="right">
           <attribution
             license="cc4"
@@ -1823,8 +1827,8 @@
                 >ECMA C# and Common Language Infrastructure Standards</see
               > on MSDN and <see cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
-              > on the ECMA Web site. </para
-            >
+              > on the ECMA Web site.
+            </para>
           </block>
           <para
             >For code that demonstrates token resolution using the generic context (that is, the generic type parameters of the generic type and/or the generic method in which the token is embedded) see the <see cref="M:System.Reflection.Module.ResolveMethod(System.Int32,System.Type[],System.Type[])" /> method.</para
@@ -1884,8 +1888,8 @@
                 >ECMA C# and Common Language Infrastructure Standards</see
               > on MSDN and <see cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
-              > on the ECMA Web site. </para
-            >
+              > on the ECMA Web site.
+            </para>
           </block>
           <para
             >For code that demonstrates token resolution using the generic context (that is, the generic type parameters of the generic type and/or the generic method in which the token is embedded) see the <see cref="M:System.Reflection.Module.ResolveMethod(System.Int32,System.Type[],System.Type[])" /> method.</para
@@ -1913,8 +1917,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Type" /> objects representing the generic type arguments of the type where the token is in scope, or null if that type is not generic. </param
-        >
+          />An array of <see cref="T:System.Type" /> objects representing the generic type arguments of the type where the token is in scope, or null if that type is not generic.
+        </param>
         <param name="genericMethodArguments">
           <attribution
             license="cc4"
@@ -1958,8 +1962,8 @@
                 >ECMA C# and Common Language Infrastructure Standards</see
               > on MSDN and <see cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
-              > on the ECMA Web site. </para
-            >
+              > on the ECMA Web site.
+            </para>
           </block>
           <para
             >For code that demonstrates token resolution using the generic context (that is, the generic type parameters of the generic type and/or the generic method in which the token is embedded) see the <see cref="M:System.Reflection.Module.ResolveMethod(System.Int32,System.Type[],System.Type[])" /> method.</para
@@ -2019,8 +2023,8 @@
                 >ECMA C# and Common Language Infrastructure Standards</see
               > on MSDN and <see cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
-              > on the ECMA Web site. </para
-            >
+              > on the ECMA Web site.
+            </para>
           </block>
           <para
             >For code that demonstrates token resolution using the generic context (that is, the generic type parameters of the generic type and/or the generic method in which the token is embedded) see the <see cref="M:System.Reflection.Module.ResolveMethod(System.Int32,System.Type[],System.Type[])" /> method.</para
@@ -2048,8 +2052,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Type" /> objects representing the generic type arguments of the type where the token is in scope, or null if that type is not generic. </param
-        >
+          />An array of <see cref="T:System.Type" /> objects representing the generic type arguments of the type where the token is in scope, or null if that type is not generic.
+        </param>
         <param name="genericMethodArguments">
           <attribution
             license="cc4"
@@ -2093,8 +2097,8 @@
                 >ECMA C# and Common Language Infrastructure Standards</see
               > on MSDN and <see cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
-              > on the ECMA Web site. </para
-            >
+              > on the ECMA Web site.
+            </para>
           </block>
         </remarks>
         <summary>
@@ -2142,8 +2146,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="M:System.Type.GetGenericArguments" /> method on the type where <paramref name="metadataToken" /> is in scope to obtain an array of generic type arguments for <paramref name="genericTypeArguments" />. Use the <see cref="M:System.Reflection.MethodInfo.GetGenericArguments" /> method on the method where <paramref name="metadataToken" /> is in scope to obtain an array of generic type arguments for <paramref name="genericMethodArguments" />. It is always safe to provide these arguments, even when they are not needed. </para
-          >
+            >Use the <see cref="M:System.Type.GetGenericArguments" /> method on the type where <paramref name="metadataToken" /> is in scope to obtain an array of generic type arguments for <paramref name="genericTypeArguments" />. Use the <see cref="M:System.Reflection.MethodInfo.GetGenericArguments" /> method on the method where <paramref name="metadataToken" /> is in scope to obtain an array of generic type arguments for <paramref name="genericMethodArguments" />. It is always safe to provide these arguments, even when they are not needed.
+          </para>
           <block subset="none" type="note">
             <para
               >Information about metadata tokens can be found in the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics". The documentation is available online; see <see
@@ -2151,8 +2155,8 @@
                 >ECMA C# and Common Language Infrastructure Standards</see
               > on MSDN and <see cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
-              > on the ECMA Web site. </para
-            >
+              > on the ECMA Web site.
+            </para>
           </block>
         </remarks>
         <summary>
@@ -2177,8 +2181,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Type" /> objects representing the generic type arguments of the type where the token is in scope, or null if that type is not generic. </param
-        >
+          />An array of <see cref="T:System.Type" /> objects representing the generic type arguments of the type where the token is in scope, or null if that type is not generic.
+        </param>
         <param name="genericMethodArguments">
           <attribution
             license="cc4"
@@ -2219,8 +2223,8 @@
                 >ECMA C# and Common Language Infrastructure Standards</see
               > on MSDN and <see cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
-              > on the ECMA Web site. </para
-            >
+              > on the ECMA Web site.
+            </para>
           </block>
         </remarks>
         <summary>
@@ -2271,8 +2275,8 @@
                 >ECMA C# and Common Language Infrastructure Standards</see
               > on MSDN and <see cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
-              > on the ECMA Web site. </para
-            >
+              > on the ECMA Web site.
+            </para>
           </block>
         </remarks>
         <summary>
@@ -2290,8 +2294,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A metadata token that identifies a string in the string heap of the module. </param
-        >
+          />A metadata token that identifies a string in the string heap of the module.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ResolveType">
@@ -2325,8 +2329,8 @@
                 >ECMA C# and Common Language Infrastructure Standards</see
               > on MSDN and <see cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
-              > on the ECMA Web site. </para
-            >
+              > on the ECMA Web site.
+            </para>
           </block>
         </remarks>
         <summary>
@@ -2383,8 +2387,8 @@
                 >ECMA C# and Common Language Infrastructure Standards</see
               > on MSDN and <see cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
-              > on the ECMA Web site. </para
-            >
+              > on the ECMA Web site.
+            </para>
           </block>
           <para
             >For code that demonstrates token resolution using the generic context (that is, the generic type parameters of the generic type and/or the generic method in which the token is embedded) see the <see cref="M:System.Reflection.Module.ResolveMethod(System.Int32,System.Type[],System.Type[])" /> method.</para
@@ -2412,8 +2416,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Type" /> objects representing the generic type arguments of the type where the token is in scope, or null if that type is not generic. </param
-        >
+          />An array of <see cref="T:System.Type" /> objects representing the generic type arguments of the type where the token is in scope, or null if that type is not generic.
+        </param>
         <param name="genericMethodArguments">
           <attribution
             license="cc4"

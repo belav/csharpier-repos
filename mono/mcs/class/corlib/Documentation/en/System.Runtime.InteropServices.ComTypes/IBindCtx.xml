@@ -187,8 +187,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to register for release. </param
-        >
+          />The object to register for release.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RegisterObjectParam">
@@ -227,15 +227,11 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name to register <paramref name="punk" /> with. </param
-        >
+          />The name to register <paramref name="punk" /> with.
+        </param>
         <param name="punk">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The object to register. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The object to register.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ReleaseBoundObjects">
@@ -299,8 +295,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to unregister for release. </param
-        >
+          />The object to unregister for release.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RevokeObjectParam">
@@ -335,12 +331,8 @@
           <para>An S_OK HRESULT value if the specified key was successfully removed from the table; otherwise, an S_FALSE HRESULT value.</para>
         </returns>
         <param name="pszKey">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The key to unregister. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The key to unregister.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetBindOptions">

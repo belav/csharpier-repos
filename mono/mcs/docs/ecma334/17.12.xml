@@ -30,8 +30,8 @@
   <paragraph
     >A <non_terminal where="17.12"
       >destructor-declaration</non_terminal
-    > may include a set of attributes (<hyperlink>24</hyperlink>). </paragraph
-  >
+    > may include a set of attributes (<hyperlink>24</hyperlink>).
+  </paragraph>
   <paragraph>The identifier of a destructor-declarator must name the class in which the destructor is declared. If any other name is specified, a compile-time error occurs. </paragraph>
   <paragraph
     >When a destructor declaration includes an extern modifier, the destructor is said to be an external destructor. Because an external destructor declaration provides no actual implementation, its  <non_terminal
@@ -44,8 +44,8 @@
       >destructor-body</non_terminal
     > corresponds exactly to the <non_terminal where="17.5"
       >method-body</non_terminal
-    > of an instance method with a <keyword>void</keyword> return type (<hyperlink>17.5.8</hyperlink>). </paragraph
-  >
+    > of an instance method with a <keyword>void</keyword> return type (<hyperlink>17.5.8</hyperlink>).
+  </paragraph>
   <paragraph>Destructors are not inherited. Thus, a class has no destructors other than the one which may be declared in that class. </paragraph>
   <paragraph>
     <note>[Note: Since a destructor is required to have no parameters, it cannot be overloaded, so a class can have, at most, one destructor. end note]</note>

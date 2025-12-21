@@ -30,17 +30,17 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Security.Cryptography.Xml.XmlDsigC14NTransform" /> class represents the C14N XML canonicalization transform that describes the canonical form of an XML document.  This transform allows a signer to create a digest (used to create a digital signature) using the canonical form of an XML document.  A recipient can then verify the XML digital signature using the same canonical form of the XML document with the same transform.         </para
-      >
+        >The <see cref="T:System.Security.Cryptography.Xml.XmlDsigC14NTransform" /> class represents the C14N XML canonicalization transform that describes the canonical form of an XML document.  This transform allows a signer to create a digest (used to create a digital signature) using the canonical form of an XML document.  A recipient can then verify the XML digital signature using the same canonical form of the XML document with the same transform.
+      </para>
       <para
         >Use the <see cref="T:System.Security.Cryptography.Xml.XmlDsigC14NTransform" /> class when you need to sign an XML document that does not contain comments.</para
       >
       <para
-        >In most cases, a new instance of a canonicalization transform class is not required. To specify a canonicalization transform, pass the Uniform Resource Identifier (URI) that describes the transform to the <see cref="P:System.Security.Cryptography.Xml.SignedInfo.CanonicalizationMethod" /> property, which is accessible from the <see cref="P:System.Security.Cryptography.Xml.SignedXml.SignedInfo" /> property.  To acquire a reference to the canonicalization transform, use the <see cref="P:System.Security.Cryptography.Xml.SignedInfo.CanonicalizationMethodObject" /> property, which is accessible from the <see cref="P:System.Security.Cryptography.Xml.SignedXml.SignedInfo" /> property.  </para
-      >
+        >In most cases, a new instance of a canonicalization transform class is not required. To specify a canonicalization transform, pass the Uniform Resource Identifier (URI) that describes the transform to the <see cref="P:System.Security.Cryptography.Xml.SignedInfo.CanonicalizationMethod" /> property, which is accessible from the <see cref="P:System.Security.Cryptography.Xml.SignedXml.SignedInfo" /> property.  To acquire a reference to the canonicalization transform, use the <see cref="P:System.Security.Cryptography.Xml.SignedInfo.CanonicalizationMethodObject" /> property, which is accessible from the <see cref="P:System.Security.Cryptography.Xml.SignedXml.SignedInfo" /> property.
+      </para>
       <para
-        >The URI that describes the <see cref="T:System.Security.Cryptography.Xml.XmlDsigC14NTransform" /> class is defined by the <see cref="F:System.Security.Cryptography.Xml.SignedXml.XmlDsigC14NTransformUrl" /> field and the <see cref="F:System.Security.Cryptography.Xml.SignedXml.XmlDsigCanonicalizationUrl" /> field. </para
-      >
+        >The URI that describes the <see cref="T:System.Security.Cryptography.Xml.XmlDsigC14NTransform" /> class is defined by the <see cref="F:System.Security.Cryptography.Xml.SignedXml.XmlDsigC14NTransformUrl" /> field and the <see cref="F:System.Security.Cryptography.Xml.SignedXml.XmlDsigCanonicalizationUrl" /> field.
+      </para>
       <para>You would only need to create a new instance of a canonicalization transform class for manually hashing an XML document or for using your own canonicalization algorithm. </para>
       <para>For more information about the C14N transform, see Sections 6.5 and 6.6.1 of the XMLDSIG specification, which is available from the World Wide Web Consortium (W3C) at www.w3.org/TR/xmldsig-core/. The canonicalization algorithm is defined in the W3C Canonical XML specification, which is available at www.w3.org/TR/xml-c14n.</para>
     </remarks>
@@ -103,8 +103,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to include comments; otherwise, false. </param
-        >
+          />true to include comments; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetDigestedOutput">
@@ -137,8 +137,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the digest associated with an <see cref="T:System.Security.Cryptography.Xml.XmlDsigC14NTransform" /> object. </para
-          >
+            >Returns the digest associated with an <see cref="T:System.Security.Cryptography.Xml.XmlDsigC14NTransform" /> object.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -265,8 +265,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the output to return. <see cref="T:System.IO.Stream" /> is the only valid type for this parameter. </param
-        >
+          />The type of the output to return. <see cref="T:System.IO.Stream" /> is the only valid type for this parameter.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="InputTypes">
@@ -337,8 +337,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlNodeList" /> object to load into the current <see cref="T:System.Security.Cryptography.Xml.XmlDsigC14NTransform" /> object. </param
-        >
+          />An <see cref="T:System.Xml.XmlNodeList" /> object to load into the current <see cref="T:System.Security.Cryptography.Xml.XmlDsigC14NTransform" /> object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="LoadInput">
@@ -377,8 +377,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The input to load into the current <see cref="T:System.Security.Cryptography.Xml.XmlDsigC14NTransform" /> object. </param
-        >
+          />The input to load into the current <see cref="T:System.Security.Cryptography.Xml.XmlDsigC14NTransform" /> object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OutputTypes">

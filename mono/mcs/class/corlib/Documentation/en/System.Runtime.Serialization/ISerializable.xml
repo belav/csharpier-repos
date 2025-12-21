@@ -101,15 +101,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> to populate with data. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> to populate with data.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The destination (see <see cref="T:System.Runtime.Serialization.StreamingContext" />) for this serialization. </param
-        >
+          />The destination (see <see cref="T:System.Runtime.Serialization.StreamingContext" />) for this serialization.
+        </param>
       </Docs>
     </Member>
   </Members>

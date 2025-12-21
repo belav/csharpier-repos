@@ -42,8 +42,8 @@
         </item>
         <item>
           <para
-            >Apply the <see cref="T:System.ComponentModel.DataAnnotations.MetadataTypeAttribute" /> attribute to the partial entity class, specifying the associated class. </para
-          >
+            >Apply the <see cref="T:System.ComponentModel.DataAnnotations.MetadataTypeAttribute" /> attribute to the partial entity class, specifying the associated class.
+          </para>
         </item>
       </list>
       <para>When you apply this attribute, you must adhere to the following usage constraints:</para>

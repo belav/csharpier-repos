@@ -142,15 +142,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Specifies the <see cref="T:System.Reflection.Assembly" /> name of the serialized object. </param
-        >
+          />Specifies the <see cref="T:System.Reflection.Assembly" /> name of the serialized object.
+        </param>
         <param name="typeName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Specifies the <see cref="T:System.Type" /> name of the serialized object. </param
-        >
+          />Specifies the <see cref="T:System.Type" /> name of the serialized object.
+        </param>
       </Docs>
     </Member>
   </Members>

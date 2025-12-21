@@ -104,8 +104,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves the captured substring from the input string by calling the <see cref="P:System.Text.RegularExpressions.Capture.Value" /> property. </para
-          >
+            >Retrieves the captured substring from the input string by calling the <see cref="P:System.Text.RegularExpressions.Capture.Value" /> property.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -130,8 +130,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a call to the <see cref="M:System.Text.RegularExpressions.Regex.Match(System.String)" /> or <see cref="M:System.Text.RegularExpressions.Match.NextMatch" /> method fails to find a match, the value of the returned Match.Value property is <see cref="F:System.String.Empty" />. If the regular expression engine is unable to match a capturing group. the value of the returned Group.Value property is <see cref="F:System.String.Empty" />. See the second example for an illustration. </para
-          >
+            >If a call to the <see cref="M:System.Text.RegularExpressions.Regex.Match(System.String)" /> or <see cref="M:System.Text.RegularExpressions.Match.NextMatch" /> method fails to find a match, the value of the returned Match.Value property is <see cref="F:System.String.Empty" />. If the regular expression engine is unable to match a capturing group. the value of the returned Group.Value property is <see cref="F:System.String.Empty" />. See the second example for an illustration.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

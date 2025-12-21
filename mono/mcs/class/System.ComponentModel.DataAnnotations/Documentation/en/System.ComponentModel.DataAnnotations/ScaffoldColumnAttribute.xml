@@ -25,8 +25,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Scaffolding is the mechanism for generating web page templates based on database schemas. ASP.NET Dynamic Data uses scaffolding to generate Web-based UI that lets a user to view and update a database. This class uses the <see cref="P:System.ComponentModel.DataAnnotations.ScaffoldColumnAttribute.Scaffold" /> property to enable scaffolding in a Dynamic Data Web Site. </para
-      >
+        >Scaffolding is the mechanism for generating web page templates based on database schemas. ASP.NET Dynamic Data uses scaffolding to generate Web-based UI that lets a user to view and update a database. This class uses the <see cref="P:System.ComponentModel.DataAnnotations.ScaffoldColumnAttribute.Scaffold" /> property to enable scaffolding in a Dynamic Data Web Site.
+      </para>
       <para>Scaffolding enhances ASP.NET page framework by dynamically displaying pages based on the data model with no physical pages required.</para>
       <para>Scaffolding provides the following capabilities:</para>
       <list type="bullet">

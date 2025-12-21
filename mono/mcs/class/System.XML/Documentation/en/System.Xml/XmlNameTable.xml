@@ -68,8 +68,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.XmlNameTable" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.XmlNameTable" /> class.
+          </para>
         </summary>
       </Docs>
       <Excluded>0</Excluded>
@@ -115,8 +115,8 @@
           <para>The new atomized string or the existing one if it already exists.</para>
         </returns>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name to add. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name to add.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -182,22 +182,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character array containing the name to add. </param
-        >
+          />The character array containing the name to add.
+        </param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Zero-based index into the array specifying the first character of the name. </param
-        >
+          />Zero-based index into the array specifying the first character of the name.
+        </param>
         <param name="length">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters in the name. </param
-        >
+          />The number of characters in the name.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -242,12 +242,8 @@
           <para>The atomized string or null if the string has not already been atomized.</para>
         </returns>
         <param name="array">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name to look up. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name to look up.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -314,22 +310,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character array containing the name to look up. </param
-        >
+          />The character array containing the name to look up.
+        </param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index into the array specifying the first character of the name. </param
-        >
+          />The zero-based index into the array specifying the first character of the name.
+        </param>
         <param name="length">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters in the name. </param
-        >
+          />The number of characters in the name.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

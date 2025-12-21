@@ -119,16 +119,16 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.Windows.Forms.DataGridView.CellClick" /> event. </para
-          >
+            >Raises the <see cref="E:System.Windows.Forms.DataGridView.CellClick" /> event.
+          </para>
         </summary>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.DataGridViewCellEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.DataGridViewCellEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -152,16 +152,16 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.Windows.Forms.DataGridView.CellContentClick" /> event. </para
-          >
+            >Raises the <see cref="E:System.Windows.Forms.DataGridView.CellContentClick" /> event.
+          </para>
         </summary>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.DataGridViewCellEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.DataGridViewCellEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -185,16 +185,16 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.Windows.Forms.DataGridView.CellContentDoubleClick" /> event. </para
-          >
+            >Raises the <see cref="E:System.Windows.Forms.DataGridView.CellContentDoubleClick" /> event.
+          </para>
         </summary>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.DataGridViewCellEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.DataGridViewCellEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -218,16 +218,16 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.Windows.Forms.DataGridView.CellValueChanged" /> event. </para
-          >
+            >Raises the <see cref="E:System.Windows.Forms.DataGridView.CellValueChanged" /> event.
+          </para>
         </summary>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.DataGridViewCellEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.DataGridViewCellEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -251,16 +251,16 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.Windows.Forms.DataGridView.DataError" /> event. </para
-          >
+            >Raises the <see cref="E:System.Windows.Forms.DataGridView.DataError" /> event.
+          </para>
         </summary>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.DataGridViewDataErrorEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.DataGridViewDataErrorEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -290,8 +290,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.MouseEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.MouseEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

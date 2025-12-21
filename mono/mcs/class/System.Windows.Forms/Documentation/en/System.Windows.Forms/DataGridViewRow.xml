@@ -140,8 +140,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Windows.Forms.DataGridView" /> control internally calls the <see cref="M:System.Windows.Forms.DataGridViewRow.AdjustRowHeaderBorderStyle(System.Windows.Forms.DataGridViewAdvancedBorderStyle,System.Windows.Forms.DataGridViewAdvancedBorderStyle,System.Boolean,System.Boolean,System.Boolean,System.Boolean)" /> method to determine the appearance of the borders for the row header cells. The <see cref="T:System.Windows.Forms.DataGridView" /> control typically uses the value of the <see cref="P:System.Windows.Forms.DataGridView.AdvancedRowHeadersBorderStyle" /> property for the <paramref name="dataGridViewAdvancedBorderStyleInput" /> parameter. </para
-          >
+            >The <see cref="T:System.Windows.Forms.DataGridView" /> control internally calls the <see cref="M:System.Windows.Forms.DataGridViewRow.AdjustRowHeaderBorderStyle(System.Windows.Forms.DataGridViewAdvancedBorderStyle,System.Windows.Forms.DataGridViewAdvancedBorderStyle,System.Boolean,System.Boolean,System.Boolean,System.Boolean)" /> method to determine the appearance of the borders for the row header cells. The <see cref="T:System.Windows.Forms.DataGridView" /> control typically uses the value of the <see cref="P:System.Windows.Forms.DataGridView.AdvancedRowHeadersBorderStyle" /> property for the <paramref name="dataGridViewAdvancedBorderStyleInput" /> parameter.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -158,8 +158,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.DataGridViewAdvancedBorderStyle" /> that represents the row header border style to modify. </param
-        >
+          />A <see cref="T:System.Windows.Forms.DataGridViewAdvancedBorderStyle" /> that represents the row header border style to modify.
+        </param>
         <param name="dataGridViewAdvancedBorderStylePlaceholder">
           <attribution
             license="cc4"
@@ -172,29 +172,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to add a single vertical border to the result; otherwise, false. </param
-        >
+          />true to add a single vertical border to the result; otherwise, false.
+        </param>
         <param name="singleHorizontalBorderAdded">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to add a single horizontal border to the result; otherwise, false. </param
-        >
+          />true to add a single horizontal border to the result; otherwise, false.
+        </param>
         <param name="isFirstDisplayedRow">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if the row is the first row displayed in the <see cref="T:System.Windows.Forms.DataGridView" />; otherwise, false. </param
-        >
+          />true if the row is the first row displayed in the <see cref="T:System.Windows.Forms.DataGridView" />; otherwise, false.
+        </param>
         <param name="isLastVisibleRow">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if the row is the last row in the <see cref="T:System.Windows.Forms.DataGridView" /> that has its <see cref="P:System.Windows.Forms.DataGridViewRow.Visible" /> property set to true; otherwise, false. </param
-        >
+          />true if the row is the last row in the <see cref="T:System.Windows.Forms.DataGridView" /> that has its <see cref="P:System.Windows.Forms.DataGridViewRow.Visible" /> property set to true; otherwise, false.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -295,11 +295,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property indicates the shortcut menu that is displayed when the user right-clicks the row unless the <see cref="T:System.Windows.Forms.DataGridView" /> control <see cref="E:System.Windows.Forms.DataGridView.CellContextMenuStripNeeded" /> event or the row <see cref="P:System.Windows.Forms.DataGridViewRow.ContextMenuStrip" /> property overrides the shortcut menu for the specific cell that was clicked. </para
-          >
+            >This property indicates the shortcut menu that is displayed when the user right-clicks the row unless the <see cref="T:System.Windows.Forms.DataGridView" /> control <see cref="E:System.Windows.Forms.DataGridView.CellContextMenuStripNeeded" /> event or the row <see cref="P:System.Windows.Forms.DataGridViewRow.ContextMenuStrip" /> property overrides the shortcut menu for the specific cell that was clicked.
+          </para>
           <para
-            >When the <see cref="T:System.Windows.Forms.DataGridView" /> control <see cref="P:System.Windows.Forms.DataGridView.DataSource" /> property is set or its <see cref="P:System.Windows.Forms.DataGridView.VirtualMode" /> property is true, getting the value of the <see cref="P:System.Windows.Forms.DataGridViewRow.ContextMenuStrip" /> property raises the <see cref="E:System.Windows.Forms.DataGridView.RowContextMenuStripNeeded" /> event of the control and returns the value of the <see cref="P:System.Windows.Forms.DataGridViewRowContextMenuStripNeededEventArgs.ContextMenuStrip" /> property as specified in the event handler. If there are no handlers for the event, getting the value of the <see cref="P:System.Windows.Forms.DataGridViewRow.ContextMenuStrip" /> property returns the previously specified value or its default value of null. </para
-          >
+            >When the <see cref="T:System.Windows.Forms.DataGridView" /> control <see cref="P:System.Windows.Forms.DataGridView.DataSource" /> property is set or its <see cref="P:System.Windows.Forms.DataGridView.VirtualMode" /> property is true, getting the value of the <see cref="P:System.Windows.Forms.DataGridViewRow.ContextMenuStrip" /> property raises the <see cref="E:System.Windows.Forms.DataGridView.RowContextMenuStripNeeded" /> event of the control and returns the value of the <see cref="P:System.Windows.Forms.DataGridViewRowContextMenuStripNeededEventArgs.ContextMenuStrip" /> property as specified in the event handler. If there are no handlers for the event, getting the value of the <see cref="P:System.Windows.Forms.DataGridViewRow.ContextMenuStrip" /> property returns the previously specified value or its default value of null.
+          </para>
           <para
             >Handling the <see cref="E:System.Windows.Forms.DataGridView.RowContextMenuStripNeeded" /> event is primarily useful when working with large amounts of data to avoid performance penalties when setting the row <see cref="P:System.Windows.Forms.DataGridViewRow.ContextMenuStrip" /> value for multiple rows. For more information, see <format type="text/html">
               <a href="8321a8a6-6340-4fd1-b475-fa090b905aaf"
@@ -346,14 +346,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new accessible object for the <see cref="T:System.Windows.Forms.DataGridViewRow" />. </para
-          >
+            >Creates a new accessible object for the <see cref="T:System.Windows.Forms.DataGridViewRow" />.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see cref="T:System.Windows.Forms.DataGridViewRow.DataGridViewRowAccessibleObject" /> for the <see cref="T:System.Windows.Forms.DataGridViewRow" />. </para
-          >
+            >A new <see cref="T:System.Windows.Forms.DataGridViewRow.DataGridViewRowAccessibleObject" /> for the <see cref="T:System.Windows.Forms.DataGridViewRow" />.
+          </para>
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -391,8 +391,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.DataGridView" /> that acts as a template for cell styles. </param
-        >
+          />A <see cref="T:System.Windows.Forms.DataGridView" /> that acts as a template for cell styles.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -437,15 +437,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.DataGridView" /> that acts as a template for cell styles. </param
-        >
+          />A <see cref="T:System.Windows.Forms.DataGridView" /> that acts as a template for cell styles.
+        </param>
         <param name="values">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of objects that initialize the reset cells. </param
-        >
+          />An array of objects that initialize the reset cells.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -534,8 +534,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Windows.Forms.DataGridView" /> control displays its cells using the styles indicated by the cell <see cref="P:System.Windows.Forms.DataGridViewCell.InheritedStyle" /> property, which inherits styles from other properties of type <see cref="T:System.Windows.Forms.DataGridViewCellStyle" />. For cells in this row, the styles specified through the <see cref="P:System.Windows.Forms.DataGridViewRow.DefaultCellStyle" /> property override the styles specified through the <see cref="P:System.Windows.Forms.DataGridView.DefaultCellStyle" />, <see cref="P:System.Windows.Forms.DataGridViewColumn.DefaultCellStyle" />, <see cref="P:System.Windows.Forms.DataGridView.RowsDefaultCellStyle" />, and <see cref="P:System.Windows.Forms.DataGridView.AlternatingRowsDefaultCellStyle" /> properties, but are overridden by the styles specified through the <see cref="P:System.Windows.Forms.DataGridViewCell.Style" /> property. </para
-          >
+            >The <see cref="T:System.Windows.Forms.DataGridView" /> control displays its cells using the styles indicated by the cell <see cref="P:System.Windows.Forms.DataGridViewCell.InheritedStyle" /> property, which inherits styles from other properties of type <see cref="T:System.Windows.Forms.DataGridViewCellStyle" />. For cells in this row, the styles specified through the <see cref="P:System.Windows.Forms.DataGridViewRow.DefaultCellStyle" /> property override the styles specified through the <see cref="P:System.Windows.Forms.DataGridView.DefaultCellStyle" />, <see cref="P:System.Windows.Forms.DataGridViewColumn.DefaultCellStyle" />, <see cref="P:System.Windows.Forms.DataGridView.RowsDefaultCellStyle" />, and <see cref="P:System.Windows.Forms.DataGridView.AlternatingRowsDefaultCellStyle" /> properties, but are overridden by the styles specified through the <see cref="P:System.Windows.Forms.DataGridViewCell.Style" /> property.
+          </para>
           <para
             >For more information, see <format type="text/html">
               <a href="dbb75ed6-8804-4232-8382-f9920c2e380c"
@@ -607,8 +607,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is useful to provide a visual boundary between frozen rows and rows that can scroll. The extra edge is part of the current row, although it will take on the foreground color of the associated <see cref="T:System.Windows.Forms.DataGridView" />. The extra edge does not extend the area in which users can double-click to automatically resize a row. To resize a row, the user must double-click on the boundary between the divider and the adjacent row. </para
-          >
+            >This property is useful to provide a visual boundary between frozen rows and rows that can scroll. The extra edge is part of the current row, although it will take on the foreground color of the associated <see cref="T:System.Windows.Forms.DataGridView" />. The extra edge does not extend the area in which users can double-click to automatically resize a row. To resize a row, the user must double-click on the boundary between the divider and the adjacent row.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -760,8 +760,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property lets you keep one or several rows of important information in place when a user scrolls through the <see cref="T:System.Windows.Forms.DataGridView" />. All rows above the frozen row are also frozen. </para
-          >
+            >This property lets you keep one or several rows of important information in place when a user scrolls through the <see cref="T:System.Windows.Forms.DataGridView" />. All rows above the frozen row are also frozen.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -881,8 +881,8 @@
             >This property is used by the content-based automatic sizing feature of the <see cref="T:System.Windows.Forms.DataGridView" /> control to determine the ideal height of a row. The <paramref name="rowIndex" /> value lets you specify the actual row index of a shared row. (Shared rows have <see cref="P:System.Windows.Forms.DataGridViewBand.Index" /> property values of -1.)</para
           >
           <para
-            >A <paramref name="fixedWidth" /> parameter value of false calculates the row height based on calculated column widths that will achieve ideal cell height-to-width ratios. </para
-          >
+            >A <paramref name="fixedWidth" /> parameter value of false calculates the row height based on calculated column widths that will achieve ideal cell height-to-width ratios.
+          </para>
           <para
             >For cell contents to wrap onto multiple lines, the cell style in effect for the cell must have a <see cref="P:System.Windows.Forms.DataGridViewCellStyle.WrapMode" /> property value of <see cref="F:System.Windows.Forms.DataGridViewTriState.True" />.</para
           >
@@ -1110,8 +1110,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Because the row for new records is in the <see cref="P:System.Windows.Forms.DataGridView.Rows" /> collection, use the <see cref="P:System.Windows.Forms.DataGridViewRow.IsNewRow" /> property to determine whether a row is the row for new records or is a populated row. </para
-          >
+            >Because the row for new records is in the <see cref="P:System.Windows.Forms.DataGridView.Rows" /> collection, use the <see cref="P:System.Windows.Forms.DataGridViewRow.IsNewRow" /> property to determine whether a row is the row for new records or is a populated row.
+          </para>
           <para>A row stops being the new row when data entry into the row begins.</para>
         </remarks>
         <summary>
@@ -1191,8 +1191,8 @@
             >The <see cref="T:System.Windows.Forms.DataGridView" /> control calls this method to paint the row.</para
           >
           <para
-            >Calling this method raises the <see cref="E:System.Windows.Forms.DataGridView.RowPrePaint" /> event. If a handler for the event does not set the <see cref="P:System.ComponentModel.HandledEventArgs.Handled" /> property to true, this method also calls the <see cref="M:System.Windows.Forms.DataGridViewRow.PaintHeader(System.Drawing.Graphics,System.Drawing.Rectangle,System.Drawing.Rectangle,System.Int32,System.Windows.Forms.DataGridViewElementStates,System.Boolean,System.Boolean,System.Windows.Forms.DataGridViewPaintParts)" /> and <see cref="M:System.Windows.Forms.DataGridViewRow.PaintCells(System.Drawing.Graphics,System.Drawing.Rectangle,System.Drawing.Rectangle,System.Int32,System.Windows.Forms.DataGridViewElementStates,System.Boolean,System.Boolean,System.Windows.Forms.DataGridViewPaintParts)" /> methods and raises the <see cref="E:System.Windows.Forms.DataGridView.RowPostPaint" /> event. </para
-          >
+            >Calling this method raises the <see cref="E:System.Windows.Forms.DataGridView.RowPrePaint" /> event. If a handler for the event does not set the <see cref="P:System.ComponentModel.HandledEventArgs.Handled" /> property to true, this method also calls the <see cref="M:System.Windows.Forms.DataGridViewRow.PaintHeader(System.Drawing.Graphics,System.Drawing.Rectangle,System.Drawing.Rectangle,System.Int32,System.Windows.Forms.DataGridViewElementStates,System.Boolean,System.Boolean,System.Windows.Forms.DataGridViewPaintParts)" /> and <see cref="M:System.Windows.Forms.DataGridViewRow.PaintCells(System.Drawing.Graphics,System.Drawing.Rectangle,System.Drawing.Rectangle,System.Int32,System.Windows.Forms.DataGridViewElementStates,System.Boolean,System.Boolean,System.Windows.Forms.DataGridViewPaintParts)" /> methods and raises the <see cref="E:System.Windows.Forms.DataGridView.RowPostPaint" /> event.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1504,11 +1504,11 @@
             >If the <see cref="P:System.Windows.Forms.DataGridViewRow.Resizable" /> property is <see cref="F:System.Windows.Forms.DataGridViewTriState.False" />, the user will not be able to manually adjust the row height.</para
           >
           <para
-            >By default, the <see cref="P:System.Windows.Forms.DataGridViewRow.Resizable" /> property value is based on the <see cref="P:System.Windows.Forms.DataGridView.AllowUserToResizeRows" /> property value. If you explicitly set <see cref="P:System.Windows.Forms.DataGridViewRow.Resizable" /> to <see cref="F:System.Windows.Forms.DataGridViewTriState.True" /> or <see cref="F:System.Windows.Forms.DataGridViewTriState.False" />, however, the control value is ignored. Set <see cref="P:System.Windows.Forms.DataGridViewRow.Resizable" /> to <see cref="F:System.Windows.Forms.DataGridViewTriState.NotSet" /> to restore the value-inheritance behavior. </para
-          >
+            >By default, the <see cref="P:System.Windows.Forms.DataGridViewRow.Resizable" /> property value is based on the <see cref="P:System.Windows.Forms.DataGridView.AllowUserToResizeRows" /> property value. If you explicitly set <see cref="P:System.Windows.Forms.DataGridViewRow.Resizable" /> to <see cref="F:System.Windows.Forms.DataGridViewTriState.True" /> or <see cref="F:System.Windows.Forms.DataGridViewTriState.False" />, however, the control value is ignored. Set <see cref="P:System.Windows.Forms.DataGridViewRow.Resizable" /> to <see cref="F:System.Windows.Forms.DataGridViewTriState.NotSet" /> to restore the value-inheritance behavior.
+          </para>
           <para
-            >Because <see cref="F:System.Windows.Forms.DataGridViewTriState.NotSet" /> restores the value inheritance, the <see cref="P:System.Windows.Forms.DataGridViewRow.Resizable" /> property will never return a <see cref="F:System.Windows.Forms.DataGridViewTriState.NotSet" /> value unless the row has not been added to a <see cref="T:System.Windows.Forms.DataGridView" /> control. If you need to determine whether the <see cref="P:System.Windows.Forms.DataGridViewRow.Resizable" /> property value of a row is inherited or has been specified explicitly, check its <see cref="P:System.Windows.Forms.DataGridViewElement.State" /> property. If the <see cref="P:System.Windows.Forms.DataGridViewElement.State" /> value includes the <see cref="F:System.Windows.Forms.DataGridViewElementStates.ResizableSet" /> flag, the <see cref="P:System.Windows.Forms.DataGridViewRow.Resizable" /> property value is not inherited. </para
-          >
+            >Because <see cref="F:System.Windows.Forms.DataGridViewTriState.NotSet" /> restores the value inheritance, the <see cref="P:System.Windows.Forms.DataGridViewRow.Resizable" /> property will never return a <see cref="F:System.Windows.Forms.DataGridViewTriState.NotSet" /> value unless the row has not been added to a <see cref="T:System.Windows.Forms.DataGridView" /> control. If you need to determine whether the <see cref="P:System.Windows.Forms.DataGridViewRow.Resizable" /> property value of a row is inherited or has been specified explicitly, check its <see cref="P:System.Windows.Forms.DataGridViewElement.State" /> property. If the <see cref="P:System.Windows.Forms.DataGridViewElement.State" /> value includes the <see cref="F:System.Windows.Forms.DataGridViewElementStates.ResizableSet" /> flag, the <see cref="P:System.Windows.Forms.DataGridViewRow.Resizable" /> property value is not inherited.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1579,8 +1579,8 @@
             >The <paramref name="values" /> parameter represents a variable number of arguments used to populate cell values in the row. These values can be passed to this method as multiple, individual arguments or as members of a single <see cref="T:System.Array" />. Because the values are expected to be instances of type <see cref="T:System.Object" />, however, if you pass in an array of value-type values (such as <see cref="T:System.Int32" /> values), this method will treat the array as a single object and assign it to a single cell. To avoid this behavior, you must cast a value-type array to an <see cref="T:System.Object" /> array or pass in multiple values as multiple arguments.</para
           >
           <para
-            >If there are more values in the <paramref name="values" /> list than there are cells to be initialized, this method ignores the extra values and returns false. This method also returns false if any of the specified values cannot be set. </para
-          >
+            >If there are more values in the <paramref name="values" /> list than there are cells to be initialized, this method ignores the extra values and returns false. This method also returns false if any of the specified values cannot be set.
+          </para>
           <para>If there are fewer values than there are cells, the remaining unmatched cells retain their current values.</para>
         </remarks>
         <summary>

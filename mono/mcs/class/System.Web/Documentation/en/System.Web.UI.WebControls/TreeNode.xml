@@ -43,8 +43,8 @@
         >
       </block>
       <para
-        >A <see cref="T:System.Web.UI.WebControls.TreeNode" /> object is made up of the following four user interface (UI) elements, which can be customized or hidden: </para
-      >
+        >A <see cref="T:System.Web.UI.WebControls.TreeNode" /> object is made up of the following four user interface (UI) elements, which can be customized or hidden:
+      </para>
       <list type="bullet">
         <item>
           <para>An expansion node indicator icon used to show whether the node is expanded, collapsed, or non-expandable.</para>
@@ -181,8 +181,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text that is displayed in the <see cref="T:System.Web.UI.WebControls.TreeView" /> control for the node. </param
-        >
+          />The text that is displayed in the <see cref="T:System.Web.UI.WebControls.TreeView" /> control for the node.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -249,15 +249,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text that is displayed in the <see cref="T:System.Web.UI.WebControls.TreeView" /> control for the node. </param
-        >
+          />The text that is displayed in the <see cref="T:System.Web.UI.WebControls.TreeView" /> control for the node.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The supplemental data associated with the node, such as data used for handling postback events. </param
-        >
+          />The supplemental data associated with the node, such as data used for handling postback events.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -376,22 +376,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text that is displayed in the <see cref="T:System.Web.UI.WebControls.TreeView" /> control for the node. </param
-        >
+          />The text that is displayed in the <see cref="T:System.Web.UI.WebControls.TreeView" /> control for the node.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The supplemental data associated with the node, such as data used for handling postback events. </param
-        >
+          />The supplemental data associated with the node, such as data used for handling postback events.
+        </param>
         <param name="imageUrl">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URL to an image that is displayed next to the node. </param
-        >
+          />The URL to an image that is displayed next to the node.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -494,36 +494,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text that is displayed in the <see cref="T:System.Web.UI.WebControls.TreeView" /> control for the node. </param
-        >
+          />The text that is displayed in the <see cref="T:System.Web.UI.WebControls.TreeView" /> control for the node.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The supplemental data associated with the node, such as data used for handling postback events. </param
-        >
+          />The supplemental data associated with the node, such as data used for handling postback events.
+        </param>
         <param name="imageUrl">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URL to an image that is displayed next to the node. </param
-        >
+          />The URL to an image that is displayed next to the node.
+        </param>
         <param name="navigateUrl">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URL to link to when the node is clicked. </param
-        >
+          />The URL to link to when the node is clicked.
+        </param>
         <param name="target">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The target window or frame in which to display the Web page content linked to when the node is clicked. </param
-        >
+          />The target window or frame in which to display the Web page content linked to when the node is clicked.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -942,8 +942,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.Web.UI.WebControls.TreeNode.Expanded" /> property to specify or determine whether the node is expanded. </para
-          >
+            >Use the <see cref="P:System.Web.UI.WebControls.TreeNode.Expanded" /> property to specify or determine whether the node is expanded.
+          </para>
           <para
             >You can expand and collapse a node by calling the <see cref="M:System.Web.UI.WebControls.TreeNode.Expand" /> and <see cref="M:System.Web.UI.WebControls.TreeNode.Collapse" /> methods, respectively. You can also expand and collapse a node and all its child nodes by calling the <see cref="M:System.Web.UI.WebControls.TreeNode.ExpandAll" /> and <see cref="M:System.Web.UI.WebControls.TreeNode.CollapseAll" /> methods, respectively.</para
           >
@@ -1091,8 +1091,8 @@ if (TreeView1.Nodes[0].Expanded)
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="M:System.Web.UI.WebControls.TreeNode.LoadViewState(System.Object)" /> is a helper method used to load the previously saved view state of the node </para
-          >
+            <see cref="M:System.Web.UI.WebControls.TreeNode.LoadViewState(System.Object)" /> is a helper method used to load the previously saved view state of the node
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1243,8 +1243,8 @@ if (TreeView1.Nodes[0].Expanded)
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.UI.HtmlTextWriter" /> that represents the output stream used to write content to a Web page. </param
-        >
+          />The <see cref="T:System.Web.UI.HtmlTextWriter" /> that represents the output stream used to write content to a Web page.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1296,8 +1296,8 @@ if (TreeView1.Nodes[0].Expanded)
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.WebControls.TreeNode.SaveViewState" /> method is a helper method called by the node to save its state. </para
-          >
+            >The <see cref="M:System.Web.UI.WebControls.TreeNode.SaveViewState" /> method is a helper method called by the node to save its state.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1693,8 +1693,8 @@ if (TreeView1.Nodes[0].Expanded)
             <para
               > The <see cref="P:System.Web.UI.WebControls.TreeNode.Target" /> property renders as a target attribute. The target attribute on anchor elements is not allowed in the XHTML 1.1 document type definition. Do not set the <see cref="P:System.Web.UI.WebControls.TreeNode.Target" /> property if the rendered output for the <see cref="T:System.Web.UI.WebControls.TreeNode" /> object must be XHTML 1.1-compliant. For more information, see <format type="text/html">
                 <a href="1b78d416-66bb-43a5-ac77-c703aab55b97">ASP.NET and XHTML Compliance</a>
-              </format>. </para
-            >
+              </format>.
+            </para>
             <para
               >When creating accessible Web pages, it is strongly recommended you avoid using the <see cref="P:System.Web.UI.WebControls.TreeNode.Target" /> property to target another window. For more information, see <format type="text/html">
                 <a href="9b5f3e05-e88d-4248-a5f4-9e64850fa0ae">ASP.NET Accessibility</a>

@@ -124,8 +124,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets an <see cref="T:System.Xml.XmlElement" /> object that represents the document context under which the current <see cref="T:System.Security.Cryptography.Xml.Transform" /> object is running. </para
-          >
+            >Gets or sets an <see cref="T:System.Xml.XmlElement" /> object that represents the document context under which the current <see cref="T:System.Security.Cryptography.Xml.Transform" /> object is running.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -159,8 +159,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, returns the digest associated with a <see cref="T:System.Security.Cryptography.Xml.Transform" /> object. </para
-          >
+            >When overridden in a derived class, returns the digest associated with a <see cref="T:System.Security.Cryptography.Xml.Transform" /> object.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -289,8 +289,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the output to return. This must be one of the types in the <see cref="P:System.Security.Cryptography.Xml.Transform.OutputTypes" /> property. </param
-        >
+          />The type of the output to return. This must be one of the types in the <see cref="P:System.Security.Cryptography.Xml.Transform.OutputTypes" /> property.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetXml">
@@ -399,8 +399,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlNodeList" /> object that specifies transform-specific content for the current <see cref="T:System.Security.Cryptography.Xml.Transform" /> object. </param
-        >
+          />An <see cref="T:System.Xml.XmlNodeList" /> object that specifies transform-specific content for the current <see cref="T:System.Security.Cryptography.Xml.Transform" /> object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="LoadInput">
@@ -439,8 +439,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The input to load into the current <see cref="T:System.Security.Cryptography.Xml.Transform" /> object. </param
-        >
+          />The input to load into the current <see cref="T:System.Security.Cryptography.Xml.Transform" /> object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OutputTypes">
@@ -512,8 +512,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see cref="T:System.Collections.Hashtable" /> object that contains the namespaces that are propagated into the signature. </para
-          >
+            >Gets or sets a <see cref="T:System.Collections.Hashtable" /> object that contains the namespaces that are propagated into the signature.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -542,8 +542,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Xml.XmlResolver" /> class resolves external XML resources named by a Uniform Resource Identifier (URI). If you do not trust the source of the XML file, you might not want to allow the XML file to access computer resources named by the URI. The <see cref="P:System.Security.Cryptography.Xml.Transform.Resolver" /> property allows you to control the level of access that XML files have to computer resources by specifying different <see cref="T:System.Xml.XmlResolver" /> objects. If you do not want to allow any access, you can set this property to null (Nothing in Visual Basic). </para
-          >
+            >The <see cref="T:System.Xml.XmlResolver" /> class resolves external XML resources named by a Uniform Resource Identifier (URI). If you do not trust the source of the XML file, you might not want to allow the XML file to access computer resources named by the URI. The <see cref="P:System.Security.Cryptography.Xml.Transform.Resolver" /> property allows you to control the level of access that XML files have to computer resources by specifying different <see cref="T:System.Xml.XmlResolver" /> objects. If you do not want to allow any access, you can set this property to null (Nothing in Visual Basic).
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

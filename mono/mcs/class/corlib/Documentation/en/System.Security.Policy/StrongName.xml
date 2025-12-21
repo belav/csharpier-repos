@@ -98,22 +98,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.Permissions.StrongNamePublicKeyBlob" /> of the software publisher. </param
-        >
+          />The <see cref="T:System.Security.Permissions.StrongNamePublicKeyBlob" /> of the software publisher.
+        </param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The simple name section of the strong name. </param
-        >
+          />The simple name section of the strong name.
+        </param>
         <param name="version">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Version" /> of the strong name. </param
-        >
+          />The <see cref="T:System.Version" /> of the strong name.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Copy">
@@ -191,8 +191,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.Policy.Evidence" /> from which to construct the <see cref="T:System.Security.Permissions.StrongNameIdentityPermission" />. </param
-        >
+          />The <see cref="T:System.Security.Policy.Evidence" /> from which to construct the <see cref="T:System.Security.Permissions.StrongNameIdentityPermission" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -228,8 +228,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The strong name to compare against the current strong name. </param
-        >
+          />The strong name to compare against the current strong name.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">

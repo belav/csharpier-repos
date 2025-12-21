@@ -77,8 +77,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> that represents the type to associate with this component converter. </param
-        >
+          />A <see cref="T:System.Type" /> that represents the type to associate with this component converter.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetProperties">
@@ -111,8 +111,8 @@
             >The <paramref name="context" /> parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para
           >
           <para
-            >The <paramref name="attributes" /> array will be used to filter the array. The <paramref name="attributes" /> can have a mix of <see cref="T:System.Type" /> and <see cref="T:System.Attribute" /> objects. Filtering is defined by the following rules: </para
-          >
+            >The <paramref name="attributes" /> array will be used to filter the array. The <paramref name="attributes" /> can have a mix of <see cref="T:System.Type" /> and <see cref="T:System.Attribute" /> objects. Filtering is defined by the following rules:
+          </para>
           <list type="bullet">
             <item>
               <para
@@ -151,22 +151,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Object" /> that specifies the type of component to get the properties for. </param
-        >
+          />An <see cref="T:System.Object" /> that specifies the type of component to get the properties for.
+        </param>
         <param name="attributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type <see cref="T:System.Attribute" /> that will be used as a filter. </param
-        >
+          />An array of type <see cref="T:System.Attribute" /> that will be used as a filter.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetPropertiesSupported">
@@ -212,8 +212,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context.
+        </param>
       </Docs>
     </Member>
   </Members>

@@ -139,8 +139,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array of unsigned bytes from which to create the current stream. </param
-        >
+          />The array of unsigned bytes from which to create the current stream.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -191,8 +191,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The initial size of the internal array in bytes. </param
-        >
+          />The initial size of the internal array in bytes.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -244,15 +244,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array of unsigned bytes from which to create this stream. </param
-        >
+          />The array of unsigned bytes from which to create this stream.
+        </param>
         <param name="writable">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The setting of the <see cref="P:System.IO.MemoryStream.CanWrite" /> property, which determines whether the stream supports writing. </param
-        >
+          />The setting of the <see cref="P:System.IO.MemoryStream.CanWrite" /> property, which determines whether the stream supports writing.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -314,22 +314,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array of unsigned bytes from which to create this stream. </param
-        >
+          />The array of unsigned bytes from which to create this stream.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index into <paramref name="buffer" /> at which the stream begins. </param
-        >
+          />The index into <paramref name="buffer" /> at which the stream begins.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The length of the stream in bytes. </param
-        >
+          />The length of the stream in bytes.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -392,29 +392,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array of unsigned bytes from which to create this stream. </param
-        >
+          />The array of unsigned bytes from which to create this stream.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index in <paramref name="buffer" /> at which the stream begins. </param
-        >
+          />The index in <paramref name="buffer" /> at which the stream begins.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The length of the stream in bytes. </param
-        >
+          />The length of the stream in bytes.
+        </param>
         <param name="writable">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The setting of the <see cref="P:System.IO.MemoryStream.CanWrite" /> property, which determines whether the stream supports writing. </param
-        >
+          />The setting of the <see cref="P:System.IO.MemoryStream.CanWrite" /> property, which determines whether the stream supports writing.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -475,36 +475,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array of unsigned bytes from which to create this stream. </param
-        >
+          />The array of unsigned bytes from which to create this stream.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index into <paramref name="buffer" /> at which the stream begins. </param
-        >
+          />The index into <paramref name="buffer" /> at which the stream begins.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The length of the stream in bytes. </param
-        >
+          />The length of the stream in bytes.
+        </param>
         <param name="writable">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The setting of the <see cref="P:System.IO.MemoryStream.CanWrite" /> property, which determines whether the stream supports writing. </param
-        >
+          />The setting of the <see cref="P:System.IO.MemoryStream.CanWrite" /> property, which determines whether the stream supports writing.
+        </param>
         <param name="publiclyVisible">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to enable <see cref="M:System.IO.MemoryStream.GetBuffer" />, which returns the unsigned byte array from which the stream was created; otherwise, false. </param
-        >
+          />true to enable <see cref="M:System.IO.MemoryStream.GetBuffer" />, which returns the unsigned byte array from which the stream was created; otherwise, false.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -652,8 +652,7 @@
           >The value specified for a set operation is negative or less than the current length of the stream.</exception
         >
         <exception cref="T:System.NotSupportedException"
-          >A set operation was attempted on a stream whose capacity cannot be modified. </exception
-        >
+          >A set operation was attempted on a stream whose capacity cannot be modified. </exception>
         <exception cref="T:System.ObjectDisposedException">The current stream is closed.</exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -683,13 +682,13 @@
             > The stream will not support reading or writing after
       this method is invoked. Following a call to <see cref="M:System.IO.MemoryStream.Close" />
       , operations on the
-      stream can raise an exception. </para
-          >
+      stream can raise an exception.
+          </para>
           <para
             > The buffer of a closed <see cref="T:System.IO.MemoryStream" /> is still available, and the <see cref="M:System.IO.MemoryStream.ToArray" />
 and <see cref="M:System.IO.MemoryStream.GetBuffer" /> methods can
-be called successfully. </para
-          >
+be called successfully.
+          </para>
           <block subset="none" type="note"
             > This method overrides <see cref="M:System.IO.Stream.Close" />
 .</block
@@ -857,8 +856,8 @@ be called successfully. </para
             >Because any data written to a <see cref="T:System.IO.MemoryStream" /> object is written into RAM, this method is redundant.</para
           >
           <para
-            >If the operation is canceled before it completes, the returned task contains the <see cref="F:System.Threading.Tasks.TaskStatus.Canceled" /> value for the <see cref="P:System.Threading.Tasks.Task.Status" /> property. </para
-          >
+            >If the operation is canceled before it completes, the returned task contains the <see cref="F:System.Threading.Tasks.TaskStatus.Canceled" /> value for the <see cref="P:System.Threading.Tasks.Task.Status" /> property.
+          </para>
           <para
             >You can create a cancellation token by creating an instance of the <see cref="T:System.Threading.CancellationTokenSource" /> class and passing the <see cref="P:System.Threading.CancellationTokenSource.Token" /> property as the <paramref name="cancellationToken" /> parameter.</para
           >
@@ -939,8 +938,7 @@ public class MemoryStreamTest {
 
    }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>a and b represent the same instance.</para>
@@ -1121,8 +1119,7 @@ public class MemoryStreamTest {
       }
    }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>0123456789 </para>
@@ -1159,8 +1156,8 @@ public class MemoryStreamTest {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />When this method returns, contains the specified byte array with the values between <paramref name="offset" /> and (<paramref name="offset" /> + <paramref name="count" /> - 1) replaced by the characters read from the current stream. </param
-        >
+          />When this method returns, contains the specified byte array with the values between <paramref name="offset" /> and (<paramref name="offset" /> + <paramref name="count" /> - 1) replaced by the characters read from the current stream.
+        </param>
         <param name="offset">
           <attribution
             license="cc4"
@@ -1173,8 +1170,8 @@ public class MemoryStreamTest {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum number of bytes to read. </param
-        >
+          />The maximum number of bytes to read.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1217,8 +1214,8 @@ public class MemoryStreamTest {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A task that represents the asynchronous read operation. The value of the <paramref name="TResult" /> parameter contains the total number of bytes read into the buffer. The result value can be less than the number of bytes requested if the number of bytes currently available is less than the requested number, or it can be 0 (zero) if the end of the stream has been reached. </para
-          >
+            >A task that represents the asynchronous read operation. The value of the <paramref name="TResult" /> parameter contains the total number of bytes read into the buffer. The result value can be less than the number of bytes requested if the number of bytes currently available is less than the requested number, or it can be 0 (zero) if the end of the stream has been reached.
+          </para>
         </returns>
         <param name="buffer">
           <attribution
@@ -1351,15 +1348,15 @@ public class MemoryStreamTest {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new position within the stream. This is relative to the <paramref name="loc" /> parameter, and can be positive or negative. </param
-        >
+          />The new position within the stream. This is relative to the <paramref name="loc" /> parameter, and can be positive or negative.
+        </param>
         <param name="loc">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A value of type <see cref="T:System.IO.SeekOrigin" />, which acts as the seek reference point. </param
-        >
+          />A value of type <see cref="T:System.IO.SeekOrigin" />, which acts as the seek reference point.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1419,8 +1416,8 @@ public class MemoryStreamTest {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value at which to set the length. </param
-        >
+          />The value at which to set the length.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1511,8 +1508,8 @@ public class MemoryStreamTest {
           >
         </exception>
         <exception cref="T:System.ArgumentException"
-          >(<paramref name="offset " />+ <paramref name="count" /> ) is greater than the length of <paramref name="buffer" />. </exception
-        >
+          >(<paramref name="offset " />+ <paramref name="count" /> ) is greater than the length of <paramref name="buffer" />.
+        </exception>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="offset" /> or <paramref name="count" /> are negative.</exception
         >
@@ -1537,8 +1534,8 @@ public class MemoryStreamTest {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The buffer to write data from. </param
-        >
+          />The buffer to write data from.
+        </param>
         <param name="offset">
           <attribution
             license="cc4"
@@ -1551,8 +1548,8 @@ public class MemoryStreamTest {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum number of bytes to write. </param
-        >
+          />The maximum number of bytes to write.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1667,8 +1664,8 @@ public class MemoryStreamTest {
           <para>Writes a byte to the current stream at the current position.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The byte to write. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The byte to write.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1719,8 +1716,8 @@ public class MemoryStreamTest {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream to write this memory stream to. </param
-        >
+          />The stream to write this memory stream to.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

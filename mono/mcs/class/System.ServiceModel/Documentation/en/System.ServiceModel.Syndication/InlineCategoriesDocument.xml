@@ -43,8 +43,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" /> class. </para
-          >
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -72,8 +72,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" /> class.  </para
-          >
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" /> class.
+          </para>
         </summary>
         <param name="categories">
           <attribution
@@ -110,8 +110,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" /> class. </para
-          >
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" /> class.
+          </para>
         </summary>
         <param name="categories">
           <attribution
@@ -192,8 +192,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
 Returns a new  <see cref="T:System.ServiceModel.Syndication.SyndicationCategory" /> instance.
-</para
-          >
+
+          </para>
         </returns>
       </Docs>
     </Member>

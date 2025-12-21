@@ -27,8 +27,8 @@
         </format>.</para
       >
       <para
-        >You must also apply the <see cref="T:System.Runtime.Serialization.DataMemberAttribute" /> to any field, property, or event that holds values you want to serialize. By applying the <see cref="T:System.Runtime.Serialization.DataContractAttribute" />, you explicitly enable the <see cref="T:System.Runtime.Serialization.DataContractSerializer" /> to serialize and deserialize the data. </para
-      >
+        >You must also apply the <see cref="T:System.Runtime.Serialization.DataMemberAttribute" /> to any field, property, or event that holds values you want to serialize. By applying the <see cref="T:System.Runtime.Serialization.DataContractAttribute" />, you explicitly enable the <see cref="T:System.Runtime.Serialization.DataContractSerializer" /> to serialize and deserialize the data.
+      </para>
       <block subset="none" type="note">
         <para
           >You can apply the <see cref="T:System.Runtime.Serialization.DataMemberAttribute" /> to private fields. Be aware that the data returned by the field (even if it is private) is serialized and deserialized, and thus can be viewed or intercepted by a malicious user or process.</para
@@ -43,12 +43,12 @@
         <h2>Data Contracts</h2>
       </format>
       <para
-        >A <newTerm>data contract</newTerm> is an abstract description of a set of fields with a name and data type for each field. The data contract exists outside of any single implementation to allow services on different platforms to interoperate. As long as the data passed between the services conforms to the same contract, all the services can process the data. This processing is also known as a <newTerm>loosely coupled system</newTerm>. A data contract is also similar to an interface in that the contract specifies how data must be delivered so that it can be processed by an application. For example, the data contract may call for a data type named "Person" that has two text fields, named "FirstName" and "LastName". To create a data contract, apply the <see cref="T:System.Runtime.Serialization.DataContractAttribute" /> to the class and apply the <see cref="T:System.Runtime.Serialization.DataMemberAttribute" /> to any fields or properties that must be serialized. When serialized, the data conforms to the data contract that is implicitly built into the type. </para
-      >
+        >A <newTerm>data contract</newTerm> is an abstract description of a set of fields with a name and data type for each field. The data contract exists outside of any single implementation to allow services on different platforms to interoperate. As long as the data passed between the services conforms to the same contract, all the services can process the data. This processing is also known as a <newTerm>loosely coupled system</newTerm>. A data contract is also similar to an interface in that the contract specifies how data must be delivered so that it can be processed by an application. For example, the data contract may call for a data type named "Person" that has two text fields, named "FirstName" and "LastName". To create a data contract, apply the <see cref="T:System.Runtime.Serialization.DataContractAttribute" /> to the class and apply the <see cref="T:System.Runtime.Serialization.DataMemberAttribute" /> to any fields or properties that must be serialized. When serialized, the data conforms to the data contract that is implicitly built into the type.
+      </para>
       <block subset="none" type="note">
         <para
-          >A data contract differs significantly from an actual interface in its inheritance behavior. Interfaces are inherited by any derived types. When you apply the <see cref="T:System.Runtime.Serialization.DataContractAttribute" /> to a base class, the derived types do not inherit the attribute or the behavior. However, if a derived type has a data contract, the data members of the base class are serialized. However, you must apply the <see cref="T:System.Runtime.Serialization.DataMemberAttribute" /> to new members in a derived class to make them serializable. </para
-        >
+          >A data contract differs significantly from an actual interface in its inheritance behavior. Interfaces are inherited by any derived types. When you apply the <see cref="T:System.Runtime.Serialization.DataContractAttribute" /> to a base class, the derived types do not inherit the attribute or the behavior. However, if a derived type has a data contract, the data members of the base class are serialized. However, you must apply the <see cref="T:System.Runtime.Serialization.DataMemberAttribute" /> to new members in a derived class to make them serializable.
+        </para>
       </block>
       <format type="text/html">
         <h2>XML Schema Documents and the SvcUtil Tool</h2>
@@ -61,8 +61,8 @@
         </format> with the <system>/dconly</system> command line option. When the input to the tool is an assembly, by default, the tool generates a set of XML schemas that define all the data contract types found in that assembly. Conversely, you can also use the Svcutil.exe tool to create Visual Basic or C# class definitions that conform to the requirements of XML schemas that use constructs that can be expressed by data contracts. In this case, the <system>/dconly</system> command line option is not required.</para
       >
       <para
-        >If the input to the Svcutil.exe tool is an XML schema, by default, the tool creates a set of classes. If you examine those classes, you find that the <see cref="T:System.Runtime.Serialization.DataContractAttribute" /> has been applied. You can use those classes to create a new application to process data that must be exchanged with other services. </para
-      >
+        >If the input to the Svcutil.exe tool is an XML schema, by default, the tool creates a set of classes. If you examine those classes, you find that the <see cref="T:System.Runtime.Serialization.DataContractAttribute" /> has been applied. You can use those classes to create a new application to process data that must be exchanged with other services.
+      </para>
       <para
         >You can also run the tool against an endpoint that returns a Web Services Description Language (WSDL) document to automatically generate the code and configuration to create an indigo1 client. The generated code includes types that are marked with the <see cref="T:System.Runtime.Serialization.DataContractAttribute" />.</para
       >
@@ -70,8 +70,8 @@
         <h2>Reusing Existing Types</h2>
       </format>
       <para
-        >A data contract has two basic requirements: a stable name and a list of members. The stable name consists of the namespace uniform resource identifier (URI) and the local name of the contract. By default, when you apply the <see cref="T:System.Runtime.Serialization.DataContractAttribute" /> to a class, it uses the class name as the local name and the class's namespace (prefixed with "http://schemas.datacontract.org/2004/07/") as the namespace URI. You can override the defaults by setting the <see cref="P:System.Runtime.Serialization.DataContractAttribute.Name" /> and <see cref="P:System.Runtime.Serialization.DataContractAttribute.Namespace" /> properties. You can also change the namespace by applying the <see cref="T:System.Runtime.Serialization.ContractNamespaceAttribute" /> to the namespace. Use this capability when you have an existing type that processes data exactly as you require but has a different namespace and class name from the data contract. By overriding the default values, you can reuse your existing type and have the serialized data conform to the data contract. </para
-      >
+        >A data contract has two basic requirements: a stable name and a list of members. The stable name consists of the namespace uniform resource identifier (URI) and the local name of the contract. By default, when you apply the <see cref="T:System.Runtime.Serialization.DataContractAttribute" /> to a class, it uses the class name as the local name and the class's namespace (prefixed with "http://schemas.datacontract.org/2004/07/") as the namespace URI. You can override the defaults by setting the <see cref="P:System.Runtime.Serialization.DataContractAttribute.Name" /> and <see cref="P:System.Runtime.Serialization.DataContractAttribute.Namespace" /> properties. You can also change the namespace by applying the <see cref="T:System.Runtime.Serialization.ContractNamespaceAttribute" /> to the namespace. Use this capability when you have an existing type that processes data exactly as you require but has a different namespace and class name from the data contract. By overriding the default values, you can reuse your existing type and have the serialized data conform to the data contract.
+      </para>
       <block subset="none" type="note">
         <para
           >In any code, you can use the word DataContract instead of the longer <see cref="T:System.Runtime.Serialization.DataContractAttribute" />.</para
@@ -81,8 +81,8 @@
         <h2>Versioning</h2>
       </format>
       <para
-        >A data contract can also accommodate later versions of itself. That is, when a later version of the contract includes extra data, that data is stored and returned to a sender untouched. To do this, implement the <see cref="T:System.Runtime.Serialization.IExtensibleDataObject" /> interface. </para
-      >
+        >A data contract can also accommodate later versions of itself. That is, when a later version of the contract includes extra data, that data is stored and returned to a sender untouched. To do this, implement the <see cref="T:System.Runtime.Serialization.IExtensibleDataObject" /> interface.
+      </para>
       <para
         >crabout versioning, see <format type="text/html">
           <a href="4a0700cb-5f5f-4137-8705-3a3ecf06461f">Data Contract Versioning</a>
@@ -92,8 +92,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies that the type defines or implements a data contract and is serializable by a serializer, such as the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />. To make their type serializable, type authors must define a data contract for their type. </para
-      >
+        >Specifies that the type defines or implements a data contract and is serializable by a serializer, such as the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />. To make their type serializable, type authors must define a data contract for their type.
+      </para>
     </summary>
   </Docs>
   <Members>
@@ -113,8 +113,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.DataContractAttribute" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.DataContractAttribute" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -159,14 +159,14 @@
           <para
             >The <see cref="P:System.Runtime.Serialization.DataContractAttribute.Name" /> property is used to give a name to a data contract, which is the name of the type in XML schema. crdefault <format type="text/html">
               <a href="31f87e6c-247b-48f5-8e94-b9e1e33d8d09">Data Contract Names</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
           <para
             >By default, the name of a data contract is the name of the type that the <see cref="T:System.Runtime.Serialization.DataContractAttribute" /> is applied to. However, there may be reasons to change this default name. One reason is to allow an existing type to process data that must conform to an existing data contract. For example, there exists a type named Person but the data contract, embodied in an XML schema, requires that the name be Customer. The contract can be satisfied by setting the property value to Customer.</para
           >
           <para
-            >A second reason is to allow the generation of names that are invalid as type names. For example, if a data contract demands a name that is not allowable as a type name, set the property value to that disallowed name. For instance, the string "$value" is disallowed as a type name but is allowed as a <see cref="P:System.Runtime.Serialization.DataContractAttribute.Name" /> property value. </para
-          >
+            >A second reason is to allow the generation of names that are invalid as type names. For example, if a data contract demands a name that is not allowable as a type name, set the property value to that disallowed name. For instance, the string "$value" is disallowed as a type name but is allowed as a <see cref="P:System.Runtime.Serialization.DataContractAttribute.Name" /> property value.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

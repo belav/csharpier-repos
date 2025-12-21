@@ -34,8 +34,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies types that should be recognized by the <see cref="T:System.Runtime.Serialization.DataContractSerializer" /> when serializing or deserializing a given type. </para
-      >
+        >Specifies types that should be recognized by the <see cref="T:System.Runtime.Serialization.DataContractSerializer" /> when serializing or deserializing a given type.
+      </para>
     </summary>
   </Docs>
   <Members>
@@ -62,8 +62,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.KnownTypeAttribute" /> class with the name of a method that returns an <see cref="T:System.Collections.IEnumerable" /> of known types. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.KnownTypeAttribute" /> class with the name of a method that returns an <see cref="T:System.Collections.IEnumerable" /> of known types.
+          </para>
         </summary>
         <param name="methodName">
           <attribution
@@ -92,8 +92,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.KnownTypeAttribute" /> class with the specified type. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.KnownTypeAttribute" /> class with the specified type.
+          </para>
         </summary>
         <param name="type">
           <attribution
@@ -145,8 +145,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the type that should be recognized during serialization or deserialization by the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />. </para
-          >
+            >Gets the type that should be recognized during serialization or deserialization by the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />.
+          </para>
         </summary>
       </Docs>
     </Member>

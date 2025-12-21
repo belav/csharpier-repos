@@ -50,8 +50,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Serialization.ExpressionContext" /> class with the given expression and owner. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Serialization.ExpressionContext" /> class with the given expression and owner.
+          </para>
         </summary>
         <param name="expression">
           <attribution

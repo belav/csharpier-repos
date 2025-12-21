@@ -55,15 +55,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes that are loaded already. </param
-        >
+          />The number of bytes that are loaded already.
+        </param>
         <param name="maximumProgress">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The total number of bytes to be loaded. </param
-        >
+          />The total number of bytes to be loaded.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

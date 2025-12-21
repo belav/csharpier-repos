@@ -132,8 +132,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the XML type that the <see cref="T:System.Xml.Serialization.XmlSerializer" /> generates when it serializes the class instance (and recognizes when it deserializes the class instance). </param
-        >
+          />The name of the XML type that the <see cref="T:System.Xml.Serialization.XmlSerializer" /> generates when it serializes the class instance (and recognizes when it deserializes the class instance).
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AnonymousType">

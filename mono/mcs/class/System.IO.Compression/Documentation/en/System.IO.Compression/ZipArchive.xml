@@ -21,8 +21,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.IO.Compression.ZipArchive" /> class enables you to work with a package of compressed files. The package contains an entry for each compressed file. You can: </para
-      >
+        >The <see cref="T:System.IO.Compression.ZipArchive" /> class enables you to work with a package of compressed files. The package contains an entry for each compressed file. You can:
+      </para>
       <list type="bullet">
         <item>
           <para
@@ -407,8 +407,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method finishes writing the archive and releases all resources used by the <see cref="T:System.IO.Compression.ZipArchive" /> object. Unless you construct the object by using the <see cref="M:System.IO.Compression.ZipArchive.#ctor(System.IO.Stream,System.IO.Compression.ZipArchiveMode,System.Boolean)" /> constructor overload and set its <paramref name="leaveOpen" /> parameter to true, all underlying streams are closed and no longer available for subsequent write operations. </para
-          >
+            >This method finishes writing the archive and releases all resources used by the <see cref="T:System.IO.Compression.ZipArchive" /> object. Unless you construct the object by using the <see cref="M:System.IO.Compression.ZipArchive.#ctor(System.IO.Stream,System.IO.Compression.ZipArchiveMode,System.Boolean)" /> constructor overload and set its <paramref name="leaveOpen" /> parameter to true, all underlying streams are closed and no longer available for subsequent write operations.
+          </para>
           <para
             >When you are finished using this instance of <see cref="T:System.IO.Compression.ZipArchive" />, call <see cref="M:System.IO.Compression.ZipArchive.Dispose" /> to release all resources used by this instance. You should eliminate further references to this <see cref="T:System.IO.Compression.ZipArchive" /> instance so that the garbage collector can reclaim the memory of the instance instead of keeping it alive for finalization.</para
           >
@@ -540,8 +540,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If multiple entries that have the specified name exist in the archive, the first one is returned. The name of the entry is compared to <paramref name="entryName" /> using ordinal comparison. </para
-          >
+            >If multiple entries that have the specified name exist in the archive, the first one is returned. The name of the entry is compared to <paramref name="entryName" /> using ordinal comparison.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

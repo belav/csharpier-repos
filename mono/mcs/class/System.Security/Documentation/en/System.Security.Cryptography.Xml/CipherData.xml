@@ -128,8 +128,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a <see cref="T:System.Security.Cryptography.Xml.CipherData" /> object that represents the &lt;CipherData&gt; element in XML encryption and assigns the <paramref name="cipherReference" /> value to the <see cref="T:System.Security.Cryptography.Xml.CipherReference" /> property. The <see cref="T:System.Security.Cryptography.Xml.CipherReference" /> object represents the &lt;CipherReference&gt; element, which provides the location of the encrypted data. </para
-          >
+            >This constructor creates a <see cref="T:System.Security.Cryptography.Xml.CipherData" /> object that represents the &lt;CipherData&gt; element in XML encryption and assigns the <paramref name="cipherReference" /> value to the <see cref="T:System.Security.Cryptography.Xml.CipherReference" /> property. The <see cref="T:System.Security.Cryptography.Xml.CipherReference" /> object represents the &lt;CipherReference&gt; element, which provides the location of the encrypted data.
+          </para>
           <block subset="none" type="note">
             <para
               >A <see cref="T:System.Security.Cryptography.Xml.CipherData" /> object can have either a <see cref="T:System.Security.Cryptography.Xml.CipherReference" /> property or a <see cref="P:System.Security.Cryptography.Xml.CipherData.CipherValue" /> property, but not both. A <see cref="T:System.Security.Cryptography.CryptographicException" /> is thrown if both are assigned to a <see cref="T:System.Security.Cryptography.Xml.CipherData" /> object.</para
@@ -237,8 +237,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to output XML for a <see cref="T:System.Security.Cryptography.Xml.CipherData" /> object. </para
-          >
+            >Use this method to output XML for a <see cref="T:System.Security.Cryptography.Xml.CipherData" /> object.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

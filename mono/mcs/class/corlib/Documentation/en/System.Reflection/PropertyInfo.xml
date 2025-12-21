@@ -350,8 +350,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Indicates whether non-public methods should be returned in the MethodInfo array. true if non-public methods are to be included; otherwise, false. </param
-        >
+          />Indicates whether non-public methods should be returned in the MethodInfo array. true if non-public methods are to be included; otherwise, false.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -501,8 +501,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Indicates whether a non-public get accessor should be returned. true if a non-public accessor is to be returned; otherwise, false. </param
-        >
+          />Indicates whether a non-public get accessor should be returned. true if a non-public accessor is to be returned; otherwise, false.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -827,15 +827,15 @@
             <item>
               <term>
                 <para
-                  >A <see cref="T:System.Reflection.MethodInfo" /> object representing the Set method for this property. </para
-                >
+                  >A <see cref="T:System.Reflection.MethodInfo" /> object representing the Set method for this property.
+                </para>
               </term>
               <description>
                 <para>The set accessor is public.</para>
                 <para>-or- </para>
                 <para>
-                  <paramref name="nonPublic" /> is true and the set accessor is non-public. </para
-                >
+                  <paramref name="nonPublic" /> is true and the set accessor is non-public.
+                </para>
               </description>
             </item>
             <item>
@@ -859,8 +859,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Indicates whether the accessor should be returned if it is non-public. true if a non-public accessor is to be returned; otherwise, false. </param
-        >
+          />Indicates whether the accessor should be returned if it is non-public. true if a non-public accessor is to be returned; otherwise, false.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -978,8 +978,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Optional index values for indexed properties. This value should be null for non-indexed properties. </param
-        >
+          />Optional index values for indexed properties. This value should be null for non-indexed properties.
+        </param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -998,8 +998,8 @@ Console.WriteLine("CurrCult: " +
                 <a href="42d9dc2a-8fcc-4ff3-b002-4ff260ef3dc5"
                   >Security Considerations for Reflection</a
                 >
-              </format>.) </para
-            >
+              </format>.)
+            </para>
             <para>To use this functionality, your application should target the net_v35_long or later.</para>
           </block>
         </remarks>
@@ -1016,15 +1016,15 @@ Console.WriteLine("CurrCult: " +
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object whose property value will be returned. </param
-        >
+          />The object whose property value will be returned.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Optional index values for indexed properties. This value should be null for non-indexed properties. </param
-        >
+          />Optional index values for indexed properties. This value should be null for non-indexed properties.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1084,29 +1084,29 @@ Console.WriteLine("CurrCult: " +
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the following enumeration members that specify the invocation attribute: InvokeMethod, CreateInstance, Static, GetField, SetField, GetProperty, and SetProperty. You must specify a suitable invocation attribute. For example, to invoke a static member, set the Static flag. </param
-        >
+          />A bitwise combination of the following enumeration members that specify the invocation attribute: InvokeMethod, CreateInstance, Static, GetField, SetField, GetProperty, and SetProperty. You must specify a suitable invocation attribute. For example, to invoke a static member, set the Static flag.
+        </param>
         <param name="binder">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that enables the binding, coercion of argument types, invocation of members, and retrieval of <see cref="T:System.Reflection.MemberInfo" /> objects through reflection. If <paramref name="binder" /> is null, the default binder is used. </param
-        >
+          />An object that enables the binding, coercion of argument types, invocation of members, and retrieval of <see cref="T:System.Reflection.MemberInfo" /> objects through reflection. If <paramref name="binder" /> is null, the default binder is used.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Optional index values for indexed properties. This value should be null for non-indexed properties. </param
-        >
+          />Optional index values for indexed properties. This value should be null for non-indexed properties.
+        </param>
         <param name="culture">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The culture for which the resource is to be localized. If the resource is not localized for this culture, the <see cref="P:System.Globalization.CultureInfo.Parent" /> property will be called successively in search of a match. If this value is null, the culture-specific information is obtained from the <see cref="P:System.Globalization.CultureInfo.CurrentUICulture" /> property. </param
-        >
+          />The culture for which the resource is to be localized. If the resource is not localized for this culture, the <see cref="P:System.Globalization.CultureInfo.Parent" /> property will be called successively in search of a match. If this value is null, the culture-specific information is obtained from the <see cref="P:System.Globalization.CultureInfo.CurrentUICulture" /> property.
+        </param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -1124,8 +1124,8 @@ Console.WriteLine("CurrCult: " +
                 <a href="42d9dc2a-8fcc-4ff3-b002-4ff260ef3dc5"
                   >Security Considerations for Reflection</a
                 >
-              </format>.) </para
-            >
+              </format>.)
+            </para>
             <para>To use this functionality, your application should target the net_v35_long or later.</para>
           </block>
         </remarks>
@@ -1142,36 +1142,36 @@ Console.WriteLine("CurrCult: " +
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object whose property value will be returned. </param
-        >
+          />The object whose property value will be returned.
+        </param>
         <param name="invokeAttr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the following enumeration members that specify the invocation attribute: InvokeMethod, CreateInstance, Static, GetField, SetField, GetProperty, and SetProperty. You must specify a suitable invocation attribute. For example, to invoke a static member, set the Static flag. </param
-        >
+          />A bitwise combination of the following enumeration members that specify the invocation attribute: InvokeMethod, CreateInstance, Static, GetField, SetField, GetProperty, and SetProperty. You must specify a suitable invocation attribute. For example, to invoke a static member, set the Static flag.
+        </param>
         <param name="binder">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that enables the binding, coercion of argument types, invocation of members, and retrieval of <see cref="T:System.Reflection.MemberInfo" /> objects through reflection. If <paramref name="binder" /> is null, the default binder is used. </param
-        >
+          />An object that enables the binding, coercion of argument types, invocation of members, and retrieval of <see cref="T:System.Reflection.MemberInfo" /> objects through reflection. If <paramref name="binder" /> is null, the default binder is used.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Optional index values for indexed properties. This value should be null for non-indexed properties. </param
-        >
+          />Optional index values for indexed properties. This value should be null for non-indexed properties.
+        </param>
         <param name="culture">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The culture for which the resource is to be localized. If the resource is not localized for this culture, the <see cref="P:System.Globalization.CultureInfo.Parent" /> property will be called successively in search of a match. If this value is null, the culture-specific information is obtained from the <see cref="P:System.Globalization.CultureInfo.CurrentUICulture" /> property. </param
-        >
+          />The culture for which the resource is to be localized. If the resource is not localized for this culture, the <see cref="P:System.Globalization.CultureInfo.Parent" /> property will be called successively in search of a match. If this value is null, the culture-specific information is obtained from the <see cref="P:System.Globalization.CultureInfo.CurrentUICulture" /> property.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1498,19 +1498,15 @@ Console.WriteLine("CurrCult: " +
           >Requires permission to reflect non-public members of a type in loaded assemblies. See <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.MemberAccess" />.</permission
         >
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The new property value. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The new property value.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Optional index values for indexed properties. This value should be null for non-indexed properties. </param
-        >
+          />Optional index values for indexed properties. This value should be null for non-indexed properties.
+        </param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -1531,8 +1527,8 @@ Console.WriteLine("CurrCult: " +
                 <a href="42d9dc2a-8fcc-4ff3-b002-4ff260ef3dc5"
                   >Security Considerations for Reflection</a
                 >
-              </format>.) </para
-            >
+              </format>.)
+            </para>
             <para>To use this functionality, your application should target the net_v35_long or later.</para>
           </block>
         </remarks>
@@ -1545,22 +1541,18 @@ Console.WriteLine("CurrCult: " +
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object whose property value will be set. </param
-        >
+          />The object whose property value will be set.
+        </param>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The new property value. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The new property value.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Optional index values for indexed properties. This value should be null for non-indexed properties. </param
-        >
+          />Optional index values for indexed properties. This value should be null for non-indexed properties.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1613,12 +1605,8 @@ Console.WriteLine("CurrCult: " +
           >Requires permission to reflect non-public members of a type in loaded assemblies. See <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.MemberAccess" />.</permission
         >
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The new property value. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The new property value.
+        </param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -1635,8 +1623,8 @@ Console.WriteLine("CurrCult: " +
                 <a href="42d9dc2a-8fcc-4ff3-b002-4ff260ef3dc5"
                   >Security Considerations for Reflection</a
                 >
-              </format>.) </para
-            >
+              </format>.)
+            </para>
             <para>To use this functionality, your application should target the net_v35_long or later.</para>
           </block>
         </remarks>
@@ -1649,43 +1637,39 @@ Console.WriteLine("CurrCult: " +
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object whose property value will be set. </param
-        >
+          />The object whose property value will be set.
+        </param>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The new property value. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The new property value.
+        </param>
         <param name="invokeAttr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the following enumeration members that specify the invocation attribute: InvokeMethod, CreateInstance, Static, GetField, SetField, GetProperty, or SetProperty. You must specify a suitable invocation attribute. For example, to invoke a static member, set the Static flag. </param
-        >
+          />A bitwise combination of the following enumeration members that specify the invocation attribute: InvokeMethod, CreateInstance, Static, GetField, SetField, GetProperty, or SetProperty. You must specify a suitable invocation attribute. For example, to invoke a static member, set the Static flag.
+        </param>
         <param name="binder">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that enables the binding, coercion of argument types, invocation of members, and retrieval of <see cref="T:System.Reflection.MemberInfo" /> objects through reflection. If <paramref name="binder" /> is null, the default binder is used. </param
-        >
+          />An object that enables the binding, coercion of argument types, invocation of members, and retrieval of <see cref="T:System.Reflection.MemberInfo" /> objects through reflection. If <paramref name="binder" /> is null, the default binder is used.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Optional index values for indexed properties. This value should be null for non-indexed properties. </param
-        >
+          />Optional index values for indexed properties. This value should be null for non-indexed properties.
+        </param>
         <param name="culture">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The culture for which the resource is to be localized. If the resource is not localized for this culture, the <see cref="P:System.Globalization.CultureInfo.Parent" /> property will be called successively in search of a match. If this value is null, the culture-specific information is obtained from the <see cref="P:System.Globalization.CultureInfo.CurrentUICulture" /> property. </param
-        >
+          />The culture for which the resource is to be localized. If the resource is not localized for this culture, the <see cref="P:System.Globalization.CultureInfo.Parent" /> property will be called successively in search of a match. If this value is null, the culture-specific information is obtained from the <see cref="P:System.Globalization.CultureInfo.CurrentUICulture" /> property.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

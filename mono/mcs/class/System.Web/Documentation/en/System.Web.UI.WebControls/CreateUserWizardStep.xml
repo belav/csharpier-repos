@@ -28,8 +28,8 @@
         >
       </block>
       <para
-        >You can modify the <see cref="T:System.Web.UI.WebControls.CreateUserWizardStep" /> step to contain additional fields, or change the display order of the fields included in the <see cref="T:System.Web.UI.WebControls.CreateUserWizardStep" /> step, by editing the template associated with the control. </para
-      >
+        >You can modify the <see cref="T:System.Web.UI.WebControls.CreateUserWizardStep" /> step to contain additional fields, or change the display order of the fields included in the <see cref="T:System.Web.UI.WebControls.CreateUserWizardStep" /> step, by editing the template associated with the control.
+      </para>
       <para
         >The new Web site user account is created in the data store when the user clicks the <ui>Next</ui> button on the <see cref="T:System.Web.UI.WebControls.CreateUserWizardStep" /> step. By default, the <see cref="P:System.Web.UI.WebControls.CreateUserWizardStep.AllowReturn" /> property is set to false to keep the user from returning to the <see cref="T:System.Web.UI.WebControls.CreateUserWizardStep" /> step and accidentally attempting to create another user account with the same credentials. If you set the <see cref="P:System.Web.UI.WebControls.CreateUserWizardStep.AllowReturn" /> property to true, you must include logic in your application to remove the user account that was originally created before the user returned to this step, or to allow the user to edit information he or she originally entered.</para
       >
@@ -109,8 +109,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.UI.WebControls.CreateUserWizardStep.StepType" /> property specifies the navigation options to display for the user-account-creation step of the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> control. </para
-          >
+            >The <see cref="P:System.Web.UI.WebControls.CreateUserWizardStep.StepType" /> property specifies the navigation options to display for the user-account-creation step of the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> control.
+          </para>
           <para
             >The <see cref="P:System.Web.UI.WebControls.CreateUserWizardStep.StepType" /> property determines which of the <see cref="T:System.Web.UI.WebControls.Wizard" /> control's navigation buttons are displayed on the <see cref="T:System.Web.UI.WebControls.CreateUserWizardStep" /> control. For more information, see the <see cref="P:System.Web.UI.WebControls.WizardStepBase.StepType" /> property.</para
           >
@@ -163,8 +163,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the title to use for the user-account-creation step of the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> control. </para
-          >
+            >Gets or sets the title to use for the user-account-creation step of the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> control.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>

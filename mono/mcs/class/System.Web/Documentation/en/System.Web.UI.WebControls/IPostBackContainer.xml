@@ -46,8 +46,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implementations of the <see cref="M:System.Web.UI.WebControls.IPostBackContainer.GetPostBackOptions(System.Web.UI.WebControls.IButtonControl)" /> method should configure a new <see cref="T:System.Web.UI.PostBackOptions" /> instance with the information required for the <see cref="M:System.Web.UI.ClientScriptManager.GetPostBackEventReference(System.Web.UI.PostBackOptions)" /> method to construct a valid postback event reference, which, when executed on the client, initiates a postback. </para
-          >
+            >Implementations of the <see cref="M:System.Web.UI.WebControls.IPostBackContainer.GetPostBackOptions(System.Web.UI.WebControls.IButtonControl)" /> method should configure a new <see cref="T:System.Web.UI.PostBackOptions" /> instance with the information required for the <see cref="M:System.Web.UI.ClientScriptManager.GetPostBackEventReference(System.Web.UI.PostBackOptions)" /> method to construct a valid postback event reference, which, when executed on the client, initiates a postback.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

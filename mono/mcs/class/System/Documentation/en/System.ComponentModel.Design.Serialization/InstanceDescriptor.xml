@@ -31,8 +31,8 @@
         >Some custom serializers use <see cref="T:System.ComponentModel.Design.Serialization.InstanceDescriptor" /> to represent serializable objects. Several methods of a <see cref="T:System.ComponentModel.TypeDescriptor" /> use <see cref="T:System.ComponentModel.Design.Serialization.InstanceDescriptor" /> to represent or instantiate objects.</para
       >
       <para
-        >An <see cref="T:System.ComponentModel.Design.Serialization.InstanceDescriptor" /> provides the following members: </para
-      >
+        >An <see cref="T:System.ComponentModel.Design.Serialization.InstanceDescriptor" /> provides the following members:
+      </para>
       <list type="bullet">
         <item>
           <para
@@ -95,15 +95,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The member information for the descriptor. This can be a <see cref="T:System.Reflection.MethodInfo" />, <see cref="T:System.Reflection.ConstructorInfo" />, <see cref="T:System.Reflection.FieldInfo" />, or <see cref="T:System.Reflection.PropertyInfo" />. If this is a <see cref="T:System.Reflection.MethodInfo" />, <see cref="T:System.Reflection.FieldInfo" />, or <see cref="T:System.Reflection.PropertyInfo" />, it must represent a static member. </param
-        >
+          />The member information for the descriptor. This can be a <see cref="T:System.Reflection.MethodInfo" />, <see cref="T:System.Reflection.ConstructorInfo" />, <see cref="T:System.Reflection.FieldInfo" />, or <see cref="T:System.Reflection.PropertyInfo" />. If this is a <see cref="T:System.Reflection.MethodInfo" />, <see cref="T:System.Reflection.FieldInfo" />, or <see cref="T:System.Reflection.PropertyInfo" />, it must represent a static member.
+        </param>
         <param name="arguments">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The collection of arguments to pass to the member. This parameter can be null or an empty collection if there are no arguments. The collection can also consist of other instances of <see cref="T:System.ComponentModel.Design.Serialization.InstanceDescriptor" />. </param
-        >
+          />The collection of arguments to pass to the member. This parameter can be null or an empty collection if there are no arguments. The collection can also consist of other instances of <see cref="T:System.ComponentModel.Design.Serialization.InstanceDescriptor" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -140,22 +140,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The member information for the descriptor. This can be a <see cref="T:System.Reflection.MethodInfo" />, <see cref="T:System.Reflection.ConstructorInfo" />, <see cref="T:System.Reflection.FieldInfo" />, or <see cref="T:System.Reflection.PropertyInfo" />. If this is a <see cref="T:System.Reflection.MethodInfo" />, <see cref="T:System.Reflection.FieldInfo" />, or <see cref="T:System.Reflection.PropertyInfo" />, it must represent a static member. </param
-        >
+          />The member information for the descriptor. This can be a <see cref="T:System.Reflection.MethodInfo" />, <see cref="T:System.Reflection.ConstructorInfo" />, <see cref="T:System.Reflection.FieldInfo" />, or <see cref="T:System.Reflection.PropertyInfo" />. If this is a <see cref="T:System.Reflection.MethodInfo" />, <see cref="T:System.Reflection.FieldInfo" />, or <see cref="T:System.Reflection.PropertyInfo" />, it must represent a static member.
+        </param>
         <param name="arguments">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The collection of arguments to pass to the member. This parameter can be null or an empty collection if there are no arguments. The collection can also consist of other instances of <see cref="T:System.ComponentModel.Design.Serialization.InstanceDescriptor" />. </param
-        >
+          />The collection of arguments to pass to the member. This parameter can be null or an empty collection if there are no arguments. The collection can also consist of other instances of <see cref="T:System.ComponentModel.Design.Serialization.InstanceDescriptor" />.
+        </param>
         <param name="isComplete">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if the specified information completely describes the instance; otherwise, false. </param
-        >
+          />true if the specified information completely describes the instance; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Arguments">

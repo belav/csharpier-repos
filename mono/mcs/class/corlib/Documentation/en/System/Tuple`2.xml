@@ -194,8 +194,8 @@
           <list type="bullet">
             <item>
               <para
-                >By calling the GetType method on the value that is returned by the <see cref="P:System.Tuple`2.Item1" /> property. </para
-              >
+                >By calling the GetType method on the value that is returned by the <see cref="P:System.Tuple`2.Item1" /> property.
+              </para>
             </item>
             <item>
               <para
@@ -232,8 +232,8 @@
           <list type="bullet">
             <item>
               <para
-                >By calling the GetType method on the value that is returned by the <see cref="P:System.Tuple`2.Item2" /> property. </para
-              >
+                >By calling the GetType method on the value that is returned by the <see cref="P:System.Tuple`2.Item2" /> property.
+              </para>
             </item>
             <item>
               <para

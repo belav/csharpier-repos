@@ -39,8 +39,8 @@
         >You can open more than one DataReader on a single <see cref="T:System.Data.OleDb.OleDbConnection" />. If the OLE DB provider you use does not support more than one DataReader on a single connection, the provider implicitly opens an additional connection for each.</para
       >
       <para
-        >If the <see cref="T:System.Data.OleDb.OleDbConnection" /> goes out of scope, it is not closed. Therefore, you must explicitly close the connection by calling <see cref="M:System.Data.OleDb.OleDbConnection.Close" /> or Dispose, or by using the <see cref="T:System.Data.OleDb.OleDbConnection" /> object within a Using statement. </para
-      >
+        >If the <see cref="T:System.Data.OleDb.OleDbConnection" /> goes out of scope, it is not closed. Therefore, you must explicitly close the connection by calling <see cref="M:System.Data.OleDb.OleDbConnection.Close" /> or Dispose, or by using the <see cref="T:System.Data.OleDb.OleDbConnection" /> object within a Using statement.
+      </para>
       <block subset="none" type="note">
         <para
           >To deploy high-performance applications, you must use connection pooling. When you use the .NET Framework Data Provider for OLE DB, you do not have to enable connection pooling because the provider manages this automatically. For more information about how to use connection pooling with the .NET Framework Data Provider for OLE DB, see <format type="text/html">
@@ -238,8 +238,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The connection used to open the database. </param
-        >
+          />The connection used to open the database.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -369,8 +369,8 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The database name. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The database name.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -426,8 +426,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Data.OleDb.OleDbConnection.ConnectionString" /> is designed to match OLE DB connection string format as closely as possible with the following exceptions: </para
-          >
+            >The <see cref="P:System.Data.OleDb.OleDbConnection.ConnectionString" /> is designed to match OLE DB connection string format as closely as possible with the following exceptions:
+          </para>
           <list type="bullet">
             <item>
               <para
@@ -459,15 +459,15 @@
             >The <see cref="P:System.Data.OleDb.OleDbConnection.ConnectionString" /> property can be set only when the connection is closed. Many of the connection string values have corresponding read-only properties. When the connection string is set, these properties are updated, except when an error is detected. In this case, none of the properties are updated. <see cref="T:System.Data.OleDb.OleDbConnection" /> properties return only those settings that are contained in the <see cref="P:System.Data.OleDb.OleDbConnection.ConnectionString" />.</para
           >
           <para
-            >Resetting the <see cref="P:System.Data.OleDb.OleDbConnection.ConnectionString" /> on a closed connection resets all connection string values and related properties. This includes the password. For example, if you set a connection string that includes "Initial Catalog= AdventureWorks", and then reset the connection string to "Provider= SQLOLEDB;Data Source= MySQLServer;IntegratedSecurity=SSPI", the <see cref="P:System.Data.OleDb.OleDbConnection.Database" /> property is no longer set to AdventureWorks. (The Initial Catalog value of the connection string corresponds to the Database property.) </para
-          >
+            >Resetting the <see cref="P:System.Data.OleDb.OleDbConnection.ConnectionString" /> on a closed connection resets all connection string values and related properties. This includes the password. For example, if you set a connection string that includes "Initial Catalog= AdventureWorks", and then reset the connection string to "Provider= SQLOLEDB;Data Source= MySQLServer;IntegratedSecurity=SSPI", the <see cref="P:System.Data.OleDb.OleDbConnection.Database" /> property is no longer set to AdventureWorks. (The Initial Catalog value of the connection string corresponds to the Database property.)
+          </para>
           <para
             >A preliminary validation of the connection string is performed when the property is set. If values for the Provider, Connect Timeout, Persist Security Info, or OLE DB Services are included in the string, these values are checked. When an application calls the <see cref="M:System.Data.OleDb.OleDbConnection.Open" /> method, the connection string is fully validated. If the connection string contains invalid or unsupported properties, a run-time exception, such as <see cref="T:System.ArgumentException" />, is generated.</para
           >
           <block subset="none" type="note">
             <para
-              >It is possible to supply connection information for an <see cref="T:System.Data.OleDb.OleDbConnection" /> in a Universal Data Link (UDL) file; however you should avoid doing so. UDL files are not encrypted and expose connection string information in clear text. Because a UDL file is an external file-based resource to your application, it cannot be secured using the .NET Framework. </para
-            >
+              >It is possible to supply connection information for an <see cref="T:System.Data.OleDb.OleDbConnection" /> in a Universal Data Link (UDL) file; however you should avoid doing so. UDL files are not encrypted and expose connection string information in clear text. Because a UDL file is an external file-based resource to your application, it cannot be secured using the .NET Framework.
+            </para>
           </block>
           <para>The basic format of a connection string includes a series of keyword/value pairs separated by semicolons. The equal sign (=) connects each keyword and its value. To include values that contain a semicolon, single-quote character, or double-quote character, the value must be enclosed in double quotation marks. If the value contains both a semicolon and a double-quote character, the value can be enclosed in single quotation marks. The single quotation mark is also useful if the value starts with a double-quote character. Conversely, the double quotation mark can be used if the value starts with a single quotation mark. If the value contains both single-quote and double-quote characters, the quotation-mark character used to enclose the value must be doubled every time it occurs within the value.</para>
           <para>To include preceding or trailing spaces in the string value, the value must be enclosed in either single quotation marks or double quotation marks. Any leading or trailing spaces around integer, Boolean, or enumerated values are ignored, even if enclosed in quotation marks. However, spaces within a string literal keyword or value are preserved. Single or double quotation marks may be used within a connection string without using delimiters (for example, Data Source= my'Server or Data Source= my"Server) unless a quotation-mark character is the first or last character in the value.</para>
@@ -787,15 +787,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Data.OleDb.OleDbSchemaGuid" /> values that specifies the schema table to return. </param
-        >
+          />One of the <see cref="T:System.Data.OleDb.OleDbSchemaGuid" /> values that specifies the schema table to return.
+        </param>
         <param name="restrictions">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Object" /> array of restriction values. These are applied in the order of the restriction columns. That is, the first restriction value applies to the first restriction column, the second restriction value applies to the second restriction column, and so on. </param
-        >
+          />An <see cref="T:System.Object" /> array of restriction values. These are applied in the order of the restriction columns. That is, the first restriction value applies to the first restriction column, the second restriction value applies to the second restriction column, and so on.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -937,8 +937,8 @@
             >Clients that want to process warnings or informational messages sent by the server should create an <see cref="T:System.Data.OleDb.OleDbInfoMessageEventHandler" /> delegate to listen to this event.</para
           >
           <para
-            >The <see cref="E:System.Data.OleDb.OleDbConnection.InfoMessage" /> event occurs when a message with low severity is returned from the data source. Low severity messages are those that do not cause an exception. For Microsoft SQL Server, this includes error messages that have a severity of 10 or less </para
-          >
+            >The <see cref="E:System.Data.OleDb.OleDbConnection.InfoMessage" /> event occurs when a message with low severity is returned from the data source. Low severity messages are those that do not cause an exception. For Microsoft SQL Server, this includes error messages that have a severity of 10 or less
+          </para>
           <para
             >For more information and an example, see <format type="text/html">
               <a href="5a29de74-acfc-4134-8616-829dd7ce0710">Working with Connection Events</a>
@@ -1133,13 +1133,13 @@
           <list type="bullet">
             <item>
               <para
-                >From Closed to Open, using the <see cref="M:System.Data.OleDb.OleDbConnection.Open" /> method of the <see cref="T:System.Data.OleDb.OleDbConnection" /> object. </para
-              >
+                >From Closed to Open, using the <see cref="M:System.Data.OleDb.OleDbConnection.Open" /> method of the <see cref="T:System.Data.OleDb.OleDbConnection" /> object.
+              </para>
             </item>
             <item>
               <para
-                >From Open to Closed, using either the <see cref="M:System.Data.OleDb.OleDbConnection.Close" /> method or the Dispose method of the <see cref="T:System.Data.OleDb.OleDbConnection" /> object. </para
-              >
+                >From Open to Closed, using either the <see cref="M:System.Data.OleDb.OleDbConnection.Close" /> method or the Dispose method of the <see cref="T:System.Data.OleDb.OleDbConnection" /> object.
+              </para>
             </item>
           </list>
           <block subset="none" type="note">

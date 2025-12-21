@@ -323,8 +323,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the delegate of the <see cref="T:System.Runtime.CompilerServices.CallSite" />. </typeparam
-        >
+          />The type of the delegate of the <see cref="T:System.Runtime.CompilerServices.CallSite" />.
+        </typeparam>
       </Docs>
     </Member>
     <Member MemberName="GetMatch">
@@ -561,8 +561,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the delegate of the <see cref="T:System.Runtime.CompilerServices.CallSite" />. </typeparam
-        >
+          />The type of the delegate of the <see cref="T:System.Runtime.CompilerServices.CallSite" />.
+        </typeparam>
       </Docs>
     </Member>
     <Member MemberName="SetNotMatched">

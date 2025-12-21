@@ -153,8 +153,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to specify that a Unicode byte order mark is provided; otherwise, false. </param
-        >
+          />true to specify that a Unicode byte order mark is provided; otherwise, false.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -188,8 +188,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to specify that an exception be thrown when an invalid encoding is detected; otherwise, false. </param
-        >
+          />true to specify that an exception be thrown when an invalid encoding is detected; otherwise, false.
+        </param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -212,15 +212,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to specify that a Unicode byte order mark is provided; otherwise, false. </param
-        >
+          />true to specify that a Unicode byte order mark is provided; otherwise, false.
+        </param>
         <param name="throwOnInvalidBytes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to specify that an exception be thrown when an invalid encoding is detected; otherwise, false. </param
-        >
+          />true to specify that an exception be thrown when an invalid encoding is detected; otherwise, false.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -250,8 +250,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Two <see cref="T:System.Text.UTF8Encoding" /> objects are considered equal if all of the following conditions are true: </para
-          >
+            >Two <see cref="T:System.Text.UTF8Encoding" /> objects are considered equal if all of the following conditions are true:
+          </para>
           <list type="bullet">
             <item>
               <para>Both objects use the same byte order.</para>
@@ -281,8 +281,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to compare with the current instance. </param
-        >
+          />The <see cref="T:System.Object" /> to compare with the current instance.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -310,8 +310,8 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="chars " />is <see langword="null" />. </exception
-        >
+          <paramref name="chars " />is <see langword="null" />.
+        </exception>
         <exception cref="T:System.ArgumentException">
           <para
             >Error-checking is turned on for the current instance and <paramref name="chars" /> contains an invalid surrogate sequence.</para
@@ -347,8 +347,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.String" /> containing the set of characters to encode. </param
-        >
+          />The <see cref="T:System.String" /> containing the set of characters to encode.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -408,15 +408,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A pointer to the first character to encode. </param
-        >
+          />A pointer to the first character to encode.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters to encode. </param
-        >
+          />The number of characters to encode.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetByteCount">
@@ -448,8 +448,8 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="chars " /> is <see langword="null" /> . </exception
-        >
+          <paramref name="chars " /> is <see langword="null" /> .
+        </exception>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <para>The return value is greater than <see cref="F:System.Int32.MaxValue" />.</para>
           <para>-or-</para>
@@ -489,22 +489,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character array containing the set of characters to encode. </param
-        >
+          />The character array containing the set of characters to encode.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the first character to encode. </param
-        >
+          />The index of the first character to encode.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters to encode. </param
-        >
+          />The number of characters to encode.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -631,29 +631,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A pointer to the first character to encode. </param
-        >
+          />A pointer to the first character to encode.
+        </param>
         <param name="charCount">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters to encode. </param
-        >
+          />The number of characters to encode.
+        </param>
         <param name="bytes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A pointer to the location at which to start writing the resulting sequence of bytes. </param
-        >
+          />A pointer to the location at which to start writing the resulting sequence of bytes.
+        </param>
         <param name="byteCount">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum number of bytes to write. </param
-        >
+          />The maximum number of bytes to write.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetBytes">
@@ -696,8 +696,8 @@
           >
         </exception>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="chars" /> or <paramref name="bytes" /> is <see langword="null" />. </exception
-        >
+          <paramref name="chars" /> or <paramref name="bytes" /> is <see langword="null" />.
+        </exception>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <para>
             <paramref name="charIndex" />, <paramref name="charCount" />, or <paramref name="byteIndex" /> is less than zero.</para
@@ -737,36 +737,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character array containing the set of characters to encode. </param
-        >
+          />The character array containing the set of characters to encode.
+        </param>
         <param name="charIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the first character to encode. </param
-        >
+          />The index of the first character to encode.
+        </param>
         <param name="charCount">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters to encode. </param
-        >
+          />The number of characters to encode.
+        </param>
         <param name="bytes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte array to contain the resulting sequence of bytes. </param
-        >
+          />The byte array to contain the resulting sequence of bytes.
+        </param>
         <param name="byteIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index at which to start writing the resulting sequence of bytes. </param
-        >
+          />The index at which to start writing the resulting sequence of bytes.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -810,8 +810,8 @@
           >
         </exception>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="chars " /> or <paramref name="bytes " />is <see langword="null" /> . </exception
-        >
+          <paramref name="chars " /> or <paramref name="bytes " />is <see langword="null" /> .
+        </exception>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <para>
             <paramref name="charIndex" />, <paramref name="charCount" />, or <paramref name="byteIndex" /> is less than zero.</para
@@ -828,36 +828,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.String" /> containing the set of characters to encode. </param
-        >
+          />The <see cref="T:System.String" /> containing the set of characters to encode.
+        </param>
         <param name="charIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the first character to encode. </param
-        >
+          />The index of the first character to encode.
+        </param>
         <param name="charCount">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters to encode. </param
-        >
+          />The number of characters to encode.
+        </param>
         <param name="bytes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte array to contain the resulting sequence of bytes. </param
-        >
+          />The byte array to contain the resulting sequence of bytes.
+        </param>
         <param name="byteIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index at which to start writing the resulting sequence of bytes. </param
-        >
+          />The index at which to start writing the resulting sequence of bytes.
+        </param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -888,36 +888,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.String" /> containing the set of characters to encode. </param
-        >
+          />The <see cref="T:System.String" /> containing the set of characters to encode.
+        </param>
         <param name="charIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the first character to encode. </param
-        >
+          />The index of the first character to encode.
+        </param>
         <param name="charCount">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters to encode. </param
-        >
+          />The number of characters to encode.
+        </param>
         <param name="bytes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte array to contain the resulting sequence of bytes. </param
-        >
+          />The byte array to contain the resulting sequence of bytes.
+        </param>
         <param name="byteIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index at which to start writing the resulting sequence of bytes. </param
-        >
+          />The index at which to start writing the resulting sequence of bytes.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -974,15 +974,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A pointer to the first byte to decode. </param
-        >
+          />A pointer to the first byte to decode.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes to decode. </param
-        >
+          />The number of bytes to decode.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetCharCount">
@@ -1014,8 +1014,8 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="bytes " /> is <see langword="null" />. </exception
-        >
+          <paramref name="bytes " /> is <see langword="null" />.
+        </exception>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <para><paramref name="index " /> or <paramref name="count " /> is less than zero.</para>
           <para>-or-</para>
@@ -1050,22 +1050,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte array containing the sequence of bytes to decode. </param
-        >
+          />The byte array containing the sequence of bytes to decode.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the first byte to decode. </param
-        >
+          />The index of the first byte to decode.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes to decode. </param
-        >
+          />The number of bytes to decode.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1129,29 +1129,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A pointer to the first byte to decode. </param
-        >
+          />A pointer to the first byte to decode.
+        </param>
         <param name="byteCount">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes to decode. </param
-        >
+          />The number of bytes to decode.
+        </param>
         <param name="chars">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A pointer to the location at which to start writing the resulting set of characters. </param
-        >
+          />A pointer to the location at which to start writing the resulting set of characters.
+        </param>
         <param name="charCount">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum number of characters to write. </param
-        >
+          />The maximum number of characters to write.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetChars">
@@ -1195,8 +1195,8 @@
         </exception>
         <exception cref="T:System.ArgumentNullException">
           <para>
-            <paramref name="bytes " /> or <paramref name="chars " /> is <see langword="null" />. </para
-          >
+            <paramref name="bytes " /> or <paramref name="chars " /> is <see langword="null" />.
+          </para>
         </exception>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <para>
@@ -1234,36 +1234,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte array containing the sequence of bytes to decode. </param
-        >
+          />The byte array containing the sequence of bytes to decode.
+        </param>
         <param name="byteIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the first byte to decode. </param
-        >
+          />The index of the first byte to decode.
+        </param>
         <param name="byteCount">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes to decode. </param
-        >
+          />The number of bytes to decode.
+        </param>
         <param name="chars">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character array to contain the resulting set of characters. </param
-        >
+          />The character array to contain the resulting set of characters.
+        </param>
         <param name="charIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index at which to start writing the resulting set of characters. </param
-        >
+          />The index at which to start writing the resulting set of characters.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1432,8 +1432,8 @@
             <see cref="M:System.Text.UTF8Encoding.GetMaxByteCount(System.Int32)" /> is a worst-case number, including the worst case for the currently selected <see cref="T:System.Text.EncoderFallback" />. If a fallback is chosen with a potentially large string, <see cref="M:System.Text.UTF8Encoding.GetMaxByteCount(System.Int32)" /> can return large values.</para
           >
           <para
-            >In most cases, this method returns reasonable numbers for small strings. For large strings, you might have to choose between using very large buffers and catching errors in the rare case that a more reasonable buffer is exceeded. You might also want to consider a different approach using <see cref="Overload:System.Text.UTF8Encoding.GetByteCount" /> or <see cref="Overload:System.Text.Encoder.Convert" />. For example, text in English and many other languages often needs only one UTF-8 byte to represent a character, but the number returned by <see cref="M:System.Text.UTF8Encoding.GetMaxByteCount(System.Int32)" /> has to allow for the possibility that the string to be converted will consist entirely of characters that each require four bytes. </para
-          >
+            >In most cases, this method returns reasonable numbers for small strings. For large strings, you might have to choose between using very large buffers and catching errors in the rare case that a more reasonable buffer is exceeded. You might also want to consider a different approach using <see cref="Overload:System.Text.UTF8Encoding.GetByteCount" /> or <see cref="Overload:System.Text.Encoder.Convert" />. For example, text in English and many other languages often needs only one UTF-8 byte to represent a character, but the number returned by <see cref="M:System.Text.UTF8Encoding.GetMaxByteCount(System.Int32)" /> has to allow for the possibility that the string to be converted will consist entirely of characters that each require four bytes.
+          </para>
           <para>
             <see cref="M:System.Text.UTF8Encoding.GetMaxByteCount(System.Int32)" /> has no relation to <see cref="M:System.Text.UTF8Encoding.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" />. If your application needs a similar function to use with <see cref="M:System.Text.UTF8Encoding.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" />, it should use <see cref="M:System.Text.UTF8Encoding.GetMaxCharCount(System.Int32)" />.</para
           >
@@ -1454,8 +1454,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters to encode. </param
-        >
+          />The number of characters to encode.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1516,8 +1516,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes to decode. </param
-        >
+          />The number of bytes to decode.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1624,22 +1624,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte array containing the sequence of bytes to decode. </param
-        >
+          />The byte array containing the sequence of bytes to decode.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the first byte to decode. </param
-        >
+          />The index of the first byte to decode.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes to decode. </param
-        >
+          />The number of bytes to decode.
+        </param>
       </Docs>
     </Member>
   </Members>

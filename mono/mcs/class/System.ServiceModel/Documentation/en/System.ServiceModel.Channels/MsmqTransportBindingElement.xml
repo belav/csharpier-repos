@@ -26,8 +26,8 @@
         >The <see cref="T:System.ServiceModel.Channels.MsmqTransportBindingElement" /> enables the user to set the properties of the queued communication channel. The queued communication channel uses Message Queuing for its transport.</para
       >
       <para
-        >This binding element is the default binding element used by the Message Queuing standard binding (<see cref="T:System.ServiceModel.NetMsmqBinding" />). </para
-      >
+        >This binding element is the default binding element used by the Message Queuing standard binding (<see cref="T:System.ServiceModel.NetMsmqBinding" />).
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -51,8 +51,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.MsmqTransportBindingElement" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.MsmqTransportBindingElement" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -103,8 +103,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.ServiceModel.Channels.IOutputSessionChannel" /> or a <see cref="T:System.ServiceModel.Channels.IOutputChannel" /> class. </typeparam
-        >
+          />A <see cref="T:System.ServiceModel.Channels.IOutputSessionChannel" /> or a <see cref="T:System.ServiceModel.Channels.IOutputChannel" /> class.
+        </typeparam>
       </Docs>
     </Member>
     <Member MemberName="BuildChannelListener&lt;TChannel&gt;">
@@ -156,8 +156,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The channel type to be used to build the channel listener. Permitted channel types are <see cref="T:System.ServiceModel.Channels.IInputSessionChannel" /> or a <see cref="T:System.ServiceModel.Channels.IInputChannel" /> class. </typeparam
-        >
+          />The channel type to be used to build the channel listener. Permitted channel types are <see cref="T:System.ServiceModel.Channels.IInputSessionChannel" /> or a <see cref="T:System.ServiceModel.Channels.IInputChannel" /> class.
+        </typeparam>
       </Docs>
     </Member>
     <Member MemberName="CanBuildChannelFactory&lt;TChannel&gt;">
@@ -206,8 +206,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The channel type to be used to build the channel listener. Permitted channel types are <see cref="T:System.ServiceModel.Channels.IOutputSessionChannel" /> or a <see cref="T:System.ServiceModel.Channels.IOutputChannel" /> class. </typeparam
-        >
+          />The channel type to be used to build the channel listener. Permitted channel types are <see cref="T:System.ServiceModel.Channels.IOutputSessionChannel" /> or a <see cref="T:System.ServiceModel.Channels.IOutputChannel" /> class.
+        </typeparam>
       </Docs>
     </Member>
     <Member MemberName="CanBuildChannelListener&lt;TChannel&gt;">
@@ -262,8 +262,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The channel type to be used to build the channel listener. Permitted channel types are <see cref="T:System.ServiceModel.Channels.IInputSessionChannel" /> or a <see cref="T:System.ServiceModel.Channels.IInputChannel" /> class. </typeparam
-        >
+          />The channel type to be used to build the channel listener. Permitted channel types are <see cref="T:System.ServiceModel.Channels.IInputSessionChannel" /> or a <see cref="T:System.ServiceModel.Channels.IInputChannel" /> class.
+        </typeparam>
       </Docs>
     </Member>
     <Member MemberName="Clone">

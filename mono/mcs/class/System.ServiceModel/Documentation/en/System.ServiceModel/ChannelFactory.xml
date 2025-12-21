@@ -82,8 +82,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.ChannelFactory" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.ChannelFactory" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -205,8 +205,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.Description.ClientCredentials" /> object is stored as a type of endpoint behavior and can be accessed through the <see cref="P:System.ServiceModel.Description.ServiceEndpoint.Behaviors" /> property. </para
-          >
+            >The <see cref="T:System.ServiceModel.Description.ClientCredentials" /> object is stored as a type of endpoint behavior and can be accessed through the <see cref="P:System.ServiceModel.Description.ServiceEndpoint.Behaviors" /> property.
+          </para>
           <para
             >The <see cref="M:System.ServiceModel.ChannelFactory.OnOpened" /> method initializes a read-only copy of the <see cref="T:System.ServiceModel.Description.ClientCredentials" /> object for the factory.</para
           >
@@ -791,8 +791,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Overrides and invokes the <see cref="M:System.ServiceModel.Channels.CommunicationObject.OnOpened" /> method, which is called during the transition of an object into the opened state. The <see cref="T:System.ServiceModel.Description.ClientCredentials" /> object is stored as a type of endpoint behavior and can be accessed through the <see cref="P:System.ServiceModel.Description.ServiceEndpoint.Behaviors" /> property. </para
-          >
+            >Overrides and invokes the <see cref="M:System.ServiceModel.Channels.CommunicationObject.OnOpened" /> method, which is called during the transition of an object into the opened state. The <see cref="T:System.ServiceModel.Description.ClientCredentials" /> object is stored as a type of endpoint behavior and can be accessed through the <see cref="P:System.ServiceModel.Description.ServiceEndpoint.Behaviors" /> property.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

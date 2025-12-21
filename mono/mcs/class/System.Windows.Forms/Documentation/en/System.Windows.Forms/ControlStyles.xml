@@ -26,8 +26,8 @@
       >
       <para />
       <para
-        >To fully enable double-buffering, you can set the <see cref="F:System.Windows.Forms.ControlStyles.OptimizedDoubleBuffer" /> and <see cref="F:System.Windows.Forms.ControlStyles.AllPaintingInWmPaint" /> bits to true. However the preferred method for enabling double buffering, which yields the same result, is to set the <see cref="P:System.Windows.Forms.Control.DoubleBuffered" /> property for the control to true. </para
-      >
+        >To fully enable double-buffering, you can set the <see cref="F:System.Windows.Forms.ControlStyles.OptimizedDoubleBuffer" /> and <see cref="F:System.Windows.Forms.ControlStyles.AllPaintingInWmPaint" /> bits to true. However the preferred method for enabling double buffering, which yields the same result, is to set the <see cref="P:System.Windows.Forms.Control.DoubleBuffered" /> property for the control to true.
+      </para>
       <para
         >If the <see cref="F:System.Windows.Forms.ControlStyles.SupportsTransparentBackColor" /> bit is set to true, and the <see cref="P:System.Windows.Forms.Control.BackColor" /> is set to a color whose alpha component is less than 255, <see cref="M:System.Windows.Forms.Control.OnPaintBackground(System.Windows.Forms.PaintEventArgs)" /> will simulate transparency by asking its parent control to paint the background. This is not true transparency.</para
       >

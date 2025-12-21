@@ -25,8 +25,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.Configuration.FormsAuthenticationCredentials" /> uses the <see cref="T:System.Web.Configuration.FormsAuthenticationUserCollection" /> to programmatically access and modify the users element of the credentials section in the forms section of the authorization configuration section. </para
-      >
+        >The <see cref="T:System.Web.Configuration.FormsAuthenticationCredentials" /> uses the <see cref="T:System.Web.Configuration.FormsAuthenticationUserCollection" /> to programmatically access and modify the users element of the credentials section in the forms section of the authorization configuration section.
+      </para>
       <para
         >This type is part of a group that includes the <see cref="T:System.Web.Configuration.FormsAuthenticationConfiguration" />, the <see cref="T:System.Web.Configuration.FormsAuthenticationCredentials" />, and the <see cref="T:System.Web.Configuration.FormsAuthenticationUser" /> types.</para
       >
@@ -89,8 +89,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.Configuration.FormsAuthenticationUser" /> object to add to the collection. </param
-        >
+          />The <see cref="T:System.Web.Configuration.FormsAuthenticationUser" /> object to add to the collection.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -236,8 +236,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The collection user's index. </param
-        >
+          />The collection user's index.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -271,8 +271,8 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The user's name. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The user's name.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -428,8 +428,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the <see cref="T:System.Web.Configuration.FormsAuthenticationUser" /> object to remove from the collection. </param
-        >
+          />The name of the <see cref="T:System.Web.Configuration.FormsAuthenticationUser" /> object to remove from the collection.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -461,8 +461,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the <see cref="T:System.Web.Configuration.FormsAuthenticationUser" /> object to remove from the collection. </param
-        >
+          />The index of the <see cref="T:System.Web.Configuration.FormsAuthenticationUser" /> object to remove from the collection.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -494,8 +494,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.Configuration.FormsAuthenticationUserCollection" /> object that must be changed. </param
-        >
+          />The <see cref="T:System.Web.Configuration.FormsAuthenticationUserCollection" /> object that must be changed.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

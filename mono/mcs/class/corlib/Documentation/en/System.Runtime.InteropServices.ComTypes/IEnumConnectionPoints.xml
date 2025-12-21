@@ -113,8 +113,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of IConnectionPoint references to return in <paramref name="rgelt" />. </param
-        >
+          />The number of IConnectionPoint references to return in <paramref name="rgelt" />.
+        </param>
         <param name="rgelt">
           <attribution
             license="cc4"
@@ -127,8 +127,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />When this method returns, contains a reference to the actual number of connections enumerated in <paramref name="rgelt" />. </param
-        >
+          />When this method returns, contains a reference to the actual number of connections enumerated in <paramref name="rgelt" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Reset">
@@ -200,8 +200,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of elements to skip in the enumeration. </param
-        >
+          />The number of elements to skip in the enumeration.
+        </param>
       </Docs>
     </Member>
   </Members>

@@ -79,8 +79,8 @@
         >The template stored in the <see cref="P:System.Web.UI.WebControls.LoginView.AnonymousTemplate" /> property is displayed to any visitor to the Web site who has not logged in. Once a user is logged in, the site displays either a template associated with one of the user's roles in the <see cref="P:System.Web.UI.WebControls.LoginView.RoleGroups" /> property or the default template specified in the <see cref="P:System.Web.UI.WebControls.LoginView.LoggedInTemplate" /> property.</para
       >
       <para
-        >The <see cref="T:System.Web.UI.WebControls.LoginView" /> control manages switching among the various templates once you assign templates to any of the three template properties of the <see cref="T:System.Web.UI.WebControls.LoginView" /> class: </para
-      >
+        >The <see cref="T:System.Web.UI.WebControls.LoginView" /> control manages switching among the various templates once you assign templates to any of the three template properties of the <see cref="T:System.Web.UI.WebControls.LoginView" /> class:
+      </para>
       <list type="bullet">
         <item>
           <para>
@@ -173,8 +173,8 @@
           </description>
           <description>
             <para
-              >Displays the first template in the <see cref="P:System.Web.UI.WebControls.LoginView.RoleGroups" /> collection that matches one of the user's roles. If no match is found, displays no content. </para
-            >
+              >Displays the first template in the <see cref="P:System.Web.UI.WebControls.LoginView.RoleGroups" /> collection that matches one of the user's roles. If no match is found, displays no content.
+            </para>
           </description>
         </item>
         <item>
@@ -189,8 +189,8 @@
           </description>
           <description>
             <para
-              >If the user is logged in, displays the template specified in the <see cref="P:System.Web.UI.WebControls.LoginView.LoggedInTemplate" /> property. If the user in not logged in, displays the template specified in the <see cref="P:System.Web.UI.WebControls.LoginView.AnonymousTemplate" /> property. </para
-            >
+              >If the user is logged in, displays the template specified in the <see cref="P:System.Web.UI.WebControls.LoginView.LoggedInTemplate" /> property. If the user in not logged in, displays the template specified in the <see cref="P:System.Web.UI.WebControls.LoginView.AnonymousTemplate" /> property.
+            </para>
           </description>
         </item>
         <item>
@@ -205,8 +205,8 @@
           </description>
           <description>
             <para
-              >If the user is logged in, displays the first template in the <see cref="P:System.Web.UI.WebControls.LoginView.RoleGroups" /> collection that matches one of the user's roles. If no match is found, displays the template specified in the <see cref="P:System.Web.UI.WebControls.LoginView.LoggedInTemplate" /> property. If the user is not logged in, displays the template specified in the <see cref="P:System.Web.UI.WebControls.LoginView.AnonymousTemplate" /> property. </para
-            >
+              >If the user is logged in, displays the first template in the <see cref="P:System.Web.UI.WebControls.LoginView.RoleGroups" /> collection that matches one of the user's roles. If no match is found, displays the template specified in the <see cref="P:System.Web.UI.WebControls.LoginView.LoggedInTemplate" /> property. If the user is not logged in, displays the template specified in the <see cref="P:System.Web.UI.WebControls.LoginView.AnonymousTemplate" /> property.
+            </para>
           </description>
         </item>
         <item>
@@ -221,8 +221,8 @@
           </description>
           <description>
             <para
-              >If the user is logged in, displays the first template in the <see cref="P:System.Web.UI.WebControls.LoginView.RoleGroups" /> collection that matches one of the user's roles. If no match is found, displays the template specified in the <see cref="P:System.Web.UI.WebControls.LoginView.LoggedInTemplate" /> property. If the user is not logged in, nothing is displayed. </para
-            >
+              >If the user is logged in, displays the first template in the <see cref="P:System.Web.UI.WebControls.LoginView.RoleGroups" /> collection that matches one of the user's roles. If no match is found, displays the template specified in the <see cref="P:System.Web.UI.WebControls.LoginView.LoggedInTemplate" /> property. If the user is not logged in, nothing is displayed.
+            </para>
           </description>
         </item>
         <item>
@@ -237,8 +237,8 @@
           </description>
           <description>
             <para
-              >If the user is logged in, displays the first template in the <see cref="P:System.Web.UI.WebControls.LoginView.RoleGroups" /> collection that matches one of the user's roles. If no match is found, nothing is displayed. If the user is not logged in, displays the template specified in the <see cref="P:System.Web.UI.WebControls.LoginView.AnonymousTemplate" /> property. </para
-            >
+              >If the user is logged in, displays the first template in the <see cref="P:System.Web.UI.WebControls.LoginView.RoleGroups" /> collection that matches one of the user's roles. If no match is found, nothing is displayed. If the user is not logged in, displays the template specified in the <see cref="P:System.Web.UI.WebControls.LoginView.AnonymousTemplate" /> property.
+            </para>
           </description>
         </item>
       </list>
@@ -461,8 +461,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether themes can be applied to the <see cref="T:System.Web.UI.WebControls.LoginView" /> control. </para
-          >
+            >Gets or sets a value indicating whether themes can be applied to the <see cref="T:System.Web.UI.WebControls.LoginView" /> control.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -559,14 +559,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.UI.WebControls.LoginView.LoggedInTemplate" /> property is displayed to Web site users when both of the following conditions are met: </para
-          >
+            >The <see cref="P:System.Web.UI.WebControls.LoginView.LoggedInTemplate" /> property is displayed to Web site users when both of the following conditions are met:
+          </para>
           <list type="bullet">
             <item>
               <para
                 >The <see cref="P:System.Security.Principal.IIdentity.Name" /> property of the <see cref="T:System.Web.UI.Page" />
-                <see cref="P:System.Web.UI.Page.User" /> property is not null </para
-              >
+                <see cref="P:System.Web.UI.Page.User" /> property is not null
+              </para>
             </item>
             <item>
               <para
@@ -629,8 +629,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> object that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> object that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnPreRender">
@@ -672,8 +672,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> object that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> object that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnViewChanged">
@@ -906,8 +906,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Collections.IDictionary" /> object containing the state of the <see cref="T:System.Web.UI.WebControls.LoginView" /> control. </param
-        >
+          />An <see cref="T:System.Collections.IDictionary" /> object containing the state of the <see cref="T:System.Web.UI.WebControls.LoginView" /> control.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

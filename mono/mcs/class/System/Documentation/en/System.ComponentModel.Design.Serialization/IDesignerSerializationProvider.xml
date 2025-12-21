@@ -80,29 +80,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The serialization manager requesting the serializer. </param
-        >
+          />The serialization manager requesting the serializer.
+        </param>
         <param name="currentSerializer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An instance of the current serializer of the specified type. This can be null if no serializer of the specified type exists. </param
-        >
+          />An instance of the current serializer of the specified type. This can be null if no serializer of the specified type exists.
+        </param>
         <param name="objectType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data type of the object to serialize. </param
-        >
+          />The data type of the object to serialize.
+        </param>
         <param name="serializerType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data type of the serializer to create. </param
-        >
+          />The data type of the serializer to create.
+        </param>
       </Docs>
     </Member>
   </Members>

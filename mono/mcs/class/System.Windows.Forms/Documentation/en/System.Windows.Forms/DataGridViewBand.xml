@@ -27,8 +27,8 @@
         >The <see cref="T:System.Windows.Forms.DataGridViewBand" /> class represents <see cref="T:System.Windows.Forms.DataGridViewCell" /> elements joined together in a band that can be manipulated as a group. Each element is typically an instance of <see cref="T:System.Windows.Forms.DataGridViewCell" /> or one of its derived classes. Although a <see cref="T:System.Windows.Forms.DataGridViewHeaderCell" /> is associated with each band, header cells are not considered elements of the band.</para
       >
       <para>
-        <see cref="T:System.Windows.Forms.DataGridViewBand" /> is the base class of the <see cref="T:System.Windows.Forms.DataGridViewRow" /> and <see cref="T:System.Windows.Forms.DataGridViewColumn" /> classes. There are no public constructors for the <see cref="T:System.Windows.Forms.DataGridViewBand" /> type, so the only way to access a band is through columns and rows in a <see cref="T:System.Windows.Forms.DataGridView" />. </para
-      >
+        <see cref="T:System.Windows.Forms.DataGridViewBand" /> is the base class of the <see cref="T:System.Windows.Forms.DataGridViewRow" /> and <see cref="T:System.Windows.Forms.DataGridViewColumn" /> classes. There are no public constructors for the <see cref="T:System.Windows.Forms.DataGridViewBand" /> type, so the only way to access a band is through columns and rows in a <see cref="T:System.Windows.Forms.DataGridView" />.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -204,8 +204,8 @@
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format> and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
           <block subset="none" type="note">
             <para
               >Always call <see cref="M:System.Windows.Forms.DataGridViewBand.Dispose" /> before you release your last reference to the <see cref="T:System.Windows.Forms.DataGridViewBand" />. Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Windows.Forms.DataGridViewBand" /> object's Finalize method.</para
@@ -215,8 +215,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the <see cref="T:System.Windows.Forms.DataGridViewBand" />.  </para
-          >
+            >Releases all resources used by the <see cref="T:System.Windows.Forms.DataGridViewBand" />.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -246,8 +246,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see cref="T:System.Windows.Forms.DataGridViewBand" /> and optionally releases the managed resources.  </para
-          >
+            >Releases the unmanaged resources used by the <see cref="T:System.Windows.Forms.DataGridViewBand" /> and optionally releases the managed resources.
+          </para>
         </summary>
         <param name="disposing">
           <attribution
@@ -273,8 +273,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overrides <see cref="M:System.Object.Finalize" />. Application code should not call this method; an object's Finalize method is automatically invoked during garbage collection, unless finalization by the garbage collector has been disabled by a call to the <see cref="M:System.GC.SuppressFinalize(System.Object)" /> method. </para
-          >
+            >This method overrides <see cref="M:System.Object.Finalize" />. Application code should not call this method; an object's Finalize method is automatically invoked during garbage collection, unless finalization by the garbage collector has been disabled by a call to the <see cref="M:System.GC.SuppressFinalize(System.Object)" /> method.
+          </para>
           <para
             >For more information, see <format type="text/html">
               <a href="fd376774-1643-499b-869e-9546a3aeea70">Finalize Methods and Destructors</a>
@@ -340,8 +340,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Getting the value of the <see cref="P:System.Windows.Forms.DataGridViewBand.DefaultCellStyle" /> property automatically instantiates a new <see cref="T:System.Windows.Forms.DataGridViewCellStyle" /> if the property has not previously been accessed. You must, therefore, use the <see cref="P:System.Windows.Forms.DataGridViewBand.HasDefaultCellStyle" /> property to determine whether the <see cref="P:System.Windows.Forms.DataGridViewBand.DefaultCellStyle" /> property is currently set to a <see cref="T:System.Windows.Forms.DataGridViewCellStyle" /> instance. This is useful to determine which properties of the object returned by the <see cref="P:System.Windows.Forms.DataGridViewBand.InheritedStyle" /> property represent styles set specifically for the band. </para
-          >
+            >Getting the value of the <see cref="P:System.Windows.Forms.DataGridViewBand.DefaultCellStyle" /> property automatically instantiates a new <see cref="T:System.Windows.Forms.DataGridViewCellStyle" /> if the property has not previously been accessed. You must, therefore, use the <see cref="P:System.Windows.Forms.DataGridViewBand.HasDefaultCellStyle" /> property to determine whether the <see cref="P:System.Windows.Forms.DataGridViewBand.DefaultCellStyle" /> property is currently set to a <see cref="T:System.Windows.Forms.DataGridViewCellStyle" /> instance. This is useful to determine which properties of the object returned by the <see cref="P:System.Windows.Forms.DataGridViewBand.InheritedStyle" /> property represent styles set specifically for the band.
+          </para>
           <para
             >For more information about cell style inheritance, see <format type="text/html">
               <a href="dbb75ed6-8804-4232-8382-f9920c2e380c"
@@ -353,8 +353,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see cref="P:System.Windows.Forms.DataGridViewBand.DefaultCellStyle" /> property has been set. </para
-          >
+            >Gets a value indicating whether the <see cref="P:System.Windows.Forms.DataGridViewBand.DefaultCellStyle" /> property has been set.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -552,8 +552,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can prevent users from resizing individual rows or columns by setting their <see cref="P:System.Windows.Forms.DataGridViewBand.Resizable" /> properties. By default, the <see cref="P:System.Windows.Forms.DataGridViewBand.Resizable" /> property value is based on the <see cref="P:System.Windows.Forms.DataGridView.AllowUserToResizeColumns" /> property value for columns and the <see cref="P:System.Windows.Forms.DataGridView.AllowUserToResizeRows" /> property value for rows. If you explicitly set <see cref="P:System.Windows.Forms.DataGridViewBand.Resizable" /> to <see cref="F:System.Windows.Forms.DataGridViewTriState.True" /> or <see cref="F:System.Windows.Forms.DataGridViewTriState.False" />, however, the control value is ignored. Set <see cref="P:System.Windows.Forms.DataGridViewBand.Resizable" /> to <see cref="F:System.Windows.Forms.DataGridViewTriState.NotSet" /> to restore the inheritance. </para
-          >
+            >You can prevent users from resizing individual rows or columns by setting their <see cref="P:System.Windows.Forms.DataGridViewBand.Resizable" /> properties. By default, the <see cref="P:System.Windows.Forms.DataGridViewBand.Resizable" /> property value is based on the <see cref="P:System.Windows.Forms.DataGridView.AllowUserToResizeColumns" /> property value for columns and the <see cref="P:System.Windows.Forms.DataGridView.AllowUserToResizeRows" /> property value for rows. If you explicitly set <see cref="P:System.Windows.Forms.DataGridViewBand.Resizable" /> to <see cref="F:System.Windows.Forms.DataGridViewTriState.True" /> or <see cref="F:System.Windows.Forms.DataGridViewTriState.False" />, however, the control value is ignored. Set <see cref="P:System.Windows.Forms.DataGridViewBand.Resizable" /> to <see cref="F:System.Windows.Forms.DataGridViewTriState.NotSet" /> to restore the inheritance.
+          </para>
           <para
             >Because <see cref="F:System.Windows.Forms.DataGridViewTriState.NotSet" /> restores the value inheritance, the <see cref="P:System.Windows.Forms.DataGridViewBand.Resizable" /> property will never return a <see cref="F:System.Windows.Forms.DataGridViewTriState.NotSet" /> value unless the row or column has not been added to a <see cref="T:System.Windows.Forms.DataGridView" /> control. If you need to determine whether the <see cref="P:System.Windows.Forms.DataGridViewBand.Resizable" /> property value of a row or column is inherited, check its <see cref="P:System.Windows.Forms.DataGridViewElement.State" /> property. If the <see cref="P:System.Windows.Forms.DataGridViewElement.State" /> value includes the <see cref="F:System.Windows.Forms.DataGridViewElementStates.ResizableSet" /> flag, the <see cref="P:System.Windows.Forms.DataGridViewBand.Resizable" /> property value is not inherited. If the <see cref="P:System.Windows.Forms.DataGridViewBand.Resizable" /> property value is <see cref="F:System.Windows.Forms.DataGridViewTriState.False" />, the user will not be able to manually adjust band size.</para
           >

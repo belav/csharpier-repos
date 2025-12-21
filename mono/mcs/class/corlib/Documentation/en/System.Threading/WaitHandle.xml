@@ -49,8 +49,8 @@
           <a href="31a6c13b-d6a2-492b-9a9f-e5238c983bcb"
             >Implementing Finalize and Dispose to Clean Up Unmanaged Resources</a
           >
-        </format>. When you derive from <see cref="T:System.Threading.WaitHandle" />, use the <see cref="P:System.Threading.WaitHandle.SafeWaitHandle" /> property to store your native handle operating system handle. You do not need to override the protected <see cref="M:System.Threading.WaitHandle.Dispose(System.Boolean)" /> method unless you use additional unmanaged resources. </para
-      >
+        </format>. When you derive from <see cref="T:System.Threading.WaitHandle" />, use the <see cref="P:System.Threading.WaitHandle.SafeWaitHandle" /> property to store your native handle operating system handle. You do not need to override the protected <see cref="M:System.Threading.WaitHandle.Dispose(System.Boolean)" /> method unless you use additional unmanaged resources.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -216,8 +216,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -272,11 +272,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Assigning a new value to the <see cref="P:System.Threading.WaitHandle.Handle" /> property does not close the previous handle. This can result in a leaked handle. </para
-          >
+            >Assigning a new value to the <see cref="P:System.Threading.WaitHandle.Handle" /> property does not close the previous handle. This can result in a leaked handle.
+          </para>
           <para
-            >Do not use this property in the .NET Framework version 2.0 or later; use the <see cref="P:System.Threading.WaitHandle.SafeWaitHandle" /> property instead. Setting this property to a valid handle also sets the <see cref="P:System.Threading.WaitHandle.SafeWaitHandle" /> property, but setting it to <see cref="F:System.Threading.WaitHandle.InvalidHandle" /> can result in a leaked handle. </para
-          >
+            >Do not use this property in the .NET Framework version 2.0 or later; use the <see cref="P:System.Threading.WaitHandle.SafeWaitHandle" /> property instead. Setting this property to a valid handle also sets the <see cref="P:System.Threading.WaitHandle.SafeWaitHandle" /> property, but setting it to <see cref="F:System.Threading.WaitHandle.InvalidHandle" /> can result in a leaked handle.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -350,8 +350,8 @@
               <a href="31a6c13b-d6a2-492b-9a9f-e5238c983bcb"
                 >Implementing Finalize and Dispose to Clean Up Unmanaged Resources</a
               >
-            </format>. When you derive from <see cref="T:System.Threading.WaitHandle" />, use the <see cref="P:System.Threading.WaitHandle.SafeWaitHandle" /> property to store your native handle operating system handle. You do not need to override the protected <see cref="M:System.Threading.WaitHandle.Dispose(System.Boolean)" /> method unless you use additional unmanaged resources. </para
-          >
+            </format>. When you derive from <see cref="T:System.Threading.WaitHandle" />, use the <see cref="P:System.Threading.WaitHandle.SafeWaitHandle" /> property to store your native handle operating system handle. You do not need to override the protected <see cref="M:System.Threading.WaitHandle.Dispose(System.Boolean)" /> method unless you use additional unmanaged resources.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -445,8 +445,8 @@
             >This operation is not guaranteed to be atomic. After the current thread signals <paramref name="toSignal" /> but before it waits on <paramref name="toWaitOn" />, a thread that is running on another processor might signal <paramref name="toWaitOn" /> or wait on it.</para
           >
           <para
-            >If <paramref name="millisecondsTimeout" /> is zero, the method does not block. It tests the state of the <paramref name="toWaitOn" /> and returns immediately. </para
-          >
+            >If <paramref name="millisecondsTimeout" /> is zero, the method does not block. It tests the state of the <paramref name="toWaitOn" /> and returns immediately.
+          </para>
           <format type="text/html">
             <h2>Notes on Exiting the Context</h2>
           </format>
@@ -496,8 +496,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to exit the synchronization domain for the context before the wait (if in a synchronized context), and reacquire it afterward; otherwise, false. </param
-        >
+          />true to exit the synchronization domain for the context before the wait (if in a synchronized context), and reacquire it afterward; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SignalAndWait">
@@ -534,8 +534,8 @@
             >The maximum value for <paramref name="timeout" /> is <see cref="F:System.Int32.MaxValue" />.</para
           >
           <para
-            >If <paramref name="timeout" /> is zero, the method does not block. It tests the state of the <paramref name="toWaitOn" /> and returns immediately. </para
-          >
+            >If <paramref name="timeout" /> is zero, the method does not block. It tests the state of the <paramref name="toWaitOn" /> and returns immediately.
+          </para>
           <format type="text/html">
             <h2>Notes on Exiting the Context</h2>
           </format>
@@ -585,8 +585,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to exit the synchronization domain for the context before the wait (if in a synchronized context), and reacquire it afterward; otherwise, false. </param
-        >
+          />true to exit the synchronization domain for the context before the wait (if in a synchronized context), and reacquire it afterward; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.IDisposable.Dispose">
@@ -655,8 +655,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="T:System.Threading.AbandonedMutexException" /> is new in the .NET Framework version 2.0. In previous versions, the <see cref="Overload:System.Threading.WaitHandle.WaitAll" /> method returns true when a mutex is abandoned. An abandoned mutex often indicates a serious coding error. In the case of a system-wide mutex, it might indicate that an application has been terminated abruptly (for example, by using Windows Task Manager). The exception contains information useful for debugging. </para
-          >
+            <see cref="T:System.Threading.AbandonedMutexException" /> is new in the .NET Framework version 2.0. In previous versions, the <see cref="Overload:System.Threading.WaitHandle.WaitAll" /> method returns true when a mutex is abandoned. An abandoned mutex often indicates a serious coding error. In the case of a system-wide mutex, it might indicate that an application has been terminated abruptly (for example, by using Windows Task Manager). The exception contains information useful for debugging.
+          </para>
           <para
             >The <see cref="Overload:System.Threading.WaitHandle.WaitAll" /> method returns when all the handles are signaled. On some implementations, if more than 64 handles are passed, a <see cref="T:System.NotSupportedException" /> is thrown. If the array contains duplicates, the call fails with a <see cref="T:System.DuplicateWaitObjectException" />.</para
           >
@@ -684,8 +684,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A WaitHandle array containing the objects for which the current instance will wait. This array cannot contain multiple references to the same object. </param
-        >
+          />A WaitHandle array containing the objects for which the current instance will wait. This array cannot contain multiple references to the same object.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -714,8 +714,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref name="millisecondsTimeout" /> is zero, the method does not block. It tests the state of the wait handles and returns immediately. </para
-          >
+            >If <paramref name="millisecondsTimeout" /> is zero, the method does not block. It tests the state of the wait handles and returns immediately.
+          </para>
           <para
             >The <see cref="Overload:System.Threading.WaitHandle.WaitAll" /> method returns when the wait terminates, which means either when all the handles are signaled or when time-out occurs. On some implementations, if more than 64 handles are passed, a <see cref="T:System.NotSupportedException" /> is thrown. If there are duplicates in the array, the call fails with a <see cref="T:System.DuplicateWaitObjectException" />.</para
           >
@@ -725,8 +725,8 @@
             >
           </block>
           <para
-            >Calling this method overload is the same as calling the <see cref="M:System.Threading.WaitHandle.WaitAll(System.Threading.WaitHandle[],System.Int32,System.Boolean)" /> overload and specifying false for <paramref name="exitContext" />. </para
-          >
+            >Calling this method overload is the same as calling the <see cref="M:System.Threading.WaitHandle.WaitAll(System.Threading.WaitHandle[],System.Int32,System.Boolean)" /> overload and specifying false for <paramref name="exitContext" />.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -745,15 +745,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A WaitHandle array containing the objects for which the current instance will wait. This array cannot contain multiple references to the same object (duplicates). </param
-        >
+          />A WaitHandle array containing the objects for which the current instance will wait. This array cannot contain multiple references to the same object (duplicates).
+        </param>
         <param name="millisecondsTimeout">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of milliseconds to wait, or <see cref="F:System.Threading.Timeout.Infinite" /> (-1) to wait indefinitely. </param
-        >
+          />The number of milliseconds to wait, or <see cref="F:System.Threading.Timeout.Infinite" /> (-1) to wait indefinitely.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WaitAll">
@@ -781,8 +781,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref name="timeout" /> is zero, the method does not block. It tests the state of the wait handles and returns immediately. </para
-          >
+            >If <paramref name="timeout" /> is zero, the method does not block. It tests the state of the wait handles and returns immediately.
+          </para>
           <para
             >The <see cref="Overload:System.Threading.WaitHandle.WaitAll" /> method returns when the wait terminates, which means either all the handles are signaled or a time-out occurs. On some implementations, if more than 64 handles are passed, a <see cref="T:System.NotSupportedException" /> is thrown. If the array contains duplicates, the call will fail.</para
           >
@@ -795,8 +795,8 @@
             >The maximum value for <paramref name="timeout" /> is <see cref="F:System.Int32.MaxValue" />.</para
           >
           <para
-            >Calling this method overload is the same as calling the <see cref="M:System.Threading.WaitHandle.WaitAll(System.Threading.WaitHandle[],System.TimeSpan,System.Boolean)" /> overload and specifying false for <paramref name="exitContext" />. </para
-          >
+            >Calling this method overload is the same as calling the <see cref="M:System.Threading.WaitHandle.WaitAll(System.Threading.WaitHandle[],System.TimeSpan,System.Boolean)" /> overload and specifying false for <paramref name="exitContext" />.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -815,15 +815,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A WaitHandle array containing the objects for which the current instance will wait. This array cannot contain multiple references to the same object. </param
-        >
+          />A WaitHandle array containing the objects for which the current instance will wait. This array cannot contain multiple references to the same object.
+        </param>
         <param name="timeout">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.TimeSpan" /> that represents the number of milliseconds to wait, or a <see cref="T:System.TimeSpan" /> that represents -1 milliseconds, to wait indefinitely. </param
-        >
+          />A <see cref="T:System.TimeSpan" /> that represents the number of milliseconds to wait, or a <see cref="T:System.TimeSpan" /> that represents -1 milliseconds, to wait indefinitely.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WaitAll">
@@ -853,11 +853,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref name="millisecondsTimeout" /> is zero, the method does not block. It tests the state of the wait handles and returns immediately. </para
-          >
+            >If <paramref name="millisecondsTimeout" /> is zero, the method does not block. It tests the state of the wait handles and returns immediately.
+          </para>
           <para>
-            <see cref="T:System.Threading.AbandonedMutexException" /> is new in the .NET Framework version 2.0. In previous versions, the <see cref="Overload:System.Threading.WaitHandle.WaitAll" /> method returns true when a mutex is abandoned. An abandoned mutex often indicates a serious coding error. In the case of a system-wide mutex, it might indicate that an application has been terminated abruptly (for example, by using Windows Task Manager). The exception contains information useful for debugging. </para
-          >
+            <see cref="T:System.Threading.AbandonedMutexException" /> is new in the .NET Framework version 2.0. In previous versions, the <see cref="Overload:System.Threading.WaitHandle.WaitAll" /> method returns true when a mutex is abandoned. An abandoned mutex often indicates a serious coding error. In the case of a system-wide mutex, it might indicate that an application has been terminated abruptly (for example, by using Windows Task Manager). The exception contains information useful for debugging.
+          </para>
           <para
             >The <see cref="Overload:System.Threading.WaitHandle.WaitAll" /> method returns when the wait terminates, which means either when all the handles are signaled or when time-out occurs. On some implementations, if more than 64 handles are passed, a <see cref="T:System.NotSupportedException" /> is thrown. If there are duplicates in the array, the call fails with a <see cref="T:System.DuplicateWaitObjectException" />.</para
           >
@@ -896,22 +896,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A WaitHandle array containing the objects for which the current instance will wait. This array cannot contain multiple references to the same object (duplicates). </param
-        >
+          />A WaitHandle array containing the objects for which the current instance will wait. This array cannot contain multiple references to the same object (duplicates).
+        </param>
         <param name="millisecondsTimeout">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of milliseconds to wait, or <see cref="F:System.Threading.Timeout.Infinite" /> (-1) to wait indefinitely. </param
-        >
+          />The number of milliseconds to wait, or <see cref="F:System.Threading.Timeout.Infinite" /> (-1) to wait indefinitely.
+        </param>
         <param name="exitContext">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to exit the synchronization domain for the context before the wait (if in a synchronized context), and reacquire it afterward; otherwise, false. </param
-        >
+          />true to exit the synchronization domain for the context before the wait (if in a synchronized context), and reacquire it afterward; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WaitAll">
@@ -941,11 +941,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref name="timeout" /> is zero, the method does not block. It tests the state of the wait handles and returns immediately. </para
-          >
+            >If <paramref name="timeout" /> is zero, the method does not block. It tests the state of the wait handles and returns immediately.
+          </para>
           <para>
-            <see cref="T:System.Threading.AbandonedMutexException" /> is new in the .NET Framework version 2.0. In previous versions, the <see cref="Overload:System.Threading.WaitHandle.WaitAll" /> method returns true when a mutex is abandoned. An abandoned mutex often indicates a serious coding error. In the case of a system-wide mutex, it might indicate that an application has been terminated abruptly (for example, by using Windows Task Manager). The exception contains information useful for debugging. </para
-          >
+            <see cref="T:System.Threading.AbandonedMutexException" /> is new in the .NET Framework version 2.0. In previous versions, the <see cref="Overload:System.Threading.WaitHandle.WaitAll" /> method returns true when a mutex is abandoned. An abandoned mutex often indicates a serious coding error. In the case of a system-wide mutex, it might indicate that an application has been terminated abruptly (for example, by using Windows Task Manager). The exception contains information useful for debugging.
+          </para>
           <para
             >The <see cref="Overload:System.Threading.WaitHandle.WaitAll" /> method returns when the wait terminates, which means either all the handles are signaled or a time-out occurs. On some implementations, if more than 64 handles are passed, a <see cref="T:System.NotSupportedException" /> is thrown. If the array contains duplicates, the call will fail.</para
           >
@@ -987,22 +987,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A WaitHandle array containing the objects for which the current instance will wait. This array cannot contain multiple references to the same object. </param
-        >
+          />A WaitHandle array containing the objects for which the current instance will wait. This array cannot contain multiple references to the same object.
+        </param>
         <param name="timeout">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.TimeSpan" /> that represents the number of milliseconds to wait, or a <see cref="T:System.TimeSpan" /> that represents -1 milliseconds, to wait indefinitely. </param
-        >
+          />A <see cref="T:System.TimeSpan" /> that represents the number of milliseconds to wait, or a <see cref="T:System.TimeSpan" /> that represents -1 milliseconds, to wait indefinitely.
+        </param>
         <param name="exitContext">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to exit the synchronization domain for the context before the wait (if in a synchronized context), and reacquire it afterward; otherwise, false. </param
-        >
+          />true to exit the synchronization domain for the context before the wait (if in a synchronized context), and reacquire it afterward; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WaitAny">
@@ -1048,8 +1048,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="T:System.Threading.AbandonedMutexException" /> is new in the .NET Framework version 2.0. In previous versions, the <see cref="Overload:System.Threading.WaitHandle.WaitAny" /> method returns true if the wait completes because a mutex is abandoned. An abandoned mutex often indicates a serious coding error. In the case of a system-wide mutex, it might indicate that an application has been terminated abruptly (for example, by using Windows Task Manager). The exception contains information useful for debugging. </para
-          >
+            <see cref="T:System.Threading.AbandonedMutexException" /> is new in the .NET Framework version 2.0. In previous versions, the <see cref="Overload:System.Threading.WaitHandle.WaitAny" /> method returns true if the wait completes because a mutex is abandoned. An abandoned mutex often indicates a serious coding error. In the case of a system-wide mutex, it might indicate that an application has been terminated abruptly (for example, by using Windows Task Manager). The exception contains information useful for debugging.
+          </para>
           <para
             >The <see cref="Overload:System.Threading.WaitHandle.WaitAny" /> method throws an <see cref="T:System.Threading.AbandonedMutexException" /> only when the wait completes because of an abandoned mutex. If <paramref name="waitHandles" /> contains a released mutex with a lower index number than the abandoned mutex, the <see cref="Overload:System.Threading.WaitHandle.WaitAny" /> method completes normally and the exception is not thrown.</para
           >
@@ -1078,8 +1078,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A WaitHandle array containing the objects for which the current instance will wait. </param
-        >
+          />A WaitHandle array containing the objects for which the current instance will wait.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1113,8 +1113,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref name="millisecondsTimeout" /> is zero, the method does not block. It tests the state of the wait handles and returns immediately. </para
-          >
+            >If <paramref name="millisecondsTimeout" /> is zero, the method does not block. It tests the state of the wait handles and returns immediately.
+          </para>
           <para
             >The <see cref="Overload:System.Threading.WaitHandle.WaitAny" /> method throws an <see cref="T:System.Threading.AbandonedMutexException" /> only when the wait completes because of an abandoned mutex. If <paramref name="waitHandles" /> contains a released mutex with a lower index number than the abandoned mutex, the <see cref="Overload:System.Threading.WaitHandle.WaitAny" /> method completes normally and the exception is not thrown.</para
           >
@@ -1122,8 +1122,8 @@
             >This method returns when the wait terminates, either when any of the handles are signaled or when a timeout occurs. If more than one object becomes signaled during the call, the return value is the array index of the signaled object with the smallest index value of all the signaled objects. On some implementations, if more that 64 handles are passed, a <see cref="T:System.NotSupportedException" /> is thrown.</para
           >
           <para
-            >Calling this method overload is the same as calling the <see cref="M:System.Threading.WaitHandle.WaitAny(System.Threading.WaitHandle[],System.Int32,System.Boolean)" /> overload and specifying false for <paramref name="exitContext" />. </para
-          >
+            >Calling this method overload is the same as calling the <see cref="M:System.Threading.WaitHandle.WaitAny(System.Threading.WaitHandle[],System.Int32,System.Boolean)" /> overload and specifying false for <paramref name="exitContext" />.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1140,15 +1140,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A WaitHandle array containing the objects for which the current instance will wait. </param
-        >
+          />A WaitHandle array containing the objects for which the current instance will wait.
+        </param>
         <param name="millisecondsTimeout">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of milliseconds to wait, or <see cref="F:System.Threading.Timeout.Infinite" /> (-1) to wait indefinitely. </param
-        >
+          />The number of milliseconds to wait, or <see cref="F:System.Threading.Timeout.Infinite" /> (-1) to wait indefinitely.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WaitAny">
@@ -1181,8 +1181,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref name="timeout" /> is zero, the method does not block. It tests the state of the wait handles and returns immediately. </para
-          >
+            >If <paramref name="timeout" /> is zero, the method does not block. It tests the state of the wait handles and returns immediately.
+          </para>
           <para
             >The <see cref="Overload:System.Threading.WaitHandle.WaitAny" /> method throws an <see cref="T:System.Threading.AbandonedMutexException" /> only when the wait completes because of an abandoned mutex. If <paramref name="waitHandles" /> contains a released mutex with a lower index number than the abandoned mutex, the <see cref="Overload:System.Threading.WaitHandle.WaitAny" /> method completes normally and the exception is not thrown.</para
           >
@@ -1193,8 +1193,8 @@
             >The maximum value for <paramref name="timeout" /> is <see cref="F:System.Int32.MaxValue" />.</para
           >
           <para
-            >Calling this method overload is the same as calling the <see cref="M:System.Threading.WaitHandle.WaitAny(System.Threading.WaitHandle[],System.TimeSpan,System.Boolean)" /> overload and specifying false for <paramref name="exitContext" />. </para
-          >
+            >Calling this method overload is the same as calling the <see cref="M:System.Threading.WaitHandle.WaitAny(System.Threading.WaitHandle[],System.TimeSpan,System.Boolean)" /> overload and specifying false for <paramref name="exitContext" />.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1213,15 +1213,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A WaitHandle array containing the objects for which the current instance will wait. </param
-        >
+          />A WaitHandle array containing the objects for which the current instance will wait.
+        </param>
         <param name="timeout">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.TimeSpan" /> that represents the number of milliseconds to wait, or a <see cref="T:System.TimeSpan" /> that represents -1 milliseconds to wait indefinitely. </param
-        >
+          />A <see cref="T:System.TimeSpan" /> that represents the number of milliseconds to wait, or a <see cref="T:System.TimeSpan" /> that represents -1 milliseconds to wait indefinitely.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WaitAny">
@@ -1256,11 +1256,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref name="millisecondsTimeout" /> is zero, the method does not block. It tests the state of the wait handles and returns immediately. </para
-          >
+            >If <paramref name="millisecondsTimeout" /> is zero, the method does not block. It tests the state of the wait handles and returns immediately.
+          </para>
           <para>
-            <see cref="T:System.Threading.AbandonedMutexException" /> is new in the .NET Framework version 2.0. In previous versions, the <see cref="Overload:System.Threading.WaitHandle.WaitAny" /> method returns true if the wait completes because a mutex is abandoned. An abandoned mutex often indicates a serious coding error. In the case of a system-wide mutex, it might indicate that an application has been terminated abruptly (for example, by using Windows Task Manager). The exception contains information useful for debugging. </para
-          >
+            <see cref="T:System.Threading.AbandonedMutexException" /> is new in the .NET Framework version 2.0. In previous versions, the <see cref="Overload:System.Threading.WaitHandle.WaitAny" /> method returns true if the wait completes because a mutex is abandoned. An abandoned mutex often indicates a serious coding error. In the case of a system-wide mutex, it might indicate that an application has been terminated abruptly (for example, by using Windows Task Manager). The exception contains information useful for debugging.
+          </para>
           <para
             >The <see cref="Overload:System.Threading.WaitHandle.WaitAny" /> method throws an <see cref="T:System.Threading.AbandonedMutexException" /> only when the wait completes because of an abandoned mutex. If <paramref name="waitHandles" /> contains a released mutex with a lower index number than the abandoned mutex, the <see cref="Overload:System.Threading.WaitHandle.WaitAny" /> method completes normally and the exception is not thrown.</para
           >
@@ -1300,22 +1300,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A WaitHandle array containing the objects for which the current instance will wait. </param
-        >
+          />A WaitHandle array containing the objects for which the current instance will wait.
+        </param>
         <param name="millisecondsTimeout">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of milliseconds to wait, or <see cref="F:System.Threading.Timeout.Infinite" /> (-1) to wait indefinitely. </param
-        >
+          />The number of milliseconds to wait, or <see cref="F:System.Threading.Timeout.Infinite" /> (-1) to wait indefinitely.
+        </param>
         <param name="exitContext">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to exit the synchronization domain for the context before the wait (if in a synchronized context), and reacquire it afterward; otherwise, false. </param
-        >
+          />true to exit the synchronization domain for the context before the wait (if in a synchronized context), and reacquire it afterward; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WaitAny">
@@ -1350,8 +1350,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref name="timeout" /> is zero, the method does not block. It tests the state of the wait handles and returns immediately. </para
-          >
+            >If <paramref name="timeout" /> is zero, the method does not block. It tests the state of the wait handles and returns immediately.
+          </para>
           <para>
             <see cref="T:System.Threading.AbandonedMutexException" /> is new in the .NET Framework version 2.0. In previous versions, the <see cref="Overload:System.Threading.WaitHandle.WaitAny" /> method returns true if the wait completes because a mutex is abandoned. An abandoned mutex often indicates a serious coding error. In the case of a system-wide mutex, it might indicate that an application has been terminated abruptly (for example, by using Windows Task Manager). The exception contains information useful for debugging.</para
           >
@@ -1399,22 +1399,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A WaitHandle array containing the objects for which the current instance will wait. </param
-        >
+          />A WaitHandle array containing the objects for which the current instance will wait.
+        </param>
         <param name="timeout">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.TimeSpan" /> that represents the number of milliseconds to wait, or a <see cref="T:System.TimeSpan" /> that represents -1 milliseconds to wait indefinitely. </param
-        >
+          />A <see cref="T:System.TimeSpan" /> that represents the number of milliseconds to wait, or a <see cref="T:System.TimeSpan" /> that represents -1 milliseconds to wait indefinitely.
+        </param>
         <param name="exitContext">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to exit the synchronization domain for the context before the wait (if in a synchronized context), and reacquire it afterward; otherwise, false. </param
-        >
+          />true to exit the synchronization domain for the context before the wait (if in a synchronized context), and reacquire it afterward; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WaitOne">
@@ -1441,8 +1441,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="T:System.Threading.AbandonedMutexException" /> is new in the .NET Framework version 2.0. In previous versions, the <see cref="Overload:System.Threading.WaitHandle.WaitOne" /> method returns true when a mutex is abandoned. An abandoned mutex often indicates a serious coding error. In the case of a system-wide mutex, it might indicate that an application has been terminated abruptly (for example, by using Windows Task Manager). The exception contains information useful for debugging. </para
-          >
+            <see cref="T:System.Threading.AbandonedMutexException" /> is new in the .NET Framework version 2.0. In previous versions, the <see cref="Overload:System.Threading.WaitHandle.WaitOne" /> method returns true when a mutex is abandoned. An abandoned mutex often indicates a serious coding error. In the case of a system-wide mutex, it might indicate that an application has been terminated abruptly (for example, by using Windows Task Manager). The exception contains information useful for debugging.
+          </para>
           <para
             >The caller of this method blocks indefinitely until the current instance receives a signal. Use this method to block until a <see cref="T:System.Threading.WaitHandle" /> receives a signal from another thread, such as is generated when an asynchronous operation completes. For more information, see the <see cref="T:System.IAsyncResult" /> interface.</para
           >
@@ -1490,15 +1490,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref name="millisecondsTimeout" /> is zero, the method does not block. It tests the state of the wait handle and returns immediately. </para
-          >
+            >If <paramref name="millisecondsTimeout" /> is zero, the method does not block. It tests the state of the wait handle and returns immediately.
+          </para>
           <para
             >The caller of this method blocks until the current instance receives a signal or a time-out occurs. Use this method to block until a <see cref="T:System.Threading.WaitHandle" /> receives a signal from another thread, such as is generated when an asynchronous operation completes. For more information, see the <see cref="T:System.IAsyncResult" /> interface.</para
           >
           <para>Override this method to customize the behavior of derived classes.</para>
           <para
-            >Calling this method overload is the same as calling the <see cref="M:System.Threading.WaitHandle.WaitOne(System.Int32,System.Boolean)" /> overload and specifying false for <paramref name="exitContext" />. </para
-          >
+            >Calling this method overload is the same as calling the <see cref="M:System.Threading.WaitHandle.WaitOne(System.Int32,System.Boolean)" /> overload and specifying false for <paramref name="exitContext" />.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1515,8 +1515,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of milliseconds to wait, or <see cref="F:System.Threading.Timeout.Infinite" /> (-1) to wait indefinitely. </param
-        >
+          />The number of milliseconds to wait, or <see cref="F:System.Threading.Timeout.Infinite" /> (-1) to wait indefinitely.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WaitOne">
@@ -1540,8 +1540,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref name="timeout" /> is zero, the method does not block. It tests the state of the wait handle and returns immediately. </para
-          >
+            >If <paramref name="timeout" /> is zero, the method does not block. It tests the state of the wait handle and returns immediately.
+          </para>
           <para
             >The caller of this method blocks until the current instance receives a signal or a time-out occurs. Use this method to block until a <see cref="T:System.Threading.WaitHandle" /> receives a signal from another thread, such as is generated when an asynchronous operation completes. For more information, see the <see cref="T:System.IAsyncResult" /> interface.</para
           >
@@ -1550,8 +1550,8 @@
             >The maximum value for <paramref name="timeout" /> is <see cref="F:System.Int32.MaxValue" />.</para
           >
           <para
-            >Calling this method overload is the same as calling the <see cref="M:System.Threading.WaitHandle.WaitOne(System.TimeSpan,System.Boolean)" /> overload and specifying false for <paramref name="exitContext" />. </para
-          >
+            >Calling this method overload is the same as calling the <see cref="M:System.Threading.WaitHandle.WaitOne(System.TimeSpan,System.Boolean)" /> overload and specifying false for <paramref name="exitContext" />.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1568,8 +1568,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.TimeSpan" /> that represents the number of milliseconds to wait, or a <see cref="T:System.TimeSpan" /> that represents -1 milliseconds to wait indefinitely. </param
-        >
+          />A <see cref="T:System.TimeSpan" /> that represents the number of milliseconds to wait, or a <see cref="T:System.TimeSpan" /> that represents -1 milliseconds to wait indefinitely.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WaitOne">
@@ -1598,11 +1598,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref name="millisecondsTimeout" /> is zero, the method does not block. It tests the state of the wait handle and returns immediately. </para
-          >
+            >If <paramref name="millisecondsTimeout" /> is zero, the method does not block. It tests the state of the wait handle and returns immediately.
+          </para>
           <para>
-            <see cref="T:System.Threading.AbandonedMutexException" /> is new in the .NET Framework version 2.0. In previous versions, the <see cref="Overload:System.Threading.WaitHandle.WaitOne" /> method returns true when a mutex is abandoned. An abandoned mutex often indicates a serious coding error. In the case of a system-wide mutex, it might indicate that an application has been terminated abruptly (for example, by using Windows Task Manager). The exception contains information useful for debugging. </para
-          >
+            <see cref="T:System.Threading.AbandonedMutexException" /> is new in the .NET Framework version 2.0. In previous versions, the <see cref="Overload:System.Threading.WaitHandle.WaitOne" /> method returns true when a mutex is abandoned. An abandoned mutex often indicates a serious coding error. In the case of a system-wide mutex, it might indicate that an application has been terminated abruptly (for example, by using Windows Task Manager). The exception contains information useful for debugging.
+          </para>
           <para
             >The caller of this method blocks until the current instance receives a signal or a time-out occurs. Use this method to block until a <see cref="T:System.Threading.WaitHandle" /> receives a signal from another thread, such as is generated when an asynchronous operation completes. For more information, see the <see cref="T:System.IAsyncResult" /> interface.</para
           >
@@ -1635,15 +1635,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of milliseconds to wait, or <see cref="F:System.Threading.Timeout.Infinite" /> (-1) to wait indefinitely. </param
-        >
+          />The number of milliseconds to wait, or <see cref="F:System.Threading.Timeout.Infinite" /> (-1) to wait indefinitely.
+        </param>
         <param name="exitContext">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to exit the synchronization domain for the context before the wait (if in a synchronized context), and reacquire it afterward; otherwise, false. </param
-        >
+          />true to exit the synchronization domain for the context before the wait (if in a synchronized context), and reacquire it afterward; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WaitOne">
@@ -1672,11 +1672,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref name="timeout" /> is zero, the method does not block. It tests the state of the wait handle and returns immediately. </para
-          >
+            >If <paramref name="timeout" /> is zero, the method does not block. It tests the state of the wait handle and returns immediately.
+          </para>
           <para>
-            <see cref="T:System.Threading.AbandonedMutexException" /> is new in the .NET Framework version 2.0. In previous versions, the <see cref="Overload:System.Threading.WaitHandle.WaitOne" /> method returns true when a mutex is abandoned. An abandoned mutex often indicates a serious coding error. In the case of a system-wide mutex, it might indicate that an application has been terminated abruptly (for example, by using Windows Task Manager). The exception contains information useful for debugging. </para
-          >
+            <see cref="T:System.Threading.AbandonedMutexException" /> is new in the .NET Framework version 2.0. In previous versions, the <see cref="Overload:System.Threading.WaitHandle.WaitOne" /> method returns true when a mutex is abandoned. An abandoned mutex often indicates a serious coding error. In the case of a system-wide mutex, it might indicate that an application has been terminated abruptly (for example, by using Windows Task Manager). The exception contains information useful for debugging.
+          </para>
           <para
             >The caller of this method blocks until the current instance receives a signal or a time-out occurs. Use this method to block until a <see cref="T:System.Threading.WaitHandle" /> receives a signal from another thread, such as is generated when an asynchronous operation completes. For more information, see the <see cref="T:System.IAsyncResult" /> interface.</para
           >
@@ -1712,15 +1712,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.TimeSpan" /> that represents the number of milliseconds to wait, or a <see cref="T:System.TimeSpan" /> that represents -1 milliseconds to wait indefinitely. </param
-        >
+          />A <see cref="T:System.TimeSpan" /> that represents the number of milliseconds to wait, or a <see cref="T:System.TimeSpan" /> that represents -1 milliseconds to wait indefinitely.
+        </param>
         <param name="exitContext">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to exit the synchronization domain for the context before the wait (if in a synchronized context), and reacquire it afterward; otherwise, false. </param
-        >
+          />true to exit the synchronization domain for the context before the wait (if in a synchronized context), and reacquire it afterward; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WaitTimeout">

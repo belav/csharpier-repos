@@ -71,8 +71,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The next surrogate selector to examine. </param
-        >
+          />The next surrogate selector to examine.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetNextSelector">

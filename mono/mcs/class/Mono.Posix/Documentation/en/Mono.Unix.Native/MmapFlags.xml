@@ -50,8 +50,8 @@
           >Map anonymous memory not associated with any specific
         file.  The file descriptor used for creating <c>MAP_ANON</c>
         must be -1.  The <paramref name="offset" /> argument is ignored.
-        </summary
-        >
+
+        </summary>
       </Docs>
     </Member>
     <Member MemberName="MAP_ANONYMOUS">

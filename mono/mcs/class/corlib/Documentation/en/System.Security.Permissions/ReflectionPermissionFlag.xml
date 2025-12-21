@@ -47,16 +47,16 @@
         >
       </block>
       <para
-        >The <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" /> flag is introduced in the net_v20sp1_short. To use this flag, your application should target the net_v35_long or later. </para
-      >
+        >The <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" /> flag is introduced in the net_v20sp1_short. To use this flag, your application should target the net_v35_long or later.
+      </para>
       <block subset="none" type="note">
         <para>
           <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.AllFlags" /> does not include the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" /> flag. To get a mask that includes all flags in this enumeration, you must use the combination of <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.AllFlags" /> with <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />.</para
         >
       </block>
       <para
-        >Starting with the net_v20sp1_short, the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" /> flag is no longer required to emit code, unless debug symbols are emitted. To use this feature, your application should target the net_v35_short or later. </para
-      >
+        >Starting with the net_v20sp1_short, the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" /> flag is no longer required to emit code, unless debug symbols are emitted. To use this feature, your application should target the net_v35_short or later.
+      </para>
       <para
         >Starting with the dnprdnlong, the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.TypeInformation" /> flag is no longer required to reflect on nonpublic types and members; the flag has been marked obsolete.</para
       >

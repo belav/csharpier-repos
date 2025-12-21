@@ -14,28 +14,28 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Windows.Forms.Application" /> class has methods to start and stop applications and threads, and to process Windows messages, as follows: </para
-      >
+        >The <see cref="T:System.Windows.Forms.Application" /> class has methods to start and stop applications and threads, and to process Windows messages, as follows:
+      </para>
       <list type="bullet">
         <item>
           <para>
-            <see cref="M:System.Windows.Forms.Application.Run" /> starts an application message loop on the current thread and, optionally, makes a form visible. </para
-          >
+            <see cref="M:System.Windows.Forms.Application.Run" /> starts an application message loop on the current thread and, optionally, makes a form visible.
+          </para>
         </item>
         <item>
           <para>
-            <see cref="M:System.Windows.Forms.Application.Exit" /> or <see cref="M:System.Windows.Forms.Application.ExitThread" /> stops a message loop. </para
-          >
+            <see cref="M:System.Windows.Forms.Application.Exit" /> or <see cref="M:System.Windows.Forms.Application.ExitThread" /> stops a message loop.
+          </para>
         </item>
         <item>
           <para>
-            <see cref="M:System.Windows.Forms.Application.DoEvents" /> processes messages while your program is in a loop. </para
-          >
+            <see cref="M:System.Windows.Forms.Application.DoEvents" /> processes messages while your program is in a loop.
+          </para>
         </item>
         <item>
           <para>
-            <see cref="M:System.Windows.Forms.Application.AddMessageFilter(System.Windows.Forms.IMessageFilter)" /> adds a message filter to the application message pump to monitor Windows messages. </para
-          >
+            <see cref="M:System.Windows.Forms.Application.AddMessageFilter(System.Windows.Forms.IMessageFilter)" /> adds a message filter to the application message pump to monitor Windows messages.
+          </para>
         </item>
         <item>
           <para>
@@ -86,8 +86,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The implementation of the <see cref="T:System.Windows.Forms.IMessageFilter" /> interface you want to install. </param
-        >
+          />The implementation of the <see cref="T:System.Windows.Forms.IMessageFilter" /> interface you want to install.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -294,8 +294,8 @@
             <para
               >Calling this method causes the current thread to be suspended while all waiting window messages are processed. If a message causes an event to be triggered, then other areas of your application code may execute. This can cause your application to exhibit unexpected behaviors that are difficult to debug. If you perform operations or computations that take a long time, it is often preferable to perform those operations on a new thread. For more information about asynchronous programming, see <format type="text/html">
                 <a href="c9b3501e-6bc6-40f9-8efd-4b6d9e39ccf0">Asynchronous Programming Overview</a>
-              </format>. </para
-            >
+              </format>.
+            </para>
           </block>
         </remarks>
         <summary>
@@ -400,8 +400,8 @@
             >The <see cref="M:System.Windows.Forms.Application.Exit" /> method stops all running message loops on all threads and closes all windows of the application. This method does not necessarily force the application to exit. The <see cref="M:System.Windows.Forms.Application.Exit" /> method is typically called from within a message loop, and forces <see cref="M:System.Windows.Forms.Application.Run" /> to return. To exit a message loop for the current thread only, call <see cref="M:System.Windows.Forms.Application.ExitThread" />.</para
           >
           <para>
-            <see cref="M:System.Windows.Forms.Application.Exit" /> raises the following events and performs the associated conditional actions: </para
-          >
+            <see cref="M:System.Windows.Forms.Application.Exit" /> raises the following events and performs the associated conditional actions:
+          </para>
           <list type="bullet">
             <item>
               <para
@@ -416,8 +416,8 @@
           </list>
           <block subset="none" type="note">
             <para
-              >The <see cref="M:System.Windows.Forms.Application.Exit" /> method does not raise the <see cref="E:System.Windows.Forms.Form.Closed" /> and <see cref="E:System.Windows.Forms.Form.Closing" /> events, which are obsolete as of dnprdnlong. </para
-            >
+              >The <see cref="M:System.Windows.Forms.Application.Exit" /> method does not raise the <see cref="E:System.Windows.Forms.Form.Closed" /> and <see cref="E:System.Windows.Forms.Form.Closing" /> events, which are obsolete as of dnprdnlong.
+            </para>
           </block>
         </remarks>
         <summary>
@@ -611,8 +611,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When hosting Windows Forms in other environments, such as unmanaged applications, this property will always return false. Use <see cref="M:System.Windows.Forms.Application.RegisterMessageLoop(System.Windows.Forms.Application.MessageLoopCallback)" /> to instruct Windows Forms if the hosting environment still has an active message loop. </para
-          >
+            >When hosting Windows Forms in other environments, such as unmanaged applications, this property will always return false. Use <see cref="M:System.Windows.Forms.Application.RegisterMessageLoop(System.Windows.Forms.Application.MessageLoopCallback)" /> to instruct Windows Forms if the hosting environment still has an active message loop.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -674,8 +674,8 @@
             >Call <see cref="M:System.Windows.Forms.Application.OnThreadException(System.Exception)" /> to raise an exception that will halt processing of the application.</para
           >
           <para
-            >The <see cref="T:System.Windows.Forms.Application" /> class has a <see cref="E:System.Windows.Forms.Application.ThreadException" /> event. You can attach an event handler to this event to do whatever custom processing you need for unhandled exceptions. If you do not attach an event handler, <see cref="M:System.Windows.Forms.Application.OnThreadException(System.Exception)" /> will execute the default behavior, which involves displaying a dialog box to inform the user that there has been an error. </para
-          >
+            >The <see cref="T:System.Windows.Forms.Application" /> class has a <see cref="E:System.Windows.Forms.Application.ThreadException" /> event. You can attach an event handler to this event to do whatever custom processing you need for unhandled exceptions. If you do not attach an event handler, <see cref="M:System.Windows.Forms.Application.OnThreadException(System.Exception)" /> will execute the default behavior, which involves displaying a dialog box to inform the user that there has been an error.
+          </para>
           <para>
             <see cref="M:System.Windows.Forms.Application.OnThreadException(System.Exception)" /> only implements default exception behavior for unhandled exceptions that occur on threads owned by Windows Forms. Unhandled exceptions on other threads are handled by the <see cref="E:System.AppDomain.UnhandledException" /> event.</para
           >
@@ -683,16 +683,16 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.Windows.Forms.Application.ThreadException" /> event. </para
-          >
+            >Raises the <see cref="E:System.Windows.Forms.Application.ThreadException" /> event.
+          </para>
         </summary>
         <param name="t">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Exception" /> that represents the exception that was thrown. </param
-        >
+          />An <see cref="T:System.Exception" /> that represents the exception that was thrown.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -802,8 +802,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is used when hosting Windows Forms in another environment, such as an unmanaged application. You should call <see cref="M:System.Windows.Forms.Application.RaiseIdle(System.EventArgs)" /> when the hosting application enters an idle state. This enables some Windows Forms controls and components to do important background work while the user is not interacting with the application. </para
-          >
+            >This method is used when hosting Windows Forms in another environment, such as an unmanaged application. You should call <see cref="M:System.Windows.Forms.Application.RaiseIdle(System.EventArgs)" /> when the hosting application enters an idle state. This enables some Windows Forms controls and components to do important background work while the user is not interacting with the application.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -872,8 +872,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The implementation of the <see cref="T:System.Windows.Forms.IMessageFilter" /> to remove from the application. </param
-        >
+          />The implementation of the <see cref="T:System.Windows.Forms.IMessageFilter" /> to remove from the application.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -993,8 +993,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In a Win32-based or Windows Forms application, a message loop is a routine in code that processes user events, such as mouse clicks and keyboard strokes. Every running Windows-based application requires an active message loop, called the main message loop. When the main message loop is closed, the application exits. In Windows Forms, this loop is closed when the <see cref="M:System.Windows.Forms.Application.Exit" /> method is called, or when the <see cref="M:System.Windows.Forms.Application.ExitThread" /> method is called on the thread that is running the main message loop. </para
-          >
+            >In a Win32-based or Windows Forms application, a message loop is a routine in code that processes user events, such as mouse clicks and keyboard strokes. Every running Windows-based application requires an active message loop, called the main message loop. When the main message loop is closed, the application exits. In Windows Forms, this loop is closed when the <see cref="M:System.Windows.Forms.Application.Exit" /> method is called, or when the <see cref="M:System.Windows.Forms.Application.ExitThread" /> method is called on the thread that is running the main message loop.
+          </para>
           <para
             >Most Windows Forms developers will not need to use this version of the method. You should use the <see cref="M:System.Windows.Forms.Application.Run(System.Windows.Forms.Form)" /> overload to start an application with a main form, so that the application terminates when the main form is closed. For all other situations, use the <see cref="M:System.Windows.Forms.Application.Run(System.Windows.Forms.ApplicationContext)" /> overload, which supports supplying an <see cref="T:System.Windows.Forms.ApplicationContext" /> object for better control over the lifetime of the application.</para
           >
@@ -1039,8 +1039,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Windows.Forms.ApplicationContext" /> in which the application is run. </param
-        >
+          />An <see cref="T:System.Windows.Forms.ApplicationContext" /> in which the application is run.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1081,8 +1081,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.Form" /> that represents the form to make visible. </param
-        >
+          />A <see cref="T:System.Windows.Forms.Form" /> that represents the form to make visible.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1128,8 +1128,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Certain Windows Forms controls can render their text using either the <see cref="T:System.Windows.Forms.TextRenderer" /> class, which is based on the ndptecgdi graphics library, or the <see cref="T:System.Drawing.Graphics" /> class, which is based on the ndptecgdiplus graphics library. This change was made in the dnprdnlong because of performance and localization issues with ndptecgdiplus. Use <see cref="M:System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(System.Boolean)" /> to set the default value of the UseCompatibleTextRendering property for controls that support it. </para
-          >
+            >Certain Windows Forms controls can render their text using either the <see cref="T:System.Windows.Forms.TextRenderer" /> class, which is based on the ndptecgdi graphics library, or the <see cref="T:System.Drawing.Graphics" /> class, which is based on the ndptecgdiplus graphics library. This change was made in the dnprdnlong because of performance and localization issues with ndptecgdiplus. Use <see cref="M:System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(System.Boolean)" /> to set the default value of the UseCompatibleTextRendering property for controls that support it.
+          </para>
           <para
             >The UseCompatibleTextRendering property is intended to provide visual compatibility between Windows Forms controls that render text using the <see cref="T:System.Windows.Forms.TextRenderer" /> class and net_v10_short and net_v11_short applications that perform custom text rendering using the <see cref="T:System.Drawing.Graphics" /> class. In most cases, if your application is not being upgraded from net_v10_short or net_v11_short, it is recommended that you leave UseCompatibleTextRendering set to the default value of false.</para
           >
@@ -1189,22 +1189,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.PowerState" /> indicating the power activity mode to which to transition. </param
-        >
+          />A <see cref="T:System.Windows.Forms.PowerState" /> indicating the power activity mode to which to transition.
+        </param>
         <param name="force">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to force the suspended mode immediately; false to cause Windows to send a suspend request to every application. </param
-        >
+          />true to force the suspended mode immediately; false to cause Windows to send a suspend request to every application.
+        </param>
         <param name="disableWakeEvent">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to disable restoring the system's power status to active on a wake event, false to enable restoring the system's power status to active on a wake event. </param
-        >
+          />true to disable restoring the system's power status to active on a wake event, false to enable restoring the system's power status to active on a wake event.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetUnhandledExceptionMode">
@@ -1270,8 +1270,8 @@
             >Call <see cref="M:System.Windows.Forms.Application.SetUnhandledExceptionMode(System.Windows.Forms.UnhandledExceptionMode)" /> before you instantiate the main form of your application using the <see cref="Overload:System.Windows.Forms.Application.Run" /> method.</para
           >
           <para
-            >When <paramref name="threadScope" /> is true, the thread exception mode is set. The thread exception mode overrides the application exception mode if <paramref name="mode" /> is not set to <see cref="F:System.Windows.Forms.UnhandledExceptionMode.Automatic" />. </para
-          >
+            >When <paramref name="threadScope" /> is true, the thread exception mode is set. The thread exception mode overrides the application exception mode if <paramref name="mode" /> is not set to <see cref="F:System.Windows.Forms.UnhandledExceptionMode.Automatic" />.
+          </para>
           <para
             >When <paramref name="threadScope" /> is false, the application exception mode is set. The application exception mode is used for all threads that have the <see cref="F:System.Windows.Forms.UnhandledExceptionMode.Automatic" /> mode. Setting the application exception mode does not affect the setting of the current thread.</para
           >
@@ -1334,8 +1334,8 @@
             >This event allows your Windows Forms application to handle otherwise unhandled exceptions that occur in Windows Forms threads. Attach your event handlers to the <see cref="E:System.Windows.Forms.Application.ThreadException" /> event to deal with these exceptions, which will leave your application in an unknown state. Where possible, exceptions should be handled by a structured exception handling block.</para
           >
           <para
-            >You can change whether this callback is used for unhandled Windows Forms thread exceptions by setting <see cref="Overload:System.Windows.Forms.Application.SetUnhandledExceptionMode" />. To catch exceptions that occur in threads not created and owned by Windows Forms, use the <see cref="E:System.AppDomain.UnhandledException" /> event handler. </para
-          >
+            >You can change whether this callback is used for unhandled Windows Forms thread exceptions by setting <see cref="Overload:System.Windows.Forms.Application.SetUnhandledExceptionMode" />. To catch exceptions that occur in threads not created and owned by Windows Forms, use the <see cref="E:System.AppDomain.UnhandledException" /> event handler.
+          </para>
           <block subset="none" type="note">
             <para
               >To guarantee that no activations of this event are missed, you must attach a handler before you call <see cref="Overload:System.Windows.Application.Run" />.</para

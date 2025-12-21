@@ -55,8 +55,8 @@
           </description>
           <description>
             <para
-              >Developers should not include the braces surrounding the driver name when they set the <see cref="P:System.Data.Odbc.OdbcConnectionStringBuilder.Driver" /> property. The <see cref="T:System.Data.Odbc.OdbcConnectionStringBuilder" /> instance adds braces as needed. </para
-            >
+              >Developers should not include the braces surrounding the driver name when they set the <see cref="P:System.Data.Odbc.OdbcConnectionStringBuilder.Driver" /> property. The <see cref="T:System.Data.Odbc.OdbcConnectionStringBuilder" /> instance adds braces as needed.
+            </para>
           </description>
           <description>
             <para>Empty string</para>

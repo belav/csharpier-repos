@@ -25,8 +25,8 @@
         >A settings provider defines the mechanism for storing configuration data used in the application settings architecture. The .NET Framework contains a single default settings provider, <see cref="T:System.Configuration.LocalFileSettingsProvider" />, which stores configuration data to the local file system. However, you can create alternate storage mechanisms by deriving from the abstract <see cref="T:System.Configuration.SettingsProvider" /> class. The provider that a wrapper class uses is determined by decorating the wrapper class with the <see cref="T:System.Configuration.SettingsProviderAttribute" />. If this attribute is not provided, the default, <see cref="T:System.Configuration.LocalFileSettingsProvider" />, is used.</para
       >
       <para
-        >When you create a custom settings provider, at minimum, you must provide implementations for the three methods of this class: <see cref="M:System.Configuration.SettingsProvider.GetPropertyValues(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyCollection)" />, <see cref="M:System.Configuration.SettingsProvider.SetPropertyValues(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyValueCollection)" /> and <see cref="P:System.Configuration.SettingsProvider.ApplicationName" />. </para
-      >
+        >When you create a custom settings provider, at minimum, you must provide implementations for the three methods of this class: <see cref="M:System.Configuration.SettingsProvider.GetPropertyValues(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyCollection)" />, <see cref="M:System.Configuration.SettingsProvider.SetPropertyValues(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyValueCollection)" /> and <see cref="P:System.Configuration.SettingsProvider.ApplicationName" />.
+      </para>
       <para
         >For client applications, you can add more standardized functionality to a custom provider by also implementing the <see cref="T:System.Configuration.IApplicationSettingsProvider" /> interface. This interface mirrors methods found in the <see cref="T:System.Configuration.ApplicationSettingsBase" /> class, which mainly enables versioning support.</para
       >
@@ -45,8 +45,8 @@
         </item>
         <item>
           <para
-            >If two or more properties conflict; for example, a property being decorated with both <see cref="T:System.Configuration.ApplicationScopedSettingAttribute" /> and <see cref="T:System.Configuration.UserScopedSettingAttribute" />; the provider should throw a <see cref="T:System.Configuration.ConfigurationException" />. </para
-          >
+            >If two or more properties conflict; for example, a property being decorated with both <see cref="T:System.Configuration.ApplicationScopedSettingAttribute" /> and <see cref="T:System.Configuration.UserScopedSettingAttribute" />; the provider should throw a <see cref="T:System.Configuration.ConfigurationException" />.
+          </para>
         </item>
       </list>
     </remarks>

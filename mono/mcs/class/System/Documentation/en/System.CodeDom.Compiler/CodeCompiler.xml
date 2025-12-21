@@ -69,8 +69,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.Compiler.CodeCompiler" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.Compiler.CodeCompiler" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -112,8 +112,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.Compiler.CompilerParameters" /> that indicates the compiler options. </param
-        >
+          />A <see cref="T:System.CodeDom.Compiler.CompilerParameters" /> that indicates the compiler options.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CompilerName">
@@ -201,15 +201,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.Compiler.CompilerParameters" /> object that indicates the compiler options. </param
-        >
+          />A <see cref="T:System.CodeDom.Compiler.CompilerParameters" /> object that indicates the compiler options.
+        </param>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeCompileUnit" /> object that indicates the source to compile. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeCompileUnit" /> object that indicates the source to compile.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="FromDomBatch">
@@ -249,15 +249,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.Compiler.CompilerParameters" /> object that indicates the compiler options. </param
-        >
+          />A <see cref="T:System.CodeDom.Compiler.CompilerParameters" /> object that indicates the compiler options.
+        </param>
         <param name="ea">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.CodeDom.CodeCompileUnit" /> objects that indicates the source to compile. </param
-        >
+          />An array of <see cref="T:System.CodeDom.CodeCompileUnit" /> objects that indicates the source to compile.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="FromFile">
@@ -297,15 +297,11 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.Compiler.CompilerParameters" /> object that indicates the compiler options. </param
-        >
+          />A <see cref="T:System.CodeDom.Compiler.CompilerParameters" /> object that indicates the compiler options.
+        </param>
         <param name="fileName">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The file name to compile. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The file name to compile.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="FromFileBatch">
@@ -345,15 +341,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.Compiler.CompilerParameters" /> object that indicates the compiler options. </param
-        >
+          />A <see cref="T:System.CodeDom.Compiler.CompilerParameters" /> object that indicates the compiler options.
+        </param>
         <param name="fileNames">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of strings that indicates the file names of the files to compile. </param
-        >
+          />An array of strings that indicates the file names of the files to compile.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="FromSource">
@@ -393,15 +389,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.Compiler.CompilerParameters" /> object that indicates the compiler options. </param
-        >
+          />A <see cref="T:System.CodeDom.Compiler.CompilerParameters" /> object that indicates the compiler options.
+        </param>
         <param name="source">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The source code string to compile. </param
-        >
+          />The source code string to compile.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="FromSourceBatch">
@@ -441,15 +437,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.Compiler.CompilerParameters" /> object that indicates the compiler options. </param
-        >
+          />A <see cref="T:System.CodeDom.Compiler.CompilerParameters" /> object that indicates the compiler options.
+        </param>
         <param name="sources">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of strings containing the source code to compile. </param
-        >
+          />An array of strings containing the source code to compile.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetResponseFileCmdArgs">
@@ -494,15 +490,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.Compiler.CompilerParameters" /> object that indicates the compiler options. </param
-        >
+          />A <see cref="T:System.CodeDom.Compiler.CompilerParameters" /> object that indicates the compiler options.
+        </param>
         <param name="cmdArgs">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A command arguments string. </param
-        >
+          />A command arguments string.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="JoinStringArray">
@@ -542,15 +538,11 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array of strings to join. </param
-        >
+          />The array of strings to join.
+        </param>
         <param name="separator">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The separator to use. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The separator to use.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ProcessCompilerOutputLine">
@@ -588,15 +580,11 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.Compiler.CompilerResults" /> that indicates the results of compilation. </param
-        >
+          />A <see cref="T:System.CodeDom.Compiler.CompilerResults" /> that indicates the results of compilation.
+        </param>
         <param name="line">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The line to process. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The line to process.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.CodeDom.Compiler.ICodeCompiler.CompileAssemblyFromDom">
@@ -631,8 +619,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see cref="M:System.CodeDom.Compiler.ICodeCompiler.CompileAssemblyFromDom(System.CodeDom.Compiler.CompilerParameters,System.CodeDom.CodeCompileUnit)" />. </para
-          >
+            >For a description of this member, see <see cref="M:System.CodeDom.Compiler.ICodeCompiler.CompileAssemblyFromDom(System.CodeDom.Compiler.CompilerParameters,System.CodeDom.CodeCompileUnit)" />.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -643,15 +631,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.Compiler.CompilerParameters" /> object that indicates the compiler options. </param
-        >
+          />A <see cref="T:System.CodeDom.Compiler.CompilerParameters" /> object that indicates the compiler options.
+        </param>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeCompileUnit" /> that indicates the source to compile. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeCompileUnit" /> that indicates the source to compile.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.CodeDom.Compiler.ICodeCompiler.CompileAssemblyFromDomBatch">
@@ -686,8 +674,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see cref="M:System.CodeDom.Compiler.ICodeCompiler.CompileAssemblyFromDomBatch(System.CodeDom.Compiler.CompilerParameters,System.CodeDom.CodeCompileUnit[])" />. </para
-          >
+            >For a description of this member, see <see cref="M:System.CodeDom.Compiler.ICodeCompiler.CompileAssemblyFromDomBatch(System.CodeDom.Compiler.CompilerParameters,System.CodeDom.CodeCompileUnit[])" />.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -698,15 +686,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.Compiler.CompilerParameters" /> object that indicates the compiler options. </param
-        >
+          />A <see cref="T:System.CodeDom.Compiler.CompilerParameters" /> object that indicates the compiler options.
+        </param>
         <param name="ea">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.CodeDom.CodeCompileUnit" /> objects that indicates the source to compile. </param
-        >
+          />An array of <see cref="T:System.CodeDom.CodeCompileUnit" /> objects that indicates the source to compile.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.CodeDom.Compiler.ICodeCompiler.CompileAssemblyFromFile">
@@ -741,8 +729,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see cref="M:System.CodeDom.Compiler.ICodeCompiler.CompileAssemblyFromFile(System.CodeDom.Compiler.CompilerParameters,System.String)" />. </para
-          >
+            >For a description of this member, see <see cref="M:System.CodeDom.Compiler.ICodeCompiler.CompileAssemblyFromFile(System.CodeDom.Compiler.CompilerParameters,System.String)" />.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -753,15 +741,11 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.Compiler.CompilerParameters" /> object that indicates the compiler options. </param
-        >
+          />A <see cref="T:System.CodeDom.Compiler.CompilerParameters" /> object that indicates the compiler options.
+        </param>
         <param name="fileName">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The file name to compile. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The file name to compile.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.CodeDom.Compiler.ICodeCompiler.CompileAssemblyFromFileBatch">
@@ -796,8 +780,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see cref="M:System.CodeDom.Compiler.ICodeCompiler.CompileAssemblyFromFileBatch(System.CodeDom.Compiler.CompilerParameters,System.String[])" />. </para
-          >
+            >For a description of this member, see <see cref="M:System.CodeDom.Compiler.ICodeCompiler.CompileAssemblyFromFileBatch(System.CodeDom.Compiler.CompilerParameters,System.String[])" />.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -808,15 +792,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.Compiler.CompilerParameters" /> object that indicates the compiler options. </param
-        >
+          />A <see cref="T:System.CodeDom.Compiler.CompilerParameters" /> object that indicates the compiler options.
+        </param>
         <param name="fileNames">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of strings that indicates the file names to compile. </param
-        >
+          />An array of strings that indicates the file names to compile.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.CodeDom.Compiler.ICodeCompiler.CompileAssemblyFromSource">
@@ -863,15 +847,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.Compiler.CompilerParameters" /> object that indicates the compiler options. </param
-        >
+          />A <see cref="T:System.CodeDom.Compiler.CompilerParameters" /> object that indicates the compiler options.
+        </param>
         <param name="source">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string that indicates the source code to compile. </param
-        >
+          />A string that indicates the source code to compile.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.CodeDom.Compiler.ICodeCompiler.CompileAssemblyFromSourceBatch">
@@ -906,8 +890,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see cref="M:System.CodeDom.Compiler.ICodeCompiler.CompileAssemblyFromSourceBatch(System.CodeDom.Compiler.CompilerParameters,System.String[])" />. </para
-          >
+            >For a description of this member, see <see cref="M:System.CodeDom.Compiler.ICodeCompiler.CompileAssemblyFromSourceBatch(System.CodeDom.Compiler.CompilerParameters,System.String[])" />.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -918,15 +902,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.Compiler.CompilerParameters" /> object that indicates the compiler options. </param
-        >
+          />A <see cref="T:System.CodeDom.Compiler.CompilerParameters" /> object that indicates the compiler options.
+        </param>
         <param name="sources">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of strings that indicates the source code to compile. </param
-        >
+          />An array of strings that indicates the source code to compile.
+        </param>
       </Docs>
     </Member>
   </Members>

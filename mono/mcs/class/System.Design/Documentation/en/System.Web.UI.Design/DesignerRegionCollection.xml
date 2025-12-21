@@ -20,8 +20,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.UI.Design.ControlDesigner" /> class, and any derived class, uses the <see cref="T:System.Web.UI.Design.DesignerRegionCollection" /> class to contain and enumerate the designer regions for the control in a design host, such as vsprvslong. </para
-      >
+        >The <see cref="T:System.Web.UI.Design.ControlDesigner" /> class, and any derived class, uses the <see cref="T:System.Web.UI.Design.DesignerRegionCollection" /> class to contain and enumerate the designer regions for the control in a design host, such as vsprvslong.
+      </para>
       <para
         >For example, the <see cref="M:System.Web.UI.Design.ControlDesigner.GetDesignTimeHtml" /> method can be used to define and add regions to the collection.</para
       >
@@ -29,23 +29,23 @@
         >Use the <see cref="P:System.Web.UI.Design.DesignerRegionCollection.Owner" /> property to access the control designer object that contains the designer region collection. Use the <see cref="T:System.Web.UI.Design.DesignerRegionCollection" /> methods and properties to examine and maintain the <see cref="T:System.Web.UI.Design.DesignerRegion" /> objects that are in the collection.</para
       >
       <para
-        >The collection dynamically increases as objects are added. Indexes in this collection are zero-based. Use the <see cref="P:System.Web.UI.Design.DesignerRegionCollection.Count" /> property to determine how many designer regions are in the collection. Use the <see cref="T:System.Web.UI.Design.DesignerRegionCollection" /> members to provide the following functionality: </para
-      >
+        >The collection dynamically increases as objects are added. Indexes in this collection are zero-based. Use the <see cref="P:System.Web.UI.Design.DesignerRegionCollection.Count" /> property to determine how many designer regions are in the collection. Use the <see cref="T:System.Web.UI.Design.DesignerRegionCollection" /> members to provide the following functionality:
+      </para>
       <list type="bullet">
         <item>
           <para
-            >The <see cref="M:System.Web.UI.Design.DesignerRegionCollection.Add(System.Web.UI.Design.DesignerRegion)" /> method to add a single designer region to the collection. </para
-          >
+            >The <see cref="M:System.Web.UI.Design.DesignerRegionCollection.Add(System.Web.UI.Design.DesignerRegion)" /> method to add a single designer region to the collection.
+          </para>
         </item>
         <item>
           <para
-            >The <see cref="M:System.Web.UI.Design.DesignerRegionCollection.Insert(System.Int32,System.Web.UI.Design.DesignerRegion)" /> method to add a designer region at a particular index within the collection. </para
-          >
+            >The <see cref="M:System.Web.UI.Design.DesignerRegionCollection.Insert(System.Int32,System.Web.UI.Design.DesignerRegion)" /> method to add a designer region at a particular index within the collection.
+          </para>
         </item>
         <item>
           <para
-            >The <see cref="M:System.Web.UI.Design.DesignerRegionCollection.Remove(System.Web.UI.Design.DesignerRegion)" /> method to remove a designer region. </para
-          >
+            >The <see cref="M:System.Web.UI.Design.DesignerRegionCollection.Remove(System.Web.UI.Design.DesignerRegion)" /> method to remove a designer region.
+          </para>
         </item>
         <item>
           <para
@@ -54,13 +54,13 @@
         </item>
         <item>
           <para
-            >The <see cref="M:System.Web.UI.Design.DesignerRegionCollection.Contains(System.Web.UI.Design.DesignerRegion)" /> method to determine whether a particular designer region is already in the collection. </para
-          >
+            >The <see cref="M:System.Web.UI.Design.DesignerRegionCollection.Contains(System.Web.UI.Design.DesignerRegion)" /> method to determine whether a particular designer region is already in the collection.
+          </para>
         </item>
         <item>
           <para
-            >The <see cref="M:System.Web.UI.Design.DesignerRegionCollection.IndexOf(System.Web.UI.Design.DesignerRegion)" /> method to retrieve the index of a designer region within the collection. </para
-          >
+            >The <see cref="M:System.Web.UI.Design.DesignerRegionCollection.IndexOf(System.Web.UI.Design.DesignerRegion)" /> method to retrieve the index of a designer region within the collection.
+          </para>
         </item>
         <item>
           <para
@@ -591,16 +591,16 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified <see cref="T:System.Web.UI.Design.DesignerRegion" /> object from the collection. </para
-          >
+            >Removes the specified <see cref="T:System.Web.UI.Design.DesignerRegion" /> object from the collection.
+          </para>
         </summary>
         <param name="region">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.UI.Design.DesignerRegion" /> to remove from the collection. </param
-        >
+          />The <see cref="T:System.Web.UI.Design.DesignerRegion" /> to remove from the collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RemoveAt">

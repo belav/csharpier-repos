@@ -45,8 +45,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.MsmqIntegration.MsmqIntegrationBindingElement" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.MsmqIntegration.MsmqIntegrationBindingElement" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>

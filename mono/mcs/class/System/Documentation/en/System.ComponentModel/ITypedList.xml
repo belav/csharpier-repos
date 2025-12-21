@@ -93,8 +93,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.ComponentModel.PropertyDescriptor" /> objects to find in the collection as bindable. This can be null. </param
-        >
+          />An array of <see cref="T:System.ComponentModel.PropertyDescriptor" /> objects to find in the collection as bindable. This can be null.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetListName">
@@ -138,8 +138,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.ComponentModel.PropertyDescriptor" /> objects, for which the list name is returned. This can be null. </param
-        >
+          />An array of <see cref="T:System.ComponentModel.PropertyDescriptor" /> objects, for which the list name is returned. This can be null.
+        </param>
       </Docs>
     </Member>
   </Members>

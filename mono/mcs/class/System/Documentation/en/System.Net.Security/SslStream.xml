@@ -27,23 +27,23 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >SSL protocols help to provide confidentiality and integrity checking for messages transmitted using an <see cref="T:System.Net.Security.SslStream" />. An SSL connection, such as that provided by <see cref="T:System.Net.Security.SslStream" />, should be used when communicating sensitive information between a client and a server. Using an <see cref="T:System.Net.Security.SslStream" /> helps to prevent anyone from reading and tampering with information while it is in transit on the network. </para
-      >
+        >SSL protocols help to provide confidentiality and integrity checking for messages transmitted using an <see cref="T:System.Net.Security.SslStream" />. An SSL connection, such as that provided by <see cref="T:System.Net.Security.SslStream" />, should be used when communicating sensitive information between a client and a server. Using an <see cref="T:System.Net.Security.SslStream" /> helps to prevent anyone from reading and tampering with information while it is in transit on the network.
+      </para>
       <para
         >An <see cref="T:System.Net.Security.SslStream" /> instance transmits data using a stream that you supply when creating the <see cref="T:System.Net.Security.SslStream" />. When you supply this underlying stream, you have the option to specify whether closing the <see cref="T:System.Net.Security.SslStream" /> also closes the underlying stream. Typically, the <see cref="T:System.Net.Security.SslStream" /> class is used with the <see cref="T:System.Net.Sockets.TcpClient" /> and <see cref="T:System.Net.Sockets.TcpListener" /> classes. The <see cref="M:System.Net.Sockets.TcpClient.GetStream" /> method provides a <see cref="T:System.Net.Sockets.NetworkStream" /> suitable for use with the <see cref="T:System.Net.Security.SslStream" /> class.</para
       >
       <para
-        >After creating an <see cref="T:System.Net.Security.SslStream" />, the server and optionally, the client must be authenticated. The server must provide an X509 certificate that establishes proof of its identity and can request that the client also do so. Authentication must be performed before transmitting information using an <see cref="T:System.Net.Security.SslStream" />. Clients initiate authentication using the synchronous <see cref="Overload:System.Net.Security.SslStream.AuthenticateAsClient" /> methods, which block until the authentication completes, or the asynchronous <see cref="Overload:System.Net.Security.SslStream.BeginAuthenticateAsClient" /> methods, which do not block waiting for the authentication to complete. Servers initiate authentication using the synchronous <see cref="Overload:System.Net.Security.SslStream.AuthenticateAsServer" /> or asynchronous <see cref="Overload:System.Net.Security.SslStream.BeginAuthenticateAsServer" /> methods. Both client and server must initiate the authentication. </para
-      >
+        >After creating an <see cref="T:System.Net.Security.SslStream" />, the server and optionally, the client must be authenticated. The server must provide an X509 certificate that establishes proof of its identity and can request that the client also do so. Authentication must be performed before transmitting information using an <see cref="T:System.Net.Security.SslStream" />. Clients initiate authentication using the synchronous <see cref="Overload:System.Net.Security.SslStream.AuthenticateAsClient" /> methods, which block until the authentication completes, or the asynchronous <see cref="Overload:System.Net.Security.SslStream.BeginAuthenticateAsClient" /> methods, which do not block waiting for the authentication to complete. Servers initiate authentication using the synchronous <see cref="Overload:System.Net.Security.SslStream.AuthenticateAsServer" /> or asynchronous <see cref="Overload:System.Net.Security.SslStream.BeginAuthenticateAsServer" /> methods. Both client and server must initiate the authentication.
+      </para>
       <para
-        >The authentication is handled by the Security Support Provider (SSPI) channel provider. The client is given an opportunity to control validation of the server's certificate by specifying a <see cref="T:System.Net.Security.RemoteCertificateValidationCallback" /> delegate when creating an <see cref="T:System.Net.Security.SslStream" />. The server can also control validation by supplying a <see cref="T:System.Net.Security.RemoteCertificateValidationCallback" /> delegate. The method referenced by the delegate includes the remote party's certificate and any errors SSPI encountered while validating the certificate. Note that if the server specifies a delegate, the delegate's method is invoked regardless of whether the server requested client authentication. If the server did not request client authentication, the server's delegate method receives a null certificate and an empty array of certificate errors. </para
-      >
+        >The authentication is handled by the Security Support Provider (SSPI) channel provider. The client is given an opportunity to control validation of the server's certificate by specifying a <see cref="T:System.Net.Security.RemoteCertificateValidationCallback" /> delegate when creating an <see cref="T:System.Net.Security.SslStream" />. The server can also control validation by supplying a <see cref="T:System.Net.Security.RemoteCertificateValidationCallback" /> delegate. The method referenced by the delegate includes the remote party's certificate and any errors SSPI encountered while validating the certificate. Note that if the server specifies a delegate, the delegate's method is invoked regardless of whether the server requested client authentication. If the server did not request client authentication, the server's delegate method receives a null certificate and an empty array of certificate errors.
+      </para>
       <para
         >If the server requires client authentication, the client must specify one or more certificates for authentication. If the client has more than one certificate, the client can provide a <see cref="T:System.Net.Security.LocalCertificateSelectionCallback" /> delegate to select the correct certificate for the server. The client's certificates must be located in the current user's "My" certificate store. Client authentication via certificates is not supported for the <see cref="F:System.Security.Authentication.SslProtocols.Ssl2" /> (SSL version 2) protocol.</para
       >
       <para
-        >If the authentication fails, you receive a <see cref="T:System.Security.Authentication.AuthenticationException" />, and the <see cref="T:System.Net.Security.SslStream" /> is no longer useable. You should close this object and remove all references to it so that it can be collected by the garbage collector. </para
-      >
+        >If the authentication fails, you receive a <see cref="T:System.Security.Authentication.AuthenticationException" />, and the <see cref="T:System.Net.Security.SslStream" /> is no longer useable. You should close this object and remove all references to it so that it can be collected by the garbage collector.
+      </para>
       <para
         >When the authentication process, also known as the SSL handshake, succeeds, the identity of the server (and optionally, the client) is established and the <see cref="T:System.Net.Security.SslStream" /> can be used by the client and server to exchange messages. Before sending or receiving information, the client and server should check the security services and levels provided by the <see cref="T:System.Net.Security.SslStream" /> to determine whether the protocol, algorithms, and strengths selected meet their requirements for integrity and confidentiality. If the current settings are not sufficient, the stream should be closed. You can check the security services provided by the <see cref="T:System.Net.Security.SslStream" /> using the <see cref="P:System.Net.Security.SslStream.IsEncrypted" /> and <see cref="P:System.Net.Security.SslStream.IsSigned" /> properties. The following table shows the elements that report the cryptographic settings used for authentication, encryption and data signing.</para
       >
@@ -64,8 +64,8 @@
           </term>
           <description>
             <para
-              >The <see cref="P:System.Net.Security.SslStream.SslProtocol" /> property and the associated <see cref="T:System.Security.Authentication.SslProtocols" /> enumeration. </para
-            >
+              >The <see cref="P:System.Net.Security.SslStream.SslProtocol" /> property and the associated <see cref="T:System.Security.Authentication.SslProtocols" /> enumeration.
+            </para>
           </description>
         </item>
         <item>
@@ -74,8 +74,8 @@
           </term>
           <description>
             <para
-              >The <see cref="P:System.Net.Security.SslStream.KeyExchangeAlgorithm" /> property and the associated <see cref="T:System.Security.Authentication.ExchangeAlgorithmType" />  enumeration. </para
-            >
+              >The <see cref="P:System.Net.Security.SslStream.KeyExchangeAlgorithm" /> property and the associated <see cref="T:System.Security.Authentication.ExchangeAlgorithmType" />  enumeration.
+            </para>
           </description>
         </item>
         <item>
@@ -84,8 +84,8 @@
           </term>
           <description>
             <para
-              >The <see cref="P:System.Net.Security.SslStream.HashAlgorithm" /> property and the associated <see cref="T:System.Security.Authentication.HashAlgorithmType" /> enumeration. </para
-            >
+              >The <see cref="P:System.Net.Security.SslStream.HashAlgorithm" /> property and the associated <see cref="T:System.Security.Authentication.HashAlgorithmType" /> enumeration.
+            </para>
           </description>
         </item>
         <item>
@@ -94,8 +94,8 @@
           </term>
           <description>
             <para
-              >The <see cref="P:System.Net.Security.SslStream.CipherAlgorithm" /> property and the associated <see cref="T:System.Security.Authentication.CipherAlgorithmType" />  enumeration. </para
-            >
+              >The <see cref="P:System.Net.Security.SslStream.CipherAlgorithm" /> property and the associated <see cref="T:System.Security.Authentication.CipherAlgorithmType" />  enumeration.
+            </para>
           </description>
         </item>
         <item>
@@ -104,14 +104,14 @@
           </term>
           <description>
             <para
-              >The <see cref="P:System.Net.Security.SslStream.KeyExchangeStrength" />, <see cref="P:System.Net.Security.SslStream.HashStrength" />, and <see cref="P:System.Net.Security.SslStream.CipherStrength" /> properties. </para
-            >
+              >The <see cref="P:System.Net.Security.SslStream.KeyExchangeStrength" />, <see cref="P:System.Net.Security.SslStream.HashStrength" />, and <see cref="P:System.Net.Security.SslStream.CipherStrength" /> properties.
+            </para>
           </description>
         </item>
       </list>
       <para
-        >After a successful authentication, you can send data using the synchronous <see cref="Overload:System.Net.Security.SslStream.Write" /> or asynchronous <see cref="M:System.Net.Security.SslStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" /> methods. You can receive data using the synchronous <see cref="M:System.Net.Security.SslStream.Read(System.Byte[],System.Int32,System.Int32)" /> or asynchronous <see cref="M:System.Net.Security.SslStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" /> methods. </para
-      >
+        >After a successful authentication, you can send data using the synchronous <see cref="Overload:System.Net.Security.SslStream.Write" /> or asynchronous <see cref="M:System.Net.Security.SslStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" /> methods. You can receive data using the synchronous <see cref="M:System.Net.Security.SslStream.Read(System.Byte[],System.Int32,System.Int32)" /> or asynchronous <see cref="M:System.Net.Security.SslStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" /> methods.
+      </para>
       <para
         >If you specified to the <see cref="Overload:System.Net.Security.SslStream.#ctor" /> that the underlying stream should be left open, you are responsible for closing that stream when you are done using it.</para
       >
@@ -353,8 +353,8 @@
             >The security protocol and cryptographic algorithms are already selected when the <paramref name="userCertificateValidationCallback" /> delegate's method is invoked. You can use the method to determine whether the selected cryptographic algorithms and strengths are sufficient for your application. If not, the method should return false to prevent the <see cref="T:System.Net.Security.SslStream" /> from being created.</para
           >
           <para
-            >The <paramref name="userCertificateSelectionCallback" /> delegate is useful when your application has multiple certificates and must dynamically choose a certificate. Certificates in the "MY" store are passed to the method invoked by the delegate. </para
-          >
+            >The <paramref name="userCertificateSelectionCallback" /> delegate is useful when your application has multiple certificates and must dynamically choose a certificate. Certificates in the "MY" store are passed to the method invoked by the delegate.
+          </para>
           <para
             >If a value is not specified in the configuration file for encryptionpolicy, the <see cref="T:System.Net.Security.EncryptionPolicy" /> defaults to <see cref="F:System.Net.Security.EncryptionPolicy.RequireEncryption" /> for the <see cref="T:System.Net.Security.SslStream" /> instance that is constructed.</para
           >
@@ -426,14 +426,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method authenticates using <see cref="F:System.Security.Authentication.SslProtocols.Default" />. No client certificates are used in the authentication. The certificate revocation list is not checked during authentication. The value specified for <paramref name="targetHost" /> must match the name on the server's certificate. </para
-          >
+            >This method authenticates using <see cref="F:System.Security.Authentication.SslProtocols.Default" />. No client certificates are used in the authentication. The certificate revocation list is not checked during authentication. The value specified for <paramref name="targetHost" /> must match the name on the server's certificate.
+          </para>
           <para
             >When authentication succeeds, you must check the <see cref="P:System.Net.Security.SslStream.IsEncrypted" /> and <see cref="P:System.Net.Security.SslStream.IsSigned" /> properties to determine what security services are used by the <see cref="T:System.Net.Security.SslStream" />. Check the <see cref="P:System.Net.Security.SslStream.IsMutuallyAuthenticated" /> property to determine whether mutual authentication occurred.</para
           >
           <para
-            >If the authentication fails, you receive a <see cref="T:System.Security.Authentication.AuthenticationException" />, and this <see cref="T:System.Net.Security.SslStream" /> is no longer useable. You should close this object and remove all references to it so that it can be collected by the garbage collector. </para
-          >
+            >If the authentication fails, you receive a <see cref="T:System.Security.Authentication.AuthenticationException" />, and this <see cref="T:System.Net.Security.SslStream" /> is no longer useable. You should close this object and remove all references to it so that it can be collected by the garbage collector.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -545,14 +545,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method authenticates using <see cref="F:System.Security.Authentication.SslProtocols.Default" />. No client certificates are used in the authentication. The certificate revocation list is not checked during authentication. The value specified for <paramref name="targetHost" /> must match the name on the server's certificate. </para
-          >
+            >This method authenticates using <see cref="F:System.Security.Authentication.SslProtocols.Default" />. No client certificates are used in the authentication. The certificate revocation list is not checked during authentication. The value specified for <paramref name="targetHost" /> must match the name on the server's certificate.
+          </para>
           <para
             >When authentication succeeds, you must check the <see cref="P:System.Net.Security.SslStream.IsEncrypted" /> and <see cref="P:System.Net.Security.SslStream.IsSigned" /> properties to determine what security services are used by the <see cref="T:System.Net.Security.SslStream" />. Check the <see cref="P:System.Net.Security.SslStream.IsMutuallyAuthenticated" /> property to determine whether mutual authentication occurred.</para
           >
           <para
-            >If the authentication fails, you receive a <see cref="T:System.Security.Authentication.AuthenticationException" />, and this <see cref="T:System.Net.Security.SslStream" /> is no longer useable. You should close this object and remove all references to it so that it can be collected by the garbage collector. </para
-          >
+            >If the authentication fails, you receive a <see cref="T:System.Security.Authentication.AuthenticationException" />, and this <see cref="T:System.Net.Security.SslStream" /> is no longer useable. You should close this object and remove all references to it so that it can be collected by the garbage collector.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -683,8 +683,8 @@
             >This method blocks until the operation completes. To prevent blocking until the operation completes, use one of the <see cref="Overload:System.Net.Security.SslStream.BeginAuthenticateAsServer" /> method overloads.</para
           >
           <para
-            >If the authentication fails, you receive a <see cref="T:System.Security.Authentication.AuthenticationException" />, and this <see cref="T:System.Net.Security.SslStream" /> is no longer useable. You should close this object and remove all references to it so that it can be collected by the garbage collector. </para
-          >
+            >If the authentication fails, you receive a <see cref="T:System.Security.Authentication.AuthenticationException" />, and this <see cref="T:System.Net.Security.SslStream" /> is no longer useable. You should close this object and remove all references to it so that it can be collected by the garbage collector.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -733,8 +733,8 @@
             >This method blocks until the operation completes. To prevent blocking until the operation completes, use one of the <see cref="Overload:System.Net.Security.SslStream.BeginAuthenticateAsServer" /> method overloads.</para
           >
           <para
-            >If the authentication fails, you receive a <see cref="T:System.Security.Authentication.AuthenticationException" />, and this <see cref="T:System.Net.Security.SslStream" /> is no longer useable. You should close this object and remove all references to it so that it can be collected by the garbage collector. </para
-          >
+            >If the authentication fails, you receive a <see cref="T:System.Security.Authentication.AuthenticationException" />, and this <see cref="T:System.Net.Security.SslStream" /> is no longer useable. You should close this object and remove all references to it so that it can be collected by the garbage collector.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -799,8 +799,8 @@
             >This method authenticates using <see cref="F:System.Security.Authentication.SslProtocols.Default" />. The certificate revocation list is not checked during authentication. The client is not required to provide a certificate for authentication.</para
           >
           <para
-            >If the authentication fails, you receive a <see cref="T:System.Security.Authentication.AuthenticationException" />, and this <see cref="T:System.Net.Security.SslStream" /> is no longer useable. You should close this object and remove all references to it so that it can be collected by the garbage collector. </para
-          >
+            >If the authentication fails, you receive a <see cref="T:System.Security.Authentication.AuthenticationException" />, and this <see cref="T:System.Net.Security.SslStream" /> is no longer useable. You should close this object and remove all references to it so that it can be collected by the garbage collector.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -849,8 +849,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the authentication fails, you receive a <see cref="T:System.Security.Authentication.AuthenticationException" />, and this <see cref="T:System.Net.Security.SslStream" /> is no longer useable. You should close this object and remove all references to it so that it can be collected by the garbage collector. </para
-          >
+            >If the authentication fails, you receive a <see cref="T:System.Security.Authentication.AuthenticationException" />, and this <see cref="T:System.Net.Security.SslStream" /> is no longer useable. You should close this object and remove all references to it so that it can be collected by the garbage collector.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -921,8 +921,8 @@
             >This method authenticates using <see cref="F:System.Security.Authentication.SslProtocols.Default" />. No client certificates are used in the authentication. The certificate revocation list is not checked during authentication.</para
           >
           <para
-            >The value specified for <paramref name="targetHost" /> must match the name on the server's certificate. </para
-          >
+            >The value specified for <paramref name="targetHost" /> must match the name on the server's certificate.
+          </para>
           <para
             >The asynchronous authentication operation must be completed by calling the <see cref="M:System.Net.Security.SslStream.EndAuthenticateAsClient(System.IAsyncResult)" /> method. Typically, the method is invoked by the <paramref name="asyncCallback" /> delegate.</para
           >
@@ -945,8 +945,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.IAsyncResult" /> object that indicates the status of the asynchronous operation. </para
-          >
+            >An <see cref="T:System.IAsyncResult" /> object that indicates the status of the asynchronous operation.
+          </para>
         </returns>
         <param name="targetHost">
           <attribution
@@ -960,8 +960,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.AsyncCallback" /> delegate that references the method to invoke when the authentication is complete. </param
-        >
+          />An <see cref="T:System.AsyncCallback" /> delegate that references the method to invoke when the authentication is complete.
+        </param>
         <param name="asyncState">
           <attribution
             license="cc4"
@@ -1004,8 +1004,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value specified for <paramref name="targetHost" /> must match the name on the server's certificate. </para
-          >
+            >The value specified for <paramref name="targetHost" /> must match the name on the server's certificate.
+          </para>
           <para
             >The asynchronous authentication operation must be completed by calling the <see cref="M:System.Net.Security.SslStream.EndAuthenticateAsClient(System.IAsyncResult)" /> method. Typically, the method is invoked by the <paramref name="asyncCallback" /> delegate.</para
           >
@@ -1031,8 +1031,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.IAsyncResult" /> object that indicates the status of the asynchronous operation. </para
-          >
+            >An <see cref="T:System.IAsyncResult" /> object that indicates the status of the asynchronous operation.
+          </para>
         </returns>
         <param name="targetHost">
           <attribution
@@ -1067,8 +1067,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.AsyncCallback" /> delegate that references the method to invoke when the authentication is complete. </param
-        >
+          />An <see cref="T:System.AsyncCallback" /> delegate that references the method to invoke when the authentication is complete.
+        </param>
         <param name="asyncState">
           <attribution
             license="cc4"
@@ -1122,8 +1122,8 @@
             </format>
           </para>
           <para
-            >If you receive a <see cref="T:System.Security.Authentication.AuthenticationException" />, this <see cref="T:System.Net.Security.SslStream" /> is no longer useable. You should close this object and remove all references to it so that it can be collected by the garbage collector. </para
-          >
+            >If you receive a <see cref="T:System.Security.Authentication.AuthenticationException" />, this <see cref="T:System.Net.Security.SslStream" /> is no longer useable. You should close this object and remove all references to it so that it can be collected by the garbage collector.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1132,8 +1132,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.IAsyncResult" /> object indicating the status of the asynchronous operation. </para
-          >
+            >An <see cref="T:System.IAsyncResult" /> object indicating the status of the asynchronous operation.
+          </para>
         </returns>
         <param name="serverCertificate">
           <attribution
@@ -1202,8 +1202,8 @@
             </format>
           </para>
           <para
-            >If you receive a <see cref="T:System.Security.Authentication.AuthenticationException" />, this <see cref="T:System.Net.Security.SslStream" /> is no longer useable. You should close this object and remove all references to it so that it can be collected by the garbage collector. </para
-          >
+            >If you receive a <see cref="T:System.Security.Authentication.AuthenticationException" />, this <see cref="T:System.Net.Security.SslStream" /> is no longer useable. You should close this object and remove all references to it so that it can be collected by the garbage collector.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1212,8 +1212,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.IAsyncResult" /> object that indicates the status of the asynchronous operation. </para
-          >
+            >An <see cref="T:System.IAsyncResult" /> object that indicates the status of the asynchronous operation.
+          </para>
         </returns>
         <param name="serverCertificate">
           <attribution
@@ -1248,8 +1248,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.AsyncCallback" /> delegate that references the method to invoke when the authentication is complete. </param
-        >
+          />An <see cref="T:System.AsyncCallback" /> delegate that references the method to invoke when the authentication is complete.
+        </param>
         <param name="asyncState">
           <attribution
             license="cc4"
@@ -1312,8 +1312,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.IAsyncResult" /> object that indicates the status of the asynchronous operation. </para
-          >
+            >An <see cref="T:System.IAsyncResult" /> object that indicates the status of the asynchronous operation.
+          </para>
         </returns>
         <param name="buffer">
           <attribution
@@ -1341,8 +1341,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.AsyncCallback" /> delegate that references the method to invoke when the read operation is complete. </param
-        >
+          />An <see cref="T:System.AsyncCallback" /> delegate that references the method to invoke when the read operation is complete.
+        </param>
         <param name="asyncState">
           <attribution
             license="cc4"
@@ -1388,8 +1388,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.IAsyncResult" /> object indicating the status of the asynchronous operation. </para
-          >
+            >An <see cref="T:System.IAsyncResult" /> object indicating the status of the asynchronous operation.
+          </para>
         </returns>
         <param name="buffer">
           <attribution
@@ -1417,8 +1417,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.AsyncCallback" /> delegate that references the method to invoke when the write operation is complete. </param
-        >
+          />An <see cref="T:System.AsyncCallback" /> delegate that references the method to invoke when the write operation is complete.
+        </param>
         <param name="asyncState">
           <attribution
             license="cc4"
@@ -1604,8 +1604,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A value of <see cref="F:System.Security.Authentication.CipherAlgorithmType.Null" /> is required for the <see cref="P:System.Net.Security.SslStream.CipherAlgorithm" /> property when the <see cref="F:System.Net.Security.EncryptionPolicy.NoEncryption" /> enumeration value is used to construct a <see cref="T:System.Net.Security.SslStream" /> instance. </para
-          >
+            >A value of <see cref="F:System.Security.Authentication.CipherAlgorithmType.Null" /> is required for the <see cref="P:System.Net.Security.SslStream.CipherAlgorithm" /> property when the <see cref="F:System.Net.Security.EncryptionPolicy.NoEncryption" /> enumeration value is used to construct a <see cref="T:System.Net.Security.SslStream" /> instance.
+          </para>
           <para
             >winxpsvr and winxp do not support the <see cref="F:System.Security.Authentication.CipherAlgorithmType.Null" /> value. So even if the <see cref="F:System.Security.Authentication.CipherAlgorithmType.Null" /> value is used to construct the <see cref="T:System.Net.Security.SslStream" /> instance, the <see cref="T:System.Net.Security.EncryptionPolicy" /> property will be <see cref="F:System.Security.Authentication.CipherAlgorithmType.None" />. The <see cref="F:System.Security.Authentication.CipherAlgorithmType.Null" /> value is only returned on Windows Vista and later.</para
           >
@@ -1702,16 +1702,16 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see cref="T:System.Net.Security.SslStream" /> and optionally releases the managed resources. </para
-          >
+            >Releases the unmanaged resources used by the <see cref="T:System.Net.Security.SslStream" /> and optionally releases the managed resources.
+          </para>
         </summary>
         <param name="disposing">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="EndAuthenticateAsClient">
@@ -1742,11 +1742,11 @@
             >If the operation has not completed, this method blocks until it does. When the authentication succeeds, you must check the <see cref="P:System.Net.Security.SslStream.IsEncrypted" /> and <see cref="P:System.Net.Security.SslStream.IsSigned" /> properties to determine what security services are used by the <see cref="T:System.Net.Security.SslStream" />. Check the <see cref="P:System.Net.Security.SslStream.IsMutuallyAuthenticated" /> property to determine whether mutual authentication occurred.</para
           >
           <para
-            >If the authentication fails, you receive a <see cref="T:System.Security.Authentication.AuthenticationException" />, and this <see cref="T:System.Net.Security.SslStream" /> is no longer useable. You should close this object and remove all references to it so that it can be collected by the garbage collector. </para
-          >
+            >If the authentication fails, you receive a <see cref="T:System.Security.Authentication.AuthenticationException" />, and this <see cref="T:System.Net.Security.SslStream" /> is no longer useable. You should close this object and remove all references to it so that it can be collected by the garbage collector.
+          </para>
           <para
-            >To perform this operation synchronously, use one of the <see cref="Overload:System.Net.Security.SslStream.AuthenticateAsServer" /> methods. </para
-          >
+            >To perform this operation synchronously, use one of the <see cref="Overload:System.Net.Security.SslStream.AuthenticateAsServer" /> methods.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1759,8 +1759,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.IAsyncResult" /> instance returned by a call to <see cref="Overload:System.Net.Security.SslStream.BeginAuthenticateAsServer" />. </param
-        >
+          />An <see cref="T:System.IAsyncResult" /> instance returned by a call to <see cref="Overload:System.Net.Security.SslStream.BeginAuthenticateAsServer" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="EndAuthenticateAsServer">
@@ -1791,11 +1791,11 @@
             >If the operation has not completed, this method blocks until it does. When the authentication succeeds, you must check the <see cref="P:System.Net.Security.SslStream.IsEncrypted" /> and <see cref="P:System.Net.Security.SslStream.IsSigned" /> properties to determine what security services are used by the <see cref="T:System.Net.Security.SslStream" />. Check the <see cref="P:System.Net.Security.SslStream.IsMutuallyAuthenticated" /> property to determine whether mutual authentication occurred.</para
           >
           <para
-            >If the authentication fails, you receive a <see cref="T:System.Security.Authentication.AuthenticationException" />, and this <see cref="T:System.Net.Security.SslStream" /> is no longer useable. You should close this object and remove all references to it so that it can be collected by the garbage collector. </para
-          >
+            >If the authentication fails, you receive a <see cref="T:System.Security.Authentication.AuthenticationException" />, and this <see cref="T:System.Net.Security.SslStream" /> is no longer useable. You should close this object and remove all references to it so that it can be collected by the garbage collector.
+          </para>
           <para
-            >To perform this operation synchronously, use one of the <see cref="Overload:System.Net.Security.SslStream.AuthenticateAsClient" /> method. </para
-          >
+            >To perform this operation synchronously, use one of the <see cref="Overload:System.Net.Security.SslStream.AuthenticateAsClient" /> method.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1808,8 +1808,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.IAsyncResult" /> instance returned by a call to <see cref="Overload:System.Net.Security.SslStream.BeginAuthenticateAsClient" />. </param
-        >
+          />An <see cref="T:System.IAsyncResult" /> instance returned by a call to <see cref="Overload:System.Net.Security.SslStream.BeginAuthenticateAsClient" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="EndRead">
@@ -1838,8 +1838,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If the operation has not completed, this method blocks until it does. </para>
           <para
-            >To perform this operation synchronously, use the <see cref="M:System.Net.Security.SslStream.Read(System.Byte[],System.Int32,System.Int32)" /> method. </para
-          >
+            >To perform this operation synchronously, use the <see cref="M:System.Net.Security.SslStream.Read(System.Byte[],System.Int32,System.Int32)" /> method.
+          </para>
           <para
             >You cannot call this method until you have successfully authenticated. To authenticate call one of the <see cref="Overload:System.Net.Security.SslStream.AuthenticateAsClient" />, or <see cref="Overload:System.Net.Security.SslStream.BeginAuthenticateAsClient" />, <see cref="Overload:System.Net.Security.SslStream.AuthenticateAsServer" />, <see cref="Overload:System.Net.Security.SslStream.BeginAuthenticateAsServer" /> methods.</para
           >
@@ -1894,8 +1894,8 @@
             >An application cannot call this method until you have successfully authenticated. To authenticate, call one of the <see cref="Overload:System.Net.Security.SslStream.AuthenticateAsClient" />, or <see cref="Overload:System.Net.Security.SslStream.BeginAuthenticateAsClient" />, <see cref="Overload:System.Net.Security.SslStream.AuthenticateAsServer" />, <see cref="Overload:System.Net.Security.SslStream.BeginAuthenticateAsServer" /> methods.</para
           >
           <para
-            >To perform this operation synchronously, use the <see cref="Overload:System.Net.Security.SslStream.Write" /> method. </para
-          >
+            >To perform this operation synchronously, use the <see cref="Overload:System.Net.Security.SslStream.Write" /> method.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2319,8 +2319,8 @@
             >You cannot call this method until you have successfully authenticated. To authenticate call one of the <see cref="Overload:System.Net.Security.SslStream.AuthenticateAsClient" />, or <see cref="Overload:System.Net.Security.SslStream.BeginAuthenticateAsClient" />, <see cref="Overload:System.Net.Security.SslStream.AuthenticateAsServer" />, <see cref="Overload:System.Net.Security.SslStream.BeginAuthenticateAsServer" /> methods.</para
           >
           <para
-            >To perform this operation asynchronously, use the <see cref="M:System.Net.Security.SslStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" /> method. </para
-          >
+            >To perform this operation asynchronously, use the <see cref="M:System.Net.Security.SslStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" /> method.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

@@ -175,8 +175,8 @@
       </Parameters>
       <exception cref="T:System.ArgumentNullException">
         <paramref name="method" /> was <see langword="null" />.
-      </exception
-      >
+
+      </exception>
       <Docs>
         <param name="method">To be added.</param>
         <summary>To be added.</summary>

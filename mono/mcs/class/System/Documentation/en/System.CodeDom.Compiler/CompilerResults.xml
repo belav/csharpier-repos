@@ -22,8 +22,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class contains the following information about the results of a compilation by an <see cref="T:System.CodeDom.Compiler.ICodeCompiler" /> interface implementation: </para
-      >
+        >This class contains the following information about the results of a compilation by an <see cref="T:System.CodeDom.Compiler.ICodeCompiler" /> interface implementation:
+      </para>
       <list type="bullet">
         <item>
           <para
@@ -107,8 +107,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.Compiler.TempFileCollection" /> with which to manage and store references to intermediate files generated during compilation. </param
-        >
+          />A <see cref="T:System.CodeDom.Compiler.TempFileCollection" /> with which to manage and store references to intermediate files generated during compilation.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CompiledAssembly">

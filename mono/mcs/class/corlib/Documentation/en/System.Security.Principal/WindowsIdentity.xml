@@ -135,8 +135,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The account token for the user on whose behalf the code is running. </param
-        >
+          />The account token for the user on whose behalf the code is running.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -180,8 +180,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The UPN for the user on whose behalf the code is running. </param
-        >
+          />The UPN for the user on whose behalf the code is running.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -264,8 +264,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The account token for the user on whose behalf the code is running. </param
-        >
+          />The account token for the user on whose behalf the code is running.
+        </param>
         <param name="type">
           <attribution
             license="cc4"
@@ -317,15 +317,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object containing the account information for the user. </param
-        >
+          />The object containing the account information for the user.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that indicates the stream characteristics. </param
-        >
+          />An object that indicates the stream characteristics.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -376,8 +376,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The UPN for the user on whose behalf the code is running. </param
-        >
+          />The UPN for the user on whose behalf the code is running.
+        </param>
         <param name="type">
           <attribution
             license="cc4"
@@ -458,8 +458,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The account token for the user on whose behalf the code is running. </param
-        >
+          />The account token for the user on whose behalf the code is running.
+        </param>
         <param name="type">
           <attribution
             license="cc4"
@@ -472,8 +472,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the enumeration values. </param
-        >
+          />One of the enumeration values.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -521,8 +521,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The account token for the user on whose behalf the code is running. </param
-        >
+          />The account token for the user on whose behalf the code is running.
+        </param>
         <param name="type">
           <attribution
             license="cc4"
@@ -535,15 +535,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the enumeration values. </param
-        >
+          />One of the enumeration values.
+        </param>
         <param name="isAuthenticated">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to indicate that the user is authenticated; otherwise, false. </param
-        >
+          />true to indicate that the user is authenticated; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AuthenticationType">
@@ -599,8 +599,8 @@
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format> and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
           <block subset="none" type="note">
             <para
               >Always call <see cref="M:System.Security.Principal.WindowsIdentity.Dispose" /> before you release your last reference to the <see cref="T:System.Security.Principal.WindowsIdentity" />. Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Security.Principal.WindowsIdentity" /> object's Finalize method.</para
@@ -610,8 +610,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the <see cref="T:System.Security.Principal.WindowsIdentity" />. </para
-          >
+            >Releases all resources used by the <see cref="T:System.Security.Principal.WindowsIdentity" />.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -651,16 +651,16 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see cref="T:System.Security.Principal.WindowsIdentity" /> and optionally releases the managed resources. </para
-          >
+            >Releases the unmanaged resources used by the <see cref="T:System.Security.Principal.WindowsIdentity" /> and optionally releases the managed resources.
+          </para>
         </summary>
         <param name="disposing">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Finalize">
@@ -745,8 +745,7 @@
 WindowsIdentity wi = WindowsIdentity.GetCurrent ();
 Console.WriteLine ("\tUserName:\t{0}", wi.Name);
 Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
-  </code
-            >
+  </code>
           </example>
         </remarks>
         <summary>
@@ -786,8 +785,8 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref name="ifImpersonating" /> is true and the thread is not impersonating, the returned <see cref="T:System.Security.Principal.WindowsIdentity" /> object has no value.  If <paramref name="ifImpersonating" /> is false and the thread is impersonating, the <see cref="T:System.Security.Principal.WindowsIdentity" /> for the thread is returned.  If <paramref name="ifImpersonating" /> is false and the thread is not impersonating, the <see cref="T:System.Security.Principal.WindowsIdentity" /> for the process is returned.  </para
-          >
+            >If <paramref name="ifImpersonating" /> is true and the thread is not impersonating, the returned <see cref="T:System.Security.Principal.WindowsIdentity" /> object has no value.  If <paramref name="ifImpersonating" /> is false and the thread is impersonating, the <see cref="T:System.Security.Principal.WindowsIdentity" /> for the thread is returned.  If <paramref name="ifImpersonating" /> is false and the thread is not impersonating, the <see cref="T:System.Security.Principal.WindowsIdentity" /> for the process is returned.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -833,8 +832,8 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="desiredAccess" /> parameter specifies an access mask that identifies the requested types of access to the access token. These requested access types are compared with the token's discretionary access control list (DACL) to determine which types of access are granted or denied. </para
-          >
+            >The <paramref name="desiredAccess" /> parameter specifies an access mask that identifies the requested types of access to the access token. These requested access types are compared with the token's discretionary access control list (DACL) to determine which types of access are granted or denied.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -851,8 +850,8 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the enumeration values. </param
-        >
+          />A bitwise combination of the enumeration values.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Groups">
@@ -951,8 +950,8 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
           <para
             >For more information about calls to unmanaged code, see <format type="text/html">
               <a href="eca7606e-ebfb-4f47-b8d9-289903fdc045">Consuming Unmanaged DLL Functions</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -967,8 +966,8 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The handle of a Windows account token. This token is usually retrieved through a call to unmanaged code, such as a call to the Win32 API LogonUser function. </param
-        >
+          />The handle of a Windows account token. This token is usually retrieved through a call to unmanaged code, such as a call to the Win32 API LogonUser function.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ImpersonationLevel">
@@ -1023,8 +1022,8 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Security.Principal.WindowsIdentity.IsAnonymous" /> property detects both the Windows anonymous identity and the anonymous identity that is returned by the <see cref="M:System.Security.Principal.WindowsIdentity.GetAnonymous" /> method. </para
-          >
+            >The <see cref="P:System.Security.Principal.WindowsIdentity.IsAnonymous" /> property detects both the Windows anonymous identity and the anonymous identity that is returned by the <see cref="M:System.Security.Principal.WindowsIdentity.GetAnonymous" /> method.
+          </para>
           <para>Anonymous accounts are typically encountered only from within ASP.NET-based applications when anonymous access is allowed by Internet Information Services (IIS).</para>
         </remarks>
         <summary>
@@ -1193,8 +1192,8 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The source of the deserialization event. </param
-        >
+          />The source of the deserialization event.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.Runtime.Serialization.ISerializable.GetObjectData">
@@ -1240,15 +1239,15 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object containing the information required to serialize the <see cref="T:System.Collections.Hashtable" />. </param
-        >
+          />An object containing the information required to serialize the <see cref="T:System.Collections.Hashtable" />.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object containing the source and destination of the serialized stream associated with the <see cref="T:System.Collections.Hashtable" />. </param
-        >
+          />An object containing the source and destination of the serialized stream associated with the <see cref="T:System.Collections.Hashtable" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Token">
@@ -1272,8 +1271,8 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
           >
           <block subset="none" type="note">
             <para
-              >The account token that is returned by the <see cref="P:System.Security.Principal.WindowsIdentity.Token" /> property is a duplicate of the Windows token that is used to create the <see cref="T:System.Security.Principal.WindowsIdentity" /> object and is automatically released by the .NET Framework. This is different from the account token (the <paramref name="userToken" /> parameter for the constructor), which is used to create the <see cref="T:System.Security.Principal.WindowsIdentity" /> object. <paramref name="userToken" /> is a Windows account token that is created by a call to <unmanagedCodeEntityReference>LogonUser</unmanagedCodeEntityReference> and must be closed to avoid a memory leak. </para
-            >
+              >The account token that is returned by the <see cref="P:System.Security.Principal.WindowsIdentity.Token" /> property is a duplicate of the Windows token that is used to create the <see cref="T:System.Security.Principal.WindowsIdentity" /> object and is automatically released by the .NET Framework. This is different from the account token (the <paramref name="userToken" /> parameter for the constructor), which is used to create the <see cref="T:System.Security.Principal.WindowsIdentity" /> object. <paramref name="userToken" /> is a Windows account token that is created by a call to <unmanagedCodeEntityReference>LogonUser</unmanagedCodeEntityReference> and must be closed to avoid a memory leak.
+            </para>
           </block>
         </remarks>
         <summary>

@@ -109,15 +109,11 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeTypeReference" /> that indicates the data type of the variable. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeTypeReference" /> that indicates the data type of the variable.
+        </param>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the variable. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the variable.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -153,15 +149,11 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the data type of the variable. </param
-        >
+          />The name of the data type of the variable.
+        </param>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the variable. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the variable.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -197,15 +189,11 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data type for the variable. </param
-        >
+          />The data type for the variable.
+        </param>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the variable. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the variable.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -242,22 +230,18 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeTypeReference" /> that indicates the type of the variable. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeTypeReference" /> that indicates the type of the variable.
+        </param>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the variable. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the variable.
+        </param>
         <param name="initExpression">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeExpression" /> that indicates the initialization expression for the variable. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeExpression" /> that indicates the initialization expression for the variable.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -294,22 +278,18 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the data type of the variable. </param
-        >
+          />The name of the data type of the variable.
+        </param>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the variable. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the variable.
+        </param>
         <param name="initExpression">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeExpression" /> that indicates the initialization expression for the variable. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeExpression" /> that indicates the initialization expression for the variable.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -346,22 +326,18 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data type of the variable. </param
-        >
+          />The data type of the variable.
+        </param>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the variable. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the variable.
+        </param>
         <param name="initExpression">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeExpression" /> that indicates the initialization expression for the variable. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeExpression" /> that indicates the initialization expression for the variable.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="InitExpression">

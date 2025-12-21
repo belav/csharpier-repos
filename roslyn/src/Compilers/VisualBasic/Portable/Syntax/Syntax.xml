@@ -116,8 +116,7 @@ Unify Enum declarations with other block type declarations.
         The StatementList and Statement structures
         are combined into a single structure. The Previous/NextInBlock and Previous/NextLexical have no direct equivalent,
         helper routines for these operations are very easy to write.
-      </native-equiv
-      >
+      </native-equiv>
     </node-structure>
 
     <!--****************
@@ -323,13 +322,11 @@ Unify Enum declarations with other block type declarations.
         <lm-equiv name="ProgramNode.Contents">
           The ProgramNode.Contents statements are split up into
           OptionStatements, ImportStatements, AttributeStatements and TypeAndNamespaceDeclarations.
-        </lm-equiv
-        >
+        </lm-equiv>
         <native-equiv name="FileBlockStatement.Children">
           The FileBlockStatement.Children statements are split up into
           OptionStatements, ImportStatements, AttributeStatements and TypeAndNamespaceDeclarations.
-        </native-equiv
-        >
+        </native-equiv>
       </child>
 
       <child name="Imports" optional="true" list="true" kind="@ImportsStatementSyntax">
@@ -337,13 +334,11 @@ Unify Enum declarations with other block type declarations.
         <lm-equiv name="ProgramNode.Contents">
           The ProgramNode.Contents statements are split up into
           OptionStatements, ImportStatements, AttributeStatements and TypeAndNamespaceDeclarations.
-        </lm-equiv
-        >
+        </lm-equiv>
         <native-equiv name="FileBlockStatement.Children">
           The FileBlockStatement.Children statements are split up into
           OptionStatements, ImportStatements, AttributeStatements and TypeAndNamespaceDeclarations.
-        </native-equiv
-        >
+        </native-equiv>
       </child>
 
       <child name="Attributes" optional="true" list="true" kind="AttributesStatement">
@@ -355,14 +350,12 @@ Unify Enum declarations with other block type declarations.
         <lm-equiv name="ProgramNode.Contents">
           The ProgramNode.Contents statements are split up into
           OptionStatements, ImportStatements, AttributeStatements and TypeAndNamespaceDeclarations.
-        </lm-equiv
-        >
+        </lm-equiv>
 
         <native-equiv name="FileBlockStatement.Children">
           The FileBlockStatement.Children statements are split up into
           OptionStatements, ImportStatements, AttributeStatements and TypeAndNamespaceDeclarations.
-        </native-equiv
-        >
+        </native-equiv>
       </child>
 
       <!-- TODO: Should the kind be more specific? -->
@@ -375,13 +368,11 @@ Unify Enum declarations with other block type declarations.
         <lm-equiv name="ProgramNode.Contents">
           The ProgramNode.Contents statements are split up into
           OptionStatements, ImportStatements, AttributeStatements and TypeAndNamespaceDeclarations.
-        </lm-equiv
-        >
+        </lm-equiv>
         <native-equiv name="FileBlockStatement.Children">
           The FileBlockStatement.Children statements are split up into
           OptionStatements, ImportStatements, AttributeStatements and TypeAndNamespaceDeclarations.
-        </native-equiv
-        >
+        </native-equiv>
       </child>
 
       <child name="EndOfFileToken" kind="EndOfFileToken">
@@ -1921,14 +1912,12 @@ Unify Enum declarations with other block type declarations.
       <lm-equiv name="AutoPropertyNode">
         Normal and auto properties are declared with the same node kind. The IsAutomaticallyImplemented
         field distinguishes the cases.
-      </lm-equiv
-      >
+      </lm-equiv>
       <native-equiv name="PropertyStatement"></native-equiv>
       <native-equiv name="AutoPropertyStatement">
         Normal and auto properties are declared with the same node kind. The IsAutomaticallyImplemented
         field distinguishes the cases.
-      </native-equiv
-      >
+      </native-equiv>
 
       <node-kind name="PropertyStatement">
         <lm-equiv name="Property" />
@@ -2477,8 +2466,7 @@ Unify Enum declarations with other block type declarations.
           "FieldIsKey" may be set to true by the native parser even in cases where
           the "Key" keyword was not set (I think in query expressions, but I'm not at all sure). More code review is needed to understand how this field
           might be computed from the new parse trees.
-        </native-equiv
-        >
+        </native-equiv>
       </child>
     </node-structure>
 
@@ -2658,21 +2646,17 @@ Unify Enum declarations with other block type declarations.
       <child name="Nullable" optional="true" kind="QuestionToken">
         <description>The "?" token that indicates a nullable type.</description>
         <lm-equiv name="IdentifierNode.IsNullable"
-          >IsNullable moves to the ModifiedIdentifier node. </lm-equiv
-        >
+          >IsNullable moves to the ModifiedIdentifier node. </lm-equiv>
         <native-equiv name="IdentifierDescriptor.IsNullable"
-          >IsNullable moves to the ModifiedIdentifier node. </native-equiv
-        >
+          >IsNullable moves to the ModifiedIdentifier node. </native-equiv>
       </child>
 
       <child name="ArrayBounds" optional="true" kind="ArgumentList">
         <description>The optional array bounds, such as "(4)" or "(0 to 5, 0 To 6)".</description>
         <lm-equiv name="IdentifierNode.IsNullable"
-          >IsNullable moves to the ModifiedIdentifier node. </lm-equiv
-        >
+          >IsNullable moves to the ModifiedIdentifier node. </lm-equiv>
         <native-equiv name="IdentifierDescriptor.IsNullable"
-          >IsNullable moves to the ModifiedIdentifier node. </native-equiv
-        >
+          >IsNullable moves to the ModifiedIdentifier node. </native-equiv>
       </child>
 
       <child name="ArrayRankSpecifiers" optional="true" list="true" kind="ArrayRankSpecifier">
@@ -4255,8 +4239,7 @@ Unify Enum declarations with other block type declarations.
       <native-equiv name="ExpressionBlockStatement">
         The SyncLock statement and the contained statements are split into a
         BlockStatement, which contains a SyncLock, Body and End SyncLock statements.
-      </native-equiv
-      >
+      </native-equiv>
 
       <node-kind name="SyncLockStatement">
         <lm-equiv name="SyncLock" />
@@ -5081,8 +5064,7 @@ Unify Enum declarations with other block type declarations.
         <native-equiv name="RedimStatement.HasPreserve">
           To determine if a ReDim statement has a Preserve, the recommended way is using the Kind and
           checking for ReDimPreserve.
-        </native-equiv
-        >
+        </native-equiv>
       </child>
 
       <child
@@ -6486,8 +6468,7 @@ Unify Enum declarations with other block type declarations.
         <native-equiv name="ClosingParenthesisIsPresent">
           To determine if the closing parenthesis was present,
           check the RightParenToken to see if it has an empty Span.
-        </native-equiv
-        >
+        </native-equiv>
       </child>
     </node-structure>
 
@@ -9329,8 +9310,7 @@ Unify Enum declarations with other block type declarations.
       <lm-equiv name="Identifier">
         Identifier in language model maps to either Identifier or SimpleName, depending on the context it
         is used in.
-      </lm-equiv
-      >
+      </lm-equiv>
       <native-equiv name="IdentifierDescriptor"></native-equiv>
 
       <node-kind name="IdentifierToken">

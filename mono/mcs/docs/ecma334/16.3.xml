@@ -31,13 +31,13 @@
   <paragraph
     >A <non_terminal where="16.3.1"
       >using-alias-directive</non_terminal
-    > (<hyperlink>16.3.1</hyperlink>) introduces an alias for a namespace or type. </paragraph
-  >
+    > (<hyperlink>16.3.1</hyperlink>) introduces an alias for a namespace or type.
+  </paragraph>
   <paragraph
     >A <non_terminal where="16.3.2"
       >using-namespace-directive</non_terminal
-    > (<hyperlink>16.3.2</hyperlink>) imports the type members of a namespace. </paragraph
-  >
+    > (<hyperlink>16.3.2</hyperlink>) imports the type members of a namespace.
+  </paragraph>
   <paragraph
     >The scope of a <non_terminal where="16.3"
       >using-directive</non_terminal
@@ -50,6 +50,6 @@
       >using-directive</non_terminal
     >s. Thus, peer <non_terminal where="16.3"
       >using-directive</non_terminal
-    >s do not affect each other, and the order in which they are written is insignificant. </paragraph
-  >
+    >s do not affect each other, and the order in which they are written is insignificant.
+  </paragraph>
 </clause>

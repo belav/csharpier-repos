@@ -156,8 +156,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The callback object of the sponsor. </param
-        >
+          />The callback object of the sponsor.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Register">
@@ -195,15 +195,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The callback object of the sponsor. </param
-        >
+          />The callback object of the sponsor.
+        </param>
         <param name="renewalTime">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The length of time to renew the lease by. </param
-        >
+          />The length of time to renew the lease by.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Renew">
@@ -244,8 +244,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The length of time to renew the lease by. </param
-        >
+          />The length of time to renew the lease by.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RenewOnCallTime">
@@ -345,8 +345,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The lease sponsor to unregister. </param
-        >
+          />The lease sponsor to unregister.
+        </param>
       </Docs>
     </Member>
   </Members>

@@ -53,8 +53,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.HierarchicalDataSourceConverter" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.HierarchicalDataSourceConverter" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -77,8 +77,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.Design.DataSourceConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" /> method uses the <see cref="M:System.Web.UI.Design.HierarchicalDataSourceConverter.IsValidDataSource(System.ComponentModel.IComponent)" /> method to determine which components are available as standard accessible data sources. For the <see cref="T:System.Web.UI.Design.HierarchicalDataSourceConverter" /> class, a valid data source is a component that implements the <see cref="T:System.Web.UI.IHierarchicalEnumerable" /> interface. </para
-          >
+            >The <see cref="M:System.Web.UI.Design.DataSourceConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" /> method uses the <see cref="M:System.Web.UI.Design.HierarchicalDataSourceConverter.IsValidDataSource(System.ComponentModel.IComponent)" /> method to determine which components are available as standard accessible data sources. For the <see cref="T:System.Web.UI.Design.HierarchicalDataSourceConverter" /> class, a valid data source is a component that implements the <see cref="T:System.Web.UI.IHierarchicalEnumerable" /> interface.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

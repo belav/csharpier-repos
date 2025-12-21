@@ -85,8 +85,8 @@
           </term>
           <description>
             <para
-              >Set by the <see cref="P:System.Net.HttpWebRequest.Connection" /> property, <see cref="P:System.Net.HttpWebRequest.KeepAlive" /> property. </para
-            >
+              >Set by the <see cref="P:System.Net.HttpWebRequest.Connection" /> property, <see cref="P:System.Net.HttpWebRequest.KeepAlive" /> property.
+            </para>
           </description>
         </item>
         <item>
@@ -95,8 +95,8 @@
           </term>
           <description>
             <para
-              >Set by the <see cref="P:System.Net.HttpWebRequest.ContentLength" /> property. </para
-            >
+              >Set by the <see cref="P:System.Net.HttpWebRequest.ContentLength" /> property.
+            </para>
           </description>
         </item>
         <item>
@@ -105,8 +105,8 @@
           </term>
           <description>
             <para
-              >Set by the <see cref="P:System.Net.HttpWebRequest.ContentType" /> property. </para
-            >
+              >Set by the <see cref="P:System.Net.HttpWebRequest.ContentType" /> property.
+            </para>
           </description>
         </item>
         <item>
@@ -139,8 +139,8 @@
           </term>
           <description>
             <para
-              >Set by the <see cref="P:System.Net.HttpWebRequest.IfModifiedSince" /> property. </para
-            >
+              >Set by the <see cref="P:System.Net.HttpWebRequest.IfModifiedSince" /> property.
+            </para>
           </description>
         </item>
         <item>
@@ -149,8 +149,8 @@
           </term>
           <description>
             <para
-              >Set by the <see cref="M:System.Net.HttpWebRequest.AddRange(System.Int32,System.Int32)" /> method. </para
-            >
+              >Set by the <see cref="M:System.Net.HttpWebRequest.AddRange(System.Int32,System.Int32)" /> method.
+            </para>
           </description>
         </item>
         <item>
@@ -167,8 +167,8 @@
           </term>
           <description>
             <para
-              >Set by the <see cref="P:System.Net.HttpWebRequest.TransferEncoding" /> property (the <see cref="P:System.Net.HttpWebRequest.SendChunked" /> property must be true). </para
-            >
+              >Set by the <see cref="P:System.Net.HttpWebRequest.TransferEncoding" /> property (the <see cref="P:System.Net.HttpWebRequest.SendChunked" /> property must be true).
+            </para>
           </description>
         </item>
         <item>
@@ -250,15 +250,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Runtime.Serialization.SerializationInfo" /> object that contains the information required to serialize the new <see cref="T:System.Net.HttpWebRequest" /> object. </param
-        >
+          />A <see cref="T:System.Runtime.Serialization.SerializationInfo" /> object that contains the information required to serialize the new <see cref="T:System.Net.HttpWebRequest" /> object.
+        </param>
         <param name="streamingContext">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Runtime.Serialization.StreamingContext" /> object that contains the source and destination of the serialized stream associated with the new <see cref="T:System.Net.HttpWebRequest" /> object. </param
-        >
+          />A <see cref="T:System.Runtime.Serialization.StreamingContext" /> object that contains the source and destination of the serialized stream associated with the new <see cref="T:System.Net.HttpWebRequest" /> object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Abort">
@@ -403,8 +403,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting or ending point of the range. </param
-        >
+          />The starting or ending point of the range.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -506,8 +506,8 @@
           <para>An example of a Range header in an HTTP protocol request that requests the first 100 bytes would be would be the following: </para>
           <para>Range: bytes=0-99\r\n\r\n</para>
           <para
-            >For this example, the <paramref name="from" /> parameter would be specified as 0 and the <paramref name="to" /> parameter would be specified as 99. The range specifier is automatically set as "bytes" by this method. </para
-          >
+            >For this example, the <paramref name="from" /> parameter would be specified as 0 and the <paramref name="to" /> parameter would be specified as 99. The range specifier is automatically set as "bytes" by this method.
+          </para>
           <para>A HTTP server indicates support for Range headers with the Accept-Ranges header. An example of the Accept-Ranges header from a server that supports byte-ranges would be as follows:</para>
           <para>Accept-Ranges: bytes\r\n\r\n</para>
           <para>If an Accept-Ranges header is not received in the header of the response from the server, then the server does not support Range headers. An example of the Accept-Ranges header from a server that does not support ranges, but recognizes the Accept-Ranges header, would be as follows:</para>
@@ -525,15 +525,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position at which to start sending data. </param
-        >
+          />The position at which to start sending data.
+        </param>
         <param name="to">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position at which to stop sending data. </param
-        >
+          />The position at which to stop sending data.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -565,8 +565,8 @@
           <para>An example of a Range header in an HTTP protocol request that requests the first 100 bytes would be would be the following: </para>
           <para>Range: bytes=0-99\r\n\r\n</para>
           <para
-            >For this example, the <paramref name="from" /> parameter would be specified as 0 and the <paramref name="to" /> parameter would be specified as 99. The range specifier is automatically set as "bytes" by this method. </para
-          >
+            >For this example, the <paramref name="from" /> parameter would be specified as 0 and the <paramref name="to" /> parameter would be specified as 99. The range specifier is automatically set as "bytes" by this method.
+          </para>
           <para>A HTTP server indicates support for Range headers with the Accept-Ranges header. An example of the Accept-Ranges header from a server that supports byte-ranges would be as follows:</para>
           <para>Accept-Ranges: bytes\r\n\r\n</para>
           <para>If an Accept-Ranges header is not received in the header of the response from the server, then the server does not support Range headers. An example of the Accept-Ranges header from a server that does not support ranges, but recognizes the Accept-Ranges header, would be as follows:</para>
@@ -669,15 +669,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The description of the range. </param
-        >
+          />The description of the range.
+        </param>
         <param name="range">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting or ending point of the range. </param
-        >
+          />The starting or ending point of the range.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -830,22 +830,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The description of the range. </param
-        >
+          />The description of the range.
+        </param>
         <param name="from">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position at which to start sending data. </param
-        >
+          />The position at which to start sending data.
+        </param>
         <param name="to">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position at which to stop sending data. </param
-        >
+          />The position at which to stop sending data.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -952,8 +952,8 @@ The default is the URI used by the <see
             />
 method to initialize
 the current
-instance. </para
-          >
+instance.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1006,8 +1006,8 @@ instance. </para
             >If <see cref="P:System.Net.HttpWebRequest.AllowAutoRedirect" /> is set to false, all responses with an HTTP status code from 300 to 399 is returned to the application.</para
           >
           <para
-            >The Authorization header is cleared on auto-redirects and <see cref="T:System.Net.HttpWebRequest" /> automatically tries to re-authenticate to the redirected location. In practice, this means that an application can't put custom authentication information into the Authorization header if it is possible to encounter redirection. Instead, the application must implement and register a custom authentication module. The <see cref="T:System.Net.AuthenticationManager" /> and related class are used to implement a custom authentication module. The <see cref="M:System.Net.AuthenticationManager.Register(System.Net.IAuthenticationModule)" /> method registers a custom authentication module. </para
-          >
+            >The Authorization header is cleared on auto-redirects and <see cref="T:System.Net.HttpWebRequest" /> automatically tries to re-authenticate to the redirected location. In practice, this means that an application can't put custom authentication information into the Authorization header if it is possible to encounter redirection. Instead, the application must implement and register a custom authentication module. The <see cref="T:System.Net.AuthenticationManager" /> and related class are used to implement a custom authentication module. The <see cref="M:System.Net.AuthenticationManager.Register(System.Net.IAuthenticationModule)" /> method registers a custom authentication module.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1157,8 +1157,8 @@ instance. </para
             >The <see cref="M:System.Net.HttpWebRequest.BeginGetRequestStream(System.AsyncCallback,System.Object)" /> method starts an asynchronous request for a stream used to send data for the <see cref="T:System.Net.HttpWebRequest" />. The asynchronous callback method uses the <see cref="M:System.Net.HttpWebRequest.EndGetRequestStream(System.IAsyncResult)" /> method to return the actual stream.</para
           >
           <para
-            >The <see cref="M:System.Net.HttpWebRequest.BeginGetRequestStream(System.AsyncCallback,System.Object)" /> method requires some synchronous setup tasks to complete (DNS resolution, proxy detection, and TCP socket connection, for example) before this method becomes asynchronous. As a result, this method should never be called on a user interface (UI) thread because it might take considerable time (up to several minutes depending on network settings) to complete the initial synchronous setup tasks before an exception for an error is thrown or the method succeeds.  </para
-          >
+            >The <see cref="M:System.Net.HttpWebRequest.BeginGetRequestStream(System.AsyncCallback,System.Object)" /> method requires some synchronous setup tasks to complete (DNS resolution, proxy detection, and TCP socket connection, for example) before this method becomes asynchronous. As a result, this method should never be called on a user interface (UI) thread because it might take considerable time (up to several minutes depending on network settings) to complete the initial synchronous setup tasks before an exception for an error is thrown or the method succeeds.
+          </para>
           <para
             >To learn more about the thread pool, see <format type="text/html">
               <a href="2BE05B06-A42E-4C9D-A739-96C21D673927"
@@ -1198,15 +1198,15 @@ instance. </para
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.AsyncCallback" /> delegate. </param
-        >
+          />The <see cref="T:System.AsyncCallback" /> delegate.
+        </param>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The state object for this request. </param
-        >
+          />The state object for this request.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1258,8 +1258,8 @@ instance. </para
             >If a <see cref="T:System.Net.WebException" /> is thrown, use the <see cref="P:System.Net.WebException.Response" /> and <see cref="P:System.Net.WebException.Status" /> properties of the exception to determine the response from the server.</para
           >
           <para
-            >The <see cref="M:System.Net.HttpWebRequest.BeginGetResponse(System.AsyncCallback,System.Object)" /> method requires some synchronous setup tasks to complete (DNS resolution, proxy detection, and TCP socket connection, for example) before this method becomes asynchronous. As a result, this method should never be called on a user interface (UI) thread because it might take considerable time (up to several minutes depending on network settings) to complete the initial synchronous setup tasks before an exception for an error is thrown or the method succeeds.  </para
-          >
+            >The <see cref="M:System.Net.HttpWebRequest.BeginGetResponse(System.AsyncCallback,System.Object)" /> method requires some synchronous setup tasks to complete (DNS resolution, proxy detection, and TCP socket connection, for example) before this method becomes asynchronous. As a result, this method should never be called on a user interface (UI) thread because it might take considerable time (up to several minutes depending on network settings) to complete the initial synchronous setup tasks before an exception for an error is thrown or the method succeeds.
+          </para>
           <para
             >To learn more about the thread pool, see <format type="text/html">
               <a href="2BE05B06-A42E-4C9D-A739-96C21D673927"
@@ -1269,8 +1269,8 @@ instance. </para
           >
           <block subset="none" type="note">
             <para
-              >Your application cannot mix synchronous and asynchronous methods for a particular request. If you call the <see cref="M:System.Net.HttpWebRequest.BeginGetRequestStream(System.AsyncCallback,System.Object)" /> method, you must use the <see cref="M:System.Net.HttpWebRequest.BeginGetResponse(System.AsyncCallback,System.Object)" /> method to retrieve the response. </para
-            >
+              >Your application cannot mix synchronous and asynchronous methods for a particular request. If you call the <see cref="M:System.Net.HttpWebRequest.BeginGetRequestStream(System.AsyncCallback,System.Object)" /> method, you must use the <see cref="M:System.Net.HttpWebRequest.BeginGetResponse(System.AsyncCallback,System.Object)" /> method to retrieve the response.
+            </para>
           </block>
           <block subset="none" type="note">
             <para
@@ -1297,15 +1297,15 @@ instance. </para
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.AsyncCallback" /> delegate </param
-        >
+          />The <see cref="T:System.AsyncCallback" /> delegate
+        </param>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The state object for this request. </param
-        >
+          />The state object for this request.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1380,8 +1380,8 @@ instance. </para
           <para
             > A <see cref="T:System.String" /> containing the
    value of the Connection HTTP header. The
-   default value is <see langword="null" />. </para
-          >
+   default value is <see langword="null" />.
+          </para>
         </value>
         <exception cref="T:System.ArgumentException"
           >The value of <see cref="P:System.Net.HttpWebRequest.Connection" /> is set to "Keep-alive" or "Close". This value is case insensitive.</exception
@@ -1526,8 +1526,8 @@ instance. </para
           <para
             >The value of the Content-type HTTP header of the current instance. The default
       value is <see langword="null" />
-      . </para
-          >
+      .
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1706,8 +1706,8 @@ received. The default value is <see langword="null" />
             >In most client scenarios, you should use the <see cref="P:System.Net.CredentialCache.DefaultCredentials" /> property, which contains the credentials of the currently logged on user. To do this, set the <see cref="P:System.Net.WebClient.UseDefaultCredentials" /> property to true instead of setting this property.</para
           >
           <para
-            >If the <see cref="T:System.Net.HttpWebRequest" /> class is being used in a middle-tier application, such as an ASP.NET application, the credentials in the <see cref="P:System.Net.CredentialCache.DefaultCredentials" /> property belong to the account running the ASP page (the server-side credentials). Typically, you would set this property to the credentials of the client on whose behalf the request is made. </para
-          >
+            >If the <see cref="T:System.Net.HttpWebRequest" /> class is being used in a middle-tier application, such as an ASP.NET application, the credentials in the <see cref="P:System.Net.CredentialCache.DefaultCredentials" /> property belong to the account running the ASP page (the server-side credentials). Typically, you would set this property to the credentials of the client on whose behalf the request is made.
+          </para>
           <block subset="none" type="note">
             <para>The NTLM authentication scheme cannot be used to impersonate another user. Kerberos must be specially configured to support impersonation.</para>
           </block>
@@ -1741,8 +1741,8 @@ received. The default value is <see langword="null" />
             >If the Date header is null, then the return value will be set to <see cref="F:System.DateTime.MinValue" />.</para
           >
           <para
-            >The <see cref="P:System.Net.HttpWebRequest.Date" /> property is a standard <see cref="T:System.DateTime" /> object and can contain a <see cref="T:System.DateTimeKind" /> field of <see cref="F:System.DateTimeKind.Local" />, <see cref="F:System.DateTimeKind.Utc" />, or <see cref="F:System.DateTimeKind.Unspecified" />. Any kind of time can be set when using the <see cref="P:System.Net.HttpWebRequest.Date" /> property. If <see cref="F:System.DateTimeKind.Unspecified" /> is set or retrieved, the <see cref="P:System.Net.HttpWebRequest.Date" /> property is assumed to be <see cref="F:System.DateTimeKind.Local" /> (local time). </para
-          >
+            >The <see cref="P:System.Net.HttpWebRequest.Date" /> property is a standard <see cref="T:System.DateTime" /> object and can contain a <see cref="T:System.DateTimeKind" /> field of <see cref="F:System.DateTimeKind.Local" />, <see cref="F:System.DateTimeKind.Utc" />, or <see cref="F:System.DateTimeKind.Unspecified" />. Any kind of time can be set when using the <see cref="P:System.Net.HttpWebRequest.Date" /> property. If <see cref="F:System.DateTimeKind.Unspecified" /> is set or retrieved, the <see cref="P:System.Net.HttpWebRequest.Date" /> property is assumed to be <see cref="F:System.DateTimeKind.Local" /> (local time).
+          </para>
           <para
             >The classes in the <see cref="N:System.Net" /> namespace always write it out the <see cref="P:System.Net.HttpWebRequest.Date" /> property on the wire during transmission in standard form using GMT (Utc) format.</para
           >
@@ -1865,8 +1865,8 @@ received. The default value is <see langword="null" />
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The length of the response header received the response status line and any extra control characters that are received as part of HTTP protocol. A value of -1 means no limit is imposed on the response headers received; a value of 0 means that all requests fail.</para>
           <para
-            >This value can also be changed in the configuration file. The impact of this property can be overridden by setting the <see cref="P:System.Net.HttpWebRequest.MaximumResponseHeadersLength" /> property on an instance of the <see cref="T:System.Net.HttpWebRequest" /> class. </para
-          >
+            >This value can also be changed in the configuration file. The impact of this property can be overridden by setting the <see cref="P:System.Net.HttpWebRequest.MaximumResponseHeadersLength" /> property on an instance of the <see cref="T:System.Net.HttpWebRequest" /> class.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1958,8 +1958,8 @@ received. The default value is <see langword="null" />
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The pending request for a stream. </param
-        >
+          />The pending request for a stream.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2070,8 +2070,8 @@ received. The default value is <see langword="null" />
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The pending request for a response. </param
-        >
+          />The pending request for a response.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2097,8 +2097,8 @@ received. The default value is <see langword="null" />
           <para
             > A <see cref="T:System.String" /> that contains the
    contents of the HTTP Expect header. The default value is
-<see langword="null" /> . </para
-          >
+<see langword="null" /> .
+          </para>
         </value>
         <remarks>
           <block subset="none" type="note">
@@ -2198,8 +2198,8 @@ received. The default value is <see langword="null" />
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> to populate with data. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> to populate with data.
+        </param>
         <param name="streamingContext">
           <attribution
             license="cc4"
@@ -2235,12 +2235,12 @@ received. The default value is <see langword="null" />
       <Docs>
         <exception cref="T:System.Net.ProtocolViolationException">
           <para
-            >The <see cref="P:System.Net.HttpWebRequest.Method" /> property of the current instance is "GET" or "HEAD". </para
-          >
+            >The <see cref="P:System.Net.HttpWebRequest.Method" /> property of the current instance is "GET" or "HEAD".
+          </para>
           <para> -or- </para>
           <para
-            >The <see cref="P:System.Net.HttpWebRequest.ContentLength" /> property of the current instance is not set. </para
-          >
+            >The <see cref="P:System.Net.HttpWebRequest.ContentLength" /> property of the current instance is not set.
+          </para>
         </exception>
         <exception cref="T:System.InvalidOperationException">
           <para
@@ -2318,8 +2318,8 @@ received. The default value is <see langword="null" />
       <Parameters />
       <Docs>
         <exception cref="T:System.Net.ProtocolViolationException"
-          >The <see cref="P:System.Net.HttpWebRequest.ContentLength" /> property of the current instance is not set. </exception
-        >
+          >The <see cref="P:System.Net.HttpWebRequest.ContentLength" /> property of the current instance is not set.
+        </exception>
         <exception cref="T:System.Net.WebException">
           <para><see cref="M:System.Net.HttpWebRequest.Abort" /> was previously called.</para>
           <para>-or-</para>
@@ -2348,8 +2348,8 @@ received. The default value is <see langword="null" />
           </block>
           <block subset="none" type="note">
             <para
-              >Your application cannot mix synchronous and asynchronous methods for a particular request. If you call the <see cref="M:System.Net.HttpWebRequest.GetRequestStream" /> method, you must use the <see cref="M:System.Net.HttpWebRequest.GetResponse" /> method to retrieve the response. </para
-            >
+              >Your application cannot mix synchronous and asynchronous methods for a particular request. If you call the <see cref="M:System.Net.HttpWebRequest.GetRequestStream" /> method, you must use the <see cref="M:System.Net.HttpWebRequest.GetResponse" /> method to retrieve the response.
+            </para>
           </block>
           <block subset="none" type="note">
             <para
@@ -2481,8 +2481,8 @@ received. The default value is <see langword="null" />
               </term>
               <description>
                 <para
-                  >Set by the <see cref="P:System.Net.HttpWebRequest.Connection" /> property and <see cref="P:System.Net.HttpWebRequest.KeepAlive" /> property. </para
-                >
+                  >Set by the <see cref="P:System.Net.HttpWebRequest.Connection" /> property and <see cref="P:System.Net.HttpWebRequest.KeepAlive" /> property.
+                </para>
               </description>
             </item>
             <item>
@@ -2491,8 +2491,8 @@ received. The default value is <see langword="null" />
               </term>
               <description>
                 <para
-                  >Set by the <see cref="P:System.Net.HttpWebRequest.ContentLength" /> property. </para
-                >
+                  >Set by the <see cref="P:System.Net.HttpWebRequest.ContentLength" /> property.
+                </para>
               </description>
             </item>
             <item>
@@ -2501,8 +2501,8 @@ received. The default value is <see langword="null" />
               </term>
               <description>
                 <para
-                  >Set by the <see cref="P:System.Net.HttpWebRequest.ContentType" /> property. </para
-                >
+                  >Set by the <see cref="P:System.Net.HttpWebRequest.ContentType" /> property.
+                </para>
               </description>
             </item>
             <item>
@@ -2535,8 +2535,8 @@ received. The default value is <see langword="null" />
               </term>
               <description>
                 <para
-                  >Set by the <see cref="P:System.Net.HttpWebRequest.IfModifiedSince" /> property. </para
-                >
+                  >Set by the <see cref="P:System.Net.HttpWebRequest.IfModifiedSince" /> property.
+                </para>
               </description>
             </item>
             <item>
@@ -2545,8 +2545,8 @@ received. The default value is <see langword="null" />
               </term>
               <description>
                 <para
-                  >Set by the <see cref="M:System.Net.HttpWebRequest.AddRange(System.Int32,System.Int32)" /> method. </para
-                >
+                  >Set by the <see cref="M:System.Net.HttpWebRequest.AddRange(System.Int32,System.Int32)" /> method.
+                </para>
               </description>
             </item>
             <item>
@@ -2555,8 +2555,8 @@ received. The default value is <see langword="null" />
               </term>
               <description>
                 <para
-                  >Set by the <see cref="P:System.Net.HttpWebRequest.Referer" /> property. </para
-                >
+                  >Set by the <see cref="P:System.Net.HttpWebRequest.Referer" /> property.
+                </para>
               </description>
             </item>
             <item>
@@ -2565,8 +2565,8 @@ received. The default value is <see langword="null" />
               </term>
               <description>
                 <para
-                  >Set by the <see cref="P:System.Net.HttpWebRequest.TransferEncoding" /> property (the <see cref="P:System.Net.HttpWebRequest.SendChunked" /> property must be true). </para
-                >
+                  >Set by the <see cref="P:System.Net.HttpWebRequest.TransferEncoding" /> property (the <see cref="P:System.Net.HttpWebRequest.SendChunked" /> property must be true).
+                </para>
               </description>
             </item>
             <item>
@@ -2575,8 +2575,8 @@ received. The default value is <see langword="null" />
               </term>
               <description>
                 <para
-                  >Set by the <see cref="P:System.Net.HttpWebRequest.UserAgent" /> property. </para
-                >
+                  >Set by the <see cref="P:System.Net.HttpWebRequest.UserAgent" /> property.
+                </para>
               </description>
             </item>
           </list>
@@ -2661,8 +2661,8 @@ received. The default value is <see langword="null" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Net.HttpWebRequest.IfModifiedSince" /> property is a standard <see cref="T:System.DateTime" /> object and can contain a <see cref="T:System.DateTimeKind" /> field of <see cref="F:System.DateTimeKind.Local" />, <see cref="F:System.DateTimeKind.Utc" />, or <see cref="F:System.DateTimeKind.Unspecified" />. Any kind of time can be set when using the <see cref="P:System.Net.HttpWebRequest.IfModifiedSince" /> property. If <see cref="F:System.DateTimeKind.Unspecified" /> is set or retrieved, the <see cref="P:System.Net.HttpWebRequest.IfModifiedSince" /> property is assumed to be <see cref="F:System.DateTimeKind.Local" /> (local time). </para
-          >
+            >The <see cref="P:System.Net.HttpWebRequest.IfModifiedSince" /> property is a standard <see cref="T:System.DateTime" /> object and can contain a <see cref="T:System.DateTimeKind" /> field of <see cref="F:System.DateTimeKind.Local" />, <see cref="F:System.DateTimeKind.Utc" />, or <see cref="F:System.DateTimeKind.Unspecified" />. Any kind of time can be set when using the <see cref="P:System.Net.HttpWebRequest.IfModifiedSince" /> property. If <see cref="F:System.DateTimeKind.Unspecified" /> is set or retrieved, the <see cref="P:System.Net.HttpWebRequest.IfModifiedSince" /> property is assumed to be <see cref="F:System.DateTimeKind.Local" /> (local time).
+          </para>
           <para
             >The classes in the <see cref="N:System.Net" /> namespace always write it out the <see cref="P:System.Net.HttpWebRequest.IfModifiedSince" /> property on the wire during transmission in standard form using GMT (Utc) format.</para
           >
@@ -2806,8 +2806,8 @@ received. The default value is <see langword="null" />
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The length of the response header includes the response status line and any extra control characters that are received as part of HTTP protocol. A value of -1 means no limit is imposed on the response headers; a value of 0 means that all requests fail.</para>
           <para
-            >If the <see cref="P:System.Net.HttpWebRequest.MaximumResponseHeadersLength" /> property is not explicitly set, it defaults to the value of the <see cref="P:System.Net.HttpWebRequest.DefaultMaximumResponseHeadersLength" /> property. </para
-          >
+            >If the <see cref="P:System.Net.HttpWebRequest.MaximumResponseHeadersLength" /> property is not explicitly set, it defaults to the value of the <see cref="P:System.Net.HttpWebRequest.DefaultMaximumResponseHeadersLength" /> property.
+          </para>
           <para
             >If the length of the response header received exceeds the value of the <see cref="P:System.Net.HttpWebRequest.MaximumResponseHeadersLength" /> property, the <see cref="M:System.Net.HttpWebRequest.EndGetResponse(System.IAsyncResult)" /> or <see cref="M:System.Net.HttpWebRequest.GetResponse" /> methods will throw a <see cref="T:System.Net.WebException" /> with the <see cref="P:System.Net.WebException.Status" /> property set to <see cref="F:System.Net.WebExceptionStatus.MessageLengthLimitExceeded" />.</para
           >
@@ -2985,8 +2985,8 @@ WWW-authenticate header with the current
           <para>http://www.contoso.com/firstpath</para>
           <para>http://www.contoso.com/secondpath/</para>
           <para
-            >If the client request to a specific <see cref="T:System.Uri" /> is not successfully authenticated, the request uses standard authentication procedures. </para
-          >
+            >If the client request to a specific <see cref="T:System.Uri" /> is not successfully authenticated, the request uses standard authentication procedures.
+          </para>
           <para
             >With the exception of the first request, the <see cref="P:System.Net.WebRequest.PreAuthenticate" /> property indicates whether to send authentication information with subsequent requests to a <see cref="T:System.Uri" /> that matches the specific <see cref="T:System.Uri" /> up to the last forward slash without waiting to be challenged by the server.</para
           >
@@ -3097,8 +3097,8 @@ WWW-authenticate header with the current
    proxy for the current instance. The default value is set by calling <see
               cref="P:System.Net.GlobalProxySelection.Select"
               qualify="true"
-            /> . </para
-          >
+            /> .
+          </para>
         </value>
         <exception cref="T:System.ArgumentNullException"
           >A set operation was requested and the specified value was <see langword="null" />.</exception
@@ -3146,8 +3146,8 @@ WWW-authenticate header with the current
               <a href="9d663c4b-07b4-4f6f-9b12-efbd3630354f"
                 >DefaultProxy Element (Network Settings)</a
               >
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3423,8 +3423,8 @@ to send data in segments; otherwise,
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> to populate with data. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> to populate with data.
+        </param>
         <param name="streamingContext">
           <attribution
             license="cc4"
@@ -3473,8 +3473,8 @@ to send data in segments; otherwise,
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="P:System.Net.HttpWebRequest.Timeout" /> is the number of milliseconds that a subsequent synchronous request made with the <see cref="M:System.Net.HttpWebRequest.GetResponse" /> method waits for a response, and the <see cref="M:System.Net.HttpWebRequest.GetRequestStream" /> method waits for a stream. The <see cref="P:System.Net.HttpWebRequest.Timeout" /> applies to the entire request and response, not individually to the <see cref="M:System.Net.HttpWebRequest.GetRequestStream" /> and <see cref="M:System.Net.HttpWebRequest.GetResponse" /> method calls. If the resource is not returned within the time-out period, the request throws a <see cref="T:System.Net.WebException" /> with the <see cref="P:System.Net.WebException.Status" /> property set to <see cref="F:System.Net.WebExceptionStatus.Timeout" />. </para
-          >
+            <see cref="P:System.Net.HttpWebRequest.Timeout" /> is the number of milliseconds that a subsequent synchronous request made with the <see cref="M:System.Net.HttpWebRequest.GetResponse" /> method waits for a response, and the <see cref="M:System.Net.HttpWebRequest.GetRequestStream" /> method waits for a stream. The <see cref="P:System.Net.HttpWebRequest.Timeout" /> applies to the entire request and response, not individually to the <see cref="M:System.Net.HttpWebRequest.GetRequestStream" /> and <see cref="M:System.Net.HttpWebRequest.GetResponse" /> method calls. If the resource is not returned within the time-out period, the request throws a <see cref="T:System.Net.WebException" /> with the <see cref="P:System.Net.WebException.Status" /> property set to <see cref="F:System.Net.WebExceptionStatus.Timeout" />.
+          </para>
           <para
             >The <see cref="P:System.Net.HttpWebRequest.Timeout" /> property must be set before the <see cref="M:System.Net.HttpWebRequest.GetRequestStream" /> or <see cref="M:System.Net.HttpWebRequest.GetResponse" /> method is called. Changing the <see cref="P:System.Net.HttpWebRequest.Timeout" /> property after calling the <see cref="M:System.Net.HttpWebRequest.GetRequestStream" /> or <see cref="M:System.Net.HttpWebRequest.GetResponse" /> method has no effect</para
           >
@@ -3583,8 +3583,8 @@ to send data in segments; otherwise,
           </block>
           <para>You may want to consider enabling this mechanism if your are having performance problems and your application is running on a Web server with integrated Windows authentication.</para>
           <para
-            >Enabling this setting opens the system to security risks. If you set the <see cref="P:System.Net.HttpWebRequest.UnsafeAuthenticatedConnectionSharing" /> property to true be sure to take the following precautions: </para
-          >
+            >Enabling this setting opens the system to security risks. If you set the <see cref="P:System.Net.HttpWebRequest.UnsafeAuthenticatedConnectionSharing" /> property to true be sure to take the following precautions:
+          </para>
           <list type="bullet">
             <item>
               <para

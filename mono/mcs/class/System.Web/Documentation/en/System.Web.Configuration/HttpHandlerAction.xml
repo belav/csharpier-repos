@@ -17,15 +17,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.Configuration.HttpHandlerAction" /> class provides a way to programmatically access and modify the add element of the httpHandlers configuration section. </para
-      >
+        >The <see cref="T:System.Web.Configuration.HttpHandlerAction" /> class provides a way to programmatically access and modify the add element of the httpHandlers configuration section.
+      </para>
       <para
-        >This type is part of a group that includes the <see cref="T:System.Web.Configuration.HttpHandlerActionCollection" /> and the <see cref="T:System.Web.Configuration.HttpHandlersSection" /> types. </para
-      >
+        >This type is part of a group that includes the <see cref="T:System.Web.Configuration.HttpHandlerActionCollection" /> and the <see cref="T:System.Web.Configuration.HttpHandlersSection" /> types.
+      </para>
       <block subset="none" type="note">
         <para
-          >The <see cref="T:System.Web.Configuration.HttpHandlerAction" /> can read and write information from and to the related section of the configuration file according to the section property <see cref="P:System.Configuration.SectionInformation.AllowDefinition" /> whose value is <see cref="F:System.Configuration.ConfigurationAllowDefinition.Everywhere" />. </para
-        >
+          >The <see cref="T:System.Web.Configuration.HttpHandlerAction" /> can read and write information from and to the related section of the configuration file according to the section property <see cref="P:System.Configuration.SectionInformation.AllowDefinition" /> whose value is <see cref="F:System.Configuration.ConfigurationAllowDefinition.Everywhere" />.
+        </para>
       </block>
       <para>ASP.NET searches for the handler assembly DLL in the application's private \bin directory first, and then it searches in the system assembly cache.</para>
     </remarks>
@@ -59,8 +59,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.Configuration.HttpHandlerAction" /> class using the passed parameters. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.HttpHandlerAction" /> class using the passed parameters.
+          </para>
         </summary>
         <param name="path">
           <attribution
@@ -164,14 +164,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.Configuration.HttpHandlerAction.Path" /> property can contain either a single URL or a wildcard string. </para
-          >
+            >The <see cref="P:System.Web.Configuration.HttpHandlerAction.Path" /> property can contain either a single URL or a wildcard string.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see cref="T:System.Web.Configuration.HttpHandlerAction" /> path. </para
-          >
+            >Gets or sets the <see cref="T:System.Web.Configuration.HttpHandlerAction" /> path.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -214,8 +214,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.Configuration.HttpHandlerAction.Type" /> property is a comma-separated class/assembly combination consisting of version, culture, and public-key tokens. </para
-          >
+            >The <see cref="P:System.Web.Configuration.HttpHandlerAction.Type" /> property is a comma-separated class/assembly combination consisting of version, culture, and public-key tokens.
+          </para>
           <block subset="none" type="note">
             <para>ASP.NET searches for the handler assembly DLL in the application's private \bin directory first, and then it searches in the system assembly cache.</para>
           </block>

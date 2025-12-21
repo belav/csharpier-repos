@@ -61,8 +61,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeLinePragma" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeLinePragma" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -99,15 +99,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file name of the associated file. </param
-        >
+          />The file name of the associated file.
+        </param>
         <param name="lineNumber">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The line number to store a reference to. </param
-        >
+          />The line number to store a reference to.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="FileName">

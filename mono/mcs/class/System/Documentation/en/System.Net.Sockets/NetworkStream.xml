@@ -33,8 +33,8 @@
           <a href="FD85BC88-E06C-467D-A30D-9FD7CFFCFCA1">Using an Asynchronous Client Socket</a>
         </format>. You can use the <see cref="T:System.Net.Sockets.NetworkStream" /> class for both synchronous and asynchronous data transfer. For more information about synchronous and asynchronous communication, see <format type="text/html">
           <a href="10D22735-BD37-42C1-A2BE-C1932F979A7D">Sockets</a>
-        </format>. </para
-      >
+        </format>.
+      </para>
       <para
         >To create a <see cref="T:System.Net.Sockets.NetworkStream" />, you must provide a connected <see cref="T:System.Net.Sockets.Socket" />. You can also specify what <see cref="T:System.IO.FileAccess" /> permission the <see cref="T:System.Net.Sockets.NetworkStream" /> has over the provided <see cref="T:System.Net.Sockets.Socket" />. By default, closing the <see cref="T:System.Net.Sockets.NetworkStream" /> does not close the provided <see cref="T:System.Net.Sockets.Socket" />. If you want the <see cref="T:System.Net.Sockets.NetworkStream" /> to have permission to close the provided <see cref="T:System.Net.Sockets.Socket" />, you must specify true for the value of the <paramref name="ownsSocket" /> parameter.</para
       >
@@ -45,8 +45,8 @@
         >The <see cref="T:System.Net.Sockets.NetworkStream" /> does not support random access to the network data stream. The value of the <see cref="P:System.Net.Sockets.NetworkStream.CanSeek" /> property, which indicates whether the stream supports seeking, is always false; reading the <see cref="P:System.Net.Sockets.NetworkStream.Position" /> property, reading the <see cref="P:System.Net.Sockets.NetworkStream.Length" /> property, or calling the <see cref="M:System.Net.Sockets.NetworkStream.Seek(System.Int64,System.IO.SeekOrigin)" /> method will throw a <see cref="T:System.NotSupportedException" />.</para
       >
       <para
-        >Read and write operations can be performed simultaneously on an instance of the <see cref="T:System.Net.Sockets.NetworkStream" /> class without the need for synchronization. As long as there is one unique thread for the write operations and one unique thread for the read operations, there will be no cross-interference between read and write threads and no synchronization is required. </para
-      >
+        >Read and write operations can be performed simultaneously on an instance of the <see cref="T:System.Net.Sockets.NetworkStream" /> class without the need for synchronization. As long as there is one unique thread for the write operations and one unique thread for the read operations, there will be no cross-interference between read and write threads and no synchronization is required.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -111,8 +111,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Net.Sockets.Socket" /> that the <see cref="T:System.Net.Sockets.NetworkStream" /> will use to send and receive data. </param
-        >
+          />The <see cref="T:System.Net.Sockets.Socket" /> that the <see cref="T:System.Net.Sockets.NetworkStream" /> will use to send and receive data.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -174,15 +174,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Net.Sockets.Socket" /> that the <see cref="T:System.Net.Sockets.NetworkStream" /> will use to send and receive data. </param
-        >
+          />The <see cref="T:System.Net.Sockets.Socket" /> that the <see cref="T:System.Net.Sockets.NetworkStream" /> will use to send and receive data.
+        </param>
         <param name="ownsSocket">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Set to true to indicate that the <see cref="T:System.Net.Sockets.NetworkStream" /> will take ownership of the <see cref="T:System.Net.Sockets.Socket" />; otherwise, false. </param
-        >
+          />Set to true to indicate that the <see cref="T:System.Net.Sockets.NetworkStream" /> will take ownership of the <see cref="T:System.Net.Sockets.Socket" />; otherwise, false.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -247,15 +247,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Net.Sockets.Socket" /> that the <see cref="T:System.Net.Sockets.NetworkStream" /> will use to send and receive data. </param
-        >
+          />The <see cref="T:System.Net.Sockets.Socket" /> that the <see cref="T:System.Net.Sockets.NetworkStream" /> will use to send and receive data.
+        </param>
         <param name="access">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the <see cref="T:System.IO.FileAccess" /> values that specify the type of access given to the <see cref="T:System.Net.Sockets.NetworkStream" /> over the provided <see cref="T:System.Net.Sockets.Socket" />. </param
-        >
+          />A bitwise combination of the <see cref="T:System.IO.FileAccess" /> values that specify the type of access given to the <see cref="T:System.Net.Sockets.NetworkStream" /> over the provided <see cref="T:System.Net.Sockets.Socket" />.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -321,22 +321,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Net.Sockets.Socket" /> that the <see cref="T:System.Net.Sockets.NetworkStream" /> will use to send and receive data. </param
-        >
+          />The <see cref="T:System.Net.Sockets.Socket" /> that the <see cref="T:System.Net.Sockets.NetworkStream" /> will use to send and receive data.
+        </param>
         <param name="access">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the <see cref="T:System.IO.FileAccess" /> values that specifies the type of access given to the <see cref="T:System.Net.Sockets.NetworkStream" /> over the provided <see cref="T:System.Net.Sockets.Socket" />. </param
-        >
+          />A bitwise combination of the <see cref="T:System.IO.FileAccess" /> values that specifies the type of access given to the <see cref="T:System.Net.Sockets.NetworkStream" /> over the provided <see cref="T:System.Net.Sockets.Socket" />.
+        </param>
         <param name="ownsSocket">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Set to true to indicate that the <see cref="T:System.Net.Sockets.NetworkStream" /> will take ownership of the <see cref="T:System.Net.Sockets.Socket" />; otherwise, false. </param
-        >
+          />Set to true to indicate that the <see cref="T:System.Net.Sockets.NetworkStream" /> will take ownership of the <see cref="T:System.Net.Sockets.Socket" />; otherwise, false.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -432,8 +432,8 @@
             >
           </block>
           <para
-            >Read and write operations can be performed simultaneously on an instance of the <see cref="T:System.Net.Sockets.NetworkStream" /> class without the need for synchronization. As long as there is one unique thread for the write operations and one unique thread for the read operations, there will be no cross-interference between read and write threads and no synchronization is required. </para
-          >
+            >Read and write operations can be performed simultaneously on an instance of the <see cref="T:System.Net.Sockets.NetworkStream" /> class without the need for synchronization. As long as there is one unique thread for the write operations and one unique thread for the read operations, there will be no cross-interference between read and write threads and no synchronization is required.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -452,36 +452,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type <see cref="T:System.Byte" /> that is the location in memory to store data read from the <see cref="T:System.Net.Sockets.NetworkStream" />. </param
-        >
+          />An array of type <see cref="T:System.Byte" /> that is the location in memory to store data read from the <see cref="T:System.Net.Sockets.NetworkStream" />.
+        </param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The location in <paramref name="buffer" /> to begin storing the data. </param
-        >
+          />The location in <paramref name="buffer" /> to begin storing the data.
+        </param>
         <param name="size">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes to read from the <see cref="T:System.Net.Sockets.NetworkStream" />. </param
-        >
+          />The number of bytes to read from the <see cref="T:System.Net.Sockets.NetworkStream" />.
+        </param>
         <param name="callback">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.AsyncCallback" /> delegate that is executed when <see cref="M:System.Net.Sockets.NetworkStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" /> completes. </param
-        >
+          />The <see cref="T:System.AsyncCallback" /> delegate that is executed when <see cref="M:System.Net.Sockets.NetworkStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" /> completes.
+        </param>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that contains any additional user-defined data. </param
-        >
+          />An object that contains any additional user-defined data.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -574,8 +574,8 @@ method. For the complete example, see the <see
             >
           </block>
           <para
-            >Read and write operations can be performed simultaneously on an instance of the <see cref="T:System.Net.Sockets.NetworkStream" /> class without the need for synchronization. As long as there is one unique thread for the write operations and one unique thread for the read operations, there will be no cross-interference between read and write threads and no synchronization is required. </para
-          >
+            >Read and write operations can be performed simultaneously on an instance of the <see cref="T:System.Net.Sockets.NetworkStream" /> class without the need for synchronization. As long as there is one unique thread for the write operations and one unique thread for the read operations, there will be no cross-interference between read and write threads and no synchronization is required.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -592,36 +592,36 @@ method. For the complete example, see the <see
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type <see cref="T:System.Byte" /> that contains the data to write to the <see cref="T:System.Net.Sockets.NetworkStream" />. </param
-        >
+          />An array of type <see cref="T:System.Byte" /> that contains the data to write to the <see cref="T:System.Net.Sockets.NetworkStream" />.
+        </param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The location in <paramref name="buffer" /> to begin sending the data. </param
-        >
+          />The location in <paramref name="buffer" /> to begin sending the data.
+        </param>
         <param name="size">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes to write to the <see cref="T:System.Net.Sockets.NetworkStream" />. </param
-        >
+          />The number of bytes to write to the <see cref="T:System.Net.Sockets.NetworkStream" />.
+        </param>
         <param name="callback">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.AsyncCallback" /> delegate that is executed when <see cref="M:System.Net.Sockets.NetworkStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" /> completes. </param
-        >
+          />The <see cref="T:System.AsyncCallback" /> delegate that is executed when <see cref="M:System.Net.Sockets.NetworkStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" /> completes.
+        </param>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that contains any additional user-defined data. </param
-        >
+          />An object that contains any additional user-defined data.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -720,8 +720,8 @@ method. For the complete example, see the <see
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is present because it is inherited from <see cref="T:System.IO.Stream" />. </para
-          >
+            >This property is present because it is inherited from <see cref="T:System.IO.Stream" />.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -783,11 +783,11 @@ indicates that the current stream does not support writing.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Net.Sockets.NetworkStream.Close" /> method frees both unmanaged and managed resources associated with the <see cref="T:System.Net.Sockets.NetworkStream" />. If the <see cref="T:System.Net.Sockets.NetworkStream" /> owns the underlying <see cref="T:System.Net.Sockets.Socket" />, it is closed as well. </para
-          >
+            >The <see cref="M:System.Net.Sockets.NetworkStream.Close" /> method frees both unmanaged and managed resources associated with the <see cref="T:System.Net.Sockets.NetworkStream" />. If the <see cref="T:System.Net.Sockets.NetworkStream" /> owns the underlying <see cref="T:System.Net.Sockets.Socket" />, it is closed as well.
+          </para>
           <para
-            >If a <see cref="T:System.Net.Sockets.NetworkStream" /> was associated with a <see cref="T:System.Net.Sockets.TcpClient" />, the <see cref="M:System.Net.Sockets.NetworkStream.Close" /> method will close the TCP connection, but not dispose of the associated <see cref="T:System.Net.Sockets.TcpClient" />. </para
-          >
+            >If a <see cref="T:System.Net.Sockets.NetworkStream" /> was associated with a <see cref="T:System.Net.Sockets.TcpClient" />, the <see cref="M:System.Net.Sockets.NetworkStream.Close" /> method will close the TCP connection, but not dispose of the associated <see cref="T:System.Net.Sockets.TcpClient" />.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -820,8 +820,8 @@ indicates that the current stream does not support writing.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Net.Sockets.NetworkStream.Close(System.Int32)" /> method frees both unmanaged and managed resources associated with the <see cref="T:System.Net.Sockets.NetworkStream" />. If the <see cref="T:System.Net.Sockets.NetworkStream" /> owns the underlying <see cref="T:System.Net.Sockets.Socket" />, it is closed as well. </para
-          >
+            >The <see cref="M:System.Net.Sockets.NetworkStream.Close(System.Int32)" /> method frees both unmanaged and managed resources associated with the <see cref="T:System.Net.Sockets.NetworkStream" />. If the <see cref="T:System.Net.Sockets.NetworkStream" /> owns the underlying <see cref="T:System.Net.Sockets.Socket" />, it is closed as well.
+          </para>
           <para
             >If a <see cref="T:System.Net.Sockets.NetworkStream" /> was associated with a <see cref="T:System.Net.Sockets.TcpClient" />, the <see cref="M:System.Net.Sockets.NetworkStream.Close(System.Int32)" /> method will close the TCP connection, but not dispose of the associated <see cref="T:System.Net.Sockets.TcpClient" />.</para
           >
@@ -927,8 +927,8 @@ indicates that the current stream does not support writing.</para
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -956,8 +956,8 @@ indicates that the current stream does not support writing.</para
       </Parameters>
       <Docs>
         <param name="ar"
-          >A <see cref="T:System.IAsyncResult" /> object that holds the state information for the asynchronous operation. </param
-        >
+          >A <see cref="T:System.IAsyncResult" /> object that holds the state information for the asynchronous operation.
+        </param>
         <exception cref="T:System.ArgumentNullException">
           <paramref name="asyncResult" /> is <see langword="null" />.</exception
         >
@@ -1046,8 +1046,8 @@ indicates that the current stream does not support writing.</para
       </Parameters>
       <Docs>
         <param name="ar"
-          >A <see cref="T:System.IAsyncResult" /> object that holds the state information for the asynchronous operation. </param
-        >
+          >A <see cref="T:System.IAsyncResult" /> object that holds the state information for the asynchronous operation.
+        </param>
         <exception cref="T:System.ArgumentNullException">
           <paramref name="asyncResult" /> is <see langword="null" />.</exception
         >
@@ -1212,8 +1212,7 @@ indicates that the current stream does not support writing.</para
           </block>
         </remarks>
         <exception cref="T:System.NotSupportedException"
-          >Any attempt to access this property. </exception
-        >
+          >Any attempt to access this property. </exception>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -1355,22 +1354,22 @@ indicates that the current stream does not support writing.</para
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type <see cref="T:System.Byte" /> that is the location in memory to store data read from the <see cref="T:System.Net.Sockets.NetworkStream" />. </param
-        >
+          />An array of type <see cref="T:System.Byte" /> that is the location in memory to store data read from the <see cref="T:System.Net.Sockets.NetworkStream" />.
+        </param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The location in <paramref name="buffer" /> to begin storing the data to. </param
-        >
+          />The location in <paramref name="buffer" /> to begin storing the data to.
+        </param>
         <param name="size">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes to read from the <see cref="T:System.Net.Sockets.NetworkStream" />. </param
-        >
+          />The number of bytes to read from the <see cref="T:System.Net.Sockets.NetworkStream" />.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1493,15 +1492,15 @@ indicates that the current stream does not support writing.</para
             license="cc4"
             from="Microsoft"
             modified="false"
-          />This parameter is not used. </param
-        >
+          />This parameter is not used.
+        </param>
         <param name="origin">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />This parameter is not used. </param
-        >
+          />This parameter is not used.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1555,8 +1554,8 @@ indicates that the current stream does not support writing.</para
             license="cc4"
             from="Microsoft"
             modified="false"
-          />This parameter is not used. </param
-        >
+          />This parameter is not used.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1611,12 +1610,12 @@ indicates that the current stream does not support writing.</para
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format> and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
           <block subset="none" type="note">
             <para
-              >Always call <see cref="M:System.Net.Sockets.NetworkStream.System#IDisposable#Dispose" /> before you release your last reference to the <see cref="T:System.Net.Sockets.NetworkStream" />. Otherwise, the resources it is using are not freed until the garbage collector calls the <see cref="T:System.Net.Sockets.NetworkStream" /> object's Finalize method. </para
-            >
+              >Always call <see cref="M:System.Net.Sockets.NetworkStream.System#IDisposable#Dispose" /> before you release your last reference to the <see cref="T:System.Net.Sockets.NetworkStream" />. Otherwise, the resources it is using are not freed until the garbage collector calls the <see cref="T:System.Net.Sockets.NetworkStream" /> object's Finalize method.
+            </para>
           </block>
         </remarks>
         <summary>
@@ -1702,22 +1701,22 @@ indicates that the current stream does not support writing.</para
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type <see cref="T:System.Byte" /> that contains the data to write to the <see cref="T:System.Net.Sockets.NetworkStream" />. </param
-        >
+          />An array of type <see cref="T:System.Byte" /> that contains the data to write to the <see cref="T:System.Net.Sockets.NetworkStream" />.
+        </param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The location in <paramref name="buffer" /> from which to start writing data. </param
-        >
+          />The location in <paramref name="buffer" /> from which to start writing data.
+        </param>
         <param name="size">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes to write to the <see cref="T:System.Net.Sockets.NetworkStream" />. </param
-        >
+          />The number of bytes to write to the <see cref="T:System.Net.Sockets.NetworkStream" />.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

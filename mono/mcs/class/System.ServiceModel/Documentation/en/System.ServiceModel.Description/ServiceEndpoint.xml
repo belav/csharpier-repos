@@ -171,8 +171,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The type of behavior that is accessible from the description hierarchy is scoped to the specific level. From the <see cref="T:System.ServiceModel.Description.ServiceEndpoint" /> the <see cref="T:System.ServiceModel.Description.IEndpointBehavior" /> is accessible. </para
-          >
+            >The type of behavior that is accessible from the description hierarchy is scoped to the specific level. From the <see cref="T:System.ServiceModel.Description.ServiceEndpoint" /> the <see cref="T:System.ServiceModel.Description.IEndpointBehavior" /> is accessible.
+          </para>
           <para
             >If you want access to the <see cref="T:System.ServiceModel.Description.IContractBehavior" /> associated with an endpoint, you can obtain the contact for the endpoint using the <see cref="P:System.ServiceModel.Description.ServiceEndpoint.Contract" /> property. Then call the <see cref="P:System.ServiceModel.Description.ContractDescription.Behaviors" /> property to obtain the <see cref="T:System.Collections.Generic.KeyedByTypeCollection`1" /> of the <see cref="T:System.ServiceModel.Description.IContractBehavior" /> objects associated with the endpoint.</para
           >
@@ -358,8 +358,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Services may have multiple endpoints, so the endpoint <see cref="P:System.ServiceModel.Description.ServiceEndpoint.Name" /> is distinct from the name of the service. The service name is accessed using the <see cref="P:System.ServiceModel.Description.ServiceDescription.Name" /> property. </para
-          >
+            >Services may have multiple endpoints, so the endpoint <see cref="P:System.ServiceModel.Description.ServiceEndpoint.Name" /> is distinct from the name of the service. The service name is accessed using the <see cref="P:System.ServiceModel.Description.ServiceDescription.Name" /> property.
+          </para>
           <block subset="none" type="note">
             <para>When accessed from the service, this property is populated by the &lt;endpoint name="endpointName"&gt; configuration element. When accessed on the client, this property is null. When the property getter is called (again on the client) it populates this property with a default value based on the contract and binding.</para>
           </block>

@@ -15,8 +15,7 @@
       <example>
         <code lang="C#">
 gr.Rectangle ( new PointD (0, 0), 1, 1);
-  </code
-        >
+  </code>
       </example>
     </remarks>
   </Docs>

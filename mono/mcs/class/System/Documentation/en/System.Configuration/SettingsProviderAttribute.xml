@@ -24,8 +24,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Each application settings class defines a group of application settings properties that represent information that persists between executions of the application. However, it is a settings provider—a class derived from <see cref="T:System.Configuration.SettingsProvider" />—that actually provides the storage mechanism. </para
-      >
+        >Each application settings class defines a group of application settings properties that represent information that persists between executions of the application. However, it is a settings provider—a class derived from <see cref="T:System.Configuration.SettingsProvider" />—that actually provides the storage mechanism.
+      </para>
       <para
         >The <see cref="T:System.Configuration.SettingsProviderAttribute" /> specifies the settings provider used to provide storage for application settings properties. This attribute can be applied to the entire application settings class or individual application settings properties. A <see cref="T:System.Configuration.SettingsProviderAttribute" /> set at the property level will override the class-level attribute. If a settings provider is not explicitly specified, the default provider is used. For client applications, the default provider is <see cref="T:System.Configuration.LocalFileSettingsProvider" />.</para
       >
@@ -106,8 +106,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Configuration.SettingsProviderAttribute" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Configuration.SettingsProviderAttribute" /> class.
+          </para>
         </summary>
         <param name="providerType">
           <attribution

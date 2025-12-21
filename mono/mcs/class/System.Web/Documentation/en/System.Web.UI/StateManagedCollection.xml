@@ -31,8 +31,8 @@
       >
       <block subset="none" type="note">
         <para>
-          <see cref="T:System.Web.UI.StateManagedCollection" /> stores assembly-qualified type names of the collection items in view state. A site visitor could decode the view state and retrieve the type name. If this scenario creates a security concern in your Web site, you can manually encrypt the type name before placing it in the view state. </para
-        >
+          <see cref="T:System.Web.UI.StateManagedCollection" /> stores assembly-qualified type names of the collection items in view state. A site visitor could decode the view state and retrieve the type name. If this scenario creates a security concern in your Web site, you can manually encrypt the type name before placing it in the view state.
+        </para>
       </block>
     </remarks>
     <summary>
@@ -56,8 +56,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.StateManagedCollection" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.StateManagedCollection" /> class.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -550,8 +550,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Forces the entire <see cref="T:System.Web.UI.StateManagedCollection" /> collection to be serialized into view state. </para
-          >
+            >Forces the entire <see cref="T:System.Web.UI.StateManagedCollection" /> collection to be serialized into view state.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>

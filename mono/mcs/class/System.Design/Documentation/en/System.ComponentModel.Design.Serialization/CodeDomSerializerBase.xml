@@ -21,8 +21,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.ComponentModel.Design.Serialization.CodeDomSerializerBase" /> class is used as a shared base between the <see cref="T:System.ComponentModel.Design.Serialization.CodeDomSerializer" /> and <see cref="T:System.ComponentModel.Design.Serialization.TypeCodeDomSerializer" /> classes. Public <see cref="T:System.ComponentModel.Design.Serialization.CodeDomSerializer" /> classes derive from the <see cref="T:System.ComponentModel.Design.Serialization.CodeDomSerializerBase" /> class. Each public class defines its own public API. The <see cref="T:System.ComponentModel.Design.Serialization.CodeDomSerializerBase" /> class defines no public API, but does offer a multitude of utility methods that can be used to aid the serialization process.  </para
-      >
+        >The <see cref="T:System.ComponentModel.Design.Serialization.CodeDomSerializerBase" /> class is used as a shared base between the <see cref="T:System.ComponentModel.Design.Serialization.CodeDomSerializer" /> and <see cref="T:System.ComponentModel.Design.Serialization.TypeCodeDomSerializer" /> classes. Public <see cref="T:System.ComponentModel.Design.Serialization.CodeDomSerializer" /> classes derive from the <see cref="T:System.ComponentModel.Design.Serialization.CodeDomSerializerBase" /> class. Each public class defines its own public API. The <see cref="T:System.ComponentModel.Design.Serialization.CodeDomSerializerBase" /> class defines no public API, but does offer a multitude of utility methods that can be used to aid the serialization process.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -644,8 +644,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to include preset expressions; otherwise, false. </param
-        >
+          />true to include preset expressions; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SerializeCreationExpression">
@@ -906,8 +906,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.ComponentModel.Design.Serialization.CodeDomSerializerBase.SerializePropertiesToResources(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.CodeDom.CodeStatementCollection,System.Object,System.Attribute[])" /> method is a helper method that derived classes can call. It looks at properties on the <paramref name="value" /> parameter that match the <paramref name="filter" /> parameter, and then it serializes the properties into the invariant culture resource bundle. If the resource service returns a <see cref="T:System.Resources.ResXResourceWriter" />, the property values will be stored in the metadata section of the XML resource (.resx) file. The <paramref name="statements" /> parameter is not used. </para
-          >
+            >The <see cref="M:System.ComponentModel.Design.Serialization.CodeDomSerializerBase.SerializePropertiesToResources(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.CodeDom.CodeStatementCollection,System.Object,System.Attribute[])" /> method is a helper method that derived classes can call. It looks at properties on the <paramref name="value" /> parameter that match the <paramref name="filter" /> parameter, and then it serializes the properties into the invariant culture resource bundle. If the resource service returns a <see cref="T:System.Resources.ResXResourceWriter" />, the property values will be stored in the metadata section of the XML resource (.resx) file. The <paramref name="statements" /> parameter is not used.
+          </para>
           <para>To be serialized as a resource, a property must be simple (not a content property) and its value must be serializable. Properties that do not conform to this pattern will be skipped.</para>
           <para>
             <see cref="M:System.ComponentModel.Design.Serialization.CodeDomSerializerBase.SerializePropertiesToResources(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.CodeDom.CodeStatementCollection,System.Object,System.Attribute[])" /> requires an <see cref="T:System.ComponentModel.Design.IResourceService" /> to obtain a <see cref="T:System.Resources.ResourceWriter" /> to write resources for the invariant culture. If this service is not available, no resources will be written.</para
@@ -1035,8 +1035,8 @@
             >The <see cref="M:System.ComponentModel.Design.Serialization.CodeDomSerializerBase.SerializeResource(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.String,System.Object)" /> method is a helper method that serializes a value to a resource bundle under the given name. The culture that the resource is written to is determined by searching the serialization manager’s <see cref="P:System.ComponentModel.Design.Serialization.IDesignerSerializationManager.Properties" /> collection for a property called ResourceCulture. If this property exists, resources will be written to that culture. Otherwise, resources will be written to the invariant culture. The <paramref name="value" /> parameter must be serializable.</para
           >
           <para>
-            <see cref="M:System.ComponentModel.Design.Serialization.CodeDomSerializerBase.SerializeResource(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.String,System.Object)" /> requires an <see cref="T:System.ComponentModel.Design.IResourceService" /> to obtain a <see cref="T:System.Resources.ResourceWriter" /> to write resources for the correct culture. If this service is not available, <see cref="M:System.ComponentModel.Design.Serialization.CodeDomSerializerBase.SerializeResource(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.String,System.Object)" /> will instead build a binary object in code that represents the resource. </para
-          >
+            <see cref="M:System.ComponentModel.Design.Serialization.CodeDomSerializerBase.SerializeResource(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.String,System.Object)" /> requires an <see cref="T:System.ComponentModel.Design.IResourceService" /> to obtain a <see cref="T:System.Resources.ResourceWriter" /> to write resources for the correct culture. If this service is not available, <see cref="M:System.ComponentModel.Design.Serialization.CodeDomSerializerBase.SerializeResource(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.String,System.Object)" /> will instead build a binary object in code that represents the resource.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1226,11 +1226,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="Overload:System.ComponentModel.Design.Serialization.CodeDomSerializerBase.SerializeToResourceExpression" /> method is a helper method that serializes a value to a resource expression. This is in contrast to the <see cref="M:System.ComponentModel.Design.Serialization.CodeDomSerializerBase.SerializeResource(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.String,System.Object)" /> method, which writes a value to a resource binary object. <see cref="Overload:System.ComponentModel.Design.Serialization.CodeDomSerializerBase.SerializeToResourceExpression" /> goes one step further and returns an expression that can be used to recover the resource. For example, the return value might be "rm.GetValue("SomeBitmap");". The name of the resource is calculated from the <see cref="T:System.ComponentModel.Design.Serialization.ExpressionContext" />, if one can be found on the context stack. </para
-          >
+            >The <see cref="Overload:System.ComponentModel.Design.Serialization.CodeDomSerializerBase.SerializeToResourceExpression" /> method is a helper method that serializes a value to a resource expression. This is in contrast to the <see cref="M:System.ComponentModel.Design.Serialization.CodeDomSerializerBase.SerializeResource(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.String,System.Object)" /> method, which writes a value to a resource binary object. <see cref="Overload:System.ComponentModel.Design.Serialization.CodeDomSerializerBase.SerializeToResourceExpression" /> goes one step further and returns an expression that can be used to recover the resource. For example, the return value might be "rm.GetValue("SomeBitmap");". The name of the resource is calculated from the <see cref="T:System.ComponentModel.Design.Serialization.ExpressionContext" />, if one can be found on the context stack.
+          </para>
           <para
-            >The <see cref="Overload:System.ComponentModel.Design.Serialization.CodeDomSerializerBase.SerializeToResourceExpression" /> method will look on the <see cref="T:System.ComponentModel.Design.Serialization.ContextStack" /> for the following objects: </para
-          >
+            >The <see cref="Overload:System.ComponentModel.Design.Serialization.CodeDomSerializerBase.SerializeToResourceExpression" /> method will look on the <see cref="T:System.ComponentModel.Design.Serialization.ContextStack" /> for the following objects:
+          </para>
           <list type="bullet">
             <item>
               <para>

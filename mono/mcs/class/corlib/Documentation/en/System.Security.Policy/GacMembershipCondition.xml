@@ -108,8 +108,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.Policy.Evidence" /> against which to make the test. </param
-        >
+          />The <see cref="T:System.Security.Policy.Evidence" /> against which to make the test.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Copy">
@@ -186,8 +186,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to compare with the current object. </param
-        >
+          />The object to compare with the current object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="FromXml">
@@ -227,8 +227,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.SecurityElement" /> that contains the XML encoding to use to reconstruct the security object. </param
-        >
+          />The <see cref="T:System.Security.SecurityElement" /> that contains the XML encoding to use to reconstruct the security object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="FromXml">
@@ -267,15 +267,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.SecurityElement" /> that contains the XML encoding to use to reconstruct the security object. </param
-        >
+          />The <see cref="T:System.Security.SecurityElement" /> that contains the XML encoding to use to reconstruct the security object.
+        </param>
         <param name="level">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.Policy.PolicyLevel" /> context for resolving <see cref="T:System.Security.NamedPermissionSet" /> references. </param
-        >
+          />The <see cref="T:System.Security.Policy.PolicyLevel" /> context for resolving <see cref="T:System.Security.NamedPermissionSet" /> references.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -420,8 +420,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.Policy.PolicyLevel" /> context for resolving <see cref="T:System.Security.NamedPermissionSet" /> references. </param
-        >
+          />The <see cref="T:System.Security.Policy.PolicyLevel" /> context for resolving <see cref="T:System.Security.NamedPermissionSet" /> references.
+        </param>
       </Docs>
     </Member>
   </Members>

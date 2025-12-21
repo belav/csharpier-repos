@@ -26,8 +26,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.ComponentModel.Design.ITypeDescriptorFilterService" /> interface provides an interface that allows modification of the properties, events, and class-level attributes of a component at design time. This modification occurs through the set of descriptors that a component provides through a <see cref="T:System.ComponentModel.TypeDescriptor" />. The type descriptor will query a component's site for the <see cref="T:System.ComponentModel.Design.ITypeDescriptorFilterService" /> service and, if it exists, the type descriptor will pass all metadata it has collected to this service. The service can then modify the metadata by adding, removing, and altering existing characteristics of the component. </para
-      >
+        >The <see cref="T:System.ComponentModel.Design.ITypeDescriptorFilterService" /> interface provides an interface that allows modification of the properties, events, and class-level attributes of a component at design time. This modification occurs through the set of descriptors that a component provides through a <see cref="T:System.ComponentModel.TypeDescriptor" />. The type descriptor will query a component's site for the <see cref="T:System.ComponentModel.Design.ITypeDescriptorFilterService" /> service and, if it exists, the type descriptor will pass all metadata it has collected to this service. The service can then modify the metadata by adding, removing, and altering existing characteristics of the component.
+      </para>
       <para
         >For example, the properties of a component can be modified through a call to the <see cref="M:System.ComponentModel.Design.ITypeDescriptorFilterService.FilterProperties(System.ComponentModel.IComponent,System.Collections.IDictionary)" /> method. The filter service obtains a dictionary that contains property names and their property descriptors of type <see cref="T:System.ComponentModel.PropertyDescriptor" />. The modifications are implemented using the following logic.</para
       >
@@ -121,15 +121,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The component to filter the attributes of. </param
-        >
+          />The component to filter the attributes of.
+        </param>
         <param name="attributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A dictionary of attributes that can be modified. </param
-        >
+          />A dictionary of attributes that can be modified.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="FilterEvents">
@@ -176,15 +176,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The component to filter events for. </param
-        >
+          />The component to filter events for.
+        </param>
         <param name="events">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A dictionary of events that can be modified. </param
-        >
+          />A dictionary of events that can be modified.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="FilterProperties">
@@ -231,15 +231,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The component to filter properties for. </param
-        >
+          />The component to filter properties for.
+        </param>
         <param name="properties">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A dictionary of properties that can be modified. </param
-        >
+          />A dictionary of properties that can be modified.
+        </param>
       </Docs>
     </Member>
   </Members>

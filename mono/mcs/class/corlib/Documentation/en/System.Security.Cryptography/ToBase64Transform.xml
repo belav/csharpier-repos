@@ -60,8 +60,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.ToBase64Transform" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.ToBase64Transform" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -136,8 +136,8 @@
           <para
             >Calling Dispose allows the resources used by the <see cref="T:System.Security.Cryptography.ToBase64Transform" /> to be reallocated for other purposes. For more information about Dispose, see <format type="text/html">
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -225,8 +225,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Finalize">
@@ -314,14 +314,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Security.Cryptography.ToBase64Transform" /> instance is cast to an <see cref="T:System.IDisposable" /> interface. </para
-          >
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Security.Cryptography.ToBase64Transform" /> instance is cast to an <see cref="T:System.IDisposable" /> interface.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see cref="T:System.Security.Cryptography.ToBase64Transform" /> class. </para
-          >
+            >Releases the unmanaged resources used by the <see cref="T:System.Security.Cryptography.ToBase64Transform" /> class.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -374,36 +374,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The input to compute to base 64. </param
-        >
+          />The input to compute to base 64.
+        </param>
         <param name="inputOffset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The offset into the input byte array from which to begin using data. </param
-        >
+          />The offset into the input byte array from which to begin using data.
+        </param>
         <param name="inputCount">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes in the input byte array to use as data. </param
-        >
+          />The number of bytes in the input byte array to use as data.
+        </param>
         <param name="outputBuffer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The output to which to write the result. </param
-        >
+          />The output to which to write the result.
+        </param>
         <param name="outputOffset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The offset into the output byte array from which to begin writing data. </param
-        >
+          />The offset into the output byte array from which to begin writing data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="TransformFinalBlock">
@@ -444,22 +444,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The input to convert to base 64. </param
-        >
+          />The input to convert to base 64.
+        </param>
         <param name="inputOffset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The offset into the byte array from which to begin using data. </param
-        >
+          />The offset into the byte array from which to begin using data.
+        </param>
         <param name="inputCount">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes in the byte array to use as data. </param
-        >
+          />The number of bytes in the byte array to use as data.
+        </param>
       </Docs>
     </Member>
   </Members>

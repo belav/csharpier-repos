@@ -19,8 +19,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Describes the function of a <see cref="T:System.Web.UI.WebControls.DataControlFieldCell" /> object. </para
-      >
+        >Describes the function of a <see cref="T:System.Web.UI.WebControls.DataControlFieldCell" /> object.
+      </para>
     </summary>
   </Docs>
   <Members>
@@ -35,8 +35,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Web.UI.WebControls.DataControlFieldCell" /> that contains data. </para
-          >
+            >A <see cref="T:System.Web.UI.WebControls.DataControlFieldCell" /> that contains data.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>

@@ -74,15 +74,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type Type containing the classes that were defined in the module and loaded. This array can contain null reference (Nothing in Visual Basic) values. </param
-        >
+          />An array of type Type containing the classes that were defined in the module and loaded. This array can contain null reference (Nothing in Visual Basic) values.
+        </param>
         <param name="exceptions">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type Exception containing the exceptions that were thrown by the class loader. The null reference (Nothing in Visual Basic) values in the <paramref name="classes" /> array line up with the exceptions in this <paramref name="exceptions" /> array. </param
-        >
+          />An array of type Exception containing the exceptions that were thrown by the class loader. The null reference (Nothing in Visual Basic) values in the <paramref name="classes" /> array line up with the exceptions in this <paramref name="exceptions" /> array.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -119,22 +119,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type Type containing the classes that were defined in the module and loaded. This array can contain null reference (Nothing in Visual Basic) values. </param
-        >
+          />An array of type Type containing the classes that were defined in the module and loaded. This array can contain null reference (Nothing in Visual Basic) values.
+        </param>
         <param name="exceptions">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type Exception containing the exceptions that were thrown by the class loader. The null reference (Nothing in Visual Basic) values in the <paramref name="classes" /> array line up with the exceptions in this <paramref name="exceptions" /> array. </param
-        >
+          />An array of type Exception containing the exceptions that were thrown by the class loader. The null reference (Nothing in Visual Basic) values in the <paramref name="classes" /> array line up with the exceptions in this <paramref name="exceptions" /> array.
+        </param>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A String describing the reason the exception was thrown. </param
-        >
+          />A String describing the reason the exception was thrown.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetObjectData">
@@ -172,15 +172,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The information and data needed to serialize or deserialize an object. </param
-        >
+          />The information and data needed to serialize or deserialize an object.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The context for the serialization. </param
-        >
+          />The context for the serialization.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="LoaderExceptions">

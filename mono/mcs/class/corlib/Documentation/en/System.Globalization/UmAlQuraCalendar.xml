@@ -25,8 +25,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Globalization.UmAlQuraCalendar" /> class is nearly identical to the <see cref="T:System.Globalization.HijriCalendar" /> class, except the Um Al Qura calendar uses a table-based algorithm licensed from the Saudi government to calculate dates, can express dates to the year 1500 A.H., and does not support the <see cref="P:System.Globalization.HijriCalendar.HijriAdjustment" /> property. </para
-      >
+        >The <see cref="T:System.Globalization.UmAlQuraCalendar" /> class is nearly identical to the <see cref="T:System.Globalization.HijriCalendar" /> class, except the Um Al Qura calendar uses a table-based algorithm licensed from the Saudi government to calculate dates, can express dates to the year 1500 A.H., and does not support the <see cref="P:System.Globalization.HijriCalendar.HijriAdjustment" /> property.
+      </para>
       <block subset="none" type="note">
         <para
           >For information about using the <see cref="T:System.Globalization.UmAlQuraCalendar" /> class and the other calendar classes in the .NET Framework, see <format type="text/html">
@@ -68,8 +68,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Globalization.UmAlQuraCalendar" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Globalization.UmAlQuraCalendar" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -134,8 +134,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The positive or negative number of months to add. </param
-        >
+          />The positive or negative number of months to add.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddYears">
@@ -199,8 +199,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The positive or negative number of years to add. </param
-        >
+          />The positive or negative number of years to add.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AlgorithmType">
@@ -313,8 +313,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An integer from 1 through 30 that represents the day of the month specified by the <paramref name="time" /> parameter. </para
-          >
+            >An integer from 1 through 30 that represents the day of the month specified by the <paramref name="time" /> parameter.
+          </para>
         </returns>
         <param name="time">
           <attribution
@@ -460,8 +460,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The day of the year is defined as the number of days from the first day of the year. For example, the <see cref="M:System.Globalization.UmAlQuraCalendar.GetDayOfYear(System.DateTime)" /> method returns 1 for the first day of the first month of the year, and the total number of days in the year for the last day of the last month. </para
-          >
+            >The day of the year is defined as the number of days from the first day of the year. For example, the <see cref="M:System.Globalization.UmAlQuraCalendar.GetDayOfYear(System.DateTime)" /> method returns 1 for the first day of the first month of the year, and the total number of days in the year for the last day of the last month.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -521,15 +521,15 @@
           <para>The number of days in the specified month in the specified year and era. The return value is 29 in a common year and 30 in a leap year.</para>
         </returns>
         <param name="year">
-          <attribution license="cc4" from="Microsoft" modified="false" />A year. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A year.
+        </param>
         <param name="month">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer from 1 through 12 that represents a month. </param
-        >
+          />An integer from 1 through 12 that represents a month.
+        </param>
         <param name="era">
           <attribution
             license="cc4"
@@ -572,8 +572,8 @@
           <para>The number of days in the specified year and era. The number of days is 354 in a common year or 355 in a leap year.</para>
         </returns>
         <param name="year">
-          <attribution license="cc4" from="Microsoft" modified="false" />A year. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A year.
+        </param>
         <param name="era">
           <attribution
             license="cc4"
@@ -617,12 +617,8 @@
           >
         </returns>
         <param name="time">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The date value to read. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The date value to read.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetLeapMonth">
@@ -748,8 +744,8 @@
           <para>Always 12.</para>
         </returns>
         <param name="year">
-          <attribution license="cc4" from="Microsoft" modified="false" />A year. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A year.
+        </param>
         <param name="era">
           <attribution
             license="cc4"
@@ -840,22 +836,22 @@
           >
         </returns>
         <param name="year">
-          <attribution license="cc4" from="Microsoft" modified="false" />A year. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A year.
+        </param>
         <param name="month">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer from 1 through 12 that represents a month. </param
-        >
+          />An integer from 1 through 12 that represents a month.
+        </param>
         <param name="day">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer from 1 through 30 that represents a day. </param
-        >
+          />An integer from 1 through 30 that represents a day.
+        </param>
         <param name="era">
           <attribution
             license="cc4"
@@ -904,15 +900,15 @@
           >
         </returns>
         <param name="year">
-          <attribution license="cc4" from="Microsoft" modified="false" />A year. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A year.
+        </param>
         <param name="month">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer from 1 through 12 that represents a month. </param
-        >
+          />An integer from 1 through 12 that represents a month.
+        </param>
         <param name="era">
           <attribution
             license="cc4"
@@ -955,8 +951,8 @@
           <para>true if the specified year is a leap year; otherwise, false.</para>
         </returns>
         <param name="year">
-          <attribution license="cc4" from="Microsoft" modified="false" />A year. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A year.
+        </param>
         <param name="era">
           <attribution
             license="cc4"
@@ -990,8 +986,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >Starting with the net_v45, the value of the <see cref="P:System.Globalization.UmAlQuraCalendar.MaxSupportedDateTime" /> property is 11/16/2077. In previous versions of the .NET Framework, its value is the last moment of May 13, 2029 C.E. in the Gregorian calendar. </para
-            >
+              >Starting with the net_v45, the value of the <see cref="P:System.Globalization.UmAlQuraCalendar.MaxSupportedDateTime" /> property is 11/16/2077. In previous versions of the .NET Framework, its value is the last moment of May 13, 2029 C.E. in the Gregorian calendar.
+            </para>
           </block>
         </remarks>
         <summary>
@@ -1075,50 +1071,50 @@
           >
         </returns>
         <param name="year">
-          <attribution license="cc4" from="Microsoft" modified="false" />A year. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A year.
+        </param>
         <param name="month">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer from 1 through 12 that represents a month. </param
-        >
+          />An integer from 1 through 12 that represents a month.
+        </param>
         <param name="day">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer from 1 through 29 that represents a day. </param
-        >
+          />An integer from 1 through 29 that represents a day.
+        </param>
         <param name="hour">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer from 0 through 23 that represents an hour. </param
-        >
+          />An integer from 0 through 23 that represents an hour.
+        </param>
         <param name="minute">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer from 0 through 59 that represents a minute. </param
-        >
+          />An integer from 0 through 59 that represents a minute.
+        </param>
         <param name="second">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer from 0 through 59 that represents a second. </param
-        >
+          />An integer from 0 through 59 that represents a second.
+        </param>
         <param name="millisecond">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer from 0 through 999 that represents a millisecond. </param
-        >
+          />An integer from 0 through 999 that represents a millisecond.
+        </param>
         <param name="era">
           <attribution
             license="cc4"
@@ -1153,8 +1149,8 @@
             >The <see cref="M:System.Globalization.UmAlQuraCalendar.ToFourDigitYear(System.Int32)" /> method uses the <paramref name="year" /> parameter, the <see cref="P:System.Globalization.UmAlQuraCalendar.TwoDigitYearMax" /> property, and a year to calculate a 4-digit year. The century is determined by finding the sole occurrence of the 2-digit <paramref name="year" /> parameter within that 100-year range. For example, if <see cref="P:System.Globalization.UmAlQuraCalendar.TwoDigitYearMax" /> is set to 1429, the 100-year range is from 1330 through 1429. Therefore, a 2-digit value of 30 is interpreted as 1330, while a 2-digit value of 29 is interpreted as 1429.</para
           >
           <para
-            >If the <see cref="P:System.Globalization.UmAlQuraCalendar.TwoDigitYearMax" /> property is the special value 99, the <see cref="M:System.Globalization.UmAlQuraCalendar.ToFourDigitYear(System.Int32)" /> method ignores the settings in the regional and language options in Control Panel and returns the <paramref name="year" /> parameter unchanged. </para
-          >
+            >If the <see cref="P:System.Globalization.UmAlQuraCalendar.TwoDigitYearMax" /> property is the special value 99, the <see cref="M:System.Globalization.UmAlQuraCalendar.ToFourDigitYear(System.Int32)" /> method ignores the settings in the regional and language options in Control Panel and returns the <paramref name="year" /> parameter unchanged.
+          </para>
           <para>
             <see cref="M:System.Globalization.UmAlQuraCalendar.ToFourDigitYear(System.Int32)" /> supports either a two-digit year or a four-digit year. Passing a two-digit year value (less than 100) causes the method to convert the value to a four-digit value according to the <see cref="P:System.Globalization.UmAlQuraCalendar.TwoDigitYearMax" /> value representing the appropriate century. If the application supplies a four-digit year value that is within the supported calendar range to <see cref="M:System.Globalization.UmAlQuraCalendar.ToFourDigitYear(System.Int32)" />, the method returns the actual input value. If the application supplies a four-digit value that is outside the supported calendar range, or if it supplies a negative value, the method throws an exception.</para
           >

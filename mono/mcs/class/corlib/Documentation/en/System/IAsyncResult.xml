@@ -150,8 +150,8 @@
         <value>
           <para>
             <see langword="true" /> if the operation synchronously;
-   otherwise <see langword="false" />. </para
-          >
+   otherwise <see langword="false" />.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />

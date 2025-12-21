@@ -99,8 +99,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to include comments; otherwise, false. </param
-        >
+          />true to include comments; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetInnerXml">
@@ -213,8 +213,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the output to return. <see cref="T:System.IO.Stream" /> is the only valid type for this parameter. </param
-        >
+          />The type of the output to return. <see cref="T:System.IO.Stream" /> is the only valid type for this parameter.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="InputTypes">
@@ -283,8 +283,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlNodeList" /> object that encapsulates an XSLT style sheet to load into the current <see cref="T:System.Security.Cryptography.Xml.XmlDsigXsltTransform" /> object. This style sheet is applied to the document loaded by the <see cref="M:System.Security.Cryptography.Xml.XmlDsigXsltTransform.LoadInput(System.Object)" /> method. </param
-        >
+          />An <see cref="T:System.Xml.XmlNodeList" /> object that encapsulates an XSLT style sheet to load into the current <see cref="T:System.Security.Cryptography.Xml.XmlDsigXsltTransform" /> object. This style sheet is applied to the document loaded by the <see cref="M:System.Security.Cryptography.Xml.XmlDsigXsltTransform.LoadInput(System.Object)" /> method.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="LoadInput">
@@ -323,8 +323,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The input to load into the current <see cref="T:System.Security.Cryptography.Xml.XmlDsigXsltTransform" /> object. </param
-        >
+          />The input to load into the current <see cref="T:System.Security.Cryptography.Xml.XmlDsigXsltTransform" /> object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OutputTypes">

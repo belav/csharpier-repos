@@ -89,22 +89,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the counter, which must be unique within its category. </param
-        >
+          />The name of the counter, which must be unique within its category.
+        </param>
         <param name="counterHelp">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text that describes the counter's behavior. </param
-        >
+          />The text that describes the counter's behavior.
+        </param>
         <param name="counterType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Diagnostics.PerformanceCounterType" /> that identifies the counter's behavior. </param
-        >
+          />A <see cref="T:System.Diagnostics.PerformanceCounterType" /> that identifies the counter's behavior.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CounterHelp">

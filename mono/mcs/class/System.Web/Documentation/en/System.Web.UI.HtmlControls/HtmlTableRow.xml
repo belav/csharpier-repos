@@ -338,8 +338,8 @@
             </item>
           </list>
           <para
-            >The available colors for use with the <see cref="P:System.Web.UI.HtmlControls.HtmlTableRow.BgColor" /> property can be determined from the <see cref="T:System.Drawing.KnownColor" /> enumeration. </para
-          >
+            >The available colors for use with the <see cref="P:System.Web.UI.HtmlControls.HtmlTableRow.BgColor" /> property can be determined from the <see cref="T:System.Drawing.KnownColor" /> enumeration.
+          </para>
           <para>Color names are case-insensitive. </para>
         </remarks>
         <summary>
@@ -523,8 +523,8 @@
             </item>
           </list>
           <para
-            >The available colors for use with the <see cref="P:System.Web.UI.HtmlControls.HtmlTableRow.BorderColor" /> property can be determined from the <see cref="T:System.Drawing.KnownColor" /> enumeration. </para
-          >
+            >The available colors for use with the <see cref="P:System.Web.UI.HtmlControls.HtmlTableRow.BorderColor" /> property can be determined from the <see cref="T:System.Drawing.KnownColor" /> enumeration.
+          </para>
           <para>Color names are case-insensitive. </para>
         </remarks>
         <summary>

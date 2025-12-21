@@ -16,11 +16,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You can use the <see cref="T:System.Web.UI.WebControls.ProfileParameter" /> class to bind the value of an ASP.NET Profile parameter to a parameter used in a parameterized SQL query, business object method, or filtering expression. </para
-      >
+        >You can use the <see cref="T:System.Web.UI.WebControls.ProfileParameter" /> class to bind the value of an ASP.NET Profile parameter to a parameter used in a parameterized SQL query, business object method, or filtering expression.
+      </para>
       <para
-        >The <see cref="T:System.Web.UI.WebControls.ProfileParameter" /> class provides the <see cref="P:System.Web.UI.WebControls.ProfileParameter.PropertyName" /> property in addition to those inherited from the <see cref="T:System.Web.UI.WebControls.Parameter" /> class. The <see cref="P:System.Web.UI.WebControls.ProfileParameter.PropertyName" /> property identifies the ASP.NET Profile property from which the <see cref="T:System.Web.UI.WebControls.ProfileParameter" /> retrieves a value. </para
-      >
+        >The <see cref="T:System.Web.UI.WebControls.ProfileParameter" /> class provides the <see cref="P:System.Web.UI.WebControls.ProfileParameter.PropertyName" /> property in addition to those inherited from the <see cref="T:System.Web.UI.WebControls.Parameter" /> class. The <see cref="P:System.Web.UI.WebControls.ProfileParameter.PropertyName" /> property identifies the ASP.NET Profile property from which the <see cref="T:System.Web.UI.WebControls.ProfileParameter" /> retrieves a value.
+      </para>
       <block subset="none" type="note">
         <para
           >Controls that bind data to the parameter might throw an exception if a <see cref="T:System.Web.UI.WebControls.ProfileParameter" /> object is specified but no corresponding profile property is set. Similarly, they might display no data if the profile property is set with null. Set the <see cref="P:System.Web.UI.WebControls.Parameter.DefaultValue" /> property to avoid these situations where appropriate.</para

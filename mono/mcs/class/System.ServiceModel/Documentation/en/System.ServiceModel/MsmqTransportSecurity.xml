@@ -39,8 +39,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.MsmqTransportSecurity" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.MsmqTransportSecurity" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -104,8 +104,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see cref="T:System.ServiceModel.MsmqAuthenticationMode" /> that is associated with this instance of the <see cref="T:System.ServiceModel.MsmqTransportSecurity" /> class. </para
-          >
+            >Gets or sets the <see cref="T:System.ServiceModel.MsmqAuthenticationMode" /> that is associated with this instance of the <see cref="T:System.ServiceModel.MsmqTransportSecurity" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -136,8 +136,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see cref="T:System.ServiceModel.MsmqEncryptionAlgorithm" /> that is associated with this instance of the <see cref="T:System.ServiceModel.MsmqTransportSecurity" /> class. </para
-          >
+            >Gets or sets the <see cref="T:System.ServiceModel.MsmqEncryptionAlgorithm" /> that is associated with this instance of the <see cref="T:System.ServiceModel.MsmqTransportSecurity" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -168,8 +168,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see cref="T:System.Net.Security.ProtectionLevel" /> that is associated with this instance of the <see cref="T:System.ServiceModel.MsmqTransportSecurity" /> class. </para
-          >
+            >Gets or sets the <see cref="T:System.Net.Security.ProtectionLevel" /> that is associated with this instance of the <see cref="T:System.ServiceModel.MsmqTransportSecurity" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -200,8 +200,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see cref="T:System.ServiceModel.MsmqSecureHashAlgorithm" /> that is associated with this instance of the <see cref="T:System.ServiceModel.MsmqTransportSecurity" /> class. </para
-          >
+            >Gets or sets the <see cref="T:System.ServiceModel.MsmqSecureHashAlgorithm" /> that is associated with this instance of the <see cref="T:System.ServiceModel.MsmqTransportSecurity" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>

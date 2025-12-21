@@ -70,8 +70,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the user on whose behalf the code is running. </param
-        >
+          />The name of the user on whose behalf the code is running.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -104,15 +104,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the user on whose behalf the code is running. </param
-        >
+          />The name of the user on whose behalf the code is running.
+        </param>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of authentication used to identify the user. </param
-        >
+          />The type of authentication used to identify the user.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AuthenticationType">

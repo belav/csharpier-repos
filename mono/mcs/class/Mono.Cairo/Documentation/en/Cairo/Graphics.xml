@@ -334,8 +334,8 @@ Note that the <paramref name="surface" /> can be a <see cref="T:Cairo.Surface" /
         >
         <value
           >A <see cref="T:Cairo.Pattern" /> to be used as the source for subsequent drawing operations.
-</value
-        >
+
+        </value>
         <remarks>This pattern will then be used for any subsequent drawing operation until a new source pattern is set.</remarks>
       </Docs>
       <AssemblyInfo>

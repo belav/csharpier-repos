@@ -364,8 +364,8 @@
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format> and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
           <para
             >Note   Always call <see cref="M:System.Net.Mail.AttachmentBase.Dispose" /> before you release your last reference to the <see cref="T:System.Net.Mail.AttachmentBase" />. Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Net.Mail.AttachmentBase" /> object's Finalize method.</para
           >
@@ -373,8 +373,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the resources used by the <see cref="T:System.Net.Mail.AttachmentBase" />. </para
-          >
+            >Releases the resources used by the <see cref="T:System.Net.Mail.AttachmentBase" />.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -409,16 +409,16 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see cref="T:System.Net.Mail.AttachmentBase" /> and optionally releases the managed resources. </para
-          >
+            >Releases the unmanaged resources used by the <see cref="T:System.Net.Mail.AttachmentBase" /> and optionally releases the managed resources.
+          </para>
         </summary>
         <param name="disposing">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="TransferEncoding">

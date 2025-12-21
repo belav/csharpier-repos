@@ -59,8 +59,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A URI on which the channel hook will listen. </param
-        >
+          />A URI on which the channel hook will listen.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ChannelScheme">

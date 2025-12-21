@@ -27,8 +27,8 @@
         >The <see cref="T:System.Web.UI.WebControls.TreeNodeCollection" /> class is used to store and manage a collection of <see cref="T:System.Web.UI.WebControls.TreeNode" /> objects in the <see cref="T:System.Web.UI.WebControls.TreeView" /> control. The <see cref="T:System.Web.UI.WebControls.TreeView" /> control uses the <see cref="T:System.Web.UI.WebControls.TreeNodeCollection" /> class in two of its properties. It stores its root nodes in the <see cref="P:System.Web.UI.WebControls.TreeView.Nodes" /> property and its selected nodes in the <see cref="P:System.Web.UI.WebControls.TreeView.CheckedNodes" /> property. The <see cref="T:System.Web.UI.WebControls.TreeNodeCollection" /> collection is also used for the <see cref="P:System.Web.UI.WebControls.TreeNode.ChildNodes" /> property to store child nodes (if any).</para
       >
       <para
-        >The <see cref="T:System.Web.UI.WebControls.TreeNodeCollection" /> class supports several ways to access the items in the collection: </para
-      >
+        >The <see cref="T:System.Web.UI.WebControls.TreeNodeCollection" /> class supports several ways to access the items in the collection:
+      </para>
       <list type="bullet">
         <item>
           <para
@@ -37,8 +37,8 @@
         </item>
         <item>
           <para
-            >Use the <see cref="M:System.Web.UI.WebControls.TreeNodeCollection.GetEnumerator" /> method to create an enumerator that can be used to iterate through the collection. </para
-          >
+            >Use the <see cref="M:System.Web.UI.WebControls.TreeNodeCollection.GetEnumerator" /> method to create an enumerator that can be used to iterate through the collection.
+          </para>
         </item>
         <item>
           <para>Use foreach (C#) or For Each (Visual Basic) to iterate through the collection.</para>
@@ -130,8 +130,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.UI.WebControls.TreeNode" /> object that represents the parent node of the collection. </param
-        >
+          />The <see cref="T:System.Web.UI.WebControls.TreeNode" /> object that represents the parent node of the collection.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -176,8 +176,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.UI.WebControls.TreeNode" /> object to append. </param
-        >
+          />The <see cref="T:System.Web.UI.WebControls.TreeNode" /> object to append.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -223,15 +223,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index location at which to insert the <see cref="T:System.Web.UI.WebControls.TreeNode" /> object. </param
-        >
+          />The zero-based index location at which to insert the <see cref="T:System.Web.UI.WebControls.TreeNode" /> object.
+        </param>
         <param name="child">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.UI.WebControls.TreeNode" /> object to add. </param
-        >
+          />The <see cref="T:System.Web.UI.WebControls.TreeNode" /> object to add.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -593,8 +593,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index location of the node to remove. </param
-        >
+          />The zero-based index location of the node to remove.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -677,15 +677,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A zero-based <see cref="T:System.Array" /> object that receives the copied items from the <see cref="T:System.Web.UI.WebControls.TreeNodeCollection" />. </param
-        >
+          />A zero-based <see cref="T:System.Array" /> object that receives the copied items from the <see cref="T:System.Web.UI.WebControls.TreeNodeCollection" />.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position in the target array at which to start receiving the copied content. </param
-        >
+          />The position in the target array at which to start receiving the copied content.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.Web.UI.IStateManager.IsTrackingViewState">
@@ -736,8 +736,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Object" /> that contains the saved view state values. </param
-        >
+          />A <see cref="T:System.Object" /> that contains the saved view state values.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.Web.UI.IStateManager.SaveViewState">

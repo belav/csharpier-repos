@@ -76,15 +76,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The fully qualified name of the data type of the serializer. </param
-        >
+          />The fully qualified name of the data type of the serializer.
+        </param>
         <param name="baseSerializerTypeName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The fully qualified name of the base data type of the serializer. Multiple serializers can be supplied for a class as long as the serializers have different base types. </param
-        >
+          />The fully qualified name of the base data type of the serializer. Multiple serializers can be supplied for a class as long as the serializers have different base types.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -120,15 +120,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The fully qualified name of the data type of the serializer. </param
-        >
+          />The fully qualified name of the data type of the serializer.
+        </param>
         <param name="baseSerializerType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The base data type of the serializer. Multiple serializers can be supplied for a class as long as the serializers have different base types. </param
-        >
+          />The base data type of the serializer. Multiple serializers can be supplied for a class as long as the serializers have different base types.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -164,15 +164,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data type of the serializer. </param
-        >
+          />The data type of the serializer.
+        </param>
         <param name="baseSerializerType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The base data type of the serializer. Multiple serializers can be supplied for a class as long as the serializers have different base types. </param
-        >
+          />The base data type of the serializer. Multiple serializers can be supplied for a class as long as the serializers have different base types.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SerializerBaseTypeName">

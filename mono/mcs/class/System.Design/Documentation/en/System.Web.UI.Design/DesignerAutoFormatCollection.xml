@@ -34,8 +34,8 @@
       <list type="bullet">
         <item>
           <para
-            >The <see cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.Add(System.Web.UI.Design.DesignerAutoFormat)" /> method to add a single format to the collection. </para
-          >
+            >The <see cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.Add(System.Web.UI.Design.DesignerAutoFormat)" /> method to add a single format to the collection.
+          </para>
         </item>
         <item>
           <para
@@ -44,8 +44,8 @@
         </item>
         <item>
           <para
-            >The <see cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.Remove(System.Web.UI.Design.DesignerAutoFormat)" /> method to remove a format. </para
-          >
+            >The <see cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.Remove(System.Web.UI.Design.DesignerAutoFormat)" /> method to remove a format.
+          </para>
         </item>
         <item>
           <para
@@ -54,13 +54,13 @@
         </item>
         <item>
           <para
-            >The <see cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.Contains(System.Web.UI.Design.DesignerAutoFormat)" /> method to determine whether a particular format is already in the collection. </para
-          >
+            >The <see cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.Contains(System.Web.UI.Design.DesignerAutoFormat)" /> method to determine whether a particular format is already in the collection.
+          </para>
         </item>
         <item>
           <para
-            >The <see cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.IndexOf(System.Web.UI.Design.DesignerAutoFormat)" /> method to retrieve the index of a format within the collection. </para
-          >
+            >The <see cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.IndexOf(System.Web.UI.Design.DesignerAutoFormat)" /> method to retrieve the index of a format within the collection.
+          </para>
         </item>
         <item>
           <para

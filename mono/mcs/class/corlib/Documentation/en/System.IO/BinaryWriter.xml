@@ -30,8 +30,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.IO.BinaryWriter" /> class provides methods that simplify writing primitive data types to a stream. For example, you can use the <see cref="M:System.IO.BinaryWriter.Write(System.Boolean)" /> method to write a Boolean value to the stream as a one-byte value. The class includes write methods that support different data types. </para
-      >
+        >The <see cref="T:System.IO.BinaryWriter" /> class provides methods that simplify writing primitive data types to a stream. For example, you can use the <see cref="M:System.IO.BinaryWriter.Write(System.Boolean)" /> method to write a Boolean value to the stream as a one-byte value. The class includes write methods that support different data types.
+      </para>
       <para
         >When you create a new instance of the <see cref="T:System.IO.BinaryWriter" /> class, you provide the stream to write to, and optionally specify the type of encoding and whether to leave the stream open after disposing the <see cref="T:System.IO.BinaryWriter" /> object. If you do not specify an encoding type, UTF-8 is used.</para
       >
@@ -106,8 +106,8 @@
           >
         </summary>
         <param name="output">
-          <attribution license="cc4" from="Microsoft" modified="false" />The output stream. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The output stream.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -146,15 +146,15 @@
           >
         </summary>
         <param name="output">
-          <attribution license="cc4" from="Microsoft" modified="false" />The output stream. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The output stream.
+        </param>
         <param name="encoding">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character encoding to use. </param
-        >
+          />The character encoding to use.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -322,8 +322,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Flush">
@@ -464,15 +464,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A byte offset relative to <paramref name="origin" />. </param
-        >
+          />A byte offset relative to <paramref name="origin" />.
+        </param>
         <param name="origin">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A field of <see cref="T:System.IO.SeekOrigin" /> indicating the reference point from which the new position is to be obtained. </param
-        >
+          />A field of <see cref="T:System.IO.SeekOrigin" /> indicating the reference point from which the new position is to be obtained.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.IDisposable.Dispose">
@@ -535,8 +535,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The Boolean value to write (0 or 1). </param
-        >
+          />The Boolean value to write (0 or 1).
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -587,8 +587,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The unsigned byte to write. </param
-        >
+          />The unsigned byte to write.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -627,8 +627,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A byte array containing the data to write. </param
-        >
+          />A byte array containing the data to write.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -682,8 +682,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The non-surrogate, Unicode character to write. </param
-        >
+          />The non-surrogate, Unicode character to write.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -860,8 +860,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A character array containing the data to write. </param
-        >
+          />A character array containing the data to write.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -1038,8 +1038,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The decimal value to write. </param
-        >
+          />The decimal value to write.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -1078,8 +1078,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The eight-byte floating-point value to write. </param
-        >
+          />The eight-byte floating-point value to write.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -1257,8 +1257,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The two-byte signed integer to write. </param
-        >
+          />The two-byte signed integer to write.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -1298,8 +1298,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The four-byte signed integer to write. </param
-        >
+          />The four-byte signed integer to write.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -1339,8 +1339,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The eight-byte signed integer to write. </param
-        >
+          />The eight-byte signed integer to write.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -1380,12 +1380,8 @@
           <para>Writes a signed byte to the current stream and advances the stream position by one byte.</para>
         </summary>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The signed byte to write. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The signed byte to write.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -1425,8 +1421,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The four-byte floating-point value to write. </param
-        >
+          />The four-byte floating-point value to write.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -1467,8 +1463,8 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to write. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to write.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -1513,8 +1509,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The two-byte unsigned integer to write. </param
-        >
+          />The two-byte unsigned integer to write.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -1559,8 +1555,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The four-byte unsigned integer to write. </param
-        >
+          />The four-byte unsigned integer to write.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -1605,8 +1601,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The eight-byte unsigned integer to write. </param
-        >
+          />The eight-byte unsigned integer to write.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -1650,22 +1646,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A byte array containing the data to write. </param
-        >
+          />A byte array containing the data to write.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting point in <paramref name="buffer" /> at which to begin writing. </param
-        >
+          />The starting point in <paramref name="buffer" /> at which to begin writing.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes to write. </param
-        >
+          />The number of bytes to write.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -1709,22 +1705,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A character array containing the data to write. </param
-        >
+          />A character array containing the data to write.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting point in <paramref name="chars" /> from which to begin writing. </param
-        >
+          />The starting point in <paramref name="chars" /> from which to begin writing.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters to write. </param
-        >
+          />The number of characters to write.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Write7BitEncodedInt">
@@ -1769,8 +1765,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The 32-bit integer to be written. </param
-        >
+          />The 32-bit integer to be written.
+        </param>
       </Docs>
     </Member>
   </Members>

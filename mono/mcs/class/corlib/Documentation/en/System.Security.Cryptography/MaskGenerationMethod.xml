@@ -59,8 +59,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.MaskGenerationMethod" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.MaskGenerationMethod" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -108,15 +108,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The random seed to use to compute the mask. </param
-        >
+          />The random seed to use to compute the mask.
+        </param>
         <param name="cbReturn">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The length of the generated mask in bytes. </param
-        >
+          />The length of the generated mask in bytes.
+        </param>
       </Docs>
     </Member>
   </Members>

@@ -90,8 +90,7 @@ class App {
     }
    }
 }
-</code
-      >
+</code>
       <para>An example of some output is</para>
       <c>
         <para>10:51:40.5809015 Checking Status 1.</para>
@@ -124,8 +123,8 @@ class App {
         >
       </block>
       <para
-        >When a timer is no longer needed, use the <see cref="Overload:System.Threading.Timer.Dispose" /> method to free the resources held by the timer. Note that callbacks can occur after the <see cref="M:System.Threading.Timer.Dispose" /> method overload has been called, because the timer queues callbacks for execution by thread pool threads. You can use the <see cref="M:System.Threading.Timer.Dispose(System.Threading.WaitHandle)" /> method overload to wait until all callbacks have completed. </para
-      >
+        >When a timer is no longer needed, use the <see cref="Overload:System.Threading.Timer.Dispose" /> method to free the resources held by the timer. Note that callbacks can occur after the <see cref="M:System.Threading.Timer.Dispose" /> method overload has been called, because the timer queues callbacks for execution by thread pool threads. You can use the <see cref="M:System.Threading.Timer.Dispose(System.Threading.WaitHandle)" /> method overload to wait until all callbacks have completed.
+      </para>
       <para
         >The callback method executed by the timer should be reentrant, because it is called on <see cref="T:System.Threading.ThreadPool" /> threads. The callback can be executed simultaneously on two thread pool threads if the timer interval is less than the time required to execute the callback, or if all thread pool threads are in use and the callback is queued multiple times.</para
       >
@@ -166,8 +165,8 @@ class App {
             >Call this constructor when you want to use the <see cref="T:System.Threading.Timer" /> object itself as the state object. After creating the timer, use the <see cref="Overload:System.Threading.Timer.Change" /> method to set the interval and due time.</para
           >
           <para
-            >This constructor specifies an infinite due time before the first callback and an infinite interval between callbacks, in order to prevent the first callback from occurring before the <see cref="T:System.Threading.Timer" /> object is assigned to the state object. </para
-          >
+            >This constructor specifies an infinite due time before the first callback and an infinite interval between callbacks, in order to prevent the first callback from occurring before the <see cref="T:System.Threading.Timer" /> object is assigned to the state object.
+          </para>
           <para
             >The method specified for <paramref name="callback" /> should be reentrant, because it is called on <see cref="T:System.Threading.ThreadPool" /> threads. The method can be executed simultaneously on two thread pool threads if the timer interval is less than the time required to execute the method, or if all thread pool threads are in use and the method is queued multiple times.</para
           >
@@ -175,8 +174,8 @@ class App {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Threading.Timer" /> class with an infinite period and an infinite due time, using the newly created <see cref="T:System.Threading.Timer" /> object as the state object. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Threading.Timer" /> class with an infinite period and an infinite due time, using the newly created <see cref="T:System.Threading.Timer" /> object as the state object.
+          </para>
         </summary>
         <param name="callback">
           <attribution
@@ -215,8 +214,8 @@ class App {
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentOutOfRangeException">
-          <paramref name="dueTime" /> or <paramref name="period" /> is negative and is not equal to <see cref="F:System.Threading.Timeout.Infinite" />. </exception
-        >
+          <paramref name="dueTime" /> or <paramref name="period" /> is negative and is not equal to <see cref="F:System.Threading.Timeout.Infinite" />.
+        </exception>
         <exception cref="T:System.ArgumentNullException">
           <paramref name="callback" /> is a <see langword="null" /> reference.</exception
         >
@@ -250,29 +249,29 @@ class App {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Threading.TimerCallback" /> delegate representing a method to be executed. </param
-        >
+          />A <see cref="T:System.Threading.TimerCallback" /> delegate representing a method to be executed.
+        </param>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object containing information to be used by the callback method, or null. </param
-        >
+          />An object containing information to be used by the callback method, or null.
+        </param>
         <param name="dueTime">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The amount of time to delay before <paramref name="callback" /> is invoked, in milliseconds. Specify <see cref="F:System.Threading.Timeout.Infinite" /> to prevent the timer from starting. Specify zero (0) to start the timer immediately. </param
-        >
+          />The amount of time to delay before <paramref name="callback" /> is invoked, in milliseconds. Specify <see cref="F:System.Threading.Timeout.Infinite" /> to prevent the timer from starting. Specify zero (0) to start the timer immediately.
+        </param>
         <param name="period">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The time interval between invocations of <paramref name="callback" />, in milliseconds. Specify <see cref="F:System.Threading.Timeout.Infinite" /> to disable periodic signaling. </param
-        >
+          />The time interval between invocations of <paramref name="callback" />, in milliseconds. Specify <see cref="F:System.Threading.Timeout.Infinite" /> to disable periodic signaling.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -328,29 +327,29 @@ class App {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Threading.TimerCallback" /> delegate representing a method to be executed. </param
-        >
+          />A <see cref="T:System.Threading.TimerCallback" /> delegate representing a method to be executed.
+        </param>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object containing information to be used by the callback method, or null. </param
-        >
+          />An object containing information to be used by the callback method, or null.
+        </param>
         <param name="dueTime">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The amount of time to delay before <paramref name="callback" /> is invoked, in milliseconds. Specify <see cref="F:System.Threading.Timeout.Infinite" /> to prevent the timer from starting. Specify zero (0) to start the timer immediately. </param
-        >
+          />The amount of time to delay before <paramref name="callback" /> is invoked, in milliseconds. Specify <see cref="F:System.Threading.Timeout.Infinite" /> to prevent the timer from starting. Specify zero (0) to start the timer immediately.
+        </param>
         <param name="period">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The time interval between invocations of <paramref name="callback" />, in milliseconds. Specify <see cref="F:System.Threading.Timeout.Infinite" /> to disable periodic signaling. </param
-        >
+          />The time interval between invocations of <paramref name="callback" />, in milliseconds. Specify <see cref="F:System.Threading.Timeout.Infinite" /> to disable periodic signaling.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -418,29 +417,29 @@ class App {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Threading.TimerCallback" /> delegate representing a method to be executed. </param
-        >
+          />A <see cref="T:System.Threading.TimerCallback" /> delegate representing a method to be executed.
+        </param>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object containing information to be used by the callback method, or null. </param
-        >
+          />An object containing information to be used by the callback method, or null.
+        </param>
         <param name="dueTime">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.TimeSpan" /> representing the amount of time to delay before the <paramref name="callback" /> parameter invokes its methods. Specify negative one (-1) milliseconds to prevent the timer from starting. Specify zero (0) to start the timer immediately. </param
-        >
+          />The <see cref="T:System.TimeSpan" /> representing the amount of time to delay before the <paramref name="callback" /> parameter invokes its methods. Specify negative one (-1) milliseconds to prevent the timer from starting. Specify zero (0) to start the timer immediately.
+        </param>
         <param name="period">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The time interval between invocations of the methods referenced by <paramref name="callback" />. Specify negative one (-1) milliseconds to disable periodic signaling. </param
-        >
+          />The time interval between invocations of the methods referenced by <paramref name="callback" />. Specify negative one (-1) milliseconds to disable periodic signaling.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -501,29 +500,29 @@ class App {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Threading.TimerCallback" /> delegate representing a method to be executed. </param
-        >
+          />A <see cref="T:System.Threading.TimerCallback" /> delegate representing a method to be executed.
+        </param>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object containing information to be used by the callback method, or null. </param
-        >
+          />An object containing information to be used by the callback method, or null.
+        </param>
         <param name="dueTime">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The amount of time to delay before <paramref name="callback" /> is invoked, in milliseconds. Specify <see cref="F:System.Threading.Timeout.Infinite" /> to prevent the timer from starting. Specify zero (0) to start the timer immediately. </param
-        >
+          />The amount of time to delay before <paramref name="callback" /> is invoked, in milliseconds. Specify <see cref="F:System.Threading.Timeout.Infinite" /> to prevent the timer from starting. Specify zero (0) to start the timer immediately.
+        </param>
         <param name="period">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The time interval between invocations of <paramref name="callback" />, in milliseconds. Specify <see cref="F:System.Threading.Timeout.Infinite" /> to disable periodic signaling. </param
-        >
+          />The time interval between invocations of <paramref name="callback" />, in milliseconds. Specify <see cref="F:System.Threading.Timeout.Infinite" /> to disable periodic signaling.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Change">
@@ -578,15 +577,15 @@ class App {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The amount of time to delay before the invoking the callback method specified when the <see cref="T:System.Threading.Timer" /> was constructed, in milliseconds. Specify <see cref="F:System.Threading.Timeout.Infinite" /> to prevent the timer from restarting. Specify zero (0) to restart the timer immediately. </param
-        >
+          />The amount of time to delay before the invoking the callback method specified when the <see cref="T:System.Threading.Timer" /> was constructed, in milliseconds. Specify <see cref="F:System.Threading.Timeout.Infinite" /> to prevent the timer from restarting. Specify zero (0) to restart the timer immediately.
+        </param>
         <param name="period">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The time interval between invocations of the callback method specified when the <see cref="T:System.Threading.Timer" /> was constructed, in milliseconds. Specify <see cref="F:System.Threading.Timeout.Infinite" /> to disable periodic signaling. </param
-        >
+          />The time interval between invocations of the callback method specified when the <see cref="T:System.Threading.Timer" /> was constructed, in milliseconds. Specify <see cref="F:System.Threading.Timeout.Infinite" /> to disable periodic signaling.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -635,15 +634,15 @@ class App {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The amount of time to delay before the invoking the callback method specified when the <see cref="T:System.Threading.Timer" /> was constructed, in milliseconds. Specify <see cref="F:System.Threading.Timeout.Infinite" /> to prevent the timer from restarting. Specify zero (0) to restart the timer immediately. </param
-        >
+          />The amount of time to delay before the invoking the callback method specified when the <see cref="T:System.Threading.Timer" /> was constructed, in milliseconds. Specify <see cref="F:System.Threading.Timeout.Infinite" /> to prevent the timer from restarting. Specify zero (0) to restart the timer immediately.
+        </param>
         <param name="period">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The time interval between invocations of the callback method specified when the <see cref="T:System.Threading.Timer" /> was constructed, in milliseconds. Specify <see cref="F:System.Threading.Timeout.Infinite" /> to disable periodic signaling. </param
-        >
+          />The time interval between invocations of the callback method specified when the <see cref="T:System.Threading.Timer" /> was constructed, in milliseconds. Specify <see cref="F:System.Threading.Timeout.Infinite" /> to disable periodic signaling.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Change">
@@ -703,15 +702,15 @@ class App {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.TimeSpan" /> representing the amount of time to delay before invoking the callback method specified when the <see cref="T:System.Threading.Timer" /> was constructed. Specify negative one (-1) milliseconds to prevent the timer from restarting. Specify zero (0) to restart the timer immediately. </param
-        >
+          />A <see cref="T:System.TimeSpan" /> representing the amount of time to delay before invoking the callback method specified when the <see cref="T:System.Threading.Timer" /> was constructed. Specify negative one (-1) milliseconds to prevent the timer from restarting. Specify zero (0) to restart the timer immediately.
+        </param>
         <param name="period">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The time interval between invocations of the callback method specified when the <see cref="T:System.Threading.Timer" /> was constructed. Specify negative one (-1) milliseconds to disable periodic signaling. </param
-        >
+          />The time interval between invocations of the callback method specified when the <see cref="T:System.Threading.Timer" /> was constructed. Specify negative one (-1) milliseconds to disable periodic signaling.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -765,15 +764,15 @@ class App {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The amount of time to delay before the invoking the callback method specified when the <see cref="T:System.Threading.Timer" /> was constructed, in milliseconds. Specify <see cref="F:System.Threading.Timeout.Infinite" /> to prevent the timer from restarting. Specify zero (0) to restart the timer immediately. </param
-        >
+          />The amount of time to delay before the invoking the callback method specified when the <see cref="T:System.Threading.Timer" /> was constructed, in milliseconds. Specify <see cref="F:System.Threading.Timeout.Infinite" /> to prevent the timer from restarting. Specify zero (0) to restart the timer immediately.
+        </param>
         <param name="period">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The time interval between invocations of the callback method specified when the <see cref="T:System.Threading.Timer" /> was constructed, in milliseconds. Specify <see cref="F:System.Threading.Timeout.Infinite" /> to disable periodic signaling. </param
-        >
+          />The time interval between invocations of the callback method specified when the <see cref="T:System.Threading.Timer" /> was constructed, in milliseconds. Specify <see cref="F:System.Threading.Timeout.Infinite" /> to disable periodic signaling.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Dispose">
@@ -883,8 +882,8 @@ class App {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Threading.WaitHandle" /> to be signaled when the Timer has been disposed of. </param
-        >
+          />The <see cref="T:System.Threading.WaitHandle" /> to be signaled when the Timer has been disposed of.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

@@ -76,15 +76,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text of the menu command that is shown to the user. </param
-        >
+          />The text of the menu command that is shown to the user.
+        </param>
         <param name="handler">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The event handler that performs the actions of the verb. </param
-        >
+          />The event handler that performs the actions of the verb.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -124,22 +124,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text of the menu command that is shown to the user. </param
-        >
+          />The text of the menu command that is shown to the user.
+        </param>
         <param name="handler">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The event handler that performs the actions of the verb. </param
-        >
+          />The event handler that performs the actions of the verb.
+        </param>
         <param name="startCommandID">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting command ID for this verb. By default, the designer architecture sets aside a range of command IDs for verbs. You can override this by providing a custom command ID. </param
-        >
+          />The starting command ID for this verb. By default, the designer architecture sets aside a range of command IDs for verbs. You can override this by providing a custom command ID.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Description">

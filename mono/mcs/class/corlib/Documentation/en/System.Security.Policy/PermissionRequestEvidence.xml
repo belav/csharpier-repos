@@ -80,22 +80,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The minimum permissions the code requires to run. </param
-        >
+          />The minimum permissions the code requires to run.
+        </param>
         <param name="optional">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The permissions the code can use if they are granted, but that are not required. </param
-        >
+          />The permissions the code can use if they are granted, but that are not required.
+        </param>
         <param name="denied">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The permissions the code explicitly asks not to be granted. </param
-        >
+          />The permissions the code explicitly asks not to be granted.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Copy">

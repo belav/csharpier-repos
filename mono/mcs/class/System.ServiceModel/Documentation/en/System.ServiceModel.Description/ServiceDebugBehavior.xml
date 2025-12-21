@@ -27,12 +27,12 @@
         >Use the <see cref="T:System.ServiceModel.Description.ServiceDebugBehavior" /> properties from a configuration file or programmatically to enable the flow of managed exception information to the client for debugging purposes as well as the publication of HTML information files for users browsing the service in Web browsers.</para
       >
       <para
-        >Set the <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.IncludeExceptionDetailInFaults" /> property to true to instruct indigo2 to return managed exception information in SOAP faults to clients for debugging purposes. </para
-      >
+        >Set the <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.IncludeExceptionDetailInFaults" /> property to true to instruct indigo2 to return managed exception information in SOAP faults to clients for debugging purposes.
+      </para>
       <block subset="none" type="note">
         <para
-          >Returning managed exception information to clients can be a security risk because exception details expose information about the internal service implementation that could be used by unauthorized clients. In addition, although the <see cref="T:System.ServiceModel.Description.ServiceDebugBehavior" /> properties can also be set programmatically, it can be easy to forget to disable <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.IncludeExceptionDetailInFaults" /> when deploying. </para
-        >
+          >Returning managed exception information to clients can be a security risk because exception details expose information about the internal service implementation that could be used by unauthorized clients. In addition, although the <see cref="T:System.ServiceModel.Description.ServiceDebugBehavior" /> properties can also be set programmatically, it can be easy to forget to disable <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.IncludeExceptionDetailInFaults" /> when deploying.
+        </para>
       </block>
       <para>Because of the security issues involved, it is strongly recommended that:</para>
       <list type="bullet">
@@ -92,8 +92,8 @@
               <a href="6d7ea986-f232-49fe-842c-f934d9966889">&lt;serviceDebug&gt;</a>
             </format> element to the <format type="text/html">
               <a href="b90ca3bc-3c22-4174-b903-e3a39898bd27">&lt;behavior&gt;</a>
-            </format> element from step 2 and enable or disable the various properties appropriate to your scenario. </para
-          >
+            </format> element from step 2 and enable or disable the various properties appropriate to your scenario.
+          </para>
         </item>
       </list>
       <para>For a specific example, see the Example section.</para>
@@ -152,8 +152,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.ServiceDebugBehavior" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.ServiceDebugBehavior" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -205,8 +205,8 @@
           <list type="bullet">
             <item>
               <para
-                >The <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpsHelpPageUrl" /> property is an absolute address that supports the HTTP protocol scheme. </para
-              >
+                >The <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpsHelpPageUrl" /> property is an absolute address that supports the HTTP protocol scheme.
+              </para>
             </item>
             <item>
               <para>There is a base address for the service that supports the HTTP protocol scheme.</para>
@@ -305,16 +305,16 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Set the <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpsHelpPageEnabled" /> property to false to disable the publication of an HTML help page visible to HTML browsers. </para
-          >
+            >Set the <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpsHelpPageEnabled" /> property to false to disable the publication of an HTML help page visible to HTML browsers.
+          </para>
           <para
             >To ensure the HTML help page is published at the location controlled by the <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpsHelpPageUrl" /> property, you must set this property to true and then one of the following conditions must also be true:</para
           >
           <list type="bullet">
             <item>
               <para
-                >The <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpsHelpPageUrl" /> property is an absolute address that supports the HTTPS protocol scheme. </para
-              >
+                >The <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpsHelpPageUrl" /> property is an absolute address that supports the HTTPS protocol scheme.
+              </para>
             </item>
             <item>
               <para>There is a base address for the service that supports the HTTPS protocol scheme.</para>
@@ -365,8 +365,8 @@
             </item>
           </list>
           <para
-            >This property is applied only in the case that the <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpsHelpPageEnabled" /> property is true. </para
-          >
+            >This property is applied only in the case that the <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpsHelpPageEnabled" /> property is true.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -399,8 +399,8 @@
           >
           <block subset="none" type="note">
             <para
-              >Returning managed exception information to clients can be a security risk because exception details expose information about the internal service implementation that could be used by unauthorized clients. In addition, although the <see cref="T:System.ServiceModel.Description.ServiceDebugBehavior" /> properties can also be set programmatically, it can be easy to forget to disable <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.IncludeExceptionDetailInFaults" /> when deploying. </para
-            >
+              >Returning managed exception information to clients can be a security risk because exception details expose information about the internal service implementation that could be used by unauthorized clients. In addition, although the <see cref="T:System.ServiceModel.Description.ServiceDebugBehavior" /> properties can also be set programmatically, it can be easy to forget to disable <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.IncludeExceptionDetailInFaults" /> when deploying.
+            </para>
           </block>
           <para>Because of the security issues involved, it is strongly recommended that:</para>
           <list type="bullet">

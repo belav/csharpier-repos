@@ -43,18 +43,18 @@
         </item>
         <item>
           <para
-            >The <see cref="M:System.Web.UI.Adapters.PageAdapter.DeterminePostBackMode" /> method returns a collection of the postback variables if the page is in postback. It is called by the .NET Framework instead of the <see cref="M:System.Web.UI.Page.DeterminePostBackMode" /> method if a derived page adapter is present. </para
-          >
+            >The <see cref="M:System.Web.UI.Adapters.PageAdapter.DeterminePostBackMode" /> method returns a collection of the postback variables if the page is in postback. It is called by the .NET Framework instead of the <see cref="M:System.Web.UI.Page.DeterminePostBackMode" /> method if a derived page adapter is present.
+          </para>
         </item>
         <item>
           <para
-            >The <see cref="Overload:System.Web.UI.Adapters.PageAdapter.RenderBeginHyperlink" /> and <see cref="M:System.Web.UI.Adapters.PageAdapter.RenderEndHyperlink(System.Web.UI.HtmlTextWriter)" /> methods are used by control adapters to render hyperlinks if a derived page adapter is present. </para
-          >
+            >The <see cref="Overload:System.Web.UI.Adapters.PageAdapter.RenderBeginHyperlink" /> and <see cref="M:System.Web.UI.Adapters.PageAdapter.RenderEndHyperlink(System.Web.UI.HtmlTextWriter)" /> methods are used by control adapters to render hyperlinks if a derived page adapter is present.
+          </para>
         </item>
         <item>
           <para
-            >The <see cref="Overload:System.Web.UI.Adapters.PageAdapter.RenderPostBackEvent" /> method renders a hyperlink or postback client tag that can submit the form. </para
-          >
+            >The <see cref="Overload:System.Web.UI.Adapters.PageAdapter.RenderPostBackEvent" /> method renders a hyperlink or postback client tag that can submit the form.
+          </para>
         </item>
         <item>
           <para
@@ -63,8 +63,8 @@
         </item>
         <item>
           <para
-            >The <see cref="P:System.Web.UI.Adapters.PageAdapter.ClientState" /> property provides access to the combined control and view states of the <see cref="T:System.Web.UI.Page" /> object through the internal ClientState property of the <see cref="T:System.Web.UI.Page" /> class. </para
-          >
+            >The <see cref="P:System.Web.UI.Adapters.PageAdapter.ClientState" /> property provides access to the combined control and view states of the <see cref="T:System.Web.UI.Page" /> object through the internal ClientState property of the <see cref="T:System.Web.UI.Page" /> class.
+          </para>
         </item>
         <item>
           <para
@@ -94,8 +94,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.Adapters.PageAdapter" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Adapters.PageAdapter" /> class.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -199,8 +199,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.Adapters.PageAdapter.DeterminePostBackMode" /> method returns one of the following collections: </para
-          >
+            >The <see cref="M:System.Web.UI.Adapters.PageAdapter.DeterminePostBackMode" /> method returns one of the following collections:
+          </para>
           <list type="bullet">
             <item>
               <para>Form variables if the HTTP data transfer method is POST.</para>
@@ -217,8 +217,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Collections.Specialized.NameValueCollection" /> of the postback variables, if any; otherwise null. </para
-          >
+            >A <see cref="T:System.Collections.Specialized.NameValueCollection" /> of the postback variables, if any; otherwise null.
+          </para>
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -245,8 +245,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.Adapters.PageAdapter.GetPostBackFormReference(System.String)" /> method provides a DHTML reference to the postback form. The code fragment has the following format: </para
-          >
+            >The <see cref="M:System.Web.UI.Adapters.PageAdapter.GetPostBackFormReference(System.String)" /> method provides a DHTML reference to the postback form. The code fragment has the following format:
+          </para>
           <para>document.forms['<paramref name="formID" />']</para>
         </remarks>
         <summary>
@@ -298,8 +298,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.String" /> that is the name of the <see cref="T:System.Web.UI.WebControls.RadioButton" /> group to retrieve. </param
-        >
+          />A <see cref="T:System.String" /> that is the name of the <see cref="T:System.Web.UI.WebControls.RadioButton" /> group to retrieve.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -422,8 +422,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.UI.WebControls.RadioButton" /> to add to the collection. </param
-        >
+          />The <see cref="T:System.Web.UI.WebControls.RadioButton" /> to add to the collection.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -451,8 +451,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.Adapters.PageAdapter.RenderBeginHyperlink(System.Web.UI.HtmlTextWriter,System.String,System.Boolean,System.String)" /> method writes an opening hyperlink tag. When <paramref name="writer" /> is <see cref="T:System.Web.UI.HtmlTextWriter" />, this tag has the following format: </para
-          >
+            >The <see cref="M:System.Web.UI.Adapters.PageAdapter.RenderBeginHyperlink(System.Web.UI.HtmlTextWriter,System.String,System.Boolean,System.String)" /> method writes an opening hyperlink tag. When <paramref name="writer" /> is <see cref="T:System.Web.UI.HtmlTextWriter" />, this tag has the following format:
+          </para>
           <para>&lt;a href="<paramref name="targetUrl" />"&gt; </para>
         </remarks>
         <summary>
@@ -464,15 +464,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.String" /> value holding the target URL of the link. </param
-        >
+          />The <see cref="T:System.String" /> value holding the target URL of the link.
+        </param>
         <param name="encodeUrl">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to use <see cref="M:System.Web.HttpUtility.HtmlAttributeEncode(System.String)" /> to encode the stream output; otherwise, false. </param
-        >
+          />true to use <see cref="M:System.Web.HttpUtility.HtmlAttributeEncode(System.String)" /> to encode the stream output; otherwise, false.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -501,11 +501,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.Adapters.PageAdapter.RenderBeginHyperlink(System.Web.UI.HtmlTextWriter,System.String,System.Boolean,System.String,System.String)" /> method writes an opening hyperlink tag. When <paramref name="writer" /> is an <see cref="T:System.Web.UI.HtmlTextWriter" /> object, this tag has the following format: </para
-          >
+            >The <see cref="M:System.Web.UI.Adapters.PageAdapter.RenderBeginHyperlink(System.Web.UI.HtmlTextWriter,System.String,System.Boolean,System.String,System.String)" /> method writes an opening hyperlink tag. When <paramref name="writer" /> is an <see cref="T:System.Web.UI.HtmlTextWriter" /> object, this tag has the following format:
+          </para>
           <para
-            >&lt;a href="<paramref name="targetUrl" />" accessKey="<paramref name="accessKey" />"&gt; </para
-          >
+            >&lt;a href="<paramref name="targetUrl" />" accessKey="<paramref name="accessKey" />"&gt;
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -516,22 +516,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.String" /> value holding the target URL of the link. </param
-        >
+          />The <see cref="T:System.String" /> value holding the target URL of the link.
+        </param>
         <param name="encodeUrl">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to use <see cref="M:System.Web.HttpUtility.HtmlAttributeEncode(System.String)" /> to encode the stream output; otherwise, false. </param
-        >
+          />true to use <see cref="M:System.Web.HttpUtility.HtmlAttributeEncode(System.String)" /> to encode the stream output; otherwise, false.
+        </param>
         <param name="accessKey">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.String" /> value to assign to the accessKey attribute of the link to create. </param
-        >
+          />The <see cref="T:System.String" /> value to assign to the accessKey attribute of the link to create.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -555,8 +555,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.Adapters.PageAdapter.RenderEndHyperlink(System.Web.UI.HtmlTextWriter)" /> method writes a closing hyperlink tag. When the text writer is an <see cref="T:System.Web.UI.HtmlTextWriter" /> object, this tag has the following format: </para
-          >
+            >The <see cref="M:System.Web.UI.Adapters.PageAdapter.RenderEndHyperlink(System.Web.UI.HtmlTextWriter)" /> method writes a closing hyperlink tag. When the text writer is an <see cref="T:System.Web.UI.HtmlTextWriter" /> object, this tag has the following format:
+          </para>
           <para>&lt;/a&gt;</para>
         </remarks>
         <summary>
@@ -603,22 +603,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.String" /> value holding the postback event target name. </param
-        >
+          />The <see cref="T:System.String" /> value holding the postback event target name.
+        </param>
         <param name="argument">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.String" /> value holding the argument to pass to the postback target event. </param
-        >
+          />The <see cref="T:System.String" /> value holding the argument to pass to the postback target event.
+        </param>
         <param name="text">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.String" /> value of the text to display as the link. </param
-        >
+          />The <see cref="T:System.String" /> value of the text to display as the link.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -666,36 +666,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.String" /> value holding the postback event target name. </param
-        >
+          />The <see cref="T:System.String" /> value holding the postback event target name.
+        </param>
         <param name="argument">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.String" /> value holding the argument to pass to the postback target event. </param
-        >
+          />The <see cref="T:System.String" /> value holding the argument to pass to the postback target event.
+        </param>
         <param name="text">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.String" /> value of the text to display as the link. </param
-        >
+          />The <see cref="T:System.String" /> value of the text to display as the link.
+        </param>
         <param name="postUrl">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.String" /> value holding the URL target page of the postback. </param
-        >
+          />The <see cref="T:System.String" /> value holding the URL target page of the postback.
+        </param>
         <param name="accessKey">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.String" /> value used to assign to the accessKey attribute of the created link. </param
-        >
+          />The <see cref="T:System.String" /> value used to assign to the accessKey attribute of the created link.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -739,43 +739,43 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.String" /> value holding the postback event target name. </param
-        >
+          />The <see cref="T:System.String" /> value holding the postback event target name.
+        </param>
         <param name="argument">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.String" /> value holding the argument to pass to the postback target event. </param
-        >
+          />The <see cref="T:System.String" /> value holding the argument to pass to the postback target event.
+        </param>
         <param name="text">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.String" /> value of the text to display as the link. </param
-        >
+          />The <see cref="T:System.String" /> value of the text to display as the link.
+        </param>
         <param name="postUrl">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.String" /> value holding the URL target page of the postback. </param
-        >
+          />The <see cref="T:System.String" /> value holding the URL target page of the postback.
+        </param>
         <param name="accessKey">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.String" /> value to assign to the accessKey attribute of the created link. </param
-        >
+          />The <see cref="T:System.String" /> value to assign to the accessKey attribute of the created link.
+        </param>
         <param name="encode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to use &amp;amp; as the URL parameter separator; false to use &amp;. </param
-        >
+          />true to use &amp;amp; as the URL parameter separator; false to use &amp;.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

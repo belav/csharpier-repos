@@ -208,15 +208,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the page that defines the option. </param
-        >
+          />The name of the page that defines the option.
+        </param>
         <param name="valueName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the option property. </param
-        >
+          />The name of the option property.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetOptionValue">
@@ -394,18 +394,18 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the page that defines the option. </param
-        >
+          />The name of the page that defines the option.
+        </param>
         <param name="valueName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the option property. </param
-        >
+          />The name of the option property.
+        </param>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The new value. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The new value.
+        </param>
       </Docs>
     </Member>
   </Members>

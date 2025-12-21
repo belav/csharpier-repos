@@ -214,8 +214,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The exception that is the cause of the current exception. </param
-        >
+          />The exception that is the cause of the current exception.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -386,8 +386,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> to populate with data. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> to populate with data.
+        </param>
         <param name="streamingContext">
           <attribution
             license="cc4"
@@ -431,15 +431,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Runtime.Serialization.SerializationInfo" /> instance, which holds the serialized data for the <see cref="T:System.Net.Mail.SmtpFailedRecipientException" />. </param
-        >
+          />A <see cref="T:System.Runtime.Serialization.SerializationInfo" /> instance, which holds the serialized data for the <see cref="T:System.Net.Mail.SmtpFailedRecipientException" />.
+        </param>
         <param name="streamingContext">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Runtime.Serialization.StreamingContext" /> instance that contains the destination of the serialized stream that is associated with the new <see cref="T:System.Net.Mail.SmtpFailedRecipientException" />. </param
-        >
+          />A <see cref="T:System.Runtime.Serialization.StreamingContext" /> instance that contains the destination of the serialized stream that is associated with the new <see cref="T:System.Net.Mail.SmtpFailedRecipientException" />.
+        </param>
       </Docs>
     </Member>
   </Members>

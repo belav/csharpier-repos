@@ -70,8 +70,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.DesignerRegionMouseEventArgs" /> class with the specified region and location. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.DesignerRegionMouseEventArgs" /> class with the specified region and location.
+          </para>
         </summary>
         <param name="region">
           <attribution

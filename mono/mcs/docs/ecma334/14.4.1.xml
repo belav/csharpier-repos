@@ -6,8 +6,8 @@
         > For instance constructors, methods, and delegates, the arguments are specified as an <non_terminal
           where="14.4.1"
           >argument-list</non_terminal
-        >, as described below. </list_item
-      >
+        >, as described below.
+      </list_item>
       <list_item> For properties, the argument list is empty when invoking the get accessor, and consists of the expression specified as the right operand of the assignment operator when invoking the set accessor. </list_item>
       <list_item> For events, the argument list consists of the expression specified as the right operand of the += or -= operator. </list_item>
       <list_item> For indexers, the argument list consists of the expressions specified between the square brackets in the indexer access. When invoking the set accessor, the argument list additionally includes the expression specified as the right operand of the assignment operator. </list_item>
@@ -15,8 +15,8 @@
     </list>
   </paragraph>
   <paragraph
-    >The arguments of properties (<hyperlink>17.6</hyperlink>), events (<hyperlink>17.7</hyperlink>), indexers (<hyperlink>17.8</hyperlink>), and user-defined operators (<hyperlink>17.9</hyperlink>) are always passed as value parameters (<hyperlink>17.5.1.1</hyperlink>). Reference and output parameters are not supported for these categories of function members. </paragraph
-  >
+    >The arguments of properties (<hyperlink>17.6</hyperlink>), events (<hyperlink>17.7</hyperlink>), indexers (<hyperlink>17.8</hyperlink>), and user-defined operators (<hyperlink>17.9</hyperlink>) are always passed as value parameters (<hyperlink>17.5.1.1</hyperlink>). Reference and output parameters are not supported for these categories of function members.
+  </paragraph>
   <paragraph
     >The arguments of an instance constructor, method, or delegate invocation are specified as an argument-list: <grammar_production>
       <name>
@@ -49,41 +49,41 @@
       >argument-list</non_terminal
     > consists of one or more arguments, separated by commas. Each argument can take one of the following forms: <list>
       <list_item
-        > An expression, indicating that the argument is passed as a value parameter (<hyperlink>17.5.1.1</hyperlink>). </list_item
-      >
+        > An expression, indicating that the argument is passed as a value parameter (<hyperlink>17.5.1.1</hyperlink>).
+      </list_item>
       <list_item
         > The keyword ref followed by a <non_terminal where="12.4"
           >variable-reference</non_terminal
-        > (<hyperlink>12.3.3</hyperlink>), indicating that the argument is passed as a reference parameter (<hyperlink>17.5.1.2</hyperlink>). A variable must be definitely assigned (<hyperlink>12.3</hyperlink>) before it can be passed as a reference parameter. A volatile field (<hyperlink>17.4.3</hyperlink>) cannot be passed as a reference parameter. </list_item
-      >
+        > (<hyperlink>12.3.3</hyperlink>), indicating that the argument is passed as a reference parameter (<hyperlink>17.5.1.2</hyperlink>). A variable must be definitely assigned (<hyperlink>12.3</hyperlink>) before it can be passed as a reference parameter. A volatile field (<hyperlink>17.4.3</hyperlink>) cannot be passed as a reference parameter.
+      </list_item>
       <list_item
         > The keyword out followed by a <non_terminal where="12.4"
           >variable-reference</non_terminal
-        > (<hyperlink>12.3.3</hyperlink>), indicating that the argument is passed as an output parameter (<hyperlink>17.5.1.3</hyperlink>). A variable is considered definitely assigned (<hyperlink>12.3</hyperlink>) following a function member invocation in which the variable is passed as an output parameter. A volatile field (<hyperlink>17.4.3</hyperlink>) cannot be passed as an output parameter. </list_item
-      >
+        > (<hyperlink>12.3.3</hyperlink>), indicating that the argument is passed as an output parameter (<hyperlink>17.5.1.3</hyperlink>). A variable is considered definitely assigned (<hyperlink>12.3</hyperlink>) following a function member invocation in which the variable is passed as an output parameter. A volatile field (<hyperlink>17.4.3</hyperlink>) cannot be passed as an output parameter.
+      </list_item>
     </list>
   </paragraph>
   <paragraph
     >During the run-time processing of a function member invocation (<hyperlink>14.4.3</hyperlink>), the expressions or variable references of an argument list are evaluated in order, from left to right, as follows: <list>
       <list_item
-        > For a value parameter, the argument expression is evaluated and an implicit conversion (<hyperlink>13.1</hyperlink>) to the corresponding parameter type is performed. The resulting value becomes the initial value of the value parameter in the function member invocation. </list_item
-      >
+        > For a value parameter, the argument expression is evaluated and an implicit conversion (<hyperlink>13.1</hyperlink>) to the corresponding parameter type is performed. The resulting value becomes the initial value of the value parameter in the function member invocation.
+      </list_item>
       <list_item
         > For a reference or output parameter, the variable reference is evaluated and the resulting storage location becomes the storage location represented by the parameter in the function member invocation. If the variable reference given as a reference or output parameter is an array element of a <non_terminal
           where="11.2"
           >reference-type</non_terminal
-        >, a run-time check is performed to ensure that the element type of the array is identical to the type of the parameter. If this check fails, a System.ArrayTypeMismatchException is thrown. </list_item
-      >
+        >, a run-time check is performed to ensure that the element type of the array is identical to the type of the parameter. If this check fails, a System.ArrayTypeMismatchException is thrown.
+      </list_item>
     </list>
   </paragraph>
   <paragraph
     >Methods, indexers, and instance constructors may declare their right-most parameter to be a parameter array (<hyperlink>17.5.1.4</hyperlink>). Such function members are invoked either in their normal form or in their expanded form depending on which is applicable (<hyperlink>14.4.2.1</hyperlink>): <list>
       <list_item
-        > When a function member with a parameter array is invoked in its normal form, the argument given for the parameter array must be a single expression of a type that is implicitly convertible (<hyperlink>13.1</hyperlink>) to the parameter array type. In this case, the parameter array acts precisely like a value parameter. </list_item
-      >
+        > When a function member with a parameter array is invoked in its normal form, the argument given for the parameter array must be a single expression of a type that is implicitly convertible (<hyperlink>13.1</hyperlink>) to the parameter array type. In this case, the parameter array acts precisely like a value parameter.
+      </list_item>
       <list_item
-        > When a function member with a parameter array is invoked in its expanded form, the invocation must specify zero or more arguments for the parameter array, where each argument is an expression of a type that is implicitly convertible (<hyperlink>13.1</hyperlink>) to the element type of the parameter array. In this case, the invocation creates an instance of the parameter array type with a length corresponding to the number of arguments, initializes the elements of the array instance with the given argument values, and uses the newly created array instance as the actual argument. </list_item
-      >
+        > When a function member with a parameter array is invoked in its expanded form, the invocation must specify zero or more arguments for the parameter array, where each argument is an expression of a type that is implicitly convertible (<hyperlink>13.1</hyperlink>) to the element type of the parameter array. In this case, the invocation creates an instance of the parameter array type with a length corresponding to the number of arguments, initializes the elements of the array instance with the given argument values, and uses the newly created array instance as the actual argument.
+      </list_item>
     </list>
   </paragraph>
   <paragraph
@@ -148,6 +148,6 @@ F(10, 20, new object[] {30, 40});
 F(10, 20, new object[] {1, "hello", 3.0});  
 ]]>
       </code_example>end example]</example
-    > In particular, note that an empty array is created when there are zero arguments given for the parameter array. </paragraph
-  >
+    > In particular, note that an empty array is created when there are zero arguments given for the parameter array.
+  </paragraph>
 </clause>

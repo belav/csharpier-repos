@@ -56,8 +56,8 @@
           <list type="ordered">
             <item>
               <para
-                >If <see cref="F:System.Xml.Schema.XmlSchemaValidationFlags.AllowXmlAttributes" /> is set to true (default) and the instance document contains Xml attributes, the validation engine will use the default Xml namespace schema for validation. If Xml attributes used in the instance document are not found in the default schema, the document will not validate. </para
-              >
+                >If <see cref="F:System.Xml.Schema.XmlSchemaValidationFlags.AllowXmlAttributes" /> is set to true (default) and the instance document contains Xml attributes, the validation engine will use the default Xml namespace schema for validation. If Xml attributes used in the instance document are not found in the default schema, the document will not validate.
+              </para>
             </item>
             <item>
               <para

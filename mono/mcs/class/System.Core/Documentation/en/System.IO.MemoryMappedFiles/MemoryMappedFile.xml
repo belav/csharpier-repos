@@ -22,11 +22,11 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>A memory-mapped file maps the contents of a file to an application’s logical address space. Memory-mapped files enable programmers to work with extremely large files because memory can be managed concurrently, and they allow complete, random access to a file without the need for seeking. Memory-mapped files can also be shared across multiple processes.</para>
       <para
-        >The <see cref="Overload:System.IO.MemoryMappedFiles.MemoryMappedFile.CreateFromFile" /> methods create a memory-mapped file from a specified path or a <see cref="T:System.IO.FileStream" /> of an existing file on disk. Changes are automatically propagated to disk when the file is unmapped. </para
-      >
+        >The <see cref="Overload:System.IO.MemoryMappedFiles.MemoryMappedFile.CreateFromFile" /> methods create a memory-mapped file from a specified path or a <see cref="T:System.IO.FileStream" /> of an existing file on disk. Changes are automatically propagated to disk when the file is unmapped.
+      </para>
       <para
-        >The <see cref="Overload:System.IO.MemoryMappedFiles.MemoryMappedFile.CreateNew" /> methods create a memory-mapped file that is not mapped to an existing file on disk; and are suitable for creating shared memory for interprocess communication (IPC).  </para
-      >
+        >The <see cref="Overload:System.IO.MemoryMappedFiles.MemoryMappedFile.CreateNew" /> methods create a memory-mapped file that is not mapped to an existing file on disk; and are suitable for creating shared memory for interprocess communication (IPC).
+      </para>
       <para>A memory-mapped file is associated with a name. </para>
       <para>You can create multiple views of the memory-mapped file, including views of parts of the file. You can map the same part of a file to more than one address to create concurrent memory. For two views to remain concurrent, they have to be created from the same memory-mapped file. Creating two file mappings of the same file with two views does not provide concurrency.</para>
     </remarks>
@@ -180,8 +180,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A name to assign to the memory-mapped file. </param
-        >
+          />A name to assign to the memory-mapped file.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateFromFile">
@@ -241,8 +241,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A name to assign to the memory-mapped file. </param
-        >
+          />A name to assign to the memory-mapped file.
+        </param>
         <param name="capacity">
           <attribution
             license="cc4"
@@ -310,8 +310,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A name to assign to the memory-mapped file. </param
-        >
+          />A name to assign to the memory-mapped file.
+        </param>
         <param name="capacity">
           <attribution
             license="cc4"
@@ -539,8 +539,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the enumeration values that specifies the type of access allowed to the memory-mapped file. The default is <see cref="F:System.IO.MemoryMappedFiles.MemoryMappedFileAccess.ReadWrite" />. </param
-        >
+          />One of the enumeration values that specifies the type of access allowed to the memory-mapped file. The default is <see cref="F:System.IO.MemoryMappedFiles.MemoryMappedFileAccess.ReadWrite" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateNew">
@@ -607,8 +607,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the enumeration values that specifies the type of access allowed to the memory-mapped file. The default is <see cref="F:System.IO.MemoryMappedFiles.MemoryMappedFileAccess.ReadWrite" />. </param
-        >
+          />One of the enumeration values that specifies the type of access allowed to the memory-mapped file. The default is <see cref="F:System.IO.MemoryMappedFiles.MemoryMappedFileAccess.ReadWrite" />.
+        </param>
         <param name="options">
           <attribution
             license="cc4"
@@ -744,8 +744,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the enumeration values that specifies the type of access allowed to the memory-mapped file. The default is <see cref="F:System.IO.MemoryMappedFiles.MemoryMappedFileAccess.ReadWrite" />. </param
-        >
+          />One of the enumeration values that specifies the type of access allowed to the memory-mapped file. The default is <see cref="F:System.IO.MemoryMappedFiles.MemoryMappedFileAccess.ReadWrite" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateOrOpen">
@@ -812,8 +812,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the enumeration values that specifies the type of access allowed to the memory-mapped file. The default is <see cref="F:System.IO.MemoryMappedFiles.MemoryMappedFileAccess.ReadWrite" />. </param
-        >
+          />One of the enumeration values that specifies the type of access allowed to the memory-mapped file. The default is <see cref="F:System.IO.MemoryMappedFiles.MemoryMappedFileAccess.ReadWrite" />.
+        </param>
         <param name="options">
           <attribution
             license="cc4"
@@ -1150,8 +1150,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the <see cref="T:System.IO.MemoryMappedFiles.MemoryMappedFile" />. </para
-          >
+            >Releases all resources used by the <see cref="T:System.IO.MemoryMappedFiles.MemoryMappedFile" />.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -1176,16 +1176,16 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see cref="T:System.IO.MemoryMappedFiles.MemoryMappedFile" /> and optionally releases the managed resources. </para
-          >
+            >Releases the unmanaged resources used by the <see cref="T:System.IO.MemoryMappedFiles.MemoryMappedFile" /> and optionally releases the managed resources.
+          </para>
         </summary>
         <param name="disposing">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetAccessControl">

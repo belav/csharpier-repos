@@ -138,8 +138,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte offset to use as the starting index in <paramref name="binaryForm" />. </param
-        >
+          />The byte offset to use as the starting index in <paramref name="binaryForm" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -444,8 +444,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte offset to use as the starting index in <paramref name="binaryForm" />. </param
-        >
+          />The byte offset to use as the starting index in <paramref name="binaryForm" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -626,8 +626,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value that indicates whether the <see cref="T:System.Security.Principal.SecurityIdentifier" /> object matches the specified well known security identifier (SID) type. </para
-          >
+            >Returns a value that indicates whether the <see cref="T:System.Security.Principal.SecurityIdentifier" /> object matches the specified well known security identifier (SID) type.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -719,8 +719,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares two <see cref="T:System.Security.Principal.SecurityIdentifier" /> objects to determine whether they are equal. They are considered equal if they have the same canonical representation as the one returned by the <see cref="P:System.Security.Principal.SecurityIdentifier.Value" /> property or if they are both null. </para
-          >
+            >Compares two <see cref="T:System.Security.Principal.SecurityIdentifier" /> objects to determine whether they are equal. They are considered equal if they have the same canonical representation as the one returned by the <see cref="P:System.Security.Principal.SecurityIdentifier.Value" /> property or if they are both null.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -817,8 +817,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the security identifier (SID), in Security Descriptor Definition Language (SDDL) format, for the account represented by the <see cref="T:System.Security.Principal.SecurityIdentifier" /> object. An example of the SDDL format is S-1-5-9. </para
-          >
+            >Returns the security identifier (SID), in Security Descriptor Definition Language (SDDL) format, for the account represented by the <see cref="T:System.Security.Principal.SecurityIdentifier" /> object. An example of the SDDL format is S-1-5-9.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />

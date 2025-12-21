@@ -55,8 +55,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the request message is larger that the maximum message size allowed by the binding being used, a <see cref="T:System.ServiceModel.QuotaExceededException" /> is thrown. The maximum message size is set by the <see cref="P:System.ServiceModel.Channels.TransportBindingElement.MaxReceivedMessageSize" /> property. The default value is 65536 bytes. </para
-          >
+            >If the request message is larger that the maximum message size allowed by the binding being used, a <see cref="T:System.ServiceModel.QuotaExceededException" /> is thrown. The maximum message size is set by the <see cref="P:System.ServiceModel.Channels.TransportBindingElement.MaxReceivedMessageSize" /> property. The default value is 65536 bytes.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -65,8 +65,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.IAsyncResult" /> that references the asynchronous message transmission. </para
-          >
+            >The <see cref="T:System.IAsyncResult" /> that references the asynchronous message transmission.
+          </para>
         </returns>
         <param name="message">
           <attribution
@@ -117,8 +117,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the request message is larger that the maximum message size allowed by the binding being used, a <see cref="T:System.ServiceModel.QuotaExceededException" /> should be thrown. The maximum message size is set by the <see cref="P:System.ServiceModel.Channels.TransportBindingElement.MaxReceivedMessageSize" /> property. The default value is 65536 bytes. </para
-          >
+            >If the request message is larger that the maximum message size allowed by the binding being used, a <see cref="T:System.ServiceModel.QuotaExceededException" /> should be thrown. The maximum message size is set by the <see cref="P:System.ServiceModel.Channels.TransportBindingElement.MaxReceivedMessageSize" /> property. The default value is 65536 bytes.
+          </para>
           <para
             >If a <paramref name="timeout" /> is passed while calling the function then that value is used. If the <see cref="P:System.ServiceModel.Channels.Binding.SendTimeout" /> is set on the binding, then the value on the binding is used if no <paramref name="timeout" /> is specified while calling the function.</para
           >
@@ -133,8 +133,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.IAsyncResult" /> that references the asynchronous message transmission. </para
-          >
+            >The <see cref="T:System.IAsyncResult" /> that references the asynchronous message transmission.
+          </para>
         </returns>
         <param name="message">
           <attribution
@@ -189,8 +189,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the request message is larger that the maximum message size allowed by the binding being used, a <see cref="T:System.ServiceModel.QuotaExceededException" /> is thrown. The maximum message size is set by the <see cref="P:System.ServiceModel.Channels.TransportBindingElement.MaxReceivedMessageSize" /> property. The default value is 65536 bytes. </para
-          >
+            >If the request message is larger that the maximum message size allowed by the binding being used, a <see cref="T:System.ServiceModel.QuotaExceededException" /> is thrown. The maximum message size is set by the <see cref="P:System.ServiceModel.Channels.TransportBindingElement.MaxReceivedMessageSize" /> property. The default value is 65536 bytes.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -199,16 +199,16 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.Channels.Message" /> received in response to the request. </para
-          >
+            >The <see cref="T:System.ServiceModel.Channels.Message" /> received in response to the request.
+          </para>
         </returns>
         <param name="result">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IAsyncResult" /> returned by a call to the <see cref="Overload:System.ServiceModel.Channels.IInputChannel.BeginReceive" /> method. </param
-        >
+          />The <see cref="T:System.IAsyncResult" /> returned by a call to the <see cref="Overload:System.ServiceModel.Channels.IInputChannel.BeginReceive" /> method.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RemoteAddress">
@@ -264,20 +264,20 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implementations of <see cref="T:System.ServiceModel.Channels.IRequestChannel" /> ensure that the response message is correlated with the request message. </para
-          >
+            >Implementations of <see cref="T:System.ServiceModel.Channels.IRequestChannel" /> ensure that the response message is correlated with the request message.
+          </para>
           <para
-            >Generally, if an implementation of <see cref="T:System.ServiceModel.Channels.IRequestChannel" /> receives a message that is not correlated to an outstanding request, it is dropped. </para
-          >
+            >Generally, if an implementation of <see cref="T:System.ServiceModel.Channels.IRequestChannel" /> receives a message that is not correlated to an outstanding request, it is dropped.
+          </para>
           <para
-            >The <see cref="Overload:System.ServiceModel.Channels.IRequestChannel.Request" /> method can be called concurrently across multiple threads. </para
-          >
+            >The <see cref="Overload:System.ServiceModel.Channels.IRequestChannel.Request" /> method can be called concurrently across multiple threads.
+          </para>
           <para
-            >Passing the message into the request channel causes the message to be accessed. After you call <see cref="Overload:System.ServiceModel.Channels.IRequestChannel.Request" />, you can no longer inspect the message or call <see cref="M:System.ServiceModel.Channels.Message.Close" /> on the message. </para
-          >
+            >Passing the message into the request channel causes the message to be accessed. After you call <see cref="Overload:System.ServiceModel.Channels.IRequestChannel.Request" />, you can no longer inspect the message or call <see cref="M:System.ServiceModel.Channels.Message.Close" /> on the message.
+          </para>
           <para
-            >If the request message is larger that the maximum message size allowed by the binding being used, a <see cref="T:System.ServiceModel.QuotaExceededException" /> is thrown. The maximum message size is set by the <see cref="P:System.ServiceModel.Channels.TransportBindingElement.MaxReceivedMessageSize" /> property. The default value is 65536 bytes. </para
-          >
+            >If the request message is larger that the maximum message size allowed by the binding being used, a <see cref="T:System.ServiceModel.QuotaExceededException" /> is thrown. The maximum message size is set by the <see cref="P:System.ServiceModel.Channels.TransportBindingElement.MaxReceivedMessageSize" /> property. The default value is 65536 bytes.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -286,8 +286,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.Channels.Message" /> received in response to the request. </para
-          >
+            >The <see cref="T:System.ServiceModel.Channels.Message" /> received in response to the request.
+          </para>
         </returns>
         <param name="message">
           <attribution
@@ -322,20 +322,20 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implementations of <see cref="T:System.ServiceModel.Channels.IRequestChannel" /> ensure that the response message is correlated with the request message. </para
-          >
+            >Implementations of <see cref="T:System.ServiceModel.Channels.IRequestChannel" /> ensure that the response message is correlated with the request message.
+          </para>
           <para
-            >Generally, if an implementation of <see cref="T:System.ServiceModel.Channels.IRequestChannel" /> receives a message that is not correlated to an outstanding request, it is dropped. </para
-          >
+            >Generally, if an implementation of <see cref="T:System.ServiceModel.Channels.IRequestChannel" /> receives a message that is not correlated to an outstanding request, it is dropped.
+          </para>
           <para
-            >The <see cref="Overload:System.ServiceModel.Channels.IRequestChannel.Request" /> method can be called concurrently across multiple threads. </para
-          >
+            >The <see cref="Overload:System.ServiceModel.Channels.IRequestChannel.Request" /> method can be called concurrently across multiple threads.
+          </para>
           <para
-            >Passing the message into the request channel causes the message to be accessed. After you call <see cref="Overload:System.ServiceModel.Channels.IRequestChannel.Request" />, you can no longer inspect the message or call <see cref="M:System.ServiceModel.Channels.Message.Close" /> on the message. </para
-          >
+            >Passing the message into the request channel causes the message to be accessed. After you call <see cref="Overload:System.ServiceModel.Channels.IRequestChannel.Request" />, you can no longer inspect the message or call <see cref="M:System.ServiceModel.Channels.Message.Close" /> on the message.
+          </para>
           <para
-            >If the request message is larger that the maximum message size allowed by the binding being used, a <see cref="T:System.ServiceModel.QuotaExceededException" /> is thrown. The maximum message size is set by the <see cref="P:System.ServiceModel.Channels.TransportBindingElement.MaxReceivedMessageSize" /> property. The default value is 65536 bytes. </para
-          >
+            >If the request message is larger that the maximum message size allowed by the binding being used, a <see cref="T:System.ServiceModel.QuotaExceededException" /> is thrown. The maximum message size is set by the <see cref="P:System.ServiceModel.Channels.TransportBindingElement.MaxReceivedMessageSize" /> property. The default value is 65536 bytes.
+          </para>
           <para
             >If a <paramref name="timeout" /> is passed while calling the function then that value is used. If the <see cref="P:System.ServiceModel.Channels.Binding.SendTimeout" /> is set on the binding, then the value on the binding is used if no <paramref name="timeout" /> is specified while calling the function.</para
           >
@@ -350,8 +350,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.Channels.Message" /> received in response to the request. </para
-          >
+            >The <see cref="T:System.ServiceModel.Channels.Message" /> received in response to the request.
+          </para>
         </returns>
         <param name="message">
           <attribution

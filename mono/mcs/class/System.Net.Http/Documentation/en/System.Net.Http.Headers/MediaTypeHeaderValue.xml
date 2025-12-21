@@ -93,8 +93,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The source represented as a string to initialize the new instance. </param
-        >
+          />The source represented as a string to initialize the new instance.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CharSet">

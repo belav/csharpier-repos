@@ -71,8 +71,8 @@
   <paragraph>A hexadecimal escape sequence represents a single Unicode character, with the value formed by the hexadecimal number following &quot;\x&quot;. </paragraph>
   <paragraph>If the value represented by a character literal is greater than U+FFFF, a compile-time error occurs. </paragraph>
   <paragraph
-    >A Unicode character escape sequence (<hyperlink>9.4.1</hyperlink>) in a character literal must be in the range U+0000 to U+FFFF. </paragraph
-  >
+    >A Unicode character escape sequence (<hyperlink>9.4.1</hyperlink>) in a character literal must be in the range U+0000 to U+FFFF.
+  </paragraph>
   <paragraph
     >A simple escape sequence represents a Unicode character encoding, as described in the table below. <table_line>Escape </table_line>
     <table_line>sequence </table_line>
@@ -95,6 +95,6 @@
   <paragraph
     >The type of a <non_terminal where="9.4.4.4"
       >character-literal</non_terminal
-    > is <keyword>char</keyword>. </paragraph
-  >
+    > is <keyword>char</keyword>.
+  </paragraph>
 </clause>

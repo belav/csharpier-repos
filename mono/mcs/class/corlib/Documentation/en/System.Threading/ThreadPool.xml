@@ -43,16 +43,16 @@
       </block>
       <block subset="none" type="note">
         <para
-          >When the thread pool reuses a thread, it does not clear the data in thread local storage or in fields that are marked with the <see cref="T:System.ThreadStaticAttribute" /> attribute. Therefore, when a method examines thread local storage or fields that are marked with the <see cref="T:System.ThreadStaticAttribute" /> attribute, the values it finds might be left over from an earlier use of the thread pool thread. </para
-        >
+          >When the thread pool reuses a thread, it does not clear the data in thread local storage or in fields that are marked with the <see cref="T:System.ThreadStaticAttribute" /> attribute. Therefore, when a method examines thread local storage or fields that are marked with the <see cref="T:System.ThreadStaticAttribute" /> attribute, the values it finds might be left over from an earlier use of the thread pool thread.
+        </para>
       </block>
       <para
         >You can also queue work items that are not related to a wait operation to the thread pool. To request that a work item be handled by a thread in the thread pool, call the <see cref="M:System.Threading.ThreadPool.QueueUserWorkItem(System.Threading.WaitCallback,System.Object)" /> method. This method takes as a parameter a reference to the method or delegate that will be called by the thread selected from the thread pool. There is no way to cancel a work item after it has been queued.</para
       >
       <para>Timer-queue timers and registered wait operations also use the thread pool. Their callback functions are queued to the thread pool.</para>
       <para
-        >There is one thread pool per process. Beginning with the net_v40_long, the default size of the thread pool for a process depends on several factors, such as the size of the virtual address space. A process can call the <see cref="M:System.Threading.ThreadPool.GetMaxThreads(System.Int32@,System.Int32@)" /> method to determine the number of threads. The number of threads in the thread pool can be changed by using the <see cref="M:System.Threading.ThreadPool.SetMaxThreads(System.Int32,System.Int32)" /> method. Each thread uses the default stack size and runs at the default priority. </para
-      >
+        >There is one thread pool per process. Beginning with the net_v40_long, the default size of the thread pool for a process depends on several factors, such as the size of the virtual address space. A process can call the <see cref="M:System.Threading.ThreadPool.GetMaxThreads(System.Int32@,System.Int32@)" /> method to determine the number of threads. The number of threads in the thread pool can be changed by using the <see cref="M:System.Threading.ThreadPool.SetMaxThreads(System.Int32,System.Int32)" /> method. Each thread uses the default stack size and runs at the default priority.
+      </para>
       <block subset="none" type="note">
         <para
           >Unmanaged code that hosts the .NET Framework can change the size of the thread pool by using the <unmanagedCodeEntityReference>CorSetMaxThreads</unmanagedCodeEntityReference> function, defined in the mscoree.h file.</para
@@ -63,12 +63,12 @@
         <para>When demand is low, the actual number of thread pool threads can fall below the minimum values.</para>
       </block>
       <para
-        >You can use the <see cref="M:System.Threading.ThreadPool.GetMinThreads(System.Int32@,System.Int32@)" /> method to obtain these minimum values. </para
-      >
+        >You can use the <see cref="M:System.Threading.ThreadPool.GetMinThreads(System.Int32@,System.Int32@)" /> method to obtain these minimum values.
+      </para>
       <block subset="none" type="note">
         <para
-          >You can use the <see cref="M:System.Threading.ThreadPool.SetMinThreads(System.Int32,System.Int32)" /> method to increase the minimum number of threads. However, unnecessarily increasing these values can cause performance problems. If too many tasks start at the same time, all of them might appear to be slow. In most cases the thread pool will perform better with its own algorithm for allocating threads. </para
-        >
+          >You can use the <see cref="M:System.Threading.ThreadPool.SetMinThreads(System.Int32,System.Int32)" /> method to increase the minimum number of threads. However, unnecessarily increasing these values can cause performance problems. If too many tasks start at the same time, all of them might appear to be slow. In most cases the thread pool will perform better with its own algorithm for allocating threads.
+        </para>
       </block>
     </remarks>
     <summary>
@@ -117,8 +117,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.IntPtr" /> that holds the handle. The handle must have been opened for overlapped I/O on the unmanaged side. </param
-        >
+          />An <see cref="T:System.IntPtr" /> that holds the handle. The handle must have been opened for overlapped I/O on the unmanaged side.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="BindHandle">
@@ -146,8 +146,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="osHandle" /> parameter should be a <see cref="T:Microsoft.Win32.SafeHandles.SafeFileHandle" />, which derives from the abstract <see cref="T:System.Runtime.InteropServices.SafeHandle" /> class. </para
-          >
+            >The <paramref name="osHandle" /> parameter should be a <see cref="T:Microsoft.Win32.SafeHandles.SafeFileHandle" />, which derives from the abstract <see cref="T:System.Runtime.InteropServices.SafeHandle" /> class.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -309,8 +309,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Threading.WaitCallback" /> that represents the method to be executed. </param
-        >
+          />A <see cref="T:System.Threading.WaitCallback" /> that represents the method to be executed.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="QueueUserWorkItem">
@@ -366,15 +366,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Threading.WaitCallback" /> representing the method to execute. </param
-        >
+          />A <see cref="T:System.Threading.WaitCallback" /> representing the method to execute.
+        </param>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object containing data to be used by the method. </param
-        >
+          />An object containing data to be used by the method.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RegisterWaitForSingleObject">
@@ -409,8 +409,8 @@
             >When you are finished using the <see cref="T:System.Threading.RegisteredWaitHandle" /> that is returned by this method, call its <see cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" /> method to release references to the wait handle. We recommend that you always call the <see cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" /> method, even if you specify true for <paramref name="executeOnlyOnce" />. Garbage collection works more efficiently if you call the <see cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" /> method instead of depending on the registered wait handle's finalizer.</para
           >
           <para
-            >The <see cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.Int32,System.Boolean)" /> method queues the specified delegate to the thread pool. A worker thread will execute the delegate when one of the following occurs: </para
-          >
+            >The <see cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.Int32,System.Boolean)" /> method queues the specified delegate to the thread pool. A worker thread will execute the delegate when one of the following occurs:
+          </para>
           <list type="bullet">
             <item>
               <para>The specified object is in the signaled state.</para>
@@ -465,29 +465,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Threading.WaitOrTimerCallback" /> delegate to call when the <paramref name="waitObject" /> parameter is signaled. </param
-        >
+          />The <see cref="T:System.Threading.WaitOrTimerCallback" /> delegate to call when the <paramref name="waitObject" /> parameter is signaled.
+        </param>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that is passed to the delegate. </param
-        >
+          />The object that is passed to the delegate.
+        </param>
         <param name="millisecondsTimeOutInterval">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The time-out in milliseconds. If the <paramref name="millisecondsTimeOutInterval" /> parameter is 0 (zero), the function tests the object's state and returns immediately. If <paramref name="millisecondsTimeOutInterval" /> is -1, the function's time-out interval never elapses. </param
-        >
+          />The time-out in milliseconds. If the <paramref name="millisecondsTimeOutInterval" /> parameter is 0 (zero), the function tests the object's state and returns immediately. If <paramref name="millisecondsTimeOutInterval" /> is -1, the function's time-out interval never elapses.
+        </param>
         <param name="executeOnlyOnce">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to indicate that the thread will no longer wait on the <paramref name="waitObject" /> parameter after the delegate has been called; false to indicate that the timer is reset every time the wait operation completes until the wait is unregistered. </param
-        >
+          />true to indicate that the thread will no longer wait on the <paramref name="waitObject" /> parameter after the delegate has been called; false to indicate that the timer is reset every time the wait operation completes until the wait is unregistered.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RegisterWaitForSingleObject">
@@ -522,8 +522,8 @@
             >When you are finished using the <see cref="T:System.Threading.RegisteredWaitHandle" /> that is returned by this method, call its <see cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" /> method to release references to the wait handle. We recommend that you always call the <see cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" /> method, even if you specify true for <paramref name="executeOnlyOnce" />. Garbage collection works more efficiently if you call the <see cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" /> method instead of depending on the registered wait handle's finalizer.</para
           >
           <para
-            >The <see cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.Int64,System.Boolean)" /> method queues the specified delegate to the thread pool. A worker thread will execute the delegate when one of the following occurs: </para
-          >
+            >The <see cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.Int64,System.Boolean)" /> method queues the specified delegate to the thread pool. A worker thread will execute the delegate when one of the following occurs:
+          </para>
           <list type="bullet">
             <item>
               <para>The specified object is in the signaled state.</para>
@@ -578,29 +578,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Threading.WaitOrTimerCallback" /> delegate to call when the <paramref name="waitObject" /> parameter is signaled. </param
-        >
+          />The <see cref="T:System.Threading.WaitOrTimerCallback" /> delegate to call when the <paramref name="waitObject" /> parameter is signaled.
+        </param>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object passed to the delegate. </param
-        >
+          />The object passed to the delegate.
+        </param>
         <param name="millisecondsTimeOutInterval">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The time-out in milliseconds. If the <paramref name="millisecondsTimeOutInterval" /> parameter is 0 (zero), the function tests the object's state and returns immediately. If <paramref name="millisecondsTimeOutInterval" /> is -1, the function's time-out interval never elapses. </param
-        >
+          />The time-out in milliseconds. If the <paramref name="millisecondsTimeOutInterval" /> parameter is 0 (zero), the function tests the object's state and returns immediately. If <paramref name="millisecondsTimeOutInterval" /> is -1, the function's time-out interval never elapses.
+        </param>
         <param name="executeOnlyOnce">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to indicate that the thread will no longer wait on the <paramref name="waitObject" /> parameter after the delegate has been called; false to indicate that the timer is reset every time the wait operation completes until the wait is unregistered. </param
-        >
+          />true to indicate that the thread will no longer wait on the <paramref name="waitObject" /> parameter after the delegate has been called; false to indicate that the timer is reset every time the wait operation completes until the wait is unregistered.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RegisterWaitForSingleObject">
@@ -635,8 +635,8 @@
             >When you are finished using the <see cref="T:System.Threading.RegisteredWaitHandle" /> that is returned by this method, call its <see cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" /> method to release references to the wait handle. We recommend that you always call the <see cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" /> method, even if you specify true for <paramref name="executeOnlyOnce" />. Garbage collection works more efficiently if you call the <see cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" /> method instead of depending on the registered wait handle's finalizer.</para
           >
           <para
-            >The <see cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.TimeSpan,System.Boolean)" /> method queues the specified delegate to the thread pool. A worker thread will execute the delegate when one of the following occurs: </para
-          >
+            >The <see cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.TimeSpan,System.Boolean)" /> method queues the specified delegate to the thread pool. A worker thread will execute the delegate when one of the following occurs:
+          </para>
           <list type="bullet">
             <item>
               <para>The specified object is in the signaled state.</para>
@@ -691,29 +691,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Threading.WaitOrTimerCallback" /> delegate to call when the <paramref name="waitObject" /> parameter is signaled. </param
-        >
+          />The <see cref="T:System.Threading.WaitOrTimerCallback" /> delegate to call when the <paramref name="waitObject" /> parameter is signaled.
+        </param>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object passed to the delegate. </param
-        >
+          />The object passed to the delegate.
+        </param>
         <param name="timeout">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The time-out represented by a <see cref="T:System.TimeSpan" />. If <paramref name="timeout" /> is 0 (zero), the function tests the object's state and returns immediately. If <paramref name="timeout" /> is -1, the function's time-out interval never elapses. </param
-        >
+          />The time-out represented by a <see cref="T:System.TimeSpan" />. If <paramref name="timeout" /> is 0 (zero), the function tests the object's state and returns immediately. If <paramref name="timeout" /> is -1, the function's time-out interval never elapses.
+        </param>
         <param name="executeOnlyOnce">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to indicate that the thread will no longer wait on the <paramref name="waitObject" /> parameter after the delegate has been called; false to indicate that the timer is reset every time the wait operation completes until the wait is unregistered. </param
-        >
+          />true to indicate that the thread will no longer wait on the <paramref name="waitObject" /> parameter after the delegate has been called; false to indicate that the timer is reset every time the wait operation completes until the wait is unregistered.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RegisterWaitForSingleObject">
@@ -753,8 +753,8 @@
             >When you are finished using the <see cref="T:System.Threading.RegisteredWaitHandle" /> that is returned by this method, call its <see cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" /> method to release references to the wait handle. We recommend that you always call the <see cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" /> method, even if you specify true for <paramref name="executeOnlyOnce" />. Garbage collection works more efficiently if you call the <see cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" /> method instead of depending on the registered wait handle's finalizer.</para
           >
           <para
-            >The <see cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.Int64,System.Boolean)" /> method queues the specified delegate to the thread pool. A worker thread will execute the delegate when one of the following occurs: </para
-          >
+            >The <see cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.Int64,System.Boolean)" /> method queues the specified delegate to the thread pool. A worker thread will execute the delegate when one of the following occurs:
+          </para>
           <list type="bullet">
             <item>
               <para>The specified object is in the signaled state.</para>
@@ -809,29 +809,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Threading.WaitOrTimerCallback" /> delegate to call when the <paramref name="waitObject" /> parameter is signaled. </param
-        >
+          />The <see cref="T:System.Threading.WaitOrTimerCallback" /> delegate to call when the <paramref name="waitObject" /> parameter is signaled.
+        </param>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object passed to the delegate. </param
-        >
+          />The object passed to the delegate.
+        </param>
         <param name="millisecondsTimeOutInterval">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The time-out in milliseconds. If the <paramref name="millisecondsTimeOutInterval" /> parameter is 0 (zero), the function tests the object's state and returns immediately. If <paramref name="millisecondsTimeOutInterval" /> is -1, the function's time-out interval never elapses. </param
-        >
+          />The time-out in milliseconds. If the <paramref name="millisecondsTimeOutInterval" /> parameter is 0 (zero), the function tests the object's state and returns immediately. If <paramref name="millisecondsTimeOutInterval" /> is -1, the function's time-out interval never elapses.
+        </param>
         <param name="executeOnlyOnce">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to indicate that the thread will no longer wait on the <paramref name="waitObject" /> parameter after the delegate has been called; false to indicate that the timer is reset every time the wait operation completes until the wait is unregistered. </param
-        >
+          />true to indicate that the thread will no longer wait on the <paramref name="waitObject" /> parameter after the delegate has been called; false to indicate that the timer is reset every time the wait operation completes until the wait is unregistered.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetMaxThreads">
@@ -877,15 +877,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum number of worker threads in the thread pool. </param
-        >
+          />The maximum number of worker threads in the thread pool.
+        </param>
         <param name="completionPortThreads">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum number of asynchronous I/O threads in the thread pool. </param
-        >
+          />The maximum number of asynchronous I/O threads in the thread pool.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetMinThreads">
@@ -920,8 +920,8 @@
           >
           <block subset="none" type="note">
             <para
-              >You can use the <see cref="M:System.Threading.ThreadPool.SetMinThreads(System.Int32,System.Int32)" /> method to increase the minimum number of threads. However, unnecessarily increasing these values can cause performance problems. If too many tasks start at the same time, all of them might appear to be slow. In most cases, the thread pool will perform better with its own algorithm for allocating threads. Reducing the minimum to less than the number of processors can also hurt performance. </para
-            >
+              >You can use the <see cref="M:System.Threading.ThreadPool.SetMinThreads(System.Int32,System.Int32)" /> method to increase the minimum number of threads. However, unnecessarily increasing these values can cause performance problems. If too many tasks start at the same time, all of them might appear to be slow. In most cases, the thread pool will perform better with its own algorithm for allocating threads. Reducing the minimum to less than the number of processors can also hurt performance.
+            </para>
           </block>
         </remarks>
         <summary>
@@ -937,15 +937,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The minimum number of worker threads that the thread pool creates on demand. </param
-        >
+          />The minimum number of worker threads that the thread pool creates on demand.
+        </param>
         <param name="completionPortThreads">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The minimum number of asynchronous I/O threads that the thread pool creates on demand. </param
-        >
+          />The minimum number of asynchronous I/O threads that the thread pool creates on demand.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="UnsafeQueueNativeOverlapped">
@@ -1052,15 +1052,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Threading.WaitCallback" /> that represents the delegate to invoke when a thread in the thread pool picks up the work item. </param
-        >
+          />A <see cref="T:System.Threading.WaitCallback" /> that represents the delegate to invoke when a thread in the thread pool picks up the work item.
+        </param>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that is passed to the delegate when serviced from the thread pool. </param
-        >
+          />The object that is passed to the delegate when serviced from the thread pool.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="UnsafeRegisterWaitForSingleObject">
@@ -1130,29 +1130,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The delegate to call when the <paramref name="waitObject" /> parameter is signaled. </param
-        >
+          />The delegate to call when the <paramref name="waitObject" /> parameter is signaled.
+        </param>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that is passed to the delegate. </param
-        >
+          />The object that is passed to the delegate.
+        </param>
         <param name="millisecondsTimeOutInterval">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The time-out in milliseconds. If the <paramref name="millisecondsTimeOutInterval" /> parameter is 0 (zero), the function tests the object's state and returns immediately. If <paramref name="millisecondsTimeOutInterval" /> is -1, the function's time-out interval never elapses. </param
-        >
+          />The time-out in milliseconds. If the <paramref name="millisecondsTimeOutInterval" /> parameter is 0 (zero), the function tests the object's state and returns immediately. If <paramref name="millisecondsTimeOutInterval" /> is -1, the function's time-out interval never elapses.
+        </param>
         <param name="executeOnlyOnce">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to indicate that the thread will no longer wait on the <paramref name="waitObject" /> parameter after the delegate has been called; false to indicate that the timer is reset every time the wait operation completes until the wait is unregistered. </param
-        >
+          />true to indicate that the thread will no longer wait on the <paramref name="waitObject" /> parameter after the delegate has been called; false to indicate that the timer is reset every time the wait operation completes until the wait is unregistered.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="UnsafeRegisterWaitForSingleObject">
@@ -1222,29 +1222,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The delegate to call when the <paramref name="waitObject" /> parameter is signaled. </param
-        >
+          />The delegate to call when the <paramref name="waitObject" /> parameter is signaled.
+        </param>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that is passed to the delegate. </param
-        >
+          />The object that is passed to the delegate.
+        </param>
         <param name="millisecondsTimeOutInterval">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The time-out in milliseconds. If the <paramref name="millisecondsTimeOutInterval" /> parameter is 0 (zero), the function tests the object's state and returns immediately. If <paramref name="millisecondsTimeOutInterval" /> is -1, the function's time-out interval never elapses. </param
-        >
+          />The time-out in milliseconds. If the <paramref name="millisecondsTimeOutInterval" /> parameter is 0 (zero), the function tests the object's state and returns immediately. If <paramref name="millisecondsTimeOutInterval" /> is -1, the function's time-out interval never elapses.
+        </param>
         <param name="executeOnlyOnce">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to indicate that the thread will no longer wait on the <paramref name="waitObject" /> parameter after the delegate has been called; false to indicate that the timer is reset every time the wait operation completes until the wait is unregistered. </param
-        >
+          />true to indicate that the thread will no longer wait on the <paramref name="waitObject" /> parameter after the delegate has been called; false to indicate that the timer is reset every time the wait operation completes until the wait is unregistered.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="UnsafeRegisterWaitForSingleObject">
@@ -1314,29 +1314,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The delegate to call when the <paramref name="waitObject" /> parameter is signaled. </param
-        >
+          />The delegate to call when the <paramref name="waitObject" /> parameter is signaled.
+        </param>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that is passed to the delegate. </param
-        >
+          />The object that is passed to the delegate.
+        </param>
         <param name="timeout">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The time-out represented by a <see cref="T:System.TimeSpan" />. If <paramref name="timeout" /> is 0 (zero), the function tests the object's state and returns immediately. If <paramref name="timeout" /> is -1, the function's time-out interval never elapses. </param
-        >
+          />The time-out represented by a <see cref="T:System.TimeSpan" />. If <paramref name="timeout" /> is 0 (zero), the function tests the object's state and returns immediately. If <paramref name="timeout" /> is -1, the function's time-out interval never elapses.
+        </param>
         <param name="executeOnlyOnce">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to indicate that the thread will no longer wait on the <paramref name="waitObject" /> parameter after the delegate has been called; false to indicate that the timer is reset every time the wait operation completes until the wait is unregistered. </param
-        >
+          />true to indicate that the thread will no longer wait on the <paramref name="waitObject" /> parameter after the delegate has been called; false to indicate that the timer is reset every time the wait operation completes until the wait is unregistered.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="UnsafeRegisterWaitForSingleObject">
@@ -1411,29 +1411,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The delegate to call when the <paramref name="waitObject" /> parameter is signaled. </param
-        >
+          />The delegate to call when the <paramref name="waitObject" /> parameter is signaled.
+        </param>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that is passed to the delegate. </param
-        >
+          />The object that is passed to the delegate.
+        </param>
         <param name="millisecondsTimeOutInterval">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The time-out in milliseconds. If the <paramref name="millisecondsTimeOutInterval" /> parameter is 0 (zero), the function tests the object's state and returns immediately. If <paramref name="millisecondsTimeOutInterval" /> is -1, the function's time-out interval never elapses. </param
-        >
+          />The time-out in milliseconds. If the <paramref name="millisecondsTimeOutInterval" /> parameter is 0 (zero), the function tests the object's state and returns immediately. If <paramref name="millisecondsTimeOutInterval" /> is -1, the function's time-out interval never elapses.
+        </param>
         <param name="executeOnlyOnce">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to indicate that the thread will no longer wait on the <paramref name="waitObject" /> parameter after the delegate has been called; false to indicate that the timer is reset every time the wait operation completes until the wait is unregistered. </param
-        >
+          />true to indicate that the thread will no longer wait on the <paramref name="waitObject" /> parameter after the delegate has been called; false to indicate that the timer is reset every time the wait operation completes until the wait is unregistered.
+        </param>
       </Docs>
     </Member>
   </Members>

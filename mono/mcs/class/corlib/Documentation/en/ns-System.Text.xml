@@ -13,8 +13,8 @@
         >The encoding classes are primarily intended to convert between different encodings or code pages and a Unicode encoding. <see cref="P:System.Text.Encoding.Unicode" /> (UTF-16) encoding is used internally by the .NET Framework, and <see cref="P:System.Text.Encoding.UTF8" /> encoding is often used for storing character data to ensure portability across machines and cultures.</para
       >
       <para
-        >The classes derived from <see cref="T:System.Text.Encoding" /> enable you to choose a fallback strategy, which determines how characters that cannot be encoded into a sequence of bytes, or bytes that cannot be decoded into characters, are handled. You can choose one of the following: </para
-      >
+        >The classes derived from <see cref="T:System.Text.Encoding" /> enable you to choose a fallback strategy, which determines how characters that cannot be encoded into a sequence of bytes, or bytes that cannot be decoded into characters, are handled. You can choose one of the following:
+      </para>
       <list type="bullet">
         <item>
           <para

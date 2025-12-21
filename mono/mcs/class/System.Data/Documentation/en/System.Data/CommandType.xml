@@ -19,8 +19,8 @@
         >When the <see cref="T:System.Data.CommandType" /> property is set to <see cref="F:System.Data.CommandType.StoredProcedure" />, the <see cref="P:System.Data.IDbCommand.CommandText" /> property should be set to the name of the stored procedure to be accessed. The user may be required to use escape character syntax or include qualifying characters if any of the specified tables named contain any special characters. All rows and columns of the named table or tables will be returned when you call one of the Execute methods of a Command object.</para
       >
       <para
-        >When the <see cref="T:System.Data.CommandType" /> property is set to <see cref="F:System.Data.CommandType.TableDirect" />, the <see cref="P:System.Data.IDbCommand.CommandText" /> property should be set to the name of the table to be accessed. The user may be required to use escape character syntax or include qualifying characters if any of the tables named contain any special characters. All rows and columns of the named table will be returned when you call one of the Execute methods. </para
-      >
+        >When the <see cref="T:System.Data.CommandType" /> property is set to <see cref="F:System.Data.CommandType.TableDirect" />, the <see cref="P:System.Data.IDbCommand.CommandText" /> property should be set to the name of the table to be accessed. The user may be required to use escape character syntax or include qualifying characters if any of the tables named contain any special characters. All rows and columns of the named table will be returned when you call one of the Execute methods.
+      </para>
       <para>In order to access multiple tables, use a comma delimited list, without spaces or padding, containing the names of the tables to access. When the CommandText property names multiple tables, a join of the specified tables is returned.</para>
       <block subset="none" type="note">
         <para

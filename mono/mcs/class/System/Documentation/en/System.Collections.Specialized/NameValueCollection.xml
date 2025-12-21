@@ -254,8 +254,8 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentOutOfRangeException">
-          <paramref name="capacity" /> &lt; 0. </exception
-        >
+          <paramref name="capacity" /> &lt; 0.
+        </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -565,8 +565,8 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentOutOfRangeException">
-          <paramref name="capacity" /> &lt; 0. </exception
-        >
+          <paramref name="capacity" /> &lt; 0.
+        </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -1403,8 +1403,7 @@
           <paramref name="index" /> is outside the valid range of indexes for the collection.</exception
         >
         <exception cref="T:System.NotSupportedException"
-          >The property is being set and the current instance is read-only. </exception
-        >
+          >The property is being set and the current instance is read-only. </exception>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

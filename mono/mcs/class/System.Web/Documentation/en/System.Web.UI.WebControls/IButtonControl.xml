@@ -63,8 +63,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -94,8 +94,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -173,8 +173,8 @@
             >You can use the <see cref="P:System.Web.UI.WebControls.IButtonControl.PostBackUrl" /> property to perform a cross-page post. If the <see cref="P:System.Web.UI.WebControls.IButtonControl.PostBackUrl" /> property is set to the page that the button is currently on, a normal postback event cycle occurs.</para
           >
           <para
-            >A control that implements the <see cref="T:System.Web.UI.WebControls.IButtonControl" /> interface must implement the <see cref="P:System.Web.UI.WebControls.IButtonControl.PostBackUrl" /> property to indicate the URL of the Web page to post to from the current page when the button control is clicked. </para
-          >
+            >A control that implements the <see cref="T:System.Web.UI.WebControls.IButtonControl" /> interface must implement the <see cref="P:System.Web.UI.WebControls.IButtonControl.PostBackUrl" /> property to indicate the URL of the Web page to post to from the current page when the button control is clicked.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

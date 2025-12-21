@@ -111,15 +111,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The random seed to use for computing the mask. </param
-        >
+          />The random seed to use for computing the mask.
+        </param>
         <param name="cbReturn">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The length of the generated mask in bytes. </param
-        >
+          />The length of the generated mask in bytes.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="HashName">

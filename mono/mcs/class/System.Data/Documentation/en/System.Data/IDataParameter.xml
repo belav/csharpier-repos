@@ -18,8 +18,8 @@
           <a href="537D8A2C-D40B-4000-83EB-BC1FCC93F707"
             >[&lt;topic://cpconusingstoredprocedureswithcommand&gt;]</a
           >
-        </format>. </para
-      >
+        </format>.
+      </para>
       <para
         >An application does not create an instance of the <see cref="T:System.Data.IDataParameter" /> interface directly, but creates an instance of a class that inherits <see cref="T:System.Data.IDataParameter" />.</para
       >

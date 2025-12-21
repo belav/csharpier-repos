@@ -62,16 +62,16 @@
           <list type="bullet">
             <item>
               <para
-                >A default pipe direction of <see cref="F:System.IO.Pipes.PipeDirection.InOut" />. </para
-              >
+                >A default pipe direction of <see cref="F:System.IO.Pipes.PipeDirection.InOut" />.
+              </para>
             </item>
             <item>
               <para>The maximum number of server instances that share the same name set to 1. </para>
             </item>
             <item>
               <para
-                >A <see cref="T:System.IO.Pipes.PipeTransmissionMode" /> value of <see cref="F:System.IO.Pipes.PipeTransmissionMode.Byte" />. </para
-              >
+                >A <see cref="T:System.IO.Pipes.PipeTransmissionMode" /> value of <see cref="F:System.IO.Pipes.PipeTransmissionMode.Byte" />.
+              </para>
             </item>
             <item>
               <para
@@ -86,8 +86,8 @@
             </item>
             <item>
               <para
-                >A <see cref="T:System.IO.HandleInheritability" /> value of <see cref="F:System.IO.HandleInheritability.None" />. </para
-              >
+                >A <see cref="T:System.IO.HandleInheritability" /> value of <see cref="F:System.IO.HandleInheritability.None" />.
+              </para>
             </item>
             <item>
               <para
@@ -137,13 +137,13 @@
           <list type="bullet">
             <item>
               <para
-                >A <see cref="T:System.IO.Pipes.PipeTransmissionMode" /> value of <see cref="F:System.IO.Pipes.PipeTransmissionMode.Byte" />. </para
-              >
+                >A <see cref="T:System.IO.Pipes.PipeTransmissionMode" /> value of <see cref="F:System.IO.Pipes.PipeTransmissionMode.Byte" />.
+              </para>
             </item>
             <item>
               <para
-                >A <see cref="T:System.IO.Pipes.PipeOptions" /> value of <see cref="F:System.IO.Pipes.PipeOptions.None" />. </para
-              >
+                >A <see cref="T:System.IO.Pipes.PipeOptions" /> value of <see cref="F:System.IO.Pipes.PipeOptions.None" />.
+              </para>
             </item>
             <item>
               <para>Default input and output buffer sizes. </para>
@@ -153,8 +153,8 @@
             </item>
             <item>
               <para
-                >A <see cref="T:System.IO.HandleInheritability" /> value of <see cref="F:System.IO.HandleInheritability.None" />. </para
-              >
+                >A <see cref="T:System.IO.HandleInheritability" /> value of <see cref="F:System.IO.HandleInheritability.None" />.
+              </para>
             </item>
             <item>
               <para
@@ -215,13 +215,13 @@
             </item>
             <item>
               <para
-                >A default <see cref="T:System.IO.Pipes.PipeTransmissionMode" /> value of <see cref="F:System.IO.Pipes.PipeTransmissionMode.Byte" />. </para
-              >
+                >A default <see cref="T:System.IO.Pipes.PipeTransmissionMode" /> value of <see cref="F:System.IO.Pipes.PipeTransmissionMode.Byte" />.
+              </para>
             </item>
             <item>
               <para
-                >A <see cref="T:System.IO.Pipes.PipeOptions" /> value of <see cref="F:System.IO.Pipes.PipeOptions.None" />. </para
-              >
+                >A <see cref="T:System.IO.Pipes.PipeOptions" /> value of <see cref="F:System.IO.Pipes.PipeOptions.None" />.
+              </para>
             </item>
             <item>
               <para>Default input and output buffer sizes. </para>
@@ -231,8 +231,8 @@
             </item>
             <item>
               <para
-                >A <see cref="T:System.IO.HandleInheritability" /> value of <see cref="F:System.IO.HandleInheritability.None" />. </para
-              >
+                >A <see cref="T:System.IO.HandleInheritability" /> value of <see cref="F:System.IO.HandleInheritability.None" />.
+              </para>
             </item>
             <item>
               <para
@@ -355,8 +355,8 @@
           <list type="bullet">
             <item>
               <para
-                >A default <see cref="T:System.IO.Pipes.PipeOptions" /> value of <see cref="F:System.IO.Pipes.PipeOptions.None" />. </para
-              >
+                >A default <see cref="T:System.IO.Pipes.PipeOptions" /> value of <see cref="F:System.IO.Pipes.PipeOptions.None" />.
+              </para>
             </item>
             <item>
               <para>Default input and output buffer sizes. </para>
@@ -366,8 +366,8 @@
             </item>
             <item>
               <para
-                >A <see cref="T:System.IO.HandleInheritability" /> value of <see cref="F:System.IO.HandleInheritability.None" />. </para
-              >
+                >A <see cref="T:System.IO.HandleInheritability" /> value of <see cref="F:System.IO.HandleInheritability.None" />.
+              </para>
             </item>
             <item>
               <para
@@ -447,8 +447,8 @@
             </item>
             <item>
               <para
-                >A <see cref="T:System.IO.HandleInheritability" /> value of <see cref="F:System.IO.HandleInheritability.None" />. </para
-              >
+                >A <see cref="T:System.IO.HandleInheritability" /> value of <see cref="F:System.IO.HandleInheritability.None" />.
+              </para>
             </item>
             <item>
               <para
@@ -534,8 +534,8 @@
             </item>
             <item>
               <para
-                >A default <see cref="T:System.IO.HandleInheritability" /> value of <see cref="F:System.IO.HandleInheritability.None" />. </para
-              >
+                >A default <see cref="T:System.IO.HandleInheritability" /> value of <see cref="F:System.IO.HandleInheritability.None" />.
+              </para>
             </item>
             <item>
               <para
@@ -633,8 +633,8 @@
           <list type="bullet">
             <item>
               <para
-                >A default <see cref="T:System.IO.HandleInheritability" /> value of <see cref="F:System.IO.HandleInheritability.None" />. </para
-              >
+                >A default <see cref="T:System.IO.HandleInheritability" /> value of <see cref="F:System.IO.HandleInheritability.None" />.
+              </para>
             </item>
             <item>
               <para

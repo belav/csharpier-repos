@@ -33,15 +33,15 @@
         >This is a simple implementation of <see cref="T:System.Collections.IDictionary" /> using a singly linked list. It is smaller and faster than a <see cref="T:System.Collections.Hashtable" /> if the number of elements is 10 or less. This should not be used if performance is important for large numbers of elements.</para
       >
       <para
-        >Items in a <see cref="T:System.Collections.Specialized.ListDictionary" /> are not in any guaranteed order; code should not depend on the current order. The <see cref="T:System.Collections.Specialized.ListDictionary" /> is implemented for fast keyed retrieval; the actual internal order of items is implementation-dependent and could change in future versions of the product. </para
-      >
+        >Items in a <see cref="T:System.Collections.Specialized.ListDictionary" /> are not in any guaranteed order; code should not depend on the current order. The <see cref="T:System.Collections.Specialized.ListDictionary" /> is implemented for fast keyed retrieval; the actual internal order of items is implementation-dependent and could change in future versions of the product.
+      </para>
       <para
         >Members, such as <see cref="P:System.Collections.Specialized.ListDictionary.Item(System.Object)" />, <see cref="M:System.Collections.Specialized.ListDictionary.Add(System.Object,System.Object)" />, <see cref="M:System.Collections.Specialized.ListDictionary.Remove(System.Object)" />, and <see cref="M:System.Collections.Specialized.ListDictionary.Contains(System.Object)" /> are O(<paramref name="n" />) operations, where <paramref name="n" /> is <see cref="P:System.Collections.Specialized.ListDictionary.Count" />.</para
       >
       <para>A key cannot be null, but a value can.</para>
       <para
-        >The foreach statement of the C# language (for each in Visual Basic) requires the type of each element in the collection. Since each element of the <see cref="T:System.Collections.Specialized.ListDictionary" /> is a key/value pair, the element type is not the type of the key or the type of the value. Instead, the element type is <see cref="T:System.Collections.DictionaryEntry" />. For example: </para
-      >
+        >The foreach statement of the C# language (for each in Visual Basic) requires the type of each element in the collection. Since each element of the <see cref="T:System.Collections.Specialized.ListDictionary" /> is a key/value pair, the element type is not the type of the key or the type of the value. Instead, the element type is <see cref="T:System.Collections.DictionaryEntry" />. For example:
+      </para>
       <para>code reference: System.Collections.Specialized.ListDictionary2#3</para>
       <para>The foreach statement is a wrapper around the enumerator, which only allows reading from, not writing to, the collection.</para>
     </remarks>
@@ -165,15 +165,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key of the entry to add. </param
-        >
+          />The key of the entry to add.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value of the entry to add. The value can be null. </param
-        >
+          />The value of the entry to add. The value can be null.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Clear">
@@ -253,8 +253,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key to locate in the <see cref="T:System.Collections.Specialized.ListDictionary" />. </param
-        >
+          />The key to locate in the <see cref="T:System.Collections.Specialized.ListDictionary" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CopyTo">
@@ -303,15 +303,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The one-dimensional <see cref="T:System.Array" /> that is the destination of the <see cref="T:System.Collections.DictionaryEntry" /> objects copied from <see cref="T:System.Collections.Specialized.ListDictionary" />. The <see cref="T:System.Array" /> must have zero-based indexing. </param
-        >
+          />The one-dimensional <see cref="T:System.Array" /> that is the destination of the <see cref="T:System.Collections.DictionaryEntry" /> objects copied from <see cref="T:System.Collections.Specialized.ListDictionary" />. The <see cref="T:System.Array" /> must have zero-based indexing.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index in <paramref name="array" /> at which copying begins. </param
-        >
+          />The zero-based index in <paramref name="array" /> at which copying begins.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Count">
@@ -581,8 +581,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key of the entry to remove. </param
-        >
+          />The key of the entry to remove.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SyncRoot">

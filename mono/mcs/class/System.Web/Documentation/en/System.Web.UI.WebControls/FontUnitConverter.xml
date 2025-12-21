@@ -24,15 +24,15 @@
       >
       <block subset="none" type="note">
         <para
-          >You should never access a type converter directly. Instead, call the appropriate converter by using <see cref="T:System.ComponentModel.TypeDescriptor" />. For more information, see the examples in the <see cref="T:System.ComponentModel.TypeConverter" /> base class. </para
-        >
+          >You should never access a type converter directly. Instead, call the appropriate converter by using <see cref="T:System.ComponentModel.TypeDescriptor" />. For more information, see the examples in the <see cref="T:System.ComponentModel.TypeConverter" /> base class.
+        </para>
       </block>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Converts a <see cref="T:System.Web.UI.WebControls.FontUnit" /> to a string. It also converts a string to a <see cref="T:System.Web.UI.WebControls.FontUnit" />. </para
-      >
+        >Converts a <see cref="T:System.Web.UI.WebControls.FontUnit" /> to a string. It also converts a string to a <see cref="T:System.Web.UI.WebControls.FontUnit" />.
+      </para>
     </summary>
   </Docs>
   <Members>
@@ -104,15 +104,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> implemented object that provides information about the context of a type converter. </param
-        >
+          />A <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> implemented object that provides information about the context of a type converter.
+        </param>
         <param name="sourceType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> that represents the data type to check. </param
-        >
+          />A <see cref="T:System.Type" /> that represents the data type to check.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -217,22 +217,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> implemented object that provides information about the context of a type converter. </param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> implemented object that provides information about the context of a type converter.
+        </param>
         <param name="culture">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Globalization.CultureInfo" /> that specifies the culture to represent the <see cref="T:System.Web.UI.WebControls.FontUnit" />, when it is expressed in points. </param
-        >
+          />A <see cref="T:System.Globalization.CultureInfo" /> that specifies the culture to represent the <see cref="T:System.Web.UI.WebControls.FontUnit" />, when it is expressed in points.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to convert to a <see cref="T:System.Web.UI.WebControls.FontUnit" />. </param
-        >
+          />The object to convert to a <see cref="T:System.Web.UI.WebControls.FontUnit" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -286,29 +286,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> implemented object that provides information about the context of a type converter. </param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> implemented object that provides information about the context of a type converter.
+        </param>
         <param name="culture">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Globalization.CultureInfo" /> that specifies the culture to represent the <see cref="T:System.Web.UI.WebControls.FontUnit" />, when it is expressed in points. </param
-        >
+          />A <see cref="T:System.Globalization.CultureInfo" /> that specifies the culture to represent the <see cref="T:System.Web.UI.WebControls.FontUnit" />, when it is expressed in points.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Object" /> that represents the <see cref="T:System.Web.UI.WebControls.FontUnit" /> to convert. </param
-        >
+          />A <see cref="T:System.Object" /> that represents the <see cref="T:System.Web.UI.WebControls.FontUnit" /> to convert.
+        </param>
         <param name="destinationType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> that represents the data type to convert to. </param
-        >
+          />A <see cref="T:System.Type" /> that represents the data type to convert to.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -351,8 +351,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides information about the context of a type converter. </param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides information about the context of a type converter.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -393,8 +393,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides information about the context of a type converter. </param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides information about the context of a type converter.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -435,8 +435,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides information about the context of a type converter. </param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides information about the context of a type converter.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

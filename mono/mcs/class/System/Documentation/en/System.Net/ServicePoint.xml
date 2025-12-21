@@ -120,8 +120,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Some load balancing techniques require a client to use a specific local IP address and port number, rather than <see cref="F:System.Net.IPAddress.Any" /> (or <see cref="F:System.Net.IPAddress.IPv6Any" /> for Internet Protocol Version 6) and an ephemeral port. Your <see cref="P:System.Net.ServicePoint.BindIPEndPointDelegate" /> can satisfy this requirement. </para
-          >
+            >Some load balancing techniques require a client to use a specific local IP address and port number, rather than <see cref="F:System.Net.IPAddress.Any" /> (or <see cref="F:System.Net.IPAddress.IPv6Any" /> for Internet Protocol Version 6) and an ephemeral port. Your <see cref="P:System.Net.ServicePoint.BindIPEndPointDelegate" /> can satisfy this requirement.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -234,8 +234,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the connection group that contains the connections to close and remove from this service point. </param
-        >
+          />The name of the connection group that contains the connections to close and remove from this service point.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ConnectionLeaseTimeout">
@@ -262,8 +262,8 @@
             >You can use this property to ensure that a <see cref="T:System.Net.ServicePoint" /> object's active connections do not remain open indefinitely. This property is intended for scenarios where connections should be dropped and reestablished periodically, such as load balancing scenarios.</para
           >
           <para
-            >By default, when <see cref="P:System.Net.FtpWebRequest.KeepAlive" /> is true for a request, the <see cref="P:System.Net.ServicePoint.MaxIdleTime" /> property sets the time-out for closing <see cref="T:System.Net.ServicePoint" /> connections due to inactivity. If the <see cref="T:System.Net.ServicePoint" /> has active connections, <see cref="P:System.Net.ServicePoint.MaxIdleTime" /> has no effect and the connections remain open indefinitely. </para
-          >
+            >By default, when <see cref="P:System.Net.FtpWebRequest.KeepAlive" /> is true for a request, the <see cref="P:System.Net.ServicePoint.MaxIdleTime" /> property sets the time-out for closing <see cref="T:System.Net.ServicePoint" /> connections due to inactivity. If the <see cref="T:System.Net.ServicePoint" /> has active connections, <see cref="P:System.Net.ServicePoint.MaxIdleTime" /> has no effect and the connections remain open indefinitely.
+          </para>
           <para
             >When the <see cref="P:System.Net.ServicePoint.ConnectionLeaseTimeout" /> property is set to a value other than -1, and after the specified time elapses, an active <see cref="T:System.Net.ServicePoint" /> connection is closed after servicing a request by setting <see cref="P:System.Net.FtpWebRequest.KeepAlive" /> to false in that request.</para
           >
@@ -304,8 +304,7 @@
           >
         </value>
         <exception cref="T:System.ArgumentOutOfRangeException"
-          >The value specified for a set operation is less than or equal to zero. </exception
-        >
+          >The value specified for a set operation is less than or equal to zero. </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -350,8 +349,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see cref="T:System.Net.ServicePoint" /> object was constructed with a <see cref="T:System.Uri" /> object (the <see cref="M:System.Net.ServicePointManager.FindServicePoint(System.Uri)" /> or <see cref="M:System.Net.ServicePointManager.FindServicePoint(System.Uri,System.Net.IWebProxy)" /> methods, for example), then the <see cref="P:System.Net.ServicePoint.ConnectionName" /> property represents the <see cref="P:System.Uri.Scheme" /> property of the <see cref="T:System.Uri" /> object used. </para
-          >
+            >If the <see cref="T:System.Net.ServicePoint" /> object was constructed with a <see cref="T:System.Uri" /> object (the <see cref="M:System.Net.ServicePointManager.FindServicePoint(System.Uri)" /> or <see cref="M:System.Net.ServicePointManager.FindServicePoint(System.Uri,System.Net.IWebProxy)" /> methods, for example), then the <see cref="P:System.Net.ServicePoint.ConnectionName" /> property represents the <see cref="P:System.Uri.Scheme" /> property of the <see cref="T:System.Uri" /> object used.
+          </para>
           <para
             >If the <see cref="T:System.Net.ServicePoint" /> object was constructed from a network host and port, the <see cref="P:System.Net.ServicePoint.ConnectionName" /> property contains a string that represents the host and the network port. If the <see cref="P:System.Net.ServicePoint.ConnectionName" /> property is set when constructed from a host and port, only <see cref="T:System.Net.WebRequest" /> objects with the same <see cref="P:System.Net.WebRequest.ConnectionGroupName" /> value can use this <see cref="T:System.Net.ServicePoint" /> object.</para
           >
@@ -384,8 +383,8 @@
         <value>
  A <see cref="T:System.Int32" /> containing the number of connections held by
  the current instance.
-</value
-        >
+
+        </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -656,8 +655,8 @@ and subsequently freed.</para
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>An application can request that a TCP/IP provider enable the use of keep-alive packets on a TCP connection. The default is that the use of keep-alive packets on a TCP connection is disabled. </para>
           <para
-            >The default settings when a TCP socket is initialized sets the keep-alive timeout to 2 hours and the keep-alive interval to 1 second. The <paramref name="keepAliveTime" /> parameter specifies the timeout, in milliseconds, with no activity until the first keep-alive packet is sent. The <paramref name="keepAliveInterval" /> parameter specifies the interval, in milliseconds, between when successive keep-alive packets are sent if no acknowledgement is received. The number of keep-alive probes cannot be changed and is set to 10. </para
-          >
+            >The default settings when a TCP socket is initialized sets the keep-alive timeout to 2 hours and the keep-alive interval to 1 second. The <paramref name="keepAliveTime" /> parameter specifies the timeout, in milliseconds, with no activity until the first keep-alive packet is sent. The <paramref name="keepAliveInterval" /> parameter specifies the interval, in milliseconds, between when successive keep-alive packets are sent if no acknowledgement is received. The number of keep-alive probes cannot be changed and is set to 10.
+          </para>
           <para
             >If a TCP connection is dropped as the result of keep-alives, a <see cref="T:System.Net.Sockets.SocketError" /> of <see cref="F:System.Net.Sockets.SocketError.NetworkReset" /> is returned to any calls in progress on the socket, and any subsequent calls will fail with a <see cref="T:System.Net.Sockets.SocketError" /> of <see cref="F:System.Net.Sockets.SocketError.NotConnected" />.</para
           >
@@ -671,15 +670,15 @@ and subsequently freed.</para
             license="cc4"
             from="Microsoft"
             modified="false"
-          />If set to true, then the TCP keep-alive option on a TCP connection will be enabled using the specified <paramref name="keepAliveTime " />and <paramref name="keepAliveInterval" /> values. </param
-        >
+          />If set to true, then the TCP keep-alive option on a TCP connection will be enabled using the specified <paramref name="keepAliveTime " />and <paramref name="keepAliveInterval" /> values.
+        </param>
         <param name="keepAliveTime">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Specifies the timeout, in milliseconds, with no activity until the first keep-alive packet is sent. </param
-        >
+          />Specifies the timeout, in milliseconds, with no activity until the first keep-alive packet is sent.
+        </param>
         <param name="keepAliveInterval">
           <attribution
             license="cc4"

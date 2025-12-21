@@ -91,8 +91,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Diagnostics.CounterCreationData" /> instances with which to initialize this <see cref="T:System.Diagnostics.CounterCreationDataCollection" />. </param
-        >
+          />An array of <see cref="T:System.Diagnostics.CounterCreationData" /> instances with which to initialize this <see cref="T:System.Diagnostics.CounterCreationDataCollection" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -127,8 +127,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Diagnostics.CounterCreationDataCollection" /> that holds <see cref="T:System.Diagnostics.CounterCreationData" /> instances with which to initialize this <see cref="T:System.Diagnostics.CounterCreationDataCollection" />. </param
-        >
+          />A <see cref="T:System.Diagnostics.CounterCreationDataCollection" /> that holds <see cref="T:System.Diagnostics.CounterCreationData" /> instances with which to initialize this <see cref="T:System.Diagnostics.CounterCreationDataCollection" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Add">
@@ -171,8 +171,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Diagnostics.CounterCreationData" /> object to append to the existing collection. </param
-        >
+          />A <see cref="T:System.Diagnostics.CounterCreationData" /> object to append to the existing collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddRange">
@@ -209,8 +209,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Diagnostics.CounterCreationData" /> instances to append to the existing collection. </param
-        >
+          />An array of <see cref="T:System.Diagnostics.CounterCreationData" /> instances to append to the existing collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddRange">
@@ -247,8 +247,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A collection of <see cref="T:System.Diagnostics.CounterCreationData" /> instances to append to the existing collection. </param
-        >
+          />A collection of <see cref="T:System.Diagnostics.CounterCreationData" /> instances to append to the existing collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Contains">
@@ -291,8 +291,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Diagnostics.CounterCreationData" /> object to find in the collection. </param
-        >
+          />The <see cref="T:System.Diagnostics.CounterCreationData" /> object to find in the collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CopyTo">
@@ -330,15 +330,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Diagnostics.CounterCreationData" /> instances to add to the collection. </param
-        >
+          />An array of <see cref="T:System.Diagnostics.CounterCreationData" /> instances to add to the collection.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The location at which to add the new instances. </param
-        >
+          />The location at which to add the new instances.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IndexOf">
@@ -381,8 +381,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Diagnostics.CounterCreationData" /> object to locate in the collection. </param
-        >
+          />The <see cref="T:System.Diagnostics.CounterCreationData" /> object to locate in the collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Insert">
@@ -420,15 +420,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index of the location at which the <see cref="T:System.Diagnostics.CounterCreationData" /> is to be inserted. </param
-        >
+          />The zero-based index of the location at which the <see cref="T:System.Diagnostics.CounterCreationData" /> is to be inserted.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Diagnostics.CounterCreationData" /> to insert into the collection. </param
-        >
+          />The <see cref="T:System.Diagnostics.CounterCreationData" /> to insert into the collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Item">
@@ -555,8 +555,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Diagnostics.CounterCreationData" /> to remove from the collection. </param
-        >
+          />The <see cref="T:System.Diagnostics.CounterCreationData" /> to remove from the collection.
+        </param>
       </Docs>
     </Member>
   </Members>

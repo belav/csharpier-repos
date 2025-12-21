@@ -39,16 +39,16 @@
         >
       </block>
       <para
-        >Use the <see cref="Overload:System.Web.UI.ClientScriptManager.GetPostBackEventReference" /> method and the <see cref="M:System.Web.UI.ClientScriptManager.GetPostBackClientHyperlink(System.Web.UI.Control,System.String)" /> method to define a client postback event. These methods enable client script functions, when invoked, to cause the server to post back to the page. A client postback event is different from a client callback in that the Web page completes a normal life cycle to process the client postback event. </para
-      >
+        >Use the <see cref="Overload:System.Web.UI.ClientScriptManager.GetPostBackEventReference" /> method and the <see cref="M:System.Web.UI.ClientScriptManager.GetPostBackClientHyperlink(System.Web.UI.Control,System.String)" /> method to define a client postback event. These methods enable client script functions, when invoked, to cause the server to post back to the page. A client postback event is different from a client callback in that the Web page completes a normal life cycle to process the client postback event.
+      </para>
       <block subset="none" type="note">
         <para
           >If you are using a <see cref="T:System.Web.UI.WebControls.Button" /> control and the <see cref="P:System.Web.UI.WebControls.Button.UseSubmitBehavior" /> property is set to false, then you can use the <see cref="Overload:System.Web.UI.ClientScriptManager.GetPostBackEventReference" /> method to return the client postback event for the <see cref="T:System.Web.UI.WebControls.Button" /> control.</para
         >
       </block>
       <para
-        >The <see cref="P:System.Web.UI.WebControls.Button.OnClientClick" /> property of the <see cref="T:System.Web.UI.WebControls.Button" /> control, <see cref="T:System.Web.UI.WebControls.ImageButton" /> control, and <see cref="T:System.Web.UI.WebControls.LinkButton" /> control can be used to run client script. </para
-      >
+        >The <see cref="P:System.Web.UI.WebControls.Button.OnClientClick" /> property of the <see cref="T:System.Web.UI.WebControls.Button" /> control, <see cref="T:System.Web.UI.WebControls.ImageButton" /> control, and <see cref="T:System.Web.UI.WebControls.LinkButton" /> control can be used to run client script.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -80,8 +80,8 @@
               <a href="dfaaa7d4-e1f2-4322-b2f5-796e0419f185"
                 >Client Callbacks Without Postbacks in ASP.NET Pages</a
               >
-            </format>. </para
-          >
+            </format>.
+          </para>
           <block subset="none" type="note">
             <para
               >When the browser is Microsoft Internet Explorer (version 5.0 or later), the script callback mechanism is implemented through the Microsoft.XmlHttp COM object and requires the browser to be set to run ActiveX controls. For other browsers, an XMLHttpRequest using the browser's local Document Object Model (DOM) is used. To check whether a browser supports client callbacks, use the <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.SupportsCallback" /> property. To check whether a browser supports XML over HTTP, use the <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.SupportsXmlHttp" /> property. Both properties are accessible through the <see cref="P:System.Web.HttpRequest.Browser" /> property of the intrinsic ASP.NET <see cref="P:System.Web.HttpContext.Request" /> object.</para
@@ -116,29 +116,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The server <see cref="T:System.Web.UI.Control" /> that handles the client callback. The control must implement the <see cref="T:System.Web.UI.ICallbackEventHandler" /> interface and provide a <see cref="M:System.Web.UI.ICallbackEventHandler.RaiseCallbackEvent(System.String)" /> method. </param
-        >
+          />The server <see cref="T:System.Web.UI.Control" /> that handles the client callback. The control must implement the <see cref="T:System.Web.UI.ICallbackEventHandler" /> interface and provide a <see cref="M:System.Web.UI.ICallbackEventHandler.RaiseCallbackEvent(System.String)" /> method.
+        </param>
         <param name="argument">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An argument passed from the client script to the server </param
-        >
+          />An argument passed from the client script to the server
+        </param>
         <param name="clientCallback">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the client event handler that receives the result of the successful server event. </param
-        >
+          />The name of the client event handler that receives the result of the successful server event.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The client script that is evaluated on the client prior to initiating the callback. The result of the script is passed back to the client event handler. </param
-        >
+          />The client script that is evaluated on the client prior to initiating the callback. The result of the script is passed back to the client event handler.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -184,29 +184,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The server <see cref="T:System.Web.UI.Control" /> that handles the client callback. The control must implement the <see cref="T:System.Web.UI.ICallbackEventHandler" /> interface and provide a <see cref="M:System.Web.UI.ICallbackEventHandler.RaiseCallbackEvent(System.String)" /> method. </param
-        >
+          />The server <see cref="T:System.Web.UI.Control" /> that handles the client callback. The control must implement the <see cref="T:System.Web.UI.ICallbackEventHandler" /> interface and provide a <see cref="M:System.Web.UI.ICallbackEventHandler.RaiseCallbackEvent(System.String)" /> method.
+        </param>
         <param name="argument">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An argument passed from the client script to the server </param
-        >
+          />An argument passed from the client script to the server
+        </param>
         <param name="clientCallback">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the client event handler that receives the result of the successful server event. </param
-        >
+          />The name of the client event handler that receives the result of the successful server event.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The client script that is evaluated on the client prior to initiating the callback. The result of the script is passed back to the client event handler. </param
-        >
+          />The client script that is evaluated on the client prior to initiating the callback. The result of the script is passed back to the client event handler.
+        </param>
         <param name="useAsync">
           <attribution
             license="cc4"
@@ -270,15 +270,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An argument passed from the client script to the server </param
-        >
+          />An argument passed from the client script to the server
+        </param>
         <param name="clientCallback">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the client event handler that receives the result of the successful server event. </param
-        >
+          />The name of the client event handler that receives the result of the successful server event.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
@@ -291,8 +291,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the client event handler that receives the result when an error occurs in the server event handler. </param
-        >
+          />The name of the client event handler that receives the result when an error occurs in the server event handler.
+        </param>
         <param name="useAsync">
           <attribution
             license="cc4"
@@ -346,43 +346,43 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The server <see cref="T:System.Web.UI.Control" /> that handles the client callback. The control must implement the <see cref="T:System.Web.UI.ICallbackEventHandler" /> interface and provide a <see cref="M:System.Web.UI.ICallbackEventHandler.RaiseCallbackEvent(System.String)" /> method. </param
-        >
+          />The server <see cref="T:System.Web.UI.Control" /> that handles the client callback. The control must implement the <see cref="T:System.Web.UI.ICallbackEventHandler" /> interface and provide a <see cref="M:System.Web.UI.ICallbackEventHandler.RaiseCallbackEvent(System.String)" /> method.
+        </param>
         <param name="argument">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An argument passed from the client script to the server <see cref="M:System.Web.UI.ICallbackEventHandler.RaiseCallbackEvent(System.String)" />  method. </param
-        >
+          />An argument passed from the client script to the server <see cref="M:System.Web.UI.ICallbackEventHandler.RaiseCallbackEvent(System.String)" />  method.
+        </param>
         <param name="clientCallback">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the client event handler that receives the result of the successful server event. </param
-        >
+          />The name of the client event handler that receives the result of the successful server event.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The client script that is evaluated on the client prior to initiating the callback. The result of the script is passed back to the client event handler. </param
-        >
+          />The client script that is evaluated on the client prior to initiating the callback. The result of the script is passed back to the client event handler.
+        </param>
         <param name="clientErrorCallback">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the client event handler that receives the result when an error occurs in the server event handler. </param
-        >
+          />The name of the client event handler that receives the result when an error occurs in the server event handler.
+        </param>
         <param name="useAsync">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to perform the callback asynchronously; false to perform the callback synchronously. </param
-        >
+          />true to perform the callback asynchronously; false to perform the callback synchronously.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -431,8 +431,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The parameter passed to the server control. </param
-        >
+          />The parameter passed to the server control.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -736,8 +736,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.ClientScriptManager.GetWebResourceUrl(System.Type,System.String)" /> method returns a URL reference to a resource embedded in an assembly. The returned reference is not URL encoded. Resources can be script files, images, or any static file. You specify the type based on the object that will be accessing the resource. </para
-          >
+            >The <see cref="M:System.Web.UI.ClientScriptManager.GetWebResourceUrl(System.Type,System.String)" /> method returns a URL reference to a resource embedded in an assembly. The returned reference is not URL encoded. Resources can be script files, images, or any static file. You specify the type based on the object that will be accessing the resource.
+          </para>
           <para>A Web resource registered with the page is uniquely identified by its type and name. Only one resource with a given type and name pair can be registered with the page. Attempting to register a resource that is already registered does not create a duplicate of the registered resource. </para>
           <para
             >The <see cref="M:System.Web.UI.ClientScriptManager.GetWebResourceUrl(System.Type,System.String)" /> method is used in conjunction with the <see cref="M:System.Web.UI.ClientScriptManager.RegisterClientScriptResource(System.Type,System.String)" /> method for accessing resources embedded in assemblies. For more information on using resources in applications, see <format type="text/html">
@@ -754,19 +754,15 @@
           <para>The URL reference to the resource.</para>
         </returns>
         <param name="type">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The type of the resource. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The type of the resource.
+        </param>
         <param name="resourceName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The fully qualified name of the resource in the assembly. </param
-        >
+          />The fully qualified name of the resource in the assembly.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -793,14 +789,14 @@
           >
           <para>A client script is uniquely identified by its key and its type. Scripts with the same key and type are considered duplicates.</para>
           <para
-            >This overload of the <see cref="Overload:System.Web.UI.ClientScriptManager.IsClientScriptBlockRegistered" /> method calls the overload that takes both a <paramref name="key" /> and a <paramref name="type" /> parameter with the type set as a <see cref="T:System.Web.UI.Page" /> object </para
-          >
+            >This overload of the <see cref="Overload:System.Web.UI.ClientScriptManager.IsClientScriptBlockRegistered" /> method calls the overload that takes both a <paramref name="key" /> and a <paramref name="type" /> parameter with the type set as a <see cref="T:System.Web.UI.Page" /> object
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the client script block is registered with the <see cref="T:System.Web.UI.Page" /> object using the specified key. </para
-          >
+            >Determines whether the client script block is registered with the <see cref="T:System.Web.UI.Page" /> object using the specified key.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -855,15 +851,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the client script block to search for.  </param
-        >
+          />The type of the client script block to search for.
+        </param>
         <param name="key">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key of the client script block to search for. </param
-        >
+          />The key of the client script block to search for.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -895,8 +891,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the client script include is registered with the <see cref="T:System.Web.UI.Page" /> object using the specified key. </para
-          >
+            >Determines whether the client script include is registered with the <see cref="T:System.Web.UI.Page" /> object using the specified key.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -907,8 +903,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key of the client script include to search for. </param
-        >
+          />The key of the client script include to search for.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -950,15 +946,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the client script include to search for. </param
-        >
+          />The type of the client script include to search for.
+        </param>
         <param name="key">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key of the client script include to search for. </param
-        >
+          />The key of the client script include to search for.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -990,8 +986,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the OnSubmit statement is registered with the <see cref="T:System.Web.UI.Page" /> object using the specified key. </para
-          >
+            >Determines whether the OnSubmit statement is registered with the <see cref="T:System.Web.UI.Page" /> object using the specified key.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1045,15 +1041,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the OnSubmit statement to search for. </param
-        >
+          />The type of the OnSubmit statement to search for.
+        </param>
         <param name="key">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key of the OnSubmit statement to search for. </param
-        >
+          />The key of the OnSubmit statement to search for.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1076,8 +1072,8 @@
           >
           <para>A startup script is uniquely identified by its key and its type. Scripts with the same key and type are considered duplicates.</para>
           <para
-            >This overload of the <see cref="Overload:System.Web.UI.ClientScriptManager.IsStartupScriptRegistered" /> method calls the overload that takes both a string <paramref name="key" /> and a <paramref name="type" /> parameter with the type set as a <see cref="T:System.Web.UI.Page" /> object </para
-          >
+            >This overload of the <see cref="Overload:System.Web.UI.ClientScriptManager.IsStartupScriptRegistered" /> method calls the overload that takes both a string <paramref name="key" /> and a <paramref name="type" /> parameter with the type set as a <see cref="T:System.Web.UI.Page" /> object
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1137,8 +1133,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the startup script to search for. </param
-        >
+          />The type of the startup script to search for.
+        </param>
         <param name="key">
           <attribution
             license="cc4"
@@ -1240,22 +1236,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the client script to register. </param
-        >
+          />The type of the client script to register.
+        </param>
         <param name="key">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key of the client script to register. </param
-        >
+          />The key of the client script to register.
+        </param>
         <param name="script">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The client script literal to register. </param
-        >
+          />The client script literal to register.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1301,22 +1297,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the client script to register. </param
-        >
+          />The type of the client script to register.
+        </param>
         <param name="key">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key of the client script to register. </param
-        >
+          />The key of the client script to register.
+        </param>
         <param name="script">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The client script literal to register.  </param
-        >
+          />The client script literal to register.
+        </param>
         <param name="addScriptTags">
           <attribution
             license="cc4"
@@ -1370,15 +1366,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key of the client script include to register. </param
-        >
+          />The key of the client script include to register.
+        </param>
         <param name="url">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URL of the client script include to register. </param
-        >
+          />The URL of the client script include to register.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1422,22 +1418,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the client script include to register. </param
-        >
+          />The type of the client script include to register.
+        </param>
         <param name="key">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key of the client script include to register. </param
-        >
+          />The key of the client script include to register.
+        </param>
         <param name="url">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URL of the client script include to register. </param
-        >
+          />The URL of the client script include to register.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1475,15 +1471,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the client script resource to register. </param
-        >
+          />The type of the client script resource to register.
+        </param>
         <param name="resourceName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the client script resource to register. </param
-        >
+          />The name of the client script resource to register.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1508,8 +1504,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.ClientScriptManager.RegisterExpandoAttribute(System.String,System.String,System.String)" /> method registers a name/value pair as a custom (expando) attribute on the specified <see cref="T:System.Web.UI.Control" />. The expando attribute is set dynamically from JavaScript to preserve XHTML compatibility for the rendered control's markup. Quotes and backslashes in the custom (expando) attribute's values are escaped. If you do not want to escape quotes and backslashes, call the <see cref="M:System.Web.UI.ClientScriptManager.RegisterExpandoAttribute(System.String,System.String,System.String,System.Boolean)" /> overload method and set the <paramref name="encode" /> parameter to false. </para
-          >
+            >The <see cref="M:System.Web.UI.ClientScriptManager.RegisterExpandoAttribute(System.String,System.String,System.String)" /> method registers a name/value pair as a custom (expando) attribute on the specified <see cref="T:System.Web.UI.Control" />. The expando attribute is set dynamically from JavaScript to preserve XHTML compatibility for the rendered control's markup. Quotes and backslashes in the custom (expando) attribute's values are escaped. If you do not want to escape quotes and backslashes, call the <see cref="M:System.Web.UI.ClientScriptManager.RegisterExpandoAttribute(System.String,System.String,System.String,System.Boolean)" /> overload method and set the <paramref name="encode" /> parameter to false.
+          </para>
           <para>If the expando attribute is not found or the control to add the expando attribute to is not found, the client script is still emitted, but it will not affect the control.</para>
         </remarks>
         <summary>
@@ -1521,22 +1517,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.UI.Control" /> on the page that contains the custom attribute. </param
-        >
+          />The <see cref="T:System.Web.UI.Control" /> on the page that contains the custom attribute.
+        </param>
         <param name="attributeName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the custom attribute to register. </param
-        >
+          />The name of the custom attribute to register.
+        </param>
         <param name="attributeValue">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value of the custom attribute. </param
-        >
+          />The value of the custom attribute.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1805,22 +1801,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the OnSubmit statement to register. </param
-        >
+          />The type of the OnSubmit statement to register.
+        </param>
         <param name="key">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key of the OnSubmit statement to register. </param
-        >
+          />The key of the OnSubmit statement to register.
+        </param>
         <param name="script">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The script literal of the OnSubmit statement to register. </param
-        >
+          />The script literal of the OnSubmit statement to register.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1866,22 +1862,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the startup script to register. </param
-        >
+          />The type of the startup script to register.
+        </param>
         <param name="key">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key of the startup script to register. </param
-        >
+          />The key of the startup script to register.
+        </param>
         <param name="script">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The startup script literal to register. </param
-        >
+          />The startup script literal to register.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1928,29 +1924,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the startup script to register. </param
-        >
+          />The type of the startup script to register.
+        </param>
         <param name="key">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key of the startup script to register. </param
-        >
+          />The key of the startup script to register.
+        </param>
         <param name="script">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The startup script literal to register. </param
-        >
+          />The startup script literal to register.
+        </param>
         <param name="addScriptTags">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A Boolean value indicating whether to add script tags. </param
-        >
+          />A Boolean value indicating whether to add script tags.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

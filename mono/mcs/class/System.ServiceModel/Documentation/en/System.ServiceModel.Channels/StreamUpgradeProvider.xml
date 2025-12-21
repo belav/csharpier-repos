@@ -26,8 +26,8 @@
       <list type="ordered">
         <item>
           <para
-            >Implement a class that derives from <see cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" />. </para
-          >
+            >Implement a class that derives from <see cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" />.
+          </para>
         </item>
         <item>
           <para>Register it. You do this by creating a binding element for it, and registering the provider in a custom binding.</para>

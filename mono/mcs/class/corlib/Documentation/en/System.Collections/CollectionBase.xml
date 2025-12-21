@@ -944,8 +944,8 @@
           >
           <para>Enumerating through a collection is intrinsically not a thread safe procedure. Even when a collection is synchronized, other threads can still modify the collection, which causes the enumerator to throw an exception. To guarantee thread safety during enumeration, you can either lock the collection during the entire enumeration or catch the exceptions resulting from changes made by other threads.</para>
           <para
-            >The following code example shows how to lock the collection using the <see cref="P:System.Collections.ICollection.SyncRoot" /> during the entire enumeration: </para
-          >
+            >The following code example shows how to lock the collection using the <see cref="P:System.Collections.ICollection.SyncRoot" /> during the entire enumeration:
+          </para>
           <para>code reference: System.Collections.CollectionBase#2</para>
           <para>Retrieving the value of this property is an O(1) operation.</para>
         </remarks>
@@ -984,8 +984,8 @@
           >
           <para>Enumerating through a collection is intrinsically not a thread safe procedure. Even when a collection is synchronized, other threads can still modify the collection, which causes the enumerator to throw an exception. To guarantee thread safety during enumeration, you can either lock the collection during the entire enumeration or catch the exceptions resulting from changes made by other threads.</para>
           <para
-            >The following code example shows how to lock the collection using the <see cref="P:System.Collections.ICollection.SyncRoot" /> during the entire enumeration: </para
-          >
+            >The following code example shows how to lock the collection using the <see cref="P:System.Collections.ICollection.SyncRoot" /> during the entire enumeration:
+          </para>
           <para>code reference: System.Collections.CollectionBase#2</para>
           <para>Retrieving the value of this property is an O(1) operation.</para>
         </remarks>

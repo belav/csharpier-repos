@@ -53,8 +53,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.Mail.SmtpException" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.Mail.SmtpException" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -214,8 +214,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.Mail.SmtpException" /> class from the specified instances of the <see cref="T:System.Runtime.Serialization.SerializationInfo" /> and <see cref="T:System.Runtime.Serialization.StreamingContext" /> classes. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.Mail.SmtpException" /> class from the specified instances of the <see cref="T:System.Runtime.Serialization.SerializationInfo" /> and <see cref="T:System.Runtime.Serialization.StreamingContext" /> classes.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -245,8 +245,8 @@
             >This constructor uses the <paramref name="message" /> parameter to initialize the <see cref="P:System.Exception.Message" /> property and the <paramref name="innerException" /> parameter to initialize the <see cref="P:System.Exception.InnerException" /> property.</para
           >
           <para
-            >If <paramref name="innerException" /> is not null, the current exception is raised in a catch block that handles <paramref name="innerException" />. </para
-          >
+            >If <paramref name="innerException" /> is not null, the current exception is raised in a catch block that handles <paramref name="innerException" />.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -266,8 +266,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The exception that is the cause of the current exception. </param
-        >
+          />The exception that is the cause of the current exception.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetObjectData">

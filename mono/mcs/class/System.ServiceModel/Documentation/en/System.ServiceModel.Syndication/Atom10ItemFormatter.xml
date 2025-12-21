@@ -59,8 +59,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.Atom10ItemFormatter" /> class. </para
-          >
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.Atom10ItemFormatter" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -114,8 +114,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.Atom10ItemFormatter" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.Atom10ItemFormatter" /> class.
+          </para>
         </summary>
         <param name="itemTypeToCreate">
           <attribution

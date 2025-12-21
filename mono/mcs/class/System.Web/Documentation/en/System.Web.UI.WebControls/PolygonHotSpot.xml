@@ -74,8 +74,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.Web.UI.WebControls.PolygonHotSpot.Coordinates" /> property to specify the coordinates of the vertexes of a <see cref="T:System.Web.UI.WebControls.PolygonHotSpot" /> object. A polygon vertex is a point at which two polygon edges meet. The string that you specify must be formatted with each coordinate separated by a comma. Each vertex that you specify must have both an x- coordinate and a y-coordinate. For example, the string "128,185,335,157,510,224,510,383,228,383" defines a polygon hot spot with five vertexes. The x-coordinate of the first vertex is 128. The y-coordinate of the first vertex is 185. </para
-          >
+            >Use the <see cref="P:System.Web.UI.WebControls.PolygonHotSpot.Coordinates" /> property to specify the coordinates of the vertexes of a <see cref="T:System.Web.UI.WebControls.PolygonHotSpot" /> object. A polygon vertex is a point at which two polygon edges meet. The string that you specify must be formatted with each coordinate separated by a comma. Each vertex that you specify must have both an x- coordinate and a y-coordinate. For example, the string "128,185,335,157,510,224,510,383,228,383" defines a polygon hot spot with five vertexes. The x-coordinate of the first vertex is 128. The y-coordinate of the first vertex is 185.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

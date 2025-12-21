@@ -45,8 +45,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.FileDialogCustomPlacesCollection" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.FileDialogCustomPlacesCollection" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -110,8 +110,8 @@
             >The folder is added to custom places only for a particular <see cref="T:System.Windows.Forms.FileDialog" /> and is not a system or application wide change.</para
           >
           <para
-            >The folders are positioned in the custom places in the order that they are added to the <see cref="T:System.Windows.Forms.FileDialog" />. The last one added will be at the top. </para
-          >
+            >The folders are positioned in the custom places in the order that they are added to the <see cref="T:System.Windows.Forms.FileDialog" />. The last one added will be at the top.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

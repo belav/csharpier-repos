@@ -136,10 +136,8 @@ three";
     <note>[Note: Since a hexadecimal escape sequence can have a variable number of hex digits, the string literal &quot;\x123&quot; contains a single character with hex value 123. To create a string containing the character with hex value 12 followed by the character 3, one could write &quot;\x00123&quot; or &quot;\x12&quot; + &quot;3&quot; instead. end note]</note>
   </paragraph>
   <paragraph
-    >The type of a <non_terminal where="9.4.4.5"
-      >string-literal</non_terminal
-    > is string. </paragraph
-  >
+    >The type of a <non_terminal where="9.4.4.5">string-literal</non_terminal> is string.
+  </paragraph>
   <paragraph
     >Each string literal does not necessarily result in a new string instance. When two or more string literals that are equivalent according to the string equality operator (<hyperlink>14.9.7</hyperlink>), appear in the same assembly, these string literals refer to the same string instance. <example
       >[Example: For instance, the output produced by <code_example>

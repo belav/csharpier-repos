@@ -149,8 +149,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The points past the last instruction in the scope. </param
-        >
+          />The points past the last instruction in the scope.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefineDocument">
@@ -192,29 +192,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URL that identifies the document. </param
-        >
+          />The URL that identifies the document.
+        </param>
         <param name="language">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The document language. This parameter can be <see cref="F:System.Guid.Empty" />. </param
-        >
+          />The document language. This parameter can be <see cref="F:System.Guid.Empty" />.
+        </param>
         <param name="languageVendor">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The identity of the vendor for the document language. This parameter can be <see cref="F:System.Guid.Empty" />. </param
-        >
+          />The identity of the vendor for the document language. This parameter can be <see cref="F:System.Guid.Empty" />.
+        </param>
         <param name="documentType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the document. This parameter can be <see cref="F:System.Guid.Empty" />. </param
-        >
+          />The type of the document. This parameter can be <see cref="F:System.Guid.Empty" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefineField">
@@ -261,53 +261,49 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The metadata type or method token. </param
-        >
+          />The metadata type or method token.
+        </param>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The field name. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The field name.
+        </param>
         <param name="attributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the field attributes. </param
-        >
+          />A bitwise combination of the field attributes.
+        </param>
         <param name="signature">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The field signature. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The field signature.
+        </param>
         <param name="addrKind">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The address types for <paramref name="addr1" /> and <paramref name="addr2" />. </param
-        >
+          />The address types for <paramref name="addr1" /> and <paramref name="addr2" />.
+        </param>
         <param name="addr1">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first address for the field specification. </param
-        >
+          />The first address for the field specification.
+        </param>
         <param name="addr2">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second address for the field specification. </param
-        >
+          />The second address for the field specification.
+        </param>
         <param name="addr3">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The third address for the field specification. </param
-        >
+          />The third address for the field specification.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefineGlobalVariable">
@@ -344,54 +340,50 @@
           <para>Defines a single global variable.</para>
         </summary>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The global variable name. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The global variable name.
+        </param>
         <param name="attributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the global variable attributes. </param
-        >
+          />A bitwise combination of the global variable attributes.
+        </param>
         <param name="signature">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The global variable signature. </param
-        >
+          />The global variable signature.
+        </param>
         <param name="addrKind">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The address types for <paramref name="addr1" />, <paramref name="addr2" />, and <paramref name="addr3" />. </param
-        >
+          />The address types for <paramref name="addr1" />, <paramref name="addr2" />, and <paramref name="addr3" />.
+        </param>
         <param name="addr1">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first address for the global variable specification. </param
-        >
+          />The first address for the global variable specification.
+        </param>
         <param name="addr2">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second address for the global variable specification. </param
-        >
+          />The second address for the global variable specification.
+        </param>
         <param name="addr3">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The third address for the global variable specification. </param
-        >
+          />The third address for the global variable specification.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefineLocalVariable">
@@ -430,76 +422,72 @@
             >The <paramref name="startOffset" /> and <paramref name="endOffset" /> parameters are optional. If their value is zero, they are ignored and the variable is defined throughout the entire scope. If their value is nonzero, the variable falls within the offsets of the current scope.</para
           >
           <para
-            >You can call <see cref="M:System.Diagnostics.SymbolStore.ISymbolWriter.DefineLocalVariable(System.String,System.Reflection.FieldAttributes,System.Byte[],System.Diagnostics.SymbolStore.SymAddressKind,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)" /> multiple times for a variable of the same name that occurs multiple times in different offset ranges throughout a scope. (In this case, start and end offsets must not overlap.) </para
-          >
+            >You can call <see cref="M:System.Diagnostics.SymbolStore.ISymbolWriter.DefineLocalVariable(System.String,System.Reflection.FieldAttributes,System.Byte[],System.Diagnostics.SymbolStore.SymAddressKind,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)" /> multiple times for a variable of the same name that occurs multiple times in different offset ranges throughout a scope. (In this case, start and end offsets must not overlap.)
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Defines a single variable in the current lexical scope.</para>
         </summary>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The local variable name. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The local variable name.
+        </param>
         <param name="attributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the local variable attributes. </param
-        >
+          />A bitwise combination of the local variable attributes.
+        </param>
         <param name="signature">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local variable signature. </param
-        >
+          />The local variable signature.
+        </param>
         <param name="addrKind">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The address types for <paramref name="addr1" />, <paramref name="addr2" />, and <paramref name="addr3" />. </param
-        >
+          />The address types for <paramref name="addr1" />, <paramref name="addr2" />, and <paramref name="addr3" />.
+        </param>
         <param name="addr1">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first address for the local variable specification. </param
-        >
+          />The first address for the local variable specification.
+        </param>
         <param name="addr2">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second address for the local variable specification. </param
-        >
+          />The second address for the local variable specification.
+        </param>
         <param name="addr3">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The third address for the local variable specification. </param
-        >
+          />The third address for the local variable specification.
+        </param>
         <param name="startOffset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The start offset for the variable. If this parameter is zero, it is ignored and the variable is defined throughout the entire scope. If the parameter is nonzero, the variable falls within the offsets of the current scope. </param
-        >
+          />The start offset for the variable. If this parameter is zero, it is ignored and the variable is defined throughout the entire scope. If the parameter is nonzero, the variable falls within the offsets of the current scope.
+        </param>
         <param name="endOffset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The end offset for the variable. If this parameter is zero, it is ignored and the variable is defined throughout the entire scope. If the parameter is nonzero, the variable falls within the offsets of the current scope. </param
-        >
+          />The end offset for the variable. If this parameter is zero, it is ignored and the variable is defined throughout the entire scope. If the parameter is nonzero, the variable falls within the offsets of the current scope.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefineParameter">
@@ -539,50 +527,46 @@
           <para>Defines a single parameter in the current method. The type of each parameter is taken from its position within the signature of the method.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The parameter name. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The parameter name.
+        </param>
         <param name="attributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the parameter attributes. </param
-        >
+          />A bitwise combination of the parameter attributes.
+        </param>
         <param name="sequence">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The parameter signature. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The parameter signature.
+        </param>
         <param name="addrKind">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The address types for <paramref name="addr1" />, <paramref name="addr2" />, and <paramref name="addr3" />. </param
-        >
+          />The address types for <paramref name="addr1" />, <paramref name="addr2" />, and <paramref name="addr3" />.
+        </param>
         <param name="addr1">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first address for the parameter specification. </param
-        >
+          />The first address for the parameter specification.
+        </param>
         <param name="addr2">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second address for the parameter specification. </param
-        >
+          />The second address for the parameter specification.
+        </param>
         <param name="addr3">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The third address for the parameter specification. </param
-        >
+          />The third address for the parameter specification.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefineSequencePoints">
@@ -625,43 +609,43 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The document object for which the sequence points are being defined. </param
-        >
+          />The document object for which the sequence points are being defined.
+        </param>
         <param name="offsets">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The sequence point offsets measured from the beginning of methods. </param
-        >
+          />The sequence point offsets measured from the beginning of methods.
+        </param>
         <param name="lines">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The document lines for the sequence points. </param
-        >
+          />The document lines for the sequence points.
+        </param>
         <param name="columns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The document positions for the sequence points. </param
-        >
+          />The document positions for the sequence points.
+        </param>
         <param name="endLines">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The document end lines for the sequence points. </param
-        >
+          />The document end lines for the sequence points.
+        </param>
         <param name="endColumns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The document end positions for the sequence points. </param
-        >
+          />The document end positions for the sequence points.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Initialize">
@@ -703,22 +687,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The metadata emitter interface. </param
-        >
+          />The metadata emitter interface.
+        </param>
         <param name="filename">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file name for which the debugging symbols are written. Some writers require a file name, and others do not. If a file name is specified for a writer that does not use file names, this parameter is ignored. </param
-        >
+          />The file name for which the debugging symbols are written. Some writers require a file name, and others do not. If a file name is specified for a writer that does not use file names, this parameter is ignored.
+        </param>
         <param name="fFullBuild">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true indicates that this is a full rebuild; false indicates that this is an incremental compilation. </param
-        >
+          />true indicates that this is a full rebuild; false indicates that this is an incremental compilation.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OpenMethod">
@@ -756,8 +740,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The metadata token for the method to be opened. </param
-        >
+          />The metadata token for the method to be opened.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OpenNamespace">
@@ -792,8 +776,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the new namespace. </param
-        >
+          />The name of the new namespace.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OpenScope">
@@ -835,8 +819,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The offset, in bytes, from the beginning of the method to the first instruction in the lexical scope. </param
-        >
+          />The offset, in bytes, from the beginning of the method to the first instruction in the lexical scope.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetMethodSourceRange">
@@ -878,43 +862,27 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The document that contains the starting position. </param
-        >
+          />The document that contains the starting position.
+        </param>
         <param name="startLine">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The starting line number. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The starting line number.
+        </param>
         <param name="startColumn">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The starting column. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The starting column.
+        </param>
         <param name="endDoc">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The document that contains the ending position. </param
-        >
+          />The document that contains the ending position.
+        </param>
         <param name="endLine">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The ending line number. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The ending line number.
+        </param>
         <param name="endColumn">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The ending column number. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The ending column number.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetScopeRange">
@@ -951,22 +919,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The identifier of the lexical scope. </param
-        >
+          />The identifier of the lexical scope.
+        </param>
         <param name="startOffset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte offset of the beginning of the lexical scope. </param
-        >
+          />The byte offset of the beginning of the lexical scope.
+        </param>
         <param name="endOffset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte offset of the end of the lexical scope. </param
-        >
+          />The byte offset of the end of the lexical scope.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetSymAttribute">
@@ -1008,18 +976,14 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The metadata token for which the attribute is being defined. </param
-        >
+          />The metadata token for which the attribute is being defined.
+        </param>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The attribute name. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The attribute name.
+        </param>
         <param name="data">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The attribute value. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The attribute value.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetUnderlyingWriter">
@@ -1059,8 +1023,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A pointer to code that represents the underlying writer. </param
-        >
+          />A pointer to code that represents the underlying writer.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetUserEntryPoint">
@@ -1098,8 +1062,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The metadata token for the method that is the user entry point. </param
-        >
+          />The metadata token for the method that is the user entry point.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="UsingNamespace">
@@ -1134,8 +1098,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The fully qualified name of the namespace. </param
-        >
+          />The fully qualified name of the namespace.
+        </param>
       </Docs>
     </Member>
   </Members>

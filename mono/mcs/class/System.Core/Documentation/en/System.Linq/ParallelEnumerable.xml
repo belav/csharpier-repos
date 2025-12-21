@@ -300,15 +300,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A function that returns the initial accumulator value. </param
-        >
+          />A function that returns the initial accumulator value.
+        </param>
         <param name="updateAccumulatorFunc">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An accumulator function to be invoked on each element in a partition. </param
-        >
+          />An accumulator function to be invoked on each element in a partition.
+        </param>
         <param name="combineAccumulatorsFunc">
           <attribution
             license="cc4"
@@ -321,8 +321,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A function to transform the final accumulator value into the result value. </param
-        >
+          />A function to transform the final accumulator value into the result value.
+        </param>
         <typeparam name="TSource">
           <attribution
             license="cc4"
@@ -414,22 +414,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An accumulator function to be invoked on each element in a partition. </param
-        >
+          />An accumulator function to be invoked on each element in a partition.
+        </param>
         <param name="combineAccumulatorsFunc">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An accumulator function to be invoked on the yielded accumulator result from each partition. </param
-        >
+          />An accumulator function to be invoked on the yielded accumulator result from each partition.
+        </param>
         <param name="resultSelector">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A function to transform the final accumulator value into the result value. </param
-        >
+          />A function to transform the final accumulator value into the result value.
+        </param>
         <typeparam name="TSource">
           <attribution
             license="cc4"
@@ -3050,8 +3050,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A sequence whose elements that also occur in the first sequence will cause those elements to be removed from the returned sequence. </param
-        >
+          />A sequence whose elements that also occur in the first sequence will cause those elements to be removed from the returned sequence.
+        </param>
         <param name="comparer">
           <attribution license="cc4" from="Microsoft" modified="false" />
           <see cref="T:System.Collections.Generic.IEqualityComparer`1" /> to compare values.</param
@@ -8626,8 +8626,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A sequence whose elements are the result of invoking the one-to-many transform function <paramref name="collectionSelector" /> on each element of <paramref name="source" /> based on the index supplied to <paramref name="collectionSelector" />, and then mapping each of those sequence elements and their corresponding source element to a result element. </para
-          >
+            >A sequence whose elements are the result of invoking the one-to-many transform function <paramref name="collectionSelector" /> on each element of <paramref name="source" /> based on the index supplied to <paramref name="collectionSelector" />, and then mapping each of those sequence elements and their corresponding source element to a result element.
+          </para>
         </returns>
         <param name="source">
           <attribution
@@ -9398,8 +9398,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A function to test each source element for a condition; the second parameter of the function represents the index of the source element. </param
-        >
+          />A function to test each source element for a condition; the second parameter of the function represents the index of the source element.
+        </param>
         <typeparam name="TSource">
           <attribution
             license="cc4"
@@ -10561,8 +10561,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A function to test each source element for a condition; the second parameter of the function represents the index of the source element. </param
-        >
+          />A function to test each source element for a condition; the second parameter of the function represents the index of the source element.
+        </param>
         <typeparam name="TSource">
           <attribution
             license="cc4"
@@ -11134,8 +11134,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A transform function to produce a result element value from each element. </param
-        >
+          />A transform function to produce a result element value from each element.
+        </param>
         <typeparam name="TSource">
           <attribution
             license="cc4"
@@ -11508,8 +11508,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A transform function to produce a result element value from each element. </param
-        >
+          />A transform function to produce a result element value from each element.
+        </param>
         <typeparam name="TSource">
           <attribution
             license="cc4"
@@ -11594,8 +11594,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A transform function to produce a result element value from each element. </param
-        >
+          />A transform function to produce a result element value from each element.
+        </param>
         <param name="comparer">
           <attribution
             license="cc4"

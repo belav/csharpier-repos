@@ -23,8 +23,8 @@
       <list type="bullet">
         <item>
           <para
-            >Optional (and off by default) with <see cref="T:System.ServiceModel.NetTcpBinding" /> and <see cref="T:System.ServiceModel.WsHttpBinding" /> and </para
-          >
+            >Optional (and off by default) with <see cref="T:System.ServiceModel.NetTcpBinding" /> and <see cref="T:System.ServiceModel.WsHttpBinding" /> and
+          </para>
         </item>
         <item>
           <para
@@ -108,8 +108,8 @@
           <list type="bullet">
             <item>
               <para
-                >Optional (and off by default) with <see cref="T:System.ServiceModel.NetTcpBinding" /> and <see cref="T:System.ServiceModel.WsHttpBinding" />. </para
-              >
+                >Optional (and off by default) with <see cref="T:System.ServiceModel.NetTcpBinding" /> and <see cref="T:System.ServiceModel.WsHttpBinding" />.
+              </para>
             </item>
             <item>
               <para

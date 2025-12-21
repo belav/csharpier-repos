@@ -83,8 +83,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.PermissionSet" /> with which to initialize the new instance. </param
-        >
+          />The <see cref="T:System.Security.PermissionSet" /> with which to initialize the new instance.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -120,15 +120,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.PermissionSet" /> with which to initialize the new instance. </param
-        >
+          />The <see cref="T:System.Security.PermissionSet" /> with which to initialize the new instance.
+        </param>
         <param name="attributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the <see cref="T:System.Security.Policy.PolicyStatementAttribute" /> values. </param
-        >
+          />A bitwise combination of the <see cref="T:System.Security.Policy.PolicyStatementAttribute" /> values.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Attributes">
@@ -264,8 +264,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.Policy.PolicyStatement" /> object to compare with the current <see cref="T:System.Security.Policy.PolicyStatement" />. </param
-        >
+          />The <see cref="T:System.Security.Policy.PolicyStatement" /> object to compare with the current <see cref="T:System.Security.Policy.PolicyStatement" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="FromXml">
@@ -300,8 +300,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML encoding to use to reconstruct the security object. </param
-        >
+          />The XML encoding to use to reconstruct the security object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="FromXml">
@@ -337,15 +337,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML encoding to use to reconstruct the security object. </param
-        >
+          />The XML encoding to use to reconstruct the security object.
+        </param>
         <param name="level">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.Policy.PolicyLevel" /> context for lookup of <see cref="T:System.Security.NamedPermissionSet" /> values. </param
-        >
+          />The <see cref="T:System.Security.Policy.PolicyLevel" /> context for lookup of <see cref="T:System.Security.NamedPermissionSet" /> values.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -483,8 +483,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.Policy.PolicyLevel" /> context for lookup of <see cref="T:System.Security.NamedPermissionSet" /> values. </param
-        >
+          />The <see cref="T:System.Security.Policy.PolicyLevel" /> context for lookup of <see cref="T:System.Security.NamedPermissionSet" /> values.
+        </param>
       </Docs>
     </Member>
   </Members>

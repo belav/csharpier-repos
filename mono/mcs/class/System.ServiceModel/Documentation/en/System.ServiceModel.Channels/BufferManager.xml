@@ -45,8 +45,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.BufferManager" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.BufferManager" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>

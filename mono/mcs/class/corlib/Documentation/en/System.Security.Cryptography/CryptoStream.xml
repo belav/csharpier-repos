@@ -81,22 +81,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream on which to perform the cryptographic transformation. </param
-        >
+          />The stream on which to perform the cryptographic transformation.
+        </param>
         <param name="transform">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The cryptographic transformation that is to be performed on the stream. </param
-        >
+          />The cryptographic transformation that is to be performed on the stream.
+        </param>
         <param name="mode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Security.Cryptography.CryptoStreamMode" /> values. </param
-        >
+          />One of the <see cref="T:System.Security.Cryptography.CryptoStreamMode" /> values.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CanRead">
@@ -266,8 +266,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Finalize">
@@ -350,8 +350,8 @@
             </format>.</para
           >
           <para
-            >If the operation is canceled before it completes, the returned task contains the <see cref="F:System.Threading.Tasks.TaskStatus.Canceled" /> value for the <see cref="P:System.Threading.Tasks.Task.Status" /> property. </para
-          >
+            >If the operation is canceled before it completes, the returned task contains the <see cref="F:System.Threading.Tasks.TaskStatus.Canceled" /> value for the <see cref="P:System.Threading.Tasks.Task.Status" /> property.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -515,22 +515,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of bytes. A maximum of <paramref name="count" /> bytes are read from the current stream and stored in <paramref name="buffer" />. </param
-        >
+          />An array of bytes. A maximum of <paramref name="count" /> bytes are read from the current stream and stored in <paramref name="buffer" />.
+        </param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte offset in <paramref name="buffer" /> at which to begin storing the data read from the current stream. </param
-        >
+          />The byte offset in <paramref name="buffer" /> at which to begin storing the data read from the current stream.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum number of bytes to be read from the current stream. </param
-        >
+          />The maximum number of bytes to be read from the current stream.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ReadAsync">
@@ -576,8 +576,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A task that represents the asynchronous read operation. The value of the task object's <paramref name="TResult" /> parameter contains the total number of bytes read into the buffer. The result can be less than the number of bytes requested if the number of bytes currently available is less than the requested number, or it can be 0 (zero) if the end of the stream has been reached. </para
-          >
+            >A task that represents the asynchronous read operation. The value of the task object's <paramref name="TResult" /> parameter contains the total number of bytes read into the buffer. The result can be less than the number of bytes requested if the number of bytes currently available is less than the requested number, or it can be 0 (zero) if the end of the stream has been reached.
+          </para>
         </returns>
         <param name="buffer">
           <attribution
@@ -651,15 +651,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A byte offset relative to the <paramref name="origin" /> parameter. </param
-        >
+          />A byte offset relative to the <paramref name="origin" /> parameter.
+        </param>
         <param name="origin">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.SeekOrigin" /> object indicating the reference point used to obtain the new position. </param
-        >
+          />A <see cref="T:System.IO.SeekOrigin" /> object indicating the reference point used to obtain the new position.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetLength">
@@ -696,8 +696,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The desired length of the current stream in bytes. </param
-        >
+          />The desired length of the current stream in bytes.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -736,22 +736,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of bytes. This method copies <paramref name="count" /> bytes from <paramref name="buffer" /> to the current stream. </param
-        >
+          />An array of bytes. This method copies <paramref name="count" /> bytes from <paramref name="buffer" /> to the current stream.
+        </param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte offset in <paramref name="buffer" /> at which to begin copying bytes to the current stream. </param
-        >
+          />The byte offset in <paramref name="buffer" /> at which to begin copying bytes to the current stream.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes to be written to the current stream. </param
-        >
+          />The number of bytes to be written to the current stream.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteAsync">

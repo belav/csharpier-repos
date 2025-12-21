@@ -107,8 +107,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.CodeDom.CodeParameterDeclarationExpression" /> objects with which to initialize the collection. </param
-        >
+          />An array of <see cref="T:System.CodeDom.CodeParameterDeclarationExpression" /> objects with which to initialize the collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -146,8 +146,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeParameterDeclarationExpressionCollection" /> with which to initialize the collection. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeParameterDeclarationExpressionCollection" /> with which to initialize the collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Add">
@@ -188,8 +188,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.CodeDom.CodeParameterDeclarationExpression" /> to add. </param
-        >
+          />The <see cref="T:System.CodeDom.CodeParameterDeclarationExpression" /> to add.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddRange">
@@ -224,8 +224,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type <see cref="T:System.CodeDom.CodeParameterDeclarationExpression" /> containing the objects to add to the collection. </param
-        >
+          />An array of type <see cref="T:System.CodeDom.CodeParameterDeclarationExpression" /> containing the objects to add to the collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddRange">
@@ -265,8 +265,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeParameterDeclarationExpressionCollection" /> containing the objects to add to the collection. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeParameterDeclarationExpressionCollection" /> containing the objects to add to the collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Contains">
@@ -307,8 +307,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeParameterDeclarationExpression" /> to search for in the collection. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeParameterDeclarationExpression" /> to search for in the collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CopyTo">
@@ -346,15 +346,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The one-dimensional <see cref="T:System.Array" /> that is the destination of the values copied from the collection. </param
-        >
+          />The one-dimensional <see cref="T:System.Array" /> that is the destination of the values copied from the collection.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the array at which to begin inserting. </param
-        >
+          />The index of the array at which to begin inserting.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IndexOf">
@@ -395,8 +395,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.CodeDom.CodeParameterDeclarationExpression" /> to locate in the collection. </param
-        >
+          />The <see cref="T:System.CodeDom.CodeParameterDeclarationExpression" /> to locate in the collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Insert">
@@ -434,15 +434,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index where the specified object should be inserted. </param
-        >
+          />The zero-based index where the specified object should be inserted.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.CodeDom.CodeParameterDeclarationExpression" /> to insert. </param
-        >
+          />The <see cref="T:System.CodeDom.CodeParameterDeclarationExpression" /> to insert.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Item">
@@ -507,8 +507,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.CodeDom.CodeParameterDeclarationExpression" /> to remove from the collection. </param
-        >
+          />The <see cref="T:System.CodeDom.CodeParameterDeclarationExpression" /> to remove from the collection.
+        </param>
       </Docs>
     </Member>
   </Members>

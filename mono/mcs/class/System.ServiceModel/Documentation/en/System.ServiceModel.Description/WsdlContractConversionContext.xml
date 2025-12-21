@@ -20,8 +20,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see cref="T:System.ServiceModel.Description.WsdlContractConversionContext" /> object to examine and modify items that are to be converted to or from WSDL. </para
-      >
+        >Use the <see cref="T:System.ServiceModel.Description.WsdlContractConversionContext" /> object to examine and modify items that are to be converted to or from WSDL.
+      </para>
       <para
         >When exporting metadata a <see cref="T:System.ServiceModel.Description.WsdlContractConversionContext" /> object is passed to the <see cref="M:System.ServiceModel.Description.IWsdlExportExtension.ExportContract(System.ServiceModel.Description.WsdlExporter,System.ServiceModel.Description.WsdlContractConversionContext)" /> and <see cref="M:System.ServiceModel.Description.IWsdlExportExtension.ExportEndpoint(System.ServiceModel.Description.WsdlExporter,System.ServiceModel.Description.WsdlEndpointConversionContext)" /> methods. Use the various methods and properties to obtain metadata objects that you can use to examine and modify to alter the published WSDL.</para
       >

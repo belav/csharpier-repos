@@ -70,8 +70,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Collections.Generic.SynchronizedCollection`1" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Collections.Generic.SynchronizedCollection`1" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -713,8 +713,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of this <paramref name="syncRoot" /> object can be set when creating the thread-safe collection using the <see cref="M:System.Collections.Generic.SynchronizedCollection`1.#ctor(System.Object)" /> constructor. </para
-          >
+            >The value of this <paramref name="syncRoot" /> object can be set when creating the thread-safe collection using the <see cref="M:System.Collections.Generic.SynchronizedCollection`1.#ctor(System.Object)" /> constructor.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

@@ -74,8 +74,7 @@ class Directory {
       r.Close();
    }
 }
-</code
-      >
+</code>
       <para>Some example output is </para>
       <c>
         <para>Log Entry : 9:26:21 AM Friday, July 06, 2001</para>
@@ -180,23 +179,23 @@ class Directory {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.IO.FileStream" /> class for the specified file handle, with the specified read/write permission. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.IO.FileStream" /> class for the specified file handle, with the specified read/write permission.
+          </para>
         </summary>
         <param name="handle">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A file handle for the file that the current FileStream object will encapsulate. </param
-        >
+          />A file handle for the file that the current FileStream object will encapsulate.
+        </param>
         <param name="access">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A constant that sets the <see cref="P:System.IO.FileStream.CanRead" /> and <see cref="P:System.IO.FileStream.CanWrite" /> properties of the FileStream object. </param
-        >
+          />A constant that sets the <see cref="P:System.IO.FileStream.CanRead" /> and <see cref="P:System.IO.FileStream.CanWrite" /> properties of the FileStream object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -255,15 +254,15 @@ class Directory {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A file handle for the file that the current FileStream object will encapsulate. </param
-        >
+          />A file handle for the file that the current FileStream object will encapsulate.
+        </param>
         <param name="access">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A constant that sets the <see cref="P:System.IO.FileStream.CanRead" /> and <see cref="P:System.IO.FileStream.CanWrite" /> properties of the FileStream object. </param
-        >
+          />A constant that sets the <see cref="P:System.IO.FileStream.CanRead" /> and <see cref="P:System.IO.FileStream.CanWrite" /> properties of the FileStream object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -312,8 +311,8 @@ class Directory {
           >The directory information specified in <paramref name="path" /> does not exist.</exception
         >
         <exception cref="T:System.IO.PathTooLongException"
-          >The length of <paramref name="path" /> or the absolute path information for <paramref name="path " />exceeds the system-defined maximum length. </exception
-        >
+          >The length of <paramref name="path" /> or the absolute path information for <paramref name="path " />exceeds the system-defined maximum length.
+        </exception>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <para><paramref name="mode" /> contains an invalid value. </para>
         </exception>
@@ -370,15 +369,15 @@ class Directory {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A relative or absolute path for the file that the current FileStream object will encapsulate. </param
-        >
+          />A relative or absolute path for the file that the current FileStream object will encapsulate.
+        </param>
         <param name="mode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A constant that determines how to open or create the file. </param
-        >
+          />A constant that determines how to open or create the file.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -431,15 +430,15 @@ class Directory {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A file handle for the file that the current FileStream object will encapsulate. </param
-        >
+          />A file handle for the file that the current FileStream object will encapsulate.
+        </param>
         <param name="access">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.FileAccess" /> constant that gets the <see cref="P:System.IO.FileStream.CanRead" /> and <see cref="P:System.IO.FileStream.CanWrite" /> properties of the FileStream object. </param
-        >
+          />A <see cref="T:System.IO.FileAccess" /> constant that gets the <see cref="P:System.IO.FileStream.CanRead" /> and <see cref="P:System.IO.FileStream.CanWrite" /> properties of the FileStream object.
+        </param>
         <param name="bufferSize">
           <attribution
             license="cc4"
@@ -506,22 +505,22 @@ class Directory {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A file handle for the file that the current FileStream object will encapsulate. </param
-        >
+          />A file handle for the file that the current FileStream object will encapsulate.
+        </param>
         <param name="access">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A constant that gets the <see cref="P:System.IO.FileStream.CanRead" /> and <see cref="P:System.IO.FileStream.CanWrite" /> properties of the FileStream object. </param
-        >
+          />A constant that gets the <see cref="P:System.IO.FileStream.CanRead" /> and <see cref="P:System.IO.FileStream.CanWrite" /> properties of the FileStream object.
+        </param>
         <param name="ownsHandle">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if the file handle will be owned by this FileStream instance; otherwise, false. </param
-        >
+          />true if the file handle will be owned by this FileStream instance; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -580,12 +579,12 @@ class Directory {
           <paramref name="path" /> specified a read-only file and <paramref name="access" />  is not <see langword="Read" />  , or <paramref name="path" /> specified a directory.</exception
         >
         <exception cref="T:System.IO.PathTooLongException"
-          >The length of <paramref name="path" /> or the absolute path information for <paramref name="path " />exceeds the system-defined maximum length. </exception
-        >
+          >The length of <paramref name="path" /> or the absolute path information for <paramref name="path " />exceeds the system-defined maximum length.
+        </exception>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <para>
-            <paramref name="mode" /> or <paramref name="access" /> contain an invalid value. </para
-          >
+            <paramref name="mode" /> or <paramref name="access" /> contain an invalid value.
+          </para>
         </exception>
         <permission cref="T:System.Security.Permissions.FileIOPermission"
           >Requires permission to read, write, and append to files. See <see
@@ -637,22 +636,22 @@ class Directory {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A relative or absolute path for the file that the current FileStream object will encapsulate. </param
-        >
+          />A relative or absolute path for the file that the current FileStream object will encapsulate.
+        </param>
         <param name="mode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A constant that determines how to open or create the file. </param
-        >
+          />A constant that determines how to open or create the file.
+        </param>
         <param name="access">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A constant that determines how the file can be accessed by the FileStream object. This gets the <see cref="P:System.IO.FileStream.CanRead" /> and <see cref="P:System.IO.FileStream.CanWrite" /> properties of the FileStream object. <see cref="P:System.IO.FileStream.CanSeek" /> is true if <paramref name="path" /> specifies a disk file. </param
-        >
+          />A constant that determines how the file can be accessed by the FileStream object. This gets the <see cref="P:System.IO.FileStream.CanRead" /> and <see cref="P:System.IO.FileStream.CanWrite" /> properties of the FileStream object. <see cref="P:System.IO.FileStream.CanSeek" /> is true if <paramref name="path" /> specifies a disk file.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -709,15 +708,15 @@ class Directory {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A file handle for the file that this FileStream object will encapsulate. </param
-        >
+          />A file handle for the file that this FileStream object will encapsulate.
+        </param>
         <param name="access">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A constant that gets the <see cref="P:System.IO.FileStream.CanRead" /> and <see cref="P:System.IO.FileStream.CanWrite" /> properties of the FileStream object. </param
-        >
+          />A constant that gets the <see cref="P:System.IO.FileStream.CanRead" /> and <see cref="P:System.IO.FileStream.CanWrite" /> properties of the FileStream object.
+        </param>
         <param name="bufferSize">
           <attribution
             license="cc4"
@@ -730,8 +729,8 @@ class Directory {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if the handle was opened asynchronously (that is, in overlapped I/O mode); otherwise, false. </param
-        >
+          />true if the handle was opened asynchronously (that is, in overlapped I/O mode); otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -792,22 +791,22 @@ class Directory {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A file handle for the file that this FileStream object will encapsulate. </param
-        >
+          />A file handle for the file that this FileStream object will encapsulate.
+        </param>
         <param name="access">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A constant that gets the <see cref="P:System.IO.FileStream.CanRead" /> and <see cref="P:System.IO.FileStream.CanWrite" /> properties of the FileStream object. </param
-        >
+          />A constant that gets the <see cref="P:System.IO.FileStream.CanRead" /> and <see cref="P:System.IO.FileStream.CanWrite" /> properties of the FileStream object.
+        </param>
         <param name="ownsHandle">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if the file handle will be owned by this FileStream instance; otherwise, false. </param
-        >
+          />true if the file handle will be owned by this FileStream instance; otherwise, false.
+        </param>
         <param name="bufferSize">
           <attribution
             license="cc4"
@@ -868,12 +867,12 @@ class Directory {
           >The <paramref name="access" /> requested is not permitted by the operating system for the specified <paramref name="path" />.</exception
         >
         <exception cref="T:System.IO.PathTooLongException"
-          >The length of <paramref name="path" /> or the absolute path information for <paramref name="path " />exceeds the system-defined maximum length. </exception
-        >
+          >The length of <paramref name="path" /> or the absolute path information for <paramref name="path " />exceeds the system-defined maximum length.
+        </exception>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <para>
-            <paramref name="mode" />, <paramref name="access" />, or <paramref name="share " />contains an invalid value. </para
-          >
+            <paramref name="mode" />, <paramref name="access" />, or <paramref name="share " />contains an invalid value.
+          </para>
         </exception>
         <permission cref="T:System.Security.Permissions.FileIOPermission"
           >Requires permission to read, write, and append to files. See <see
@@ -922,29 +921,29 @@ class Directory {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A relative or absolute path for the file that the current FileStream object will encapsulate. </param
-        >
+          />A relative or absolute path for the file that the current FileStream object will encapsulate.
+        </param>
         <param name="mode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A constant that determines how to open or create the file. </param
-        >
+          />A constant that determines how to open or create the file.
+        </param>
         <param name="access">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A constant that determines how the file can be accessed by the FileStream object. This gets the <see cref="P:System.IO.FileStream.CanRead" /> and <see cref="P:System.IO.FileStream.CanWrite" /> properties of the FileStream object. <see cref="P:System.IO.FileStream.CanSeek" /> is true if <paramref name="path" /> specifies a disk file. </param
-        >
+          />A constant that determines how the file can be accessed by the FileStream object. This gets the <see cref="P:System.IO.FileStream.CanRead" /> and <see cref="P:System.IO.FileStream.CanWrite" /> properties of the FileStream object. <see cref="P:System.IO.FileStream.CanSeek" /> is true if <paramref name="path" /> specifies a disk file.
+        </param>
         <param name="share">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A constant that determines how the file will be shared by processes. </param
-        >
+          />A constant that determines how the file will be shared by processes.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1007,22 +1006,22 @@ class Directory {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A file handle for the file that this FileStream object will encapsulate. </param
-        >
+          />A file handle for the file that this FileStream object will encapsulate.
+        </param>
         <param name="access">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A constant that gets the <see cref="P:System.IO.FileStream.CanRead" /> and <see cref="P:System.IO.FileStream.CanWrite" /> properties of the FileStream object. </param
-        >
+          />A constant that gets the <see cref="P:System.IO.FileStream.CanRead" /> and <see cref="P:System.IO.FileStream.CanWrite" /> properties of the FileStream object.
+        </param>
         <param name="ownsHandle">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if the file handle will be owned by this FileStream instance; otherwise, false. </param
-        >
+          />true if the file handle will be owned by this FileStream instance; otherwise, false.
+        </param>
         <param name="bufferSize">
           <attribution
             license="cc4"
@@ -1035,8 +1034,8 @@ class Directory {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if the handle was opened asynchronously (that is, in overlapped I/O mode); otherwise, false. </param
-        >
+          />true if the handle was opened asynchronously (that is, in overlapped I/O mode); otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -1098,8 +1097,8 @@ class Directory {
           >The <paramref name="access" /> requested is not permitted by the operating system for the specified <paramref name="path" />.</exception
         >
         <exception cref="T:System.IO.PathTooLongException"
-          >The length of <paramref name="path" /> or the absolute path information for <paramref name="path " />exceeds the system-defined maximum length. </exception
-        >
+          >The length of <paramref name="path" /> or the absolute path information for <paramref name="path " />exceeds the system-defined maximum length.
+        </exception>
         <permission cref="T:System.Security.Permissions.FileIOPermission"
           >Requires permission to read, write, and append to files. See <see
             cref="F:System.Security.Permissions.FileIOPermissionAccess.Read"
@@ -1146,36 +1145,36 @@ class Directory {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A relative or absolute path for the file that the current FileStream object will encapsulate. </param
-        >
+          />A relative or absolute path for the file that the current FileStream object will encapsulate.
+        </param>
         <param name="mode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A constant that determines how to open or create the file. </param
-        >
+          />A constant that determines how to open or create the file.
+        </param>
         <param name="access">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A constant that determines how the file can be accessed by the FileStream object. This gets the <see cref="P:System.IO.FileStream.CanRead" /> and <see cref="P:System.IO.FileStream.CanWrite" /> properties of the FileStream object. <see cref="P:System.IO.FileStream.CanSeek" /> is true if <paramref name="path" /> specifies a disk file. </param
-        >
+          />A constant that determines how the file can be accessed by the FileStream object. This gets the <see cref="P:System.IO.FileStream.CanRead" /> and <see cref="P:System.IO.FileStream.CanWrite" /> properties of the FileStream object. <see cref="P:System.IO.FileStream.CanSeek" /> is true if <paramref name="path" /> specifies a disk file.
+        </param>
         <param name="share">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A constant that determines how the file will be shared by processes. </param
-        >
+          />A constant that determines how the file will be shared by processes.
+        </param>
         <param name="bufferSize">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A positive <see cref="T:System.Int32" /> value greater than 0 indicating the buffer size. For <paramref name="bufferSize" /> values between one and eight, the actual buffer size is set to eight bytes. </param
-        >
+          />A positive <see cref="T:System.Int32" /> value greater than 0 indicating the buffer size. For <paramref name="bufferSize" /> values between one and eight, the actual buffer size is set to eight bytes.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1239,8 +1238,8 @@ class Directory {
           >The <paramref name="access" /> requested is not permitted by the operating system for the specified <paramref name="path" />.</exception
         >
         <exception cref="T:System.IO.PathTooLongException"
-          >The length of <paramref name="path" /> or the absolute path information for <paramref name="path " />exceeds the system-defined maximum length. </exception
-        >
+          >The length of <paramref name="path" /> or the absolute path information for <paramref name="path " />exceeds the system-defined maximum length.
+        </exception>
         <permission cref="T:System.Security.Permissions.FileIOPermission"
           >Requires permission to read, write, and append to files. See <see
             cref="F:System.Security.Permissions.FileIOPermissionAccess.Read"
@@ -1287,43 +1286,43 @@ class Directory {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A relative or absolute path for the file that the current FileStream object will encapsulate. </param
-        >
+          />A relative or absolute path for the file that the current FileStream object will encapsulate.
+        </param>
         <param name="mode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A constant that determines how to open or create the file. </param
-        >
+          />A constant that determines how to open or create the file.
+        </param>
         <param name="access">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A constant that determines how the file can be accessed by the FileStream object. This gets the <see cref="P:System.IO.FileStream.CanRead" /> and <see cref="P:System.IO.FileStream.CanWrite" /> properties of the FileStream object. <see cref="P:System.IO.FileStream.CanSeek" /> is true if <paramref name="path" /> specifies a disk file. </param
-        >
+          />A constant that determines how the file can be accessed by the FileStream object. This gets the <see cref="P:System.IO.FileStream.CanRead" /> and <see cref="P:System.IO.FileStream.CanWrite" /> properties of the FileStream object. <see cref="P:System.IO.FileStream.CanSeek" /> is true if <paramref name="path" /> specifies a disk file.
+        </param>
         <param name="share">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A constant that determines how the file will be shared by processes. </param
-        >
+          />A constant that determines how the file will be shared by processes.
+        </param>
         <param name="bufferSize">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A positive <see cref="T:System.Int32" /> value greater than 0 indicating the buffer size. For <paramref name="bufferSize" /> values between one and eight, the actual buffer size is set to eight bytes. </param
-        >
+          />A positive <see cref="T:System.Int32" /> value greater than 0 indicating the buffer size. For <paramref name="bufferSize" /> values between one and eight, the actual buffer size is set to eight bytes.
+        </param>
         <param name="useAsync">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Specifies whether to use asynchronous I/O or synchronous I/O. However, note that the underlying operating system might not support asynchronous I/O, so when specifying true, the handle might be opened synchronously depending on the platform. When opened asynchronously, the <see cref="M:System.IO.FileStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" /> and <see cref="M:System.IO.FileStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" /> methods perform better on large reads or writes, but they might be much slower for small reads or writes. If the application is designed to take advantage of asynchronous I/O, set the <paramref name="useAsync" /> parameter to true. Using asynchronous I/O correctly can speed up applications by as much as a factor of 10, but using it without redesigning the application for asynchronous I/O can decrease performance by as much as a factor of 10. </param
-        >
+          />Specifies whether to use asynchronous I/O or synchronous I/O. However, note that the underlying operating system might not support asynchronous I/O, so when specifying true, the handle might be opened synchronously depending on the platform. When opened asynchronously, the <see cref="M:System.IO.FileStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" /> and <see cref="M:System.IO.FileStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" /> methods perform better on large reads or writes, but they might be much slower for small reads or writes. If the application is designed to take advantage of asynchronous I/O, set the <paramref name="useAsync" /> parameter to true. Using asynchronous I/O correctly can speed up applications by as much as a factor of 10, but using it without redesigning the application for asynchronous I/O can decrease performance by as much as a factor of 10.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1388,36 +1387,36 @@ class Directory {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A relative or absolute path for the file that the current FileStream object will encapsulate. </param
-        >
+          />A relative or absolute path for the file that the current FileStream object will encapsulate.
+        </param>
         <param name="mode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A constant that determines how to open or create the file. </param
-        >
+          />A constant that determines how to open or create the file.
+        </param>
         <param name="access">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A constant that determines how the file can be accessed by the FileStream object. This gets the <see cref="P:System.IO.FileStream.CanRead" /> and <see cref="P:System.IO.FileStream.CanWrite" /> properties of the FileStream object. <see cref="P:System.IO.FileStream.CanSeek" /> is true if <paramref name="path" /> specifies a disk file. </param
-        >
+          />A constant that determines how the file can be accessed by the FileStream object. This gets the <see cref="P:System.IO.FileStream.CanRead" /> and <see cref="P:System.IO.FileStream.CanWrite" /> properties of the FileStream object. <see cref="P:System.IO.FileStream.CanSeek" /> is true if <paramref name="path" /> specifies a disk file.
+        </param>
         <param name="share">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A constant that determines how the file will be shared by processes. </param
-        >
+          />A constant that determines how the file will be shared by processes.
+        </param>
         <param name="bufferSize">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A positive <see cref="T:System.Int32" /> value greater than 0 indicating the buffer size. For <paramref name="bufferSize" /> values between one and eight, the actual buffer size is set to eight bytes. </param
-        >
+          />A positive <see cref="T:System.Int32" /> value greater than 0 indicating the buffer size. For <paramref name="bufferSize" /> values between one and eight, the actual buffer size is set to eight bytes.
+        </param>
         <param name="options">
           <attribution
             license="cc4"
@@ -1679,8 +1678,8 @@ class Directory {
           <paramref name="array" /> is <see langword="null" />.</exception
         >
         <exception cref="T:System.ArgumentOutOfRangeException">
-          <paramref name="offset" /> or <paramref name="numBytes" /> is negative. </exception
-        >
+          <paramref name="offset" /> or <paramref name="numBytes" /> is negative.
+        </exception>
         <exception cref="T:System.IO.IOException"
           >The asynchronous read operation attempted to read past the end of the file.</exception
         >
@@ -1728,36 +1727,36 @@ class Directory {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The buffer to read data into. </param
-        >
+          />The buffer to read data into.
+        </param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte offset in <paramref name="array" /> at which to begin reading. </param
-        >
+          />The byte offset in <paramref name="array" /> at which to begin reading.
+        </param>
         <param name="numBytes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum number of bytes to read. </param
-        >
+          />The maximum number of bytes to read.
+        </param>
         <param name="userCallback">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The method to be called when the asynchronous read operation is completed. </param
-        >
+          />The method to be called when the asynchronous read operation is completed.
+        </param>
         <param name="stateObject">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A user-provided object that distinguishes this particular asynchronous read request from other requests. </param
-        >
+          />A user-provided object that distinguishes this particular asynchronous read request from other requests.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1803,8 +1802,7 @@ class Directory {
         >
         <exception cref="T:System.IO.IOException">An I/O error occurred.</exception>
         <exception cref="T:System.SystemNotSupportedException"
-          >The stream does not support writing. </exception
-        >
+          >The stream does not support writing. </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -1858,22 +1856,22 @@ class Directory {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum number of bytes to write. </param
-        >
+          />The maximum number of bytes to write.
+        </param>
         <param name="userCallback">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The method to be called when the asynchronous write operation is completed. </param
-        >
+          />The method to be called when the asynchronous write operation is completed.
+        </param>
         <param name="stateObject">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A user-provided object that distinguishes this particular asynchronous write request from other requests. </param
-        >
+          />A user-provided object that distinguishes this particular asynchronous write request from other requests.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2035,8 +2033,8 @@ the stream. To prevent data loss, always call <see langword="Close" /> on the hi
             <block subset="none" type="note">
    
    This method overrides <see cref="M:System.IO.Stream.Close" qualify="true" />.
-</block
-            >
+
+            </block>
           </para>
         </remarks>
       </Docs>
@@ -2089,8 +2087,8 @@ the stream. To prevent data loss, always call <see langword="Close" /> on the hi
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2159,8 +2157,8 @@ the stream. To prevent data loss, always call <see langword="Close" /> on the hi
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The reference to the pending asynchronous request to wait for. </param
-        >
+          />The reference to the pending asynchronous request to wait for.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2222,8 +2220,8 @@ the stream. To prevent data loss, always call <see langword="Close" /> on the hi
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The pending asynchronous I/O request. </param
-        >
+          />The pending asynchronous I/O request.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2288,8 +2286,8 @@ the stream. To prevent data loss, always call <see langword="Close" /> on the hi
             >A stream’s encoder is not flushed unless you explicitly call <see cref="M:System.IO.FileStream.Flush" /> or dispose of the object. Setting <see cref="P:System.IO.StreamWriter.AutoFlush" /> to true means that data will be flushed from the buffer to the stream, but the encoder state will not be flushed. This allows the encoder to keep its state (partial characters) so that it can encode the next block of characters correctly. This scenario affects UTF8 and UTF7 where certain characters can only be encoded after the encoder receives the adjacent character or characters.</para
           >
           <para
-            >Because a buffer can be used for either reading or writing, <see cref="M:System.IO.FileStream.Flush" /> performs the following two functions: </para
-          >
+            >Because a buffer can be used for either reading or writing, <see cref="M:System.IO.FileStream.Flush" /> performs the following two functions:
+          </para>
           <list type="bullet">
             <item>
               <para>Any data previously written to the buffer is copied to the file and the buffer is cleared except for its encoder state.</para>
@@ -2344,8 +2342,8 @@ the stream. To prevent data loss, always call <see langword="Close" /> on the hi
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to flush all intermediate file buffers; otherwise, false. </param
-        >
+          />true to flush all intermediate file buffers; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="FlushAsync">
@@ -2612,15 +2610,11 @@ the stream. To prevent data loss, always call <see langword="Close" /> on the hi
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The beginning of the range to lock. The value of this parameter must be equal to or greater than zero (0). </param
-        >
+          />The beginning of the range to lock. The value of this parameter must be equal to or greater than zero (0).
+        </param>
         <param name="length">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The range to be locked. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The range to be locked.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Name">
@@ -2774,22 +2768,22 @@ the stream. To prevent data loss, always call <see langword="Close" /> on the hi
             license="cc4"
             from="Microsoft"
             modified="false"
-          />When this method returns, contains the specified byte array with the values between <paramref name="offset" /> and (<paramref name="offset" /> + <paramref name="count" /> - 1<paramref name=")" /> replaced by the bytes read from the current source. </param
-        >
+          />When this method returns, contains the specified byte array with the values between <paramref name="offset" /> and (<paramref name="offset" /> + <paramref name="count" /> - 1<paramref name=")" /> replaced by the bytes read from the current source.
+        </param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte offset in <paramref name="array" /> at which the read bytes will be placed. </param
-        >
+          />The byte offset in <paramref name="array" /> at which the read bytes will be placed.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum number of bytes to read. </param
-        >
+          />The maximum number of bytes to read.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2835,8 +2829,8 @@ the stream. To prevent data loss, always call <see langword="Close" /> on the hi
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A task that represents the asynchronous read operation. The value of the <paramref name="TResult" /> parameter contains the total number of bytes read into the buffer. The result value can be less than the number of bytes requested if the number of bytes currently available is less than the requested number, or it can be 0 (zero) if the end of the stream has been reached. </para
-          >
+            >A task that represents the asynchronous read operation. The value of the <paramref name="TResult" /> parameter contains the total number of bytes read into the buffer. The result value can be less than the number of bytes requested if the number of bytes currently available is less than the requested number, or it can be 0 (zero) if the end of the stream has been reached.
+          </para>
         </returns>
         <param name="buffer">
           <attribution
@@ -3011,15 +3005,15 @@ the stream. To prevent data loss, always call <see langword="Close" /> on the hi
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The point relative to <paramref name="origin" /> from which to begin seeking. </param
-        >
+          />The point relative to <paramref name="origin" /> from which to begin seeking.
+        </param>
         <param name="origin">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Specifies the beginning, the end, or the current position as a reference point for <paramref name="offset" />, using a value of type <see cref="T:System.IO.SeekOrigin" />. </param
-        >
+          />Specifies the beginning, the end, or the current position as a reference point for <paramref name="offset" />, using a value of type <see cref="T:System.IO.SeekOrigin" />.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -3051,8 +3045,8 @@ the stream. To prevent data loss, always call <see langword="Close" /> on the hi
             >While the <see cref="T:System.IO.FileStream" /> class and <see cref="M:System.IO.FileStream.SetAccessControl(System.Security.AccessControl.FileSecurity)" /> can be used on an existing file, consider using the <see cref="M:System.IO.File.SetAccessControl(System.String,System.Security.AccessControl.FileSecurity)" /> method as it is easier to use.</para
           >
           <para
-            >The <see cref="M:System.IO.FileStream.SetAccessControl(System.Security.AccessControl.FileSecurity)" /> method applies access control list (ACL) entries to a file that represents the noninherited ACL list. </para
-          >
+            >The <see cref="M:System.IO.FileStream.SetAccessControl(System.Security.AccessControl.FileSecurity)" /> method applies access control list (ACL) entries to a file that represents the noninherited ACL list.
+          </para>
           <block subset="none" type="note">
             <para
               >The ACL specified for the <paramref name="fileSecurity" /> parameter replaces the existing ACL for the file. To add permissions for a new user, use the <see cref="M:System.IO.FileStream.GetAccessControl" /> method to obtain the existing ACL, modify it, and then use <see cref="M:System.IO.FileStream.SetAccessControl(System.Security.AccessControl.FileSecurity)" /> to apply it back to the file.</para
@@ -3140,8 +3134,8 @@ the stream. To prevent data loss, always call <see langword="Close" /> on the hi
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new length of the stream. </param
-        >
+          />The new length of the stream.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -3185,15 +3179,11 @@ the stream. To prevent data loss, always call <see langword="Close" /> on the hi
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The beginning of the range to unlock. </param
-        >
+          />The beginning of the range to unlock.
+        </param>
         <param name="length">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The range to be unlocked. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The range to be unlocked.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -3274,15 +3264,15 @@ the stream. To prevent data loss, always call <see langword="Close" /> on the hi
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based byte offset in <paramref name="array" /> from which to begin copying bytes to the stream. </param
-        >
+          />The zero-based byte offset in <paramref name="array" /> from which to begin copying bytes to the stream.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum number of bytes to write. </param
-        >
+          />The maximum number of bytes to write.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -3334,8 +3324,8 @@ the stream. To prevent data loss, always call <see langword="Close" /> on the hi
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The buffer to write data from. </param
-        >
+          />The buffer to write data from.
+        </param>
         <param name="offset">
           <attribution
             license="cc4"
@@ -3408,8 +3398,8 @@ the stream. To prevent data loss, always call <see langword="Close" /> on the hi
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A byte to write to the stream. </param
-        >
+          />A byte to write to the stream.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

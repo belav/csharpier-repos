@@ -22,8 +22,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Mark an operation with the <see cref="T:System.ServiceModel.FaultContractAttribute" /> attribute to declare one or more specific exception conditions that are added to the Web Service Description Language (WSDL) description of the service operation as explicit SOAP fault messages returned by the operation. </para
-      >
+        >Mark an operation with the <see cref="T:System.ServiceModel.FaultContractAttribute" /> attribute to declare one or more specific exception conditions that are added to the Web Service Description Language (WSDL) description of the service operation as explicit SOAP fault messages returned by the operation.
+      </para>
       <para
         >In all managed applications, processing errors are represented by <see cref="T:System.Exception" /> objects. In SOAP-based applications such as indigo1 applications, service methods communicate processing error information using SOAP fault messages. Because indigo2 applications execute under both types of error systems, any managed exception information that must be sent to the client must be converted from exceptions into SOAP faults. You can use the default service exception behaviors, or you can explicitly control whether -- and how -- exceptions are mapped to fault messages. For an overview of exceptions and SOAP faults in indigo2 applications, see <format type="text/html">
           <a href="a9696563-d404-4905-942d-1e0834c26dea"
@@ -32,8 +32,8 @@
         </format>.</para
       >
       <para
-        >It is recommended that service operations use the <see cref="T:System.ServiceModel.FaultContractAttribute" /> to formally specify all SOAP faults that a client can expect to receive in the normal course of an operation. It is also recommended that only that information a client must know is returned in a SOAP fault to minimize information disclosure. </para
-      >
+        >It is recommended that service operations use the <see cref="T:System.ServiceModel.FaultContractAttribute" /> to formally specify all SOAP faults that a client can expect to receive in the normal course of an operation. It is also recommended that only that information a client must know is returned in a SOAP fault to minimize information disclosure.
+      </para>
       <list type="bullet">
         <item>
           <para
@@ -52,14 +52,14 @@
         </item>
         <item>
           <para
-            >The <see cref="P:System.ServiceModel.FaultContractAttribute.HasProtectionLevel" /> indicates whether the fault message has a protection level specified, and if so, the <see cref="P:System.ServiceModel.FaultContractAttribute.ProtectionLevel" /> property controls that level of protection. </para
-          >
+            >The <see cref="P:System.ServiceModel.FaultContractAttribute.HasProtectionLevel" /> indicates whether the fault message has a protection level specified, and if so, the <see cref="P:System.ServiceModel.FaultContractAttribute.ProtectionLevel" /> property controls that level of protection.
+          </para>
         </item>
       </list>
       <block subset="none" type="note">
         <para
-          > If a fault message carries information that is sensitive or can lead to security problems, it is strongly recommended that the <see cref="P:System.ServiceModel.FaultContractAttribute.ProtectionLevel" /> property be set. </para
-        >
+          > If a fault message carries information that is sensitive or can lead to security problems, it is strongly recommended that the <see cref="P:System.ServiceModel.FaultContractAttribute.ProtectionLevel" /> property be set.
+        </para>
       </block>
       <list type="bullet">
         <item>
@@ -84,14 +84,14 @@
         </format>.</para
       >
       <para
-        >To return a specified fault from an operation marked with <see cref="T:System.ServiceModel.FaultContractAttribute" />, throw a <see cref="T:System.ServiceModel.FaultException`1" /> (where the type parameter is the serializable error information) when the managed exception occurs during the operation. indigo2 client applications surface the SOAP fault as the same type as was thrown in the client implementation -- that is, as a <see cref="T:System.ServiceModel.FaultException`1" /> (where the type parameter is the serializable error information). The <see cref="T:System.ServiceModel.FaultContractAttribute" /> can be used only to specify SOAP faults for two-way service operations and for asynchronous operation pairs; one-way operations do not support SOAP faults and therefore do not support <see cref="T:System.ServiceModel.FaultContractAttribute" />. </para
-      >
+        >To return a specified fault from an operation marked with <see cref="T:System.ServiceModel.FaultContractAttribute" />, throw a <see cref="T:System.ServiceModel.FaultException`1" /> (where the type parameter is the serializable error information) when the managed exception occurs during the operation. indigo2 client applications surface the SOAP fault as the same type as was thrown in the client implementation -- that is, as a <see cref="T:System.ServiceModel.FaultException`1" /> (where the type parameter is the serializable error information). The <see cref="T:System.ServiceModel.FaultContractAttribute" /> can be used only to specify SOAP faults for two-way service operations and for asynchronous operation pairs; one-way operations do not support SOAP faults and therefore do not support <see cref="T:System.ServiceModel.FaultContractAttribute" />.
+      </para>
       <block subset="none" type="note">
         <para
           >You can use any serializable type to convey error information. The only restriction in this version of indigo2 is that types specified in a <see cref="T:System.ServiceModel.FaultContractAttribute" /> must be serializable by the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />. For the serialization support the <see cref="T:System.Runtime.Serialization.DataContractSerializer" /> provides, see <format type="text/html">
             <a href="3d64837e-0a0c-4cc8-90ff-a5c6f313c63a">Data Contract Serializer</a>
-          </format>. </para
-        >
+          </format>.
+        </para>
       </block>
       <para
         >For example, to specify that clients can expect a SOAP fault that contains an <see cref="T:System.Int32" />, place that type parameter in the <see cref="T:System.ServiceModel.FaultContractAttribute" /> on your service method.</para
@@ -115,18 +115,18 @@
         >
       </block>
       <para
-        >To explicitly control the behavior of the application when an exception or <see cref="T:System.ServiceModel.FaultException`1" /> is thrown, implement the <see cref="T:System.ServiceModel.Dispatcher.IErrorHandler" /> interface on an <see cref="T:System.ServiceModel.Description.IServiceBehavior" />, <see cref="T:System.ServiceModel.Description.IContractBehavior" /> or <see cref="T:System.ServiceModel.Description.IEndpointBehavior" /> and assign it to the <see cref="P:System.ServiceModel.Dispatcher.ChannelDispatcher.Errorhandlers" /> property. <see cref="T:System.ServiceModel.Dispatcher.IErrorHandler" /> enables you to explicitly control the SOAP fault that is generated and whether to send it back to the client. </para
-      >
+        >To explicitly control the behavior of the application when an exception or <see cref="T:System.ServiceModel.FaultException`1" /> is thrown, implement the <see cref="T:System.ServiceModel.Dispatcher.IErrorHandler" /> interface on an <see cref="T:System.ServiceModel.Description.IServiceBehavior" />, <see cref="T:System.ServiceModel.Description.IContractBehavior" /> or <see cref="T:System.ServiceModel.Description.IEndpointBehavior" /> and assign it to the <see cref="P:System.ServiceModel.Dispatcher.ChannelDispatcher.Errorhandlers" /> property. <see cref="T:System.ServiceModel.Dispatcher.IErrorHandler" /> enables you to explicitly control the SOAP fault that is generated and whether to send it back to the client.
+      </para>
       <para
-        >To facilitate debugging, set the <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.IncludeExceptionDetailInFaults" /> to true in code or you can use the <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.IncludeExceptionDetailInFaults" /> in an application configuration file. When enabled, the service automatically returns exception information to the caller. These faults appear to the client as <see cref="T:System.ServiceModel.FaultException" /> exceptions. </para
-      >
+        >To facilitate debugging, set the <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.IncludeExceptionDetailInFaults" /> to true in code or you can use the <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.IncludeExceptionDetailInFaults" /> in an application configuration file. When enabled, the service automatically returns exception information to the caller. These faults appear to the client as <see cref="T:System.ServiceModel.FaultException" /> exceptions.
+      </para>
       <block subset="none" type="note">
         <para
           >Because managed exceptions can expose internal application information, setting <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.IncludeExceptionDetailInFaults" /> or <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.IncludeExceptionDetailInFaults" /> to true can permit indigo2 clients to obtain information about internal service operation exceptions, including personally identifiable or other sensitive information.</para
         >
         <para
-          >Therefore, setting <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.IncludeExceptionDetailInFaults" /> or <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.IncludeExceptionDetailInFaults" /> to true is only recommended as a way of temporarily debugging a service application. In addition, the WSDL for a method that returns unhandled managed exceptions in this way does not contain the contract for the <see cref="T:System.ServiceModel.FaultException`1" /> of type <see cref="T:System.String" />. Clients must expect the possibility of an unknown SOAP fault (returned to indigo2 clients as <see cref="T:System.ServiceModel.FaultException" /> objects) to obtain the debugging information properly. </para
-        >
+          >Therefore, setting <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.IncludeExceptionDetailInFaults" /> or <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.IncludeExceptionDetailInFaults" /> to true is only recommended as a way of temporarily debugging a service application. In addition, the WSDL for a method that returns unhandled managed exceptions in this way does not contain the contract for the <see cref="T:System.ServiceModel.FaultException`1" /> of type <see cref="T:System.String" />. Clients must expect the possibility of an unknown SOAP fault (returned to indigo2 clients as <see cref="T:System.ServiceModel.FaultException" /> objects) to obtain the debugging information properly.
+        </para>
       </block>
     </remarks>
     <summary>
@@ -156,8 +156,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.FaultContractAttribute" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.FaultContractAttribute" /> class.
+          </para>
         </summary>
         <param name="detailType">
           <attribution

@@ -44,8 +44,8 @@
       >
       <block subset="none" type="note">
         <para
-          >Locking on the instance or on the type, as with the <see cref="F:System.Runtime.CompilerServices.MethodImplOptions.Synchronized" /> flag, is not recommended for public types, because code other than your own can take locks on public types and instances. This might cause deadlocks or other synchronization problems. </para
-        >
+          >Locking on the instance or on the type, as with the <see cref="F:System.Runtime.CompilerServices.MethodImplOptions.Synchronized" /> flag, is not recommended for public types, because code other than your own can take locks on public types and instances. This might cause deadlocks or other synchronization problems.
+        </para>
       </block>
     </remarks>
     <summary>

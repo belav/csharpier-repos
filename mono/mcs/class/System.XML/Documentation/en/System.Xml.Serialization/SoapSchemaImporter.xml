@@ -71,8 +71,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.SoapSchemaImporter" /> class, specifying <see cref="T:System.Xml.Schema.XmlSchema" /> objects representing the XML schemas used by SOAP encoded messages defined in a WSDL document. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.SoapSchemaImporter" /> class, specifying <see cref="T:System.Xml.Schema.XmlSchema" /> objects representing the XML schemas used by SOAP encoded messages defined in a WSDL document.
+          </para>
         </summary>
         <param name="schemas">
           <attribution
@@ -114,8 +114,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.SoapSchemaImporter" /> class, specifying <see cref="T:System.Xml.Schema.XmlSchema" /> objects representing the XML schemas used by SOAP encoded messages, plus classes being generated for bindings defined in a WSDL document. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.SoapSchemaImporter" /> class, specifying <see cref="T:System.Xml.Schema.XmlSchema" /> objects representing the XML schemas used by SOAP encoded messages, plus classes being generated for bindings defined in a WSDL document.
+          </para>
         </summary>
         <param name="schemas">
           <attribution
@@ -180,8 +180,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.Serialization.ImportContext" /> that describes the context in which a set of schema are bound to .NET Framework code entities. </param
-        >
+          />An <see cref="T:System.Xml.Serialization.ImportContext" /> that describes the context in which a set of schema are bound to .NET Framework code entities.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -328,8 +328,8 @@
             </format> while generating client proxy classes or abstract server classes from a Web Services Description Language (WSDL) document. Instead of calling this method directly, use Wsdl.exe.</para
           >
           <para
-            >The <see cref="T:System.Xml.Serialization.SoapSchemaImporter" /> class is used only when a WSDL document specifies SOAP encoding, as described in Section 5 of the SOAP 1.1 specification. </para
-          >
+            >The <see cref="T:System.Xml.Serialization.SoapSchemaImporter" /> class is used only when a WSDL document specifies SOAP encoding, as described in Section 5 of the SOAP 1.1 specification.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

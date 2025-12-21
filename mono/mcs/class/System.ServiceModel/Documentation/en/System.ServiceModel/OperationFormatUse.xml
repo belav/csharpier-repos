@@ -23,8 +23,8 @@
   &lt;n2&gt;15.99&lt;/n2&gt;
  &lt;/Add&gt;</code>
       <para>
-        <see cref="F:System.ServiceModel.OperationFormatUse.Encoded" /> means that the schemas in the WSDL are abstract specifications that are encoded according to the rules found in SOAP 1.1 section 5. The following is an RPC/Encoded example. </para
-      >
+        <see cref="F:System.ServiceModel.OperationFormatUse.Encoded" /> means that the schemas in the WSDL are abstract specifications that are encoded according to the rules found in SOAP 1.1 section 5. The following is an RPC/Encoded example.
+      </para>
       <code>&lt;q1:Add xmlns:q1="http://Microsoft.ServiceModel.Samples"&gt;
   &lt;n1 xsi:type="xsd:double" xmlns=""&gt;100&lt;/n1&gt;
   &lt;n2 xsi:type="xsd:double" xmlns=""&gt;15.99&lt;/n2&gt;

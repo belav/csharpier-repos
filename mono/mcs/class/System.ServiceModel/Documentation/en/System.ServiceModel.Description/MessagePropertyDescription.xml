@@ -29,8 +29,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a message property specified by the <see cref="T:System.ServiceModel.MessagePropertyAttribute" />. </para
-      >
+        >Represents a message property specified by the <see cref="T:System.ServiceModel.MessagePropertyAttribute" />.
+      </para>
     </summary>
   </Docs>
   <Members>
@@ -52,8 +52,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.MessagePropertyDescription" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.MessagePropertyDescription" /> class.
+          </para>
         </summary>
         <param name="name">
           <attribution

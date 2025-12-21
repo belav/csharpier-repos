@@ -192,8 +192,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the specific implementation of <see cref="T:System.Security.Cryptography.DES" /> to use. </param
-        >
+          />The name of the specific implementation of <see cref="T:System.Security.Cryptography.DES" /> to use.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsSemiWeakKey">
@@ -237,8 +237,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The secret key to test for semi-weakness. </param
-        >
+          />The secret key to test for semi-weakness.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsWeakKey">
@@ -282,8 +282,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The secret key to test for weakness. </param
-        >
+          />The secret key to test for weakness.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Key">

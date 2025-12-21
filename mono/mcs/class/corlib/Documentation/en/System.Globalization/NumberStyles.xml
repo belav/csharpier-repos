@@ -37,8 +37,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Globalization.NumberStyles" /> enumeration consists of two kinds of enumeration values that are used to parse the string representations of numeric values: </para
-      >
+        >The <see cref="T:System.Globalization.NumberStyles" /> enumeration consists of two kinds of enumeration values that are used to parse the string representations of numeric values:
+      </para>
       <list type="bullet">
         <item>
           <para>Individual field flags, which define specific style elements (such as white space and group separators) that can be present in the parsed string.</para>

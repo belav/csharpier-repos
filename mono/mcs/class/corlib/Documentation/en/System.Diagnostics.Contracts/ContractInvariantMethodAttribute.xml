@@ -31,8 +31,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The invariant method can have any name, but it must return void and take no parameters. A suggested name for the method is ObjectInvariant. The body of the invariant method must consist solely of one or more calls to the <see cref="M:System.Diagnostics.Contracts.Contract.Invariant(System.Boolean)" /> method. A type can have more than one contract invariant method, which can be public or private. </para
-      >
+        >The invariant method can have any name, but it must return void and take no parameters. A suggested name for the method is ObjectInvariant. The body of the invariant method must consist solely of one or more calls to the <see cref="M:System.Diagnostics.Contracts.Contract.Invariant(System.Boolean)" /> method. A type can have more than one contract invariant method, which can be public or private.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -56,8 +56,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Diagnostics.Contracts.ContractInvariantMethodAttribute" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.Contracts.ContractInvariantMethodAttribute" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>

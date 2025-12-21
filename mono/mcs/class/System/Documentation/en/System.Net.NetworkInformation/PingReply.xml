@@ -19,8 +19,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Net.NetworkInformation.Ping" /> class attempts to send an Internet Control Message Protocol (ICMP) echo request to a remote computer and receive information back from the computer via an ICMP echo reply message. The <see cref="T:System.Net.NetworkInformation.Ping" /> class uses instances of the <see cref="T:System.Net.NetworkInformation.PingReply" /> class to return information about the operation, such as its status and the time taken to send the request and receive the reply. </para
-      >
+        >The <see cref="T:System.Net.NetworkInformation.Ping" /> class attempts to send an Internet Control Message Protocol (ICMP) echo request to a remote computer and receive information back from the computer via an ICMP echo reply message. The <see cref="T:System.Net.NetworkInformation.Ping" /> class uses instances of the <see cref="T:System.Net.NetworkInformation.PingReply" /> class to return information about the operation, such as its status and the time taken to send the request and receive the reply.
+      </para>
       <para
         >The <see cref="Overload:System.Net.NetworkInformation.Ping.Send" /> methods return instances of the <see cref="T:System.Net.NetworkInformation.PingReply" /> class directly. The <see cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" /> methods return a <see cref="T:System.Net.NetworkInformation.PingReply" /> in the <see cref="T:System.Net.NetworkInformation.PingCompletedEventHandler" /> method's <see cref="T:System.Net.NetworkInformation.PingCompletedEventArgs" /> parameter. The <see cref="T:System.Net.NetworkInformation.PingReply" /> is accessed through the <see cref="P:System.Net.NetworkInformation.PingCompletedEventArgs.Reply" /> property.</para
       >
@@ -85,8 +85,8 @@
             >The data buffer sent with the ICMP echo request is returned to the sender in the echo reply so the roundtrip travel time for a packet of a known size can be computed. The data buffer, combined with the <see cref="P:System.Net.NetworkInformation.PingOptions.DontFragment" /> option, can be used to discover the maximum transmission unit for the network path between the source and destination computers. For additional information, see "Traceroute" in RFC 1574, Section 3.2, available at http://www.ietf.org.</para
           >
           <para
-            >The default buffer used with <see cref="Overload:System.Net.NetworkInformation.Ping.Send" />  and <see cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" /> contains 32 bytes of data. </para
-          >
+            >The default buffer used with <see cref="Overload:System.Net.NetworkInformation.Ping.Send" />  and <see cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" /> contains 32 bytes of data.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

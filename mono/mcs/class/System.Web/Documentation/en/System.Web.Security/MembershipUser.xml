@@ -29,8 +29,8 @@
         >A <see cref="T:System.Web.Security.MembershipUser" /> object is returned by the <see cref="M:System.Web.Security.Membership.GetUser" /> and <see cref="M:System.Web.Security.Membership.CreateUser(System.String,System.String)" /> methods or as part of a <see cref="T:System.Web.Security.MembershipUserCollection" /> returned by the <see cref="M:System.Web.Security.Membership.GetAllUsers" />, <see cref="Overload:System.Web.Security.Membership.FindUsersByName" />, and <see cref="Overload:System.Web.Security.Membership.FindUsersByEmail" /> methods.</para
       >
       <para
-        >A <see cref="T:System.Web.Security.MembershipUser" /> object is required by the <see cref="M:System.Web.Security.Membership.UpdateUser(System.Web.Security.MembershipUser)" /> method when you want to update the information for an existing membership user. </para
-      >
+        >A <see cref="T:System.Web.Security.MembershipUser" /> object is required by the <see cref="M:System.Web.Security.Membership.UpdateUser(System.Web.Security.MembershipUser)" /> method when you want to update the information for an existing membership user.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

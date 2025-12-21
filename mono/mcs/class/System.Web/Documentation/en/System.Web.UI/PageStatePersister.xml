@@ -14,8 +14,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The HTTP requests and responses are inherently stateless. To maintain state information between HTTP requests, ASP.NET server pages can store <see cref="T:System.Web.UI.Page" /> state. This state, called view state, consists of page and control settings and data that make the page and controls appear as if they are the same ones that the user saw and interacted with on their last round trip to the server. Several mechanisms exist to store view state between successive requests to the same page. The abstract <see cref="T:System.Web.UI.PageStatePersister" /> class represents the base class for these state information storage mechanisms. </para
-      >
+        >The HTTP requests and responses are inherently stateless. To maintain state information between HTTP requests, ASP.NET server pages can store <see cref="T:System.Web.UI.Page" /> state. This state, called view state, consists of page and control settings and data that make the page and controls appear as if they are the same ones that the user saw and interacted with on their last round trip to the server. Several mechanisms exist to store view state between successive requests to the same page. The abstract <see cref="T:System.Web.UI.PageStatePersister" /> class represents the base class for these state information storage mechanisms.
+      </para>
       <para
         >The default view state persistence mechanism in ASP.NET is to maintain the state information as a Base64-encoded string in a hidden HTML element (an element with the type attribute set to "hidden") on the page. An ASP.NET page uses a <see cref="T:System.Web.UI.HiddenFieldPageStatePersister" /> object to perform this work, using an <see cref="T:System.Web.UI.IStateFormatter" /> instance to serialize and deserialize object state information. Alternately, you can store the view state for your pages in the <see cref="P:System.Web.HttpContext.Session" /> object on the server using the <see cref="T:System.Web.UI.SessionPageStatePersister" /> class for mobile clients with limited bandwidth and resources. In some cases, you might disable view state persistence altogether. If you do this, the result is that sometimes pages and controls that rely on state persistence do not behave correctly. For more information about page state management and view state, see <format type="text/html">
           <a href="0218d965-5d30-445b-b6a6-8870e70e63ce">ASP.NET State Management Overview</a>
@@ -90,8 +90,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets an object that represents the data that controls contained by the current <see cref="T:System.Web.UI.Page" /> object use to persist across HTTP requests to the Web server. </para
-          >
+            >Gets or sets an object that represents the data that controls contained by the current <see cref="T:System.Web.UI.Page" /> object use to persist across HTTP requests to the Web server.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -191,8 +191,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can override the <see cref="P:System.Web.UI.PageStatePersister.StateFormatter" /> property to provide your own view state formatter. </para
-          >
+            >You can override the <see cref="P:System.Web.UI.PageStatePersister.StateFormatter" /> property to provide your own view state formatter.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -227,8 +227,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets an object that represents the data that controls contained by the current <see cref="T:System.Web.UI.Page" /> object use to persist across HTTP requests to the Web server. </para
-          >
+            >Gets or sets an object that represents the data that controls contained by the current <see cref="T:System.Web.UI.Page" /> object use to persist across HTTP requests to the Web server.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>

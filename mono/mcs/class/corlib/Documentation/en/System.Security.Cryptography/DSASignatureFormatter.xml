@@ -88,8 +88,7 @@
             <code lang="C#">
 DSASignatureFormatter f = new DSASignatureFormatter ();
 f.SetKey (dsa);
-  </code
-            >
+  </code>
           </example>
         </remarks>
         <summary>
@@ -103,8 +102,8 @@ f.SetKey (dsa);
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The instance of the Digital Signature Algorithm (<see cref="T:System.Security.Cryptography.DSA" />) that holds the key. </param
-        >
+          />The instance of the Digital Signature Algorithm (<see cref="T:System.Security.Cryptography.DSA" />) that holds the key.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateSignature">
@@ -146,12 +145,8 @@ f.SetKey (dsa);
           <para>The digital signature for the specified data.</para>
         </returns>
         <param name="rgbHash">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The data to be signed. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The data to be signed.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetHashAlgorithm">
@@ -179,8 +174,8 @@ f.SetKey (dsa);
         <remarks>
           <para>
 This class only support the <see cref="T:System.Security.Cryptography.SHA1" /> hash algorithm. Any name that resolves in another hash algorithm (or anything else) will throw a <see cref="T:System.Security.Cryptography.CryptographicUnexpectedOperationException" />. This is a restriction of the DSA algorithm (FIPS 186) not of the class library.
-</para
-          >
+
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -193,8 +188,8 @@ This class only support the <see cref="T:System.Security.Cryptography.SHA1" /> h
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the hash algorithm to use for the signature formatter. </param
-        >
+          />The name of the hash algorithm to use for the signature formatter.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetKey">
@@ -220,8 +215,8 @@ This class only support the <see cref="T:System.Security.Cryptography.SHA1" /> h
       </Parameters>
       <Docs>
         <remarks>
-          <see cref="M:System.Security.Cryptography.DSASignatureFormatter.CreateSignature" /> will only be successful if the key object has it's private key available. </remarks
-        >
+          <see cref="M:System.Security.Cryptography.DSASignatureFormatter.CreateSignature" /> will only be successful if the key object has it's private key available.
+        </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -233,8 +228,8 @@ This class only support the <see cref="T:System.Security.Cryptography.SHA1" /> h
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The instance of <see cref="T:System.Security.Cryptography.DSA" /> that holds the key. </param
-        >
+          />The instance of <see cref="T:System.Security.Cryptography.DSA" /> that holds the key.
+        </param>
       </Docs>
     </Member>
   </Members>

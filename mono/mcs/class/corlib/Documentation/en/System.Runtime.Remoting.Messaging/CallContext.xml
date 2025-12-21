@@ -79,8 +79,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the data slot to empty. </param
-        >
+          />The name of the data slot to empty.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetData">
@@ -118,8 +118,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the item in the call context. </param
-        >
+          />The name of the item in the call context.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetHeaders">
@@ -205,8 +205,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the item in the logical call context. </param
-        >
+          />The name of the item in the logical call context.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="LogicalSetData">
@@ -241,15 +241,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name with which to associate the new item in the logical call context. </param
-        >
+          />The name with which to associate the new item in the logical call context.
+        </param>
         <param name="data">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to store in the logical call context, this object must be serializable. </param
-        >
+          />The object to store in the logical call context, this object must be serializable.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetData">
@@ -285,15 +285,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name with which to associate the new item in the call context. </param
-        >
+          />The name with which to associate the new item in the call context.
+        </param>
         <param name="data">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to store in the call context. </param
-        >
+          />The object to store in the call context.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetHeaders">
@@ -328,8 +328,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Runtime.Remoting.Messaging.Header" /> array of the headers that are to be sent along with the method call. </param
-        >
+          />A <see cref="T:System.Runtime.Remoting.Messaging.Header" /> array of the headers that are to be sent along with the method call.
+        </param>
       </Docs>
     </Member>
   </Members>

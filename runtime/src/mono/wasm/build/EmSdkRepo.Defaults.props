@@ -37,8 +37,7 @@
 
     <_EMSDKMissingPaths
       Condition="'$(_EMSDKMissingPaths)' == '' and ('$(EmscriptenPythonToolsPath)' == '' or !Exists('$(EmscriptenPythonToolsPath)'))"
-      >%24(EmscriptenPythonToolsPath)=$(EmscriptenPythonToolsPath) </_EMSDKMissingPaths
-    >
+      >%24(EmscriptenPythonToolsPath)=$(EmscriptenPythonToolsPath) </_EMSDKMissingPaths>
   </PropertyGroup>
 
   <!-- Paths to be added to environment variable `PATH` -->

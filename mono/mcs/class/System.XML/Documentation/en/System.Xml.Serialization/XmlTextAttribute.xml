@@ -54,8 +54,8 @@
       <para
         >The <format type="text/html">
           <a href="a6e6e65c-347f-4494-9457-653bf29baac2">XML Schema Definition Tool (Xsd.exe)</a>
-        </format> occasionally generates the <see cref="T:System.Xml.Serialization.XmlTextAttribute" /> when creating classes from an XML Schema definition (XSD) file. This occurs when the schema contains a complexType with mixed content; in that case, the corresponding class contains a member that returns a string array to which the <see cref="T:System.Xml.Serialization.XmlTextAttribute" /> is applied. For example, when the Xml Schema Definition tool processes this schema: </para
-      >
+        </format> occasionally generates the <see cref="T:System.Xml.Serialization.XmlTextAttribute" /> when creating classes from an XML Schema definition (XSD) file. This occurs when the schema contains a complexType with mixed content; in that case, the corresponding class contains a member that returns a string array to which the <see cref="T:System.Xml.Serialization.XmlTextAttribute" /> is applied. For example, when the Xml Schema Definition tool processes this schema:
+      </para>
       <code> &lt;xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="" 
  xmlns:xs="http://www.w3.org/2001/XMLSchema"&gt;
    &lt;xs:element name="LinkList" type="LinkList" /&gt;
@@ -151,8 +151,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of the member to be serialized. </param
-        >
+          />The <see cref="T:System.Type" /> of the member to be serialized.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DataType">
@@ -184,8 +184,8 @@
               <a href="3c03f855-f931-47ff-bbc6-50c0367a16e4"
                 >The XML Schema Definition Tool and XML Serialization</a
               >
-            </format>. </para
-          >
+            </format>.
+          </para>
           <para>The following table lists the XML Schema simple data types with their .NET equivalents.</para>
           <para
             >For the XML Schema base64Binary and hexBinary data types, use an array of <see cref="T:System.Byte" /> structures, and apply a <see cref="T:System.Xml.Serialization.XmlTextAttribute" /> with the <see cref="P:System.Xml.Serialization.XmlTextAttribute.DataType" /> set to "base64Binary" or "hexBinary", as appropriate. For the XML Schema time and date data types, use the <see cref="T:System.DateTime" /> type and apply the <see cref="T:System.Xml.Serialization.XmlTextAttribute" /> with the <see cref="P:System.Xml.Serialization.XmlTextAttribute.DataType" /> set to "date" or "time".</para

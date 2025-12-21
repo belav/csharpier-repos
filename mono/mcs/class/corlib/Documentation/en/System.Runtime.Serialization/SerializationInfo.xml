@@ -88,15 +88,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of the object to serialize. </param
-        >
+          />The <see cref="T:System.Type" /> of the object to serialize.
+        </param>
         <param name="converter">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.IFormatterConverter" /> used during deserialization. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.IFormatterConverter" /> used during deserialization.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddValue">
@@ -154,15 +154,15 @@ End Sub</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name to associate with the value, so it can be deserialized later. </param
-        >
+          />The name to associate with the value, so it can be deserialized later.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The Boolean value to serialize. </param
-        >
+          />The Boolean value to serialize.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddValue">
@@ -188,8 +188,8 @@ End Sub</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If two values are added with names that differ only by case, no exception will be thrown, which is not a recommended practice. However, adding two values with the exact same name will cause the <see cref="T:System.Runtime.Serialization.SerializationException" /> to be thrown. </para
-          >
+            >If two values are added with names that differ only by case, no exception will be thrown, which is not a recommended practice. However, adding two values with the exact same name will cause the <see cref="T:System.Runtime.Serialization.SerializationException" /> to be thrown.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -202,15 +202,15 @@ End Sub</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name to associate with the value, so it can be deserialized later. </param
-        >
+          />The name to associate with the value, so it can be deserialized later.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte value to serialize. </param
-        >
+          />The byte value to serialize.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddValue">
@@ -236,8 +236,8 @@ End Sub</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If two values are added with names that differ only by case, no exception will be thrown, which is not a recommended practice. However, adding two values with the exact same name will cause the <see cref="T:System.Runtime.Serialization.SerializationException" /> to be thrown. </para
-          >
+            >If two values are added with names that differ only by case, no exception will be thrown, which is not a recommended practice. However, adding two values with the exact same name will cause the <see cref="T:System.Runtime.Serialization.SerializationException" /> to be thrown.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -250,15 +250,15 @@ End Sub</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name to associate with the value, so it can be deserialized later. </param
-        >
+          />The name to associate with the value, so it can be deserialized later.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character value to serialize. </param
-        >
+          />The character value to serialize.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddValue">
@@ -284,8 +284,8 @@ End Sub</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If two values are added with names that differ only by case, no exception will be thrown, which is not a recommended practice. However, adding two values with the exact same name will cause the <see cref="T:System.Runtime.Serialization.SerializationException" /> to be thrown. </para
-          >
+            >If two values are added with names that differ only by case, no exception will be thrown, which is not a recommended practice. However, adding two values with the exact same name will cause the <see cref="T:System.Runtime.Serialization.SerializationException" /> to be thrown.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -298,15 +298,15 @@ End Sub</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name to associate with the value, so it can be deserialized later. </param
-        >
+          />The name to associate with the value, so it can be deserialized later.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.DateTime" /> value to serialize. </param
-        >
+          />The <see cref="T:System.DateTime" /> value to serialize.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddValue">
@@ -332,8 +332,8 @@ End Sub</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If two values are added with names that differ only by case, no exception will be thrown, which is not a recommended practice. However, adding two values with the exact same name will cause the <see cref="T:System.Runtime.Serialization.SerializationException" /> to be thrown. </para
-          >
+            >If two values are added with names that differ only by case, no exception will be thrown, which is not a recommended practice. However, adding two values with the exact same name will cause the <see cref="T:System.Runtime.Serialization.SerializationException" /> to be thrown.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -346,15 +346,15 @@ End Sub</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name to associate with the value, so it can be deserialized later. </param
-        >
+          />The name to associate with the value, so it can be deserialized later.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The decimal value to serialize. </param
-        >
+          />The decimal value to serialize.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddValue">
@@ -380,8 +380,8 @@ End Sub</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If two values are added with names that differ only by case, no exception will be thrown, which is not a recommended practice. However, adding two values with the exact same name will cause the <see cref="T:System.Runtime.Serialization.SerializationException" /> to be thrown. </para
-          >
+            >If two values are added with names that differ only by case, no exception will be thrown, which is not a recommended practice. However, adding two values with the exact same name will cause the <see cref="T:System.Runtime.Serialization.SerializationException" /> to be thrown.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -394,15 +394,15 @@ End Sub</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name to associate with the value, so it can be deserialized later. </param
-        >
+          />The name to associate with the value, so it can be deserialized later.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The double value to serialize. </param
-        >
+          />The double value to serialize.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddValue">
@@ -428,8 +428,8 @@ End Sub</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If two values are added with names that differ only by case, no exception will be thrown, which is not a recommended practice. However, adding two values with the exact same name will cause the <see cref="T:System.Runtime.Serialization.SerializationException" /> to be thrown. </para
-          >
+            >If two values are added with names that differ only by case, no exception will be thrown, which is not a recommended practice. However, adding two values with the exact same name will cause the <see cref="T:System.Runtime.Serialization.SerializationException" /> to be thrown.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -442,15 +442,15 @@ End Sub</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name to associate with the value, so it can be deserialized later. </param
-        >
+          />The name to associate with the value, so it can be deserialized later.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The Int16 value to serialize. </param
-        >
+          />The Int16 value to serialize.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddValue">
@@ -476,8 +476,8 @@ End Sub</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If two values are added with names that differ only by case, no exception will be thrown, which is not a recommended practice. However, adding two values with the exact same name will cause the <see cref="T:System.Runtime.Serialization.SerializationException" /> to be thrown. </para
-          >
+            >If two values are added with names that differ only by case, no exception will be thrown, which is not a recommended practice. However, adding two values with the exact same name will cause the <see cref="T:System.Runtime.Serialization.SerializationException" /> to be thrown.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -490,15 +490,15 @@ End Sub</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name to associate with the value, so it can be deserialized later. </param
-        >
+          />The name to associate with the value, so it can be deserialized later.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The Int32 value to serialize. </param
-        >
+          />The Int32 value to serialize.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddValue">
@@ -524,8 +524,8 @@ End Sub</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If two values are added with names that differ only by case, no exception will be thrown, which is not a recommended practice. However, adding two values with the exact same name will cause the <see cref="T:System.Runtime.Serialization.SerializationException" /> to be thrown. </para
-          >
+            >If two values are added with names that differ only by case, no exception will be thrown, which is not a recommended practice. However, adding two values with the exact same name will cause the <see cref="T:System.Runtime.Serialization.SerializationException" /> to be thrown.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -538,15 +538,15 @@ End Sub</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name to associate with the value, so it can be deserialized later. </param
-        >
+          />The name to associate with the value, so it can be deserialized later.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The Int64 value to serialize. </param
-        >
+          />The Int64 value to serialize.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddValue">
@@ -572,11 +572,11 @@ End Sub</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The object contained in the <paramref name="value" /> parameter is serialized as the type returned by <paramref name="value" />. </para
-          >
+            >The object contained in the <paramref name="value" /> parameter is serialized as the type returned by <paramref name="value" />.
+          </para>
           <para
-            >If two values are added with names that differ only by case, no exception will be thrown, which is not a recommended practice. However, adding two values with the exact same name will cause the <see cref="T:System.Runtime.Serialization.SerializationException" /> to be thrown. </para
-          >
+            >If two values are added with names that differ only by case, no exception will be thrown, which is not a recommended practice. However, adding two values with the exact same name will cause the <see cref="T:System.Runtime.Serialization.SerializationException" /> to be thrown.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -589,15 +589,15 @@ End Sub</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name to associate with the value, so it can be deserialized later. </param
-        >
+          />The name to associate with the value, so it can be deserialized later.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to be serialized. Any children of this object will automatically be serialized. </param
-        >
+          />The value to be serialized. Any children of this object will automatically be serialized.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddValue">
@@ -628,8 +628,8 @@ End Sub</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If two values are added with names that differ only by case, no exception will be thrown, which is not a recommended practice. However, adding two values with the exact same name will cause the <see cref="T:System.Runtime.Serialization.SerializationException" /> to be thrown. </para
-          >
+            >If two values are added with names that differ only by case, no exception will be thrown, which is not a recommended practice. However, adding two values with the exact same name will cause the <see cref="T:System.Runtime.Serialization.SerializationException" /> to be thrown.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -642,15 +642,15 @@ End Sub</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name to associate with the value, so it can be deserialized later. </param
-        >
+          />The name to associate with the value, so it can be deserialized later.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The Sbyte value to serialize. </param
-        >
+          />The Sbyte value to serialize.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddValue">
@@ -690,15 +690,15 @@ End Sub</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name to associate with the value, so it can be deserialized later. </param
-        >
+          />The name to associate with the value, so it can be deserialized later.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The single value to serialize. </param
-        >
+          />The single value to serialize.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddValue">
@@ -743,15 +743,15 @@ End Sub</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name to associate with the value, so it can be deserialized later. </param
-        >
+          />The name to associate with the value, so it can be deserialized later.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The UInt16 value to serialize. </param
-        >
+          />The UInt16 value to serialize.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddValue">
@@ -796,15 +796,15 @@ End Sub</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name to associate with the value, so it can be deserialized later. </param
-        >
+          />The name to associate with the value, so it can be deserialized later.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The UInt32 value to serialize. </param
-        >
+          />The UInt32 value to serialize.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddValue">
@@ -849,15 +849,15 @@ End Sub</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name to associate with the value, so it can be deserialized later. </param
-        >
+          />The name to associate with the value, so it can be deserialized later.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The UInt64 value to serialize. </param
-        >
+          />The UInt64 value to serialize.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddValue">
@@ -888,8 +888,8 @@ End Sub</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The assigned type is always the type of the object, or one of its parents.</para>
           <para
-            >If two values are added with names that differ only by case, no exception will be thrown, which is not a recommended practice. However, adding two values with the exact same name will cause the <see cref="T:System.Runtime.Serialization.SerializationException" /> to be thrown. </para
-          >
+            >If two values are added with names that differ only by case, no exception will be thrown, which is not a recommended practice. However, adding two values with the exact same name will cause the <see cref="T:System.Runtime.Serialization.SerializationException" /> to be thrown.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -903,22 +903,22 @@ End Sub</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name to associate with the value, so it can be deserialized later. </param
-        >
+          />The name to associate with the value, so it can be deserialized later.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to be serialized. Any children of this object will automatically be serialized. </param
-        >
+          />The value to be serialized. Any children of this object will automatically be serialized.
+        </param>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> to associate with the current object. This parameter must always be the type of the object itself or of one of its base classes. </param
-        >
+          />The <see cref="T:System.Type" /> to associate with the current object. This parameter must always be the type of the object itself or of one of its base classes.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AssemblyName">
@@ -1022,8 +1022,8 @@ End Sub</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name associated with the value to retrieve. </param
-        >
+          />The name associated with the value to retrieve.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetByte">
@@ -1066,8 +1066,8 @@ End Sub</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name associated with the value to retrieve. </param
-        >
+          />The name associated with the value to retrieve.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetChar">
@@ -1156,8 +1156,8 @@ End Sub</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name associated with the value to retrieve.  </param
-        >
+          />The name associated with the value to retrieve.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetDecimal">
@@ -1202,8 +1202,8 @@ End Sub</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name associated with the value to retrieve.  </param
-        >
+          />The name associated with the value to retrieve.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetDouble">
@@ -1374,8 +1374,8 @@ End Sub</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the value to retrieve. </param
-        >
+          />The name of the value to retrieve.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetInt64">
@@ -1513,8 +1513,8 @@ End Sub</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the value to retrieve. </param
-        >
+          />The name of the value to retrieve.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetString">
@@ -1761,8 +1761,8 @@ End Sub</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of the value to retrieve. If the stored value cannot be converted to this type, the system will throw a <see cref="T:System.InvalidCastException" />. </param
-        >
+          />The <see cref="T:System.Type" /> of the value to retrieve. If the stored value cannot be converted to this type, the system will throw a <see cref="T:System.InvalidCastException" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsAssemblyNameSetExplicit">
@@ -1879,8 +1879,8 @@ End Sub</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of the object to serialize. </param
-        >
+          />The <see cref="T:System.Type" /> of the object to serialize.
+        </param>
       </Docs>
     </Member>
   </Members>

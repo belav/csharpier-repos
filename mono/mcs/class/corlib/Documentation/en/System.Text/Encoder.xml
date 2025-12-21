@@ -76,8 +76,7 @@ public class EncoderExample
    }
 
 }
-</code
-      >
+</code>
       <para>The output is</para>
       <c>
         <para>Bytes1: '69' '110' '99' </para>
@@ -104,8 +103,8 @@ public class EncoderExample
         <h2>Version Considerations</h2>
       </format>
       <para
-        >A <see cref="T:System.Text.Decoder" /> or <see cref="T:System.Text.Encoder" /> object can be serialized during a conversion operation. The state of the object is retained if it is deserialized in the same version of the .NET Framework, but lost if it is deserialized in another version. </para
-      >
+        >A <see cref="T:System.Text.Decoder" /> or <see cref="T:System.Text.Encoder" /> object can be serialized during a conversion operation. The state of the object is retained if it is deserialized in the same version of the .NET Framework, but lost if it is deserialized in another version.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -272,8 +271,8 @@ public class EncoderExample
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Text.EncoderFallback" /> object represents an error handler that is invoked when a character cannot be converted into an encoded byte sequence. </para
-          >
+            >The <see cref="T:System.Text.EncoderFallback" /> object represents an error handler that is invoked when a character cannot be converted into an encoded byte sequence.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -311,8 +310,8 @@ public class EncoderExample
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Text.Encoder.FallbackBuffer" /> object represents data used by the <see cref="T:System.Text.EncoderFallback" /> object. The <see cref="T:System.Text.EncoderFallback" /> object represents an error handler that is invoked when a character cannot be converted into an encoded byte sequence. </para
-          >
+            >The <see cref="P:System.Text.Encoder.FallbackBuffer" /> object represents data used by the <see cref="T:System.Text.EncoderFallback" /> object. The <see cref="T:System.Text.EncoderFallback" /> object represents an error handler that is invoked when a character cannot be converted into an encoded byte sequence.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -377,22 +376,22 @@ public class EncoderExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A pointer to the first character to encode. </param
-        >
+          />A pointer to the first character to encode.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters to encode. </param
-        >
+          />The number of characters to encode.
+        </param>
         <param name="flush">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to simulate clearing the internal state of the encoder after the calculation; otherwise, false. </param
-        >
+          />true to simulate clearing the internal state of the encoder after the calculation; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetByteCount">
@@ -425,8 +424,8 @@ public class EncoderExample
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="chars " /> is <see langword="null" />. </exception
-        >
+          <paramref name="chars " /> is <see langword="null" />.
+        </exception>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <para>Return value is greater than <see cref="F:System.Int32.MaxValue" />. </para>
           <para>-or- </para>
@@ -461,29 +460,29 @@ public class EncoderExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character array containing the set of characters to encode. </param
-        >
+          />The character array containing the set of characters to encode.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the first character to encode. </param
-        >
+          />The index of the first character to encode.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters to encode. </param
-        >
+          />The number of characters to encode.
+        </param>
         <param name="flush">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to simulate clearing the internal state of the encoder after the calculation; otherwise, false. </param
-        >
+          />true to simulate clearing the internal state of the encoder after the calculation; otherwise, false.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -527,8 +526,8 @@ public class EncoderExample
             >Remember that the <see cref="T:System.Text.Encoder" /> object saves state between calls to <see cref="M:System.Text.Encoder.GetBytes(System.Char*,System.Int32,System.Byte*,System.Int32,System.Boolean)" />. When the application is done with a stream of data, it should set the <paramref name="flush" /> parameter to true in the last call to GetBytes to make sure that the state information is flushed and that the encoded bytes are properly terminated. With this setting, the encoder ignores invalid bytes at the end of the data block, such as unmatched surrogates or incomplete combining sequences, and clears the internal buffer.</para
           >
           <para
-            >To calculate the exact buffer size that GetBytes requires to store the resulting characters, the application should use <see cref="M:System.Text.Encoder.GetByteCount(System.Char*,System.Int32,System.Boolean)" />. </para
-          >
+            >To calculate the exact buffer size that GetBytes requires to store the resulting characters, the application should use <see cref="M:System.Text.Encoder.GetByteCount(System.Char*,System.Int32,System.Boolean)" />.
+          </para>
           <para
             >If GetBytes is called with <paramref name="flush" /> set to false, the encoder stores trailing bytes at the end of the data block in an internal buffer and uses them in the next encoding operation. The application should call GetByteCount on a block of data immediately before calling GetBytes on the same block, so that any trailing characters from the previous block are included in the calculation.</para
           >
@@ -551,36 +550,36 @@ public class EncoderExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A pointer to the first character to encode. </param
-        >
+          />A pointer to the first character to encode.
+        </param>
         <param name="charCount">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters to encode. </param
-        >
+          />The number of characters to encode.
+        </param>
         <param name="bytes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A pointer to the location at which to start writing the resulting sequence of bytes. </param
-        >
+          />A pointer to the location at which to start writing the resulting sequence of bytes.
+        </param>
         <param name="byteCount">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum number of bytes to write. </param
-        >
+          />The maximum number of bytes to write.
+        </param>
         <param name="flush">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to clear the internal state of the encoder after the conversion; otherwise, false. </param
-        >
+          />true to clear the internal state of the encoder after the conversion; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetBytes">
@@ -643,8 +642,8 @@ public class EncoderExample
             >Remember that the <see cref="T:System.Text.Encoder" /> object saves state between calls to <see cref="M:System.Text.Encoder.GetBytes(System.Char[],System.Int32,System.Int32,System.Byte[],System.Int32,System.Boolean)" />. When the application is done with a stream of data, it should set the <paramref name="flush" /> parameter to true in the last call to GetBytes to make sure that the state information is flushed and that the encoded bytes are properly terminated. With this setting, the encoder ignores invalid bytes at the end of the data block, such as unmatched surrogates or incomplete combining sequences, and clears the internal buffer.</para
           >
           <para
-            >To calculate the exact buffer size that GetBytes requires to store the resulting characters, the application should use <see cref="M:System.Text.Encoder.GetByteCount(System.Char[],System.Int32,System.Int32,System.Boolean)" />. </para
-          >
+            >To calculate the exact buffer size that GetBytes requires to store the resulting characters, the application should use <see cref="M:System.Text.Encoder.GetByteCount(System.Char[],System.Int32,System.Int32,System.Boolean)" />.
+          </para>
           <para
             >If GetBytes is called with <paramref name="flush" /> set to false, the encoder stores trailing bytes at the end of the data block in an internal buffer and uses them in the next encoding operation. The application should call GetByteCount on a block of data immediately before calling GetBytes on the same block, so that any trailing characters from the previous block are included in the calculation.</para
           >
@@ -665,43 +664,43 @@ public class EncoderExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character array containing the set of characters to encode. </param
-        >
+          />The character array containing the set of characters to encode.
+        </param>
         <param name="charIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the first character to encode. </param
-        >
+          />The index of the first character to encode.
+        </param>
         <param name="charCount">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters to encode. </param
-        >
+          />The number of characters to encode.
+        </param>
         <param name="bytes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte array to contain the resulting sequence of bytes. </param
-        >
+          />The byte array to contain the resulting sequence of bytes.
+        </param>
         <param name="byteIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index at which to start writing the resulting sequence of bytes. </param
-        >
+          />The index at which to start writing the resulting sequence of bytes.
+        </param>
         <param name="flush">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to clear the internal state of the encoder after the conversion; otherwise, false. </param
-        >
+          />true to clear the internal state of the encoder after the conversion; otherwise, false.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

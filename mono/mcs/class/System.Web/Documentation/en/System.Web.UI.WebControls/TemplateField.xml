@@ -20,8 +20,8 @@
         >The <see cref="T:System.Web.UI.WebControls.TemplateField" /> class is used by data-bound controls (such as <see cref="T:System.Web.UI.WebControls.GridView" /> and <see cref="T:System.Web.UI.WebControls.DetailsView" />) to display custom content for each record displayed. When you need to display content in a data-bound control that is not provided by one of the predefined data control fields (such as <see cref="T:System.Web.UI.WebControls.BoundField" />), use the <see cref="T:System.Web.UI.WebControls.TemplateField" /> class to create your custom user interface (UI). The <see cref="T:System.Web.UI.WebControls.TemplateField" /> object is displayed differently depending on the data-bound control in which it is used. For example, the <see cref="T:System.Web.UI.WebControls.GridView" /> control displays a <see cref="T:System.Web.UI.WebControls.TemplateField" /> object as a column, and the <see cref="T:System.Web.UI.WebControls.DetailsView" /> control displays it as a row.</para
       >
       <para
-        >You can define a custom template for the different parts of the <see cref="T:System.Web.UI.WebControls.TemplateField" /> object using the templates listed in the following table. </para
-      >
+        >You can define a custom template for the different parts of the <see cref="T:System.Web.UI.WebControls.TemplateField" /> object using the templates listed in the following table.
+      </para>
       <list type="table">
         <listheader>
           <item>
@@ -139,8 +139,8 @@
           </term>
           <description>
             <para
-              >The style settings for the child Web server controls of the <see cref="T:System.Web.UI.WebControls.TemplateField" /> object. </para
-            >
+              >The style settings for the child Web server controls of the <see cref="T:System.Web.UI.WebControls.TemplateField" /> object.
+            </para>
           </description>
         </item>
         <item>
@@ -151,8 +151,8 @@
           </term>
           <description>
             <para
-              >The style settings for the footer section of the <see cref="T:System.Web.UI.WebControls.TemplateField" /> object. </para
-            >
+              >The style settings for the footer section of the <see cref="T:System.Web.UI.WebControls.TemplateField" /> object.
+            </para>
           </description>
         </item>
         <item>
@@ -163,8 +163,8 @@
           </term>
           <description>
             <para
-              >The style settings for the header section of the <see cref="T:System.Web.UI.WebControls.TemplateField" /> object. </para
-            >
+              >The style settings for the header section of the <see cref="T:System.Web.UI.WebControls.TemplateField" /> object.
+            </para>
           </description>
         </item>
         <item>
@@ -175,8 +175,8 @@
           </term>
           <description>
             <para
-              >The style settings for the data items in the <see cref="T:System.Web.UI.WebControls.TemplateField" /> object. </para
-            >
+              >The style settings for the data items in the <see cref="T:System.Web.UI.WebControls.TemplateField" /> object.
+            </para>
           </description>
         </item>
       </list>
@@ -405,8 +405,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.Web.UI.WebControls.TemplateField.EditItemTemplate" /> property to specify the custom content displayed for an item that is in edit mode in a <see cref="T:System.Web.UI.WebControls.TemplateField" /> object. Define the content by creating a template that specifies how an item in edit mode is rendered. The <see cref="P:System.Web.UI.WebControls.TemplateField.EditItemTemplate" /> property usually contains input controls for the user to modify a value in a data source. </para
-          >
+            >Use the <see cref="P:System.Web.UI.WebControls.TemplateField.EditItemTemplate" /> property to specify the custom content displayed for an item that is in edit mode in a <see cref="T:System.Web.UI.WebControls.TemplateField" /> object. Define the content by creating a template that specifies how an item in edit mode is rendered. The <see cref="P:System.Web.UI.WebControls.TemplateField.EditItemTemplate" /> property usually contains input controls for the user to modify a value in a data source.
+          </para>
           <para>To specify a template, first place opening and closing &lt;EditItemTemplate&gt; tags between the opening and closing tags of the &lt;TemplateField&gt; element. Next, add the custom content between the opening and closing &lt;EditItemTemplate&gt; tags. The content can be as simple as plain text or more complex (embedding other controls in the template, for example).</para>
           <para
             >To programmatically access a control defined in a template, first determine which <see cref="T:System.Web.UI.WebControls.TableCell" /> object in the data-bound control contains the control. Next, use the <see cref="P:System.Web.UI.Control.Controls" /> collection of the <see cref="T:System.Web.UI.WebControls.TableCell" /> object to access the control. You can also use the <see cref="M:System.Web.UI.Control.FindControl(System.String)" /> method of the <see cref="T:System.Web.UI.WebControls.TableCell" /> object to find the control, if the control has an <see cref="P:System.Web.UI.Control.ID" /> property specified.</para

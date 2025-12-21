@@ -107,22 +107,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The document for which the offset is requested. </param
-        >
+          />The document for which the offset is requested.
+        </param>
         <param name="line">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The document line corresponding to the offset. </param
-        >
+          />The document line corresponding to the offset.
+        </param>
         <param name="column">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The document column corresponding to the offset. </param
-        >
+          />The document column corresponding to the offset.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetParameters">
@@ -200,22 +200,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The document for which the offset is requested. </param
-        >
+          />The document for which the offset is requested.
+        </param>
         <param name="line">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The document line corresponding to the ranges. </param
-        >
+          />The document line corresponding to the ranges.
+        </param>
         <param name="column">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The document column corresponding to the ranges. </param
-        >
+          />The document column corresponding to the ranges.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetScope">
@@ -259,8 +259,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte offset within the method of the lexical scope. </param
-        >
+          />The byte offset within the method of the lexical scope.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetSequencePoints">
@@ -308,43 +308,43 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array of byte offsets from the beginning of the method for the sequence points. </param
-        >
+          />The array of byte offsets from the beginning of the method for the sequence points.
+        </param>
         <param name="documents">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array of documents in which the sequence points are located. </param
-        >
+          />The array of documents in which the sequence points are located.
+        </param>
         <param name="lines">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array of lines in the documents at which the sequence points are located. </param
-        >
+          />The array of lines in the documents at which the sequence points are located.
+        </param>
         <param name="columns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array of columns in the documents at which the sequence points are located. </param
-        >
+          />The array of columns in the documents at which the sequence points are located.
+        </param>
         <param name="endLines">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array of lines in the documents at which the sequence points end. </param
-        >
+          />The array of lines in the documents at which the sequence points end.
+        </param>
         <param name="endColumns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array of columns in the documents at which the sequence points end. </param
-        >
+          />The array of columns in the documents at which the sequence points end.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetSourceStartEnd">
@@ -388,22 +388,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting and ending source documents. </param
-        >
+          />The starting and ending source documents.
+        </param>
         <param name="lines">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting and ending lines in the corresponding source documents. </param
-        >
+          />The starting and ending lines in the corresponding source documents.
+        </param>
         <param name="columns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting and ending columns in the corresponding source documents. </param
-        >
+          />The starting and ending columns in the corresponding source documents.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RootScope">

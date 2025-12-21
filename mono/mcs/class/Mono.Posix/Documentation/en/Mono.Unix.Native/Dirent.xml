@@ -31,8 +31,8 @@
       >Not all of the members in this class are part of an actual
     standard; in particular, the only member that is consistently portable and
     will have a reliable value is <see cref="F:Mono.Unix.Native.Dirent.d_name" />.
-    </remarks
-    >
+
+    </remarks>
     <altmember cref="M:Mono.Unix.Native.Syscall.readdir" />
     <altmember cref="M:Mono.Unix.UnixDirectoryInfo.GetEntries" />
     <altmember cref="M:Mono.Unix.UnixDirectory.GetEntries" />

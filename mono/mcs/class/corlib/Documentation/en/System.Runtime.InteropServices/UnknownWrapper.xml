@@ -63,12 +63,8 @@
           >
         </summary>
         <param name="obj">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The object being wrapped. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The object being wrapped.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WrappedObject">

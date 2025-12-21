@@ -36,8 +36,8 @@
         >A static field marked with <see cref="T:System.ThreadStaticAttribute" /> is not shared between threads. Each executing thread has a separate instance of the field, and independently sets and gets values for that field. If the field is accessed on a different thread, it will contain a different value.</para
       >
       <para
-        >Note that in addition to applying the <see cref="T:System.ThreadStaticAttribute" /> attribute to a field, you must also define it as a static field (in C#) or a Shared field (in Visual Basic). </para
-      >
+        >Note that in addition to applying the <see cref="T:System.ThreadStaticAttribute" /> attribute to a field, you must also define it as a static field (in C#) or a Shared field (in Visual Basic).
+      </para>
       <block subset="none" type="note">
         <para>Do not specify initial values for fields marked with ThreadStaticAttribute, because such initialization occurs only once, when the class constructor executes, and therefore affects only one thread. If you do not specify an initial value, you can rely on the field being initialized to its default value if it is a value type, or to null if it is a reference type.</para>
       </block>

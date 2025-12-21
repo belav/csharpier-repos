@@ -57,8 +57,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            > Use the <see cref="M:System.ServiceModel.Description.MetadataExchangeBindings.CreateMexHttpBinding" /> method to return a binding that supports most metadata requests. </para
-          >
+            > Use the <see cref="M:System.ServiceModel.Description.MetadataExchangeBindings.CreateMexHttpBinding" /> method to return a binding that supports most metadata requests.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -103,8 +103,8 @@
               >
             </format>, and the sample <format type="text/html">
               <a href="9e369e99-ea4a-49ff-aed2-9fdf61091a48">Custom Secure Metadata Endpoint</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

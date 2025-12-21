@@ -22,8 +22,8 @@
         >You can implement a custom <see cref="T:System.ComponentModel.Design.Serialization.CodeDomSerializer" /> to control the generation of component initialization code for a type of component at design time.</para
       >
       <para
-        >To implement a custom <see cref="T:System.ComponentModel.Design.Serialization.CodeDomSerializer" /> for a type, you must: </para
-      >
+        >To implement a custom <see cref="T:System.ComponentModel.Design.Serialization.CodeDomSerializer" /> for a type, you must:
+      </para>
       <list type="ordered">
         <item>
           <para
@@ -78,8 +78,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Serialization.CodeDomSerializer" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Serialization.CodeDomSerializer" /> class.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -120,15 +120,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A serialization manager interface that is used during the deserialization process. </param
-        >
+          />A serialization manager interface that is used during the deserialization process.
+        </param>
         <param name="codeObject">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A serialized CodeDOM object to deserialize. </param
-        >
+          />A serialized CodeDOM object to deserialize.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -269,15 +269,11 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The serialization manager to use during serialization. </param
-        >
+          />The serialization manager to use during serialization.
+        </param>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The object to serialize. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The object to serialize.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -460,15 +456,11 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The serialization manager to use during serialization. </param
-        >
+          />The serialization manager to use during serialization.
+        </param>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The object to serialize. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The object to serialize.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

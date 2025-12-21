@@ -562,8 +562,8 @@
           <list type="bullet">
             <item>
               <para>
-                <see cref="P:System.IdentityModel.Selectors.SecurityTokenRequirement.TokenType" /> is set to the value in the current instance of this class. </para
-              >
+                <see cref="P:System.IdentityModel.Selectors.SecurityTokenRequirement.TokenType" /> is set to the value in the current instance of this class.
+              </para>
             </item>
             <item>
               <para>

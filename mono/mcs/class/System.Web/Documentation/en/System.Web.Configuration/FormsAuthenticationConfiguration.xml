@@ -34,8 +34,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Configures an ASP.NET application to use the <see cref="T:System.Web.Configuration.AuthenticationMode" /> forms modality. </para
-      >
+        >Configures an ASP.NET application to use the <see cref="T:System.Web.Configuration.AuthenticationMode" /> forms modality.
+      </para>
     </summary>
   </Docs>
   <Members>
@@ -178,8 +178,8 @@
             >The <see cref="P:System.Web.Configuration.FormsAuthenticationConfiguration.Domain" /> is used for the authentication cookies.</para
           >
           <para
-            >This property corresponds to the value of <see cref="P:System.Web.HttpCookie.Domain" />. </para
-          >
+            >This property corresponds to the value of <see cref="P:System.Web.HttpCookie.Domain" />.
+          </para>
           <para
             >This setting will take precedence over the domain attribute of the <format type="text/html">
               <a href="74790718-bfa3-4935-bc9a-59c88797e08f">httpCookies</a>

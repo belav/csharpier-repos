@@ -21,14 +21,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.IO.Pipes.PipeAccessRights" /> enumeration specifies which file system actions are allowed for a particular user account and which file system actions are audited for a particular user account.      </para
-      >
+        >The <see cref="T:System.IO.Pipes.PipeAccessRights" /> enumeration specifies which file system actions are allowed for a particular user account and which file system actions are audited for a particular user account.
+      </para>
       <para
         >Use the <see cref="T:System.IO.Pipes.PipeAccessRights" /> enumeration when you create an access rule with the <see cref="T:System.IO.Pipes.PipeAccessRule" /> class or when you create an audit rule with the <see cref="T:System.IO.Pipes.PipeAuditRule" /> class.</para
       >
       <para
-        >This enumeration contains several specific system rights values and several values that are a combination of those specific values.  It is easier to use the combination values, such as <see cref="F:System.IO.Pipes.PipeAccessRights.FullControl" />, <see cref="F:System.IO.Pipes.PipeAccessRights.Read" />, and <see cref="F:System.IO.Pipes.PipeAccessRights.Write" />, rather than specifying each component value separately.  </para
-      >
+        >This enumeration contains several specific system rights values and several values that are a combination of those specific values.  It is easier to use the combination values, such as <see cref="F:System.IO.Pipes.PipeAccessRights.FullControl" />, <see cref="F:System.IO.Pipes.PipeAccessRights.Read" />, and <see cref="F:System.IO.Pipes.PipeAccessRights.Write" />, rather than specifying each component value separately.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

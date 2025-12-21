@@ -24,8 +24,8 @@
         >The <see cref="T:System.Web.SessionState.ISessionStateItemCollection" /> interface defines the collection of session items exposed to application code by the <see cref="T:System.Web.SessionState.HttpSessionStateContainer" /> class.</para
       >
       <para
-        >The ASP.NET implementation of the <see cref="T:System.Web.SessionState.ISessionStateItemCollection" /> interface is the <see cref="T:System.Web.SessionState.SessionStateItemCollection" /> class. </para
-      >
+        >The ASP.NET implementation of the <see cref="T:System.Web.SessionState.ISessionStateItemCollection" /> interface is the <see cref="T:System.Web.SessionState.SessionStateItemCollection" /> class.
+      </para>
       <para
         >If you create a class derived from the <see cref="T:System.Web.SessionState.SessionStateStoreProviderBase" /> class to store session data, you can either use the <see cref="T:System.Web.SessionState.SessionStateItemCollection" /> class to manage the stored objects or implement the <see cref="T:System.Web.SessionState.ISessionStateItemCollection" /> interface on your own collection manager.</para
       >

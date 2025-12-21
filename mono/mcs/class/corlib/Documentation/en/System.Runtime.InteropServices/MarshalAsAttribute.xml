@@ -54,8 +54,8 @@
         </format>.</para
       >
       <para
-        >In most cases, the attribute simply identifies the format of the unmanaged data using the <see cref="T:System.Runtime.InteropServices.UnmanagedType" /> enumeration, as shown in the following C# signature: </para
-      >
+        >In most cases, the attribute simply identifies the format of the unmanaged data using the <see cref="T:System.Runtime.InteropServices.UnmanagedType" /> enumeration, as shown in the following C# signature:
+      </para>
       <code>void
     MyMethod([MarshalAs(LPStr)] String s);</code>
       <para
@@ -126,8 +126,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value the data is to be marshaled as. </param
-        >
+          />The value the data is to be marshaled as.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -170,8 +170,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value the data is to be marshaled as. </param
-        >
+          />The value the data is to be marshaled as.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -526,8 +526,8 @@
         <value>
           <para
             > The <see cref="T:System.Runtime.InteropServices.UnmanagedType" /> value indicating how the data is to
-   be marshaled. </para
-          >
+   be marshaled.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />

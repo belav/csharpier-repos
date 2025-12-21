@@ -31,8 +31,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Resource writers are used to write resources to files in a particular file format. Implement this interface if you want to control the way in which a resource file is written (for example, to store resources in something other than a .txt, .resx, or binary .resources file). Otherwise, use the default <see cref="T:System.Resources.ResourceWriter" /> class, which writes resources to a binary .resources file, or the <see cref="T:System.Resources.ResXResourceWriter" /> class, which writes resources to an XML resource (.resx) file. </para
-      >
+        >Resource writers are used to write resources to files in a particular file format. Implement this interface if you want to control the way in which a resource file is written (for example, to store resources in something other than a .txt, .resx, or binary .resources file). Otherwise, use the default <see cref="T:System.Resources.ResourceWriter" /> class, which writes resources to a binary .resources file, or the <see cref="T:System.Resources.ResXResourceWriter" /> class, which writes resources to an XML resource (.resx) file.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -71,15 +71,15 @@
           <para>Adds an 8-bit unsigned integer array as a named resource to the list of resources to be written.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />Name of a resource. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />Name of a resource.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Value of a resource as an 8-bit unsigned integer array. </param
-        >
+          />Value of a resource as an 8-bit unsigned integer array.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddResource">
@@ -120,19 +120,11 @@
           >
         </summary>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the resource. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the resource.
+        </param>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The value of the resource. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value of the resource.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddResource">
@@ -168,19 +160,11 @@
           >
         </summary>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the resource. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the resource.
+        </param>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The value of the resource. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value of the resource.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Close">

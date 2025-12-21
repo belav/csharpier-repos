@@ -55,8 +55,8 @@
           </term>
           <description>
             <para
-              >The style settings for the child Web server controls of the <see cref="T:System.Web.UI.WebControls.BoundField" /> object. </para
-            >
+              >The style settings for the child Web server controls of the <see cref="T:System.Web.UI.WebControls.BoundField" /> object.
+            </para>
           </description>
         </item>
         <item>
@@ -67,8 +67,8 @@
           </term>
           <description>
             <para
-              >The style settings for the footer section of the <see cref="T:System.Web.UI.WebControls.BoundField" /> object. </para
-            >
+              >The style settings for the footer section of the <see cref="T:System.Web.UI.WebControls.BoundField" /> object.
+            </para>
           </description>
         </item>
         <item>
@@ -79,8 +79,8 @@
           </term>
           <description>
             <para
-              >The style settings for the header section of the <see cref="T:System.Web.UI.WebControls.BoundField" /> object. </para
-            >
+              >The style settings for the header section of the <see cref="T:System.Web.UI.WebControls.BoundField" /> object.
+            </para>
           </description>
         </item>
         <item>
@@ -91,8 +91,8 @@
           </term>
           <description>
             <para
-              >The style settings for the data items in the <see cref="T:System.Web.UI.WebControls.BoundField" /> object. </para
-            >
+              >The style settings for the data items in the <see cref="T:System.Web.UI.WebControls.BoundField" /> object.
+            </para>
           </description>
         </item>
       </list>
@@ -335,8 +335,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.Web.UI.WebControls.BoundField.DataFormatString" /> property to specify a custom display format for the values that are displayed in the <see cref="T:System.Web.UI.WebControls.BoundField" /> object. If the <see cref="P:System.Web.UI.WebControls.BoundField.DataFormatString" /> property is not set, the field's value is displayed without any special formatting. </para
-          >
+            >Use the <see cref="P:System.Web.UI.WebControls.BoundField.DataFormatString" /> property to specify a custom display format for the values that are displayed in the <see cref="T:System.Web.UI.WebControls.BoundField" /> object. If the <see cref="P:System.Web.UI.WebControls.BoundField.DataFormatString" /> property is not set, the field's value is displayed without any special formatting.
+          </para>
           <block subset="none" type="note">
             <para
               >In versions of ASP.NET earlier than 3.5, you must set the <see cref="P:System.Web.UI.WebControls.BoundField.HtmlEncode" /> property to false in order to format fields that are not string data types. Otherwise, the field value is converted to a string by the default conversion method before the format string that is stored in the <see cref="P:System.Web.UI.WebControls.BoundField.DataFormatString" /> property is applied.</para
@@ -346,8 +346,8 @@
             >By default, the formatting string is applied to the field value only when the data-bound control that contains the <see cref="T:System.Web.UI.WebControls.BoundField" /> object is in read-only mode. To apply the formatting string to field values while in edit mode, set the <see cref="P:System.Web.UI.WebControls.BoundField.ApplyFormatInEditMode" /> property to true.</para
           >
           <para
-            >The formatting string can be any literal string and usually includes a placeholder for the field's value. For example, in the formatting string Item Value: {0}, the field's value is substituted for the {0} placeholder when the string is displayed in the <see cref="T:System.Web.UI.WebControls.BoundField" /> object. The rest of the formatting string is displayed as literal text. </para
-          >
+            >The formatting string can be any literal string and usually includes a placeholder for the field's value. For example, in the formatting string Item Value: {0}, the field's value is substituted for the {0} placeholder when the string is displayed in the <see cref="T:System.Web.UI.WebControls.BoundField" /> object. The rest of the formatting string is displayed as literal text.
+          </para>
           <para>If the formatting string does not include a placeholder, only the formatting string itself is included in the final display text (the field's value from the data source is not included). If the placeholder is a 0 (zero) enclosed in curly braces as shown in the preceding example, the field value is converted to a string by the default method. You can append to the zero a string that specifies how the field value should be formatted. For example, the placeholder {0:C} for a numeric field specifies that value of the field should be converted to a currency format.</para>
           <para
             >Formatting is applied by using the <see cref="M:System.String.Format(System.IFormatProvider,System.String,System.Object[])" /> method. The number that follows the left curly brace is part of the syntax used by that method and indicates which one of a series of values the placeholder should use. Because there is only one field value in each cell, the number that follows the left curly brace can only be set to 0.</para
@@ -623,8 +623,8 @@
               </term>
               <description>
                 <para
-                  >RFC1123 pattern (for information, see <see cref="P:System.Globalization.DateTimeFormatInfo.RFC1123Pattern" />). </para
-                >
+                  >RFC1123 pattern (for information, see <see cref="P:System.Globalization.DateTimeFormatInfo.RFC1123Pattern" />).
+                </para>
               </description>
               <description>
                 <para>Format: {0:R}</para>

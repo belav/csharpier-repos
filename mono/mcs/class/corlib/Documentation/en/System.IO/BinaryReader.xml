@@ -30,8 +30,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.IO.BinaryReader" /> class provides methods that simplify reading primitive data types from a stream. For example, you can use the <see cref="M:System.IO.BinaryReader.ReadBoolean" /> method to read the next byte as a Boolean value and advance the current position in the stream by one byte. The class includes read methods that support different data types. </para
-      >
+        >The <see cref="T:System.IO.BinaryReader" /> class provides methods that simplify reading primitive data types from a stream. For example, you can use the <see cref="M:System.IO.BinaryReader.ReadBoolean" /> method to read the next byte as a Boolean value and advance the current position in the stream by one byte. The class includes read methods that support different data types.
+      </para>
       <para
         >When you create a new instance of the <see cref="T:System.IO.BinaryReader" /> class, you provide the stream to read from, and optionally specify the type of encoding and whether to leave the stream open after disposing the <see cref="T:System.IO.BinaryReader" /> object. If you do not specify an encoding type, UTF-8 is used.</para
       >
@@ -74,8 +74,8 @@
           >
         </summary>
         <param name="input">
-          <attribution license="cc4" from="Microsoft" modified="false" />The input stream. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The input stream.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -114,15 +114,15 @@
           >
         </summary>
         <param name="input">
-          <attribution license="cc4" from="Microsoft" modified="false" />The input stream. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The input stream.
+        </param>
         <param name="encoding">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character encoding to use. </param
-        >
+          />The character encoding to use.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -318,8 +318,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="FillBuffer">
@@ -361,8 +361,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes to be read. </param
-        >
+          />The number of bytes to be read.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="PeekChar">
@@ -491,22 +491,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The buffer to read data into. </param
-        >
+          />The buffer to read data into.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting point in the buffer at which to begin reading into the buffer. </param
-        >
+          />The starting point in the buffer at which to begin reading into the buffer.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes to read. </param
-        >
+          />The number of bytes to read.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Read">
@@ -557,22 +557,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The buffer to read data into. </param
-        >
+          />The buffer to read data into.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting point in the buffer at which to begin reading into the buffer. </param
-        >
+          />The starting point in the buffer at which to begin reading into the buffer.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters to read. </param
-        >
+          />The number of characters to read.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Read7BitEncodedInt">
@@ -842,8 +842,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters to read. </param
-        >
+          />The number of characters to read.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ReadDecimal">

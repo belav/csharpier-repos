@@ -135,12 +135,8 @@
           >
         </summary>
         <param name="zone">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The zone identifier. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The zone identifier.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Copy">
@@ -206,8 +202,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML encoding to use to reconstruct the permission. </param
-        >
+          />The XML encoding to use to reconstruct the permission.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Intersect">
@@ -252,8 +248,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission to intersect with the current permission. It must be of the same type as the current permission. </param
-        >
+          />A permission to intersect with the current permission. It must be of the same type as the current permission.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsSubsetOf">
@@ -297,8 +293,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission that is to be tested for the subset relationship. This permission must be of the same type as the current permission. </param
-        >
+          />A permission that is to be tested for the subset relationship. This permission must be of the same type as the current permission.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SecurityZone">
@@ -408,8 +404,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The result of a call to <see cref="M:System.Security.Permissions.ZoneIdentityPermission.Union(System.Security.IPermission)" /> is a permission that represents the security zone represented by both the current permission and the specified permission. Any demand that passes either permission passes their union. The union of two identical <see cref="T:System.Security.Permissions.ZoneIdentityPermission" /> objects is the same permission. The union of a null permission and a <see cref="T:System.Security.Permissions.ZoneIdentityPermission" /> permission is the permission that is not null. </para
-          >
+            >The result of a call to <see cref="M:System.Security.Permissions.ZoneIdentityPermission.Union(System.Security.IPermission)" /> is a permission that represents the security zone represented by both the current permission and the specified permission. Any demand that passes either permission passes their union. The union of two identical <see cref="T:System.Security.Permissions.ZoneIdentityPermission" /> objects is the same permission. The union of a null permission and a <see cref="T:System.Security.Permissions.ZoneIdentityPermission" /> permission is the permission that is not null.
+          </para>
           <para
             >Note that a <see cref="T:System.Security.Permissions.ZoneIdentityPermission" /> object representing a <see cref="F:System.Security.SecurityZone.NoZone" /> security zone is treated as a null permission and handled as a special case. The union of a <see cref="T:System.Security.Permissions.ZoneIdentityPermission" /> object representing the <see cref="F:System.Security.SecurityZone.NoZone" /> security zone and a null permission is null. The union of two different zone identity permissions results in an <see cref="T:System.ArgumentException" /> exception being thrown when neither of the two permissions represents the <see cref="F:System.Security.SecurityZone.NoZone" /> security zone.</para
           >
@@ -427,8 +423,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission to combine with the current permission. It must be of the same type as the current permission. </param
-        >
+          />A permission to combine with the current permission. It must be of the same type as the current permission.
+        </param>
       </Docs>
     </Member>
   </Members>

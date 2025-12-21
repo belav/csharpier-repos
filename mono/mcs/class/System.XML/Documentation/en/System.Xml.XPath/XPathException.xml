@@ -117,15 +117,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> object that contains all the properties of an <see cref="T:System.Xml.XPath.XPathException" />. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> object that contains all the properties of an <see cref="T:System.Xml.XPath.XPathException" />.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.StreamingContext" /> object. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.StreamingContext" /> object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -161,15 +161,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The description of the error condition. </param
-        >
+          />The description of the error condition.
+        </param>
         <param name="innerException">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Exception" /> that threw the <see cref="T:System.Xml.XPath.XPathException" />, if any. This value can be null. </param
-        >
+          />The <see cref="T:System.Exception" /> that threw the <see cref="T:System.Xml.XPath.XPathException" />, if any. This value can be null.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetObjectData">

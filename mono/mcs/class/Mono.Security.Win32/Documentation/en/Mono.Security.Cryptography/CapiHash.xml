@@ -224,8 +224,8 @@
       </Parameters>
       <Docs>
         <param name="algo"
-          >a <see cref="T:System.Int32" /> representing the CryptoAPI hash implementation to use. </param
-        >
+          >a <see cref="T:System.Int32" /> representing the CryptoAPI hash implementation to use.
+        </param>
         <summary>Resets the class after use.</summary>
         <remarks> Called automatically after hashing is done.</remarks>
       </Docs>

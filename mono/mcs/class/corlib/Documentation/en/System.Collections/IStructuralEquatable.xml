@@ -18,15 +18,15 @@
       >
       <block subset="none" type="note">
         <para
-          >The <see cref="T:System.Collections.IStructuralEquatable" /> interface supports only custom comparisons for structural equality. The <see cref="T:System.Collections.IStructuralComparable" /> interface supports custom structural comparisons for sorting and ordering. </para
-        >
+          >The <see cref="T:System.Collections.IStructuralEquatable" /> interface supports only custom comparisons for structural equality. The <see cref="T:System.Collections.IStructuralComparable" /> interface supports custom structural comparisons for sorting and ordering.
+        </para>
       </block>
       <para
-        >The .NET Framework also provides default equality comparers, which are returned by the <see cref="P:System.Collections.Generic.EqualityComparer`1.Default" /> and <see cref="P:System.Collections.StructuralComparisons.StructuralEqualityComparer" /> properties. For more information, see the example. </para
-      >
+        >The .NET Framework also provides default equality comparers, which are returned by the <see cref="P:System.Collections.Generic.EqualityComparer`1.Default" /> and <see cref="P:System.Collections.StructuralComparisons.StructuralEqualityComparer" /> properties. For more information, see the example.
+      </para>
       <para
-        >The generic tuple classes (<see cref="T:System.Tuple`1" />, <see cref="T:System.Tuple`2" />, <see cref="T:System.Tuple`3" />, and so on) and the <see cref="T:System.Array" /> class provide explicit implementations of the <see cref="T:System.Collections.IStructuralEquatable" /> interface. By casting (in C#) or converting (in Visual Basic) the current instance of an array or tuple to an <see cref="T:System.Collections.IStructuralEquatable" /> interface value and providing your <see cref="T:System.Collections.IEqualityComparer" /> implementation as an argument to the <see cref="M:System.Collections.IStructuralEquatable.Equals(System.Object,System.Collections.IEqualityComparer)" /> method, you can define a custom equality comparison for the array or collection. </para
-      >
+        >The generic tuple classes (<see cref="T:System.Tuple`1" />, <see cref="T:System.Tuple`2" />, <see cref="T:System.Tuple`3" />, and so on) and the <see cref="T:System.Array" /> class provide explicit implementations of the <see cref="T:System.Collections.IStructuralEquatable" /> interface. By casting (in C#) or converting (in Visual Basic) the current instance of an array or tuple to an <see cref="T:System.Collections.IStructuralEquatable" /> interface value and providing your <see cref="T:System.Collections.IEqualityComparer" /> implementation as an argument to the <see cref="M:System.Collections.IStructuralEquatable.Equals(System.Object,System.Collections.IEqualityComparer)" /> method, you can define a custom equality comparison for the array or collection.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -58,8 +58,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Collections.IStructuralEquatable.Equals(System.Object,System.Collections.IEqualityComparer)" /> method supports custom structural comparison of array and tuple objects. This method in turn calls the <paramref name="comparer" /> object's <see cref="M:System.Collections.IEqualityComparer.Equals(System.Object,System.Object)" /> method to compare individual array elements or tuple components, starting with the first element or component. The individual calls to <see cref="M:System.Collections.IEqualityComparer.Equals(System.Object,System.Object)" /> end and the <see cref="M:System.Collections.IStructuralEquatable.Equals(System.Object,System.Collections.IEqualityComparer)" /> method returns a value either when a method call returns false or after all array elements or tuple components have been compared. </para
-          >
+            >The <see cref="M:System.Collections.IStructuralEquatable.Equals(System.Object,System.Collections.IEqualityComparer)" /> method supports custom structural comparison of array and tuple objects. This method in turn calls the <paramref name="comparer" /> object's <see cref="M:System.Collections.IEqualityComparer.Equals(System.Object,System.Object)" /> method to compare individual array elements or tuple components, starting with the first element or component. The individual calls to <see cref="M:System.Collections.IEqualityComparer.Equals(System.Object,System.Object)" /> end and the <see cref="M:System.Collections.IStructuralEquatable.Equals(System.Object,System.Collections.IEqualityComparer)" /> method returns a value either when a method call returns false or after all array elements or tuple components have been compared.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -81,8 +81,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that determines whether the current instance and <paramref name="other" /> are equal. </param
-        >
+          />An object that determines whether the current instance and <paramref name="other" /> are equal.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">

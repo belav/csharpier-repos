@@ -29,8 +29,8 @@
       </list>
       <para>This works well with encodings that are similar to the textual XML encoding. However, there are some encodings that do not place XML infoset information (For example, tags for starting and ending XML elements) together with the data contained within elements. For example, in the MTOM encoding, the message is split into multiple parts. One part contains the XML infoset, which may contain references to other parts for actual element contents. Since the XML infoset will normally be small compared to the streamed contents, it makes sense to buffer the infoset, write it out, and then write the contents in a streamed way. This means that by the time the closing element tag is written, we should not have written out the stream yet.</para>
       <para
-        >For this purpose, the <see cref="T:System.Xml.IStreamProvider" /> interface is used. The interface has a <see cref="M:System.Xml.IStreamProvider.GetStream" /> method that returns the stream to be written. The correct way to write out a streamed message body in <see cref="M:System.ServiceModel.Channels.Message.OnWriteBodyContents(System.Xml.XmlDictionaryWriter)" /> is as follows: </para
-      >
+        >For this purpose, the <see cref="T:System.Xml.IStreamProvider" /> interface is used. The interface has a <see cref="M:System.Xml.IStreamProvider.GetStream" /> method that returns the stream to be written. The correct way to write out a streamed message body in <see cref="M:System.ServiceModel.Channels.Message.OnWriteBodyContents(System.Xml.XmlDictionaryWriter)" /> is as follows:
+      </para>
       <list type="bullet">
         <item>
           <para>Write any necessary information preceding the stream (For example, the opening XML tag)</para>

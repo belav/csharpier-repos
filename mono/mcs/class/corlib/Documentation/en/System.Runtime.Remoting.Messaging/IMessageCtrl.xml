@@ -55,8 +55,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of milliseconds after which to cancel the message. </param
-        >
+          />The number of milliseconds after which to cancel the message.
+        </param>
       </Docs>
     </Member>
   </Members>

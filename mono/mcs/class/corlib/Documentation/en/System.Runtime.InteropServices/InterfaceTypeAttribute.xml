@@ -99,8 +99,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Describes how the interface should be exposed to COM clients. </param
-        >
+          />Describes how the interface should be exposed to COM clients.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -138,8 +138,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Runtime.InteropServices.ComInterfaceType" /> values that describes how the interface should be exposed to COM clients. </param
-        >
+          />One of the <see cref="T:System.Runtime.InteropServices.ComInterfaceType" /> values that describes how the interface should be exposed to COM clients.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Value">

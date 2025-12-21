@@ -66,8 +66,7 @@
 
       <_XHarnessAppleCustomCommand Condition="'$(NeedsiOSSDK)' == 'true'">
         source build-apple-app.sh
-      </_XHarnessAppleCustomCommand
-      >
+      </_XHarnessAppleCustomCommand>
       <_RuntimeComponentManifestDir>$([MSBuild]::NormalizeDirectory('$(MonoArtifactsPath)', 'build'))</_RuntimeComponentManifestDir>
     </PropertyGroup>
 

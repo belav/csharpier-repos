@@ -135,8 +135,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A description for this transaction. </param
-        >
+          />A description for this transaction.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Cancel">
@@ -302,8 +302,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Finalize">
@@ -425,8 +425,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the <see cref="T:System.ComponentModel.Design.DesignerTransaction" />. </para
-          >
+            >Releases all resources used by the <see cref="T:System.ComponentModel.Design.DesignerTransaction" />.
+          </para>
         </summary>
       </Docs>
     </Member>

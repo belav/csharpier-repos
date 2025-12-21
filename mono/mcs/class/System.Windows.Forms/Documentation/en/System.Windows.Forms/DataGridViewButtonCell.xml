@@ -17,19 +17,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Windows.Forms.DataGridViewButtonCell" /> class is a specialized type of <see cref="T:System.Windows.Forms.DataGridViewCell" /> used to display a button-like UI. </para
-      >
+        >The <see cref="T:System.Windows.Forms.DataGridViewButtonCell" /> class is a specialized type of <see cref="T:System.Windows.Forms.DataGridViewCell" /> used to display a button-like UI.
+      </para>
       <para>
-        <see cref="T:System.Windows.Forms.DataGridViewButtonColumn" /> is the column type specialized to hold cells of this type. By default, the <see cref="P:System.Windows.Forms.DataGridViewButtonColumn.CellTemplate" /> is initialized to a new <see cref="T:System.Windows.Forms.DataGridViewButtonCell" />. To pattern the cells within a column after an existing <see cref="T:System.Windows.Forms.DataGridViewButtonCell" />, set the column's <see cref="P:System.Windows.Forms.DataGridViewButtonColumn.CellTemplate" /> property to the cell to use as a pattern. </para
-      >
+        <see cref="T:System.Windows.Forms.DataGridViewButtonColumn" /> is the column type specialized to hold cells of this type. By default, the <see cref="P:System.Windows.Forms.DataGridViewButtonColumn.CellTemplate" /> is initialized to a new <see cref="T:System.Windows.Forms.DataGridViewButtonCell" />. To pattern the cells within a column after an existing <see cref="T:System.Windows.Forms.DataGridViewButtonCell" />, set the column's <see cref="P:System.Windows.Forms.DataGridViewButtonColumn.CellTemplate" /> property to the cell to use as a pattern.
+      </para>
       <para
-        >To respond to user button clicks, handle the <see cref="E:System.Windows.Forms.DataGridView.CellClick" /> or <see cref="E:System.Windows.Forms.DataGridView.CellContentClick" /> event. In the event handler, you can use the <see cref="P:System.Windows.Forms.DataGridViewCellEventArgs.ColumnIndex" /> property to determine whether the click occurred a the button column. You can use the <see cref="P:System.Windows.Forms.DataGridViewCellEventArgs.RowIndex" /> property to determine whether the click occurred in a particular button cell. </para
-      >
+        >To respond to user button clicks, handle the <see cref="E:System.Windows.Forms.DataGridView.CellClick" /> or <see cref="E:System.Windows.Forms.DataGridView.CellContentClick" /> event. In the event handler, you can use the <see cref="P:System.Windows.Forms.DataGridViewCellEventArgs.ColumnIndex" /> property to determine whether the click occurred a the button column. You can use the <see cref="P:System.Windows.Forms.DataGridViewCellEventArgs.RowIndex" /> property to determine whether the click occurred in a particular button cell.
+      </para>
       <para>The cell-related properties of the column are wrappers for the similarly-named properties of the template cell. Changing the property values of the template cell will affect only cells based on the template that are added after the change. Changing the cell-related property values of the column, however, will update the template cell and all other cells in the column, and refresh the column display if necessary. </para>
       <block subset="none" type="note">
         <para
-          >When visual styles are enabled, the buttons in a button column are painted using a <see cref="T:System.Windows.Forms.ButtonRenderer" />, and cell styles specified through properties such as <see cref="P:System.Windows.Forms.DataGridViewButtonColumn.DefaultCellStyle" /> have no effect. </para
-        >
+          >When visual styles are enabled, the buttons in a button column are painted using a <see cref="T:System.Windows.Forms.ButtonRenderer" />, and cell styles specified through properties such as <see cref="P:System.Windows.Forms.DataGridViewButtonColumn.DefaultCellStyle" /> have no effect.
+        </para>
       </block>
     </remarks>
     <summary>
@@ -114,14 +114,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new accessible object for the <see cref="T:System.Windows.Forms.DataGridViewButtonCell" />. </para
-          >
+            >Creates a new accessible object for the <see cref="T:System.Windows.Forms.DataGridViewButtonCell" />.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see cref="T:System.Windows.Forms.DataGridViewButtonCell.DataGridViewButtonCellAccessibleObject" /> for the <see cref="T:System.Windows.Forms.DataGridViewButtonCell" />. </para
-          >
+            >A new <see cref="T:System.Windows.Forms.DataGridViewButtonCell.DataGridViewButtonCellAccessibleObject" /> for the <see cref="T:System.Windows.Forms.DataGridViewButtonCell" />.
+          </para>
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -309,8 +309,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the <see cref="T:System.Windows.Forms.DataGridViewButtonCell" /> or the <see cref="P:System.Windows.Forms.DataGridViewButtonColumn.Text" /> value of the owning column if <see cref="P:System.Windows.Forms.DataGridViewButtonCell.UseColumnTextForButtonValue" /> is true. </para
-          >
+            >The value of the <see cref="T:System.Windows.Forms.DataGridViewButtonCell" /> or the <see cref="P:System.Windows.Forms.DataGridViewButtonColumn.Text" /> value of the owning column if <see cref="P:System.Windows.Forms.DataGridViewButtonCell.UseColumnTextForButtonValue" /> is true.
+          </para>
         </returns>
         <param name="rowIndex">
           <attribution
@@ -365,15 +365,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.KeyEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.KeyEventArgs" /> that contains the event data.
+        </param>
         <param name="rowIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the cell's parent row. </param
-        >
+          />The index of the cell's parent row.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -420,15 +420,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.KeyEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.KeyEventArgs" /> that contains the event data.
+        </param>
         <param name="rowIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the cell's parent row. </param
-        >
+          />The index of the cell's parent row.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1058,8 +1058,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Windows.Forms.DataGridViewCell.FormattedValue" /> of a button cell is displayed as text on the button. The <see cref="P:System.Windows.Forms.DataGridViewButtonCell.UseColumnTextForButtonValue" /> property allows you to either set the button text for each cell, or to use the <see cref="P:System.Windows.Forms.DataGridViewButtonColumn.Text" /> property value of the parent column for all of the button cells. </para
-          >
+            >The <see cref="P:System.Windows.Forms.DataGridViewCell.FormattedValue" /> of a button cell is displayed as text on the button. The <see cref="P:System.Windows.Forms.DataGridViewButtonCell.UseColumnTextForButtonValue" /> property allows you to either set the button text for each cell, or to use the <see cref="P:System.Windows.Forms.DataGridViewButtonColumn.Text" /> property value of the parent column for all of the button cells.
+          </para>
           <para
             >Setting the <see cref="P:System.Windows.Forms.DataGridViewButtonColumn.UseColumnTextForButtonValue" /> property of the owning column also sets the <see cref="P:System.Windows.Forms.DataGridViewButtonCell.UseColumnTextForButtonValue" /> property of every cell in the column and refreshes the column display. To override the specified value for individual cells, set the cell values after you set the column value.</para
           >

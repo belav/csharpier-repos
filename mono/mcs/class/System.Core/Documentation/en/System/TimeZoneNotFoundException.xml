@@ -13,8 +13,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This exception is thrown by the <see cref="M:System.TimeZoneInfo.ConvertTimeBySystemTimeZoneId(System.DateTime,System.String,System.String)" /> and <see cref="M:System.TimeZoneInfo.FindSystemTimeZoneById(System.String)" /> methods when a time zone identifier cannot be found on the local system, or when there is no data associated with a particular time zone identifier. </para
-      >
+        >This exception is thrown by the <see cref="M:System.TimeZoneInfo.ConvertTimeBySystemTimeZoneId(System.DateTime,System.String,System.String)" /> and <see cref="M:System.TimeZoneInfo.FindSystemTimeZoneById(System.String)" /> methods when a time zone identifier cannot be found on the local system, or when there is no data associated with a particular time zone identifier.
+      </para>
       <para>Because the registry serves as the repository of time zone information in Windows XP and Windows Vista, this exception indicates that the registry contains no information about a particular time zone. Time zone information is stored in the subkeys of HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Time Zones.</para>
       <para
         >If an application depends on the presence of a particular time zone and the attempt to retrieve it throws a <see cref="T:System.TimeZoneNotFoundException" />, the application can handle the exception in either of two ways:</para
@@ -22,8 +22,8 @@
       <list type="bullet">
         <item>
           <para
-            >By calling the <see cref="M:System.TimeZoneInfo.FromSerializedString(System.String)" /> method to deserialize a saved <see cref="T:System.TimeZoneInfo" /> object. </para
-          >
+            >By calling the <see cref="M:System.TimeZoneInfo.FromSerializedString(System.String)" /> method to deserialize a saved <see cref="T:System.TimeZoneInfo" /> object.
+          </para>
         </item>
         <item>
           <para
@@ -165,8 +165,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string that describes the exception.    </param
-        >
+          />A string that describes the exception.
+        </param>
       </Docs>
     </Member>
   </Members>

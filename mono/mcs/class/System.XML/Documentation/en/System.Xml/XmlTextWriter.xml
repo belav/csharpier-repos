@@ -50,8 +50,7 @@ public class WriteFragment
     xWriter.Close();           
   }
 }
-   </code
-      >
+   </code>
       <para>The output is</para>
       <para>
         <c>&lt;prefix:Element1 n1:Attr1="value1" n2:Attr2="value2" xmlns:n2="namespace2"
@@ -213,8 +212,8 @@ public class WriteFragment
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The TextWriter to write to. It is assumed that the TextWriter is already set to the correct encoding. </param
-        >
+          />The TextWriter to write to. It is assumed that the TextWriter is already set to the correct encoding.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -256,8 +255,8 @@ public class WriteFragment
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The encoding to generate. If encoding is null it writes out the stream as UTF-8 and omits the encoding attribute from the ProcessingInstruction. </param
-        >
+          />The encoding to generate. If encoding is null it writes out the stream as UTF-8 and omits the encoding attribute from the ProcessingInstruction.
+        </param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
@@ -277,15 +276,15 @@ public class WriteFragment
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream to which you want to write. </param
-        >
+          />The stream to which you want to write.
+        </param>
         <param name="encoding">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The encoding to generate. If encoding is null it writes out the stream as UTF-8 and omits the encoding attribute from the ProcessingInstruction. </param
-        >
+          />The encoding to generate. If encoding is null it writes out the stream as UTF-8 and omits the encoding attribute from the ProcessingInstruction.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -350,8 +349,8 @@ public class WriteFragment
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The encoding to generate. If encoding is null it writes the file out as UTF-8, and omits the encoding attribute from the ProcessingInstruction. </param
-        >
+          />The encoding to generate. If encoding is null it writes the file out as UTF-8, and omits the encoding attribute from the ProcessingInstruction.
+        </param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
@@ -373,15 +372,15 @@ public class WriteFragment
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The filename to write to. If the file exists, it truncates it and overwrites it with the new content. </param
-        >
+          />The filename to write to. If the file exists, it truncates it and overwrites it with the new content.
+        </param>
         <param name="encoding">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The encoding to generate. If encoding is null it writes the file out as UTF-8, and omits the encoding attribute from the ProcessingInstruction. </param
-        >
+          />The encoding to generate. If encoding is null it writes the file out as UTF-8, and omits the encoding attribute from the ProcessingInstruction.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -553,8 +552,8 @@ public class WriteFragment
             >
           </block>
           <para
-            >If the Indented option is set, child elements are indented using the <see cref="P:System.Xml.XmlTextWriter.Indentation" /> and <see cref="P:System.Xml.XmlTextWriter.IndentChar" /> properties. Only element content is indented. The following C# code writes out HTML elements including mixed content: </para
-          >
+            >If the Indented option is set, child elements are indented using the <see cref="P:System.Xml.XmlTextWriter.Indentation" /> and <see cref="P:System.Xml.XmlTextWriter.IndentChar" /> properties. Only element content is indented. The following C# code writes out HTML elements including mixed content:
+          </para>
           <code> XmlTextWriter w = new XmlTextWriter(Console.Out); 
   w.Formatting = Formatting.Indented; 
   w.WriteStartElement("ol"); 
@@ -742,8 +741,8 @@ public class WriteFragment
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Namespace URI whose prefix you want to find. </param
-        >
+          />Namespace URI whose prefix you want to find.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -820,8 +819,8 @@ public class WriteFragment
               qualify="true"
             /> specifying the 
    quotation mark character (" or ') used to enclose the value of an attribute. The
-   default is the double quote. </para
-          >
+   default is the double quote.
+          </para>
         </value>
         <exception cref="T:System.ArgumentException"
           >The value to be set is not the single quote or double quote character.</exception
@@ -901,26 +900,22 @@ public class WriteFragment
           <para>Encodes the specified binary bytes as base64 and writes out the resulting text.</para>
         </summary>
         <param name="buffer">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />Byte array to encode. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />Byte array to encode.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position within the buffer indicating the start of the bytes to write. </param
-        >
+          />The position within the buffer indicating the start of the bytes to write.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes to write. </param
-        >
+          />The number of bytes to write.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -982,26 +977,22 @@ public class WriteFragment
           <para>Encodes the specified binary bytes as binhex and writes out the resulting text.</para>
         </summary>
         <param name="buffer">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />Byte array to encode. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />Byte array to encode.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position in the buffer indicating the start of the bytes to write. </param
-        >
+          />The position in the buffer indicating the start of the bytes to write.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes to write. </param
-        >
+          />The number of bytes to write.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1059,8 +1050,8 @@ public class WriteFragment
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Text to place inside the CDATA block. </param
-        >
+          />Text to place inside the CDATA block.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1116,8 +1107,8 @@ public class WriteFragment
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Unicode character for which to generate a character entity. </param
-        >
+          />Unicode character for which to generate a character entity.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1187,22 +1178,22 @@ public class WriteFragment
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Character array containing the text to write. </param
-        >
+          />Character array containing the text to write.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position in the buffer indicating the start of the text to write. </param
-        >
+          />The position in the buffer indicating the start of the text to write.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters to write. </param
-        >
+          />The number of characters to write.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1260,8 +1251,8 @@ public class WriteFragment
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Text to place inside the comment. </param
-        >
+          />Text to place inside the comment.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1334,29 +1325,29 @@ public class WriteFragment
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the DOCTYPE. This must be non-empty. </param
-        >
+          />The name of the DOCTYPE. This must be non-empty.
+        </param>
         <param name="pubid">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />If non-null it also writes PUBLIC "pubid" "sysid" where <paramref name="pubid" /> and <paramref name="sysid" /> are replaced with the value of the given arguments. </param
-        >
+          />If non-null it also writes PUBLIC "pubid" "sysid" where <paramref name="pubid" /> and <paramref name="sysid" /> are replaced with the value of the given arguments.
+        </param>
         <param name="sysid">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />If <paramref name="pubid" /> is null and <paramref name="sysid" /> is non-null it writes SYSTEM "sysid" where <paramref name="sysid" /> is replaced with the value of this argument. </param
-        >
+          />If <paramref name="pubid" /> is null and <paramref name="sysid" /> is non-null it writes SYSTEM "sysid" where <paramref name="sysid" /> is replaced with the value of this argument.
+        </param>
         <param name="subset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />If non-null it writes [subset] where subset is replaced with the value of this argument. </param
-        >
+          />If non-null it writes [subset] where subset is replaced with the value of this argument.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1562,8 +1553,8 @@ public class WriteFragment
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Name of the entity reference. </param
-        >
+          />Name of the entity reference.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1667,8 +1658,8 @@ public class WriteFragment
           <para>Writes out the specified name, ensuring it is a valid name according to the W3C XML 1.0 recommendation (http://www.w3.org/TR/1998/REC-xml-19980210#NT-Name).</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />Name to write. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />Name to write.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1724,8 +1715,8 @@ public class WriteFragment
           <para>Writes out the specified name, ensuring it is a valid NmToken according to the W3C XML 1.0 recommendation (http://www.w3.org/TR/1998/REC-xml-19980210#NT-Name).</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />Name to write. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />Name to write.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1767,8 +1758,8 @@ public class WriteFragment
           >
           <para> - or -</para>
           <para
-            >This method is being used to create an XML declaration after <see cref="M:System.Xml.XmlTextWriter.WriteStartDocument" /> has already been called. </para
-          >
+            >This method is being used to create an XML declaration after <see cref="M:System.Xml.XmlTextWriter.WriteStartDocument" /> has already been called.
+          </para>
         </exception>
         <exception cref="T:System.InvalidOperationException"
           >The <see cref="P:System.Xml.XmlTextWriter.WriteState" /> is <see
@@ -1781,8 +1772,8 @@ public class WriteFragment
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Text to include in the processing instruction. </param
-        >
+          />Text to include in the processing instruction.
+        </param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
@@ -1805,15 +1796,15 @@ public class WriteFragment
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Name of the processing instruction. </param
-        >
+          />Name of the processing instruction.
+        </param>
         <param name="text">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Text to include in the processing instruction. </param
-        >
+          />Text to include in the processing instruction.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1875,8 +1866,8 @@ public class WriteFragment
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI to associate with the name. </param
-        >
+          />The namespace URI to associate with the name.
+        </param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
@@ -1917,19 +1908,15 @@ public class WriteFragment
           <para>Writes out the namespace-qualified name. This method looks up the prefix that is in scope for the given namespace.</para>
         </summary>
         <param name="localName">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The local name to write. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The local name to write.
+        </param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI to associate with the name. </param
-        >
+          />The namespace URI to associate with the name.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1987,8 +1974,8 @@ public class WriteFragment
             license="cc4"
             from="Microsoft"
             modified="false"
-          />String containing the text to write. </param
-        >
+          />String containing the text to write.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2061,22 +2048,22 @@ public class WriteFragment
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Character array containing the text to write. </param
-        >
+          />Character array containing the text to write.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position within the buffer indicating the start of the text to write. </param
-        >
+          />The position within the buffer indicating the start of the text to write.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters to write. </param
-        >
+          />The number of characters to write.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2122,8 +2109,8 @@ public class WriteFragment
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Namespace prefix of the attribute. </param
-        >
+          />Namespace prefix of the attribute.
+        </param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
@@ -2146,22 +2133,22 @@ public class WriteFragment
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Namespace prefix of the attribute. </param
-        >
+          />Namespace prefix of the attribute.
+        </param>
         <param name="localName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />LocalName of the attribute. </param
-        >
+          />LocalName of the attribute.
+        </param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />NamespaceURI of the attribute </param
-        >
+          />NamespaceURI of the attribute
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2274,8 +2261,8 @@ public class WriteFragment
             license="cc4"
             from="Microsoft"
             modified="false"
-          />If true, it writes "standalone=yes"; if false, it writes "standalone=no". </param
-        >
+          />If true, it writes "standalone=yes"; if false, it writes "standalone=no".
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2337,8 +2324,7 @@ public class WriteXml
     xWriter.WriteEndDocument();
   }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <para>
             <c>&lt;?xml version="1.0" encoding=
@@ -2355,8 +2341,8 @@ public class WriteXml
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace prefix of the element. </param
-        >
+          />The namespace prefix of the element.
+        </param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
@@ -2379,22 +2365,22 @@ public class WriteXml
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace prefix of the element. </param
-        >
+          />The namespace prefix of the element.
+        </param>
         <param name="localName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element. </param
-        >
+          />The local name of the element.
+        </param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI to associate with the element. If this namespace is already in scope and has an associated prefix then the writer automatically writes that prefix also. </param
-        >
+          />The namespace URI to associate with the element. If this namespace is already in scope and has an associated prefix then the writer automatically writes that prefix also.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2425,8 +2411,8 @@ public class WriteXml
         <value>
           <para
             > One of the members of the <see cref="T:System.Xml.WriteState" /> enumeration.
-   </para
-          >
+
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2492,8 +2478,7 @@ public class WriteFrag {
     xtWriter.WriteString("&lt;1 &amp; 2 = 3&gt;");
   }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <para>&amp;lt;1 &amp;amp; 2 = 3&amp;gt;</para>
         </example>
@@ -2529,8 +2514,8 @@ public class WriteFrag {
           <para>Writes the given text content.</para>
         </summary>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />Text to write. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />Text to write.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2581,8 +2566,8 @@ public class WriteFrag {
           </block>
           <para>This method is only applicable on systems that use UTF-16 encoding.</para>
           <para
-            >The surrogate character entity is written in hexadecimal format. The range for surrogate characters is #x10000 to #x10FFFF. The following formula is used to generate the surrogate character entity: (<paramref name="highChar" /> - 0xD800) * 0x400 + (<paramref name="lowChar" /> - 0xDC00) + 0x10000. </para
-          >
+            >The surrogate character entity is written in hexadecimal format. The range for surrogate characters is #x10000 to #x10FFFF. The following formula is used to generate the surrogate character entity: (<paramref name="highChar" /> - 0xD800) * 0x400 + (<paramref name="lowChar" /> - 0xDC00) + 0x10000.
+          </para>
           <para>For both HTML and XML, the document character set (and therefore the notation of numeric character references) is based on UCS [ISO-10646]. A single numeric character reference in a source document may therefore in some cases correspond to two 16-bit units in a string (a high surrogate and a low surrogate). These 16-bit units are referred to as a surrogate pair.</para>
           <para>For more information regarding surrogates or characters, refer to section 3.7 of the Unicode 3.0/Unicode 2.0 standard located at http://www.unicode.org, or section 2.2 of the W3C XML 1.0 Recommendation located at http://www.w3.org/TR/REC-xml#charsets.</para>
         </remarks>
@@ -2595,15 +2580,15 @@ public class WriteFrag {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The low surrogate. This must be a value between 0xDC00 and 0xDFFF. </param
-        >
+          />The low surrogate. This must be a value between 0xDC00 and 0xDFFF.
+        </param>
         <param name="highChar">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The high surrogate. This must be a value between 0xD800 and 0xDBFF. </param
-        >
+          />The high surrogate. This must be a value between 0xD800 and 0xDBFF.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2664,8 +2649,8 @@ public class WriteFrag {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string of white space characters. </param
-        >
+          />The string of white space characters.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2745,8 +2730,8 @@ language attribute is not specified for the element.</para
               cref="T:System.Xml.XmlSpace"
               qualify="true"
             /> enumeration, or <see cref="F:System.Xml.XmlSpace.None" /> if the white space attribute is not
-   specified for the element. </para
-          >
+   specified for the element.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />

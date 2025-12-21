@@ -48,8 +48,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Dispatcher.FilterInvalidBodyAccessException" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Dispatcher.FilterInvalidBodyAccessException" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -183,8 +183,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Dispatcher.FilterInvalidBodyAccessException" /> class with a specified error message and the inner exception that caused the current exception. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Dispatcher.FilterInvalidBodyAccessException" /> class with a specified error message and the inner exception that caused the current exception.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -216,8 +216,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Dispatcher.FilterInvalidBodyAccessException" /> class with a specified error message, the inner exception that caused the current exception, and the collection that contains the filter that attempted to inspect the body. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Dispatcher.FilterInvalidBodyAccessException" /> class with a specified error message, the inner exception that caused the current exception, and the collection that contains the filter that attempted to inspect the body.
+          </para>
         </summary>
         <param name="filters">
           <attribution

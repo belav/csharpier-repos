@@ -100,8 +100,8 @@
           >
         </format> and <format type="text/html">
           <a href="847a37e3-ce20-41da-b0d3-7dfb0fdae9a0">ASP.NET Controls and Accessibility</a>
-        </format>. </para
-      >
+        </format>.
+      </para>
       <format type="text/html">
         <a href="#declarative_syntax" />
       </format>
@@ -206,8 +206,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.ImageMap" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.ImageMap" /> class.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -245,8 +245,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Web.UI.HtmlTextWriter" /> that represents the output stream to render HTML content on the client. </param
-        >
+          />A <see cref="T:System.Web.UI.HtmlTextWriter" /> that represents the output stream to render HTML content on the client.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -352,8 +352,8 @@
               </term>
               <description>
                 <para
-                  >The <see cref="T:System.Web.UI.WebControls.HotSpot" /> objects navigate to a URL. </para
-                >
+                  >The <see cref="T:System.Web.UI.WebControls.HotSpot" /> objects navigate to a URL.
+                </para>
               </description>
             </item>
             <item>
@@ -362,8 +362,8 @@
               </term>
               <description>
                 <para
-                  >The <see cref="T:System.Web.UI.WebControls.HotSpot" /> objects generate a postback to the server. </para
-                >
+                  >The <see cref="T:System.Web.UI.WebControls.HotSpot" /> objects generate a postback to the server.
+                </para>
               </description>
             </item>
           </list>
@@ -380,8 +380,8 @@
             >If you specify HotSpotMode.PostBack for the <see cref="P:System.Web.UI.WebControls.ImageMap.HotSpotMode" /> property, the page generates a postback to the server when the <see cref="T:System.Web.UI.WebControls.HotSpot" /> is clicked. Use the <see cref="P:System.Web.UI.WebControls.HotSpot.PostBackValue" /> property to specify the name of the hot spot region. This name will be passed in the <see cref="T:System.Web.UI.WebControls.ImageMapEventArgs" /> event data when a postback event occurs. When a postback <see cref="T:System.Web.UI.WebControls.HotSpot" /> is clicked, the <see cref="E:System.Web.UI.WebControls.ImageMap.Click" /> event is raised. To programmatically control the actions performed when a postback <see cref="T:System.Web.UI.WebControls.HotSpot" /> is clicked, provide an event handler for the <see cref="E:System.Web.UI.WebControls.ImageMap.Click" /> event.</para
           >
           <para
-            >If you specify HotSpotMode.Inactive for the <see cref="P:System.Web.UI.WebControls.HotSpot.HotSpotMode" /> property, the <see cref="T:System.Web.UI.WebControls.HotSpot" /> object does not have any behavior when it is clicked. You can use this value to create an inactive hot spot within a larger active hot spot. This option is provided to allow you to create more complex hot spot zones within an <see cref="T:System.Web.UI.WebControls.ImageMap" /> control. </para
-          >
+            >If you specify HotSpotMode.Inactive for the <see cref="P:System.Web.UI.WebControls.HotSpot.HotSpotMode" /> property, the <see cref="T:System.Web.UI.WebControls.HotSpot" /> object does not have any behavior when it is clicked. You can use this value to create an inactive hot spot within a larger active hot spot. This option is provided to allow you to create more complex hot spot zones within an <see cref="T:System.Web.UI.WebControls.ImageMap" /> control.
+          </para>
           <para
             >To create an inactive area within an active hot spot, you must specify the inactive hot spot before the active hot spot in the <see cref="T:System.Web.UI.WebControls.ImageMap" /> control. For example, the following <see cref="T:System.Web.UI.WebControls.ImageMap" /> defines an active ring by specifying an inactive circular hot spot within a larger active circular hot spot:</para
           >
@@ -492,8 +492,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Object" /> that represents the <see cref="T:System.Web.UI.WebControls.ImageMap" /> control to restore. </param
-        >
+          />An <see cref="T:System.Object" /> that represents the <see cref="T:System.Web.UI.WebControls.ImageMap" /> control to restore.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -538,8 +538,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An argument of type <see cref="T:System.Web.UI.WebControls.ImageMapEventArgs" /> that contains the event data. </param
-        >
+          />An argument of type <see cref="T:System.Web.UI.WebControls.ImageMapEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -616,8 +616,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.UI.HtmlTextWriter" /> object that receives the <see cref="T:System.Web.UI.WebControls.ImageMap" /> control content. </param
-        >
+          />The <see cref="T:System.Web.UI.HtmlTextWriter" /> object that receives the <see cref="T:System.Web.UI.WebControls.ImageMap" /> control content.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SaveViewState">
@@ -635,13 +635,13 @@
           <para
             >View state is the accumulation of the values of a server control's properties. These values are automatically placed in the server control's <see cref="P:System.Web.UI.Control.ViewState" /> property, which is an instance of the <see cref="T:System.Web.UI.StateBag" /> class. This property's value is then persisted to a string object after the save state stage of the server control life cycle. For more information, see <format type="text/html">
               <a href="0218d965-5d30-445b-b6a6-8870e70e63ce">ASP.NET State Management Overview</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
           <para
             >When view state is saved, this string object is returned to the client as a variable that is stored in an Hidden HTML element. When you author custom server controls, you can improve efficiency by overriding this method and modifying your server control's ViewState property. For more information, see <format type="text/html">
               <a href="0218d965-5d30-445b-b6a6-8870e70e63ce">ASP.NET State Management Overview</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -677,8 +677,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.Web.UI.WebControls.ImageMap.Target" /> property to specify the frame or window that displays the Web page r when the <see cref="T:System.Web.UI.WebControls.ImageMap" /> control is clicked. The Web page is specified by setting the <see cref="P:System.Web.UI.WebControls.Image.ImageUrl" /> property. </para
-          >
+            >Use the <see cref="P:System.Web.UI.WebControls.ImageMap.Target" /> property to specify the frame or window that displays the Web page r when the <see cref="T:System.Web.UI.WebControls.ImageMap" /> control is clicked. The Web page is specified by setting the <see cref="P:System.Web.UI.WebControls.Image.ImageUrl" /> property.
+          </para>
           <para
             >The <see cref="P:System.Web.UI.WebControls.ImageMap.Target" /> property is used when the value of the <see cref="P:System.Web.UI.WebControls.ImageMap.HotSpotMode" /> property is HotSpotMode.Navigate; it is ignored when the value of the <see cref="P:System.Web.UI.WebControls.ImageMap.HotSpotMode" /> property is HotSpotMode.PostBack.</para
           >
@@ -689,8 +689,8 @@
             <para
               > The <see cref="P:System.Web.UI.WebControls.ImageMap.Target" /> property renders as a target attribute. The target attribute on anchor elements is not allowed in the XHTML 1.1 document type definition. Do not set the <see cref="P:System.Web.UI.WebControls.ImageMap.Target" /> property if the rendered output for the <see cref="T:System.Web.UI.WebControls.ImageMap" /> must be XHTML 1.1-compliant. For more information, see <format type="text/html">
                 <a href="1b78d416-66bb-43a5-ac77-c703aab55b97">ASP.NET and XHTML Compliance</a>
-              </format>. </para
-            >
+              </format>.
+            </para>
             <para
               >When creating accessible Web pages, it is strongly recommended that you avoid using the <see cref="P:System.Web.UI.WebControls.ImageMap.Target" /> property to target another window. For more information, see <format type="text/html">
                 <a href="7e3ce9c4-6b7d-4fb1-94b5-72cf2a44fe13"

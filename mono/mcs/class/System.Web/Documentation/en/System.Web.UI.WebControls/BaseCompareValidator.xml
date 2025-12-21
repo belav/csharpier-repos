@@ -259,8 +259,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Web.UI.WebControls.ValidationCompareOperator" /> values. </param
-        >
+          />One of the <see cref="T:System.Web.UI.WebControls.ValidationCompareOperator" /> values.
+        </param>
         <param name="type">
           <attribution
             license="cc4"
@@ -613,8 +613,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.Web.UI.WebControls.BaseCompareValidator.Type" /> property to specify the data type used for comparison. The <see cref="P:System.Web.UI.WebControls.BaseCompareValidator.Type" /> property is used differently by the various comparison validation controls. </para
-          >
+            >Use the <see cref="P:System.Web.UI.WebControls.BaseCompareValidator.Type" /> property to specify the data type used for comparison. The <see cref="P:System.Web.UI.WebControls.BaseCompareValidator.Type" /> property is used differently by the various comparison validation controls.
+          </para>
           <block subset="none" type="note">
             <para
               >When the <see cref="P:System.Web.UI.WebControls.BaseCompareValidator.Type" /> property is set to <see cref="F:System.Web.UI.WebControls.ValidationDataType.Date" /> and the current calendar type is non-Gregorian, the validator performs server-side validation only. The validator client script supports only Gregorian calendars.</para

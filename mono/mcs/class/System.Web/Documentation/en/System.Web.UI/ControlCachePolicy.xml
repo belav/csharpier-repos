@@ -34,8 +34,8 @@
         </item>
         <item>
           <para
-            >Use the <see cref="T:System.Web.UI.ControlCachePolicy" /> class to specify cache settings in programmatic scenarios in which you are working with <see cref="T:System.Web.UI.BasePartialCachingControl" /> instances that have been cache-enabled using one of the previous methods and dynamically loaded using the <see cref="Overload:System.Web.UI.TemplateControl.LoadControl" /> method. A <see cref="T:System.Web.UI.ControlCachePolicy" /> instance can be successfully manipulated only between the Init and PreRender stages of the control life cycle. If you modify a <see cref="T:System.Web.UI.ControlCachePolicy" /> object after the PreRender phase, ASP.NET throws an exception, because any changes made after the control is rendered cannot actually affect cache settings (a control is cached during the Render stage). Finally, a user control instance (and therefore its <see cref="T:System.Web.UI.ControlCachePolicy" /> object) is only available for programmatic manipulation when it is actually rendered. </para
-          >
+            >Use the <see cref="T:System.Web.UI.ControlCachePolicy" /> class to specify cache settings in programmatic scenarios in which you are working with <see cref="T:System.Web.UI.BasePartialCachingControl" /> instances that have been cache-enabled using one of the previous methods and dynamically loaded using the <see cref="Overload:System.Web.UI.TemplateControl.LoadControl" /> method. A <see cref="T:System.Web.UI.ControlCachePolicy" /> instance can be successfully manipulated only between the Init and PreRender stages of the control life cycle. If you modify a <see cref="T:System.Web.UI.ControlCachePolicy" /> object after the PreRender phase, ASP.NET throws an exception, because any changes made after the control is rendered cannot actually affect cache settings (a control is cached during the Render stage). Finally, a user control instance (and therefore its <see cref="T:System.Web.UI.ControlCachePolicy" /> object) is only available for programmatic manipulation when it is actually rendered.
+          </para>
         </item>
       </list>
     </remarks>
@@ -175,8 +175,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Instructs the <see cref="T:System.Web.UI.BasePartialCachingControl" /> control that wraps the user control to set the user control's cache entry to use sliding or absolute expiration. </para
-          >
+            >Instructs the <see cref="T:System.Web.UI.BasePartialCachingControl" /> control that wraps the user control to set the user control's cache entry to use sliding or absolute expiration.
+          </para>
         </summary>
         <param name="useSlidingExpiration">
           <attribution
@@ -204,8 +204,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you pass "browser" as the <paramref name="varyByCustom" /> parameter, the user control will be varied by browser type and major version number. If another custom string is entered, you must override the <see cref="M:System.Web.HttpApplication.GetVaryByCustomString(System.Web.HttpContext,System.String)" /> method in your application's Global.asax file. </para
-          >
+            >If you pass "browser" as the <paramref name="varyByCustom" /> parameter, the user control will be varied by browser type and major version number. If another custom string is entered, you must override the <see cref="M:System.Web.HttpApplication.GetVaryByCustomString(System.Web.HttpContext,System.String)" /> method in your application's Global.asax file.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

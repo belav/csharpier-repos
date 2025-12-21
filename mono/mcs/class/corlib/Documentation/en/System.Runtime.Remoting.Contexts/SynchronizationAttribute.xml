@@ -49,8 +49,8 @@
             <a href="5133A620-9C8C-47BD-8E36-130E722FE463"
               >[&lt;topic://cpconservicedcomponentoverview&gt;]</a
             >
-          </format>.) The <see cref="T:System.Runtime.Remoting.Contexts.SynchronizationAttribute" /> supports both synchronous and asynchronous calls, and can be used only with context bound objects. (For more information on context bound objects, see the <see cref="T:System.ContextBoundObject" /> class.) </para
-        >
+          </format>.) The <see cref="T:System.Runtime.Remoting.Contexts.SynchronizationAttribute" /> supports both synchronous and asynchronous calls, and can be used only with context bound objects. (For more information on context bound objects, see the <see cref="T:System.ContextBoundObject" /> class.)
+        </para>
       </block>
       <block subset="none" type="note">
         <para
@@ -128,8 +128,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A Boolean value indicating whether reentry is required. </param
-        >
+          />A Boolean value indicating whether reentry is required.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -166,8 +166,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer value indicating the behavior of the object to which this attribute is applied. </param
-        >
+          />An integer value indicating the behavior of the object to which this attribute is applied.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -208,15 +208,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer value indicating the behavior of the object to which this attribute is applied. </param
-        >
+          />An integer value indicating the behavior of the object to which this attribute is applied.
+        </param>
         <param name="reEntrant">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if reentry is required, and callouts must be intercepted and serialized; otherwise, false. </param
-        >
+          />true if reentry is required, and callouts must be intercepted and serialized; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetClientContextSink">
@@ -260,8 +260,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The chain of sinks composed so far. </param
-        >
+          />The chain of sinks composed so far.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetPropertiesForNewContext">
@@ -306,8 +306,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Remoting.Activation.IConstructionCallMessage" /> to which to add the property. </param
-        >
+          />The <see cref="T:System.Runtime.Remoting.Activation.IConstructionCallMessage" /> to which to add the property.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetServerContextSink">
@@ -351,8 +351,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The chain of sinks composed so far. </param
-        >
+          />The chain of sinks composed so far.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsContextOK">
@@ -393,19 +393,15 @@
           <para>true if the passed in context is OK; otherwise, false.</para>
         </returns>
         <param name="ctx">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The context to check. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The context to check.
+        </param>
         <param name="msg">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Information gathered at construction time of the context bound object marked by this attribute. The <see cref="T:System.Runtime.Remoting.Contexts.SynchronizationAttribute" /> can inspect, add to, and remove properties from the context while determining if the context is acceptable to it. </param
-        >
+          />Information gathered at construction time of the context bound object marked by this attribute. The <see cref="T:System.Runtime.Remoting.Contexts.SynchronizationAttribute" /> can inspect, add to, and remove properties from the context while determining if the context is acceptable to it.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsReEntrant">

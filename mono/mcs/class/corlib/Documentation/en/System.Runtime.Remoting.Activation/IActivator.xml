@@ -70,8 +70,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The information about the object that is needed to activate it, stored in a <see cref="T:System.Runtime.Remoting.Activation.IConstructionCallMessage" />. </param
-        >
+          />The information about the object that is needed to activate it, stored in a <see cref="T:System.Runtime.Remoting.Activation.IConstructionCallMessage" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Level">

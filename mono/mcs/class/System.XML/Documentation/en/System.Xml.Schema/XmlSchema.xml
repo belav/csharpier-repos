@@ -367,8 +367,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The validation event handler that receives information about XML Schema validation errors. </param
-        >
+          />The validation event handler that receives information about XML Schema validation errors.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Compile">
@@ -422,15 +422,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The validation event handler that receives information about the XML Schema validation errors. </param
-        >
+          />The validation event handler that receives information about the XML Schema validation errors.
+        </param>
         <param name="resolver">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XmlResolver used to resolve namespaces referenced in include and import elements. </param
-        >
+          />The XmlResolver used to resolve namespaces referenced in include and import elements.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ElementFormDefault">
@@ -973,19 +973,15 @@ schema.Includes.Add(include);</code>
           >
         </returns>
         <param name="stream">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The supplied data stream. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The supplied data stream.
+        </param>
         <param name="validationEventHandler">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The validation event handler that receives information about XML Schema syntax errors. </param
-        >
+          />The validation event handler that receives information about XML Schema syntax errors.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Read">
@@ -1027,15 +1023,15 @@ schema.Includes.Add(include);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The TextReader containing the XML Schema to read. </param
-        >
+          />The TextReader containing the XML Schema to read.
+        </param>
         <param name="validationEventHandler">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The validation event handler that receives information about the XML Schema syntax errors. </param
-        >
+          />The validation event handler that receives information about the XML Schema syntax errors.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Read">
@@ -1077,15 +1073,15 @@ schema.Includes.Add(include);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XmlReader containing the XML Schema to read. </param
-        >
+          />The XmlReader containing the XML Schema to read.
+        </param>
         <param name="validationEventHandler">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The validation event handler that receives information about the XML Schema syntax errors. </param
-        >
+          />The validation event handler that receives information about the XML Schema syntax errors.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SchemaTypes">
@@ -1237,12 +1233,8 @@ schema.Includes.Add(include);</code>
           <para>Writes the XML Schema to the supplied data stream.</para>
         </summary>
         <param name="stream">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The supplied data stream. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The supplied data stream.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -1307,8 +1299,8 @@ schema.Includes.Add(include);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlWriter" /> to write to. </param
-        >
+          />The <see cref="T:System.Xml.XmlWriter" /> to write to.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -1349,12 +1341,8 @@ schema.Includes.Add(include);</code>
           >
         </summary>
         <param name="stream">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The supplied data stream. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The supplied data stream.
+        </param>
         <param name="namespaceManager">
           <attribution
             license="cc4"
@@ -1411,8 +1399,8 @@ schema.Includes.Add(include);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlNamespaceManager" />. </param
-        >
+          />The <see cref="T:System.Xml.XmlNamespaceManager" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -1462,8 +1450,8 @@ schema.Includes.Add(include);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlNamespaceManager" />. </param
-        >
+          />The <see cref="T:System.Xml.XmlNamespaceManager" />.
+        </param>
       </Docs>
     </Member>
   </Members>

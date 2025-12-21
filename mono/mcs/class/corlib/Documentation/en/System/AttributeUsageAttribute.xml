@@ -43,8 +43,8 @@
       >
       <para>Attribute classes have positional and named parameters. Each public constructor for an attribute class defines a valid sequence of positional parameters for that class. Named parameters are defined by the non-static, public, and read-write fields or properties of the attribute class.</para>
       <para
-        >The three properties of <see cref="T:System.AttributeUsageAttribute" /> are set by defining the following parameters: </para
-      >
+        >The three properties of <see cref="T:System.AttributeUsageAttribute" /> are set by defining the following parameters:
+      </para>
       <list type="bullet">
         <item>
           <para>
@@ -129,8 +129,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The set of values combined using a bitwise OR operation to indicate which program elements are valid. </param
-        >
+          />The set of values combined using a bitwise OR operation to indicate which program elements are valid.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -189,8 +189,7 @@ class JohnsClass {
 
   public static void Main() {}
 }
-</code
-          >
+</code>
           <para>
             <see langword="Example #2:" />
           </para>
@@ -218,8 +217,7 @@ class JohnsClass {
 
   public static void Main() {}
 }
-</code
-          >
+</code>
           <para>This should throw an error similar to:</para>
           <para>error CS0579: Duplicate 'Author' attribute</para>
         </example>

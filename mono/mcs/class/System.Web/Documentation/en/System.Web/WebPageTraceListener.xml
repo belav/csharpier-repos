@@ -35,8 +35,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides a listener that directs <see cref="T:System.Diagnostics.Trace" /> messages to ASP.NET Web page outputs. </para
-      >
+        >Provides a listener that directs <see cref="T:System.Diagnostics.Trace" /> messages to ASP.NET Web page outputs.
+      </para>
     </summary>
   </Docs>
   <Members>
@@ -80,8 +80,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.WebPageTraceListener.TraceEvent(System.Diagnostics.TraceEventCache,System.String,System.Diagnostics.TraceEventType,System.Int32,System.String)" /> method writes the event message to the <see cref="T:System.Web.TraceContext" /> object using <paramref name="source" /> as the category and <paramref name="message" /> as the message. </para
-          >
+            >The <see cref="M:System.Web.WebPageTraceListener.TraceEvent(System.Diagnostics.TraceEventCache,System.String,System.Diagnostics.TraceEventType,System.Int32,System.String)" /> method writes the event message to the <see cref="T:System.Web.TraceContext" /> object using <paramref name="source" /> as the category and <paramref name="message" /> as the message.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -99,8 +99,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A category name used to organize the output. </param
-        >
+          />A category name used to organize the output.
+        </param>
         <param name="severity">
           <attribution
             license="cc4"
@@ -150,8 +150,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.WebPageTraceListener.TraceEvent(System.Diagnostics.TraceEventCache,System.String,System.Diagnostics.TraceEventType,System.Int32,System.String,System.Object[])" /> method calls the <see cref="M:System.String.Format(System.IFormatProvider,System.String,System.Object[])" /> method, passing <paramref name="format" /> and <paramref name="args" /> and using the <see cref="P:System.Globalization.CultureInfo.InvariantCulture" /> property to format the string as the message to write to the trace viewer or Web page. </para
-          >
+            >The <see cref="M:System.Web.WebPageTraceListener.TraceEvent(System.Diagnostics.TraceEventCache,System.String,System.Diagnostics.TraceEventType,System.Int32,System.String,System.Object[])" /> method calls the <see cref="M:System.String.Format(System.IFormatProvider,System.String,System.Object[])" /> method, passing <paramref name="format" /> and <paramref name="args" /> and using the <see cref="P:System.Globalization.CultureInfo.InvariantCulture" /> property to format the string as the message to write to the trace viewer or Web page.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -169,8 +169,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A category name used to organize the output. </param
-        >
+          />A category name used to organize the output.
+        </param>
         <param name="severity">
           <attribution
             license="cc4"

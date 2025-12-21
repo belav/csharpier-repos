@@ -119,11 +119,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="M:System.Web.Hosting.VirtualPathProvider.CombineVirtualPaths(System.String,System.String)" /> method to inspect the contents of a relative path to a virtual resource and perform any modifications required. </para
-          >
+            >Use the <see cref="M:System.Web.Hosting.VirtualPathProvider.CombineVirtualPaths(System.String,System.String)" /> method to inspect the contents of a relative path to a virtual resource and perform any modifications required.
+          </para>
           <para
-            >The default implementation combines the <paramref name="basePath" /> and <paramref name="relativePath" /> parameters according to standard ASP.NET path processing. </para
-          >
+            >The default implementation combines the <paramref name="basePath" /> and <paramref name="relativePath" /> parameters according to standard ASP.NET path processing.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -445,8 +445,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="M:System.Web.Hosting.VirtualPathProvider.GetFileHash(System.String,System.Collections.IEnumerable)" /> method to provide a hash of the dependencies for a virtual-file-system resource. </para
-          >
+            >Use the <see cref="M:System.Web.Hosting.VirtualPathProvider.GetFileHash(System.String,System.Collections.IEnumerable)" /> method to provide a hash of the dependencies for a virtual-file-system resource.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -548,8 +548,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.Hosting.VirtualPathProvider.OpenFile(System.String)" /> method is a convenience method that enables you to get a stream from a virtual file without creating a <see cref="T:System.Web.Hosting.VirtualPathProvider" /> instance. </para
-          >
+            >The <see cref="M:System.Web.Hosting.VirtualPathProvider.OpenFile(System.String)" /> method is a convenience method that enables you to get a stream from a virtual file without creating a <see cref="T:System.Web.Hosting.VirtualPathProvider" /> instance.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

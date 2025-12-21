@@ -207,15 +207,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> object to populate with serialization information. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> object to populate with serialization information.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />(Reserved) The place to store and retrieve serialized data. </param
-        >
+          />(Reserved) The place to store and retrieve serialized data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="op_Equality">
@@ -344,8 +344,8 @@
           <para
             > A <see cref="T:System.IntPtr" /> that contains the
    value of the current <see cref="T:System.RuntimeFieldHandle" /> .
-   </para
-          >
+
+          </para>
         </value>
         <remarks>
           <para>This property is read-only.</para>

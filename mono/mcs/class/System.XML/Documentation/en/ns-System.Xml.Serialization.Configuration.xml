@@ -6,8 +6,8 @@
       <para
         >The <see cref="N:System.Xml.Serialization.Configuration" /> namespace contains classes used to read the values found in application configuration files under the <format type="text/html">
           <a href="3ce45919-388a-418c-8968-6df0372c73ec">system.xml.serialization</a>
-        </format> section. </para
-      >
+        </format> section.
+      </para>
     </summary>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />

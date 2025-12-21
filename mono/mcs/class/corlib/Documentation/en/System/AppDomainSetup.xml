@@ -182,8 +182,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>No exception is thrown if this property is set to null.</para>
           <para
-            >The information provided by the <see cref="T:System.Runtime.Hosting.ActivationArguments" /> object supports manifest-based activation. </para
-          >
+            >The information provided by the <see cref="T:System.Runtime.Hosting.ActivationArguments" /> object supports manifest-based activation.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -426,8 +426,8 @@
             >If the <see cref="P:System.AppDomainSetup.DisallowApplicationBaseProbing" /> property is true, the values of the <see cref="P:System.AppDomainSetup.PrivateBinPath" /> property and the <see cref="P:System.AppDomainSetup.PrivateBinPathProbe" /> property are ignored. No assemblies are probed for in the directories specified by the <see cref="P:System.AppDomainSetup.PrivateBinPath" /> property.</para
           >
           <para
-            >The <see cref="P:System.AppDomainSetup.DisallowApplicationBaseProbing" /> property provides an additional layer of control over the loading process. In the normal assembly loading sequence, the application base is probed before the <see cref="E:System.AppDomain.AssemblyResolve" /> event is raised. However, some applications might need to load assemblies from an OLE compound file within a document, or from a unique known location that is neither in the global assembly cache nor in the directories specified by the <see cref="P:System.AppDomainSetup.ApplicationBase" /> and <see cref="P:System.AppDomainSetup.PrivateBinPath" /> properties. Such applications can use the <see cref="P:System.AppDomainSetup.DisallowApplicationBaseProbing" /> property to avoid the delay caused by normal probing, and to avoid loading copies of the necessary assembly that might be located in the normal probing paths. </para
-          >
+            >The <see cref="P:System.AppDomainSetup.DisallowApplicationBaseProbing" /> property provides an additional layer of control over the loading process. In the normal assembly loading sequence, the application base is probed before the <see cref="E:System.AppDomain.AssemblyResolve" /> event is raised. However, some applications might need to load assemblies from an OLE compound file within a document, or from a unique known location that is neither in the global assembly cache nor in the directories specified by the <see cref="P:System.AppDomainSetup.ApplicationBase" /> and <see cref="P:System.AppDomainSetup.PrivateBinPath" /> properties. Such applications can use the <see cref="P:System.AppDomainSetup.DisallowApplicationBaseProbing" /> property to avoid the delay caused by normal probing, and to avoid loading copies of the necessary assembly that might be located in the normal probing paths.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -553,8 +553,8 @@
             >Use this property to set the base directory where the dynamic directory for the new application domain will be located. When code in the new application domain loads an assembly, assembly resolution looks first in the normal probing paths. If it does not find the assembly, it looks in the dynamic directory, which is returned by the <see cref="P:System.AppDomain.DynamicDirectory" /> property. Dynamic assemblies that will be loaded and executed by the new application domain can be placed there.</para
           >
           <para
-            >When you assign a path to the <see cref="P:System.AppDomainSetup.DynamicBase" /> property, an additional subdirectory is added; the name of this subdirectory is the hash code of the value assigned to the <see cref="P:System.AppDomainSetup.ApplicationName" /> property. Thus, the base directory subsequently returned by this property is always different from the value assigned. </para
-          >
+            >When you assign a path to the <see cref="P:System.AppDomainSetup.DynamicBase" /> property, an additional subdirectory is added; the name of this subdirectory is the hash code of the value assigned to the <see cref="P:System.AppDomainSetup.ApplicationName" /> property. Thus, the base directory subsequently returned by this property is always different from the value assigned.
+          </para>
           <block subset="none" type="note">
             <para>Assigning a value to this property does not create any directories. The directories must be created or verified by the code that uses them. </para>
           </block>
@@ -595,11 +595,11 @@
             >
           </block>
           <para
-            >The XML in <paramref name="value" /> is the same as the XML in a normal configuration file, except that it is stored as a <see cref="T:System.Byte" /> array. </para
-          >
+            >The XML in <paramref name="value" /> is the same as the XML in a normal configuration file, except that it is stored as a <see cref="T:System.Byte" /> array.
+          </para>
           <para
-            >To access the configuration bytes for an application domain, use the <see cref="P:System.AppDomain.SetupInformation" /> property to get the <see cref="T:System.AppDomainSetup" /> object for the application domain, then use the <see cref="M:System.AppDomainSetup.GetConfigurationBytes" /> method. </para
-          >
+            >To access the configuration bytes for an application domain, use the <see cref="P:System.AppDomain.SetupInformation" /> property to get the <see cref="T:System.AppDomainSetup" /> object for the application domain, then use the <see cref="M:System.AppDomainSetup.GetConfigurationBytes" /> method.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -710,8 +710,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Set this property to any non-null string value, including <see cref="F:System.String.Empty" /> (""), to exclude the application directory path — that is, <see cref="P:System.AppDomainSetup.ApplicationBase" /> — from the search path for the application, and to search for assemblies only in <see cref="P:System.AppDomainSetup.PrivateBinPath" />. </para
-          >
+            >Set this property to any non-null string value, including <see cref="F:System.String.Empty" /> (""), to exclude the application directory path — that is, <see cref="P:System.AppDomainSetup.ApplicationBase" /> — from the search path for the application, and to search for assemblies only in <see cref="P:System.AppDomainSetup.PrivateBinPath" />.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -777,8 +777,8 @@
                     <a href="07132b9c-4a72-4710-99d7-e702405e02d4"
                       >&lt;NetFx40_LegacySecurityPolicy&gt; Element</a
                     >
-                  </format>. </para
-                >
+                  </format>.
+                </para>
               </description>
             </item>
             <item>
@@ -851,8 +851,8 @@
             >
           </block>
           <para
-            >The XML in <paramref name="value" /> is the same as the XML in a normal configuration file, except that it is stored as a <see cref="T:System.Byte" /> array. </para
-          >
+            >The XML in <paramref name="value" /> is the same as the XML in a normal configuration file, except that it is stored as a <see cref="T:System.Byte" /> array.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

@@ -41,8 +41,8 @@
         <h2>Returning Anonymous Types</h2>
       </format>
       <para
-        >An anonymous complex type cannot be created using a method that returns <see cref="T:System.Xml.XmlQualifiedName" />. Because an anonymous type has no name, and you cannot add an anonymous type to a schema, the anonymous type must be returned as an <see cref="T:System.Xml.Schema.XmlSchemaType" />. </para
-      >
+        >An anonymous complex type cannot be created using a method that returns <see cref="T:System.Xml.XmlQualifiedName" />. Because an anonymous type has no name, and you cannot add an anonymous type to a schema, the anonymous type must be returned as an <see cref="T:System.Xml.Schema.XmlSchemaType" />.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

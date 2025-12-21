@@ -123,8 +123,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Data.Common.DbCommand" /> that represents the database query, command, or stored procedure that is submitted to the database by the <see cref="T:System.Web.UI.WebControls.SqlDataSource" /> control. </param
-        >
+          />The <see cref="T:System.Data.Common.DbCommand" /> that represents the database query, command, or stored procedure that is submitted to the database by the <see cref="T:System.Web.UI.WebControls.SqlDataSource" /> control.
+        </param>
         <param name="exception">
           <attribution
             license="cc4"
@@ -149,11 +149,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >All operations return the number of rows affected by the operation. The <see cref="P:System.Web.UI.WebControls.SqlDataSourceStatusEventArgs.AffectedRows" /> property has the same value as the return value of the <see cref="M:System.Web.UI.WebControls.SqlDataSource.Update" />, <see cref="M:System.Web.UI.WebControls.SqlDataSource.Insert" />, and <see cref="M:System.Web.UI.WebControls.SqlDataSource.Delete" /> methods. </para
-          >
+            >All operations return the number of rows affected by the operation. The <see cref="P:System.Web.UI.WebControls.SqlDataSourceStatusEventArgs.AffectedRows" /> property has the same value as the return value of the <see cref="M:System.Web.UI.WebControls.SqlDataSource.Update" />, <see cref="M:System.Web.UI.WebControls.SqlDataSource.Insert" />, and <see cref="M:System.Web.UI.WebControls.SqlDataSource.Delete" /> methods.
+          </para>
           <para
-            >When the <see cref="M:System.Web.UI.WebControls.SqlDataSource.Select(System.Web.UI.DataSourceSelectArguments)" /> method is called and the data source is set to <see cref="F:System.Web.UI.WebControls.SqlDataSourceMode.DataReader" /> mode, the return value is 0 in all cases. </para
-          >
+            >When the <see cref="M:System.Web.UI.WebControls.SqlDataSource.Select(System.Web.UI.DataSourceSelectArguments)" /> method is called and the data source is set to <see cref="F:System.Web.UI.WebControls.SqlDataSourceMode.DataReader" /> mode, the return value is 0 in all cases.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

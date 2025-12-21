@@ -100,8 +100,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Text.DecoderFallbackBuffer" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Text.DecoderFallbackBuffer" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -183,8 +183,8 @@
             >A decoding operation calls the <see cref="M:System.Text.DecoderFallbackBuffer.Fallback(System.Byte[],System.Int32)" /> method if the operation encounters an unknown byte sequence in the input. If the <see cref="M:System.Text.DecoderFallbackBuffer.Fallback(System.Byte[],System.Int32)" /> method returns true, a substitute string exists that can be inserted in the output instead of decoding the unknown input. The decoding operation calls the <see cref="M:System.Text.DecoderFallbackBuffer.GetNextChar" /> method repeatedly and obtains the substitute string one character at a time. When all characters in the fallback buffer have been returned to the decoder, the method should return U+0000.</para
           >
           <para
-            >For an exception fallback handler, the <see cref="M:System.Text.DecoderFallbackBuffer.GetNextChar" /> method should return U+0000. </para
-          >
+            >For an exception fallback handler, the <see cref="M:System.Text.DecoderFallbackBuffer.GetNextChar" /> method should return U+0000.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -220,8 +220,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, causes the next call to the <see cref="M:System.Text.DecoderFallbackBuffer.GetNextChar" /> method to access the data buffer character position that is prior to the current character position. </para
-          >
+            >When overridden in a derived class, causes the next call to the <see cref="M:System.Text.DecoderFallbackBuffer.GetNextChar" /> method to access the data buffer character position that is prior to the current character position.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />

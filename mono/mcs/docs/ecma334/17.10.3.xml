@@ -38,8 +38,8 @@ x = 1, y = 0
   </paragraph>
   <paragraph>
     <example
-      >The value of x is 1 because the variable initializer is executed before the base class instance constructor is invoked. However, the value of y is 0 (the default value of an <keyword>int</keyword>) because the assignment to y is not executed until after the base class constructor returns. </example
-    >
+      >The value of x is 1 because the variable initializer is executed before the base class instance constructor is invoked. However, the value of y is 0 (the default value of an <keyword>int</keyword>) because the assignment to y is not executed until after the base class constructor returns.
+    </example>
   </paragraph>
   <paragraph>
     <example

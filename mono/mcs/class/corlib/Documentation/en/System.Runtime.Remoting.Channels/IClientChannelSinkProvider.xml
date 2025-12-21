@@ -88,22 +88,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Channel for which the current sink chain is being constructed. </param
-        >
+          />Channel for which the current sink chain is being constructed.
+        </param>
         <param name="url">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URL of the object to connect to. This parameter can be null if the connection is based entirely on the information contained in the <paramref name="remoteChannelData" /> parameter. </param
-        >
+          />The URL of the object to connect to. This parameter can be null if the connection is based entirely on the information contained in the <paramref name="remoteChannelData" /> parameter.
+        </param>
         <param name="remoteChannelData">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A channel data object that describes a channel on the remote server. </param
-        >
+          />A channel data object that describes a channel on the remote server.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Next">

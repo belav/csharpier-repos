@@ -97,8 +97,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Security.Permissions.PermissionState" /> values. </param
-        >
+          />One of the <see cref="T:System.Security.Permissions.PermissionState" /> values.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddPermissionAccess">
@@ -133,8 +133,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.Permissions.ResourcePermissionBaseEntry" /> to add. </param
-        >
+          />The <see cref="T:System.Security.Permissions.ResourcePermissionBaseEntry" /> to add.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Any">
@@ -253,8 +253,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML encoding to use to reconstruct the security object. </param
-        >
+          />The XML encoding to use to reconstruct the security object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetPermissionEntries">
@@ -336,8 +336,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission object of the same type as the current permission object. </param
-        >
+          />A permission object of the same type as the current permission object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsSubsetOf">
@@ -380,8 +380,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission object that is to be tested for the subset relationship. </param
-        >
+          />A permission object that is to be tested for the subset relationship.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsUnrestricted">
@@ -495,8 +495,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.Permissions.ResourcePermissionBaseEntry" /> to remove. </param
-        >
+          />The <see cref="T:System.Security.Permissions.ResourcePermissionBaseEntry" /> to remove.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="TagNames">
@@ -592,8 +592,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission object to combine with the current permission object. It must be of the same type as the current permission object. </param
-        >
+          />A permission object to combine with the current permission object. It must be of the same type as the current permission object.
+        </param>
       </Docs>
     </Member>
   </Members>

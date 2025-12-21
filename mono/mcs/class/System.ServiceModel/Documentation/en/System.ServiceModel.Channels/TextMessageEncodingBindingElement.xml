@@ -31,14 +31,14 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>Encoding is the process of transforming a message into a sequence of bytes. Decoding is the reverse process. indigo1 includes three types of encoding for SOAP messages: Text, Binary and Message Transmission Optimization Mechanism (MTOM). </para>
       <para
-        >The text encoding represented by the <see cref="T:System.ServiceModel.Channels.TextMessageEncodingBindingElement" /> is the most interoperable, but the least efficient encoder for XML messages. Web service or Web service client can generally understand textual XML. However, transmitting large blocks of binary data as text is not efficient. </para
-      >
+        >The text encoding represented by the <see cref="T:System.ServiceModel.Channels.TextMessageEncodingBindingElement" /> is the most interoperable, but the least efficient encoder for XML messages. Web service or Web service client can generally understand textual XML. However, transmitting large blocks of binary data as text is not efficient.
+      </para>
       <para
-        >crabout the binding element that specifies messages are encoded using the .NET Binary Format for XML, see <see cref="T:System.ServiceModel.Channels.BinaryMessageEncodingBindingElement" />. </para
-      >
+        >crabout the binding element that specifies messages are encoded using the .NET Binary Format for XML, see <see cref="T:System.ServiceModel.Channels.BinaryMessageEncodingBindingElement" />.
+      </para>
       <para
-        >crabout the binding element that specifies messages are encoded using the MTOM message encoding, see <see cref="T:System.ServiceModel.Channels.MtomMessageEncodingBindingElement" />. </para
-      >
+        >crabout the binding element that specifies messages are encoded using the MTOM message encoding, see <see cref="T:System.ServiceModel.Channels.MtomMessageEncodingBindingElement" />.
+      </para>
       <para
         >crabout how to implement a custom message encoder, use the <see cref="T:System.ServiceModel.Channels.MessageEncodingBindingElement" /> class.</para
       >
@@ -70,8 +70,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.TextMessageEncodingBindingElement" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.TextMessageEncodingBindingElement" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -680,8 +680,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.Channels.TextMessageEncodingBindingElement" /> is responsible for setting information about the message version in the WSDL. But this is done by the <see cref="M:System.ServiceModel.Channels.TextMessageEncodingBindingElement.System.ServiceModel.Description.IWsdlExportExtension.ExportEndpoint(System.ServiceModel.Description.WsdlExporter,System.ServiceModel.Description.WsdlEndpointConversionContext)" /> method. </para
-          >
+            >The <see cref="T:System.ServiceModel.Channels.TextMessageEncodingBindingElement" /> is responsible for setting information about the message version in the WSDL. But this is done by the <see cref="M:System.ServiceModel.Channels.TextMessageEncodingBindingElement.System.ServiceModel.Description.IWsdlExportExtension.ExportEndpoint(System.ServiceModel.Description.WsdlExporter,System.ServiceModel.Description.WsdlEndpointConversionContext)" /> method.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

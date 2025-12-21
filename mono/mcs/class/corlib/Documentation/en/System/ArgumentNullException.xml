@@ -53,8 +53,7 @@ class ArgumentNullTest {
  }
  }
 }
-   </code
-      >
+   </code>
       <para>The output is</para>
       <c>
         <para>Error: System.ArgumentNullException: Value cannot be null.</para>
@@ -237,8 +236,8 @@ class ArgumentNullTest {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the parameter that caused the exception. </param
-        >
+          />The name of the parameter that caused the exception.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -283,15 +282,15 @@ class ArgumentNullTest {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that holds the serialized object data. </param
-        >
+          />The object that holds the serialized object data.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that describes the source or destination of the serialized data. </param
-        >
+          />An object that describes the source or destination of the serialized data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -326,15 +325,15 @@ class ArgumentNullTest {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The error message that explains the reason for this exception. </param
-        >
+          />The error message that explains the reason for this exception.
+        </param>
         <param name="innerException">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The exception that is the cause of the current exception, or a null reference (Nothing in Visual Basic) if no inner exception is specified. </param
-        >
+          />The exception that is the cause of the current exception, or a null reference (Nothing in Visual Basic) if no inner exception is specified.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -427,15 +426,15 @@ class ArgumentNullTest {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the parameter that caused the exception. </param
-        >
+          />The name of the parameter that caused the exception.
+        </param>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A message that describes the error. </param
-        >
+          />A message that describes the error.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

@@ -34,8 +34,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Security.Cryptography.Xml.KeyInfo" /> class represents key information in XML digital signing and encryption. </para
-      >
+        >The <see cref="T:System.Security.Cryptography.Xml.KeyInfo" /> class represents key information in XML digital signing and encryption.
+      </para>
       <para
         >The <see cref="T:System.Security.Cryptography.Xml.KeyInfo" /> class enables you to imbed key-related information intended to help identify the key necessary for validating or decrypting the XML document. Multiple types of key-related information can be included within a single <see cref="T:System.Security.Cryptography.Xml.KeyInfo" />; each type of key-related information has an associated class derived from <see cref="T:System.Security.Cryptography.Xml.KeyInfoClause" />.</para
       >
@@ -105,8 +105,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.Cryptography.Xml.KeyInfoClause" /> to add to the <see cref="T:System.Security.Cryptography.Xml.KeyInfo" /> object. </param
-        >
+          />The <see cref="T:System.Security.Cryptography.Xml.KeyInfoClause" /> to add to the <see cref="T:System.Security.Cryptography.Xml.KeyInfo" /> object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Count">
@@ -216,8 +216,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of object to enumerate. </param
-        >
+          />The type of object to enumerate.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetXml">
@@ -305,8 +305,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML element from which to load the <see cref="T:System.Security.Cryptography.Xml.KeyInfo" /> state. </param
-        >
+          />The XML element from which to load the <see cref="T:System.Security.Cryptography.Xml.KeyInfo" /> state.
+        </param>
       </Docs>
     </Member>
   </Members>

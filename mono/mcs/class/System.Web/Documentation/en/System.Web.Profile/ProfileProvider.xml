@@ -131,8 +131,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.Profile.ProfileProvider.DeleteProfiles(System.String[])" /> method deletes the profiles specified in the <paramref name="usernames" /> parameter. Only data for the applicationName specified in the configuration file is removed. </para
-          >
+            >The <see cref="M:System.Web.Profile.ProfileProvider.DeleteProfiles(System.String[])" /> method deletes the profiles specified in the <paramref name="usernames" /> parameter. Only data for the applicationName specified in the configuration file is removed.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -171,8 +171,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.Profile.ProfileProvider.DeleteProfiles(System.Web.Profile.ProfileInfoCollection)" /> method deletes the profiles specified in the <paramref name="profiles" /> parameter. Only data for the applicationName specified in the configuration file is removed. </para
-          >
+            >The <see cref="M:System.Web.Profile.ProfileProvider.DeleteProfiles(System.Web.Profile.ProfileInfoCollection)" /> method deletes the profiles specified in the <paramref name="profiles" /> parameter. Only data for the applicationName specified in the configuration file is removed.
+          </para>
           <para
             >When implementing this method in a derived class, you can use the applicationName value and the <see cref="P:System.Web.Profile.ProfileInfo.UserName" /> property of each <see cref="T:System.Web.Profile.ProfileInfo" /> object in the supplied <see cref="T:System.Web.Profile.ProfileInfoCollection" /> to determine which profiles to delete from your data source.</para
           >

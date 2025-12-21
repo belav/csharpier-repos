@@ -246,8 +246,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="T:System.Windows.Forms.StatusBarPanel" /> objects set to <see cref="F:System.Windows.Forms.StatusBarPanelAutoSize.Contents" /> have precedence over those panels set to the <see cref="F:System.Windows.Forms.StatusBarPanelAutoSize.Spring" /> value. For example, a <see cref="T:System.Windows.Forms.StatusBarPanel" /> that has its <see cref="P:System.Windows.Forms.StatusBarPanel.AutoSize" /> property set to <see cref="F:System.Windows.Forms.StatusBarPanelAutoSize.Spring" /> is shortened if a <see cref="T:System.Windows.Forms.StatusBarPanel" /> with the <see cref="P:System.Windows.Forms.StatusBarPanel.AutoSize" /> property set to <see cref="F:System.Windows.Forms.StatusBarPanelAutoSize.Contents" /> requires that space. </para
-          >
+            <see cref="T:System.Windows.Forms.StatusBarPanel" /> objects set to <see cref="F:System.Windows.Forms.StatusBarPanelAutoSize.Contents" /> have precedence over those panels set to the <see cref="F:System.Windows.Forms.StatusBarPanelAutoSize.Spring" /> value. For example, a <see cref="T:System.Windows.Forms.StatusBarPanel" /> that has its <see cref="P:System.Windows.Forms.StatusBarPanel.AutoSize" /> property set to <see cref="F:System.Windows.Forms.StatusBarPanelAutoSize.Spring" /> is shortened if a <see cref="T:System.Windows.Forms.StatusBarPanel" /> with the <see cref="P:System.Windows.Forms.StatusBarPanel.AutoSize" /> property set to <see cref="F:System.Windows.Forms.StatusBarPanelAutoSize.Contents" /> requires that space.
+          </para>
           <para
             >You can use <see cref="P:System.Windows.Forms.StatusBarPanel.AutoSize" /> to ensure that the contents of a <see cref="T:System.Windows.Forms.StatusBarPanel" /> are properly displayed in a <see cref="T:System.Windows.Forms.StatusBar" /> control that contains more than one panel. For example, you might want a panel that contains text to adjust automatically to the amount of text it is displaying (<see cref="F:System.Windows.Forms.StatusBarPanelAutoSize.Contents" />), while another panel on the <see cref="T:System.Windows.Forms.StatusBar" /> that displays an owner-drawn progress bar would need to be a fixed size (<see cref="F:System.Windows.Forms.StatusBarPanelAutoSize.None" />).</para
           >
@@ -345,16 +345,16 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see cref="T:System.Windows.Forms.StatusBarPanel" /> and optionally releases the managed resources. </para
-          >
+            >Releases the unmanaged resources used by the <see cref="T:System.Windows.Forms.StatusBarPanel" /> and optionally releases the managed resources.
+          </para>
         </summary>
         <param name="disposing">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -486,8 +486,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the name to apply to the <see cref="T:System.Windows.Forms.StatusBarPanel" />. </para
-          >
+            >Gets or sets the name to apply to the <see cref="T:System.Windows.Forms.StatusBarPanel" />.
+          </para>
         </summary>
       </Docs>
     </Member>

@@ -107,15 +107,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeExpression" /> that indicates the object that contains the property to reference. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeExpression" /> that indicates the object that contains the property to reference.
+        </param>
         <param name="propertyName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the property to reference. </param
-        >
+          />The name of the property to reference.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="PropertyName">

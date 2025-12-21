@@ -137,8 +137,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Get the first annotation object of the specified type from this <see cref="T:System.Xml.Linq.XObject" />. </para
-          >
+            >Get the first annotation object of the specified type from this <see cref="T:System.Xml.Linq.XObject" />.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />

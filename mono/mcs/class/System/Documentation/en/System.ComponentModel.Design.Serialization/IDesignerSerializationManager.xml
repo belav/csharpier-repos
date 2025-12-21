@@ -77,8 +77,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The serialization provider to add. </param
-        >
+          />The serialization provider to add.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Context">
@@ -153,33 +153,29 @@
           <para>The newly created object instance.</para>
         </returns>
         <param name="type">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The data type to create. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The data type to create.
+        </param>
         <param name="arguments">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The arguments to pass to the constructor for this type. </param
-        >
+          />The arguments to pass to the constructor for this type.
+        </param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the object. This name can be used to access the object later through <see cref="M:System.ComponentModel.Design.Serialization.IDesignerSerializationManager.GetInstance(System.String)" />. If null is passed, the object is still created but cannot be accessed by name. </param
-        >
+          />The name of the object. This name can be used to access the object later through <see cref="M:System.ComponentModel.Design.Serialization.IDesignerSerializationManager.GetInstance(System.String)" />. If null is passed, the object is still created but cannot be accessed by name.
+        </param>
         <param name="addToContainer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />If true, this object is added to the design container. The object must implement <see cref="T:System.ComponentModel.IComponent" /> for this to have any effect. </param
-        >
+          />If true, this object is added to the design container. The object must implement <see cref="T:System.ComponentModel.IComponent" /> for this to have any effect.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetInstance">
@@ -220,8 +216,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the object to retrieve. </param
-        >
+          />The name of the object to retrieve.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetName">
@@ -257,8 +253,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to retrieve the name for. </param
-        >
+          />The object to retrieve the name for.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetSerializer">
@@ -298,15 +294,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the object to get the serializer for. </param
-        >
+          />The type of the object to get the serializer for.
+        </param>
         <param name="serializerType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the serializer to retrieve. </param
-        >
+          />The type of the serializer to retrieve.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetType">
@@ -342,8 +338,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The fully qualified name of the type to load. </param
-        >
+          />The fully qualified name of the type to load.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Properties">
@@ -413,8 +409,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The provider to remove. This object must have been added using <see cref="M:System.ComponentModel.Design.Serialization.IDesignerSerializationManager.AddSerializationProvider(System.ComponentModel.Design.Serialization.IDesignerSerializationProvider)" />. </param
-        >
+          />The provider to remove. This object must have been added using <see cref="M:System.ComponentModel.Design.Serialization.IDesignerSerializationManager.AddSerializationProvider(System.ComponentModel.Design.Serialization.IDesignerSerializationProvider)" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ReportError">
@@ -454,8 +450,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The error to report. This information object can be of any object type. If it is an exception, the message of the exception is extracted and reported to the user. If it is any other type, <see cref="M:System.Object.ToString" /> is called to display the information to the user. </param
-        >
+          />The error to report. This information object can be of any object type. If it is an exception, the message of the exception is extracted and reported to the user. If it is any other type, <see cref="M:System.Object.ToString" /> is called to display the information to the user.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ResolveName">
@@ -558,15 +554,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object instance to name. </param
-        >
+          />The object instance to name.
+        </param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name to give the instance. </param
-        >
+          />The name to give the instance.
+        </param>
       </Docs>
     </Member>
   </Members>

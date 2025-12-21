@@ -81,8 +81,8 @@
               >To obtain the current working 
           directory, see 
           <see cref="M:.Mono.Unix.UnixDirectoryInfo.GetCurrentDirectory" />.
-          </block
-            >
+
+            </block>
           </para>
           <para
             >It is valid to construct 
@@ -98,13 +98,13 @@
         </remarks>
         <exception cref="T:System.ArgumentNullException">
           <paramref name="path" /> is <see langword="null" />.
-        </exception
-        >
+
+        </exception>
         <exception cref="T:System.ArgumentException">
           <paramref name="path" /> contains invalid characters; see
           <see cref="M:Mono.Unix.UnixPath.GetInvalidPathChars" />.
-        </exception
-        >
+
+        </exception>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -150,8 +150,8 @@
               <see cref="F:Mono.Unix.Native.FilePermissions.S_IROTH" />
             )</c
             > (the 0644 permission).
-          </para
-          >
+
+          </para>
         </remarks>
         <exception cref="T:System.InvalidOperationException">
           <para>
@@ -159,144 +159,144 @@
             file mounted through a file system that does not support access to
             it (e.g. NFS).
             [<see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >An attempt was made to open a socket.
             [<see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />]
-          </para
-          >
+
+          </para>
         </exception>
         <exception cref="T:System.UnauthorizedAccessException">
           <para
             >Search permission is denied for a component of the path
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />.
             [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >The required permissions (for reading and/or writing)
           are denied for the given flags.
             [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> does not
           exist, and <see cref="P:Mono.Unix.UnixFileInfo.Directory" /> does not
           permit writing.
             [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is a
           directory.
             [<see cref="F:Mono.Unix.Native.Errno.EISDIR" />]
-          </para
-          >
+
+          </para>
         </exception>
         <exception cref="T:System.IO.DirectoryNotFoundException">
           A component of the path prefix of 
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is not a
           directory.
             [<see cref="F:Mono.Unix.Native.Errno.ENOTDIR" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:System.IO.FileNotFoundException">
           A component of <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> 
           that must exist does not exist.
             [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:System.IO.IOException">
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> resides on a
           read-only file system.
             [<see cref="F:Mono.Unix.Native.Errno.EROFS" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is a
           character device or block device, and the device associated with
           this file does not exist.
             [<see cref="F:Mono.Unix.Native.Errno.ENXIO" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is a
           fifo, no process has it open for reading, and the arguments specify
           it is to be opened for writing.
             [<see cref="F:Mono.Unix.Native.Errno.ENXIO" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >The directory <see cref="P:Mono.Unix.UnixFileInfo.Directory" /> 
           cannot be extended because there is no space left on the file
           system containing the directory.
             [<see cref="F:Mono.Unix.Native.Errno.ENOSPC" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >There are no free inodes on the file system on which the file
           is being created.
             [<see cref="F:Mono.Unix.Native.Errno.ENOSPC" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >An I/O error occurred while making the directory entry or
           allocating the inode.
             [<see cref="F:Mono.Unix.Native.Errno.EIO" />]
-          </para
-          >
+
+          </para>
         </exception>
         <exception cref="T:System.IO.PathTooLongException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> was too long.
             [<see cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:Mono.Unix.UnixIOException">
           <para
             >Too many symbolic links were encountered in translating 
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />.
             [<see cref="F:Mono.Unix.Native.Errno.ELOOP" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >The process has already reached its limit for open file
           descriptors.
             [<see cref="F:Mono.Unix.Native.Errno.EMFILE" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >The system file table is full.
             [<see cref="F:Mono.Unix.Native.Errno.ENFILE" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >The user's quota of inodes on the file system containing
           <see cref="P:Mono.Unix.UnixFileInfo.Directory" /> has been exhausted.
             [<see cref="F:Mono.Unix.Native.Errno.EDQUOT" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileInfo.Directory" /> cannot be
           extended because the user's quota of disk blocks on the file system
           containing this directory has been exhausted.
             [<see cref="F:Mono.Unix.Native.Errno.EDQUOT" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is a
@@ -304,8 +304,8 @@
           <see cref="M:Mono.Unix.Native.Syscall.open" /> requests write
           access.
             [<see cref="F:Mono.Unix.Native.Errno.ETXTBSY" />]
-          </para
-          >
+
+          </para>
         </exception>
         <altmember cref="M:Mono.Unix.Native.Syscall.creat" />
       </Docs>
@@ -359,144 +359,144 @@
             file mounted through a file system that does not support access to
             it (e.g. NFS).
             [<see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >An attempt was made to open a socket.
             [<see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />]
-          </para
-          >
+
+          </para>
         </exception>
         <exception cref="T:System.UnauthorizedAccessException">
           <para
             >Search permission is denied for a component of the path
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />.
             [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >The required permissions (for reading and/or writing)
           are denied for the given flags.
             [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> does not
           exist, and <see cref="P:Mono.Unix.UnixFileInfo.Directory" /> does not
           permit writing.
             [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is a
           directory.
             [<see cref="F:Mono.Unix.Native.Errno.EISDIR" />]
-          </para
-          >
+
+          </para>
         </exception>
         <exception cref="T:System.IO.DirectoryNotFoundException">
           A component of the path prefix of 
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is not a
           directory.
             [<see cref="F:Mono.Unix.Native.Errno.ENOTDIR" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:System.IO.FileNotFoundException">
           A component of <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> 
           that must exist does not exist.
             [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:System.IO.IOException">
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> resides on a
           read-only file system.
             [<see cref="F:Mono.Unix.Native.Errno.EROFS" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is a
           character device or block device, and the device associated with
           this file does not exist.
             [<see cref="F:Mono.Unix.Native.Errno.ENXIO" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is a
           fifo, no process has it open for reading, and the arguments specify
           it is to be opened for writing.
             [<see cref="F:Mono.Unix.Native.Errno.ENXIO" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >The directory <see cref="P:Mono.Unix.UnixFileInfo.Directory" /> 
           cannot be extended because there is no space left on the file
           system containing the directory.
             [<see cref="F:Mono.Unix.Native.Errno.ENOSPC" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >There are no free inodes on the file system on which the file
           is being created.
             [<see cref="F:Mono.Unix.Native.Errno.ENOSPC" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >An I/O error occurred while making the directory entry or
           allocating the inode.
             [<see cref="F:Mono.Unix.Native.Errno.EIO" />]
-          </para
-          >
+
+          </para>
         </exception>
         <exception cref="T:System.IO.PathTooLongException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> was too long.
             [<see cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:Mono.Unix.UnixIOException">
           <para
             >Too many symbolic links were encountered in translating 
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />.
             [<see cref="F:Mono.Unix.Native.Errno.ELOOP" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >The process has already reached its limit for open file
           descriptors.
             [<see cref="F:Mono.Unix.Native.Errno.EMFILE" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >The system file table is full.
             [<see cref="F:Mono.Unix.Native.Errno.ENFILE" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >The user's quota of inodes on the file system containing
           <see cref="P:Mono.Unix.UnixFileInfo.Directory" /> has been exhausted.
             [<see cref="F:Mono.Unix.Native.Errno.EDQUOT" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileInfo.Directory" /> cannot be
           extended because the user's quota of disk blocks on the file system
           containing this directory has been exhausted.
             [<see cref="F:Mono.Unix.Native.Errno.EDQUOT" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is a
@@ -504,8 +504,8 @@
           <see cref="M:Mono.Unix.Native.Syscall.open" /> requests write
           access.
             [<see cref="F:Mono.Unix.Native.Errno.ETXTBSY" />]
-          </para
-          >
+
+          </para>
         </exception>
         <altmember cref="M:Mono.Unix.Native.Syscall.creat" />
       </Docs>
@@ -564,144 +564,144 @@
             file mounted through a file system that does not support access to
             it (e.g. NFS).
             [<see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >An attempt was made to open a socket.
             [<see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />]
-          </para
-          >
+
+          </para>
         </exception>
         <exception cref="T:System.UnauthorizedAccessException">
           <para
             >Search permission is denied for a component of the path
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />.
             [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >The required permissions (for reading and/or writing)
           are denied for the given flags.
             [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> does not
           exist, and <see cref="P:Mono.Unix.UnixFileInfo.Directory" /> does not
           permit writing.
             [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is a
           directory.
             [<see cref="F:Mono.Unix.Native.Errno.EISDIR" />]
-          </para
-          >
+
+          </para>
         </exception>
         <exception cref="T:System.IO.DirectoryNotFoundException">
           A component of the path prefix of 
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is not a
           directory.
             [<see cref="F:Mono.Unix.Native.Errno.ENOTDIR" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:System.IO.FileNotFoundException">
           A component of <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> 
           that must exist does not exist.
             [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:System.IO.IOException">
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> resides on a
           read-only file system.
             [<see cref="F:Mono.Unix.Native.Errno.EROFS" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is a
           character device or block device, and the device associated with
           this file does not exist.
             [<see cref="F:Mono.Unix.Native.Errno.ENXIO" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is a
           fifo, no process has it open for reading, and the arguments specify
           it is to be opened for writing.
             [<see cref="F:Mono.Unix.Native.Errno.ENXIO" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >The directory <see cref="P:Mono.Unix.UnixFileInfo.Directory" /> 
           cannot be extended because there is no space left on the file
           system containing the directory.
             [<see cref="F:Mono.Unix.Native.Errno.ENOSPC" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >There are no free inodes on the file system on which the file
           is being created.
             [<see cref="F:Mono.Unix.Native.Errno.ENOSPC" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >An I/O error occurred while making the directory entry or
           allocating the inode.
             [<see cref="F:Mono.Unix.Native.Errno.EIO" />]
-          </para
-          >
+
+          </para>
         </exception>
         <exception cref="T:System.IO.PathTooLongException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> was too long.
             [<see cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:Mono.Unix.UnixIOException">
           <para
             >Too many symbolic links were encountered in translating 
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />.
             [<see cref="F:Mono.Unix.Native.Errno.ELOOP" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >The process has already reached its limit for open file
           descriptors.
             [<see cref="F:Mono.Unix.Native.Errno.EMFILE" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >The system file table is full.
             [<see cref="F:Mono.Unix.Native.Errno.ENFILE" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >The user's quota of inodes on the file system containing
           <see cref="P:Mono.Unix.UnixFileInfo.Directory" /> has been exhausted.
             [<see cref="F:Mono.Unix.Native.Errno.EDQUOT" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileInfo.Directory" /> cannot be
           extended because the user's quota of disk blocks on the file system
           containing this directory has been exhausted.
             [<see cref="F:Mono.Unix.Native.Errno.EDQUOT" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is a
@@ -709,8 +709,8 @@
           <see cref="M:Mono.Unix.Native.Syscall.open" /> requests write
           access.
             [<see cref="F:Mono.Unix.Native.Errno.ETXTBSY" />]
-          </para
-          >
+
+          </para>
         </exception>
         <altmember cref="M:Mono.Unix.Native.Syscall.creat" />
       </Docs>
@@ -764,8 +764,8 @@
           >A <see cref="T:Mono.Unix.UnixDirectoryInfo" /> instance
         containing information about the directory 
         <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> resides in.
-        </value
-        >
+
+        </value>
         <remarks>
           <para
             >This is identical to 
@@ -773,8 +773,8 @@
               cref="C:Mono.Unix.UnixDirectoryInfo(System.String)"
               qualify="false"
             />(<see cref="P:Mono.Unix.UnixFileInfo.DirectoryName" />).
-          </para
-          >
+
+          </para>
         </remarks>
       </Docs>
     </Member>
@@ -803,8 +803,8 @@
           <para
             >This is equivalent to 
             <see cref="M:Mono.Unix.UnixPath.GetDirectoryName" />(<see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />).
-          </para
-          >
+
+          </para>
         </remarks>
       </Docs>
     </Member>
@@ -876,8 +876,8 @@
           <see cref="F:Mono.Unix.Native.OpenFlags.O_WRONLY" />, and
           <see cref="F:Mono.Unix.Native.OpenFlags.O_RDWR" />.
             [<see cref="F:Mono.Unix.Native.Errno.EINVAL" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" /> was
@@ -897,16 +897,16 @@
             <see cref="F:Mono.Unix.Native.OpenFlags.O_EXLOCK" /> is specified
             but the underlying file system does not support locking.
             [<see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is a special
             file mounted through a file system that does not support access to
             it (e.g. NFS).
             [<see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>An attempt was made to open a socket.</para>
         </exception>
@@ -915,132 +915,132 @@
             >Search permission is denied for a component of the path
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />.
             [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >The required permissions (for reading and/or writing)
           are denied for the given flags.
             [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> does not
           exist, and <see cref="P:Mono.Unix.UnixFileInfo.Directory" /> does not
           permit writing.
             [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is a
           directory.
             [<see cref="F:Mono.Unix.Native.Errno.EISDIR" />]
-          </para
-          >
+
+          </para>
         </exception>
         <exception cref="T:System.IO.DirectoryNotFoundException">
           A component of the path prefix of 
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is not a
           directory.
             [<see cref="F:Mono.Unix.Native.Errno.ENOTDIR" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:System.IO.FileNotFoundException">
           <para
             >A component of <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> 
           that must exist does not exist.
             [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> does not exist
           and <see cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" /> is not
           set.
             [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />]
-          </para
-          >
+
+          </para>
         </exception>
         <exception cref="T:System.IO.IOException">
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> resides on a
           read-only file system.
             [<see cref="F:Mono.Unix.Native.Errno.EROFS" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is a
           character device or block device, and the device associated with
           this file does not exist.
             [<see cref="F:Mono.Unix.Native.Errno.ENXIO" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is a
           fifo, no process has it open for reading, and the arguments specify
           it is to be opened for writing.
             [<see cref="F:Mono.Unix.Native.Errno.ENXIO" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >The directory <see cref="P:Mono.Unix.UnixFileInfo.Directory" /> 
           cannot be extended because there is no space left on the file
           system containing the directory.
             [<see cref="F:Mono.Unix.Native.Errno.ENOSPC" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >There are no free inodes on the file system on which the file
           is being created.
             [<see cref="F:Mono.Unix.Native.Errno.ENOSPC" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >An I/O error occurred while making the directory entry or
           allocating the inode.
             [<see cref="F:Mono.Unix.Native.Errno.EIO" />]
-          </para
-          >
+
+          </para>
         </exception>
         <exception cref="T:System.IO.PathTooLongException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> was too long.
             [<see cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:Mono.Unix.UnixIOException">
           <para
             >Too many symbolic links were encountered in translating 
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />.
             [<see cref="F:Mono.Unix.Native.Errno.ELOOP" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >The process has already reached its limit for open file
           descriptors.
             [<see cref="F:Mono.Unix.Native.Errno.EMFILE" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >The system file table is full.
             [<see cref="F:Mono.Unix.Native.Errno.ENFILE" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="F:Mono.Unix.Native.OpenFlags.O_NOFOLLOW" /> was
           specified and the target is a symbolic link.
             [<see cref="F:Mono.Unix.Native.Errno.EMLINK" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="F:Mono.Unix.Native.OpenFlags.O_NONBLOCK" /> and one of
@@ -1048,23 +1048,23 @@
             <see cref="F:Mono.Unix.Native.OpenFlags.O_EXLOCK" /> is specified
             and the file is locked.
             [<see cref="F:Mono.Unix.Native.Errno.EWOULDBLOCK" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >The user's quota of inodes on the file system containing
           <see cref="P:Mono.Unix.UnixFileInfo.Directory" /> has been exhausted.
             [<see cref="F:Mono.Unix.Native.Errno.EDQUOT" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileInfo.Directory" /> cannot be
           extended because the user's quota of disk blocks on the file system
           containing this directory has been exhausted.
             [<see cref="F:Mono.Unix.Native.Errno.EDQUOT" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is a
@@ -1072,8 +1072,8 @@
           <see cref="M:Mono.Unix.Native.Syscall.open" /> requests write
           access.
             [<see cref="F:Mono.Unix.Native.Errno.ETXTBSY" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" /> and
@@ -1082,8 +1082,8 @@
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
             exists.
             [<see cref="F:Mono.Unix.Native.Errno.EEXIST" />]
-          </para
-          >
+
+          </para>
         </exception>
         <altmember cref="T:Mono.Unix.Native.Syscall.open(System.String,Mono.Unix.Native.OpenFlags)" />
       </Docs>
@@ -1136,8 +1136,8 @@
                 qualify="false"
               /> (<paramref name="mode" />))</c
             >.
-          </para
-          >
+
+          </para>
         </remarks>
         <exception cref="T:System.ArgumentException">
           <para
@@ -1147,8 +1147,8 @@
           <see cref="F:Mono.Unix.Native.OpenFlags.O_WRONLY" />, and
           <see cref="F:Mono.Unix.Native.OpenFlags.O_RDWR" />.
             [<see cref="F:Mono.Unix.Native.Errno.EINVAL" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" /> was
@@ -1168,154 +1168,154 @@
             <see cref="F:Mono.Unix.Native.OpenFlags.O_EXLOCK" /> is specified
             but the underlying file system does not support locking.
             [<see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is a special
             file mounted through a file system that does not support access to
             it (e.g. NFS).
             [<see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >An attempt was made to open a socket.
             [<see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />]
-          </para
-          >
+
+          </para>
         </exception>
         <exception cref="T:System.UnauthorizedAccessException">
           <para
             >Search permission is denied for a component of the path
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />.
             [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >The required permissions (for reading and/or writing)
           are denied for the given flags.
             [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> does not
           exist, and <see cref="P:Mono.Unix.UnixFileInfo.Directory" /> does not
           permit writing.
             [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is a
           directory.
             [<see cref="F:Mono.Unix.Native.Errno.EISDIR" />]
-          </para
-          >
+
+          </para>
         </exception>
         <exception cref="T:System.IO.DirectoryNotFoundException">
           A component of the path prefix of 
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is not a
           directory.
             [<see cref="F:Mono.Unix.Native.Errno.ENOTDIR" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:System.IO.FileNotFoundException">
           <para
             >A component of <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> 
           that must exist does not exist.
             [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> does not exist
           and <see cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" /> is not
           set.
             [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />]
-          </para
-          >
+
+          </para>
         </exception>
         <exception cref="T:System.IO.IOException">
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> resides on a
           read-only file system.
             [<see cref="F:Mono.Unix.Native.Errno.EROFS" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is a
           character device or block device, and the device associated with
           this file does not exist.
             [<see cref="F:Mono.Unix.Native.Errno.ENXIO" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is a
           fifo, no process has it open for reading, and the arguments specify
           it is to be opened for writing.
             [<see cref="F:Mono.Unix.Native.Errno.ENXIO" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >The directory <see cref="P:Mono.Unix.UnixFileInfo.Directory" /> 
           cannot be extended because there is no space left on the file
           system containing the directory.
             [<see cref="F:Mono.Unix.Native.Errno.ENOSPC" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >There are no free inodes on the file system on which the file
           is being created.
             [<see cref="F:Mono.Unix.Native.Errno.ENOSPC" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >An I/O error occurred while making the directory entry or
           allocating the inode.
             [<see cref="F:Mono.Unix.Native.Errno.EIO" />]
-          </para
-          >
+
+          </para>
         </exception>
         <exception cref="T:System.IO.PathTooLongException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> was too long.
             [<see cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:Mono.Unix.UnixIOException">
           <para
             >Too many symbolic links were encountered in translating 
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />.
             [<see cref="F:Mono.Unix.Native.Errno.ELOOP" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >The process has already reached its limit for open file
           descriptors.
             [<see cref="F:Mono.Unix.Native.Errno.EMFILE" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >The system file table is full.
             [<see cref="F:Mono.Unix.Native.Errno.ENFILE" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="F:Mono.Unix.Native.OpenFlags.O_NOFOLLOW" /> was
           specified and the target is a symbolic link.
             [<see cref="F:Mono.Unix.Native.Errno.EMLINK" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="F:Mono.Unix.Native.OpenFlags.O_NONBLOCK" /> and one of
@@ -1323,23 +1323,23 @@
             <see cref="F:Mono.Unix.Native.OpenFlags.O_EXLOCK" /> is specified
             and the file is locked.
             [<see cref="F:Mono.Unix.Native.Errno.EWOULDBLOCK" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >The user's quota of inodes on the file system containing
           <see cref="P:Mono.Unix.UnixFileInfo.Directory" /> has been exhausted.
             [<see cref="F:Mono.Unix.Native.Errno.EDQUOT" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileInfo.Directory" /> cannot be
           extended because the user's quota of disk blocks on the file system
           containing this directory has been exhausted.
             [<see cref="F:Mono.Unix.Native.Errno.EDQUOT" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is a
@@ -1347,8 +1347,8 @@
           <see cref="M:Mono.Unix.Native.Syscall.open" /> requests write
           access.
             [<see cref="F:Mono.Unix.Native.Errno.ETXTBSY" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" /> and
@@ -1357,8 +1357,8 @@
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
             exists.
             [<see cref="F:Mono.Unix.Native.Errno.EEXIST" />]
-          </para
-          >
+
+          </para>
         </exception>
       </Docs>
     </Member>
@@ -1419,8 +1419,8 @@
           <see cref="F:Mono.Unix.Native.OpenFlags.O_WRONLY" />, and
           <see cref="F:Mono.Unix.Native.OpenFlags.O_RDWR" />.
             [<see cref="F:Mono.Unix.Native.Errno.EINVAL" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" /> was
@@ -1440,154 +1440,154 @@
             <see cref="F:Mono.Unix.Native.OpenFlags.O_EXLOCK" /> is specified
             but the underlying file system does not support locking.
             [<see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is a special
             file mounted through a file system that does not support access to
             it (e.g. NFS).
             [<see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >An attempt was made to open a socket.
             [<see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />]
-          </para
-          >
+
+          </para>
         </exception>
         <exception cref="T:System.UnauthorizedAccessException">
           <para
             >Search permission is denied for a component of the path
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />.
             [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >The required permissions (for reading and/or writing)
           are denied for the given flags.
             [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> does not
           exist, and <see cref="P:Mono.Unix.UnixFileInfo.Directory" /> does not
           permit writing.
             [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is a
           directory.
             [<see cref="F:Mono.Unix.Native.Errno.EISDIR" />]
-          </para
-          >
+
+          </para>
         </exception>
         <exception cref="T:System.IO.DirectoryNotFoundException">
           A component of the path prefix of 
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is not a
           directory.
             [<see cref="F:Mono.Unix.Native.Errno.ENOTDIR" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:System.IO.FileNotFoundException">
           <para
             >A component of <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> 
           that must exist does not exist.
             [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> does not exist
           and <see cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" /> is not
           set.
             [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />]
-          </para
-          >
+
+          </para>
         </exception>
         <exception cref="T:System.IO.IOException">
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> resides on a
           read-only file system.
             [<see cref="F:Mono.Unix.Native.Errno.EROFS" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is a
           character device or block device, and the device associated with
           this file does not exist.
             [<see cref="F:Mono.Unix.Native.Errno.ENXIO" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is a
           fifo, no process has it open for reading, and the arguments specify
           it is to be opened for writing.
             [<see cref="F:Mono.Unix.Native.Errno.ENXIO" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >The directory <see cref="P:Mono.Unix.UnixFileInfo.Directory" /> 
           cannot be extended because there is no space left on the file
           system containing the directory.
             [<see cref="F:Mono.Unix.Native.Errno.ENOSPC" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >There are no free inodes on the file system on which the file
           is being created.
             [<see cref="F:Mono.Unix.Native.Errno.ENOSPC" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >An I/O error occurred while making the directory entry or
           allocating the inode.
             [<see cref="F:Mono.Unix.Native.Errno.EIO" />]
-          </para
-          >
+
+          </para>
         </exception>
         <exception cref="T:System.IO.PathTooLongException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> was too long.
             [<see cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:Mono.Unix.UnixIOException">
           <para
             >Too many symbolic links were encountered in translating 
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />.
             [<see cref="F:Mono.Unix.Native.Errno.ELOOP" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >The process has already reached its limit for open file
           descriptors.
             [<see cref="F:Mono.Unix.Native.Errno.EMFILE" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >The system file table is full.
             [<see cref="F:Mono.Unix.Native.Errno.ENFILE" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="F:Mono.Unix.Native.OpenFlags.O_NOFOLLOW" /> was
           specified and the target is a symbolic link.
             [<see cref="F:Mono.Unix.Native.Errno.EMLINK" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="F:Mono.Unix.Native.OpenFlags.O_NONBLOCK" /> and one of
@@ -1595,23 +1595,23 @@
             <see cref="F:Mono.Unix.Native.OpenFlags.O_EXLOCK" /> is specified
             and the file is locked.
             [<see cref="F:Mono.Unix.Native.Errno.EWOULDBLOCK" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >The user's quota of inodes on the file system containing
           <see cref="P:Mono.Unix.UnixFileInfo.Directory" /> has been exhausted.
             [<see cref="F:Mono.Unix.Native.Errno.EDQUOT" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileInfo.Directory" /> cannot be
           extended because the user's quota of disk blocks on the file system
           containing this directory has been exhausted.
             [<see cref="F:Mono.Unix.Native.Errno.EDQUOT" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is a
@@ -1619,8 +1619,8 @@
           <see cref="M:Mono.Unix.Native.Syscall.open" /> requests write
           access.
             [<see cref="F:Mono.Unix.Native.Errno.ETXTBSY" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" /> and
@@ -1629,8 +1629,8 @@
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
             exists.
             [<see cref="F:Mono.Unix.Native.Errno.EEXIST" />]
-          </para
-          >
+
+          </para>
         </exception>
         <altmember cref="T:Mono.Unix.Native.Syscall.open(System.String,Mono.Unix.Native.OpenFlags,Mono.Unix.Native.FilePermissions)" />
       </Docs>
@@ -1689,8 +1689,8 @@
               /> (<paramref name="mode" />, 
             <paramref name="access" />))</c
             >.
-          </para
-          >
+
+          </para>
         </remarks>
         <exception cref="T:System.ArgumentException">
           <para
@@ -1700,8 +1700,8 @@
           <see cref="F:Mono.Unix.Native.OpenFlags.O_WRONLY" />, and
           <see cref="F:Mono.Unix.Native.OpenFlags.O_RDWR" />.
             [<see cref="F:Mono.Unix.Native.Errno.EINVAL" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" /> was
@@ -1721,154 +1721,154 @@
             <see cref="F:Mono.Unix.Native.OpenFlags.O_EXLOCK" /> is specified
             but the underlying file system does not support locking.
             [<see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is a special
             file mounted through a file system that does not support access to
             it (e.g. NFS).
             [<see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >An attempt was made to open a socket.
             [<see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />]
-          </para
-          >
+
+          </para>
         </exception>
         <exception cref="T:System.UnauthorizedAccessException">
           <para
             >Search permission is denied for a component of the path
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />.
             [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >The required permissions (for reading and/or writing)
           are denied for the given flags.
             [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> does not
           exist, and <see cref="P:Mono.Unix.UnixFileInfo.Directory" /> does not
           permit writing.
             [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is a
           directory.
             [<see cref="F:Mono.Unix.Native.Errno.EISDIR" />]
-          </para
-          >
+
+          </para>
         </exception>
         <exception cref="T:System.IO.DirectoryNotFoundException">
           A component of the path prefix of 
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is not a
           directory.
             [<see cref="F:Mono.Unix.Native.Errno.ENOTDIR" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:System.IO.FileNotFoundException">
           <para
             >A component of <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> 
           that must exist does not exist.
             [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> does not exist
           and <see cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" /> is not
           set.
             [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />]
-          </para
-          >
+
+          </para>
         </exception>
         <exception cref="T:System.IO.IOException">
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> resides on a
           read-only file system.
             [<see cref="F:Mono.Unix.Native.Errno.EROFS" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is a
           character device or block device, and the device associated with
           this file does not exist.
             [<see cref="F:Mono.Unix.Native.Errno.ENXIO" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is a
           fifo, no process has it open for reading, and the arguments specify
           it is to be opened for writing.
             [<see cref="F:Mono.Unix.Native.Errno.ENXIO" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >The directory <see cref="P:Mono.Unix.UnixFileInfo.Directory" /> 
           cannot be extended because there is no space left on the file
           system containing the directory.
             [<see cref="F:Mono.Unix.Native.Errno.ENOSPC" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >There are no free inodes on the file system on which the file
           is being created.
             [<see cref="F:Mono.Unix.Native.Errno.ENOSPC" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >An I/O error occurred while making the directory entry or
           allocating the inode.
             [<see cref="F:Mono.Unix.Native.Errno.EIO" />]
-          </para
-          >
+
+          </para>
         </exception>
         <exception cref="T:System.IO.PathTooLongException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> was too long.
             [<see cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:Mono.Unix.UnixIOException">
           <para
             >Too many symbolic links were encountered in translating 
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />.
             [<see cref="F:Mono.Unix.Native.Errno.ELOOP" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >The process has already reached its limit for open file
           descriptors.
             [<see cref="F:Mono.Unix.Native.Errno.EMFILE" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >The system file table is full.
             [<see cref="F:Mono.Unix.Native.Errno.ENFILE" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="F:Mono.Unix.Native.OpenFlags.O_NOFOLLOW" /> was
           specified and the target is a symbolic link.
             [<see cref="F:Mono.Unix.Native.Errno.EMLINK" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="F:Mono.Unix.Native.OpenFlags.O_NONBLOCK" /> and one of
@@ -1876,23 +1876,23 @@
             <see cref="F:Mono.Unix.Native.OpenFlags.O_EXLOCK" /> is specified
             and the file is locked.
             [<see cref="F:Mono.Unix.Native.Errno.EWOULDBLOCK" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >The user's quota of inodes on the file system containing
           <see cref="P:Mono.Unix.UnixFileInfo.Directory" /> has been exhausted.
             [<see cref="F:Mono.Unix.Native.Errno.EDQUOT" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileInfo.Directory" /> cannot be
           extended because the user's quota of disk blocks on the file system
           containing this directory has been exhausted.
             [<see cref="F:Mono.Unix.Native.Errno.EDQUOT" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is a
@@ -1900,8 +1900,8 @@
           <see cref="M:Mono.Unix.Native.Syscall.open" /> requests write
           access.
             [<see cref="F:Mono.Unix.Native.Errno.ETXTBSY" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" /> and
@@ -1910,8 +1910,8 @@
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
             exists.
             [<see cref="F:Mono.Unix.Native.Errno.EEXIST" />]
-          </para
-          >
+
+          </para>
         </exception>
       </Docs>
     </Member>
@@ -1982,8 +1982,8 @@
               /> (<paramref name="mode" />, 
             <paramref name="access" />), <paramref name="perms" />)</c
             >.
-          </para
-          >
+
+          </para>
         </remarks>
         <exception cref="T:System.ArgumentException">
           <para
@@ -1993,8 +1993,8 @@
           <see cref="F:Mono.Unix.Native.OpenFlags.O_WRONLY" />, and
           <see cref="F:Mono.Unix.Native.OpenFlags.O_RDWR" />.
             [<see cref="F:Mono.Unix.Native.Errno.EINVAL" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" /> was
@@ -2014,154 +2014,154 @@
             <see cref="F:Mono.Unix.Native.OpenFlags.O_EXLOCK" /> is specified
             but the underlying file system does not support locking.
             [<see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is a special
             file mounted through a file system that does not support access to
             it (e.g. NFS).
             [<see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >An attempt was made to open a socket.
             [<see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />]
-          </para
-          >
+
+          </para>
         </exception>
         <exception cref="T:System.UnauthorizedAccessException">
           <para
             >Search permission is denied for a component of the path
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />.
             [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >The required permissions (for reading and/or writing)
           are denied for the given flags.
             [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> does not
           exist, and <see cref="P:Mono.Unix.UnixFileInfo.Directory" /> does not
           permit writing.
             [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is a
           directory.
             [<see cref="F:Mono.Unix.Native.Errno.EISDIR" />]
-          </para
-          >
+
+          </para>
         </exception>
         <exception cref="T:System.IO.DirectoryNotFoundException">
           A component of the path prefix of 
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is not a
           directory.
             [<see cref="F:Mono.Unix.Native.Errno.ENOTDIR" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:System.IO.FileNotFoundException">
           <para
             >A component of <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> 
           that must exist does not exist.
             [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> does not exist
           and <see cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" /> is not
           set.
             [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />]
-          </para
-          >
+
+          </para>
         </exception>
         <exception cref="T:System.IO.IOException">
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> resides on a
           read-only file system.
             [<see cref="F:Mono.Unix.Native.Errno.EROFS" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is a
           character device or block device, and the device associated with
           this file does not exist.
             [<see cref="F:Mono.Unix.Native.Errno.ENXIO" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is a
           fifo, no process has it open for reading, and the arguments specify
           it is to be opened for writing.
             [<see cref="F:Mono.Unix.Native.Errno.ENXIO" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >The directory <see cref="P:Mono.Unix.UnixFileInfo.Directory" /> 
           cannot be extended because there is no space left on the file
           system containing the directory.
             [<see cref="F:Mono.Unix.Native.Errno.ENOSPC" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >There are no free inodes on the file system on which the file
           is being created.
             [<see cref="F:Mono.Unix.Native.Errno.ENOSPC" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >An I/O error occurred while making the directory entry or
           allocating the inode.
             [<see cref="F:Mono.Unix.Native.Errno.EIO" />]
-          </para
-          >
+
+          </para>
         </exception>
         <exception cref="T:System.IO.PathTooLongException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> was too long.
             [<see cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:Mono.Unix.UnixIOException">
           <para
             >Too many symbolic links were encountered in translating 
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />.
             [<see cref="F:Mono.Unix.Native.Errno.ELOOP" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >The process has already reached its limit for open file
           descriptors.
             [<see cref="F:Mono.Unix.Native.Errno.EMFILE" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >The system file table is full.
             [<see cref="F:Mono.Unix.Native.Errno.ENFILE" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="F:Mono.Unix.Native.OpenFlags.O_NOFOLLOW" /> was
           specified and the target is a symbolic link.
             [<see cref="F:Mono.Unix.Native.Errno.EMLINK" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="F:Mono.Unix.Native.OpenFlags.O_NONBLOCK" /> and one of
@@ -2169,23 +2169,23 @@
             <see cref="F:Mono.Unix.Native.OpenFlags.O_EXLOCK" /> is specified
             and the file is locked.
             [<see cref="F:Mono.Unix.Native.Errno.EWOULDBLOCK" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >The user's quota of inodes on the file system containing
           <see cref="P:Mono.Unix.UnixFileInfo.Directory" /> has been exhausted.
             [<see cref="F:Mono.Unix.Native.Errno.EDQUOT" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileInfo.Directory" /> cannot be
           extended because the user's quota of disk blocks on the file system
           containing this directory has been exhausted.
             [<see cref="F:Mono.Unix.Native.Errno.EDQUOT" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is a
@@ -2193,8 +2193,8 @@
           <see cref="M:Mono.Unix.Native.Syscall.open" /> requests write
           access.
             [<see cref="F:Mono.Unix.Native.Errno.ETXTBSY" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" /> and
@@ -2203,8 +2203,8 @@
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
             exists.
             [<see cref="F:Mono.Unix.Native.Errno.EEXIST" />]
-          </para
-          >
+
+          </para>
         </exception>
       </Docs>
     </Member>
@@ -2242,8 +2242,8 @@
               /> (<see cref="F:System.IO.FileMode.Open" />,
               <see cref="F:System.IO.FileAccess.Read" />)</c
             >.
-          </para
-          >
+
+          </para>
         </remarks>
         <exception cref="T:System.ArgumentException">
           <para
@@ -2253,8 +2253,8 @@
           <see cref="F:Mono.Unix.Native.OpenFlags.O_WRONLY" />, and
           <see cref="F:Mono.Unix.Native.OpenFlags.O_RDWR" />.
             [<see cref="F:Mono.Unix.Native.Errno.EINVAL" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" /> was
@@ -2274,154 +2274,154 @@
             <see cref="F:Mono.Unix.Native.OpenFlags.O_EXLOCK" /> is specified
             but the underlying file system does not support locking.
             [<see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is a special
             file mounted through a file system that does not support access to
             it (e.g. NFS).
             [<see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >An attempt was made to open a socket.
             [<see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />]
-          </para
-          >
+
+          </para>
         </exception>
         <exception cref="T:System.UnauthorizedAccessException">
           <para
             >Search permission is denied for a component of the path
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />.
             [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >The required permissions (for reading and/or writing)
           are denied for the given flags.
             [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> does not
           exist, and <see cref="P:Mono.Unix.UnixFileInfo.Directory" /> does not
           permit writing.
             [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is a
           directory.
             [<see cref="F:Mono.Unix.Native.Errno.EISDIR" />]
-          </para
-          >
+
+          </para>
         </exception>
         <exception cref="T:System.IO.DirectoryNotFoundException">
           A component of the path prefix of 
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is not a
           directory.
             [<see cref="F:Mono.Unix.Native.Errno.ENOTDIR" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:System.IO.FileNotFoundException">
           <para
             >A component of <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> 
           that must exist does not exist.
             [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> does not exist
           and <see cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" /> is not
           set.
             [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />]
-          </para
-          >
+
+          </para>
         </exception>
         <exception cref="T:System.IO.IOException">
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> resides on a
           read-only file system.
             [<see cref="F:Mono.Unix.Native.Errno.EROFS" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is a
           character device or block device, and the device associated with
           this file does not exist.
             [<see cref="F:Mono.Unix.Native.Errno.ENXIO" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is a
           fifo, no process has it open for reading, and the arguments specify
           it is to be opened for writing.
             [<see cref="F:Mono.Unix.Native.Errno.ENXIO" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >The directory <see cref="P:Mono.Unix.UnixFileInfo.Directory" /> 
           cannot be extended because there is no space left on the file
           system containing the directory.
             [<see cref="F:Mono.Unix.Native.Errno.ENOSPC" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >There are no free inodes on the file system on which the file
           is being created.
             [<see cref="F:Mono.Unix.Native.Errno.ENOSPC" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >An I/O error occurred while making the directory entry or
           allocating the inode.
             [<see cref="F:Mono.Unix.Native.Errno.EIO" />]
-          </para
-          >
+
+          </para>
         </exception>
         <exception cref="T:System.IO.PathTooLongException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> was too long.
             [<see cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:Mono.Unix.UnixIOException">
           <para
             >Too many symbolic links were encountered in translating 
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />.
             [<see cref="F:Mono.Unix.Native.Errno.ELOOP" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >The process has already reached its limit for open file
           descriptors.
             [<see cref="F:Mono.Unix.Native.Errno.EMFILE" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >The system file table is full.
             [<see cref="F:Mono.Unix.Native.Errno.ENFILE" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="F:Mono.Unix.Native.OpenFlags.O_NOFOLLOW" /> was
           specified and the target is a symbolic link.
             [<see cref="F:Mono.Unix.Native.Errno.EMLINK" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="F:Mono.Unix.Native.OpenFlags.O_NONBLOCK" /> and one of
@@ -2429,23 +2429,23 @@
             <see cref="F:Mono.Unix.Native.OpenFlags.O_EXLOCK" /> is specified
             and the file is locked.
             [<see cref="F:Mono.Unix.Native.Errno.EWOULDBLOCK" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >The user's quota of inodes on the file system containing
           <see cref="P:Mono.Unix.UnixFileInfo.Directory" /> has been exhausted.
             [<see cref="F:Mono.Unix.Native.Errno.EDQUOT" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileInfo.Directory" /> cannot be
           extended because the user's quota of disk blocks on the file system
           containing this directory has been exhausted.
             [<see cref="F:Mono.Unix.Native.Errno.EDQUOT" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is a
@@ -2453,8 +2453,8 @@
           <see cref="M:Mono.Unix.Native.Syscall.open" /> requests write
           access.
             [<see cref="F:Mono.Unix.Native.Errno.ETXTBSY" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" /> and
@@ -2463,8 +2463,8 @@
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
             exists.
             [<see cref="F:Mono.Unix.Native.Errno.EEXIST" />]
-          </para
-          >
+
+          </para>
         </exception>
       </Docs>
     </Member>
@@ -2502,8 +2502,8 @@
               /> (<see cref="F:System.IO.FileMode.OpenOrCreate" />,
               <see cref="F:System.IO.FileAccess.Write" />)</c
             >.
-          </para
-          >
+
+          </para>
         </remarks>
         <exception cref="T:System.ArgumentException">
           <para
@@ -2513,8 +2513,8 @@
           <see cref="F:Mono.Unix.Native.OpenFlags.O_WRONLY" />, and
           <see cref="F:Mono.Unix.Native.OpenFlags.O_RDWR" />.
             [<see cref="F:Mono.Unix.Native.Errno.EINVAL" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" /> was
@@ -2534,154 +2534,154 @@
             <see cref="F:Mono.Unix.Native.OpenFlags.O_EXLOCK" /> is specified
             but the underlying file system does not support locking.
             [<see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is a special
             file mounted through a file system that does not support access to
             it (e.g. NFS).
             [<see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >An attempt was made to open a socket.
             [<see cref="F:Mono.Unix.Native.Errno.EOPNOTSUPP" />]
-          </para
-          >
+
+          </para>
         </exception>
         <exception cref="T:System.UnauthorizedAccessException">
           <para
             >Search permission is denied for a component of the path
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />.
             [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >The required permissions (for reading and/or writing)
           are denied for the given flags.
             [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> does not
           exist, and <see cref="P:Mono.Unix.UnixFileInfo.Directory" /> does not
           permit writing.
             [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is a
           directory.
             [<see cref="F:Mono.Unix.Native.Errno.EISDIR" />]
-          </para
-          >
+
+          </para>
         </exception>
         <exception cref="T:System.IO.DirectoryNotFoundException">
           A component of the path prefix of 
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is not a
           directory.
             [<see cref="F:Mono.Unix.Native.Errno.ENOTDIR" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:System.IO.FileNotFoundException">
           <para
             >A component of <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> 
           that must exist does not exist.
             [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> does not exist
           and <see cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" /> is not
           set.
             [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />]
-          </para
-          >
+
+          </para>
         </exception>
         <exception cref="T:System.IO.IOException">
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> resides on a
           read-only file system.
             [<see cref="F:Mono.Unix.Native.Errno.EROFS" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is a
           character device or block device, and the device associated with
           this file does not exist.
             [<see cref="F:Mono.Unix.Native.Errno.ENXIO" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is a
           fifo, no process has it open for reading, and the arguments specify
           it is to be opened for writing.
             [<see cref="F:Mono.Unix.Native.Errno.ENXIO" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >The directory <see cref="P:Mono.Unix.UnixFileInfo.Directory" /> 
           cannot be extended because there is no space left on the file
           system containing the directory.
             [<see cref="F:Mono.Unix.Native.Errno.ENOSPC" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >There are no free inodes on the file system on which the file
           is being created.
             [<see cref="F:Mono.Unix.Native.Errno.ENOSPC" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >An I/O error occurred while making the directory entry or
           allocating the inode.
             [<see cref="F:Mono.Unix.Native.Errno.EIO" />]
-          </para
-          >
+
+          </para>
         </exception>
         <exception cref="T:System.IO.PathTooLongException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> was too long.
             [<see cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:Mono.Unix.UnixIOException">
           <para
             >Too many symbolic links were encountered in translating 
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />.
             [<see cref="F:Mono.Unix.Native.Errno.ELOOP" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >The process has already reached its limit for open file
           descriptors.
             [<see cref="F:Mono.Unix.Native.Errno.EMFILE" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >The system file table is full.
             [<see cref="F:Mono.Unix.Native.Errno.ENFILE" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="F:Mono.Unix.Native.OpenFlags.O_NOFOLLOW" /> was
           specified and the target is a symbolic link.
             [<see cref="F:Mono.Unix.Native.Errno.EMLINK" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="F:Mono.Unix.Native.OpenFlags.O_NONBLOCK" /> and one of
@@ -2689,23 +2689,23 @@
             <see cref="F:Mono.Unix.Native.OpenFlags.O_EXLOCK" /> is specified
             and the file is locked.
             [<see cref="F:Mono.Unix.Native.Errno.EWOULDBLOCK" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >The user's quota of inodes on the file system containing
           <see cref="P:Mono.Unix.UnixFileInfo.Directory" /> has been exhausted.
             [<see cref="F:Mono.Unix.Native.Errno.EDQUOT" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileInfo.Directory" /> cannot be
           extended because the user's quota of disk blocks on the file system
           containing this directory has been exhausted.
             [<see cref="F:Mono.Unix.Native.Errno.EDQUOT" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is a
@@ -2713,8 +2713,8 @@
           <see cref="M:Mono.Unix.Native.Syscall.open" /> requests write
           access.
             [<see cref="F:Mono.Unix.Native.Errno.ETXTBSY" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" /> and
@@ -2723,8 +2723,8 @@
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
             exists.
             [<see cref="F:Mono.Unix.Native.Errno.EEXIST" />]
-          </para
-          >
+
+          </para>
         </exception>
       </Docs>
     </Member>

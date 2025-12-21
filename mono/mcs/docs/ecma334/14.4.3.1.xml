@@ -11,8 +11,8 @@
         > When the function member is an implementation of an interface function member and is invoked through an instance expression of an <non_terminal
           where="11.2"
           >interface-type</non_terminal
-        >. </list_item
-      >
+        >.
+      </list_item>
       <list_item> When the function member is invoked through a delegate. </list_item>
     </list>
   </paragraph>

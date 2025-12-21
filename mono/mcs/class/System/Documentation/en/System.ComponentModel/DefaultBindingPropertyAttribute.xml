@@ -29,8 +29,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.ComponentModel.DefaultBindingPropertyAttribute" /> is specified at the class level. It can be inherited and does not allow multiple attributes on the same class. </para
-      >
+        >The <see cref="T:System.ComponentModel.DefaultBindingPropertyAttribute" /> is specified at the class level. It can be inherited and does not allow multiple attributes on the same class.
+      </para>
       <para
         >For more information about using attributes, see <format type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
@@ -65,8 +65,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.DefaultBindingPropertyAttribute" /> class using no parameters. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DefaultBindingPropertyAttribute" /> class using no parameters.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -168,8 +168,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified <see cref="T:System.Object" /> is equal to the current <see cref="T:System.ComponentModel.DefaultBindingPropertyAttribute" /> instance. </para
-          >
+            >Determines whether the specified <see cref="T:System.Object" /> is equal to the current <see cref="T:System.ComponentModel.DefaultBindingPropertyAttribute" /> instance.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />

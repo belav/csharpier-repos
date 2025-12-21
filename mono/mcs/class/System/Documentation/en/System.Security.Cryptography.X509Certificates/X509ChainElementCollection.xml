@@ -78,15 +78,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainElement" /> objects. </param
-        >
+          />An array of <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainElement" /> objects.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer representing the index value. </param
-        >
+          />An integer representing the index value.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Count">

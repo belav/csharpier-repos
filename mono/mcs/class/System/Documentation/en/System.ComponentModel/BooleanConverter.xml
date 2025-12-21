@@ -66,8 +66,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.BooleanConverter" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.BooleanConverter" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -114,15 +114,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context.
+        </param>
         <param name="sourceType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> that represents the type you wish to convert from. </param
-        >
+          />A <see cref="T:System.Type" /> that represents the type you wish to convert from.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ConvertFrom">
@@ -171,8 +171,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context.
+        </param>
         <param name="culture">
           <attribution
             license="cc4"
@@ -185,8 +185,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to convert. </param
-        >
+          />The <see cref="T:System.Object" /> to convert.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetStandardValues">
@@ -230,8 +230,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetStandardValuesExclusive">
@@ -279,8 +279,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetStandardValuesSupported">
@@ -324,8 +324,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context.
+        </param>
       </Docs>
     </Member>
   </Members>

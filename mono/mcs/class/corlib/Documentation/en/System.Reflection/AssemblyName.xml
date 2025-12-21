@@ -111,8 +111,8 @@
         >This qualified name can be persisted and later used to load the <see cref="T:System.Type" />. To search for and load a <see cref="T:System.Type" />, use <see cref="M:System.Type.GetType" /> either with the type name only or with the assembly qualified type name. <see cref="M:System.Type.GetType" /> with the type name only will look for the <see cref="T:System.Type" /> in the caller's assembly and then in the System assembly. <see cref="M:System.Type.GetType" /> with the assembly qualified type name will look for the <see cref="T:System.Type" /> in any assembly.</para
       >
       <para
-        >A fully specified <see cref="T:System.Reflection.AssemblyName" /> must have the name, culture, public key or public key token, major version, minor version, build number, and revision number parameters. The last four are packaged in the <see cref="T:System.Version" /> type. </para
-      >
+        >A fully specified <see cref="T:System.Reflection.AssemblyName" /> must have the name, culture, public key or public key token, major version, minor version, build number, and revision number parameters. The last four are packaged in the <see cref="T:System.Version" /> type.
+      </para>
       <para />
       <para
         >To create a simple name, create an <see cref="T:System.Reflection.AssemblyName" /> object using the default constructor and set the <see cref="P:System.Reflection.AssemblyName.Name" />. The other properties are optional.</para
@@ -152,8 +152,8 @@
         >It is possible to specify a public key and a <see cref="P:System.Reflection.AssemblyName.KeyPair" /> with inconsistent values. This can be useful in developer scenarios. In this case, the public key retrieved with <see cref="M:System.Reflection.AssemblyName.GetPublicKey" /> specifies the correct public key, while the <see cref="P:System.Reflection.AssemblyName.KeyPair" /> specifies the public and private keys used during development. When the runtime detects a mismatch between the <see cref="P:System.Reflection.AssemblyName.KeyPair" /> and the public key, it looks up in the registry the correct key that matches the public key.</para
       >
       <para
-        >The format of the display name of an <see cref="T:System.Reflection.AssemblyName" /> is a comma-delimited Unicode string that begins with the name, as follows: </para
-      >
+        >The format of the display name of an <see cref="T:System.Reflection.AssemblyName" /> is a comma-delimited Unicode string that begins with the name, as follows:
+      </para>
       <para>Name &lt;,Culture = CultureInfo&gt; &lt;,Version = Major.Minor.Build.Revision&gt; &lt;, StrongName&gt; &lt;,PublicKeyToken&gt; '\0' </para>
       <para
         >Name is the textual name of the assembly. CultureInfo is the RFC1766-format-defined culture. Major, Minor, Build, and Revision are the major version, minor version, build number, and revision number of the assembly. StrongName is the hexadecimal-encoded low-order 64 bits of the hash value of the public key generated using the SHA-1 hashing algorithm and the public key specified by <see cref="M:System.Reflection.AssemblyName.SetPublicKey(System.Byte[])" />. PublicKeyToken is the hexadecimal-encoded public key specified by <see cref="M:System.Reflection.AssemblyName.SetPublicKey(System.Byte[])" />.</para
@@ -220,8 +220,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The supplied <paramref name="assemblyName" /> is parsed, and the appropriate fields of the new <see cref="T:System.Reflection.AssemblyName" /> are initialized with values from the display name. This is the recommended way of parsing display names. Writing your own code to parse display names is not recommended. </para
-          >
+            >The supplied <paramref name="assemblyName" /> is parsed, and the appropriate fields of the new <see cref="T:System.Reflection.AssemblyName" /> are initialized with values from the display name. This is the recommended way of parsing display names. Writing your own code to parse display names is not recommended.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -289,8 +289,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When an assembly is loaded, this value can also be obtained using the <see cref="P:System.Reflection.Assembly.CodeBase" /> property. </para
-          >
+            >When an assembly is loaded, this value can also be obtained using the <see cref="P:System.Reflection.Assembly.CodeBase" /> property.
+          </para>
           <para
             >If the assembly was loaded as a byte array, this property returns the location of the caller of the <see cref="M:System.Reflection.Assembly.Load(System.Byte[])" /> method overload, not the location of the loaded assembly.</para
           >
@@ -455,11 +455,11 @@
           <para>The display name typically consists of the simple name, version number, supported culture, and public key. For example: </para>
           <code>mylib, Version=1.2.1900.0, Culture=neutral, PublicKeyToken=a14f3033def15840</code>
           <para
-            >Writing your own code to parse display names is not recommended. Instead, pass the display name to the <see cref="M:System.Reflection.AssemblyName.#ctor(System.String)" /> constructor, which parses it and populates the appropriate fields of the new <see cref="T:System.Reflection.AssemblyName" />. </para
-          >
+            >Writing your own code to parse display names is not recommended. Instead, pass the display name to the <see cref="M:System.Reflection.AssemblyName.#ctor(System.String)" /> constructor, which parses it and populates the appropriate fields of the new <see cref="T:System.Reflection.AssemblyName" />.
+          </para>
           <para
-            >When an assembly is loaded, this value can also be obtained using the <see cref="P:System.Reflection.Assembly.FullName" /> property. </para
-          >
+            >When an assembly is loaded, this value can also be obtained using the <see cref="P:System.Reflection.Assembly.FullName" /> property.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -506,8 +506,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The path for the assembly whose <see cref="T:System.Reflection.AssemblyName" /> is to be returned. </param
-        >
+          />The path for the assembly whose <see cref="T:System.Reflection.AssemblyName" /> is to be returned.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetObjectData">
@@ -543,15 +543,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to be populated with serialization information. </param
-        >
+          />The object to be populated with serialization information.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The destination context of the serialization. </param
-        >
+          />The destination context of the serialization.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetPublicKey">
@@ -735,8 +735,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The source of the deserialization event. </param
-        >
+          />The source of the deserialization event.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ProcessorArchitecture">
@@ -855,8 +855,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A byte array containing the public key of the assembly. </param
-        >
+          />A byte array containing the public key of the assembly.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetPublicKeyToken">
@@ -896,8 +896,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A byte array containing the public key token of the assembly. </param
-        >
+          />A byte array containing the public key token of the assembly.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.Runtime.InteropServices._AssemblyName.GetIDsOfNames">

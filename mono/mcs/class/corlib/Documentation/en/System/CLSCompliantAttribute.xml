@@ -43,14 +43,14 @@
           <a href="4f0b77d0-4844-464f-af73-6e06bedeafc6"
             >Language Independence and Language-Independent Components</a
           >
-        </format>. </para
-      >
+        </format>.
+      </para>
       <para
         >You can apply the <see cref="T:System.CLSCompliantAttribute" /> attribute to the following program elements: assembly, module, class, struct, enum, constructor, method, property, field, event, interface, delegate, parameter, and return value. However, the notion of CLS compliance is only meaningful for assemblies, modules, types, and members of types, not parts of a member signature. Consequently, <see cref="T:System.CLSCompliantAttribute" /> is ignored when applied to parameter or return value program elements.</para
       >
       <para
-        >If no <see cref="T:System.CLSCompliantAttribute" /> is applied to a program element, then by default: </para
-      >
+        >If no <see cref="T:System.CLSCompliantAttribute" /> is applied to a program element, then by default:
+      </para>
       <list type="bullet">
         <item>
           <para>The assembly is not CLS-compliant.</para>
@@ -116,8 +116,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if CLS-compliant; otherwise, false. </param
-        >
+          />true if CLS-compliant; otherwise, false.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

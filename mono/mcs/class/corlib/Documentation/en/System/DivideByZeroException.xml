@@ -51,8 +51,7 @@ public class DivideZeroTest {
    }
  }
 }
-   </code
-      >
+   </code>
       <para>The output is</para>
       <code>
 Error: System.DivideByZeroException: Attempted to divide by zero.
@@ -62,15 +61,15 @@ Error: System.DivideByZeroException: Attempted to divide by zero.
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Trying to divide an integer or decimal number by zero throws a <see cref="T:System.DivideByZeroException" /> exception. Dividing a floating-point value by zero doesn't throw an exception; it results in positive infinity, negative infinity, or not a number (NaN), according to the rules of IEEE 754 arithmetic. Because the following example uses floating-point division rather than integer division, the operation does not throw a <see cref="T:System.DivideByZeroException" /> exception. </para
-      >
+        >Trying to divide an integer or decimal number by zero throws a <see cref="T:System.DivideByZeroException" /> exception. Dividing a floating-point value by zero doesn't throw an exception; it results in positive infinity, negative infinity, or not a number (NaN), according to the rules of IEEE 754 arithmetic. Because the following example uses floating-point division rather than integer division, the operation does not throw a <see cref="T:System.DivideByZeroException" /> exception.
+      </para>
       <para>code reference: System.DivideByZeroException.Class#2</para>
       <para
         >For more information, see <see cref="T:System.Single" /> and <see cref="T:System.Double" />.</para
       >
       <para
-        >The following Microsoft intermediate language (MSIL) instructions throw <see cref="T:System.DivideByZeroException" />: </para
-      >
+        >The following Microsoft intermediate language (MSIL) instructions throw <see cref="T:System.DivideByZeroException" />:
+      </para>
       <list type="bullet">
         <item>
           <para>div </para>
@@ -240,8 +239,8 @@ Error: System.DivideByZeroException: Attempted to divide by zero.
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.String" /> that describes the error. </param
-        >
+          />A <see cref="T:System.String" /> that describes the error.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -280,15 +279,15 @@ Error: System.DivideByZeroException: Attempted to divide by zero.
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that holds the serialized object data. </param
-        >
+          />The object that holds the serialized object data.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The contextual information about the source or destination. </param
-        >
+          />The contextual information about the source or destination.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -368,15 +367,15 @@ Error: System.DivideByZeroException: Attempted to divide by zero.
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The error message that explains the reason for the exception. </param
-        >
+          />The error message that explains the reason for the exception.
+        </param>
         <param name="innerException">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The exception that is the cause of the current exception. If the <paramref name="innerException" /> parameter is not null, the current exception is raised in a catch block that handles the inner exception. </param
-        >
+          />The exception that is the cause of the current exception. If the <paramref name="innerException" /> parameter is not null, the current exception is raised in a catch block that handles the inner exception.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

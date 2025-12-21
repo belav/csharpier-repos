@@ -216,8 +216,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -584,8 +584,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -617,8 +617,8 @@
           <para
             >This event is not relevant to this class. For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -653,8 +653,8 @@
           <para
             >This event is not relevant to this class. For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -771,8 +771,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array of characters to search for. </param
-        >
+          />The array of characters to search for.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -817,8 +817,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text to locate in the control. </param
-        >
+          />The text to locate in the control.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -863,15 +863,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array of characters to search for. </param
-        >
+          />The array of characters to search for.
+        </param>
         <param name="start">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The location within the control's text at which to begin searching. </param
-        >
+          />The location within the control's text at which to begin searching.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -921,15 +921,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text to locate in the control. </param
-        >
+          />The text to locate in the control.
+        </param>
         <param name="options">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the <see cref="T:System.Windows.Forms.RichTextBoxFinds" /> values. </param
-        >
+          />A bitwise combination of the <see cref="T:System.Windows.Forms.RichTextBoxFinds" /> values.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -978,22 +978,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array of characters to search for. </param
-        >
+          />The array of characters to search for.
+        </param>
         <param name="start">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The location within the control's text at which to begin searching. </param
-        >
+          />The location within the control's text at which to begin searching.
+        </param>
         <param name="end">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The location within the control's text at which to end searching. </param
-        >
+          />The location within the control's text at which to end searching.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1044,22 +1044,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text to locate in the control. </param
-        >
+          />The text to locate in the control.
+        </param>
         <param name="start">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The location within the control's text at which to begin searching. </param
-        >
+          />The location within the control's text at which to begin searching.
+        </param>
         <param name="options">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the <see cref="T:System.Windows.Forms.RichTextBoxFinds" /> values. </param
-        >
+          />A bitwise combination of the <see cref="T:System.Windows.Forms.RichTextBoxFinds" /> values.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1111,29 +1111,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text to locate in the control. </param
-        >
+          />The text to locate in the control.
+        </param>
         <param name="start">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The location within the control's text at which to begin searching. </param
-        >
+          />The location within the control's text at which to begin searching.
+        </param>
         <param name="end">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The location within the control's text at which to end searching. This value must be equal to negative one (-1) or greater than or equal to the <paramref name="start" /> parameter. </param
-        >
+          />The location within the control's text at which to end searching. This value must be equal to negative one (-1) or greater than or equal to the <paramref name="start" /> parameter.
+        </param>
         <param name="options">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the <see cref="T:System.Windows.Forms.RichTextBoxFinds" /> values. </param
-        >
+          />A bitwise combination of the <see cref="T:System.Windows.Forms.RichTextBoxFinds" /> values.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1234,12 +1234,8 @@
           <para>The zero-based character index at the specified location.</para>
         </returns>
         <param name="pt">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The location to search. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The location to search.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1265,18 +1261,18 @@
             >This method enables you to determine the line number based on the character index specified in the <paramref name="index" /> parameter of the method. The first line of text in the control returns the value zero. The <see cref="M:System.Windows.Forms.RichTextBox.GetLineFromCharIndex(System.Int32)" /> method returns the physical line number where the indexed character is located within the control. For example, if a portion of the first logical line of text in the control wraps to the next line, the <see cref="M:System.Windows.Forms.RichTextBox.GetLineFromCharIndex(System.Int32)" /> method returns 1 if the character at the specified character index has wrapped to the second physical line. If <see cref="P:System.Windows.Forms.TextBoxBase.WordWrap" /> is set to false, no portion of the line wraps to the next, and the method returns 0 for the specified character index. You can use this method to determine which line a specific character index is located within. For example, after calling the <see cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" /> method to search for text, you can obtain the character index to where the search results are found. You can call this method with the character index returned by the <see cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" /> method to determine which line the word was found.</para
           >
           <para
-            >In certain cases, <see cref="M:System.Windows.Forms.RichTextBox.GetLineFromCharIndex(System.Int32)" /> does not throw an exception when the <paramref name="index" /> parameter is an invalid value. For example: </para
-          >
+            >In certain cases, <see cref="M:System.Windows.Forms.RichTextBox.GetLineFromCharIndex(System.Int32)" /> does not throw an exception when the <paramref name="index" /> parameter is an invalid value. For example:
+          </para>
           <list type="bullet">
             <item>
               <para
-                >If the <paramref name="index" /> parameter is <see cref="F:System.Int32.MinValue" /> or -1, <see cref="M:System.Windows.Forms.RichTextBox.GetLineFromCharIndex(System.Int32)" /> returns 0. </para
-              >
+                >If the <paramref name="index" /> parameter is <see cref="F:System.Int32.MinValue" /> or -1, <see cref="M:System.Windows.Forms.RichTextBox.GetLineFromCharIndex(System.Int32)" /> returns 0.
+              </para>
             </item>
             <item>
               <para
-                >If the <paramref name="index" /> parameter is the text length or <see cref="F:System.Int32.MaxValue" />, <see cref="M:System.Windows.Forms.RichTextBox.GetLineFromCharIndex(System.Int32)" /> returns the number of the last line of text, which is not necessarily the same as Lines.Length-1, depending on the value of the <see cref="P:System.Windows.Forms.TextBoxBase.WordWrap" /> property. </para
-              >
+                >If the <paramref name="index" /> parameter is the text length or <see cref="F:System.Int32.MaxValue" />, <see cref="M:System.Windows.Forms.RichTextBox.GetLineFromCharIndex(System.Int32)" /> returns the number of the last line of text, which is not necessarily the same as Lines.Length-1, depending on the value of the <see cref="P:System.Windows.Forms.TextBoxBase.WordWrap" /> property.
+              </para>
             </item>
           </list>
           <para
@@ -1303,8 +1299,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character index position to search. </param
-        >
+          />The character index position to search.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1343,8 +1339,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the character for which to retrieve the location. </param
-        >
+          />The index of the character for which to retrieve the location.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1479,8 +1475,8 @@
           <para>You can create an event handler for this event to process a link that has been clicked within the control. Using the information provided to the event handler, you can determine which link was clicked in the document.</para>
           <block subset="none" type="note">
             <para
-              >By default, links are displayed as text and are not clickable. To make them clickable set the <see cref="P:System.Windows.Forms.RichTextBox.DetectUrls" /> property to true. </para
-            >
+              >By default, links are displayed as text and are not clickable. To make them clickable set the <see cref="P:System.Windows.Forms.RichTextBox.DetectUrls" /> property to true.
+            </para>
           </block>
           <para
             >For more information about handling events, see <format type="text/html">
@@ -1535,8 +1531,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name and location of the file to load into the control. </param
-        >
+          />The name and location of the file to load into the control.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1582,15 +1578,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A stream of data to load into the <see cref="T:System.Windows.Forms.RichTextBox" /> control. </param
-        >
+          />A stream of data to load into the <see cref="T:System.Windows.Forms.RichTextBox" /> control.
+        </param>
         <param name="fileType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.RichTextBoxStreamType" /> values. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.RichTextBoxStreamType" /> values.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1636,15 +1632,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name and location of the file to load into the control. </param
-        >
+          />The name and location of the file to load into the control.
+        </param>
         <param name="fileType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.RichTextBoxStreamType" /> values. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.RichTextBoxStreamType" /> values.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1779,8 +1775,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.ContentsResizedEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.ContentsResizedEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1914,8 +1910,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1952,8 +1948,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1995,8 +1991,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.LinkClickedEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.LinkClickedEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2033,8 +2029,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2104,8 +2100,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2181,8 +2177,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2488,8 +2484,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name and location of the file to save. </param
-        >
+          />The name and location of the file to save.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2530,15 +2526,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data stream that contains the file to save to. </param
-        >
+          />The data stream that contains the file to save to.
+        </param>
         <param name="fileType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.RichTextBoxStreamType" /> values. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.RichTextBoxStreamType" /> values.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2579,15 +2575,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name and location of the file to save. </param
-        >
+          />The name and location of the file to save.
+        </param>
         <param name="fileType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.RichTextBoxStreamType" /> values. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.RichTextBoxStreamType" /> values.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

@@ -25,12 +25,12 @@
         <see cref="T:System.Windows.Forms.ToolStripProgressBar" /> is the <see cref="T:System.Windows.Forms.ProgressBar" /> optimized for hosting in a <see cref="T:System.Windows.Forms.ToolStrip" />. A subset of the hosted control's properties and events are exposed at the <see cref="T:System.Windows.Forms.ToolStripProgressBar" /> level, but the underlying <see cref="T:System.Windows.Forms.ProgressBar" /> control is fully accessible through the <see cref="P:System.Windows.Forms.ToolStripProgressBar.ProgressBar" /> property.</para
       >
       <para
-        >A <see cref="T:System.Windows.Forms.ToolStripProgressBar" /> control visually indicates the progress of a lengthy operation. The <see cref="T:System.Windows.Forms.ToolStripProgressBar" /> control displays a bar that fills in from left to right with the system highlight color as an operation progresses. </para
-      >
+        >A <see cref="T:System.Windows.Forms.ToolStripProgressBar" /> control visually indicates the progress of a lengthy operation. The <see cref="T:System.Windows.Forms.ToolStripProgressBar" /> control displays a bar that fills in from left to right with the system highlight color as an operation progresses.
+      </para>
       <block subset="none" type="note">
         <para
-          >The <see cref="T:System.Windows.Forms.ToolStripProgressBar" /> control can only be oriented horizontally. </para
-        >
+          >The <see cref="T:System.Windows.Forms.ToolStripProgressBar" /> control can only be oriented horizontally.
+        </para>
       </block>
       <para
         >The <see cref="T:System.Windows.Forms.ToolStripProgressBar" /> control is typically used when an application performs tasks such as copying files or printing documents. Users of an application might consider an application unresponsive if there is no visual cue. Use the <see cref="T:System.Windows.Forms.ToolStripProgressBar" /> to notify the user that the application is performing a lengthy task and that the application is still responding.</para
@@ -68,8 +68,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripProgressBar" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripProgressBar" /> class.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -88,8 +88,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripProgressBar" /> class with specified name. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripProgressBar" /> class with specified name.
+          </para>
         </summary>
         <param name="name">
           <attribution
@@ -509,8 +509,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.Windows.Forms.ProgressBar.RightToLeftLayoutChanged" /> event. </para
-          >
+            >Raises the <see cref="E:System.Windows.Forms.ProgressBar.RightToLeftLayoutChanged" /> event.
+          </para>
         </summary>
         <param name="e">
           <attribution
@@ -646,8 +646,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This is a strongly typed accessor for this <see cref="T:System.Windows.Forms.ToolStripProgressBar" />. </para
-          >
+            >This is a strongly typed accessor for this <see cref="T:System.Windows.Forms.ToolStripProgressBar" />.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -686,8 +686,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <see cref="T:System.Windows.Forms.ToolStripProgressBar" /> layout is right-to-left or left-to-right when the <see cref="T:System.Windows.Forms.RightToLeft" /> property is set to <see cref="F:System.Windows.Forms.RightToLeft.Yes" />. </para
-          >
+            >Gets or sets a value indicating whether the <see cref="T:System.Windows.Forms.ToolStripProgressBar" /> layout is right-to-left or left-to-right when the <see cref="T:System.Windows.Forms.RightToLeft" /> property is set to <see cref="F:System.Windows.Forms.RightToLeft.Yes" />.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -706,8 +706,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

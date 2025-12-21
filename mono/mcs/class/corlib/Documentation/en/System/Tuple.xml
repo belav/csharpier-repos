@@ -37,8 +37,8 @@
         </item>
       </list>
       <para
-        >The <see cref="T:System.Tuple" /> class does not itself represent a tuple. Instead, it is a class that provides static methods for creating instances of the tuple types that are supported by the .NET Framework. It provides helper methods that you can call to instantiate tuple objects without having to explicitly specify the type of each tuple component. </para
-      >
+        >The <see cref="T:System.Tuple" /> class does not itself represent a tuple. Instead, it is a class that provides static methods for creating instances of the tuple types that are supported by the .NET Framework. It provides helper methods that you can call to instantiate tuple objects without having to explicitly specify the type of each tuple component.
+      </para>
       <para>Although you can create an instance of a tuple class by calling its class constructor, the code to do so can be cumbersome. The following example uses a class constructor to create a 7-tuple or septuple that contains population data for New York City for each census from 1950 through 2000.</para>
       <para>code reference: System.Tuple.Class#1</para>
       <para>Creating the same tuple object by using a helper method is more straightforward, as the following example shows.</para>

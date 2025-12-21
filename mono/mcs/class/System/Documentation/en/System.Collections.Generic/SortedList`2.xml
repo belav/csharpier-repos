@@ -104,8 +104,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of key/value pairs that are sorted by key based on the associated <see cref="T:System.Collections.Generic.IComparer`1" /> implementation. </para
-      >
+        >Represents a collection of key/value pairs that are sorted by key based on the associated <see cref="T:System.Collections.Generic.IComparer`1" /> implementation.
+      </para>
     </summary>
   </Docs>
   <Members>
@@ -429,8 +429,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Collections.Generic.IComparer`1" /> for the sorted list. </para
-          >
+            >Gets the <see cref="T:System.Collections.Generic.IComparer`1" /> for the sorted list.
+          </para>
         </summary>
       </Docs>
     </Member>

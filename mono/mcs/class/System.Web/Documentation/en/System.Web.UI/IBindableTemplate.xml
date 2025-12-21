@@ -18,8 +18,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.UI.IBindableTemplate" /> interface provides a way for ASP.NET data-bound controls, such as <see cref="T:System.Web.UI.WebControls.DetailsView" />, <see cref="T:System.Web.UI.WebControls.GridView" />, and <see cref="T:System.Web.UI.WebControls.FormView" />, to bind to data supplied by an ASP.NET data source control, such as <see cref="T:System.Web.UI.WebControls.ObjectDataSource" /> or <see cref="T:System.Web.UI.WebControls.SqlDataSource" />, when the data-bound control includes templated content. </para
-      >
+        >The <see cref="T:System.Web.UI.IBindableTemplate" /> interface provides a way for ASP.NET data-bound controls, such as <see cref="T:System.Web.UI.WebControls.DetailsView" />, <see cref="T:System.Web.UI.WebControls.GridView" />, and <see cref="T:System.Web.UI.WebControls.FormView" />, to bind to data supplied by an ASP.NET data source control, such as <see cref="T:System.Web.UI.WebControls.ObjectDataSource" /> or <see cref="T:System.Web.UI.WebControls.SqlDataSource" />, when the data-bound control includes templated content.
+      </para>
       <block subset="none" type="note">
         <para
           >Page developers do not implement the <see cref="T:System.Web.UI.IBindableTemplate" /> interface. Developers creating custom data-bound controls might manipulate <see cref="T:System.Web.UI.IBindableTemplate" /> objects in implementations of the <see cref="M:System.Web.UI.WebControls.DataBoundControl.PerformDataBinding(System.Collections.IEnumerable)" /> and <see cref="M:System.Web.UI.WebControls.GridView.ExtractRowValues(System.Collections.Specialized.IOrderedDictionary,System.Web.UI.WebControls.GridViewRow,System.Boolean,System.Boolean)" /> methods, but do not implement their own <see cref="T:System.Web.UI.IBindableTemplate" /> objects.</para
@@ -97,8 +97,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides a way for ASP.NET data-bound controls, such as <see cref="T:System.Web.UI.WebControls.DetailsView" /> and <see cref="T:System.Web.UI.WebControls.FormView" />, to automatically bind to an ASP.NET data source control within templated content sections. </para
-      >
+        >Provides a way for ASP.NET data-bound controls, such as <see cref="T:System.Web.UI.WebControls.DetailsView" /> and <see cref="T:System.Web.UI.WebControls.FormView" />, to automatically bind to an ASP.NET data source control within templated content sections.
+      </para>
     </summary>
   </Docs>
   <Members>

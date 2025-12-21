@@ -191,8 +191,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the area of the container is too small to display all the child controls, then at least one control will be clipped regardless of the <see cref="P:System.Windows.Forms.FlowLayoutSettings.WrapContents" /> value. </para
-          >
+            >If the area of the container is too small to display all the child controls, then at least one control will be clipped regardless of the <see cref="P:System.Windows.Forms.FlowLayoutSettings.WrapContents" /> value.
+          </para>
           <para>Subsequent resizing of the container will reapply the layout to the contained controls.</para>
         </remarks>
         <summary>

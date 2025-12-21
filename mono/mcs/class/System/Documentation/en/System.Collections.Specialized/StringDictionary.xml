@@ -117,15 +117,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key of the entry to add. </param
-        >
+          />The key of the entry to add.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value of the entry to add. The value can be null. </param
-        >
+          />The value of the entry to add. The value can be null.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Clear">
@@ -203,8 +203,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key to locate in the <see cref="T:System.Collections.Specialized.StringDictionary" />. </param
-        >
+          />The key to locate in the <see cref="T:System.Collections.Specialized.StringDictionary" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ContainsValue">
@@ -255,8 +255,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to locate in the <see cref="T:System.Collections.Specialized.StringDictionary" />. The value can be null. </param
-        >
+          />The value to locate in the <see cref="T:System.Collections.Specialized.StringDictionary" />. The value can be null.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CopyTo">
@@ -302,15 +302,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The one-dimensional <see cref="T:System.Array" /> that is the destination of the values copied from the <see cref="T:System.Collections.Specialized.StringDictionary" />. </param
-        >
+          />The one-dimensional <see cref="T:System.Array" /> that is the destination of the values copied from the <see cref="T:System.Collections.Specialized.StringDictionary" />.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index in the array where copying begins. </param
-        >
+          />The index in the array where copying begins.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Count">
@@ -510,8 +510,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key of the entry to remove. </param
-        >
+          />The key of the entry to remove.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SyncRoot">

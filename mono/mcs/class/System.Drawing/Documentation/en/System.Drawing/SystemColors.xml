@@ -118,8 +118,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Drawing.Color" /> structure that is the color of the application workspace. </para
-          >
+            >Gets a <see cref="T:System.Drawing.Color" /> structure that is the color of the application workspace.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -171,8 +171,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Drawing.Color" /> structure that is the highlight color of a 3-D element. </para
-          >
+            >Gets a <see cref="T:System.Drawing.Color" /> structure that is the highlight color of a 3-D element.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -197,8 +197,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Drawing.Color" /> structure that is the shadow color of a 3-D element. </para
-          >
+            >Gets a <see cref="T:System.Drawing.Color" /> structure that is the shadow color of a 3-D element.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -241,8 +241,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Drawing.Color" /> structure that is the shadow color of a 3-D element. </para
-          >
+            >Gets a <see cref="T:System.Drawing.Color" /> structure that is the shadow color of a 3-D element.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -268,8 +268,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Drawing.Color" /> structure that is the dark shadow color of a 3-D element. </para
-          >
+            >Gets a <see cref="T:System.Drawing.Color" /> structure that is the dark shadow color of a 3-D element.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -295,8 +295,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Drawing.Color" /> structure that is the light color of a 3-D element. </para
-          >
+            >Gets a <see cref="T:System.Drawing.Color" /> structure that is the light color of a 3-D element.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -322,8 +322,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Drawing.Color" /> structure that is the highlight color of a 3-D element. </para
-          >
+            >Gets a <see cref="T:System.Drawing.Color" /> structure that is the highlight color of a 3-D element.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -437,8 +437,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Drawing.Color" /> structure that is the color of dimmed text. </para
-          >
+            >Gets a <see cref="T:System.Drawing.Color" /> structure that is the color of dimmed text.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -517,8 +517,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Drawing.Color" /> structure that is the color used to designate a hot-tracked item. </para
-          >
+            >Gets a <see cref="T:System.Drawing.Color" /> structure that is the color used to designate a hot-tracked item.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>

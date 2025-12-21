@@ -20,8 +20,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A validation exception occurs if an input value does not match the expected data type, range or pattern of the data field. For example, if a user enters an integer value in a data field that expects a <see cref="F:System.Data.SqlDbType.DateTime" /> value, a validation exception occurs. </para
-      >
+        >A validation exception occurs if an input value does not match the expected data type, range or pattern of the data field. For example, if a user enters an integer value in a data field that expects a <see cref="F:System.Data.SqlDbType.DateTime" /> value, a validation exception occurs.
+      </para>
       <para
         >This class uses the <see cref="T:System.ComponentModel.DataAnnotations.ValidationAttribute" /> class to customize validations. A <see cref="T:System.ComponentModel.DataAnnotations.ValidationException" /> is thrown if a validation error occurs. The exception is thrown when the <see cref="M:System.ComponentModel.DataAnnotations.ValidationAttribute.Validate(System.Object,System.String)" /> method is called. All the exceptions that are thrown during validation are contained in the <see cref="P:System.Web.DynamicData.IDynamicValidatorException.InnerExceptions" /> collection. You can retrieve each validation exception by iterating through the <see cref="P:System.Web.DynamicData.IDynamicValidatorException.InnerExceptions" /> collection.</para
       >
@@ -29,8 +29,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the exception that occurs during validation of a data field when the <see cref="T:System.ComponentModel.DataAnnotations.ValidationAttribute" /> class is used. </para
-      >
+        >Represents the exception that occurs during validation of a data field when the <see cref="T:System.ComponentModel.DataAnnotations.ValidationAttribute" /> class is used.
+      </para>
     </summary>
   </Docs>
   <Members>
@@ -174,8 +174,8 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />The error message. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The error message.
+        </param>
         <param name="innerException">
           <attribution
             license="cc4"

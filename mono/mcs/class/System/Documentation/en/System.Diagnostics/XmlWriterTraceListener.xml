@@ -35,8 +35,8 @@
         >You can enable or disable an <see cref="T:System.Diagnostics.XmlWriterTraceListener" /> through the application configuration file and then use the configured <see cref="T:System.Diagnostics.XmlWriterTraceListener" /> in your application. Alternately, you can create an <see cref="T:System.Diagnostics.XmlWriterTraceListener" /> in your code.</para
       >
       <para
-        >To configure an <see cref="T:System.Diagnostics.XmlWriterTraceListener" />, edit the configuration file that corresponds to the name of your application. In this file, you can add or remove a listener, set the properties for a listener, or remove listeners. The configuration file should be formatted like the following example. </para
-      >
+        >To configure an <see cref="T:System.Diagnostics.XmlWriterTraceListener" />, edit the configuration file that corresponds to the name of your application. In this file, you can add or remove a listener, set the properties for a listener, or remove listeners. The configuration file should be formatted like the following example.
+      </para>
       <code>&lt;configuration&gt;
   &lt;system.diagnostics&gt;
     &lt;trace autoflush="false" indentsize="4"&gt;
@@ -338,8 +338,8 @@
         </item>
       </list>
       <para
-        >The following table shows the characters that are escaped in the XML output. Escaping occurs in all the elements and attributes with the exception of the DataItem element, which is not escaped if the object passed to the <paramref name="data" /> parameter of the <see cref="Overload:System.Diagnostics.XmlWriterTraceListener.TraceData" /> method is an <see cref="T:System.Xml.XPath.XPathNavigator" /> object. If an <see cref="T:System.Xml.XPath.XPathNavigator" /> is used for the data object, the <see cref="M:System.Xml.XPath.XPathNavigator.MoveToRoot" /> method is called and the entire root node is traced as unescaped data. </para
-      >
+        >The following table shows the characters that are escaped in the XML output. Escaping occurs in all the elements and attributes with the exception of the DataItem element, which is not escaped if the object passed to the <paramref name="data" /> parameter of the <see cref="Overload:System.Diagnostics.XmlWriterTraceListener.TraceData" /> method is an <see cref="T:System.Xml.XPath.XPathNavigator" /> object. If an <see cref="T:System.Xml.XPath.XPathNavigator" /> is used for the data object, the <see cref="M:System.Xml.XPath.XPathNavigator.MoveToRoot" /> method is called and the entire root node is traced as unescaped data.
+      </para>
       <list type="table">
         <listheader>
           <item>
@@ -444,8 +444,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Diagnostics.XmlWriterTraceListener" /> class, using the specified stream as the recipient of the debugging and tracing output. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.XmlWriterTraceListener" /> class, using the specified stream as the recipient of the debugging and tracing output.
+          </para>
         </summary>
         <param name="stream">
           <attribution
@@ -483,8 +483,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Diagnostics.XmlWriterTraceListener" /> class using the specified writer as the recipient of the debugging and tracing output. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.XmlWriterTraceListener" /> class using the specified writer as the recipient of the debugging and tracing output.
+          </para>
         </summary>
         <param name="writer">
           <attribution
@@ -513,8 +513,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes a new instance of the <see cref="T:System.IO.StreamWriter" /> class for the specified file on the specified path, using <see cref="P:System.Text.Encoding.UTF8" /> encoding. If the file exists, it is appended to. If the file does not exist, a new file is created. </para
-          >
+            >This constructor initializes a new instance of the <see cref="T:System.IO.StreamWriter" /> class for the specified file on the specified path, using <see cref="P:System.Text.Encoding.UTF8" /> encoding. If the file exists, it is appended to. If the file does not exist, a new file is created.
+          </para>
           <block subset="none" type="note">
             <para>To reduce the chance of an exception, any character that might invalidate the output is replaced with a "?" character.</para>
           </block>
@@ -525,8 +525,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Diagnostics.XmlWriterTraceListener" /> class, using the specified file as the recipient of the debugging and tracing output. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.XmlWriterTraceListener" /> class, using the specified file as the recipient of the debugging and tracing output.
+          </para>
         </summary>
         <param name="filename">
           <attribution
@@ -560,24 +560,24 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see cref="P:System.Diagnostics.TraceListener.Name" /> property to the <paramref name="name" /> parameter value or to an empty string ("") if the <paramref name="name" /> parameter is null. The name can be used as an index into the <see cref="P:System.Diagnostics.Trace.Listeners" /> collection to programmatically change the properties for the listener. For example, the following code sets the <see cref="P:System.Diagnostics.TraceListener.TraceOutputOptions" /> property for an instance of <see cref="T:System.Diagnostics.XmlWriterTraceListener" /> whose <see cref="P:System.Diagnostics.TraceListener.Name" /> property is "xmlListener". </para
-          >
+            >This constructor initializes the <see cref="P:System.Diagnostics.TraceListener.Name" /> property to the <paramref name="name" /> parameter value or to an empty string ("") if the <paramref name="name" /> parameter is null. The name can be used as an index into the <see cref="P:System.Diagnostics.Trace.Listeners" /> collection to programmatically change the properties for the listener. For example, the following code sets the <see cref="P:System.Diagnostics.TraceListener.TraceOutputOptions" /> property for an instance of <see cref="T:System.Diagnostics.XmlWriterTraceListener" /> whose <see cref="P:System.Diagnostics.TraceListener.Name" /> property is "xmlListener".
+          </para>
           <code>((XmlWriterTraceListener)Trace.Listeners["xmlListener"]).TraceOutputOptions = 
     TraceOptions.Timestamp</code>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Diagnostics.XmlWriterTraceListener" /> class with the specified name, using the specified stream as the recipient of the debugging and tracing output. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.XmlWriterTraceListener" /> class with the specified name, using the specified stream as the recipient of the debugging and tracing output.
+          </para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the new instance. </param
-        >
+          />The name of the new instance.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -602,31 +602,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see cref="P:System.Diagnostics.TraceListener.Name" /> property to the <paramref name="name" /> parameter value or to an empty string ("") if the <paramref name="name" /> parameter is null. The name can be used as an index into the <see cref="P:System.Diagnostics.Trace.Listeners" /> collection to programmatically change the properties for the listener. For example, the following code sets the <see cref="P:System.Diagnostics.TraceListener.TraceOutputOptions" /> property for an instance of <see cref="T:System.Diagnostics.XmlWriterTraceListener" /> whose <see cref="P:System.Diagnostics.TraceListener.Name" /> property is "xmlListener".   </para
-          >
+            >This constructor initializes the <see cref="P:System.Diagnostics.TraceListener.Name" /> property to the <paramref name="name" /> parameter value or to an empty string ("") if the <paramref name="name" /> parameter is null. The name can be used as an index into the <see cref="P:System.Diagnostics.Trace.Listeners" /> collection to programmatically change the properties for the listener. For example, the following code sets the <see cref="P:System.Diagnostics.TraceListener.TraceOutputOptions" /> property for an instance of <see cref="T:System.Diagnostics.XmlWriterTraceListener" /> whose <see cref="P:System.Diagnostics.TraceListener.Name" /> property is "xmlListener".
+          </para>
           <code>((XmlWriterTraceListener)Trace.Listeners["xmlListener"]).TraceOutputOptions = 
     TraceOptions.Timestamp.</code>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Diagnostics.XmlWriterTraceListener" /> class with the specified name, using the specified writer as the recipient of the debugging and tracing output. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.XmlWriterTraceListener" /> class with the specified name, using the specified writer as the recipient of the debugging and tracing output.
+          </para>
         </summary>
         <param name="writer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.TextWriter" /> that receives the output from the trace listener. </param
-        >
+          />A <see cref="T:System.IO.TextWriter" /> that receives the output from the trace listener.
+        </param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the new instance. </param
-        >
+          />The name of the new instance.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -651,37 +651,37 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes a new instance of the <see cref="T:System.IO.StreamWriter" /> class for the specified file on the specified path, using <see cref="P:System.Text.Encoding.UTF8" /> encoding. If the file exists, it is appended to. If the file does not exist, a new file is created. </para
-          >
+            >This constructor initializes a new instance of the <see cref="T:System.IO.StreamWriter" /> class for the specified file on the specified path, using <see cref="P:System.Text.Encoding.UTF8" /> encoding. If the file exists, it is appended to. If the file does not exist, a new file is created.
+          </para>
           <block subset="none" type="note">
             <para>To reduce the chance of an exception, any character that might invalidate the output is replaced with a "?" character.</para>
           </block>
           <para
-            >The <see cref="P:System.Diagnostics.TraceListener.Name" /> property is set to the <paramref name="name" /> parameter value or to an empty string ("") if the <paramref name="name" /> parameter is null. The name can be used as an index into the <see cref="P:System.Diagnostics.Trace.Listeners" /> collection to programmatically change the properties for the listener. For example, the following code sets the <see cref="P:System.Diagnostics.TraceListener.TraceOutputOptions" /> property for an instance of <see cref="T:System.Diagnostics.XmlWriterTraceListener" /> whose <see cref="P:System.Diagnostics.TraceListener.Name" /> property is "xmlListener".  </para
-          >
+            >The <see cref="P:System.Diagnostics.TraceListener.Name" /> property is set to the <paramref name="name" /> parameter value or to an empty string ("") if the <paramref name="name" /> parameter is null. The name can be used as an index into the <see cref="P:System.Diagnostics.Trace.Listeners" /> collection to programmatically change the properties for the listener. For example, the following code sets the <see cref="P:System.Diagnostics.TraceListener.TraceOutputOptions" /> property for an instance of <see cref="T:System.Diagnostics.XmlWriterTraceListener" /> whose <see cref="P:System.Diagnostics.TraceListener.Name" /> property is "xmlListener".
+          </para>
           <code>((XmlWriterTraceListener)Trace.Listeners["xmlListener"]).TraceOutputOptions =
     TraceOptions.Timestamp.</code>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Diagnostics.XmlWriterTraceListener" /> class with the specified name, using the specified file as the recipient of the debugging and tracing output.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.XmlWriterTraceListener" /> class with the specified name, using the specified file as the recipient of the debugging and tracing output.
+          </para>
         </summary>
         <param name="filename">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the file to write to. </param
-        >
+          />The name of the file to write to.
+        </param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the new instance. </param
-        >
+          />The name of the new instance.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Close">
@@ -805,8 +805,8 @@
           />A <see cref="T:System.Diagnostics.TraceEventCache" /> that contains the current process ID, thread ID, and stack trace information.</param
         >
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />The source name. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The source name.
+        </param>
         <param name="eventType">
           <attribution
             license="cc4"
@@ -889,8 +889,8 @@
           />A <see cref="T:System.Diagnostics.TraceEventCache" /> that contains the current process ID, thread ID, and stack trace information.</param
         >
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />The source name. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The source name.
+        </param>
         <param name="eventType">
           <attribution
             license="cc4"
@@ -967,8 +967,8 @@
           />A <see cref="T:System.Diagnostics.TraceEventCache" /> that contains the current process ID, thread ID, and stack trace information.</param
         >
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />The source name. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The source name.
+        </param>
         <param name="eventType">
           <attribution
             license="cc4"
@@ -1032,8 +1032,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="eventCache" />, <paramref name="source" />, <paramref name="eventType" />, and <paramref name="id" /> parameters are used in the header and footer of the trace. The <paramref name="id" /> parameter is converted to an unsigned integer before writing, so a negative <paramref name="id" /> value is written as a large positive integer. The <see cref="M:System.String.Format(System.String,System.Object[])" /> method is called, passing in the <paramref name="format" /> string and <paramref name="args" /> array as parameters, to format the <paramref name="args" /> object array as the Message element. </para
-          >
+            >The <paramref name="eventCache" />, <paramref name="source" />, <paramref name="eventType" />, and <paramref name="id" /> parameters are used in the header and footer of the trace. The <paramref name="id" /> parameter is converted to an unsigned integer before writing, so a negative <paramref name="id" /> value is written as a large positive integer. The <see cref="M:System.String.Format(System.String,System.Object[])" /> method is called, passing in the <paramref name="format" /> string and <paramref name="args" /> array as parameters, to format the <paramref name="args" /> object array as the Message element.
+          </para>
           <block subset="none" type="note">
             <para
               >This method is not intended to be called directly by application code.  It is called by methods of the <see cref="T:System.Diagnostics.Debug" />, <see cref="T:System.Diagnostics.Trace" />, and <see cref="T:System.Diagnostics.TraceSource" /> classes to write trace data.</para
@@ -1052,8 +1052,8 @@
           />A <see cref="T:System.Diagnostics.TraceEventCache" /> that contains the current process ID, thread ID, and stack trace information.</param
         >
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />The source name. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The source name.
+        </param>
         <param name="eventType">
           <attribution
             license="cc4"
@@ -1112,8 +1112,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Diagnostics.XmlWriterTraceListener.TraceTransfer(System.Diagnostics.TraceEventCache,System.String,System.Int32,System.String,System.Guid)" /> method is used for the correlation of related traces. The <paramref name="eventCache" />, <paramref name="source" />, <paramref name="id" />, and <paramref name="relatedActivityId" /> parameters are used in the header and footer of the trace. The <paramref name="id" /> parameter is converted to an unsigned integer before writing, so a negative <paramref name="id" /> value is written as a large positive integer. The <paramref name="message" /> parameter is written as the Message element. The <see cref="M:System.Guid.ToString(System.String)" /> method is called to convert the <paramref name="relatedActivityId" /> value to a "B" formatted string, which appears in the header. The SubTypeName element in the footer identifies the trace event type as a <see cref="F:System.Diagnostics.TraceEventType.Transfer" />.  </para
-          >
+            >The <see cref="M:System.Diagnostics.XmlWriterTraceListener.TraceTransfer(System.Diagnostics.TraceEventCache,System.String,System.Int32,System.String,System.Guid)" /> method is used for the correlation of related traces. The <paramref name="eventCache" />, <paramref name="source" />, <paramref name="id" />, and <paramref name="relatedActivityId" /> parameters are used in the header and footer of the trace. The <paramref name="id" /> parameter is converted to an unsigned integer before writing, so a negative <paramref name="id" /> value is written as a large positive integer. The <paramref name="message" /> parameter is written as the Message element. The <see cref="M:System.Guid.ToString(System.String)" /> method is called to convert the <paramref name="relatedActivityId" /> value to a "B" formatted string, which appears in the header. The SubTypeName element in the footer identifies the trace event type as a <see cref="F:System.Diagnostics.TraceEventType.Transfer" />.
+          </para>
           <block subset="none" type="note">
             <para
               >The <see cref="M:System.Diagnostics.XmlWriterTraceListener.TraceTransfer(System.Diagnostics.TraceEventCache,System.String,System.Int32,System.String,System.Guid)" /> method is not intended to be called by application code.  It is intended to be called by a <see cref="T:System.Diagnostics.TraceSource" /> object to emit the trace information for its <see cref="M:System.Diagnostics.TraceSource.TraceTransfer(System.Int32,System.String,System.Guid)" /> method.</para
@@ -1132,8 +1132,8 @@
           />A <see cref="T:System.Diagnostics.TraceEventCache" /> that contains the current process ID, thread ID, and stack trace information.</param
         >
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />The source name. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The source name.
+        </param>
         <param name="id">
           <attribution
             license="cc4"

@@ -62,8 +62,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor allows you to initialize a new <see cref="T:System.Data.Sql.SqlNotificationRequest" /> instance, providing your own identifier, the SQL Server 2005 Service Broker service name, and a time-out value. </para
-          >
+            >This constructor allows you to initialize a new <see cref="T:System.Data.Sql.SqlNotificationRequest" /> instance, providing your own identifier, the SQL Server 2005 Service Broker service name, and a time-out value.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -76,8 +76,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string that contains an application-specific identifier for this notification. It is not used by the notifications infrastructure, but it allows you to associate notifications with the application state. The value indicated in this parameter is included in the Service Broker queue message. </param
-        >
+          />A string that contains an application-specific identifier for this notification. It is not used by the notifications infrastructure, but it allows you to associate notifications with the application state. The value indicated in this parameter is included in the Service Broker queue message.
+        </param>
         <param name="options">
           <attribution
             license="cc4"
@@ -90,8 +90,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The time, in seconds, to wait for a notification message. </param
-        >
+          />The time, in seconds, to wait for a notification message.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -109,8 +109,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the <see cref="P:System.Data.Sql.SqlNotificationRequest.Options" /> property has the following format: </para
-          >
+            >The value of the <see cref="P:System.Data.Sql.SqlNotificationRequest.Options" /> property has the following format:
+          </para>
           <para>service=&lt;service-name&gt;{;(local database=&lt;database&gt;|broker instance=&lt;broker instance&gt;)}</para>
           <para>For example, if you use the service "myservice" in the database "AdventureWorks" the format is:</para>
           <para>service=myservice;local database=AdventureWorks</para>

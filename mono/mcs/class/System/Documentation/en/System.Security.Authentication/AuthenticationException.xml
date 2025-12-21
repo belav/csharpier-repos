@@ -76,8 +76,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see cref="P:System.Exception.Message" /> property with the text in the <paramref name="message" /> parameter. The <see cref="P:System.Exception.InnerException" /> property is set to null. </para
-          >
+            >This constructor initializes the <see cref="P:System.Exception.Message" /> property with the text in the <paramref name="message" /> parameter. The <see cref="P:System.Exception.InnerException" /> property is set to null.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -126,15 +126,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Runtime.Serialization.SerializationInfo" /> instance that contains the information required to deserialize the new <see cref="T:System.Security.Authentication.AuthenticationException" /> instance. </param
-        >
+          />A <see cref="T:System.Runtime.Serialization.SerializationInfo" /> instance that contains the information required to deserialize the new <see cref="T:System.Security.Authentication.AuthenticationException" /> instance.
+        </param>
         <param name="streamingContext">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Runtime.Serialization.StreamingContext" /> instance. </param
-        >
+          />A <see cref="T:System.Runtime.Serialization.StreamingContext" /> instance.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">

@@ -259,8 +259,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.EndpointAddress" /> used to initialize the instance of this class. </para
-          >
+            >The <see cref="T:System.ServiceModel.EndpointAddress" /> used to initialize the instance of this class.
+          </para>
         </returns>
       </Docs>
     </Member>

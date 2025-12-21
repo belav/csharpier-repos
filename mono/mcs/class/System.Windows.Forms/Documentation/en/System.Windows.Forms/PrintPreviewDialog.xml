@@ -1356,8 +1356,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
           <para>This event is not relevant for this class.</para>
         </remarks>
         <summary>
@@ -1489,8 +1489,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
           <para>This event is not relevant for this class.</para>
         </remarks>
         <summary>
@@ -1664,8 +1664,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1898,8 +1898,8 @@
           <para>A maximize button automatically becomes a restore button when a window is maximized. Minimizing or restoring a window automatically changes the restore button back to a maximize button.</para>
           <block subset="none" type="note">
             <para
-              >Maximizing a form at run time generates a <see cref="E:System.Windows.Forms.Control.Resize" /> event. The <see cref="P:System.Windows.Forms.PrintPreviewDialog.WindowState" /> property reflects the current state of the window. If you set the <see cref="P:System.Windows.Forms.PrintPreviewDialog.WindowState" /> property to <see cref="F:System.Windows.Forms.FormWindowState.Maximized" />, the form is maximized independently of whatever settings are in effect for the <see cref="P:System.Windows.Forms.PrintPreviewDialog.MaximizeBox" /> and <see cref="P:System.Windows.Forms.PrintPreviewDialog.FormBorderStyle" /> properties </para
-            >
+              >Maximizing a form at run time generates a <see cref="E:System.Windows.Forms.Control.Resize" /> event. The <see cref="P:System.Windows.Forms.PrintPreviewDialog.WindowState" /> property reflects the current state of the window. If you set the <see cref="P:System.Windows.Forms.PrintPreviewDialog.WindowState" /> property to <see cref="F:System.Windows.Forms.FormWindowState.Maximized" />, the form is maximized independently of whatever settings are in effect for the <see cref="P:System.Windows.Forms.PrintPreviewDialog.MaximizeBox" /> and <see cref="P:System.Windows.Forms.PrintPreviewDialog.FormBorderStyle" /> properties
+            </para>
           </block>
         </remarks>
         <summary>
@@ -1964,8 +1964,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2113,8 +2113,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2332,8 +2332,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.Keys" /> values. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.Keys" /> values.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ProcessTabKey">
@@ -2424,8 +2424,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2497,8 +2497,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2599,8 +2599,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2737,8 +2737,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2834,8 +2834,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3026,8 +3026,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

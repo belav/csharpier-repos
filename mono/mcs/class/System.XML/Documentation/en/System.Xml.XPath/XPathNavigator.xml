@@ -131,8 +131,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see cref="T:System.Xml.XmlWriter" /> object used to create one or more new child nodes at the end of the list of child nodes of the current node. </para
-          >
+            >Returns an <see cref="T:System.Xml.XmlWriter" /> object used to create one or more new child nodes at the end of the list of child nodes of the current node.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2321,8 +2321,8 @@ nav.Evaluate(expr);</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Xml.XPath.XPathNavigator" /> is a descendant of the current <see cref="T:System.Xml.XPath.XPathNavigator" /> if it is positioned on a descendant node of the current <see cref="T:System.Xml.XPath.XPathNavigator" />. Take, for example, the following XML string: </para
-          >
+            >An <see cref="T:System.Xml.XPath.XPathNavigator" /> is a descendant of the current <see cref="T:System.Xml.XPath.XPathNavigator" /> if it is positioned on a descendant node of the current <see cref="T:System.Xml.XPath.XPathNavigator" />. Take, for example, the following XML string:
+          </para>
           <para>&lt;item&gt;&lt;name&gt;widget&lt;/name&gt;&lt;/item&gt; </para>
           <para
             >If the current <see cref="T:System.Xml.XPath.XPathNavigator" /> is positioned on the item node, and the <see cref="T:System.Xml.XPath.XPathNavigator" /> specified is positioned on the name node, <see cref="M:System.Xml.XPath.XPathNavigator.IsDescendant(System.Xml.XPath.XPathNavigator)" /> returns true.</para
@@ -2839,8 +2839,8 @@ nav.Evaluate(expr);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XPath.XPathNavigator" /> positioned on the node that you want to move to. </param
-        >
+          />The <see cref="T:System.Xml.XPath.XPathNavigator" /> positioned on the node that you want to move to.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="MoveToAttribute">
@@ -2931,8 +2931,8 @@ nav.Evaluate(expr);</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The return value of the <see cref="M:System.Xml.XPath.XPathNavigator.MoveToChild(System.Xml.XPath.XPathNodeType)" /> method depends on the <see cref="T:System.Xml.XPath.XPathNodeType" /> of the current node, and the <see cref="T:System.Xml.XPath.XPathNodeType" /> of the child node to move to. </para
-          >
+            >The return value of the <see cref="M:System.Xml.XPath.XPathNavigator.MoveToChild(System.Xml.XPath.XPathNodeType)" /> method depends on the <see cref="T:System.Xml.XPath.XPathNodeType" /> of the current node, and the <see cref="T:System.Xml.XPath.XPathNodeType" /> of the child node to move to.
+          </para>
           <para
             >The following table shows the different <see cref="T:System.Xml.XPath.XPathNodeType" /> nodes, and the child nodes they can move to.</para
           >
@@ -3290,8 +3290,8 @@ nav.Evaluate(expr);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XPath.XPathNamespaceScope" /> value describing the namespace scope. </param
-        >
+          />An <see cref="T:System.Xml.XPath.XPathNamespaceScope" /> value describing the namespace scope.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="MoveToFollowing">
@@ -3732,8 +3732,8 @@ nav.Evaluate(expr);</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The return value of the <see cref="M:System.Xml.XPath.XPathNavigator.MoveToNext(System.Xml.XPath.XPathNodeType)" /> method depends on the <see cref="T:System.Xml.XPath.XPathNodeType" /> of the current node and the <see cref="T:System.Xml.XPath.XPathNodeType" /> of the next sibling node to move to. </para
-          >
+            >The return value of the <see cref="M:System.Xml.XPath.XPathNavigator.MoveToNext(System.Xml.XPath.XPathNodeType)" /> method depends on the <see cref="T:System.Xml.XPath.XPathNodeType" /> of the current node and the <see cref="T:System.Xml.XPath.XPathNodeType" /> of the next sibling node to move to.
+          </para>
           <para
             >The following table shows the different <see cref="T:System.Xml.XPath.XPathNodeType" /> nodes and the sibling nodes they can move to.</para
           >
@@ -3994,8 +3994,8 @@ nav.Evaluate(expr);</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Xml.XPath.XPathNavigator" /> class returns namespace nodes in reverse document order. </para
-          >
+            >The <see cref="T:System.Xml.XPath.XPathNavigator" /> class returns namespace nodes in reverse document order.
+          </para>
           <para
             >If the <see cref="T:System.Xml.XPath.XPathNavigator" /> is not currently positioned on a namespace node, this method returns false and the position of the <see cref="T:System.Xml.XPath.XPathNavigator" /> does not change.</para
           >
@@ -4024,8 +4024,8 @@ nav.Evaluate(expr);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XPath.XPathNamespaceScope" /> value describing the namespace scope. </param
-        >
+          />An <see cref="T:System.Xml.XPath.XPathNamespaceScope" /> value describing the namespace scope.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="MoveToParent">
@@ -4048,8 +4048,8 @@ nav.Evaluate(expr);</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The return value of the <see cref="M:System.Xml.XPath.XPathNavigator.MoveToParent" /> method depends on the <see cref="T:System.Xml.XPath.XPathNodeType" /> of the current node, and the <see cref="T:System.Xml.XPath.XPathNodeType" /> of the parent node to move to. </para
-          >
+            >The return value of the <see cref="M:System.Xml.XPath.XPathNavigator.MoveToParent" /> method depends on the <see cref="T:System.Xml.XPath.XPathNodeType" /> of the current node, and the <see cref="T:System.Xml.XPath.XPathNodeType" /> of the parent node to move to.
+          </para>
           <para
             >The following table shows the different <see cref="T:System.Xml.XPath.XPathNodeType" /> nodes, and the parent nodes they can move to.</para
           >
@@ -4072,8 +4072,8 @@ nav.Evaluate(expr);</code>
               </term>
               <description>
                 <para>
-                  <see cref="F:System.Xml.XPath.XPathNodeType.Root" /> nodes do not have parents. </para
-                >
+                  <see cref="F:System.Xml.XPath.XPathNodeType.Root" /> nodes do not have parents.
+                </para>
               </description>
             </item>
             <item>
@@ -4084,8 +4084,8 @@ nav.Evaluate(expr);</code>
               </term>
               <description>
                 <para>
-                  <see cref="F:System.Xml.XPath.XPathNodeType.Element" /> or <see cref="F:System.Xml.XPath.XPathNodeType.Root" /> node. </para
-                >
+                  <see cref="F:System.Xml.XPath.XPathNodeType.Element" /> or <see cref="F:System.Xml.XPath.XPathNodeType.Root" /> node.
+                </para>
               </description>
             </item>
             <item>
@@ -4126,8 +4126,8 @@ nav.Evaluate(expr);</code>
               </term>
               <description>
                 <para>
-                  <see cref="F:System.Xml.XPath.XPathNodeType.Element" /> or <see cref="F:System.Xml.XPath.XPathNodeType.Root" /> node. </para
-                >
+                  <see cref="F:System.Xml.XPath.XPathNodeType.Element" /> or <see cref="F:System.Xml.XPath.XPathNodeType.Root" /> node.
+                </para>
               </description>
             </item>
             <item>
@@ -4138,8 +4138,8 @@ nav.Evaluate(expr);</code>
               </term>
               <description>
                 <para>
-                  <see cref="F:System.Xml.XPath.XPathNodeType.Element" /> or <see cref="F:System.Xml.XPath.XPathNodeType.Root" /> node. </para
-                >
+                  <see cref="F:System.Xml.XPath.XPathNodeType.Element" /> or <see cref="F:System.Xml.XPath.XPathNodeType.Root" /> node.
+                </para>
               </description>
             </item>
             <item>
@@ -4150,8 +4150,8 @@ nav.Evaluate(expr);</code>
               </term>
               <description>
                 <para>
-                  <see cref="F:System.Xml.XPath.XPathNodeType.Element" /> or <see cref="F:System.Xml.XPath.XPathNodeType.Root" /> node. </para
-                >
+                  <see cref="F:System.Xml.XPath.XPathNodeType.Element" /> or <see cref="F:System.Xml.XPath.XPathNodeType.Root" /> node.
+                </para>
               </description>
             </item>
             <item>
@@ -4162,8 +4162,8 @@ nav.Evaluate(expr);</code>
               </term>
               <description>
                 <para>
-                  <see cref="F:System.Xml.XPath.XPathNodeType.Element" /> or <see cref="F:System.Xml.XPath.XPathNodeType.Root" /> node. </para
-                >
+                  <see cref="F:System.Xml.XPath.XPathNodeType.Element" /> or <see cref="F:System.Xml.XPath.XPathNodeType.Root" /> node.
+                </para>
               </description>
             </item>
           </list>
@@ -4320,8 +4320,8 @@ nav.Evaluate(expr);</code>
               </term>
               <description>
                 <para
-                  >The target of the <see cref="F:System.Xml.XPath.XPathNodeType.ProcessingInstruction" />. In the following example, &lt;?xml-stylesheet type='text/xsl' href= 'books.xsl'?&gt;, the <see cref="P:System.Xml.XPath.XPathNavigator.Name" /> property returns xml-stylesheet. </para
-                >
+                  >The target of the <see cref="F:System.Xml.XPath.XPathNodeType.ProcessingInstruction" />. In the following example, &lt;?xml-stylesheet type='text/xsl' href= 'books.xsl'?&gt;, the <see cref="P:System.Xml.XPath.XPathNavigator.Name" /> property returns xml-stylesheet.
+                </para>
               </description>
             </item>
             <item>
@@ -4360,8 +4360,8 @@ nav.Evaluate(expr);</code>
             >The namespace URI returned depends on the <see cref="T:System.Xml.XPath.XPathNodeType" /> of the current node.</para
           >
           <para
-            >The <see cref="P:System.Xml.XPath.XPathNavigator.NamespaceURI" /> property returns urn:samples for the node &lt;bk:book xmlns:bk='urn:samples'&gt;. </para
-          >
+            >The <see cref="P:System.Xml.XPath.XPathNavigator.NamespaceURI" /> property returns urn:samples for the node &lt;bk:book xmlns:bk='urn:samples'&gt;.
+          </para>
           <para
             >Only <see cref="F:System.Xml.XPath.XPathNodeType.Element" /> and <see cref="F:System.Xml.XPath.XPathNodeType.Attribute" />
             <see cref="T:System.Xml.XPath.XPathNodeType" /> nodes can have a namespace URI.</para
@@ -4976,8 +4976,8 @@ nav.Evaluate(expr);</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Xml.XPath.XPathNavigator" /> is positioned on the new node on completion of the <see cref="M:System.Xml.XPath.XPathNavigator.ReplaceSelf(System.String)" /> method and returns true. The <see cref="T:System.Xml.XPath.XPathNavigator" /> is not positioned on the new node after completion of the <see cref="M:System.Xml.XPath.XPathNavigator.ReplaceSelf(System.String)" /> method when the XML input is <see cref="F:System.String.Empty" /> in which case the <see cref="T:System.Xml.XPath.XPathNavigator" /> is either positioned on the next sibling node or the parent node if there is no next sibling node to the replaced node and the <see cref="M:System.Xml.XPath.XPathNavigator.ReplaceSelf(System.String)" /> returns false. </para
-          >
+            >The <see cref="T:System.Xml.XPath.XPathNavigator" /> is positioned on the new node on completion of the <see cref="M:System.Xml.XPath.XPathNavigator.ReplaceSelf(System.String)" /> method and returns true. The <see cref="T:System.Xml.XPath.XPathNavigator" /> is not positioned on the new node after completion of the <see cref="M:System.Xml.XPath.XPathNavigator.ReplaceSelf(System.String)" /> method when the XML input is <see cref="F:System.String.Empty" /> in which case the <see cref="T:System.Xml.XPath.XPathNavigator" /> is either positioned on the next sibling node or the parent node if there is no next sibling node to the replaced node and the <see cref="M:System.Xml.XPath.XPathNavigator.ReplaceSelf(System.String)" /> returns false.
+          </para>
           <list type="bullet">
             <item>
               <para
@@ -5039,8 +5039,8 @@ nav.Evaluate(expr);</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Xml.XPath.XPathNavigator" /> is positioned on the new node on completion of the <see cref="M:System.Xml.XPath.XPathNavigator.ReplaceSelf(System.Xml.XmlReader)" /> method and returns true. The <see cref="T:System.Xml.XPath.XPathNavigator" /> is not positioned on the new node after completion of the <see cref="M:System.Xml.XPath.XPathNavigator.ReplaceSelf(System.Xml.XmlReader)" /> method when the XML input is <see cref="F:System.String.Empty" /> in which case the <see cref="T:System.Xml.XPath.XPathNavigator" /> is either positioned on the next sibling node or the parent node if there is no next sibling node to the replaced node and the <see cref="M:System.Xml.XPath.XPathNavigator.ReplaceSelf(System.Xml.XmlReader)" /> returns false. </para
-          >
+            >The <see cref="T:System.Xml.XPath.XPathNavigator" /> is positioned on the new node on completion of the <see cref="M:System.Xml.XPath.XPathNavigator.ReplaceSelf(System.Xml.XmlReader)" /> method and returns true. The <see cref="T:System.Xml.XPath.XPathNavigator" /> is not positioned on the new node after completion of the <see cref="M:System.Xml.XPath.XPathNavigator.ReplaceSelf(System.Xml.XmlReader)" /> method when the XML input is <see cref="F:System.String.Empty" /> in which case the <see cref="T:System.Xml.XPath.XPathNavigator" /> is either positioned on the next sibling node or the parent node if there is no next sibling node to the replaced node and the <see cref="M:System.Xml.XPath.XPathNavigator.ReplaceSelf(System.Xml.XmlReader)" /> returns false.
+          </para>
           <list type="bullet">
             <item>
               <para
@@ -5104,8 +5104,8 @@ nav.Evaluate(expr);</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Xml.XPath.XPathNavigator" /> is positioned on the new node on completion of the <see cref="M:System.Xml.XPath.XPathNavigator.ReplaceSelf(System.Xml.XPath.XPathNavigator)" /> method and returns true. The <see cref="T:System.Xml.XPath.XPathNavigator" /> is not positioned on the new node after completion of the <see cref="M:System.Xml.XPath.XPathNavigator.ReplaceSelf(System.Xml.XPath.XPathNavigator)" /> method when the XML input is <see cref="F:System.String.Empty" /> in which case the <see cref="T:System.Xml.XPath.XPathNavigator" /> is either positioned on the next sibling node or the parent node if there is no next sibling node to the replaced node and the <see cref="M:System.Xml.XPath.XPathNavigator.ReplaceSelf(System.Xml.XPath.XPathNavigator)" /> returns false. </para
-          >
+            >The <see cref="T:System.Xml.XPath.XPathNavigator" /> is positioned on the new node on completion of the <see cref="M:System.Xml.XPath.XPathNavigator.ReplaceSelf(System.Xml.XPath.XPathNavigator)" /> method and returns true. The <see cref="T:System.Xml.XPath.XPathNavigator" /> is not positioned on the new node after completion of the <see cref="M:System.Xml.XPath.XPathNavigator.ReplaceSelf(System.Xml.XPath.XPathNavigator)" /> method when the XML input is <see cref="F:System.String.Empty" /> in which case the <see cref="T:System.Xml.XPath.XPathNavigator" /> is either positioned on the next sibling node or the parent node if there is no next sibling node to the replaced node and the <see cref="M:System.Xml.XPath.XPathNavigator.ReplaceSelf(System.Xml.XPath.XPathNavigator)" /> returns false.
+          </para>
           <list type="bullet">
             <item>
               <para
@@ -5533,8 +5533,8 @@ XPathNodeIterator ni = nav.Select(expr);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />To include the context node in the selection, true; otherwise, false. </param
-        >
+          />To include the context node in the selection, true; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SelectChildren">
@@ -5633,15 +5633,15 @@ XPathNodeIterator ni = nav.Select(expr);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the child nodes. </param
-        >
+          />The local name of the child nodes.
+        </param>
         <param name="namespaceURI">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the child nodes. </param
-        >
+          />The namespace URI of the child nodes.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SelectDescendants">
@@ -5750,15 +5750,15 @@ XPathNodeIterator ni = nav.Select(expr);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the descendant nodes. </param
-        >
+          />The local name of the descendant nodes.
+        </param>
         <param name="namespaceURI">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the descendant nodes. </param
-        >
+          />The namespace URI of the descendant nodes.
+        </param>
         <param name="matchSelf">
           <attribution
             license="cc4"
@@ -6368,8 +6368,8 @@ XPathNodeIterator ni = nav.Select(expr);</code>
             >The <see cref="P:System.Xml.XPath.XPathNavigator.UnderlyingObject" /> property can be used by <see cref="T:System.Xml.XPath.XPathNavigator" /> implementations which provide a "virtualized" XML view over a store, to provide access to underlying objects. For example, if an <see cref="T:System.Xml.XPath.XPathNavigator" /> object is used to provide a virtual XML view over a Common Language Runtime (CLR) object graph, you may wish to perform XPath queries using the <see cref="Overload:System.Xml.XPath.XPathNavigator.Select" /> method and then access the CLR objects underlying the selected nodes. The <see cref="P:System.Xml.XPath.XPathNavigator.UnderlyingObject" /> property would expose these underlying objects.</para
           >
           <para
-            >In many cases, this value will be null, and the object returned by the <see cref="P:System.Xml.XPath.XPathNavigator.UnderlyingObject" /> property will always be implementation specific. </para
-          >
+            >In many cases, this value will be null, and the object returned by the <see cref="P:System.Xml.XPath.XPathNavigator.UnderlyingObject" /> property will always be implementation specific.
+          </para>
           <para
             >The <see cref="P:System.Xml.XPath.XPathNavigator.UnderlyingObject" /> property should preserve object identity and should only be used to return objects that have a one-to-one correspondence to their respective overlaid items. A user should always get the same object on successive visits to the same node using the same <see cref="T:System.Xml.XPath.XPathNavigator" /> object or a cloned one.</para
           >
@@ -6682,8 +6682,8 @@ XPathNodeIterator ni = nav.Select(expr);</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Namespace declarations for the in-scope namespaces of the current node are inserted into the XML streamed to the <see cref="T:System.Xml.XmlWriter" /> object specified. </para
-          >
+            >Namespace declarations for the in-scope namespaces of the current node are inserted into the XML streamed to the <see cref="T:System.Xml.XmlWriter" /> object specified.
+          </para>
           <para
             >For example, if the <see cref="M:System.Xml.XPath.XPathNavigator.WriteSubtree(System.Xml.XmlWriter)" /> method is called on the first book element of the books.xml file, the http://www.contoso.com/books namespace declaration made at the top of the XML document will appear in the XML streamed to the <see cref="T:System.Xml.XmlWriter" /> object specified as shown in the following example.</para
           >

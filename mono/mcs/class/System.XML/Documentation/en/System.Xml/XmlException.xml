@@ -103,12 +103,8 @@
           <para>Initializes a new instance of the XmlException class with a specified error message.</para>
         </summary>
         <param name="message">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The error description. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The error description.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -144,15 +140,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The SerializationInfo object containing all the properties of an XmlException. </param
-        >
+          />The SerializationInfo object containing all the properties of an XmlException.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The StreamingContext object containing the context information. </param
-        >
+          />The StreamingContext object containing the context information.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -186,11 +182,11 @@
    of the new instance using <paramref name="message" /> and the <see cref="!:System.Xml.XmlException.InnerException" /> property using
 <paramref name="innerException" />. If the <paramref name="message" /> parameter is 
 <see langword="null" />, the <see cref="P:System.Xml.XmlException.Message" /> property is set to the system-supplied 
-   message provided by the constructor that takes no arguments. </para
-          >
+   message provided by the constructor that takes no arguments.
+          </para>
           <para
-            >The <see cref="P:System.Xml.XmlException.LineNumber" /> and <see cref="P:System.Xml.XmlException.LinePosition" /> properties are initialized to zero. </para
-          >
+            >The <see cref="P:System.Xml.XmlException.LineNumber" /> and <see cref="P:System.Xml.XmlException.LinePosition" /> properties are initialized to zero.
+          </para>
           <para>
             <block subset="none" type="note"
               > For more information on inner
@@ -203,8 +199,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Exception" /> that threw the XmlException, if any. This value can be null. </param
-        >
+          />The <see cref="T:System.Exception" /> that threw the XmlException, if any. This value can be null.
+        </param>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Initializes a new instance of the XmlException class.</para>
@@ -214,15 +210,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The description of the error condition. </param
-        >
+          />The description of the error condition.
+        </param>
         <param name="innerException">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Exception" /> that threw the XmlException, if any. This value can be null. </param
-        >
+          />The <see cref="T:System.Exception" /> that threw the XmlException, if any. This value can be null.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -268,33 +264,29 @@
           <para>Initializes a new instance of the XmlException class with the specified message, inner exception, line number, and line position.</para>
         </summary>
         <param name="message">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The error description. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The error description.
+        </param>
         <param name="innerException">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The exception that is the cause of the current exception. This value can be null. </param
-        >
+          />The exception that is the cause of the current exception. This value can be null.
+        </param>
         <param name="lineNumber">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The line number indicating where the error occurred. </param
-        >
+          />The line number indicating where the error occurred.
+        </param>
         <param name="linePosition">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The line position indicating where the error occurred. </param
-        >
+          />The line position indicating where the error occurred.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -333,15 +325,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The SerializationInfo object. </param
-        >
+          />The SerializationInfo object.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The StreamingContext object. </param
-        >
+          />The StreamingContext object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="LineNumber">

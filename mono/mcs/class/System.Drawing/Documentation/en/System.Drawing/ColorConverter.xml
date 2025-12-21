@@ -21,8 +21,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When converting from a string to a <see cref="T:System.Drawing.Color" /> the <see cref="T:System.Drawing.ColorConverter" /> expects the unqualified color name; otherwise, an exception will occur in the conversion process. For example, you should pass "Blue", not "System.Drawing.Color.Blue" or "Color.Blue", to the <see cref="Overload:System.Drawing.ColorConverter.ConvertFrom" /> method. </para
-      >
+        >When converting from a string to a <see cref="T:System.Drawing.Color" /> the <see cref="T:System.Drawing.ColorConverter" /> expects the unqualified color name; otherwise, an exception will occur in the conversion process. For example, you should pass "Blue", not "System.Drawing.Color.Blue" or "Color.Blue", to the <see cref="Overload:System.Drawing.ColorConverter.ConvertFrom" /> method.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -79,15 +79,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. You can use this object to get additional information about the environment from which this converter is being invoked. </param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. You can use this object to get additional information about the environment from which this converter is being invoked.
+        </param>
         <param name="sourceType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type from which you want to convert. </param
-        >
+          />The type from which you want to convert.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -122,15 +122,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context.
+        </param>
         <param name="destinationType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> that represents the type to which you want to convert. </param
-        >
+          />A <see cref="T:System.Type" /> that represents the type to which you want to convert.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -155,8 +155,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When converting from a string to a <see cref="T:System.Drawing.Color" /> the <see cref="T:System.Drawing.ColorConverter" /> expects the unqualified color name; otherwise, an exception will occur in the conversion process. For example, you should pass "Blue", not "System.Drawing.Color.Blue" or "Color.Blue", to the <see cref="Overload:System.Drawing.ColorConverter.ConvertFrom" /> method. </para
-          >
+            >When converting from a string to a <see cref="T:System.Drawing.Color" /> the <see cref="T:System.Drawing.ColorConverter" /> expects the unqualified color name; otherwise, an exception will occur in the conversion process. For example, you should pass "Blue", not "System.Drawing.Color.Blue" or "Color.Blue", to the <see cref="Overload:System.Drawing.ColorConverter.ConvertFrom" /> method.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -171,22 +171,18 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.ComponentModel.TypeDescriptor" /> that provides a format context. You can use this object to get additional information about the environment from which this converter is being invoked. </param
-        >
+          />A <see cref="T:System.ComponentModel.TypeDescriptor" /> that provides a format context. You can use this object to get additional information about the environment from which this converter is being invoked.
+        </param>
         <param name="culture">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Globalization.CultureInfo" /> that specifies the culture to represent the color. </param
-        >
+          />A <see cref="T:System.Globalization.CultureInfo" /> that specifies the culture to represent the color.
+        </param>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The object to convert. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The object to convert.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -226,29 +222,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A formatter context. Use this object to extract additional information about the environment from which this converter is being invoked. Always check whether this value is null. Also, properties on the context object may return null. </param
-        >
+          />A formatter context. Use this object to extract additional information about the environment from which this converter is being invoked. Always check whether this value is null. Also, properties on the context object may return null.
+        </param>
         <param name="culture">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Globalization.CultureInfo" /> that specifies the culture to represent the color. </param
-        >
+          />A <see cref="T:System.Globalization.CultureInfo" /> that specifies the culture to represent the color.
+        </param>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The object to convert. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The object to convert.
+        </param>
         <param name="destinationType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type to convert the object to. </param
-        >
+          />The type to convert the object to.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -282,8 +274,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A formatter context. Use this object to extract additional information about the environment from which this converter is being invoked. Always check whether this value is null. Also, properties on the context object may return null. </param
-        >
+          />A formatter context. Use this object to extract additional information about the environment from which this converter is being invoked. Always check whether this value is null. Also, properties on the context object may return null.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -319,8 +311,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.ComponentModel.TypeDescriptor" /> through which additional context can be provided. </param
-        >
+          />A <see cref="T:System.ComponentModel.TypeDescriptor" /> through which additional context can be provided.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

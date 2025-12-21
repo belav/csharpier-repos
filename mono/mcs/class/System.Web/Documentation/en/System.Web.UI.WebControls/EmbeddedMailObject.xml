@@ -14,8 +14,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.UI.WebControls.EmbeddedMailObject" /> represents an item to embed in a mail message. These embedded items can be image files such as company logos. Each embedded item is specified by an identifier and a path.  </para
-      >
+        >The <see cref="T:System.Web.UI.WebControls.EmbeddedMailObject" /> represents an item to embed in a mail message. These embedded items can be image files such as company logos. Each embedded item is specified by an identifier and a path.
+      </para>
       <para>To ensure that an embedded object is displayed correctly within the e-mail message file, the following conditions must be met:</para>
       <list type="bullet">
         <item>
@@ -26,8 +26,8 @@
         </item>
         <item>
           <para
-            >The HTML-formatted body file specified in the <see cref="P:System.Web.UI.WebControls.MailDefinition.BodyFileName" /> property contains a reference to the image file using the following syntax: </para
-          >
+            >The HTML-formatted body file specified in the <see cref="P:System.Web.UI.WebControls.MailDefinition.BodyFileName" /> property contains a reference to the image file using the following syntax:
+          </para>
           <code>&lt;img src="cid:identifier" alt="Alternate Text" /&gt;.</code>
         </item>
       </list>

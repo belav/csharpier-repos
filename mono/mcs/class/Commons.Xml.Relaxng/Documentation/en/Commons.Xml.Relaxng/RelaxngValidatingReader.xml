@@ -33,8 +33,8 @@
       <Parameters />
       <Docs>
         <summary
-          >Overrides the target XmlReader's <see cref="M:System.Xml.XmlReader.Read" /> and validates the reader against the target grammar. </summary
-        >
+          >Overrides the target XmlReader's <see cref="M:System.Xml.XmlReader.Read" /> and validates the reader against the target grammar.
+        </summary>
         <returns>a <see cref="T:System.Boolean" /></returns>
         <remarks>
           <para>

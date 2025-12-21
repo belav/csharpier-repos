@@ -23,8 +23,8 @@
         >The <see cref="T:System.IO.Pipes.PipeSecurity" /> class specifies the access rights for a pipe and how access attempts are audited.  This class represents access and audit rights as a set of rules. Each access rule is represented by a <see cref="T:System.IO.Pipes.PipeAccessRule" /> object, while each audit rule is represented by a <see cref="T:System.IO.Pipes.PipeAuditRule" /> object.</para
       >
       <para
-        >The <see cref="T:System.IO.Pipes.PipeSecurity" /> class is an abstraction of the underlying Microsoft Windows file security system. In this system, each pipe has a discretionary access control list (DACL), which controls access to the pipe, and a system access control list (SACL), which specifies the access control attempts that are audited.  The <see cref="T:System.IO.Pipes.PipeAccessRule" /> and <see cref="T:System.IO.Pipes.PipeAuditRule" /> classes are abstractions of the access control entries (ACEs) that comprise DACLs and SACLs.      </para
-      >
+        >The <see cref="T:System.IO.Pipes.PipeSecurity" /> class is an abstraction of the underlying Microsoft Windows file security system. In this system, each pipe has a discretionary access control list (DACL), which controls access to the pipe, and a system access control list (SACL), which specifies the access control attempts that are audited.  The <see cref="T:System.IO.Pipes.PipeAccessRule" /> and <see cref="T:System.IO.Pipes.PipeAuditRule" /> classes are abstractions of the access control entries (ACEs) that comprise DACLs and SACLs.
+      </para>
       <para
         >The <see cref="T:System.IO.Pipes.PipeSecurity" /> class hides many of the details of DACLs and SACLs; you do not have to worry about ACE ordering or null DACLS.</para
       >
@@ -724,8 +724,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.IO.Pipes.PipeSecurity.ResetAccessRule(System.IO.Pipes.PipeAccessRule)" /> method adds the specified access control list (ACL) rule or overwrites any identical ACL rules that match the <paramref name="rule" /> parameter.  For example, if the <paramref name="rule" /> parameter specifies a <see cref="F:System.IO.Pipes.PipeAccessRights.Read" /> value and the <see cref="M:System.IO.Pipes.PipeSecurity.ResetAccessRule(System.IO.Pipes.PipeAccessRule)" /> method finds an identical ACL rule that specifies the <see cref="F:System.IO.Pipes.PipeAccessRights.Read" /> value, the identical rule will be overwritten.  If the <see cref="M:System.IO.Pipes.PipeSecurity.ResetAccessRule(System.IO.Pipes.PipeAccessRule)" /> method finds an identical ACL rule that specifies the <see cref="F:System.IO.Pipes.PipeAccessRights.Write" /> value, the identical rule will also be overwritten. </para
-          >
+            >The <see cref="M:System.IO.Pipes.PipeSecurity.ResetAccessRule(System.IO.Pipes.PipeAccessRule)" /> method adds the specified access control list (ACL) rule or overwrites any identical ACL rules that match the <paramref name="rule" /> parameter.  For example, if the <paramref name="rule" /> parameter specifies a <see cref="F:System.IO.Pipes.PipeAccessRights.Read" /> value and the <see cref="M:System.IO.Pipes.PipeSecurity.ResetAccessRule(System.IO.Pipes.PipeAccessRule)" /> method finds an identical ACL rule that specifies the <see cref="F:System.IO.Pipes.PipeAccessRights.Read" /> value, the identical rule will be overwritten.  If the <see cref="M:System.IO.Pipes.PipeSecurity.ResetAccessRule(System.IO.Pipes.PipeAccessRule)" /> method finds an identical ACL rule that specifies the <see cref="F:System.IO.Pipes.PipeAccessRights.Write" /> value, the identical rule will also be overwritten.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -765,8 +765,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.IO.Pipes.PipeSecurity.SetAccessRule(System.IO.Pipes.PipeAccessRule)" /> method adds the specified access control list (ACL) rule or overwrites any identical ACL rules that match the <see cref="T:System.IO.Pipes.PipeAccessRights" /> value of the <paramref name="rule" /> parameter.  For example, if the <paramref name="rule" /> parameter specifies a <see cref="F:System.IO.Pipes.PipeAccessRights.Read" /> value and the <see cref="M:System.IO.Pipes.PipeSecurity.SetAccessRule(System.IO.Pipes.PipeAccessRule)" /> method finds an identical ACL rule that specifies the <see cref="F:System.IO.Pipes.PipeAccessRights.Read" /> value, the identical rule will be overwritten.  If the <see cref="M:System.IO.Pipes.PipeSecurity.SetAccessRule(System.IO.Pipes.PipeAccessRule)" /> method finds an identical ACL rule that specifies the <see cref="F:System.IO.Pipes.PipeAccessRights.Write" /> value, the identical rule will not be overwritten. </para
-          >
+            >The <see cref="M:System.IO.Pipes.PipeSecurity.SetAccessRule(System.IO.Pipes.PipeAccessRule)" /> method adds the specified access control list (ACL) rule or overwrites any identical ACL rules that match the <see cref="T:System.IO.Pipes.PipeAccessRights" /> value of the <paramref name="rule" /> parameter.  For example, if the <paramref name="rule" /> parameter specifies a <see cref="F:System.IO.Pipes.PipeAccessRights.Read" /> value and the <see cref="M:System.IO.Pipes.PipeSecurity.SetAccessRule(System.IO.Pipes.PipeAccessRule)" /> method finds an identical ACL rule that specifies the <see cref="F:System.IO.Pipes.PipeAccessRights.Read" /> value, the identical rule will be overwritten.  If the <see cref="M:System.IO.Pipes.PipeSecurity.SetAccessRule(System.IO.Pipes.PipeAccessRule)" /> method finds an identical ACL rule that specifies the <see cref="F:System.IO.Pipes.PipeAccessRights.Write" /> value, the identical rule will not be overwritten.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -802,8 +802,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.IO.Pipes.PipeSecurity.SetAuditRule(System.IO.Pipes.PipeAuditRule)" /> method adds the specified audit rule or overwrites any identical audit rules that match the <see cref="T:System.IO.Pipes.PipeAccessRights" /> value of the <paramref name="rule" /> parameter.  For example, if the <paramref name="rule" /> parameter specifies a <see cref="F:System.IO.Pipes.PipeAccessRights.Read" /> value and the <see cref="M:System.IO.Pipes.PipeSecurity.SetAuditRule(System.IO.Pipes.PipeAuditRule)" /> method finds an identical audit rule that specifies the <see cref="F:System.IO.Pipes.PipeAccessRights.Read" /> value, the identical rule will be overwritten.  If the <see cref="M:System.IO.Pipes.PipeSecurity.SetAuditRule(System.IO.Pipes.PipeAuditRule)" /> method finds an identical audit rule that specifies the <see cref="F:System.IO.Pipes.PipeAccessRights.Write" /> value, the identical rule will not be overwritten. </para
-          >
+            >The <see cref="M:System.IO.Pipes.PipeSecurity.SetAuditRule(System.IO.Pipes.PipeAuditRule)" /> method adds the specified audit rule or overwrites any identical audit rules that match the <see cref="T:System.IO.Pipes.PipeAccessRights" /> value of the <paramref name="rule" /> parameter.  For example, if the <paramref name="rule" /> parameter specifies a <see cref="F:System.IO.Pipes.PipeAccessRights.Read" /> value and the <see cref="M:System.IO.Pipes.PipeSecurity.SetAuditRule(System.IO.Pipes.PipeAuditRule)" /> method finds an identical audit rule that specifies the <see cref="F:System.IO.Pipes.PipeAccessRights.Read" /> value, the identical rule will be overwritten.  If the <see cref="M:System.IO.Pipes.PipeSecurity.SetAuditRule(System.IO.Pipes.PipeAuditRule)" /> method finds an identical audit rule that specifies the <see cref="F:System.IO.Pipes.PipeAccessRights.Write" /> value, the identical rule will not be overwritten.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

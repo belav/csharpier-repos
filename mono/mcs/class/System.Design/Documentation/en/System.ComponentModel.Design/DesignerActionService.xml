@@ -366,8 +366,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -410,8 +410,8 @@
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format> and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
           <block subset="none" type="note">
             <para
               >Always call <see cref="M:System.ComponentModel.Design.DesignerActionService.Dispose" /> before you release your last reference to the <see cref="T:System.ComponentModel.Design.DesignerActionService" />. Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.ComponentModel.Design.DesignerActionService" /> object's Finalize method.</para
@@ -466,16 +466,16 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see cref="T:System.ComponentModel.Design.DesignerActionService" /> and optionally releases the managed resources. </para
-          >
+            >Releases the unmanaged resources used by the <see cref="T:System.ComponentModel.Design.DesignerActionService" /> and optionally releases the managed resources.
+          </para>
         </summary>
         <param name="disposing">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetComponentActions">
@@ -540,8 +540,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This version of the overloaded <see cref="Overload:System.ComponentModel.Design.DesignerActionService.GetComponentActions" /> method filters on the <paramref name="type" /> parameter, which can have one of the following values. </para
-          >
+            >This version of the overloaded <see cref="Overload:System.ComponentModel.Design.DesignerActionService.GetComponentActions" /> method filters on the <paramref name="type" /> parameter, which can have one of the following values.
+          </para>
           <list type="table">
             <listheader>
               <item>

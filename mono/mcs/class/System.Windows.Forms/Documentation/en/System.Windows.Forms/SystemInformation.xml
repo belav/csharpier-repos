@@ -1397,8 +1397,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Windows.Forms.SystemInformation.MaxWindowTrackSize" /> property indicates the maximum dimensions to which a user can drag resize a window. The value returned by <see cref="P:System.Windows.Forms.SystemInformation.MaxWindowTrackSize" /> refers to the dimensions of the entire desktop. </para
-          >
+            >The <see cref="P:System.Windows.Forms.SystemInformation.MaxWindowTrackSize" /> property indicates the maximum dimensions to which a user can drag resize a window. The value returned by <see cref="P:System.Windows.Forms.SystemInformation.MaxWindowTrackSize" /> refers to the dimensions of the entire desktop.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

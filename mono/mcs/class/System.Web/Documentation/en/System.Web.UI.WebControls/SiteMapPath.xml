@@ -80,8 +80,8 @@
         <h2>Introduction</h2>
       </format>
       <para
-        >The <see cref="T:System.Web.UI.WebControls.SiteMapPath" /> control is a site navigation control that reflects data provided by the <see cref="T:System.Web.SiteMap" /> object. It provides a space-saving way to easily navigate a site and serves as a point of reference for where the currently displayed page is within a site. This type of control is commonly called a breadcrumb, or eyebrow, because it displays a hierarchical path of hyperlinked page names that provides an escape up the hierarchy of pages from the current location. <see cref="T:System.Web.UI.WebControls.SiteMapDataSource" />. The <see cref="T:System.Web.UI.WebControls.SiteMapPath" /> is useful for sites that have deep hierarchical page structures, but where a <see cref="T:System.Web.UI.WebControls.TreeView" /> or <see cref="T:System.Web.UI.WebControls.Menu" /> might require too much space on a page. </para
-      >
+        >The <see cref="T:System.Web.UI.WebControls.SiteMapPath" /> control is a site navigation control that reflects data provided by the <see cref="T:System.Web.SiteMap" /> object. It provides a space-saving way to easily navigate a site and serves as a point of reference for where the currently displayed page is within a site. This type of control is commonly called a breadcrumb, or eyebrow, because it displays a hierarchical path of hyperlinked page names that provides an escape up the hierarchy of pages from the current location. <see cref="T:System.Web.UI.WebControls.SiteMapDataSource" />. The <see cref="T:System.Web.UI.WebControls.SiteMapPath" /> is useful for sites that have deep hierarchical page structures, but where a <see cref="T:System.Web.UI.WebControls.TreeView" /> or <see cref="T:System.Web.UI.WebControls.Menu" /> might require too much space on a page.
+      </para>
       <para
         >The <see cref="T:System.Web.UI.WebControls.SiteMapPath" /> control works directly with your Web site's site map data. If you use it on a page that is not represented in your site map, it will not be displayed. For more information about site maps, see <format type="text/html">
           <a href="23de8a05-cac3-4693-b508-39f1d4b7053d">ASP.NET Site Navigation</a>
@@ -139,8 +139,8 @@
         <h2>Node Appearance</h2>
       </format>
       <para
-        >Each node displayed by a <see cref="T:System.Web.UI.WebControls.SiteMapPath" /> is a <see cref="T:System.Web.UI.WebControls.HyperLink" /> or <see cref="T:System.Web.UI.WebControls.Literal" /> control that you can apply a template or style to. The templates and styles are applied to nodes according to two rules of precedence: </para
-      >
+        >Each node displayed by a <see cref="T:System.Web.UI.WebControls.SiteMapPath" /> is a <see cref="T:System.Web.UI.WebControls.HyperLink" /> or <see cref="T:System.Web.UI.WebControls.Literal" /> control that you can apply a template or style to. The templates and styles are applied to nodes according to two rules of precedence:
+      </para>
       <list type="bullet">
         <item>
           <para>If a template is defined for a node, it overrides any style defined for the node.</para>
@@ -189,8 +189,8 @@
           </term>
           <description>
             <para
-              >Occurs when the <see cref="T:System.Web.UI.WebControls.SiteMapPath" /> control first creates a <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" /> and associates it with a <see cref="T:System.Web.SiteMapNode" />. </para
-            >
+              >Occurs when the <see cref="T:System.Web.UI.WebControls.SiteMapPath" /> control first creates a <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" /> and associates it with a <see cref="T:System.Web.SiteMapNode" />.
+            </para>
           </description>
         </item>
         <item>
@@ -201,8 +201,8 @@
           </term>
           <description>
             <para
-              >Occurs when a <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" /> is bound to site map data contained by the <see cref="T:System.Web.SiteMapNode" />. </para
-            >
+              >Occurs when a <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" /> is bound to site map data contained by the <see cref="T:System.Web.SiteMapNode" />.
+            </para>
           </description>
         </item>
       </list>
@@ -425,8 +425,8 @@
             >Use the <see cref="P:System.Web.UI.WebControls.SiteMapPath.CurrentNodeStyle" /> property to control the appearance of the display text for the navigation path node that represents the currently displayed page. By default, the display text is that specified in the <see cref="P:System.Web.SiteMapNode.Title" /> property of the <see cref="T:System.Web.SiteMapNode" /> that represents the page. Common style settings include custom background color, foreground color, font properties, and node spacing.</para
           >
           <para
-            >For <see cref="T:System.Web.UI.WebControls.SiteMapPath" /> nodes, style properties are merged into a single style, in the following order: </para
-          >
+            >For <see cref="T:System.Web.UI.WebControls.SiteMapPath" /> nodes, style properties are merged into a single style, in the following order:
+          </para>
           <list type="ordered">
             <item>
               <para>
@@ -514,8 +514,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Web.UI.WebControls.SiteMapPath" /> control is designed to retrieve its data directly from a site map provider by using the <see cref="P:System.Web.UI.WebControls.SiteMapPath.Provider" /> property. Do not use the <see cref="T:System.Web.UI.WebControls.SiteMapPath" /> control to bind to ASP.NET data source controls, and do not call the <see cref="M:System.Web.UI.WebControls.SiteMapPath.DataBind" /> method explicitly. </para
-          >
+            >The <see cref="T:System.Web.UI.WebControls.SiteMapPath" /> control is designed to retrieve its data directly from a site map provider by using the <see cref="P:System.Web.UI.WebControls.SiteMapPath.Provider" /> property. Do not use the <see cref="T:System.Web.UI.WebControls.SiteMapPath" /> control to bind to ASP.NET data source controls, and do not call the <see cref="M:System.Web.UI.WebControls.SiteMapPath.DataBind" /> method explicitly.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -574,8 +574,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" /> to initialize. </param
-        >
+          />The <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" /> to initialize.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -677,8 +677,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Object" /> that represents the control state to be restored. </param
-        >
+          />An <see cref="T:System.Object" /> that represents the control state to be restored.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -716,8 +716,8 @@
             >Use the <see cref="P:System.Web.UI.WebControls.SiteMapPath.NodeStyle" /> property to control the appearance of the display text for all navigation path nodes rendered by the control. By default, the display text is that specified in the <see cref="P:System.Web.SiteMapNode.Title" /> property of the <see cref="T:System.Web.SiteMapNode" /> that represents the page. Common style settings include custom background color, foreground color, font properties, and node spacing.</para
           >
           <para
-            >For <see cref="T:System.Web.UI.WebControls.SiteMapPath" /> nodes, style properties are merged into a single style, in the following order: </para
-          >
+            >For <see cref="T:System.Web.UI.WebControls.SiteMapPath" /> nodes, style properties are merged into a single style, in the following order:
+          </para>
           <list type="ordered">
             <item>
               <para>
@@ -816,8 +816,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -862,8 +862,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Web.UI.WebControls.SiteMapNodeItemEventArgs" /> that contains event data. </param
-        >
+          />A <see cref="T:System.Web.UI.WebControls.SiteMapNodeItemEventArgs" /> that contains event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -908,8 +908,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Web.UI.WebControls.SiteMapNodeItemEventArgs" /> that contains event data. </param
-        >
+          />A <see cref="T:System.Web.UI.WebControls.SiteMapNodeItemEventArgs" /> that contains event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1205,8 +1205,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Web.UI.WebControls.SiteMapPath" /> control overrides the <see cref="M:System.Web.UI.WebControls.SiteMapPath.RenderContents(System.Web.UI.HtmlTextWriter)" /> method to perform its accessibility rendering, if the <see cref="P:System.Web.UI.WebControls.SiteMapPath.SkipLinkText" /> property is not set to <see cref="F:System.String.Empty" />. </para
-          >
+            >The <see cref="T:System.Web.UI.WebControls.SiteMapPath" /> control overrides the <see cref="M:System.Web.UI.WebControls.SiteMapPath.RenderContents(System.Web.UI.HtmlTextWriter)" /> method to perform its accessibility rendering, if the <see cref="P:System.Web.UI.WebControls.SiteMapPath.SkipLinkText" /> property is not set to <see cref="F:System.String.Empty" />.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1281,8 +1281,8 @@
             >Use the <see cref="P:System.Web.UI.WebControls.SiteMapPath.RootNodeStyle" /> property to control the appearance of the display text for the root node of the navigation path. By default, the display text is that specified in the <see cref="P:System.Web.SiteMapNode.Title" /> property of the <see cref="T:System.Web.SiteMapNode" /> that represents the page. Common style settings include custom background color, foreground color, font properties, and node spacing.</para
           >
           <para
-            >For <see cref="T:System.Web.UI.WebControls.SiteMapPath" /> nodes, style properties are merged into a single style, in the following order: </para
-          >
+            >For <see cref="T:System.Web.UI.WebControls.SiteMapPath" /> nodes, style properties are merged into a single style, in the following order:
+          </para>
           <list type="ordered">
             <item>
               <para>
@@ -1489,11 +1489,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="P:System.Web.UI.WebControls.SiteMapPath.SkipLinkText" /> is a property that you can set to make a Web page more or less accessible to users of screen readers. Web sites that contain content that repeats on multiple pages, such as controls that display site map data, can provide a mechanism that allows users of screen readers to skip the repeated content so that it is not read aloud. </para
-          >
+            <see cref="P:System.Web.UI.WebControls.SiteMapPath.SkipLinkText" /> is a property that you can set to make a Web page more or less accessible to users of screen readers. Web sites that contain content that repeats on multiple pages, such as controls that display site map data, can provide a mechanism that allows users of screen readers to skip the repeated content so that it is not read aloud.
+          </para>
           <para
-            >The <see cref="T:System.Web.UI.WebControls.SiteMapPath" /> control provides the <see cref="P:System.Web.UI.WebControls.SiteMapPath.SkipLinkText" /> property as a way for the entire control to be skipped by screen readers.  If the <see cref="P:System.Web.UI.WebControls.SiteMapPath.SkipLinkText" /> property is set, an invisible image with alternate text is rendered, giving the user the option to jump to the end of the content. Screen readers read the alternate text aloud but the image does not disturb the visual flow of the page. The property is set to "Skip Navigation Links" by default, which makes screen readers skip the control. If you want to disable this behavior, set the property to <see cref="F:System.String.Empty" />. </para
-          >
+            >The <see cref="T:System.Web.UI.WebControls.SiteMapPath" /> control provides the <see cref="P:System.Web.UI.WebControls.SiteMapPath.SkipLinkText" /> property as a way for the entire control to be skipped by screen readers.  If the <see cref="P:System.Web.UI.WebControls.SiteMapPath.SkipLinkText" /> property is set, an invisible image with alternate text is rendered, giving the user the option to jump to the end of the content. Screen readers read the alternate text aloud but the image does not disturb the visual flow of the page. The property is set to "Skip Navigation Links" by default, which makes screen readers skip the control. If you want to disable this behavior, set the property to <see cref="F:System.String.Empty" />.
+          </para>
           <para>The value of this property is stored in view state.</para>
           <para
             >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see cref="T:System.ComponentModel.LocalizableAttribute" /> and <format type="text/html">

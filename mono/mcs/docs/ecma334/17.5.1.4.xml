@@ -2,21 +2,21 @@
 <clause number="17.5.1.4" title="Parameter arrays">
   <paragraph>A parameter declared with a params modifier is a parameter array. If a formal parameter list includes a parameter array, it must be the last parameter in the list and it must be of a single-dimensional array type. </paragraph>
   <paragraph>
-    <example>[Example: For example, the types string[] and string[][] can be used as the type of a parameter array, but the type string[,] can not. end example]</example> It is not possible to combine the params modifier with the modifiers ref and out. </paragraph
-  >
+    <example>[Example: For example, the types string[] and string[][] can be used as the type of a parameter array, but the type string[,] can not. end example]</example> It is not possible to combine the params modifier with the modifiers ref and out.
+  </paragraph>
   <paragraph
     >A parameter array permits arguments to be specified in one of two ways in a method invocation: <list>
       <list_item
-        > The argument given for a parameter array can be a single expression of a type that is implicitly convertible (<hyperlink>13.1</hyperlink>) to the parameter array type. In this case, the parameter array acts precisely like a value parameter. </list_item
-      >
+        > The argument given for a parameter array can be a single expression of a type that is implicitly convertible (<hyperlink>13.1</hyperlink>) to the parameter array type. In this case, the parameter array acts precisely like a value parameter.
+      </list_item>
       <list_item
-        > Alternatively, the invocation can specify zero or more arguments for the parameter array, where each argument is an expression of a type that is implicitly convertible (<hyperlink>13.1</hyperlink>) to the element type of the parameter array. In this case, the invocation creates an instance of the parameter array type with a length corresponding to the number of arguments, initializes the elements of the array instance with the given argument values, and uses the newly created array instance as the actual argument. </list_item
-      >
+        > Alternatively, the invocation can specify zero or more arguments for the parameter array, where each argument is an expression of a type that is implicitly convertible (<hyperlink>13.1</hyperlink>) to the element type of the parameter array. In this case, the invocation creates an instance of the parameter array type with a length corresponding to the number of arguments, initializes the elements of the array instance with the given argument values, and uses the newly created array instance as the actual argument.
+      </list_item>
     </list>
   </paragraph>
   <paragraph
-    >Except for allowing a variable number of arguments in an invocation, a parameter array is precisely equivalent to a value parameter (<hyperlink>17.5.1.1</hyperlink>) of the same type. </paragraph
-  >
+    >Except for allowing a variable number of arguments in an invocation, a parameter array is precisely equivalent to a value parameter (<hyperlink>17.5.1.1</hyperlink>) of the same type.
+  </paragraph>
   <paragraph>
     <example
       >[Example: The example <code_example>
@@ -58,8 +58,8 @@ F(new int[] {});
     >
   </paragraph>
   <paragraph
-    >When performing overload resolution, a method with a parameter array may be applicable either in its normal form or in its expanded form (<hyperlink>14.4.2.1</hyperlink>). The expanded form of a method is available only if the normal form of the method is not applicable and only if a method with the same signature as the expanded form is not already declared in the same type. </paragraph
-  >
+    >When performing overload resolution, a method with a parameter array may be applicable either in its normal form or in its expanded form (<hyperlink>14.4.2.1</hyperlink>). The expanded form of a method is available only if the normal form of the method is not applicable and only if a method with the same signature as the expanded form is not already declared in the same type.
+  </paragraph>
   <paragraph>
     <example
       >[Example: The example <code_example>

@@ -27,8 +27,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.ServiceModel.Channels.ChannelBase" /> class provides an abstract base class implementation of the <see cref="T:System.ServiceModel.Channels.IChannel" /> interface. It also requires that each channel be associated with a channel manager. Note that the only constructor available for creating instances of <see cref="T:System.ServiceModel.Channels.ChannelBase" /> requires a <paramref name="channelManager" /> input parameter. </para
-      >
+        >The <see cref="T:System.ServiceModel.Channels.ChannelBase" /> class provides an abstract base class implementation of the <see cref="T:System.ServiceModel.Channels.IChannel" /> interface. It also requires that each channel be associated with a channel manager. Note that the only constructor available for creating instances of <see cref="T:System.ServiceModel.Channels.ChannelBase" /> requires a <paramref name="channelManager" /> input parameter.
+      </para>
       <para
         >State changes are managed by inheriting from the <see cref="T:System.ServiceModel.Channels.CommunicationObject" /> implementation of the state machine.</para
       >
@@ -36,12 +36,12 @@
         >The <see cref="T:System.ServiceModel.Channels.ChannelBase" /> gets its default communication timeouts for the open, close, send and receive operations from the <see cref="T:System.ServiceModel.Channels.ChannelManagerBase" /> associated with it.</para
       >
       <para
-        >The <see cref="T:System.ServiceModel.Channels.ChannelBase" /> also manages the manager for you. In addition to exposing a reference to the manager, the base class also notifies the manager when channels are created and destroyed. But the reference to the manager is only good until the channel is destroyed. </para
-      >
+        >The <see cref="T:System.ServiceModel.Channels.ChannelBase" /> also manages the manager for you. In addition to exposing a reference to the manager, the base class also notifies the manager when channels are created and destroyed. But the reference to the manager is only good until the channel is destroyed.
+      </para>
       <para>Even if you do use the base class, you must still provide behaviors for opening and closing the channel. The default implementations of these methods do not provide useful information. </para>
       <para
-        >You must also make sure to override <see cref="M:System.ServiceModel.Channels.ChannelBase.GetProperty``1" /> whenever you implement a channel. <see cref="M:System.ServiceModel.Channels.ChannelBase.GetProperty``1" /> is an excellent way to communicate information along the channel stack without having to know what channels are below you, or what channels above you may perform queries. Define interfaces that can be queried for available information. Whenever you do not recognize the type argument for <see cref="M:System.ServiceModel.Channels.ChannelBase.GetProperty``1" />, delegate down to the next channel in the stack or return null if you are creating a new transport channel at the bottom of the stack. </para
-      >
+        >You must also make sure to override <see cref="M:System.ServiceModel.Channels.ChannelBase.GetProperty``1" /> whenever you implement a channel. <see cref="M:System.ServiceModel.Channels.ChannelBase.GetProperty``1" /> is an excellent way to communicate information along the channel stack without having to know what channels are below you, or what channels above you may perform queries. Define interfaces that can be queried for available information. Whenever you do not recognize the type argument for <see cref="M:System.ServiceModel.Channels.ChannelBase.GetProperty``1" />, delegate down to the next channel in the stack or return null if you are creating a new transport channel at the bottom of the stack.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -76,8 +76,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.ChannelBase" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.ChannelBase" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -228,8 +228,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Use this to request a typed object such as an interface for setting properties or getting status from the appropriate layer in the channel stack. If a layer supports returning the requested object, it returns it. If not, it delegates the call down to the next layer in the stack. If it gets to the bottom of the stack and no channel layer supported the requested object, then the method returns null.</para>
           <para
-            >You must also make sure to override <see cref="M:System.ServiceModel.Channels.ChannelBase.GetProperty``1" /> whenever you implement a channel. <see cref="M:System.ServiceModel.Channels.ChannelBase.GetProperty``1" /> is an excellent way to communicate information along the channel stack without having to know what channels are below you, or what channels above you may perform queries. Define interfaces that can be queried for available information. Whenever you do not recognize the type argument for <see cref="M:System.ServiceModel.Channels.ChannelBase.GetProperty``1" />, delegate down to the next channel in the stack or return null if you are creating a new transport channel at the bottom of the stack. </para
-          >
+            >You must also make sure to override <see cref="M:System.ServiceModel.Channels.ChannelBase.GetProperty``1" /> whenever you implement a channel. <see cref="M:System.ServiceModel.Channels.ChannelBase.GetProperty``1" /> is an excellent way to communicate information along the channel stack without having to know what channels are below you, or what channels above you may perform queries. Define interfaces that can be queried for available information. Whenever you do not recognize the type argument for <see cref="M:System.ServiceModel.Channels.ChannelBase.GetProperty``1" />, delegate down to the next channel in the stack or return null if you are creating a new transport channel at the bottom of the stack.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

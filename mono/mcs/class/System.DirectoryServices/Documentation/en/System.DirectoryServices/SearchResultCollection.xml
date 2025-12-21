@@ -214,8 +214,8 @@
             </format>.</para
           >
           <para
-            >The garbage collector does not release memory for a <see cref="T:System.DirectoryServices.SearchResultCollection" /> object. Therefore, an application must call the <see cref="M:System.DirectoryServices.SearchResultCollection.Dispose" /> method explicitly to prevent a memory leak. </para
-          >
+            >The garbage collector does not release memory for a <see cref="T:System.DirectoryServices.SearchResultCollection" /> object. Therefore, an application must call the <see cref="M:System.DirectoryServices.SearchResultCollection.Dispose" /> method explicitly to prevent a memory leak.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

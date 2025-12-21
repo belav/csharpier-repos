@@ -21,8 +21,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class describes the type or member on which validation is performed. It also enables custom validation to be added through any service that implements the <see cref="T:System.IServiceProvider" /> interface. </para
-      >
+        >This class describes the type or member on which validation is performed. It also enables custom validation to be added through any service that implements the <see cref="T:System.IServiceProvider" /> interface.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -134,8 +134,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="serviceProvider" /> parameter represents a service that can be used by the <see cref="M:System.ComponentModel.DataAnnotations.ValidationContext.GetService(System.Type)" /> method in order to perform custom validation. </para
-          >
+            >The <paramref name="serviceProvider" /> parameter represents a service that can be used by the <see cref="M:System.ComponentModel.DataAnnotations.ValidationContext.GetService(System.Type)" /> method in order to perform custom validation.
+          </para>
           <para
             >If the <paramref name="items" /> parameter is null, an empty dictionary is created. If the parameter is not null, the set of key/value pairs is copied into a new dictionary, which prevents the service consumers from modifying the original dictionary.</para
           >
@@ -143,8 +143,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.ValidationContext" /> class using the service provider and dictionary of service consumers. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.ValidationContext" /> class using the service provider and dictionary of service consumers.
+          </para>
         </summary>
         <param name="instance">
           <attribution
@@ -213,8 +213,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see cref="P:System.ComponentModel.DataAnnotations.ValidationContext.ServiceContainer" /> object is defined at the application level, the <see cref="M:System.ComponentModel.DataAnnotations.ValidationContext.GetService(System.Type)" /> method accesses it to retrieve the requested service. </para
-          >
+            >If the <see cref="P:System.ComponentModel.DataAnnotations.ValidationContext.ServiceContainer" /> object is defined at the application level, the <see cref="M:System.ComponentModel.DataAnnotations.ValidationContext.GetService(System.Type)" /> method accesses it to retrieve the requested service.
+          </para>
           <para
             >If the <see cref="P:System.ComponentModel.DataAnnotations.ValidationContext.ServiceContainer" /> object is not defined or it does not return the service, the <see cref="M:System.ComponentModel.DataAnnotations.ValidationContext.GetService(System.Type)" /> method queries the <see cref="T:System.IServiceProvider" /> object that is passed to the <see cref="M:System.ComponentModel.DataAnnotations.ValidationContext.#ctor(System.Object,System.IServiceProvider,System.Collections.Generic.IDictionary{System.Object,System.Object})" /> method in order to obtain the service.</para
           >

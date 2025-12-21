@@ -25,8 +25,8 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>Use this base class to create a custom channel factory. </para>
       <para
-        >The <see cref="T:System.ServiceModel.Channels.ChannelFactoryBase" /> class derives from the <see cref="T:System.ServiceModel.Channels.ChannelManagerBase" /> class and implements the <see cref="T:System.ServiceModel.Channels.IChannelFactory" /> interface for creating channels. The methods handle parameter validation and then delegate to protected, virtual or abstract methods that derived classes can override. </para
-      >
+        >The <see cref="T:System.ServiceModel.Channels.ChannelFactoryBase" /> class derives from the <see cref="T:System.ServiceModel.Channels.ChannelManagerBase" /> class and implements the <see cref="T:System.ServiceModel.Channels.IChannelFactory" /> interface for creating channels. The methods handle parameter validation and then delegate to protected, virtual or abstract methods that derived classes can override.
+      </para>
       <para
         >Each of the protected virtual methods is automatically synchronized with respect to the other methods on the <see cref="T:System.ServiceModel.Channels.IChannelFactory" /> interface (including the state transition methods). This means that no additional locking is required to ensure that the object is in a consistent state inside the method body.</para
       >
@@ -58,8 +58,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.ChannelFactoryBase" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.ChannelFactoryBase" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -97,8 +97,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.IDefaultCommunicationTimeouts" /> specifying the default timeouts for open, send, receive, and close operations when exchanging messages. </param
-        >
+          />The <see cref="T:System.ServiceModel.IDefaultCommunicationTimeouts" /> specifying the default timeouts for open, send, receive, and close operations when exchanging messages.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefaultCloseTimeout">
@@ -323,8 +323,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.IAsyncResult" /> that references the asynchronous on close operation. </para
-          >
+            >The <see cref="T:System.IAsyncResult" /> that references the asynchronous on close operation.
+          </para>
         </returns>
         <param name="timeout">
           <attribution

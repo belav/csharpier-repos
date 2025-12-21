@@ -55,8 +55,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a <see cref="T:System.Security.Cryptography.Xml.CipherReference" /> object that provides reference information for a <see cref="T:System.Security.Cryptography.Xml.CipherData" /> object. </para
-          >
+            >This constructor creates a <see cref="T:System.Security.Cryptography.Xml.CipherReference" /> object that provides reference information for a <see cref="T:System.Security.Cryptography.Xml.CipherData" /> object.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -85,8 +85,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a <see cref="T:System.Security.Cryptography.Xml.CipherReference" /> object using a Uniform Resource Identifier (URI) that points to the encrypted data. The object is then used to provide reference information for a <see cref="T:System.Security.Cryptography.Xml.CipherData" /> object. </para
-          >
+            >This constructor creates a <see cref="T:System.Security.Cryptography.Xml.CipherReference" /> object using a Uniform Resource Identifier (URI) that points to the encrypted data. The object is then used to provide reference information for a <see cref="T:System.Security.Cryptography.Xml.CipherData" /> object.
+          </para>
           <para>You can use a URI to designate an XML file containing encrypted data. For example:</para>
           <para>String uri = "http://www.woodgrovebank.com/document.xml";</para>
           <para>You can also use a partial URI to designate that only a portion of an XML document is to be encrypted. For example, assume that an XML document named document.xml contains two MyForm elements as shown in the following XML code example:</para>

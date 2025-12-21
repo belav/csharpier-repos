@@ -106,12 +106,12 @@
       <para>code reference: System.Collections.Hashtable_ClassExample#01</para>
       <para>The foreach statement is a wrapper around the enumerator, which only allows reading from, not writing to, the collection.</para>
       <para
-        >Because serializing and deserializing an enumerator for a <see cref="T:System.Collections.Hashtable" /> can cause the elements to become reordered, it is not possible to continue enumeration without calling the <see cref="M:System.Collections.IEnumerator.Reset" /> method. </para
-      >
+        >Because serializing and deserializing an enumerator for a <see cref="T:System.Collections.Hashtable" /> can cause the elements to become reordered, it is not possible to continue enumeration without calling the <see cref="M:System.Collections.IEnumerator.Reset" /> method.
+      </para>
       <block subset="none" type="note">
         <para
-          >Because keys can be inherited and their behavior changed, their absolute uniqueness cannot be guaranteed by comparisons using the <see cref="M:System.Type.Equals(System.Object)" /> method. </para
-        >
+          >Because keys can be inherited and their behavior changed, their absolute uniqueness cannot be guaranteed by comparisons using the <see cref="M:System.Type.Equals(System.Object)" /> method.
+        </para>
       </block>
     </remarks>
     <summary>
@@ -214,8 +214,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Collections.IDictionary" /> object to copy to a new <see cref="T:System.Collections.Hashtable" /> object. </param
-        >
+          />The <see cref="T:System.Collections.IDictionary" /> object to copy to a new <see cref="T:System.Collections.Hashtable" /> object.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -294,8 +294,8 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentOutOfRangeException">
-          <paramref name="capacity" /> &lt; 0. </exception
-        >
+          <paramref name="capacity" /> &lt; 0.
+        </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -324,8 +324,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The approximate number of elements that the <see cref="T:System.Collections.Hashtable" /> object can initially contain. </param
-        >
+          />The approximate number of elements that the <see cref="T:System.Collections.Hashtable" /> object can initially contain.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -576,8 +576,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The approximate number of elements that the <see cref="T:System.Collections.Hashtable" /> object can initially contain. </param
-        >
+          />The approximate number of elements that the <see cref="T:System.Collections.Hashtable" /> object can initially contain.
+        </param>
         <param name="equalityComparer">
           <attribution
             license="cc4"
@@ -632,15 +632,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The approximate number of elements that the <see cref="T:System.Collections.Hashtable" /> object can initially contain. </param
-        >
+          />The approximate number of elements that the <see cref="T:System.Collections.Hashtable" /> object can initially contain.
+        </param>
         <param name="loadFactor">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A number in the range from 0.1 through 1.0 that is multiplied by the default value which provides the best performance. The result is the maximum ratio of elements to buckets. </param
-        >
+          />A number in the range from 0.1 through 1.0 that is multiplied by the default value which provides the best performance. The result is the maximum ratio of elements to buckets.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -699,8 +699,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Runtime.Serialization.StreamingContext" /> object containing the source and destination of the serialized stream associated with the <see cref="T:System.Collections.Hashtable" />. </param
-        >
+          />A <see cref="T:System.Runtime.Serialization.StreamingContext" /> object containing the source and destination of the serialized stream associated with the <see cref="T:System.Collections.Hashtable" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -735,8 +735,8 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="d" /> is <see langword="null" />. </exception
-        >
+          <paramref name="d" /> is <see langword="null" />.
+        </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The initial capacity is set to the number of elements in the source dictionary. Capacity is automatically increased as required based on the load factor.</para>
@@ -920,8 +920,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The approximate number of elements that the <see cref="T:System.Collections.Hashtable" /> object can initially contain. </param
-        >
+          />The approximate number of elements that the <see cref="T:System.Collections.Hashtable" /> object can initially contain.
+        </param>
         <param name="hcp">
           <attribution
             license="cc4"
@@ -994,8 +994,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The approximate number of elements that the <see cref="T:System.Collections.Hashtable" /> object can initially contain. </param
-        >
+          />The approximate number of elements that the <see cref="T:System.Collections.Hashtable" /> object can initially contain.
+        </param>
         <param name="loadFactor">
           <attribution
             license="cc4"
@@ -1150,8 +1150,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The approximate number of elements that the <see cref="T:System.Collections.Hashtable" /> object can initially contain. </param
-        >
+          />The approximate number of elements that the <see cref="T:System.Collections.Hashtable" /> object can initially contain.
+        </param>
         <param name="loadFactor">
           <attribution
             license="cc4"
@@ -1230,15 +1230,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key of the element to add. </param
-        >
+          />The key of the element to add.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value of the element to add. The value can be null. </param
-        >
+          />The value of the element to add. The value can be null.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1385,8 +1385,8 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="key" /> is <see langword="null" />. </exception
-        >
+          <paramref name="key" /> is <see langword="null" />.
+        </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
@@ -1414,8 +1414,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key to locate in the <see cref="T:System.Collections.Hashtable" />. </param
-        >
+          />The key to locate in the <see cref="T:System.Collections.Hashtable" />.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1443,8 +1443,8 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="key" /> is <see langword="null" />. </exception
-        >
+          <paramref name="key" /> is <see langword="null" />.
+        </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -1472,8 +1472,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key to locate in the <see cref="T:System.Collections.Hashtable" />. </param
-        >
+          />The key to locate in the <see cref="T:System.Collections.Hashtable" />.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1529,8 +1529,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to locate in the <see cref="T:System.Collections.Hashtable" />. The value can be null. </param
-        >
+          />The value to locate in the <see cref="T:System.Collections.Hashtable" />. The value can be null.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1603,15 +1603,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The one-dimensional <see cref="T:System.Array" /> that is the destination of the <see cref="T:System.Collections.DictionaryEntry" /> objects copied from <see cref="T:System.Collections.Hashtable" />. The <see cref="T:System.Array" /> must have zero-based indexing. </param
-        >
+          />The one-dimensional <see cref="T:System.Array" /> that is the destination of the <see cref="T:System.Collections.DictionaryEntry" /> objects copied from <see cref="T:System.Collections.Hashtable" />. The <see cref="T:System.Array" /> must have zero-based indexing.
+        </param>
         <param name="arrayIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index in <paramref name="array" /> at which copying begins. </param
-        >
+          />The zero-based index in <paramref name="array" /> at which copying begins.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1771,8 +1771,8 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="key" /> is <see langword="null" />. </exception
-        >
+          <paramref name="key" /> is <see langword="null" />.
+        </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -1793,8 +1793,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> for which a hash code is to be returned. </param
-        >
+          />The <see cref="T:System.Object" /> for which a hash code is to be returned.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1838,15 +1838,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Runtime.Serialization.SerializationInfo" /> object containing the information required to serialize the <see cref="T:System.Collections.Hashtable" />. </param
-        >
+          />A <see cref="T:System.Runtime.Serialization.SerializationInfo" /> object containing the information required to serialize the <see cref="T:System.Collections.Hashtable" />.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Runtime.Serialization.StreamingContext" /> object containing the source and destination of the serialized stream associated with the <see cref="T:System.Collections.Hashtable" />. </param
-        >
+          />A <see cref="T:System.Runtime.Serialization.StreamingContext" /> object containing the source and destination of the serialized stream associated with the <see cref="T:System.Collections.Hashtable" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="hcp">
@@ -1906,8 +1906,8 @@
           <para>
             <see langword="true" /> if the
    current instance has a fixed size; otherwise,
-<see langword="false" />. </para
-          >
+<see langword="false" />.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1946,8 +1946,8 @@
           <para>
             <see langword="true" /> if the
    current instance is read-only; otherwise,
-<see langword="false" />. </para
-          >
+<see langword="false" />.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1986,8 +1986,8 @@
           <para>
             <see langword="true" /> if access to
    the current instance is synchronized
-   (thread-safe); otherwise, <see langword="false" />. </para
-          >
+   (thread-safe); otherwise, <see langword="false" />.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2044,6 +2044,8 @@
             
 
             
+
+            
       
       .</para
           >
@@ -2072,8 +2074,8 @@
           </para>
         </remarks>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="key" /> is <see langword="null" />. </exception
-        >
+          <paramref name="key" /> is <see langword="null" />.
+        </exception>
         <exception cref="T:System.NotSupportedException">
           <para>The property is being set and the current instance is read-only.</para>
           <para
@@ -2139,15 +2141,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to compare with <paramref name="key" />. </param
-        >
+          />The <see cref="T:System.Object" /> to compare with <paramref name="key" />.
+        </param>
         <param name="key">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key in the <see cref="T:System.Collections.Hashtable" /> to compare with <paramref name="item" />. </param
-        >
+          />The key in the <see cref="T:System.Collections.Hashtable" /> to compare with <paramref name="item" />.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2241,8 +2243,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The source of the deserialization event. </param
-        >
+          />The source of the deserialization event.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Remove">
@@ -2274,8 +2276,8 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="key" /> is <see langword="null" />. </exception
-        >
+          <paramref name="key" /> is <see langword="null" />.
+        </exception>
         <exception cref="T:System.NotSupportedException">
           <para>The current instance is read-only or has a fixed size.</para>
         </exception>
@@ -2297,8 +2299,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key of the element to remove. </param
-        >
+          />The key of the element to remove.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2329,8 +2331,8 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="table" /> is <see langword="null" />. </exception
-        >
+          <paramref name="table" /> is <see langword="null" />.
+        </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -2338,8 +2340,8 @@
           >
           <para>Enumerating through a collection is intrinsically not a thread-safe procedure. Even when a collection is synchronized, other threads can still modify the collection, which causes the enumerator to throw an exception. To guarantee thread safety during enumeration, you can either lock the collection during the entire enumeration or catch the exceptions resulting from changes made by other threads.</para>
           <para
-            >The following code example shows how to lock the collection using the <see cref="P:System.Collections.Hashtable.SyncRoot" /> during the entire enumeration: </para
-          >
+            >The following code example shows how to lock the collection using the <see cref="P:System.Collections.Hashtable.SyncRoot" /> during the entire enumeration:
+          </para>
           <para>code reference: Classic Hashtable.IsSynchronized Example#2</para>
           <para>This method is an O(1) operation.</para>
         </remarks>
@@ -2360,8 +2362,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Collections.Hashtable" /> to synchronize. </param
-        >
+          />The <see cref="T:System.Collections.Hashtable" /> to synchronize.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

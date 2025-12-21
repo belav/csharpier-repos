@@ -47,8 +47,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationCategory" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationCategory" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -318,8 +318,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When serialized to Atom 1.0, the <see cref="P:System.ServiceModel.Syndication.SyndicationCategory.Scheme" /> property is written to the scheme attribute of the &lt;category&gt; element. </para
-          >
+            >When serialized to Atom 1.0, the <see cref="P:System.ServiceModel.Syndication.SyndicationCategory.Scheme" /> property is written to the scheme attribute of the &lt;category&gt; element.
+          </para>
           <para
             >When serialized to RSS 2.0, the <see cref="P:System.ServiceModel.Syndication.SyndicationCategory.Scheme" /> property is written to the domain attribute of the &lt;category&gt; element.</para
           >

@@ -862,8 +862,8 @@
             >8/24/94</OrderDate
           >
 								                                        Bad Order
-                                </Testing:OrderDates
-        >
+
+        </Testing:OrderDates>
       </EmployeeIDs>
     </Fred:CustomerIDs>
   </cool:OrderIDs>

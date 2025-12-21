@@ -87,8 +87,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.CodeAccessPermission" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.CodeAccessPermission" /> class.
+          </para>
         </summary>
       </Docs>
       <Excluded>0</Excluded>
@@ -118,8 +118,8 @@
           >The calling code does not have <see
             cref="F:System.Security.Permissions.SecurityPermissionFlag.Assertion"
             qualify="true"
-          />. </exception
-        >
+          />.
+        </exception>
         <permission cref="T:System.Security.Permissions.SecurityPermission"
           >Requires permission to call <see cref="M:System.Security.CodeAccessPermission.Assert" />. See <see cref="F:System.Security.Permissions.SecurityPermissionFlag.Assertion" />.</permission
         >
@@ -210,8 +210,8 @@
           <para> A caller does not have the permission specified by the current instance.</para>
           <para>-or-</para>
           <para
-            > A caller has called <see cref="M:System.Security.CodeAccessPermission.Deny" /> for the resource protected by the current instance. </para
-          >
+            > A caller has called <see cref="M:System.Security.CodeAccessPermission.Deny" /> for the resource protected by the current instance.
+          </para>
         </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -321,8 +321,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.CodeAccessPermission" /> object to compare with the current <see cref="T:System.Security.CodeAccessPermission" />. </param
-        >
+          />The <see cref="T:System.Security.CodeAccessPermission" /> object to compare with the current <see cref="T:System.Security.CodeAccessPermission" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="FromXml">
@@ -373,8 +373,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML encoding to use to reconstruct the security object. </param
-        >
+          />The XML encoding to use to reconstruct the security object.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -466,8 +466,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission to intersect with the current permission. It must be of the same type as the current permission. </param
-        >
+          />A permission to intersect with the current permission. It must be of the same type as the current permission.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -541,8 +541,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission that is to be tested for the subset relationship. This permission must be of the same type as the current permission. </param
-        >
+          />A permission that is to be tested for the subset relationship. This permission must be of the same type as the current permission.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -836,8 +836,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission to combine with the current permission. It must be of the same type as the current permission. </param
-        >
+          />A permission to combine with the current permission. It must be of the same type as the current permission.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

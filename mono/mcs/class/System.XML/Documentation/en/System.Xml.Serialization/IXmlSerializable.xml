@@ -116,8 +116,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlReader" /> stream from which the object is deserialized. </param
-        >
+          />The <see cref="T:System.Xml.XmlReader" /> stream from which the object is deserialized.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteXml">
@@ -158,8 +158,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlWriter" /> stream to which the object is serialized. </param
-        >
+          />The <see cref="T:System.Xml.XmlWriter" /> stream to which the object is serialized.
+        </param>
       </Docs>
     </Member>
   </Members>

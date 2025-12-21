@@ -86,8 +86,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data contract object used to initialize the extension. </param
-        >
+          />The data contract object used to initialize the extension.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -111,8 +111,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" /> class.
+          </para>
         </summary>
         <param name="xmlReader">
           <attribution

@@ -104,8 +104,8 @@
               </term>
               <description>
                 <para
-                  >The localized error message for <see cref="T:System.Resources.MissingSatelliteAssemblyException" />. </para
-                >
+                  >The localized error message for <see cref="T:System.Resources.MissingSatelliteAssemblyException" />.
+                </para>
               </description>
             </item>
           </list>
@@ -178,8 +178,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Resources.MissingSatelliteAssemblyException" /> class with the specified error message. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Resources.MissingSatelliteAssemblyException" /> class with the specified error message.
+          </para>
         </summary>
         <param name="message">
           <attribution
@@ -217,8 +217,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Resources.MissingSatelliteAssemblyException" /> class from serialized data. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Resources.MissingSatelliteAssemblyException" /> class from serialized data.
+          </para>
         </summary>
         <param name="info">
           <attribution
@@ -300,8 +300,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Resources.MissingSatelliteAssemblyException" /> class with a specified error message and a reference to the inner exception that is the cause of this exception. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Resources.MissingSatelliteAssemblyException" /> class with a specified error message and a reference to the inner exception that is the cause of this exception.
+          </para>
         </summary>
         <param name="message">
           <attribution
@@ -380,8 +380,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Resources.MissingSatelliteAssemblyException" /> class with a specified error message and the name of a neutral culture. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Resources.MissingSatelliteAssemblyException" /> class with a specified error message and the name of a neutral culture.
+          </para>
         </summary>
         <param name="message">
           <attribution
@@ -419,8 +419,8 @@
             >The app's default culture is defined by the <see cref="T:System.Resources.NeutralResourcesLanguageAttribute" /> attribute. For a list of culture names, see the <see
               cref="http://go.microsoft.com/fwlink/?LinkId=200048"
               >National Language Support (NLS) API Reference</see
-            > at the Go Global Developer Center. </para
-          >
+            > at the Go Global Developer Center.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

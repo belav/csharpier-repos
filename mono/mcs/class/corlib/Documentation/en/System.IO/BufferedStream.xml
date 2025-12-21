@@ -72,8 +72,8 @@
           >
         </summary>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />The current stream. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The current stream.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -110,15 +110,11 @@
           >
         </summary>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />The current stream. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The current stream.
+        </param>
         <param name="bufferSize">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The buffer size in bytes. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The buffer size in bytes.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CanRead">
@@ -368,22 +364,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The buffer to which bytes are to be copied. </param
-        >
+          />The buffer to which bytes are to be copied.
+        </param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte offset in the buffer at which to begin reading bytes. </param
-        >
+          />The byte offset in the buffer at which to begin reading bytes.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes to be read. </param
-        >
+          />The number of bytes to be read.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ReadByte">
@@ -460,15 +456,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A byte offset relative to <paramref name="origin" />. </param
-        >
+          />A byte offset relative to <paramref name="origin" />.
+        </param>
         <param name="origin">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A value of type <see cref="T:System.IO.SeekOrigin" /> indicating the reference point from which to obtain the new position. </param
-        >
+          />A value of type <see cref="T:System.IO.SeekOrigin" /> indicating the reference point from which to obtain the new position.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetLength">
@@ -505,8 +501,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer indicating the desired length of the current buffered stream in bytes. </param
-        >
+          />An integer indicating the desired length of the current buffered stream in bytes.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -543,22 +539,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte array from which to copy <paramref name="count" /> bytes to the current buffered stream. </param
-        >
+          />The byte array from which to copy <paramref name="count" /> bytes to the current buffered stream.
+        </param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The offset in the buffer at which to begin copying bytes to the current buffered stream. </param
-        >
+          />The offset in the buffer at which to begin copying bytes to the current buffered stream.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes to be written to the current buffered stream. </param
-        >
+          />The number of bytes to be written to the current buffered stream.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteByte">
@@ -590,8 +586,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A byte to write to the stream. </param
-        >
+          />A byte to write to the stream.
+        </param>
       </Docs>
     </Member>
   </Members>

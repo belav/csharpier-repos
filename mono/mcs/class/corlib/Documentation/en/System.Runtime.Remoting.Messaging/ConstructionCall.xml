@@ -80,8 +80,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Messaging.ConstructionCall" /> class from an array of remoting headers. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Messaging.ConstructionCall" /> class from an array of remoting headers.
+          </para>
         </summary>
         <param name="headers">
           <attribution
@@ -121,8 +121,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Messaging.ConstructionCall" /> class by copying an existing message. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Messaging.ConstructionCall" /> class by copying an existing message.
+          </para>
         </summary>
         <param name="m">
           <attribution license="cc4" from="Microsoft" modified="false" />A remoting message.</param
@@ -313,8 +313,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see cref="T:System.Collections.IDictionary" /> interface that represents a collection of the remoting message's properties. </para
-          >
+            >Gets an <see cref="T:System.Collections.IDictionary" /> interface that represents a collection of the remoting message's properties.
+          </para>
         </summary>
       </Docs>
     </Member>

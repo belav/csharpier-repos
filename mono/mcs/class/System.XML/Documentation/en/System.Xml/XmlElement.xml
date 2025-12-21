@@ -172,8 +172,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to recursively clone the subtree under the specified node; false to clone only the node itself (and its attributes if the node is an XmlElement). </param
-        >
+          />true to recursively clone the subtree under the specified node; false to clone only the node itself (and its attributes if the node is an XmlElement).
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetAttribute">
@@ -209,8 +209,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the attribute to retrieve. This is a qualified name. It is matched against the Name property of the matching node. </param
-        >
+          />The name of the attribute to retrieve. This is a qualified name. It is matched against the Name property of the matching node.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetAttribute">
@@ -250,15 +250,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the attribute to retrieve. </param
-        >
+          />The local name of the attribute to retrieve.
+        </param>
         <param name="namespaceURI">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the attribute to retrieve. </param
-        >
+          />The namespace URI of the attribute to retrieve.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetAttributeNode">
@@ -297,8 +297,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the attribute to retrieve. This is a qualified name. It is matched against the Name property of the matching node. </param
-        >
+          />The name of the attribute to retrieve. This is a qualified name. It is matched against the Name property of the matching node.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetAttributeNode">
@@ -340,15 +340,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the attribute. </param
-        >
+          />The local name of the attribute.
+        </param>
         <param name="namespaceURI">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the attribute. </param
-        >
+          />The namespace URI of the attribute.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetElementsByTagName">
@@ -401,8 +401,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name tag to match. This is a qualified name. It is matched against the Name property of the matching node. The asterisk (*) is a special value that matches all tags. </param
-        >
+          />The name tag to match. This is a qualified name. It is matched against the Name property of the matching node. The asterisk (*) is a special value that matches all tags.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetElementsByTagName">
@@ -454,15 +454,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name to match. The asterisk (*) is a special value that matches all tags. </param
-        >
+          />The local name to match. The asterisk (*) is a special value that matches all tags.
+        </param>
         <param name="namespaceURI">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI to match. </param
-        >
+          />The namespace URI to match.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="HasAttribute">
@@ -498,8 +498,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the attribute to find. This is a qualified name. It is matched against the Name property of the matching node. </param
-        >
+          />The name of the attribute to find. This is a qualified name. It is matched against the Name property of the matching node.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="HasAttribute">
@@ -539,15 +539,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the attribute to find. </param
-        >
+          />The local name of the attribute to find.
+        </param>
         <param name="namespaceURI">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the attribute to find. </param
-        >
+          />The namespace URI of the attribute to find.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="HasAttributes">
@@ -940,8 +940,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the attribute to remove.This is a qualified name. It is matched against the Name property of the matching node. </param
-        >
+          />The name of the attribute to remove.This is a qualified name. It is matched against the Name property of the matching node.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RemoveAttribute">
@@ -980,15 +980,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the attribute to remove. </param
-        >
+          />The local name of the attribute to remove.
+        </param>
         <param name="namespaceURI">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the attribute to remove. </param
-        >
+          />The namespace URI of the attribute to remove.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RemoveAttributeAt">
@@ -1030,8 +1030,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the node to remove. The first node has index 0. </param
-        >
+          />The index of the node to remove. The first node has index 0.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RemoveAttributeNode">
@@ -1072,8 +1072,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XmlAttribute node to remove. If the removed attribute has a default value, it is immediately replaced. </param
-        >
+          />The XmlAttribute node to remove. If the removed attribute has a default value, it is immediately replaced.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RemoveAttributeNode">
@@ -1115,15 +1115,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the attribute. </param
-        >
+          />The local name of the attribute.
+        </param>
         <param name="namespaceURI">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the attribute. </param
-        >
+          />The namespace URI of the attribute.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SchemaInfo">
@@ -1196,15 +1196,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the attribute to create or alter. This is a qualified name. If the name contains a colon it is parsed into prefix and local name components. </param
-        >
+          />The name of the attribute to create or alter. This is a qualified name. If the name contains a colon it is parsed into prefix and local name components.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to set for the attribute. </param
-        >
+          />The value to set for the attribute.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetAttribute">
@@ -1245,22 +1245,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the attribute. </param
-        >
+          />The local name of the attribute.
+        </param>
         <param name="namespaceURI">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the attribute. </param
-        >
+          />The namespace URI of the attribute.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to set for the attribute. </param
-        >
+          />The value to set for the attribute.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetAttributeNode">
@@ -1302,8 +1302,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XmlAttribute node to add to the attribute collection for this element. </param
-        >
+          />The XmlAttribute node to add to the attribute collection for this element.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetAttributeNode">
@@ -1348,15 +1348,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the attribute. </param
-        >
+          />The local name of the attribute.
+        </param>
         <param name="namespaceURI">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the attribute. </param
-        >
+          />The namespace URI of the attribute.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.Xml.IHasXmlChildNode.LastLinkedChild">
@@ -1420,8 +1420,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XmlWriter to which you want to save. </param
-        >
+          />The XmlWriter to which you want to save.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteTo">
@@ -1461,8 +1461,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XmlWriter to which you want to save. </param
-        >
+          />The XmlWriter to which you want to save.
+        </param>
       </Docs>
     </Member>
   </Members>

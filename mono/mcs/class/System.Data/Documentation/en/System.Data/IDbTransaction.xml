@@ -26,8 +26,8 @@
           <a href="F46570DE-9E50-4FE6-8710-A8C31FA8569B"
             >[&lt;topic://cpconperformingtransactions&gt;]</a
           >
-        </format>. </para
-      >
+        </format>.
+      </para>
       <para
         >An application does not create an instance of the <see cref="T:System.Data.IDbTransaction" /> interface directly, but creates an instance of a class that inherits <see cref="T:System.Data.IDbTransaction" />.</para
       >

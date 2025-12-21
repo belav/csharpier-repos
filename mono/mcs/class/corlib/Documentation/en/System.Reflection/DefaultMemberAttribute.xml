@@ -39,14 +39,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A property is imported as an indexer (default indexed property in Visual Basic) if the property has arguments and if the name of the property or one of its accessors matches the name specified by the <see cref="T:System.Reflection.DefaultMemberAttribute" />. If the <see cref="T:System.Reflection.DefaultMemberAttribute" /> is not present on the containing type, then the type does not have an indexer. The C# compiler emits the <see cref="T:System.Reflection.DefaultMemberAttribute" /> on any type containing an indexer. In C# it is an error to manually attribute a type with the <see cref="T:System.Reflection.DefaultMemberAttribute" /> if the type also declares an indexer.  </para
-      >
+        >A property is imported as an indexer (default indexed property in Visual Basic) if the property has arguments and if the name of the property or one of its accessors matches the name specified by the <see cref="T:System.Reflection.DefaultMemberAttribute" />. If the <see cref="T:System.Reflection.DefaultMemberAttribute" /> is not present on the containing type, then the type does not have an indexer. The C# compiler emits the <see cref="T:System.Reflection.DefaultMemberAttribute" /> on any type containing an indexer. In C# it is an error to manually attribute a type with the <see cref="T:System.Reflection.DefaultMemberAttribute" /> if the type also declares an indexer.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines the member of a type that is the default member used by <see cref="M:System.Type.InvokeMember(System.String,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object,System.Object[],System.Reflection.ParameterModifier[],System.Globalization.CultureInfo,System.String[])" />. </para
-      >
+        >Defines the member of a type that is the default member used by <see cref="M:System.Type.InvokeMember(System.String,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object,System.Object[],System.Reflection.ParameterModifier[],System.Globalization.CultureInfo,System.String[])" />.
+      </para>
     </summary>
   </Docs>
   <Members>
@@ -114,8 +114,8 @@
         <value>
           <para
             > A <see cref="T:System.String" /> representing the member name contained by the current instance.
-   </para
-          >
+
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />

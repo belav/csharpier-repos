@@ -65,12 +65,8 @@
           <para>Notifies the current instance that an object has been disconnected from its proxy.</para>
         </summary>
         <param name="obj">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The disconnected object. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The disconnected object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="MarshaledObject">
@@ -106,15 +102,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that has been marshaled. </param
-        >
+          />The object that has been marshaled.
+        </param>
         <param name="or">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Remoting.ObjRef" /> that results from marshaling and represents the specified object. </param
-        >
+          />The <see cref="T:System.Runtime.Remoting.ObjRef" /> that results from marshaling and represents the specified object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="UnmarshaledObject">
@@ -146,19 +142,15 @@
           <para>Notifies the current instance that an object has been unmarshaled.</para>
         </summary>
         <param name="obj">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The unmarshaled object. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The unmarshaled object.
+        </param>
         <param name="or">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Remoting.ObjRef" /> that represents the specified object. </param
-        >
+          />The <see cref="T:System.Runtime.Remoting.ObjRef" /> that represents the specified object.
+        </param>
       </Docs>
     </Member>
   </Members>

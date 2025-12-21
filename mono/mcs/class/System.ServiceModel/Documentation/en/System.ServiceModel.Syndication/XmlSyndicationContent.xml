@@ -81,8 +81,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" /> class.
+          </para>
         </summary>
         <param name="reader">
           <attribution
@@ -168,8 +168,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" /> with the specified type, object, and <see cref="T:System.Runtime.Serialization.XmlObjectSerializer" />. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" /> with the specified type, object, and <see cref="T:System.Runtime.Serialization.XmlObjectSerializer" />.
+          </para>
         </summary>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />The type of content.</param

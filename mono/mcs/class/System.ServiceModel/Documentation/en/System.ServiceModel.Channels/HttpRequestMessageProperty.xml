@@ -155,8 +155,8 @@
             >By default, indigo2 uses the POST verb for HTTP messages. The GET verb is used by indigo2 to display help information when accessing a ServiceHost's base address. This is useful for checking whether a indigo2 service is active when using a Web browser. Other methods defined by the <see
               cref="http://go.microsoft.com/fwlink/?LinkId=96616"
               >HTTP RFC</see
-            > are PUT, DELETE, HEAD, OPTIONS, TRACE, and CONNECT. These methods have special behaviors when interoperating with other services. </para
-          >
+            > are PUT, DELETE, HEAD, OPTIONS, TRACE, and CONNECT. These methods have special behaviors when interoperating with other services.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

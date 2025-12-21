@@ -40,8 +40,8 @@
         >A <see cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanging" /> event is raised before a component is changed. This event provides an opportunity for a designer to abort the change. Component designers typically raise the <see cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanging" /> event automatically. If a property cannot be changed, the method that handles the event can throw an exception. For example, if a designer file is checked into source code control, the handler of this event typically throws an exception if the user refuses to check out the file.</para
       >
       <para
-        >A <see cref="T:System.ComponentModel.Design.ComponentChangingEventArgs" /> provides the following information: </para
-      >
+        >A <see cref="T:System.ComponentModel.Design.ComponentChangingEventArgs" /> provides the following information:
+      </para>
       <list type="bullet">
         <item>
           <para>A Component property that indicates the component that is about to be modified.</para>
@@ -97,15 +97,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The component that is about to be changed. </param
-        >
+          />The component that is about to be changed.
+        </param>
         <param name="member">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.ComponentModel.MemberDescriptor" /> indicating the member of the component that is about to be changed. </param
-        >
+          />A <see cref="T:System.ComponentModel.MemberDescriptor" /> indicating the member of the component that is about to be changed.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Component">

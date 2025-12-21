@@ -216,8 +216,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Diagnostics.EventLogEntry" /> to compare. </param
-        >
+          />The <see cref="T:System.Diagnostics.EventLogEntry" /> to compare.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="EventID">
@@ -408,8 +408,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property retrieves only the replacement strings for the entry. To retrieve the full message, read the <see cref="P:System.Diagnostics.EventLogEntry.Message" /> property. </para
-          >
+            >This property retrieves only the replacement strings for the entry. To retrieve the full message, read the <see cref="P:System.Diagnostics.EventLogEntry.Message" /> property.
+          </para>
           <para
             >The <see cref="P:System.Diagnostics.EventLogEntry.ReplacementStrings" /> property contains the localized versions of replacement strings that are used in the event log entry. If you provide resource files that contain strings in each target language for your application, you can emit event log messages in the language that is used on that computer. To do that, create an instance of the <see cref="T:System.Resources.ResourceManager" /> class for the resource assembly that contains your replacement strings. The first parameter of the <see cref="M:System.Resources.ResourceManager.#ctor(System.String,System.Reflection.Assembly)" /> constructor identifies the resource assembly to be used. Use the <see cref="M:System.Resources.ResourceManager.GetString(System.String)" /> method of that instance to supply localized messages for log events. The following code automatically sets the message to the language for the current culture.</para
           >
@@ -502,15 +502,15 @@ e1.WriteEntry(LocRM.GetString("strMessage"),
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> to populate with data. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> to populate with data.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The destination (see <see cref="T:System.Runtime.Serialization.StreamingContext" />) for this serialization. </param
-        >
+          />The destination (see <see cref="T:System.Runtime.Serialization.StreamingContext" />) for this serialization.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="TimeGenerated">

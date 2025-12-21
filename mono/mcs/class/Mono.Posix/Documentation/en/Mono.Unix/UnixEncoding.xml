@@ -66,8 +66,8 @@
       <see cref="F:Mono.Unix.UnixEncoding.EscapeByte" /> is encountered, 
       in which case the <c>EscapeByte</c> character will be skipped
       and the following character will be marshaled as a byte.
-      </term
-          >
+
+          </term>
         </item>
       </list>
       <para
@@ -88,8 +88,8 @@
       Any filename on disk, in any encoding (or lack thereof), can be
       found and used with the <c>Mono.Unix</c> and <c>Mono.Unix.Native</c> 
       types.
-      </term
-          >
+
+          </term>
         </item>
         <item>
           <term>
@@ -105,8 +105,8 @@
       the <c>Mono.Unix</c> and <c>Mono.Unix.Native</c> classes.  I'm not 
       losing any sleep over this, because if the encoding is unknown the 
       strings couldn't be displayed correctly anyway...
-      </term
-          >
+
+          </term>
         </item>
         <item>
           <term>
@@ -135,8 +135,8 @@
       mono command line.  Mono will still try to decode these as either
       UTF-8 strings or as an encoding listed in the 
       <c>MONO_EXTERNAL_ENCODINGS</c> environment variable.
-      </term
-          >
+
+          </term>
         </item>
       </list>
       <para>Questions &amp; Answers</para>
@@ -192,8 +192,8 @@
         <see cref="System.String" />s for filenames in 
         <see cref="M:Mono.Unix.Native.Syscall.open" />, 
         <see cref="M:Mono.Unix.Native.Syscall.stat" />, etc.?
-        </description
-          >
+
+          </description>
         </item>
         <item>
           <term>A</term>
@@ -208,8 +208,7 @@
               <code lang="C#">
 public static int open (string pathname, OpenFlags flags);
 public static int open (byte[] pathname, OpenFlags flags);
-        </code
-              >
+        </code>
             </example>
             <para>(Hint: if you do want to explain the difference between these
         you're masochistic.)</para>

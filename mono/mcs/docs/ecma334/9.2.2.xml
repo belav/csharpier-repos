@@ -4,6 +4,6 @@
   <paragraph
     >Every source file in a C# program must conform to the <non_terminal where="16.1"
       >compilation-unit</non_terminal
-    > production (<hyperlink>16.1</hyperlink>) of the syntactic grammar. </paragraph
-  >
+    > production (<hyperlink>16.1</hyperlink>) of the syntactic grammar.
+  </paragraph>
 </clause>

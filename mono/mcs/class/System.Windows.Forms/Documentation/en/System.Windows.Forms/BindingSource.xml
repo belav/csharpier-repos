@@ -301,8 +301,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based index at which <paramref name="value" /> was added to the underlying list represented by the <see cref="P:System.Windows.Forms.BindingSource.List" /> property. </para
-          >
+            >The zero-based index at which <paramref name="value" /> was added to the underlying list represented by the <see cref="P:System.Windows.Forms.BindingSource.List" /> property.
+          </para>
         </returns>
         <param name="value">
           <attribution
@@ -334,8 +334,8 @@
           <para
             >For more information about supplying custom new item functionality, see the <see cref="M:System.Windows.Forms.BindingSource.AddNew" /> method. For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -440,13 +440,13 @@
           <list type="bullet">
             <item>
               <para
-                >It has a fixed size, as determined by the <see cref="P:System.Collections.IList.IsFixedSize" /> property. </para
-              >
+                >It has a fixed size, as determined by the <see cref="P:System.Collections.IList.IsFixedSize" /> property.
+              </para>
             </item>
             <item>
               <para
-                >It is read-only, as determined by the <see cref="P:System.Collections.IList.IsReadOnly" /> property. </para
-              >
+                >It is read-only, as determined by the <see cref="P:System.Collections.IList.IsReadOnly" /> property.
+              </para>
             </item>
             <item>
               <para>The item's type does not have a default constructor. </para>
@@ -609,8 +609,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -637,8 +637,8 @@
           <list type="bullet">
             <item>
               <para
-                >The data source implements the <see cref="T:System.ComponentModel.IEditableObject" /> interface. </para
-              >
+                >The data source implements the <see cref="T:System.ComponentModel.IEditableObject" /> interface.
+              </para>
             </item>
             <item>
               <para
@@ -670,8 +670,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Windows.Forms.BindingSource.Clear" /> method removes all elements from the underlying list represented by the <see cref="P:System.Windows.Forms.BindingSource.List" /> property and sets the <see cref="P:System.Windows.Forms.BindingSource.Count" /> property to zero. </para
-          >
+            >The <see cref="M:System.Windows.Forms.BindingSource.Clear" /> method removes all elements from the underlying list represented by the <see cref="P:System.Windows.Forms.BindingSource.List" /> property and sets the <see cref="P:System.Windows.Forms.BindingSource.Count" /> property to zero.
+          </para>
           <para
             >This method raises the <see cref="E:System.Windows.Forms.BindingSource.ListChanged" /> event.</para
           >
@@ -731,8 +731,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to locate in the underlying list represented by the <see cref="P:System.Windows.Forms.BindingSource.List" /> property. The value can be null. </param
-        >
+          />The <see cref="T:System.Object" /> to locate in the underlying list represented by the <see cref="P:System.Windows.Forms.BindingSource.List" /> property. The value can be null.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CopyTo">
@@ -794,8 +794,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Windows.Forms.BindingSource.Count" /> property gets the number of items in the underlying list represented by the <see cref="P:System.Windows.Forms.BindingSource.List" /> property as modified by the value of the <see cref="P:System.Windows.Forms.BindingSource.Filter" /> property. </para
-          >
+            >The <see cref="P:System.Windows.Forms.BindingSource.Count" /> property gets the number of items in the underlying list represented by the <see cref="P:System.Windows.Forms.BindingSource.List" /> property as modified by the value of the <see cref="P:System.Windows.Forms.BindingSource.Filter" /> property.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -913,8 +913,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -940,8 +940,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -972,8 +972,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1038,8 +1038,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1093,8 +1093,8 @@
               </term>
               <description>
                 <para
-                  >An empty <see cref="T:System.ComponentModel.IBindingList" /> of objects. Adding an item sets the list to the type of the added item. </para
-                >
+                  >An empty <see cref="T:System.ComponentModel.IBindingList" /> of objects. Adding an item sets the list to the type of the added item.
+                </para>
               </description>
             </item>
             <item>
@@ -1185,8 +1185,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1221,16 +1221,16 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see cref="T:System.Windows.Forms.BindingSource" /> and optionally releases the managed resources. </para
-          >
+            >Releases the unmanaged resources used by the <see cref="T:System.Windows.Forms.BindingSource" /> and optionally releases the managed resources.
+          </para>
         </summary>
         <param name="disposing">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="EndEdit">
@@ -1340,15 +1340,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ComponentModel.PropertyDescriptor" /> to search for. </param
-        >
+          />The <see cref="T:System.ComponentModel.PropertyDescriptor" /> to search for.
+        </param>
         <param name="key">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value of <paramref name="prop" /> to match. </param
-        >
+          />The value of <paramref name="prop" /> to match.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Find">
@@ -1420,8 +1420,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Collections.IEnumerator" /> for the <see cref="P:System.Windows.Forms.BindingSource.List" />. </para
-          >
+            >An <see cref="T:System.Collections.IEnumerator" /> for the <see cref="P:System.Windows.Forms.BindingSource.List" />.
+          </para>
         </returns>
       </Docs>
     </Member>
@@ -1587,8 +1587,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to locate in the underlying list represented by the <see cref="P:System.Windows.Forms.BindingSource.List" /> property. The value can be null. </param
-        >
+          />The <see cref="T:System.Object" /> to locate in the underlying list represented by the <see cref="P:System.Windows.Forms.BindingSource.List" /> property. The value can be null.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Insert">
@@ -1623,15 +1623,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index at which <paramref name="value" /> should be inserted. </param
-        >
+          />The zero-based index at which <paramref name="value" /> should be inserted.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to insert. The value can be null. </param
-        >
+          />The <see cref="T:System.Object" /> to insert. The value can be null.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsBindingSuspended">
@@ -1978,8 +1978,8 @@
           <para
             >This event can be completely suppressed by setting the <see cref="P:System.Windows.Forms.BindingSource.RaiseListChangedEvents" /> property to false. For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2117,8 +2117,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnBindingComplete">
@@ -2151,16 +2151,16 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.Windows.Forms.BindingSource.BindingComplete" /> event. </para
-          >
+            >Raises the <see cref="E:System.Windows.Forms.BindingSource.BindingComplete" /> event.
+          </para>
         </summary>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.BindingCompleteEventArgs" />  that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.BindingCompleteEventArgs" />  that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnCurrentChanged">
@@ -2290,8 +2290,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.BindingManagerDataErrorEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.BindingManagerDataErrorEventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnDataMemberChanged">
@@ -2524,8 +2524,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2557,8 +2557,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see cref="P:System.Windows.Forms.BindingSource.RaiseListChangedEvents" /> property is false, it suspends the raising of <see cref="E:System.Windows.Forms.BindingSource.ListChanged" /> events. This event indicates that the bound list has been modified in some way, including adding, deleting, inserting, or modifying items. </para
-          >
+            >When the <see cref="P:System.Windows.Forms.BindingSource.RaiseListChangedEvents" /> property is false, it suspends the raising of <see cref="E:System.Windows.Forms.BindingSource.ListChanged" /> events. This event indicates that the bound list has been modified in some way, including adding, deleting, inserting, or modifying items.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2634,8 +2634,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index of the item to remove. </param
-        >
+          />The zero-based index of the item to remove.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RemoveCurrent">
@@ -2773,22 +2773,22 @@
             </item>
             <item>
               <para
-                >A <paramref name="metaDataChanged" /> value of false indicates that only the values of one or more items have changed. </para
-              >
+                >A <paramref name="metaDataChanged" /> value of false indicates that only the values of one or more items have changed.
+              </para>
             </item>
           </list>
           <para
             >Regardless of the value of <paramref name="metaDataChanged" />, a <see cref="E:System.Windows.Forms.BindingSource.ListChanged" /> event is raised with <see cref="P:System.ComponentModel.ListChangedEventArgs.ListChangedType" /> set to <see cref="F:System.ComponentModel.ListChangedType.Reset" />. As a consequence, calling <see cref="M:System.Windows.Forms.BindingSource.ResetBindings(System.Boolean)" /> with a parameter of true will raise two <see cref="E:System.Windows.Forms.BindingSource.ListChanged" /> events.</para
           >
           <para>
-            <see cref="M:System.Windows.Forms.BindingSource.ResetBindings(System.Boolean)" /> is automatically called whenever another member makes major changes to the data-binding, such as setting the <see cref="P:System.Windows.Forms.BindingSource.DataSource" /> or <see cref="P:System.Windows.Forms.BindingSource.DataMember" /> properties. However, the programmer can also call this method explicitly. </para
-          >
+            <see cref="M:System.Windows.Forms.BindingSource.ResetBindings(System.Boolean)" /> is automatically called whenever another member makes major changes to the data-binding, such as setting the <see cref="P:System.Windows.Forms.BindingSource.DataSource" /> or <see cref="P:System.Windows.Forms.BindingSource.DataMember" /> properties. However, the programmer can also call this method explicitly.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Causes a control bound to the <see cref="T:System.Windows.Forms.BindingSource" /> to reread all the items in the list and refresh their displayed values. </para
-          >
+            >Causes a control bound to the <see cref="T:System.Windows.Forms.BindingSource" /> to reread all the items in the list and refresh their displayed values.
+          </para>
         </summary>
         <param name="metadataChanged">
           <attribution
@@ -2849,8 +2849,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Causes a control bound to the <see cref="T:System.Windows.Forms.BindingSource" /> to reread the item at the specified index, and refresh its displayed value. </para
-          >
+            >Causes a control bound to the <see cref="T:System.Windows.Forms.BindingSource" /> to reread the item at the specified index, and refresh its displayed value.
+          </para>
         </summary>
         <param name="itemIndex">
           <attribution
@@ -3269,8 +3269,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ComponentModel.PropertyDescriptor" /> to add to the indexes used for searching. </param
-        >
+          />The <see cref="T:System.ComponentModel.PropertyDescriptor" /> to add to the indexes used for searching.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.ComponentModel.IBindingList.RemoveIndex">
@@ -3306,8 +3306,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ComponentModel.PropertyDescriptor" /> to remove from the indexes used for searching.  </param
-        >
+          />The <see cref="T:System.ComponentModel.PropertyDescriptor" /> to remove from the indexes used for searching.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.ComponentModel.ICancelAddNew.CancelNew">
@@ -3326,8 +3326,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Windows.Forms.BindingSource.System#ComponentModel#ICancelAddNew#CancelNew(System.Int32)" /> method rolls back a pending addition of an item previously added to the collection at the index specified by <paramref name="position" />. The <paramref name="position" /> parameter is necessary because several new items can be simultaneously pending. </para
-          >
+            >The <see cref="M:System.Windows.Forms.BindingSource.System#ComponentModel#ICancelAddNew#CancelNew(System.Int32)" /> method rolls back a pending addition of an item previously added to the collection at the index specified by <paramref name="position" />. The <paramref name="position" /> parameter is necessary because several new items can be simultaneously pending.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3338,8 +3338,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the item that was added to the collection. </param
-        >
+          />The index of the item that was added to the collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.ComponentModel.ICancelAddNew.EndNew">
@@ -3358,8 +3358,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Windows.Forms.BindingSource.System#ComponentModel#ICancelAddNew#EndNew(System.Int32)" /> method commits a pending addition of an item previously added to the collection at the index specified by <paramref name="position" />. The <paramref name="position" /> parameter is necessary because several new items can be simultaneously pending. </para
-          >
+            >The <see cref="M:System.Windows.Forms.BindingSource.System#ComponentModel#ICancelAddNew#EndNew(System.Int32)" /> method commits a pending addition of an item previously added to the collection at the index specified by <paramref name="position" />. The <paramref name="position" /> parameter is necessary because several new items can be simultaneously pending.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3370,8 +3370,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the item that was added to the collection. </param
-        >
+          />The index of the item that was added to the collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.ComponentModel.ISupportInitialize.BeginInit">
@@ -3409,8 +3409,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Signals the <see cref="T:System.Windows.Forms.BindingSource" /> that initialization is complete. </para
-          >
+            >Signals the <see cref="T:System.Windows.Forms.BindingSource" /> that initialization is complete.
+          </para>
         </summary>
       </Docs>
     </Member>

@@ -26,8 +26,8 @@
         >
       </block>
       <para
-        >The <see cref="T:System.Web.Security.Membership" /> class provides facilities for: </para
-      >
+        >The <see cref="T:System.Web.Security.Membership" /> class provides facilities for:
+      </para>
       <list type="bullet">
         <item>
           <para>Creating new users.</para>
@@ -172,15 +172,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The user name for the new user. </param
-        >
+          />The user name for the new user.
+        </param>
         <param name="password">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The password for the new user. </param
-        >
+          />The password for the new user.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -230,22 +230,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The user name for the new user. </param
-        >
+          />The user name for the new user.
+        </param>
         <param name="password">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The password for the new user. </param
-        >
+          />The password for the new user.
+        </param>
         <param name="email">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The e-mail address for the new user. </param
-        >
+          />The e-mail address for the new user.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -361,8 +361,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the user to delete. </param
-        >
+          />The name of the user to delete.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -657,8 +657,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters in the generated password. The length must be between 1 and 128 characters. </param
-        >
+          />The number of characters in the generated password. The length must be between 1 and 128 characters.
+        </param>
         <param name="numberOfNonAlphanumericCharacters">
           <attribution
             license="cc4"
@@ -833,8 +833,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />If true, updates the last-activity date/time stamp for the specified user. </param
-        >
+          />If true, updates the last-activity date/time stamp for the specified user.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1022,15 +1022,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the user to retrieve. </param
-        >
+          />The name of the user to retrieve.
+        </param>
         <param name="userIsOnline">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />If true, updates the last-activity date/time stamp for the specified user. </param
-        >
+          />If true, updates the last-activity date/time stamp for the specified user.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1129,11 +1129,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.Security.Membership.MaxInvalidPasswordAttempts" /> property works in conjunction with the <see cref="P:System.Web.Security.Membership.PasswordAttemptWindow" /> property to guard against an unwanted source using repeated attempts to guess the password or password answer of a membership user. </para
-          >
+            >The <see cref="P:System.Web.Security.Membership.MaxInvalidPasswordAttempts" /> property works in conjunction with the <see cref="P:System.Web.Security.Membership.PasswordAttemptWindow" /> property to guard against an unwanted source using repeated attempts to guess the password or password answer of a membership user.
+          </para>
           <para
-            >If the number of invalid passwords or password answers entered for a membership user is greater than or equal to the value of the <see cref="P:System.Web.Security.Membership.MaxInvalidPasswordAttempts" /> property within the number of minutes specified by the <see cref="P:System.Web.Security.Membership.PasswordAttemptWindow" /> property, then the user is locked out of the Web site by setting the <see cref="P:System.Web.Security.MembershipUser.IsLockedOut" /> property to true until the user is unlocked by a call to the <see cref="M:System.Web.Security.MembershipUser.UnlockUser" /> method. </para
-          >
+            >If the number of invalid passwords or password answers entered for a membership user is greater than or equal to the value of the <see cref="P:System.Web.Security.Membership.MaxInvalidPasswordAttempts" /> property within the number of minutes specified by the <see cref="P:System.Web.Security.Membership.PasswordAttemptWindow" /> property, then the user is locked out of the Web site by setting the <see cref="P:System.Web.Security.MembershipUser.IsLockedOut" /> property to true until the user is unlocked by a call to the <see cref="M:System.Web.Security.MembershipUser.UnlockUser" /> method.
+          </para>
           <para
             >If a valid password or password answer is supplied before the value of the <see cref="P:System.Web.Security.Membership.MaxInvalidPasswordAttempts" /> property is reached, the counter that tracks the number of invalid attempts is set to zero.</para
           >
@@ -1143,8 +1143,8 @@
           <para
             >The <see cref="P:System.Web.Security.Membership.MaxInvalidPasswordAttempts" /> property value is set in the application configuration using the maxInvalidPasswordAttempts attribute of the <format type="text/html">
               <a href="b9c1ee8f-33ca-4361-8666-b42a0fe86049">membership</a>
-            </format> configuration element. </para
-          >
+            </format> configuration element.
+          </para>
           <para
             >If the <see cref="P:System.Web.Security.Membership.RequiresQuestionAndAnswer" /> property is false, invalid password-answer attempts are not tracked.</para
           >
@@ -1237,8 +1237,8 @@
             >The <see cref="P:System.Web.Security.Membership.PasswordAttemptWindow" /> property works in conjunction with the <see cref="P:System.Web.Security.Membership.MaxInvalidPasswordAttempts" /> property to help guard against an unwanted source guessing the password or password answer of a membership user through repeated attempts. When a user attempts to log in with, change, or reset his or her password, only a certain number of consecutive attempts are allowed within a specified time window. The length of this time window is specified in the <see cref="P:System.Web.Security.Membership.PasswordAttemptWindow" /> property, which identifies the number of minutes allowed between invalid attempts.</para
           >
           <para
-            >If the number of consecutive failed attempts that a user makes to reset his or her password equals the value stored in the <see cref="P:System.Web.Security.Membership.MaxInvalidPasswordAttempts" /> property, and the time elapsed since the last invalid attempt is less than the number of minutes specified in the <see cref="P:System.Web.Security.Membership.PasswordAttemptWindow" /> property, then the membership user is locked out. The user is locked out by setting the <see cref="P:System.Web.Security.MembershipUser.IsLockedOut" /> property to true until the user is unlocked by a call to the <see cref="M:System.Web.Security.MembershipUser.UnlockUser" /> method. </para
-          >
+            >If the number of consecutive failed attempts that a user makes to reset his or her password equals the value stored in the <see cref="P:System.Web.Security.Membership.MaxInvalidPasswordAttempts" /> property, and the time elapsed since the last invalid attempt is less than the number of minutes specified in the <see cref="P:System.Web.Security.Membership.PasswordAttemptWindow" /> property, then the membership user is locked out. The user is locked out by setting the <see cref="P:System.Web.Security.MembershipUser.IsLockedOut" /> property to true until the user is unlocked by a call to the <see cref="M:System.Web.Security.MembershipUser.UnlockUser" /> method.
+          </para>
           <para
             >If the interval between the current failed attempt and the last failed attempt is greater than the <see cref="P:System.Web.Security.Membership.PasswordAttemptWindow" /> property setting, the current invalid attempt is counted as the first. If a valid password answer is supplied before the maximum number of allowed invalid attempts is reached, the count of invalid password-answer attempts is set to 0 (zero). If a valid password is supplied before the maximum number of allowed invalid attempts is reached, the count of invalid password attempts and the count of invalid password-answer attempts are set to 0 (zero).</para
           >
@@ -1278,8 +1278,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.Security.Membership.PasswordStrengthRegularExpression" /> property gets the regular expression used to evaluate password complexity from the provider specified in the <see cref="P:System.Web.Security.Membership.Provider" /> property. </para
-          >
+            >The <see cref="P:System.Web.Security.Membership.PasswordStrengthRegularExpression" /> property gets the regular expression used to evaluate password complexity from the provider specified in the <see cref="P:System.Web.Security.Membership.Provider" /> property.
+          </para>
           <para
             >The <see cref="P:System.Web.Security.Membership.PasswordStrengthRegularExpression" /> property is set in the application configuration using the passwordStrengthRegularExpression attribute of the <format type="text/html">
               <a href="b9c1ee8f-33ca-4361-8666-b42a0fe86049">membership</a>
@@ -1373,8 +1373,8 @@
               <a href="b9c1ee8f-33ca-4361-8666-b42a0fe86049">membership</a>
             </format> section, you must specify the defaultProvider attribute. If you do not specify a <format type="text/html">
               <a href="b9c1ee8f-33ca-4361-8666-b42a0fe86049">membership</a>
-            </format> section in your Web.config, the values from the machine configuration are used and the <see cref="T:System.Web.Security.SqlMembershipProvider" /> instance named AspNetSqlProvider is established as the defaultProvider. </para
-          >
+            </format> section in your Web.config, the values from the machine configuration are used and the <see cref="T:System.Web.Security.SqlMembershipProvider" /> instance named AspNetSqlProvider is established as the defaultProvider.
+          </para>
           <para
             >You can obtain a strongly typed reference to a provider from the <see cref="P:System.Web.Security.Membership.Providers" /> collection by indexing the membership provider by name and casting it as the desired type.</para
           >
@@ -1451,8 +1451,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Web.Security.MembershipUser" /> object that represents the user to be updated and the updated information for the user. </param
-        >
+          />A <see cref="T:System.Web.Security.MembershipUser" /> object that represents the user to be updated and the updated information for the user.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1519,15 +1519,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the user to be validated. </param
-        >
+          />The name of the user to be validated.
+        </param>
         <param name="password">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The password for the specified user. </param
-        >
+          />The password for the specified user.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

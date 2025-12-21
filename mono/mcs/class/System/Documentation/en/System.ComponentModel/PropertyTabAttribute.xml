@@ -98,8 +98,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The assembly qualified name of the type of tab to create. For an example of this format convention, see <see cref="P:System.Type.AssemblyQualifiedName" />. </param
-        >
+          />The assembly qualified name of the type of tab to create. For an example of this format convention, see <see cref="P:System.Type.AssemblyQualifiedName" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -127,12 +127,8 @@
           >
         </summary>
         <param name="tabClass">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The type of tab to create. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The type of tab to create.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -168,15 +164,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The assembly qualified name of the type of tab to create. For an example of this format convention, see <see cref="P:System.Type.AssemblyQualifiedName" />. </param
-        >
+          />The assembly qualified name of the type of tab to create. For an example of this format convention, see <see cref="P:System.Type.AssemblyQualifiedName" />.
+        </param>
         <param name="tabScope">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.ComponentModel.PropertyTabScope" /> that indicates the scope of this tab. If the scope is <see cref="F:System.ComponentModel.PropertyTabScope.Component" />, it is shown only for components with the corresponding <see cref="T:System.ComponentModel.PropertyTabAttribute" />. If it is <see cref="F:System.ComponentModel.PropertyTabScope.Document" />, it is shown for all components on the document. </param
-        >
+          />A <see cref="T:System.ComponentModel.PropertyTabScope" /> that indicates the scope of this tab. If the scope is <see cref="F:System.ComponentModel.PropertyTabScope.Component" />, it is shown only for components with the corresponding <see cref="T:System.ComponentModel.PropertyTabAttribute" />. If it is <see cref="F:System.ComponentModel.PropertyTabScope.Document" />, it is shown for all components on the document.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -208,19 +204,15 @@
           >
         </summary>
         <param name="tabClass">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The type of tab to create. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The type of tab to create.
+        </param>
         <param name="tabScope">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.ComponentModel.PropertyTabScope" /> that indicates the scope of this tab. If the scope is <see cref="F:System.ComponentModel.PropertyTabScope.Component" />, it is shown only for components with the corresponding <see cref="T:System.ComponentModel.PropertyTabAttribute" />. If it is <see cref="F:System.ComponentModel.PropertyTabScope.Document" />, it is shown for all components on the document. </param
-        >
+          />A <see cref="T:System.ComponentModel.PropertyTabScope" /> that indicates the scope of this tab. If the scope is <see cref="F:System.ComponentModel.PropertyTabScope.Component" />, it is shown only for components with the corresponding <see cref="T:System.ComponentModel.PropertyTabAttribute" />. If it is <see cref="F:System.ComponentModel.PropertyTabScope.Document" />, it is shown for all components on the document.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -370,15 +362,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of fully qualified type names of the types to create for tabs on the Properties window. </param
-        >
+          />An array of fully qualified type names of the types to create for tabs on the Properties window.
+        </param>
         <param name="tabScopes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The scope of each tab. If the scope is <see cref="F:System.ComponentModel.PropertyTabScope.Component" />, it is shown only for components with the corresponding <see cref="T:System.ComponentModel.PropertyTabAttribute" />. If it is <see cref="F:System.ComponentModel.PropertyTabScope.Document" />, it is shown for all components on the document. </param
-        >
+          />The scope of each tab. If the scope is <see cref="F:System.ComponentModel.PropertyTabScope.Component" />, it is shown only for components with the corresponding <see cref="T:System.ComponentModel.PropertyTabAttribute" />. If it is <see cref="F:System.ComponentModel.PropertyTabScope.Document" />, it is shown for all components on the document.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="InitializeArrays">
@@ -419,15 +411,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The types of tabs to create. </param
-        >
+          />The types of tabs to create.
+        </param>
         <param name="tabScopes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The scope of each tab. If the scope is <see cref="F:System.ComponentModel.PropertyTabScope.Component" />, it is shown only for components with the corresponding <see cref="T:System.ComponentModel.PropertyTabAttribute" />. If it is <see cref="F:System.ComponentModel.PropertyTabScope.Document" />, it is shown for all components on the document. </param
-        >
+          />The scope of each tab. If the scope is <see cref="F:System.ComponentModel.PropertyTabScope.Component" />, it is shown only for components with the corresponding <see cref="T:System.ComponentModel.PropertyTabAttribute" />. If it is <see cref="F:System.ComponentModel.PropertyTabScope.Document" />, it is shown for all components on the document.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="TabClasses">

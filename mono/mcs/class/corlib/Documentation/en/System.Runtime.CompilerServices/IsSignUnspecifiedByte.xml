@@ -19,8 +19,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Some programming languages, such as C++, recognize three distinct char values: signed char, unsigned char, and char.  To distinguish the unmodified char type from the others, the Microsoft C++ compiler adds the <see cref="T:System.Runtime.CompilerServices.IsSignUnspecifiedByte" /> modifier to each char type emitted to an assembly.  </para
-      >
+        >Some programming languages, such as C++, recognize three distinct char values: signed char, unsigned char, and char.  To distinguish the unmodified char type from the others, the Microsoft C++ compiler adds the <see cref="T:System.Runtime.CompilerServices.IsSignUnspecifiedByte" /> modifier to each char type emitted to an assembly.
+      </para>
       <para>Compilers emit custom modifiers within metadata to change the way that the just-in-time (JIT) compiler handles values when the default behavior is not appropriate.  When the JIT compiler encounters a custom modifier, it handles the value in the way that the modifier specifies.  Compilers can apply custom modifiers to methods, parameters, and return values.  The JIT compiler must respond to required modifiers but can ignore optional modifiers.  </para>
       <para>You can emit custom modifiers into metadata using one of the following techniques:</para>
       <list type="bullet">

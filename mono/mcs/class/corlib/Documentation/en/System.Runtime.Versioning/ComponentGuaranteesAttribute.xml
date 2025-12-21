@@ -65,8 +65,8 @@
           <para
             >Exchange version-to-version compatibility (<see cref="F:System.Runtime.Versioning.ComponentGuaranteesOptions.Exchange" />). Extraordinary care is taken to ensure that future versions will not break the client. The client should use only these types in the signature of interfaces that are used for communication with other assemblies that are deployed independently of one another. Only one version of these types is expected to be in a given application domain, which means that if a client breaks, side-by-side execution cannot fix the compatibility problem. For more information, see the <format type="text/html">
               <a href="#Exchange">Exchange Type Compatibility</a>
-            </format> section. </para
-          >
+            </format> section.
+          </para>
         </item>
       </list>
       <para>The following sections discuss each level of guarantee in greater detail.</para>
@@ -95,8 +95,8 @@
         <h2>Stable Compatibility</h2>
       </format>
       <para
-        >Marking a type as <see cref="F:System.Runtime.Versioning.ComponentGuaranteesOptions.Stable" /> indicates that the type should remain stable across versions. However, it may also be possible for side-by-side versions of a stable type to exist in the same application domain. </para
-      >
+        >Marking a type as <see cref="F:System.Runtime.Versioning.ComponentGuaranteesOptions.Stable" /> indicates that the type should remain stable across versions. However, it may also be possible for side-by-side versions of a stable type to exist in the same application domain.
+      </para>
       <para>Stable types maintain a high binary compatibility bar. Because of this, providers should avoid making breaking changes to stable types. The following kinds of changes are acceptable:</para>
       <list type="bullet">
         <item>
@@ -123,8 +123,8 @@
         <see cref="F:System.Runtime.Versioning.ComponentGuaranteesOptions.Stable" /> provides a stronger version compatibility guarantee than <see cref="F:System.Runtime.Versioning.ComponentGuaranteesOptions.None" />. It is a common default for multi-version components.</para
       >
       <para>
-        <see cref="F:System.Runtime.Versioning.ComponentGuaranteesOptions.Stable" /> can be combined with <see cref="F:System.Runtime.Versioning.ComponentGuaranteesOptions.SideBySide" />, which states that the component will not break compatibility but is tested to work when more than one version is loaded in a given application domain. </para
-      >
+        <see cref="F:System.Runtime.Versioning.ComponentGuaranteesOptions.Stable" /> can be combined with <see cref="F:System.Runtime.Versioning.ComponentGuaranteesOptions.SideBySide" />, which states that the component will not break compatibility but is tested to work when more than one version is loaded in a given application domain.
+      </para>
       <para
         >After a type or method is marked as <see cref="F:System.Runtime.Versioning.ComponentGuaranteesOptions.Stable" />, it can be upgraded to <see cref="F:System.Runtime.Versioning.ComponentGuaranteesOptions.Exchange" />. However, it cannot be downgraded to <see cref="F:System.Runtime.Versioning.ComponentGuaranteesOptions.None" />.</para
       >
@@ -333,11 +333,11 @@
         <h2>Applying the Attribute</h2>
       </format>
       <para
-        >You can apply the <see cref="T:System.Runtime.Versioning.ComponentGuaranteesAttribute" /> to an assembly, a type, or a type member. Its application is hierarchical. That is, by default, the guarantee defined by the <see cref="P:System.Runtime.Versioning.ComponentGuaranteesAttribute.Guarantees" /> property of the attribute at the assembly level defines the guarantee of all types in the assembly and all members in those types. Similarly, if the guarantee is applied to the type, by default it also applies to each member of the type. </para
-      >
+        >You can apply the <see cref="T:System.Runtime.Versioning.ComponentGuaranteesAttribute" /> to an assembly, a type, or a type member. Its application is hierarchical. That is, by default, the guarantee defined by the <see cref="P:System.Runtime.Versioning.ComponentGuaranteesAttribute.Guarantees" /> property of the attribute at the assembly level defines the guarantee of all types in the assembly and all members in those types. Similarly, if the guarantee is applied to the type, by default it also applies to each member of the type.
+      </para>
       <para
-        >This inherited guarantee can be overridden by applying the <see cref="T:System.Runtime.Versioning.ComponentGuaranteesAttribute" /> to individual types and type members. However, guarantees that override the default can only weaken the guarantee; they cannot strengthen it. For example, if an assembly is marked with the <see cref="F:System.Runtime.Versioning.ComponentGuaranteesOptions.None" /> guarantee, its types and members have no compatibility guarantee, and any other guarantee that is applied to types or members in the assembly is ignored. </para
-      >
+        >This inherited guarantee can be overridden by applying the <see cref="T:System.Runtime.Versioning.ComponentGuaranteesAttribute" /> to individual types and type members. However, guarantees that override the default can only weaken the guarantee; they cannot strengthen it. For example, if an assembly is marked with the <see cref="F:System.Runtime.Versioning.ComponentGuaranteesOptions.None" /> guarantee, its types and members have no compatibility guarantee, and any other guarantee that is applied to types or members in the assembly is ignored.
+      </para>
       <format type="text/html">
         <h2>Testing the Guarantee</h2>
       </format>

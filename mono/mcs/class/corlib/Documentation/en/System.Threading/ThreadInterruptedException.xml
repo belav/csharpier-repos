@@ -30,8 +30,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >After a thread is created, it is in one or more <see cref="T:System.Threading.ThreadState" /> states until it is destroyed. Calling <see cref="M:System.Threading.Thread.Interrupt" /> when a thread is in the <see cref="F:System.Threading.ThreadState.WaitSleepJoin" /> state will cause a <see cref="T:System.Threading.ThreadInterruptedException" /> to be thrown in the target thread. If the thread is not in the <see cref="F:System.Threading.ThreadState.WaitSleepJoin" /> state, the exception is not thrown until the thread enters that state. If the thread never blocks, it could complete without ever being interrupted. </para
-      >
+        >After a thread is created, it is in one or more <see cref="T:System.Threading.ThreadState" /> states until it is destroyed. Calling <see cref="M:System.Threading.Thread.Interrupt" /> when a thread is in the <see cref="F:System.Threading.ThreadState.WaitSleepJoin" /> state will cause a <see cref="T:System.Threading.ThreadInterruptedException" /> to be thrown in the target thread. If the thread is not in the <see cref="F:System.Threading.ThreadState.WaitSleepJoin" /> state, the exception is not thrown until the thread enters that state. If the thread never blocks, it could complete without ever being interrupted.
+      </para>
       <para>
         <see cref="T:System.Threading.ThreadInterruptedException" /> uses the HRESULT COR_E_THREADINTERRUPTED, which has the value 0x80131519.</para
       >
@@ -174,8 +174,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The error message that explains the reason for the exception. </param
-        >
+          />The error message that explains the reason for the exception.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -218,15 +218,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception being thrown. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception being thrown.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual information about the source or destination. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual information about the source or destination.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -302,15 +302,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The error message that explains the reason for the exception. </param
-        >
+          />The error message that explains the reason for the exception.
+        </param>
         <param name="innerException">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The exception that is the cause of the current exception. If the <paramref name="innerException" /> parameter is not null, the current exception is raised in a catch block that handles the inner exception. </param
-        >
+          />The exception that is the cause of the current exception. If the <paramref name="innerException" /> parameter is not null, the current exception is raised in a catch block that handles the inner exception.
+        </param>
       </Docs>
     </Member>
   </Members>

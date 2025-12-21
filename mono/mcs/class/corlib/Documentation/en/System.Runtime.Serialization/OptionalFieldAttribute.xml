@@ -33,8 +33,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies that a field can be missing from a serialization stream so that the <see cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" /> and the <see cref="T:System.Runtime.Serialization.Formatters.Soap.SoapFormatter" /> does not throw an exception. </para
-      >
+        >Specifies that a field can be missing from a serialization stream so that the <see cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" /> and the <see cref="T:System.Runtime.Serialization.Formatters.Soap.SoapFormatter" /> does not throw an exception.
+      </para>
     </summary>
   </Docs>
   <Members>
@@ -56,8 +56,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.OptionalFieldAttribute" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.OptionalFieldAttribute" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>

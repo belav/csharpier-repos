@@ -36,8 +36,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Choose this option if you want to encrypt view state in your Web application. If you choose this option, the <see cref="P:System.Web.Configuration.MachineKeySection.DecryptionKey" /> property will be used for encryption and decryption, and the HMACSHA1 hash algorithm will be used with the <see cref="P:System.Web.Configuration.MachineKeySection.ValidationKey" /> property for validation. </para
-          >
+            >Choose this option if you want to encrypt view state in your Web application. If you choose this option, the <see cref="P:System.Web.Configuration.MachineKeySection.DecryptionKey" /> property will be used for encryption and decryption, and the HMACSHA1 hash algorithm will be used with the <see cref="P:System.Web.Configuration.MachineKeySection.ValidationKey" /> property for validation.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

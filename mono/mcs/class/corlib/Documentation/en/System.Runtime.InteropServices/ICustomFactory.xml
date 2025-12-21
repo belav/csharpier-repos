@@ -71,12 +71,8 @@
           >
         </returns>
         <param name="serverType">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The type to activate. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The type to activate.
+        </param>
       </Docs>
     </Member>
   </Members>

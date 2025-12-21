@@ -38,8 +38,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see cref="T:System.ServiceModel.Configuration.IssuedTokenClientBehaviorsElement" /> instances. This class cannot be inherited. </para
-      >
+        >Represents a collection of <see cref="T:System.ServiceModel.Configuration.IssuedTokenClientBehaviorsElement" /> instances. This class cannot be inherited.
+      </para>
     </summary>
   </Docs>
   <Members>

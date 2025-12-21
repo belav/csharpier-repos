@@ -38,8 +38,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.AutoCompleteStringCollection" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.AutoCompleteStringCollection" /> class.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -215,8 +215,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position within the collection at which to start the insertion. </param
-        >
+          />The position within the collection at which to start the insertion.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -422,8 +422,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.Windows.Forms.AutoCompleteStringCollection.CollectionChanged" /> event. </para
-          >
+            >Raises the <see cref="E:System.Windows.Forms.AutoCompleteStringCollection.CollectionChanged" /> event.
+          </para>
         </summary>
         <param name="e">
           <attribution

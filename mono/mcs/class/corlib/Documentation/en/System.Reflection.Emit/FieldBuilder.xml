@@ -199,8 +199,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Controls inheritance of custom attributes from base classes. </param
-        >
+          />Controls inheritance of custom attributes from base classes.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttributes">
@@ -238,19 +238,15 @@
           >
         </returns>
         <param name="attributeType">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The custom attribute type. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The custom attribute type.
+        </param>
         <param name="inherit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Controls inheritance of custom attributes from base classes. </param
-        >
+          />Controls inheritance of custom attributes from base classes.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetToken">
@@ -330,8 +326,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object on which to access the field. </param
-        >
+          />The object on which to access the field.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsDefined">
@@ -369,19 +365,15 @@
           >
         </returns>
         <param name="attributeType">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The type of the attribute. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The type of the attribute.
+        </param>
         <param name="inherit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Controls inheritance of custom attributes from base classes. </param
-        >
+          />Controls inheritance of custom attributes from base classes.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Module">
@@ -503,8 +495,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new default value for this field. </param
-        >
+          />The new default value for this field.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetCustomAttribute">
@@ -539,8 +531,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An instance of a helper class to define the custom attribute. </param
-        >
+          />An instance of a helper class to define the custom attribute.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetCustomAttribute">
@@ -591,15 +583,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The constructor for the custom attribute. </param
-        >
+          />The constructor for the custom attribute.
+        </param>
         <param name="binaryAttribute">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A byte blob representing the attributes. </param
-        >
+          />A byte blob representing the attributes.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetMarshal">
@@ -643,8 +635,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A descriptor specifying the native marshalling of this field. </param
-        >
+          />A descriptor specifying the native marshalling of this field.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetOffset">
@@ -680,8 +672,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The offset of the field within the type containing this field. </param
-        >
+          />The offset of the field within the type containing this field.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetValue">
@@ -735,36 +727,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object on which to access the field. </param
-        >
+          />The object on which to access the field.
+        </param>
         <param name="val">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to assign to the field. </param
-        >
+          />The value to assign to the field.
+        </param>
         <param name="invokeAttr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A member of IBinder that specifies the type of binding that is desired (for example, IBinder.CreateInstance, IBinder.ExactBinding). </param
-        >
+          />A member of IBinder that specifies the type of binding that is desired (for example, IBinder.CreateInstance, IBinder.ExactBinding).
+        </param>
         <param name="binder">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A set of properties and enabling for binding, coercion of argument types, and invocation of members using reflection. If binder is null, then IBinder.DefaultBinding is used. </param
-        >
+          />A set of properties and enabling for binding, coercion of argument types, and invocation of members using reflection. If binder is null, then IBinder.DefaultBinding is used.
+        </param>
         <param name="culture">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The software preferences of a particular culture. </param
-        >
+          />The software preferences of a particular culture.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.Runtime.InteropServices._FieldBuilder.GetIDsOfNames">

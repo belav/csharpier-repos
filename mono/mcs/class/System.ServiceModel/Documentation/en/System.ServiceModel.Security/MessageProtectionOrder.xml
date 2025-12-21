@@ -25,8 +25,8 @@
         <h2>What Is Ordered?</h2>
       </format>
       <para
-        >indigo2 offers three different protection levels that determine how messages are secured using SOAP message security. The default is <see cref="F:System.ServiceModel.Security.MessageProtectionOrder.SignBeforeEncryptAndEncryptSignature" />. This setting first signs the message, encrypts the message body, and then encrypts the XML signature. This reduces the likelihood of a successful cryptographic guessing attack against the signature. </para
-      >
+        >indigo2 offers three different protection levels that determine how messages are secured using SOAP message security. The default is <see cref="F:System.ServiceModel.Security.MessageProtectionOrder.SignBeforeEncryptAndEncryptSignature" />. This setting first signs the message, encrypts the message body, and then encrypts the XML signature. This reduces the likelihood of a successful cryptographic guessing attack against the signature.
+      </para>
       <para
         >However, using the default has performance implications. In effect, there is a tradeoff of performance for increased security. Encrypting the signature can decrease performance between 10 percent and 40 percent. If the data content of the message is of low value, and performance throughput is more significant, use <see cref="F:System.ServiceModel.Security.MessageProtectionOrder.SignBeforeEncrypt" />. With this setting, the signature digest is sent in clear text, and thus the message is more vulnerable to guess-and-verify attacks on low entropy.</para
       >

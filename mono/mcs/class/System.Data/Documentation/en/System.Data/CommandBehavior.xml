@@ -90,8 +90,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When <see cref="F:System.Data.CommandBehavior.KeyInfo" /> is used for command execution, the provider will append extra columns to the result set for existing primary key and timestamp columns. </para
-          >
+            >When <see cref="F:System.Data.CommandBehavior.KeyInfo" /> is used for command execution, the provider will append extra columns to the result set for existing primary key and timestamp columns.
+          </para>
           <para
             >When using <see cref="F:System.Data.CommandBehavior.KeyInfo" />, the .NET Framework Data Provider for SQL Server precedes the statement being executed with SET FMTONLY OFF and SET NO_BROWSETABLE ON. The user should be aware of potential side effects, such as interference with the use of SET FMTONLY ON statements. See SQL Server Books Online for more information.</para
           >

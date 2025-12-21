@@ -14,8 +14,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When a page is parsed, the values contained in a resource expression are parsed and stored in an instance of the <see cref="T:System.Web.Compilation.ResourceExpressionFields" /> class. This <see cref="T:System.Web.Compilation.ResourceExpressionFields" /> object contains two fields, <see cref="P:System.Web.Compilation.ResourceExpressionFields.ClassKey" /> and <see cref="P:System.Web.Compilation.ResourceExpressionFields.ResourceKey" />. These fields are drawn from the values of a resource expression in either the explicit (&lt;%$ Resources: ClassKey, ResourceKey %&gt;) or implicit (meta:resourcekey="ResourceKey") form. </para
-      >
+        >When a page is parsed, the values contained in a resource expression are parsed and stored in an instance of the <see cref="T:System.Web.Compilation.ResourceExpressionFields" /> class. This <see cref="T:System.Web.Compilation.ResourceExpressionFields" /> object contains two fields, <see cref="P:System.Web.Compilation.ResourceExpressionFields.ClassKey" /> and <see cref="P:System.Web.Compilation.ResourceExpressionFields.ResourceKey" />. These fields are drawn from the values of a resource expression in either the explicit (&lt;%$ Resources: ClassKey, ResourceKey %&gt;) or implicit (meta:resourcekey="ResourceKey") form.
+      </para>
       <para
         >The <see cref="P:System.Web.Compilation.ResourceExpressionFields.ClassKey" /> property identifies the class name of a resource that is mapped to a resource file. For example, to reference a resource file named Financial.resx, or a localized version such as Financial.en-GB.resx, the resource expression would appear as &lt;%$ Resources: Financial, ResourceKey %&gt;. After parsing, the <see cref="P:System.Web.Compilation.ResourceExpressionFields.ClassKey" /> property would return "Financial" as its value.</para
       >

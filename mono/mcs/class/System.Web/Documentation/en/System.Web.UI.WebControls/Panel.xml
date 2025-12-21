@@ -63,8 +63,8 @@
         >The <see cref="P:System.Web.UI.WebControls.Panel.Direction" /> property is useful for localizing a <see cref="T:System.Web.UI.WebControls.Panel" /> control's content to display text for languages that are written from right to left, such as Arabic or Hebrew.</para
       >
       <para
-        >The <see cref="T:System.Web.UI.WebControls.Panel" /> control provides several properties that allow you to customize the behavior and display of its contents. Use the <see cref="P:System.Web.UI.WebControls.Panel.BackImageUrl" /> property to display a custom image for the <see cref="T:System.Web.UI.WebControls.Panel" /> control. Use the <see cref="P:System.Web.UI.WebControls.Panel.ScrollBars" /> property to specify scroll bars for the control. </para
-      >
+        >The <see cref="T:System.Web.UI.WebControls.Panel" /> control provides several properties that allow you to customize the behavior and display of its contents. Use the <see cref="P:System.Web.UI.WebControls.Panel.BackImageUrl" /> property to display a custom image for the <see cref="T:System.Web.UI.WebControls.Panel" /> control. Use the <see cref="P:System.Web.UI.WebControls.Panel.ScrollBars" /> property to specify scroll bars for the control.
+      </para>
       <format type="text/html">
         <a href="#declarative_syntax" />
       </format>
@@ -267,8 +267,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.Web.UI.WebControls.Panel.DefaultButton" /> property to indicate which button gets clicked when the <see cref="T:System.Web.UI.WebControls.Panel" /> control has focus and the user presses the ENTER key. The <see cref="P:System.Web.UI.WebControls.Panel.DefaultButton" /> can be set to the identifier for a <see cref="T:System.Web.UI.WebControls.Button" /> control or any control that implements the <see cref="T:System.Web.UI.WebControls.IButtonControl" /> interface except a <see cref="T:System.Web.UI.WebControls.LinkButton" /> control. </para
-          >
+            >Use the <see cref="P:System.Web.UI.WebControls.Panel.DefaultButton" /> property to indicate which button gets clicked when the <see cref="T:System.Web.UI.WebControls.Panel" /> control has focus and the user presses the ENTER key. The <see cref="P:System.Web.UI.WebControls.Panel.DefaultButton" /> can be set to the identifier for a <see cref="T:System.Web.UI.WebControls.Button" /> control or any control that implements the <see cref="T:System.Web.UI.WebControls.IButtonControl" /> interface except a <see cref="T:System.Web.UI.WebControls.LinkButton" /> control.
+          </para>
           <para
             >If the <see cref="P:System.Web.UI.WebControls.Panel.DefaultButton" /> is set to a control that does not implement the <see cref="T:System.Web.UI.WebControls.IButtonControl" /> interface, or to a control that is not contained in the <see cref="T:System.Web.UI.WebControls.Panel" /> control, the <see cref="T:System.Web.UI.WebControls.Panel" /> control throws an exception while rendering.</para
           >
@@ -286,8 +286,8 @@
             </item>
             <item>
               <para
-                >Referencing a default button that is a <see cref="T:System.Web.UI.WebControls.LinkButton" /> control. Only <see cref="T:System.Web.UI.WebControls.Button" /> and <see cref="T:System.Web.UI.WebControls.ImageButton" /> controls are supported. </para
-              >
+                >Referencing a default button that is a <see cref="T:System.Web.UI.WebControls.LinkButton" /> control. Only <see cref="T:System.Web.UI.WebControls.Button" /> and <see cref="T:System.Web.UI.WebControls.ImageButton" /> controls are supported.
+              </para>
             </item>
             <item>
               <para
@@ -295,8 +295,8 @@
                   <a href="29a2265d-9674-4c19-b70e-e5560ee9689a">UpdatePanel Control Overview</a>
                 </format> and <format type="text/html">
                   <a href="5c12736d-d9e9-464a-9388-3fe0f9f49e49">Partial-Page Rendering Overview</a>
-                </format>. </para
-              >
+                </format>.
+              </para>
             </item>
             <item>
               <para
@@ -527,8 +527,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Web.UI.HtmlTextWriter" /> that represents the output stream to render HTML content on the client. </param
-        >
+          />An <see cref="T:System.Web.UI.HtmlTextWriter" /> that represents the output stream to render HTML content on the client.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ScrollBars">

@@ -56,13 +56,13 @@ library OldLib {
         <h2>Implementing the ICustomMarshaler Interface</h2>
       </format>
       <para
-        >Your custom marshaler must implement the <see cref="T:System.Runtime.InteropServices.ICustomMarshaler" /> interface to provide the appropriate wrappers to the runtime. </para
-      >
+        >Your custom marshaler must implement the <see cref="T:System.Runtime.InteropServices.ICustomMarshaler" /> interface to provide the appropriate wrappers to the runtime.
+      </para>
       <para>The following C# code displays the base interface that must be implemented by all custom marshalers. </para>
       <para>code reference: System.Runtime.InteropServices.ICustomMarshaler#2</para>
       <para
-        >The <see cref="T:System.Runtime.InteropServices.ICustomMarshaler" /> interface includes methods that provide conversion support, cleanup support, and information about the data to be marshaled. </para
-      >
+        >The <see cref="T:System.Runtime.InteropServices.ICustomMarshaler" /> interface includes methods that provide conversion support, cleanup support, and information about the data to be marshaled.
+      </para>
       <list type="table">
         <listheader>
           <item>
@@ -278,8 +278,8 @@ library UserLib {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The managed object to be destroyed. </param
-        >
+          />The managed object to be destroyed.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CleanUpNativeData">
@@ -311,8 +311,8 @@ library UserLib {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A pointer to the unmanaged data to be destroyed. </param
-        >
+          />A pointer to the unmanaged data to be destroyed.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetNativeDataSize">
@@ -379,8 +379,8 @@ library UserLib {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The managed object to be converted. </param
-        >
+          />The managed object to be converted.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="MarshalNativeToManaged">
@@ -419,8 +419,8 @@ library UserLib {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A pointer to the unmanaged data to be wrapped. </param
-        >
+          />A pointer to the unmanaged data to be wrapped.
+        </param>
       </Docs>
     </Member>
   </Members>

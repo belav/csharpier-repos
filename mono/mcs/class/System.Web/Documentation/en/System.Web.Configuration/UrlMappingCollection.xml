@@ -122,16 +122,16 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you save the configuration file after calling the <see cref="M:System.Web.Configuration.UrlMappingCollection.Clear" /> method, the result will be dependent upon the chosen <see cref="T:System.Configuration.ConfigurationSaveMode" />. </para
-          >
+            >If you save the configuration file after calling the <see cref="M:System.Web.Configuration.UrlMappingCollection.Clear" /> method, the result will be dependent upon the chosen <see cref="T:System.Configuration.ConfigurationSaveMode" />.
+          </para>
           <para
             >The following list describes the conditions that apply if you use the <see cref="M:System.Configuration.Configuration.Save(System.Configuration.ConfigurationSaveMode)" /> method to save the file:</para
           >
           <list type="bullet">
             <item>
               <para
-                >If you pass <see cref="F:System.Configuration.ConfigurationSaveMode.Full" /> or <see cref="F:System.Configuration.ConfigurationSaveMode.Modified" /> as the parameter value, a clear element is inserted into the urlMappings section of the configuration file at the current hierarchy level. </para
-              >
+                >If you pass <see cref="F:System.Configuration.ConfigurationSaveMode.Full" /> or <see cref="F:System.Configuration.ConfigurationSaveMode.Modified" /> as the parameter value, a clear element is inserted into the urlMappings section of the configuration file at the current hierarchy level.
+              </para>
             </item>
             <item>
               <para
@@ -140,8 +140,8 @@
               <list type="bullet">
                 <item>
                   <para>
-                    <see cref="P:System.Configuration.ConfigurationElementCollection.EmitClear" /> set to true. A clear element is inserted into the urlMappings section of the configuration file at the current hierarchy level. This removes all references to the add elements defined in the parent configuration files at higher levels in the hierarchy. </para
-                  >
+                    <see cref="P:System.Configuration.ConfigurationElementCollection.EmitClear" /> set to true. A clear element is inserted into the urlMappings section of the configuration file at the current hierarchy level. This removes all references to the add elements defined in the parent configuration files at higher levels in the hierarchy.
+                  </para>
                 </item>
                 <item>
                   <para>

@@ -53,8 +53,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="switchLevelType" /> parameter identifies the type that is used by the switch to determine if a trace should be written; for example, the type of the <see cref="P:System.Diagnostics.TraceSwitch.Level" /> property of the <see cref="T:System.Diagnostics.TraceSwitch" /> class is <see cref="T:System.Diagnostics.TraceLevel" />. </para
-          >
+            >The <paramref name="switchLevelType" /> parameter identifies the type that is used by the switch to determine if a trace should be written; for example, the type of the <see cref="P:System.Diagnostics.TraceSwitch.Level" /> property of the <see cref="T:System.Diagnostics.TraceSwitch" /> class is <see cref="T:System.Diagnostics.TraceLevel" />.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

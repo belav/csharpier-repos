@@ -43,8 +43,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripDropDownItem" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripDropDownItem" /> class.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -288,16 +288,16 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see cref="T:System.Windows.Forms.ToolStripDropDownItem" /> and optionally releases the managed resources. </para
-          >
+            >Releases the unmanaged resources used by the <see cref="T:System.Windows.Forms.ToolStripDropDownItem" /> and optionally releases the managed resources.
+          </para>
         </summary>
         <param name="disposing">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -318,8 +318,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If no <see cref="T:System.Windows.Forms.ToolStripDropDown" /> is associated with the <see cref="T:System.Windows.Forms.ToolStripDropDownItem" />, a call to <see cref="M:System.Windows.Forms.ToolStripDropDownItem.CreateDefaultDropDown" /> creates a generic drop-down control. </para
-          >
+            >If no <see cref="T:System.Windows.Forms.ToolStripDropDown" /> is associated with the <see cref="T:System.Windows.Forms.ToolStripDropDownItem" />, a call to <see cref="M:System.Windows.Forms.ToolStripDropDownItem.CreateDefaultDropDown" /> creates a generic drop-down control.
+          </para>
           <block subset="none" type="note">
             <para
               >If a drop-down control is automatically generated, which means that items are added to the collection, and you then set the <see cref="P:System.Windows.Forms.ToolStripDropDownItem.DropDown" /> property to an explicit drop-down control, you might lose data.</para
@@ -355,14 +355,14 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see cref="T:System.Windows.Forms.ToolStripDropDown" /> closes. </para
-          >
+            >Occurs when the <see cref="T:System.Windows.Forms.ToolStripDropDown" /> closes.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -414,8 +414,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -501,8 +501,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -528,8 +528,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -555,8 +555,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see cref="T:System.Windows.Forms.ToolStripDropDownItem" /> has <see cref="T:System.Windows.Forms.ToolStripDropDown" /> controls associated with it. </para
-          >
+            >Gets a value indicating whether the <see cref="T:System.Windows.Forms.ToolStripDropDownItem" /> has <see cref="T:System.Windows.Forms.ToolStripDropDown" /> controls associated with it.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -648,8 +648,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnDropDownHide">
@@ -772,8 +772,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnDropDownShow">
@@ -963,8 +963,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.Keys" /> values that represents the key to process. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.Keys" /> values that represents the key to process.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ShowDropDown">

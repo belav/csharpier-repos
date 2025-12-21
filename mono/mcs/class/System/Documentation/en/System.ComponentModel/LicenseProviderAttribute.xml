@@ -114,8 +114,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The fully qualified name of the license provider class. </param
-        >
+          />The fully qualified name of the license provider class.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -147,8 +147,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> that represents the type of the license provider class. </param
-        >
+          />A <see cref="T:System.Type" /> that represents the type of the license provider class.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Default">

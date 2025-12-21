@@ -36,8 +36,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.Services.Discovery.ExcludePathInfo" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Discovery.ExcludePathInfo" /> class.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -62,8 +62,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.Services.Discovery.ExcludePathInfo" /> class and specifies the file system path to exclude from searches. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Discovery.ExcludePathInfo" /> class and specifies the file system path to exclude from searches.
+          </para>
         </summary>
         <param name="path">
           <attribution

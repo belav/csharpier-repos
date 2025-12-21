@@ -44,8 +44,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ScrollProperties" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ScrollProperties" /> class.
+          </para>
         </summary>
         <param name="container">
           <attribution
@@ -101,8 +101,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="P:System.Windows.Forms.ScrollProperties.LargeChange" /> is used to determine how far the scroll bar is moved in response to a request to move a considerable distance, such as when the user presses the PAGE UP or PAGE DOWN button. </para
-          >
+            <see cref="P:System.Windows.Forms.ScrollProperties.LargeChange" /> is used to determine how far the scroll bar is moved in response to a request to move a considerable distance, such as when the user presses the PAGE UP or PAGE DOWN button.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

@@ -36,8 +36,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.ServiceModel.Description.ClientViaBehavior" /> is used by clients to specify the URI for which the transport channel should be created. </para
-      >
+        >The <see cref="T:System.ServiceModel.Description.ClientViaBehavior" /> is used by clients to specify the URI for which the transport channel should be created.
+      </para>
     </summary>
   </Docs>
   <Members>
@@ -59,8 +59,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.ClientViaBehavior" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.ClientViaBehavior" /> class.
+          </para>
         </summary>
         <param name="uri">
           <attribution

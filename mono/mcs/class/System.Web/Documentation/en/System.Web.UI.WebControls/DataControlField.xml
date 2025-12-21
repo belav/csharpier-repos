@@ -747,8 +747,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Types derived from <see cref="T:System.Web.UI.WebControls.DataControlField" /> implement the <see cref="M:System.Web.UI.WebControls.DataControlField.InitializeCell(System.Web.UI.WebControls.DataControlFieldCell,System.Web.UI.WebControls.DataControlCellType,System.Web.UI.WebControls.DataControlRowState,System.Int32)" /> method to add text and controls to a <see cref="T:System.Web.UI.WebControls.DataControlFieldCell" /> object that belongs to a data control that uses tables to display a user interface (UI). These data controls create the complete table structure row by row when their respective CreateChildControls methods are called. The <see cref="M:System.Web.UI.WebControls.DataControlField.InitializeCell(System.Web.UI.WebControls.DataControlFieldCell,System.Web.UI.WebControls.DataControlCellType,System.Web.UI.WebControls.DataControlRowState,System.Int32)" /> method is called by the InitializeRow method of data controls such as <see cref="T:System.Web.UI.WebControls.DetailsView" /> and <see cref="T:System.Web.UI.WebControls.GridView" />. </para
-          >
+            >Types derived from <see cref="T:System.Web.UI.WebControls.DataControlField" /> implement the <see cref="M:System.Web.UI.WebControls.DataControlField.InitializeCell(System.Web.UI.WebControls.DataControlFieldCell,System.Web.UI.WebControls.DataControlCellType,System.Web.UI.WebControls.DataControlRowState,System.Int32)" /> method to add text and controls to a <see cref="T:System.Web.UI.WebControls.DataControlFieldCell" /> object that belongs to a data control that uses tables to display a user interface (UI). These data controls create the complete table structure row by row when their respective CreateChildControls methods are called. The <see cref="M:System.Web.UI.WebControls.DataControlField.InitializeCell(System.Web.UI.WebControls.DataControlFieldCell,System.Web.UI.WebControls.DataControlCellType,System.Web.UI.WebControls.DataControlRowState,System.Int32)" /> method is called by the InitializeRow method of data controls such as <see cref="T:System.Web.UI.WebControls.DetailsView" /> and <see cref="T:System.Web.UI.WebControls.GridView" />.
+          </para>
           <para
             >Call this method when you are writing a custom data-bound control that uses <see cref="T:System.Web.UI.WebControls.DataControlFieldCell" /> objects to initialize the cells of the table structure with data or controls. Implement this method when you are writing a class derived from <see cref="T:System.Web.UI.WebControls.DataControlField" />.</para
           >
@@ -972,8 +972,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is used primarily by control developers.</para>
           <para
-            >View state is the accumulation of the values of a server control's properties. These values are automatically placed in the server control's <see cref="P:System.Web.UI.Control.ViewState" /> property, which is an instance of the <see cref="T:System.Web.UI.StateBag" /> class. This property's value is then persisted to a string object after the save state stage of the server control life cycle. </para
-          >
+            >View state is the accumulation of the values of a server control's properties. These values are automatically placed in the server control's <see cref="P:System.Web.UI.Control.ViewState" /> property, which is an instance of the <see cref="T:System.Web.UI.StateBag" /> class. This property's value is then persisted to a string object after the save state stage of the server control life cycle.
+          </para>
           <para
             >When view state is saved, a string is returned to the client as a variable that is stored in an HTML hidden element. When you author custom server controls, you can improve efficiency by overriding this method and modifying your server control's <see cref="P:System.Web.UI.Control.ViewState" /> property. For more information, see <format type="text/html">
               <a href="19d2a6ed-9a77-4c7c-a7f5-74dd4b6c3818">View State Overview</a>
@@ -1263,13 +1263,13 @@
           <para
             >A data control field's view state is the accumulation of all its property values. To preserve these values across HTTP requests, ASP.NET server controls use this property, which is an instance of the <see cref="T:System.Web.UI.StateBag" /> class, to store the property values. The values are then passed as a variable to an HTML hidden input element when subsequent requests are processed. For more information about saving server control view state, see <format type="text/html">
               <a href="19d2a6ed-9a77-4c7c-a7f5-74dd4b6c3818">View State Overview</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
           <para
             >View state is enabled for all server controls by default, but there are circumstances when you will want to disable it. For more information, see <format type="text/html">
               <a href="f882bf1b-a009-4312-ac06-74370ffabc0b">Performance Overview</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
           <para
             >For more information about dictionaries and how to use them, see <format type="text/html">
               <a href="60cc581f-1db5-445b-ba04-a173396bf872">Grouping Data in Collections</a>

@@ -436,15 +436,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.DateTime" /> to which to add months. </param
-        >
+          />The <see cref="T:System.DateTime" /> to which to add months.
+        </param>
         <param name="months">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of months to add. </param
-        >
+          />The number of months to add.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddYears">
@@ -503,15 +503,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.DateTime" /> to which to add years. </param
-        >
+          />The <see cref="T:System.DateTime" /> to which to add years.
+        </param>
         <param name="years">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of years to add. </param
-        >
+          />The number of years to add.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AlgorithmType">
@@ -693,8 +693,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.DateTime" /> to read. </param
-        >
+          />The <see cref="T:System.DateTime" /> to read.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetDayOfWeek">
@@ -808,8 +808,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.DateTime" /> to read. </param
-        >
+          />The <see cref="T:System.DateTime" /> to read.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetDayOfYear">
@@ -854,8 +854,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.DateTime" /> to read. </param
-        >
+          />The <see cref="T:System.DateTime" /> to read.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetDaysInMonth">
@@ -901,22 +901,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the year. </param
-        >
+          />An integer that represents the year.
+        </param>
         <param name="month">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer from 1 to 12 that represents the month. </param
-        >
+          />An integer from 1 to 12 that represents the month.
+        </param>
         <param name="era">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the era. </param
-        >
+          />An integer that represents the era.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetDaysInYear">
@@ -961,15 +961,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the year. </param
-        >
+          />An integer that represents the year.
+        </param>
         <param name="era">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the era. </param
-        >
+          />An integer that represents the era.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetEra">
@@ -1070,8 +1070,8 @@
             </item>
           </list>
           <para
-            >Ordinarily, the <see cref="T:System.Globalization.JapaneseCalendar" /> class supports dates from September 8 in the year Meiji 1 (September 8, 1868 of the Gregorian calendar), which is the value of the <see cref="P:System.Globalization.JapaneseCalendar.MinSupportedDateTime" /> property. However, the <see cref="M:System.Globalization.JapaneseCalendar.GetEra(System.DateTime)" /> method successfully returns the era for dates from January 1 through September 7 in the year Meiji 1 (January 1, 1868 through September 7, 1868 in the Gregorian calendar). For dates earlier than January 1, 1868 in the Gregorian calendar, the method throws an <see cref="T:System.ArgumentOutOfRangeException" /> exception. </para
-          >
+            >Ordinarily, the <see cref="T:System.Globalization.JapaneseCalendar" /> class supports dates from September 8 in the year Meiji 1 (September 8, 1868 of the Gregorian calendar), which is the value of the <see cref="P:System.Globalization.JapaneseCalendar.MinSupportedDateTime" /> property. However, the <see cref="M:System.Globalization.JapaneseCalendar.GetEra(System.DateTime)" /> method successfully returns the era for dates from January 1 through September 7 in the year Meiji 1 (January 1, 1868 through September 7, 1868 in the Gregorian calendar). For dates earlier than January 1, 1868 in the Gregorian calendar, the method throws an <see cref="T:System.ArgumentOutOfRangeException" /> exception.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1088,8 +1088,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.DateTime" /> to read. </param
-        >
+          />The <see cref="T:System.DateTime" /> to read.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetLeapMonth">
@@ -1178,8 +1178,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.DateTime" /> to read. </param
-        >
+          />The <see cref="T:System.DateTime" /> to read.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetMonthsInYear">
@@ -1219,15 +1219,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the year. </param
-        >
+          />An integer that represents the year.
+        </param>
         <param name="era">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the era. </param
-        >
+          />An integer that represents the era.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetWeekOfYear">
@@ -1293,22 +1293,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.DateTime" /> to read. </param
-        >
+          />The <see cref="T:System.DateTime" /> to read.
+        </param>
         <param name="rule">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Globalization.CalendarWeekRule" /> values that defines a calendar week. </param
-        >
+          />One of the <see cref="T:System.Globalization.CalendarWeekRule" /> values that defines a calendar week.
+        </param>
         <param name="firstDayOfWeek">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.DayOfWeek" /> values that represents the first day of the week. </param
-        >
+          />One of the <see cref="T:System.DayOfWeek" /> values that represents the first day of the week.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetYear">
@@ -1346,8 +1346,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.DateTime" /> to read. </param
-        >
+          />The <see cref="T:System.DateTime" /> to read.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsLeapDay">
@@ -1393,29 +1393,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the year. </param
-        >
+          />An integer that represents the year.
+        </param>
         <param name="month">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer from 1 to 12 that represents the month. </param
-        >
+          />An integer from 1 to 12 that represents the month.
+        </param>
         <param name="day">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer from 1 to 31 that represents the day. </param
-        >
+          />An integer from 1 to 31 that represents the day.
+        </param>
         <param name="era">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the era. </param
-        >
+          />An integer that represents the era.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsLeapMonth">
@@ -1460,22 +1460,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the year. </param
-        >
+          />An integer that represents the year.
+        </param>
         <param name="month">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer from 1 to 12 that represents the month. </param
-        >
+          />An integer from 1 to 12 that represents the month.
+        </param>
         <param name="era">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the era. </param
-        >
+          />An integer that represents the era.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsLeapYear">
@@ -1515,15 +1515,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the year. </param
-        >
+          />An integer that represents the year.
+        </param>
         <param name="era">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the era. </param
-        >
+          />An integer that represents the era.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="MaxSupportedDateTime">
@@ -1651,57 +1651,57 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the year. </param
-        >
+          />An integer that represents the year.
+        </param>
         <param name="month">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer from 1 to 12 that represents the month. </param
-        >
+          />An integer from 1 to 12 that represents the month.
+        </param>
         <param name="day">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer from 1 to 31 that represents the day. </param
-        >
+          />An integer from 1 to 31 that represents the day.
+        </param>
         <param name="hour">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer from 0 to 23 that represents the hour. </param
-        >
+          />An integer from 0 to 23 that represents the hour.
+        </param>
         <param name="minute">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer from 0 to 59 that represents the minute. </param
-        >
+          />An integer from 0 to 59 that represents the minute.
+        </param>
         <param name="second">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer from 0 to 59 that represents the second. </param
-        >
+          />An integer from 0 to 59 that represents the second.
+        </param>
         <param name="millisecond">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer from 0 to 999 that represents the millisecond. </param
-        >
+          />An integer from 0 to 999 that represents the millisecond.
+        </param>
         <param name="era">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the era. </param
-        >
+          />An integer that represents the era.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ToFourDigitYear">
@@ -1752,8 +1752,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer (usually two digits) that represents the year to convert. </param
-        >
+          />An integer (usually two digits) that represents the year to convert.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="TwoDigitYearMax">

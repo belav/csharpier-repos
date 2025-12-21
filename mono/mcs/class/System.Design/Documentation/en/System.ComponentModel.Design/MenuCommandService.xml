@@ -110,8 +110,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.MenuCommandService" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.MenuCommandService" /> class.
+          </para>
         </summary>
         <param name="serviceProvider">
           <attribution
@@ -141,8 +141,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.ComponentModel.Design.MenuCommandService.AddCommand(System.ComponentModel.Design.MenuCommand)" /> method adds a command handler to the menu command service. Command handlers do not define the text, shortcut, or placement of a menu item. Rather, they define the menu item’s behavior if the item is clicked. </para
-          >
+            >The <see cref="M:System.ComponentModel.Design.MenuCommandService.AddCommand(System.ComponentModel.Design.MenuCommand)" /> method adds a command handler to the menu command service. Command handlers do not define the text, shortcut, or placement of a menu item. Rather, they define the menu item’s behavior if the item is clicked.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -210,8 +210,8 @@
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format> and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
           <block subset="none" type="note">
             <para
               >Always call <see cref="M:System.ComponentModel.Design.MenuCommandService.Dispose" /> before you release your last reference to the <see cref="T:System.ComponentModel.Design.MenuCommandService" />. Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.ComponentModel.Design.MenuCommandService" /> object's Finalize method.</para
@@ -531,8 +531,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -573,16 +573,16 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.ComponentModel.Design.MenuCommandService.MenuCommandsChanged" /> event. </para
-          >
+            >Raises the <see cref="E:System.ComponentModel.Design.MenuCommandService.MenuCommandsChanged" /> event.
+          </para>
         </summary>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.ComponentModel.Design.MenuCommandsChangedEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.ComponentModel.Design.MenuCommandsChangedEventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RemoveCommand">

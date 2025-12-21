@@ -309,8 +309,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The public <see cref="M:System.ComponentModel.Design.DesignSurfaceManager.Dispose" /> method follows the standard <see cref="T:System.IDisposable" /> pattern. Calling this method destroys the design surface manager. It also disposes the service container, which causes all services that implement <see cref="T:System.IDisposable" /> to also be disposed. The protected version of this method is virtual and follows the normal <see cref="T:System.IDisposable" /> pattern. </para
-          >
+            >The public <see cref="M:System.ComponentModel.Design.DesignSurfaceManager.Dispose" /> method follows the standard <see cref="T:System.IDisposable" /> pattern. Calling this method destroys the design surface manager. It also disposes the service container, which causes all services that implement <see cref="T:System.IDisposable" /> to also be disposed. The protected version of this method is virtual and follows the normal <see cref="T:System.IDisposable" /> pattern.
+          </para>
           <block subset="none" type="note">
             <para
               >Because <see cref="T:System.ComponentModel.Design.DesignSurfaceManager" /> does not have any native code to clean up, it does not have a finalizer that calls <see cref="M:System.ComponentModel.Design.DesignSurfaceManager.Dispose(System.Boolean)" />. If you need to call <see cref="M:System.ComponentModel.Design.DesignSurfaceManager.Dispose(System.Boolean)" />, you must add a finalizer yourself.</para
@@ -341,8 +341,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The public <see cref="M:System.ComponentModel.Design.DesignSurfaceManager.Dispose" /> method follows the standard <see cref="T:System.IDisposable" /> pattern. Calling this method destroys the design surface manager. It also disposes the service container, which causes all services that implement <see cref="T:System.IDisposable" /> to also be disposed. The protected version of this method is virtual and follows the normal <see cref="T:System.IDisposable" /> pattern. </para
-          >
+            >The public <see cref="M:System.ComponentModel.Design.DesignSurfaceManager.Dispose" /> method follows the standard <see cref="T:System.IDisposable" /> pattern. Calling this method destroys the design surface manager. It also disposes the service container, which causes all services that implement <see cref="T:System.IDisposable" /> to also be disposed. The protected version of this method is virtual and follows the normal <see cref="T:System.IDisposable" /> pattern.
+          </para>
           <block subset="none" type="note">
             <para
               >Because <see cref="T:System.ComponentModel.Design.DesignSurfaceManager" /> does not have any native code to clean up, it does not have a finalizer that calls <see cref="M:System.ComponentModel.Design.DesignSurfaceManager.Dispose(System.Boolean)" />. If you need to call <see cref="M:System.ComponentModel.Design.DesignSurfaceManager.Dispose(System.Boolean)" />, you must add a finalizer yourself.</para

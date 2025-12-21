@@ -19,8 +19,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When a client makes a request to a Uniform Resource Identifier (URI) handled by an <see cref="T:System.Net.HttpListener" /> object, the <see cref="T:System.Net.HttpListener" /> provides a <see cref="T:System.Net.HttpListenerContext" /> object that contains information about the sender, the request, and the response that is sent to the client. The <see cref="P:System.Net.HttpListenerContext.Request" /> property returns the <see cref="T:System.Net.HttpListenerRequest" /> object that describes the request. </para
-      >
+        >When a client makes a request to a Uniform Resource Identifier (URI) handled by an <see cref="T:System.Net.HttpListener" /> object, the <see cref="T:System.Net.HttpListener" /> provides a <see cref="T:System.Net.HttpListenerContext" /> object that contains information about the sender, the request, and the response that is sent to the client. The <see cref="P:System.Net.HttpListenerContext.Request" /> property returns the <see cref="T:System.Net.HttpListenerRequest" /> object that describes the request.
+      </para>
       <para
         >The <see cref="T:System.Net.HttpListenerRequest" /> object contains information about the request, such as the request <see cref="P:System.Net.HttpListenerRequest.HttpMethod" /> string, <see cref="P:System.Net.HttpListenerRequest.UserAgent" /> string, and request body data (see the <see cref="P:System.Net.HttpListenerRequest.InputStream" /> property).</para
       >
@@ -138,8 +138,8 @@
             >This property contains a Windows error code returned by the Secure Channel (Schannel) Security Support Provider Interface (SSPI), which is used to validate the certificate. For more information about SSPI support for Schannel, see "Creating a Secure Connection Using Schannel" in the Security documentation at <see
               cref="http://msdn.microsoft.com/library"
               >http://msdn.microsoft.com/library</see
-            >. </para
-          >
+            >.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -518,8 +518,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Your application requests client authentication using the <see cref="P:System.Net.HttpListener.AuthenticationSchemes" /> or <see cref="P:System.Net.HttpListener.AuthenticationSchemeSelectorDelegate" /> property. </para
-          >
+            >Your application requests client authentication using the <see cref="P:System.Net.HttpListener.AuthenticationSchemes" /> or <see cref="P:System.Net.HttpListener.AuthenticationSchemeSelectorDelegate" /> property.
+          </para>
           <para
             >Your application does not receive an <see cref="T:System.Net.HttpListenerContext" /> for requests from clients that are not successfully authenticated.</para
           >
@@ -867,14 +867,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Net.TransportContext" /> property can be used to retrieve the channel binding token (CBT) for an <see cref="T:System.Net.HttpListenerRequest" /> which was sent using HTTPS. </para
-          >
+            >The <see cref="T:System.Net.TransportContext" /> property can be used to retrieve the channel binding token (CBT) for an <see cref="T:System.Net.HttpListenerRequest" /> which was sent using HTTPS.
+          </para>
           <para
             >An application could use the <see cref="T:System.Net.TransportContext" /> property to perform custom authentication using calls to the native Win32 <see
               cref="http://go.microsoft.com/fwlink/?LinkId=147021"
               >AcceptSecurityContext</see
-            > function. </para
-          >
+            > function.
+          </para>
           <para
             >If an application attempts to retrieve the channel binding token (CBT) from this <see cref="P:System.Net.HttpListenerRequest.TransportContext" /> property using the <see cref="M:System.Net.TransportContext.GetChannelBinding(System.Security.Authentication.ExtendedProtection.ChannelBindingKind)" /> method and the <see cref="T:System.Security.Authentication.ExtendedProtection.ChannelBindingKind" /> is not <see cref="F:System.Security.Authentication.ExtendedProtection.ChannelBindingKind.Endpoint" />, then the <see cref="T:System.Net.HttpListenerRequest" /> will throw <see cref="T:System.NotSupportedException" />. The <see cref="T:System.Net.HttpListenerRequest" /> overrides the <see cref="M:System.Net.TransportContext.GetChannelBinding(System.Security.Authentication.ExtendedProtection.ChannelBindingKind)" /> method with an internal implementation.</para
           >
@@ -911,8 +911,8 @@
             >The <see cref="P:System.Net.Configuration.HttpListenerElement.UnescapeRequestUrl" /> property indicates if <see cref="T:System.Net.HttpListener" /> uses the raw unescaped URI instead of the converted URI where any percent-encoded values are converted and other normalization steps are taken.</para
           >
           <para
-            >When a <see cref="T:System.Net.HttpListener" /> instance receives a request through the http.sys service, it creates an instance of the URI string provided by http.sys, and exposes it as the <see cref="P:System.Net.HttpListenerRequest.Url" /> property. </para
-          >
+            >When a <see cref="T:System.Net.HttpListener" /> instance receives a request through the http.sys service, it creates an instance of the URI string provided by http.sys, and exposes it as the <see cref="P:System.Net.HttpListenerRequest.Url" /> property.
+          </para>
           <para>The http.sys service exposes two request URI strings:</para>
           <list type="bullet">
             <item>

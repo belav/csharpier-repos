@@ -55,8 +55,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This default constructor sets the <see cref="P:System.Windows.Forms.Control.TabStop" /> property to false. </para
-          >
+            >This default constructor sets the <see cref="P:System.Windows.Forms.Control.TabStop" /> property to false.
+          </para>
           <para
             >Application code typically will not explicitly create instances of the <see cref="T:System.Windows.Forms.DataGridViewComboBoxEditingControl" /> class, because this is performed automatically when the containing <see cref="T:System.Windows.Forms.DataGridViewComboBoxCell" /> is created.</para
           >

@@ -91,8 +91,8 @@
           >
         </summary>
         <param name="errorCode">
-          <attribution license="cc4" from="Microsoft" modified="false" />A Win32 error code. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A Win32 error code.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">

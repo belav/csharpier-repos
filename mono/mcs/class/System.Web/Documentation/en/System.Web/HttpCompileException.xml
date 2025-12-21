@@ -98,8 +98,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.Compiler.CompilerResults" /> containing compiler output and error information. </param
-        >
+          />A <see cref="T:System.CodeDom.Compiler.CompilerResults" /> containing compiler output and error information.
+        </param>
         <param name="sourceCode">
           <attribution
             license="cc4"
@@ -175,15 +175,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception being thrown. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception being thrown.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual information about the source or destination. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual information about the source or destination.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Message">

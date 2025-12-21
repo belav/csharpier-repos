@@ -134,8 +134,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The input <see cref="T:System.Byte" /> buffer array from which to read. </param
-        >
+          />The input <see cref="T:System.Byte" /> buffer array from which to read.
+        </param>
         <param name="offset">
           <attribution
             license="cc4"

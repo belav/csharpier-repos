@@ -70,22 +70,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The minimum valid key size. </param
-        >
+          />The minimum valid key size.
+        </param>
         <param name="maxSize">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum valid key size. </param
-        >
+          />The maximum valid key size.
+        </param>
         <param name="skipSize">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The interval between valid key sizes. </param
-        >
+          />The interval between valid key sizes.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="MaxSize">

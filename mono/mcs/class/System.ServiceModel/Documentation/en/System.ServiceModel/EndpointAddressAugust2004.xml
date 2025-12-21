@@ -87,8 +87,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.EndpointAddress" /> used to initialize the instance of this class. </param
-        >
+          />The <see cref="T:System.ServiceModel.EndpointAddress" /> used to initialize the instance of this class.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetSchema">

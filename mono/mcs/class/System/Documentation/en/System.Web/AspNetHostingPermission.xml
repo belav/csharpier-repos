@@ -77,8 +77,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Security.Permissions.PermissionState" /> enumeration value. </param
-        >
+          />A <see cref="T:System.Security.Permissions.PermissionState" /> enumeration value.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -112,8 +112,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Web.AspNetHostingPermissionLevel" /> enumeration value. </param
-        >
+          />An <see cref="T:System.Web.AspNetHostingPermissionLevel" /> enumeration value.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Copy">
@@ -183,8 +183,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.SecurityElement" /> containing the XML encoding to use to reconstruct the permission object. </param
-        >
+          />The <see cref="T:System.Security.SecurityElement" /> containing the XML encoding to use to reconstruct the permission object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Intersect">
@@ -225,8 +225,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission to combine with the current permission. It must be of the same type as the current permission. </param
-        >
+          />A permission to combine with the current permission. It must be of the same type as the current permission.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsSubsetOf">
@@ -267,8 +267,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.IPermission" /> to combine with the current permission. It must be of the same type as the current <see cref="T:System.Security.IPermission" />. </param
-        >
+          />The <see cref="T:System.Security.IPermission" /> to combine with the current permission. It must be of the same type as the current <see cref="T:System.Security.IPermission" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsUnrestricted">
@@ -397,8 +397,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission to combine with the current permission. It must be of the same type as the current permission. </param
-        >
+          />A permission to combine with the current permission. It must be of the same type as the current permission.
+        </param>
       </Docs>
     </Member>
   </Members>

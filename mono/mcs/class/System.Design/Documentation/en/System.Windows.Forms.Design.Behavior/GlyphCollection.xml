@@ -271,8 +271,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index in <paramref name="array" /> where copying begins. </param
-        >
+          />The index in <paramref name="array" /> where copying begins.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IndexOf">
@@ -342,8 +342,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index where <paramref name="value" /> should be inserted. </param
-        >
+          />The zero-based index where <paramref name="value" /> should be inserted.
+        </param>
         <param name="value">
           <attribution
             license="cc4"

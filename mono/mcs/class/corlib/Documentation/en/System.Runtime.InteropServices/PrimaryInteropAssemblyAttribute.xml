@@ -113,15 +113,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The major version of the type library for which this assembly is the primary interop assembly. </param
-        >
+          />The major version of the type library for which this assembly is the primary interop assembly.
+        </param>
         <param name="minor">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The minor version of the type library for which this assembly is the primary interop assembly. </param
-        >
+          />The minor version of the type library for which this assembly is the primary interop assembly.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="MajorVersion">

@@ -46,8 +46,8 @@
   <paragraph
     >Each enum type has a corresponding integral type called the underlying type of the enum type. This underlying type must be able to represent all the enumerator values defined in the enumeration. An enum declaration may explicitly declare an underlying type of <keyword>byte</keyword>, <keyword>sbyte</keyword>, <keyword>short</keyword>, <keyword>ushort</keyword>, <keyword>int</keyword>, <keyword>uint</keyword>, <keyword>long</keyword> or <keyword>ulong</keyword>. <note
       >[Note: <keyword>char</keyword> cannot be used as an underlying type. end note]</note
-    > An enum declaration that does not explicitly declare an underlying type has an underlying type of <keyword>int</keyword>. </paragraph
-  >
+    > An enum declaration that does not explicitly declare an underlying type has an underlying type of <keyword>int</keyword>.
+  </paragraph>
   <paragraph>
     <example
       >[Example: The example <code_example>

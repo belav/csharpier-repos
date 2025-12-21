@@ -20,8 +20,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.Services.Protocols.SoapException" /> can either be thrown by the common language runtime or by an XML Web service method. The common language runtime can throw a <see cref="T:System.Web.Services.Protocols.SoapException" /> if a response to a request is not formatted correctly. XML Web service methods can generate a <see cref="T:System.Web.Services.Protocols.SoapException" /> by simply throwing an exception within the XML Web service method. If the client accessed the method over SOAP, the exception is caught on the server and wrapped inside a new <see cref="T:System.Web.Services.Protocols.SoapException" />. The <see cref="T:System.Web.Services.Protocols.SoapException" /> thrown has the following property values: </para
-      >
+        >The <see cref="T:System.Web.Services.Protocols.SoapException" /> can either be thrown by the common language runtime or by an XML Web service method. The common language runtime can throw a <see cref="T:System.Web.Services.Protocols.SoapException" /> if a response to a request is not formatted correctly. XML Web service methods can generate a <see cref="T:System.Web.Services.Protocols.SoapException" /> by simply throwing an exception within the XML Web service method. If the client accessed the method over SOAP, the exception is caught on the server and wrapped inside a new <see cref="T:System.Web.Services.Protocols.SoapException" />. The <see cref="T:System.Web.Services.Protocols.SoapException" /> thrown has the following property values:
+      </para>
       <list type="table">
         <listheader>
           <item>
@@ -41,8 +41,8 @@
           </term>
           <description>
             <para
-              >The <see cref="P:System.Exception.Message" /> property of the original exception. </para
-            >
+              >The <see cref="P:System.Exception.Message" /> property of the original exception.
+            </para>
           </description>
         </item>
         <item>
@@ -53,8 +53,8 @@
           </term>
           <description>
             <para>
-              <see cref="F:System.Web.Services.Protocols.SoapException.ServerFaultCode" />. </para
-            >
+              <see cref="F:System.Web.Services.Protocols.SoapException.ServerFaultCode" />.
+            </para>
           </description>
         </item>
         <item>
@@ -166,15 +166,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A message that identifies the reason the exception occurred. This parameter sets the <see cref="P:System.Exception.Message" /> property. </param
-        >
+          />A message that identifies the reason the exception occurred. This parameter sets the <see cref="P:System.Exception.Message" /> property.
+        </param>
         <param name="code">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlQualifiedName" /> that specifies the type of error that occurred. This parameter sets the <see cref="P:System.Web.Services.Protocols.SoapException.Code" /> property. </param
-        >
+          />An <see cref="T:System.Xml.XmlQualifiedName" /> that specifies the type of error that occurred. This parameter sets the <see cref="P:System.Web.Services.Protocols.SoapException.Code" /> property.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -206,22 +206,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A message that identifies the reason the exception occurred. This parameter sets the <see cref="P:System.Exception.Message" /> property. </param
-        >
+          />A message that identifies the reason the exception occurred. This parameter sets the <see cref="P:System.Exception.Message" /> property.
+        </param>
         <param name="code">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlQualifiedName" /> that specifies the type of error that occurred. This parameter sets the <see cref="P:System.Web.Services.Protocols.SoapException.Code" /> property. </param
-        >
+          />An <see cref="T:System.Xml.XmlQualifiedName" /> that specifies the type of error that occurred. This parameter sets the <see cref="P:System.Web.Services.Protocols.SoapException.Code" /> property.
+        </param>
         <param name="innerException">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An exception that is the root cause of the exception. This parameter sets the <see cref="P:System.Exception.InnerException" /> property. </param
-        >
+          />An exception that is the root cause of the exception. This parameter sets the <see cref="P:System.Exception.InnerException" /> property.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -253,22 +253,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A message that identifies the reason the exception occurred. This parameter sets the <see cref="P:System.Exception.Message" /> property. </param
-        >
+          />A message that identifies the reason the exception occurred. This parameter sets the <see cref="P:System.Exception.Message" /> property.
+        </param>
         <param name="code">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlQualifiedName" /> that specifies the type of error that occurred. This parameter sets the <see cref="P:System.Web.Services.Protocols.SoapException.Code" /> property. </param
-        >
+          />An <see cref="T:System.Xml.XmlQualifiedName" /> that specifies the type of error that occurred. This parameter sets the <see cref="P:System.Web.Services.Protocols.SoapException.Code" /> property.
+        </param>
         <param name="actor">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A URI that identifies the code that caused the exception. Typically, this is a URL to an XML Web service method. This parameter sets the <see cref="P:System.Web.Services.Protocols.SoapException.Actor" /> property. </param
-        >
+          />A URI that identifies the code that caused the exception. Typically, this is a URL to an XML Web service method. This parameter sets the <see cref="P:System.Web.Services.Protocols.SoapException.Actor" /> property.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -340,29 +340,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A message that identifies the reason the exception occurred. This parameter sets the <see cref="P:System.Exception.Message" /> property. </param
-        >
+          />A message that identifies the reason the exception occurred. This parameter sets the <see cref="P:System.Exception.Message" /> property.
+        </param>
         <param name="code">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlQualifiedName" /> that specifies the type of error that occurred. This parameter sets the <see cref="P:System.Web.Services.Protocols.SoapException.Code" /> property. </param
-        >
+          />An <see cref="T:System.Xml.XmlQualifiedName" /> that specifies the type of error that occurred. This parameter sets the <see cref="P:System.Web.Services.Protocols.SoapException.Code" /> property.
+        </param>
         <param name="actor">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A URI that identifies the piece of code that caused the exception. Typically, this is a URL to an XML Web service method. This parameter sets the <see cref="P:System.Web.Services.Protocols.SoapException.Actor" /> property. </param
-        >
+          />A URI that identifies the piece of code that caused the exception. Typically, this is a URL to an XML Web service method. This parameter sets the <see cref="P:System.Web.Services.Protocols.SoapException.Actor" /> property.
+        </param>
         <param name="innerException">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An exception that is the root cause of the exception. This parameter sets the <see cref="P:System.Exception.InnerException" /> property. </param
-        >
+          />An exception that is the root cause of the exception. This parameter sets the <see cref="P:System.Exception.InnerException" /> property.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -395,29 +395,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A message that identifies the reason the exception occurred. This parameter sets the <see cref="P:System.Exception.Message" /> property. </param
-        >
+          />A message that identifies the reason the exception occurred. This parameter sets the <see cref="P:System.Exception.Message" /> property.
+        </param>
         <param name="code">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlQualifiedName" /> that specifies the type of error that occurred. This parameter sets the <see cref="P:System.Web.Services.Protocols.SoapException.Code" /> property. </param
-        >
+          />An <see cref="T:System.Xml.XmlQualifiedName" /> that specifies the type of error that occurred. This parameter sets the <see cref="P:System.Web.Services.Protocols.SoapException.Code" /> property.
+        </param>
         <param name="actor">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A URI that identifies the piece of code that caused the exception. Typically, this is a URL to an XML Web service method. This parameter sets the <see cref="P:System.Web.Services.Protocols.SoapException.Actor" /> property. </param
-        >
+          />A URI that identifies the piece of code that caused the exception. Typically, this is a URL to an XML Web service method. This parameter sets the <see cref="P:System.Web.Services.Protocols.SoapException.Actor" /> property.
+        </param>
         <param name="detail">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlNode" /> that contains application specific exception information. This parameter sets the <see cref="P:System.Web.Services.Protocols.SoapException.Detail" /> property. </param
-        >
+          />An <see cref="T:System.Xml.XmlNode" /> that contains application specific exception information. This parameter sets the <see cref="P:System.Web.Services.Protocols.SoapException.Detail" /> property.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -451,36 +451,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A message that identifies the reason the exception occurred. This parameter sets the <see cref="P:System.Exception.Message" /> property. </param
-        >
+          />A message that identifies the reason the exception occurred. This parameter sets the <see cref="P:System.Exception.Message" /> property.
+        </param>
         <param name="code">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlQualifiedName" /> that specifies the type of error that occurred. This parameter sets the <see cref="P:System.Web.Services.Protocols.SoapException.Code" /> property. </param
-        >
+          />An <see cref="T:System.Xml.XmlQualifiedName" /> that specifies the type of error that occurred. This parameter sets the <see cref="P:System.Web.Services.Protocols.SoapException.Code" /> property.
+        </param>
         <param name="actor">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A URI that identifies the piece of code that caused the exception. Typically, this is a URL to an XML Web service method. This parameter sets the <see cref="P:System.Web.Services.Protocols.SoapException.Actor" /> property. </param
-        >
+          />A URI that identifies the piece of code that caused the exception. Typically, this is a URL to an XML Web service method. This parameter sets the <see cref="P:System.Web.Services.Protocols.SoapException.Actor" /> property.
+        </param>
         <param name="detail">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlNode" /> that contains application specific exception information. This parameter sets the <see cref="P:System.Web.Services.Protocols.SoapException.Detail" /> property. </param
-        >
+          />An <see cref="T:System.Xml.XmlNode" /> that contains application specific exception information. This parameter sets the <see cref="P:System.Web.Services.Protocols.SoapException.Detail" /> property.
+        </param>
         <param name="innerException">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An exception that is the root cause of the exception. This parameter sets the <see cref="P:System.Exception.InnerException" /> property. </param
-        >
+          />An exception that is the root cause of the exception. This parameter sets the <see cref="P:System.Exception.InnerException" /> property.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -759,8 +759,8 @@
               </term>
               <description>
                 <para
-                  >An error occurred during the processing of a client call on the server, however, the problem is not due to the message contents. For example, an upstream server might not respond to a request due to network problems. Typically, with this type of exception, the client call might succeed later. If an XML Web service throws an exception, other than <see cref="T:System.Web.Services.Protocols.SoapException" /> and the client calls using SOAP, ASP.NET converts the exception to a <see cref="T:System.Web.Services.Protocols.SoapException" />, setting the <see cref="P:System.Web.Services.Protocols.SoapException.Code" /> property to <see cref="F:System.Web.Services.Protocols.SoapException.ServerFaultCode" /> and throws it back to the client. </para
-                >
+                  >An error occurred during the processing of a client call on the server, however, the problem is not due to the message contents. For example, an upstream server might not respond to a request due to network problems. Typically, with this type of exception, the client call might succeed later. If an XML Web service throws an exception, other than <see cref="T:System.Web.Services.Protocols.SoapException" /> and the client calls using SOAP, ASP.NET converts the exception to a <see cref="T:System.Web.Services.Protocols.SoapException" />, setting the <see cref="P:System.Web.Services.Protocols.SoapException.Code" /> property to <see cref="F:System.Web.Services.Protocols.SoapException.ServerFaultCode" /> and throws it back to the client.
+                </para>
               </description>
             </item>
           </list>
@@ -916,8 +916,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlQualifiedName" /> that contains a SOAP fault code. </param
-        >
+          />An <see cref="T:System.Xml.XmlQualifiedName" /> that contains a SOAP fault code.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsMustUnderstandFaultCode">
@@ -957,8 +957,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlQualifiedName" /> that contains a SOAP fault code. </param
-        >
+          />An <see cref="T:System.Xml.XmlQualifiedName" /> that contains a SOAP fault code.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsServerFaultCode">
@@ -998,8 +998,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlQualifiedName" /> that contains a SOAP fault code. </param
-        >
+          />An <see cref="T:System.Xml.XmlQualifiedName" /> that contains a SOAP fault code.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsVersionMismatchFaultCode">
@@ -1039,8 +1039,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlQualifiedName" /> that contains a SOAP fault code. </param
-        >
+          />An <see cref="T:System.Xml.XmlQualifiedName" /> that contains a SOAP fault code.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Lang">

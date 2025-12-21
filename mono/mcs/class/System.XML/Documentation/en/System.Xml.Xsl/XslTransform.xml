@@ -334,8 +334,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URL that specifies the XSLT style sheet to load. </param
-        >
+          />The URL that specifies the XSLT style sheet to load.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Load">
@@ -404,8 +404,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlReader" /> object that contains the XSLT style sheet. </param
-        >
+          />An <see cref="T:System.Xml.XmlReader" /> object that contains the XSLT style sheet.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Load">
@@ -471,8 +471,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object implementing the <see cref="T:System.Xml.XPath.IXPathNavigable" /> interface. In the .NET Framework, this can be either an <see cref="T:System.Xml.XmlNode" /> (typically an <see cref="T:System.Xml.XmlDocument" />), or an <see cref="T:System.Xml.XPath.XPathDocument" /> containing the XSLT style sheet. </param
-        >
+          />An object implementing the <see cref="T:System.Xml.XPath.IXPathNavigable" /> interface. In the .NET Framework, this can be either an <see cref="T:System.Xml.XmlNode" /> (typically an <see cref="T:System.Xml.XmlDocument" />), or an <see cref="T:System.Xml.XPath.XPathDocument" /> containing the XSLT style sheet.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Load">
@@ -541,8 +541,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XPath.XPathNavigator" /> object that contains the XSLT style sheet. </param
-        >
+          />An <see cref="T:System.Xml.XPath.XPathNavigator" /> object that contains the XSLT style sheet.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Load">
@@ -604,8 +604,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URL that specifies the XSLT style sheet to load. </param
-        >
+          />The URL that specifies the XSLT style sheet to load.
+        </param>
         <param name="resolver">
           <attribution
             license="cc4"
@@ -685,8 +685,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlReader" /> object that contains the XSLT style sheet. </param
-        >
+          />An <see cref="T:System.Xml.XmlReader" /> object that contains the XSLT style sheet.
+        </param>
         <param name="resolver">
           <attribution
             license="cc4"
@@ -757,8 +757,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object implementing the <see cref="T:System.Xml.XPath.IXPathNavigable" /> interface. In the .NET Framework, this can be either an <see cref="T:System.Xml.XmlNode" /> (typically an <see cref="T:System.Xml.XmlDocument" />), or an <see cref="T:System.Xml.XPath.XPathDocument" /> containing the XSLT style sheet. </param
-        >
+          />An object implementing the <see cref="T:System.Xml.XPath.IXPathNavigable" /> interface. In the .NET Framework, this can be either an <see cref="T:System.Xml.XmlNode" /> (typically an <see cref="T:System.Xml.XmlDocument" />), or an <see cref="T:System.Xml.XPath.XPathDocument" /> containing the XSLT style sheet.
+        </param>
         <param name="resolver">
           <attribution
             license="cc4"
@@ -832,8 +832,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XPath.XPathNavigator" /> object that contains the XSLT style sheet. </param
-        >
+          />An <see cref="T:System.Xml.XPath.XPathNavigator" /> object that contains the XSLT style sheet.
+        </param>
         <param name="resolver">
           <attribution
             license="cc4"
@@ -937,8 +937,8 @@ xslt.Load(xslReader,resolver,evidence);</code>
               <description>
                 <para>Set evidence to null. Script blocks are not processed, the XSLT document() function is not supported, and privileged extension objects are disallowed.</para>
                 <para
-                  >Additionally, you can also set the <paramref name="resolver" /> parameter to null. This ensures that xsl:import and xsl:include elements are not processed. </para
-                >
+                  >Additionally, you can also set the <paramref name="resolver" /> parameter to null. This ensures that xsl:import and xsl:include elements are not processed.
+                </para>
               </description>
             </item>
             <item>
@@ -947,8 +947,8 @@ xslt.Load(xslReader,resolver,evidence);</code>
               </term>
               <description>
                 <para
-                  >Request evidence from the caller. The API of the caller must provide a way to provide evidence, typically the <see cref="T:System.Security.Policy.Evidence" /> class. </para
-                >
+                  >Request evidence from the caller. The API of the caller must provide a way to provide evidence, typically the <see cref="T:System.Security.Policy.Evidence" /> class.
+                </para>
               </description>
             </item>
           </list>
@@ -964,8 +964,8 @@ xslt.Load(xslReader,resolver,evidence);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlReader" /> object containing the style sheet to load. </param
-        >
+          />An <see cref="T:System.Xml.XmlReader" /> object containing the style sheet to load.
+        </param>
         <param name="resolver">
           <attribution
             license="cc4"
@@ -1067,8 +1067,8 @@ xslt.Load(style sheet,resolver,evidence);</code>
               <description>
                 <para>Set evidence to null. Script blocks are not processed, the XSLT document() function is not supported, and privileged extension objects are disallowed.</para>
                 <para
-                  >Additionally, you can also set the <paramref name="resolver" /> parameter to null. This ensures that xsl:import and xsl:include elements are not processed. </para
-                >
+                  >Additionally, you can also set the <paramref name="resolver" /> parameter to null. This ensures that xsl:import and xsl:include elements are not processed.
+                </para>
               </description>
             </item>
             <item>
@@ -1077,8 +1077,8 @@ xslt.Load(style sheet,resolver,evidence);</code>
               </term>
               <description>
                 <para
-                  >Request evidence from the caller. The API of the caller must provide a way to provide evidence, typically the <see cref="T:System.Security.Policy.Evidence" /> class. </para
-                >
+                  >Request evidence from the caller. The API of the caller must provide a way to provide evidence, typically the <see cref="T:System.Security.Policy.Evidence" /> class.
+                </para>
               </description>
             </item>
           </list>
@@ -1094,8 +1094,8 @@ xslt.Load(style sheet,resolver,evidence);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object implementing the <see cref="T:System.Xml.XPath.IXPathNavigable" /> interface. In the .NET Framework, this can be either an <see cref="T:System.Xml.XmlNode" /> (typically an <see cref="T:System.Xml.XmlDocument" />), or an <see cref="T:System.Xml.XPath.XPathDocument" /> containing the XSLT style sheet. </param
-        >
+          />An object implementing the <see cref="T:System.Xml.XPath.IXPathNavigable" /> interface. In the .NET Framework, this can be either an <see cref="T:System.Xml.XmlNode" /> (typically an <see cref="T:System.Xml.XmlDocument" />), or an <see cref="T:System.Xml.XPath.XPathDocument" /> containing the XSLT style sheet.
+        </param>
         <param name="resolver">
           <attribution
             license="cc4"
@@ -1200,8 +1200,8 @@ xslt.Load(xslNav,resolver,evidence);</code>
               <description>
                 <para>Set evidence to null. Script blocks are not processed, the XSLT document() function is not supported, and privileged extension objects are disallowed.</para>
                 <para
-                  >Additionally, you can also set the <paramref name="resolver" /> parameter to null. This ensures that xsl:import and xsl:include elements are not processed. </para
-                >
+                  >Additionally, you can also set the <paramref name="resolver" /> parameter to null. This ensures that xsl:import and xsl:include elements are not processed.
+                </para>
               </description>
             </item>
             <item>
@@ -1225,8 +1225,8 @@ xslt.Load(xslNav,resolver,evidence);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XPath.XPathNavigator" /> object containing the style sheet to load. </param
-        >
+          />An <see cref="T:System.Xml.XPath.XPathNavigator" /> object containing the style sheet to load.
+        </param>
         <param name="resolver">
           <attribution
             license="cc4"
@@ -1299,15 +1299,15 @@ xslt.Load(xslNav,resolver,evidence);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URL of the source document to be transformed. </param
-        >
+          />The URL of the source document to be transformed.
+        </param>
         <param name="outputfile">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URL of the output file. </param
-        >
+          />The URL of the output file.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Transform">
@@ -1415,15 +1415,15 @@ xslt.Load(xslNav,resolver,evidence);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object implementing the <see cref="T:System.Xml.XPath.IXPathNavigable" /> interface. In the .NET Framework, this can be either an <see cref="T:System.Xml.XmlNode" /> (typically an <see cref="T:System.Xml.XmlDocument" />), or an <see cref="T:System.Xml.XPath.XPathDocument" /> containing the data to be transformed. </param
-        >
+          />An object implementing the <see cref="T:System.Xml.XPath.IXPathNavigable" /> interface. In the .NET Framework, this can be either an <see cref="T:System.Xml.XmlNode" /> (typically an <see cref="T:System.Xml.XmlDocument" />), or an <see cref="T:System.Xml.XPath.XPathDocument" /> containing the data to be transformed.
+        </param>
         <param name="args">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.Xsl.XsltArgumentList" /> containing the namespace-qualified arguments used as input to the transformation. </param
-        >
+          />An <see cref="T:System.Xml.Xsl.XsltArgumentList" /> containing the namespace-qualified arguments used as input to the transformation.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Transform">
@@ -1499,15 +1499,15 @@ xslt.Load(xslNav,resolver,evidence);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XPath.XPathNavigator" /> containing the data to be transformed. </param
-        >
+          />An <see cref="T:System.Xml.XPath.XPathNavigator" /> containing the data to be transformed.
+        </param>
         <param name="args">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.Xsl.XsltArgumentList" /> containing the namespace-qualified arguments used as input to the transformation. </param
-        >
+          />An <see cref="T:System.Xml.Xsl.XsltArgumentList" /> containing the namespace-qualified arguments used as input to the transformation.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Transform">
@@ -1562,15 +1562,15 @@ xslt.Load(xslNav,resolver,evidence);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URL of the source document to be transformed. </param
-        >
+          />The URL of the source document to be transformed.
+        </param>
         <param name="outputfile">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URL of the output file. </param
-        >
+          />The URL of the output file.
+        </param>
         <param name="resolver">
           <attribution
             license="cc4"
@@ -1677,22 +1677,22 @@ xslt.Load(xslNav,resolver,evidence);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object implementing the <see cref="T:System.Xml.XPath.IXPathNavigable" /> interface. In the .NET Framework, this can be either an <see cref="T:System.Xml.XmlNode" /> (typically an <see cref="T:System.Xml.XmlDocument" />), or an <see cref="T:System.Xml.XPath.XPathDocument" /> containing the data to be transformed. </param
-        >
+          />An object implementing the <see cref="T:System.Xml.XPath.IXPathNavigable" /> interface. In the .NET Framework, this can be either an <see cref="T:System.Xml.XmlNode" /> (typically an <see cref="T:System.Xml.XmlDocument" />), or an <see cref="T:System.Xml.XPath.XPathDocument" /> containing the data to be transformed.
+        </param>
         <param name="args">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.Xsl.XsltArgumentList" /> containing the namespace-qualified arguments used as input to the transformation. </param
-        >
+          />An <see cref="T:System.Xml.Xsl.XsltArgumentList" /> containing the namespace-qualified arguments used as input to the transformation.
+        </param>
         <param name="output">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream to which you want to output. </param
-        >
+          />The stream to which you want to output.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Transform">
@@ -1797,22 +1797,22 @@ xslt.Load(xslNav,resolver,evidence);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object implementing the <see cref="T:System.Xml.XPath.IXPathNavigable" /> interface. In the .NET Framework, this can be either an <see cref="T:System.Xml.XmlNode" /> (typically an <see cref="T:System.Xml.XmlDocument" />), or an <see cref="T:System.Xml.XPath.XPathDocument" /> containing the data to be transformed. </param
-        >
+          />An object implementing the <see cref="T:System.Xml.XPath.IXPathNavigable" /> interface. In the .NET Framework, this can be either an <see cref="T:System.Xml.XmlNode" /> (typically an <see cref="T:System.Xml.XmlDocument" />), or an <see cref="T:System.Xml.XPath.XPathDocument" /> containing the data to be transformed.
+        </param>
         <param name="args">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.Xsl.XsltArgumentList" /> containing the namespace-qualified arguments used as input to the transformation. </param
-        >
+          />An <see cref="T:System.Xml.Xsl.XsltArgumentList" /> containing the namespace-qualified arguments used as input to the transformation.
+        </param>
         <param name="output">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.TextWriter" /> to which you want to output. </param
-        >
+          />The <see cref="T:System.IO.TextWriter" /> to which you want to output.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Transform">
@@ -1916,15 +1916,15 @@ xslt.Load(xslNav,resolver,evidence);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object implementing the <see cref="T:System.Xml.XPath.IXPathNavigable" /> interface. In the .NET Framework, this can be either an <see cref="T:System.Xml.XmlNode" /> (typically an <see cref="T:System.Xml.XmlDocument" />), or an <see cref="T:System.Xml.XPath.XPathDocument" /> containing the data to be transformed. </param
-        >
+          />An object implementing the <see cref="T:System.Xml.XPath.IXPathNavigable" /> interface. In the .NET Framework, this can be either an <see cref="T:System.Xml.XmlNode" /> (typically an <see cref="T:System.Xml.XmlDocument" />), or an <see cref="T:System.Xml.XPath.XPathDocument" /> containing the data to be transformed.
+        </param>
         <param name="args">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.Xsl.XsltArgumentList" /> containing the namespace-qualified arguments used as input to the transformation. </param
-        >
+          />An <see cref="T:System.Xml.Xsl.XsltArgumentList" /> containing the namespace-qualified arguments used as input to the transformation.
+        </param>
         <param name="resolver">
           <attribution
             license="cc4"
@@ -2033,22 +2033,22 @@ xslt.Load(xslNav,resolver,evidence);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object implementing the <see cref="T:System.Xml.XPath.IXPathNavigable" /> interface. In the .NET Framework, this can be either an <see cref="T:System.Xml.XmlNode" /> (typically an <see cref="T:System.Xml.XmlDocument" />), or an <see cref="T:System.Xml.XPath.XPathDocument" /> containing the data to be transformed. </param
-        >
+          />An object implementing the <see cref="T:System.Xml.XPath.IXPathNavigable" /> interface. In the .NET Framework, this can be either an <see cref="T:System.Xml.XmlNode" /> (typically an <see cref="T:System.Xml.XmlDocument" />), or an <see cref="T:System.Xml.XPath.XPathDocument" /> containing the data to be transformed.
+        </param>
         <param name="args">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.Xsl.XsltArgumentList" /> containing the namespace-qualified arguments used as input to the transformation. </param
-        >
+          />An <see cref="T:System.Xml.Xsl.XsltArgumentList" /> containing the namespace-qualified arguments used as input to the transformation.
+        </param>
         <param name="output">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlWriter" /> to which you want to output. </param
-        >
+          />The <see cref="T:System.Xml.XmlWriter" /> to which you want to output.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Transform">
@@ -2118,22 +2118,22 @@ xslt.Load(xslNav,resolver,evidence);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XPath.XPathNavigator" /> containing the data to be transformed. </param
-        >
+          />An <see cref="T:System.Xml.XPath.XPathNavigator" /> containing the data to be transformed.
+        </param>
         <param name="args">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.Xsl.XsltArgumentList" /> containing the namespace-qualified arguments used as input to the transformation. </param
-        >
+          />An <see cref="T:System.Xml.Xsl.XsltArgumentList" /> containing the namespace-qualified arguments used as input to the transformation.
+        </param>
         <param name="output">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream to which you want to output. </param
-        >
+          />The stream to which you want to output.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Transform">
@@ -2203,22 +2203,22 @@ xslt.Load(xslNav,resolver,evidence);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XPath.XPathNavigator" /> containing the data to be transformed. </param
-        >
+          />An <see cref="T:System.Xml.XPath.XPathNavigator" /> containing the data to be transformed.
+        </param>
         <param name="args">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.Xsl.XsltArgumentList" /> containing the namespace-qualified arguments used as input to the transformation. </param
-        >
+          />An <see cref="T:System.Xml.Xsl.XsltArgumentList" /> containing the namespace-qualified arguments used as input to the transformation.
+        </param>
         <param name="output">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.TextWriter" /> to which you want to output. </param
-        >
+          />The <see cref="T:System.IO.TextWriter" /> to which you want to output.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Transform">
@@ -2290,15 +2290,15 @@ xslt.Load(xslNav,resolver,evidence);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XPath.XPathNavigator" /> containing the data to be transformed. </param
-        >
+          />An <see cref="T:System.Xml.XPath.XPathNavigator" /> containing the data to be transformed.
+        </param>
         <param name="args">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.Xsl.XsltArgumentList" /> containing the namespace-qualified arguments used as input to the transformation. </param
-        >
+          />An <see cref="T:System.Xml.Xsl.XsltArgumentList" /> containing the namespace-qualified arguments used as input to the transformation.
+        </param>
         <param name="resolver">
           <attribution
             license="cc4"
@@ -2375,22 +2375,22 @@ xslt.Load(xslNav,resolver,evidence);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XPath.XPathNavigator" /> containing the data to be transformed. </param
-        >
+          />An <see cref="T:System.Xml.XPath.XPathNavigator" /> containing the data to be transformed.
+        </param>
         <param name="args">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.Xsl.XsltArgumentList" /> containing the namespace-qualified arguments used as input to the transformation. </param
-        >
+          />An <see cref="T:System.Xml.Xsl.XsltArgumentList" /> containing the namespace-qualified arguments used as input to the transformation.
+        </param>
         <param name="output">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlWriter" /> to which you want to output. </param
-        >
+          />The <see cref="T:System.Xml.XmlWriter" /> to which you want to output.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Transform">
@@ -2486,22 +2486,22 @@ xslt.Load(xslNav,resolver,evidence);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object implementing the <see cref="T:System.Xml.XPath.IXPathNavigable" /> interface. In the .NET Framework, this can be either an <see cref="T:System.Xml.XmlNode" /> (typically an <see cref="T:System.Xml.XmlDocument" />), or an <see cref="T:System.Xml.XPath.XPathDocument" /> containing the data to be transformed. </param
-        >
+          />An object implementing the <see cref="T:System.Xml.XPath.IXPathNavigable" /> interface. In the .NET Framework, this can be either an <see cref="T:System.Xml.XmlNode" /> (typically an <see cref="T:System.Xml.XmlDocument" />), or an <see cref="T:System.Xml.XPath.XPathDocument" /> containing the data to be transformed.
+        </param>
         <param name="args">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.Xsl.XsltArgumentList" /> containing the namespace-qualified arguments used as input to the transformation. </param
-        >
+          />An <see cref="T:System.Xml.Xsl.XsltArgumentList" /> containing the namespace-qualified arguments used as input to the transformation.
+        </param>
         <param name="output">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream to which you want to output. </param
-        >
+          />The stream to which you want to output.
+        </param>
         <param name="resolver">
           <attribution
             license="cc4"
@@ -2609,22 +2609,22 @@ xslt.Load(xslNav,resolver,evidence);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object implementing the <see cref="T:System.Xml.XPath.IXPathNavigable" /> interface. In the .NET Framework, this can be either an <see cref="T:System.Xml.XmlNode" /> (typically an <see cref="T:System.Xml.XmlDocument" />), or an <see cref="T:System.Xml.XPath.XPathDocument" /> containing the data to be transformed. </param
-        >
+          />An object implementing the <see cref="T:System.Xml.XPath.IXPathNavigable" /> interface. In the .NET Framework, this can be either an <see cref="T:System.Xml.XmlNode" /> (typically an <see cref="T:System.Xml.XmlDocument" />), or an <see cref="T:System.Xml.XPath.XPathDocument" /> containing the data to be transformed.
+        </param>
         <param name="args">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.Xsl.XsltArgumentList" /> containing the namespace-qualified arguments used as input to the transformation. </param
-        >
+          />An <see cref="T:System.Xml.Xsl.XsltArgumentList" /> containing the namespace-qualified arguments used as input to the transformation.
+        </param>
         <param name="output">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.TextWriter" /> to which you want to output. </param
-        >
+          />The <see cref="T:System.IO.TextWriter" /> to which you want to output.
+        </param>
         <param name="resolver">
           <attribution
             license="cc4"
@@ -2729,22 +2729,22 @@ xslt.Load(xslNav,resolver,evidence);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object implementing the <see cref="T:System.Xml.XPath.IXPathNavigable" /> interface. In the .NET Framework, this can be either an <see cref="T:System.Xml.XmlNode" /> (typically an <see cref="T:System.Xml.XmlDocument" />), or an <see cref="T:System.Xml.XPath.XPathDocument" /> containing the data to be transformed. </param
-        >
+          />An object implementing the <see cref="T:System.Xml.XPath.IXPathNavigable" /> interface. In the .NET Framework, this can be either an <see cref="T:System.Xml.XmlNode" /> (typically an <see cref="T:System.Xml.XmlDocument" />), or an <see cref="T:System.Xml.XPath.XPathDocument" /> containing the data to be transformed.
+        </param>
         <param name="args">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.Xsl.XsltArgumentList" /> containing the namespace-qualified arguments used as input to the transformation. </param
-        >
+          />An <see cref="T:System.Xml.Xsl.XsltArgumentList" /> containing the namespace-qualified arguments used as input to the transformation.
+        </param>
         <param name="output">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlWriter" /> to which you want to output. </param
-        >
+          />The <see cref="T:System.Xml.XmlWriter" /> to which you want to output.
+        </param>
         <param name="resolver">
           <attribution
             license="cc4"
@@ -2817,22 +2817,22 @@ xslt.Load(xslNav,resolver,evidence);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XPath.XPathNavigator" /> containing the data to be transformed. </param
-        >
+          />An <see cref="T:System.Xml.XPath.XPathNavigator" /> containing the data to be transformed.
+        </param>
         <param name="args">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.Xsl.XsltArgumentList" /> containing the namespace-qualified arguments used as input to the transformation. </param
-        >
+          />An <see cref="T:System.Xml.Xsl.XsltArgumentList" /> containing the namespace-qualified arguments used as input to the transformation.
+        </param>
         <param name="output">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream to which you want to output. </param
-        >
+          />The stream to which you want to output.
+        </param>
         <param name="resolver">
           <attribution
             license="cc4"
@@ -2905,22 +2905,22 @@ xslt.Load(xslNav,resolver,evidence);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XPath.XPathNavigator" /> containing the data to be transformed. </param
-        >
+          />An <see cref="T:System.Xml.XPath.XPathNavigator" /> containing the data to be transformed.
+        </param>
         <param name="args">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.Xsl.XsltArgumentList" /> containing the namespace-qualified arguments used as input to the transformation. </param
-        >
+          />An <see cref="T:System.Xml.Xsl.XsltArgumentList" /> containing the namespace-qualified arguments used as input to the transformation.
+        </param>
         <param name="output">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.TextWriter" /> to which you want to output. </param
-        >
+          />The <see cref="T:System.IO.TextWriter" /> to which you want to output.
+        </param>
         <param name="resolver">
           <attribution
             license="cc4"
@@ -2993,22 +2993,22 @@ xslt.Load(xslNav,resolver,evidence);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XPath.XPathNavigator" /> containing the data to be transformed. </param
-        >
+          />An <see cref="T:System.Xml.XPath.XPathNavigator" /> containing the data to be transformed.
+        </param>
         <param name="args">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.Xsl.XsltArgumentList" /> containing the namespace-qualified arguments used as input to the transformation. </param
-        >
+          />An <see cref="T:System.Xml.Xsl.XsltArgumentList" /> containing the namespace-qualified arguments used as input to the transformation.
+        </param>
         <param name="output">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlWriter" /> to which you want to output. </param
-        >
+          />The <see cref="T:System.Xml.XmlWriter" /> to which you want to output.
+        </param>
         <param name="resolver">
           <attribution
             license="cc4"
@@ -3104,20 +3104,20 @@ xslt.Load(xslNav,resolver,evidence);</code>
       <remarks>
         <para
           >This method compiles the stylesheet from <see cref="System.Xml.XPath.XPathNavigator" /> instance.
-</para
-        >
+
+        </para>
         <para
           >If the input was not valid stylesheet, an <see cref="T:System.Xml.Xsl.XslCompileException" /> will be thrown. Note that XSLT allows simplified syntax; the input does not always have XSLT "transform" (or "stylesheet") document element.
-</para
-        >
+
+        </para>
         <para
           >If there were XSLT "include" or "import" elements, then parameter "resolver" is used to resolve external resources. If it was not explicitly provided, then the value of <see cref="P:System.Xml.Xsl.XslTransform.XmlResolver" /> (that is set in advance) is used. If is was not set explicitly, then a <see cref="T:System.Xml.XmlUrlResolver" /> instance is used.
-</para
-        >
+
+        </para>
         <para
           >See also <see cref="M:System.Xml.Xsl.XslTransform.Transform" /> for the transformation details.
-</para
-        >
+
+        </para>
         <para>Note: Evidence is not used as yet.</para>
       </remarks>
     </Docs>

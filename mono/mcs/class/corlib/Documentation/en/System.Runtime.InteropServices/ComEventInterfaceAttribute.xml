@@ -43,8 +43,8 @@
         </format> typically applies it for you when it imports a type library.</para
       >
       <para
-        >When a source interface is imported from a type library, any methods it implements are added as events to a generated event interface. Tlbimp.exe applies <see cref="T:System.Runtime.InteropServices.ComEventInterfaceAttribute" /> to the event interface to identify the managed class that implements the methods of the event interface and implements the original source interface. The common language runtime uses this attribute at run time to perform the following tasks: </para
-      >
+        >When a source interface is imported from a type library, any methods it implements are added as events to a generated event interface. Tlbimp.exe applies <see cref="T:System.Runtime.InteropServices.ComEventInterfaceAttribute" /> to the event interface to identify the managed class that implements the methods of the event interface and implements the original source interface. The common language runtime uses this attribute at run time to perform the following tasks:
+      </para>
       <list type="bullet">
         <item>
           <para>Associate events exposed by the interface to their implementation in the event provider class.</para>
@@ -104,15 +104,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> that contains the original source interface from the type library. COM uses this interface to call back to the managed class. </param
-        >
+          />A <see cref="T:System.Type" /> that contains the original source interface from the type library. COM uses this interface to call back to the managed class.
+        </param>
         <param name="EventProvider">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> that contains the class that implements the methods of the event interface. </param
-        >
+          />A <see cref="T:System.Type" /> that contains the class that implements the methods of the event interface.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="EventProvider">

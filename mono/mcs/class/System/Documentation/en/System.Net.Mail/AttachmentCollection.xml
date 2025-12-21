@@ -29,14 +29,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Instances of the <see cref="T:System.Net.Mail.AttachmentCollection" /> class are returned by the <see cref="P:System.Net.Mail.MailMessage.AlternateViews" /> and <see cref="P:System.Net.Mail.MailMessage.Attachments" /> properties. </para
-      >
+        >Instances of the <see cref="T:System.Net.Mail.AttachmentCollection" /> class are returned by the <see cref="P:System.Net.Mail.MailMessage.AlternateViews" /> and <see cref="P:System.Net.Mail.MailMessage.Attachments" /> properties.
+      </para>
       <para
         >Use the <see cref="P:System.Net.Mail.MailMessage.AlternateViews" /> property to specify copies of an e-mail message in different formats. For example, if you send a message in HTML, you might also want provide a plain text version in case some of the recipients use e-mail readers that cannot display HTML content.</para
       >
       <para
-        >Use the collection returned by the <see cref="P:System.Net.Mail.MailMessage.Attachments" /> property to add an attachment, such as a file or the contents of a <see cref="T:System.IO.Stream" /> to this <see cref="T:System.Net.Mail.MailMessage" />. </para
-      >
+        >Use the collection returned by the <see cref="P:System.Net.Mail.MailMessage.Attachments" /> property to add an attachment, such as a file or the contents of a <see cref="T:System.IO.Stream" /> to this <see cref="T:System.Net.Mail.MailMessage" />.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -90,8 +90,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the <see cref="T:System.Net.Mail.AttachmentCollection" />. </para
-          >
+            >Releases all resources used by the <see cref="T:System.Net.Mail.AttachmentCollection" />.
+          </para>
         </summary>
       </Docs>
     </Member>

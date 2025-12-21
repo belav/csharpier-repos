@@ -46,8 +46,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.Configuration.AuthorizationRuleCollection" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.AuthorizationRuleCollection" /> class.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -85,8 +85,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.Configuration.AuthorizationRule" /> object to add to the collection. </param
-        >
+          />The <see cref="T:System.Web.Configuration.AuthorizationRule" /> object to add to the collection.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -196,8 +196,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Name of the <see cref="T:System.Configuration.ConfigurationElement" /> to be created. </param
-        >
+          />Name of the <see cref="T:System.Configuration.ConfigurationElement" /> to be created.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -254,8 +254,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.Configuration.AuthorizationRule" /> index. </param
-        >
+          />The <see cref="T:System.Web.Configuration.AuthorizationRule" /> index.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -279,14 +279,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the element key for a specified <see cref="T:System.Configuration.ConfigurationElement" />. </para
-          >
+            >Gets the element key for a specified <see cref="T:System.Configuration.ConfigurationElement" />.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Object" /> that acts as the key for the specified <see cref="T:System.Configuration.ConfigurationElement" />. </para
-          >
+            >The <see cref="T:System.Object" /> that acts as the key for the specified <see cref="T:System.Configuration.ConfigurationElement" />.
+          </para>
         </returns>
         <param name="element">
           <attribution
@@ -512,8 +512,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index location at which to add the specified <see cref="T:System.Web.Configuration.AuthorizationRuleCollection" /> object. </param
-        >
+          />The index location at which to add the specified <see cref="T:System.Web.Configuration.AuthorizationRuleCollection" /> object.
+        </param>
         <param name="rule">
           <attribution
             license="cc4"

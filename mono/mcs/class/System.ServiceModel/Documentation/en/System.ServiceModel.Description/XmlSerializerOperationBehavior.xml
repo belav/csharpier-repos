@@ -30,8 +30,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.ServiceModel.Description.XmlSerializerOperationBehavior" /> enables control of <see cref="T:System.Xml.Serialization.XmlSerializer" /> options, such as the <see cref="P:System.ServiceModel.XmlSerializerFormatAttribute.Style" /> property of the <see cref="T:System.ServiceModel.XmlSerializerFormatAttribute" />. </para
-      >
+        >The <see cref="T:System.ServiceModel.Description.XmlSerializerOperationBehavior" /> enables control of <see cref="T:System.Xml.Serialization.XmlSerializer" /> options, such as the <see cref="P:System.ServiceModel.XmlSerializerFormatAttribute.Style" /> property of the <see cref="T:System.ServiceModel.XmlSerializerFormatAttribute" />.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -97,8 +97,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.XmlSerializerOperationBehavior" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.XmlSerializerOperationBehavior" /> class.
+          </para>
         </summary>
         <param name="operation">
           <attribution

@@ -14,8 +14,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >In versions previous to.NET Framework 4.0, serialization of custom user data in a security transparent code was accomplished using the <see cref="M:System.Exception.GetObjectData" /> method. Starting with .NET Framework 4.0, that method is marked with the <see cref="T:System.Security.SecurityCriticalAttribute" /> attribute which prevents execution in security-transparent code. To work around this condition, implement the <see cref="T:System.Runtime.Serialization.ISafeSerializationData interface" /> and add custom data as shown in the example below. </para
-      >
+        >In versions previous to.NET Framework 4.0, serialization of custom user data in a security transparent code was accomplished using the <see cref="M:System.Exception.GetObjectData" /> method. Starting with .NET Framework 4.0, that method is marked with the <see cref="T:System.Security.SecurityCriticalAttribute" /> attribute which prevents execution in security-transparent code. To work around this condition, implement the <see cref="T:System.Runtime.Serialization.ISafeSerializationData interface" /> and add custom data as shown in the example below.
+      </para>
       <para
         >The <see cref="M:System.Runtime.Serialization.ISafeSerializationData.CompleteDeserialization" /> method is called after serialization, and uses the <see cref="T:System.Runtime.Serialization.SafeSerializationEventArgs" /> to restore the custom data.</para
       >

@@ -57,8 +57,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeDirectiveCollection" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeDirectiveCollection" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -85,8 +85,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeDirectiveCollection" /> class with the code directive objects in the specified array. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeDirectiveCollection" /> class with the code directive objects in the specified array.
+          </para>
         </summary>
         <param name="value">
           <attribution
@@ -322,15 +322,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type <see cref="T:System.CodeDom.CodeDirective" /> that is the destination of the values copied from the collection. </param
-        >
+          />An array of type <see cref="T:System.CodeDom.CodeDirective" /> that is the destination of the values copied from the collection.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index in the array at which to begin inserting collection objects. </param
-        >
+          />The index in the array at which to begin inserting collection objects.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IndexOf">
@@ -410,15 +410,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index position where the specified object should be inserted. </param
-        >
+          />The zero-based index position where the specified object should be inserted.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.CodeDom.CodeDirective" /> object to insert. </param
-        >
+          />The <see cref="T:System.CodeDom.CodeDirective" /> object to insert.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Item">

@@ -23,6 +23,6 @@
   </paragraph>
   <paragraph>The checked statement causes all expressions in the block to be evaluated in a checked context, and the unchecked statement causes all expressions in the block to be evaluated in an unchecked context. </paragraph>
   <paragraph
-    >The checked and unchecked statements are precisely equivalent to the checked and unchecked operators (<hyperlink>14.5.12</hyperlink>), except that they operate on blocks instead of expressions. </paragraph
-  >
+    >The checked and unchecked statements are precisely equivalent to the checked and unchecked operators (<hyperlink>14.5.12</hyperlink>), except that they operate on blocks instead of expressions.
+  </paragraph>
 </clause>

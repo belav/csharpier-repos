@@ -34,8 +34,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of <see cref="T:Microsoft.Build.BuildEngine.InvalidProjectFileException" /> class. </para
-          >
+            >Initializes a new instance of <see cref="T:Microsoft.Build.BuildEngine.InvalidProjectFileException" /> class.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>

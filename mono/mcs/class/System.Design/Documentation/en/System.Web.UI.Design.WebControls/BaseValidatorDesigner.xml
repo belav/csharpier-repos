@@ -29,8 +29,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides design-time support in a visual designer for Web server controls that are derived from the <see cref="T:System.Web.UI.WebControls.BaseValidator" /> class. </para
-      >
+        >Provides design-time support in a visual designer for Web server controls that are derived from the <see cref="T:System.Web.UI.WebControls.BaseValidator" /> class.
+      </para>
     </summary>
   </Docs>
   <Members>
@@ -48,8 +48,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.WebControls.BaseValidatorDesigner" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.WebControls.BaseValidatorDesigner" /> class.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>

@@ -257,19 +257,15 @@
           <para>Streams all the XmlSchemaException properties into the SerializationInfo class for the given StreamingContext.</para>
         </summary>
         <param name="info">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The SerializationInfo. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The SerializationInfo.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The StreamingContext information. </param
-        >
+          />The StreamingContext information.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="LineNumber">

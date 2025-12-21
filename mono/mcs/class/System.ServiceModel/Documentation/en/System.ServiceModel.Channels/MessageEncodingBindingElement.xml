@@ -53,13 +53,13 @@
       <list type="bullet">
         <item>
           <para>
-            <see cref="T:System.ServiceModel.Channels.TextMessageEncodingBindingElement" />: the most interoperable, but the least efficient encoder for XML messages. A Web service or Web service client can generally understand textual XML. However, transmitting large blocks of binary data as text is not efficient. </para
-          >
+            <see cref="T:System.ServiceModel.Channels.TextMessageEncodingBindingElement" />: the most interoperable, but the least efficient encoder for XML messages. A Web service or Web service client can generally understand textual XML. However, transmitting large blocks of binary data as text is not efficient.
+          </para>
         </item>
         <item>
           <para>
-            <see cref="T:System.ServiceModel.Channels.BinaryMessageEncodingBindingElement" />: represents the binding element that specifies the character encoding and message versioning used for binary-based XML messages. This is most efficient but least interoperable of the encoding options. </para
-          >
+            <see cref="T:System.ServiceModel.Channels.BinaryMessageEncodingBindingElement" />: represents the binding element that specifies the character encoding and message versioning used for binary-based XML messages. This is most efficient but least interoperable of the encoding options.
+          </para>
         </item>
         <item>
           <para>
@@ -90,8 +90,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.MessageEncodingBindingElement" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.MessageEncodingBindingElement" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>

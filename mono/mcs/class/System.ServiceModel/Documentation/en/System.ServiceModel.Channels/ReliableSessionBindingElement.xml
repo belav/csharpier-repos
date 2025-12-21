@@ -98,8 +98,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.ReliableSessionBindingElement" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.ReliableSessionBindingElement" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -157,8 +157,8 @@
             >The destination that receives messages on a reliable channel groups the acknowledgments for these messages together into a single message to reduce network traffic and to increase information density on messages. Grouping scales better as traffic increases. It does not attempt to send an acknowledgment for every message it receives as soon as possible, but rather waits for an interval of time, groups together the acknowledgments that have arrived during that interval, and then sends them all together. The first message that is received is the exception; it is acknowledged as soon as it is delivered. Also, if reliable sessions are used with single HTTP connections, as is the case for example with the <see cref="T:System.ServiceModel.WsHttpBinding" /> but not <see cref="T:System.ServiceModel.WsDualHttpBinding" />, then this setting is not used.</para
           >
           <para
-            >The value that is set with the <see cref="P:System.ServiceModel.Channels.ReliableSessionBindingElement.AcknowledgementInterval" /> property is a recommendation to the infrastructure and not a hard limit. </para
-          >
+            >The value that is set with the <see cref="P:System.ServiceModel.Channels.ReliableSessionBindingElement.AcknowledgementInterval" /> property is a recommendation to the infrastructure and not a hard limit.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -715,8 +715,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A message is considered to be transferred if its delivery at the recipient has been acknowledged by the recipient.</para>
           <para
-            >If an acknowledgment has not been received within a certain amount of time for a message that has been transmitted, the infrastructure automatically retransmits the message. The infrastructure tries to send the message for, at most, a <see cref="P:System.ServiceModel.Channels.ReliableSessionBindingElement.MaxRetryCount" /> number of times. Not receiving an acknowledgment before this limit is reached is considered a fatal communication failure and causes the channel faulted event to be raised. </para
-          >
+            >If an acknowledgment has not been received within a certain amount of time for a message that has been transmitted, the infrastructure automatically retransmits the message. The infrastructure tries to send the message for, at most, a <see cref="P:System.ServiceModel.Channels.ReliableSessionBindingElement.MaxRetryCount" /> number of times. Not receiving an acknowledgment before this limit is reached is considered a fatal communication failure and causes the channel faulted event to be raised.
+          </para>
           <para>The infrastructure uses an exponential back-off algorithm to determine when to retransmit, based on a computed average round-trip time. The initial retry time is computed based on the measured roundtrip time of establishing the session. The retransmission algorithm doubles the delay with every attempt, which results in approximately 8.5 minutes passing between the first transmission attempt and the last retransmission attempt. The time for the first retransmission attempt is adjusted according to the calculated round-trip time and the resulting stretch of time that those attempts take varies accordingly. This allows the retransmission time to dynamically adapt to varying network conditions. </para>
         </remarks>
         <summary>
@@ -838,8 +838,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Description.MetadataExporter" /> that exports the binding information in the reliable session binding element to the WSDL elements. </param
-        >
+          />The <see cref="T:System.ServiceModel.Description.MetadataExporter" /> that exports the binding information in the reliable session binding element to the WSDL elements.
+        </param>
         <param name="context">
           <attribution
             license="cc4"

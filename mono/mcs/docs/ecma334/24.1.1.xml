@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <clause number="24.1.1" title="Attribute usage">
   <paragraph
-    >The attribute AttributeUsage (<hyperlink>24.4.1</hyperlink>) is used to describe how an attribute class can be used. </paragraph
-  >
+    >The attribute AttributeUsage (<hyperlink>24.4.1</hyperlink>) is used to describe how an attribute class can be used.
+  </paragraph>
   <paragraph
     >AttributeUsage has a positional parameter (<hyperlink>24.1.2</hyperlink>) that enables an attribute class to specify the kinds of declarations on which it can be used. <example
       >[Example: The example <code_example>
@@ -31,8 +31,8 @@ public class SimpleAttribute: Attribute
     >
   </paragraph>
   <paragraph
-    >AttributeUsage has a named parameter (<hyperlink>24.1.2</hyperlink>), called AllowMultiple, which indicates whether the attribute can be specified more than once for a given entity. If AllowMultiple for an attribute class is true, then that class is a multi-use attribute class, and can be specified more than once on an entity. If AllowMultiple for an attribute class is false or it is unspecified, then that class is a single-use attribute class, and can be specified at most once on an entity. </paragraph
-  >
+    >AttributeUsage has a named parameter (<hyperlink>24.1.2</hyperlink>), called AllowMultiple, which indicates whether the attribute can be specified more than once for a given entity. If AllowMultiple for an attribute class is true, then that class is a multi-use attribute class, and can be specified more than once on an entity. If AllowMultiple for an attribute class is false or it is unspecified, then that class is a single-use attribute class, and can be specified at most once on an entity.
+  </paragraph>
   <paragraph>
     <example
       >[Example: The example <code_example>
@@ -56,8 +56,8 @@ class Class1 {...}
     >
   </paragraph>
   <paragraph
-    >AttributeUsage has another named parameter (<hyperlink>24.1.2</hyperlink>), called Inherited, which indicates whether the attribute, when specified on a base class, is also inherited by classes that derive from that base class. If Inherited for an attribute class is true, then that attribute is inherited. If Inherited for an attribute class is false or it is unspecified, then that attribute is not inherited. </paragraph
-  >
+    >AttributeUsage has another named parameter (<hyperlink>24.1.2</hyperlink>), called Inherited, which indicates whether the attribute, when specified on a base class, is also inherited by classes that derive from that base class. If Inherited for an attribute class is true, then that attribute is inherited. If Inherited for an attribute class is false or it is unspecified, then that attribute is not inherited.
+  </paragraph>
   <paragraph
     >An attribute class X not having an AttributeUsage attribute attached to it, as in <code_example>
       <![CDATA[

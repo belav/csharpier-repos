@@ -31,13 +31,13 @@
       >global-attributes</non_terminal
     > and <non_terminal where="16.4"
       >namespace-member-declaration</non_terminal
-    >s of that compilation unit, but have no effect on other compilation units. </paragraph
-  >
+    >s of that compilation unit, but have no effect on other compilation units.
+  </paragraph>
   <paragraph
     >The <non_terminal where="24.2"
       >global-attributes</non_terminal
-    > (<hyperlink>24</hyperlink>) of a compilation unit permit the specification of attributes for the target assembly. Assemblies act as physical containers for types. </paragraph
-  >
+    > (<hyperlink>24</hyperlink>) of a compilation unit permit the specification of attributes for the target assembly. Assemblies act as physical containers for types.
+  </paragraph>
   <paragraph
     >The <non_terminal where="16.4"
       >namespace-member-declaration</non_terminal

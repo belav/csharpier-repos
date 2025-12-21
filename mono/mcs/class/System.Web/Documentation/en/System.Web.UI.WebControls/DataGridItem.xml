@@ -71,22 +71,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the item from the <see cref="P:System.Web.UI.WebControls.DataGrid.Items" /> collection in the <see cref="T:System.Web.UI.WebControls.DataGrid" /> control. </param
-        >
+          />The index of the item from the <see cref="P:System.Web.UI.WebControls.DataGrid.Items" /> collection in the <see cref="T:System.Web.UI.WebControls.DataGrid" /> control.
+        </param>
         <param name="dataSetIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index number of the item, from the bound data source, that appears in the <see cref="T:System.Web.UI.WebControls.DataGrid" /> control. </param
-        >
+          />The index number of the item, from the bound data source, that appears in the <see cref="T:System.Web.UI.WebControls.DataGrid" /> control.
+        </param>
         <param name="itemType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Web.UI.WebControls.ListItemType" /> values. </param
-        >
+          />One of the <see cref="T:System.Web.UI.WebControls.ListItemType" /> values.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -246,8 +246,8 @@ List items contains one of this types.
               </term>
               <description>
                 <para
-                  >The heading section of the <see cref="T:System.Web.UI.WebControls.DataGrid" /> control. </para
-                >
+                  >The heading section of the <see cref="T:System.Web.UI.WebControls.DataGrid" /> control.
+                </para>
               </description>
             </item>
             <item>
@@ -256,8 +256,8 @@ List items contains one of this types.
               </term>
               <description>
                 <para
-                  >The footer section of the <see cref="T:System.Web.UI.WebControls.DataGrid" /> control. </para
-                >
+                  >The footer section of the <see cref="T:System.Web.UI.WebControls.DataGrid" /> control.
+                </para>
               </description>
             </item>
             <item>
@@ -266,8 +266,8 @@ List items contains one of this types.
               </term>
               <description>
                 <para
-                  >An item in the <see cref="T:System.Web.UI.WebControls.DataGrid" /> control. </para
-                >
+                  >An item in the <see cref="T:System.Web.UI.WebControls.DataGrid" /> control.
+                </para>
               </description>
             </item>
             <item>
@@ -276,8 +276,8 @@ List items contains one of this types.
               </term>
               <description>
                 <para
-                  >An alternating item in the <see cref="T:System.Web.UI.WebControls.DataGrid" /> control. </para
-                >
+                  >An alternating item in the <see cref="T:System.Web.UI.WebControls.DataGrid" /> control.
+                </para>
               </description>
             </item>
             <item>
@@ -286,8 +286,8 @@ List items contains one of this types.
               </term>
               <description>
                 <para
-                  >The selected item in the <see cref="T:System.Web.UI.WebControls.DataGrid" /> control. </para
-                >
+                  >The selected item in the <see cref="T:System.Web.UI.WebControls.DataGrid" /> control.
+                </para>
               </description>
             </item>
             <item>
@@ -296,8 +296,8 @@ List items contains one of this types.
               </term>
               <description>
                 <para
-                  >The item selected for editing in the <see cref="T:System.Web.UI.WebControls.DataGrid" /> control. </para
-                >
+                  >The item selected for editing in the <see cref="T:System.Web.UI.WebControls.DataGrid" /> control.
+                </para>
               </description>
             </item>
             <item>
@@ -306,8 +306,8 @@ List items contains one of this types.
               </term>
               <description>
                 <para
-                  >A separator between the items of the <see cref="T:System.Web.UI.WebControls.DataGrid" /> control. </para
-                >
+                  >A separator between the items of the <see cref="T:System.Web.UI.WebControls.DataGrid" /> control.
+                </para>
               </description>
             </item>
             <item>
@@ -316,8 +316,8 @@ List items contains one of this types.
               </term>
               <description>
                 <para
-                  >The page selection section of the <see cref="T:System.Web.UI.WebControls.DataGrid" /> control. </para
-                >
+                  >The page selection section of the <see cref="T:System.Web.UI.WebControls.DataGrid" /> control.
+                </para>
               </description>
             </item>
           </list>

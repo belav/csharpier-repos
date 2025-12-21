@@ -52,10 +52,8 @@
   <paragraph
     >A <non_terminal where="19.1"
       >non-array-type</non_terminal
-    > is any type that is not itself an <non_terminal where="19.1"
-      >array-type</non_terminal
-    >. </paragraph
-  >
+    > is any type that is not itself an <non_terminal where="19.1">array-type</non_terminal>.
+  </paragraph>
   <paragraph
     >The rank of an array type is given by the leftmost <non_terminal where="19.1"
       >rank-specifier</non_terminal
@@ -64,8 +62,8 @@
     > indicates that the array is an array with a rank of one plus the number of &quot;,&quot; tokens in the <non_terminal
       where="19.1"
       >rank-specifier</non_terminal
-    >. </paragraph
-  >
+    >.
+  </paragraph>
   <paragraph
     >The element type of an array type is the type that results from deleting the leftmost rank-specifier: <list>
       <list_item> An array type of the form T[R] is an array with rank R and a non-array element type T. </list_item>

@@ -23,8 +23,8 @@
       <see cref="T:System.IO.FileStream" />s,
       <see cref="T:Mono.Unix.UnixStream" />s, and 
       Unix file descriptors.
-    </remarks
-    >
+
+    </remarks>
   </Docs>
   <Members>
     <Member MemberName="AdviseFileAccessPattern">
@@ -54,8 +54,8 @@
         <param name="pattern">
           A <see cref="T:Mono.Unix.FileAccessPattern" /> containing the file 
           access pattern to suggest.
-        </param
-        >
+
+        </param>
         <summary>Advises a file access pattern for a file stream.</summary>
         <remarks>
           <para>
@@ -73,13 +73,13 @@
         <exception cref="T:System.ArgumentException">
           <para>
             <paramref name="stream" /> is not a valid file stream.
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <paramref name="advice" /> is not a value.
-          </para
-          >
+
+          </para>
         </exception>
         <exception cref="T:System.ArgumentNullException">
           <paramref name="stream" /> 
@@ -117,13 +117,13 @@
       <Docs>
         <param name="fd">
           A <see cref="T:System.Int32" /> containing the file descriptor to advise.
-        </param
-        >
+
+        </param>
         <param name="pattern">
           A <see cref="T:Mono.Unix.FileAccessPattern" /> containing the file 
           access pattern to suggest.
-        </param
-        >
+
+        </param>
         <summary>Advises a file access pattern for a Unix file descriptor.</summary>
         <remarks>
           <para>
@@ -141,13 +141,13 @@
         <exception cref="T:System.ArgumentException">
           <para>
             <paramref name="fd" /> is not a valid file descriptor.
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <paramref name="advice" /> is not a valid value.
-          </para
-          >
+
+          </para>
         </exception>
         <exception cref="T:System.IO.IOException">
           <paramref name="fd" /> 
@@ -183,8 +183,8 @@
         <param name="pattern">
           A <see cref="T:Mono.Unix.FileAccessPattern" /> containing the file 
           access pattern to suggest.
-        </param
-        >
+
+        </param>
         <summary>Advises a file access pattern for a file stream.</summary>
         <remarks>
           <para>
@@ -202,13 +202,13 @@
         <exception cref="T:System.ArgumentException">
           <para>
             <paramref name="file" /> is not a valid file stream.
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <paramref name="advice" /> is not a valid value.
-          </para
-          >
+
+          </para>
         </exception>
         <exception cref="T:System.ArgumentNullException">
           <paramref name="file" /> 
@@ -250,20 +250,20 @@
         <param name="pattern">
           A <see cref="T:Mono.Unix.FileAccessPattern" /> containing the file 
           access pattern to suggest.
-        </param
-        >
+
+        </param>
         <param name="offset">
           A <see cref="T:System.Int64" /> containing the start of the range to suggest 
           the <paramref name="pattern" /> access pattern.
-        </param
-        >
+
+        </param>
         <param name="len">
           A <see cref="T:System.Int64" /> containing the length of the range
           to suggest the <paramref name="pattern" />
           access pattern.  If <c>0</c>, <paramref name="pattern" /> is suggested 
           until end-of-file.
-        </param
-        >
+
+        </param>
         <summary>Advises a file access pattern for a file stream.</summary>
         <remarks>
           <para>
@@ -284,13 +284,13 @@
         <exception cref="T:System.ArgumentException">
           <para>
             <paramref name="stream" /> is not a valid file stream.
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <paramref name="advice" /> is not a value.
-          </para
-          >
+
+          </para>
         </exception>
         <exception cref="T:System.ArgumentNullException">
           <paramref name="stream" /> is <see langword="null" />.</exception
@@ -329,25 +329,25 @@
       <Docs>
         <param name="fd">
           A <see cref="T:System.Int32" /> containing the file descriptor to advise.
-        </param
-        >
+
+        </param>
         <param name="pattern">
           A <see cref="T:Mono.Unix.FileAccessPattern" /> containing the file 
           access pattern to suggest.
-        </param
-        >
+
+        </param>
         <param name="offset">
           A <see cref="T:System.Int64" /> containing the start of the range to suggest 
           the <paramref name="pattern" /> access pattern.
-        </param
-        >
+
+        </param>
         <param name="len">
           A <see cref="T:System.Int64" /> containing the length of the range
           to suggest the <paramref name="pattern" />
           access pattern.  If <c>0</c>, <paramref name="pattern" /> is suggested 
           until end-of-file.
-        </param
-        >
+
+        </param>
         <summary>Advises a file access pattern for a Unix file descriptor.</summary>
         <remarks>
           <para>
@@ -368,13 +368,13 @@
         <exception cref="T:System.ArgumentException">
           <para>
             <paramref name="fd" /> is not a valid file descriptor.
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <paramref name="advice" /> is not a valid value.
-          </para
-          >
+
+          </para>
         </exception>
         <exception cref="T:System.IO.IOException">
           <paramref name="fd" /> 
@@ -412,20 +412,20 @@
         <param name="pattern">
           A <see cref="T:Mono.Unix.FileAccessPattern" /> containing the file 
           access pattern to suggest.
-        </param
-        >
+
+        </param>
         <param name="offset">
           A <see cref="T:System.Int64" /> containing the start of the range to suggest 
           the <paramref name="pattern" /> access pattern.
-        </param
-        >
+
+        </param>
         <param name="len">
           A <see cref="T:System.Int64" /> containing the length of the range
           to suggest the <paramref name="pattern" />
           access pattern.  If <c>0</c>, <paramref name="pattern" /> is suggested 
           until end-of-file.
-        </param
-        >
+
+        </param>
         <summary>Advises a file access pattern for a Unix file descriptor.</summary>
         <remarks>
           <para>
@@ -446,13 +446,13 @@
         <exception cref="T:System.ArgumentException">
           <para>
             <paramref name="file" /> is not a valid file stream.
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <paramref name="advice" /> is not a valid value.
-          </para
-          >
+
+          </para>
         </exception>
         <exception cref="T:System.ArgumentNullException">
           <paramref name="file" /> 

@@ -96,8 +96,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The tag name of an XML element. </param
-        >
+          />The tag name of an XML element.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -134,15 +134,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The tag name of the XML element. </param
-        >
+          />The tag name of the XML element.
+        </param>
         <param name="text">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text content within the element. </param
-        >
+          />The text content within the element.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddAttribute">
@@ -180,19 +180,15 @@
           <para>Adds a name/value attribute to an XML element.</para>
         </summary>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the attribute. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the attribute.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value of the attribute. </param
-        >
+          />The value of the attribute.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddChild">
@@ -226,12 +222,8 @@
           <para>Adds a child element to the XML element.</para>
         </summary>
         <param name="child">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The child element to add. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The child element to add.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Attribute">
@@ -273,8 +265,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the attribute for which to search. </param
-        >
+          />The name of the attribute for which to search.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Attributes">
@@ -429,8 +421,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An XML element object to which to compare the current XML element object. </param
-        >
+          />An XML element object to which to compare the current XML element object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Escape">
@@ -524,8 +516,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string within which to escape invalid characters. </param
-        >
+          />The string within which to escape invalid characters.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="FromString">
@@ -613,8 +605,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The attribute name to test for validity. </param
-        >
+          />The attribute name to test for validity.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsValidAttributeValue">
@@ -658,8 +650,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The attribute value to test for validity. </param
-        >
+          />The attribute value to test for validity.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsValidTag">
@@ -702,8 +694,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The tag to test for validity. </param
-        >
+          />The tag to test for validity.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsValidText">
@@ -746,8 +738,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text to test for validity. </param
-        >
+          />The text to test for validity.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SearchForChildByTag">
@@ -793,8 +785,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The tag for which to search in child elements. </param
-        >
+          />The tag for which to search in child elements.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SearchForTextOfTag">
@@ -837,8 +829,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The tag for which to search in child elements. </param
-        >
+          />The tag for which to search in child elements.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Tag">

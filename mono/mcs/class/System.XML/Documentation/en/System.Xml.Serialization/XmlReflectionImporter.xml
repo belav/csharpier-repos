@@ -45,8 +45,8 @@
         </item>
       </list>
       <para
-        >The <see cref="T:System.Xml.Serialization.XmlReflectionImporter" /> class is used for Web services when a service or client specifies: </para
-      >
+        >The <see cref="T:System.Xml.Serialization.XmlReflectionImporter" /> class is used for Web services when a service or client specifies:
+      </para>
       <list type="bullet">
         <item>
           <para>Literal use, which indicates that the contents of SOAP message parameters and return values (or request and response documents) are literally specified with XML schema definitions.</para>
@@ -86,8 +86,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlReflectionImporter" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlReflectionImporter" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -120,8 +120,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlReflectionImporter" /> class using the specified default XML namespace. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlReflectionImporter" /> class using the specified default XML namespace.
+          </para>
         </summary>
         <param name="defaultNamespace">
           <attribution
@@ -164,8 +164,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlReflectionImporter" /> class using the specified XML serialization overrides. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlReflectionImporter" /> class using the specified XML serialization overrides.
+          </para>
         </summary>
         <param name="attributeOverrides">
           <attribution
@@ -209,8 +209,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlReflectionImporter" /> class using the specified XML serialization overrides and default XML namespace. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlReflectionImporter" /> class using the specified XML serialization overrides and default XML namespace.
+          </para>
         </summary>
         <param name="attributeOverrides">
           <attribution

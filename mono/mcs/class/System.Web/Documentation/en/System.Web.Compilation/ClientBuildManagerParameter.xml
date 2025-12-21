@@ -28,8 +28,8 @@
         >Either the <see cref="P:System.Web.Compilation.ClientBuildManagerParameter.StrongNameKeyContainer" /> property or the <see cref="P:System.Web.Compilation.ClientBuildManagerParameter.StrongNameKeyFile" /> property is assigned a value to create a strong-named assembly. Both values do not need to be set to create a strong-named assembly.</para
       >
       <para
-        >A <see cref="T:System.Web.Compilation.ClientBuildManagerParameter" /> object is passed to the <see cref="T:System.Web.Compilation.ClientBuildManager" /> object through the <see cref="M:System.Web.Compilation.ClientBuildManager.#ctor(System.String,System.String,System.String,System.Web.Compilation.ClientBuildManagerParameter)" /> constructor. </para
-      >
+        >A <see cref="T:System.Web.Compilation.ClientBuildManagerParameter" /> object is passed to the <see cref="T:System.Web.Compilation.ClientBuildManager" /> object through the <see cref="M:System.Web.Compilation.ClientBuildManager.#ctor(System.String,System.String,System.String,System.Web.Compilation.ClientBuildManagerParameter)" /> constructor.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -52,8 +52,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.Compilation.ClientBuildManagerParameter" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.Compilation.ClientBuildManagerParameter" /> class.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>

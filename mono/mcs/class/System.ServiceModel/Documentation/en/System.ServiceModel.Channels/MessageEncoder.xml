@@ -41,8 +41,8 @@
         >Override the <see cref="P:System.ServiceModel.Channels.MessageEncoderFactory.Encoder" /> to return an instance of your custom <see cref="T:System.ServiceModel.Channels.MessageEncoder" />. Then wire up your custom <see cref="T:System.ServiceModel.Channels.MessageEncoderFactory" /> to the binding element stack used to configure the service or client by overriding the <see cref="M:System.ServiceModel.Channels.MessageEncodingBindingElement.CreateMessageEncoderFactory" /> method to return an instance of this factory.</para
       >
       <para
-        >The task of converting between the in-memory representation of a message and an XML Information Set (Infoset) representation that can be written to a stream is encapsulated within the <see cref="T:System.ServiceModel.Channels.MessageEncoder" /> class, which most commonly serves as a factory for XML readers and XML writers that support specific types of XML encodings. </para
-      >
+        >The task of converting between the in-memory representation of a message and an XML Information Set (Infoset) representation that can be written to a stream is encapsulated within the <see cref="T:System.ServiceModel.Channels.MessageEncoder" /> class, which most commonly serves as a factory for XML readers and XML writers that support specific types of XML encodings.
+      </para>
       <para
         >The key methods on <see cref="T:System.ServiceModel.Channels.MessageEncoder" /> are <see cref="M:System.ServiceModel.Channels.MessageEncoder.WriteMessage" /> and <see cref="M:System.ServiceModel.Channels.MessageEncoder.ReadMessage" />. <see cref="M:System.ServiceModel.Channels.MessageEncoder.WriteMessage" /> takes a <see cref="T:System.ServiceModel.Channels.Message" /> object and writes it into a <see cref="T:System.IO.Stream" /> object. <see cref="M:System.ServiceModel.Channels.MessageEncoder.ReadMessage" /> takes a <see cref="T:System.IO.Stream" /> object and a maximum header size and returns a <see cref="T:System.ServiceModel.Channels.Message" /> object.</para
       >
@@ -69,8 +69,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.MessageEncoder" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.MessageEncoder" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -183,8 +183,8 @@
               >RFC 2045</see
             > Section 5.1. <see cref="http://go.microsoft.com/fwlink/?LinkId=95944"
               >RFC 2046</see
-            > provides detailed information on Multipurpose Internet Mail Extensions (MIME) media types and their parameters. </para
-          >
+            > provides detailed information on Multipurpose Internet Mail Extensions (MIME) media types and their parameters.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

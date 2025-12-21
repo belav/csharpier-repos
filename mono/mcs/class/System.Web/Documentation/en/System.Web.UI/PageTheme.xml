@@ -66,8 +66,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.UI.PageTheme.AppRelativeTemplateSourceDirectory" /> property is abstract. When compiled, a theme will generate code that overrides the <see cref="P:System.Web.UI.PageTheme.AppRelativeTemplateSourceDirectory" /> property. The <see cref="M:System.Web.UI.Control.ResolveUrl(System.String)" /> method uses the <see cref="P:System.Web.UI.PageTheme.AppRelativeTemplateSourceDirectory" /> property to resolves a relative URL to an absolute URL. </para
-          >
+            >The <see cref="P:System.Web.UI.PageTheme.AppRelativeTemplateSourceDirectory" /> property is abstract. When compiled, a theme will generate code that overrides the <see cref="P:System.Web.UI.PageTheme.AppRelativeTemplateSourceDirectory" /> property. The <see cref="M:System.Web.UI.Control.ResolveUrl(System.String)" /> method uses the <see cref="P:System.Web.UI.PageTheme.AppRelativeTemplateSourceDirectory" /> property to resolves a relative URL to an absolute URL.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -145,8 +145,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the control skin for which to create a key. </param
-        >
+          />The name of the control skin for which to create a key.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -326,8 +326,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string name of the device filter to check. </param
-        >
+          />The string name of the device filter to check.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -347,8 +347,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.PageTheme.XPath(System.String)" /> method uses the <see cref="M:System.Web.UI.Page.GetDataItem" /> method to resolve the <see cref="T:System.Xml.XPath.IXPathNavigable" /> object reference that the expression is evaluated against. </para
-          >
+            >The <see cref="M:System.Web.UI.PageTheme.XPath(System.String)" /> method uses the <see cref="M:System.Web.UI.Page.GetDataItem" /> method to resolve the <see cref="T:System.Xml.XPath.IXPathNavigable" /> object reference that the expression is evaluated against.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -390,8 +390,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.PageTheme.XPath(System.String,System.String)" /> method uses the <see cref="M:System.Web.UI.Page.GetDataItem" /> method to resolve the <see cref="T:System.Xml.XPath.IXPathNavigable" /> object reference that the expression is evaluated against. </para
-          >
+            >The <see cref="M:System.Web.UI.PageTheme.XPath(System.String,System.String)" /> method uses the <see cref="M:System.Web.UI.Page.GetDataItem" /> method to resolve the <see cref="T:System.Xml.XPath.IXPathNavigable" /> object reference that the expression is evaluated against.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -413,8 +413,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A .NET Framework format string to apply to the result. </param
-        >
+          />A .NET Framework format string to apply to the result.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -456,8 +456,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XPath expression to evaluate. For details, see <see cref="T:System.Web.UI.XPathBinder" />. </param
-        >
+          />The XPath expression to evaluate. For details, see <see cref="T:System.Web.UI.XPathBinder" />.
+        </param>
         <param name="resolver">
           <attribution
             license="cc4"
@@ -507,15 +507,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XPath expression to evaluate. For details, see <see cref="T:System.Web.UI.XPathBinder" />. </param
-        >
+          />The XPath expression to evaluate. For details, see <see cref="T:System.Web.UI.XPathBinder" />.
+        </param>
         <param name="format">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A .NET Framework format string to apply to the result. </param
-        >
+          />A .NET Framework format string to apply to the result.
+        </param>
         <param name="resolver">
           <attribution
             license="cc4"
@@ -545,8 +545,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.PageTheme.XPathSelect(System.String)" /> method uses the <see cref="M:System.Web.UI.Page.GetDataItem" /> method to resolve the <see cref="T:System.Xml.XPath.IXPathNavigable" /> object reference that the expression is evaluated against. </para
-          >
+            >The <see cref="M:System.Web.UI.PageTheme.XPathSelect(System.String)" /> method uses the <see cref="M:System.Web.UI.Page.GetDataItem" /> method to resolve the <see cref="T:System.Xml.XPath.IXPathNavigable" /> object reference that the expression is evaluated against.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -606,15 +606,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XPath expression to evaluate. For details, see <see cref="T:System.Web.UI.XPathBinder" />. </param
-        >
+          />The XPath expression to evaluate. For details, see <see cref="T:System.Web.UI.XPathBinder" />.
+        </param>
         <param name="resolver">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A set of prefix and namespace mappings used to for namespace resolution. </param
-        >
+          />A set of prefix and namespace mappings used to for namespace resolution.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

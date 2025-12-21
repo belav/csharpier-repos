@@ -23,8 +23,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see cref="E:System.Windows.Forms.ListView.SearchForVirtualItem" /> event. </para
-      >
+        >Provides data for the <see cref="E:System.Windows.Forms.ListView.SearchForVirtualItem" /> event.
+      </para>
     </summary>
   </Docs>
   <Members>
@@ -49,8 +49,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.SearchForVirtualItemEventArgs" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.SearchForVirtualItemEventArgs" /> class.
+          </para>
         </summary>
         <param name="isTextSearch">
           <attribution
@@ -195,8 +195,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Windows.Forms.SearchForVirtualItemEventArgs.Text" /> property can specify a substring of the desired text. The <see cref="P:System.Windows.Forms.SearchForVirtualItemEventArgs.IsPrefixSearch" /> property indicates whether the search should match items that start with the search text. </para
-          >
+            >The <see cref="P:System.Windows.Forms.SearchForVirtualItemEventArgs.Text" /> property can specify a substring of the desired text. The <see cref="P:System.Windows.Forms.SearchForVirtualItemEventArgs.IsPrefixSearch" /> property indicates whether the search should match items that start with the search text.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

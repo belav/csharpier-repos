@@ -23,8 +23,8 @@
         >Use the <see cref="T:System.Runtime.Serialization.XsdDataContractImporter" /> if you are creating a Web service that must interoperate with an existing Web service, or to create data contract types from XML schemas. <see cref="T:System.Runtime.Serialization.XsdDataContractImporter" /> will transform a set of XML schemas and create the dnprdnshort types that represent the data contract in a selected programming language. To create the code, use the classes in the <see cref="N:System.CodeDom" /> namespace.</para
       >
       <para
-        >Conversely, use the <see cref="T:System.Runtime.Serialization.XsdDataContractExporter" /> class when you have created a Web service that incorporates data represented by CLR types and when you need to export XML schemas for each data type to be consumed by other Web services. That is, <see cref="T:System.Runtime.Serialization.XsdDataContractExporter" /> transforms a set of CLR types into a set of XML schemas. </para
-      >
+        >Conversely, use the <see cref="T:System.Runtime.Serialization.XsdDataContractExporter" /> class when you have created a Web service that incorporates data represented by CLR types and when you need to export XML schemas for each data type to be consumed by other Web services. That is, <see cref="T:System.Runtime.Serialization.XsdDataContractExporter" /> transforms a set of CLR types into a set of XML schemas.
+      </para>
       <block subset="none" type="note">
         <para
           >To generate CLR types from XML schemas at design time, use the <format type="text/html">
@@ -57,8 +57,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.XsdDataContractImporter" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.XsdDataContractImporter" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -88,16 +88,16 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.XsdDataContractImporter" /> class with the <see cref="T:System.CodeDom.CodeCompileUnit" /> that will be used to generate CLR code. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.XsdDataContractImporter" /> class with the <see cref="T:System.CodeDom.CodeCompileUnit" /> that will be used to generate CLR code.
+          </para>
         </summary>
         <param name="codeCompileUnit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.CodeDom.CodeCompileUnit" /> that will be used to store the code. </param
-        >
+          />The <see cref="T:System.CodeDom.CodeCompileUnit" /> that will be used to store the code.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CanImport">
@@ -124,8 +124,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the schemas contained in an <see cref="T:System.Xml.Schema.XmlSchemaSet" /> can be transformed into a <see cref="T:System.CodeDom.CodeCompileUnit" />. </para
-          >
+            >Gets a value that indicates whether the schemas contained in an <see cref="T:System.Xml.Schema.XmlSchemaSet" /> can be transformed into a <see cref="T:System.CodeDom.CodeCompileUnit" />.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -136,8 +136,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Xml.Schema.XmlSchemaSet" /> that contains the schemas to transform. </param
-        >
+          />A <see cref="T:System.Xml.Schema.XmlSchemaSet" /> that contains the schemas to transform.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CanImport">
@@ -276,8 +276,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the schemas contained in an <see cref="T:System.Xml.Schema.XmlSchemaSet" /> can be transformed into a <see cref="T:System.CodeDom.CodeCompileUnit" />. </para
-          >
+            >Gets a value that indicates whether the schemas contained in an <see cref="T:System.Xml.Schema.XmlSchemaSet" /> can be transformed into a <see cref="T:System.CodeDom.CodeCompileUnit" />.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -288,8 +288,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Xml.Schema.XmlSchemaSet" /> that contains the schema representations. </param
-        >
+          />A <see cref="T:System.Xml.Schema.XmlSchemaSet" /> that contains the schema representations.
+        </param>
         <param name="typeName">
           <attribution
             license="cc4"
@@ -402,8 +402,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The schema element is needed for data about the type that is specified at the element scope. The main example of this is the XSD attribute nillable. In schema, setting nillable to true is specified on the containing schema element whereas the concept of null is expressed in the CLR type <see cref="T:System.Nullable`1" />. The element is passed in so that this importer can look up the element-level information and return the correct type reference accordingly. </para
-          >
+            >The schema element is needed for data about the type that is specified at the element scope. The main example of this is the XSD attribute nillable. In schema, setting nillable to true is specified on the containing schema element whereas the concept of null is expressed in the CLR type <see cref="T:System.Nullable`1" />. The element is passed in so that this importer can look up the element-level information and return the correct type reference accordingly.
+          </para>
           <para>When importing WSDL, each parameter is imported separately and therefore the parameter elements need to be passed in separately.</para>
         </remarks>
         <summary>
@@ -510,8 +510,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Transforms the specified set of XML schemas contained in an <see cref="T:System.Xml.Schema.XmlSchemaSet" /> into a <see cref="T:System.CodeDom.CodeCompileUnit" />. </para
-          >
+            >Transforms the specified set of XML schemas contained in an <see cref="T:System.Xml.Schema.XmlSchemaSet" /> into a <see cref="T:System.CodeDom.CodeCompileUnit" />.
+          </para>
         </summary>
         <param name="schemas">
           <attribution
@@ -615,8 +615,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.Schema.XmlSchemaElement" /> that represents the specific schema element to transform. </param
-        >
+          />An <see cref="T:System.Xml.Schema.XmlSchemaElement" /> that represents the specific schema element to transform.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Import">
@@ -652,8 +652,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Xml.Schema.XmlSchemaSet" /> that contains the schema representations. </param
-        >
+          />A <see cref="T:System.Xml.Schema.XmlSchemaSet" /> that contains the schema representations.
+        </param>
         <param name="typeName">
           <attribution
             license="cc4"
@@ -690,8 +690,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets an <see cref="T:System.Runtime.Serialization.ImportOptions" /> that contains settable options for the import operation. </para
-          >
+            >Gets or sets an <see cref="T:System.Runtime.Serialization.ImportOptions" /> that contains settable options for the import operation.
+          </para>
         </summary>
       </Docs>
     </Member>

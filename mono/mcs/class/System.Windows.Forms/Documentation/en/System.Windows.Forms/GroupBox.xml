@@ -158,8 +158,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -198,8 +198,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets how the <see cref="T:System.Windows.Forms.GroupBox" /> behaves when its <see cref="P:System.Windows.Forms.Control.AutoSize" /> property is enabled. </para
-          >
+            >Gets or sets how the <see cref="T:System.Windows.Forms.GroupBox" /> behaves when its <see cref="P:System.Windows.Forms.Control.AutoSize" /> property is enabled.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -476,8 +476,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the user presses a key while the <see cref="T:System.Windows.Forms.GroupBox" /> control has focus. </para
-          >
+            >Occurs when the user presses a key while the <see cref="T:System.Windows.Forms.GroupBox" /> control has focus.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>

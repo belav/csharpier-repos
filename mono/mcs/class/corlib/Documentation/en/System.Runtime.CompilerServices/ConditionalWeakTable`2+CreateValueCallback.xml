@@ -42,11 +42,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Runtime.CompilerServices.ConditionalWeakTable`2" /> class enables language compilers to attach arbitrary properties to managed objects at run time. A <see cref="T:System.Runtime.CompilerServices.ConditionalWeakTable`2" /> object is a dictionary that binds a managed object, which is represented by a key, to its attached property, which is represented by a value. The object's keys are the individual instances of the <paramref name="TKey" /> class to which the property is attached, and its values are the property values that are assigned to the corresponding objects. </para
-      >
+        >The <see cref="T:System.Runtime.CompilerServices.ConditionalWeakTable`2" /> class enables language compilers to attach arbitrary properties to managed objects at run time. A <see cref="T:System.Runtime.CompilerServices.ConditionalWeakTable`2" /> object is a dictionary that binds a managed object, which is represented by a key, to its attached property, which is represented by a value. The object's keys are the individual instances of the <paramref name="TKey" /> class to which the property is attached, and its values are the property values that are assigned to the corresponding objects.
+      </para>
       <para
-        >Keys must be unique; in other words, the <see cref="T:System.Runtime.CompilerServices.ConditionalWeakTable`2" /> class supports one attached value per managed object. Two keys are equal if passing them to the <see cref="M:System.Object.ReferenceEquals(System.Object,System.Object)" /> method returns true. </para
-      >
+        >Keys must be unique; in other words, the <see cref="T:System.Runtime.CompilerServices.ConditionalWeakTable`2" /> class supports one attached value per managed object. Two keys are equal if passing them to the <see cref="M:System.Object.ReferenceEquals(System.Object,System.Object)" /> method returns true.
+      </para>
       <block subset="none" type="note">
         <para
           >You cannot control equality comparisons by overriding <see cref="M:System.Object.GetHashCode" /> to explicitly set the hash code for a key. The <see cref="T:System.Runtime.CompilerServices.ConditionalWeakTable`2" /> class does not use the <see cref="M:System.Object.GetHashCode" /> method to compute hash codes, and therefore does not invoke <see cref="M:System.Object.GetHashCode" /> overrides.</para

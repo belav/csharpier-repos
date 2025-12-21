@@ -77,22 +77,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that represents the date and time when daylight saving time begins. The value must be in local time. </param
-        >
+          />The object that represents the date and time when daylight saving time begins. The value must be in local time.
+        </param>
         <param name="end">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that represents the date and time when daylight saving time ends. The value must be in local time. </param
-        >
+          />The object that represents the date and time when daylight saving time ends. The value must be in local time.
+        </param>
         <param name="delta">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that represents the difference between standard time and daylight saving time, in ticks. </param
-        >
+          />The object that represents the difference between standard time and daylight saving time, in ticks.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Delta">

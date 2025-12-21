@@ -65,8 +65,8 @@
           </term>
           <description>
             <para
-              >The style settings for the child Web server controls of the <see cref="T:System.Web.UI.WebControls.CheckBoxField" /> object. </para
-            >
+              >The style settings for the child Web server controls of the <see cref="T:System.Web.UI.WebControls.CheckBoxField" /> object.
+            </para>
           </description>
         </item>
         <item>
@@ -77,8 +77,8 @@
           </term>
           <description>
             <para
-              >The style settings for the footer section of the <see cref="T:System.Web.UI.WebControls.CheckBoxField" /> object. </para
-            >
+              >The style settings for the footer section of the <see cref="T:System.Web.UI.WebControls.CheckBoxField" /> object.
+            </para>
           </description>
         </item>
         <item>
@@ -89,8 +89,8 @@
           </term>
           <description>
             <para
-              >The style settings for the header section of the <see cref="T:System.Web.UI.WebControls.CheckBoxField" /> object. </para
-            >
+              >The style settings for the header section of the <see cref="T:System.Web.UI.WebControls.CheckBoxField" /> object.
+            </para>
           </description>
         </item>
         <item>
@@ -101,8 +101,8 @@
           </term>
           <description>
             <para
-              >The style settings for the data items in the <see cref="T:System.Web.UI.WebControls.CheckBoxField" /> object. </para
-            >
+              >The style settings for the data items in the <see cref="T:System.Web.UI.WebControls.CheckBoxField" /> object.
+            </para>
           </description>
         </item>
       </list>
@@ -584,19 +584,15 @@
           >
         </summary>
         <param name="sender">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The source of the event. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The source of the event.
+        </param>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

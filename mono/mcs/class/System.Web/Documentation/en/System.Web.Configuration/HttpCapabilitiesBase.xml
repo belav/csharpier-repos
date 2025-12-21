@@ -346,8 +346,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.CanRenderMixedSelects" /> property applies only to WML-compatible mobile devices. </para
-          >
+            >The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.CanRenderMixedSelects" /> property applies only to WML-compatible mobile devices.
+          </para>
           <para>If false, onpick values are displayed as hyperlinks and value attributes require a &lt;do&gt; element for postback.</para>
         </remarks>
         <summary>
@@ -608,8 +608,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.DefaultSubmitButtonLimit" /> property primarily represents the number of soft keys that are available on a WML-compatible mobile device. </para
-          >
+            >The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.DefaultSubmitButtonLimit" /> property primarily represents the number of soft keys that are available on a WML-compatible mobile device.
+          </para>
           <para
             >Web Forms pages for mobile devices can contain a <see cref="T:System.Web.UI.MobileControls.SelectionList" /> object and more than one <see cref="T:System.Web.UI.MobileControls.Command" /> control. The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.DefaultSubmitButtonLimit" /> allows you to choose which of the <see cref="T:System.Web.UI.MobileControls.Command" /> controls should be assigned to a soft key on devices that have multiple soft keys.</para
           >
@@ -1310,8 +1310,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Some of the possible values for the <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.Platform" /> property are as follows: </para
-          >
+            >Some of the possible values for the <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.Platform" /> property are as follows:
+          </para>
           <list type="bullet">
             <item>
               <para>Unknown</para>
@@ -2356,8 +2356,8 @@
             >The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.SupportsInputMode" /> property applies only to i-mode–compatible devices.</para
           >
           <para
-            >Set i-Phone–specific picture symbols for i-mode–compatible browsers by using the <see cref="P:System.Web.UI.WebControls.Image.ImageUrl" /> property. </para
-          >
+            >Set i-Phone–specific picture symbols for i-mode–compatible browsers by using the <see cref="P:System.Web.UI.WebControls.Image.ImageUrl" /> property.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

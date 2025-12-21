@@ -62,8 +62,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.CompositeControl" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.CompositeControl" /> class.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -146,8 +146,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Recreates the child controls in a control derived from <see cref="T:System.Web.UI.WebControls.CompositeControl" />. </para
-          >
+            >Recreates the child controls in a control derived from <see cref="T:System.Web.UI.WebControls.CompositeControl" />.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>

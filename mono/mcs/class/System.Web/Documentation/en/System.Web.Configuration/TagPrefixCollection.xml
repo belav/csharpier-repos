@@ -22,11 +22,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.Configuration.TagPrefixInfo" /> class allows you to programmatically access and modify tag-prefix information stored in a configuration file. Tag prefixes associate a "namespace" in ASP.NET with the assemblies and namespaces that must be included for custom controls and user controls to work properly. </para
-      >
+        >The <see cref="T:System.Web.Configuration.TagPrefixInfo" /> class allows you to programmatically access and modify tag-prefix information stored in a configuration file. Tag prefixes associate a "namespace" in ASP.NET with the assemblies and namespaces that must be included for custom controls and user controls to work properly.
+      </para>
       <para>
-        <see cref="T:System.Web.Configuration.TagPrefixInfo" /> objects are stored as members of a <see cref="T:System.Web.Configuration.TagPrefixCollection" /> object. The <see cref="T:System.Web.Configuration.TagPrefixCollection" /> class allows you to programmatically access and modify the controls subsection of the pages section of a configuration file. </para
-      >
+        <see cref="T:System.Web.Configuration.TagPrefixInfo" /> objects are stored as members of a <see cref="T:System.Web.Configuration.TagPrefixCollection" /> object. The <see cref="T:System.Web.Configuration.TagPrefixCollection" /> class allows you to programmatically access and modify the controls subsection of the pages section of a configuration file.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

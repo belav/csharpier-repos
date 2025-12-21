@@ -96,8 +96,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type <see cref="T:System.ComponentModel.EventDescriptor" /> that provides the events for this collection. </param
-        >
+          />An array of type <see cref="T:System.ComponentModel.EventDescriptor" /> that provides the events for this collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -145,8 +145,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type <see cref="T:System.ComponentModel.EventDescriptor" /> that provides the events for this collection. </param
-        >
+          />An array of type <see cref="T:System.ComponentModel.EventDescriptor" /> that provides the events for this collection.
+        </param>
         <param name="readOnly">
           <attribution
             license="cc4"
@@ -207,8 +207,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.EventDescriptor" /> to add to the collection. </param
-        >
+          />An <see cref="T:System.ComponentModel.EventDescriptor" /> to add to the collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Clear">
@@ -297,8 +297,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ComponentModel.EventDescriptor" /> to find within the collection. </param
-        >
+          />The <see cref="T:System.ComponentModel.EventDescriptor" /> to find within the collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Count">
@@ -413,15 +413,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the event to get from the collection. </param
-        >
+          />The name of the event to get from the collection.
+        </param>
         <param name="ignoreCase">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if you want to ignore the case of the event; otherwise, false. </param
-        >
+          />true if you want to ignore the case of the event; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetEnumerator">
@@ -521,8 +521,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ComponentModel.EventDescriptor" /> to find within the collection. </param
-        >
+          />The <see cref="T:System.ComponentModel.EventDescriptor" /> to find within the collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Insert">
@@ -571,15 +571,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index within the collection in which to insert the <paramref name="value" /> parameter. </param
-        >
+          />The index within the collection in which to insert the <paramref name="value" /> parameter.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.EventDescriptor" /> to insert into the collection. </param
-        >
+          />An <see cref="T:System.ComponentModel.EventDescriptor" /> to insert into the collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="InternalSort">
@@ -769,8 +769,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ComponentModel.EventDescriptor" /> to remove from the collection. </param
-        >
+          />The <see cref="T:System.ComponentModel.EventDescriptor" /> to remove from the collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RemoveAt">
@@ -815,8 +815,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the <see cref="T:System.ComponentModel.EventDescriptor" /> to remove. </param
-        >
+          />The index of the <see cref="T:System.ComponentModel.EventDescriptor" /> to remove.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Sort">
@@ -915,8 +915,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Collections.IComparer" /> to use to sort the <see cref="T:System.ComponentModel.EventDescriptor" /> objects in this collection. </param
-        >
+          />An <see cref="T:System.Collections.IComparer" /> to use to sort the <see cref="T:System.ComponentModel.EventDescriptor" /> objects in this collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Sort">
@@ -1021,8 +1021,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Collections.IComparer" /> to use to sort the <see cref="T:System.ComponentModel.EventDescriptor" /> objects in this collection. </param
-        >
+          />An <see cref="T:System.Collections.IComparer" /> to use to sort the <see cref="T:System.ComponentModel.EventDescriptor" /> objects in this collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.ICollection.CopyTo">

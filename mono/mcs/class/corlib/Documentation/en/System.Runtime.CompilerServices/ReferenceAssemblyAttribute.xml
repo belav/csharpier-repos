@@ -48,8 +48,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.ReferenceAssemblyAttribute" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.ReferenceAssemblyAttribute" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -74,16 +74,16 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.ReferenceAssemblyAttribute" /> class by using the specified description. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.ReferenceAssemblyAttribute" /> class by using the specified description.
+          </para>
         </summary>
         <param name="description">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The description of the reference assembly. </param
-        >
+          />The description of the reference assembly.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Description">

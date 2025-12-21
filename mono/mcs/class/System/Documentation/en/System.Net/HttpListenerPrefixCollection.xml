@@ -65,8 +65,8 @@
             >This method adds a URI prefix to the set of prefixes managed by the associated <see cref="T:System.Net.HttpListener" /> object. When checking <paramref name="uriPrefix" /> to ensure it is valid, case is ignored.</para
           >
           <para
-            >A URI prefix string is composed of a scheme (http or https), a host, an optional port, and an optional path, for example, "http://www.contoso.com:8080/customerData/". The prefix must be terminated with a forward slash ("/"). The <see cref="T:System.Net.HttpListener" /> with the prefix that most closely matches a requested URI responds to the request. Multiple <see cref="T:System.Net.HttpListener" /> objects cannot add the same prefix. An <see cref="T:System.Net.HttpListenerException" /> exception is thrown if an <see cref="T:System.Net.HttpListener" /> adds a prefix that is already in use. </para
-          >
+            >A URI prefix string is composed of a scheme (http or https), a host, an optional port, and an optional path, for example, "http://www.contoso.com:8080/customerData/". The prefix must be terminated with a forward slash ("/"). The <see cref="T:System.Net.HttpListener" /> with the prefix that most closely matches a requested URI responds to the request. Multiple <see cref="T:System.Net.HttpListener" /> objects cannot add the same prefix. An <see cref="T:System.Net.HttpListenerException" /> exception is thrown if an <see cref="T:System.Net.HttpListener" /> adds a prefix that is already in use.
+          </para>
           <para
             >When a port is specified, the host element can be replaced with "*" to indicate that the <see cref="T:System.Net.HttpListener" /> accepts requests sent to the port if the requested URI does not match any other prefix. For example, to receive all requests sent to port 8080 when the requested URI is not handled by any other <see cref="T:System.Net.HttpListener" />, the prefix is "http://*:8080/". Similarly, to specify that the <see cref="T:System.Net.HttpListener" /> accepts all requests sent to a port, replace the host element with the "+" character, "https://+:8080/". The "*" and "+" characters can be present in prefixes that include paths.</para
           >
@@ -184,8 +184,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the contents of an <see cref="T:System.Net.HttpListenerPrefixCollection" /> to the specified array. </para
-          >
+            >Copies the contents of an <see cref="T:System.Net.HttpListenerPrefixCollection" /> to the specified array.
+          </para>
         </summary>
         <param name="array">
           <attribution
@@ -230,8 +230,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the contents of an <see cref="T:System.Net.HttpListenerPrefixCollection" /> to the specified string array. </para
-          >
+            >Copies the contents of an <see cref="T:System.Net.HttpListenerPrefixCollection" /> to the specified string array.
+          </para>
         </summary>
         <param name="array">
           <attribution

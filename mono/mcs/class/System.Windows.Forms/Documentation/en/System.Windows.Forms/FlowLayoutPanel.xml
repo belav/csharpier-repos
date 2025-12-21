@@ -41,8 +41,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Windows.Forms.FlowLayoutPanel" /> control arranges its contents in a horizontal or vertical flow direction. Its contents can be wrapped from one row to the next, or from one column to the next. Alternatively, its contents can be clipped instead of wrapped. </para
-      >
+        >The <see cref="T:System.Windows.Forms.FlowLayoutPanel" /> control arranges its contents in a horizontal or vertical flow direction. Its contents can be wrapped from one row to the next, or from one column to the next. Alternatively, its contents can be clipped instead of wrapped.
+      </para>
       <para
         >You can specify the flow direction by setting the value of the <see cref="P:System.Windows.Forms.FlowLayoutPanel.FlowDirection" /> property. The <see cref="T:System.Windows.Forms.FlowLayoutPanel" /> control correctly reverses its flow direction in right-to-left (RTL) layouts. You can also specify whether the contents of the <see cref="T:System.Windows.Forms.FlowLayoutPanel" /> control are wrapped or clipped by setting the value of the <see cref="P:System.Windows.Forms.FlowLayoutPanel.WrapContents" /> property.</para
       >

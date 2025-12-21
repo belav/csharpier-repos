@@ -51,8 +51,8 @@ End Function
         results.value + ", Max=" + results.maxValue;
 </code>
       <para
-        >You must give the return value a different name if you already have a parameter named "value". Or you might simply want to use a more meaningful name (such as "average" in this example). Apply the <see cref="T:System.Runtime.InteropServices.WindowsRuntime.ReturnValueNameAttribute" /> attribute to your method and specify a new name. </para
-      >
+        >You must give the return value a different name if you already have a parameter named "value". Or you might simply want to use a more meaningful name (such as "average" in this example). Apply the <see cref="T:System.Runtime.InteropServices.WindowsRuntime.ReturnValueNameAttribute" /> attribute to your method and specify a new name.
+      </para>
       <code>[return: ReturnValueName("average")]
 public static int ComputeAverage([ReadOnlyArray()] int[] input,
     out int minValue, out int maxValue)
@@ -101,8 +101,8 @@ End Function
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the return value. </param
-        >
+          />The name of the return value.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Name">

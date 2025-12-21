@@ -208,8 +208,8 @@ namespace ServiceNamespace
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.SslStreamSecurityBindingElement" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.SslStreamSecurityBindingElement" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -362,8 +362,8 @@ namespace ServiceNamespace
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of the <see cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" />. </para
-          >
+            >An instance of the <see cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" />.
+          </para>
         </returns>
         <param name="context">
           <attribution

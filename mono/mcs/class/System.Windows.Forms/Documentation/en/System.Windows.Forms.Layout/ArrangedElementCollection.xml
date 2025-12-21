@@ -24,8 +24,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Windows.Forms.Layout.ArrangedElementCollection" /> class represents a collection of objects arranged on a design surface or inside a parent <see cref="T:System.Windows.Forms.ContainerControl" />. </para
-      >
+        >The <see cref="T:System.Windows.Forms.Layout.ArrangedElementCollection" /> class represents a collection of objects arranged on a design surface or inside a parent <see cref="T:System.Windows.Forms.ContainerControl" />.
+      </para>
       <para
         >There are no publicly defined constructors in <see cref="T:System.Windows.Forms.Layout.ArrangedElementCollection" /> because it is designed to be used only internally within the dnprdnshort. However, classes derived from <see cref="T:System.Windows.Forms.Layout.ArrangedElementCollection" />, such as <see cref="T:System.Windows.Forms.Control.ControlCollection" />, are available to the developer.</para
       >

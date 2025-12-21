@@ -76,22 +76,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that can be used to gain additional context information. </param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that can be used to gain additional context information.
+        </param>
         <param name="provider">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.IServiceProvider" /> through which editing services can be obtained. </param
-        >
+          />An <see cref="T:System.IServiceProvider" /> through which editing services can be obtained.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Object" /> being edited. </param
-        >
+          />An <see cref="T:System.Object" /> being edited.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetFileDialogDescription">

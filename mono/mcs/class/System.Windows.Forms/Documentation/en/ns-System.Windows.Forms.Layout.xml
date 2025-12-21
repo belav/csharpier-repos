@@ -18,8 +18,8 @@
         </item>
         <item>
           <para
-            >The <see cref="T:System.Windows.Forms.Layout.ArrangedElementCollection" /> class collects objects that participate in a layout managed by a <see cref="T:System.Windows.Forms.Layout.LayoutEngine" />. </para
-          >
+            >The <see cref="T:System.Windows.Forms.Layout.ArrangedElementCollection" /> class collects objects that participate in a layout managed by a <see cref="T:System.Windows.Forms.Layout.LayoutEngine" />.
+          </para>
         </item>
       </list>
     </remarks>

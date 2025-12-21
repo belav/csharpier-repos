@@ -304,8 +304,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see cref="M:System.ComponentModel.Design.DesignerActionListCollection.CopyTo(System.ComponentModel.Design.DesignerActionList[],System.Int32)" /> method throws an exception while copying, the state of the destination array is undefined. For example, if an <see cref="T:System.ArgumentException" /> or <see cref="T:System.InvalidCastException" /> occurs, the destination array may be left in a partially filled state. </para
-          >
+            >If the <see cref="M:System.ComponentModel.Design.DesignerActionListCollection.CopyTo(System.ComponentModel.Design.DesignerActionList[],System.Int32)" /> method throws an exception while copying, the state of the destination array is undefined. For example, if an <see cref="T:System.ArgumentException" /> or <see cref="T:System.InvalidCastException" /> occurs, the destination array may be left in a partially filled state.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

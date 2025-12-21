@@ -34,8 +34,8 @@
         >Generally, your application should enumerate all cultures, using the <see cref="F:System.Globalization.CultureTypes.AllCultures" /> value. This allows enumeration of custom cultures, as well as the other culture types.</para
       >
       <para
-        >Note that the <see cref="F:System.Globalization.CultureTypes.FrameworkCultures" /> and <see cref="F:System.Globalization.CultureTypes.WindowsOnlyCultures" /> members have been deprecated. </para
-      >
+        >Note that the <see cref="F:System.Globalization.CultureTypes.FrameworkCultures" /> and <see cref="F:System.Globalization.CultureTypes.WindowsOnlyCultures" /> members have been deprecated.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

@@ -545,8 +545,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.IFormatProvider" /> object that controls formatting. </param
-        >
+          />An <see cref="T:System.IFormatProvider" /> object that controls formatting.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -731,8 +731,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The StringBuilder to write to. </param
-        >
+          />The StringBuilder to write to.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -769,8 +769,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.IFormatProvider" /> object that controls formatting. </param
-        >
+          />An <see cref="T:System.IFormatProvider" /> object that controls formatting.
+        </param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The following table lists examples of other typical or related I/O tasks.</para>
@@ -928,15 +928,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The StringBuilder to write to. </param
-        >
+          />The StringBuilder to write to.
+        </param>
         <param name="formatProvider">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.IFormatProvider" /> object that controls formatting. </param
-        >
+          />An <see cref="T:System.IFormatProvider" /> object that controls formatting.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1032,8 +1032,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1523,12 +1523,8 @@
           <para>Writes a character to the string.</para>
         </summary>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The character to write. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The character to write.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1711,12 +1707,8 @@
           <para>Writes a string to the current string.</para>
         </summary>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The string to write. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The string to write.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1922,8 +1914,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character array to write data from. </param
-        >
+          />The character array to write data from.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
@@ -1936,8 +1928,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum number of characters to write. </param
-        >
+          />The maximum number of characters to write.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2212,8 +2204,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum number of characters to write. </param
-        >
+          />The maximum number of characters to write.
+        </param>
       </Docs>
     </Member>
   </Members>

@@ -79,8 +79,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see cref="E:System.Windows.Forms.DataGridView.CellStyleContentChanged" /> event. </para
-      >
+        >Provides data for the <see cref="E:System.Windows.Forms.DataGridView.CellStyleContentChanged" /> event.
+      </para>
     </summary>
   </Docs>
   <Members>
@@ -99,8 +99,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this property to retrieve the updated <see cref="T:System.Windows.Forms.DataGridViewCellStyle" /> property value. Use the <see cref="P:System.Windows.Forms.DataGridViewCellStyleContentChangedEventArgs.CellStyleScope" /> property to determine which property has the <see cref="T:System.Windows.Forms.DataGridViewCellStyle" /> that changed. </para
-          >
+            >Use this property to retrieve the updated <see cref="T:System.Windows.Forms.DataGridViewCellStyle" /> property value. Use the <see cref="P:System.Windows.Forms.DataGridViewCellStyleContentChangedEventArgs.CellStyleScope" /> property to determine which property has the <see cref="T:System.Windows.Forms.DataGridViewCellStyle" /> that changed.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

@@ -98,8 +98,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value that the <see cref="P:System.ComponentModel.DesignTimeVisibleAttribute.Visible" /> property will be set against. </param
-        >
+          />The value that the <see cref="P:System.ComponentModel.DesignTimeVisibleAttribute.Visible" /> property will be set against.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Default">

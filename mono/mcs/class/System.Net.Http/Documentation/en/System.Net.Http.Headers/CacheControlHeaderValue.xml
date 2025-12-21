@@ -350,8 +350,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This property represents the "no-store" directive in a cache-control header field on an HTTP request or HTTP response. </para>
           <para
-            >The purpose of the <see cref="P:System.Net.Http.Headers.CacheControlHeaderValue.NoStore" /> property is to prevent the inadvertent release or retention of sensitive information. This property applies to the entire message, and may be sent either in an HTTP request or a response.  </para
-          >
+            >The purpose of the <see cref="P:System.Net.Http.Headers.CacheControlHeaderValue.NoStore" /> property is to prevent the inadvertent release or retention of sensitive information. This property applies to the entire message, and may be sent either in an HTTP request or a response.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -375,8 +375,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This property represents the "no-transform" directive in a cache-control header field on an HTTP request or HTTP response.</para>
           <para
-            >When the <see cref="P:System.Net.Http.Headers.CacheControlHeaderValue.NoTransform" /> is set to true, intermediate caches or rpoxies must not change any aspect of the entity body. Implementors of intermediate caches and proxies have found it useful to convert the media type of certain entity bodies. A non-transparent proxy might, for example, convert between image formats in order to save cache space or to reduce the amount of traffic on a slow link. Serious operational problems occur, however, when these transformations are applied to entity bodies intended for certain kinds of applications. </para
-          >
+            >When the <see cref="P:System.Net.Http.Headers.CacheControlHeaderValue.NoTransform" /> is set to true, intermediate caches or rpoxies must not change any aspect of the entity body. Implementors of intermediate caches and proxies have found it useful to convert the media type of certain entity bodies. A non-transparent proxy might, for example, convert between image formats in order to save cache space or to reduce the amount of traffic on a slow link. Serious operational problems occur, however, when these transformations are applied to entity bodies intended for certain kinds of applications.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

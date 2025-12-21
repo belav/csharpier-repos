@@ -31,8 +31,8 @@
         >At any given time, a given provider may have zero, one, or multiple observers. The provider is responsible for storing references to observers and ensuring that they are valid before it sends notifications. The <see cref="T:System.IObservable`1" /> interface does not make any assumptions about the number of observers or the order in which notifications are sent.</para
       >
       <para
-        >The provider sends the following three kinds of notifications to the observer by calling <see cref="T:System.IObserver`1" /> methods: </para
-      >
+        >The provider sends the following three kinds of notifications to the observer by calling <see cref="T:System.IObserver`1" /> methods:
+      </para>
       <list type="bullet">
         <item>
           <para

@@ -80,8 +80,8 @@
               >Use
       the <see cref="M:System.Collections.IList.Add(System.Object)" /> method to add another element to the
       current instance. The index into which that element is
-      added is implementation-dependent. </block
-            >
+      added is implementation-dependent.
+            </block>
           </para>
         </remarks>
         <exception cref="T:System.NotSupportedException">
@@ -100,8 +100,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to add to the <see cref="T:System.Collections.IList" />. </param
-        >
+          />The object to add to the <see cref="T:System.Collections.IList" />.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -188,8 +188,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to locate in the <see cref="T:System.Collections.IList" />. </param
-        >
+          />The object to locate in the <see cref="T:System.Collections.IList" />.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -237,8 +237,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to locate in the <see cref="T:System.Collections.IList" />. </param
-        >
+          />The object to locate in the <see cref="T:System.Collections.IList" />.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -290,15 +290,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index at which <paramref name="value" /> should be inserted. </param
-        >
+          />The zero-based index at which <paramref name="value" /> should be inserted.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to insert into the <see cref="T:System.Collections.IList" />. </param
-        >
+          />The object to insert into the <see cref="T:System.Collections.IList" />.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -324,8 +324,8 @@
           <para>
             <see langword="true" /> if the
    current instance has a fixed size; otherwise,
-<see langword="false" />. </para
-          >
+<see langword="false" />.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -416,8 +416,8 @@
             <block subset="none" type="usage"
               >Use this property
       for subscript indexing for the current instance in the following form: <c> myCollection[index]</c>.
-</block
-            >
+
+            </block>
           </para>
         </remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
@@ -472,8 +472,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to remove from the <see cref="T:System.Collections.IList" />. </param
-        >
+          />The object to remove from the <see cref="T:System.Collections.IList" />.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -521,8 +521,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index of the item to remove. </param
-        >
+          />The zero-based index of the item to remove.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

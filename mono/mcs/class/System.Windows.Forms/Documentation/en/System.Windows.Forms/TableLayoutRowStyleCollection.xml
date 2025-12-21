@@ -171,12 +171,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Windows.Forms.TableLayoutRowStyleCollection.Insert(System.Int32,System.Windows.Forms.RowStyle)" /> method reapplies the table layout to all the controls in the current <see cref="T:System.Windows.Forms.TableLayoutPanel" /> container. </para
-          >
+            >The <see cref="M:System.Windows.Forms.TableLayoutRowStyleCollection.Insert(System.Int32,System.Windows.Forms.RowStyle)" /> method reapplies the table layout to all the controls in the current <see cref="T:System.Windows.Forms.TableLayoutPanel" /> container.
+          </para>
           <para>The number of styles stored in a collection is limited only by available memory.</para>
           <para
-            >In collections of contiguous elements, such as the <see cref="T:System.Windows.Forms.TableLayoutRowStyleCollection" /> class, the elements that follow the insertion point move down to accommodate the inserted element. The indexes of the elements that are moved are also updated. </para
-          >
+            >In collections of contiguous elements, such as the <see cref="T:System.Windows.Forms.TableLayoutRowStyleCollection" /> class, the elements that follow the insertion point move down to accommodate the inserted element. The indexes of the elements that are moved are also updated.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

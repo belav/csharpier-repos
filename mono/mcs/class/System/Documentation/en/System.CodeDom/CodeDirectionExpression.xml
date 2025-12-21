@@ -108,15 +108,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.FieldDirection" /> that indicates the field direction of the expression. </param
-        >
+          />A <see cref="T:System.CodeDom.FieldDirection" /> that indicates the field direction of the expression.
+        </param>
         <param name="expression">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeExpression" /> that indicates the code expression to represent. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeExpression" /> that indicates the code expression to represent.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Direction">

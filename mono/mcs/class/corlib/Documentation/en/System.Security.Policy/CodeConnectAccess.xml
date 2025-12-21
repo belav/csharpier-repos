@@ -24,8 +24,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class is used in conjunction with the <see cref="T:System.Security.Policy.NetCodeGroup" /> class to control how executing code can connect back to the site it was downloaded from. These classes provide programmatic control of the <see cref="T:System.Net.WebPermission" /> granted to executing code that controls what schemes and ports the code can use access its origin site. You can specify scheme and port pairs that are permitted based on the scheme in the URL where the code originates. </para
-      >
+        >This class is used in conjunction with the <see cref="T:System.Security.Policy.NetCodeGroup" /> class to control how executing code can connect back to the site it was downloaded from. These classes provide programmatic control of the <see cref="T:System.Net.WebPermission" /> granted to executing code that controls what schemes and ports the code can use access its origin site. You can specify scheme and port pairs that are permitted based on the scheme in the URL where the code originates.
+      </para>
       <para
         >To create a <see cref="T:System.Security.Policy.CodeConnectAccess" /> object based on the code's origin scheme, use the <see cref="M:System.Security.Policy.CodeConnectAccess.CreateOriginSchemeAccess(System.Int32)" /> method.</para
       >
@@ -71,8 +71,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Policy.CodeConnectAccess" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Policy.CodeConnectAccess" /> class.
+          </para>
         </summary>
         <param name="allowScheme">
           <attribution

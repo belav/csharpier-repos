@@ -72,8 +72,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see cref="P:System.Reflection.FieldInfo.Attributes" /> property. </para
-          >
+            >Provides COM objects with version-independent access to the <see cref="P:System.Reflection.FieldInfo.Attributes" /> property.
+          </para>
         </summary>
       </Docs>
       <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -105,8 +105,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see cref="P:System.Reflection.MemberInfo.DeclaringType" /> property. </para
-          >
+            >Provides COM objects with version-independent access to the <see cref="P:System.Reflection.MemberInfo.DeclaringType" /> property.
+          </para>
         </summary>
       </Docs>
       <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -313,15 +313,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of attribute to search for. Only attributes that are assignable to this type are returned. </param
-        >
+          />The type of attribute to search for. Only attributes that are assignable to this type are returned.
+        </param>
         <param name="inherit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Specifies whether to search this member's inheritance chain to find the attributes. </param
-        >
+          />Specifies whether to search this member's inheritance chain to find the attributes.
+        </param>
       </Docs>
       <AssemblyVersion>2.0.0.0</AssemblyVersion>
     </Member>
@@ -729,15 +729,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> object to which the custom attributes are applied. </param
-        >
+          />The <see cref="T:System.Type" /> object to which the custom attributes are applied.
+        </param>
         <param name="inherit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Specifies whether to search this member's inheritance chain to find the attributes. </param
-        >
+          />Specifies whether to search this member's inheritance chain to find the attributes.
+        </param>
       </Docs>
       <AssemblyVersion>2.0.0.0</AssemblyVersion>
     </Member>
@@ -1215,8 +1215,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to assign to the field. </param
-        >
+          />The value to assign to the field.
+        </param>
       </Docs>
       <AssemblyVersion>2.0.0.0</AssemblyVersion>
     </Member>
@@ -1264,36 +1264,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object whose field value will be set. </param
-        >
+          />The object whose field value will be set.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to assign to the field. </param
-        >
+          />The value to assign to the field.
+        </param>
         <param name="invokeAttr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A field of <see cref="T:System.Reflection.Binder" /> that specifies the type of binding that is desired (for example, Binder.CreateInstance or Binder.ExactBinding). </param
-        >
+          />A field of <see cref="T:System.Reflection.Binder" /> that specifies the type of binding that is desired (for example, Binder.CreateInstance or Binder.ExactBinding).
+        </param>
         <param name="binder">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A set of properties that enables the binding, coercion of argument types, and invocation of members through reflection. If <paramref name="binder" /> is null, then Binder.DefaultBinding is used. </param
-        >
+          />A set of properties that enables the binding, coercion of argument types, and invocation of members through reflection. If <paramref name="binder" /> is null, then Binder.DefaultBinding is used.
+        </param>
         <param name="culture">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The software preferences of a particular culture. </param
-        >
+          />The software preferences of a particular culture.
+        </param>
       </Docs>
       <AssemblyVersion>2.0.0.0</AssemblyVersion>
     </Member>

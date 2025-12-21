@@ -83,8 +83,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor is used to create <see cref="T:System.Web.Caching.SqlCacheDependency" /> objects that use the query-notification feature of sqprsqlong products. </para
-          >
+            >This constructor is used to create <see cref="T:System.Web.Caching.SqlCacheDependency" /> objects that use the query-notification feature of sqprsqlong products.
+          </para>
           <para
             >SQL statements that are associated with the <paramref name="sqlCmd" /> parameter must include the following:</para
           >
@@ -159,8 +159,8 @@
               <a href="d17168e3-83f1-48d7-ab1c-535fd335eca0">Aspnet_regsql.exe</a>
             </format> command-line tool to set up the database for notifications. If a <see cref="T:System.Web.Caching.TableNotEnabledForNotificationException" /> is thrown, you can call the <see cref="M:System.Web.Caching.SqlCacheDependencyAdmin.EnableTableForNotifications(System.String,System.String)" /> method or use <format type="text/html">
               <a href="d17168e3-83f1-48d7-ab1c-535fd335eca0">Aspnet_regsql.exe</a>
-            </format> to set up the table for notifications. </para
-          >
+            </format> to set up the table for notifications.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -173,15 +173,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of a database defined in the databases element of the application's Web.config file. </param
-        >
+          />The name of a database defined in the databases element of the application's Web.config file.
+        </param>
         <param name="tableName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the database table that the <see cref="T:System.Web.Caching.SqlCacheDependency" /> is associated with. </param
-        >
+          />The name of the database table that the <see cref="T:System.Web.Caching.SqlCacheDependency" /> is associated with.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetUniqueID">

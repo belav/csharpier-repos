@@ -24,8 +24,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Reflection.MethodBody" /> class provides access to information about the local variables and exception-handling clauses in a method body, and to the Microsoft intermediate language (MSIL) that makes up the method body. </para
-      >
+        >The <see cref="T:System.Reflection.MethodBody" /> class provides access to information about the local variables and exception-handling clauses in a method body, and to the Microsoft intermediate language (MSIL) that makes up the method body.
+      </para>
       <para
         >You can use the token-resolution methods of the module class, such as <see cref="M:System.Reflection.Module.ResolveType(System.Int32,System.Type[],System.Type[])" />, <see cref="M:System.Reflection.Module.ResolveMethod(System.Int32,System.Type[],System.Type[])" />, and <see cref="M:System.Reflection.Module.ResolveType(System.Int32,System.Type[],System.Type[])" />, to resolve the tokens in the method body to <see cref="T:System.Type" /> objects, <see cref="T:System.Reflection.MethodInfo" /> objects, and <see cref="T:System.Reflection.FieldInfo" /> objects that provide detailed information about the types, methods, and fields accessed by the MSIL in the method body.</para
       >
@@ -157,8 +157,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of type <see cref="T:System.Byte" /> that contains the MSIL for the method body. </para
-          >
+            >An array of type <see cref="T:System.Byte" /> that contains the MSIL for the method body.
+          </para>
         </returns>
       </Docs>
     </Member>

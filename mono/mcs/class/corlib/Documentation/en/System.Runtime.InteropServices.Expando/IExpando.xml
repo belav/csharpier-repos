@@ -74,12 +74,8 @@
           >
         </returns>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the field. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the field.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddMethod">
@@ -115,19 +111,15 @@
           <para>A MethodInfo object representing the added method.</para>
         </returns>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the method. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the method.
+        </param>
         <param name="method">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The delegate to the method. </param
-        >
+          />The delegate to the method.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddProperty">
@@ -162,12 +154,8 @@
           <para>A PropertyInfo object representing the added property.</para>
         </returns>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the property. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the property.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RemoveMember">
@@ -198,12 +186,8 @@
           <para>Removes the specified member.</para>
         </summary>
         <param name="m">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The member to remove. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The member to remove.
+        </param>
       </Docs>
     </Member>
   </Members>

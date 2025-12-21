@@ -39,8 +39,8 @@
         >Apply the <see cref="T:System.SerializableAttribute" /> attribute even if the class also implements the <see cref="T:System.Runtime.Serialization.ISerializable" /> interface to control the serialization process.</para
       >
       <para
-        >When you apply the <see cref="T:System.SerializableAttribute" /> attribute to a type, all private and public fields are serialized by default. You can control serialization more granularly by implementing the <see cref="T:System.Runtime.Serialization.ISerializable" /> interface to override the serialization process. </para
-      >
+        >When you apply the <see cref="T:System.SerializableAttribute" /> attribute to a type, all private and public fields are serialized by default. You can control serialization more granularly by implementing the <see cref="T:System.Runtime.Serialization.ISerializable" /> interface to override the serialization process.
+      </para>
       <para
         >Or you can exclude fields from serialization by applying the <see cref="T:System.NonSerializedAttribute" /> attribute to the field. If a field of a serializable type contains a pointer, a handle, or some other data structure that is specific to a particular environment, and cannot be meaningfully reconstituted in a different environment, then you might want to apply the <see cref="T:System.NonSerializedAttribute" /> attribute to that field.</para
       >

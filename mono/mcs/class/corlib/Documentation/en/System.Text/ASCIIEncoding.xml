@@ -136,8 +136,8 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="chars " />is <see langword="null" />. </exception
-        >
+          <paramref name="chars " />is <see langword="null" />.
+        </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -254,8 +254,8 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="chars " /> is <see langword="null" />. </exception
-        >
+          <paramref name="chars " /> is <see langword="null" />.
+        </exception>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <para><paramref name=" index " /> &lt; 0.</para>
           <para> -or-</para>
@@ -1216,8 +1216,8 @@
       </Parameters>
       <Docs>
         <param name="bytes"
-          > A <see cref="T:System.Byte" /> array to decode as ASCII-encoded characters. </param
-        >
+          > A <see cref="T:System.Byte" /> array to decode as ASCII-encoded characters.
+        </param>
         <summary>
           <para>Decodes the specified array of bytes as a string of ASCII-encoded characters. </para>
         </summary>
@@ -1283,8 +1283,8 @@
           <para><paramref name="byteCount" /> &lt; 0.</para>
           <para> -or-</para>
           <para
-            >(<paramref name="bytes" />.Length - <paramref name="byteIndex" />) &lt; <paramref name="byteCount" />. </para
-          >
+            >(<paramref name="bytes" />.Length - <paramref name="byteIndex" />) &lt; <paramref name="byteCount" />.
+          </para>
         </exception>
         <param name="bytes">
           <attribution

@@ -53,8 +53,8 @@
         >The <see cref="T:System.Diagnostics.Trace" /> class provides properties to get or set the level of <see cref="M:System.Diagnostics.Trace.Indent" />, the <see cref="P:System.Diagnostics.Trace.IndentSize" />, and whether to <see cref="P:System.Diagnostics.Trace.AutoFlush" /> after each write.</para
       >
       <para
-        >To set the <see cref="P:System.Diagnostics.Trace.AutoFlush" /> and <see cref="P:System.Diagnostics.Trace.IndentSize" /> for <see cref="T:System.Diagnostics.Trace" />, you can edit the configuration file that corresponds to the name of your application. The configuration file should be formatted like the following example: </para
-      >
+        >To set the <see cref="P:System.Diagnostics.Trace.AutoFlush" /> and <see cref="P:System.Diagnostics.Trace.IndentSize" /> for <see cref="T:System.Diagnostics.Trace" />, you can edit the configuration file that corresponds to the name of your application. The configuration file should be formatted like the following example:
+      </para>
       <code>&lt;configuration&gt;
   &lt;system.diagnostics&gt;
     &lt;trace autoflush="false" indentsize="3" /&gt;
@@ -109,11 +109,11 @@
             </format>.</para
           >
           <para
-            >Typically, the <see cref="M:System.Diagnostics.Trace.Assert(System.Boolean)" /> method is used to identify logic errors during program development. <see cref="M:System.Diagnostics.Trace.Assert(System.Boolean)" /> evaluates the condition. If the result is false, it sends a failure message to the <see cref="P:System.Diagnostics.Trace.Listeners" /> collection. You can customize this behavior by adding a <see cref="T:System.Diagnostics.TraceListener" /> to, or removing one from, the <see cref="P:System.Diagnostics.Trace.Listeners" /> collection. </para
-          >
+            >Typically, the <see cref="M:System.Diagnostics.Trace.Assert(System.Boolean)" /> method is used to identify logic errors during program development. <see cref="M:System.Diagnostics.Trace.Assert(System.Boolean)" /> evaluates the condition. If the result is false, it sends a failure message to the <see cref="P:System.Diagnostics.Trace.Listeners" /> collection. You can customize this behavior by adding a <see cref="T:System.Diagnostics.TraceListener" /> to, or removing one from, the <see cref="P:System.Diagnostics.Trace.Listeners" /> collection.
+          </para>
           <para
-            >When the application runs in user-interface mode, it displays a message box that shows the call stack with file and line numbers. The message box contains three buttons: <ui>Abort</ui>, <ui>Retry</ui>, and <ui>Ignore</ui>. Clicking the <ui>Abort</ui> button terminates the application. Clicking <ui>Retry</ui> sends you to the code in the debugger if your application is running in a debugger, or offers to open a debugger if it is not. Clicking <ui>Ignore</ui> continues with the next instruction in the code. </para
-          >
+            >When the application runs in user-interface mode, it displays a message box that shows the call stack with file and line numbers. The message box contains three buttons: <ui>Abort</ui>, <ui>Retry</ui>, and <ui>Ignore</ui>. Clicking the <ui>Abort</ui> button terminates the application. Clicking <ui>Retry</ui> sends you to the code in the debugger if your application is running in a debugger, or offers to open a debugger if it is not. Clicking <ui>Ignore</ui> continues with the next instruction in the code.
+          </para>
           <block subset="none" type="note">
             <para
               >The display of the message box depends on the presence of the <see cref="T:System.Diagnostics.DefaultTraceListener" />. If the <see cref="T:System.Diagnostics.DefaultTraceListener" /> is not in the <see cref="P:System.Diagnostics.Trace.Listeners" /> collection, the message box is not displayed. The <see cref="T:System.Diagnostics.DefaultTraceListener" /> can be removed by the <format type="text/html">
@@ -189,8 +189,8 @@
             </format>.</para
           >
           <para
-            >Typically, the <see cref="M:System.Diagnostics.Trace.Assert(System.Boolean,System.String)" /> method is used to identify logic errors during program development. <see cref="M:System.Diagnostics.Trace.Assert(System.Boolean,System.String)" /> evaluates the condition. If the result is false, it sends the specified diagnostic message to the <see cref="P:System.Diagnostics.Trace.Listeners" /> collection. You can customize this behavior by adding a <see cref="T:System.Diagnostics.TraceListener" /> to, or removing one from, the <see cref="P:System.Diagnostics.Trace.Listeners" /> collection. </para
-          >
+            >Typically, the <see cref="M:System.Diagnostics.Trace.Assert(System.Boolean,System.String)" /> method is used to identify logic errors during program development. <see cref="M:System.Diagnostics.Trace.Assert(System.Boolean,System.String)" /> evaluates the condition. If the result is false, it sends the specified diagnostic message to the <see cref="P:System.Diagnostics.Trace.Listeners" /> collection. You can customize this behavior by adding a <see cref="T:System.Diagnostics.TraceListener" /> to, or removing one from, the <see cref="P:System.Diagnostics.Trace.Listeners" /> collection.
+          </para>
           <para
             >When the application runs in user-interface mode, it displays a message box that shows the call stack with file and line numbers. The message box contains three buttons: <ui>Abort</ui>, <ui>Retry</ui>, and <ui>Ignore</ui>. Clicking the <ui>Abort</ui> button terminates the application. Clicking <ui>Retry</ui> sends you to the code in the debugger if your application is running in a debugger, or offers to open a debugger if it is not. Clicking <ui>Ignore</ui> continues with the next instruction in the code.</para
           >
@@ -229,15 +229,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The conditional expression to evaluate. If the condition is true, the specified message is not sent and the message box is not displayed.  </param
-        >
+          />The conditional expression to evaluate. If the condition is true, the specified message is not sent and the message box is not displayed.
+        </param>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The message to send to the <see cref="P:System.Diagnostics.Trace.Listeners" /> collection. </param
-        >
+          />The message to send to the <see cref="P:System.Diagnostics.Trace.Listeners" /> collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Assert">
@@ -277,8 +277,8 @@
             </format>.</para
           >
           <para
-            >Typically, the <see cref="M:System.Diagnostics.Trace.Assert(System.Boolean,System.String,System.String)" /> method is used to identify logic errors during program development. <see cref="M:System.Diagnostics.Trace.Assert(System.Boolean,System.String,System.String)" /> evaluates the condition. If the result is false, it sends the specified diagnostic message and detailed message to the <see cref="P:System.Diagnostics.Trace.Listeners" /> collection. You can customize this behavior by adding a <see cref="T:System.Diagnostics.TraceListener" /> to, or removing one from, the <see cref="P:System.Diagnostics.Trace.Listeners" /> collection. </para
-          >
+            >Typically, the <see cref="M:System.Diagnostics.Trace.Assert(System.Boolean,System.String,System.String)" /> method is used to identify logic errors during program development. <see cref="M:System.Diagnostics.Trace.Assert(System.Boolean,System.String,System.String)" /> evaluates the condition. If the result is false, it sends the specified diagnostic message and detailed message to the <see cref="P:System.Diagnostics.Trace.Listeners" /> collection. You can customize this behavior by adding a <see cref="T:System.Diagnostics.TraceListener" /> to, or removing one from, the <see cref="P:System.Diagnostics.Trace.Listeners" /> collection.
+          </para>
           <para
             >When the application runs in user-interface mode, it displays a message box that shows the call stack with file and line numbers. The message box contains three buttons: <ui>Abort</ui>, <ui>Retry</ui>, and <ui>Ignore</ui>. Clicking the <ui>Abort</ui> button terminates the application. Clicking <ui>Retry</ui> sends you to the code in the debugger if your application is running in a debugger, or offers to open a debugger if it is not. Clicking <ui>Ignore</ui> continues with the next instruction in the code.</para
           >
@@ -317,22 +317,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The conditional expression to evaluate. If the condition is true, the specified messages are not sent and the message box is not displayed.  </param
-        >
+          />The conditional expression to evaluate. If the condition is true, the specified messages are not sent and the message box is not displayed.
+        </param>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The message to send to the <see cref="P:System.Diagnostics.Trace.Listeners" /> collection. </param
-        >
+          />The message to send to the <see cref="P:System.Diagnostics.Trace.Listeners" /> collection.
+        </param>
         <param name="detailMessage">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The detailed message to send to the <see cref="P:System.Diagnostics.Trace.Listeners" /> collection. </param
-        >
+          />The detailed message to send to the <see cref="P:System.Diagnostics.Trace.Listeners" /> collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AutoFlush">
@@ -354,8 +354,8 @@
           objects should be 
           <see cref="M:System.Diagnostics.TraceListener.Flush" />ed after each
           write.
-        </value
-        >
+
+        </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The default is false.</para>
@@ -363,8 +363,8 @@
             >Flushing the stream will not flush its underlying encoder unless you explicitly call <see cref="M:System.Diagnostics.Trace.Flush" /> or <see cref="M:System.Diagnostics.Trace.Close" />. Setting <see cref="P:System.Diagnostics.Trace.AutoFlush" /> to true means that data will be flushed from the buffer to the stream, but the encoder state will not be flushed. This allows the encoder to keep its state (partial characters) so that it can encode the next block of characters correctly. This scenario affects UTF8 and UTF7 where certain characters can only be encoded after the encoder receives the adjacent character or characters.</para
           >
           <para
-            >To set the <see cref="P:System.Diagnostics.Trace.AutoFlush" /> and <see cref="P:System.Diagnostics.Trace.IndentSize" /> for <see cref="T:System.Diagnostics.Trace" />, you can also edit the configuration file that corresponds to the name of your application. The configuration file should be formatted like the following example: </para
-          >
+            >To set the <see cref="P:System.Diagnostics.Trace.AutoFlush" /> and <see cref="P:System.Diagnostics.Trace.IndentSize" /> for <see cref="T:System.Diagnostics.Trace" />, you can also edit the configuration file that corresponds to the name of your application. The configuration file should be formatted like the following example:
+          </para>
           <code>&lt;configuration&gt;
   &lt;system.diagnostics&gt;
     &lt;trace autoflush="false" indentsize="3" /&gt;
@@ -479,8 +479,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default behavior for the default trace listener is to output the <paramref name="message" /> parameter to a message box when the application runs in user-interface mode, and to the <see cref="T:System.Diagnostics.TraceListener" /> instances in the <see cref="P:System.Diagnostics.Trace.Listeners" /> collection. </para
-          >
+            >The default behavior for the default trace listener is to output the <paramref name="message" /> parameter to a message box when the application runs in user-interface mode, and to the <see cref="T:System.Diagnostics.TraceListener" /> instances in the <see cref="P:System.Diagnostics.Trace.Listeners" /> collection.
+          </para>
           <block subset="none" type="note">
             <para
               >The display of the message box is dependent on the presence of the <see cref="T:System.Diagnostics.DefaultTraceListener" />. If the <see cref="T:System.Diagnostics.DefaultTraceListener" /> is not in the <see cref="P:System.Diagnostics.Trace.Listeners" /> collection, the message box is not displayed. The <see cref="T:System.Diagnostics.DefaultTraceListener" /> can be removed by the <format type="text/html">
@@ -503,8 +503,8 @@
           <para>Emits the specified error message.</para>
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />A message to emit. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A message to emit.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Fail">
@@ -538,8 +538,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default behavior is for the default trace listener to output the <paramref name="message" /> parameter and the <paramref name="detailedMessage" /> parameter to a message box when the application runs in user-interface mode, and to the <see cref="T:System.Diagnostics.TraceListener" /> instances in the <see cref="P:System.Diagnostics.Trace.Listeners" /> collection. </para
-          >
+            >The default behavior is for the default trace listener to output the <paramref name="message" /> parameter and the <paramref name="detailedMessage" /> parameter to a message box when the application runs in user-interface mode, and to the <see cref="T:System.Diagnostics.TraceListener" /> instances in the <see cref="P:System.Diagnostics.Trace.Listeners" /> collection.
+          </para>
           <block subset="none" type="note">
             <para
               >The display of the message box is dependent on the presence of the <see cref="T:System.Diagnostics.DefaultTraceListener" />. If the <see cref="T:System.Diagnostics.DefaultTraceListener" /> is not in the <see cref="P:System.Diagnostics.Trace.Listeners" /> collection, the message box is not displayed. The <see cref="T:System.Diagnostics.DefaultTraceListener" /> can be removed by the <format type="text/html">
@@ -562,15 +562,15 @@
           <para>Emits an error message, and a detailed error message.</para>
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />A message to emit. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A message to emit.
+        </param>
         <param name="detailMessage">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A detailed message to emit. </param
-        >
+          />A detailed message to emit.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Flush">
@@ -635,8 +635,8 @@
           <para>
             This is equivalent to incrementing 
             <see cref="P:System.Diagnostics.Trace.IndentLevel" /> by one.
-          </para
-          >
+
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -697,8 +697,8 @@
           >
           <para>This property is stored on per-thread/per-request basis.</para>
           <para
-            >To set the <see cref="P:System.Diagnostics.Trace.AutoFlush" /> and <see cref="P:System.Diagnostics.Trace.IndentSize" /> for <see cref="T:System.Diagnostics.Trace" />, you can also edit the configuration file that corresponds to the name of your application. The configuration file should be formatted like the following example: </para
-          >
+            >To set the <see cref="P:System.Diagnostics.Trace.AutoFlush" /> and <see cref="P:System.Diagnostics.Trace.IndentSize" /> for <see cref="T:System.Diagnostics.Trace" />, you can also edit the configuration file that corresponds to the name of your application. The configuration file should be formatted like the following example:
+          </para>
           <code>&lt;configuration&gt;
   &lt;system.diagnostics&gt;
     &lt;trace autoflush="false" indentsize="3" /&gt;
@@ -733,8 +733,8 @@
         <value>
           The list of <see cref="T:System.Diagnostics.TraceListener" /> objects
           to forward messages to.
-        </value
-        >
+
+        </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -1111,8 +1111,8 @@
           <para>
             This is equivalent to decrementing 
             <see cref="P:System.Diagnostics.Trace.IndentLevel" /> by one.
-          </para
-          >
+
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1141,8 +1141,8 @@
             >The global lock is always used if the trace listener is not thread safe, regardless of the value of <see cref="P:System.Diagnostics.Trace.UseGlobalLock" />. The <see cref="P:System.Diagnostics.TraceListener.IsThreadSafe" /> property is used to determine if the listener is thread safe. The global lock is not used only if the value of <see cref="P:System.Diagnostics.Trace.UseGlobalLock" /> is false and the value of <see cref="P:System.Diagnostics.TraceListener.IsThreadSafe" /> is true. The default behavior is to use the global lock.</para
           >
           <para
-            >To set the <see cref="P:System.Diagnostics.Trace.UseGlobalLock" /> for <see cref="T:System.Diagnostics.Trace" />, you can also edit the configuration file that corresponds to the name of your application. The configuration file should be formatted like the following example: </para
-          >
+            >To set the <see cref="P:System.Diagnostics.Trace.UseGlobalLock" /> for <see cref="T:System.Diagnostics.Trace" />, you can also edit the configuration file that corresponds to the name of your application. The configuration file should be formatted like the following example:
+          </para>
           <code>&lt;configuration&gt;
   &lt;system.diagnostics&gt;
     &lt;trace useGlobalLock="false" /&gt;
@@ -1189,8 +1189,8 @@
           >
           <block subset="none" type="note">
             <para
-              > ASP.NET supplies tracing functionality tailored for Web pages. To write trace messages in ASP.NET pages, use the <see cref="P:System.Web.UI.Page.Trace" /> property. </para
-            >
+              > ASP.NET supplies tracing functionality tailored for Web pages. To write trace messages in ASP.NET pages, use the <see cref="P:System.Web.UI.Page.Trace" /> property.
+            </para>
           </block>
           <para
             >By default, in code associated with an ASP.NET Web page, the statement Trace.Write("...") is a call to the <see cref="Overload:System.Web.TraceContext.Write" /> method of the <see cref="P:System.Web.UI.Page.Trace" /> property. To use the <see cref="T:System.Diagnostics.Trace" /> class in Web pages, you must include the namespace, for example, System.Diagnostics.Trace.Write("...").</para
@@ -1207,8 +1207,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Object" /> whose name is sent to the <see cref="P:System.Diagnostics.Trace.Listeners" />. </param
-        >
+          />An <see cref="T:System.Object" /> whose name is sent to the <see cref="P:System.Diagnostics.Trace.Listeners" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -1245,8 +1245,8 @@
           >
           <block subset="none" type="note">
             <para
-              > ASP.NET supplies tracing functionality tailored for Web pages. To write trace messages in ASP.NET pages, use the <see cref="P:System.Web.UI.Page.Trace" /> property. </para
-            >
+              > ASP.NET supplies tracing functionality tailored for Web pages. To write trace messages in ASP.NET pages, use the <see cref="P:System.Web.UI.Page.Trace" /> property.
+            </para>
           </block>
           <para
             >By default, in code associated with an ASP.NET Web page, the statement Trace.Write("...") is a call to the <see cref="Overload:System.Web.TraceContext.Write" /> method of the <see cref="P:System.Web.UI.Page.Trace" /> property. To use the <see cref="T:System.Diagnostics.Trace" /> class in Web pages, you must include the namespace, for example, System.Diagnostics.Trace.Write("...").</para
@@ -1259,8 +1259,8 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />A message to write. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A message to write.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -1304,8 +1304,8 @@
           >
           <block subset="none" type="note">
             <para
-              > ASP.NET supplies tracing functionality tailored for Web pages. To write trace messages in ASP.NET pages, use the <see cref="P:System.Web.UI.Page.Trace" /> property. </para
-            >
+              > ASP.NET supplies tracing functionality tailored for Web pages. To write trace messages in ASP.NET pages, use the <see cref="P:System.Web.UI.Page.Trace" /> property.
+            </para>
           </block>
           <para
             >By default, in code associated with an ASP.NET Web page, the statement Trace.Write("...") is a call to the <see cref="Overload:System.Web.TraceContext.Write" /> method of the <see cref="P:System.Web.UI.Page.Trace" /> property. To use the <see cref="T:System.Diagnostics.Trace" /> class in Web pages, you must include the namespace, for example, System.Diagnostics.Trace.Write("...").</para
@@ -1322,15 +1322,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Object" /> name is sent to the <see cref="P:System.Diagnostics.Trace.Listeners" />. </param
-        >
+          />An <see cref="T:System.Object" /> name is sent to the <see cref="P:System.Diagnostics.Trace.Listeners" />.
+        </param>
         <param name="category">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A category name used to organize the output. </param
-        >
+          />A category name used to organize the output.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -1374,8 +1374,8 @@
           >
           <block subset="none" type="note">
             <para
-              > ASP.NET supplies tracing functionality tailored for Web pages. To write trace messages in ASP.NET pages, use the <see cref="P:System.Web.UI.Page.Trace" /> property. </para
-            >
+              > ASP.NET supplies tracing functionality tailored for Web pages. To write trace messages in ASP.NET pages, use the <see cref="P:System.Web.UI.Page.Trace" /> property.
+            </para>
           </block>
           <para
             >By default, in code associated with an ASP.NET Web page, the statement Trace.Write("...") is a call to the <see cref="Overload:System.Web.TraceContext.Write" /> method of the <see cref="P:System.Web.UI.Page.Trace" /> property. To use the <see cref="T:System.Diagnostics.Trace" /> class in Web pages, you must include the namespace, for example, System.Diagnostics.Trace.Write("...").</para
@@ -1388,15 +1388,15 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />A message to write. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A message to write.
+        </param>
         <param name="category">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A category name used to organize the output. </param
-        >
+          />A category name used to organize the output.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteIf">
@@ -1447,15 +1447,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to cause a message to be written; otherwise, false. </param
-        >
+          />true to cause a message to be written; otherwise, false.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Object" /> whose name is sent to the <see cref="P:System.Diagnostics.Trace.Listeners" />. </param
-        >
+          />An <see cref="T:System.Object" /> whose name is sent to the <see cref="P:System.Diagnostics.Trace.Listeners" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteIf">
@@ -1506,11 +1506,11 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to cause a message to be written; otherwise, false. </param
-        >
+          />true to cause a message to be written; otherwise, false.
+        </param>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />A message to write. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A message to write.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteIf">
@@ -1565,22 +1565,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to cause a message to be written; otherwise, false. </param
-        >
+          />true to cause a message to be written; otherwise, false.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Object" /> whose name is sent to the <see cref="P:System.Diagnostics.Trace.Listeners" />. </param
-        >
+          />An <see cref="T:System.Object" /> whose name is sent to the <see cref="P:System.Diagnostics.Trace.Listeners" />.
+        </param>
         <param name="category">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A category name used to organize the output. </param
-        >
+          />A category name used to organize the output.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteIf">
@@ -1635,18 +1635,18 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to cause a message to be written; otherwise, false. </param
-        >
+          />true to cause a message to be written; otherwise, false.
+        </param>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />A message to write. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A message to write.
+        </param>
         <param name="category">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A category name used to organize the output. </param
-        >
+          />A category name used to organize the output.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteLine">
@@ -1693,8 +1693,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Object" /> whose name is sent to the <see cref="P:System.Diagnostics.Trace.Listeners" />. </param
-        >
+          />An <see cref="T:System.Object" /> whose name is sent to the <see cref="P:System.Diagnostics.Trace.Listeners" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteLine">
@@ -1737,8 +1737,8 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />A message to write. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A message to write.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteLine">
@@ -1792,15 +1792,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Object" /> whose name is sent to the <see cref="P:System.Diagnostics.Trace.Listeners" />. </param
-        >
+          />An <see cref="T:System.Object" /> whose name is sent to the <see cref="P:System.Diagnostics.Trace.Listeners" />.
+        </param>
         <param name="category">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A category name used to organize the output. </param
-        >
+          />A category name used to organize the output.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteLine">
@@ -1850,15 +1850,15 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />A message to write. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A message to write.
+        </param>
         <param name="category">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A category name used to organize the output. </param
-        >
+          />A category name used to organize the output.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteLineIf">
@@ -1909,15 +1909,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to cause a message to be written; otherwise, false. </param
-        >
+          />true to cause a message to be written; otherwise, false.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Object" /> whose name is sent to the <see cref="P:System.Diagnostics.Trace.Listeners" />. </param
-        >
+          />An <see cref="T:System.Object" /> whose name is sent to the <see cref="P:System.Diagnostics.Trace.Listeners" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteLineIf">
@@ -1968,11 +1968,11 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to cause a message to be written; otherwise, false. </param
-        >
+          />true to cause a message to be written; otherwise, false.
+        </param>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />A message to write. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A message to write.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteLineIf">
@@ -2027,22 +2027,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to cause a message to be written; otherwise, false. </param
-        >
+          />true to cause a message to be written; otherwise, false.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Object" /> whose name is sent to the <see cref="P:System.Diagnostics.Trace.Listeners" />. </param
-        >
+          />An <see cref="T:System.Object" /> whose name is sent to the <see cref="P:System.Diagnostics.Trace.Listeners" />.
+        </param>
         <param name="category">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A category name used to organize the output. </param
-        >
+          />A category name used to organize the output.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteLineIf">
@@ -2097,18 +2097,18 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to cause a message to be written; otherwise, false. </param
-        >
+          />true to cause a message to be written; otherwise, false.
+        </param>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />A message to write. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A message to write.
+        </param>
         <param name="category">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A category name used to organize the output. </param
-        >
+          />A category name used to organize the output.
+        </param>
       </Docs>
     </Member>
   </Members>

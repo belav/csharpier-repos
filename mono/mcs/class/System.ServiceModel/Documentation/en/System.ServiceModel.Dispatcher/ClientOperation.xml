@@ -17,14 +17,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.ServiceModel.Dispatcher.ClientOperation" /> class is the location for client run-time modifications and insertion point for custom extensions that are scoped to only one service operation. (To modify client run-time behavior for all messages in a contract, use the <see cref="T:System.ServiceModel.Dispatcher.ClientRuntime" /> class. ) </para
-      >
+        >The <see cref="T:System.ServiceModel.Dispatcher.ClientOperation" /> class is the location for client run-time modifications and insertion point for custom extensions that are scoped to only one service operation. (To modify client run-time behavior for all messages in a contract, use the <see cref="T:System.ServiceModel.Dispatcher.ClientRuntime" /> class. )
+      </para>
       <para
-        >Install <see cref="T:System.ServiceModel.Dispatcher.ClientOperation" /> modifications using a custom client behavior object, either of type <see cref="T:System.ServiceModel.Description.IContractBehavior" /> (to find a particular operation to modify) or of type <see cref="T:System.ServiceModel.Description.IOperationBehavior" /> (which can then be applied by creating a custom attribute). </para
-      >
+        >Install <see cref="T:System.ServiceModel.Dispatcher.ClientOperation" /> modifications using a custom client behavior object, either of type <see cref="T:System.ServiceModel.Description.IContractBehavior" /> (to find a particular operation to modify) or of type <see cref="T:System.ServiceModel.Description.IOperationBehavior" /> (which can then be applied by creating a custom attribute).
+      </para>
       <para
-        >Use the <see cref="P:System.ServiceModel.Dispatcher.ClientRuntime.Operations" /> property to locate the <see cref="T:System.ServiceModel.Dispatcher.ClientOperation" /> object that represents a particular service operation. </para
-      >
+        >Use the <see cref="P:System.ServiceModel.Dispatcher.ClientRuntime.Operations" /> property to locate the <see cref="T:System.ServiceModel.Dispatcher.ClientOperation" /> object that represents a particular service operation.
+      </para>
       <para
         >For more information about clients and the client architecture, see <format type="text/html">
           <a href="c8329832-bf66-4064-9034-bf39f153fc2d">Consuming Services Using a Client</a>
@@ -34,8 +34,8 @@
           <a href="1328c61c-06e5-455f-9ebd-ceefb59d3867">Extending Clients</a>
         </format>. For more information about using behaviors, see <format type="text/html">
           <a href="149b99b6-6eb6-4f45-be22-c967279677d9">Attaching Extensions Using Behaviors</a>
-        </format>. </para
-      >
+        </format>.
+      </para>
       <para>The following properties enable you to insert custom objects or modify the client execution behavior:</para>
       <list type="bullet">
         <item>
@@ -95,8 +95,8 @@
         </item>
         <item>
           <para
-            >Use the <see cref="P:System.ServiceModel.Dispatcher.ClientOperation.SyncMethod" /> property to control which method is mapped to the operation. </para
-          >
+            >Use the <see cref="P:System.ServiceModel.Dispatcher.ClientOperation.SyncMethod" /> property to control which method is mapped to the operation.
+          </para>
         </item>
       </list>
     </remarks>
@@ -129,8 +129,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Dispatcher.ClientOperation" /> class using the specified <see cref="T:System.ServiceModel.Dispatcher.ClientRuntime" />, name, and action values. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Dispatcher.ClientOperation" /> class using the specified <see cref="T:System.ServiceModel.Dispatcher.ClientRuntime" />, name, and action values.
+          </para>
         </summary>
         <param name="parent">
           <attribution
@@ -179,8 +179,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Dispatcher.ClientOperation" /> class using the specified <see cref="T:System.ServiceModel.Dispatcher.ClientRuntime" />, name, action, and reply action values. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Dispatcher.ClientOperation" /> class using the specified <see cref="T:System.ServiceModel.Dispatcher.ClientRuntime" />, name, action, and reply action values.
+          </para>
         </summary>
         <param name="parent">
           <attribution
@@ -531,8 +531,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.ServiceModel.Dispatcher.ClientOperation.ParameterInspectors" /> property to insert a custom <see cref="T:System.ServiceModel.Dispatcher.IParameterInspector" /> implementation or to modify the current one. Parameter inspectors are invoked in the order in which they are added to the collection for requests and in the reverse order for replies. </para
-          >
+            >Use the <see cref="P:System.ServiceModel.Dispatcher.ClientOperation.ParameterInspectors" /> property to insert a custom <see cref="T:System.ServiceModel.Dispatcher.IParameterInspector" /> implementation or to modify the current one. Parameter inspectors are invoked in the order in which they are added to the collection for requests and in the reverse order for replies.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -608,8 +608,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.ServiceModel.Dispatcher.ClientOperation.SerializeRequest" /> property to indicate whether the formatter serializes operation parameters into a reply message or to determine if the first parameter is sent as the outbound message. </para
-          >
+            >Use the <see cref="P:System.ServiceModel.Dispatcher.ClientOperation.SerializeRequest" /> property to indicate whether the formatter serializes operation parameters into a reply message or to determine if the first parameter is sent as the outbound message.
+          </para>
           <block subset="none" type="note">
             <para
               >If set to false, the operation must have exactly one parameter of type <see cref="T:System.ServiceModel.Channels.Message" /> or an exception is thrown.</para

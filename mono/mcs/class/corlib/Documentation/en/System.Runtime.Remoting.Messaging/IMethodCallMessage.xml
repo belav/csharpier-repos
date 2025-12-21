@@ -73,8 +73,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of the requested in argument. </param
-        >
+          />The number of the requested in argument.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetInArgName">
@@ -110,8 +110,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of the requested in argument. </param
-        >
+          />The number of the requested in argument.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="InArgCount">

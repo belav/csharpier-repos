@@ -180,8 +180,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index at which the column should be inserted. </param
-        >
+          />The zero-based index at which the column should be inserted.
+        </param>
         <param name="dataGridViewColumn">
           <attribution
             license="cc4"

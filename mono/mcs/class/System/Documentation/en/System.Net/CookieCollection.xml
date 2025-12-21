@@ -143,8 +143,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Net.Cookie" /> to be added to a <see cref="T:System.Net.CookieCollection" />. </param
-        >
+          />The <see cref="T:System.Net.Cookie" /> to be added to a <see cref="T:System.Net.CookieCollection" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Add">
@@ -187,8 +187,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Net.CookieCollection" /> to be added. </param
-        >
+          />The <see cref="T:System.Net.CookieCollection" /> to be added.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CopyTo">
@@ -229,15 +229,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The target <see cref="T:System.Array" /> to which the <see cref="T:System.Net.CookieCollection" /> will be copied. </param
-        >
+          />The target <see cref="T:System.Array" /> to which the <see cref="T:System.Net.CookieCollection" /> will be copied.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index in the target <see cref="T:System.Array" /> where copying begins. </param
-        >
+          />The zero-based index in the target <see cref="T:System.Array" /> where copying begins.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CopyTo">
@@ -287,8 +287,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index in the target <see cref="T:System.Array" /> where copying begins. </param
-        >
+          />The zero-based index in the target <see cref="T:System.Array" /> where copying begins.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Count">

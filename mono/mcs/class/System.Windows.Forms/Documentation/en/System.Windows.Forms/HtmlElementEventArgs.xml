@@ -13,11 +13,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.Windows.Forms.HtmlElementEventArgs" /> encapsulates the same information found on the window.event object when programming against the unmanaged HTML DOM or when writing Active Script for HTML pages. </para
-      >
+        <see cref="T:System.Windows.Forms.HtmlElementEventArgs" /> encapsulates the same information found on the window.event object when programming against the unmanaged HTML DOM or when writing Active Script for HTML pages.
+      </para>
       <para
-        >In most cases, you can use <see cref="P:System.Windows.Forms.HtmlElementEventArgs.ToElement" /> to find the HTML element that is receiving the event action, and <see cref="P:System.Windows.Forms.HtmlElementEventArgs.FromElement" /> to find the HTML element that the current event is causing us to leave. However, not every event supplies a value for these properties; see the managed documentation for an event, or the corresponding documentation in the Internet Explorer SDK documentation, to discover if the event supplies it. </para
-      >
+        >In most cases, you can use <see cref="P:System.Windows.Forms.HtmlElementEventArgs.ToElement" /> to find the HTML element that is receiving the event action, and <see cref="P:System.Windows.Forms.HtmlElementEventArgs.FromElement" /> to find the HTML element that the current event is causing us to leave. However, not every event supplies a value for these properties; see the managed documentation for an event, or the corresponding documentation in the Internet Explorer SDK documentation, to discover if the event supplies it.
+      </para>
       <para
         >Many events in the HTML DOM are sent to their parent elements unless they are cancelled. This is known as event bubbling. If a SPAN inside of a DIV receives a click, then a click event is raised for the SPAN first, then for the DIV, and finally for the HTML page's BODY element. <see cref="P:System.Windows.Forms.HtmlElementEventArgs.BubbleEvent" /> controls whether an event will behave in this manner or not.</para
       >
@@ -318,8 +318,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="P:System.Windows.Forms.HtmlElementEventArgs.ToElement" /> will have a valid value during mouse events such as <see cref="E:System.Windows.Forms.HtmlElement.MouseEnter" /> and <see cref="E:System.Windows.Forms.HtmlElement.MouseLeave" />. </para
-          >
+            <see cref="P:System.Windows.Forms.HtmlElementEventArgs.ToElement" /> will have a valid value during mouse events such as <see cref="E:System.Windows.Forms.HtmlElement.MouseEnter" /> and <see cref="E:System.Windows.Forms.HtmlElement.MouseLeave" />.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

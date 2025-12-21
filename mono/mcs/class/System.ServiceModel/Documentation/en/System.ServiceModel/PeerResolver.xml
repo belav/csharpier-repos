@@ -40,8 +40,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.PeerResolver" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.PeerResolver" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -150,8 +150,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Object" /> that represents the registration ID. This registration ID object is passed to the <see cref="M:System.ServiceModel.PeerResolver.Update(System.Object,System.ServiceModel.PeerNodeAddress,System.TimeSpan)" /> and <see cref="M:System.ServiceModel.PeerResolver.Unregister(System.Object,System.TimeSpan)" /> methods. </para
-          >
+            >An <see cref="T:System.Object" /> that represents the registration ID. This registration ID object is passed to the <see cref="M:System.ServiceModel.PeerResolver.Update(System.Object,System.ServiceModel.PeerNodeAddress,System.TimeSpan)" /> and <see cref="M:System.ServiceModel.PeerResolver.Unregister(System.Object,System.TimeSpan)" /> methods.
+          </para>
         </returns>
         <param name="meshId">
           <attribution
@@ -165,8 +165,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.PeerNodeAddress" /> to be registered with the peer mesh. </param
-        >
+          />The <see cref="T:System.ServiceModel.PeerNodeAddress" /> to be registered with the peer mesh.
+        </param>
         <param name="timeout">
           <attribution
             license="cc4"
@@ -256,8 +256,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A registration ID is a peer resolver token, that, at the very minimum, represents the tuple of a peer node ID and the mesh ID. This ID value must have been obtained in a previous call to <see cref="M:System.ServiceModel.PeerResolver.Register(System.String,System.ServiceModel.PeerNodeAddress,System.TimeSpan)" />. </para
-          >
+            >A registration ID is a peer resolver token, that, at the very minimum, represents the tuple of a peer node ID and the mesh ID. This ID value must have been obtained in a previous call to <see cref="M:System.ServiceModel.PeerResolver.Register(System.String,System.ServiceModel.PeerNodeAddress,System.TimeSpan)" />.
+          </para>
           <para>
             <see cref="M:System.ServiceModel.PeerResolver.Unregister(System.Object,System.TimeSpan)" /> is called in two specific cases:</para
           >
@@ -340,8 +340,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The updated endpoint address (and other multihoming IP addresses). </param
-        >
+          />The updated endpoint address (and other multihoming IP addresses).
+        </param>
         <param name="timeout">
           <attribution
             license="cc4"

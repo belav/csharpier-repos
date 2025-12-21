@@ -19,8 +19,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Net.NetworkInformation.PingOptions" /> class provides the <see cref="P:System.Net.NetworkInformation.PingOptions.Ttl" /> and <see cref="P:System.Net.NetworkInformation.PingOptions.DontFragment" /> properties to control how Internet Control Message Protocol (ICMP) echo request packets are transmitted.  </para
-      >
+        >The <see cref="T:System.Net.NetworkInformation.PingOptions" /> class provides the <see cref="P:System.Net.NetworkInformation.PingOptions.Ttl" /> and <see cref="P:System.Net.NetworkInformation.PingOptions.DontFragment" /> properties to control how Internet Control Message Protocol (ICMP) echo request packets are transmitted.
+      </para>
       <para
         >The <see cref="P:System.Net.NetworkInformation.PingOptions.Ttl" /> property specifies the Time to Live for packets sent by the <see cref="T:System.Net.NetworkInformation.Ping" /> class. This value indicates the number of routing nodes that can forward a <see cref="T:System.Net.NetworkInformation.Ping" /> packet before it is discarded. Setting this option is useful if you want to test the number of forwards, also known as hops, are required to send a packet from a source computer to a destination computer.</para
       >

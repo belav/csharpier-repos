@@ -28,8 +28,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class provides a filter that never allows a message through. Specifically, the <see cref="Overload:System.ServiceModel.Dispatcher.MatchNoneMessageFilter.Match" /> methods returns false for every message that is not null. </para
-      >
+        >This class provides a filter that never allows a message through. Specifically, the <see cref="Overload:System.ServiceModel.Dispatcher.MatchNoneMessageFilter.Match" /> methods returns false for every message that is not null.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -52,14 +52,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor can be used to create distinct instances of <see cref="T:System.ServiceModel.Dispatcher.MatchNoneMessageFilter" />. </para
-          >
+            >This constructor can be used to create distinct instances of <see cref="T:System.ServiceModel.Dispatcher.MatchNoneMessageFilter" />.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Dispatcher.MatchNoneMessageFilter" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Dispatcher.MatchNoneMessageFilter" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>

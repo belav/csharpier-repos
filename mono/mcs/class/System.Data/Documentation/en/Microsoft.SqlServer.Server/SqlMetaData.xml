@@ -933,8 +933,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum length of the specified type. </param
-        >
+          />The maximum length of the specified type.
+        </param>
         <param name="locale">
           <attribution
             license="cc4"

@@ -94,8 +94,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.String" /> object that contains a normalized string. </param
-        >
+          />A <see cref="T:System.String" /> object that contains a normalized string.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetXsdType">
@@ -164,12 +164,8 @@
           >
         </returns>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The String to convert. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The String to convert.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ToString">

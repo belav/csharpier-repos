@@ -25,8 +25,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Packing size affects the alignment of fields in structures and classes whose organization is <see cref="F:System.Runtime.InteropServices.LayoutKind.Sequential" />. The packing size is one of two factors that determine the offset of a field when the structure or class is marshaled; the other factor is the effective size of the field. To determine the offset of a field: </para
-      >
+        >Packing size affects the alignment of fields in structures and classes whose organization is <see cref="F:System.Runtime.InteropServices.LayoutKind.Sequential" />. The packing size is one of two factors that determine the offset of a field when the structure or class is marshaled; the other factor is the effective size of the field. To determine the offset of a field:
+      </para>
       <list type="ordered">
         <item>
           <para>Compute the minimum value for the offset by adding the size of the preceding field to the offset of the preceding field.</para>

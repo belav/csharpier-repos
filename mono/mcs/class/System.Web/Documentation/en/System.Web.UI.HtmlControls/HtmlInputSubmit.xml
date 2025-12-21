@@ -25,8 +25,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.UI.HtmlControls.HtmlInputSubmit" /> class is derived from the <see cref="T:System.Web.UI.HtmlControls.HtmlInputButton" /> class and is used to create a button control on a Web page that submits a form. The <see cref="T:System.Web.UI.HtmlControls.HtmlInputSubmit" /> control is often used with the <see cref="T:System.Web.UI.HtmlControls.HtmlInputReset" /> control, which resets form controls to their initial values. </para
-      >
+        >The <see cref="T:System.Web.UI.HtmlControls.HtmlInputSubmit" /> class is derived from the <see cref="T:System.Web.UI.HtmlControls.HtmlInputButton" /> class and is used to create a button control on a Web page that submits a form. The <see cref="T:System.Web.UI.HtmlControls.HtmlInputSubmit" /> control is often used with the <see cref="T:System.Web.UI.HtmlControls.HtmlInputReset" /> control, which resets form controls to their initial values.
+      </para>
       <para
         >For a list of initial property values for an instance of <see cref="T:System.Web.UI.HtmlControls.HtmlInputSubmit" />, see the <see cref="M:System.Web.UI.HtmlControls.HtmlInputSubmit.#ctor" /> constructor.</para
       >
@@ -125,12 +125,8 @@
           >
         </summary>
         <param name="type">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The input button type. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The input button type.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

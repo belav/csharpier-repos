@@ -80,19 +80,15 @@
           >
         </returns>
         <param name="o">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The unreferenced object. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The unreferenced object.
+        </param>
         <param name="id">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A unique string used to identify the unreferenced object. </param
-        >
+          />A unique string used to identify the unreferenced object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="UnreferencedId">

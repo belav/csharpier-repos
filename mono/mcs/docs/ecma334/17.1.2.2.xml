@@ -3,6 +3,6 @@
   <paragraph
     >A <non_terminal where="17.1.2"
       >class-base</non_terminal
-    > specification may include a list of interface types, in which case the class is said to implement the given interface types. Interface implementations are discussed further in <hyperlink>20.4</hyperlink>. </paragraph
-  >
+    > specification may include a list of interface types, in which case the class is said to implement the given interface types. Interface implementations are discussed further in <hyperlink>20.4</hyperlink>.
+  </paragraph>
 </clause>

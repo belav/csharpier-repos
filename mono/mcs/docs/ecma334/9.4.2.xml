@@ -71,8 +71,8 @@
       <rhs
         >A <non_terminal where="9.4.1"
           >unicode-escape-sequence</non_terminal
-        > representing a character of classes Lu, Ll, Lt, Lm, Lo, or Nl </rhs
-      >
+        > representing a character of classes Lu, Ll, Lt, Lm, Lo, or Nl
+      </rhs>
     </grammar_production>
     <grammar_production>
       <name>
@@ -81,8 +81,8 @@
       <rhs
         >A <non_terminal where="9.4.1"
           >unicode-escape-sequence</non_terminal
-        > representing a character of classes Mn or Mc </rhs
-      >
+        > representing a character of classes Mn or Mc
+      </rhs>
     </grammar_production>
     <grammar_production>
       <name>
@@ -91,8 +91,8 @@
       <rhs
         >A <non_terminal where="9.4.1"
           >unicode-escape-sequence</non_terminal
-        > representing a character of the class Nd </rhs
-      >
+        > representing a character of the class Nd
+      </rhs>
     </grammar_production>
     <grammar_production>
       <name>
@@ -101,8 +101,8 @@
       <rhs
         >A <non_terminal where="9.4.1"
           >unicode-escape-sequence</non_terminal
-        > representing a character of the class Pc </rhs
-      >
+        > representing a character of the class Pc
+      </rhs>
     </grammar_production>
     <grammar_production>
       <name>
@@ -111,8 +111,8 @@
       <rhs
         >A <non_terminal where="9.4.1"
           >unicode-escape-sequence</non_terminal
-        > representing a character of the class Cf </rhs
-      >
+        > representing a character of the class Cf
+      </rhs>
     </grammar_production>
   </paragraph>
   <paragraph>
@@ -154,13 +154,11 @@ class Class1
       <list_item
         > Each <non_terminal where="9.4.1"
           >unicode-escape-sequence</non_terminal
-        > is transformed into its corresponding Unicode character. </list_item
-      >
+        > is transformed into its corresponding Unicode character.
+      </list_item>
       <list_item
-        > Any <non_terminal where="9.4.2"
-          >formatting-character</non_terminal
-        >s are removed. </list_item
-      >
+        > Any <non_terminal where="9.4.2">formatting-character</non_terminal>s are removed.
+      </list_item>
     </list>
   </paragraph>
   <paragraph

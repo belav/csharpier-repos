@@ -22,8 +22,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The source levels identify the <see cref="T:System.Diagnostics.TraceEventType" /> events that are to be traced. The <see cref="T:System.Diagnostics.SourceSwitch" /> class uses the <see cref="T:System.Diagnostics.SourceLevels" /> enumeration to define the event level of the trace message to use for filtering messages to send to the trace listener. </para
-      >
+        >The source levels identify the <see cref="T:System.Diagnostics.TraceEventType" /> events that are to be traced. The <see cref="T:System.Diagnostics.SourceSwitch" /> class uses the <see cref="T:System.Diagnostics.SourceLevels" /> enumeration to define the event level of the trace message to use for filtering messages to send to the trace listener.
+      </para>
       <para
         >The <see cref="T:System.Diagnostics.EventTypeFilter" /> class uses the <see cref="T:System.Diagnostics.SourceLevels" /> enumeration to determine whether a trace listener should emit a trace.</para
       >

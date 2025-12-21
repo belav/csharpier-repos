@@ -14,8 +14,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.Compilation.ImplicitResourceKey" /> class contains fields that identify an implicit resource key. </para
-      >
+        >The <see cref="T:System.Web.Compilation.ImplicitResourceKey" /> class contains fields that identify an implicit resource key.
+      </para>
       <para>An implicit resource is assigned to a control in the following form:</para>
       <code>    &lt;asp:label runat="server" id="label1" meta:resourcekey="Welcome"
         text="Welcome" 
@@ -44,8 +44,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.Compilation.ImplicitResourceKey" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.Compilation.ImplicitResourceKey" /> class.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>

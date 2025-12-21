@@ -91,8 +91,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <paramref name="ignoreTrailingSlash" /> is set to true, trailing slashes on the end of template are ignored when matching a candidate URI. For example, a template such as “http://www.microsoft.com/customer/” would match the following candidate URIs: </para
-          >
+            >When the <paramref name="ignoreTrailingSlash" /> is set to true, trailing slashes on the end of template are ignored when matching a candidate URI. For example, a template such as “http://www.microsoft.com/customer/” would match the following candidate URIs:
+          </para>
           <list type="bullet">
             <item>
               <para>"http://www.microsoft.com/customer/"</para>
@@ -292,8 +292,8 @@
           >
           <block subset="none" type="note">
             <para
-              >The name/value collection passed to <see cref="M:System.UriTemplate.BindByName(System.Uri,System.Collections.Specialized.NameValueCollection)" /> must contain a key for every template variable. Extra name/value pairs that do not match template variables are appended to the query string of the final URI. </para
-            >
+              >The name/value collection passed to <see cref="M:System.UriTemplate.BindByName(System.Uri,System.Collections.Specialized.NameValueCollection)" /> must contain a key for every template variable. Extra name/value pairs that do not match template variables are appended to the query string of the final URI.
+            </para>
           </block>
           <block subset="none" type="note">
             <para>It is possible to pass in text within the name/value pairs that prevent the generated URI from matching the template that is used to generate it. Examples of such text includes: '/', '..', '*', '{', and '}'.</para>
@@ -415,8 +415,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A collection of parameter name/value pairs. </param
-        >
+          />A collection of parameter name/value pairs.
+        </param>
         <param name="omitDefaults">
           <attribution
             license="cc4"

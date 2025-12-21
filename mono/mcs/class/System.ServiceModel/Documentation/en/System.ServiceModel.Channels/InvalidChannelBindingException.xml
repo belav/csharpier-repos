@@ -40,8 +40,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.InvalidChannelBindingException" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.InvalidChannelBindingException" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -171,8 +171,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Exception" /> that caused the current exception to be thrown. </param
-        >
+          />The <see cref="T:System.Exception" /> that caused the current exception to be thrown.
+        </param>
       </Docs>
     </Member>
   </Members>

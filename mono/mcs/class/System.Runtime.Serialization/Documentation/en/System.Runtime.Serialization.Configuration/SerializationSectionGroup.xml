@@ -61,8 +61,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.Configuration.SerializationSectionGroup" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.Configuration.SerializationSectionGroup" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -88,8 +88,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Runtime.Serialization.Configuration.DataContractSerializerSection" /> used to set up the known types collection. </para
-          >
+            >Gets the <see cref="T:System.Runtime.Serialization.Configuration.DataContractSerializerSection" /> used to set up the known types collection.
+          </para>
         </summary>
       </Docs>
     </Member>

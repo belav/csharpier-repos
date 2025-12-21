@@ -647,8 +647,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The SQL query used to retrieve data from the Access database. If the SQL query is a parameterized SQL string, add <see cref="T:System.Web.UI.WebControls.Parameter" /> objects to the <see cref="P:System.Web.UI.WebControls.SqlDataSource.SelectParameters" /> collection. </param
-        >
+          />The SQL query used to retrieve data from the Access database. If the SQL query is a parameterized SQL string, add <see cref="T:System.Web.UI.WebControls.Parameter" /> objects to the <see cref="P:System.Web.UI.WebControls.SqlDataSource.SelectParameters" /> collection.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

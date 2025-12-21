@@ -16,8 +16,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The abstract <see cref="T:System.Web.Services.Description.ProtocolReflector" /> class and its concrete derived classes create <see cref="T:System.Web.Services.Description.ServiceDescription" /> objects from classes that are identified as Web services with the <see cref="T:System.Web.Services.WebServiceAttribute" /> attribute. Each concrete <see cref="T:System.Web.Services.Description.ProtocolReflector" />-derived class generates <see cref="T:System.Web.Services.Description.ServiceDescription" /> objects according to a specified communication protocol; <see cref="T:System.Web.Services.Description.ProtocolReflector" /> provides common functionality regardless of the protocol. </para
-      >
+        >The abstract <see cref="T:System.Web.Services.Description.ProtocolReflector" /> class and its concrete derived classes create <see cref="T:System.Web.Services.Description.ServiceDescription" /> objects from classes that are identified as Web services with the <see cref="T:System.Web.Services.WebServiceAttribute" /> attribute. Each concrete <see cref="T:System.Web.Services.Description.ProtocolReflector" />-derived class generates <see cref="T:System.Web.Services.Description.ServiceDescription" /> objects according to a specified communication protocol; <see cref="T:System.Web.Services.Description.ProtocolReflector" /> provides common functionality regardless of the protocol.
+      </para>
       <para
         >An output <see cref="T:System.Web.Services.Description.ServiceDescription" /> instance can be used to generate a Web Services Description Language (WSDL) document with the <see cref="M:System.Web.Services.Description.ServiceDescription.Write(System.IO.Stream)" /> method or one of the available overloads. The <see cref="T:System.Web.Services.Description.ServiceDescription" /> instance can also be used by the <see cref="T:System.Web.Services.Description.ServiceDescriptionImporter" /> class and related classes to generate client proxy code or abstract server code.</para
       >
@@ -46,8 +46,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.Services.Description.ProtocolReflector" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Description.ProtocolReflector" /> class.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -667,8 +667,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Web.Services.Description.ServiceDescription" /> objects that have so far been created and added to the corresponding to the <see cref="T:System.Web.Services.Description.ServiceDescriptionCollection" /> obtained through the <see cref="P:System.Web.Services.Description.ServiceDescriptionReflector.ServiceDescriptions" /> property of the associated <see cref="T:System.Web.Services.Description.ServiceDescriptionReflector" /> instance. </para
-          >
+            >Gets the <see cref="T:System.Web.Services.Description.ServiceDescription" /> objects that have so far been created and added to the corresponding to the <see cref="T:System.Web.Services.Description.ServiceDescriptionCollection" /> obtained through the <see cref="P:System.Web.Services.Description.ServiceDescriptionReflector.ServiceDescriptions" /> property of the associated <see cref="T:System.Web.Services.Description.ServiceDescriptionReflector" /> instance.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>

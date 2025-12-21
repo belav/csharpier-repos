@@ -17,8 +17,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.Configuration.HttpRuntimeSection" /> allows you to handle those parameters that affect the behavior of the ASP.NET runtime. </para
-      >
+        >The <see cref="T:System.Web.Configuration.HttpRuntimeSection" /> allows you to handle those parameters that affect the behavior of the ASP.NET runtime.
+      </para>
       <para
         >It refers to the node in the configuration file that is indicated by the <format type="text/html">
           <a href="e9b81350-8aaf-47cc-9843-5f7d0c59f369">&lt;httpRuntime&gt;</a>
@@ -150,8 +150,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can address the problem caused by some antivirus applications, when writing information back to the scanned files, by setting the <see cref="P:System.Web.Configuration.HttpRuntimeSection.DelayNotificationTimeout" /> property. </para
-          >
+            >You can address the problem caused by some antivirus applications, when writing information back to the scanned files, by setting the <see cref="P:System.Web.Configuration.HttpRuntimeSection.DelayNotificationTimeout" /> property.
+          </para>
           <block subset="none" type="note">
             <para>The problem occurs because file changes caused by antivirus scanning cannot be distinguished from the ones made by the user. The end result is the restart of the application whose files are being scanned.</para>
           </block>
@@ -330,13 +330,13 @@
           <para
             >The <see cref="P:System.Web.Configuration.HttpRuntimeSection.ExecutionTimeout" /> property indicates the maximum number of seconds a request is allowed to execute before being automatically shut down by ASP.NET. The default is 110 seconds. This time-out applies only if the debug attribute in the <format type="text/html">
               <a href="7c319582-074a-4d2a-a787-03b9d4541c12">&lt;compilation&gt;</a>
-            </format> element is set to false. </para
-          >
+            </format> element is set to false.
+          </para>
           <para
             >If the time-out expires an exception is raised. You can record the related information in the Application folder of the Event Log. You do this by enabling the application health monitoring in the <format type="text/html">
               <a href="956dd91b-448e-4a50-b526-961b244d02f8">&lt;healthMonitoring&gt;</a>
-            </format> configuration element. </para
-          >
+            </format> configuration element.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -367,8 +367,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.Configuration.HttpRuntimeSection.MaxRequestLength" /> property specifies the limit for the buffering threshold of the input stream. For example, this limit can be used to prevent denial of service attacks that are caused by users who post large files to the server. </para
-          >
+            >The <see cref="P:System.Web.Configuration.HttpRuntimeSection.MaxRequestLength" /> property specifies the limit for the buffering threshold of the input stream. For example, this limit can be used to prevent denial of service attacks that are caused by users who post large files to the server.
+          </para>
           <para
             >The value assigned to this property should be greater or equal to value assigned to the <see cref="P:System.Web.Configuration.HttpRuntimeSection.RequestLengthDiskThreshold" /> property.</para
           >
@@ -402,8 +402,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A suggested value for the <see cref="P:System.Web.Configuration.HttpRuntimeSection.MaxWaitChangeNotification" /> property would exceed the length of time to complete a copy during the deployment process. </para
-          >
+            >A suggested value for the <see cref="P:System.Web.Configuration.HttpRuntimeSection.MaxWaitChangeNotification" /> property would exceed the length of time to complete a copy during the deployment process.
+          </para>
           <block subset="none" type="note">
             <para>The content might appear cached if you view it immediately after a copy-and-deploy process. This is typical behavior. The changes take effect when the wait period that you specified has elapsed.</para>
           </block>
@@ -523,8 +523,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.Configuration.HttpRuntimeSection.RequestLengthDiskThreshold" /> property specifies the input-stream buffering threshold limit in number of bytes. Its value should not exceed the <see cref="P:System.Web.Configuration.HttpRuntimeSection.MaxRequestLength" /> property value. After a request entity exceeds this threshold, it is buffered transparently onto disk. </para
-          >
+            >The <see cref="P:System.Web.Configuration.HttpRuntimeSection.RequestLengthDiskThreshold" /> property specifies the input-stream buffering threshold limit in number of bytes. Its value should not exceed the <see cref="P:System.Web.Configuration.HttpRuntimeSection.MaxRequestLength" /> property value. After a request entity exceeds this threshold, it is buffered transparently onto disk.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -552,8 +552,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.Configuration.HttpRuntimeSection.RequireRootedSaveAsPath" /> property specifies whether the file name argument to SaveAs methods must be a rooted path. The ASP.NET process must have permission to create files in the specified location. </para
-          >
+            >The <see cref="P:System.Web.Configuration.HttpRuntimeSection.RequireRootedSaveAsPath" /> property specifies whether the file name argument to SaveAs methods must be a rooted path. The ASP.NET process must have permission to create files in the specified location.
+          </para>
           <para
             >For more information, see the save methods defined in the <see cref="T:System.Configuration.Configuration" /> class.</para
           >
@@ -651,8 +651,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.Configuration.HttpRuntimeSection.UseFullyQualifiedRedirectUrl" /> property indicates whether client-side redirects are fully qualified (in the form http://server/path) or whether relative redirects are instead sent to the client. </para
-          >
+            >The <see cref="P:System.Web.Configuration.HttpRuntimeSection.UseFullyQualifiedRedirectUrl" /> property indicates whether client-side redirects are fully qualified (in the form http://server/path) or whether relative redirects are instead sent to the client.
+          </para>
           <block subset="none" type="note">
             <para>Some browsers might have problems loading pages in cookieless sessions when this value is false.</para>
           </block>
@@ -686,8 +686,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A suggested value for <see cref="P:System.Web.Configuration.HttpRuntimeSection.WaitChangeNotification" /> would exceed the length of time to complete a copy during the deployment process. </para
-          >
+            >A suggested value for <see cref="P:System.Web.Configuration.HttpRuntimeSection.WaitChangeNotification" /> would exceed the length of time to complete a copy during the deployment process.
+          </para>
           <block subset="none" type="note">
             <para>The content might appear cached if you view it immediately after a copy and deploy process. This is typical behavior. The changes take effect when the wait period that you specified has elapsed.</para>
           </block>

@@ -16,17 +16,17 @@
         <see cref="T:System.Windows.Forms.HtmlElement" /> represents any possible type of element in an HTML document, such as BODY, TABLE, and FORM, among others. The class exposes the most common properties you can expect to find on all elements.</para
       >
       <para
-        >Most elements can have <newTerm>child elements</newTerm>: other HTML elements that are placed underneath them. Use the <see cref="P:System.Windows.Forms.HtmlElement.CanHaveChildren" /> property to test whether a given element has children, and the <see cref="P:System.Windows.Forms.HtmlElement.Children" /> collection to iterate through them. The <see cref="P:System.Windows.Forms.HtmlElement.Parent" /> property returns the <see cref="T:System.Windows.Forms.HtmlElement" /> in which the current element is nested. </para
-      >
+        >Most elements can have <newTerm>child elements</newTerm>: other HTML elements that are placed underneath them. Use the <see cref="P:System.Windows.Forms.HtmlElement.CanHaveChildren" /> property to test whether a given element has children, and the <see cref="P:System.Windows.Forms.HtmlElement.Children" /> collection to iterate through them. The <see cref="P:System.Windows.Forms.HtmlElement.Parent" /> property returns the <see cref="T:System.Windows.Forms.HtmlElement" /> in which the current element is nested.
+      </para>
       <para
-        >You often need access to attributes, properties, and methods on the underlying element that are not directly exposed by <see cref="T:System.Windows.Forms.HtmlElement" />, such as the SRC attribute on an IMG element or the Submit method on a FORM. The <see cref="M:System.Windows.Forms.HtmlElement.GetAttribute(System.String)" /> and <see cref="M:System.Windows.Forms.HtmlElement.SetAttribute(System.String,System.String)" /> methods enable you to retrieve and alter any attribute or property on a specific element, while <see cref="M:System.Windows.Forms.HtmlElement.InvokeMember(System.String)" /> provides access to any methods not exposed in the managed Document Object Model (DOM). If your application has unmanaged code permission, you can also access unexposed properties and methods with the <see cref="P:System.Windows.Forms.HtmlElement.DomElement" /> attribute. </para
-      >
+        >You often need access to attributes, properties, and methods on the underlying element that are not directly exposed by <see cref="T:System.Windows.Forms.HtmlElement" />, such as the SRC attribute on an IMG element or the Submit method on a FORM. The <see cref="M:System.Windows.Forms.HtmlElement.GetAttribute(System.String)" /> and <see cref="M:System.Windows.Forms.HtmlElement.SetAttribute(System.String,System.String)" /> methods enable you to retrieve and alter any attribute or property on a specific element, while <see cref="M:System.Windows.Forms.HtmlElement.InvokeMember(System.String)" /> provides access to any methods not exposed in the managed Document Object Model (DOM). If your application has unmanaged code permission, you can also access unexposed properties and methods with the <see cref="P:System.Windows.Forms.HtmlElement.DomElement" /> attribute.
+      </para>
       <para
-        >Use the <see cref="P:System.Windows.Forms.HtmlElement.TagName" /> property to test whether an element is of a specific type. </para
-      >
+        >Use the <see cref="P:System.Windows.Forms.HtmlElement.TagName" /> property to test whether an element is of a specific type.
+      </para>
       <para
-        >Any HTML document can be modified at run time. You can create new <see cref="T:System.Windows.Forms.HtmlElement" /> objects with the <see cref="M:System.Windows.Forms.HtmlDocument.CreateElement(System.String)" /> method of <see cref="T:System.Windows.Forms.HtmlDocument" />, and add them to another element using the <see cref="M:System.Windows.Forms.HtmlElement.AppendChild(System.Windows.Forms.HtmlElement)" /> or <see cref="M:System.Windows.Forms.HtmlElement.InsertAdjacentElement(System.Windows.Forms.HtmlElementInsertionOrientation,System.Windows.Forms.HtmlElement)" /> methods. You can also create the elements as HTML tags and assign them to an existing element's <see cref="P:System.Windows.Forms.HtmlElement.InnerHtml" /> property. </para
-      >
+        >Any HTML document can be modified at run time. You can create new <see cref="T:System.Windows.Forms.HtmlElement" /> objects with the <see cref="M:System.Windows.Forms.HtmlDocument.CreateElement(System.String)" /> method of <see cref="T:System.Windows.Forms.HtmlDocument" />, and add them to another element using the <see cref="M:System.Windows.Forms.HtmlElement.AppendChild(System.Windows.Forms.HtmlElement)" /> or <see cref="M:System.Windows.Forms.HtmlElement.InsertAdjacentElement(System.Windows.Forms.HtmlElementInsertionOrientation,System.Windows.Forms.HtmlElement)" /> methods. You can also create the elements as HTML tags and assign them to an existing element's <see cref="P:System.Windows.Forms.HtmlElement.InnerHtml" /> property.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -58,8 +58,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see cref="T:System.Windows.Forms.HtmlElementCollection" /> of all elements underneath the current element. </para
-          >
+            >Gets an <see cref="T:System.Windows.Forms.HtmlElementCollection" /> of all elements underneath the current element.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -102,8 +102,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.HtmlElement" /> to append to this location in the tree. </param
-        >
+          />The <see cref="T:System.Windows.Forms.HtmlElement" /> to append to this location in the tree.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AttachEventHandler">
@@ -129,8 +129,8 @@
             >The Managed Document Object Model (DOM) exposes only a select number of events. Most of the unexposed events are only defined for specific types of elements; such as the submit event, which is valid only on FORM elements. Use <see cref="M:System.Windows.Forms.HtmlElement.AttachEventHandler(System.String,System.EventHandler)" /> to add an event handler to these unexposed events.</para
           >
           <para
-            >You should not attach an event to the document or one of its objects until the document has completed loading. The earliest you should call this method is in the <see cref="E:System.Windows.Forms.WebBrowser.DocumentCompleted" /> event of the <see cref="T:System.Windows.Forms.WebBrowser" /> control. </para
-          >
+            >You should not attach an event to the document or one of its objects until the document has completed loading. The earliest you should call this method is in the <see cref="E:System.Windows.Forms.WebBrowser.DocumentCompleted" /> event of the <see cref="T:System.Windows.Forms.WebBrowser" /> control.
+          </para>
           <para
             >For more information about the available unmanaged events, see <format type="text/html">
               <a href="762295bd-2355-4aa7-b43c-5bff997a33e6"
@@ -205,15 +205,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Many of the elements inside of an HTML file can have other HTML elements underneath them. The <see cref="P:System.Windows.Forms.HtmlElement.Children" /> collection provides a simple mechanism for exploring the tree structure of a document. </para
-          >
+            >Many of the elements inside of an HTML file can have other HTML elements underneath them. The <see cref="P:System.Windows.Forms.HtmlElement.Children" /> collection provides a simple mechanism for exploring the tree structure of a document.
+          </para>
           <para>
             <see cref="P:System.Windows.Forms.HtmlElement.Children" /> only exposes elements whose direct parent is the current element. If you have an <see cref="T:System.Windows.Forms.HtmlElement" /> for a TABLE element, <see cref="P:System.Windows.Forms.HtmlElement.Children" /> will give you all of the TR (row) elements inside of the TABLE. To retrieve the TD (cell) elements contained inside of the TR elements, you will need to use either the <see cref="P:System.Windows.Forms.HtmlElement.Children" /> collection on each individual TR element, or use the <see cref="P:System.Windows.Forms.HtmlElement.All" /> collection on <see cref="T:System.Windows.Forms.HtmlElement" />.</para
           >
           <para>Elements in this collection are not guaranteed to be in source order. </para>
           <para
-            >If <see cref="P:System.Windows.Forms.HtmlElement.CanHaveChildren" /> is false, Children will always be empty. </para
-          >
+            >If <see cref="P:System.Windows.Forms.HtmlElement.CanHaveChildren" /> is false, Children will always be empty.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -341,8 +341,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Some HTML pages can host frames using the FRAMESET tags. In this case, each individual FRAME element will contain its own instance of <see cref="T:System.Windows.Forms.HtmlDocument" />. This property is most useful when you have received a reference to an element in an event handler from the <see cref="T:System.Windows.Forms.HtmlElementEventArgs" />, and need to perform some action on the document in which the element resides. </para
-          >
+            >Some HTML pages can host frames using the FRAMESET tags. In this case, each individual FRAME element will contain its own instance of <see cref="T:System.Windows.Forms.HtmlDocument" />. This property is most useful when you have received a reference to an element in an event handler from the <see cref="T:System.Windows.Forms.HtmlElementEventArgs" />, and need to perform some action on the document in which the element resides.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -646,8 +646,8 @@
             >Setting the focus on an element both gives that element focus and makes it the active element; for example, the element that has focus will be returned by the <see cref="P:System.Windows.Forms.HtmlDocument.ActiveElement" /> property of <see cref="T:System.Windows.Forms.HtmlDocument" />.</para
           >
           <para
-            >Any key strokes entered by a user after <see cref="M:System.Windows.Forms.HtmlElement.Focus" /> has been called will be sent to that element. </para
-          >
+            >Any key strokes entered by a user after <see cref="M:System.Windows.Forms.HtmlElement.Focus" /> has been called will be sent to that element.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -708,8 +708,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An attribute in HTML is any valid name/value pair for that element. <see cref="T:System.Windows.Forms.HtmlElement" /> exposes only those attributes that are common to all elements, leaving out those that only apply to certain types of elements; SRC is a predefined attribute for the IMG tag, for example, but not for the DIV tag. Use <see cref="M:System.Windows.Forms.HtmlElement.GetAttribute(System.String)" /> and <see cref="M:System.Windows.Forms.HtmlElement.SetAttribute(System.String,System.String)" /> to manipulate attributes not exposed on the managed Document Object Model (DOM). </para
-          >
+            >An attribute in HTML is any valid name/value pair for that element. <see cref="T:System.Windows.Forms.HtmlElement" /> exposes only those attributes that are common to all elements, leaving out those that only apply to certain types of elements; SRC is a predefined attribute for the IMG tag, for example, but not for the DIV tag. Use <see cref="M:System.Windows.Forms.HtmlElement.GetAttribute(System.String)" /> and <see cref="M:System.Windows.Forms.HtmlElement.SetAttribute(System.String,System.String)" /> to manipulate attributes not exposed on the managed Document Object Model (DOM).
+          </para>
           <para>
             <see cref="M:System.Windows.Forms.HtmlElement.GetAttribute(System.String)" /> and <see cref="M:System.Windows.Forms.HtmlElement.SetAttribute(System.String,System.String)" /> are case-insensitive.</para
           >
@@ -853,14 +853,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >There are several ways to add new elements to an existing HTML page, such as the <see cref="M:System.Windows.Forms.HtmlElement.AppendChild(System.Windows.Forms.HtmlElement)" /> and <see cref="M:System.Windows.Forms.HtmlElement.InsertAdjacentElement(System.Windows.Forms.HtmlElementInsertionOrientation,System.Windows.Forms.HtmlElement)" /> methods. Using <see cref="P:System.Windows.Forms.HtmlElement.InnerHtml" /> is often the fastest way to add new content when you have to set many attributes or styles on your new elements. </para
-          >
+            >There are several ways to add new elements to an existing HTML page, such as the <see cref="M:System.Windows.Forms.HtmlElement.AppendChild(System.Windows.Forms.HtmlElement)" /> and <see cref="M:System.Windows.Forms.HtmlElement.InsertAdjacentElement(System.Windows.Forms.HtmlElementInsertionOrientation,System.Windows.Forms.HtmlElement)" /> methods. Using <see cref="P:System.Windows.Forms.HtmlElement.InnerHtml" /> is often the fastest way to add new content when you have to set many attributes or styles on your new elements.
+          </para>
           <para>
             <see cref="P:System.Windows.Forms.HtmlElement.InnerHtml" /> differs from <see cref="P:System.Windows.Forms.HtmlElement.OuterHtml" /> in that <see cref="P:System.Windows.Forms.HtmlElement.InnerHtml" /> will not include the HTML that represents the object you are calling. See <see cref="P:System.Windows.Forms.HtmlElement.OuterHtml" /> for more information about the difference between these two properties.</para
           >
           <para
-            >Setting <see cref="P:System.Windows.Forms.HtmlElement.InnerHtml" /> destroys any children previously appended to the element. If you retrieve an element from the DOM and then assign new HTML to its parents' <see cref="P:System.Windows.Forms.HtmlElement.InnerHtml" /> property, your reference to that element will be useless, and its behavior when it calls its properties and methods is undefined. </para
-          >
+            >Setting <see cref="P:System.Windows.Forms.HtmlElement.InnerHtml" /> destroys any children previously appended to the element. If you retrieve an element from the DOM and then assign new HTML to its parents' <see cref="P:System.Windows.Forms.HtmlElement.InnerHtml" /> property, your reference to that element will be useless, and its behavior when it calls its properties and methods is undefined.
+          </para>
           <para
             >For some elements, setting <see cref="P:System.Windows.Forms.HtmlElement.InnerHtml" /> is not a valid operation. Some HTML tags have no closing tag, such as the IMG tag, and therefore cannot contain nested elements. Some tags, such as the SCRIPT tag, can only contain text content; setting <see cref="P:System.Windows.Forms.HtmlElement.InnerHtml" /> will result in an error. For both types of tags, the <see cref="P:System.Windows.Forms.HtmlElement.CanHaveChildren" /> property will return false. However, you also cannot set <see cref="P:System.Windows.Forms.HtmlElement.InnerHtml" /> on TABLE and TR elements, as assigning malformed HTML to these elements could corrupt the rendering of the document. Use <see cref="M:System.Windows.Forms.HtmlElement.AppendChild(System.Windows.Forms.HtmlElement)" /> or the <unmanagedCodeEntityReference>insertRow</unmanagedCodeEntityReference> and <unmanagedCodeEntityReference>insertCell</unmanagedCodeEntityReference> methods on the unmanaged <unmanagedCodeEntityReference>IHTMLTable</unmanagedCodeEntityReference> interface to add rows and cells to a TABLE.</para
           >
@@ -894,8 +894,8 @@
             >If you attempt to assign HTML to an element with <see cref="P:System.Windows.Forms.HtmlElement.InnerText" />, the HTML code will display as literals in the document, just as if you were viewing HTML within a text file. If you assign HTML to an element using the <see cref="P:System.Windows.Forms.HtmlElement.InnerHtml" /> property, <see cref="P:System.Windows.Forms.HtmlElement.InnerText" /> will return all of the text in that HTML with the markup removed.</para
           >
           <para
-            >Assigning a value to <see cref="P:System.Windows.Forms.HtmlElement.InnerText" /> will destroy any child elements that belong to the element. </para
-          >
+            >Assigning a value to <see cref="P:System.Windows.Forms.HtmlElement.InnerText" /> will destroy any child elements that belong to the element.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -923,8 +923,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Do not call this method until after the <see cref="E:System.Windows.Forms.WebBrowser.DocumentCompleted" /> event on the <see cref="T:System.Windows.Forms.WebBrowser" /> control has occurred. Calling this method before then can result in an exception, as the document will not have finished loading. </para
-          >
+            >Do not call this method until after the <see cref="E:System.Windows.Forms.WebBrowser.DocumentCompleted" /> event on the <see cref="T:System.Windows.Forms.WebBrowser" /> control has occurred. Calling this method before then can result in an exception, as the document will not have finished loading.
+          </para>
           <para
             >Whether a value of <see cref="T:System.Windows.Forms.HtmlElementInsertionOrientation" /> is valid will depend on the type of the element. For example, <see cref="F:System.Windows.Forms.HtmlElementInsertionOrientation.AfterBegin" /> is valid if the element is a DIV, but not if it is a SCRIPT or IMG element, neither of which can contain child elements.</para
           >
@@ -989,8 +989,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the property or method to invoke. </param
-        >
+          />The name of the property or method to invoke.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="InvokeMember">
@@ -1019,8 +1019,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method can be used to call methods from the Document Object Model (DOM) that do not have equivalents in managed code. All arguments supplied to <see cref="M:System.Windows.Forms.HtmlElement.InvokeMember(System.String,System.Object[])" /> will be converted to Win32 VARIANT data types before they are passed to the named scripting function. </para
-          >
+            >This method can be used to call methods from the Document Object Model (DOM) that do not have equivalents in managed code. All arguments supplied to <see cref="M:System.Windows.Forms.HtmlElement.InvokeMember(System.String,System.Object[])" /> will be converted to Win32 VARIANT data types before they are passed to the named scripting function.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1044,8 +1044,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A list of parameters to pass. </param
-        >
+          />A list of parameters to pass.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="KeyDown">
@@ -1064,8 +1064,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="E:System.Windows.Forms.HtmlElement.KeyDown" /> occurs before <see cref="E:System.Windows.Forms.HtmlElement.KeyPress" />, which in turns occurs before <see cref="E:System.Windows.Forms.HtmlElement.KeyUp" />. </para
-          >
+            <see cref="E:System.Windows.Forms.HtmlElement.KeyDown" /> occurs before <see cref="E:System.Windows.Forms.HtmlElement.KeyPress" />, which in turns occurs before <see cref="E:System.Windows.Forms.HtmlElement.KeyUp" />.
+          </para>
           <para
             >You can cancel the default action for a <see cref="E:System.Windows.Forms.HtmlElement.KeyDown" /> event on an element by setting the <see cref="P:System.Windows.Forms.HtmlElementEventArgs.ReturnValue" /> property of the <see cref="T:System.Windows.Forms.HtmlElementEventArgs" /> class to true.</para
           >
@@ -1403,8 +1403,8 @@
             >Use the <see cref="P:System.Windows.Forms.HtmlElement.Name" /> property to retrieve elements from a document using the <see cref="M:System.Windows.Forms.HtmlElementCollection.GetElementsByName(System.String)" /> method on the <see cref="P:System.Windows.Forms.HtmlElement.All" /> property of <see cref="T:System.Windows.Forms.HtmlDocument" />.</para
           >
           <para
-            >When applied to INPUT elements, <see cref="P:System.Windows.Forms.HtmlElement.Name" /> defines the variable name for that element's data when its form is submitted to the server. </para
-          >
+            >When applied to INPUT elements, <see cref="P:System.Windows.Forms.HtmlElement.Name" /> defines the variable name for that element's data when its form is submitted to the server.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1460,8 +1460,8 @@
             >For more information about element positioning in HTML, see <see
               cref="http://msdn.microsoft.com/en-us/library/ms533005.aspx"
               >About Element Positioning</see
-            >. </para
-          >
+            >.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1503,8 +1503,8 @@
             >For more information about element positioning in HTML, see <see
               cref="http://msdn.microsoft.com/en-us/library/ms533005.aspx"
               >About Element Positioning</see
-            >. </para
-          >
+            >.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1649,8 +1649,8 @@
           <para>    How are you?</para>
           <para>    &lt;/DIV&gt;</para>
           <para
-            >If you assign a new value to <see cref="P:System.Windows.Forms.HtmlElement.OuterHtml" />, the current element reference will become invalid; it will not reflect the name, properties and child content of the HTML you have just assigned. </para
-          >
+            >If you assign a new value to <see cref="P:System.Windows.Forms.HtmlElement.OuterHtml" />, the current element reference will become invalid; it will not reflect the name, properties and child content of the HTML you have just assigned.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1704,8 +1704,8 @@
             >The <see cref="P:System.Windows.Forms.HtmlElement.Parent" /> property enables discovery of an element's context. It is most useful inside of event handlers such as <see cref="E:System.Windows.Forms.HtmlElement.Click" />, which can fire for any element anywhere in the document's object hierarchy.</para
           >
           <para
-            >The <see cref="P:System.Windows.Forms.HtmlElement.Parent" /> property of the HTML element (the top of an HTML document) points back to itself. If you call <see cref="P:System.Windows.Forms.HtmlElement.Parent" /> inside a loop, verify that the loop's break condition compares the type of the current element and the type of the Parent property, or else your code may execute an infinite loop. </para
-          >
+            >The <see cref="P:System.Windows.Forms.HtmlElement.Parent" /> property of the HTML element (the top of an HTML document) points back to itself. If you call <see cref="P:System.Windows.Forms.HtmlElement.Parent" /> inside a loop, verify that the loop's break condition compares the type of the current element and the type of the Parent property, or else your code may execute an infinite loop.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1748,8 +1748,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the event to raise. </param
-        >
+          />The name of the event to raise.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RemoveFocus">
@@ -1896,8 +1896,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An attribute in HTML is any valid name-value pair for that element. <see cref="T:System.Windows.Forms.HtmlElement" /> exposes only those attributes that are common to all elements, leaving out those that only apply to certain types of elements; SRC is a predefined attribute for the IMG tag, for example, but not for the DIV tag. Use <see cref="M:System.Windows.Forms.HtmlElement.GetAttribute(System.String)" /> and <see cref="M:System.Windows.Forms.HtmlElement.SetAttribute(System.String,System.String)" /> to manipulate attributes not exposed on the managed Document Object Model (DOM). </para
-          >
+            >An attribute in HTML is any valid name-value pair for that element. <see cref="T:System.Windows.Forms.HtmlElement" /> exposes only those attributes that are common to all elements, leaving out those that only apply to certain types of elements; SRC is a predefined attribute for the IMG tag, for example, but not for the DIV tag. Use <see cref="M:System.Windows.Forms.HtmlElement.GetAttribute(System.String)" /> and <see cref="M:System.Windows.Forms.HtmlElement.SetAttribute(System.String,System.String)" /> to manipulate attributes not exposed on the managed Document Object Model (DOM).
+          </para>
           <para
             >If <paramref name="attributeName" /> is not a defined attribute on an element, <see cref="M:System.Windows.Forms.HtmlElement.SetAttribute(System.String,System.String)" /> will define it on the element as a new attribute.</para
           >
@@ -1924,8 +1924,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new value of this attribute. </param
-        >
+          />The new value of this attribute.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Style">
@@ -1977,8 +1977,8 @@
             <see cref="P:System.Windows.Forms.HtmlElement.TabIndex" /> determines which element in an HTML document will next receive focus when the user presses the TAB key. By default, the only elements included in the tab order are INPUT elements, the SELECT control, and any element whose contentEditable property is set to true. You can include any HTML element in the tab order, such as a DIV, by assigning it an explicit <see cref="P:System.Windows.Forms.HtmlElement.TabIndex" />.</para
           >
           <para
-            >Valid values for <see cref="P:System.Windows.Forms.HtmlElement.TabIndex" /> range from -32767 to 32767. </para
-          >
+            >Valid values for <see cref="P:System.Windows.Forms.HtmlElement.TabIndex" /> range from -32767 to 32767.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

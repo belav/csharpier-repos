@@ -104,8 +104,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Remoting.Messaging.IMessageSink" /> that the current stack can use to reply to messages. </param
-        >
+          />The <see cref="T:System.Runtime.Remoting.Messaging.IMessageSink" /> that the current stack can use to reply to messages.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AsyncProcessResponse">
@@ -146,15 +146,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The headers that are retrieved from the server response stream. </param
-        >
+          />The headers that are retrieved from the server response stream.
+        </param>
         <param name="stream">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream that is returning from the transport sink. </param
-        >
+          />The stream that is returning from the transport sink.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DispatchException">
@@ -191,8 +191,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The exception to dispatch to the server. </param
-        >
+          />The exception to dispatch to the server.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DispatchReplyMessage">
@@ -232,8 +232,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Remoting.Messaging.IMessage" /> to dispatch. </param
-        >
+          />The <see cref="T:System.Runtime.Remoting.Messaging.IMessage" /> to dispatch.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Pop">
@@ -272,8 +272,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The sink to remove and return from the sink stack. </param
-        >
+          />The sink to remove and return from the sink stack.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Push">
@@ -314,15 +314,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The sink to push onto the sink stack. </param
-        >
+          />The sink to push onto the sink stack.
+        </param>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Information generated on the request side that is needed on the response side. </param
-        >
+          />Information generated on the request side that is needed on the response side.
+        </param>
       </Docs>
     </Member>
   </Members>

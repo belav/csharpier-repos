@@ -77,15 +77,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The component instance the event is connected to. </param
-        >
+          />The component instance the event is connected to.
+        </param>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The event to create a name for. </param
-        >
+          />The event to create a name for.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetCompatibleMethods">
@@ -127,8 +127,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The event to get the compatible event-handler methods for. </param
-        >
+          />The event to get the compatible event-handler methods for.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetEvent">
@@ -171,8 +171,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The property that represents an event. </param
-        >
+          />The property that represents an event.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetEventProperties">
@@ -218,8 +218,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The events to convert to properties. </param
-        >
+          />The events to convert to properties.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetEventProperty">
@@ -261,12 +261,8 @@
           >
         </returns>
         <param name="e">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The event to convert. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The event to convert.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ShowCode">
@@ -336,8 +332,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The line number to place the caret on. </param
-        >
+          />The line number to place the caret on.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ShowCode">
@@ -380,15 +376,11 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The component that the event is connected to. </param
-        >
+          />The component that the event is connected to.
+        </param>
         <param name="e">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The event to display. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The event to display.
+        </param>
       </Docs>
     </Member>
   </Members>

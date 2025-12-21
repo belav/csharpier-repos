@@ -151,28 +151,26 @@
         >s of the <symbol>#if</symbol> and <symbol>#elif</symbol> directives are evaluated in order until one yields true. If an expression yields true, the <non_terminal
           where="9.5.4"
           >conditional-section</non_terminal
-        > of the corresponding directive is selected. </list_item
-      >
+        > of the corresponding directive is selected.
+      </list_item>
       <list_item
         > If all <non_terminal where="9.5.2"
           >pp-expression</non_terminal
         >s yield false, and if an <symbol>#else</symbol> directive is present, the <non_terminal
           where="9.5.4"
           >conditional-section</non_terminal
-        > of the <symbol>#else</symbol> directive is selected. </list_item
-      >
+        > of the <symbol>#else</symbol> directive is selected.
+      </list_item>
       <list_item
-        > Otherwise, no <non_terminal where="9.5.4"
-          >conditional-section</non_terminal
-        > is selected. </list_item
-      >
+        > Otherwise, no <non_terminal where="9.5.4">conditional-section</non_terminal> is selected.
+      </list_item>
     </list>
   </paragraph>
   <paragraph
     >The selected <non_terminal where="9.5.4"
       >conditional-section</non_terminal
-    >, if any, is processed as a normal input-section: the source code contained in the section must adhere to the lexical grammar; tokens are generated from the source code in the section; and pre-processing directives in the section have the prescribed effects. </paragraph
-  >
+    >, if any, is processed as a normal input-section: the source code contained in the section must adhere to the lexical grammar; tokens are generated from the source code in the section; and pre-processing directives in the section have the prescribed effects.
+  </paragraph>
   <paragraph
     >The remaining <non_terminal where="9.5.4"
       >conditional-section</non_terminal
@@ -186,8 +184,8 @@
     >s (contained in nested <symbol>#if</symbol>...<symbol>#endif</symbol> and <symbol>#region</symbol>...<symbol>#endregion</symbol> constructs) are also processed as <non_terminal
       where="9.5.4"
       >skipped-section</non_terminal
-    >s. </paragraph
-  >
+    >s.
+  </paragraph>
   <paragraph>
     <example
       >[Example: The following example illustrates how conditional compilation directives can nest: <code_example>

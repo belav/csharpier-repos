@@ -159,8 +159,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.ComponentModel.Design.DesignerActionListsChangedEventArgs.RelatedObject" /> property enables the programmer to associate an object to an instance of the <see cref="T:System.ComponentModel.Design.DesignerActionListsChangedEventArgs" /> class. </para
-          >
+            >The <see cref="P:System.ComponentModel.Design.DesignerActionListsChangedEventArgs.RelatedObject" /> property enables the programmer to associate an object to an instance of the <see cref="T:System.ComponentModel.Design.DesignerActionListsChangedEventArgs" /> class.
+          </para>
           <para
             >For the <see cref="E:System.ComponentModel.Design.DesignerActionService.DesignerActionListsChanged" /> event, the <see cref="P:System.ComponentModel.Design.DesignerActionListsChangedEventArgs.RelatedObject" /> property should always reference the <see cref="T:System.ComponentModel.Component" /> that the <see cref="T:System.ComponentModel.Design.DesignerActionListCollection" /> is associated with.</para
           >

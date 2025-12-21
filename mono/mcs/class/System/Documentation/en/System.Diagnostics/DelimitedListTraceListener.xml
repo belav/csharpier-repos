@@ -32,8 +32,8 @@
         >
       </block>
       <para
-        >To configure a <see cref="T:System.Diagnostics.DelimitedListTraceListener" />, edit the configuration file that corresponds to the name of your application. In this file, you can add a listener, set the properties for a listener, or remove a listener. The configuration file should be formatted as shown in the following example: </para
-      >
+        >To configure a <see cref="T:System.Diagnostics.DelimitedListTraceListener" />, edit the configuration file that corresponds to the name of your application. In this file, you can add a listener, set the properties for a listener, or remove a listener. The configuration file should be formatted as shown in the following example:
+      </para>
       <code>&lt;configuration&gt;
   &lt;system.diagnostics&gt;
     &lt;trace autoflush="false" indentsize="4"&gt;
@@ -89,8 +89,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Diagnostics.DelimitedListTraceListener" /> class that writes to the specified output stream. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.DelimitedListTraceListener" /> class that writes to the specified output stream.
+          </para>
         </summary>
         <param name="stream">
           <attribution
@@ -128,8 +128,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Diagnostics.DelimitedListTraceListener" /> class that writes to the specified text writer. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.DelimitedListTraceListener" /> class that writes to the specified text writer.
+          </para>
         </summary>
         <param name="writer">
           <attribution
@@ -164,8 +164,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Diagnostics.DelimitedListTraceListener" /> class that writes to the specified file.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.DelimitedListTraceListener" /> class that writes to the specified file.
+          </para>
         </summary>
         <param name="fileName">
           <attribution
@@ -198,15 +198,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see cref="P:System.Diagnostics.TraceListener.Name" /> property to the value of the <paramref name="name" /> parameter, or to an empty string ("") if the <paramref name="name" /> parameter is null.  The <see cref="P:System.Diagnostics.TraceListener.Name" /> property can be used as an index into the Listeners collection to programmatically change the properties for the listener. For example, the following code sets the <see cref="P:System.Diagnostics.DelimitedListTraceListener.Delimiter" /> property for the instance of <see cref="T:System.Diagnostics.DelimitedListTraceListener" /> that has the name "delimListener":   </para
-          >
+            >This constructor initializes the <see cref="P:System.Diagnostics.TraceListener.Name" /> property to the value of the <paramref name="name" /> parameter, or to an empty string ("") if the <paramref name="name" /> parameter is null.  The <see cref="P:System.Diagnostics.TraceListener.Name" /> property can be used as an index into the Listeners collection to programmatically change the properties for the listener. For example, the following code sets the <see cref="P:System.Diagnostics.DelimitedListTraceListener.Delimiter" /> property for the instance of <see cref="T:System.Diagnostics.DelimitedListTraceListener" /> that has the name "delimListener":
+          </para>
           <code>((DelimitedListTraceListener)Trace.Listeners["delimListener"]).Delimiter = ":"</code>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Diagnostics.DelimitedListTraceListener" /> class that writes to the specified output stream and has the specified name. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.DelimitedListTraceListener" /> class that writes to the specified output stream and has the specified name.
+          </para>
         </summary>
         <param name="stream">
           <attribution
@@ -220,8 +220,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the new instance of the trace listener. </param
-        >
+          />The name of the new instance of the trace listener.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -246,15 +246,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see cref="P:System.Diagnostics.TraceListener.Name" /> property to the value of the <paramref name="name" /> parameter, or to an empty string ("") if the <paramref name="name" /> parameter is null. The <see cref="P:System.Diagnostics.TraceListener.Name" /> property can be used as an index into the Listeners collection to programmatically change the properties for the listener. For example the following code sets the <see cref="P:System.Diagnostics.DelimitedListTraceListener.Delimiter" /> property for the instance of <see cref="T:System.Diagnostics.DelimitedListTraceListener" /> that has the name "delimListener":   </para
-          >
+            >This constructor initializes the <see cref="P:System.Diagnostics.TraceListener.Name" /> property to the value of the <paramref name="name" /> parameter, or to an empty string ("") if the <paramref name="name" /> parameter is null. The <see cref="P:System.Diagnostics.TraceListener.Name" /> property can be used as an index into the Listeners collection to programmatically change the properties for the listener. For example the following code sets the <see cref="P:System.Diagnostics.DelimitedListTraceListener.Delimiter" /> property for the instance of <see cref="T:System.Diagnostics.DelimitedListTraceListener" /> that has the name "delimListener":
+          </para>
           <code>((DelimitedListTraceListener)Trace.Listeners["delimListener"]).Delimiter = ":"</code>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Diagnostics.DelimitedListTraceListener" /> class that writes to the specified text writer and has the specified name. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.DelimitedListTraceListener" /> class that writes to the specified text writer and has the specified name.
+          </para>
         </summary>
         <param name="writer">
           <attribution
@@ -268,8 +268,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the new instance of the trace listener. </param
-        >
+          />The name of the new instance of the trace listener.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -300,30 +300,30 @@
             <para>To reduce the chance of an exception, any character that might invalidate the output is replaced with a "?" character.</para>
           </block>
           <para
-            >The <see cref="P:System.Diagnostics.TraceListener.Name" /> property is set to the value of the <paramref name="name" /> parameter, or to an empty string ("") if the <paramref name="name" /> parameter is null. The <see cref="P:System.Diagnostics.TraceListener.Name" /> property can be used as an index into the Listeners collection to programmatically change the properties for the listener. For example, the following code sets the <see cref="P:System.Diagnostics.DelimitedListTraceListener.Delimiter" /> property for the instance of <see cref="T:System.Diagnostics.DelimitedListTraceListener" /> that has the name "delimListener":   </para
-          >
+            >The <see cref="P:System.Diagnostics.TraceListener.Name" /> property is set to the value of the <paramref name="name" /> parameter, or to an empty string ("") if the <paramref name="name" /> parameter is null. The <see cref="P:System.Diagnostics.TraceListener.Name" /> property can be used as an index into the Listeners collection to programmatically change the properties for the listener. For example, the following code sets the <see cref="P:System.Diagnostics.DelimitedListTraceListener.Delimiter" /> property for the instance of <see cref="T:System.Diagnostics.DelimitedListTraceListener" /> that has the name "delimListener":
+          </para>
           <code>((DelimitedListTraceListener)Trace.Listeners["delimListener"]).Delimiter = ":"</code>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Diagnostics.DelimitedListTraceListener" /> class that writes to the specified file and has the specified name. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.DelimitedListTraceListener" /> class that writes to the specified file and has the specified name.
+          </para>
         </summary>
         <param name="fileName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the file to receive the output. </param
-        >
+          />The name of the file to receive the output.
+        </param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the new instance of the trace listener. </param
-        >
+          />The name of the new instance of the trace listener.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Delimiter">

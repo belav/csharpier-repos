@@ -72,8 +72,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.ChannelProtectionRequirements" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.ChannelProtectionRequirements" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -125,8 +125,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.ChannelProtectionRequirements" /> class from another instance of this class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.ChannelProtectionRequirements" /> class from another instance of this class.
+          </para>
         </summary>
         <param name="other">
           <attribution
@@ -164,8 +164,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the parts collections in the specified <see cref="T:System.ServiceModel.Security.ChannelProtectionRequirements" /> to the current instance of this class. </para
-          >
+            >Adds the parts collections in the specified <see cref="T:System.ServiceModel.Security.ChannelProtectionRequirements" /> to the current instance of this class.
+          </para>
         </summary>
         <param name="protectionRequirements">
           <attribution
@@ -204,8 +204,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the various parts collections in the specified <see cref="T:System.ServiceModel.Security.ChannelProtectionRequirements" /> to the current instance of this class. </para
-          >
+            >Adds the various parts collections in the specified <see cref="T:System.ServiceModel.Security.ChannelProtectionRequirements" /> to the current instance of this class.
+          </para>
         </summary>
         <param name="protectionRequirements">
           <attribution

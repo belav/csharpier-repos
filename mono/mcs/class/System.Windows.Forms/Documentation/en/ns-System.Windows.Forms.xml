@@ -10,8 +10,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The following table shows the classes in <see cref="N:System.Windows.Forms" /> namespace grouped into categories. </para
-      >
+        >The following table shows the classes in <see cref="N:System.Windows.Forms" /> namespace grouped into categories.
+      </para>
       <list type="table">
         <listheader>
           <item>
@@ -61,8 +61,8 @@
           </term>
           <description>
             <para
-              >The <see cref="N:System.Windows.Forms" /> namespace provides a variety of control classes that you can use to create rich user interfaces. Some controls are designed for data entry within the application, such as <see cref="T:System.Windows.Forms.TextBox" /> and <see cref="T:System.Windows.Forms.ComboBox" /> controls. Other controls display application data, such as <see cref="T:System.Windows.Forms.Label" /> and <see cref="T:System.Windows.Forms.ListView" />. The namespace also provides controls for invoking commands within the application, such as <see cref="T:System.Windows.Forms.Button" />. The <see cref="T:System.Windows.Forms.WebBrowser" /> control and managed HTML classes, such as <see cref="T:System.Windows.Forms.HtmlDocument" />, let you display and manipulate HTML pages within your managed Windows Forms application. The <see cref="T:System.Windows.Forms.MaskedTextBox" /> control is an advanced data entry control that lets you define masks that automatically accept or reject user input. Additionally, you can use the <see cref="T:System.Windows.Forms.PropertyGrid" /> control to create your own Windows Forms Designer that displays the designer-visible properties of the controls. </para
-            >
+              >The <see cref="N:System.Windows.Forms" /> namespace provides a variety of control classes that you can use to create rich user interfaces. Some controls are designed for data entry within the application, such as <see cref="T:System.Windows.Forms.TextBox" /> and <see cref="T:System.Windows.Forms.ComboBox" /> controls. Other controls display application data, such as <see cref="T:System.Windows.Forms.Label" /> and <see cref="T:System.Windows.Forms.ListView" />. The namespace also provides controls for invoking commands within the application, such as <see cref="T:System.Windows.Forms.Button" />. The <see cref="T:System.Windows.Forms.WebBrowser" /> control and managed HTML classes, such as <see cref="T:System.Windows.Forms.HtmlDocument" />, let you display and manipulate HTML pages within your managed Windows Forms application. The <see cref="T:System.Windows.Forms.MaskedTextBox" /> control is an advanced data entry control that lets you define masks that automatically accept or reject user input. Additionally, you can use the <see cref="T:System.Windows.Forms.PropertyGrid" /> control to create your own Windows Forms Designer that displays the designer-visible properties of the controls.
+            </para>
           </description>
         </item>
         <item>
@@ -128,8 +128,8 @@
       <block subset="none" type="note">
         <para>Classes within the Windows Forms namespace are not supported for use within a Windows service. Trying to use these classes from within a service may produce unexpected problems, such as diminished service performance and run-time exceptions. </para>
         <para
-          >If you are using .NET Framework version 1.1 or .NET Framework 1.0 and you must make your Windows Forms application support Windows XP visual styles, make sure that you set the FlatStyle property of your controls to <see cref="F:System.Windows.Forms.FlatStyle.System" /> and include a manifest with your executable file. A manifest is an XML file that is included either as a resource within your application executable file or as a separate file that resides in the same directory as the executable file. For an example of a manifest, see the Example section for the <see cref="T:System.Windows.Forms.FlatStyle" /> enumeration. For more information about how to use the visual styles available in Windows XP, see "Using Windows XP Visual Styles in the User Interface Design and Development" in the MSDN Library. By default visual styles are enabled for the .NET Framework versions 1.1, 1.2, and 2.0. </para
-        >
+          >If you are using .NET Framework version 1.1 or .NET Framework 1.0 and you must make your Windows Forms application support Windows XP visual styles, make sure that you set the FlatStyle property of your controls to <see cref="F:System.Windows.Forms.FlatStyle.System" /> and include a manifest with your executable file. A manifest is an XML file that is included either as a resource within your application executable file or as a separate file that resides in the same directory as the executable file. For an example of a manifest, see the Example section for the <see cref="T:System.Windows.Forms.FlatStyle" /> enumeration. For more information about how to use the visual styles available in Windows XP, see "Using Windows XP Visual Styles in the User Interface Design and Development" in the MSDN Library. By default visual styles are enabled for the .NET Framework versions 1.1, 1.2, and 2.0.
+        </para>
       </block>
     </remarks>
   </Docs>

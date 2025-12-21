@@ -75,8 +75,7 @@ public class enumFormat {
     Console.WriteLine("Color: {0}", c); 
   } 
 } 
-      </code
-      >
+      </code>
       <para>The output is</para>
       <c>
         <para>Position: Top, Left</para>
@@ -98,8 +97,8 @@ public class enumFormat {
       <list type="bullet">
         <item>
           <para
-            >Use the <see cref="T:System.FlagsAttribute" /> custom attribute for an enumeration only if a bitwise operation (AND, OR, EXCLUSIVE OR) is to be performed on a numeric value. </para
-          >
+            >Use the <see cref="T:System.FlagsAttribute" /> custom attribute for an enumeration only if a bitwise operation (AND, OR, EXCLUSIVE OR) is to be performed on a numeric value.
+          </para>
         </item>
         <item>
           <para>Define enumeration constants in powers of two, that is, 1, 2, 4, 8, and so on. This means the individual flags in combined enumeration constants do not overlap. </para>

@@ -112,8 +112,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref name="bindingAttr" /> does not include <see cref="F:System.Reflection.BindingFlags.SetField" />, the default binder implementation provided by <see cref="P:System.Type.DefaultBinder" /> simply returns the first element of <paramref name="match" />. No selection is done. </para
-          >
+            >If <paramref name="bindingAttr" /> does not include <see cref="F:System.Reflection.BindingFlags.SetField" />, the default binder implementation provided by <see cref="P:System.Type.DefaultBinder" /> simply returns the first element of <paramref name="match" />. No selection is done.
+          </para>
           <para
             >This method controls the binding provided by <see cref="M:System.Type.InvokeMember(System.String,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object,System.Object[],System.Reflection.ParameterModifier[],System.Globalization.CultureInfo,System.String[])" />.</para
           >
@@ -131,8 +131,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of <see cref="T:System.Reflection.BindingFlags" /> values. </param
-        >
+          />A bitwise combination of <see cref="T:System.Reflection.BindingFlags" /> values.
+        </param>
         <param name="match">
           <attribution
             license="cc4"
@@ -145,8 +145,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The field value used to locate a matching field. </param
-        >
+          />The field value used to locate a matching field.
+        </param>
         <param name="culture">
           <attribution
             license="cc4"
@@ -420,15 +420,15 @@ returns <see langword="null" />
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to change into a new Type. </param
-        >
+          />The object to change into a new Type.
+        </param>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new Type that <paramref name="value" /> will become. </param
-        >
+          />The new Type that <paramref name="value" /> will become.
+        </param>
         <param name="culture">
           <attribution
             license="cc4"
@@ -471,8 +471,8 @@ returns <see langword="null" />
         >
         <param name="state">
           <para
-            >A binder-provided opaque object that keeps track of parameter reordering. This object is the same object that was passed as the <paramref name="state" /> parameter in the invocation of <see cref="M:System.Reflection.Binder.BindToMethod(System.Reflection.BindingFlags,System.Reflection.MethodBase[],System.Object[]@,System.Reflection.ParameterModifier[],System.Globalization.CultureInfo,System.String[],System.Object@)" /> that caused <see cref="M:System.Reflection.Binder.ReorderArgumentArray(System.Object[]@,System.Object)" /> to be called. </para
-          >
+            >A binder-provided opaque object that keeps track of parameter reordering. This object is the same object that was passed as the <paramref name="state" /> parameter in the invocation of <see cref="M:System.Reflection.Binder.BindToMethod(System.Reflection.BindingFlags,System.Reflection.MethodBase[],System.Object[]@,System.Reflection.ParameterModifier[],System.Globalization.CultureInfo,System.String[],System.Object@)" /> that caused <see cref="M:System.Reflection.Binder.ReorderArgumentArray(System.Object[]@,System.Object)" /> to be called.
+          </para>
         </param>
         <param name="state">To be added.</param>
         <summary>
@@ -522,8 +522,8 @@ returns <see langword="null" />
               >Use this method to
    insure that the parameters contained in <paramref name="args" /> are returned
    to their original order, <see cref="T:System.Type" /> and value, after being used by a bound method.
-</block
-            >
+
+            </block>
           </para>
         </remarks>
       </Docs>
@@ -575,8 +575,8 @@ returns <see langword="null" />
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of <see cref="T:System.Reflection.BindingFlags" /> values. </param
-        >
+          />A bitwise combination of <see cref="T:System.Reflection.BindingFlags" /> values.
+        </param>
         <param name="match">
           <attribution
             license="cc4"
@@ -589,15 +589,15 @@ returns <see langword="null" />
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The parameter types used to locate a matching method. </param
-        >
+          />The parameter types used to locate a matching method.
+        </param>
         <param name="modifiers">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of parameter modifiers that enable binding to work with parameter signatures in which the types have been modified. </param
-        >
+          />An array of parameter modifiers that enable binding to work with parameter signatures in which the types have been modified.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -648,8 +648,8 @@ returns <see langword="null" />
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of <see cref="T:System.Reflection.BindingFlags" /> values. </param
-        >
+          />A bitwise combination of <see cref="T:System.Reflection.BindingFlags" /> values.
+        </param>
         <param name="match">
           <attribution
             license="cc4"
@@ -662,22 +662,22 @@ returns <see langword="null" />
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The return value the matching property must have. </param
-        >
+          />The return value the matching property must have.
+        </param>
         <param name="indexes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index types of the property being searched for. Used for index properties such as the indexer for a class. </param
-        >
+          />The index types of the property being searched for. Used for index properties such as the indexer for a class.
+        </param>
         <param name="modifiers">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of parameter modifiers that enable binding to work with parameter signatures in which the types have been modified. </param
-        >
+          />An array of parameter modifiers that enable binding to work with parameter signatures in which the types have been modified.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

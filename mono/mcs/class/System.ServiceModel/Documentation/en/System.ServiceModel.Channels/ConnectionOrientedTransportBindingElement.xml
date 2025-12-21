@@ -36,8 +36,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >An abstract class that supplements the base <see cref="T:System.ServiceModel.Channels.TransportBindingElement" /> with additional properties that are common to connection-oriented transports such as TCP and named pipes.  </para
-      >
+        >An abstract class that supplements the base <see cref="T:System.ServiceModel.Channels.TransportBindingElement" /> with additional properties that are common to connection-oriented transports such as TCP and named pipes.
+      </para>
     </summary>
   </Docs>
   <Members>
@@ -179,8 +179,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see cref="T:System.TimeSpan" /> that determines the maximum time a channel can be in the initialization status before being disconnected.  </para
-          >
+            >Gets or sets a <see cref="T:System.TimeSpan" /> that determines the maximum time a channel can be in the initialization status before being disconnected.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -307,11 +307,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>For streamed messages this property only applies to the message headers; for buffered messages it applies to the entire message. </para>
           <para
-            >The value of this property must be less than or equal to <see cref="P:System.ServiceModel.Channels.TransportBindingElement.MaxReceivedMessageSize" /> and must be larger than the size of the headers of the message or the channel throws an exception. </para
-          >
+            >The value of this property must be less than or equal to <see cref="P:System.ServiceModel.Channels.TransportBindingElement.MaxReceivedMessageSize" /> and must be larger than the size of the headers of the message or the channel throws an exception.
+          </para>
           <para
-            >If you receive more data than you can buffer the channel throws a <see cref="T:System.ServiceModel.CommunicationException" />, which contains a <see cref="T:System.ServiceModel.QuotaExceededException" /> as an inner exception.  </para
-          >
+            >If you receive more data than you can buffer the channel throws a <see cref="T:System.ServiceModel.CommunicationException" />, which contains a <see cref="T:System.ServiceModel.QuotaExceededException" /> as an inner exception.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -361,8 +361,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property limits the number of channels that the server can have waiting on a listener. When MaxPendingAccepts is too low, there will be a small interval of time in which all of the waiting channels have started servicing connections, but no new channels have begun listening. A connection can arrive during this interval and will fail because nothing is waiting for it on the server. This property can be configured by setting the <see cref="P:System.ServiceModel.Channels.ConnectionOrientedTransportBindingElement.MaxPendingConnections" /> property to a larger number. </para
-          >
+            >This property limits the number of channels that the server can have waiting on a listener. When MaxPendingAccepts is too low, there will be a small interval of time in which all of the waiting channels have started servicing connections, but no new channels have begun listening. A connection can arrive during this interval and will fail because nothing is waiting for it on the server. This property can be configured by setting the <see cref="P:System.ServiceModel.Channels.ConnectionOrientedTransportBindingElement.MaxPendingConnections" /> property to a larger number.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

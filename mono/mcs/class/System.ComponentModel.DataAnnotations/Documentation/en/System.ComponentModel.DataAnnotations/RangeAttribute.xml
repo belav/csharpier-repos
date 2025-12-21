@@ -58,8 +58,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.RangeAttribute" /> class by using the specified minimum and maximum values. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.RangeAttribute" /> class by using the specified minimum and maximum values.
+          </para>
         </summary>
         <param name="minimum">
           <attribution
@@ -208,8 +208,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the field that caused the validation failure. </param
-        >
+          />The name of the field that caused the validation failure.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsValid">

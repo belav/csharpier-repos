@@ -134,8 +134,8 @@
         >
       </block>
       <para>
-        <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> control properties represented by text boxes, such as <see cref="P:System.Web.UI.WebControls.CreateUserWizard.UserName" />, are accessible during all phases of the page life cycle. The control will pick up any changes made by the end user by means of the <see cref="E:System.Web.UI.WebControls.TextBox.TextChanged" /> event raised by the text boxes. </para
-      >
+        <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> control properties represented by text boxes, such as <see cref="P:System.Web.UI.WebControls.CreateUserWizard.UserName" />, are accessible during all phases of the page life cycle. The control will pick up any changes made by the end user by means of the <see cref="E:System.Web.UI.WebControls.TextBox.TextChanged" /> event raised by the text boxes.
+      </para>
       <para
         >The <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> control can optionally send e-mail messages to new users if you have configured an SMTP mail server to send e-mail. For more information, see the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.MailDefinition" /> property.</para
       >
@@ -634,8 +634,8 @@
             >The membership provider specified in the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.MembershipProvider" /> property will determine whether the question and answer text boxes are displayed at run time.</para
           >
           <para
-            >If an answer is required by the membership provider specified in the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.MembershipProvider" /> property, then the answer text box will appear on the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> control. Each text box displayed on the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> control has a <see cref="T:System.Web.UI.WebControls.RequiredFieldValidator" /> object associated with it. </para
-          >
+            >If an answer is required by the membership provider specified in the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.MembershipProvider" /> property, then the answer text box will appear on the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> control. Each text box displayed on the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> control has a <see cref="T:System.Web.UI.WebControls.RequiredFieldValidator" /> object associated with it.
+          </para>
           <para
             >This property cannot be set by themes or style sheet themes. For more information, see <see cref="T:System.Web.UI.ThemeableAttribute" /> and <format type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
@@ -779,8 +779,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.UI.WebControls.CreateUserWizard.CompleteStep" /> property defines the final step for creating a user account. This property is read-only; however, you can set the properties of the <see cref="T:System.Web.UI.WebControls.CompleteWizardStep" /> object that <see cref="P:System.Web.UI.WebControls.CreateUserWizard.CompleteStep" /> returns. </para
-          >
+            >The <see cref="P:System.Web.UI.WebControls.CreateUserWizard.CompleteStep" /> property defines the final step for creating a user account. This property is read-only; however, you can set the properties of the <see cref="T:System.Web.UI.WebControls.CompleteWizardStep" /> object that <see cref="P:System.Web.UI.WebControls.CreateUserWizard.CompleteStep" /> returns.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -854,8 +854,8 @@
             >The style settings for the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.CompleteSuccessTextStyle" /> property are merged with the style settings for the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> control. Any settings applied in the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.CompleteSuccessTextStyle" /> property override the corresponding settings in properties of the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> control.</para
           >
           <para
-            >The following <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> style properties are overridden by <see cref="P:System.Web.UI.WebControls.CreateUserWizard.CompleteSuccessTextStyle" /> settings: </para
-          >
+            >The following <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> style properties are overridden by <see cref="P:System.Web.UI.WebControls.CreateUserWizard.CompleteSuccessTextStyle" /> settings:
+          </para>
           <list type="bullet">
             <item>
               <para>
@@ -923,8 +923,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.UI.WebControls.CreateUserWizard.ConfirmPassword" /> property contains the second password (the confirmation password) entered by the user. By default, a <see cref="T:System.Web.UI.WebControls.CompareValidator" /> object is provided for the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.Password" /> and <see cref="P:System.Web.UI.WebControls.CreateUserWizard.ConfirmPassword" /> text box values. Each text box displayed on the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> control also has a <see cref="T:System.Web.UI.WebControls.RequiredFieldValidator" /> associated with it. </para
-          >
+            >The <see cref="P:System.Web.UI.WebControls.CreateUserWizard.ConfirmPassword" /> property contains the second password (the confirmation password) entered by the user. By default, a <see cref="T:System.Web.UI.WebControls.CompareValidator" /> object is provided for the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.Password" /> and <see cref="P:System.Web.UI.WebControls.CreateUserWizard.ConfirmPassword" /> text box values. Each text box displayed on the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> control also has a <see cref="T:System.Web.UI.WebControls.RequiredFieldValidator" /> associated with it.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1059,8 +1059,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1087,11 +1087,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="F:System.Web.UI.WebControls.CreateUserWizard.ContinueButtonCommandName" /> field represents the <see cref="P:System.Web.UI.WebControls.Button.CommandName" /> value of the <ui>Continue</ui> button on the final step for creating a user account. </para
-          >
+            >The <see cref="F:System.Web.UI.WebControls.CreateUserWizard.ContinueButtonCommandName" /> field represents the <see cref="P:System.Web.UI.WebControls.Button.CommandName" /> value of the <ui>Continue</ui> button on the final step for creating a user account.
+          </para>
           <para
-            >To assign continue functionality to any <see cref="T:System.Web.UI.WebControls.Button" /> control contained in the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> control, set the <see cref="P:System.Web.UI.WebControls.Button.CommandName" /> property of the button to the string that is contained in the <see cref="F:System.Web.UI.WebControls.CreateUserWizard.ContinueButtonCommandName" /> field. </para
-          >
+            >To assign continue functionality to any <see cref="T:System.Web.UI.WebControls.Button" /> control contained in the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> control, set the <see cref="P:System.Web.UI.WebControls.Button.CommandName" /> property of the button to the string that is contained in the <see cref="F:System.Web.UI.WebControls.CreateUserWizard.ContinueButtonCommandName" /> field.
+          </para>
           <para
             >The <ui>Continue</ui> button appears on the template for the final step for creating a user account, which is represented by the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.CompleteStep" /> property. Clicking the <ui>Continue</ui> button redirects the user to the URL that is stored in the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.ContinueDestinationPageUrl" /> property. To add custom functionality to the <ui>Continue</ui> button, create an event handler for the <see cref="E:System.Web.UI.WebControls.CreateUserWizard.ContinueButtonClick" /> event.</para
           >
@@ -1099,8 +1099,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents the <see cref="P:System.Web.UI.WebControls.Button.CommandName" /> value of the <ui>Continue</ui> button on the final step for creating a user account. The <see cref="F:System.Web.UI.WebControls.CreateUserWizard.ContinueButtonCommandName" /> field is read-only. </para
-          >
+            >Represents the <see cref="P:System.Web.UI.WebControls.Button.CommandName" /> value of the <ui>Continue</ui> button on the final step for creating a user account. The <see cref="F:System.Web.UI.WebControls.CreateUserWizard.ContinueButtonCommandName" /> field is read-only.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1158,8 +1158,8 @@
             >The style settings for the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.ContinueButtonStyle" /> property are merged with the style settings for the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> control. Any settings applied in the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.ContinueButtonStyle" /> property override the corresponding settings in the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> control.</para
           >
           <para
-            >The following <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> style properties are overridden by <see cref="P:System.Web.UI.WebControls.CreateUserWizard.ContinueButtonStyle" /> settings: </para
-          >
+            >The following <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> style properties are overridden by <see cref="P:System.Web.UI.WebControls.CreateUserWizard.ContinueButtonStyle" /> settings:
+          </para>
           <list type="bullet">
             <item>
               <para>
@@ -1399,8 +1399,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="b6f65241-e0ad-4590-a99f-200ce741bb1f">Handling and Raising Events</a>
-            </format>.  </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1462,8 +1462,8 @@
             >The style settings for the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.CreateUserButtonStyle" /> property are merged with the style settings for the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> control. Any settings applied in the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.CreateUserButtonStyle" /> property override the corresponding settings in the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> control.</para
           >
           <para
-            >The following <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> style properties are overridden by <see cref="P:System.Web.UI.WebControls.CreateUserWizard.CreateUserButtonStyle" /> settings: </para
-          >
+            >The following <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> style properties are overridden by <see cref="P:System.Web.UI.WebControls.CreateUserWizard.CreateUserButtonStyle" /> settings:
+          </para>
           <list type="bullet">
             <item>
               <para>
@@ -1622,16 +1622,16 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="E:System.Web.UI.WebControls.CreateUserWizard.CreateUserError" /> event is raised on the server when the membership provider specified in the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.MembershipProvider" /> property fails to create the specified user account. </para
-          >
+            >The <see cref="E:System.Web.UI.WebControls.CreateUserWizard.CreateUserError" /> event is raised on the server when the membership provider specified in the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.MembershipProvider" /> property fails to create the specified user account.
+          </para>
           <para
             >The error handler is passed a <see cref="T:System.Web.Security.MembershipCreateStatus" /> object that contains the details of the failure from the membership provider. For a list of the possible error conditions, see <see cref="T:System.Web.Security.MembershipCreateStatus" />.</para
           >
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1715,8 +1715,8 @@
               </description>
               <description>
                 <para
-                  >Required if <see cref="P:System.Web.UI.WebControls.CreateUserWizard.RequireEmail" /> is true. </para
-                >
+                  >Required if <see cref="P:System.Web.UI.WebControls.CreateUserWizard.RequireEmail" /> is true.
+                </para>
               </description>
             </item>
             <item>
@@ -1725,8 +1725,8 @@
               </term>
               <description>
                 <para
-                  >Any control that implements <see cref="T:System.Web.UI.IEditableTextControl" />, including <see cref="T:System.Web.UI.WebControls.TextBox" />, or a custom or third-party control. </para
-                >
+                  >Any control that implements <see cref="T:System.Web.UI.IEditableTextControl" />, including <see cref="T:System.Web.UI.WebControls.TextBox" />, or a custom or third-party control.
+                </para>
               </description>
               <description>
                 <para>No requirements </para>
@@ -1738,8 +1738,8 @@
               </term>
               <description>
                 <para
-                  >Any control that implements <see cref="T:System.Web.UI.IEditableTextControl" />, including <see cref="T:System.Web.UI.WebControls.TextBox" />, or a custom or third-party control. </para
-                >
+                  >Any control that implements <see cref="T:System.Web.UI.IEditableTextControl" />, including <see cref="T:System.Web.UI.WebControls.TextBox" />, or a custom or third-party control.
+                </para>
               </description>
               <description>
                 <para>Optional unless required by membership. </para>
@@ -1751,8 +1751,8 @@
               </term>
               <description>
                 <para
-                  >Any control that implements <see cref="T:System.Web.UI.IEditableTextControl" />, including <see cref="T:System.Web.UI.WebControls.TextBox" />, or a custom or third-party control. </para
-                >
+                  >Any control that implements <see cref="T:System.Web.UI.IEditableTextControl" />, including <see cref="T:System.Web.UI.WebControls.TextBox" />, or a custom or third-party control.
+                </para>
               </description>
               <description>
                 <para>Optional unless required by membership. </para>
@@ -1764,8 +1764,8 @@
               </term>
               <description>
                 <para
-                  >Any control that implements <see cref="T:System.Web.UI.ITextControl" />. </para
-                >
+                  >Any control that implements <see cref="T:System.Web.UI.ITextControl" />.
+                </para>
               </description>
               <description>
                 <para>Optional </para>
@@ -1795,8 +1795,8 @@
             </item>
           </list>
           <para
-            >If the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.RequireEmail" /> property is set to true and you are using templated content, the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.Email" /> control is required; the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> control throws an exception if the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.Email" /> control is not found or is of the wrong type. If <see cref="P:System.Web.UI.WebControls.CreateUserWizard.RequireEmail" /> is set to false, no exception is thrown if the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.Email" /> control is not found. If the control is of the wrong type, it is ignored. </para
-          >
+            >If the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.RequireEmail" /> property is set to true and you are using templated content, the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.Email" /> control is required; the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> control throws an exception if the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.Email" /> control is not found or is of the wrong type. If <see cref="P:System.Web.UI.WebControls.CreateUserWizard.RequireEmail" /> is set to false, no exception is thrown if the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.Email" /> control is not found. If the control is of the wrong type, it is ignored.
+          </para>
           <para
             >Similarly, if a membership provider requires a question and answer (determined by the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.QuestionAndAnswerRequired" /> property), the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.Question" /> and <see cref="P:System.Web.UI.WebControls.CreateUserWizard.Answer" /> controls are required and the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> throws an exception if they are not found or are of the wrong type. If they are not required by the membership provider, no exception is thrown if they are not found, and if they are of the wrong type they are ignored.</para
           >
@@ -1832,8 +1832,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2058,8 +2058,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If an e-mail address is required by the membership provider specified in the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.MembershipProvider" /> property, then the e-mail address text box appears on the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> control. Each text box displayed on the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> control has a <see cref="T:System.Web.UI.WebControls.RequiredFieldValidator" /> object associated with it. </para
-          >
+            >If an e-mail address is required by the membership provider specified in the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.MembershipProvider" /> property, then the e-mail address text box appears on the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> control. Each text box displayed on the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> control has a <see cref="T:System.Web.UI.WebControls.RequiredFieldValidator" /> object associated with it.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2151,8 +2151,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.EmailRegularExpressionErrorMessage" /> property to inform the user that the e-mail address entered did not pass the site's criteria for e-mail addresses. </para
-          >
+            >Use the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.EmailRegularExpressionErrorMessage" /> property to inform the user that the e-mail address entered did not pass the site's criteria for e-mail addresses.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2260,8 +2260,8 @@
             >Common settings include custom background color, text color, and font properties. The style settings for the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.ErrorMessageStyle" /> property are merged with the style settings for the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> control. Any settings that are applied in the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.ErrorMessageStyle" /> property override the corresponding settings in the properties of the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> control.</para
           >
           <para
-            >The following <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> style properties are overridden by <see cref="P:System.Web.UI.WebControls.CreateUserWizard.ErrorMessageStyle" /> settings: </para
-          >
+            >The following <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> style properties are overridden by <see cref="P:System.Web.UI.WebControls.CreateUserWizard.ErrorMessageStyle" /> settings:
+          </para>
           <list type="bullet">
             <item>
               <para>
@@ -2438,8 +2438,8 @@
             >The style settings for the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.HyperLinkStyle" /> property are merged with the style settings for the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> control. Any settings applied in the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.HyperLinkStyle" /> property override the corresponding settings in the properties of the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> control.</para
           >
           <para
-            >The following <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> style properties are overridden by <see cref="P:System.Web.UI.WebControls.CreateUserWizard.HyperLinkStyle" /> settings: </para
-          >
+            >The following <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> style properties are overridden by <see cref="P:System.Web.UI.WebControls.CreateUserWizard.HyperLinkStyle" /> settings:
+          </para>
           <list type="bullet">
             <item>
               <para>
@@ -2558,8 +2558,8 @@
             >The style settings for the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.InstructionTextStyle" /> property are merged with the style settings for the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> control. Any settings applied in the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.InstructionTextStyle" /> property override the corresponding settings in properties of the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> control.</para
           >
           <para
-            >The following <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> style properties are overridden by <see cref="P:System.Web.UI.WebControls.CreateUserWizard.InstructionTextStyle" /> settings: </para
-          >
+            >The following <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> style properties are overridden by <see cref="P:System.Web.UI.WebControls.CreateUserWizard.InstructionTextStyle" /> settings:
+          </para>
           <list type="bullet">
             <item>
               <para>
@@ -2827,8 +2827,8 @@
             >The style settings for the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.LabelStyle" /> property are merged with the style settings for the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> control. Any settings applied in the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.LabelStyle" /> property override the corresponding settings in properties of the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> control.</para
           >
           <para
-            >The following <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> style properties are overridden by <see cref="P:System.Web.UI.WebControls.CreateUserWizard.LabelStyle" /> settings: </para
-          >
+            >The following <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> style properties are overridden by <see cref="P:System.Web.UI.WebControls.CreateUserWizard.LabelStyle" /> settings:
+          </para>
           <list type="bullet">
             <item>
               <para>
@@ -2970,8 +2970,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.UI.WebControls.CreateUserWizard.MailDefinition" /> property returns a reference to a group of properties that you use to define the format and content of the e-mail message that is sent to new users. Common settings include the subject line and the sender's return address. For a complete list of properties, see the <see cref="T:System.Web.UI.WebControls.MailDefinition" /> class. </para
-          >
+            >The <see cref="P:System.Web.UI.WebControls.CreateUserWizard.MailDefinition" /> property returns a reference to a group of properties that you use to define the format and content of the e-mail message that is sent to new users. Common settings include the subject line and the sender's return address. For a complete list of properties, see the <see cref="T:System.Web.UI.WebControls.MailDefinition" /> class.
+          </para>
           <para
             >The <see cref="P:System.Web.UI.WebControls.CreateUserWizard.MailDefinition" /> property is read-only; however, you can set the properties of the <see cref="T:System.Web.UI.WebControls.MailDefinition" /> object it returns. You can set the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.MailDefinition" /> properties declaratively in the form Property-Subproperty, where <paramref name="Subproperty" /> represents a property of the <see cref="T:System.Web.UI.WebControls.MailDefinition" /> class (for example, MailDefinition-Subject). You can also set the properties programmatically in the form Property.SubProperty (for example, MailDefinition.Subject).</para
           >
@@ -3118,8 +3118,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="E:System.Web.UI.WebControls.CreateUserWizard.ContinueButtonClick" /> event is raised when the user clicks the <ui>Continue</ui> button on the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> control. </para
-          >
+            >The <see cref="E:System.Web.UI.WebControls.CreateUserWizard.ContinueButtonClick" /> event is raised when the user clicks the <ui>Continue</ui> button on the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> control.
+          </para>
           <para
             >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
@@ -3186,8 +3186,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -3215,8 +3215,8 @@
           <para
             >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="b6f65241-e0ad-4590-a99f-200ce741bb1f">Handling and Raising Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
           <para
             >The <see cref="M:System.Web.UI.WebControls.CreateUserWizard.OnCreateUserError(System.Web.UI.WebControls.CreateUserErrorEventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
           >
@@ -3264,8 +3264,8 @@
           <para
             >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="b6f65241-e0ad-4590-a99f-200ce741bb1f">Handling and Raising Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
           <para
             >The <see cref="M:System.Web.UI.WebControls.CreateUserWizard.OnCreatingUser(System.Web.UI.WebControls.LoginCancelEventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
           >
@@ -3358,8 +3358,8 @@
           <para
             >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="b6f65241-e0ad-4590-a99f-200ce741bb1f">Handling and Raising Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
           <para
             >The <see cref="M:System.Web.UI.WebControls.CreateUserWizard.OnSendingMail(System.Web.UI.WebControls.MailMessageEventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
           >
@@ -3399,8 +3399,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.WebControls.CreateUserWizard.OnSendMailError(System.Web.UI.WebControls.SendMailErrorEventArgs)" /> method is called when the SMTP mail system raises an exception while attempting to send e-mail to the new user. </para
-          >
+            >The <see cref="M:System.Web.UI.WebControls.CreateUserWizard.OnSendMailError(System.Web.UI.WebControls.SendMailErrorEventArgs)" /> method is called when the SMTP mail system raises an exception while attempting to send e-mail to the new user.
+          </para>
           <para
             >Examine the <see cref="P:System.Web.UI.WebControls.SendMailErrorEventArgs.Exception" /> property of the <see cref="T:System.Web.UI.WebControls.SendMailErrorEventArgs" /> object passed as the <paramref name="e" /> parameter to determine the actual cause of the exception. The most common problem is a configuration error in the &lt;smtpMail&gt; section of the Web.config file.</para
           >
@@ -3446,8 +3446,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.UI.WebControls.CreateUserWizard.Password" /> property contains the password entered by the user. By default, a <see cref="T:System.Web.UI.WebControls.CompareValidator" /> object is provided for the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.Password" /> and <see cref="P:System.Web.UI.WebControls.CreateUserWizard.ConfirmPassword" /> text box values. Each text box displayed on the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> control also has a <see cref="T:System.Web.UI.MobileControls.RequiredFieldValidator" /> object associated with it. </para
-          >
+            >The <see cref="P:System.Web.UI.WebControls.CreateUserWizard.Password" /> property contains the password entered by the user. By default, a <see cref="T:System.Web.UI.WebControls.CompareValidator" /> object is provided for the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.Password" /> and <see cref="P:System.Web.UI.WebControls.CreateUserWizard.ConfirmPassword" /> text box values. Each text box displayed on the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> control also has a <see cref="T:System.Web.UI.MobileControls.RequiredFieldValidator" /> object associated with it.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3482,8 +3482,8 @@
             >The style settings for the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.PasswordHintStyle" /> property are merged with the style settings for the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> control. Any settings applied in the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.PasswordHintStyle" /> property override the corresponding settings in properties of the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> control.</para
           >
           <para
-            >The following <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> style properties are overridden by <see cref="P:System.Web.UI.WebControls.CreateUserWizard.PasswordHintStyle" /> settings: </para
-          >
+            >The following <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> style properties are overridden by <see cref="P:System.Web.UI.WebControls.CreateUserWizard.PasswordHintStyle" /> settings:
+          </para>
           <list type="bullet">
             <item>
               <para>
@@ -3724,8 +3724,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The membership provider specified in the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.MembershipProvider" /> property will determine whether the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.Question" /> and <see cref="P:System.Web.UI.WebControls.CreateUserWizard.Answer" /> text boxes are displayed at run time. Each text box displayed on the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> control has a <see cref="T:System.Web.UI.WebControls.RequiredFieldValidator" /> associated with it. </para
-          >
+            >The membership provider specified in the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.MembershipProvider" /> property will determine whether the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.Question" /> and <see cref="P:System.Web.UI.WebControls.CreateUserWizard.Answer" /> text boxes are displayed at run time. Each text box displayed on the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> control has a <see cref="T:System.Web.UI.WebControls.RequiredFieldValidator" /> associated with it.
+          </para>
           <para
             >This property cannot be set by themes or style sheet themes. For more information, see <see cref="T:System.Web.UI.ThemeableAttribute" /> and <format type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
@@ -3866,8 +3866,8 @@
             >When the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.RequireEmail" /> property is true, the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> will display a text box and an associated label for the user to enter an e-mail address. If the user does not enter an e-mail address, the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.EmailRequiredErrorMessage" /> property will display an error message.</para
           >
           <para
-            >If the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.RequireEmail" /> property is set to true and you are using templated content, the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.Email" /> control is required and the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> throws an exception if the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.Email" /> control is not found or is of the wrong type. If <see cref="P:System.Web.UI.WebControls.CreateUserWizard.RequireEmail" /> is set to false, no exception is thrown if the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.Email" /> is not found. If it is of the wrong type, it is ignored. </para
-          >
+            >If the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.RequireEmail" /> property is set to true and you are using templated content, the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.Email" /> control is required and the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> throws an exception if the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.Email" /> control is not found or is of the wrong type. If <see cref="P:System.Web.UI.WebControls.CreateUserWizard.RequireEmail" /> is set to false, no exception is thrown if the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.Email" /> is not found. If it is of the wrong type, it is ignored.
+          </para>
           <block subset="none" type="note">
             <para
               >If the membership provider specified in the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.MembershipProvider" /> property requires a unique e-mail address for new users, you must set the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.RequireEmail" /> property to true so that the UI for entering an e-mail address is displayed. Otherwise, the user will see the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.EmailRequiredErrorMessage" /> but have no way to enter an e-mail address.</para
@@ -3922,16 +3922,16 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> class will send an e-mail message confirming that a new Web site account has been created when the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.MailDefinition" /> property defines an e-mail message to send. </para
-          >
+            >The <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> class will send an e-mail message confirming that a new Web site account has been created when the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.MailDefinition" /> property defines an e-mail message to send.
+          </para>
           <para
             >Because the e-mail message only has automatic replacement fields for the user name and password fields, you can use the <see cref="E:System.Web.UI.WebControls.CreateUserWizard.SendingMail" /> event to modify the e-mail message before it is sent to the new user.</para
           >
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3964,8 +3964,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -4078,8 +4078,8 @@
             >The style settings for the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.TextBoxStyle" /> property are merged with the style settings for the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> control. Any settings applied in the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.TextBoxStyle" /> property override the corresponding settings in properties of the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> control.</para
           >
           <para
-            >The following <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> style properties are overridden by <see cref="P:System.Web.UI.WebControls.CreateUserWizard.TextBoxStyle" /> settings: </para
-          >
+            >The following <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> style properties are overridden by <see cref="P:System.Web.UI.WebControls.CreateUserWizard.TextBoxStyle" /> settings:
+          </para>
           <list type="bullet">
             <item>
               <para>
@@ -4159,8 +4159,8 @@
             >The style settings for the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.TitleTextStyle" /> property are merged with the style settings for the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> control. Any settings applied in the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.TitleTextStyle" /> property override the corresponding settings in properties of the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> control.</para
           >
           <para
-            >The following <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> style properties are overridden by <see cref="P:System.Web.UI.WebControls.CreateUserWizard.TitleTextStyle" /> settings: </para
-          >
+            >The following <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> style properties are overridden by <see cref="P:System.Web.UI.WebControls.CreateUserWizard.TitleTextStyle" /> settings:
+          </para>
           <list type="bullet">
             <item>
               <para>
@@ -4283,8 +4283,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a user name is required by the membership provider specified in the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.MembershipProvider" /> property, then the user name text box will appear on the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> control. Each text box displayed on the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> control has a <see cref="T:System.Web.UI.WebControls.RequiredFieldValidator" /> object associated with it. </para
-          >
+            >If a user name is required by the membership provider specified in the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.MembershipProvider" /> property, then the user name text box will appear on the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> control. Each text box displayed on the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> control has a <see cref="T:System.Web.UI.WebControls.RequiredFieldValidator" /> object associated with it.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -4433,8 +4433,8 @@
             >Common settings include custom background color, text color, and font properties. The style settings for the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.ValidatorTextStyle" /> property are merged with the style settings for the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> control. Any settings applied in the <see cref="P:System.Web.UI.WebControls.CreateUserWizard.ValidatorTextStyle" /> property override the corresponding settings in the properties of the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> control.</para
           >
           <para
-            >The following <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> style properties are overridden by <see cref="P:System.Web.UI.WebControls.CreateUserWizard.ValidatorTextStyle" /> settings: </para
-          >
+            >The following <see cref="T:System.Web.UI.WebControls.CreateUserWizard" /> style properties are overridden by <see cref="P:System.Web.UI.WebControls.CreateUserWizard.ValidatorTextStyle" /> settings:
+          </para>
           <list type="bullet">
             <item>
               <para>
@@ -4518,8 +4518,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a reference to a collection containing all the <see cref="T:System.Web.UI.WebControls.WizardStepBase" /> objects defined for the control. </para
-          >
+            >Gets a reference to a collection containing all the <see cref="T:System.Web.UI.WebControls.WizardStepBase" /> objects defined for the control.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>

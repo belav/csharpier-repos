@@ -27,8 +27,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.ServiceModel.Description.DataContractSerializerMessageContractImporter" /> is invoked by the <see cref="T:System.ServiceModel.Description.WsdlImporter" /> when converting a WSDL description. It examines the WSDL documents and generates an in-memory description to be used later for code generation. </para
-      >
+        >The <see cref="T:System.ServiceModel.Description.DataContractSerializerMessageContractImporter" /> is invoked by the <see cref="T:System.ServiceModel.Description.WsdlImporter" /> when converting a WSDL description. It examines the WSDL documents and generates an in-memory description to be used later for code generation.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -55,8 +55,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.DataContractSerializerMessageContractImporter" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.DataContractSerializerMessageContractImporter" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>

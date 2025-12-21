@@ -39,8 +39,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Wraps the corresponding <see cref="T:System.Xml.XmlDocument" /> type and also carries the necessary information for reporting file-name and line numbers. </para
-      >
+        >Wraps the corresponding <see cref="T:System.Xml.XmlDocument" /> type and also carries the necessary information for reporting file-name and line numbers.
+      </para>
     </summary>
   </Docs>
   <Members>
@@ -63,8 +63,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Configuration.ConfigXmlDocument" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Configuration.ConfigXmlDocument" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>

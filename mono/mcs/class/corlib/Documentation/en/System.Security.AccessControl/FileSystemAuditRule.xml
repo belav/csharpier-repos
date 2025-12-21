@@ -37,13 +37,13 @@
         </item>
         <item>
           <para
-            >Double-click the <ui>Audit object access</ui> entry on the right pane of the MMC snap-in, or right-click and choose Properties to display the <ui>Audit object access properties</ui> dialog box. </para
-          >
+            >Double-click the <ui>Audit object access</ui> entry on the right pane of the MMC snap-in, or right-click and choose Properties to display the <ui>Audit object access properties</ui> dialog box.
+          </para>
         </item>
         <item>
           <para
-            >Select the <ui>Success</ui> or <ui>Failure</ui> check boxes to log successes or failures.   </para
-          >
+            >Select the <ui>Success</ui> or <ui>Failure</ui> check boxes to log successes or failures.
+          </para>
         </item>
       </list>
       <para>Note that an audit rule for a user account requires a corresponding access rule for the same user account.  </para>
@@ -87,8 +87,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.FileSystemAuditRule" /> class using a reference to a user account, a value that specifies the type of operation associated with the audit rule, and a value that specifies when to perform auditing. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.FileSystemAuditRule" /> class using a reference to a user account, a value that specifies the type of operation associated with the audit rule, and a value that specifies when to perform auditing.
+          </para>
         </summary>
         <param name="identity">
           <attribution
@@ -102,8 +102,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Security.AccessControl.FileSystemRights" /> values that specifies the type of operation associated with the audit rule. </param
-        >
+          />One of the <see cref="T:System.Security.AccessControl.FileSystemRights" /> values that specifies the type of operation associated with the audit rule.
+        </param>
         <param name="flags">
           <attribution
             license="cc4"
@@ -161,8 +161,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Security.AccessControl.FileSystemRights" /> values that specifies the type of operation associated with the audit rule. </param
-        >
+          />One of the <see cref="T:System.Security.AccessControl.FileSystemRights" /> values that specifies the type of operation associated with the audit rule.
+        </param>
         <param name="flags">
           <attribution
             license="cc4"
@@ -204,8 +204,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.FileSystemAuditRule" /> class using the name of a reference to a user account, a value that specifies the type of operation associated with the audit rule, a value that determines how rights are inherited, a value that determines how rights are propagated, and a value that specifies when to perform auditing.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.FileSystemAuditRule" /> class using the name of a reference to a user account, a value that specifies the type of operation associated with the audit rule, a value that determines how rights are inherited, a value that determines how rights are propagated, and a value that specifies when to perform auditing.
+          </para>
         </summary>
         <param name="identity">
           <attribution
@@ -279,8 +279,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.FileSystemAuditRule" /> class using the name of a user account, a value that specifies the type of operation associated with the audit rule, a value that determines how rights are inherited, a value that determines how rights are propagated, and a value that specifies when to perform auditing. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.FileSystemAuditRule" /> class using the name of a user account, a value that specifies the type of operation associated with the audit rule, a value that determines how rights are inherited, a value that determines how rights are propagated, and a value that specifies when to perform auditing.
+          </para>
         </summary>
         <param name="identity">
           <attribution

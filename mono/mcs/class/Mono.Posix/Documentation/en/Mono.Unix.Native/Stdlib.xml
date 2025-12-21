@@ -20,8 +20,8 @@
   <see cref="M:Mono.Unix.Native.Stdlib.fopen" /> are not protected.)
   No multithreading guarantee is made between managed and unmanaged code.  
   Check your operating system documentation for more information.
-  </ThreadingSafetyStatement
-  >
+
+  </ThreadingSafetyStatement>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
   </Base>
@@ -64,12 +64,12 @@
         <remarks>
           <para>
 The <c>_Exit</c>(3) function terminates without calling the functions registered with the <see cref="M:Mono.Unix.Native.Stdlib.atexit" />(3) function, and may or may not perform the other actions listed in <see cref="M:Mono.Unix.Native.Stdlib.exit" />(3).
-</para
-          >
+
+          </para>
           <para>
 The C Standard (ISO/IEC 9899:1999 ("ISO C99")) defines the values 0, <see cref="F:Mono.Unix.Native.Stdlib.EXIT_SUCCESS" />, and <see cref="F:Mono.Unix.Native.Stdlib.EXIT_FAILURE" /> as possible values of <paramref name="status" />.  Cooperating processes may use other values; in a program which might be called by a mail transfer agent, the values described in <c>sysexits</c>(3) may be used to provide more information to the parent process.
-</para
-          >
+
+          </para>
           <para>
 This function never returns.
 </para>
@@ -167,8 +167,8 @@ This function never returns.
           <para
             >The <c>abort</c>() function causes abnormal program termination to occur, unless the signal
 <see cref="F:Mono.Unix.Native.Signum.SIGABRT" /> is being caught and the signal handler does not return.
-</para
-          >
+
+          </para>
           <para>
 Any open streams are flushed and closed.
 </para>
@@ -236,12 +236,12 @@ Any open streams are flushed and closed.
         <remarks>
           <para>
 The <c>calloc</c>() function allocates space for <paramref name="nmemb" /> objects, each <paramref name="size" /> bytes in length. The result is identical to calling <see cref="M:Mono.Unix.Native.Stdlib.malloc" />(3) with an argument of "<c>nmemb * size</c>," with the exception that the allocated memory is explicitly initialized to zero bytes.
-</para
-          >
+
+          </para>
           <para>
 The return value of <c>calloc</c> must be passed to <see cref="M:Mono.Unix.Native.Stdlib.free" /> to avoid a memory leak.
-</para
-          >
+
+          </para>
         </remarks>
       </Docs>
     </Member>
@@ -349,17 +349,17 @@ The return value of <c>calloc</c> must be passed to <see cref="M:Mono.Unix.Nativ
           </list>
           <para
             >The low-order eight bits of the <paramref name="status" /> argument is made available to a parent process which has called a <see cref="M:Mono.Unix.Native.Syscall.wait" />(2)-family function.
-</para
-          >
+
+          </para>
           <para>
 The C Standard (ISO/IEC 9899:1999 ("ISO C99")) defines the values 0, <see cref="F:Mono.Unix.Native.Stdlib.EXIT_SUCCESS" />, and <see cref="F:Mono.Unix.Native.Stdlib.EXIT_FAILURE" /> as possible values of <paramref name="status" />.  Cooperating processes may use other values; in a program which might be called by a mail transfer agent, the values described in <c>sysexits</c>(3) may be used to provide more information to the parent process.
-</para
-          >
+
+          </para>
           <para
             >Note that <c>exit</c>() does nothing to prevent bottomless recursion should a function registered using <see cref="M:Mono.Unix.Native.Stdlib.atexit" />(3) itself call <c>exit</c>().  Such functions must call <see cref="M:Mono.Unix.Native.Stdlib._Exit" />() instead
      (although this has other effects as well which may not be desired).
-</para
-          >
+
+          </para>
           <para>
 This function never returns.
 </para>
@@ -474,14 +474,14 @@ class Test
           >
           <para
             > The <c>fclose</c>() function may also fail and set <c>errno</c> for any of the errors specified for the routines <see cref="M:Mono.Unix.Native.Syscall.close" />(2) or <see cref="M:Mono.Unix.Native.Stdlib.fflush" />(3).
-</para
-          >
+
+          </para>
         </returns>
         <remarks>
           <para
             > The <c>fclose</c>() function dissociates the named stream from its underlying file or set of functions.  If the stream was being used for output, any buffered data is written first, using <see cref="M:Mono.Unix.Native.Stdlib.fflush" />(3).
-</para
-          >
+
+          </para>
         </remarks>
       </Docs>
     </Member>
@@ -705,8 +705,8 @@ class Test
           </block>
           <para>
             <c>fgetpos</c> may also fail for any of the error specified for the routines <see cref="M:Mono.Unix.Native.Stdlib.fflush" />(3), <see cref="M:Mono.Unix.Native.Syscall.fstat" />(2), <see cref="M:Mono.Unix.Native.Syscall.lseek" />(2), and <see cref="M:Mono.Unix.Native.Stdlib.malloc" />(3)
-</para
-          >
+
+          </para>
         </returns>
         <remarks>
           <para
@@ -714,8 +714,8 @@ class Test
           >
           <block subset="none" type="note"
             >The value of <paramref name="pos" /> is modified by this operation.
-</block
-          >
+
+          </block>
         </remarks>
       </Docs>
     </Member>
@@ -813,8 +813,8 @@ See the <see cref="M:Mono.Unix.Native.Stdlib.fgets(System.Text.StringBuilder,int
           </block>
           <para>
             <c>fgetpos</c> may also fail for any of the error specified for the routines <see cref="M:Mono.Unix.Native.Stdlib.fflush" />(3), <see cref="M:Mono.Unix.Native.Syscall.fstat" />(2), <see cref="M:Mono.Unix.Native.Syscall.read" />(2), or <see cref="M:Mono.Unix.Native.Stdlib.malloc" />(3).
-</para
-          >
+
+          </para>
         </returns>
         <remarks
           >The <c>fgets</c>() function reads at most one less than the number of characters specified by <paramref name="size" /> from the given <paramref name="stream" /> and stores them in the string <paramref name="sb" />.  Reading stops when a newline character is found, at end-of-file or error.  The newline, if any, is retained.  If any characters are read and there is no error, a '\0' character is appended to end the string.</remarks
@@ -893,8 +893,8 @@ See the <see cref="M:Mono.Unix.Native.Stdlib.fgets(System.Text.StringBuilder,int
           </block>
           <para>
             <c>fopen</c> may also fail for any of the error specified for the routines <see cref="M:Mono.Unix.Native.Stdlib.malloc" />(3) and <see cref="M:Mono.Unix.Native.Syscall.open" />(2).
-</para
-          >
+
+          </para>
         </returns>
         <remarks>
           <para>The fopen() function opens the file whose name is the string pointed to by path and associates a stream with it.
@@ -904,8 +904,8 @@ See the <see cref="M:Mono.Unix.Native.Stdlib.fgets(System.Text.StringBuilder,int
           >
           <para
             >The argument <paramref name="mode" /> points to a string beginning with one of the following sequences (Additional characters may follow these sequences.):
-</para
-          >
+
+          </para>
           <list type="table">
             <listheader>
               <term>
@@ -960,8 +960,8 @@ See the <see cref="M:Mono.Unix.Native.Stdlib.fgets(System.Text.StringBuilder,int
           >
           <para
             >Any created files will have mode <c>S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH</c> (0666), as modified by the process' umask value (see <see cref="M:Mono.Unix.Native.Syscall.umask" />(2)).
-</para
-          >
+
+          </para>
           <para>ANSI C requires that a file positioning function intervene between output and input, unless an input operation encounters end-of-file.</para>
         </remarks>
       </Docs>
@@ -1044,8 +1044,8 @@ See the <see cref="M:Mono.Unix.Native.Stdlib.fgets(System.Text.StringBuilder,int
             </list>
             <para
               >Any of the errors documented for the <see cref="M:Mono.Unix.Native.Syscall.write" /> system call may also be returned.
-</para
-            >
+
+            </para>
           </block>
         </returns>
         <remarks />
@@ -1120,8 +1120,8 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
             </list>
             <para
               >Any of the errors documented for the <see cref="M:Mono.Unix.Native.Syscall.write" /> system call may also be returned.
-</para
-            >
+
+            </para>
           </block>
         </returns>
         <remarks>
@@ -1130,8 +1130,8 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
           >
           <para
             >These functions write the output under the control of a <paramref name="format" /> string that specifies how subsequent arguments (or arguments accessed via the variable-length argument facilities of <c>stdarg</c>(3)) are converted for output.
-</para
-          >
+
+          </para>
           <para>The format string is composed of zero or more directives: ordinary characters (not %), which are copied unchanged to the output stream; and conversion specifications, each of which results in fetching zero or more subsequent arguments.  Each conversion specification is introduced by the % character.  The arguments must correspond properly (after type promotion) with the conversion specifier.  After the %, the following appear in sequence:</para>
           <list type="bullet">
             <item>
@@ -1317,8 +1317,8 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
                 <block subset="none" type="note">
                   <para
                     >the <c>t</c> modifier, when applied to a <c>o</c>, <c>u</c>, <c>x</c>, or <c>X</c> conversion, indicates that the argument is of an unsigned type equivalent in size to a <c>ptrdiff_t</c>.  The <c>z</c> modifier, when applied to a <c>d</c> or <c>i</c> conversion, indicates that the argument is of a signed type equivalent in size to a <c>size_t</c>.  Similarly, when applied to an <c>n</c> conversion, it indicates that the argument is a pointer to a signed type equivalent in size to a <c>size_t</c>.
-  </para
-                  >
+
+                  </para>
                 </block>
                 <para
                   >The following length modifier is valid for the <c>a</c>, <c>A</c>, <c>e</c>, <c>E</c>, <c>f</c>, <c>F</c>, <c>g</c>, or <c>G</c> conversion:</para
@@ -1370,8 +1370,8 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
           </list>
           <para
             >A field width or precision, or both, may be indicated by an asterisk '<c>*</c>' or an asterisk followed by one or more decimal digits and a '<c>$</c>' instead of a digit string.  In this case, an <i>int</i> argument supplies the field width or precision.  A negative field width is treated as a left adjustment flag followed by a positive field width; a negative precision is treated as though it were missing.  If a single format directive mixes positional (<c>nn$</c>) and non-positional arguments, the results are undefined
-</para
-          >
+
+          </para>
           <para>The conversion specifiers and their meanings are:</para>
           <list type="table">
             <listheader>
@@ -1430,8 +1430,8 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
 <para
                   >Note that there may be multiple valid ways to represent floating-point numbers in this hexadecimal format.  For example, <c>0x3.24p+0</c>, <c>0x6.48p-1</c> and <c>0xc.9p-2</c> are all equivalent.  The format chosen depends on the internal representation of the number, but the implementation guarantees that the length of the mantissa will be minimized.  Zeroes are always represented with a mantissa of 0 (preceded by a '<c>-</c>' if appropriate) and an exponent of +0.
-</para
-                >
+
+                </para>
               </description>
             </item>
             <item>
@@ -1449,8 +1449,8 @@ Use fprintf (IntPtr, string) instead.")</AttributeName>
 
 <para
                   >If the <c>l</c> (ell) modifier is used, the <c>wint_t</c> argument shall be converted to a <c>wchar_t</c>, and the (potentially multi-byte) sequence representing the single wide character is written, including any shift sequences.  If a shift sequence is used, the shift state is also restored to the original state after the character.
-</para
-                >
+
+                </para>
               </description>
             </item>
             <item>
@@ -1498,8 +1498,8 @@ The <c>char *</c> argument is expected to be a pointer to an array of character 
           </list>
           <para
             >The decimal point character is defined in the program's locale (category <c>LC_NUMERIC</c>)
-</para
-          >
+
+          </para>
           <para>In no case does a non-existent or small field width cause truncation of a numeric field; if the result of a conversion is wider than the field width, the field is expanded to contain the conversion result.</para>
         </remarks>
       </Docs>
@@ -1581,8 +1581,8 @@ The <c>char *</c> argument is expected to be a pointer to an array of character 
           </block>
           <para>
             <c>fputs</c> may also fail for any of the errors specified for the routines <see cref="M:Mono.Unix.Native.Syscall.write" />(2).
-</para
-          >
+
+          </para>
         </returns>
         <remarks
           > The function <c>fputs</c>() writes the string pointed to by <paramref name="s" /> to the stream pointed to by <paramref name="stream" />.</remarks
@@ -1859,21 +1859,21 @@ The <c>char *</c> argument is expected to be a pointer to an array of character 
 <see cref="M:Mono.Unix.Native.Syscall.open" />(2), 
 <see cref="M:Mono.Unix.Native.Stdlib.fclose" />(3), and
 <see cref="M:Mono.Unix.Native.Stdlib.fflush" />(3).
-</para
-          >
+
+          </para>
         </returns>
         <remarks>
           <para
             >The <c>freopen</c>() function opens the file whose name is the string pointed to by <paramref name="path" /> and associates the stream pointed to by <paramref name="stream" /> with it.  The original stream (if it exists) is closed.
-</para
-          >
+
+          </para>
           <para
             >Use <see cref="M:Mono.Unix.Native.Stdlib.fclose" /> to close the returned <c>FILE</c> stream.</para
           >
           <para
             >The argument <paramref name="mode" /> points to a string beginning with one of the following sequences (Additional characters may follow these sequences.):
-</para
-          >
+
+          </para>
           <list type="table">
             <listheader>
               <term>
@@ -1928,8 +1928,8 @@ The <c>char *</c> argument is expected to be a pointer to an array of character 
           >
           <para
             >If the <paramref name="path" /> argument is <see langword="null" />, <c>freopen</c>() attempts to re-open the file associated with <paramref name="stream" /> with a new mode.  The new mode must be compatible with the mode that the stream was originally opened with:
-</para
-          >
+
+          </para>
           <list type="bullet">
             <item>
               <term
@@ -1954,8 +1954,8 @@ The <c>char *</c> argument is expected to be a pointer to an array of character 
           </list>
           <para
             >The primary use of the <c>freopen</c>() function is to change the file associated with a standard text stream (<see cref="F:Mono.Unix.Native.Stdlib.stderr" />, <see cref="F:Mono.Unix.Native.Stdlib.stdin" />, or <see cref="F:Mono.Unix.Native.Stdlib.stdout" />).
-</para
-          >
+
+          </para>
         </remarks>
       </Docs>
     </Member>
@@ -2041,8 +2041,8 @@ The <c>char *</c> argument is expected to be a pointer to an array of character 
           </block>
           <para>
             <c>fseek</c> may also fail for any of the error specified for the routines <see cref="M:Mono.Unix.Native.Stdlib.fflush" />(3), <see cref="M:Mono.Unix.Native.Syscall.fstat" />(2), <see cref="M:Mono.Unix.Native.Syscall.lseek" />(2), and <see cref="M:Mono.Unix.Native.Stdlib.malloc" />(3)
-</para
-          >
+
+          </para>
         </returns>
         <remarks
           >The <c>fseek</c>() function sets the file position indicator for the stream pointed to by <paramref name="stream" />.  The new position, measured in bytes, is obtained by adding <paramref name="offset" /> bytes to the position specified by <paramref name="whence" />.  If whence is set to <see cref="F:Mono.Unix.Native.SeekFlags.SEEK_SET" />, <see cref="F:Mono.Unix.Native.SeekFlags.SEEK_CUR" />, or <see cref="F:Mono.Unix.Native.SeekFlags.SEEK_END" />, the offset is relative to the start of the file, the current position indicator, or end-of-file, respectively.  A successful call to the <c>fseek</c>() function clears the end-of-file indicator for the stream and undoes any effects of the <see cref="M:Mono.Unix.Native.Stdlib.ungetc" />(3) and <see cref="M:Mono.Unix.Native.Stdlib.ungetwc" />(3) functions on the same stream.</remarks
@@ -2122,13 +2122,13 @@ The <c>char *</c> argument is expected to be a pointer to an array of character 
           </block>
           <para>
             <c>fsetpos</c> may also fail for any of the error specified for the routines <see cref="M:Mono.Unix.Native.Stdlib.fflush" />(3), <see cref="M:Mono.Unix.Native.Syscall.fstat" />(2), <see cref="M:Mono.Unix.Native.Syscall.lseek" />(2), and <see cref="M:Mono.Unix.Native.Stdlib.malloc" />(3)
-</para
-          >
+
+          </para>
         </returns>
         <remarks
           >The <c>fsetpos</c>() function is an alternate interfaces for setting the current position in the file, similar to <see cref="M:Mono.Unix.Native.Stdlib.fseek" />(), except that the current position is stored in an opaque object of type <see cref="T:Mono.Unix.Native.FilePosition" /> pointed to by pos.  This provides a portable way to seek to offsets larger than those that can be represented by a long int.  It may also store additional state information in the <see cref="T:Mono.Unix.Native.FilePosition" /> object to facilitate seeking within files containing multibyte characters with state-dependent encodings.
-</remarks
-        >
+
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="ftell">
@@ -2199,8 +2199,8 @@ The <c>char *</c> argument is expected to be a pointer to an array of character 
           </block>
           <para>
             <c>ftell</c> may also fail for any of the error specified for the routines <see cref="M:Mono.Unix.Native.Stdlib.fflush" />(3), <see cref="M:Mono.Unix.Native.Syscall.fstat" />(2), <see cref="M:Mono.Unix.Native.Syscall.lseek" />(2), and <see cref="M:Mono.Unix.Native.Stdlib.malloc" />(3)
-</para
-          >
+
+          </para>
         </returns>
         <remarks
           >The <c>ftell</c>() function obtains the current value of the file position indicator for the stream pointed to by <paramref name="stream" />.</remarks
@@ -2244,16 +2244,16 @@ The <c>char *</c> argument is expected to be a pointer to an array of character 
           >
           <para
             >The function <c>fwrite</c>() returns a value less than <paramref name="nmemb" /> only if a write error has occurred.
-</para
-          >
+
+          </para>
         </returns>
         <remarks>
           <para
             >The function <c>fwrite</c>() writes <c>
               <paramref name="ptr" />.Length</c
             > bytes to the stream pointed to by <paramref name="stream" />, obtaining them from the location given by <paramref name="ptr" />.
-</para
-          >
+
+          </para>
         </remarks>
       </Docs>
     </Member>
@@ -2298,14 +2298,14 @@ The <c>char *</c> argument is expected to be a pointer to an array of character 
           >
           <para
             >The function <c>fwrite</c>() returns a value less than <paramref name="nmemb" /> only if a write error has occurred.
-</para
-          >
+
+          </para>
         </returns>
         <remarks>
           <para
             >The function <c>fwrite</c>() writes <paramref name="nmemb" /> objects, each <paramref name="size" /> bytes long, to the stream pointed to by <paramref name="stream" />, obtaining them from the location given by <paramref name="ptr" />.
-</para
-          >
+
+          </para>
         </remarks>
       </Docs>
     </Member>
@@ -2350,14 +2350,14 @@ The <c>char *</c> argument is expected to be a pointer to an array of character 
           >
           <para
             >The function <c>fwrite</c>() returns a value less than <paramref name="nmemb" /> only if a write error has occurred.
-</para
-          >
+
+          </para>
         </returns>
         <remarks>
           <para
             >The function <c>fwrite</c>() writes <paramref name="nmemb" /> objects, each <paramref name="size" /> bytes long, to the stream pointed to by <paramref name="stream" />, obtaining them from the location given by <paramref name="ptr" />.
-</para
-          >
+
+          </para>
         </remarks>
       </Docs>
     </Member>
@@ -2402,14 +2402,14 @@ The <c>char *</c> argument is expected to be a pointer to an array of character 
           >
           <para
             >The function <c>fwrite</c>() returns a value less than <paramref name="nmemb" /> only if a write error has occurred.
-</para
-          >
+
+          </para>
         </returns>
         <remarks>
           <para
             >The function <c>fwrite</c>() writes <paramref name="nmemb" /> objects, each <paramref name="size" /> bytes long, to the stream pointed to by <paramref name="stream" />, obtaining them from the location given by <paramref name="ptr" />.
-</para
-          >
+
+          </para>
         </remarks>
       </Docs>
     </Member>
@@ -2588,8 +2588,8 @@ obtaining the next input character (if present) from <see cref="F:Mono.Unix.Nati
           >
           <para
             >Note that <c>malloc</c>() does NOT normally initialize the returned memory to zero bytes.
-</para
-          >
+
+          </para>
         </remarks>
       </Docs>
     </Member>
@@ -2697,8 +2697,8 @@ obtaining the next input character (if present) from <see cref="F:Mono.Unix.Nati
             </list>
             <para
               >Any of the errors documented for the <see cref="M:Mono.Unix.Native.Syscall.write" /> system call may also be returned.
-</para
-            >
+
+            </para>
           </block>
         </returns>
         <remarks />
@@ -2771,8 +2771,8 @@ Use printf (string) instead.")</AttributeName>
             </list>
             <para
               >Any of the errors documented for the <see cref="M:Mono.Unix.Native.Syscall.write" /> system call may also be returned.
-</para
-            >
+
+            </para>
           </block>
         </returns>
         <remarks>
@@ -2781,8 +2781,8 @@ Use printf (string) instead.")</AttributeName>
           >
           <para
             >These functions write the output under the control of a <paramref name="format" /> string that specifies how subsequent arguments (or arguments accessed via the variable-length argument facilities of <c>stdarg</c>(3)) are converted for output.
-</para
-          >
+
+          </para>
           <para>The format string is composed of zero or more directives: ordinary characters (not %), which are copied unchanged to the output stream; and conversion specifications, each of which results in fetching zero or more subsequent arguments.  Each conversion specification is introduced by the % character.  The arguments must correspond properly (after type promotion) with the conversion specifier.  After the %, the following appear in sequence:</para>
           <list type="bullet">
             <item>
@@ -2968,8 +2968,8 @@ Use printf (string) instead.")</AttributeName>
                 <block subset="none" type="note">
                   <para
                     >the <c>t</c> modifier, when applied to a <c>o</c>, <c>u</c>, <c>x</c>, or <c>X</c> conversion, indicates that the argument is of an unsigned type equivalent in size to a <c>ptrdiff_t</c>.  The <c>z</c> modifier, when applied to a <c>d</c> or <c>i</c> conversion, indicates that the argument is of a signed type equivalent in size to a <c>size_t</c>.  Similarly, when applied to an <c>n</c> conversion, it indicates that the argument is a pointer to a signed type equivalent in size to a <c>size_t</c>.
-  </para
-                  >
+
+                  </para>
                 </block>
                 <para
                   >The following length modifier is valid for the <c>a</c>, <c>A</c>, <c>e</c>, <c>E</c>, <c>f</c>, <c>F</c>, <c>g</c>, or <c>G</c> conversion:</para
@@ -3021,8 +3021,8 @@ Use printf (string) instead.")</AttributeName>
           </list>
           <para
             >A field width or precision, or both, may be indicated by an asterisk '<c>*</c>' or an asterisk followed by one or more decimal digits and a '<c>$</c>' instead of a digit string.  In this case, an <i>int</i> argument supplies the field width or precision.  A negative field width is treated as a left adjustment flag followed by a positive field width; a negative precision is treated as though it were missing.  If a single format directive mixes positional (<c>nn$</c>) and non-positional arguments, the results are undefined
-</para
-          >
+
+          </para>
           <para>The conversion specifiers and their meanings are:</para>
           <list type="table">
             <listheader>
@@ -3081,8 +3081,8 @@ Use printf (string) instead.")</AttributeName>
 
 <para
                   >Note that there may be multiple valid ways to represent floating-point numbers in this hexadecimal format.  For example, <c>0x3.24p+0</c>, <c>0x6.48p-1</c> and <c>0xc.9p-2</c> are all equivalent.  The format chosen depends on the internal representation of the number, but the implementation guarantees that the length of the mantissa will be minimized.  Zeroes are always represented with a mantissa of 0 (preceded by a '<c>-</c>' if appropriate) and an exponent of +0.
-</para
-                >
+
+                </para>
               </description>
             </item>
             <item>
@@ -3100,8 +3100,8 @@ Use printf (string) instead.")</AttributeName>
 
 <para
                   >If the <c>l</c> (ell) modifier is used, the <c>wint_t</c> argument shall be converted to a <c>wchar_t</c>, and the (potentially multi-byte) sequence representing the single wide character is written, including any shift sequences.  If a shift sequence is used, the shift state is also restored to the original state after the character.
-</para
-                >
+
+                </para>
               </description>
             </item>
             <item>
@@ -3149,8 +3149,8 @@ The <c>char *</c> argument is expected to be a pointer to an array of character 
           </list>
           <para
             >The decimal point character is defined in the program's locale (category <c>LC_NUMERIC</c>)
-</para
-          >
+
+          </para>
           <para>In no case does a non-existent or small field width cause truncation of a numeric field; if the result of a conversion is wider than the field width, the field is expanded to contain the conversion result.</para>
         </remarks>
       </Docs>
@@ -3259,8 +3259,8 @@ The <c>char *</c> argument is expected to be a pointer to an array of character 
           </block>
           <para>
             <c>fputs</c> may also fail for any of the errors specified for the routines <see cref="M:Mono.Unix.Native.Syscall.write" />(2).
-</para
-          >
+
+          </para>
         </returns>
         <remarks
           >The function <c>puts</c>() writes the string <paramref name="s" />, and a terminating newline character, to the stream <see cref="F:Mono.Unix.Native.Stdlib.stdout" />.</remarks
@@ -3292,8 +3292,8 @@ The <c>char *</c> argument is expected to be a pointer to an array of character 
         <summary>Send a realtime signal to the current process.</summary>
         <returns
           >The <c>raise</c>() function returns the value 0 if successful; otherwise the value -1 is returned and <see cref="M:Mono.Unix.Native.Stdlib.GetLastError" /> indicates the error.
-        </returns
-        >
+
+        </returns>
         <remarks
           >The <c>raise</c>() function sends the signal <paramref name="sig" /> to the current process.</remarks
         >
@@ -3330,8 +3330,8 @@ The <c>char *</c> argument is expected to be a pointer to an array of character 
         <summary>Send a signal to the current process.</summary>
         <returns
           >The <c>raise</c>() function returns the value 0 if successful; otherwise the value -1 is returned and <see cref="M:Mono.Unix.Native.Stdlib.GetLastError" /> indicates the error.
-</returns
-        >
+
+        </returns>
         <remarks
           >The <c>raise</c>() function sends the signal <paramref name="sig" /> to the current process.</remarks
         >
@@ -3463,8 +3463,8 @@ The <c>char *</c> argument is expected to be a pointer to an array of character 
             >.  Otherwise, it is the equivalent of <c>
               <see cref="M:Mono.Unix.Native.Syscall.unlink" />(<paramref name="path" />)</c
             >.
-</para
-          >
+
+          </para>
         </remarks>
       </Docs>
     </Member>
@@ -3542,8 +3542,8 @@ The <c>char *</c> argument is expected to be a pointer to an array of character 
           >
           <para>
             <see cref="M:Mono.Unix.Native.Stdlib.fseek" />(<paramref name="stream" />, 0, <see cref="F:Mono.Unix.Native.SeekFlags.SEEK_SET" />)
-</para
-          >
+
+          </para>
           <para
             >except that the error indicator for the stream is also cleared (see <see cref="M:Mono.Unix.Native.Stdlib.clearerr" />(3)).</para
           >
@@ -3589,20 +3589,20 @@ The <c>char *</c> argument is expected to be a pointer to an array of character 
         <remarks>
           <para
             >The <c>setbuf</c> function disables <c>FILE</c> stream buffering if <paramref name="buf" /> is <see cref="F:System.IntPtr.Zero" />, otherwise full buffering is enabled (and <paramref name="buf" /> is used as the buffer).
-</para
-          >
+
+          </para>
           <para
             >The <c>setbuf</c> function is an alias for calls to <see />
             <see cref="M:Mono.Unix.Native.Stdlib.setvbuf" />.  Except for the lack of a return value, the <c>setbuf</c> function is exactly equivalent to the call:</para
           >
           <para>
             <see cref="M:Mono.Unix.Native.Stdlib.setvbuf" /> (<paramref name="stream" />, <paramref name="buf" />, <paramref name="buf" /> ? <see cref="M:Mono.Unix.Native.Stdlib._IOFBF" /> : <see cref="M:Mono.Unix.Native.Stdlib._IONBF" />, <see cref="M:Mono.Unix.Native.Stdlib.BUFSIZ" />);
-</para
-          >
+
+          </para>
           <para
             >This function requires that <paramref name="buf" /> refer to at least <see cref="M:Mono.Unix.Native.Stdlib.BUFSIZ" /> bytes of memory.  This memory must remain valid until the next <c>setbuf</c>, <see cref="M:Mono.Unix.Native.Stdlib.setvbuf" />, or <see cref="M:Mono.Unix.Native.Stdlib.fclose" /> call.
-</para
-          >
+
+          </para>
         </remarks>
       </Docs>
     </Member>
@@ -3638,20 +3638,20 @@ The <c>char *</c> argument is expected to be a pointer to an array of character 
         <remarks>
           <para
             >The <c>setbuf</c> function disables <c>FILE</c> stream buffering if <paramref name="buf" /> is <see cref="F:System.IntPtr.Zero" />, otherwise full buffering is enabled (and <paramref name="buf" /> is used as the buffer).
-</para
-          >
+
+          </para>
           <para
             >The <c>setbuf</c> function is an alias for calls to <see />
             <see cref="M:Mono.Unix.Native.Stdlib.setvbuf" />.  Except for the lack of a return value, the <c>setbuf</c> function is exactly equivalent to the call:</para
           >
           <para>
             <see cref="M:Mono.Unix.Native.Stdlib.setvbuf" /> (<paramref name="stream" />, <paramref name="buf" />, <paramref name="buf" /> ? <see cref="M:Mono.Unix.Native.Stdlib._IOFBF" /> : <see cref="M:Mono.Unix.Native.Stdlib._IONBF" />, <see cref="M:Mono.Unix.Native.Stdlib.BUFSIZ" />);
-</para
-          >
+
+          </para>
           <para
             >This function requires that <paramref name="buf" /> refer to at least <see cref="M:Mono.Unix.Native.Stdlib.BUFSIZ" /> bytes of memory.  This memory must remain valid until the next <c>setbuf</c>, <see cref="M:Mono.Unix.Native.Stdlib.setvbuf" />, or <see cref="M:Mono.Unix.Native.Stdlib.fclose" /> call.
-</para
-          >
+
+          </para>
         </remarks>
       </Docs>
     </Member>
@@ -3708,8 +3708,8 @@ The <c>char *</c> argument is expected to be a pointer to an array of character 
         <param name="action">
           A <see cref="T:Mono.Unix.Native.SignalAction" /> specifying what to
           do when the <paramref name="signum" /> signal is emitted.
-        </param
-        >
+
+        </param>
         <summary>
           Specifies what should happen when a signal is emitted.
         </summary>
@@ -3719,8 +3719,8 @@ The <c>char *</c> argument is expected to be a pointer to an array of character 
             was successful.  <c>-1</c> is returned on failure, and sets 
             <see cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
             to indicate the error.
-          </para
-          >
+
+          </para>
           <block subset="none" type="usage">
             <para>
               Possible errors include:
@@ -3741,8 +3741,8 @@ The <c>char *</c> argument is expected to be a pointer to an array of character 
                 <description>
                   <para>
                     <paramref name="signum" /> is invalid.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
             </list>
@@ -3755,8 +3755,8 @@ The <c>char *</c> argument is expected to be a pointer to an array of character 
             While <c>signal</c>(2) permits an arbitrary method to be set as
             the signal handler, this method permits specifying only the
             default, ignore, or error handlers.
-          </para
-          >
+
+          </para>
           <block subset="none" type="behaviors">
             <para>
               If <paramref name="action" /> is
@@ -3765,8 +3765,8 @@ The <c>char *</c> argument is expected to be a pointer to an array of character 
               <c
                 >signal(<paramref name="signum" />, SIG_DFL)</c
               >.
-            </para
-            >
+
+            </para>
             <para>
               If <paramref name="action" /> is
               <see cref="F:Mono.Unix.Native.SignalAction.Ignore" />, then
@@ -3774,8 +3774,8 @@ The <c>char *</c> argument is expected to be a pointer to an array of character 
               <c
                 >signal(<paramref name="signum" />, SIG_IGN)</c
               >.
-            </para
-            >
+
+            </para>
             <para>
               If <paramref name="action" /> is
               <see cref="F:Mono.Unix.Native.SignalAction.Error" />, then
@@ -3783,8 +3783,8 @@ The <c>char *</c> argument is expected to be a pointer to an array of character 
               <c
                 >signal(<paramref name="signum" />, SIG_ERR)</c
               >.
-            </para
-            >
+
+            </para>
           </block>
         </remarks>
       </Docs>
@@ -3816,8 +3816,8 @@ The <c>char *</c> argument is expected to be a pointer to an array of character 
         <param name="action">
           A <see cref="T:Mono.Unix.Native.SignalAction" /> specifying what to
           do when the <paramref name="signum" /> signal is emitted.
-        </param
-        >
+
+        </param>
         <summary>
           Specifies what should happen when a signal is emitted.
         </summary>
@@ -3827,8 +3827,8 @@ The <c>char *</c> argument is expected to be a pointer to an array of character 
             was successful.  <c>-1</c> is returned on failure, and sets 
             <see cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
             to indicate the error.
-          </para
-          >
+
+          </para>
           <block subset="none" type="usage">
             <para>
               Possible errors include:
@@ -3849,8 +3849,8 @@ The <c>char *</c> argument is expected to be a pointer to an array of character 
                 <description>
                   <para>
                     <paramref name="signum" /> is invalid.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
             </list>
@@ -3863,8 +3863,8 @@ The <c>char *</c> argument is expected to be a pointer to an array of character 
             While <c>signal</c>(2) permits an arbitrary method to be set as
             the signal handler, this method permits specifying only the
             default, ignore, or error handlers.
-          </para
-          >
+
+          </para>
           <block subset="none" type="behaviors">
             <para>
               If <paramref name="action" /> is
@@ -3873,8 +3873,8 @@ The <c>char *</c> argument is expected to be a pointer to an array of character 
               <c
                 >signal(<paramref name="signum" />, SIG_DFL)</c
               >.
-            </para
-            >
+
+            </para>
             <para>
               If <paramref name="action" /> is
               <see cref="F:Mono.Unix.Native.SignalAction.Ignore" />, then
@@ -3882,8 +3882,8 @@ The <c>char *</c> argument is expected to be a pointer to an array of character 
               <c
                 >signal(<paramref name="signum" />, SIG_IGN)</c
               >.
-            </para
-            >
+
+            </para>
             <para>
               If <paramref name="action" /> is
               <see cref="F:Mono.Unix.Native.SignalAction.Error" />, then
@@ -3891,8 +3891,8 @@ The <c>char *</c> argument is expected to be a pointer to an array of character 
               <c
                 >signal(<paramref name="signum" />, SIG_ERR)</c
               >.
-            </para
-            >
+
+            </para>
           </block>
         </remarks>
       </Docs>
@@ -3940,15 +3940,15 @@ The <c>char *</c> argument is expected to be a pointer to an array of character 
         <remarks>
           <para
             >The three types of buffering available are unbuffered, block buffered, and line buffered.  When an output stream is unbuffered, information appears on the destination file or terminal as soon as written; when it is block buffered many characters are saved up and written as a block; when it is line buffered characters are saved up until a new- line is output or input is read from any stream attached to a terminal device (typically <see cref="F:Mono.Unix.Native.Stdlib.stdin" />).  The function <see cref="M:Mono.Unix.Native.Stdlib.fflush" />(3) may be used to force the block out early.  (See <see cref="M:Mono.Unix.Native.Stdlib.fclose" />(3).)
-</para
-          >
+
+          </para>
           <para
             >Normally all files are block buffered.  When the first I/O operation occurs on a file, <see cref="M:Mono.Unix.Native.Stdlib.malloc" />(3) is called, and an optimally-sized buffer is obtained.  If a stream refers to a terminal (as <see cref="F:Mono.Unix.Native.Stdlib.stdout" /> normally does) it is line buffered.  The standard error stream <see cref="F:Mono.Unix.Native.Stdlib.stderr" /> is always unbuffered.</para
           >
           <para
             >The <c>setvbuf</c> function may be used to alter the buffering behavior of a stream.  The <paramref name="mode" /> argument must be one of the following three values:
-</para
-          >
+
+          </para>
           <list type="table">
             <listheader>
               <term>Value</term>
@@ -3975,12 +3975,12 @@ The <c>char *</c> argument is expected to be a pointer to an array of character 
           </list>
           <para
             >The <paramref name="size" /> argument may be given as zero to obtain deferred optimal-size buffer allocation as usual.  If it is not zero, then except for unbuffered files, the <paramref name="buf" /> argument should point to a buffer at least <paramref name="size" /> bytes long; this buffer will be used instead of the current buffer.  If <paramref name="buf" /> is not <see langword="null" />, it is the caller's responsibility to <see cref="M:Mono.Unix.Native.Stdlib.free" />(3) this buffer after closing the stream.
-</para
-          >
+
+          </para>
           <para
             >The <c>setvbuf</c>() function may be used at any time, but may have peculiar side effects (such as discarding input or flushing output) if the stream is ''active''.  Portable applications should call it only once on any given stream, and before any I/O is performed.
-</para
-          >
+
+          </para>
         </remarks>
       </Docs>
     </Member>
@@ -4027,15 +4027,15 @@ The <c>char *</c> argument is expected to be a pointer to an array of character 
         <remarks>
           <para
             >The three types of buffering available are unbuffered, block buffered, and line buffered.  When an output stream is unbuffered, information appears on the destination file or terminal as soon as written; when it is block buffered many characters are saved up and written as a block; when it is line buffered characters are saved up until a new- line is output or input is read from any stream attached to a terminal device (typically <see cref="F:Mono.Unix.Native.Stdlib.stdin" />).  The function <see cref="M:Mono.Unix.Native.Stdlib.fflush" />(3) may be used to force the block out early.  (See <see cref="M:Mono.Unix.Native.Stdlib.fclose" />(3).)
-</para
-          >
+
+          </para>
           <para
             >Normally all files are block buffered.  When the first I/O operation occurs on a file, <see cref="M:Mono.Unix.Native.Stdlib.malloc" />(3) is called, and an optimally-sized buffer is obtained.  If a stream refers to a terminal (as <see cref="F:Mono.Unix.Native.Stdlib.stdout" /> normally does) it is line buffered.  The standard error stream <see cref="F:Mono.Unix.Native.Stdlib.stderr" /> is always unbuffered.</para
           >
           <para
             >The <c>setvbuf</c> function may be used to alter the buffering behavior of a stream.  The <paramref name="mode" /> argument must be one of the following three values:
-</para
-          >
+
+          </para>
           <list type="table">
             <listheader>
               <term>Value</term>
@@ -4062,12 +4062,12 @@ The <c>char *</c> argument is expected to be a pointer to an array of character 
           </list>
           <para
             >The <paramref name="size" /> argument may be given as zero to obtain deferred optimal-size buffer allocation as usual.  If it is not zero, then except for unbuffered files, the <paramref name="buf" /> argument should point to a buffer at least <paramref name="size" /> bytes long; this buffer will be used instead of the current buffer.  If <paramref name="buf" /> is not <see cref="System.IntPtr.Zero" />, it is the caller's responsibility to <see cref="M:Mono.Unix.Native.Stdlib.free" />(3) this buffer after closing the stream.
-</para
-          >
+
+          </para>
           <para
             >The <c>setvbuf</c>() function may be used at any time, but may have peculiar side effects (such as discarding input or flushing output) if the stream is ''active''.  Portable applications should call it only once on any given stream, and before any I/O is performed.
-</para
-          >
+
+          </para>
         </remarks>
       </Docs>
     </Member>
@@ -4234,34 +4234,34 @@ The <c>char *</c> argument is expected to be a pointer to an array of character 
               New code should use the replacement method
               <see cref="M:Mono.Unix.Native.Stdlib.SetSignalAction" /> or the
               type <see cref="T:Mono.Unix.UnixSignal" />.
-            </para
-            >
+
+            </para>
           </block>
           <para
             >This signal() facility is a simplified interface to the more general <see cref="M:Mono.Unix.Native.Syscall.sigaction" />(2) facility.</para
           >
           <para
             >Signals allow the manipulation of a process from outside its domain as well as allowing the process to manipulate itself or copies of itself (children).  There are two general types of signals: those that cause termination of a process and those that do not.  Signals which cause termination of a program might result from an irrecoverable error or might be the result of a user at a terminal typing the 'interrupt' character.  Signals are used when a process is stopped because it wishes to access its control terminal while in the background (see <c>tty</c>(4)).  Signals are optionally generated when a process resumes after being stopped, when the status of child processes changes, or when input is ready at the control terminal.  Most signals result in the termination of the process receiving them if no action is taken; some signals instead cause the process receiving them to be stopped, or are simply discarded if the process has not requested otherwise. Except for the <see cref="F:Mono.Unix.Native.Signum.SIGKILL" /> and <see cref="F:Mono.Unix.Native.Signum.SIGSTOP" /> signals, the <c>signal</c>() function allows for a signal to be caught, to be ignored, or to generate an interrupt.
-</para
-          >
+
+          </para>
           <para
             >The <paramref name="sig" /> argument specifies which signal was received.  The <paramref name="func" /> procedure allows a user to choose the action upon receipt of a signal.  To set the default action of the signal to occur as listed above, <paramref name="func" /> should be <see cref="F:Mono.Unix.Native.Stdlib.SIG_DFL" />.  A <see cref="F:Mono.Unix.Native.Stdlib.SIG_DFL" /> resets the default action. To ignore the signal func should be <see cref="F:Mono.Unix.Native.Stdlib.SIG_IGN" />.  This will cause subsequent instances of the signal to be ignored and pending instances to be discarded.  If <see cref="F:Mono.Unix.Native.Stdlib.SIG_IGN" /> is not used, further occurrences of the signal are automatically blocked and <paramref name="func" /> is called.
-</para
-          >
+
+          </para>
           <para>The handled signal is unblocked when the function returns and the process continues from where it left off when the signal occurred.
 </para>
           <para
             >For some system calls, if a signal is caught while the call is executing and the call is prematurely terminated, the call is automatically restarted.  (The handler is installed using the SA_RESTART flag with <see cref="M:Mono.Unix.Native.Syscall.sigaction" />(2).)  The affected system calls include <see cref="M:Mono.Unix.Native.Syscall.read" />(2), <see cref="M:Mono.Unix.Native.Syscall.write" />(2), <see cref="M:Mono.Unix.Native.Syscall.sendto" />(2), <see cref="M:Mono.Unix.Native.Syscall.recvfrom" />(2), <see cref="M:Mono.Unix.Native.Syscall.sendmsg" />(2) and <see cref="M:Mono.Unix.Native.Syscall.recvmsg" />(2) on a communications channel or a low speed device and during a <see cref="M:Mono.Unix.Native.Syscall.ioctl" />(2) or <see cref="M:Mono.Unix.Native.Syscall.wait" />(2).  However, calls that have already committed are not restarted, but instead return a partial success (for example, a short read count).  These semantics could be changed with <see cref="M:Mono.Unix.Native.Syscall.siginterrupt" />(3)
-</para
-          >
+
+          </para>
           <para
             >When a process which has installed signal handlers forks, the child process inherits the signals.  All caught signals may be reset to their default action by a call to the <see cref="M:Mono.Unix.Native.Syscall.execve" />(2) function; ignored signals remain ignored.
-</para
-          >
+
+          </para>
           <para
             >If a process explicitly specifies <see cref="F:Mono.Unix.Native.Stdlib.SIG_IGN" /> as the action for the signal <see cref="F:Mono.Unix.Native.Stdlib.SIGCHLD" />, the system will not create zombie processes when children of the calling process exit.  As a consequence, the system will discard the exit status from the child processes.  If the calling process subsequently issues a call to <see cref="M:Mono.Unix.Native.Syscall.wait" />(2) or equivalent, it will block until all of the calling process's children terminate, and then return a value of -1 with <see cref="M:Mono.Unix.Native.Stdlib.GetLastError" /> returning <see cref="F:Mono.Unix.Native.Errno.ECHILD" />.
-</para
-          >
+
+          </para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Stdlib.SetSignalAction" />
         <altmember cref="T:Mono.Unix.UnixSignal" />
@@ -4353,8 +4353,8 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
           >
           <para
             >These functions write the output under the control of a <paramref name="format" /> string that specifies how subsequent arguments (or arguments accessed via the variable-length argument facilities of <c>stdarg</c>(3)) are converted for output.
-</para
-          >
+
+          </para>
           <para>The format string is composed of zero or more directives: ordinary characters (not %), which are copied unchanged to the output stream; and conversion specifications, each of which results in fetching zero or more subsequent arguments.  Each conversion specification is introduced by the % character.  The arguments must correspond properly (after type promotion) with the conversion specifier.  After the %, the following appear in sequence:</para>
           <list type="bullet">
             <item>
@@ -4540,8 +4540,8 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
                 <block subset="none" type="note">
                   <para
                     >the <c>t</c> modifier, when applied to a <c>o</c>, <c>u</c>, <c>x</c>, or <c>X</c> conversion, indicates that the argument is of an unsigned type equivalent in size to a <c>ptrdiff_t</c>.  The <c>z</c> modifier, when applied to a <c>d</c> or <c>i</c> conversion, indicates that the argument is of a signed type equivalent in size to a <c>size_t</c>.  Similarly, when applied to an <c>n</c> conversion, it indicates that the argument is a pointer to a signed type equivalent in size to a <c>size_t</c>.
-  </para
-                  >
+
+                  </para>
                 </block>
                 <para
                   >The following length modifier is valid for the <c>a</c>, <c>A</c>, <c>e</c>, <c>E</c>, <c>f</c>, <c>F</c>, <c>g</c>, or <c>G</c> conversion:</para
@@ -4593,8 +4593,8 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
           </list>
           <para
             >A field width or precision, or both, may be indicated by an asterisk '<c>*</c>' or an asterisk followed by one or more decimal digits and a '<c>$</c>' instead of a digit string.  In this case, an <i>int</i> argument supplies the field width or precision.  A negative field width is treated as a left adjustment flag followed by a positive field width; a negative precision is treated as though it were missing.  If a single format directive mixes positional (<c>nn$</c>) and non-positional arguments, the results are undefined
-</para
-          >
+
+          </para>
           <para>The conversion specifiers and their meanings are:</para>
           <list type="table">
             <listheader>
@@ -4653,8 +4653,8 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
 <para
                   >Note that there may be multiple valid ways to represent floating-point numbers in this hexadecimal format.  For example, <c>0x3.24p+0</c>, <c>0x6.48p-1</c> and <c>0xc.9p-2</c> are all equivalent.  The format chosen depends on the internal representation of the number, but the implementation guarantees that the length of the mantissa will be minimized.  Zeroes are always represented with a mantissa of 0 (preceded by a '<c>-</c>' if appropriate) and an exponent of +0.
-</para
-                >
+
+                </para>
               </description>
             </item>
             <item>
@@ -4672,8 +4672,8 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
 <para
                   >If the <c>l</c> (ell) modifier is used, the <c>wint_t</c> argument shall be converted to a <c>wchar_t</c>, and the (potentially multi-byte) sequence representing the single wide character is written, including any shift sequences.  If a shift sequence is used, the shift state is also restored to the original state after the character.
-</para
-                >
+
+                </para>
               </description>
             </item>
             <item>
@@ -4721,8 +4721,8 @@ The <c>char *</c> argument is expected to be a pointer to an array of character 
           </list>
           <para
             >The decimal point character is defined in the program's locale (category <c>LC_NUMERIC</c>)
-</para
-          >
+
+          </para>
           <para>In no case does a non-existent or small field width cause truncation of a numeric field; if the result of a conversion is wider than the field width, the field is expanded to contain the conversion result.</para>
         </remarks>
       </Docs>
@@ -4822,8 +4822,8 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
           >
           <para
             >These functions write the output under the control of a <paramref name="format" /> string that specifies how subsequent arguments (or arguments accessed via the variable-length argument facilities of <c>stdarg</c>(3)) are converted for output.
-</para
-          >
+
+          </para>
           <para>The format string is composed of zero or more directives: ordinary characters (not %), which are copied unchanged to the output stream; and conversion specifications, each of which results in fetching zero or more subsequent arguments.  Each conversion specification is introduced by the % character.  The arguments must correspond properly (after type promotion) with the conversion specifier.  After the %, the following appear in sequence:</para>
           <list type="bullet">
             <item>
@@ -5009,8 +5009,8 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
                 <block subset="none" type="note">
                   <para
                     >the <c>t</c> modifier, when applied to a <c>o</c>, <c>u</c>, <c>x</c>, or <c>X</c> conversion, indicates that the argument is of an unsigned type equivalent in size to a <c>ptrdiff_t</c>.  The <c>z</c> modifier, when applied to a <c>d</c> or <c>i</c> conversion, indicates that the argument is of a signed type equivalent in size to a <c>size_t</c>.  Similarly, when applied to an <c>n</c> conversion, it indicates that the argument is a pointer to a signed type equivalent in size to a <c>size_t</c>.
-  </para
-                  >
+
+                  </para>
                 </block>
                 <para
                   >The following length modifier is valid for the <c>a</c>, <c>A</c>, <c>e</c>, <c>E</c>, <c>f</c>, <c>F</c>, <c>g</c>, or <c>G</c> conversion:</para
@@ -5062,8 +5062,8 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
           </list>
           <para
             >A field width or precision, or both, may be indicated by an asterisk '<c>*</c>' or an asterisk followed by one or more decimal digits and a '<c>$</c>' instead of a digit string.  In this case, an <i>int</i> argument supplies the field width or precision.  A negative field width is treated as a left adjustment flag followed by a positive field width; a negative precision is treated as though it were missing.  If a single format directive mixes positional (<c>nn$</c>) and non-positional arguments, the results are undefined
-</para
-          >
+
+          </para>
           <para>The conversion specifiers and their meanings are:</para>
           <list type="table">
             <listheader>
@@ -5122,8 +5122,8 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
 <para
                   >Note that there may be multiple valid ways to represent floating-point numbers in this hexadecimal format.  For example, <c>0x3.24p+0</c>, <c>0x6.48p-1</c> and <c>0xc.9p-2</c> are all equivalent.  The format chosen depends on the internal representation of the number, but the implementation guarantees that the length of the mantissa will be minimized.  Zeroes are always represented with a mantissa of 0 (preceded by a '<c>-</c>' if appropriate) and an exponent of +0.
-</para
-                >
+
+                </para>
               </description>
             </item>
             <item>
@@ -5141,8 +5141,8 @@ Use snprintf (StringBuilder, string) instead.")</AttributeName>
 
 <para
                   >If the <c>l</c> (ell) modifier is used, the <c>wint_t</c> argument shall be converted to a <c>wchar_t</c>, and the (potentially multi-byte) sequence representing the single wide character is written, including any shift sequences.  If a shift sequence is used, the shift state is also restored to the original state after the character.
-</para
-                >
+
+                </para>
               </description>
             </item>
             <item>
@@ -5190,8 +5190,8 @@ The <c>char *</c> argument is expected to be a pointer to an array of character 
           </list>
           <para
             >The decimal point character is defined in the program's locale (category <c>LC_NUMERIC</c>)
-</para
-          >
+
+          </para>
           <para>In no case does a non-existent or small field width cause truncation of a numeric field; if the result of a conversion is wider than the field width, the field is expanded to contain the conversion result.</para>
         </remarks>
       </Docs>
@@ -5317,8 +5317,8 @@ The <c>char *</c> argument is expected to be a pointer to an array of character 
           <para>The strerror() function accepts an error number argument errnum and returns a pointer to the corresponding message string.</para>
           <para
             >If the error number is not recognized, these functions return an error message string containing "<c>Unknown error: </c>" followed by the error number in decimal.
-</para
-          >
+
+          </para>
         </remarks>
       </Docs>
     </Member>
@@ -5384,8 +5384,8 @@ The <c>char *</c> argument is expected to be a pointer to an array of character 
           >
           <para
             >Otherwise, the <c>system</c> function returns the exit status of the shell as returned by <see cref="M:Mono.Unix.Native.Syscall.waitpid" />(2), or -1 if an error occurred when invoking <see cref="M:Mono.Unix.Native.Syscall.fork" />(2) or <see cref="M:Mono.Unix.Native.Syscall.waitpid" />(2).  A return value of 127 means the execution of the shell failed.
-</para
-          >
+
+          </para>
         </returns>
         <remarks
           >The <c>system</c>() function hands the argument <paramref name="string" /> to the command interpreter <c>sh</c>(1).  The calling process waits for the shell to finish executing the command, ignoring <see cref="F:Mono.Unix.Native.Signum.SIGINT" /> and <see cref="F:Mono.Unix.Native.Signum.SIGQUIT" />, and blocking <see cref="F:Mono.Unix.Native.Signum.SIGCHLD" />.</remarks
@@ -5546,14 +5546,14 @@ The <c>char *</c> argument is expected to be a pointer to an array of character 
         <remarks>
           <para
             >The <c>ungetc</c>() function pushes the character <paramref name="c" /> (converted to an unsigned char) back onto the input stream pointed to by <paramref name="stream" />.  The pushed-back characters will be returned by subsequent reads on the stream (in reverse order).  A successful intervening call, using the same stream, to one of the file positioning functions (<see cref="M:Mono.Unix.Native.Stdlib.fseek" />(3), <see cref="M:Mono.Unix.Native.Stdlib.fsetpos" />(3), or <see cref="M:Mono.Unix.Native.Stdlib.rewind" />(3)) will discard the pushed back characters.
-</para
-          >
+
+          </para>
           <para>One character of push-back is guaranteed, but as long as there is sufficient memory, an effectively infinite amount of pushback is allowed.
 </para>
           <para
             >If a character is successfully pushed-back, the end-of-file indicator for the stream is cleared.  The file-position indicator is decremented by each successful call to <c>ungetc</c>(); if its value was 0 before a call, its value is unspecified after the call.
-</para
-          >
+
+          </para>
         </remarks>
       </Docs>
     </Member>

@@ -51,8 +51,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.Configuration.TypeElement" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.Configuration.TypeElement" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -74,8 +74,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.Configuration.TypeElement" /> class with the specified type name. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.Configuration.TypeElement" /> class with the specified type name.
+          </para>
         </summary>
         <param name="typeName">
           <attribution

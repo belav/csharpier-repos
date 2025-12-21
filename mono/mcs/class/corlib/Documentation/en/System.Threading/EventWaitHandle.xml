@@ -303,11 +303,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="Overload:System.Threading.EventWaitHandle.OpenExisting" /> method tries to open the specified named system event. If the system event does not exist, this method throws an exception instead of creating the system event. To create the system event when it does not already exist, use one of the <see cref="M:System.Threading.EventWaitHandle.#ctor(System.Boolean,System.Threading.EventResetMode,System.String,System.Boolean@,System.Security.AccessControl.EventWaitHandleSecurity)" /> constructors that has a <paramref name="name" /> parameter. </para
-          >
+            >The <see cref="Overload:System.Threading.EventWaitHandle.OpenExisting" /> method tries to open the specified named system event. If the system event does not exist, this method throws an exception instead of creating the system event. To create the system event when it does not already exist, use one of the <see cref="M:System.Threading.EventWaitHandle.#ctor(System.Boolean,System.Threading.EventResetMode,System.String,System.Boolean@,System.Security.AccessControl.EventWaitHandleSecurity)" /> constructors that has a <paramref name="name" /> parameter.
+          </para>
           <para
-            >Multiple calls to this method that use the same value for <paramref name="name" /> do not necessarily return the same <see cref="T:System.Threading.EventWaitHandle" /> object, even though the objects that are returned represent the same named system event.  </para
-          >
+            >Multiple calls to this method that use the same value for <paramref name="name" /> do not necessarily return the same <see cref="T:System.Threading.EventWaitHandle" /> object, even though the objects that are returned represent the same named system event.
+          </para>
           <para
             >This method overload is equivalent to calling the <see cref="M:System.Threading.EventWaitHandle.OpenExisting(System.String,System.Security.AccessControl.EventWaitHandleRights)" /> method overload and specifying <see cref="F:System.Security.AccessControl.EventWaitHandleRights.Synchronize" /> and <see cref="F:System.Security.AccessControl.EventWaitHandleRights.Modify" /> rights, combined by using the bitwise OR operation.</para
           >
@@ -358,14 +358,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="rights" /> parameter must include the <see cref="F:System.Security.AccessControl.EventWaitHandleRights.Synchronize" /> flag to allow threads to wait on the event, and the <see cref="F:System.Security.AccessControl.EventWaitHandleRights.Modify" /> flag to allow threads to call the <see cref="M:System.Threading.EventWaitHandle.Set" /> and <see cref="M:System.Threading.EventWaitHandle.Reset" /> methods. </para
-          >
+            >The <paramref name="rights" /> parameter must include the <see cref="F:System.Security.AccessControl.EventWaitHandleRights.Synchronize" /> flag to allow threads to wait on the event, and the <see cref="F:System.Security.AccessControl.EventWaitHandleRights.Modify" /> flag to allow threads to call the <see cref="M:System.Threading.EventWaitHandle.Set" /> and <see cref="M:System.Threading.EventWaitHandle.Reset" /> methods.
+          </para>
           <para
             >The <see cref="Overload:System.Threading.EventWaitHandle.OpenExisting" /> method tries to open an existing named system event. If the system event does not exist, this method throws an exception instead of creating the system event. To create the system event when it does not already exist, use one of the <see cref="M:System.Threading.EventWaitHandle.#ctor(System.Boolean,System.Threading.EventResetMode,System.String,System.Boolean@,System.Security.AccessControl.EventWaitHandleSecurity)" /> constructors that has a <paramref name="name" /> parameter.</para
           >
           <para
-            >Multiple calls to this method that use the same value for <paramref name="name" /> do not necessarily return the same <see cref="T:System.Threading.EventWaitHandle" /> object, even though the objects that are returned represent the same named system event.  </para
-          >
+            >Multiple calls to this method that use the same value for <paramref name="name" /> do not necessarily return the same <see cref="T:System.Threading.EventWaitHandle" /> object, even though the objects that are returned represent the same named system event.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -443,8 +443,8 @@
           >
           <block subset="none" type="note">
             <para
-              >There is no guarantee that every call to the <see cref="M:System.Threading.EventWaitHandle.Set" /> method will release a thread from an <see cref="T:System.Threading.EventWaitHandle" /> whose reset mode is <see cref="F:System.Threading.EventResetMode.AutoReset" />. If two calls are too close together, so that the second call occurs before a thread has been released, only one thread is released. It is as if the second call did not happen. Also, if <see cref="M:System.Threading.EventWaitHandle.Set" /> is called when there are no threads waiting and the <see cref="T:System.Threading.EventWaitHandle" /> is already signaled, the call has no effect. </para
-            >
+              >There is no guarantee that every call to the <see cref="M:System.Threading.EventWaitHandle.Set" /> method will release a thread from an <see cref="T:System.Threading.EventWaitHandle" /> whose reset mode is <see cref="F:System.Threading.EventResetMode.AutoReset" />. If two calls are too close together, so that the second call occurs before a thread has been released, only one thread is released. It is as if the second call did not happen. Also, if <see cref="M:System.Threading.EventWaitHandle.Set" /> is called when there are no threads waiting and the <see cref="T:System.Threading.EventWaitHandle" /> is already signaled, the call has no effect.
+            </para>
           </block>
           <para
             >For an <see cref="T:System.Threading.EventWaitHandle" /> with <see cref="F:System.Threading.EventResetMode.ManualReset" /> (including <see cref="T:System.Threading.ManualResetEvent" />), calling the <see cref="M:System.Threading.EventWaitHandle.Set" /> method leaves the wait handle in a signaled state until its <see cref="M:System.Threading.EventWaitHandle.Reset" /> method is called.</para

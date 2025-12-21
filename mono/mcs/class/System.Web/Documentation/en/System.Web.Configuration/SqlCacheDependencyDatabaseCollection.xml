@@ -25,8 +25,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.Configuration.SqlCacheDependencySection" /> uses the <see cref="T:System.Web.Configuration.SqlCacheDependencyDatabaseCollection" /> to programmatically access and modify the databases element of the sqlCacheDependency in the cache configuration section. </para
-      >
+        >The <see cref="T:System.Web.Configuration.SqlCacheDependencySection" /> uses the <see cref="T:System.Web.Configuration.SqlCacheDependencyDatabaseCollection" /> to programmatically access and modify the databases element of the sqlCacheDependency in the cache configuration section.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -451,16 +451,16 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Resets a specified <see cref="T:System.Web.Configuration.SqlCacheDependencyDatabase" /> object that exists within the collection. </para
-          >
+            >Resets a specified <see cref="T:System.Web.Configuration.SqlCacheDependencyDatabase" /> object that exists within the collection.
+          </para>
         </summary>
         <param name="user">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.Configuration.SqlCacheDependencyDatabase" /> element to reset. </param
-        >
+          />The <see cref="T:System.Web.Configuration.SqlCacheDependencyDatabase" /> element to reset.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

@@ -22,8 +22,8 @@
         >The <see cref="T:System.ComponentModel.ICustomTypeDescriptor" /> interface allows an object to provide type information about itself. Typically, this interface is used when an object needs dynamic type information. In contrast, the <see cref="T:System.ComponentModel.TypeDescriptor" /> class provides static type information that is obtained from metadata.</para
       >
       <para
-        >For example, <see cref="T:System.ComponentModel.ICustomTypeDescriptor" /> is used in the dnprdnshort to provide type information for COM objects. COM objects do not support properties or attributes. Therefore, the dnprdnshort uses <see cref="T:System.ComponentModel.ICustomTypeDescriptor" /> to implement properties and attributes for COM objects. </para
-      >
+        >For example, <see cref="T:System.ComponentModel.ICustomTypeDescriptor" /> is used in the dnprdnshort to provide type information for COM objects. COM objects do not support properties or attributes. Therefore, the dnprdnshort uses <see cref="T:System.ComponentModel.ICustomTypeDescriptor" /> to implement properties and attributes for COM objects.
+      </para>
       <para
         >To provide dynamic custom type information, a class can implement <see cref="T:System.ComponentModel.ICustomTypeDescriptor" /> or derive from the <see cref="T:System.ComponentModel.CustomTypeDescriptor" /> class, which provides a simple implementation of this interface.</para
       >
@@ -286,8 +286,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> that represents the editor for this object. </param
-        >
+          />A <see cref="T:System.Type" /> that represents the editor for this object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetEvents">
@@ -440,8 +440,8 @@
             >If an <see cref="T:System.Attribute" /> is specified in the <paramref name="attributes" /> array and the property does not have an instance of the class for that attribute, the returned collection will include the property if the <see cref="T:System.Attribute" /> is the default property.</para
           >
           <para
-            >For filtering rules, see <see cref="M:System.ComponentModel.TypeDescriptor.GetProperties(System.Object,System.Attribute[])" />. </para
-          >
+            >For filtering rules, see <see cref="M:System.ComponentModel.TypeDescriptor.GetProperties(System.Object,System.Attribute[])" />.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -503,8 +503,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.ComponentModel.PropertyDescriptor" /> that represents the property whose owner is to be found. </param
-        >
+          />A <see cref="T:System.ComponentModel.PropertyDescriptor" /> that represents the property whose owner is to be found.
+        </param>
       </Docs>
     </Member>
   </Members>

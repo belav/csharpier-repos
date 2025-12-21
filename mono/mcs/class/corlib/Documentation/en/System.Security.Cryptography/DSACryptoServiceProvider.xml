@@ -37,8 +37,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You can use the <see cref="T:System.Security.Cryptography.DSACryptoServiceProvider" /> class to create digital signatures and protect the integrity of your data. </para
-      >
+        >You can use the <see cref="T:System.Security.Cryptography.DSACryptoServiceProvider" /> class to create digital signatures and protect the integrity of your data.
+      </para>
       <para>To use a public-key system to digitally sign a message, the sender first applies a hash function to the message to create a message digest. The sender then encrypts the message digest with the sender's private key to create the sender's personal signature. Upon receiving the message and signature, the receiver decrypts the signature using the sender's public key to recover the message digest and hashes the message using the same hash algorithm that the sender used. If the message digest that the receiver computes exactly matches the message digest received from the sender, the receiver can be sure that the message was not altered while in transit. Note that a signature can be verified by anyone, because the sender's public key is common knowledge.</para>
       <block subset="none" type="note">
         <para
@@ -50,8 +50,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines a wrapper object to access the cryptographic service provider (CSP) implementation of the <see cref="T:System.Security.Cryptography.DSA" /> algorithm. This class cannot be inherited. </para
-      >
+        >Defines a wrapper object to access the cryptographic service provider (CSP) implementation of the <see cref="T:System.Security.Cryptography.DSA" /> algorithm. This class cannot be inherited.
+      </para>
     </summary>
   </Docs>
   <Members>
@@ -108,8 +108,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The size of the key for the asymmetric algorithm in bits. </param
-        >
+          />The size of the key for the asymmetric algorithm in bits.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -144,8 +144,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The parameters for the CSP. </param
-        >
+          />The parameters for the CSP.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -181,15 +181,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The size of the key for the cryptographic algorithm in bits. </param
-        >
+          />The size of the key for the cryptographic algorithm in bits.
+        </param>
         <param name="parameters">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The parameters for the CSP. </param
-        >
+          />The parameters for the CSP.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateSignature">
@@ -228,12 +228,8 @@
           <para>The digital signature for the specified data.</para>
         </returns>
         <param name="rgbHash">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The data to be signed. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The data to be signed.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CspKeyContainerInfo">
@@ -264,17 +260,17 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.Security.Cryptography.DSACryptoServiceProvider.CspKeyContainerInfo" /> property to retrieve additional information about a cryptographic key pair.  The returned <see cref="T:System.Security.Cryptography.CspKeyContainerInfo" /> object describes whether the key is exportable, and specifies the key container name, information about the provider, and other information. </para
-          >
+            >Use the <see cref="P:System.Security.Cryptography.DSACryptoServiceProvider.CspKeyContainerInfo" /> property to retrieve additional information about a cryptographic key pair.  The returned <see cref="T:System.Security.Cryptography.CspKeyContainerInfo" /> object describes whether the key is exportable, and specifies the key container name, information about the provider, and other information.
+          </para>
           <para
-            >In cases where a random key is generated, a key container will not be created until you call a method that uses the key.  Some properties of the <see cref="T:System.Security.Cryptography.CspKeyContainerInfo" /> object returned by the <see cref="P:System.Security.Cryptography.DSACryptoServiceProvider.CspKeyContainerInfo" /> property will throw a <see cref="T:System.Security.Cryptography.CryptographicException" /> if a key container has not been created.  To make sure that a key container has been created, call a method such as <see cref="Overload:System.Security.Cryptography.DSACryptoServiceProvider.SignData" />, <see cref="M:System.Security.Cryptography.DSACryptoServiceProvider.SignHash(System.Byte[],System.String)" />, <see cref="M:System.Security.Cryptography.DSACryptoServiceProvider.VerifyData(System.Byte[],System.Byte[])" />, <see cref="M:System.Security.Cryptography.DSACryptoServiceProvider.VerifyHash(System.Byte[],System.String,System.Byte[])" />, and so on, before you call the <see cref="P:System.Security.Cryptography.DSACryptoServiceProvider.CspKeyContainerInfo" /> property.  </para
-          >
+            >In cases where a random key is generated, a key container will not be created until you call a method that uses the key.  Some properties of the <see cref="T:System.Security.Cryptography.CspKeyContainerInfo" /> object returned by the <see cref="P:System.Security.Cryptography.DSACryptoServiceProvider.CspKeyContainerInfo" /> property will throw a <see cref="T:System.Security.Cryptography.CryptographicException" /> if a key container has not been created.  To make sure that a key container has been created, call a method such as <see cref="Overload:System.Security.Cryptography.DSACryptoServiceProvider.SignData" />, <see cref="M:System.Security.Cryptography.DSACryptoServiceProvider.SignHash(System.Byte[],System.String)" />, <see cref="M:System.Security.Cryptography.DSACryptoServiceProvider.VerifyData(System.Byte[],System.Byte[])" />, <see cref="M:System.Security.Cryptography.DSACryptoServiceProvider.VerifyHash(System.Byte[],System.String,System.Byte[])" />, and so on, before you call the <see cref="P:System.Security.Cryptography.DSACryptoServiceProvider.CspKeyContainerInfo" /> property.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Security.Cryptography.CspKeyContainerInfo" /> object that describes additional information about a cryptographic key pair.  </para
-          >
+            >Gets a <see cref="T:System.Security.Cryptography.CspKeyContainerInfo" /> object that describes additional information about a cryptographic key pair.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -315,8 +311,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ExportCspBlob">
@@ -355,8 +351,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Exports a blob containing the key information associated with a <see cref="T:System.Security.Cryptography.DSACryptoServiceProvider" /> object.  </para
-          >
+            >Exports a blob containing the key information associated with a <see cref="T:System.Security.Cryptography.DSACryptoServiceProvider" /> object.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -416,8 +412,7 @@ bool IsPrivateKeyAvailable (DSA dsa)
 		return false;
 	}
 }
-  </code
-            >
+  </code>
           </example>
           <para
             >You are responsable to zeroize the private key (<see cref="T:System.Security.Cryptography.DSAParameters" />.<see cref="M:System.Security.Cryptography.DSAParameters.X" />) if you export it from the instance.</para
@@ -436,8 +431,8 @@ bool IsPrivateKeyAvailable (DSA dsa)
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to include private parameters; otherwise, false. </param
-        >
+          />true to include private parameters; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Finalize">
@@ -540,8 +535,8 @@ bool IsPrivateKeyAvailable (DSA dsa)
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The parameters for <see cref="T:System.Security.Cryptography.DSA" />. </param
-        >
+          />The parameters for <see cref="T:System.Security.Cryptography.DSA" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="KeyExchangeAlgorithm">
@@ -583,8 +578,8 @@ bool IsPrivateKeyAvailable (DSA dsa)
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This algorithm supports key lengths from 512 bits to 1024 bits in increments of 64 bits.</para>
           <para
-            >The <see cref="T:System.Security.Cryptography.DSACryptoServiceProvider" /> class does not allow you to change key sizes using the <see cref="P:System.Security.Cryptography.DSACryptoServiceProvider.KeySize" /> property.  Any value written to this property will fail to update the property without error.  To change the key size, use one of the constructor overloads.   </para
-          >
+            >The <see cref="T:System.Security.Cryptography.DSACryptoServiceProvider" /> class does not allow you to change key sizes using the <see cref="P:System.Security.Cryptography.DSACryptoServiceProvider.KeySize" /> property.  Any value written to this property will fail to update the property without error.  To change the key size, use one of the constructor overloads.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -665,8 +660,8 @@ bool IsPrivateKeyAvailable (DSA dsa)
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Security.Cryptography.DSACryptoServiceProvider" /> class can be initialized either with a public key only or with both a public and private key.  Use the <see cref="P:System.Security.Cryptography.DSACryptoServiceProvider.PublicOnly" /> property to determine whether the current instance contains only a public key or both a public and private key.    </para
-          >
+            >The <see cref="T:System.Security.Cryptography.DSACryptoServiceProvider" /> class can be initialized either with a public key only or with both a public and private key.  Use the <see cref="P:System.Security.Cryptography.DSACryptoServiceProvider.PublicOnly" /> property to determine whether the current instance contains only a public key or both a public and private key.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -740,8 +735,8 @@ bool IsPrivateKeyAvailable (DSA dsa)
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The input data for which to compute the hash. </param
-        >
+          />The input data for which to compute the hash.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SignData">
@@ -787,8 +782,8 @@ bool IsPrivateKeyAvailable (DSA dsa)
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The input data for which to compute the hash. </param
-        >
+          />The input data for which to compute the hash.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SignData">
@@ -835,26 +830,22 @@ bool IsPrivateKeyAvailable (DSA dsa)
           >
         </returns>
         <param name="buffer">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The input data to sign. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The input data to sign.
+        </param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The offset into the array from which to begin using data. </param
-        >
+          />The offset into the array from which to begin using data.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes in the array to use as data. </param
-        >
+          />The number of bytes in the array to use as data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SignHash">
@@ -901,15 +892,15 @@ bool IsPrivateKeyAvailable (DSA dsa)
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The hash value of the data to be signed. </param
-        >
+          />The hash value of the data to be signed.
+        </param>
         <param name="str">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the hash algorithm used to create the hash value of the data. </param
-        >
+          />The name of the hash algorithm used to create the hash value of the data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="UseMachineKeyStore">
@@ -979,19 +970,15 @@ bool IsPrivateKeyAvailable (DSA dsa)
           <para>true if the signature verifies as valid; otherwise, false.</para>
         </returns>
         <param name="rgbData">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The data that was signed. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The data that was signed.
+        </param>
         <param name="rgbSignature">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The signature data to be verified. </param
-        >
+          />The signature data to be verified.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="VerifyHash">
@@ -1040,22 +1027,22 @@ bool IsPrivateKeyAvailable (DSA dsa)
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The hash value of the data to be signed. </param
-        >
+          />The hash value of the data to be signed.
+        </param>
         <param name="str">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the hash algorithm used to create the hash value of the data. </param
-        >
+          />The name of the hash algorithm used to create the hash value of the data.
+        </param>
         <param name="rgbSignature">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The signature data to be verified. </param
-        >
+          />The signature data to be verified.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="VerifySignature">
@@ -1101,15 +1088,15 @@ bool IsPrivateKeyAvailable (DSA dsa)
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data signed with <paramref name="rgbSignature" />. </param
-        >
+          />The data signed with <paramref name="rgbSignature" />.
+        </param>
         <param name="rgbSignature">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The signature to be verified for <paramref name="rgbData" />. </param
-        >
+          />The signature to be verified for <paramref name="rgbData" />.
+        </param>
       </Docs>
     </Member>
   </Members>

@@ -54,8 +54,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Linq.XProcessingInstruction" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Linq.XProcessingInstruction" /> class.
+          </para>
         </summary>
         <param name="other">
           <attribution
@@ -88,8 +88,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Linq.XProcessingInstruction" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Linq.XProcessingInstruction" /> class.
+          </para>
         </summary>
         <param name="target">
           <attribution
@@ -201,8 +201,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is primarily used internally by the methods that write an XML tree to an <see cref="T:System.Xml.XmlWriter" />. </para
-          >
+            >This method is primarily used internally by the methods that write an XML tree to an <see cref="T:System.Xml.XmlWriter" />.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

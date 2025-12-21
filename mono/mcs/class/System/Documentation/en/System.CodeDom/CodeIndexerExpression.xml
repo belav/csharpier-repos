@@ -102,15 +102,15 @@
           >
         </summary>
         <param name="targetObject">
-          <attribution license="cc4" from="Microsoft" modified="false" />The target object. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The target object.
+        </param>
         <param name="indices">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index or indexes of the indexer expression. </param
-        >
+          />The index or indexes of the indexer expression.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Indices">

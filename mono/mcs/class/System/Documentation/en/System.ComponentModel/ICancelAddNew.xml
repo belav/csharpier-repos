@@ -46,8 +46,8 @@
         </item>
         <item>
           <para
-            >The newer model supports a more robust data-binding scenario through the generic <see cref="T:System.ComponentModel.BindingList`1" /> class, which implements the <see cref="T:System.ComponentModel.IBindingList" /> and <see cref="T:System.ComponentModel.ICancelAddNew" /> interfaces. In this case, the transactional support is managed by the <see cref="T:System.ComponentModel.BindingList`1" /> collection directly. </para
-          >
+            >The newer model supports a more robust data-binding scenario through the generic <see cref="T:System.ComponentModel.BindingList`1" /> class, which implements the <see cref="T:System.ComponentModel.IBindingList" /> and <see cref="T:System.ComponentModel.ICancelAddNew" /> interfaces. In this case, the transactional support is managed by the <see cref="T:System.ComponentModel.BindingList`1" /> collection directly.
+          </para>
         </item>
       </list>
     </remarks>
@@ -78,8 +78,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.ComponentModel.ICancelAddNew.CancelNew(System.Int32)" /> method rolls back a pending addition (<see cref="M:System.ComponentModel.IBindingList.AddNew" />) of an item previously added to the collection at position <paramref name="itemIndex" />. The index parameter is necessary because several new items can be simultaneously pending. </para
-          >
+            >The <see cref="M:System.ComponentModel.ICancelAddNew.CancelNew(System.Int32)" /> method rolls back a pending addition (<see cref="M:System.ComponentModel.IBindingList.AddNew" />) of an item previously added to the collection at position <paramref name="itemIndex" />. The index parameter is necessary because several new items can be simultaneously pending.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -90,8 +90,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the item that was previously added to the collection. </param
-        >
+          />The index of the item that was previously added to the collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="EndNew">
@@ -115,8 +115,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.ComponentModel.ICancelAddNew.EndNew(System.Int32)" /> commits a pending addition (<see cref="M:System.ComponentModel.IBindingList.AddNew" />) of an item previously added to the collection at position <paramref name="itemIndex" />. The index parameter is necessary because several new items can be simultaneously pending. </para
-          >
+            >The <see cref="M:System.ComponentModel.ICancelAddNew.EndNew(System.Int32)" /> commits a pending addition (<see cref="M:System.ComponentModel.IBindingList.AddNew" />) of an item previously added to the collection at position <paramref name="itemIndex" />. The index parameter is necessary because several new items can be simultaneously pending.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -127,8 +127,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the item that was previously added to the collection. </param
-        >
+          />The index of the item that was previously added to the collection.
+        </param>
       </Docs>
     </Member>
   </Members>

@@ -57,8 +57,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationContent" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationContent" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -527,8 +527,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is abstract, so it must be accessed on an instance of a syndication content type (a class derived from <see cref="T:System.ServiceModel.Syndication.SyndicationContent" />). The dnprdnshort defines the following syndication content types: </para
-          >
+            >This property is abstract, so it must be accessed on an instance of a syndication content type (a class derived from <see cref="T:System.ServiceModel.Syndication.SyndicationContent" />). The dnprdnshort defines the following syndication content types:
+          </para>
           <list type="bullet">
             <item>
               <para>

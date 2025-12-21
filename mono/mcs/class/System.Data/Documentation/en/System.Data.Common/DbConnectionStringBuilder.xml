@@ -24,8 +24,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Data.Common.DbConnectionStringBuilder" /> class provides the base class from which the strongly typed connection string builders (<see cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />, <see cref="T:System.Data.OleDb.OleDbConnectionStringBuilder" />, and so on) derive. The connection string builders let developers programmatically create syntactically correct connection strings, and parse and rebuild existing connection strings. </para
-      >
+        >The <see cref="T:System.Data.Common.DbConnectionStringBuilder" /> class provides the base class from which the strongly typed connection string builders (<see cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />, <see cref="T:System.Data.OleDb.OleDbConnectionStringBuilder" />, and so on) derive. The connection string builders let developers programmatically create syntactically correct connection strings, and parse and rebuild existing connection strings.
+      </para>
       <para
         >The <see cref="T:System.Data.Common.DbConnectionStringBuilder" /> has been defined in a database-agnostic manner. Because of the addition of the <see cref="N:System.Data.Common" /> namespace, developers require a base class against which they can program in order to build connection strings that can work against an arbitrary database. Therefore, the <see cref="T:System.Data.Common.DbConnectionStringBuilder" /> class lets users assign arbitrary key/value pairs and pass the resulting connection string to a strongly typed provider. All the data providers that are included as part of the .NET Framework provide a strongly typed class that inherits from <see cref="T:System.Data.Common.DbConnectionStringBuilder" />: <see cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />, <see cref="T:System.Data.OracleClient.OracleConnectionStringBuilder" />, <see cref="T:System.Data.Odbc.OdbcConnectionStringBuilder" />, and <see cref="T:System.Data.OleDb.OleDbConnectionStringBuilder" />.</para
       >
@@ -131,11 +131,11 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Data.Common.DbConnectionStringBuilder.Item(System.String)" /> property can also be used to add new elements by setting the value of a key that does not exist in the dictionary. For example: myCollection["myNonexistentKey"] = myValue. </para
-          >
+            >The <see cref="P:System.Data.Common.DbConnectionStringBuilder.Item(System.String)" /> property can also be used to add new elements by setting the value of a key that does not exist in the dictionary. For example: myCollection["myNonexistentKey"] = myValue.
+          </para>
           <para
-            >Calling the <see cref="M:System.Data.Common.DbConnectionStringBuilder.Add(System.String,System.Object)" /> method by passing a null (Nothing in Visual Basic) key throws an <see cref="T:System.ArgumentNullException" />. However, calling the <see cref="M:System.Data.Common.DbConnectionStringBuilder.Add(System.String,System.Object)" /> method by passing a null value removes the key/value pair. </para
-          >
+            >Calling the <see cref="M:System.Data.Common.DbConnectionStringBuilder.Add(System.String,System.Object)" /> method by passing a null (Nothing in Visual Basic) key throws an <see cref="T:System.ArgumentNullException" />. However, calling the <see cref="M:System.Data.Common.DbConnectionStringBuilder.Add(System.String,System.Object)" /> method by passing a null value removes the key/value pair.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -181,8 +181,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method allows developers using a <see cref="T:System.Text.StringBuilder" /> to create a collection of key/value pairs to be able to take advantage of the features included in the <see cref="T:System.Data.Common.DbConnectionStringBuilder" /> class when you add key/value pairs, without having to incur the overhead of creating and maintaining a <see cref="T:System.Data.Common.DbConnectionStringBuilder" /> instance. The AppendKeyValuePair method formats the key and value correctly and adds the new string to the supplied <see cref="T:System.Text.StringBuilder" />. </para
-          >
+            >This method allows developers using a <see cref="T:System.Text.StringBuilder" /> to create a collection of key/value pairs to be able to take advantage of the features included in the <see cref="T:System.Data.Common.DbConnectionStringBuilder" /> class when you add key/value pairs, without having to incur the overhead of creating and maintaining a <see cref="T:System.Data.Common.DbConnectionStringBuilder" /> instance. The AppendKeyValuePair method formats the key and value correctly and adds the new string to the supplied <see cref="T:System.Text.StringBuilder" />.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -235,8 +235,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
             >This method allows developers using a <see cref="T:System.Text.StringBuilder" /> to create a collection of key/value pairs to be able to take advantage of the features included in the <see cref="T:System.Data.Common.DbConnectionStringBuilder" /> class when adding key/value pairs, without having to incur the overhead of creating and maintaining a <see cref="T:System.Data.Common.DbConnectionStringBuilder" /> instance. The AppendKeyValuePair method formats the key and value correctly and adds the new string to the supplied <see cref="T:System.Text.StringBuilder" />.</para
           >
           <para
-            >Although most data sources let you delimit fields by using quotation marks, ODBC does not--for ODBC connection strings, you must use curly braces ({}). In order to have the <see cref="T:System.Data.Common.DbConnectionStringBuilder" /> use ODBC rules for delimiting fields, set the <paramref name="useOdbcRules" /> parameter to true. </para
-          >
+            >Although most data sources let you delimit fields by using quotation marks, ODBC does not--for ODBC connection strings, you must use curly braces ({}). In order to have the <see cref="T:System.Data.Common.DbConnectionStringBuilder" /> use ODBC rules for delimiting fields, set the <paramref name="useOdbcRules" /> parameter to true.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -299,8 +299,8 @@ initial catalog="AdventureWorks;NewValue=Bad"</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Developers creating designers that take advantage of the <see cref="T:System.Data.Common.DbConnectionStringBuilder" /> class must be able to make the connection string visible or invisible within the designer's property grid. The <see cref="P:System.Data.Common.DbConnectionStringBuilder.BrowsableConnectionString" /> property lets developers indicate that the property should be invisible by setting the property to false. </para
-          >
+            >Developers creating designers that take advantage of the <see cref="T:System.Data.Common.DbConnectionStringBuilder" /> class must be able to make the connection string visible or invisible within the designer's property grid. The <see cref="P:System.Data.Common.DbConnectionStringBuilder.BrowsableConnectionString" /> property lets developers indicate that the property should be invisible by setting the property to false.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

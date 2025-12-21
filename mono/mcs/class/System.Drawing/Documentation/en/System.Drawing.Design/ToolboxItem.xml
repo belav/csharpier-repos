@@ -31,8 +31,8 @@
         >An instance of the <see cref="T:System.Drawing.Design.ToolboxItem" /> class can be configured with a name, bitmap, and type to create, without creating a class that derives from <see cref="T:System.Drawing.Design.ToolboxItem" />. The <see cref="T:System.Drawing.Design.ToolboxItem" /> class also provides a base class for custom toolbox item implementations. A custom <see cref="T:System.Drawing.Design.ToolboxItem" /> can create multiple components. To implement a custom toolbox item, you must derive from <see cref="T:System.Drawing.Design.ToolboxItem" /> and override the <see cref="M:System.Drawing.Design.ToolboxItem.CreateComponentsCore(System.ComponentModel.Design.IDesignerHost)" />, <see cref="M:System.Drawing.Design.ToolboxItem.Serialize(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />, and <see cref="M:System.Drawing.Design.ToolboxItem.Deserialize(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" /> methods.</para
       >
       <para
-        >The following properties and methods must be configured for a <see cref="T:System.Drawing.Design.ToolboxItem" /> to function correctly: </para
-      >
+        >The following properties and methods must be configured for a <see cref="T:System.Drawing.Design.ToolboxItem" /> to function correctly:
+      </para>
       <list type="bullet">
         <item>
           <para
@@ -141,8 +141,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of <see cref="T:System.ComponentModel.IComponent" /> that the toolbox item creates. </param
-        >
+          />The type of <see cref="T:System.ComponentModel.IComponent" /> that the toolbox item creates.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -254,13 +254,13 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="E:System.Drawing.Design.ToolboxItem.ComponentsCreated" /> event is raised each time components of this toolbox item are created. </para
-          >
+            >The <see cref="E:System.Drawing.Design.ToolboxItem.ComponentsCreated" /> event is raised each time components of this toolbox item are created.
+          </para>
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -285,8 +285,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="E:System.Drawing.Design.ToolboxItem.ComponentsCreating" /> event is raised each time components of the toolbox item are about to be created. </para
-          >
+            >The <see cref="E:System.Drawing.Design.ToolboxItem.ComponentsCreating" /> event is raised each time components of the toolbox item are about to be created.
+          </para>
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
@@ -390,8 +390,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ComponentModel.Design.IDesignerHost" /> to use when creating the components. </param
-        >
+          />The <see cref="T:System.ComponentModel.Design.IDesignerHost" /> to use when creating the components.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -481,8 +481,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ComponentModel.Design.IDesignerHost" /> to host the toolbox item. </param
-        >
+          />The <see cref="T:System.ComponentModel.Design.IDesignerHost" /> to host the toolbox item.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -608,15 +608,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> to load from. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> to load from.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Runtime.Serialization.StreamingContext" /> that indicates the stream characteristics. </param
-        >
+          />A <see cref="T:System.Runtime.Serialization.StreamingContext" /> that indicates the stream characteristics.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -859,29 +859,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ComponentModel.Design.IDesignerHost" /> for the current document. This can be null. </param
-        >
+          />The <see cref="T:System.ComponentModel.Design.IDesignerHost" /> for the current document. This can be null.
+        </param>
         <param name="assemblyName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Reflection.AssemblyName" /> that indicates the assembly that contains the type to load. This can be null. </param
-        >
+          />An <see cref="T:System.Reflection.AssemblyName" /> that indicates the assembly that contains the type to load. This can be null.
+        </param>
         <param name="typeName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the type to create an instance of. </param
-        >
+          />The name of the type to create an instance of.
+        </param>
         <param name="reference">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A value indicating whether or not to add a reference to the assembly that contains the specified type to the designer host's set of references. </param
-        >
+          />A value indicating whether or not to add a reference to the assembly that contains the specified type to the designer host's set of references.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -931,8 +931,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> that the toolbox item creates. </param
-        >
+          />The <see cref="T:System.Type" /> that the toolbox item creates.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1048,8 +1048,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Drawing.Design.ToolboxComponentsCreatedEventArgs" /> that provides data for the event. </param
-        >
+          />A <see cref="T:System.Drawing.Design.ToolboxComponentsCreatedEventArgs" /> that provides data for the event.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1094,8 +1094,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Drawing.Design.ToolboxComponentsCreatingEventArgs" /> that provides data for the event. </param
-        >
+          />A <see cref="T:System.Drawing.Design.ToolboxComponentsCreatingEventArgs" /> that provides data for the event.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1155,15 +1155,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> to save to. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> to save to.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Runtime.Serialization.StreamingContext" /> that indicates the stream characteristics. </param
-        >
+          />A <see cref="T:System.Runtime.Serialization.StreamingContext" /> that indicates the stream characteristics.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

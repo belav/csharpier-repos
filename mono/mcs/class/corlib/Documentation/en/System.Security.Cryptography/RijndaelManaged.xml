@@ -117,8 +117,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The IV to be used for the symmetric algorithm. </param
-        >
+          />The IV to be used for the symmetric algorithm.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateEncryptor">
@@ -175,8 +175,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The IV to be used for the symmetric algorithm. </param
-        >
+          />The IV to be used for the symmetric algorithm.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GenerateIV">

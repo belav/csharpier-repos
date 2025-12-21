@@ -65,12 +65,8 @@
           >
         </summary>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name to resolve. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name to resolve.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Name">

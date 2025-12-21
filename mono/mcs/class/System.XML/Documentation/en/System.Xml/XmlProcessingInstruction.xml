@@ -129,8 +129,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to recursively clone the subtree under the specified node; false to clone only the node itself. </param
-        >
+          />true to recursively clone the subtree under the specified node; false to clone only the node itself.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Data">
@@ -327,8 +327,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XmlWriter to which you want to save. </param
-        >
+          />The XmlWriter to which you want to save.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteTo">
@@ -366,8 +366,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XmlWriter to which you want to save. </param
-        >
+          />The XmlWriter to which you want to save.
+        </param>
       </Docs>
     </Member>
   </Members>

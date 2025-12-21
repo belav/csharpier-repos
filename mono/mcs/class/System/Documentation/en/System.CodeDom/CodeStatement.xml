@@ -34,8 +34,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.CodeDom.CodeStatement" /> provides an abstract base class for code statements within the <see cref="N:System.CodeDom" /> namespace. </para
-      >
+        <see cref="T:System.CodeDom.CodeStatement" /> provides an abstract base class for code statements within the <see cref="N:System.CodeDom" /> namespace.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -62,8 +62,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeStatement" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeStatement" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>

@@ -122,8 +122,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Uri" /> that specifies the requested Internet resource. </param
-        >
+          />A <see cref="T:System.Uri" /> that specifies the requested Internet resource.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -171,8 +171,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Uri" /> of the host to check for proxy use. </param
-        >
+          />The <see cref="T:System.Uri" /> of the host to check for proxy use.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

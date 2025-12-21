@@ -16,8 +16,8 @@
     > must be applicable (<hyperlink>14.4.2.1</hyperlink>) with respect to the <non_terminal
       where="14.4.1"
       >argument-list</non_terminal
-    > of the <non_terminal where="14.5.5">invocation-expression</non_terminal>. </paragraph
-  >
+    > of the <non_terminal where="14.5.5">invocation-expression</non_terminal>.
+  </paragraph>
   <paragraph
     >The run-time processing of a delegate invocation of the form D(A), where D is a <non_terminal
       where="14.5"
@@ -30,8 +30,8 @@
       <list_item> D is evaluated. If this evaluation causes an exception, no further steps are executed. </list_item>
       <list_item> The value of D is checked to be valid. If the value of D is null, a System.NullReferenceException is thrown and no further steps are executed. </list_item>
       <list_item
-        > Otherwise, D is a reference to a delegate instance. A function member invocation (<hyperlink>14.4.3</hyperlink>) is performed on the method referenced by the delegate. If the method is an instance method, the instance of the invocation becomes the instance referenced by the delegate. </list_item
-      >
+        > Otherwise, D is a reference to a delegate instance. A function member invocation (<hyperlink>14.4.3</hyperlink>) is performed on the method referenced by the delegate. If the method is an instance method, the instance of the invocation becomes the instance referenced by the delegate.
+      </list_item>
     </list>
   </paragraph>
 </clause>

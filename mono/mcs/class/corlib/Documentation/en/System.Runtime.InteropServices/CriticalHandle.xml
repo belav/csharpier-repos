@@ -155,8 +155,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the <see cref="T:System.Runtime.InteropServices.CriticalHandle" />. </para
-          >
+            >Releases all resources used by the <see cref="T:System.Runtime.InteropServices.CriticalHandle" />.
+          </para>
         </summary>
       </Docs>
     </Member>

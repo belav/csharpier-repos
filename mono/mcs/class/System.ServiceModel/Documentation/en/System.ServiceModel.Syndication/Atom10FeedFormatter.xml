@@ -29,8 +29,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use this class to serialize instances of <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" /> and to create instances of <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" /> from XML documents that represent Atom1.0 feeds. If you have derived a class from <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" /> and want to serialize it, use the <see cref="T:System.ServiceModel.Syndication.Atom10FeedFormatter`1" /> formatter. </para
-      >
+        >Use this class to serialize instances of <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" /> and to create instances of <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" /> from XML documents that represent Atom1.0 feeds. If you have derived a class from <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" /> and want to serialize it, use the <see cref="T:System.ServiceModel.Syndication.Atom10FeedFormatter`1" /> formatter.
+      </para>
       <block subset="none" type="note">
         <para>The Atom 1.0 specification allows for fractional seconds to be specified in any of its date constructs. When serializing and deserializing, the indigo2 implementation ignores the fractional seconds.</para>
       </block>
@@ -59,8 +59,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.Atom10FeedFormatter" /> class. </para
-          >
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.Atom10FeedFormatter" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -120,8 +120,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.Atom10FeedFormatter" /> class. </para
-          >
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.Atom10FeedFormatter" /> class.
+          </para>
         </summary>
         <param name="feedTypeToCreate">
           <attribution

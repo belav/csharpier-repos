@@ -17,8 +17,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You can extend the security of your Web application by creating your own named <see cref="T:System.Web.Configuration.TrustLevel" /> object that is mapped to a file specified by the policyFile attribute. </para
-      >
+        >You can extend the security of your Web application by creating your own named <see cref="T:System.Web.Configuration.TrustLevel" /> object that is mapped to a file specified by the policyFile attribute.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

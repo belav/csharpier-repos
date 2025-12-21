@@ -366,8 +366,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to which the <see cref="T:System.IO.StringReader" /> should be initialized. </param
-        >
+          />The string to which the <see cref="T:System.IO.StringReader" /> should be initialized.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -462,8 +462,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -953,22 +953,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />When this method returns, contains the specified character array with the values between <paramref name="index" /> and (<paramref name="index" /> + <paramref name="count" /> - 1) replaced by the characters read from the current source. </param
-        >
+          />When this method returns, contains the specified character array with the values between <paramref name="index" /> and (<paramref name="index" /> + <paramref name="count" /> - 1) replaced by the characters read from the current source.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting index in the buffer. </param
-        >
+          />The starting index in the buffer.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters to read. </param
-        >
+          />The number of characters to read.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -997,8 +997,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The task completes after either the number of characters specified by the <paramref name="count" /> parameter are read or the end of the string is reached. </para
-          >
+            >The task completes after either the number of characters specified by the <paramref name="count" /> parameter are read or the end of the string is reached.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1528,8 +1528,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A task that represents the asynchronous read operation. The value of the <paramref name="TResult" /> parameter contains a string with the characters from the current position to the end of the string. </para
-          >
+            >A task that represents the asynchronous read operation. The value of the <paramref name="TResult" /> parameter contains a string with the characters from the current position to the end of the string.
+          </para>
         </returns>
       </Docs>
     </Member>

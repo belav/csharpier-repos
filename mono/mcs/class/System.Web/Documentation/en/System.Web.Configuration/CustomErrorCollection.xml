@@ -144,8 +144,8 @@
           <list type="bullet">
             <item>
               <para
-                >If you pass a <see cref="F:System.Configuration.ConfigurationSaveMode.Full" /> or <see cref="F:System.Configuration.ConfigurationSaveMode.Modified" /> parameter value, then a clear element is inserted into the clientTarget section of the configuration file at the current hierarchy level. </para
-              >
+                >If you pass a <see cref="F:System.Configuration.ConfigurationSaveMode.Full" /> or <see cref="F:System.Configuration.ConfigurationSaveMode.Modified" /> parameter value, then a clear element is inserted into the clientTarget section of the configuration file at the current hierarchy level.
+              </para>
             </item>
             <item>
               <para
@@ -158,8 +158,8 @@
               <list type="bullet">
                 <item>
                   <para
-                    >If the <see cref="P:System.Configuration.ConfigurationElementCollection.EmitClear" /> set to true, clear element is inserted into the clientTarget section of the configuration file at the current hierarchy level. This removes all references to the add elements defined in the parent configuration files at higher levels in the hierarchy. </para
-                  >
+                    >If the <see cref="P:System.Configuration.ConfigurationElementCollection.EmitClear" /> set to true, clear element is inserted into the clientTarget section of the configuration file at the current hierarchy level. This removes all references to the add elements defined in the parent configuration files at higher levels in the hierarchy.
+                  </para>
                 </item>
                 <item>
                   <para
@@ -279,8 +279,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The collection index of the <see cref="T:System.Web.Configuration.CustomError" /> object. </param
-        >
+          />The collection index of the <see cref="T:System.Web.Configuration.CustomError" /> object.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -318,8 +318,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The HTTP status code associated with the custom error. </param
-        >
+          />The HTTP status code associated with the custom error.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -377,8 +377,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The collection key's index. </param
-        >
+          />The collection key's index.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -463,8 +463,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.Configuration.CustomErrorCollection.Remove(System.String)" /> method inserts a remove element into the customErrors section of the configuration file at the current hierarchy level. This removes the reference to the add element defined in the parent configuration files at higher levels in the hierarchy. </para
-          >
+            >The <see cref="M:System.Web.Configuration.CustomErrorCollection.Remove(System.String)" /> method inserts a remove element into the customErrors section of the configuration file at the current hierarchy level. This removes the reference to the add element defined in the parent configuration files at higher levels in the hierarchy.
+          </para>
           <block subset="none" type="note">
             <para
               >The add elements are not deleted from the parent configuration files. The remove element merely deactivates them. However, the <see cref="M:System.Web.Configuration.CustomErrorCollection.Remove(System.String)" /> method does actually delete them at the current hierarchy level.</para
@@ -482,8 +482,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The HTTP status code associated with the custom error.  </param
-        >
+          />The HTTP status code associated with the custom error.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -503,8 +503,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.Configuration.CustomErrorCollection.RemoveAt(System.Int32)" /> method inserts a remove element into the customErrors section of the configuration file at the current hierarchy level. This is to remove the reference to the add element defined in the parent configuration files at higher-level in the hierarchy. </para
-          >
+            >The <see cref="M:System.Web.Configuration.CustomErrorCollection.RemoveAt(System.Int32)" /> method inserts a remove element into the customErrors section of the configuration file at the current hierarchy level. This is to remove the reference to the add element defined in the parent configuration files at higher-level in the hierarchy.
+          </para>
           <para
             >Note   The add elements are not deleted from the parent configuration files. They are merely deactivated. However, the <see cref="M:System.Web.Configuration.CustomErrorCollection.RemoveAt(System.Int32)" /> method does actually delete them at the current hierarchy level.</para
           >
@@ -520,8 +520,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The collection index of the <see cref="T:System.Web.Configuration.CustomError" /> object to remove. </param
-        >
+          />The collection index of the <see cref="T:System.Web.Configuration.CustomError" /> object to remove.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -556,8 +556,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.Configuration.CustomError" /> to add to the collection. </param
-        >
+          />The <see cref="T:System.Web.Configuration.CustomError" /> to add to the collection.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

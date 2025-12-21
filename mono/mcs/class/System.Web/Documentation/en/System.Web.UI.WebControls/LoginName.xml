@@ -216,8 +216,8 @@
               </term>
               <description>
                 <para
-                  >Same as default. To hide the control, set the <see cref="P:System.Web.UI.Control.Visible" /> property to false. </para
-                >
+                  >Same as default. To hide the control, set the <see cref="P:System.Web.UI.Control.Visible" /> property to false.
+                </para>
               </description>
             </item>
             <item>
@@ -234,8 +234,8 @@
               </term>
               <description>
                 <para
-                  >When the <see cref="P:System.Web.UI.WebControls.LoginName.FormatString" /> property is set to a string, the string is displayed when the user is logged in. Because the string does not contain "{0}", the user's name is not displayed. When the user is not logged in, nothing is displayed. </para
-                >
+                  >When the <see cref="P:System.Web.UI.WebControls.LoginName.FormatString" /> property is set to a string, the string is displayed when the user is logged in. Because the string does not contain "{0}", the user's name is not displayed. When the user is not logged in, nothing is displayed.
+                </para>
               </description>
             </item>
           </list>
@@ -276,8 +276,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Renders the <see cref="T:System.Web.UI.WebControls.LoginName" /> control to the specified <see cref="T:System.Web.UI.HtmlTextWriter" /> control. </para
-          >
+            >Renders the <see cref="T:System.Web.UI.WebControls.LoginName" /> control to the specified <see cref="T:System.Web.UI.HtmlTextWriter" /> control.
+          </para>
         </summary>
         <param name="writer">
           <attribution

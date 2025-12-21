@@ -27,18 +27,18 @@
       >boolean-expression</non_terminal
     >, but for reasons of operator precedence is classified as a <non_terminal where="14.11"
       >conditional-or-expression</non_terminal
-    >. </paragraph
-  >
+    >.
+  </paragraph>
   <paragraph
     >A <non_terminal where="15.7.1"
       >boolean-expression</non_terminal
     > is required to be of a type that can be implicitly converted to <keyword>bool</keyword> or of a type that implements operator true. <note
       >[Note: As required by <hyperlink>17.9.1</hyperlink>, any type that implements operator true must also implement operator false. end note]</note
-    > If neither requirement is satisfied, a compile-time error occurs. </paragraph
-  >
+    > If neither requirement is satisfied, a compile-time error occurs.
+  </paragraph>
   <paragraph
-    >When a boolean expression is of a type that cannot be implicitly converted to <keyword>bool</keyword> but does implement operator true, then following evaluation of the expression, the operator true implementation provided by that type is invoked to produce a <keyword>bool</keyword> value. </paragraph
-  >
+    >When a boolean expression is of a type that cannot be implicitly converted to <keyword>bool</keyword> but does implement operator true, then following evaluation of the expression, the operator true implementation provided by that type is invoked to produce a <keyword>bool</keyword> value.
+  </paragraph>
   <paragraph>
     <note
       >[Note: The DBBool struct type in <hyperlink>18.4.2</hyperlink> provides an example of a type that implements operator true and operator false. end note]</note

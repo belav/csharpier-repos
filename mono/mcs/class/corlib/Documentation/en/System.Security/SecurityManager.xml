@@ -95,8 +95,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see cref="M:System.Security.SecurityManager.CurrentThreadRequiresSecurityContextCapture" /> method before you cache sensitive data that is obtained after successful security demands. </para
-          >
+            >You can use the <see cref="M:System.Security.SecurityManager.CurrentThreadRequiresSecurityContextCapture" /> method before you cache sensitive data that is obtained after successful security demands.
+          </para>
           <para
             >If the <see cref="M:System.Security.CodeAccessPermission.Assert" /> method has been called higher on the stack, the data should not be cached without capturing the corresponding security context. Otherwise, sensitive data that is obtained under an <see cref="M:System.Security.CodeAccessPermission.Assert" /> may become available to code that is no longer be running with that <see cref="M:System.Security.CodeAccessPermission.Assert" /> in place.</para
           >
@@ -114,8 +114,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >false if the stack contains no partially trusted application domains, no partially trusted assemblies, and no currently active <see cref="M:System.Security.CodeAccessPermission.PermitOnly" /> or <see cref="M:System.Security.CodeAccessPermission.Deny" /> modifiers; true if the common language runtime cannot guarantee that the stack contains none of these. </para
-          >
+            >false if the stack contains no partially trusted application domains, no partially trusted assemblies, and no currently active <see cref="M:System.Security.CodeAccessPermission.PermitOnly" /> or <see cref="M:System.Security.CodeAccessPermission.Deny" /> modifiers; true if the common language runtime cannot guarantee that the stack contains none of these.
+          </para>
         </returns>
       </Docs>
     </Member>
@@ -318,8 +318,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The permission to test against the grant of the caller. </param
-        >
+          />The permission to test against the grant of the caller.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="LoadPolicyLevelFromFile">
@@ -366,15 +366,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The physical file path to a file containing the security policy information. </param
-        >
+          />The physical file path to a file containing the security policy information.
+        </param>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the enumeration values that specifies the type of the policy level to be loaded. </param
-        >
+          />One of the enumeration values that specifies the type of the policy level to be loaded.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="LoadPolicyLevelFromString">
@@ -421,15 +421,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML representation of a security policy level in the same form in which it appears in a configuration file. </param
-        >
+          />The XML representation of a security policy level in the same form in which it appears in a configuration file.
+        </param>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the enumeration values that specifies the type of the policy level to be loaded. </param
-        >
+          />One of the enumeration values that specifies the type of the policy level to be loaded.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="PolicyHierarchy">
@@ -520,8 +520,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The evidence set used to evaluate policy. </param
-        >
+          />The evidence set used to evaluate policy.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ResolvePolicy">
@@ -570,8 +570,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of evidence objects used to evaluate policy. </param
-        >
+          />An array of evidence objects used to evaluate policy.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ResolvePolicy">
@@ -662,8 +662,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The evidence set against which the policy is evaluated. </param
-        >
+          />The evidence set against which the policy is evaluated.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ResolveSystemPolicy">
@@ -796,8 +796,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The policy level object to be saved. </param
-        >
+          />The policy level object to be saved.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SecurityEnabled">

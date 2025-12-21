@@ -30,8 +30,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The TransportBindingElementImporter type is an implementation of the <see cref="T:System.ServiceModel.Description.IWsdlImportExtension" /> and <see cref="T:System.ServiceModel.Description.IPolicyImportExtension" /> interfaces. It imports the <see cref="T:System.ServiceModel.Channels.HttpTransportBindingElement" />, <see cref="T:System.ServiceModel.Channels.HttpsTransportBindingElement" />, <see cref="T:System.ServiceModel.Channels.TcpTransportBindingElement" />, <see cref="T:System.ServiceModel.Channels.NamedPipeTransportBindingElement" />, <see cref="T:System.ServiceModel.Channels.MsmqTransportBindingElement" />, and <see cref="T:System.ServiceModel.Channels.PeerTransportBindingElement" /> instances from WSDL service metadata.  </para
-      >
+        >The TransportBindingElementImporter type is an implementation of the <see cref="T:System.ServiceModel.Description.IWsdlImportExtension" /> and <see cref="T:System.ServiceModel.Description.IPolicyImportExtension" /> interfaces. It imports the <see cref="T:System.ServiceModel.Channels.HttpTransportBindingElement" />, <see cref="T:System.ServiceModel.Channels.HttpsTransportBindingElement" />, <see cref="T:System.ServiceModel.Channels.TcpTransportBindingElement" />, <see cref="T:System.ServiceModel.Channels.NamedPipeTransportBindingElement" />, <see cref="T:System.ServiceModel.Channels.MsmqTransportBindingElement" />, and <see cref="T:System.ServiceModel.Channels.PeerTransportBindingElement" /> instances from WSDL service metadata.
+      </para>
       <para
         >When these <see cref="T:System.ServiceModel.Channels.TransportBindingElement" /> types are imported, the TransportBindingElementImporter type also imports the addressing information from the WSDL metadata.</para
       >

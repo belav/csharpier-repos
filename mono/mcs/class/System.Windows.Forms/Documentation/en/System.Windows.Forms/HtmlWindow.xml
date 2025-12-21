@@ -13,8 +13,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.Windows.Forms.HtmlWindow" /> should not be confused with the concept of a window in Windows Forms or the Win32 API; there is no HWND or similar Windows resource that corresponds directly to an instance of <see cref="T:System.Windows.Forms.HtmlWindow" />. Rather, <see cref="T:System.Windows.Forms.HtmlWindow" /> provides high-level descriptions of a document's location on a user's screen, as well as methods for interacting with users by way of prompts and dialog boxes. <see cref="T:System.Windows.Forms.HtmlWindow" /> acts as a logical container for a Web page's documents and its metadata, such as the document's location and the capabilities of the Web browser. </para
-      >
+        <see cref="T:System.Windows.Forms.HtmlWindow" /> should not be confused with the concept of a window in Windows Forms or the Win32 API; there is no HWND or similar Windows resource that corresponds directly to an instance of <see cref="T:System.Windows.Forms.HtmlWindow" />. Rather, <see cref="T:System.Windows.Forms.HtmlWindow" /> provides high-level descriptions of a document's location on a user's screen, as well as methods for interacting with users by way of prompts and dialog boxes. <see cref="T:System.Windows.Forms.HtmlWindow" /> acts as a logical container for a Web page's documents and its metadata, such as the document's location and the capabilities of the Web browser.
+      </para>
       <para
         >A Web page consists of a single document, or a FRAMESET containing one or more FRAME elements, each of which hosts its own document. Web developers use framesets to show logically related pages side by side (for example, a content page next to a navigation page). When a page consists of a single document, you can access it through the <see cref="P:System.Windows.Forms.HtmlWindow.Document" /> property of <see cref="T:System.Windows.Forms.HtmlWindow" />; if the page uses frames, you can access their documents through the <see cref="P:System.Windows.Forms.HtmlWindow.Frames" /> collection, which consists of one or more <see cref="T:System.Windows.Forms.HtmlWindow" /> objects.</para
       >
@@ -49,8 +49,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Windows.Forms.MessageBox" /> class offers a more powerful version of the <see cref="M:System.Windows.Forms.HtmlWindow.Alert(System.String)" /> method. </para
-          >
+            >The <see cref="T:System.Windows.Forms.MessageBox" /> class offers a more powerful version of the <see cref="M:System.Windows.Forms.HtmlWindow.Alert(System.String)" /> method.
+          </para>
           <para
             >Although <see cref="M:System.Windows.Forms.HtmlWindow.Alert(System.String)" /> accepts Unicode text as input, the Internet Explorer script prompt will not display non-Latin language text appropriately on Windows 95, Windows 98, Windows ME or Windows NT due to operating system limitations. For more information, see <see
               cref="http://support.microsoft.com/default.aspx?scid=kb;en-us;211147"
@@ -91,8 +91,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You should not attach an event to an HTML document or one of its objects until the document has completed loading. The earliest you should call this method is in the <see cref="E:System.Windows.Forms.WebBrowser.DocumentCompleted" /> event of the <see cref="T:System.Windows.Forms.WebBrowser" /> control. </para
-          >
+            >You should not attach an event to an HTML document or one of its objects until the document has completed loading. The earliest you should call this method is in the <see cref="E:System.Windows.Forms.WebBrowser.DocumentCompleted" /> event of the <see cref="T:System.Windows.Forms.WebBrowser" /> control.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -128,11 +128,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.Windows.Forms.HtmlWindow.IsClosed" /> property to determine if the window is already closed. If the window is already closed, this method will have no effect. </para
-          >
+            >Use the <see cref="P:System.Windows.Forms.HtmlWindow.IsClosed" /> property to determine if the window is already closed. If the window is already closed, this method will have no effect.
+          </para>
           <para
-            >When you create new windows using <see cref="M:System.Windows.Forms.HtmlWindow.Open(System.String,System.String,System.String,System.Boolean)" /> or <see cref="M:System.Windows.Forms.HtmlWindow.OpenNew(System.String,System.String)" />, <see cref="M:System.Windows.Forms.HtmlWindow.Close" /> causes the HTML Document Object Model to open a new instance of Internet Explorer. If you do not call <see cref="M:System.Windows.Forms.HtmlWindow.Close" /> on all of the windows you have created, this instance of Internet Explorer will remain running even after your application closes. </para
-          >
+            >When you create new windows using <see cref="M:System.Windows.Forms.HtmlWindow.Open(System.String,System.String,System.String,System.Boolean)" /> or <see cref="M:System.Windows.Forms.HtmlWindow.OpenNew(System.String,System.String)" />, <see cref="M:System.Windows.Forms.HtmlWindow.Close" /> causes the HTML Document Object Model to open a new instance of Internet Explorer. If you do not call <see cref="M:System.Windows.Forms.HtmlWindow.Close" /> on all of the windows you have created, this instance of Internet Explorer will remain running even after your application closes.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -156,8 +156,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="M:System.Windows.Forms.HtmlWindow.Confirm(System.String)" /> displays a modal dialog box; the user will not be able to access the underlying HTML page without first closing this dialog box. </para
-          >
+            <see cref="M:System.Windows.Forms.HtmlWindow.Confirm(System.String)" /> displays a modal dialog box; the user will not be able to access the underlying HTML page without first closing this dialog box.
+          </para>
           <para
             >Although <see cref="M:System.Windows.Forms.HtmlWindow.Confirm(System.String)" /> accepts Unicode text as input, the Internet Explorer script prompt will not display non-Latin language text appropriately on Windows 95, Windows 98, Windows ME or Windows NT due to operating system limitations. For more information, see <see
               cref="http://support.microsoft.com/default.aspx?scid=kb;en-us;211147"
@@ -269,8 +269,8 @@
               <a href="d1898229-cd40-426e-a275-f3eb65fbc79f"
                 >Importing a Type Library as an Assembly</a
               >
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -353,8 +353,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If another window held the focus before <see cref="M:System.Windows.Forms.HtmlWindow.Focus" /> was called, that window will lose the focus. </para
-          >
+            >If another window held the focus before <see cref="M:System.Windows.Forms.HtmlWindow.Focus" /> was called, that window will lose the focus.
+          </para>
           <para
             >Do not call focus on an element inside of a window until the window's <see cref="E:System.Windows.Forms.HtmlWindow.Load" /> event has been raised.</para
           >
@@ -471,8 +471,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="P:System.Windows.Forms.HtmlWindow.History" /> contains all URLs navigated to within the current window, which is referred to as the <newTerm>navigation stack</newTerm>, and provides methods for navigating back to those documents. </para
-          >
+            <see cref="P:System.Windows.Forms.HtmlWindow.History" /> contains all URLs navigated to within the current window, which is referred to as the <newTerm>navigation stack</newTerm>, and provides methods for navigating back to those documents.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -519,11 +519,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="E:System.Windows.Forms.HtmlWindow.Load" /> event works similarly to the <see cref="E:System.Windows.Forms.WebBrowser.DocumentCompleted" /> event on the <see cref="T:System.Windows.Forms.WebBrowser" /> control: it signals that it is safe to access HTML elements inside of the document. </para
-          >
+            >The <see cref="E:System.Windows.Forms.HtmlWindow.Load" /> event works similarly to the <see cref="E:System.Windows.Forms.WebBrowser.DocumentCompleted" /> event on the <see cref="T:System.Windows.Forms.WebBrowser" /> control: it signals that it is safe to access HTML elements inside of the document.
+          </para>
           <para
-            >You cannot cancel the default action for the <see cref="E:System.Windows.Forms.HtmlWindow.Load" /> event. </para
-          >
+            >You cannot cancel the default action for the <see cref="E:System.Windows.Forms.HtmlWindow.Load" /> event.
+          </para>
           <para
             >For more information about the difference between canceling event bubbling and canceling the default action on an event, see <see
               cref="http://msdn.microsoft.com/en-us/library/ms533022.aspx"
@@ -588,8 +588,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The x- and y-coordinates of the window's upper-left corner. </param
-        >
+          />The x- and y-coordinates of the window's upper-left corner.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="MoveTo">
@@ -669,8 +669,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <paramref name="url" /> parameter points to an HTML page, the page currently displayed in the window will be destroyed and replaced with the new page; any references your application holds to managed DOM objects in the old page will not be valid. If <paramref name="url" /> points to a resource that cannot be displayed by Internet Explorer, the user will be presented with a dialog box asking whether to open the resource outside of the application, save it to disk, or cancel the download operation. </para
-          >
+            >If the <paramref name="url" /> parameter points to an HTML page, the page currently displayed in the window will be destroyed and replaced with the new page; any references your application holds to managed DOM objects in the old page will not be valid. If <paramref name="url" /> points to a resource that cannot be displayed by Internet Explorer, the user will be presented with a dialog box asking whether to open the resource outside of the application, save it to disk, or cancel the download operation.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -681,8 +681,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The resource to display, described by a Uniform Resource Locator. </param
-        >
+          />The resource to display, described by a Uniform Resource Locator.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Navigate">
@@ -835,8 +835,8 @@
             >If the file referenced by <paramref name="url" /> is an HTML file, text file, or other file type that can be hosted inside of Internet Explorer, it will be displayed in the named window. If the file cannot be displayed inside of Internet Explorer, and the window named by target does not already exist, then the window will open only long enough for Internet Explorer to download the resource; it will close immediately afterwards.</para
           >
           <para
-            >When you create new windows using <see cref="M:System.Windows.Forms.HtmlWindow.Open(System.String,System.String,System.String,System.Boolean)" /> or <see cref="M:System.Windows.Forms.HtmlWindow.OpenNew(System.String,System.String)" />, it causes the HTML Document Object Model to open a new instance of Internet Explorer. If you do not call <see cref="M:System.Windows.Forms.HtmlWindow.Close" /> on all of the windows you have created, this instance of Internet Explorer will remain running even after your application has quit. </para
-          >
+            >When you create new windows using <see cref="M:System.Windows.Forms.HtmlWindow.Open(System.String,System.String,System.String,System.Boolean)" /> or <see cref="M:System.Windows.Forms.HtmlWindow.OpenNew(System.String,System.String)" />, it causes the HTML Document Object Model to open a new instance of Internet Explorer. If you do not call <see cref="M:System.Windows.Forms.HtmlWindow.Close" /> on all of the windows you have created, this instance of Internet Explorer will remain running even after your application has quit.
+          </para>
           <para
             >If you use <see cref="M:System.Windows.Forms.HtmlWindow.Open(System.String,System.String,System.String,System.Boolean)" /> to load a URL in an existing window, <paramref name="windowOptions" /> will be ignored; the window will retain the dimensions, appearance, and screen location first given it by the initial call to <see cref="M:System.Windows.Forms.HtmlWindow.Open(System.String,System.String,System.String,System.Boolean)" />.</para
           >
@@ -913,8 +913,8 @@
             >If the file referenced by <paramref name="url" /> is an HTML file, text file, or other file type that can be hosted inside of Internet Explorer, it will be displayed in the named window. If the file cannot be displayed inside of Internet Explorer, and the window named by target does not already exist, then the window will open only long enough for Internet Explorer to download the resource; it will close immediately afterwards.</para
           >
           <para
-            >When you create new windows using <see cref="M:System.Windows.Forms.HtmlWindow.Open(System.Uri,System.String,System.String,System.Boolean)" /> or <see cref="M:System.Windows.Forms.HtmlWindow.OpenNew(System.Uri,System.String)" />, it causes the HTML Document Object Model to open a new instance of Internet Explorer. If you do not call <see cref="M:System.Windows.Forms.HtmlWindow.Close" /> on all of the windows you have created, this instance of Internet Explorer will remain running even after your application has quit. </para
-          >
+            >When you create new windows using <see cref="M:System.Windows.Forms.HtmlWindow.Open(System.Uri,System.String,System.String,System.Boolean)" /> or <see cref="M:System.Windows.Forms.HtmlWindow.OpenNew(System.Uri,System.String)" />, it causes the HTML Document Object Model to open a new instance of Internet Explorer. If you do not call <see cref="M:System.Windows.Forms.HtmlWindow.Close" /> on all of the windows you have created, this instance of Internet Explorer will remain running even after your application has quit.
+          </para>
           <para
             >If you use <see cref="M:System.Windows.Forms.HtmlWindow.Open(System.Uri,System.String,System.String,System.Boolean)" /> to load a URL in an existing window, <paramref name="windowOptions" /> will be ignored; the window will retain the dimensions, appearance, and screen location first given it by the initial call to <see cref="M:System.Windows.Forms.HtmlWindow.Open(System.Uri,System.String,System.String,System.Boolean)" /> .</para
           >
@@ -955,8 +955,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Whether <paramref name="url" /> replaces the current window's URL in the navigation history. This will effect the operation of methods on the <see cref="T:System.Windows.Forms.HtmlHistory" /> class. </param
-        >
+          />Whether <paramref name="url" /> replaces the current window's URL in the navigation history. This will effect the operation of methods on the <see cref="T:System.Windows.Forms.HtmlHistory" /> class.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Opener">
@@ -1003,8 +1003,8 @@
             >If the file referenced by <paramref name="url" /> is an HTML file, text file, or other file type that can be hosted inside of Internet Explorer, it will be displayed in a new window. If the file cannot be displayed inside of Internet Explorer, then the window will open only long enough for Internet Explorer to download the resource; it will close immediately afterwards.</para
           >
           <para
-            >When you create new windows using <see cref="M:System.Windows.Forms.HtmlWindow.Open(System.String,System.String,System.String,System.Boolean)" /> or <see cref="M:System.Windows.Forms.HtmlWindow.OpenNew(System.String,System.String)" />, it causes the HTML Document Object Model to open a new instance of Internet Explorer. If you do not call <see cref="M:System.Windows.Forms.HtmlWindow.Close" /> on all of the windows you have created, this instance of Internet Explorer will remain running even after your application has quit. </para
-          >
+            >When you create new windows using <see cref="M:System.Windows.Forms.HtmlWindow.Open(System.String,System.String,System.String,System.Boolean)" /> or <see cref="M:System.Windows.Forms.HtmlWindow.OpenNew(System.String,System.String)" />, it causes the HTML Document Object Model to open a new instance of Internet Explorer. If you do not call <see cref="M:System.Windows.Forms.HtmlWindow.Close" /> on all of the windows you have created, this instance of Internet Explorer will remain running even after your application has quit.
+          </para>
           <para
             >If you want to load a document into a previously opened window, see the <see cref="M:System.Windows.Forms.HtmlWindow.Open(System.String,System.String,System.String,System.Boolean)" /> method.</para
           >
@@ -1016,8 +1016,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Windows.Forms.HtmlWindow" /> representing the new window. </para
-          >
+            >An <see cref="T:System.Windows.Forms.HtmlWindow" /> representing the new window.
+          </para>
         </returns>
         <param name="urlString">
           <attribution
@@ -1031,8 +1031,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A comma-delimited string consisting of zero or more of the following options in the form <paramref name="name=value" />. See <see cref="M:System.Windows.Forms.HtmlWindow.Open(System.String,System.String,System.String,System.Boolean)" /> for a full description of the valid options. </param
-        >
+          />A comma-delimited string consisting of zero or more of the following options in the form <paramref name="name=value" />. See <see cref="M:System.Windows.Forms.HtmlWindow.Open(System.String,System.String,System.String,System.Boolean)" /> for a full description of the valid options.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OpenNew">
@@ -1058,8 +1058,8 @@
             >If the file referenced by <paramref name="url" /> is an HTML file, text file, or other file type that can be hosted inside of Internet Explorer, it will be displayed in a new window. If the file cannot be displayed inside of Internet Explorer, then the window will open only long enough for Internet Explorer to download the resource; it will close immediately afterwards.</para
           >
           <para
-            >When you create new windows using <see cref="M:System.Windows.Forms.HtmlWindow.Open(System.Uri,System.String,System.String,System.Boolean)" /> or <see cref="M:System.Windows.Forms.HtmlWindow.OpenNew(System.Uri,System.String)" />, it causes the HTML Document Object Model to open a new instance of Internet Explorer. If you do not call <see cref="M:System.Windows.Forms.HtmlWindow.Close" /> on all of the windows you have created, this instance of Internet Explorer will remain running even after your application has quit. </para
-          >
+            >When you create new windows using <see cref="M:System.Windows.Forms.HtmlWindow.Open(System.Uri,System.String,System.String,System.Boolean)" /> or <see cref="M:System.Windows.Forms.HtmlWindow.OpenNew(System.Uri,System.String)" />, it causes the HTML Document Object Model to open a new instance of Internet Explorer. If you do not call <see cref="M:System.Windows.Forms.HtmlWindow.Close" /> on all of the windows you have created, this instance of Internet Explorer will remain running even after your application has quit.
+          </para>
           <para
             >If you want to load a document into a previously opened window, see the <see cref="M:System.Windows.Forms.HtmlWindow.Open(System.Uri,System.String,System.String,System.Boolean)" /> method.</para
           >
@@ -1071,8 +1071,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Windows.Forms.HtmlWindow" /> representing the new window. </para
-          >
+            >An <see cref="T:System.Windows.Forms.HtmlWindow" /> representing the new window.
+          </para>
         </returns>
         <param name="url">
           <attribution
@@ -1086,8 +1086,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A comma-delimited string consisting of zero or more of the following options in the form <paramref name="name=value" />. See <see cref="M:System.Windows.Forms.HtmlWindow.Open(System.String,System.String,System.String,System.Boolean)" /> for a full description of the valid options. </param
-        >
+          />A comma-delimited string consisting of zero or more of the following options in the form <paramref name="name=value" />. See <see cref="M:System.Windows.Forms.HtmlWindow.Open(System.String,System.String,System.String,System.Boolean)" /> for a full description of the valid options.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Parent">
@@ -1128,8 +1128,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Windows.Forms.Control.Location" /> property of the <see cref="T:System.Windows.Forms.WebBrowser" /> control will return the position of the control relative to the upper-left corner of the form. By contrast, <see cref="P:System.Windows.Forms.HtmlWindow.Position" /> will return the location of the document's display area relative to the top-left corner of the user's monitor. </para
-          >
+            >The <see cref="P:System.Windows.Forms.Control.Location" /> property of the <see cref="T:System.Windows.Forms.WebBrowser" /> control will return the position of the control relative to the upper-left corner of the form. By contrast, <see cref="P:System.Windows.Forms.HtmlWindow.Position" /> will return the location of the document's display area relative to the top-left corner of the user's monitor.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1163,8 +1163,8 @@
             >Although <see cref="M:System.Windows.Forms.HtmlWindow.Prompt(System.String,System.String)" /> accepts Unicode text as input, the Internet Explorer script prompt will not display non-Latin language text appropriately on Windows 95, Windows 98, Windows ME or Windows NT due to operating system limitations. For more information, see <see
               cref="http://support.microsoft.com/default.aspx?scid=kb;en-us;211147"
               >INFO: Internet Explorer Script Prompts and MBCS/Unicode</see
-            >. </para
-          >
+            >.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1204,8 +1204,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When called on a FRAME window in a FRAMESET, <see cref="M:System.Windows.Forms.HtmlWindow.RemoveFocus" /> will cause that window to lose focus, but it will not automatically set focus on another window. </para
-          >
+            >When called on a FRAME window in a FRAMESET, <see cref="M:System.Windows.Forms.HtmlWindow.RemoveFocus" /> will cause that window to lose focus, but it will not automatically set focus on another window.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1256,8 +1256,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Drawing.Size" /> describing the desired width and height of the window, in pixels. Must be 100 pixels or more in both dimensions. </param
-        >
+          />A <see cref="T:System.Drawing.Size" /> describing the desired width and height of the window, in pixels. Must be 100 pixels or more in both dimensions.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ResizeTo">
@@ -1331,8 +1331,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="M:System.Windows.Forms.HtmlWindow.ScrollTo(System.Drawing.Point)" /> will cause the document to scroll so that the specified coordinate on the document is located in the upper-left corner of the document's window. If the document is not long or wide enough for this to happen, <see cref="M:System.Windows.Forms.HtmlWindow.ScrollTo(System.Drawing.Point)" /> will scroll through the document as far as possible in the specified direction. </para
-          >
+            <see cref="M:System.Windows.Forms.HtmlWindow.ScrollTo(System.Drawing.Point)" /> will cause the document to scroll so that the specified coordinate on the document is located in the upper-left corner of the document's window. If the document is not long or wide enough for this to happen, <see cref="M:System.Windows.Forms.HtmlWindow.ScrollTo(System.Drawing.Point)" /> will scroll through the document as far as possible in the specified direction.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1343,8 +1343,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The x- and y-coordinates, relative to the top-left corner of the current window, toward which the page should scroll. </param
-        >
+          />The x- and y-coordinates, relative to the top-left corner of the current window, toward which the page should scroll.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ScrollTo">
@@ -1364,8 +1364,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="M:System.Windows.Forms.HtmlWindow.ScrollTo(System.Drawing.Point)" /> will cause the document to scroll so that the specified coordinate on the document is located in the upper-left corner of the document's window. If the document is not long or wide enough for this to happen, <see cref="M:System.Windows.Forms.HtmlWindow.ScrollTo(System.Drawing.Point)" /> will scroll through the document as far as possible in the specified direction. </para
-          >
+            <see cref="M:System.Windows.Forms.HtmlWindow.ScrollTo(System.Drawing.Point)" /> will cause the document to scroll so that the specified coordinate on the document is located in the upper-left corner of the document's window. If the document is not long or wide enough for this to happen, <see cref="M:System.Windows.Forms.HtmlWindow.ScrollTo(System.Drawing.Point)" /> will scroll through the document as far as possible in the specified direction.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1462,8 +1462,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is read-only. To navigate the window to a new document, use the <see cref="M:System.Windows.Forms.HtmlWindow.Navigate(System.Uri)" /> method. </para
-          >
+            >This property is read-only. To navigate the window to a new document, use the <see cref="M:System.Windows.Forms.HtmlWindow.Navigate(System.Uri)" /> method.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

@@ -17,11 +17,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The data is part of the <see cref="T:System.ServiceModel.Security.SecurityMessageProperty" /> for a message. </para
-      >
+        >The data is part of the <see cref="T:System.ServiceModel.Security.SecurityMessageProperty" /> for a message.
+      </para>
       <para
-        >Use this class to obtain information about a remote <newTerm>security context</newTerm> at runtime. A security context is created when a client is successfully authenticated and authorized to access a method. When a message is successfully authenticated and authorized, the security information from the client and for the current service instance can be obtained from an instance of this class. </para
-      >
+        >Use this class to obtain information about a remote <newTerm>security context</newTerm> at runtime. A security context is created when a client is successfully authenticated and authorized to access a method. When a message is successfully authenticated and authorized, the security information from the client and for the current service instance can be obtained from an instance of this class.
+      </para>
       <para
         >You can retrieve an instance of the <see cref="T:System.ServiceModel.ServiceSecurityContext" /> from the <see cref="P:System.ServiceModel.OperationContext.Current" /> property of the <see cref="T:System.ServiceModel.OperationContext" /> class, or use it from within a service operation method, as shown in the following example.</para
       >
@@ -37,8 +37,8 @@
         <h2>Cookie Mode and IsAuthenticated</h2>
       </format>
       <para
-        >Note that under some circumstances, the <see cref="P:System.Security.Principal.IIdentity.IsAuthenticated" /> property of the <see cref="T:System.Security.Principal.IIdentity" /> interface returns true even if the remote client is authenticated as an anonymous user. (The <see cref="P:System.ServiceModel.ServiceSecurityContext.PrimaryIdentity" /> property returns an implementation of the <see cref="T:System.Security.Principal.IIdentity" /> interface.) The following circumstances must be true for this to occur: </para
-      >
+        >Note that under some circumstances, the <see cref="P:System.Security.Principal.IIdentity.IsAuthenticated" /> property of the <see cref="T:System.Security.Principal.IIdentity" /> interface returns true even if the remote client is authenticated as an anonymous user. (The <see cref="P:System.ServiceModel.ServiceSecurityContext.PrimaryIdentity" /> property returns an implementation of the <see cref="T:System.Security.Principal.IIdentity" /> interface.) The following circumstances must be true for this to occur:
+      </para>
       <list type="bullet">
         <item>
           <para>The service uses Windows authentication.</para>

@@ -36,8 +36,8 @@
       >
       <para>Regardless of recursion policy, only one thread can be in write mode at any time. When a thread is in write mode, no other thread can enter the lock in any mode. Only one thread can be in upgradeable mode at any time. Any number of threads can be in read mode, and there can be one thread in upgradeable mode while other threads are in read mode. </para>
       <para>
-        <see cref="T:System.Threading.ReaderWriterLockSlim" /> has managed thread affinity; that is, each <see cref="T:System.Threading.Thread" /> object must make its own method calls to enter and exit lock modes. No thread can change the mode of another thread. </para
-      >
+        <see cref="T:System.Threading.ReaderWriterLockSlim" /> has managed thread affinity; that is, each <see cref="T:System.Threading.Thread" /> object must make its own method calls to enter and exit lock modes. No thread can change the mode of another thread.
+      </para>
       <para
         >If a <see cref="T:System.Threading.ReaderWriterLockSlim" /> does not allow recursion, a thread that tries to enter the lock can block for several reasons:</para
       >
@@ -70,15 +70,15 @@
         <para>If you allow multiple threads to enter write mode or upgradeable mode, you must not allow one thread to monopolize upgradeable mode. Otherwise, threads that try to enter write mode directly will be blocked indefinitely, and while they are blocked, other threads will be unable to enter read mode.</para>
       </block>
       <para
-        >A thread in upgradeable mode can downgrade to read mode by first calling the <see cref="M:System.Threading.ReaderWriterLockSlim.EnterReadLock" /> method and then calling the <see cref="M:System.Threading.ReaderWriterLockSlim.ExitUpgradeableReadLock" /> method. This downgrade pattern is allowed for all lock recursion policies, even <see cref="F:System.Threading.LockRecursionPolicy.NoRecursion" />. </para
-      >
+        >A thread in upgradeable mode can downgrade to read mode by first calling the <see cref="M:System.Threading.ReaderWriterLockSlim.EnterReadLock" /> method and then calling the <see cref="M:System.Threading.ReaderWriterLockSlim.ExitUpgradeableReadLock" /> method. This downgrade pattern is allowed for all lock recursion policies, even <see cref="F:System.Threading.LockRecursionPolicy.NoRecursion" />.
+      </para>
       <para>After downgrading to read mode, a thread cannot reenter upgradeable mode until it has exited from read mode.</para>
       <format type="text/html">
         <h2>Entering the Lock Recursively</h2>
       </format>
       <para
-        >You can create a <see cref="T:System.Threading.ReaderWriterLockSlim" /> that supports recursive lock entry by using the <see cref="M:System.Threading.ReaderWriterLockSlim.#ctor(System.Threading.LockRecursionPolicy)" /> constructor that specifies lock policy, and specifying <see cref="F:System.Threading.LockRecursionPolicy.SupportsRecursion" />. </para
-      >
+        >You can create a <see cref="T:System.Threading.ReaderWriterLockSlim" /> that supports recursive lock entry by using the <see cref="M:System.Threading.ReaderWriterLockSlim.#ctor(System.Threading.LockRecursionPolicy)" /> constructor that specifies lock policy, and specifying <see cref="F:System.Threading.LockRecursionPolicy.SupportsRecursion" />.
+      </para>
       <block subset="none" type="note">
         <para>The use of recursion is not recommended for new development, because it introduces unnecessary complications and makes your code more prone to deadlocks.</para>
       </block>
@@ -88,8 +88,8 @@
       <list type="bullet">
         <item>
           <para
-            >A thread in read mode can enter read mode recursively, but cannot enter write mode or upgradeable mode. If it tries to do this, a <see cref="T:System.Threading.LockRecursionException" /> is thrown. Entering read mode and then entering write mode or upgradeable mode is a pattern with a strong probability of deadlocks, so it is not allowed. As discussed earlier, upgradeable mode is provided for cases where it is necessary to upgrade a lock. </para
-          >
+            >A thread in read mode can enter read mode recursively, but cannot enter write mode or upgradeable mode. If it tries to do this, a <see cref="T:System.Threading.LockRecursionException" /> is thrown. Entering read mode and then entering write mode or upgradeable mode is a pattern with a strong probability of deadlocks, so it is not allowed. As discussed earlier, upgradeable mode is provided for cases where it is necessary to upgrade a lock.
+          </para>
         </item>
         <item>
           <para>A thread in upgradeable mode can enter write mode and/or read mode, and can enter any of the three modes recursively. However, an attempt to enter write mode blocks if there are other threads in read mode.</para>
@@ -118,8 +118,8 @@
           <para>Read: In this state, one or more threads have entered the lock for read access to the protected resource. </para>
           <block subset="none" type="note">
             <para
-              >A thread can enter the lock in read mode by using the <see cref="M:System.Threading.ReaderWriterLockSlim.EnterReadLock" /> or <see cref="Overload:System.Threading.ReaderWriterLockSlim.TryEnterReadLock" /> methods, or by downgrading from upgradeable mode. </para
-            >
+              >A thread can enter the lock in read mode by using the <see cref="M:System.Threading.ReaderWriterLockSlim.EnterReadLock" /> or <see cref="Overload:System.Threading.ReaderWriterLockSlim.TryEnterReadLock" /> methods, or by downgrading from upgradeable mode.
+            </para>
           </block>
         </item>
         <item>
@@ -254,8 +254,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Threading.ReaderWriterLockSlim" /> that is initialized with this constructor does not allow recursion. That is, the <see cref="P:System.Threading.ReaderWriterLockSlim.RecursionPolicy" /> property returns <see cref="F:System.Threading.LockRecursionPolicy.NoRecursion" />. </para
-          >
+            >A <see cref="T:System.Threading.ReaderWriterLockSlim" /> that is initialized with this constructor does not allow recursion. That is, the <see cref="P:System.Threading.ReaderWriterLockSlim.RecursionPolicy" /> property returns <see cref="F:System.Threading.LockRecursionPolicy.NoRecursion" />.
+          </para>
           <para
             >For more information about recursion policy and its effects, see the <see cref="T:System.Threading.LockRecursionPolicy" /> enumeration and the <see cref="T:System.Threading.ReaderWriterLockSlim" /> class.</para
           >
@@ -288,8 +288,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Recursion policy determines the restrictions on threads that enter the lock more than once. For example, if a lock was created with <see cref="F:System.Threading.LockRecursionPolicy.NoRecursion" /> and a thread has entered the lock in read mode, <see cref="T:System.Threading.LockRecursionException" /> is thrown if the thread tries to reenter the lock in read mode. Similarly, if a thread has entered the lock in write mode, <see cref="T:System.Threading.LockRecursionException" /> is thrown if the thread tries to reenter the lock in any mode. </para
-          >
+            >Recursion policy determines the restrictions on threads that enter the lock more than once. For example, if a lock was created with <see cref="F:System.Threading.LockRecursionPolicy.NoRecursion" /> and a thread has entered the lock in read mode, <see cref="T:System.Threading.LockRecursionException" /> is thrown if the thread tries to reenter the lock in read mode. Similarly, if a thread has entered the lock in write mode, <see cref="T:System.Threading.LockRecursionException" /> is thrown if the thread tries to reenter the lock in any mode.
+          </para>
           <block subset="none" type="note">
             <para>A thread in upgradeable mode can upgrade to write mode or downgrade to read mode regardless of the lock recursion policy setting. </para>
           </block>
@@ -309,8 +309,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the enumeration values that specifies the lock recursion policy. </param
-        >
+          />One of the enumeration values that specifies the lock recursion policy.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CurrentReadCount">
@@ -358,8 +358,8 @@
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format> and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
           <block subset="none" type="note">
             <para
               >Always call <see cref="M:System.Threading.ReaderWriterLockSlim.Dispose" /> before you release your last reference to the <see cref="T:System.Threading.ReaderWriterLockSlim" />. Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Threading.ReaderWriterLockSlim" /> object's Finalize method.</para
@@ -392,8 +392,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method blocks until the calling thread enters the lock, and therefore might never return. Use the <see cref="Overload:System.Threading.ReaderWriterLockSlim.TryEnterReadLock" /> method to block for a specified interval, and then return if the calling thread has not entered read mode during that interval. </para
-          >
+            >This method blocks until the calling thread enters the lock, and therefore might never return. Use the <see cref="Overload:System.Threading.ReaderWriterLockSlim.TryEnterReadLock" /> method to block for a specified interval, and then return if the calling thread has not entered read mode during that interval.
+          </para>
           <para>Multiple threads can enter read mode at the same time.</para>
           <para
             >If one or more threads are waiting to enter write mode, a thread that calls the <see cref="M:System.Threading.ReaderWriterLockSlim.EnterReadLock" /> method blocks until those threads have either timed out or entered write mode and then exited from it.</para
@@ -646,8 +646,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Recursion policy determines the restrictions on threads that enter the lock more than once. For example, if a lock was created with <see cref="F:System.Threading.LockRecursionPolicy.NoRecursion" /> and a thread has entered the lock in read mode, <see cref="T:System.Threading.LockRecursionException" /> is thrown if the thread tries to reenter the lock in read mode. </para
-          >
+            >Recursion policy determines the restrictions on threads that enter the lock more than once. For example, if a lock was created with <see cref="F:System.Threading.LockRecursionPolicy.NoRecursion" /> and a thread has entered the lock in read mode, <see cref="T:System.Threading.LockRecursionException" /> is thrown if the thread tries to reenter the lock in read mode.
+          </para>
           <block subset="none" type="note">
             <para>A thread in upgradeable mode can upgrade to write mode or downgrade to read mode regardless of the lock recursion policy setting. </para>
           </block>
@@ -829,8 +829,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The interval to wait, or -1 milliseconds to wait indefinitely. </param
-        >
+          />The interval to wait, or -1 milliseconds to wait indefinitely.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="TryEnterUpgradeableReadLock">
@@ -859,8 +859,8 @@
             >If <paramref name="millisecondsTimeout" /> is 0 (zero), this method checks the lock state and returns false immediately if the desired state is unavailable.</para
           >
           <para
-            >Use upgradeable mode when a thread usually accesses the resource that is protected by the <see cref="T:System.Threading.ReaderWriterLockSlim" /> in read mode, but may need to enter write mode if certain conditions are met. A thread in upgradeable mode can upgrade to write mode or downgrade to read mode. </para
-          >
+            >Use upgradeable mode when a thread usually accesses the resource that is protected by the <see cref="T:System.Threading.ReaderWriterLockSlim" /> in read mode, but may need to enter write mode if certain conditions are met. A thread in upgradeable mode can upgrade to write mode or downgrade to read mode.
+          </para>
           <para>Only one thread can enter a lock in upgradeable mode at any given time. If a thread is in upgradeable mode, and there are no threads waiting to enter write mode, any number of other threads can enter read mode, even if there are threads waiting to enter upgradeable mode.</para>
           <para
             >If one or more threads are waiting to enter write mode, a thread that calls the <see cref="M:System.Threading.ReaderWriterLockSlim.TryEnterUpgradeableReadLock(System.Int32)" /> method blocks until those threads have either timed out or entered write mode and then exited from it, or until the calling thread's own time-out interval expires.</para
@@ -912,8 +912,8 @@
             >If <paramref name="timeout" /> is 0 (zero), this method checks the lock state and returns false immediately if the desired state is unavailable.</para
           >
           <para
-            >Use upgradeable mode when a thread usually accesses the resource protected by the <see cref="T:System.Threading.ReaderWriterLockSlim" /> in read mode, but may need to enter write mode if certain conditions are met. A thread in upgradeable mode can upgrade to write mode or downgrade to read mode. </para
-          >
+            >Use upgradeable mode when a thread usually accesses the resource protected by the <see cref="T:System.Threading.ReaderWriterLockSlim" /> in read mode, but may need to enter write mode if certain conditions are met. A thread in upgradeable mode can upgrade to write mode or downgrade to read mode.
+          </para>
           <para>Only one thread can enter a lock in upgradeable mode at any given time. If a thread is in upgradeable mode, and there are no threads waiting to enter write mode, any number of other threads can enter read mode, even if there are threads waiting to enter upgradeable mode.</para>
           <para
             >If one or more threads are waiting to enter write mode, a thread that calls the <see cref="M:System.Threading.ReaderWriterLockSlim.TryEnterUpgradeableReadLock(System.Int32)" /> method blocks until those threads have either timed out or entered write mode and then exited from it, or until the calling thread's own time-out interval expires.</para

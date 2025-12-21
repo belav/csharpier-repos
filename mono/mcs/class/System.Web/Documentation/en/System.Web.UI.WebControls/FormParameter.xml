@@ -92,8 +92,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Web.UI.WebControls.FormParameter" /> instance that the current instance is initialized from. </param
-        >
+          />A <see cref="T:System.Web.UI.WebControls.FormParameter" /> instance that the current instance is initialized from.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -124,19 +124,15 @@
           >
         </summary>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the parameter. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the parameter.
+        </param>
         <param name="formField">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the form variable that the parameter object is bound to. The default is <see cref="F:System.String.Empty" />. </param
-        >
+          />The name of the form variable that the parameter object is bound to. The default is <see cref="F:System.String.Empty" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -168,26 +164,22 @@
           >
         </summary>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the parameter. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the parameter.
+        </param>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type that the parameter represents. The default is <see cref="F:System.TypeCode.Object" />. </param
-        >
+          />The type that the parameter represents. The default is <see cref="F:System.TypeCode.Object" />.
+        </param>
         <param name="formField">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the form variable that the parameter object is bound to. The default is <see cref="F:System.String.Empty" />. </param
-        >
+          />The name of the form variable that the parameter object is bound to. The default is <see cref="F:System.String.Empty" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -270,8 +262,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Web.UI.Control" /> that is associated with the page where the <see cref="T:System.Web.UI.WebControls.FormParameter" /> is used. </param
-        >
+          />A <see cref="T:System.Web.UI.Control" /> that is associated with the page where the <see cref="T:System.Web.UI.WebControls.FormParameter" /> is used.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

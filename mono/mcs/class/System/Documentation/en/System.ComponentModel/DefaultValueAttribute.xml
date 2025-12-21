@@ -79,8 +79,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Boolean" /> that is the default value. </param
-        >
+          />A <see cref="T:System.Boolean" /> that is the default value.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -112,8 +112,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An 8-bit unsigned integer that is the default value. </param
-        >
+          />An 8-bit unsigned integer that is the default value.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -145,8 +145,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A Unicode character that is the default value. </param
-        >
+          />A Unicode character that is the default value.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -178,8 +178,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A double-precision floating point number that is the default value. </param
-        >
+          />A double-precision floating point number that is the default value.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -211,8 +211,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A 16-bit signed integer that is the default value. </param
-        >
+          />A 16-bit signed integer that is the default value.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -244,8 +244,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A 32-bit signed integer that is the default value. </param
-        >
+          />A 32-bit signed integer that is the default value.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -277,8 +277,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A 64-bit signed integer that is the default value. </param
-        >
+          />A 64-bit signed integer that is the default value.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -310,8 +310,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Object" /> that represents the default value. </param
-        >
+          />An <see cref="T:System.Object" /> that represents the default value.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -343,8 +343,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A single-precision floating point number that is the default value. </param
-        >
+          />A single-precision floating point number that is the default value.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -376,8 +376,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.String" /> that is the default value. </param
-        >
+          />A <see cref="T:System.String" /> that is the default value.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -413,15 +413,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> that represents the type to convert the value to. </param
-        >
+          />A <see cref="T:System.Type" /> that represents the type to convert the value to.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.String" /> that can be converted to the type using the <see cref="T:System.ComponentModel.TypeConverter" /> for the type and the U.S. English culture. </param
-        >
+          />A <see cref="T:System.String" /> that can be converted to the type using the <see cref="T:System.ComponentModel.TypeConverter" /> for the type and the U.S. English culture.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -459,8 +459,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to test the value equality of. </param
-        >
+          />The object to test the value equality of.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">

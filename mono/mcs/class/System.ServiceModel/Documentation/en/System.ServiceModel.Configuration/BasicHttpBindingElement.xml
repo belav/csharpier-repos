@@ -43,8 +43,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.BasicHttpBindingElement" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.BasicHttpBindingElement" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -66,8 +66,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.BasicHttpBindingElement" /> class with a name. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.BasicHttpBindingElement" /> class with a name.
+          </para>
         </summary>
         <param name="name">
           <attribution

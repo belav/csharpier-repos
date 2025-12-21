@@ -74,15 +74,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A basic implementation of <see cref="T:System.Security.Principal.IIdentity" /> that represents any user. </param
-        >
+          />A basic implementation of <see cref="T:System.Security.Principal.IIdentity" /> that represents any user.
+        </param>
         <param name="roles">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of role names to which the user represented by the <paramref name="identity" /> parameter belongs. </param
-        >
+          />An array of role names to which the user represented by the <paramref name="identity" /> parameter belongs.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Identity">
@@ -151,8 +151,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the role for which to check membership. </param
-        >
+          />The name of the role for which to check membership.
+        </param>
       </Docs>
     </Member>
   </Members>

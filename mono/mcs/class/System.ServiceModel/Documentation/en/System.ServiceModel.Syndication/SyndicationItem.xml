@@ -362,8 +362,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationItem" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationItem" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -461,8 +461,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationItem" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationItem" /> class.
+          </para>
         </summary>
         <param name="title">
           <attribution
@@ -520,8 +520,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationItem" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationItem" /> class.
+          </para>
         </summary>
         <param name="title">
           <attribution
@@ -1172,8 +1172,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When serialized to Atom 1.0, a &lt;link&gt; element is written for each <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> in the collection. When serialized to RSS 2.0, an &lt;a10:link&gt; element is written for each <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> in the collection. </para
-          >
+            >When serialized to Atom 1.0, a &lt;link&gt; element is written for each <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> in the collection. When serialized to RSS 2.0, an &lt;a10:link&gt; element is written for each <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> in the collection.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1217,8 +1217,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlReader" /> to read from. </param
-        >
+          />The <see cref="T:System.Xml.XmlReader" /> to read from.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Load&lt;TSyndicationItem&gt;">

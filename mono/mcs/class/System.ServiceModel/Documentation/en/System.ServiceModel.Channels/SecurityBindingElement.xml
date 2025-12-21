@@ -27,8 +27,8 @@
       <list type="ordered">
         <item>
           <para
-            >Create a <see cref="T:System.ServiceModel.Channels.BindingElementCollection" />. </para
-          >
+            >Create a <see cref="T:System.ServiceModel.Channels.BindingElementCollection" />.
+          </para>
         </item>
         <item>
           <para
@@ -226,8 +226,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a channel listener based on the <see cref="T:System.ServiceModel.Channels.SecurityBindingElement" /> settings and the binding context passed in. </para
-          >
+            >Creates a channel listener based on the <see cref="T:System.ServiceModel.Channels.SecurityBindingElement" /> settings and the binding context passed in.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -478,8 +478,8 @@
             >The binding element is configured to use the <see cref="P:System.ServiceModel.MessageSecurityVersion.Default" /> property of the <see cref="T:System.ServiceModel.MessageSecurityVersion" /> class.</para
           >
           <para
-            >The created binding has <see cref="P:System.ServiceModel.Channels.SecurityBindingElement.IncludeTimestamp" /> set to true. </para
-          >
+            >The created binding has <see cref="P:System.ServiceModel.Channels.SecurityBindingElement.IncludeTimestamp" /> set to true.
+          </para>
           <para
             >The <see cref="T:System.ServiceModel.Channels.LocalClientSecuritySettings" /> object returned from <see cref="P:System.ServiceModel.Channels.SecurityBindingElement.LocalClientSettings" /> has its <see cref="P:System.ServiceModel.Channels.LocalClientSecuritySettings.DetectReplays" /> property set to false.</para
           >
@@ -668,8 +668,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The issued token can have a symmetric or an asymmetric key. The client and server must be provisioned with the server's certificate.</para>
           <para
-            >The created binding has <see cref="P:System.ServiceModel.Channels.SymmetricSecurityBindingElement.RequireSignatureConfirmation" /> set to true and <see cref="P:System.ServiceModel.Channels.SecurityBindingElement.MessageSecurityVersion" /> set to <see cref="P:System.ServiceModel.MessageSecurityVersion.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11" />. </para
-          >
+            >The created binding has <see cref="P:System.ServiceModel.Channels.SymmetricSecurityBindingElement.RequireSignatureConfirmation" /> set to true and <see cref="P:System.ServiceModel.Channels.SecurityBindingElement.MessageSecurityVersion" /> set to <see cref="P:System.ServiceModel.MessageSecurityVersion.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11" />.
+          </para>
           <block subset="none" type="note">
             <para
               >Once a <see cref="T:System.ServiceModel.Channels.SecurityBindingElement" /> object is created by calling this method, the <see cref="P:System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters.KeyType" /> property should be treated as immutable. Inconsistent binding behavior may occur if this value is modified.</para
@@ -1073,8 +1073,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to allow a serialized signing token on the reply; otherwise, false. </param
-        >
+          />true to allow a serialized signing token on the reply; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateMutualCertificateDuplexBindingElement">
@@ -1807,8 +1807,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Supporting tokens provide additional claims beyond those contained in the primary tokens for the binding. The collection returned by the <see cref="P:System.ServiceModel.Channels.SecurityBindingElement.EndpointSupportingTokenParameters" /> contains additional token parameters (<see cref="T:System.ServiceModel.Security.Tokens.SecurityTokenParameters" />) for all operations defined by an endpoint. The primary token parameters are found on either the <see cref="T:System.ServiceModel.Channels.SymmetricSecurityBindingElement" /> or the <see cref="T:System.ServiceModel.Channels.AsymmetricSecurityBindingElement" /> (both inherit from the <see cref="T:System.ServiceModel.Channels.SecurityBindingElement" /> class). In the case of the <see cref="T:System.ServiceModel.Channels.SymmetricSecurityBindingElement" />, the primary token parameters are returned by the <see cref="P:System.ServiceModel.Channels.SymmetricSecurityBindingElement.ProtectionTokenParameters" /> property. On the <see cref="T:System.ServiceModel.Channels.AsymmetricSecurityBindingElement" /> element there are two parameter properties, the <see cref="P:System.ServiceModel.Channels.AsymmetricSecurityBindingElement.InitiatorTokenParameters" /> and <see cref="P:System.ServiceModel.Channels.AsymmetricSecurityBindingElement.RecipientTokenParameters" /> properties. </para
-          >
+            >Supporting tokens provide additional claims beyond those contained in the primary tokens for the binding. The collection returned by the <see cref="P:System.ServiceModel.Channels.SecurityBindingElement.EndpointSupportingTokenParameters" /> contains additional token parameters (<see cref="T:System.ServiceModel.Security.Tokens.SecurityTokenParameters" />) for all operations defined by an endpoint. The primary token parameters are found on either the <see cref="T:System.ServiceModel.Channels.SymmetricSecurityBindingElement" /> or the <see cref="T:System.ServiceModel.Channels.AsymmetricSecurityBindingElement" /> (both inherit from the <see cref="T:System.ServiceModel.Channels.SecurityBindingElement" /> class). In the case of the <see cref="T:System.ServiceModel.Channels.SymmetricSecurityBindingElement" />, the primary token parameters are returned by the <see cref="P:System.ServiceModel.Channels.SymmetricSecurityBindingElement.ProtectionTokenParameters" /> property. On the <see cref="T:System.ServiceModel.Channels.AsymmetricSecurityBindingElement" /> element there are two parameter properties, the <see cref="P:System.ServiceModel.Channels.AsymmetricSecurityBindingElement.InitiatorTokenParameters" /> and <see cref="P:System.ServiceModel.Channels.AsymmetricSecurityBindingElement.RecipientTokenParameters" /> properties.
+          </para>
           <block subset="none" type="note">
             <para>The properties are called parameters because they specify only the type of the security token, not the actual values. </para>
             <para>Supporting tokens can be scoped at the endpoint level, in which case they are included in all secured messages sent by the client to the service. The service enforces that all secured messages from the client contain the supporting token types configured by this property. </para>
@@ -1853,11 +1853,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method gets the specified object from the base class, or from one of that class's ancestors. The object returned is usually a collection of properties, for example, an object that implements <see cref="T:System.ServiceModel.Channels.ISecurityCapabilities" />. </para
-          >
+            >This method gets the specified object from the base class, or from one of that class's ancestors. The object returned is usually a collection of properties, for example, an object that implements <see cref="T:System.ServiceModel.Channels.ISecurityCapabilities" />.
+          </para>
           <para
-            >If the SecurityBindingElement does not recognize the type of property requested, it delegates the call to the binding element stack below it, passing the binding context parameter. The types of properties that the SecurityBindingElement can provide are <see cref="T:System.ServiceModel.Channels.ISecurityCapabilities" /> and <see cref="T:System.ServiceModel.Security.IdentityVerifier" />. </para
-          >
+            >If the SecurityBindingElement does not recognize the type of property requested, it delegates the call to the binding element stack below it, passing the binding context parameter. The types of properties that the SecurityBindingElement can provide are <see cref="T:System.ServiceModel.Channels.ISecurityCapabilities" /> and <see cref="T:System.ServiceModel.Security.IdentityVerifier" />.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2084,8 +2084,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Supporting tokens provide additional claims beyond those contained in the primary tokens for the binding. </para>
           <para
-            >The collection returned by the <see cref="P:System.ServiceModel.Channels.SecurityBindingElement.OperationSupportingTokenParameters" /> property contains additional token parameters (<see cref="T:System.ServiceModel.Security.Tokens.SecurityTokenParameters" />) for specific operations defined. The primary token parameters are found on either the <see cref="T:System.ServiceModel.Channels.SymmetricSecurityBindingElement" /> or the <see cref="T:System.ServiceModel.Channels.AsymmetricSecurityBindingElement" /> (both inherit from the <see cref="T:System.ServiceModel.Channels.SecurityBindingElement" /> class). In the case of the <see cref="T:System.ServiceModel.Channels.SymmetricSecurityBindingElement" />, the primary token parameters are returned by the <see cref="P:System.ServiceModel.Channels.SymmetricSecurityBindingElement.ProtectionTokenParameters" /> property. On the <see cref="T:System.ServiceModel.Channels.AsymmetricSecurityBindingElement" /> there are two parameter properties, the <see cref="P:System.ServiceModel.Channels.AsymmetricSecurityBindingElement.InitiatorTokenParameters" /> and <see cref="P:System.ServiceModel.Channels.AsymmetricSecurityBindingElement.RecipientTokenParameters" /> properties. </para
-          >
+            >The collection returned by the <see cref="P:System.ServiceModel.Channels.SecurityBindingElement.OperationSupportingTokenParameters" /> property contains additional token parameters (<see cref="T:System.ServiceModel.Security.Tokens.SecurityTokenParameters" />) for specific operations defined. The primary token parameters are found on either the <see cref="T:System.ServiceModel.Channels.SymmetricSecurityBindingElement" /> or the <see cref="T:System.ServiceModel.Channels.AsymmetricSecurityBindingElement" /> (both inherit from the <see cref="T:System.ServiceModel.Channels.SecurityBindingElement" /> class). In the case of the <see cref="T:System.ServiceModel.Channels.SymmetricSecurityBindingElement" />, the primary token parameters are returned by the <see cref="P:System.ServiceModel.Channels.SymmetricSecurityBindingElement.ProtectionTokenParameters" /> property. On the <see cref="T:System.ServiceModel.Channels.AsymmetricSecurityBindingElement" /> there are two parameter properties, the <see cref="P:System.ServiceModel.Channels.AsymmetricSecurityBindingElement.InitiatorTokenParameters" /> and <see cref="P:System.ServiceModel.Channels.AsymmetricSecurityBindingElement.RecipientTokenParameters" /> properties.
+          </para>
           <block subset="none" type="note">
             <para>The properties are called parameters because they specify only the type of the security token, not the actual values. </para>
           </block>
@@ -2191,13 +2191,13 @@
             </item>
             <item>
               <para>
-                <see cref="F:System.ServiceModel.Channels.SecurityHeaderLayout.Lax" />: Items are added to the security header in any order that conforms to WSS: SOAP Message security. </para
-              >
+                <see cref="F:System.ServiceModel.Channels.SecurityHeaderLayout.Lax" />: Items are added to the security header in any order that conforms to WSS: SOAP Message security.
+              </para>
             </item>
             <item>
               <para>
-                <see cref="F:System.ServiceModel.Channels.SecurityHeaderLayout.LaxTimestampFirst" />: Items are added to the security header in any order that conforms to WSS: SOAP message security except that the first element in the security header must be a wsse:Timestamp element. </para
-              >
+                <see cref="F:System.ServiceModel.Channels.SecurityHeaderLayout.LaxTimestampFirst" />: Items are added to the security header in any order that conforms to WSS: SOAP message security except that the first element in the security header must be a wsse:Timestamp element.
+              </para>
             </item>
             <item>
               <para>
@@ -2290,8 +2290,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to require derived keys; otherwise, false. </param
-        >
+          />true to require derived keys; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ToString">

@@ -30,8 +30,8 @@ class Test
    }  
 }  
 ]]>
-    </code_example>shows a Stack that has several static methods (Clone and Flip) and several instance methods (Pop, Push, and ToString). </paragraph
-  >
+    </code_example>shows a Stack that has several static methods (Clone and Flip) and several instance methods (Pop, Push, and ToString).
+  </paragraph>
   <paragraph
     >Methods can be overloaded, which means that multiple methods may have the same name so long as they have unique signatures. The signature of a method consists of the name of the method and the number, modifiers, and types of its formal parameters. The signature of a method does not include the return type. The example <code_example>
       <![CDATA[

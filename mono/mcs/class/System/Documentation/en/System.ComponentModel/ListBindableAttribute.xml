@@ -71,8 +71,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if the list is bindable; otherwise, false. </param
-        >
+          />true if the list is bindable; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -107,8 +107,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.ComponentModel.BindableSupport" /> that indicates whether the list is bindable. </param
-        >
+          />A <see cref="T:System.ComponentModel.BindableSupport" /> that indicates whether the list is bindable.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Default">
@@ -180,8 +180,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to test equality with. </param
-        >
+          />The object to test equality with.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">

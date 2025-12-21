@@ -75,8 +75,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The filter string for the toolbox item. </param
-        >
+          />The filter string for the toolbox item.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -112,15 +112,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The filter string for the toolbox item. </param
-        >
+          />The filter string for the toolbox item.
+        </param>
         <param name="filterType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.ComponentModel.ToolboxItemFilterType" /> indicating the type of the filter. </param
-        >
+          />A <see cref="T:System.ComponentModel.ToolboxItemFilterType" /> indicating the type of the filter.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -262,8 +262,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to test for a matching filter string. </param
-        >
+          />The object to test for a matching filter string.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ToString">

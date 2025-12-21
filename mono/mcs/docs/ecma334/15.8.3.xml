@@ -71,34 +71,34 @@
     > for the variable and extends to the end of the embedded statement. The scope includes the <non_terminal
       where="15.8.3"
       >for-condition</non_terminal
-    > and the <non_terminal where="15.8.3">for-iterator</non_terminal>. </paragraph
-  >
+    > and the <non_terminal where="15.8.3">for-iterator</non_terminal>.
+  </paragraph>
   <paragraph
     >The <non_terminal where="15.8.3"
       >for-condition</non_terminal
     >, if present, must be a <non_terminal where="15.7.1"
       >boolean-expression</non_terminal
-    > (<hyperlink>14.16</hyperlink>). </paragraph
-  >
+    > (<hyperlink>14.16</hyperlink>).
+  </paragraph>
   <paragraph
     >The <non_terminal where="15.8.3"
       >for-iterator</non_terminal
     >, if present, consists of a list of <non_terminal where="15.6"
       >statement-expression</non_terminal
-    >s (<hyperlink>15.6</hyperlink>) separated by commas. </paragraph
-  >
+    >s (<hyperlink>15.6</hyperlink>) separated by commas.
+  </paragraph>
   <paragraph
     >A for statement is executed as follows: <list>
       <list_item
         > If a <non_terminal where="15.8.3"
           >for-initializer</non_terminal
-        > is present, the variable initializers or statement expressions are executed in the order they are written. This step is only performed once. </list_item
-      >
+        > is present, the variable initializers or statement expressions are executed in the order they are written. This step is only performed once.
+      </list_item>
       <list_item
         > If a <non_terminal where="15.8.3"
           >for-condition</non_terminal
-        > is present, it is evaluated. </list_item
-      >
+        > is present, it is evaluated.
+      </list_item>
       <list_item
         > If the <non_terminal where="15.8.3"
           >for-condition</non_terminal
@@ -108,30 +108,30 @@
         >, if any, are evaluated in sequence, and then another iteration is performed, starting with evaluation of the <non_terminal
           where="15.8.3"
           >for-condition</non_terminal
-        > in the step above. </list_item
-      >
+        > in the step above.
+      </list_item>
       <list_item
         > If the <non_terminal where="15.8.3"
           >for-condition</non_terminal
-        > is present and the evaluation yields false, control is transferred to the end point of the for statement. </list_item
-      >
+        > is present and the evaluation yields false, control is transferred to the end point of the for statement.
+      </list_item>
     </list>
   </paragraph>
   <paragraph
-    >Within the embedded statement of a for statement, a break statement (<hyperlink>15.9.1</hyperlink>) may be used to transfer control to the end point of the for statement (thus ending iteration of the embedded statement), and a continue statement (<hyperlink>15.9.2</hyperlink>) may be used to transfer control to the end point of the embedded statement (thus executing another iteration of the for statement). </paragraph
-  >
+    >Within the embedded statement of a for statement, a break statement (<hyperlink>15.9.1</hyperlink>) may be used to transfer control to the end point of the for statement (thus ending iteration of the embedded statement), and a continue statement (<hyperlink>15.9.2</hyperlink>) may be used to transfer control to the end point of the embedded statement (thus executing another iteration of the for statement).
+  </paragraph>
   <paragraph
     >The embedded statement of a for statement is reachable if one of the following is true: <list>
       <list_item
         > The for statement is reachable and no <non_terminal where="15.8.3"
           >for-condition</non_terminal
-        > is present. </list_item
-      >
+        > is present.
+      </list_item>
       <list_item
         > The for statement is reachable and a <non_terminal where="15.8.3"
           >for-condition</non_terminal
-        > is present and does not have the constant value false. </list_item
-      >
+        > is present and does not have the constant value false.
+      </list_item>
     </list>
   </paragraph>
   <paragraph
@@ -140,8 +140,8 @@
       <list_item
         > The for statement is reachable and a <non_terminal where="15.8.3"
           >for-condition</non_terminal
-        > is present and does not have the constant value true. </list_item
-      >
+        > is present and does not have the constant value true.
+      </list_item>
     </list>
   </paragraph>
 </clause>

@@ -58,8 +58,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.Configuration.ConnectionManagementElement" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.Configuration.ConnectionManagementElement" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -134,8 +134,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>You can set this property using an asterisk (*) to set the default number of connections for unspecified computers.</para>
           <para
-            >This property identifies one or more remote computers and the <see cref="P:System.Net.Configuration.ConnectionManagementElement.MaxConnection" /> property specifies how many simultaneous connections are allowed between the local computer and the remote computers. </para
-          >
+            >This property identifies one or more remote computers and the <see cref="P:System.Net.Configuration.ConnectionManagementElement.MaxConnection" /> property specifies how many simultaneous connections are allowed between the local computer and the remote computers.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -168,8 +168,8 @@
             >This property specifies how many simultaneous connections are allowed between the local computer and the remote computer. The remote computer is specified using the <see cref="P:System.Net.Configuration.ConnectionManagementElement.Address" /> property.</para
           >
           <para
-            >The <see cref="P:System.Net.Configuration.ConnectionManagementElement.MaxConnection" /> property is per <see cref="P:System.Net.WebRequest.ConnectionGroupName" />. If an application is not changing <see cref="P:System.Net.WebRequest.ConnectionGroupName" /> from the default, then the <see cref="P:System.Net.Configuration.ConnectionManagementElement.MaxConnection" /> property applies to the entire application domain. If only a single application domain is running in your application, then the <see cref="P:System.Net.Configuration.ConnectionManagementElement.MaxConnection" /> property setting is application-wide. </para
-          >
+            >The <see cref="P:System.Net.Configuration.ConnectionManagementElement.MaxConnection" /> property is per <see cref="P:System.Net.WebRequest.ConnectionGroupName" />. If an application is not changing <see cref="P:System.Net.WebRequest.ConnectionGroupName" /> from the default, then the <see cref="P:System.Net.Configuration.ConnectionManagementElement.MaxConnection" /> property applies to the entire application domain. If only a single application domain is running in your application, then the <see cref="P:System.Net.Configuration.ConnectionManagementElement.MaxConnection" /> property setting is application-wide.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

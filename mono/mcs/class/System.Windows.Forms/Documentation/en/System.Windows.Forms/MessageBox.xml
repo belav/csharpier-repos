@@ -55,8 +55,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text to display in the message box. </param
-        >
+          />The text to display in the message box.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -94,15 +94,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text to display in the message box. </param
-        >
+          />The text to display in the message box.
+        </param>
         <param name="caption">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text to display in the title bar of the message box. </param
-        >
+          />The text to display in the title bar of the message box.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -145,15 +145,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An implementation of <see cref="T:System.Windows.Forms.IWin32Window" /> that will own the modal dialog box. </param
-        >
+          />An implementation of <see cref="T:System.Windows.Forms.IWin32Window" /> that will own the modal dialog box.
+        </param>
         <param name="text">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text to display in the message box. </param
-        >
+          />The text to display in the message box.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -192,22 +192,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text to display in the message box. </param
-        >
+          />The text to display in the message box.
+        </param>
         <param name="caption">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text to display in the title bar of the message box. </param
-        >
+          />The text to display in the title bar of the message box.
+        </param>
         <param name="buttons">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.MessageBoxButtons" /> values that specifies which buttons to display in the message box. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.MessageBoxButtons" /> values that specifies which buttons to display in the message box.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -256,15 +256,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text to display in the message box. </param
-        >
+          />The text to display in the message box.
+        </param>
         <param name="caption">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text to display in the title bar of the message box. </param
-        >
+          />The text to display in the title bar of the message box.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -304,29 +304,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text to display in the message box. </param
-        >
+          />The text to display in the message box.
+        </param>
         <param name="caption">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text to display in the title bar of the message box. </param
-        >
+          />The text to display in the title bar of the message box.
+        </param>
         <param name="buttons">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.MessageBoxButtons" /> values that specifies which buttons to display in the message box. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.MessageBoxButtons" /> values that specifies which buttons to display in the message box.
+        </param>
         <param name="icon">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.MessageBoxIcon" /> values that specifies which icon to display in the message box. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.MessageBoxIcon" /> values that specifies which icon to display in the message box.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -376,22 +376,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text to display in the message box. </param
-        >
+          />The text to display in the message box.
+        </param>
         <param name="caption">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text to display in the title bar of the message box. </param
-        >
+          />The text to display in the title bar of the message box.
+        </param>
         <param name="buttons">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.MessageBoxButtons" /> values that specifies which buttons to display in the message box. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.MessageBoxButtons" /> values that specifies which buttons to display in the message box.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -432,36 +432,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text to display in the message box. </param
-        >
+          />The text to display in the message box.
+        </param>
         <param name="caption">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text to display in the title bar of the message box. </param
-        >
+          />The text to display in the title bar of the message box.
+        </param>
         <param name="buttons">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.MessageBoxButtons" /> values that specifies which buttons to display in the message box. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.MessageBoxButtons" /> values that specifies which buttons to display in the message box.
+        </param>
         <param name="icon">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.MessageBoxIcon" /> values that specifies which icon to display in the message box. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.MessageBoxIcon" /> values that specifies which icon to display in the message box.
+        </param>
         <param name="defaultButton">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.MessageBoxDefaultButton" /> values that specifies the default button for the message box. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.MessageBoxDefaultButton" /> values that specifies the default button for the message box.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -512,29 +512,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text to display in the message box. </param
-        >
+          />The text to display in the message box.
+        </param>
         <param name="caption">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text to display in the title bar of the message box. </param
-        >
+          />The text to display in the title bar of the message box.
+        </param>
         <param name="buttons">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.MessageBoxButtons" /> values that specifies which buttons to display in the message box. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.MessageBoxButtons" /> values that specifies which buttons to display in the message box.
+        </param>
         <param name="icon">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.MessageBoxIcon" /> values that specifies which icon to display in the message box. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.MessageBoxIcon" /> values that specifies which icon to display in the message box.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -576,36 +576,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text to display in the message box. </param
-        >
+          />The text to display in the message box.
+        </param>
         <param name="caption">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text to display in the title bar of the message box. </param
-        >
+          />The text to display in the title bar of the message box.
+        </param>
         <param name="buttons">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.MessageBoxButtons" /> values that specifies which buttons to display in the message box. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.MessageBoxButtons" /> values that specifies which buttons to display in the message box.
+        </param>
         <param name="icon">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.MessageBoxIcon" /> values that specifies which icon to display in the message box. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.MessageBoxIcon" /> values that specifies which icon to display in the message box.
+        </param>
         <param name="defaultButton">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.MessageBoxDefaultButton" /> values that specifies the default button for the message box. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.MessageBoxDefaultButton" /> values that specifies the default button for the message box.
+        </param>
         <param name="options">
           <attribution
             license="cc4"
@@ -664,36 +664,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text to display in the message box. </param
-        >
+          />The text to display in the message box.
+        </param>
         <param name="caption">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text to display in the title bar of the message box. </param
-        >
+          />The text to display in the title bar of the message box.
+        </param>
         <param name="buttons">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.MessageBoxButtons" /> values that specifies which buttons to display in the message box. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.MessageBoxButtons" /> values that specifies which buttons to display in the message box.
+        </param>
         <param name="icon">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.MessageBoxIcon" /> values that specifies which icon to display in the message box. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.MessageBoxIcon" /> values that specifies which icon to display in the message box.
+        </param>
         <param name="defaultButton">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.MessageBoxDefaultButton" /> values that specifies the default button for the message box. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.MessageBoxDefaultButton" /> values that specifies the default button for the message box.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -742,36 +742,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text to display in the message box. </param
-        >
+          />The text to display in the message box.
+        </param>
         <param name="caption">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text to display in the title bar of the message box. </param
-        >
+          />The text to display in the title bar of the message box.
+        </param>
         <param name="buttons">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.MessageBoxButtons" /> values that specifies which buttons to display in the message box. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.MessageBoxButtons" /> values that specifies which buttons to display in the message box.
+        </param>
         <param name="icon">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.MessageBoxIcon" /> values that specifies which icon to display in the message box. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.MessageBoxIcon" /> values that specifies which icon to display in the message box.
+        </param>
         <param name="defaultButton">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.MessageBoxDefaultButton" /> values that specifies the default button for the message box. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.MessageBoxDefaultButton" /> values that specifies the default button for the message box.
+        </param>
         <param name="options">
           <attribution
             license="cc4"
@@ -784,8 +784,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to show the Help button; otherwise, false. The default is false. </param
-        >
+          />true to show the Help button; otherwise, false. The default is false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Show">
@@ -833,36 +833,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text to display in the message box. </param
-        >
+          />The text to display in the message box.
+        </param>
         <param name="caption">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text to display in the title bar of the message box. </param
-        >
+          />The text to display in the title bar of the message box.
+        </param>
         <param name="buttons">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.MessageBoxButtons" /> values that specifies which buttons to display in the message box. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.MessageBoxButtons" /> values that specifies which buttons to display in the message box.
+        </param>
         <param name="icon">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.MessageBoxIcon" /> values that specifies which icon to display in the message box. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.MessageBoxIcon" /> values that specifies which icon to display in the message box.
+        </param>
         <param name="defaultButton">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.MessageBoxDefaultButton" /> values that specifies the default button for the message box. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.MessageBoxDefaultButton" /> values that specifies the default button for the message box.
+        </param>
         <param name="options">
           <attribution
             license="cc4"
@@ -875,8 +875,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The path and name of the Help file to display when the user clicks the Help button. </param
-        >
+          />The path and name of the Help file to display when the user clicks the Help button.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Show">
@@ -925,36 +925,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text to display in the message box. </param
-        >
+          />The text to display in the message box.
+        </param>
         <param name="caption">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text to display in the title bar of the message box. </param
-        >
+          />The text to display in the title bar of the message box.
+        </param>
         <param name="buttons">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.MessageBoxButtons" /> values that specifies which buttons to display in the message box. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.MessageBoxButtons" /> values that specifies which buttons to display in the message box.
+        </param>
         <param name="icon">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.MessageBoxIcon" /> values that specifies which icon to display in the message box. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.MessageBoxIcon" /> values that specifies which icon to display in the message box.
+        </param>
         <param name="defaultButton">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.MessageBoxDefaultButton" /> values the specifies the default button for the message box. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.MessageBoxDefaultButton" /> values the specifies the default button for the message box.
+        </param>
         <param name="options">
           <attribution
             license="cc4"
@@ -1011,36 +1011,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text to display in the message box. </param
-        >
+          />The text to display in the message box.
+        </param>
         <param name="caption">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text to display in the title bar of the message box. </param
-        >
+          />The text to display in the title bar of the message box.
+        </param>
         <param name="buttons">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.MessageBoxButtons" /> values that specifies which buttons to display in the message box. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.MessageBoxButtons" /> values that specifies which buttons to display in the message box.
+        </param>
         <param name="icon">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.MessageBoxIcon" /> values that specifies which icon to display in the message box. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.MessageBoxIcon" /> values that specifies which icon to display in the message box.
+        </param>
         <param name="defaultButton">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.MessageBoxDefaultButton" /> values that specifies the default button for the message box. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.MessageBoxDefaultButton" /> values that specifies the default button for the message box.
+        </param>
         <param name="options">
           <attribution
             license="cc4"
@@ -1053,15 +1053,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The path and name of the Help file to display when the user clicks the Help button. </param
-        >
+          />The path and name of the Help file to display when the user clicks the Help button.
+        </param>
         <param name="keyword">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The Help keyword to display when the user clicks the Help button. </param
-        >
+          />The Help keyword to display when the user clicks the Help button.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Show">
@@ -1113,36 +1113,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text to display in the message box. </param
-        >
+          />The text to display in the message box.
+        </param>
         <param name="caption">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text to display in the title bar of the message box. </param
-        >
+          />The text to display in the title bar of the message box.
+        </param>
         <param name="buttons">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.MessageBoxButtons" /> values that specifies which buttons to display in the message box. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.MessageBoxButtons" /> values that specifies which buttons to display in the message box.
+        </param>
         <param name="icon">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.MessageBoxIcon" /> values that specifies which icon to display in the message box. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.MessageBoxIcon" /> values that specifies which icon to display in the message box.
+        </param>
         <param name="defaultButton">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.MessageBoxDefaultButton" /> values that specifies the default button for the message box. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.MessageBoxDefaultButton" /> values that specifies the default button for the message box.
+        </param>
         <param name="options">
           <attribution
             license="cc4"
@@ -1155,15 +1155,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The path and name of the Help file to display when the user clicks the Help button. </param
-        >
+          />The path and name of the Help file to display when the user clicks the Help button.
+        </param>
         <param name="navigator">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.HelpNavigator" /> values. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.HelpNavigator" /> values.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Show">
@@ -1221,36 +1221,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text to display in the message box. </param
-        >
+          />The text to display in the message box.
+        </param>
         <param name="caption">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text to display in the title bar of the message box. </param
-        >
+          />The text to display in the title bar of the message box.
+        </param>
         <param name="buttons">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.MessageBoxButtons" /> values that specifies which buttons to display in the message box. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.MessageBoxButtons" /> values that specifies which buttons to display in the message box.
+        </param>
         <param name="icon">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.MessageBoxIcon" /> values that specifies which icon to display in the message box. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.MessageBoxIcon" /> values that specifies which icon to display in the message box.
+        </param>
         <param name="defaultButton">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.MessageBoxDefaultButton" /> values that specifies the default button for the message box. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.MessageBoxDefaultButton" /> values that specifies the default button for the message box.
+        </param>
         <param name="options">
           <attribution
             license="cc4"
@@ -1263,8 +1263,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The path and name of the Help file to display when the user clicks the Help button. </param
-        >
+          />The path and name of the Help file to display when the user clicks the Help button.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Show">
@@ -1320,36 +1320,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text to display in the message box. </param
-        >
+          />The text to display in the message box.
+        </param>
         <param name="caption">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text to display in the title bar of the message box. </param
-        >
+          />The text to display in the title bar of the message box.
+        </param>
         <param name="buttons">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.MessageBoxButtons" /> values that specifies which buttons to display in the message box. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.MessageBoxButtons" /> values that specifies which buttons to display in the message box.
+        </param>
         <param name="icon">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.MessageBoxIcon" /> values that specifies which icon to display in the message box. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.MessageBoxIcon" /> values that specifies which icon to display in the message box.
+        </param>
         <param name="defaultButton">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.MessageBoxDefaultButton" /> values that specifies the default button for the message box. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.MessageBoxDefaultButton" /> values that specifies the default button for the message box.
+        </param>
         <param name="options">
           <attribution
             license="cc4"
@@ -1362,22 +1362,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The path and name of the Help file to display when the user clicks the Help button. </param
-        >
+          />The path and name of the Help file to display when the user clicks the Help button.
+        </param>
         <param name="navigator">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.HelpNavigator" /> values. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.HelpNavigator" /> values.
+        </param>
         <param name="param">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The numeric ID of the Help topic to display when the user clicks the Help button. </param
-        >
+          />The numeric ID of the Help topic to display when the user clicks the Help button.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Show">
@@ -1433,36 +1433,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text to display in the message box. </param
-        >
+          />The text to display in the message box.
+        </param>
         <param name="caption">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text to display in the title bar of the message box. </param
-        >
+          />The text to display in the title bar of the message box.
+        </param>
         <param name="buttons">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.MessageBoxButtons" /> values that specifies which buttons to display in the message box. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.MessageBoxButtons" /> values that specifies which buttons to display in the message box.
+        </param>
         <param name="icon">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.MessageBoxIcon" /> values that specifies which icon to display in the message box. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.MessageBoxIcon" /> values that specifies which icon to display in the message box.
+        </param>
         <param name="defaultButton">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.MessageBoxDefaultButton" /> values that specifies the default button for the message box. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.MessageBoxDefaultButton" /> values that specifies the default button for the message box.
+        </param>
         <param name="options">
           <attribution
             license="cc4"
@@ -1475,15 +1475,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The path and name of the Help file to display when the user clicks the Help button. </param
-        >
+          />The path and name of the Help file to display when the user clicks the Help button.
+        </param>
         <param name="keyword">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The Help keyword to display when the user clicks the Help button. </param
-        >
+          />The Help keyword to display when the user clicks the Help button.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Show">
@@ -1545,36 +1545,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text to display in the message box. </param
-        >
+          />The text to display in the message box.
+        </param>
         <param name="caption">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text to display in the title bar of the message box. </param
-        >
+          />The text to display in the title bar of the message box.
+        </param>
         <param name="buttons">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.MessageBoxButtons" /> values that specifies which buttons to display in the message box. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.MessageBoxButtons" /> values that specifies which buttons to display in the message box.
+        </param>
         <param name="icon">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.MessageBoxIcon" /> values that specifies which icon to display in the message box. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.MessageBoxIcon" /> values that specifies which icon to display in the message box.
+        </param>
         <param name="defaultButton">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.MessageBoxDefaultButton" /> values that specifies the default button for the message box. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.MessageBoxDefaultButton" /> values that specifies the default button for the message box.
+        </param>
         <param name="options">
           <attribution
             license="cc4"
@@ -1587,15 +1587,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The path and name of the Help file to display when the user clicks the Help button. </param
-        >
+          />The path and name of the Help file to display when the user clicks the Help button.
+        </param>
         <param name="navigator">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.HelpNavigator" /> values. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.HelpNavigator" /> values.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Show">
@@ -1661,36 +1661,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text to display in the message box. </param
-        >
+          />The text to display in the message box.
+        </param>
         <param name="caption">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text to display in the title bar of the message box. </param
-        >
+          />The text to display in the title bar of the message box.
+        </param>
         <param name="buttons">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.MessageBoxButtons" /> values that specifies which buttons to display in the message box. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.MessageBoxButtons" /> values that specifies which buttons to display in the message box.
+        </param>
         <param name="icon">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.MessageBoxIcon" /> values that specifies which icon to display in the message box. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.MessageBoxIcon" /> values that specifies which icon to display in the message box.
+        </param>
         <param name="defaultButton">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.MessageBoxDefaultButton" /> values that specifies the default button for the message box. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.MessageBoxDefaultButton" /> values that specifies the default button for the message box.
+        </param>
         <param name="options">
           <attribution
             license="cc4"
@@ -1703,22 +1703,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The path and name of the Help file to display when the user clicks the Help button. </param
-        >
+          />The path and name of the Help file to display when the user clicks the Help button.
+        </param>
         <param name="navigator">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.HelpNavigator" /> values. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.HelpNavigator" /> values.
+        </param>
         <param name="param">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The numeric ID of the Help topic to display when the user clicks the Help button. </param
-        >
+          />The numeric ID of the Help topic to display when the user clicks the Help button.
+        </param>
       </Docs>
     </Member>
   </Members>

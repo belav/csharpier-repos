@@ -83,8 +83,8 @@
               </term>
               <description>
                 <para
-                  >The value of the <see cref="P:System.Web.UI.WebControls.CommandEventArgs.CommandArgument" /> property of the <see cref="T:System.Web.UI.WebControls.CommandEventArgs" /> contained in the <paramref name="originalArgs" /> parameter. </para
-                >
+                  >The value of the <see cref="P:System.Web.UI.WebControls.CommandEventArgs.CommandArgument" /> property of the <see cref="T:System.Web.UI.WebControls.CommandEventArgs" /> contained in the <paramref name="originalArgs" /> parameter.
+                </para>
               </description>
             </item>
             <item>
@@ -95,8 +95,8 @@
               </term>
               <description>
                 <para
-                  >The value of the <see cref="P:System.Web.UI.WebControls.CommandEventArgs.CommandName" /> property of the <see cref="T:System.Web.UI.WebControls.CommandEventArgs" /> object contained in the <paramref name="originalArgs" /> parameter. </para
-                >
+                  >The value of the <see cref="P:System.Web.UI.WebControls.CommandEventArgs.CommandName" /> property of the <see cref="T:System.Web.UI.WebControls.CommandEventArgs" /> object contained in the <paramref name="originalArgs" /> parameter.
+                </para>
               </description>
             </item>
             <item>
@@ -107,8 +107,8 @@
               </term>
               <description>
                 <para
-                  >The object contained in the <paramref name="commandSource" /> parameter. </para
-                >
+                  >The object contained in the <paramref name="commandSource" /> parameter.
+                </para>
               </description>
             </item>
           </list>

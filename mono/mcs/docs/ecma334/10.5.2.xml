@@ -8,11 +8,11 @@
       >interface-body</non_terminal
     >, or <non_terminal where="21.1"
       >enum-body</non_terminal
-    > of the type (including, possibly, types that are nested within the type). </paragraph
-  >
+    > of the type (including, possibly, types that are nested within the type).
+  </paragraph>
   <paragraph
-    >The accessibility domain of a predefined type (such as object, <keyword>int</keyword>, or <keyword>double</keyword>) is unlimited. </paragraph
-  >
+    >The accessibility domain of a predefined type (such as object, <keyword>int</keyword>, or <keyword>double</keyword>) is unlimited.
+  </paragraph>
   <paragraph
     >The accessibility domain of a top-level type T that is declared in a program P is defined as follows: <list>
       <list_item> If the declared accessibility of T is public, the accessibility domain of T is the program text of P and any program that references P. </list_item>
@@ -40,11 +40,11 @@
         <list_item> First, if M is declared within a type (as opposed to a compilation unit or a namespace), a compile-time error occurs if that type is not accessible. </list_item>
         <list_item> Then, if M is public, the access is permitted. </list_item>
         <list_item
-          > Otherwise, if M is protected internal, the access is permitted if it occurs within the program in which M is declared, or if it occurs within a class derived from the class in which M is declared and takes place through the derived class type (<hyperlink>10.5.3</hyperlink>). </list_item
-        >
+          > Otherwise, if M is protected internal, the access is permitted if it occurs within the program in which M is declared, or if it occurs within a class derived from the class in which M is declared and takes place through the derived class type (<hyperlink>10.5.3</hyperlink>).
+        </list_item>
         <list_item
-          > Otherwise, if M is protected, the access is permitted if it occurs within the class in which M is declared, or if it occurs within a class derived from the class in which M is declared and takes place through the derived class type (<hyperlink>10.5.3</hyperlink>). </list_item
-        >
+          > Otherwise, if M is protected, the access is permitted if it occurs within the class in which M is declared, or if it occurs within a class derived from the class in which M is declared and takes place through the derived class type (<hyperlink>10.5.3</hyperlink>).
+        </list_item>
         <list_item> Otherwise, if M is internal, the access is permitted if it occurs within the program in which M is declared. </list_item>
         <list_item> Otherwise, if M is private, the access is permitted if it occurs within the type in which M is declared. </list_item>
         <list_item> Otherwise, the type or member is inaccessible, and a compile-time error occurs. end note]</list_item>

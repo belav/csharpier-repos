@@ -20,14 +20,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >An HTML document may consist of a FRAMESET that defines multiple fixed FRAME objects, each of which contains its own HTML page. Alternatively, a document may contain a number of IFRAME objects, which can position documents arbitrarily inside of other documents. FRAME objects and IFRAME objects are represented at their top-most level by an <see cref="T:System.Windows.Forms.HtmlWindowCollection" />, which contains elements of type <see cref="T:System.Windows.Forms.HtmlWindow" />. </para
-      >
+        >An HTML document may consist of a FRAMESET that defines multiple fixed FRAME objects, each of which contains its own HTML page. Alternatively, a document may contain a number of IFRAME objects, which can position documents arbitrarily inside of other documents. FRAME objects and IFRAME objects are represented at their top-most level by an <see cref="T:System.Windows.Forms.HtmlWindowCollection" />, which contains elements of type <see cref="T:System.Windows.Forms.HtmlWindow" />.
+      </para>
       <para>
-        <see cref="T:System.Windows.Forms.HtmlWindowCollection" /> supports the <see cref="T:System.Collections.IEnumerator" /> interface so that it can be used in loop constructs. It also defines an Item method, which allows access to the elements of the collection either via a method call or using standard array syntax. </para
-      >
+        <see cref="T:System.Windows.Forms.HtmlWindowCollection" /> supports the <see cref="T:System.Collections.IEnumerator" /> interface so that it can be used in loop constructs. It also defines an Item method, which allows access to the elements of the collection either via a method call or using standard array syntax.
+      </para>
       <para
-        >If you create new windows with the <see cref="M:System.Windows.Forms.HtmlWindow.Open(System.String,System.String,System.String,System.Boolean)" /> or <see cref="M:System.Windows.Forms.HtmlWindow.OpenNew(System.String,System.String)" /> methods, and the documents hosted by these windows contain FRAME or IFRAME elements, that these elements will appear in the <see cref="T:System.Windows.Forms.HtmlWindowCollection" /> of the parent page. </para
-      >
+        >If you create new windows with the <see cref="M:System.Windows.Forms.HtmlWindow.Open(System.String,System.String,System.String,System.Boolean)" /> or <see cref="M:System.Windows.Forms.HtmlWindow.OpenNew(System.String,System.String)" /> methods, and the documents hosted by these windows contain FRAME or IFRAME elements, that these elements will appear in the <see cref="T:System.Windows.Forms.HtmlWindowCollection" /> of the parent page.
+      </para>
       <para
         >For more information on frames, see the documentation for the <see cref="P:System.Windows.Forms.HtmlWindow.Frames" /> property.</para
       >

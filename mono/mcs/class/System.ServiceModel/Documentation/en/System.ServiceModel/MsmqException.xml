@@ -47,8 +47,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.MsmqException" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.MsmqException" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -154,8 +154,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The inner exception to be encapsulated by the new instance of the <see cref="T:System.ServiceModel.MsmqException" /> class. </param
-        >
+          />The inner exception to be encapsulated by the new instance of the <see cref="T:System.ServiceModel.MsmqException" /> class.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">

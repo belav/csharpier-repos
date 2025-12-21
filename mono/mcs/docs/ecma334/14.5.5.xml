@@ -34,13 +34,13 @@
       >primary-expression</non_terminal
     > is neither a method group nor a value of a <non_terminal where="11.2"
       >delegate-type</non_terminal
-    >, a  compile-time error occurs. </paragraph
-  >
+    >, a  compile-time error occurs.
+  </paragraph>
   <paragraph
     >The optional <non_terminal where="14.4.1"
       >argument-list</non_terminal
-    > (<hyperlink>14.4.1</hyperlink>) provides values or variable references for the parameters of the method. </paragraph
-  >
+    > (<hyperlink>14.4.1</hyperlink>) provides values or variable references for the parameters of the method.
+  </paragraph>
   <paragraph
     >The result of evaluating an <non_terminal where="14.5.5"
       >invocation-expression</non_terminal
@@ -51,8 +51,8 @@
         > invokes a method or delegate that returns <keyword>void</keyword>, the result is nothing. An expression that is classified as nothing cannot be an operand of any operator, and is permitted only in the context of a <non_terminal
           where="15.6"
           >statement-expression</non_terminal
-        > (<hyperlink>15.6</hyperlink>). </list_item
-      >
+        > (<hyperlink>15.6</hyperlink>).
+      </list_item>
       <list_item> Otherwise, the result is a value of the type returned by the method or delegate. </list_item>
     </list>
   </paragraph>

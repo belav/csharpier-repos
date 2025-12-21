@@ -43,8 +43,8 @@
       <para>You can use this delegate to represent a method that can be passed as a parameter without explicitly declaring a custom delegate. The encapsulated method must correspond to the method signature that is defined by this delegate. This means that the encapsulated method must have four parameters, each of which is passed to it by value, and that it must return a value.</para>
       <block subset="none" type="note">
         <para
-          >To reference a method that has four parameters and returns void (or in Visual Basic, that is declared as a Sub rather than as a Function), use the generic <see cref="T:System.Action`4" /> delegate instead. </para
-        >
+          >To reference a method that has four parameters and returns void (or in Visual Basic, that is declared as a Sub rather than as a Function), use the generic <see cref="T:System.Action`4" /> delegate instead.
+        </para>
       </block>
       <para
         >When you use the <see cref="T:System.Func`5" /> delegate, you do not have to explicitly define a delegate that encapsulates a method with four parameters. For example, the following code explicitly declares a generic delegate named Searcher and assigns a reference to the <see cref="M:System.String.IndexOf(System.String,System.Int32,System.Int32,System.StringComparison)" /> method to its delegate instance.</para

@@ -32,8 +32,8 @@
         >The <see cref="T:System.ComponentModel.ComplexBindingPropertiesAttribute" /> is used to specify the properties used with complex data binding, such as binding based on <see cref="T:System.Collections.IList" />.</para
       >
       <para
-        >The <see cref="T:System.ComponentModel.ComplexBindingPropertiesAttribute" /> attribute is specified at the class level. It is inheritable and does not allow multiple attributes on the same class. </para
-      >
+        >The <see cref="T:System.ComponentModel.ComplexBindingPropertiesAttribute" /> attribute is specified at the class level. It is inheritable and does not allow multiple attributes on the same class.
+      </para>
       <para
         >A control can support both simple binding, with <see cref="T:System.ComponentModel.DefaultBindingPropertyAttribute" />, as well as complex binding.</para
       >
@@ -71,8 +71,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.ComplexBindingPropertiesAttribute" /> class using no parameters. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.ComplexBindingPropertiesAttribute" /> class using no parameters.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -103,8 +103,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.ComplexBindingPropertiesAttribute" /> class using the specified data source. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.ComplexBindingPropertiesAttribute" /> class using the specified data source.
+          </para>
         </summary>
         <param name="dataSource">
           <attribution
@@ -143,8 +143,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.ComplexBindingPropertiesAttribute" /> class using the specified data source and data member. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.ComplexBindingPropertiesAttribute" /> class using the specified data source and data member.
+          </para>
         </summary>
         <param name="dataSource">
           <attribution
@@ -275,8 +275,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified <see cref="T:System.Object" /> is equal to the current <see cref="T:System.ComponentModel.ComplexBindingPropertiesAttribute" /> instance. </para
-          >
+            >Determines whether the specified <see cref="T:System.Object" /> is equal to the current <see cref="T:System.ComponentModel.ComplexBindingPropertiesAttribute" /> instance.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -287,8 +287,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to compare with the current <see cref="T:System.ComponentModel.ComplexBindingPropertiesAttribute" /> instance </param
-        >
+          />The <see cref="T:System.Object" /> to compare with the current <see cref="T:System.ComponentModel.ComplexBindingPropertiesAttribute" /> instance
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">

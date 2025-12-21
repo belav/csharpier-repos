@@ -96,8 +96,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XmlNode you want to read. </param
-        >
+          />The XmlNode you want to read.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AttributeCount">
@@ -367,8 +367,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the attribute. The index is zero-based. (The first attribute has index 0.) </param
-        >
+          />The index of the attribute. The index is zero-based. (The first attribute has index 0.)
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetAttribute">
@@ -415,8 +415,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The qualified name of the attribute. </param
-        >
+          />The qualified name of the attribute.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetAttribute">
@@ -476,15 +476,15 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the attribute. </param
-        >
+          />The local name of the attribute.
+        </param>
         <param name="namespaceURI">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the attribute. </param
-        >
+          />The namespace URI of the attribute.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="HasAttributes">
@@ -845,8 +845,8 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The prefix whose namespace URI you want to resolve. To match the default namespace, pass an empty string. This string does not have to be atomized. </param
-        >
+          />The prefix whose namespace URI you want to resolve. To match the default namespace, pass an empty string. This string does not have to be atomized.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Mono.Xml.IHasXmlParserContext.ParserContext">
@@ -914,8 +914,8 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the attribute. </param
-        >
+          />The index of the attribute.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="MoveToAttribute">
@@ -963,8 +963,8 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The qualified name of the attribute. </param
-        >
+          />The qualified name of the attribute.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="MoveToAttribute">
@@ -1016,15 +1016,15 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the attribute. </param
-        >
+          />The local name of the attribute.
+        </param>
         <param name="namespaceURI">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the attribute. </param
-        >
+          />The namespace URI of the attribute.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="MoveToElement">
@@ -1889,8 +1889,8 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
             >
           </block>
           <para
-            >The <see cref="T:System.Xml.Schema.IXmlSchemaInfo" /> interface represents the Post Schema Validation Infoset (PSVI) of the underlying XML node. The PSVI contents of this property are set after the node has been validated. </para
-          >
+            >The <see cref="T:System.Xml.Schema.IXmlSchemaInfo" /> interface represents the Post Schema Validation Infoset (PSVI) of the underlying XML node. The PSVI contents of this property are set after the node has been validated.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

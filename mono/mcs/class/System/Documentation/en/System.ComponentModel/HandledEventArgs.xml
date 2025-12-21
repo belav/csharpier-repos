@@ -19,11 +19,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Typically, the value of the <see cref="P:System.ComponentModel.HandledEventArgs.Handled" /> property is set in an event handler to indicate that the system should perform no further processing. </para
-      >
+        >Typically, the value of the <see cref="P:System.ComponentModel.HandledEventArgs.Handled" /> property is set in an event handler to indicate that the system should perform no further processing.
+      </para>
       <para
-        >This class is a base class for types such as the <see cref="T:System.Windows.Forms.DataGridViewCellPaintingEventArgs" />, <see cref="T:System.Windows.Forms.DataGridViewRowPrePaintEventArgs" />, <see cref="T:System.Windows.Forms.DataGridViewRowHeightInfoPushedEventArgs" />, and <see cref="T:System.Windows.Forms.DataGridViewSortCompareEventArgs" /> classes. </para
-      >
+        >This class is a base class for types such as the <see cref="T:System.Windows.Forms.DataGridViewCellPaintingEventArgs" />, <see cref="T:System.Windows.Forms.DataGridViewRowPrePaintEventArgs" />, <see cref="T:System.Windows.Forms.DataGridViewRowHeightInfoPushedEventArgs" />, and <see cref="T:System.Windows.Forms.DataGridViewSortCompareEventArgs" /> classes.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

@@ -99,8 +99,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Net.HttpListenerResponse" /> object that will be sent to the client in response to the client's request. </para
-          >
+            >Gets the <see cref="T:System.Net.HttpListenerResponse" /> object that will be sent to the client in response to the client's request.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -130,14 +130,14 @@
             >An <see cref="T:System.Net.HttpListener" /> indicates that it requires authentication using the <see cref="P:System.Net.HttpListener.AuthenticationSchemes" /> property or by specifying an <see cref="T:System.Net.AuthenticationSchemeSelector" /> delegate using the <see cref="P:System.Net.HttpListener.AuthenticationSchemeSelectorDelegate" /> property.</para
           >
           <para
-            >To determine the client's login name and authentication information, check the <see cref="P:System.Security.Principal.IPrincipal.Identity" /> property in the object returned by this property. </para
-          >
+            >To determine the client's login name and authentication information, check the <see cref="P:System.Security.Principal.IPrincipal.Identity" /> property in the object returned by this property.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an object used to obtain identity, authentication information, and security roles for the client whose request is represented by this <see cref="T:System.Net.HttpListenerContext" /> object. </para
-          >
+            >Gets an object used to obtain identity, authentication information, and security roles for the client whose request is represented by this <see cref="T:System.Net.HttpListenerContext" /> object.
+          </para>
         </summary>
       </Docs>
     </Member>

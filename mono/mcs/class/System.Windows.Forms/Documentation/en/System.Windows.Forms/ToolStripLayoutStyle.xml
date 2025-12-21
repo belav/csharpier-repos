@@ -24,8 +24,8 @@
       <list type="bullet">
         <item>
           <para>
-            <see cref="F:System.Windows.Forms.ToolStripLayoutStyle.StackWithOverflow" /> is the default. This setting causes the <see cref="T:System.Windows.Forms.ToolStrip" /> to alter its layout automatically in accordance with the <see cref="P:System.Windows.Forms.ToolStrip.Orientation" /> property to handle dragging and docking scenarios. </para
-          >
+            <see cref="F:System.Windows.Forms.ToolStripLayoutStyle.StackWithOverflow" /> is the default. This setting causes the <see cref="T:System.Windows.Forms.ToolStrip" /> to alter its layout automatically in accordance with the <see cref="P:System.Windows.Forms.ToolStrip.Orientation" /> property to handle dragging and docking scenarios.
+          </para>
         </item>
         <item>
           <para>
@@ -45,8 +45,8 @@
         <see cref="P:System.Windows.Forms.ToolStripItem.Alignment" /> determines the end of the <see cref="T:System.Windows.Forms.ToolStrip" /> to which the item is aligned.</para
       >
       <para
-        >When items do not fit within the <see cref="T:System.Windows.Forms.ToolStrip" />, an overflow button automatically appears. The <see cref="P:System.Windows.Forms.ToolStripItem.Overflow" /> property setting determines whether an item appears in the overflow area always, as needed, or never. </para
-      >
+        >When items do not fit within the <see cref="T:System.Windows.Forms.ToolStrip" />, an overflow button automatically appears. The <see cref="P:System.Windows.Forms.ToolStripItem.Overflow" /> property setting determines whether an item appears in the overflow area always, as needed, or never.
+      </para>
       <para
         >In the <see cref="E:System.Windows.Forms.ToolStrip.LayoutCompleted" /> event, you can inspect the <see cref="P:System.Windows.Forms.ToolStripItem.Placement" /> property to determine whether an item was placed on the main <see cref="T:System.Windows.Forms.ToolStrip" />, the overflow <see cref="T:System.Windows.Forms.ToolStrip" />, or if it is not currently showing at all. The typical reasons why an item is not displayed are that the item did not fit on the main <see cref="T:System.Windows.Forms.ToolStrip" /> and its <see cref="P:System.Windows.Forms.ToolStripItem.Overflow" /> property was set to <see cref="F:System.Windows.Forms.ToolStripItemOverflow.Never" />.</para
       >

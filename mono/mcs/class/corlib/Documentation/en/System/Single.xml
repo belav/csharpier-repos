@@ -90,8 +90,8 @@
           <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">Standard Numeric Format Strings</a>
         </format>, and <format type="text/html">
           <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
-        </format>. </para
-      >
+        </format>.
+      </para>
       <format type="text/html">
         <a href="#Precision" />
       </format>
@@ -99,8 +99,8 @@
         <h2>Floating-point representation and precision</h2>
       </format>
       <para
-        >The <see cref="T:System.Single" /> data type stores single-precision floating-point values in a 32-bit binary format, as shown in the following table: </para
-      >
+        >The <see cref="T:System.Single" /> data type stores single-precision floating-point values in a 32-bit binary format, as shown in the following table:
+      </para>
       <list type="table">
         <listheader>
           <item>
@@ -145,8 +145,8 @@
       <para>code reference: System.Single.Structure#3</para>
       <para>Because some numbers cannot be represented exactly as fractional binary values, floating-point numbers can only approximate real numbers.</para>
       <para
-        >All floating-point numbers have a limited number of significant digits, which also determines how accurately a floating-point value approximates a real number. A <see cref="T:System.Single" /> value has up to 7 decimal digits of precision, although a maximum of 9 digits is maintained internally. This means that some floating-point operations may lack the precision to change a floating-point value. The following example defines a large single-precision floating-point value, and then adds the product of <see cref="F:System.Single.Epsilon" /> and one quadrillion to it. However, the product is too small to modify the original floating-point value. Its least significant digit is thousandths, whereas the most significant digit in the product is 1<superscript>-312</superscript>. </para
-      >
+        >All floating-point numbers have a limited number of significant digits, which also determines how accurately a floating-point value approximates a real number. A <see cref="T:System.Single" /> value has up to 7 decimal digits of precision, although a maximum of 9 digits is maintained internally. This means that some floating-point operations may lack the precision to change a floating-point value. The following example defines a large single-precision floating-point value, and then adds the product of <see cref="F:System.Single.Epsilon" /> and one quadrillion to it. However, the product is too small to modify the original floating-point value. Its least significant digit is thousandths, whereas the most significant digit in the product is 1<superscript>-312</superscript>.
+      </para>
       <para>code reference: System.Single.Structure#4</para>
       <para>The limited precision of a floating-point number has several consequences:</para>
       <list type="bullet">
@@ -154,19 +154,19 @@
           <para>Two floating-point numbers that appear equal for a particular precision might not compare equal because their least significant digits are different. In the following example, a series of numbers are added together, and their total is compared with their expected total. Although the two values appear to be the same, a call to the Equals method indicates that they are not.</para>
           <para>code reference: System.Single.Structure#6</para>
           <para
-            >If you change the format items in the <see cref="M:System.Console.WriteLine(System.String,System.Object,System.Object)" /> statement from {0} and {1} to {0:R} and {1:R} to display all significant digits of the two <see cref="T:System.Single" /> values, it is clear that the two values are unequal because of a loss of precision during the addition operations. In this case, the issue can be resolved by calling the <see cref="M:System.Math.Round(System.Double,System.Int32)" /> method to round the <see cref="T:System.Single" /> values to the desired precision before performing the comparison. </para
-          >
+            >If you change the format items in the <see cref="M:System.Console.WriteLine(System.String,System.Object,System.Object)" /> statement from {0} and {1} to {0:R} and {1:R} to display all significant digits of the two <see cref="T:System.Single" /> values, it is clear that the two values are unequal because of a loss of precision during the addition operations. In this case, the issue can be resolved by calling the <see cref="M:System.Math.Round(System.Double,System.Int32)" /> method to round the <see cref="T:System.Single" /> values to the desired precision before performing the comparison.
+          </para>
         </item>
         <item>
           <para>A mathematical or comparison operation that uses a floating-point number might not yield the same result if a decimal number is used, because the binary floating-point number might not equal the decimal number. A previous example illustrated this by displaying the result of multiplying .3 by 10 and adding .3 to .3 nine times. </para>
           <para
-            >When accuracy in numeric operations with fractional values is important, use the <see cref="T:System.Decimal" /> type instead of the <see cref="T:System.Single" /> type. When accuracy in numeric operations with integral values beyond the range of the <see cref="T:System.Int64" /> or <see cref="T:System.UInt64" /> types is important, use the <see cref="T:System.Numerics.BigInteger" /> type. </para
-          >
+            >When accuracy in numeric operations with fractional values is important, use the <see cref="T:System.Decimal" /> type instead of the <see cref="T:System.Single" /> type. When accuracy in numeric operations with integral values beyond the range of the <see cref="T:System.Int64" /> or <see cref="T:System.UInt64" /> types is important, use the <see cref="T:System.Numerics.BigInteger" /> type.
+          </para>
         </item>
         <item>
           <para
-            >A value might not round-trip if a floating-point number is involved. A value is said to round-trip if an operation converts an original floating-point number to another form, an inverse operation transforms the converted form back to a floating-point number, and the final floating-point number is not equal to the original floating-point number. The round trip might fail because one or more least significant digits are lost or changed in a conversion. In the following example, three <see cref="T:System.Single" /> values are converted to strings and saved in a file. As the output shows, although the values appear to be identical, the restored values are not equal to the original values. </para
-          >
+            >A value might not round-trip if a floating-point number is involved. A value is said to round-trip if an operation converts an original floating-point number to another form, an inverse operation transforms the converted form back to a floating-point number, and the final floating-point number is not equal to the original floating-point number. The round trip might fail because one or more least significant digits are lost or changed in a conversion. In the following example, three <see cref="T:System.Single" /> values are converted to strings and saved in a file. As the output shows, although the values appear to be identical, the restored values are not equal to the original values.
+          </para>
           <para>code reference: System.Single.Structure#7</para>
           <para
             >In this case, the values can be successfully round-tripped by using the "R" <format type="text/html">
@@ -177,12 +177,12 @@
         </item>
         <item>
           <para>
-            <see cref="T:System.Single" /> values have less precision than <see cref="T:System.Double" /> values. A <see cref="T:System.Single" /> value that is converted to a seemingly equivalent <see cref="T:System.Double" /> often does not equal the <see cref="T:System.Double" /> value because of differences in precision. In the following example, the result of identical division operations is assigned to a <see cref="T:System.Double" /> value and a <see cref="T:System.Single" /> value. After the <see cref="T:System.Single" /> value is cast to a <see cref="T:System.Double" />, a comparison of the two values shows that they are unequal. </para
-          >
+            <see cref="T:System.Single" /> values have less precision than <see cref="T:System.Double" /> values. A <see cref="T:System.Single" /> value that is converted to a seemingly equivalent <see cref="T:System.Double" /> often does not equal the <see cref="T:System.Double" /> value because of differences in precision. In the following example, the result of identical division operations is assigned to a <see cref="T:System.Double" /> value and a <see cref="T:System.Single" /> value. After the <see cref="T:System.Single" /> value is cast to a <see cref="T:System.Double" />, a comparison of the two values shows that they are unequal.
+          </para>
           <para>code reference: System.Double.Structure#5</para>
           <para
-            >To avoid this problem, either use the <see cref="T:System.Double" /> data type in place of the <see cref="T:System.Single" /> data type, or use the <see cref="M:System.Math.Round(System.Double)" /> method so that both values have the same precision. </para
-          >
+            >To avoid this problem, either use the <see cref="T:System.Double" /> data type in place of the <see cref="T:System.Single" /> data type, or use the <see cref="M:System.Math.Round(System.Double)" /> method so that both values have the same precision.
+          </para>
         </item>
       </list>
       <format type="text/html">
@@ -192,32 +192,32 @@
         <h2>Testing for equality</h2>
       </format>
       <para
-        >To be considered equal, two <see cref="T:System.Single" /> values must represent identical values. However, because of differences in precision between values, or because of a loss of precision by one or both values, floating-point values that are expected to be identical often turn out to be unequal due to differences in their least significant digits. As a result, calls to the <see cref="M:System.Single.Equals(System.Single)" /> method to determine whether two values are equal, or calls to the <see cref="M:System.Single.CompareTo(System.Single)" /> method to determine the relationship between two <see cref="T:System.Single" /> values, often yield unexpected results. This is evident in the following example, where two apparently equal <see cref="T:System.Single" /> values turn out to be unequal, because the first value has 7 digits of precision, whereas the second value has 9. </para
-      >
+        >To be considered equal, two <see cref="T:System.Single" /> values must represent identical values. However, because of differences in precision between values, or because of a loss of precision by one or both values, floating-point values that are expected to be identical often turn out to be unequal due to differences in their least significant digits. As a result, calls to the <see cref="M:System.Single.Equals(System.Single)" /> method to determine whether two values are equal, or calls to the <see cref="M:System.Single.CompareTo(System.Single)" /> method to determine the relationship between two <see cref="T:System.Single" /> values, often yield unexpected results. This is evident in the following example, where two apparently equal <see cref="T:System.Single" /> values turn out to be unequal, because the first value has 7 digits of precision, whereas the second value has 9.
+      </para>
       <para>code reference: System.Single.Structure#9</para>
       <para
-        >Calculated values that follow different code paths and that are manipulated in different ways often prove to be unequal. In the following example, one <see cref="T:System.Single" /> value is squared, and then the square root is calculated to restore the original value. A second <see cref="T:System.Single" /> is multiplied by 3.51 and squared before the square root of the result is divided by 3.51 to restore the original value. Although the two values appear to be identical, a call to the <see cref="M:System.Single.Equals(System.Single)" /> method indicates that they are not equal. Using the "R" standard format string to return a result string that displays all the significant digits of each <see cref="T:System.Single" /> value shows that the second value is .0000000000001 less than the first. </para
-      >
+        >Calculated values that follow different code paths and that are manipulated in different ways often prove to be unequal. In the following example, one <see cref="T:System.Single" /> value is squared, and then the square root is calculated to restore the original value. A second <see cref="T:System.Single" /> is multiplied by 3.51 and squared before the square root of the result is divided by 3.51 to restore the original value. Although the two values appear to be identical, a call to the <see cref="M:System.Single.Equals(System.Single)" /> method indicates that they are not equal. Using the "R" standard format string to return a result string that displays all the significant digits of each <see cref="T:System.Single" /> value shows that the second value is .0000000000001 less than the first.
+      </para>
       <para>code reference: System.Single.Structure#10</para>
       <para
-        >In cases where a loss of precision is likely to affect the result of a comparison, you can use the following techniques instead of calling the <see cref="M:System.Single.Equals(System.Single)" /> or <see cref="M:System.Single.CompareTo(System.Single)" /> method: </para
-      >
+        >In cases where a loss of precision is likely to affect the result of a comparison, you can use the following techniques instead of calling the <see cref="M:System.Single.Equals(System.Single)" /> or <see cref="M:System.Single.CompareTo(System.Single)" /> method:
+      </para>
       <list type="bullet">
         <item>
           <para
-            >Call the <see cref="M:System.Math.Round(System.Double)" /> method to ensure that both values have the same precision. The following example modifies a previous example to use this approach so that two fractional values are equivalent. </para
-          >
+            >Call the <see cref="M:System.Math.Round(System.Double)" /> method to ensure that both values have the same precision. The following example modifies a previous example to use this approach so that two fractional values are equivalent.
+          </para>
           <para>code reference: System.Single.Structure#11</para>
           <para
-            >Note that the problem of precision still applies to rounding of midpoint values. For more information, see the <see cref="M:System.Math.Round(System.Double,System.Int32,System.MidpointRounding)" /> method. </para
-          >
+            >Note that the problem of precision still applies to rounding of midpoint values. For more information, see the <see cref="M:System.Math.Round(System.Double,System.Int32,System.MidpointRounding)" /> method.
+          </para>
         </item>
         <item>
           <para>Test for approximate equality instead of equality. This technique requires that you define either an absolute amount by which the two values can differ but still be equal, or that you define a relative amount by which the smaller value can diverge from the larger value. </para>
           <block subset="none" type="note">
             <para>
-              <see cref="F:System.Single.Epsilon" /> is sometimes used as an absolute measure of the distance between two <see cref="T:System.Single" /> values when testing for equality.  However, <see cref="F:System.Single.Epsilon" /> measures the smallest possible value that can be added to, or subtracted from, a <see cref="T:System.Single" /> whose value is zero. For most positive and negative <see cref="T:System.Single" /> values, the value of <see cref="F:System.Single.Epsilon" /> is too small to be detected. Therefore, except for values that are zero, we do not recommend its use in tests for equality.  </para
-            >
+              <see cref="F:System.Single.Epsilon" /> is sometimes used as an absolute measure of the distance between two <see cref="T:System.Single" /> values when testing for equality.  However, <see cref="F:System.Single.Epsilon" /> measures the smallest possible value that can be added to, or subtracted from, a <see cref="T:System.Single" /> whose value is zero. For most positive and negative <see cref="T:System.Single" /> values, the value of <see cref="F:System.Single.Epsilon" /> is too small to be detected. Therefore, except for values that are zero, we do not recommend its use in tests for equality.
+            </para>
           </block>
           <para
             >The following example uses the latter approach to define an IsApproximatelyEqual method that tests the relative difference between two values. It also contrasts the result of calls to the IsApproximatelyEqual method and the <see cref="M:System.Single.Equals(System.Single)" /> method.</para
@@ -243,8 +243,8 @@
           >
           <para>code reference: System.Single.Structure#2</para>
           <para>
-            <see cref="F:System.Single.PositiveInfinity" /> also results from a division by zero with a positive dividend, and <see cref="F:System.Single.NegativeInfinity" /> results from a division by zero with a negative dividend. </para
-          >
+            <see cref="F:System.Single.PositiveInfinity" /> also results from a division by zero with a positive dividend, and <see cref="F:System.Single.NegativeInfinity" /> results from a division by zero with a negative dividend.
+          </para>
         </item>
         <item>
           <para
@@ -253,18 +253,18 @@
           <list type="bullet">
             <item>
               <para
-                >Division by zero with a dividend of zero. Note that other cases of division by zero result in either <see cref="F:System.Single.PositiveInfinity" /> or <see cref="F:System.Single.NegativeInfinity" />. </para
-              >
+                >Division by zero with a dividend of zero. Note that other cases of division by zero result in either <see cref="F:System.Single.PositiveInfinity" /> or <see cref="F:System.Single.NegativeInfinity" />.
+              </para>
             </item>
             <item>
               <para
-                >Any floating-point operation with invalid input. For example, attempting to find the square root of a negative value returns <see cref="F:System.Single.NaN" />. </para
-              >
+                >Any floating-point operation with invalid input. For example, attempting to find the square root of a negative value returns <see cref="F:System.Single.NaN" />.
+              </para>
             </item>
             <item>
               <para
-                >Any operation with an argument whose value is <see cref="F:System.Single.NaN" />. </para
-              >
+                >Any operation with an argument whose value is <see cref="F:System.Single.NaN" />.
+              </para>
             </item>
           </list>
         </item>
@@ -276,22 +276,22 @@
         <h2>Floating-point functionality</h2>
       </format>
       <para
-        >The <see cref="T:System.Single" /> structure and related types provide methods to perform the following categories of operations: </para
-      >
+        >The <see cref="T:System.Single" /> structure and related types provide methods to perform the following categories of operations:
+      </para>
       <list type="bullet">
         <item>
           <para
-            >Comparison of values. You can call the <see cref="M:System.Single.Equals(System.Single)" /> method to determine whether two <see cref="T:System.Single" /> values are equal, or the <see cref="M:System.Single.CompareTo(System.Single)" /> method to determine the relationship between two values. </para
-          >
+            >Comparison of values. You can call the <see cref="M:System.Single.Equals(System.Single)" /> method to determine whether two <see cref="T:System.Single" /> values are equal, or the <see cref="M:System.Single.CompareTo(System.Single)" /> method to determine the relationship between two values.
+          </para>
           <para
-            >The <see cref="T:System.Single" /> structure also supports a complete set of comparison operators. For example, you can test for equality or inequality, or determine whether one value is greater than or equal to another value. If one of the operands is a <see cref="T:System.Double" />, the <see cref="T:System.Single" /> value is converted to a <see cref="T:System.Double" /> before performing the comparison. If one of the operands is an integral type, it is converted to a <see cref="T:System.Single" /> before performing the comparison. Although these are widening conversions, they may involve a loss of precision. </para
-          >
+            >The <see cref="T:System.Single" /> structure also supports a complete set of comparison operators. For example, you can test for equality or inequality, or determine whether one value is greater than or equal to another value. If one of the operands is a <see cref="T:System.Double" />, the <see cref="T:System.Single" /> value is converted to a <see cref="T:System.Double" /> before performing the comparison. If one of the operands is an integral type, it is converted to a <see cref="T:System.Single" /> before performing the comparison. Although these are widening conversions, they may involve a loss of precision.
+          </para>
           <block subset="none" type="note">
             <para
               >Because of differences in precision, two <see cref="T:System.Single" /> values that you expect to be equal may turn out to be unequal, which affects the result of the comparison. See the <format type="text/html">
                 <a href="#Equality">Testing for equality</a>
-              </format> section for more information about comparing two <see cref="T:System.Single" /> values. </para
-            >
+              </format> section for more information about comparing two <see cref="T:System.Single" /> values.
+            </para>
           </block>
           <para
             >You can also call the <see cref="M:System.Single.IsNaN(System.Single)" />, <see cref="M:System.Single.IsInfinity(System.Single)" />, <see cref="M:System.Single.IsPositiveInfinity(System.Single)" />, and <see cref="M:System.Single.IsNegativeInfinity(System.Single)" /> methods to test for these special values.</para
@@ -299,19 +299,19 @@
         </item>
         <item>
           <para
-            >Mathematical operations. Common arithmetic operations such as addition, subtraction, multiplication, and division are implemented by language compilers and Common Intermediate Language (CIL) instructions rather than by <see cref="T:System.Single" /> methods. If the other operand in a mathematical operation is a <see cref="T:System.Double" />, the <see cref="T:System.Single" /> is converted to a <see cref="T:System.Double" /> before performing the operation, and the result of the operation is also a <see cref="T:System.Double" /> value. If the other operand is an integral type, it is converted to a <see cref="T:System.Single" /> before performing the operation, and the result of the operation is also a <see cref="T:System.Single" /> value. </para
-          >
+            >Mathematical operations. Common arithmetic operations such as addition, subtraction, multiplication, and division are implemented by language compilers and Common Intermediate Language (CIL) instructions rather than by <see cref="T:System.Single" /> methods. If the other operand in a mathematical operation is a <see cref="T:System.Double" />, the <see cref="T:System.Single" /> is converted to a <see cref="T:System.Double" /> before performing the operation, and the result of the operation is also a <see cref="T:System.Double" /> value. If the other operand is an integral type, it is converted to a <see cref="T:System.Single" /> before performing the operation, and the result of the operation is also a <see cref="T:System.Single" /> value.
+          </para>
           <para
-            >You can perform other mathematical operations by calling static (Shared in Visual Basic) methods in the <see cref="T:System.Math" /> class. These include additional methods commonly used for arithmetic (such as <see cref="M:System.Math.Abs(System.Double)" />, <see cref="M:System.Math.Sign(System.Double)" />, and <see cref="M:System.Math.Sqrt(System.Double)" />), geometry (such as <see cref="M:System.Math.Cos(System.Double)" /> and <see cref="M:System.Math.Sin(System.Double)" />), and calculus (such as <see cref="M:System.Math.Log(System.Double)" />).  In all cases, the <see cref="T:System.Single" /> value is converted to a <see cref="T:System.Double" />. </para
-          >
+            >You can perform other mathematical operations by calling static (Shared in Visual Basic) methods in the <see cref="T:System.Math" /> class. These include additional methods commonly used for arithmetic (such as <see cref="M:System.Math.Abs(System.Double)" />, <see cref="M:System.Math.Sign(System.Double)" />, and <see cref="M:System.Math.Sqrt(System.Double)" />), geometry (such as <see cref="M:System.Math.Cos(System.Double)" /> and <see cref="M:System.Math.Sin(System.Double)" />), and calculus (such as <see cref="M:System.Math.Log(System.Double)" />).  In all cases, the <see cref="T:System.Single" /> value is converted to a <see cref="T:System.Double" />.
+          </para>
           <para
-            >You can also manipulate the individual bits in a <see cref="T:System.Single" /> value. The <see cref="M:System.BitConverter.GetBytes(System.Single)" /> method returns its bit pattern in a byte array.  By passing that byte array to the <see cref="M:System.BitConverter.ToInt32(System.Byte[],System.Int32)" /> method, you can also preserve the <see cref="T:System.Single" /> value's bit pattern in a 32-bit integer. </para
-          >
+            >You can also manipulate the individual bits in a <see cref="T:System.Single" /> value. The <see cref="M:System.BitConverter.GetBytes(System.Single)" /> method returns its bit pattern in a byte array.  By passing that byte array to the <see cref="M:System.BitConverter.ToInt32(System.Byte[],System.Int32)" /> method, you can also preserve the <see cref="T:System.Single" /> value's bit pattern in a 32-bit integer.
+          </para>
         </item>
         <item>
           <para
-            >Rounding. Rounding is often used as a technique for reducing the impact of differences between values caused by problems of floating-point representation and precision. You can round a <see cref="T:System.Single" /> value by calling the <see cref="M:System.Math.Round(System.Double)" /> method. However, note  that the <see cref="T:System.Single" /> value is converted to a <see cref="T:System.Double" /> before the method is called, and the conversion can involve a loss of precision. </para
-          >
+            >Rounding. Rounding is often used as a technique for reducing the impact of differences between values caused by problems of floating-point representation and precision. You can round a <see cref="T:System.Single" /> value by calling the <see cref="M:System.Math.Round(System.Double)" /> method. However, note  that the <see cref="T:System.Single" /> value is converted to a <see cref="T:System.Double" /> before the method is called, and the conversion can involve a loss of precision.
+          </para>
         </item>
         <item>
           <para
@@ -321,8 +321,8 @@
               <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">Standard Numeric Format Strings</a>
             </format> and <format type="text/html">
               <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
-            </format> topics. </para
-          >
+            </format> topics.
+          </para>
         </item>
         <item>
           <para
@@ -331,8 +331,8 @@
         </item>
         <item>
           <para
-            >Type conversion. The <see cref="T:System.Single" /> structure provides an explicit interface implementation for the <see cref="T:System.IConvertible" /> interface, which supports conversion between any two standard .NET Framework data types. Language compilers also support the implicit conversion of values for all other standard numeric types except for the conversion of <see cref="T:System.Double" /> to <see cref="T:System.Single" /> values. Conversion of a value of any standard numeric type other than a <see cref="T:System.Double" /> to a <see cref="T:System.Single" /> is a widening conversion and does not require the use of a casting operator or conversion method. </para
-          >
+            >Type conversion. The <see cref="T:System.Single" /> structure provides an explicit interface implementation for the <see cref="T:System.IConvertible" /> interface, which supports conversion between any two standard .NET Framework data types. Language compilers also support the implicit conversion of values for all other standard numeric types except for the conversion of <see cref="T:System.Double" /> to <see cref="T:System.Single" /> values. Conversion of a value of any standard numeric type other than a <see cref="T:System.Double" /> to a <see cref="T:System.Single" /> is a widening conversion and does not require the use of a casting operator or conversion method.
+          </para>
           <para
             >However, conversion of 32-bit and 64-bit integer values can involve a loss of precision. The following table lists the differences in precision for 32-bit, 64-bit, and <see cref="T:System.Double" /> types:</para
           >
@@ -400,8 +400,8 @@
             </item>
           </list>
           <para
-            >The problem of precision most frequently affects <see cref="T:System.Single" /> values that are converted to <see cref="T:System.Double" /> values. In the following example, two values produced by identical division operations are unequal, because one of the values is a single-precision floating point value that is converted to a <see cref="T:System.Double" />.  </para
-          >
+            >The problem of precision most frequently affects <see cref="T:System.Single" /> values that are converted to <see cref="T:System.Double" /> values. In the following example, two values produced by identical division operations are unequal, because one of the values is a single-precision floating point value that is converted to a <see cref="T:System.Double" />.
+          </para>
           <para>code reference: System.Single.Structure#5</para>
         </item>
       </list>
@@ -446,8 +446,8 @@
           <para
             >Values must be identical to be considered equal. Particularly when floating-point values depend on multiple mathematical operations, it is common for them to lose precision and for their values to be nearly identical except for their least significant digits. Because of this, the return value of the <see cref="M:System.Single.CompareTo(System.Object)" /> method may seem surprising at times. For example, multiplication by a particular value followed by division by the same value should produce the original value, but in the following example, the computed value turns out to be greater than the original value. Showing all significant digits of the two values by using the "R" <format type="text/html">
               <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">standard numeric format string</a>
-            </format> indicates that the computed value differs from the original value in its least significant digits. For information about handling such comparisons, see the Remarks section of the <see cref="M:System.Single.Equals(System.Single)" /> method. </para
-          >
+            </format> indicates that the computed value differs from the original value in its least significant digits. For information about handling such comparisons, see the Remarks section of the <see cref="M:System.Single.Equals(System.Single)" /> method.
+          </para>
           <para>code reference: System.Single.CompareTo#2</para>
           <para
             >This method is implemented to support the <see cref="T:System.IComparable" /> interface. Note that, although a <see cref="F:System.Single.NaN" /> is not considered to be equal to another <see cref="F:System.Single.NaN" /> (even itself), the <see cref="T:System.IComparable" /> interface requires that A.CompareTo(A) return zero.</para
@@ -485,8 +485,8 @@
                 <para>This instance is less than <paramref name="value" />.</para>
                 <para>-or- </para>
                 <para
-                  >This instance is not a number (<see cref="F:System.Single.NaN" />) and <paramref name="value" /> is a number. </para
-                >
+                  >This instance is not a number (<see cref="F:System.Single.NaN" />) and <paramref name="value" /> is a number.
+                </para>
               </description>
             </item>
             <item>
@@ -497,8 +497,8 @@
                 <para>This instance is equal to <paramref name="value" />.</para>
                 <para>-or- </para>
                 <para
-                  >This instance and value are both not a number (<see cref="F:System.Single.NaN" />), <see cref="F:System.Single.PositiveInfinity" />, or <see cref="F:System.Single.NegativeInfinity" />. </para
-                >
+                  >This instance and value are both not a number (<see cref="F:System.Single.NaN" />), <see cref="F:System.Single.PositiveInfinity" />, or <see cref="F:System.Single.NegativeInfinity" />.
+                </para>
               </description>
             </item>
             <item>
@@ -522,8 +522,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object to compare, or null. </param
-        >
+          />An object to compare, or null.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -551,8 +551,8 @@
           <para
             >Values must be identical to be considered equal. It is common for floating-point values to lose precision and to become nearly identical except for their least significant digits, especially when the values depend on multiple mathematical operations. Because of this, the return value of the <see cref="M:System.Single.CompareTo(System.Single)" /> method at times may seem surprising. For example, multiplication by any value followed by division by the same value should produce the original value. However, in the following example, the computed value turns out to be greater than the original value. Showing all significant digits of the two values by using the "R" <format type="text/html">
               <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">standard numeric format string</a>
-            </format> indicates that the computed value differs from the original value in its least significant digits. For information about handling such comparisons, see the Remarks section of the <see cref="M:System.Single.Equals(System.Single)" /> method. </para
-          >
+            </format> indicates that the computed value differs from the original value in its least significant digits. For information about handling such comparisons, see the Remarks section of the <see cref="M:System.Single.Equals(System.Single)" /> method.
+          </para>
           <para>code reference: System.Single.CompareTo#1</para>
           <para
             >This method implements the <see cref="T:System.IComparable`1" /> interface and performs slightly better than the <see cref="M:System.Single.CompareTo(System.Object)" /> method because it does not have to convert the <paramref name="value" /> parameter to an object.</para
@@ -607,8 +607,8 @@
                 <para>This instance is less than <paramref name="value" />.</para>
                 <para>-or- </para>
                 <para
-                  >This instance is not a number (<see cref="F:System.Single.NaN" />) and <paramref name="value" /> is a number. </para
-                >
+                  >This instance is not a number (<see cref="F:System.Single.NaN" />) and <paramref name="value" /> is a number.
+                </para>
               </description>
             </item>
             <item>
@@ -619,8 +619,8 @@
                 <para>This instance is equal to <paramref name="value" />.</para>
                 <para>-or- </para>
                 <para
-                  >Both this instance and <paramref name="value" /> are not a number (<see cref="F:System.Single.NaN" />), <see cref="F:System.Single.PositiveInfinity" />, or <see cref="F:System.Single.NegativeInfinity" />. </para
-                >
+                  >Both this instance and <paramref name="value" /> are not a number (<see cref="F:System.Single.NaN" />), <see cref="F:System.Single.PositiveInfinity" />, or <see cref="F:System.Single.NegativeInfinity" />.
+                </para>
               </description>
             </item>
             <item>
@@ -631,8 +631,8 @@
                 <para>This instance is greater than <paramref name="value" />.</para>
                 <para>-or- </para>
                 <para
-                  >This instance is a number and <paramref name="value" /> is not a number (<see cref="F:System.Single.NaN" />). </para
-                >
+                  >This instance is a number and <paramref name="value" /> is not a number (<see cref="F:System.Single.NaN" />).
+                </para>
               </description>
             </item>
           </list>
@@ -642,8 +642,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A single-precision floating-point number to compare. </param
-        >
+          />A single-precision floating-point number to compare.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Epsilon">
@@ -675,12 +675,12 @@
           >
           <para>code reference: System.Single.Epsilon#5</para>
           <para
-            >More precisely, the single-precision floating-point format consists of a sign, a 23-bit mantissa or significand, and an 8-bit exponent. As the following example shows, zero has an exponent of -126 and a mantissa of 0. <see cref="F:System.Single.Epsilon" /> has an exponent of -126 and a mantissa of 1. This means that <see cref="F:System.Single.Epsilon" /> is the smallest positive <see cref="T:System.Single" /> value that is greater than zero and represents the smallest possible value and the smallest possible increment for a <see cref="T:System.Single" /> whose exponent is -126. </para
-          >
+            >More precisely, the single-precision floating-point format consists of a sign, a 23-bit mantissa or significand, and an 8-bit exponent. As the following example shows, zero has an exponent of -126 and a mantissa of 0. <see cref="F:System.Single.Epsilon" /> has an exponent of -126 and a mantissa of 1. This means that <see cref="F:System.Single.Epsilon" /> is the smallest positive <see cref="T:System.Single" /> value that is greater than zero and represents the smallest possible value and the smallest possible increment for a <see cref="T:System.Single" /> whose exponent is -126.
+          </para>
           <para>code reference: System.Single.Epsilon#6</para>
           <para
-            >However, the <see cref="F:System.Single.Epsilon" /> property is not a general measure of precision of the <see cref="T:System.Single" /> type; it applies only to <see cref="T:System.Single" /> instances that have a value of zero. </para
-          >
+            >However, the <see cref="F:System.Single.Epsilon" /> property is not a general measure of precision of the <see cref="T:System.Single" /> type; it applies only to <see cref="T:System.Single" /> instances that have a value of zero.
+          </para>
           <block subset="none" type="note">
             <para
               >The value of the <see cref="F:System.Single.Epsilon" /> property is not equivalent to machine epsilon, which represents the upper bound of the relative error due to rounding in floating-point arithmetic.</para
@@ -688,14 +688,14 @@
           </block>
           <para>The value of this constant is 1.4e-45. </para>
           <para
-            >Two apparently equivalent floating-point numbers might not compare equal because of differences in their least significant digits. For example, the C# expression, (float)1/3 == (float)0.33333, does not compare equal because the division operation on the left side has maximum precision while the constant on the right side is precise only to the specified digits. If you create a custom algorithm that determines whether two floating-point numbers can be considered equal, you must use a value that is greater than the <see cref="F:System.Single.Epsilon" /> constant to establish the acceptable absolute margin of difference for the two values to be considered equal. (Typically, that margin of difference is many times greater than <see cref="F:System.Single.Epsilon" />.) </para
-          >
+            >Two apparently equivalent floating-point numbers might not compare equal because of differences in their least significant digits. For example, the C# expression, (float)1/3 == (float)0.33333, does not compare equal because the division operation on the left side has maximum precision while the constant on the right side is precise only to the specified digits. If you create a custom algorithm that determines whether two floating-point numbers can be considered equal, you must use a value that is greater than the <see cref="F:System.Single.Epsilon" /> constant to establish the acceptable absolute margin of difference for the two values to be considered equal. (Typically, that margin of difference is many times greater than <see cref="F:System.Single.Epsilon" />.)
+          </para>
           <format type="text/html">
             <h2>Platform Notes</h2>
           </format>
           <para
-            >On ARM systems, the value of the <see cref="F:System.Single.Epsilon" /> constant is too small to be detected, so it equates to zero. You can define an alternative epsilon value that equals 1.175494351E-38 instead. </para
-          >
+            >On ARM systems, the value of the <see cref="F:System.Single.Epsilon" /> constant is too small to be detected, so it equates to zero. You can define an alternative epsilon value that equals 1.175494351E-38 instead.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -762,8 +762,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object to compare with this instance. </param
-        >
+          />An object to compare with this instance.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -823,8 +823,8 @@
             >
           </block>
           <para
-            >A second technique that avoids the problems associated with comparing for equality involves comparing the difference between two floating-point numbers with some absolute value. If the difference is less than or equal to that absolute value, the numbers are equal. If it is greater, the numbers are not equal. One way to do this is to arbitrarily select an absolute value. However, this is problematic, because an acceptable margin of difference depends on the magnitude of the <see cref="T:System.Single" /> values. A second way takes advantage of a design feature of the floating-point format: The difference between the mantissa components in the integer representations of two floating-point values indicates the number of possible floating-point values that separates the two values. For example, the difference between 0.0 and <see cref="F:System.Single.Epsilon" /> is 1, because <see cref="F:System.Single.Epsilon" /> is the smallest representable value when working with a <see cref="T:System.Single" /> whose value is zero. The following example uses this technique to compare .33333 and 1/3, which are the two <see cref="T:System.Double" /> values that the previous code example with the <see cref="M:System.Single.Equals(System.Single)" /> method found to be unequal. Note that the example uses the <see cref="M:System.BitConverter.GetBytes(System.Single)" /> and <see cref="M:System.BitConverter.ToInt32(System.Byte[],System.Int32)" /> methods to convert a single-precision floating-point value to its integer representation. </para
-          >
+            >A second technique that avoids the problems associated with comparing for equality involves comparing the difference between two floating-point numbers with some absolute value. If the difference is less than or equal to that absolute value, the numbers are equal. If it is greater, the numbers are not equal. One way to do this is to arbitrarily select an absolute value. However, this is problematic, because an acceptable margin of difference depends on the magnitude of the <see cref="T:System.Single" /> values. A second way takes advantage of a design feature of the floating-point format: The difference between the mantissa components in the integer representations of two floating-point values indicates the number of possible floating-point values that separates the two values. For example, the difference between 0.0 and <see cref="F:System.Single.Epsilon" /> is 1, because <see cref="F:System.Single.Epsilon" /> is the smallest representable value when working with a <see cref="T:System.Single" /> whose value is zero. The following example uses this technique to compare .33333 and 1/3, which are the two <see cref="T:System.Double" /> values that the previous code example with the <see cref="M:System.Single.Equals(System.Single)" /> method found to be unequal. Note that the example uses the <see cref="M:System.BitConverter.GetBytes(System.Single)" /> and <see cref="M:System.BitConverter.ToInt32(System.Byte[],System.Int32)" /> methods to convert a single-precision floating-point value to its integer representation.
+          </para>
           <para>code reference: System.Single.Equals#1</para>
           <para>The precision of floating-point numbers beyond the documented precision is specific to the implementation and version of the .NET Framework. Consequently, a comparison of two numbers might produce different results depending on the version of the .NET Framework, because the precision of the numbers' internal representation might change.</para>
         </remarks>
@@ -877,8 +877,8 @@
             <block subset="none" type="note"
               > 
 This method overrides <see cref="M:System.Object.GetHashCode" />.
-</block
-            >
+
+            </block>
           </para>
         </remarks>
         <summary>
@@ -966,8 +966,8 @@ This method overrides <see cref="M:System.Object.GetHashCode" />.
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A single-precision floating-point number. </param
-        >
+          />A single-precision floating-point number.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1006,8 +1006,8 @@ This method overrides <see cref="M:System.Object.GetHashCode" />.
           >
           <block subset="none" type="note">
             <para>
-              <see cref="M:System.Single.IsNaN(System.Single)" /> returns false if a <see cref="T:System.Single" /> value is either <see cref="F:System.Single.PositiveInfinity" /> or <see cref="F:System.Single.NegativeInfinity" />. To test for these values, use the <see cref="M:System.Single.IsInfinity(System.Single)" />, <see cref="M:System.Single.IsPositiveInfinity(System.Single)" />, and <see cref="M:System.Single.IsNegativeInfinity(System.Single)" /> methods. </para
-            >
+              <see cref="M:System.Single.IsNaN(System.Single)" /> returns false if a <see cref="T:System.Single" /> value is either <see cref="F:System.Single.PositiveInfinity" /> or <see cref="F:System.Single.NegativeInfinity" />. To test for these values, use the <see cref="M:System.Single.IsInfinity(System.Single)" />, <see cref="M:System.Single.IsPositiveInfinity(System.Single)" />, and <see cref="M:System.Single.IsNegativeInfinity(System.Single)" /> methods.
+            </para>
           </block>
         </remarks>
         <summary>
@@ -1027,8 +1027,8 @@ This method overrides <see cref="M:System.Object.GetHashCode" />.
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A single-precision floating-point number. </param
-        >
+          />A single-precision floating-point number.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1076,8 +1076,8 @@ This method overrides <see cref="M:System.Object.GetHashCode" />.
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A single-precision floating-point number. </param
-        >
+          />A single-precision floating-point number.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1125,8 +1125,8 @@ This method overrides <see cref="M:System.Object.GetHashCode" />.
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A single-precision floating-point number. </param
-        >
+          />A single-precision floating-point number.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1156,8 +1156,8 @@ This method overrides <see cref="M:System.Object.GetHashCode" />.
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The value of this constant is positive 3.402823e38.</para>
           <para
-            >The result of an operation that exceeds <see cref="F:System.Single.MaxValue" /> is <see cref="F:System.Single.PositiveInfinity" />. In the following example, <see cref="F:System.Single.PositiveInfinity" /> results from addition, multiplication, and exponentiation operations when the result exceeds <see cref="F:System.Single.MaxValue" />. </para
-          >
+            >The result of an operation that exceeds <see cref="F:System.Single.MaxValue" /> is <see cref="F:System.Single.PositiveInfinity" />. In the following example, <see cref="F:System.Single.PositiveInfinity" /> results from addition, multiplication, and exponentiation operations when the result exceeds <see cref="F:System.Single.MaxValue" />.
+          </para>
           <para>code reference: System.Single.MaxValue#1</para>
         </remarks>
         <summary>
@@ -1195,8 +1195,8 @@ This method overrides <see cref="M:System.Object.GetHashCode" />.
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The value of this constant is negative 3.402823e38.</para>
           <para
-            >The result of an operation that is less than <see cref="F:System.Single.MinValue" />  is <see cref="F:System.Single.NegativeInfinity" />. In the following example, <see cref="F:System.Single.NegativeInfinity" /> results from subtraction and multiplication operations when the result is less than <see cref="F:System.Single.MinValue" />. </para
-          >
+            >The result of an operation that is less than <see cref="F:System.Single.MinValue" />  is <see cref="F:System.Single.NegativeInfinity" />. In the following example, <see cref="F:System.Single.NegativeInfinity" /> results from subtraction and multiplication operations when the result is less than <see cref="F:System.Single.MinValue" />.
+          </para>
           <para>code reference: System.Single.MinValue#1</para>
         </remarks>
         <summary>
@@ -1233,8 +1233,8 @@ This method overrides <see cref="M:System.Object.GetHashCode" />.
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A method or operator returns <see cref="F:System.Single.NaN" /> when the result of an operation is undefined. For example, the result of dividing zero by zero is <see cref="F:System.Single.NaN" />, as the following example shows. (But note that dividing a non-zero number by zero returns either <see cref="F:System.Single.PositiveInfinity" /> or <see cref="F:System.Single.NegativeInfinity" />, depending on the sign of the divisor.) </para
-          >
+            >A method or operator returns <see cref="F:System.Single.NaN" /> when the result of an operation is undefined. For example, the result of dividing zero by zero is <see cref="F:System.Single.NaN" />, as the following example shows. (But note that dividing a non-zero number by zero returns either <see cref="F:System.Single.PositiveInfinity" /> or <see cref="F:System.Single.NegativeInfinity" />, depending on the sign of the divisor.)
+          </para>
           <para>code reference: System.Single.NaN#1</para>
           <para
             >In addition, a method call with a <see cref="F:System.Single.NaN" /> value or an operation on a <see cref="F:System.Single.NaN" /> value returns <see cref="F:System.Single.NaN" />, as the following example shows.</para
@@ -1281,8 +1281,8 @@ This method overrides <see cref="M:System.Object.GetHashCode" />.
             >This constant is returned when the result of an operation is less than <see cref="F:System.Single.MinValue" />.</para
           >
           <para
-            >Use <see cref="M:System.Single.IsNegativeInfinity(System.Single)" /> to determine whether a value evaluates to negative infinity. </para
-          >
+            >Use <see cref="M:System.Single.IsNegativeInfinity(System.Single)" /> to determine whether a value evaluates to negative infinity.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1656,8 +1656,8 @@ This method overrides <see cref="M:System.Object.GetHashCode" />.
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="s" /> parameter can contain the current culture's <see cref="P:System.Globalization.NumberFormatInfo.PositiveInfinitySymbol" />, <see cref="P:System.Globalization.NumberFormatInfo.NegativeInfinitySymbol" />, <see cref="P:System.Globalization.NumberFormatInfo.NaNSymbol" />, or a string of the form: </para
-          >
+            >The <paramref name="s" /> parameter can contain the current culture's <see cref="P:System.Globalization.NumberFormatInfo.PositiveInfinitySymbol" />, <see cref="P:System.Globalization.NumberFormatInfo.NegativeInfinitySymbol" />, <see cref="P:System.Globalization.NumberFormatInfo.NaNSymbol" />, or a string of the form:
+          </para>
           <para>[ws][sign] [integral-digits[,]]integral-digits[.[fractional-digits]][e[sign]exponential-digits][ws] </para>
           <para>Elements in square brackets ([ and ]) are optional. The following table describes each element.</para>
           <list type="table">
@@ -1745,8 +1745,8 @@ This method overrides <see cref="M:System.Object.GetHashCode" />.
             >The <paramref name="s" /> parameter is parsed by using the formatting information in a <see cref="T:System.Globalization.NumberFormatInfo" /> object that is initialized for the current system culture. For more information, see <see cref="P:System.Globalization.NumberFormatInfo.CurrentInfo" />. To parse a string by using the formatting information of a specific culture, use the <see cref="M:System.Single.Parse(System.String,System.IFormatProvider)" /> or <see cref="M:System.Single.Parse(System.String,System.Globalization.NumberStyles,System.IFormatProvider)" /> method.</para
           >
           <para
-            >Ordinarily, if you pass the <see cref="Overload:System.Single.Parse" /> method a string that is created by calling the <see cref="Overload:System.Single.ToString" /> method, the original <see cref="T:System.Single" /> value is returned. However, because of a loss of precision, the values may not be equal. </para
-          >
+            >Ordinarily, if you pass the <see cref="Overload:System.Single.Parse" /> method a string that is created by calling the <see cref="Overload:System.Single.ToString" /> method, the original <see cref="T:System.Single" /> value is returned. However, because of a loss of precision, the values may not be equal.
+          </para>
           <para
             >If a separator is encountered in the <paramref name="s" /> parameter during a parse operation, and the applicable currency or number decimal and group separators are the same, the parse operation assumes that the separator is a decimal separator rather than a group separator. For more information about separators, see <see cref="P:System.Globalization.NumberFormatInfo.CurrencyDecimalSeparator" />, <see cref="P:System.Globalization.NumberFormatInfo.NumberDecimalSeparator" />, <see cref="P:System.Globalization.NumberFormatInfo.CurrencyGroupSeparator" />, and <see cref="P:System.Globalization.NumberFormatInfo.NumberGroupSeparator" />.</para
           >
@@ -1766,8 +1766,8 @@ This method overrides <see cref="M:System.Object.GetHashCode" />.
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string that contains a number to convert. </param
-        >
+          />A string that contains a number to convert.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1825,8 +1825,8 @@ This method overrides <see cref="M:System.Object.GetHashCode" />.
             </item>
           </list>
           <para
-            >The <paramref name="s" /> parameter can contain the current culture's <see cref="P:System.Globalization.NumberFormatInfo.PositiveInfinitySymbol" />, <see cref="P:System.Globalization.NumberFormatInfo.NegativeInfinitySymbol" />, <see cref="P:System.Globalization.NumberFormatInfo.NaNSymbol" />. Depending on the value of <paramref name="style" />, it can also take the form: </para
-          >
+            >The <paramref name="s" /> parameter can contain the current culture's <see cref="P:System.Globalization.NumberFormatInfo.PositiveInfinitySymbol" />, <see cref="P:System.Globalization.NumberFormatInfo.NegativeInfinitySymbol" />, <see cref="P:System.Globalization.NumberFormatInfo.NaNSymbol" />. Depending on the value of <paramref name="style" />, it can also take the form:
+          </para>
           <para>[ws][$][sign][integral-digits[,]]integral-digits[.[fractional-digits]][E[sign]exponential-digits][ws] </para>
           <para>Elements in square brackets ([ and ]) are optional. The following table describes each element.</para>
           <list type="table">
@@ -1834,8 +1834,8 @@ This method overrides <see cref="M:System.Object.GetHashCode" />.
               <term>ws</term>
               <description>
                 <para
-                  >A series of white-space characters. White space can appear at the beginning of <paramref name="s" /> if <paramref name="style" /> includes the <see cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" /> flag, and it can appear at the end of <paramref name="s" /> if <paramref name="style" /> includes the <see cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" /> flag. </para
-                >
+                  >A series of white-space characters. White space can appear at the beginning of <paramref name="s" /> if <paramref name="style" /> includes the <see cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" /> flag, and it can appear at the end of <paramref name="s" /> if <paramref name="style" /> includes the <see cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" /> flag.
+                </para>
               </description>
             </item>
             <item>
@@ -1850,8 +1850,8 @@ This method overrides <see cref="M:System.Object.GetHashCode" />.
               <term>sign</term>
               <description>
                 <para
-                  >A negative sign symbol (-) or a positive sign symbol (+). The sign can appear at the beginning of <paramref name="s" /> if <paramref name="style" /> includes the <see cref="F:System.Globalization.NumberStyles.AllowLeadingSign" /> flag, and it can appear at the end of <paramref name="s" /> if <paramref name="style" /> includes the <see cref="F:System.Globalization.NumberStyles.AllowTrailingSign" /> flag. Parentheses can be used in <paramref name="s" /> to indicate a negative value if <paramref name="style" /> includes the <see cref="F:System.Globalization.NumberStyles.AllowParentheses" /> flag. </para
-                >
+                  >A negative sign symbol (-) or a positive sign symbol (+). The sign can appear at the beginning of <paramref name="s" /> if <paramref name="style" /> includes the <see cref="F:System.Globalization.NumberStyles.AllowLeadingSign" /> flag, and it can appear at the end of <paramref name="s" /> if <paramref name="style" /> includes the <see cref="F:System.Globalization.NumberStyles.AllowTrailingSign" /> flag. Parentheses can be used in <paramref name="s" /> to indicate a negative value if <paramref name="style" /> includes the <see cref="F:System.Globalization.NumberStyles.AllowParentheses" /> flag.
+                </para>
               </description>
             </item>
             <item>
@@ -2069,8 +2069,8 @@ This method overrides <see cref="M:System.Object.GetHashCode" />.
             >The <paramref name="s" /> parameter is parsed using the formatting information in a <see cref="T:System.Globalization.NumberFormatInfo" /> object that is initialized for the current system culture. To specify the culture whose formatting information is used for the parse operation, call the <see cref="M:System.Single.Parse(System.String,System.Globalization.NumberStyles,System.IFormatProvider)" /> overload.</para
           >
           <para
-            >Ordinarily, if you pass the <see cref="Overload:System.Single.Parse" /> method a string that is created by calling the <see cref="Overload:System.Single.ToString" /> method, the original <see cref="T:System.Single" /> value is returned. However, because of a loss of precision, the values may not be equal. </para
-          >
+            >Ordinarily, if you pass the <see cref="Overload:System.Single.Parse" /> method a string that is created by calling the <see cref="Overload:System.Single.ToString" /> method, the original <see cref="T:System.Single" /> value is returned. However, because of a loss of precision, the values may not be equal.
+          </para>
           <para
             >If a separator is encountered in the <paramref name="s" /> parameter during a parse operation, and the applicable currency or number decimal and group separators are the same, the parse operation assumes that the separator is a decimal separator rather than a group separator. For more information about separators, see <see cref="P:System.Globalization.NumberFormatInfo.CurrencyDecimalSeparator" />, <see cref="P:System.Globalization.NumberFormatInfo.NumberDecimalSeparator" />, <see cref="P:System.Globalization.NumberFormatInfo.CurrencyGroupSeparator" />, and <see cref="P:System.Globalization.NumberFormatInfo.NumberGroupSeparator" />.</para
           >
@@ -2090,8 +2090,8 @@ This method overrides <see cref="M:System.Object.GetHashCode" />.
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string that contains a number to convert. </param
-        >
+          />A string that contains a number to convert.
+        </param>
         <param name="style">
           <attribution
             license="cc4"
@@ -2144,8 +2144,8 @@ This method overrides <see cref="M:System.Object.GetHashCode" />.
             >This overload is typically used to convert text that can be formatted in a variety of ways to a <see cref="T:System.Single" /> value. For example, it can be used to convert the text entered by a user into an HTML text box to a numeric value.</para
           >
           <para
-            >The <paramref name="s" /> parameter is interpreted using a combination of the <see cref="F:System.Globalization.NumberStyles.Float" /> and <see cref="F:System.Globalization.NumberStyles.AllowThousands" /> flags. The <paramref name="s" /> parameter can contain <see cref="P:System.Globalization.NumberFormatInfo.PositiveInfinitySymbol" />, <see cref="P:System.Globalization.NumberFormatInfo.NegativeInfinitySymbol" />, or <see cref="P:System.Globalization.NumberFormatInfo.NaNSymbol" /> for the culture specified by <paramref name="provider" />, or it can contain a string of the form: </para
-          >
+            >The <paramref name="s" /> parameter is interpreted using a combination of the <see cref="F:System.Globalization.NumberStyles.Float" /> and <see cref="F:System.Globalization.NumberStyles.AllowThousands" /> flags. The <paramref name="s" /> parameter can contain <see cref="P:System.Globalization.NumberFormatInfo.PositiveInfinitySymbol" />, <see cref="P:System.Globalization.NumberFormatInfo.NegativeInfinitySymbol" />, or <see cref="P:System.Globalization.NumberFormatInfo.NaNSymbol" /> for the culture specified by <paramref name="provider" />, or it can contain a string of the form:
+          </para>
           <para>[ws][sign]integral-digits[.[fractional-digits]][E[sign]exponential-digits][ws] </para>
           <para>Optional elements are framed in square brackets ([ and ]). Elements that contain the term "digits" consist of a series of numeric characters ranging from 0 to 9.</para>
           <list type="table">
@@ -2224,8 +2224,8 @@ This method overrides <see cref="M:System.Object.GetHashCode" />.
             </format> topic.</para
           >
           <para
-            >The <paramref name="provider" /> parameter is an <see cref="T:System.IFormatProvider" /> implementation whose <see cref="M:System.IFormatProvider.GetFormat(System.Type)" /> method returns a <see cref="T:System.Globalization.NumberFormatInfo" /> object that provides culture-specific formatting information. When the <see cref="M:System.Single.Parse(System.String,System.IFormatProvider)" /> method is invoked, it calls the <paramref name="provider" /> parameter's <see cref="M:System.IFormatProvider.GetFormat(System.Type)" /> method and passes it a <see cref="T:System.Type" /> object that represents the <see cref="T:System.Globalization.NumberFormatInfo" /> type. The <see cref="M:System.IFormatProvider.GetFormat(System.Type)" /> method then returns the <see cref="T:System.Globalization.NumberFormatInfo" /> object that provides information about the format of the <paramref name="s" /> parameter. There are three ways to use the <paramref name="provider" /> parameter to supply custom formatting information to the parse operation: </para
-          >
+            >The <paramref name="provider" /> parameter is an <see cref="T:System.IFormatProvider" /> implementation whose <see cref="M:System.IFormatProvider.GetFormat(System.Type)" /> method returns a <see cref="T:System.Globalization.NumberFormatInfo" /> object that provides culture-specific formatting information. When the <see cref="M:System.Single.Parse(System.String,System.IFormatProvider)" /> method is invoked, it calls the <paramref name="provider" /> parameter's <see cref="M:System.IFormatProvider.GetFormat(System.Type)" /> method and passes it a <see cref="T:System.Type" /> object that represents the <see cref="T:System.Globalization.NumberFormatInfo" /> type. The <see cref="M:System.IFormatProvider.GetFormat(System.Type)" /> method then returns the <see cref="T:System.Globalization.NumberFormatInfo" /> object that provides information about the format of the <paramref name="s" /> parameter. There are three ways to use the <paramref name="provider" /> parameter to supply custom formatting information to the parse operation:
+          </para>
           <list type="bullet">
             <item>
               <para
@@ -2268,15 +2268,15 @@ This method overrides <see cref="M:System.Object.GetHashCode" />.
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string that contains a number to convert. </param
-        >
+          />A string that contains a number to convert.
+        </param>
         <param name="provider">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that supplies culture-specific formatting information about <paramref name="s" />. </param
-        >
+          />An object that supplies culture-specific formatting information about <paramref name="s" />.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2335,8 +2335,8 @@ This method overrides <see cref="M:System.Object.GetHashCode" />.
             </item>
           </list>
           <para
-            >The <paramref name="s" /> parameter can contain <see cref="P:System.Globalization.NumberFormatInfo.PositiveInfinitySymbol" />, <see cref="P:System.Globalization.NumberFormatInfo.NegativeInfinitySymbol" />, or <see cref="P:System.Globalization.NumberFormatInfo.NaNSymbol" /> for the culture specified by <paramref name="provider" />. Depending on the value of <paramref name="style" />, it can also take the form: </para
-          >
+            >The <paramref name="s" /> parameter can contain <see cref="P:System.Globalization.NumberFormatInfo.PositiveInfinitySymbol" />, <see cref="P:System.Globalization.NumberFormatInfo.NegativeInfinitySymbol" />, or <see cref="P:System.Globalization.NumberFormatInfo.NaNSymbol" /> for the culture specified by <paramref name="provider" />. Depending on the value of <paramref name="style" />, it can also take the form:
+          </para>
           <para>[ws] [$] [sign][integral-digits,]integral-digits[.[fractional-digits]][E[sign]exponential-digits][ws] </para>
           <para>Elements framed in square brackets ([ and ]) are optional. The following table describes each element.</para>
           <list type="table">
@@ -2356,8 +2356,8 @@ This method overrides <see cref="M:System.Object.GetHashCode" />.
               </term>
               <description>
                 <para
-                  >A series of white-space characters. White space can appear at the beginning of <paramref name="s" /> if <paramref name="style" /> includes the <see cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" /> flag, and it can appear at the end of <paramref name="s" /> if <paramref name="style" /> includes the <see cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" /> flag. </para
-                >
+                  >A series of white-space characters. White space can appear at the beginning of <paramref name="s" /> if <paramref name="style" /> includes the <see cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" /> flag, and it can appear at the end of <paramref name="s" /> if <paramref name="style" /> includes the <see cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" /> flag.
+                </para>
               </description>
             </item>
             <item>
@@ -2376,8 +2376,8 @@ This method overrides <see cref="M:System.Object.GetHashCode" />.
               </term>
               <description>
                 <para
-                  >A negative sign symbol (-) or a positive sign symbol (+). The sign can appear at the beginning of <paramref name="s" /> if <paramref name="style" /> includes the <see cref="F:System.Globalization.NumberStyles.AllowLeadingSign" /> flag, and it can appear at the end of <paramref name="s" /> if <paramref name="style" /> includes the <see cref="F:System.Globalization.NumberStyles.AllowTrailingSign" /> flag. Parentheses can be used in <paramref name="s" /> to indicate a negative value if <paramref name="style" /> includes the <see cref="F:System.Globalization.NumberStyles.AllowParentheses" /> flag. </para
-                >
+                  >A negative sign symbol (-) or a positive sign symbol (+). The sign can appear at the beginning of <paramref name="s" /> if <paramref name="style" /> includes the <see cref="F:System.Globalization.NumberStyles.AllowLeadingSign" /> flag, and it can appear at the end of <paramref name="s" /> if <paramref name="style" /> includes the <see cref="F:System.Globalization.NumberStyles.AllowTrailingSign" /> flag. Parentheses can be used in <paramref name="s" /> to indicate a negative value if <paramref name="style" /> includes the <see cref="F:System.Globalization.NumberStyles.AllowParentheses" /> flag.
+                </para>
               </description>
             </item>
             <item>
@@ -2438,8 +2438,8 @@ This method overrides <see cref="M:System.Object.GetHashCode" />.
             </item>
           </list>
           <para
-            >A string with digits only (which corresponds to the <see cref="F:System.Globalization.NumberStyles.None" /> style) always parses successfully. The remaining <see cref="T:System.Globalization.NumberStyles" /> members control elements that may be present, but are not required to be present, in the input string. The following table indicates how individual <see cref="T:System.Globalization.NumberStyles" /> flags affect the elements that may be present in <paramref name="s" />. </para
-          >
+            >A string with digits only (which corresponds to the <see cref="F:System.Globalization.NumberStyles.None" /> style) always parses successfully. The remaining <see cref="T:System.Globalization.NumberStyles" /> members control elements that may be present, but are not required to be present, in the input string. The following table indicates how individual <see cref="T:System.Globalization.NumberStyles" /> flags affect the elements that may be present in <paramref name="s" />.
+          </para>
           <list type="table">
             <listheader>
               <item>
@@ -2601,8 +2601,8 @@ This method overrides <see cref="M:System.Object.GetHashCode" />.
             </item>
           </list>
           <para
-            >The <paramref name="provider" /> parameter is an <see cref="T:System.IFormatProvider" /> implementation. Its <see cref="M:System.IFormatProvider.GetFormat(System.Type)" /> method returns a <see cref="T:System.Globalization.NumberFormatInfo" /> object that provides culture-specific information about the format of <paramref name="value" />. Typically, <paramref name="provider" /> can be any one of the following: </para
-          >
+            >The <paramref name="provider" /> parameter is an <see cref="T:System.IFormatProvider" /> implementation. Its <see cref="M:System.IFormatProvider.GetFormat(System.Type)" /> method returns a <see cref="T:System.Globalization.NumberFormatInfo" /> object that provides culture-specific information about the format of <paramref name="value" />. Typically, <paramref name="provider" /> can be any one of the following:
+          </para>
           <list type="bullet">
             <item>
               <para
@@ -2642,8 +2642,8 @@ This method overrides <see cref="M:System.Object.GetHashCode" />.
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string that contains a number to convert. </param
-        >
+          />A string that contains a number to convert.
+        </param>
         <param name="style">
           <attribution
             license="cc4"
@@ -2656,8 +2656,8 @@ This method overrides <see cref="M:System.Object.GetHashCode" />.
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that supplies culture-specific formatting information about <paramref name="s" />. </param
-        >
+          />An object that supplies culture-specific formatting information about <paramref name="s" />.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2690,8 +2690,8 @@ This method overrides <see cref="M:System.Object.GetHashCode" />.
             >This constant is returned when the result of an operation is greater than <see cref="F:System.Single.MaxValue" />.</para
           >
           <para
-            >Use <see cref="M:System.Single.IsPositiveInfinity(System.Single)" /> to determine whether a value evaluates to positive infinity. </para
-          >
+            >Use <see cref="M:System.Single.IsPositiveInfinity(System.Single)" /> to determine whether a value evaluates to positive infinity.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2731,8 +2731,8 @@ This method overrides <see cref="M:System.Object.GetHashCode" />.
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see cref="M:System.IConvertible.ToBoolean(System.IFormatProvider)" />. </para
-          >
+            >For a description of this member, see <see cref="M:System.IConvertible.ToBoolean(System.IFormatProvider)" />.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2775,8 +2775,8 @@ This method overrides <see cref="M:System.Object.GetHashCode" />.
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see cref="M:System.IConvertible.ToByte(System.IFormatProvider)" />. </para
-          >
+            >For a description of this member, see <see cref="M:System.IConvertible.ToByte(System.IFormatProvider)" />.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2816,8 +2816,8 @@ This method overrides <see cref="M:System.Object.GetHashCode" />.
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This conversion is not supported. Attempting to use this method throws an <see cref="T:System.InvalidCastException" />. </para
-          >
+            >This conversion is not supported. Attempting to use this method throws an <see cref="T:System.InvalidCastException" />.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2905,8 +2905,8 @@ This method overrides <see cref="M:System.Object.GetHashCode" />.
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see cref="M:System.IConvertible.ToDecimal(System.IFormatProvider)" />. </para
-          >
+            >For a description of this member, see <see cref="M:System.IConvertible.ToDecimal(System.IFormatProvider)" />.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2954,8 +2954,8 @@ This method overrides <see cref="M:System.Object.GetHashCode" />.
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see cref="M:System.IConvertible.ToDouble(System.IFormatProvider)" />. </para
-          >
+            >For a description of this member, see <see cref="M:System.IConvertible.ToDouble(System.IFormatProvider)" />.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3003,8 +3003,8 @@ This method overrides <see cref="M:System.Object.GetHashCode" />.
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see cref="M:System.IConvertible.ToInt16(System.IFormatProvider)" />. </para
-          >
+            >For a description of this member, see <see cref="M:System.IConvertible.ToInt16(System.IFormatProvider)" />.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3049,8 +3049,8 @@ This method overrides <see cref="M:System.Object.GetHashCode" />.
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see cref="M:System.IConvertible.ToInt32(System.IFormatProvider)" />. </para
-          >
+            >For a description of this member, see <see cref="M:System.IConvertible.ToInt32(System.IFormatProvider)" />.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3098,8 +3098,8 @@ This method overrides <see cref="M:System.Object.GetHashCode" />.
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see cref="M:System.IConvertible.ToInt64(System.IFormatProvider)" />. </para
-          >
+            >For a description of this member, see <see cref="M:System.IConvertible.ToInt64(System.IFormatProvider)" />.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3147,8 +3147,8 @@ This method overrides <see cref="M:System.Object.GetHashCode" />.
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see cref="M:System.IConvertible.ToSByte(System.IFormatProvider)" />. </para
-          >
+            >For a description of this member, see <see cref="M:System.IConvertible.ToSByte(System.IFormatProvider)" />.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3196,8 +3196,8 @@ This method overrides <see cref="M:System.Object.GetHashCode" />.
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see cref="M:System.IConvertible.ToSingle(System.IFormatProvider)" />. </para
-          >
+            >For a description of this member, see <see cref="M:System.IConvertible.ToSingle(System.IFormatProvider)" />.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3245,8 +3245,8 @@ This method overrides <see cref="M:System.Object.GetHashCode" />.
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see cref="M:System.IConvertible.ToType(System.Type,System.IFormatProvider)" />. </para
-          >
+            >For a description of this member, see <see cref="M:System.IConvertible.ToType(System.Type,System.IFormatProvider)" />.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3341,8 +3341,8 @@ This method overrides <see cref="M:System.Object.GetHashCode" />.
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see cref="M:System.IConvertible.ToUInt32(System.IFormatProvider)" />. </para
-          >
+            >For a description of this member, see <see cref="M:System.IConvertible.ToUInt32(System.IFormatProvider)" />.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3390,8 +3390,8 @@ This method overrides <see cref="M:System.Object.GetHashCode" />.
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see cref="M:System.IConvertible.ToUInt64(System.IFormatProvider)" />. </para
-          >
+            >For a description of this member, see <see cref="M:System.IConvertible.ToUInt64(System.IFormatProvider)" />.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3432,8 +3432,8 @@ This method overrides <see cref="M:System.Object.GetHashCode" />.
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Single.ToString" /> method formats a <see cref="T:System.Single" /> value in the default ("G", or general) format of the current culture. If you want to specify a different format or culture, use the other overloads of the <see cref="M:System.Single.ToString(System.String)" /> method, as follows: </para
-          >
+            >The <see cref="M:System.Single.ToString" /> method formats a <see cref="T:System.Single" /> value in the default ("G", or general) format of the current culture. If you want to specify a different format or culture, use the other overloads of the <see cref="M:System.Single.ToString(System.String)" /> method, as follows:
+          </para>
           <list type="table">
             <listheader>
               <item>
@@ -3490,8 +3490,8 @@ This method overrides <see cref="M:System.Object.GetHashCode" />.
           </list>
           <para></para>
           <para
-            >The return value can be <see cref="P:System.Globalization.NumberFormatInfo.PositiveInfinitySymbol" />, <see cref="P:System.Globalization.NumberFormatInfo.NegativeInfinitySymbol" />, <see cref="P:System.Globalization.NumberFormatInfo.NaNSymbol" />, or a string of the form: </para
-          >
+            >The return value can be <see cref="P:System.Globalization.NumberFormatInfo.PositiveInfinitySymbol" />, <see cref="P:System.Globalization.NumberFormatInfo.NegativeInfinitySymbol" />, <see cref="P:System.Globalization.NumberFormatInfo.NaNSymbol" />, or a string of the form:
+          </para>
           <para>[sign]integral-digits[.[fractional-digits]][e[sign]exponential-digits] </para>
           <para>Optional elements are framed in square brackets ([ and ]). Elements that contain the term "digits" consist of a series of numeric characters ranging from 0 to 9. The following table lists each element:</para>
           <list type="table">
@@ -3563,15 +3563,15 @@ This method overrides <see cref="M:System.Object.GetHashCode" />.
                   <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">Standard Numeric Format Strings</a>
                 </format> and <format type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
-                </format>. </para
-              >
+                </format>.
+              </para>
             </item>
             <item>
               <para
                 >For more information about formatting, see <format type="text/html">
                   <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Types</a>
-                </format>. </para
-              >
+                </format>.
+              </para>
             </item>
           </list>
         </remarks>
@@ -3670,8 +3670,8 @@ This method overrides <see cref="M:System.Object.GetHashCode" />.
           </list>
           <para></para>
           <para
-            >The return value can be <see cref="P:System.Globalization.NumberFormatInfo.PositiveInfinitySymbol" />, <see cref="P:System.Globalization.NumberFormatInfo.NegativeInfinitySymbol" />, <see cref="P:System.Globalization.NumberFormatInfo.NaNSymbol" />, or a string of the form: </para
-          >
+            >The return value can be <see cref="P:System.Globalization.NumberFormatInfo.PositiveInfinitySymbol" />, <see cref="P:System.Globalization.NumberFormatInfo.NegativeInfinitySymbol" />, <see cref="P:System.Globalization.NumberFormatInfo.NaNSymbol" />, or a string of the form:
+          </para>
           <para>[sign]integral-digits[.[fractional-digits]][e[sign]exponential-digits] </para>
           <para>Optional elements are framed in square brackets ([ and ]). Elements containing the term "digits" consist of a series of numeric characters ranging from 0 to 9. The following table lists each element.</para>
           <list type="table">
@@ -3743,23 +3743,23 @@ This method overrides <see cref="M:System.Object.GetHashCode" />.
                   <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">Standard Numeric Format Strings</a>
                 </format> and <format type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
-                </format>. </para
-              >
+                </format>.
+              </para>
             </item>
             <item>
               <para
                 >For more information about formatting, see <format type="text/html">
                   <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Types</a>
-                </format>. </para
-              >
+                </format>.
+              </para>
             </item>
           </list>
           <para
             >The <paramref name="provider" /> parameter is an <see cref="T:System.IFormatProvider" /> implementation whose <see cref="M:System.IFormatProvider.GetFormat(System.Type)" /> method returns a <see cref="T:System.Globalization.NumberFormatInfo" /> object. Typically, <paramref name="provider" /> is a <see cref="T:System.Globalization.CultureInfo" /> object or a <see cref="T:System.Globalization.NumberFormatInfo" /> object. The <paramref name="provider" /> parameter supplies culture-specific information used in formatting. If <paramref name="provider" /> is null, the return value is formatted using the <see cref="T:System.Globalization.NumberFormatInfo" /> data for the current culture.</para
           >
           <para
-            >To convert a <see cref="T:System.Single" /> value to its string representation using a specified culture and a specific format string, call the <see cref="M:System.Single.ToString(System.String,System.IFormatProvider)" /> method. </para
-          >
+            >To convert a <see cref="T:System.Single" /> value to its string representation using a specified culture and a specific format string, call the <see cref="M:System.Single.ToString(System.String,System.IFormatProvider)" /> method.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3776,8 +3776,8 @@ This method overrides <see cref="M:System.Object.GetHashCode" />.
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that supplies culture-specific formatting information. </param
-        >
+          />An object that supplies culture-specific formatting information.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -3825,8 +3825,7 @@ class test {
        fmts[i],f.ToString(fmts[i]));
  }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>1234.567</para>
@@ -3914,15 +3913,15 @@ class test {
                   <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">Standard Numeric Format Strings</a>
                 </format> and <format type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
-                </format>. </para
-              >
+                </format>.
+              </para>
             </item>
             <item>
               <para
                 >For more information about formatting, see <format type="text/html">
                   <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Types</a>
-                </format>. </para
-              >
+                </format>.
+              </para>
             </item>
           </list>
           <para
@@ -4053,15 +4052,15 @@ class test {
                   <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">Standard Numeric Format Strings</a>
                 </format> and <format type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
-                </format>. </para
-              >
+                </format>.
+              </para>
             </item>
             <item>
               <para
                 >For more information about formatting, see <format type="text/html">
                   <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Types</a>
-                </format>. </para
-              >
+                </format>.
+              </para>
             </item>
           </list>
           <para
@@ -4093,8 +4092,8 @@ class test {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that supplies culture-specific formatting information. </param
-        >
+          />An object that supplies culture-specific formatting information.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

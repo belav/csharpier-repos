@@ -104,15 +104,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if the load of the designer is successful; false if errors prevented the load from finishing. </param
-        >
+          />true if the load of the designer is successful; false if errors prevented the load from finishing.
+        </param>
         <param name="errorCollection">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A collection of errors that occurred during the load, if any. If no errors occurred, pass either an empty collection or null. </param
-        >
+          />A collection of errors that occurred during the load, if any. If no errors occurred, pass either an empty collection or null.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Reload">

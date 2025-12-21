@@ -23,8 +23,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see cref="T:System.Runtime.Serialization.Json.DataContractJsonSerializer" /> class to serialize instances of a type into a JSON document and to deserialize a JSON document into an instance of a type. For example, you can create a type named Person with properties that contain essential data, such as a name and address. You can then create and manipulate an instance of the Person class and write all of its property values in a JSON document for later retrieval. This JSON document can later be deserialized into the Person class or another class with an equivalent data contract. </para
-      >
+        >Use the <see cref="T:System.Runtime.Serialization.Json.DataContractJsonSerializer" /> class to serialize instances of a type into a JSON document and to deserialize a JSON document into an instance of a type. For example, you can create a type named Person with properties that contain essential data, such as a name and address. You can then create and manipulate an instance of the Person class and write all of its property values in a JSON document for later retrieval. This JSON document can later be deserialized into the Person class or another class with an equivalent data contract.
+      </para>
       <para>If an error occurs during the serialization of an outgoing reply on the server or the reply operation throws an exception for some other reason, it may not get returned to the client as a fault. </para>
     </remarks>
     <summary>
@@ -88,8 +88,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.Json.DataContractJsonSerializer" /> class to serialize or deserialize an object of the specified type, with a collection of known types that may be present in the object graph. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.Json.DataContractJsonSerializer" /> class to serialize or deserialize an object of the specified type, with a collection of known types that may be present in the object graph.
+          </para>
         </summary>
         <param name="type">
           <attribution
@@ -326,8 +326,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlDictionaryString" /> that contains the root element name of the content. </param
-        >
+          />An <see cref="T:System.Xml.XmlDictionaryString" /> that contains the root element name of the content.
+        </param>
         <param name="knownTypes">
           <attribution
             license="cc4"
@@ -384,8 +384,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlDictionaryString" /> that contains the root element name of the content. </param
-        >
+          />An <see cref="T:System.Xml.XmlDictionaryString" /> that contains the root element name of the content.
+        </param>
         <param name="maxItemsInObjectGraph">
           <attribution
             license="cc4"
@@ -689,8 +689,8 @@
           <para
             >The <see cref="P:System.Runtime.Serialization.Json.DataContractJsonSerializer.IgnoreExtensionDataObject" /> property affects types to which a <see cref="T:System.Runtime.Serialization.DataContractAttribute" /> attribute has been applied and that also implement the <see cref="T:System.Runtime.Serialization.IExtensibleDataObject" /> interface. In this case when <see cref="T:System.Runtime.Serialization.IExtensibleDataObject" /> is true, data added in future versions of the contract is ignored on read and write. crdefault <format type="text/html">
               <a href="413c9044-26f8-4ecb-968c-18495ea52cd9">Forward Compatible Data Contracts</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

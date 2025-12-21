@@ -120,15 +120,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.Graphics" /> to match the pixel format for the new buffer to. </param
-        >
+          />The <see cref="T:System.Drawing.Graphics" /> to match the pixel format for the new buffer to.
+        </param>
         <param name="targetRectangle">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Drawing.Rectangle" /> indicating the size of the buffer to create. </param
-        >
+          />A <see cref="T:System.Drawing.Rectangle" /> indicating the size of the buffer to create.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -172,15 +172,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.IntPtr" /> to a device context to match the pixel format of the new buffer to. </param
-        >
+          />An <see cref="T:System.IntPtr" /> to a device context to match the pixel format of the new buffer to.
+        </param>
         <param name="targetRectangle">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Drawing.Rectangle" /> indicating the size of the buffer to create. </param
-        >
+          />A <see cref="T:System.Drawing.Rectangle" /> indicating the size of the buffer to create.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

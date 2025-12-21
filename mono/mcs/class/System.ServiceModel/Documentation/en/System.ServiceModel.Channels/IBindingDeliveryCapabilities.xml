@@ -17,8 +17,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.ServiceModel.Channels.IBindingDeliveryCapabilities" /> interface must be implemented by a binding if clients and services are to be able to stipulate, as part of their contract, that the features they require are provided by the binding. </para
-      >
+        >The <see cref="T:System.ServiceModel.Channels.IBindingDeliveryCapabilities" /> interface must be implemented by a binding if clients and services are to be able to stipulate, as part of their contract, that the features they require are provided by the binding.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

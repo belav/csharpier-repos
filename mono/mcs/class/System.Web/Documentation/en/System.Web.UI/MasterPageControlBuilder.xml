@@ -23,8 +23,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Acts as a merging class and container for content pages that are composed only of <see cref="T:System.Web.UI.WebControls.Content" /> controls and their respective child controls. </para
-      >
+        >Acts as a merging class and container for content pages that are composed only of <see cref="T:System.Web.UI.WebControls.Content" /> controls and their respective child controls.
+      </para>
     </summary>
   </Docs>
   <Members>
@@ -43,8 +43,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.MasterPageControlBuilder" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.MasterPageControlBuilder" /> class.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>

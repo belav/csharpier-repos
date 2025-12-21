@@ -85,8 +85,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A null-delimited list of fully qualified event source interface names. </param
-        >
+          />A null-delimited list of fully qualified event source interface names.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -124,8 +124,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of the source interface. </param
-        >
+          />The <see cref="T:System.Type" /> of the source interface.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -164,15 +164,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of the default source interface. </param
-        >
+          />The <see cref="T:System.Type" /> of the default source interface.
+        </param>
         <param name="sourceInterface2">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of a source interface. </param
-        >
+          />The <see cref="T:System.Type" /> of a source interface.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -210,22 +210,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of the default source interface. </param
-        >
+          />The <see cref="T:System.Type" /> of the default source interface.
+        </param>
         <param name="sourceInterface2">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of a source interface. </param
-        >
+          />The <see cref="T:System.Type" /> of a source interface.
+        </param>
         <param name="sourceInterface3">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of a source interface. </param
-        >
+          />The <see cref="T:System.Type" /> of a source interface.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -266,29 +266,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of the default source interface. </param
-        >
+          />The <see cref="T:System.Type" /> of the default source interface.
+        </param>
         <param name="sourceInterface2">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of a source interface. </param
-        >
+          />The <see cref="T:System.Type" /> of a source interface.
+        </param>
         <param name="sourceInterface3">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of a source interface. </param
-        >
+          />The <see cref="T:System.Type" /> of a source interface.
+        </param>
         <param name="sourceInterface4">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of a source interface. </param
-        >
+          />The <see cref="T:System.Type" /> of a source interface.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Value">

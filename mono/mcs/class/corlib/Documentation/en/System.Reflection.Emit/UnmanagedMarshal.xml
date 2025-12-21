@@ -105,8 +105,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of elements in the fixed-length array. </param
-        >
+          />The number of elements in the fixed-length array.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefineByValTStr">
@@ -150,8 +150,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of elements in the fixed array buffer. </param
-        >
+          />The number of elements in the fixed array buffer.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefineCustom">
@@ -224,8 +224,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The unmanaged type to which to marshal the array. </param
-        >
+          />The unmanaged type to which to marshal the array.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefineSafeArray">
@@ -269,8 +269,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The base type or the UnmanagedType of each element of the array. </param
-        >
+          />The base type or the UnmanagedType of each element of the array.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefineUnmanagedMarshal">
@@ -315,8 +315,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The unmanaged type to which the type is to be marshaled. </param
-        >
+          />The unmanaged type to which the type is to be marshaled.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ElementCount">

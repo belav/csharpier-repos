@@ -20,8 +20,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Communication between a provider and consumer requires a contract defined in an interface. This collection contains all the communication interfaces supported by the consumer. The <see cref="M:System.Web.UI.WebControls.WebParts.ProviderConnectionPoint.GetSecondaryInterfaces(System.Web.UI.Control)" /> method returns a <see cref="T:System.Web.UI.WebControls.WebParts.ConnectionInterfaceCollection" /> object.  </para
-      >
+        >Communication between a provider and consumer requires a contract defined in an interface. This collection contains all the communication interfaces supported by the consumer. The <see cref="M:System.Web.UI.WebControls.WebParts.ProviderConnectionPoint.GetSecondaryInterfaces(System.Web.UI.Control)" /> method returns a <see cref="T:System.Web.UI.WebControls.WebParts.ConnectionInterfaceCollection" /> object.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -39,8 +39,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.WebParts.ConnectionInterfaceCollection" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.WebParts.ConnectionInterfaceCollection" /> class.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -62,8 +62,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.WebParts.ConnectionInterfaceCollection" /> class with the specified collection. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.WebParts.ConnectionInterfaceCollection" /> class with the specified collection.
+          </para>
         </summary>
         <param name="connectionInterfaces">
           <attribution
@@ -96,8 +96,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.WebParts.ConnectionInterfaceCollection" /> class by combining the two specified collections. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.WebParts.ConnectionInterfaceCollection" /> class by combining the two specified collections.
+          </para>
         </summary>
         <param name="existingConnectionInterfaces">
           <attribution
@@ -225,8 +225,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Searches for the specified object and returns the zero-based index of the first occurrence within the entire <see cref="T:System.Web.UI.WebControls.WebParts.ConnectionInterfaceCollection" /> collection. </para
-          >
+            >Searches for the specified object and returns the zero-based index of the first occurrence within the entire <see cref="T:System.Web.UI.WebControls.WebParts.ConnectionInterfaceCollection" /> collection.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />

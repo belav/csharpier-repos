@@ -95,8 +95,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Runtime.CompilerServices.InternalsVisibleToAttribute.#ctor(System.String)" /> constructor defines a friend assembly, which is an assembly that has access to the internal types and members of the current assembly. </para
-          >
+            >The <see cref="M:System.Runtime.CompilerServices.InternalsVisibleToAttribute.#ctor(System.String)" /> constructor defines a friend assembly, which is an assembly that has access to the internal types and members of the current assembly.
+          </para>
           <para
             >Both the current assembly and the friend assembly must be unsigned, or both must be signed with a strong name. (For more information about strong-named assemblies, see <format type="text/html">
               <a href="ffbf6d9e-4a88-4a8a-9645-4ce0ee1ee5f9"
@@ -147,8 +147,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.InternalsVisibleToAttribute" /> class with the name of the specified friend assembly. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.InternalsVisibleToAttribute" /> class with the name of the specified friend assembly.
+          </para>
         </summary>
         <param name="assemblyName">
           <attribution

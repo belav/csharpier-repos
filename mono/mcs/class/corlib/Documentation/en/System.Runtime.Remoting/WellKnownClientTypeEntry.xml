@@ -78,15 +78,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of the server-activated type. </param
-        >
+          />The <see cref="T:System.Type" /> of the server-activated type.
+        </param>
         <param name="objectUrl">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URL of the server-activated type. </param
-        >
+          />The URL of the server-activated type.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -123,22 +123,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type name of the server-activated type. </param
-        >
+          />The type name of the server-activated type.
+        </param>
         <param name="assemblyName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The assembly name of the server-activated type. </param
-        >
+          />The assembly name of the server-activated type.
+        </param>
         <param name="objectUrl">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URL of the server-activated type. </param
-        >
+          />The URL of the server-activated type.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ApplicationUrl">

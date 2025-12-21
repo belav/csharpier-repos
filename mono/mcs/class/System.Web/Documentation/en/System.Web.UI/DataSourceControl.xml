@@ -75,8 +75,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.DataSourceControl" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.DataSourceControl" /> class.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -258,8 +258,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Searches the current naming container for a server control with the specified <paramref name="id" /> parameter. </para
-          >
+            >Searches the current naming container for a server control with the specified <paramref name="id" /> parameter.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -294,8 +294,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Because the <see cref="T:System.Web.UI.DataSourceControl" /> control has no visual rendering, calling the <see cref="M:System.Web.UI.DataSourceControl.Focus" /> method on it throws a <see cref="T:System.NotSupportedException" /> exception. </para
-          >
+            >Because the <see cref="T:System.Web.UI.DataSourceControl" /> control has no visual rendering, calling the <see cref="M:System.Web.UI.DataSourceControl.Focus" /> method on it throws a <see cref="T:System.NotSupportedException" /> exception.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -354,8 +354,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the <see cref="T:System.Web.UI.DataSourceView" /> to retrieve. In data source controls that support only one view, such as <see cref="T:System.Web.UI.WebControls.SqlDataSource" />, this parameter is ignored. </param
-        >
+          />The name of the <see cref="T:System.Web.UI.DataSourceView" /> to retrieve. In data source controls that support only one view, such as <see cref="T:System.Web.UI.WebControls.SqlDataSource" />, this parameter is ignored.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -494,8 +494,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Outputs server control content to a provided <see cref="T:System.Web.UI.HtmlTextWriter" /> object and stores tracing information about the control if tracing is enabled. </para
-          >
+            >Outputs server control content to a provided <see cref="T:System.Web.UI.HtmlTextWriter" /> object and stores tracing information about the control if tracing is enabled.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>

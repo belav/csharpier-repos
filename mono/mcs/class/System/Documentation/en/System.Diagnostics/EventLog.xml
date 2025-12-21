@@ -45,8 +45,8 @@
       >
       <block subset="none" type="note">
         <para
-          >If the <see cref="P:System.Diagnostics.EventLog.Source" /> for the event log associated with the <see cref="T:System.Diagnostics.EventLog" /> instance does not exist, a new event source is created. To create an event source in Windows Vista and later or Windows Server 2003, you must have administrative privileges. </para
-        >
+          >If the <see cref="P:System.Diagnostics.EventLog.Source" /> for the event log associated with the <see cref="T:System.Diagnostics.EventLog" /> instance does not exist, a new event source is created. To create an event source in Windows Vista and later or Windows Server 2003, you must have administrative privileges.
+        </para>
         <para
           >The reason for this requirement is that all event logs, including security, must be searched to determine whether the event source is unique. Starting with Windows Vista, users do not have permission to access the security log; therefore, a <see cref="T:System.Security.SecurityException" /> is thrown.</para
         >
@@ -289,8 +289,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the log on the local computer. </param
-        >
+          />The name of the log on the local computer.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -381,15 +381,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the log on the specified computer. </param
-        >
+          />The name of the log on the specified computer.
+        </param>
         <param name="machineName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The computer on which the log exists. </param
-        >
+          />The computer on which the log exists.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -476,22 +476,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the log on the specified computer </param
-        >
+          />The name of the log on the specified computer
+        </param>
         <param name="machineName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The computer on which the log exists. </param
-        >
+          />The computer on which the log exists.
+        </param>
         <param name="source">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The source of event log entries. </param
-        >
+          />The source of event log entries.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="BeginInit">
@@ -656,8 +656,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The configuration properties for the event source and its target event log. </param
-        >
+          />The configuration properties for the event source and its target event log.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateEventSource">
@@ -735,15 +735,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The source name by which the application is registered on the local computer. </param
-        >
+          />The source name by which the application is registered on the local computer.
+        </param>
         <param name="logName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the log the source's entries are written to. Possible values include Application, System, or a custom event log. </param
-        >
+          />The name of the log the source's entries are written to. Possible values include Application, System, or a custom event log.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateEventSource">
@@ -822,22 +822,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The source by which the application is registered on the specified computer. </param
-        >
+          />The source by which the application is registered on the specified computer.
+        </param>
         <param name="logName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the log the source's entries are written to. Possible values include Application, System, or a custom event log. If you do not specify a value, <paramref name="logName" /> defaults to Application. </param
-        >
+          />The name of the log the source's entries are written to. Possible values include Application, System, or a custom event log. If you do not specify a value, <paramref name="logName" /> defaults to Application.
+        </param>
         <param name="machineName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the computer to register this event source with, or "." for the local computer. </param
-        >
+          />The name of the computer to register this event source with, or "." for the local computer.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Delete">
@@ -884,8 +884,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the log to delete. Possible values include: Application, Security, System, and any custom event logs on the computer. </param
-        >
+          />The name of the log to delete. Possible values include: Application, Security, System, and any custom event logs on the computer.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Delete">
@@ -939,15 +939,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the log to delete. Possible values include: Application, Security, System, and any custom event logs on the specified computer. </param
-        >
+          />The name of the log to delete. Possible values include: Application, Security, System, and any custom event logs on the specified computer.
+        </param>
         <param name="machineName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the computer to delete the log from, or "." for the local computer. </param
-        >
+          />The name of the computer to delete the log from, or "." for the local computer.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DeleteEventSource">
@@ -997,8 +997,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name by which the application is registered in the event log system. </param
-        >
+          />The name by which the application is registered in the event log system.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DeleteEventSource">
@@ -1054,15 +1054,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name by which the application is registered in the event log system. </param
-        >
+          />The name by which the application is registered in the event log system.
+        </param>
         <param name="machineName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the computer to remove the registration from, or "." for the local computer. </param
-        >
+          />The name of the computer to remove the registration from, or "." for the local computer.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Dispose">
@@ -1096,8 +1096,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see cref="T:System.Diagnostics.EventLog" />, and optionally releases the managed resources. </para
-          >
+            >Releases the unmanaged resources used by the <see cref="T:System.Diagnostics.EventLog" />, and optionally releases the managed resources.
+          </para>
         </summary>
         <param name="disposing">
           <attribution
@@ -1329,8 +1329,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the log to search for. Possible values include: Application, Security, System, other application-specific logs (such as those associated with Active Directory), or any custom log on the computer. </param
-        >
+          />The name of the log to search for. Possible values include: Application, Security, System, other application-specific logs (such as those associated with Active Directory), or any custom log on the computer.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Exists">
@@ -1387,15 +1387,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The log for which to search. Possible values include: Application, Security, System, other application-specific logs (such as those associated with Active Directory), or any custom log on the computer. </param
-        >
+          />The log for which to search. Possible values include: Application, Security, System, other application-specific logs (such as those associated with Active Directory), or any custom log on the computer.
+        </param>
         <param name="machineName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the computer on which to search for the log, or "." for the local computer. </param
-        >
+          />The name of the computer on which to search for the log, or "." for the local computer.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetEventLogs">
@@ -1497,8 +1497,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The computer on which to search for event logs. </param
-        >
+          />The computer on which to search for event logs.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Log">
@@ -1597,8 +1597,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In Windows Vista and later, users do not have permission to access the security log. If you are running Windows Vista or later as a user, you will get a <see cref="T:System.Security.SecurityException" /> when you attempt to access the display name for an event in the security log.  </para
-            >
+              >In Windows Vista and later, users do not have permission to access the security log. If you are running Windows Vista or later as a user, you will get a <see cref="T:System.Security.SecurityException" /> when you attempt to access the display name for an event in the security log.
+            </para>
             <para>In Windows Vista and later, User Account Control (UAC) determines the privileges of a user. If you are a member of the Built-in Administrators group, you are assigned two run-time access tokens: a standard user access token and an administrator access token. By default, you are in the standard user role. To execute the code that accesses the security log, you must first elevate your privileges from standard user to administrator. You can do this when you start an application by right-clicking the application icon and indicating that you want to run as an administrator.</para>
           </block>
         </remarks>
@@ -1656,15 +1656,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the event source. </param
-        >
+          />The name of the event source.
+        </param>
         <param name="machineName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the computer on which to look, or "." for the local computer. </param
-        >
+          />The name of the computer on which to look, or "." for the local computer.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="MachineName">
@@ -1869,15 +1869,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The overflow behavior for writing new entries to the event log. </param
-        >
+          />The overflow behavior for writing new entries to the event log.
+        </param>
         <param name="retentionDays">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The minimum number of days each event log entry is retained. This parameter is used only if <paramref name="action" /> is set to <see cref="F:System.Diagnostics.OverflowAction.OverwriteOlder" />. </param
-        >
+          />The minimum number of days each event log entry is retained. This parameter is used only if <paramref name="action" /> is set to <see cref="F:System.Diagnostics.OverflowAction.OverwriteOlder" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OverflowAction">
@@ -1980,15 +1980,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The fully specified path to a localized resource file. </param
-        >
+          />The fully specified path to a localized resource file.
+        </param>
         <param name="resourceId">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The resource identifier that indexes a localized string within the resource file. </param
-        >
+          />The resource identifier that indexes a localized string within the resource file.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Source">
@@ -2035,8 +2035,8 @@
             >
           </block>
           <para
-            >Use <see cref="Overload:System.Diagnostics.EventLog.WriteEvent" /> and <see cref="Overload:System.Diagnostics.EventLog.WriteEntry" /> to write events to an event log. You must specify an event source to write events; you must create and configure the event source before writing the first entry with the source. </para
-          >
+            >Use <see cref="Overload:System.Diagnostics.EventLog.WriteEvent" /> and <see cref="Overload:System.Diagnostics.EventLog.WriteEntry" /> to write events to an event log. You must specify an event source to write events; you must create and configure the event source before writing the first entry with the source.
+          </para>
           <para
             >Create the new event source during the installation of your application. This allows time for the operating system to refresh its list of registered event sources and their configuration. If the operating system has not refreshed its list of event sources, and you attempt to write an event with the new source, the write operation will fail. You can configure a new source using an <see cref="T:System.Diagnostics.EventLogInstaller" />, or using the <see cref="Overload:System.Diagnostics.EventLog.CreateEventSource" /> method. You must have administrative rights on the computer to create a new event source.</para
           >
@@ -2115,8 +2115,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the event source. </param
-        >
+          />The name of the event source.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SourceExists">
@@ -2188,15 +2188,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the event source. </param
-        >
+          />The name of the event source.
+        </param>
         <param name="machineName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name the computer on which to look, or "." for the local computer. </param
-        >
+          />The name the computer on which to look, or "." for the local computer.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SynchronizingObject">
@@ -2326,8 +2326,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to write to the event log. </param
-        >
+          />The string to write to the event log.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteEntry">
@@ -2396,8 +2396,8 @@
           </block>
           <block subset="none" type="note">
             <para
-              >If the <paramref name="message" /> parameter contains a NUL character, the message in the event log is terminated at the NUL character. </para
-            >
+              >If the <paramref name="message" /> parameter contains a NUL character, the message in the event log is terminated at the NUL character.
+            </para>
           </block>
         </remarks>
         <summary>
@@ -2409,15 +2409,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to write to the event log. </param
-        >
+          />The string to write to the event log.
+        </param>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Diagnostics.EventLogEntryType" /> values. </param
-        >
+          />One of the <see cref="T:System.Diagnostics.EventLogEntryType" /> values.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteEntry">
@@ -2459,8 +2459,8 @@
           >
           <block subset="none" type="note">
             <para
-              >If the <paramref name="message" /> parameter contains a NUL character, the message in the event log is terminated at the NUL character. </para
-            >
+              >If the <paramref name="message" /> parameter contains a NUL character, the message in the event log is terminated at the NUL character.
+            </para>
             <para
               >The <paramref name="message" /> string cannot contain %n, where n is an integer value (for example, %1), because the event viewer treats it as an insertion string. Because an Internet Protocol, version 6 (IPv6) address can contain this character sequence, you cannot log an event message that contains an IPv6 address.</para
             >
@@ -2475,15 +2475,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The source by which the application is registered on the specified computer. </param
-        >
+          />The source by which the application is registered on the specified computer.
+        </param>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to write to the event log. </param
-        >
+          />The string to write to the event log.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteEntry">
@@ -2556,8 +2556,8 @@
           </block>
           <block subset="none" type="note">
             <para
-              >If the <paramref name="message" /> parameter contains a NUL character, the message in the event log is terminated at the NUL character. </para
-            >
+              >If the <paramref name="message" /> parameter contains a NUL character, the message in the event log is terminated at the NUL character.
+            </para>
           </block>
         </remarks>
         <summary>
@@ -2569,22 +2569,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to write to the event log. </param
-        >
+          />The string to write to the event log.
+        </param>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Diagnostics.EventLogEntryType" /> values. </param
-        >
+          />One of the <see cref="T:System.Diagnostics.EventLogEntryType" /> values.
+        </param>
         <param name="eventID">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The application-specific identifier for the event. </param
-        >
+          />The application-specific identifier for the event.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteEntry">
@@ -2632,8 +2632,8 @@
           >
           <block subset="none" type="note">
             <para
-              >If the <paramref name="message" /> parameter contains a NUL character, the message in the event log is terminated at the NUL character. </para
-            >
+              >If the <paramref name="message" /> parameter contains a NUL character, the message in the event log is terminated at the NUL character.
+            </para>
           </block>
         </remarks>
         <summary>
@@ -2645,22 +2645,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The source by which the application is registered on the specified computer. </param
-        >
+          />The source by which the application is registered on the specified computer.
+        </param>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to write to the event log. </param
-        >
+          />The string to write to the event log.
+        </param>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Diagnostics.EventLogEntryType" /> values. </param
-        >
+          />One of the <see cref="T:System.Diagnostics.EventLogEntryType" /> values.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteEntry">
@@ -2743,8 +2743,8 @@
           </block>
           <block subset="none" type="note">
             <para
-              >If the <paramref name="message" /> parameter contains a NUL character, the message in the event log is terminated at the NUL character. </para
-            >
+              >If the <paramref name="message" /> parameter contains a NUL character, the message in the event log is terminated at the NUL character.
+            </para>
           </block>
         </remarks>
         <summary>
@@ -2756,29 +2756,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to write to the event log. </param
-        >
+          />The string to write to the event log.
+        </param>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Diagnostics.EventLogEntryType" /> values. </param
-        >
+          />One of the <see cref="T:System.Diagnostics.EventLogEntryType" /> values.
+        </param>
         <param name="eventID">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The application-specific identifier for the event. </param
-        >
+          />The application-specific identifier for the event.
+        </param>
         <param name="category">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The application-specific subcategory associated with the message. </param
-        >
+          />The application-specific subcategory associated with the message.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteEntry">
@@ -2830,8 +2830,8 @@
           >
           <block subset="none" type="note">
             <para
-              >If the <paramref name="message" /> parameter contains a NUL character, the message in the event log is terminated at the NUL character. </para
-            >
+              >If the <paramref name="message" /> parameter contains a NUL character, the message in the event log is terminated at the NUL character.
+            </para>
           </block>
         </remarks>
         <summary>
@@ -2843,29 +2843,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The source by which the application is registered on the specified computer. </param
-        >
+          />The source by which the application is registered on the specified computer.
+        </param>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to write to the event log. </param
-        >
+          />The string to write to the event log.
+        </param>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Diagnostics.EventLogEntryType" /> values. </param
-        >
+          />One of the <see cref="T:System.Diagnostics.EventLogEntryType" /> values.
+        </param>
         <param name="eventID">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The application-specific identifier for the event. </param
-        >
+          />The application-specific identifier for the event.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteEntry">
@@ -2948,8 +2948,8 @@
           </block>
           <block subset="none" type="note">
             <para
-              >If the <paramref name="message" /> parameter contains a NUL character, the message in the event log is terminated at the NUL character. </para
-            >
+              >If the <paramref name="message" /> parameter contains a NUL character, the message in the event log is terminated at the NUL character.
+            </para>
           </block>
         </remarks>
         <summary>
@@ -2961,36 +2961,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to write to the event log. </param
-        >
+          />The string to write to the event log.
+        </param>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Diagnostics.EventLogEntryType" /> values. </param
-        >
+          />One of the <see cref="T:System.Diagnostics.EventLogEntryType" /> values.
+        </param>
         <param name="eventID">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The application-specific identifier for the event. </param
-        >
+          />The application-specific identifier for the event.
+        </param>
         <param name="category">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The application-specific subcategory associated with the message. </param
-        >
+          />The application-specific subcategory associated with the message.
+        </param>
         <param name="rawData">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of bytes that holds the binary data associated with the entry. </param
-        >
+          />An array of bytes that holds the binary data associated with the entry.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteEntry">
@@ -3047,8 +3047,8 @@
           >
           <block subset="none" type="note">
             <para
-              >If the <paramref name="message" /> parameter contains a NUL character, the message in the event log is terminated at the NUL character. </para
-            >
+              >If the <paramref name="message" /> parameter contains a NUL character, the message in the event log is terminated at the NUL character.
+            </para>
             <para
               >The <paramref name="message" /> string cannot contain %n, where n is an integer value (for example, %1), because the event viewer treats it as an insertion string. Because an Internet Protocol, version 6 (IPv6) address can contain this character sequence, you cannot log an event message that contains an IPv6 address.</para
             >
@@ -3065,36 +3065,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The source by which the application is registered on the specified computer. </param
-        >
+          />The source by which the application is registered on the specified computer.
+        </param>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to write to the event log. </param
-        >
+          />The string to write to the event log.
+        </param>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Diagnostics.EventLogEntryType" /> values. </param
-        >
+          />One of the <see cref="T:System.Diagnostics.EventLogEntryType" /> values.
+        </param>
         <param name="eventID">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The application-specific identifier for the event. </param
-        >
+          />The application-specific identifier for the event.
+        </param>
         <param name="category">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The application-specific subcategory associated with the message. </param
-        >
+          />The application-specific subcategory associated with the message.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteEntry">
@@ -3151,8 +3151,8 @@
           >
           <block subset="none" type="note">
             <para
-              >If the <paramref name="message" /> parameter contains a NUL character, the message in the event log is terminated at the NUL character. </para
-            >
+              >If the <paramref name="message" /> parameter contains a NUL character, the message in the event log is terminated at the NUL character.
+            </para>
             <para
               >The <paramref name="message" /> string cannot contain %n, where n is an integer value (for example, %1), because the event viewer treats it as an insertion string. Because an Internet Protocol, version 6 (IPv6) address can contain this character sequence, you cannot log an event message that contains an IPv6 address.</para
             >
@@ -3167,43 +3167,43 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The source by which the application is registered on the specified computer. </param
-        >
+          />The source by which the application is registered on the specified computer.
+        </param>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to write to the event log. </param
-        >
+          />The string to write to the event log.
+        </param>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Diagnostics.EventLogEntryType" /> values. </param
-        >
+          />One of the <see cref="T:System.Diagnostics.EventLogEntryType" /> values.
+        </param>
         <param name="eventID">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The application-specific identifier for the event. </param
-        >
+          />The application-specific identifier for the event.
+        </param>
         <param name="category">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The application-specific subcategory associated with the message. </param
-        >
+          />The application-specific subcategory associated with the message.
+        </param>
         <param name="rawData">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of bytes that holds the binary data associated with the entry. </param
-        >
+          />An array of bytes that holds the binary data associated with the entry.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteEvent">
@@ -3274,15 +3274,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Diagnostics.EventInstance" /> instance that represents a localized event log entry. </param
-        >
+          />An <see cref="T:System.Diagnostics.EventInstance" /> instance that represents a localized event log entry.
+        </param>
         <param name="values">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of strings to merge into the message text of the event log entry. </param
-        >
+          />An array of strings to merge into the message text of the event log entry.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteEvent">
@@ -3362,22 +3362,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Diagnostics.EventInstance" /> instance that represents a localized event log entry. </param
-        >
+          />An <see cref="T:System.Diagnostics.EventInstance" /> instance that represents a localized event log entry.
+        </param>
         <param name="data">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of bytes that holds the binary data associated with the entry. </param
-        >
+          />An array of bytes that holds the binary data associated with the entry.
+        </param>
         <param name="values">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of strings to merge into the message text of the event log entry. </param
-        >
+          />An array of strings to merge into the message text of the event log entry.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteEvent">
@@ -3437,22 +3437,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the event source registered for the application on the specified computer. </param
-        >
+          />The name of the event source registered for the application on the specified computer.
+        </param>
         <param name="instance">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Diagnostics.EventInstance" /> instance that represents a localized event log entry. </param
-        >
+          />An <see cref="T:System.Diagnostics.EventInstance" /> instance that represents a localized event log entry.
+        </param>
         <param name="values">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of strings to merge into the message text of the event log entry. </param
-        >
+          />An array of strings to merge into the message text of the event log entry.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteEvent">
@@ -3516,29 +3516,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the event source registered for the application on the specified computer. </param
-        >
+          />The name of the event source registered for the application on the specified computer.
+        </param>
         <param name="instance">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Diagnostics.EventInstance" /> instance that represents a localized event log entry. </param
-        >
+          />An <see cref="T:System.Diagnostics.EventInstance" /> instance that represents a localized event log entry.
+        </param>
         <param name="data">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of bytes that holds the binary data associated with the entry. </param
-        >
+          />An array of bytes that holds the binary data associated with the entry.
+        </param>
         <param name="values">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of strings to merge into the message text of the event log entry. </param
-        >
+          />An array of strings to merge into the message text of the event log entry.
+        </param>
       </Docs>
     </Member>
   </Members>

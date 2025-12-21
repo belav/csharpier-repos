@@ -109,8 +109,8 @@
         <h2>Introduction</h2>
       </format>
       <para
-        >The <see cref="T:System.Web.UI.WebControls.GridView" /> control is used to display the values of a data source in a table. Each column represents a field, while each row represents a record. The <see cref="T:System.Web.UI.WebControls.GridView" /> control supports the following features: </para
-      >
+        >The <see cref="T:System.Web.UI.WebControls.GridView" /> control is used to display the values of a data source in a table. Each column represents a field, while each row represents a record. The <see cref="T:System.Web.UI.WebControls.GridView" /> control supports the following features:
+      </para>
       <list type="bullet">
         <item>
           <para
@@ -189,8 +189,8 @@
           </term>
           <description>
             <para
-              >Displays the value of a field in a data source. This is the default column type of the <see cref="T:System.Web.UI.WebControls.GridView" /> control. </para
-            >
+              >Displays the value of a field in a data source. This is the default column type of the <see cref="T:System.Web.UI.WebControls.GridView" /> control.
+            </para>
           </description>
         </item>
         <item>
@@ -201,8 +201,8 @@
           </term>
           <description>
             <para
-              >Displays a command button for each item in the <see cref="T:System.Web.UI.WebControls.GridView" /> control. This enables you to create a column of custom button controls, such as the Add or the Remove button. </para
-            >
+              >Displays a command button for each item in the <see cref="T:System.Web.UI.WebControls.GridView" /> control. This enables you to create a column of custom button controls, such as the Add or the Remove button.
+            </para>
           </description>
         </item>
         <item>
@@ -213,8 +213,8 @@
           </term>
           <description>
             <para
-              >Displays a check box for each item in the <see cref="T:System.Web.UI.WebControls.GridView" /> control. This column field type is commonly used to display fields with a Boolean value. </para
-            >
+              >Displays a check box for each item in the <see cref="T:System.Web.UI.WebControls.GridView" /> control. This column field type is commonly used to display fields with a Boolean value.
+            </para>
           </description>
         </item>
         <item>
@@ -257,8 +257,8 @@
           </term>
           <description>
             <para
-              >Displays user-defined content for each item in the <see cref="T:System.Web.UI.WebControls.GridView" /> control according to a specified template. This column field type enables you to create a custom column field. </para
-            >
+              >Displays user-defined content for each item in the <see cref="T:System.Web.UI.WebControls.GridView" /> control according to a specified template. This column field type enables you to create a custom column field.
+            </para>
           </description>
         </item>
       </list>
@@ -367,8 +367,8 @@
           </term>
           <description>
             <para
-              >The style settings for the alternating data rows in the <see cref="T:System.Web.UI.WebControls.GridView" /> control. When this property is set, the data rows are displayed alternating between the <see cref="P:System.Web.UI.WebControls.GridView.RowStyle" /> settings and the <see cref="P:System.Web.UI.WebControls.GridView.AlternatingRowStyle" /> settings. </para
-            >
+              >The style settings for the alternating data rows in the <see cref="T:System.Web.UI.WebControls.GridView" /> control. When this property is set, the data rows are displayed alternating between the <see cref="P:System.Web.UI.WebControls.GridView.RowStyle" /> settings and the <see cref="P:System.Web.UI.WebControls.GridView.AlternatingRowStyle" /> settings.
+            </para>
           </description>
         </item>
         <item>
@@ -379,8 +379,8 @@
           </term>
           <description>
             <para
-              >The style settings for the row being edited in the <see cref="T:System.Web.UI.WebControls.GridView" /> control. </para
-            >
+              >The style settings for the row being edited in the <see cref="T:System.Web.UI.WebControls.GridView" /> control.
+            </para>
           </description>
         </item>
         <item>
@@ -391,8 +391,8 @@
           </term>
           <description>
             <para
-              >The style settings for the empty data row displayed in the <see cref="T:System.Web.UI.WebControls.GridView" /> control when the data source does not contain any records. </para
-            >
+              >The style settings for the empty data row displayed in the <see cref="T:System.Web.UI.WebControls.GridView" /> control when the data source does not contain any records.
+            </para>
           </description>
         </item>
         <item>
@@ -403,8 +403,8 @@
           </term>
           <description>
             <para
-              >The style settings for the footer row of the <see cref="T:System.Web.UI.WebControls.GridView" /> control. </para
-            >
+              >The style settings for the footer row of the <see cref="T:System.Web.UI.WebControls.GridView" /> control.
+            </para>
           </description>
         </item>
         <item>
@@ -415,8 +415,8 @@
           </term>
           <description>
             <para
-              >The style settings for the header row of the <see cref="T:System.Web.UI.WebControls.GridView" /> control. </para
-            >
+              >The style settings for the header row of the <see cref="T:System.Web.UI.WebControls.GridView" /> control.
+            </para>
           </description>
         </item>
         <item>
@@ -427,8 +427,8 @@
           </term>
           <description>
             <para
-              >The style settings for the pager row of the <see cref="T:System.Web.UI.WebControls.GridView" /> control. </para
-            >
+              >The style settings for the pager row of the <see cref="T:System.Web.UI.WebControls.GridView" /> control.
+            </para>
           </description>
         </item>
         <item>
@@ -439,8 +439,8 @@
           </term>
           <description>
             <para
-              >The style settings for the data rows in the <see cref="T:System.Web.UI.WebControls.GridView" /> control. When the <see cref="P:System.Web.UI.WebControls.GridView.AlternatingRowStyle" /> property is also set, the data rows are displayed alternating between the <see cref="P:System.Web.UI.WebControls.GridView.RowStyle" /> settings and the <see cref="P:System.Web.UI.WebControls.GridView.AlternatingRowStyle" /> settings. </para
-            >
+              >The style settings for the data rows in the <see cref="T:System.Web.UI.WebControls.GridView" /> control. When the <see cref="P:System.Web.UI.WebControls.GridView.AlternatingRowStyle" /> property is also set, the data rows are displayed alternating between the <see cref="P:System.Web.UI.WebControls.GridView.RowStyle" /> settings and the <see cref="P:System.Web.UI.WebControls.GridView.AlternatingRowStyle" /> settings.
+            </para>
           </description>
         </item>
         <item>
@@ -451,8 +451,8 @@
           </term>
           <description>
             <para
-              >The style settings for the selected row in the <see cref="T:System.Web.UI.WebControls.GridView" /> control. </para
-            >
+              >The style settings for the selected row in the <see cref="T:System.Web.UI.WebControls.GridView" /> control.
+            </para>
           </description>
         </item>
         <item>
@@ -569,8 +569,8 @@
           </term>
           <description>
             <para
-              >Occurs when one of the pager buttons is clicked, but after the <see cref="T:System.Web.UI.WebControls.GridView" /> control handles the paging operation. This event is commonly used when you need to perform a task after the user navigates to a different page in the control. </para
-            >
+              >Occurs when one of the pager buttons is clicked, but after the <see cref="T:System.Web.UI.WebControls.GridView" /> control handles the paging operation. This event is commonly used when you need to perform a task after the user navigates to a different page in the control.
+            </para>
           </description>
         </item>
         <item>
@@ -581,8 +581,8 @@
           </term>
           <description>
             <para
-              >Occurs when one of the pager buttons is clicked, but before the <see cref="T:System.Web.UI.WebControls.GridView" /> control handles the paging operation. This event is often used to cancel the paging operation. </para
-            >
+              >Occurs when one of the pager buttons is clicked, but before the <see cref="T:System.Web.UI.WebControls.GridView" /> control handles the paging operation. This event is often used to cancel the paging operation.
+            </para>
           </description>
         </item>
         <item>
@@ -593,8 +593,8 @@
           </term>
           <description>
             <para
-              >Occurs when a row's Cancel button is clicked, but before the <see cref="T:System.Web.UI.WebControls.GridView" /> control exits edit mode. This event is often used to stop the canceling operation. </para
-            >
+              >Occurs when a row's Cancel button is clicked, but before the <see cref="T:System.Web.UI.WebControls.GridView" /> control exits edit mode. This event is often used to stop the canceling operation.
+            </para>
           </description>
         </item>
         <item>
@@ -605,8 +605,8 @@
           </term>
           <description>
             <para
-              >Occurs when a button is clicked in the <see cref="T:System.Web.UI.WebControls.GridView" /> control. This event is often used to perform a task when a button is clicked in the control. </para
-            >
+              >Occurs when a button is clicked in the <see cref="T:System.Web.UI.WebControls.GridView" /> control. This event is often used to perform a task when a button is clicked in the control.
+            </para>
           </description>
         </item>
         <item>
@@ -617,8 +617,8 @@
           </term>
           <description>
             <para
-              >Occurs when a new row is created in the <see cref="T:System.Web.UI.WebControls.GridView" /> control. This event is often used to modify the contents of a row when the row is created. </para
-            >
+              >Occurs when a new row is created in the <see cref="T:System.Web.UI.WebControls.GridView" /> control. This event is often used to modify the contents of a row when the row is created.
+            </para>
           </description>
         </item>
         <item>
@@ -629,8 +629,8 @@
           </term>
           <description>
             <para
-              >Occurs when a data row is bound to data in the <see cref="T:System.Web.UI.WebControls.GridView" /> control. This event is often used to modify the contents of a row when the row is bound to data. </para
-            >
+              >Occurs when a data row is bound to data in the <see cref="T:System.Web.UI.WebControls.GridView" /> control. This event is often used to modify the contents of a row when the row is bound to data.
+            </para>
           </description>
         </item>
         <item>
@@ -641,8 +641,8 @@
           </term>
           <description>
             <para
-              >Occurs when a row's Delete button is clicked, but after the <see cref="T:System.Web.UI.WebControls.GridView" /> control deletes the record from the data source. This event is often used to check the results of the delete operation. </para
-            >
+              >Occurs when a row's Delete button is clicked, but after the <see cref="T:System.Web.UI.WebControls.GridView" /> control deletes the record from the data source. This event is often used to check the results of the delete operation.
+            </para>
           </description>
         </item>
         <item>
@@ -653,8 +653,8 @@
           </term>
           <description>
             <para
-              >Occurs when a row's Delete button is clicked, but before the <see cref="T:System.Web.UI.WebControls.GridView" /> control deletes the record from the data source. This event is often used to cancel the deleting operation. </para
-            >
+              >Occurs when a row's Delete button is clicked, but before the <see cref="T:System.Web.UI.WebControls.GridView" /> control deletes the record from the data source. This event is often used to cancel the deleting operation.
+            </para>
           </description>
         </item>
         <item>
@@ -665,8 +665,8 @@
           </term>
           <description>
             <para
-              >Occurs when a row's Edit button is clicked, but before the <see cref="T:System.Web.UI.WebControls.GridView" /> control enters edit mode. This event is often used to cancel the editing operation. </para
-            >
+              >Occurs when a row's Edit button is clicked, but before the <see cref="T:System.Web.UI.WebControls.GridView" /> control enters edit mode. This event is often used to cancel the editing operation.
+            </para>
           </description>
         </item>
         <item>
@@ -677,8 +677,8 @@
           </term>
           <description>
             <para
-              >Occurs when a row's Update button is clicked, but after the <see cref="T:System.Web.UI.WebControls.GridView" /> control updates the row. This event is often used to check the results of the update operation. </para
-            >
+              >Occurs when a row's Update button is clicked, but after the <see cref="T:System.Web.UI.WebControls.GridView" /> control updates the row. This event is often used to check the results of the update operation.
+            </para>
           </description>
         </item>
         <item>
@@ -689,8 +689,8 @@
           </term>
           <description>
             <para
-              >Occurs when a row's Update button is clicked, but before the <see cref="T:System.Web.UI.WebControls.GridView" /> control updates the row. This event is often used to cancel the updating operation. </para
-            >
+              >Occurs when a row's Update button is clicked, but before the <see cref="T:System.Web.UI.WebControls.GridView" /> control updates the row. This event is often used to cancel the updating operation.
+            </para>
           </description>
         </item>
         <item>
@@ -701,8 +701,8 @@
           </term>
           <description>
             <para
-              >Occurs when a row's Select button is clicked, but after the <see cref="T:System.Web.UI.WebControls.GridView" /> control handles the select operation. This event is often used to perform a task after a row is selected in the control. </para
-            >
+              >Occurs when a row's Select button is clicked, but after the <see cref="T:System.Web.UI.WebControls.GridView" /> control handles the select operation. This event is often used to perform a task after a row is selected in the control.
+            </para>
           </description>
         </item>
         <item>
@@ -713,8 +713,8 @@
           </term>
           <description>
             <para
-              >Occurs when a row's Select button is clicked, but before the <see cref="T:System.Web.UI.WebControls.GridView" /> control handles the select operation. This event is often used to cancel the selection operation. </para
-            >
+              >Occurs when a row's Select button is clicked, but before the <see cref="T:System.Web.UI.WebControls.GridView" /> control handles the select operation. This event is often used to cancel the selection operation.
+            </para>
           </description>
         </item>
         <item>
@@ -725,8 +725,8 @@
           </term>
           <description>
             <para
-              >Occurs when the hyperlink to sort a column is clicked, but after the <see cref="T:System.Web.UI.WebControls.GridView" /> control handles the sort operation. This event is commonly used to perform a task after the user clicks a hyperlink to sort a column. </para
-            >
+              >Occurs when the hyperlink to sort a column is clicked, but after the <see cref="T:System.Web.UI.WebControls.GridView" /> control handles the sort operation. This event is commonly used to perform a task after the user clicks a hyperlink to sort a column.
+            </para>
           </description>
         </item>
         <item>
@@ -737,8 +737,8 @@
           </term>
           <description>
             <para
-              >Occurs when the hyperlink to sort a column is clicked, but before the <see cref="T:System.Web.UI.WebControls.GridView" /> control handles the sort operation. This event is often used to cancel the sorting operation or to perform a custom sorting routine. </para
-            >
+              >Occurs when the hyperlink to sort a column is clicked, but before the <see cref="T:System.Web.UI.WebControls.GridView" /> control handles the sort operation. This event is often used to cancel the sorting operation or to perform a custom sorting routine.
+            </para>
           </description>
         </item>
       </list>
@@ -1225,8 +1225,8 @@
               </term>
               <description>
                 <para
-                  >Occurs when one of the pager buttons is clicked, but after the <see cref="T:System.Web.UI.WebControls.GridView" /> control handles the paging operation. This event is commonly used when you need to perform a task after the user navigates to a different page in the control. </para
-                >
+                  >Occurs when one of the pager buttons is clicked, but after the <see cref="T:System.Web.UI.WebControls.GridView" /> control handles the paging operation. This event is commonly used when you need to perform a task after the user navigates to a different page in the control.
+                </para>
               </description>
             </item>
             <item>
@@ -1237,8 +1237,8 @@
               </term>
               <description>
                 <para
-                  >Occurs when one of the pager buttons is clicked, but before the <see cref="T:System.Web.UI.WebControls.GridView" /> control handles the paging operation. This event is often used to cancel the paging operation. </para
-                >
+                  >Occurs when one of the pager buttons is clicked, but before the <see cref="T:System.Web.UI.WebControls.GridView" /> control handles the paging operation. This event is often used to cancel the paging operation.
+                </para>
               </description>
             </item>
           </list>
@@ -1307,8 +1307,8 @@
               </term>
               <description>
                 <para
-                  >Occurs when the hyperlink to sort a column is clicked, but after the <see cref="T:System.Web.UI.WebControls.GridView" /> control handles the sort operation. This event is commonly used to perform a task after the user clicks a hyperlink to sort a column. </para
-                >
+                  >Occurs when the hyperlink to sort a column is clicked, but after the <see cref="T:System.Web.UI.WebControls.GridView" /> control handles the sort operation. This event is commonly used to perform a task after the user clicks a hyperlink to sort a column.
+                </para>
               </description>
             </item>
             <item>
@@ -1319,8 +1319,8 @@
               </term>
               <description>
                 <para
-                  >Occurs when the hyperlink to sort a column is clicked, but before the <see cref="T:System.Web.UI.WebControls.GridView" /> control handles the sort operation. This event is often used to cancel the sorting operation or to perform a custom sorting routine. </para
-                >
+                  >Occurs when the hyperlink to sort a column is clicked, but before the <see cref="T:System.Web.UI.WebControls.GridView" /> control handles the sort operation. This event is often used to cancel the sorting operation or to perform a custom sorting routine.
+                </para>
               </description>
             </item>
           </list>
@@ -1507,8 +1507,8 @@
               </term>
               <description>
                 <para
-                  >Occurs when a row's Delete button is clicked, but after the <see cref="T:System.Web.UI.WebControls.GridView" /> control deletes the record from the data source. This event is often used to check the results of the delete operation. </para
-                >
+                  >Occurs when a row's Delete button is clicked, but after the <see cref="T:System.Web.UI.WebControls.GridView" /> control deletes the record from the data source. This event is often used to check the results of the delete operation.
+                </para>
               </description>
             </item>
             <item>
@@ -1519,8 +1519,8 @@
               </term>
               <description>
                 <para
-                  >Occurs when a row's Delete button is clicked, but before the <see cref="T:System.Web.UI.WebControls.GridView" /> control deletes the record from the data source. This event is often used to cancel the deleting operation. </para
-                >
+                  >Occurs when a row's Delete button is clicked, but before the <see cref="T:System.Web.UI.WebControls.GridView" /> control deletes the record from the data source. This event is often used to cancel the deleting operation.
+                </para>
               </description>
             </item>
           </list>
@@ -1598,8 +1598,8 @@
               </term>
               <description>
                 <para
-                  >Occurs when a row's Cancel button is clicked, but before the <see cref="T:System.Web.UI.WebControls.GridView" /> control cancels out of edit mode. This event is often used to stop the canceling operation. </para
-                >
+                  >Occurs when a row's Cancel button is clicked, but before the <see cref="T:System.Web.UI.WebControls.GridView" /> control cancels out of edit mode. This event is often used to stop the canceling operation.
+                </para>
               </description>
             </item>
             <item>
@@ -1610,8 +1610,8 @@
               </term>
               <description>
                 <para
-                  >Occurs when a row's Edit button is clicked, but before the <see cref="T:System.Web.UI.WebControls.GridView" /> control enters edit mode. This event is often used to cancel the editing operation. </para
-                >
+                  >Occurs when a row's Edit button is clicked, but before the <see cref="T:System.Web.UI.WebControls.GridView" /> control enters edit mode. This event is often used to cancel the editing operation.
+                </para>
               </description>
             </item>
             <item>
@@ -1622,8 +1622,8 @@
               </term>
               <description>
                 <para
-                  >Occurs when a row's Update button is clicked, but after the <see cref="T:System.Web.UI.WebControls.GridView" /> control updates the row. This event is often used to check the results of the update operation. </para
-                >
+                  >Occurs when a row's Update button is clicked, but after the <see cref="T:System.Web.UI.WebControls.GridView" /> control updates the row. This event is often used to check the results of the update operation.
+                </para>
               </description>
             </item>
             <item>
@@ -1634,8 +1634,8 @@
               </term>
               <description>
                 <para
-                  >Occurs when a row's Update button is clicked, but before the <see cref="T:System.Web.UI.WebControls.GridView" /> control updates the row. This event is often used to cancel the updating operation. </para
-                >
+                  >Occurs when a row's Update button is clicked, but before the <see cref="T:System.Web.UI.WebControls.GridView" /> control updates the row. This event is often used to cancel the updating operation.
+                </para>
               </description>
             </item>
           </list>
@@ -1703,8 +1703,8 @@
               </term>
               <description>
                 <para
-                  >Occurs when a row's Select button is clicked, but after the <see cref="T:System.Web.UI.WebControls.GridView" /> control handles the select operation. This event is often used to perform a task after a row is selected in the control. </para
-                >
+                  >Occurs when a row's Select button is clicked, but after the <see cref="T:System.Web.UI.WebControls.GridView" /> control handles the select operation. This event is often used to perform a task after a row is selected in the control.
+                </para>
               </description>
             </item>
             <item>
@@ -1715,8 +1715,8 @@
               </term>
               <description>
                 <para
-                  >Occurs when a row's Select button is clicked, but before the <see cref="T:System.Web.UI.WebControls.GridView" /> control handles the select operation. This event is often used to cancel the selecting operation. </para
-                >
+                  >Occurs when a row's Select button is clicked, but before the <see cref="T:System.Web.UI.WebControls.GridView" /> control handles the select operation. This event is often used to cancel the selecting operation.
+                </para>
               </description>
             </item>
           </list>
@@ -1755,8 +1755,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.Web.UI.WebControls.GridView.BackImageUrl" /> property to specify the URL to an image to display in the background of a <see cref="T:System.Web.UI.WebControls.GridView" /> control. </para
-          >
+            >Use the <see cref="P:System.Web.UI.WebControls.GridView.BackImageUrl" /> property to specify the URL to an image to display in the background of a <see cref="T:System.Web.UI.WebControls.GridView" /> control.
+          </para>
           <block subset="none" type="note">
             <para
               >If the specified image is smaller than the <see cref="T:System.Web.UI.WebControls.GridView" /> control, the image is tiled to fill in the background. If the image is larger than the control, the image is cropped.</para
@@ -2262,8 +2262,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to indicate that the child controls are bound to data; otherwise, false. </param
-        >
+          />true to indicate that the child controls are bound to data; otherwise, false.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2343,15 +2343,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Web.UI.WebControls.PagedDataSource" /> that represents the data source. </param
-        >
+          />A <see cref="T:System.Web.UI.WebControls.PagedDataSource" /> that represents the data source.
+        </param>
         <param name="useDataSource">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to use the data source specified by the <paramref name="dataSource" /> parameter; otherwise, false. </param
-        >
+          />true to use the data source specified by the <paramref name="dataSource" /> parameter; otherwise, false.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2475,29 +2475,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the row to create. </param
-        >
+          />The index of the row to create.
+        </param>
         <param name="dataSourceIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the data source item to bind to the row. </param
-        >
+          />The index of the data source item to bind to the row.
+        </param>
         <param name="rowType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Web.UI.WebControls.DataControlRowType" /> values. </param
-        >
+          />One of the <see cref="T:System.Web.UI.WebControls.DataControlRowType" /> values.
+        </param>
         <param name="rowState">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Web.UI.WebControls.DataControlRowState" /> values. </param
-        >
+          />One of the <see cref="T:System.Web.UI.WebControls.DataControlRowState" /> values.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -3530,15 +3530,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Web.UI.WebControls.GridViewRow" /> that represents the pager row to initialize. </param
-        >
+          />A <see cref="T:System.Web.UI.WebControls.GridViewRow" /> that represents the pager row to initialize.
+        </param>
         <param name="columnSpan">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of columns the pager row should span. </param
-        >
+          />The number of columns the pager row should span.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -3581,15 +3581,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Web.UI.WebControls.GridViewRow" /> that represents the row to initialize. </param
-        >
+          />A <see cref="T:System.Web.UI.WebControls.GridViewRow" /> that represents the row to initialize.
+        </param>
         <param name="fields">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Web.UI.WebControls.DataControlField" /> objects that represent the column fields in the <see cref="T:System.Web.UI.WebControls.GridView" /> control. </param
-        >
+          />An array of <see cref="T:System.Web.UI.WebControls.DataControlField" /> objects that represent the column fields in the <see cref="T:System.Web.UI.WebControls.GridView" /> control.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -3711,8 +3711,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> that represents the data type to test. </param
-        >
+          />A <see cref="T:System.Type" /> that represents the data type to test.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -3787,8 +3787,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Object" /> that contains the saved view state values for the control. </param
-        >
+          />An <see cref="T:System.Object" /> that contains the saved view state values for the control.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -3824,19 +3824,15 @@
           <para>true if the event has been canceled; otherwise, false.</para>
         </returns>
         <param name="source">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The source of the event. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The source of the event.
+        </param>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -3956,8 +3952,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnPageIndexChanged">
@@ -3999,8 +3995,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -4045,8 +4041,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Web.UI.WebControls.GridViewPageEventArgs" /> that contains event data. </param
-        >
+          />A <see cref="T:System.Web.UI.WebControls.GridViewPageEventArgs" /> that contains event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -4168,8 +4164,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Web.UI.WebControls.GridViewCancelEditEventArgs" /> that contains event data. </param
-        >
+          />A <see cref="T:System.Web.UI.WebControls.GridViewCancelEditEventArgs" /> that contains event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -4260,8 +4256,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Web.UI.WebControls.GridViewRowEventArgs" /> that contains event data. </param
-        >
+          />A <see cref="T:System.Web.UI.WebControls.GridViewRowEventArgs" /> that contains event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -4358,8 +4354,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Web.UI.WebControls.GridViewDeletedEventArgs" /> that contains event data. </param
-        >
+          />A <see cref="T:System.Web.UI.WebControls.GridViewDeletedEventArgs" /> that contains event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -4404,8 +4400,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Web.UI.WebControls.GridViewDeleteEventArgs" /> that contains event data. </param
-        >
+          />A <see cref="T:System.Web.UI.WebControls.GridViewDeleteEventArgs" /> that contains event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -4450,8 +4446,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Web.UI.WebControls.GridViewEditEventArgs" /> that contains event data. </param
-        >
+          />A <see cref="T:System.Web.UI.WebControls.GridViewEditEventArgs" /> that contains event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -5288,8 +5284,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.UI.HtmlTextWriter" /> used to render the server control content on the client's browser. </param
-        >
+          />The <see cref="T:System.Web.UI.HtmlTextWriter" /> used to render the server control content on the client's browser.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RowCancelingEdit">
@@ -5829,8 +5825,8 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see cref="P:System.Web.UI.WebControls.GridViewUpdateEventArgs.Keys" />, <see cref="P:System.Web.UI.WebControls.GridViewUpdateEventArgs.OldValues" /> and <see cref="P:System.Web.UI.WebControls.GridViewUpdateEventArgs.NewValues" /> collections are automatically populated only when the <see cref="T:System.Web.UI.WebControls.GridView" /> control is bound to data by using the <see cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSourceID" /> property. </para
-            >
+              >The <see cref="P:System.Web.UI.WebControls.GridViewUpdateEventArgs.Keys" />, <see cref="P:System.Web.UI.WebControls.GridViewUpdateEventArgs.OldValues" /> and <see cref="P:System.Web.UI.WebControls.GridViewUpdateEventArgs.NewValues" /> collections are automatically populated only when the <see cref="T:System.Web.UI.WebControls.GridView" /> control is bound to data by using the <see cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSourceID" /> property.
+            </para>
           </block>
           <para
             >For more information about handling events, see <format type="text/html">
@@ -5933,8 +5929,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see cref="P:System.Web.UI.WebControls.GridView.DataKeyNames" /> property is set, the <see cref="T:System.Web.UI.WebControls.GridView" /> control automatically creates a <see cref="T:System.Web.UI.WebControls.DataKey" /> object for each row in the control using the value or values of the specified field or fields. The <see cref="T:System.Web.UI.WebControls.DataKey" /> objects are then added to the control's <see cref="P:System.Web.UI.WebControls.GridView.DataKeys" /> collection. Normally, the <see cref="P:System.Web.UI.WebControls.GridView.DataKeys" /> property is used to retrieve the <see cref="T:System.Web.UI.WebControls.DataKey" /> object for a specific data row in the <see cref="T:System.Web.UI.WebControls.GridView" /> control. However, if you just need to retrieve the <see cref="T:System.Web.UI.WebControls.DataKey" /> object of the currently selected row, you can simply use the <see cref="P:System.Web.UI.WebControls.GridView.SelectedDataKey" /> property as a shortcut. </para
-          >
+            >When the <see cref="P:System.Web.UI.WebControls.GridView.DataKeyNames" /> property is set, the <see cref="T:System.Web.UI.WebControls.GridView" /> control automatically creates a <see cref="T:System.Web.UI.WebControls.DataKey" /> object for each row in the control using the value or values of the specified field or fields. The <see cref="T:System.Web.UI.WebControls.DataKey" /> objects are then added to the control's <see cref="P:System.Web.UI.WebControls.GridView.DataKeys" /> collection. Normally, the <see cref="P:System.Web.UI.WebControls.GridView.DataKeys" /> property is used to retrieve the <see cref="T:System.Web.UI.WebControls.DataKey" /> object for a specific data row in the <see cref="T:System.Web.UI.WebControls.GridView" /> control. However, if you just need to retrieve the <see cref="T:System.Web.UI.WebControls.DataKey" /> object of the currently selected row, you can simply use the <see cref="P:System.Web.UI.WebControls.GridView.SelectedDataKey" /> property as a shortcut.
+          </para>
           <block subset="none" type="note">
             <para
               >This is the same as retrieving the <see cref="T:System.Web.UI.WebControls.DataKey" /> object at the index specified by the <see cref="P:System.Web.UI.WebControls.GridView.SelectedIndex" /> property from the <see cref="P:System.Web.UI.WebControls.GridView.DataKeys" /> collection. You can also use the <see cref="P:System.Web.UI.WebControls.GridView.SelectedValue" /> property to retrieve the data key value for the currently selected row directly.</para

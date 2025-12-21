@@ -71,8 +71,8 @@
           >
         </summary>
         <param name="callsiteURL">
-          <attribution license="cc4" from="Microsoft" modified="false" />The call site URL. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The call site URL.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -115,8 +115,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to compare to the current <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />. </param
-        >
+          />The object to compare to the current <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -196,8 +196,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Remoting.Activation.IConstructionCallMessage" /> of the server object to create. </param
-        >
+          />The <see cref="T:System.Runtime.Remoting.Activation.IConstructionCallMessage" /> of the server object to create.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsContextOK">
@@ -244,15 +244,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The context to check against the current context attribute. </param
-        >
+          />The context to check against the current context attribute.
+        </param>
         <param name="msg">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The construction call, the parameters of which need to be checked against the current context. </param
-        >
+          />The construction call, the parameters of which need to be checked against the current context.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="UrlValue">

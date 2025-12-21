@@ -15,8 +15,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.Security.Membership" /> class is used by ASP.NET applications to validate user credentials and manage user settings such as passwords and e-mail addresses. The <see cref="T:System.Web.Security.Roles" /> class enables you to manage authorization for your application based on groups of users assigned to roles in the Web application. </para
-      >
+        >The <see cref="T:System.Web.Security.Membership" /> class is used by ASP.NET applications to validate user credentials and manage user settings such as passwords and e-mail addresses. The <see cref="T:System.Web.Security.Roles" /> class enables you to manage authorization for your application based on groups of users assigned to roles in the Web application.
+      </para>
       <para
         >Both the <see cref="T:System.Web.Security.Membership" /> class and the <see cref="T:System.Web.Security.Roles" /> class work with providers, classes that access your application's data store to retrieve membership and role information. Membership and role information can be stored in a Microsoft SQL Server database using the <see cref="T:System.Web.Security.SqlMembershipProvider" /> and <see cref="T:System.Web.Security.SqlRoleProvider" /> classes; in an Active Directory using the <see cref="T:System.Web.Security.ActiveDirectoryMembershipProvider" /> and <see cref="T:System.Web.Security.AuthorizationStoreRoleProvider" /> classes, or in a custom data source using implementations of the <see cref="T:System.Web.Security.MembershipProvider" /> and <see cref="T:System.Web.Security.RoleProvider" /> classes.</para
       >
@@ -32,8 +32,8 @@
           <a href="4b0f6078-4824-4fc8-a5ee-4ae00ee3ceec"
             >roleManager Element (ASP.NET Settings Schema)</a
           >
-        </format>. ASP.NET creates an instance of the <see cref="T:System.Web.Security.Roles" /> class that contains information about the role membership of the current user. </para
-      >
+        </format>. ASP.NET creates an instance of the <see cref="T:System.Web.Security.Roles" /> class that contains information about the role membership of the current user.
+      </para>
       <para
         >ASP.NET provides server controls that interact with the <see cref="T:System.Web.Security.Membership" /> class and the <see cref="T:System.Web.Security.Roles" /> class. The <see cref="T:System.Web.UI.WebControls.Login" />, <see cref="T:System.Web.UI.WebControls.CreateUserWizard" />, and <see cref="T:System.Web.UI.WebControls.ChangePassword" /> controls work with the <see cref="T:System.Web.Security.Membership" /> class to simplify creating an authenticated Web application, and the <see cref="T:System.Web.UI.WebControls.LoginView" /> control uses role-specific templates to customize Web pages for specific groups of users.</para
       >

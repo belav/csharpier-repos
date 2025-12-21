@@ -67,8 +67,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.Atom10FeedFormatter`1" /> class. </para
-          >
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.Atom10FeedFormatter`1" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -116,14 +116,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" /> derived class. </para
-          >
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" /> derived class.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" /> class. </para
-          >
+            >A new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" /> class.
+          </para>
         </returns>
       </Docs>
     </Member>

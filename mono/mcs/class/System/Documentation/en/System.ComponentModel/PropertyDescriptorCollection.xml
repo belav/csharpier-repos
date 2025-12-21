@@ -85,8 +85,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type <see cref="T:System.ComponentModel.PropertyDescriptor" /> that provides the properties for this collection. </param
-        >
+          />An array of type <see cref="T:System.ComponentModel.PropertyDescriptor" /> that provides the properties for this collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -171,8 +171,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ComponentModel.PropertyDescriptor" /> to add to the collection. </param
-        >
+          />The <see cref="T:System.ComponentModel.PropertyDescriptor" /> to add to the collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Clear">
@@ -241,8 +241,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ComponentModel.PropertyDescriptor" /> to find in the collection. </param
-        >
+          />The <see cref="T:System.ComponentModel.PropertyDescriptor" /> to find in the collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CopyTo">
@@ -275,15 +275,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.ComponentModel.PropertyDescriptor" /> objects to copy elements of the collection to. </param
-        >
+          />An array of <see cref="T:System.ComponentModel.PropertyDescriptor" /> objects to copy elements of the collection to.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the <paramref name="array" /> parameter at which copying begins. </param
-        >
+          />The index of the <paramref name="array" /> parameter at which copying begins.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Count">
@@ -380,15 +380,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the <see cref="T:System.ComponentModel.PropertyDescriptor" /> to return from the collection. </param
-        >
+          />The name of the <see cref="T:System.ComponentModel.PropertyDescriptor" /> to return from the collection.
+        </param>
         <param name="ignoreCase">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if you want to ignore the case of the property name; otherwise, false. </param
-        >
+          />true if you want to ignore the case of the property name; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetEnumerator">
@@ -462,8 +462,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ComponentModel.PropertyDescriptor" /> to return the index of. </param
-        >
+          />The <see cref="T:System.ComponentModel.PropertyDescriptor" /> to return the index of.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Insert">
@@ -501,15 +501,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index at which to add the <paramref name="value" /> parameter to the collection. </param
-        >
+          />The index at which to add the <paramref name="value" /> parameter to the collection.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ComponentModel.PropertyDescriptor" /> to add to the collection. </param
-        >
+          />The <see cref="T:System.ComponentModel.PropertyDescriptor" /> to add to the collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="InternalSort">
@@ -661,8 +661,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ComponentModel.PropertyDescriptor" /> to remove from the collection. </param
-        >
+          />The <see cref="T:System.ComponentModel.PropertyDescriptor" /> to remove from the collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RemoveAt">
@@ -696,8 +696,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the <see cref="T:System.ComponentModel.PropertyDescriptor" /> to remove from the collection. </param
-        >
+          />The index of the <see cref="T:System.ComponentModel.PropertyDescriptor" /> to remove from the collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Sort">
@@ -773,8 +773,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A comparer to use to sort the <see cref="T:System.ComponentModel.PropertyDescriptor" /> objects in this collection. </param
-        >
+          />A comparer to use to sort the <see cref="T:System.ComponentModel.PropertyDescriptor" /> objects in this collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Sort">
@@ -855,8 +855,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A comparer to use to sort the <see cref="T:System.ComponentModel.PropertyDescriptor" /> objects in this collection. </param
-        >
+          />A comparer to use to sort the <see cref="T:System.ComponentModel.PropertyDescriptor" /> objects in this collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.ICollection.Count">
@@ -1001,8 +1001,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all elements from the <see cref="T:System.Collections.IDictionary" />. </para
-          >
+            >Removes all elements from the <see cref="T:System.Collections.IDictionary" />.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -1216,8 +1216,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the element with the specified key from the <see cref="T:System.Collections.IDictionary" />. </para
-          >
+            >Removes the element with the specified key from the <see cref="T:System.Collections.IDictionary" />.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -1274,8 +1274,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see cref="T:System.Collections.IEnumerator" /> for the <see cref="T:System.Collections.IDictionary" />. </para
-          >
+            >Returns an <see cref="T:System.Collections.IEnumerator" /> for the <see cref="T:System.Collections.IDictionary" />.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />

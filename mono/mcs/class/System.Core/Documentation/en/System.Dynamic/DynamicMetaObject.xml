@@ -844,8 +844,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents the most specific type known about the object represented by the <see cref="T:System.Dynamic.DynamicMetaObject" />. </para
-          >
+            >Represents the most specific type known about the object represented by the <see cref="T:System.Dynamic.DynamicMetaObject" />.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

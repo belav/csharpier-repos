@@ -24,8 +24,8 @@
       <para
         >The <see cref="T:System.Data.IDbCommand" /> interface enables an inheriting class to implement a Command class, which represents an SQL statement that is executed at a data source. For more information about Command classes, see <format type="text/html">
           <a href="40494916-C25A-4CB8-8F7C-FCB8D378464E">[&lt;topic://cpconadonetcommands&gt;]</a>
-        </format>. </para
-      >
+        </format>.
+      </para>
       <para
         >An application does not create an instance of the <see cref="T:System.Data.IDbCommand" /> interface directly, but creates an instance of a class that inherits <see cref="T:System.Data.IDbCommand" />.</para
       >
@@ -298,8 +298,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Data.CommandBehavior" /> values. </param
-        >
+          />One of the <see cref="T:System.Data.CommandBehavior" /> values.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -320,8 +320,8 @@
             >Use the <see cref="M:System.Data.IDbCommand.ExecuteScalar" /> method to retrieve a single value (for example, an aggregate value) from a database. This requires less code than using the <see cref="M:System.Data.IDbCommand.ExecuteReader" /> method, and then performing the operations necessary to generate the single value using the data returned by an <see cref="T:System.Data.IDataReader" />.</para
           >
           <para
-            >A typical <see cref="M:System.Data.IDbCommand.ExecuteScalar" /> query can be formatted as in the following C# example: </para
-          >
+            >A typical <see cref="M:System.Data.IDbCommand.ExecuteScalar" /> query can be formatted as in the following C# example:
+          </para>
           <code> CommandText = "select count(*) as NumberOfRegions from region";
  Int32 count = (int) ExecuteScalar();</code>
           <para>If the first column of the first row in the result set is not found, a null reference (Nothing in Visual Basic) is returned. If the value in the database is null, the query returns DBNull.Value.</para>

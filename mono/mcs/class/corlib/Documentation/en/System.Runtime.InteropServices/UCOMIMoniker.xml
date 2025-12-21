@@ -435,8 +435,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A reference to the moniker to be used for comparison. </param
-        >
+          />A reference to the moniker to be used for comparison.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsRunning">
@@ -476,22 +476,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A reference to the bind context to be used in this binding operation. </param
-        >
+          />A reference to the bind context to be used in this binding operation.
+        </param>
         <param name="pmkToLeft">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A reference to the moniker to the left of this moniker if this moniker is part of a composite. </param
-        >
+          />A reference to the moniker to the left of this moniker if this moniker is part of a composite.
+        </param>
         <param name="pmkNewlyRunning">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A reference to the moniker most recently added to the Running Object Table. </param
-        >
+          />A reference to the moniker most recently added to the Running Object Table.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsSystemMoniker">
@@ -553,8 +553,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Stream from which the object is loaded. </param
-        >
+          />Stream from which the object is loaded.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ParseDisplayName">
@@ -706,15 +706,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream into which the object is saved. </param
-        >
+          />The stream into which the object is saved.
+        </param>
         <param name="fClearDirty">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Indicates whether to clear the modified flag after the save is complete. </param
-        >
+          />Indicates whether to clear the modified flag after the save is complete.
+        </param>
       </Docs>
     </Member>
   </Members>

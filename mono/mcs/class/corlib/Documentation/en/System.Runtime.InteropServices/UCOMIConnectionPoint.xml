@@ -189,8 +189,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The connection cookie previously returned from <see cref="M:System.Runtime.InteropServices.UCOMIConnectionPoint.Advise(System.Object,System.Int32@)" />. </param
-        >
+          />The connection cookie previously returned from <see cref="M:System.Runtime.InteropServices.UCOMIConnectionPoint.Advise(System.Object,System.Int32@)" />.
+        </param>
       </Docs>
     </Member>
   </Members>

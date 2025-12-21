@@ -65,8 +65,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.Mail.SmtpPermissionAttribute" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.Mail.SmtpPermissionAttribute" /> class.
+          </para>
         </summary>
         <param name="action">
           <attribution

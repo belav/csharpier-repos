@@ -144,8 +144,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The trust decisions in the collection are maintained using the methods of the collection, such as the <see cref="M:System.Security.Policy.ApplicationTrustCollection.Add(System.Security.Policy.ApplicationTrust)" /> method or the <see cref="Overload:System.Security.Policy.ApplicationTrustCollection.Remove" /> method. </para
-          >
+            >The trust decisions in the collection are maintained using the methods of the collection, such as the <see cref="M:System.Security.Policy.ApplicationTrustCollection.Add(System.Security.Policy.ApplicationTrust)" /> method or the <see cref="Overload:System.Security.Policy.ApplicationTrustCollection.Remove" /> method.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

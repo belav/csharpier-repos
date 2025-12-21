@@ -6,8 +6,8 @@
   <paragraph
     >If no matching catch clause is found, one of two things occurs: <list>
       <list_item
-        > If the search for a matching catch clause reaches a static constructor (<hyperlink>17.11</hyperlink>) or static field initializer, then a System.TypeInitializationException is thrown at the point that triggered the invocation of the static constructor. The inner exception of the System.TypeInitializationException contains the exception that was originally thrown. </list_item
-      >
+        > If the search for a matching catch clause reaches a static constructor (<hyperlink>17.11</hyperlink>) or static field initializer, then a System.TypeInitializationException is thrown at the point that triggered the invocation of the static constructor. The inner exception of the System.TypeInitializationException contains the exception that was originally thrown.
+      </list_item>
       <list_item> If the search for matching catch clauses reaches the code that initially started the thread, then execution of the thread is terminated. The impact of such termination is implementation-defined. </list_item>
     </list>
   </paragraph>

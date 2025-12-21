@@ -69,46 +69,46 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The numeric value associated with the performance counter sample. </param
-        >
+          />The numeric value associated with the performance counter sample.
+        </param>
         <param name="baseValue">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An optional, base raw value for the counter, to use only if the sample is based on multiple counters. </param
-        >
+          />An optional, base raw value for the counter, to use only if the sample is based on multiple counters.
+        </param>
         <param name="counterFrequency">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The frequency with which the counter is read. </param
-        >
+          />The frequency with which the counter is read.
+        </param>
         <param name="systemFrequency">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The frequency with which the system reads from the counter. </param
-        >
+          />The frequency with which the system reads from the counter.
+        </param>
         <param name="timeStamp">
-          <attribution license="cc4" from="Microsoft" modified="false" />The raw time stamp. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The raw time stamp.
+        </param>
         <param name="timeStamp100nSec">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The raw, high-fidelity time stamp. </param
-        >
+          />The raw, high-fidelity time stamp.
+        </param>
         <param name="counterType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Diagnostics.PerformanceCounterType" /> object that indicates the type of the counter for which this sample is a snapshot. </param
-        >
+          />A <see cref="T:System.Diagnostics.PerformanceCounterType" /> object that indicates the type of the counter for which this sample is a snapshot.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -155,53 +155,53 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The numeric value associated with the performance counter sample. </param
-        >
+          />The numeric value associated with the performance counter sample.
+        </param>
         <param name="baseValue">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An optional, base raw value for the counter, to use only if the sample is based on multiple counters. </param
-        >
+          />An optional, base raw value for the counter, to use only if the sample is based on multiple counters.
+        </param>
         <param name="counterFrequency">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The frequency with which the counter is read. </param
-        >
+          />The frequency with which the counter is read.
+        </param>
         <param name="systemFrequency">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The frequency with which the system reads from the counter. </param
-        >
+          />The frequency with which the system reads from the counter.
+        </param>
         <param name="timeStamp">
-          <attribution license="cc4" from="Microsoft" modified="false" />The raw time stamp. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The raw time stamp.
+        </param>
         <param name="timeStamp100nSec">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The raw, high-fidelity time stamp. </param
-        >
+          />The raw, high-fidelity time stamp.
+        </param>
         <param name="counterType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Diagnostics.PerformanceCounterType" /> object that indicates the type of the counter for which this sample is a snapshot. </param
-        >
+          />A <see cref="T:System.Diagnostics.PerformanceCounterType" /> object that indicates the type of the counter for which this sample is a snapshot.
+        </param>
         <param name="counterTimeStamp">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The time at which the sample was taken. </param
-        >
+          />The time at which the sample was taken.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="BaseValue">
@@ -261,8 +261,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Diagnostics.CounterSample" /> structure to use as a base point for calculating performance data. </param
-        >
+          />The <see cref="T:System.Diagnostics.CounterSample" /> structure to use as a base point for calculating performance data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Calculate">
@@ -302,15 +302,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Diagnostics.CounterSample" /> structure to use as a base point for calculating performance data. </param
-        >
+          />The <see cref="T:System.Diagnostics.CounterSample" /> structure to use as a base point for calculating performance data.
+        </param>
         <param name="nextCounterSample">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Diagnostics.CounterSample" /> structure to use as an ending point for calculating performance data. </param
-        >
+          />The <see cref="T:System.Diagnostics.CounterSample" /> structure to use as an ending point for calculating performance data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CounterFrequency">
@@ -446,8 +446,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref name="sample" /> is equal to the current instance; otherwise, false. </para
-          >
+            >true if <paramref name="sample" /> is equal to the current instance; otherwise, false.
+          </para>
         </returns>
       </Docs>
     </Member>
@@ -485,8 +485,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref name="o" /> is a <see cref="T:System.Diagnostics.CounterSample" /> structure and is identical to the current instance; otherwise, false. </para
-          >
+            >true if <paramref name="o" /> is a <see cref="T:System.Diagnostics.CounterSample" /> structure and is identical to the current instance; otherwise, false.
+          </para>
         </returns>
       </Docs>
     </Member>

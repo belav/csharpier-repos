@@ -28,8 +28,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.Windows.Forms.ToolStripContainer" /> is similar to <see cref="T:System.Windows.Forms.SplitContainer" />. It uses four docked side panels (instances of <see cref="T:System.Windows.Forms.ToolStripPanel" />) and one central panel (an instance of <see cref="T:System.Windows.Forms.ToolStripContentPanel" />) to create a typical arrangement. You cannot remove the side panels, but you can hide them by setting their respective <see cref="P:System.Windows.Forms.ToolStripContainer.TopToolStripPanelVisible" />, <see cref="P:System.Windows.Forms.ToolStripContainer.BottomToolStripPanelVisible" />, <see cref="P:System.Windows.Forms.ToolStripContainer.LeftToolStripPanelVisible" />, and <see cref="P:System.Windows.Forms.ToolStripContainer.RightToolStripPanelVisible" /> properties to false. By default, each of these properties is true at design time. Also at design time, the <see cref="T:System.Windows.Forms.ToolStripContainer" /> appears with its top panel already expanded. You can neither remove nor hide the <see cref="T:System.Windows.Forms.ToolStripContentPanel" />. You can arrange one or more <see cref="T:System.Windows.Forms.ToolStrip" />, <see cref="T:System.Windows.Forms.MenuStrip" />, or <see cref="T:System.Windows.Forms.StatusStrip" /> controls in the side panels, and you can use the central panel for other controls. The <see cref="T:System.Windows.Forms.ToolStripContentPanel" /> also provides a way to get renderer support into the body of your form for a consistent appearance. </para
-      >
+        <see cref="T:System.Windows.Forms.ToolStripContainer" /> is similar to <see cref="T:System.Windows.Forms.SplitContainer" />. It uses four docked side panels (instances of <see cref="T:System.Windows.Forms.ToolStripPanel" />) and one central panel (an instance of <see cref="T:System.Windows.Forms.ToolStripContentPanel" />) to create a typical arrangement. You cannot remove the side panels, but you can hide them by setting their respective <see cref="P:System.Windows.Forms.ToolStripContainer.TopToolStripPanelVisible" />, <see cref="P:System.Windows.Forms.ToolStripContainer.BottomToolStripPanelVisible" />, <see cref="P:System.Windows.Forms.ToolStripContainer.LeftToolStripPanelVisible" />, and <see cref="P:System.Windows.Forms.ToolStripContainer.RightToolStripPanelVisible" /> properties to false. By default, each of these properties is true at design time. Also at design time, the <see cref="T:System.Windows.Forms.ToolStripContainer" /> appears with its top panel already expanded. You can neither remove nor hide the <see cref="T:System.Windows.Forms.ToolStripContentPanel" />. You can arrange one or more <see cref="T:System.Windows.Forms.ToolStrip" />, <see cref="T:System.Windows.Forms.MenuStrip" />, or <see cref="T:System.Windows.Forms.StatusStrip" /> controls in the side panels, and you can use the central panel for other controls. The <see cref="T:System.Windows.Forms.ToolStripContentPanel" /> also provides a way to get renderer support into the body of your form for a consistent appearance.
+      </para>
       <para>
         <see cref="T:System.Windows.Forms.ToolStripContainer" /> does not support Multiple Document Interface (MDI) applications. Use <see cref="T:System.Windows.Forms.ToolStripPanel" /> for MDI applications.</para
       >
@@ -50,8 +50,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripContainer" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripContainer" /> class.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -429,8 +429,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the bottom panel of the <see cref="T:System.Windows.Forms.ToolStripContainer" /> is visible. </para
-          >
+            >Gets or sets a value indicating whether the bottom panel of the <see cref="T:System.Windows.Forms.ToolStripContainer" /> is visible.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -491,8 +491,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -598,8 +598,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

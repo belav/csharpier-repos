@@ -106,15 +106,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that indicates the type of the parameter to declare. </param
-        >
+          />An object that indicates the type of the parameter to declare.
+        </param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the parameter to declare. </param
-        >
+          />The name of the parameter to declare.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -161,15 +161,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the parameter to declare. </param
-        >
+          />The type of the parameter to declare.
+        </param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the parameter to declare. </param
-        >
+          />The name of the parameter to declare.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -205,15 +205,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the parameter to declare. </param
-        >
+          />The type of the parameter to declare.
+        </param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the parameter to declare. </param
-        >
+          />The name of the parameter to declare.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CustomAttributes">

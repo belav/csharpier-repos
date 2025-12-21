@@ -132,8 +132,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The tracking handler to register. </param
-        >
+          />The tracking handler to register.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="UnregisterTrackingHandler">
@@ -166,12 +166,8 @@
           >
         </summary>
         <param name="handler">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The handler to unregister. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The handler to unregister.
+        </param>
       </Docs>
     </Member>
   </Members>

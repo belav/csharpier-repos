@@ -105,15 +105,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The event to raise when the user selects the menu item or toolbar button. </param
-        >
+          />The event to raise when the user selects the menu item or toolbar button.
+        </param>
         <param name="command">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The unique command ID that links this menu command to the environment's menu. </param
-        >
+          />The unique command ID that links this menu command to the environment's menu.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Checked">
@@ -339,8 +339,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Properties">

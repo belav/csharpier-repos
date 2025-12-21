@@ -99,8 +99,8 @@
             >This constructor initializes the encoding to <see cref="T:System.Text.UTF8Encoding" />, the <see cref="P:System.IO.StreamReader.BaseStream" /> property using the <paramref name="stream" /> parameter, and the internal buffer size to 1024 bytes.</para
           >
           <para
-            >The <see cref="T:System.IO.StreamReader" /> object calls <see cref="M:System.IO.Stream.Dispose" /> on the provided <see cref="T:System.IO.Stream" /> object when <see cref="M:System.IO.StreamReader.Dispose(System.Boolean)" /> is called. </para
-          >
+            >The <see cref="T:System.IO.StreamReader" /> object calls <see cref="M:System.IO.Stream.Dispose" /> on the provided <see cref="T:System.IO.Stream" /> object when <see cref="M:System.IO.StreamReader.Dispose(System.Boolean)" /> is called.
+          </para>
           <block subset="none" type="note">
             <para>When you compile a set of characters with a particular cultural setting and retrieve those same characters with a different cultural setting, the characters might not be interpretable, and could cause an exception to be thrown.</para>
           </block>
@@ -117,12 +117,8 @@
           >
         </summary>
         <param name="stream">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The stream to be read. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The stream to be read.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -193,8 +189,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The complete file path to be read. </param
-        >
+          />The complete file path to be read.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -253,19 +249,15 @@
           >
         </summary>
         <param name="stream">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The stream to be read. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The stream to be read.
+        </param>
         <param name="detectEncodingFromByteOrderMarks">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Indicates whether to look for byte order marks at the beginning of the file. </param
-        >
+          />Indicates whether to look for byte order marks at the beginning of the file.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -324,19 +316,15 @@
           >
         </summary>
         <param name="stream">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The stream to be read. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The stream to be read.
+        </param>
         <param name="encoding">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character encoding to use. </param
-        >
+          />The character encoding to use.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -411,15 +399,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The complete file path to be read. </param
-        >
+          />The complete file path to be read.
+        </param>
         <param name="detectEncodingFromByteOrderMarks">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Indicates whether to look for byte order marks at the beginning of the file. </param
-        >
+          />Indicates whether to look for byte order marks at the beginning of the file.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -494,15 +482,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The complete file path to be read. </param
-        >
+          />The complete file path to be read.
+        </param>
         <param name="encoding">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character encoding to use. </param
-        >
+          />The character encoding to use.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -565,26 +553,22 @@
           >
         </summary>
         <param name="stream">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The stream to be read. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The stream to be read.
+        </param>
         <param name="encoding">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character encoding to use. </param
-        >
+          />The character encoding to use.
+        </param>
         <param name="detectEncodingFromByteOrderMarks">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Indicates whether to look for byte order marks at the beginning of the file. </param
-        >
+          />Indicates whether to look for byte order marks at the beginning of the file.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -663,22 +647,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The complete file path to be read. </param
-        >
+          />The complete file path to be read.
+        </param>
         <param name="encoding">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character encoding to use. </param
-        >
+          />The character encoding to use.
+        </param>
         <param name="detectEncodingFromByteOrderMarks">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Indicates whether to look for byte order marks at the beginning of the file. </param
-        >
+          />Indicates whether to look for byte order marks at the beginning of the file.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -750,33 +734,25 @@
           >
         </summary>
         <param name="stream">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The stream to be read. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The stream to be read.
+        </param>
         <param name="encoding">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character encoding to use. </param
-        >
+          />The character encoding to use.
+        </param>
         <param name="detectEncodingFromByteOrderMarks">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Indicates whether to look for byte order marks at the beginning of the file. </param
-        >
+          />Indicates whether to look for byte order marks at the beginning of the file.
+        </param>
         <param name="bufferSize">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The minimum buffer size. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The minimum buffer size.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -834,8 +810,8 @@
             >This constructor allows you to change the encoding the first time you read from the <see cref="T:System.IO.StreamReader" /> object. The <paramref name="detectEncodingFromByteOrderMarks" /> parameter detects the encoding by looking at the first three bytes of the stream. It automatically recognizes UTF-8, little-endian Unicode, and big-endian Unicode text if the file starts with the appropriate byte order marks. Otherwise, the user-provided encoding is used. See the <see cref="M:System.Text.Encoding.GetPreamble" /> method for more information.</para
           >
           <para
-            >The buffer size, in number of 16-bit characters, is set by the <paramref name="bufferSize" /> parameter. If <paramref name="bufferSize" /> is less than the minimum allowable size (128 characters), the minimum allowable size is used. </para
-          >
+            >The buffer size, in number of 16-bit characters, is set by the <paramref name="bufferSize" /> parameter. If <paramref name="bufferSize" /> is less than the minimum allowable size (128 characters), the minimum allowable size is used.
+          </para>
           <para
             >The <paramref name="path" /> parameter can be a file name, including a file on a Universal Naming Convention (UNC) share.</para
           >
@@ -862,29 +838,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The complete file path to be read. </param
-        >
+          />The complete file path to be read.
+        </param>
         <param name="encoding">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character encoding to use. </param
-        >
+          />The character encoding to use.
+        </param>
         <param name="detectEncodingFromByteOrderMarks">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Indicates whether to look for byte order marks at the beginning of the file. </param
-        >
+          />Indicates whether to look for byte order marks at the beginning of the file.
+        </param>
         <param name="bufferSize">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The minimum buffer size, in number of 16-bit characters. </param
-        >
+          />The minimum buffer size, in number of 16-bit characters.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1078,8 +1054,8 @@
       <Docs>
         <value>
    The current <see cref="T:System.Text.Encoding" /> used by the current reader.
-</value
-        >
+
+        </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -1121,8 +1097,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="M:System.IO.StreamReader.DiscardBufferedData" /> method to reset the internal buffer for the <see cref="T:System.IO.StreamReader" /> object. You need to call this method only when the position of the internal buffer and the <see cref="P:System.IO.StreamReader.BaseStream" /> do not match. These positions can become mismatched when you read data into the buffer and then seek a new position in the underlying stream. This method slows performance and should be used only when absolutely necessary, such as when you want to read a portion of the contents of a <see cref="T:System.IO.StreamReader" /> object more than once. </para
-          >
+            >Use the <see cref="M:System.IO.StreamReader.DiscardBufferedData" /> method to reset the internal buffer for the <see cref="T:System.IO.StreamReader" /> object. You need to call this method only when the position of the internal buffer and the <see cref="P:System.IO.StreamReader.BaseStream" /> do not match. These positions can become mismatched when you read data into the buffer and then seek a new position in the underlying stream. This method slows performance and should be used only when absolutely necessary, such as when you want to read a portion of the contents of a <see cref="T:System.IO.StreamReader" /> object more than once.
+          </para>
           <para
             >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
@@ -1180,8 +1156,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1265,8 +1241,8 @@
           >
           <para>This method overrides <see cref="M:System.IO.TextReader.Peek" />.</para>
           <para
-            >The current position of the <see cref="T:System.IO.StreamReader" /> object is not changed by <see cref="M:System.IO.StreamReader.Peek" />. </para
-          >
+            >The current position of the <see cref="T:System.IO.StreamReader" /> object is not changed by <see cref="M:System.IO.StreamReader.Peek" />.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1396,22 +1372,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />When this method returns, contains the specified character array with the values between <paramref name="index" /> and (<paramref name="index + count - 1" />) replaced by the characters read from the current source. </param
-        >
+          />When this method returns, contains the specified character array with the values between <paramref name="index" /> and (<paramref name="index + count - 1" />) replaced by the characters read from the current source.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of <paramref name="buffer" /> at which to begin writing. </param
-        >
+          />The index of <paramref name="buffer" /> at which to begin writing.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum number of characters to read. </param
-        >
+          />The maximum number of characters to read.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1631,8 +1607,8 @@
           <para>A line is defined as a sequence of characters followed by a line feed ("\n"), a carriage return ("\r"), or a carriage return immediately followed by a line feed ("\r\n"). The string that is returned does not contain the terminating carriage return or line feed. The returned value is null if the end of the input stream is reached.</para>
           <para>This method overrides <see cref="M:System.IO.TextReader.ReadLine" />.</para>
           <para
-            >If the current method throws an <see cref="T:System.OutOfMemoryException" />, the reader's position in the underlying <see cref="T:System.IO.Stream" /> object is advanced by the number of characters the method was able to read, but the characters already read into the internal <see cref="M:System.IO.StreamReader.ReadLine" /> buffer are discarded. If you manipulate the position of the underlying stream after reading data into the buffer, the position of the underlying stream might not match the position of the internal buffer. To reset the internal buffer, call the <see cref="M:System.IO.StreamReader.DiscardBufferedData" /> method; however, this method slows performance and should be called only when absolutely necessary. </para
-          >
+            >If the current method throws an <see cref="T:System.OutOfMemoryException" />, the reader's position in the underlying <see cref="T:System.IO.Stream" /> object is advanced by the number of characters the method was able to read, but the characters already read into the internal <see cref="M:System.IO.StreamReader.ReadLine" /> buffer are discarded. If you manipulate the position of the underlying stream after reading data into the buffer, the position of the underlying stream might not match the position of the internal buffer. To reset the internal buffer, call the <see cref="M:System.IO.StreamReader.DiscardBufferedData" /> method; however, this method slows performance and should be called only when absolutely necessary.
+          </para>
           <para
             >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
@@ -1713,14 +1689,14 @@
             <see cref="M:System.IO.StreamReader.ReadToEnd" /> works best when you need to read all the input from the current position to the end of the stream. If more control is needed over how many characters are read from the stream, use the <see cref="M:System.IO.StreamReader.Read(System.Char[],System.Int32,System.Int32)" /> method overload, which generally results in better performance.</para
           >
           <para>
-            <see cref="M:System.IO.StreamReader.ReadToEnd" /> assumes that the stream knows when it has reached an end. For interactive protocols in which the server sends data only when you ask for it and does not close the connection, <see cref="M:System.IO.StreamReader.ReadToEnd" /> might block indefinitely because it does not reach an end, and should be avoided. </para
-          >
+            <see cref="M:System.IO.StreamReader.ReadToEnd" /> assumes that the stream knows when it has reached an end. For interactive protocols in which the server sends data only when you ask for it and does not close the connection, <see cref="M:System.IO.StreamReader.ReadToEnd" /> might block indefinitely because it does not reach an end, and should be avoided.
+          </para>
           <para
             >Note that when using the <see cref="M:System.IO.StreamReader.Read" />  method, it is more efficient to use a buffer that is the same size as the internal buffer of the stream. If the size of the buffer was unspecified when the stream was constructed, its default size is 4 kilobytes (4096 bytes).</para
           >
           <para
-            >If the current method throws an <see cref="T:System.OutOfMemoryException" />, the reader's position in the underlying <see cref="T:System.IO.Stream" /> object is advanced by the number of characters the method was able to read, but the characters already read into the internal <see cref="M:System.IO.StreamReader.ReadLine" /> buffer are discarded. If you manipulate the position of the underlying stream after reading data into the buffer, the position of the underlying stream might not match the position of the internal buffer. To reset the internal buffer, call the <see cref="M:System.IO.StreamReader.DiscardBufferedData" /> method; however, this method slows performance and should be called only when absolutely necessary. </para
-          >
+            >If the current method throws an <see cref="T:System.OutOfMemoryException" />, the reader's position in the underlying <see cref="T:System.IO.Stream" /> object is advanced by the number of characters the method was able to read, but the characters already read into the internal <see cref="M:System.IO.StreamReader.ReadLine" /> buffer are discarded. If you manipulate the position of the underlying stream after reading data into the buffer, the position of the underlying stream might not match the position of the internal buffer. To reset the internal buffer, call the <see cref="M:System.IO.StreamReader.DiscardBufferedData" /> method; however, this method slows performance and should be called only when absolutely necessary.
+          </para>
           <para
             >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>

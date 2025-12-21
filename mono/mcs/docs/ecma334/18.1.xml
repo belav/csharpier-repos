@@ -32,6 +32,6 @@
       >struct-interfaces</non_terminal
     > specification (<hyperlink>18.1.2</hyperlink>), followed by a <non_terminal where="18.1.3"
       >struct-body</non_terminal
-    > (<hyperlink>18.1.3</hyperlink>), optionally followed by a semicolon. </paragraph
-  >
+    > (<hyperlink>18.1.3</hyperlink>), optionally followed by a semicolon.
+  </paragraph>
 </clause>

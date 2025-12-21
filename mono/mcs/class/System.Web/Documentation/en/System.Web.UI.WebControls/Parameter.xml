@@ -29,8 +29,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.UI.WebControls.Parameter" /> class represents a parameter in a parameterized SQL query, a filtering expression, or a business object method call that an ASP.NET data source control uses to select, filter, or modify data. <see cref="T:System.Web.UI.WebControls.Parameter" /> objects are contained in a <see cref="T:System.Web.UI.WebControls.ParameterCollection" /> object. <see cref="T:System.Web.UI.WebControls.Parameter" /> objects are evaluated at run time, to bind the values of the variables they represent to whatever method is used by a data source control to interact with data. </para
-      >
+        >The <see cref="T:System.Web.UI.WebControls.Parameter" /> class represents a parameter in a parameterized SQL query, a filtering expression, or a business object method call that an ASP.NET data source control uses to select, filter, or modify data. <see cref="T:System.Web.UI.WebControls.Parameter" /> objects are contained in a <see cref="T:System.Web.UI.WebControls.ParameterCollection" /> object. <see cref="T:System.Web.UI.WebControls.Parameter" /> objects are evaluated at run time, to bind the values of the variables they represent to whatever method is used by a data source control to interact with data.
+      </para>
       <para
         >Use classes that derive from <see cref="T:System.Web.UI.WebControls.Parameter" /> with data source and data-bound controls to build Web-based data applications. These parameter classes are used by data source controls to bind specific kinds of values found in Web applications to placeholders in SQL query strings, business object method parameters, and more. The following table lists parameter types that are included in ASP.NET.</para
       >
@@ -174,12 +174,8 @@
           >
         </summary>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the parameter. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the parameter.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -213,8 +209,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Web.UI.WebControls.Parameter" /> instance from which the current instance is initialized. </param
-        >
+          />A <see cref="T:System.Web.UI.WebControls.Parameter" /> instance from which the current instance is initialized.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -242,19 +238,15 @@
           >
         </summary>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the parameter. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the parameter.
+        </param>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.TypeCode" /> that describes the type of the parameter. </param
-        >
+          />A <see cref="T:System.TypeCode" /> that describes the type of the parameter.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -286,26 +278,22 @@
           >
         </summary>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the parameter. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the parameter.
+        </param>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.TypeCode" /> that describes the type of the parameter. </param
-        >
+          />A <see cref="T:System.TypeCode" /> that describes the type of the parameter.
+        </param>
         <param name="defaultValue">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string that serves as a default value for the parameter, if the <see cref="T:System.Web.UI.WebControls.Parameter" /> is bound to a value that is not yet initialized when <see cref="M:System.Web.UI.WebControls.Parameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" /> is called. </param
-        >
+          />A string that serves as a default value for the parameter, if the <see cref="T:System.Web.UI.WebControls.Parameter" /> is bound to a value that is not yet initialized when <see cref="M:System.Web.UI.WebControls.Parameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" /> is called.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -497,8 +485,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.UI.Control" /> the parameter is bound to. If the parameter is not bound to a control, the <paramref name="control" /> parameter is ignored. </param
-        >
+          />The <see cref="T:System.Web.UI.Control" /> the parameter is bound to. If the parameter is not bound to a control, the <paramref name="control" /> parameter is ignored.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -559,8 +547,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Object" /> that represents the <see cref="T:System.Web.UI.WebControls.Parameter" /> state to restore. </param
-        >
+          />An <see cref="T:System.Object" /> that represents the <see cref="T:System.Web.UI.WebControls.Parameter" /> state to restore.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -656,11 +644,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is used primarily by control developers.</para>
           <para
-            >View state is the accumulation of the values of a server control's properties. These values are automatically placed in the server control's <see cref="P:System.Web.UI.Control.ViewState" /> property, which is an instance of the <see cref="T:System.Web.UI.StateBag" /> class. This property's value is then persisted to a string object after the save state stage of the server control life cycle. </para
-          >
+            >View state is the accumulation of the values of a server control's properties. These values are automatically placed in the server control's <see cref="P:System.Web.UI.Control.ViewState" /> property, which is an instance of the <see cref="T:System.Web.UI.StateBag" /> class. This property's value is then persisted to a string object after the save state stage of the server control life cycle.
+          </para>
           <para
-            >When view state is saved, this string object is returned to the client as a variable that is stored in an HTML hidden element. When you author custom server controls, you can improve efficiency by overriding this method and modifying your server control's <see cref="P:System.Web.UI.WebControls.Parameter.ViewState" /> property. </para
-          >
+            >When view state is saved, this string object is returned to the client as a variable that is stored in an HTML hidden element. When you author custom server controls, you can improve efficiency by overriding this method and modifying your server control's <see cref="P:System.Web.UI.WebControls.Parameter.ViewState" /> property.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -822,8 +810,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Object" /> that represents the <see cref="T:System.Web.UI.WebControls.Parameter" /> state to restore. </param
-        >
+          />An <see cref="T:System.Object" /> that represents the <see cref="T:System.Web.UI.WebControls.Parameter" /> state to restore.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.Web.UI.IStateManager.SaveViewState">
@@ -841,11 +829,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is used primarily by control developers.</para>
           <para
-            >View state is the accumulation of the values of a server control's properties. These values are automatically placed in the server control's <see cref="P:System.Web.UI.Control.ViewState" /> property, which is an instance of the <see cref="T:System.Web.UI.StateBag" /> class. This property's value is then persisted to a string object after the save state stage of the server control life cycle. </para
-          >
+            >View state is the accumulation of the values of a server control's properties. These values are automatically placed in the server control's <see cref="P:System.Web.UI.Control.ViewState" /> property, which is an instance of the <see cref="T:System.Web.UI.StateBag" /> class. This property's value is then persisted to a string object after the save state stage of the server control life cycle.
+          </para>
           <para
-            >When view state is saved, this string object is returned to the client as a variable that is stored in an HTML hidden element. When you author custom server controls, you can improve efficiency by overriding this method and modifying your server control's <see cref="P:System.Web.UI.WebControls.Parameter.ViewState" /> property. </para
-          >
+            >When view state is saved, this string object is returned to the client as a variable that is stored in an HTML hidden element. When you author custom server controls, you can improve efficiency by overriding this method and modifying your server control's <see cref="P:System.Web.UI.WebControls.Parameter.ViewState" /> property.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

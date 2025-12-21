@@ -13,8 +13,8 @@ class Test
    }  
 }  
 ]]>
-    </code_example>implicitly converts an <keyword>int</keyword> to a <keyword>long</keyword>. </paragraph
-  >
+    </code_example>implicitly converts an <keyword>int</keyword> to a <keyword>long</keyword>.
+  </paragraph>
   <paragraph
     >In contrast, explicit conversions are performed with a cast expression. The example <code_example>
       <![CDATA[
@@ -32,6 +32,6 @@ class Test
       <![CDATA[
 (int) 9223372036854775807 = -1  
 ]]>
-    </code_example>because an overflow occurs. Cast expressions permit the use of both implicit and explicit conversions. </paragraph
-  >
+    </code_example>because an overflow occurs. Cast expressions permit the use of both implicit and explicit conversions.
+  </paragraph>
 </clause>

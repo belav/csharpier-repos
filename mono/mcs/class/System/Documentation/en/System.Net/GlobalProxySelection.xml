@@ -147,8 +147,8 @@ that identifies the proxy server used by the <see
               cref="M:System.Net.HttpWebRequest.GetResponse"
               qualify="true"
             /> method if no proxy information is
-specified. </para
-          >
+specified.
+          </para>
         </value>
         <exception cref="T:System.Security.SecurityException"
           >The caller does not have permission for the requested operation.</exception

@@ -72,8 +72,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.Configuration.MachineKeySection.Decryption" /> property supports the following decryption values: </para
-          >
+            >The <see cref="P:System.Web.Configuration.MachineKeySection.Decryption" /> property supports the following decryption values:
+          </para>
           <list type="bullet">
             <item>
               <para>Auto, which is the default value, specifies that ASP.NET determines which encryption algorithm to use based on configuration default settings. </para>
@@ -85,8 +85,8 @@
             </item>
             <item>
               <para
-                >3DES, which specifies that ASP.NET uses the <see cref="F:System.Web.Configuration.MachineKeyValidation.TripleDES" /> algorithm to encrypt data. </para
-              >
+                >3DES, which specifies that ASP.NET uses the <see cref="F:System.Web.Configuration.MachineKeyValidation.TripleDES" /> algorithm to encrypt data.
+              </para>
             </item>
             <item>
               <para>A custom algorithm. </para>
@@ -232,8 +232,8 @@
               <a href="4b5699a9-bc21-4c4a-85f1-8b3b8ebd2d46">machineKey</a>
             </format> element of the Web.config file. For more information, see the <format type="text/html">
               <a href="4b5699a9-bc21-4c4a-85f1-8b3b8ebd2d46">machineKey</a>
-            </format> element. </para
-          >
+            </format> element.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

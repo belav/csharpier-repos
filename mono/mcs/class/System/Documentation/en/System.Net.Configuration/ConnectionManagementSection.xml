@@ -58,8 +58,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.Configuration.ConnectionManagementSection" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.Configuration.ConnectionManagementSection" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -91,8 +91,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Net.Configuration.ConnectionManagementElementCollection" /> returned by this property contains one <see cref="T:System.Net.Configuration.ConnectionManagementElement" /> for each connectionManagement element in the configuration file. </para
-          >
+            >The <see cref="T:System.Net.Configuration.ConnectionManagementElementCollection" /> returned by this property contains one <see cref="T:System.Net.Configuration.ConnectionManagementElement" /> for each connectionManagement element in the configuration file.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

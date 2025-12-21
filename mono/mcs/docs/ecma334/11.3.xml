@@ -8,6 +8,6 @@
       >reference-type</non_terminal
     >s by permitting any value of a <non_terminal where="11.1"
       >value-type</non_terminal
-    > to be converted to and from type object. Boxing and unboxing enables a unified view of the type system wherein a value of any type can ultimately be treated as an object. </paragraph
-  >
+    > to be converted to and from type object. Boxing and unboxing enables a unified view of the type system wherein a value of any type can ultimately be treated as an object.
+  </paragraph>
 </clause>

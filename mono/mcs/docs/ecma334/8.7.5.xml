@@ -32,15 +32,15 @@ public class Form1
    }  
 }  
 ]]>
-    </code_example>shows a Form1 class that adds Button1_Click as an event handler for Button1's Click event. In the Disconnect method, that event handler is removed. </paragraph
-  >
+    </code_example>shows a Form1 class that adds Button1_Click as an event handler for Button1's Click event. In the Disconnect method, that event handler is removed.
+  </paragraph>
   <paragraph
     >For a simple event declaration such as <code_example>
       <![CDATA[
 public event EventHandler Click;  
 ]]>
-    </code_example>the compiler automatically provides the implementation underlying the += and -= operators. </paragraph
-  >
+    </code_example>the compiler automatically provides the implementation underlying the += and -= operators.
+  </paragraph>
   <paragraph
     >An implementer who wants more control can get it by explicitly providing add and remove accessors. For example, the Button class could be rewritten as follows: <code_example>
       <![CDATA[

@@ -30,8 +30,8 @@
       <para
         >You can use the underlying integer value of each <see cref="T:System.PlatformID" /> enumeration member, as shown in the table, as the <paramref name="PlatformId" /> argument for the <format type="text/html">
           <a href="0c25ff6c-bff3-422e-b017-146a3ee86cb9">SignTool.exe (Sign Tool)</a>
-        </format> utility. </para
-      >
+        </format> utility.
+      </para>
       <list type="table">
         <listheader>
           <item>

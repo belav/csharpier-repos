@@ -13,8 +13,8 @@
   <paragraph
     >The <non_terminal where="17.7"
       >event-accessor-declarations</non_terminal
-    > of an event specify the executable statements associated with adding and removing event handlers. </paragraph
-  >
+    > of an event specify the executable statements associated with adding and removing event handlers.
+  </paragraph>
   <paragraph
     >The accessor declarations consist of an <non_terminal where="17.7"
       >add-accessor-declaration</non_terminal
@@ -26,8 +26,8 @@
     > specifies the statements to execute when an event handler is added, and the block associated with a <non_terminal
       where="17.7"
       >remove-accessor-declaration</non_terminal
-    > specifies the statements to execute when an event handler is removed. </paragraph
-  >
+    > specifies the statements to execute when an event handler is removed.
+  </paragraph>
   <paragraph
     >Each <non_terminal where="17.7">add-accessor-declaration</non_terminal> and <non_terminal
       where="17.7"
@@ -37,8 +37,8 @@
       >add-accessor-declaration</non_terminal
     > or a  <non_terminal where="17.7"
       >remove-accessor-declaration</non_terminal
-    > must conform to the rules for <keyword>void</keyword> methods described in <hyperlink>17.5.8</hyperlink>. In particular, return statements in such a block are not permitted to specify an expression. </paragraph
-  >
+    > must conform to the rules for <keyword>void</keyword> methods described in <hyperlink>17.5.8</hyperlink>. In particular, return statements in such a block are not permitted to specify an expression.
+  </paragraph>
   <paragraph>Since an event accessor implicitly has a parameter named value, it is a compile-time error for a local variable declared in an event accessor to have that name. </paragraph>
   <paragraph>
     <example

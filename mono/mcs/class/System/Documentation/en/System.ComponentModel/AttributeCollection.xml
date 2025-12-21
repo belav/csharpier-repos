@@ -67,8 +67,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.AttributeCollection" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.AttributeCollection" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -107,8 +107,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type <see cref="T:System.Attribute" /> that provides the attributes for this collection. </param
-        >
+          />An array of type <see cref="T:System.Attribute" /> that provides the attributes for this collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Attributes">
@@ -209,8 +209,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type <see cref="T:System.Attribute" /> to find in the collection. </param
-        >
+          />An array of type <see cref="T:System.Attribute" /> to find in the collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CopyTo">
@@ -243,15 +243,11 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Array" /> to copy the collection to. </param
-        >
+          />The <see cref="T:System.Array" /> to copy the collection to.
+        </param>
         <param name="index">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The index to start from. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The index to start from.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Count">
@@ -409,8 +405,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of the attribute to retrieve. </param
-        >
+          />The <see cref="T:System.Type" /> of the attribute to retrieve.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetEnumerator">
@@ -570,8 +566,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.CodeDom.MemberAttributes" /> to compare with the attributes in this collection. </param
-        >
+          />An array of <see cref="T:System.CodeDom.MemberAttributes" /> to compare with the attributes in this collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.ICollection.Count">
@@ -676,8 +672,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see cref="T:System.Collections.IEnumerator" /> for the <see cref="T:System.Collections.IDictionary" />. </para
-          >
+            >Returns an <see cref="T:System.Collections.IEnumerator" /> for the <see cref="T:System.Collections.IDictionary" />.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />

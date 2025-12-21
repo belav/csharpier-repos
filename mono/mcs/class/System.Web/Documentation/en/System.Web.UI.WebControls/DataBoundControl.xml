@@ -22,14 +22,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.UI.WebControls.DataBoundControl" /> class is the base class used for ASP.NET controls that retrieve tabular or list-style data from an ASP.NET data source control and bind user-interface (UI) elements of the control to that data for display. Composite data-bound controls such as <see cref="T:System.Web.UI.WebControls.GridView" />, <see cref="T:System.Web.UI.WebControls.DetailsView" />, and <see cref="T:System.Web.UI.WebControls.FormView" />; list-style data-bound controls such as <see cref="T:System.Web.UI.WebControls.BulletedList" /> and <see cref="T:System.Web.UI.WebControls.CheckBoxList" />; and other controls such as <see cref="T:System.Web.UI.WebControls.AdRotator" /> derive from <see cref="T:System.Web.UI.WebControls.DataBoundControl" />. </para
-      >
+        >The <see cref="T:System.Web.UI.WebControls.DataBoundControl" /> class is the base class used for ASP.NET controls that retrieve tabular or list-style data from an ASP.NET data source control and bind user-interface (UI) elements of the control to that data for display. Composite data-bound controls such as <see cref="T:System.Web.UI.WebControls.GridView" />, <see cref="T:System.Web.UI.WebControls.DetailsView" />, and <see cref="T:System.Web.UI.WebControls.FormView" />; list-style data-bound controls such as <see cref="T:System.Web.UI.WebControls.BulletedList" /> and <see cref="T:System.Web.UI.WebControls.CheckBoxList" />; and other controls such as <see cref="T:System.Web.UI.WebControls.AdRotator" /> derive from <see cref="T:System.Web.UI.WebControls.DataBoundControl" />.
+      </para>
       <para
         >Page developers do not use the <see cref="T:System.Web.UI.WebControls.DataBoundControl" /> class directly; instead, they use controls that derive from this class.</para
       >
       <para
-        >Control developers extend this class to create data-bound controls that work with classes that implement the <see cref="T:System.Web.UI.IDataSource" /> interface and classes that derive from the <see cref="T:System.Web.UI.DataSourceControl" /> and <see cref="T:System.Web.UI.DataSourceView" /> classes. When deriving a class from the <see cref="T:System.Web.UI.WebControls.DataBoundControl" /> class, override the <see cref="M:System.Web.UI.WebControls.DataBoundControl.PerformDataBinding(System.Collections.IEnumerable)" /> method to bind the UI elements of your control to data retrieved by the <see cref="M:System.Web.UI.WebControls.DataBoundControl.GetData" /> method. In most cases, the <see cref="M:System.Web.UI.WebControls.DataBoundControl.PerformDataBinding(System.Collections.IEnumerable)" /> method is the only method you will override in your derived class. </para
-      >
+        >Control developers extend this class to create data-bound controls that work with classes that implement the <see cref="T:System.Web.UI.IDataSource" /> interface and classes that derive from the <see cref="T:System.Web.UI.DataSourceControl" /> and <see cref="T:System.Web.UI.DataSourceView" /> classes. When deriving a class from the <see cref="T:System.Web.UI.WebControls.DataBoundControl" /> class, override the <see cref="M:System.Web.UI.WebControls.DataBoundControl.PerformDataBinding(System.Collections.IEnumerable)" /> method to bind the UI elements of your control to data retrieved by the <see cref="M:System.Web.UI.WebControls.DataBoundControl.GetData" /> method. In most cases, the <see cref="M:System.Web.UI.WebControls.DataBoundControl.PerformDataBinding(System.Collections.IEnumerable)" /> method is the only method you will override in your derived class.
+      </para>
       <para
         >For ASP.NET 2.0 data-bound controls, the <see cref="M:System.Web.UI.WebControls.DataBoundControl.PerformSelect" /> method is the equivalent of the DataBind method, and is called to bind data at run time. The <see cref="M:System.Web.UI.WebControls.DataBoundControl.PerformSelect" /> method calls the <see cref="M:System.Web.UI.WebControls.DataBoundControl.GetData" /> and <see cref="M:System.Web.UI.WebControls.DataBoundControl.PerformDataBinding(System.Collections.IEnumerable)" /> methods.</para
       >
@@ -73,8 +73,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.WebControls.DataBoundControl.CreateDataSourceSelectArguments" /> method is used by the <see cref="P:System.Web.UI.WebControls.DataBoundControl.SelectArguments" /> property to initialize a default arguments object, and by the <see cref="T:System.Web.UI.WebControls.DataBoundControl" /> class's implementation of the <see cref="M:System.Web.UI.WebControls.DataBoundControl.PerformSelect" /> method. </para
-          >
+            >The <see cref="M:System.Web.UI.WebControls.DataBoundControl.CreateDataSourceSelectArguments" /> method is used by the <see cref="P:System.Web.UI.WebControls.DataBoundControl.SelectArguments" /> property to initialize a default arguments object, and by the <see cref="T:System.Web.UI.WebControls.DataBoundControl" /> class's implementation of the <see cref="M:System.Web.UI.WebControls.DataBoundControl.PerformSelect" /> method.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -85,8 +85,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Web.UI.DataSourceSelectArguments" /> initialized to <see cref="P:System.Web.UI.DataSourceSelectArguments.Empty" />. </para
-          >
+            >A <see cref="T:System.Web.UI.DataSourceSelectArguments" /> initialized to <see cref="P:System.Web.UI.DataSourceSelectArguments.Empty" />.
+          </para>
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -204,8 +204,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.WebControls.DataBoundControl.GetData" /> method calls the <see cref="M:System.Web.UI.WebControls.DataBoundControl.GetDataSource" /> method internally. A valid <see cref="T:System.Web.UI.IDataSource" /> instance is retrieved by these two methods and is cached by the <see cref="T:System.Web.UI.WebControls.DataBoundControl" /> object until the <see cref="M:System.Web.UI.WebControls.DataBoundControl.OnDataPropertyChanged" /> method signals that the data source has changed. </para
-          >
+            >The <see cref="M:System.Web.UI.WebControls.DataBoundControl.GetData" /> method calls the <see cref="M:System.Web.UI.WebControls.DataBoundControl.GetDataSource" /> method internally. A valid <see cref="T:System.Web.UI.IDataSource" /> instance is retrieved by these two methods and is cached by the <see cref="T:System.Web.UI.WebControls.DataBoundControl" /> object until the <see cref="M:System.Web.UI.WebControls.DataBoundControl.OnDataPropertyChanged" /> method signals that the data source has changed.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -216,8 +216,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Web.UI.IDataSource" /> that represents the data source identified by <see cref="P:System.Web.UI.WebControls.DataBoundControl.DataSourceID" />. </para
-          >
+            >An <see cref="T:System.Web.UI.IDataSource" /> that represents the data source identified by <see cref="P:System.Web.UI.WebControls.DataBoundControl.DataSourceID" />.
+          </para>
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -498,14 +498,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.UI.WebControls.DataBoundControl.SelectArguments" /> property calls the <see cref="M:System.Web.UI.WebControls.DataBoundControl.CreateDataSourceSelectArguments" /> method to create a default <see cref="T:System.Web.UI.DataSourceSelectArguments" /> object. </para
-          >
+            >The <see cref="P:System.Web.UI.WebControls.DataBoundControl.SelectArguments" /> property calls the <see cref="M:System.Web.UI.WebControls.DataBoundControl.CreateDataSourceSelectArguments" /> method to create a default <see cref="T:System.Web.UI.DataSourceSelectArguments" /> object.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Web.UI.DataSourceSelectArguments" /> object that the data-bound control uses when retrieving data from a data source control. </para
-          >
+            >Gets a <see cref="T:System.Web.UI.DataSourceSelectArguments" /> object that the data-bound control uses when retrieving data from a data source control.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>

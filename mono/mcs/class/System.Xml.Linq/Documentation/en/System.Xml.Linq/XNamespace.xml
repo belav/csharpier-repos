@@ -18,8 +18,8 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>This class represents the XML construct of namespaces.</para>
       <para
-        >Every <see cref="T:System.Xml.Linq.XName" /> contains an <see cref="T:System.Xml.Linq.XNamespace" />. Even if an element is not in a namespace, the element's <see cref="T:System.Xml.Linq.XName" /> still contains a namespace, <see cref="P:System.Xml.Linq.XNamespace.None" />. The <see cref="P:System.Xml.Linq.XName.Namespace" /> property is guaranteed to not be null. </para
-      >
+        >Every <see cref="T:System.Xml.Linq.XName" /> contains an <see cref="T:System.Xml.Linq.XNamespace" />. Even if an element is not in a namespace, the element's <see cref="T:System.Xml.Linq.XName" /> still contains a namespace, <see cref="P:System.Xml.Linq.XNamespace.None" />. The <see cref="P:System.Xml.Linq.XName.Namespace" /> property is guaranteed to not be null.
+      </para>
       <format type="text/html">
         <h2>Creating an XNamespace Object</h2>
       </format>

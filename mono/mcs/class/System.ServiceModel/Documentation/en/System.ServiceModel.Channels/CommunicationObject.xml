@@ -144,8 +144,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.IAsyncResult" /> that references the asynchronous close operation. </para
-          >
+            >The <see cref="T:System.IAsyncResult" /> that references the asynchronous close operation.
+          </para>
         </returns>
       </Docs>
     </Member>
@@ -231,8 +231,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.IAsyncResult" /> that references the asynchronous open operation. </para
-          >
+            >The <see cref="T:System.IAsyncResult" /> that references the asynchronous open operation.
+          </para>
         </returns>
       </Docs>
     </Member>
@@ -277,8 +277,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.IAsyncResult" /> that references the asynchronous open operation. </para
-          >
+            >The <see cref="T:System.IAsyncResult" /> that references the asynchronous open operation.
+          </para>
         </returns>
       </Docs>
     </Member>
@@ -300,11 +300,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method causes a <see cref="T:System.ServiceModel.Channels.CommunicationObject" /> to gracefully transition from any state, other than the <see cref="F:System.ServiceModel.CommunicationState.Closed" /> state, into the <see cref="F:System.ServiceModel.CommunicationState.Closed" /> state. The <see cref="Overload:System.ServiceModel.Channels.CommunicationObject.Close" /> method allows any unfinished work to be completed before returning. For example, finish sending any buffered messages. </para
-          >
+            >This method causes a <see cref="T:System.ServiceModel.Channels.CommunicationObject" /> to gracefully transition from any state, other than the <see cref="F:System.ServiceModel.CommunicationState.Closed" /> state, into the <see cref="F:System.ServiceModel.CommunicationState.Closed" /> state. The <see cref="Overload:System.ServiceModel.Channels.CommunicationObject.Close" /> method allows any unfinished work to be completed before returning. For example, finish sending any buffered messages.
+          </para>
           <para
-            >The <see cref="T:System.ServiceModel.Channels.CommunicationObject" /> enters the <see cref="F:System.ServiceModel.CommunicationState.Closing" /> state and remains in it after the <see cref="Overload:System.ServiceModel.Channels.CommunicationObject.Close" /> method is called until the transition to the <see cref="F:System.ServiceModel.CommunicationState.Closed" /> state is completed. The transition consists of making successive calls to <see cref="M:System.ServiceModel.Channels.CommunicationObject.OnClosing" />, <see cref="M:System.ServiceModel.Channels.CommunicationObject.OnClose(System.TimeSpan)" />, and <see cref="M:System.ServiceModel.Channels.CommunicationObject.OnClosed" />.  </para
-          >
+            >The <see cref="T:System.ServiceModel.Channels.CommunicationObject" /> enters the <see cref="F:System.ServiceModel.CommunicationState.Closing" /> state and remains in it after the <see cref="Overload:System.ServiceModel.Channels.CommunicationObject.Close" /> method is called until the transition to the <see cref="F:System.ServiceModel.CommunicationState.Closed" /> state is completed. The transition consists of making successive calls to <see cref="M:System.ServiceModel.Channels.CommunicationObject.OnClosing" />, <see cref="M:System.ServiceModel.Channels.CommunicationObject.OnClose(System.TimeSpan)" />, and <see cref="M:System.ServiceModel.Channels.CommunicationObject.OnClosed" />.
+          </para>
           <para
             >There is also an asynchronous version of the close method that is initiated by calling <see cref="Overload:System.ServiceModel.Channels.CommunicationObject.BeginClose" />.</para
           >
@@ -336,11 +336,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method causes a <see cref="T:System.ServiceModel.Channels.CommunicationObject" /> to gracefully transition from any state, other than the <see cref="F:System.ServiceModel.CommunicationState.Closed" /> state, into the <see cref="F:System.ServiceModel.CommunicationState.Closed" /> state within a specified interval of time. The <see cref="Overload:System.ServiceModel.Channels.CommunicationObject.Close" /> method allows any unfinished work to be completed before returning. For example, finish sending any buffered messages. </para
-          >
+            >This method causes a <see cref="T:System.ServiceModel.Channels.CommunicationObject" /> to gracefully transition from any state, other than the <see cref="F:System.ServiceModel.CommunicationState.Closed" /> state, into the <see cref="F:System.ServiceModel.CommunicationState.Closed" /> state within a specified interval of time. The <see cref="Overload:System.ServiceModel.Channels.CommunicationObject.Close" /> method allows any unfinished work to be completed before returning. For example, finish sending any buffered messages.
+          </para>
           <para
-            >The <see cref="T:System.ServiceModel.Channels.CommunicationObject" /> enters the <see cref="F:System.ServiceModel.CommunicationState.Closing" /> state and remains in it after the <see cref="Overload:System.ServiceModel.Channels.CommunicationObject.Close" /> method is called until the transition to the <see cref="F:System.ServiceModel.CommunicationState.Closed" /> state is completed. The transition consists of making successive calls to <see cref="M:System.ServiceModel.Channels.CommunicationObject.OnClosing" />, <see cref="M:System.ServiceModel.Channels.CommunicationObject.OnClose(System.TimeSpan)" /> and <see cref="M:System.ServiceModel.Channels.CommunicationObject.OnClosed" />. </para
-          >
+            >The <see cref="T:System.ServiceModel.Channels.CommunicationObject" /> enters the <see cref="F:System.ServiceModel.CommunicationState.Closing" /> state and remains in it after the <see cref="Overload:System.ServiceModel.Channels.CommunicationObject.Close" /> method is called until the transition to the <see cref="F:System.ServiceModel.CommunicationState.Closed" /> state is completed. The transition consists of making successive calls to <see cref="M:System.ServiceModel.Channels.CommunicationObject.OnClosing" />, <see cref="M:System.ServiceModel.Channels.CommunicationObject.OnClose(System.TimeSpan)" /> and <see cref="M:System.ServiceModel.Channels.CommunicationObject.OnClosed" />.
+          </para>
           <para
             >There is also an asynchronous version of the close method that is initiated by calling <see cref="Overload:System.ServiceModel.Channels.CommunicationObject.BeginClose" />.</para
           >
@@ -678,8 +678,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.IAsyncResult" /> that references the asynchronous on close operation. </para
-          >
+            >The <see cref="T:System.IAsyncResult" /> that references the asynchronous on close operation.
+          </para>
         </returns>
       </Docs>
     </Member>
@@ -721,8 +721,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.IAsyncResult" /> that references the asynchronous on open operation. </para
-          >
+            >The <see cref="T:System.IAsyncResult" /> that references the asynchronous on open operation.
+          </para>
         </returns>
       </Docs>
     </Member>
@@ -1021,8 +1021,8 @@
             <see cref="F:System.ServiceModel.CommunicationState.Opened" /> state, the <see cref="T:System.ServiceModel.Channels.CommunicationObject" />is usable (for example, messages can be received), but it is no longer configurable.</para
           >
           <para
-            >There is also an asynchronous version of the open method that is initiated by calling <see cref="M:System.ServiceModel.Channels.CommunicationObject.OnBeginOpen(System.TimeSpan,System.AsyncCallback,System.Object)" /> and completed by calling <see cref="M:System.ServiceModel.Channels.CommunicationObject.EndOpen(System.IAsyncResult)" />. </para
-          >
+            >There is also an asynchronous version of the open method that is initiated by calling <see cref="M:System.ServiceModel.Channels.CommunicationObject.OnBeginOpen(System.TimeSpan,System.AsyncCallback,System.Object)" /> and completed by calling <see cref="M:System.ServiceModel.Channels.CommunicationObject.EndOpen(System.IAsyncResult)" />.
+          </para>
           <format type="text/html">
             <h2>Credentials Capture with Windows Authentication</h2>
           </format>
@@ -1071,8 +1071,8 @@
             <see cref="F:System.ServiceModel.CommunicationState.Opened" /> state, the <see cref="T:System.ServiceModel.Channels.CommunicationObject" /> is usable (for example, messages can be received), but it is no longer configurable.</para
           >
           <para
-            >There is also an asynchronous version of the open method that is initiated by calling <see cref="Overload:System.ServiceModel.Channels.CommunicationObject.BeginOpen" /> and completed by calling <see cref="M:System.ServiceModel.Channels.CommunicationObject.EndOpen(System.IAsyncResult)" />. </para
-          >
+            >There is also an asynchronous version of the open method that is initiated by calling <see cref="Overload:System.ServiceModel.Channels.CommunicationObject.BeginOpen" /> and completed by calling <see cref="M:System.ServiceModel.Channels.CommunicationObject.EndOpen(System.IAsyncResult)" />.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

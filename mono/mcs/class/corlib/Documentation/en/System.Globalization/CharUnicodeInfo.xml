@@ -21,8 +21,8 @@
       <para
         >The <see cref="http://go.microsoft.com/fwlink/?linkid=37123"
           >Unicode Standard</see
-        > defines a number of Unicode character categories. For example, a character might be categorized as an uppercase letter, a lowercase letter, a decimal digit number, a letter number, a paragraph separator, a math symbol, or a currency symbol. Your application can use the character category to govern string-based operations, such as parsing. The <see cref="T:System.Globalization.UnicodeCategory" /> enumeration defines the possible character categories. </para
-      >
+        > defines a number of Unicode character categories. For example, a character might be categorized as an uppercase letter, a lowercase letter, a decimal digit number, a letter number, a paragraph separator, a math symbol, or a currency symbol. Your application can use the character category to govern string-based operations, such as parsing. The <see cref="T:System.Globalization.UnicodeCategory" /> enumeration defines the possible character categories.
+      </para>
       <para
         >You use the <see cref="T:System.Globalization.CharUnicodeInfo" /> class to obtain the <see cref="T:System.Globalization.UnicodeCategory" /> value for a specific character. The <see cref="T:System.Globalization.CharUnicodeInfo" /> class defines methods that return the following Unicode character values:</para
       >
@@ -35,8 +35,8 @@
         </item>
         <item>
           <para
-            >Decimal digit value. Applies only to characters that represent decimal digits in the decimal (base 10) system. A decimal digit can be one of ten digits, from zero through nine. These characters are members of the <see cref="F:System.Globalization.UnicodeCategory.DecimalDigitNumber" /> category. </para
-          >
+            >Decimal digit value. Applies only to characters that represent decimal digits in the decimal (base 10) system. A decimal digit can be one of ten digits, from zero through nine. These characters are members of the <see cref="F:System.Globalization.UnicodeCategory.DecimalDigitNumber" /> category.
+          </para>
         </item>
       </list>
       <para
@@ -81,8 +81,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method converts characters that represent decimal digits to their equivalent integral values. Decimal digits are characters in the <see cref="F:System.Globalization.UnicodeCategory.DecimalDigitNumber" /> category that can represent one of ten digits in the decimal (base 10) numbering system, from zero through nine. It includes characters such as U+0030 (DIGIT ZERO) through U+0039 (DIGIT NINE), U+0660 (ARABIC-INDIC DIGIT ZERO) through U+0669 (ARABIC-INDIC DIGIT NINE), U+07C0 (NKO DIGIT ZERO) through U+07C9 (NKO DIGIT NINE), and U+1040 (MYANMAR DIGIT ZERO) through U+1049 (MYANMAR DIGIT NINE). </para
-          >
+            >This method converts characters that represent decimal digits to their equivalent integral values. Decimal digits are characters in the <see cref="F:System.Globalization.UnicodeCategory.DecimalDigitNumber" /> category that can represent one of ten digits in the decimal (base 10) numbering system, from zero through nine. It includes characters such as U+0030 (DIGIT ZERO) through U+0039 (DIGIT NINE), U+0660 (ARABIC-INDIC DIGIT ZERO) through U+0669 (ARABIC-INDIC DIGIT NINE), U+07C0 (NKO DIGIT ZERO) through U+07C9 (NKO DIGIT NINE), and U+1040 (MYANMAR DIGIT ZERO) through U+1049 (MYANMAR DIGIT NINE).
+          </para>
           <para
             >For more information about Unicode characters, see the <see
               cref="http://go.microsoft.com/fwlink/?linkid=37123"
@@ -105,8 +105,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The Unicode character for which to get the decimal digit value. </param
-        >
+          />The Unicode character for which to get the decimal digit value.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetDecimalDigitValue">
@@ -135,8 +135,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method converts characters that represent decimal digits to their equivalent integral values. Decimal digits are characters in the <see cref="F:System.Globalization.UnicodeCategory.DecimalDigitNumber" /> category that can represent one of ten digits in the decimal (base 10) numbering system, from zero through nine. It includes characters such as U+0030 (DIGIT ZERO) through U+0039 (DIGIT NINE), U+0660 (ARABIC-INDIC DIGIT ZERO) through U+0669 (ARABIC-INDIC DIGIT NINE), U+07C0 (NKO DIGIT ZERO) through U+07C9 (NKO DIGIT NINE), and U+1040 (MYANMAR DIGIT ZERO) through U+1049 (MYANMAR DIGIT NINE). </para
-          >
+            >This method converts characters that represent decimal digits to their equivalent integral values. Decimal digits are characters in the <see cref="F:System.Globalization.UnicodeCategory.DecimalDigitNumber" /> category that can represent one of ten digits in the decimal (base 10) numbering system, from zero through nine. It includes characters such as U+0030 (DIGIT ZERO) through U+0039 (DIGIT NINE), U+0660 (ARABIC-INDIC DIGIT ZERO) through U+0669 (ARABIC-INDIC DIGIT NINE), U+07C0 (NKO DIGIT ZERO) through U+07C9 (NKO DIGIT NINE), and U+1040 (MYANMAR DIGIT ZERO) through U+1049 (MYANMAR DIGIT NINE).
+          </para>
           <para
             >For more information about Unicode characters, see the <see
               cref="http://go.microsoft.com/fwlink/?linkid=37123"
@@ -159,15 +159,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.String" /> containing the Unicode character for which to get the decimal digit value. </param
-        >
+          />The <see cref="T:System.String" /> containing the Unicode character for which to get the decimal digit value.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the Unicode character for which to get the decimal digit value. </param
-        >
+          />The index of the Unicode character for which to get the decimal digit value.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetDigitValue">
@@ -214,8 +214,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The Unicode character for which to get the digit value. </param
-        >
+          />The Unicode character for which to get the digit value.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetDigitValue">
@@ -266,15 +266,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.String" /> containing the Unicode character for which to get the digit value. </param
-        >
+          />The <see cref="T:System.String" /> containing the Unicode character for which to get the digit value.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the Unicode character for which to get the digit value. </param
-        >
+          />The index of the Unicode character for which to get the digit value.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetNumericValue">
@@ -324,8 +324,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The Unicode character for which to get the numeric value. </param
-        >
+          />The Unicode character for which to get the numeric value.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetNumericValue">
@@ -379,15 +379,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.String" /> containing the Unicode character for which to get the numeric value. </param
-        >
+          />The <see cref="T:System.String" /> containing the Unicode character for which to get the numeric value.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the Unicode character for which to get the numeric value. </param
-        >
+          />The index of the Unicode character for which to get the numeric value.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetUnicodeCategory">
@@ -443,8 +443,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The Unicode character for which to get the Unicode category. </param
-        >
+          />The Unicode character for which to get the Unicode category.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetUnicodeCategory">
@@ -501,15 +501,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.String" /> containing the Unicode character for which to get the Unicode category. </param
-        >
+          />The <see cref="T:System.String" /> containing the Unicode character for which to get the Unicode category.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the Unicode character for which to get the Unicode category. </param
-        >
+          />The index of the Unicode character for which to get the Unicode category.
+        </param>
       </Docs>
     </Member>
   </Members>

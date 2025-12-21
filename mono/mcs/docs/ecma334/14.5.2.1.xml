@@ -9,8 +9,8 @@
     > in an expression within the immediately enclosing block (<hyperlink>15.2</hyperlink>) or  <non_terminal
       where="15.7.2"
       >switch-block</non_terminal
-    > (<hyperlink>15.7.2</hyperlink>) must refer to the same entity. This rule ensures that the meaning of a name in the context of an expression is always the same within a block. </paragraph
-  >
+    > (<hyperlink>15.7.2</hyperlink>) must refer to the same entity. This rule ensures that the meaning of a name in the context of an expression is always the same within a block.
+  </paragraph>
   <paragraph
     >The example <code_example>
       <![CDATA[
@@ -40,8 +40,8 @@ class Test
    }  
 }  
 ]]>
-    </code_example>is permitted because the name x is never used in the outer block. </paragraph
-  >
+    </code_example>is permitted because the name x is never used in the outer block.
+  </paragraph>
   <paragraph
     >Note that the rule of invariant meaning applies only to simple names. It is perfectly valid for the same identifier to have one meaning as a simple name and another meaning as right operand of a member access (<hyperlink>14.5.4</hyperlink>). <example
       >[Example: For example: <code_example>

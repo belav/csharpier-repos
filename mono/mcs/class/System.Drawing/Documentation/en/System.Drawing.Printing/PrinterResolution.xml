@@ -73,8 +73,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Drawing.Printing.PrinterResolution" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Drawing.Printing.PrinterResolution" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>

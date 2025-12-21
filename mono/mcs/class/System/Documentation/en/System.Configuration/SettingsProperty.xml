@@ -19,8 +19,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.Configuration.SettingsProperty" /> is used to describe settings properties of a class derived from <see cref="T:System.Configuration.SettingsBase" />. The Settings API allows a collection of settings properties to be grouped into a common language runtime class. </para
-      >
+        <see cref="T:System.Configuration.SettingsProperty" /> is used to describe settings properties of a class derived from <see cref="T:System.Configuration.SettingsBase" />. The Settings API allows a collection of settings properties to be grouped into a common language runtime class.
+      </para>
       <para
         >When persisting settings, the <see cref="T:System.Configuration.SettingsBase" /> base class asks for a collection of <see cref="T:System.Configuration.SettingsProperty" /> objects, grouped in a collection of type <see cref="T:System.Configuration.SettingsPropertyCollection" />. It does this by calling its own Properties member. Inherited classes should return a collection of properties to persist.</para
       >
@@ -298,8 +298,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value specifying whether a <see cref="T:System.Configuration.SettingsProperty" /> object is read-only. </para
-          >
+            >Gets or sets a value specifying whether a <see cref="T:System.Configuration.SettingsProperty" /> object is read-only.
+          </para>
         </summary>
       </Docs>
     </Member>

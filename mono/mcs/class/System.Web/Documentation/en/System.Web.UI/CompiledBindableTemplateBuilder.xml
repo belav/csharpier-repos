@@ -142,8 +142,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.CompiledBindableTemplateBuilder.InstantiateIn(System.Web.UI.Control)" /> method is the <see cref="T:System.Web.UI.CompiledBindableTemplateBuilder" /> class's implementation of the <see cref="M:System.Web.UI.ITemplate.InstantiateIn(System.Web.UI.Control)" /> method. </para
-          >
+            >The <see cref="M:System.Web.UI.CompiledBindableTemplateBuilder.InstantiateIn(System.Web.UI.Control)" /> method is the <see cref="T:System.Web.UI.CompiledBindableTemplateBuilder" /> class's implementation of the <see cref="M:System.Web.UI.ITemplate.InstantiateIn(System.Web.UI.Control)" /> method.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -156,8 +156,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.UI.Control" /> to contain the controls that are created from the inline template. </param
-        >
+          />The <see cref="T:System.Web.UI.Control" /> to contain the controls that are created from the inline template.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

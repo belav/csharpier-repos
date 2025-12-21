@@ -20,8 +20,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see cref="T:System.Diagnostics.Contracts.ContractFailedEventArgs" /> object is passed to the <see cref="E:System.Diagnostics.Contracts.Contract.ContractFailed" /> event when a contract fails. The <see cref="E:System.Diagnostics.Contracts.Contract.ContractFailed" /> event enables a managed application environment such as an interactive interpreter, a Web browser host, a test harness, or a logging infrastructure to be notified of contract failures. The event requires full trust. </para
-      >
+        >A <see cref="T:System.Diagnostics.Contracts.ContractFailedEventArgs" /> object is passed to the <see cref="E:System.Diagnostics.Contracts.Contract.ContractFailed" /> event when a contract fails. The <see cref="E:System.Diagnostics.Contracts.Contract.ContractFailed" /> event enables a managed application environment such as an interactive interpreter, a Web browser host, a test harness, or a logging infrastructure to be notified of contract failures. The event requires full trust.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

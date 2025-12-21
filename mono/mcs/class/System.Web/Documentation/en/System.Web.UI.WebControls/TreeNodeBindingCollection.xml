@@ -29,8 +29,8 @@
       <list type="ordered">
         <item>
           <para
-            >Nest opening and closing &lt;DataBindings&gt; tags between the opening and closing tags of the <see cref="T:System.Web.UI.WebControls.TreeView" /> control. </para
-          >
+            >Nest opening and closing &lt;DataBindings&gt; tags between the opening and closing tags of the <see cref="T:System.Web.UI.WebControls.TreeView" /> control.
+          </para>
         </item>
         <item>
           <para>Place &lt;asp:TreeNodeBinding&gt; elements between the opening and closing &lt;DataBindings&gt; tags for each tree node binding that you want to specify.</para>
@@ -40,8 +40,8 @@
         >You can programmatically manage a <see cref="T:System.Web.UI.WebControls.TreeNodeBindingCollection" /> by adding and removing <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" /> objects. To add a <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" /> object to the collection, use the <see cref="M:System.Web.UI.WebControls.TreeNodeBindingCollection.Add(System.Web.UI.WebControls.TreeNodeBinding)" /> or <see cref="M:System.Web.UI.WebControls.TreeNodeBindingCollection.Insert(System.Int32,System.Web.UI.WebControls.TreeNodeBinding)" /> method. To remove nodes from the collection, use the <see cref="M:System.Web.UI.WebControls.TreeNodeBindingCollection.Remove(System.Web.UI.WebControls.TreeNodeBinding)" />, <see cref="M:System.Web.UI.WebControls.TreeNodeBindingCollection.RemoveAt(System.Int32)" />, or <see cref="M:System.Web.UI.StateManagedCollection.Clear" /> method.</para
       >
       <para
-        >The <see cref="T:System.Web.UI.WebControls.TreeNodeBindingCollection" /> class supports several ways to access the items in the collection: </para
-      >
+        >The <see cref="T:System.Web.UI.WebControls.TreeNodeBindingCollection" /> class supports several ways to access the items in the collection:
+      </para>
       <list type="bullet">
         <item>
           <para
@@ -103,8 +103,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" /> to append. </param
-        >
+          />The <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" /> to append.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -321,15 +321,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index location at which to insert the <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" />. </param
-        >
+          />The zero-based index location at which to insert the <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" />.
+        </param>
         <param name="binding">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" /> to insert. </param
-        >
+          />The <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" /> to insert.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -392,8 +392,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" /> to remove. </param
-        >
+          />The <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" /> to remove.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -430,8 +430,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index location of the <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" /> to remove. </param
-        >
+          />The zero-based index location of the <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" /> to remove.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

@@ -24,8 +24,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.ServiceModel.Channels.IDuplexSession" /> interface is the union of the inbound session, defined by the <see cref="T:System.ServiceModel.Channels.IInputSession" /> interface, and the outbound session, defined by the <see cref="T:System.ServiceModel.Channels.IOutputSession" /> interface. Either the inbound session or outbound session can be terminated independently of the other. The outbound session can be terminated synchronously by calling <see cref="M:System.ServiceModel.Channels.IDuplexSession.CloseOutputSession" /> or asynchronously by calling <see cref="M:System.ServiceModel.Channels.IDuplexSession.BeginCloseOutputSession" />. </para
-      >
+        >The <see cref="T:System.ServiceModel.Channels.IDuplexSession" /> interface is the union of the inbound session, defined by the <see cref="T:System.ServiceModel.Channels.IInputSession" /> interface, and the outbound session, defined by the <see cref="T:System.ServiceModel.Channels.IOutputSession" /> interface. Either the inbound session or outbound session can be terminated independently of the other. The outbound session can be terminated synchronously by calling <see cref="M:System.ServiceModel.Channels.IDuplexSession.CloseOutputSession" /> or asynchronously by calling <see cref="M:System.ServiceModel.Channels.IDuplexSession.BeginCloseOutputSession" />.
+      </para>
       <para
         >The inbound session can be remotely terminated. The <see cref="M:System.ServiceModel.Channels.IInputChannel.Receive" /> associated with the inbound session starts returning null when that session is shutdown.</para
       >
@@ -68,23 +68,23 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.IAsyncResult" /> that references the asynchronous outbound session termination. </para
-          >
+            >The <see cref="T:System.IAsyncResult" /> that references the asynchronous outbound session termination.
+          </para>
         </returns>
         <param name="callback">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.AsyncCallback" /> delegate. </param
-        >
+          />The <see cref="T:System.AsyncCallback" /> delegate.
+        </param>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that contains state information for this request. </param
-        >
+          />An object that contains state information for this request.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="BeginCloseOutputSession">
@@ -120,8 +120,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.IAsyncResult" /> that references the asynchronous outbound session termination. </para
-          >
+            >The <see cref="T:System.IAsyncResult" /> that references the asynchronous outbound session termination.
+          </para>
         </returns>
         <param name="timeout">
           <attribution
@@ -135,15 +135,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.AsyncCallback" /> delegate. </param
-        >
+          />The <see cref="T:System.AsyncCallback" /> delegate.
+        </param>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that contains state information for this request. </param
-        >
+          />An object that contains state information for this request.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CloseOutputSession">

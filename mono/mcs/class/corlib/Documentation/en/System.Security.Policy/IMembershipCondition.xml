@@ -74,8 +74,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The evidence set against which to make the test. </param
-        >
+          />The evidence set against which to make the test.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Copy">
@@ -146,8 +146,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to compare with the current <see cref="T:System.Object" />. </param
-        >
+          />The <see cref="T:System.Object" /> to compare with the current <see cref="T:System.Object" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ToString">

@@ -126,8 +126,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URL where XML Web services discovery begins. </param
-        >
+          />The URL where XML Web services discovery begins.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -171,8 +171,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URL where XML Web services discovery begins. </param
-        >
+          />The URL where XML Web services discovery begins.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -346,8 +346,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Name of file to read in, containing the map of saved discovery documents. </param
-        >
+          />Name of file to read in, containing the map of saved discovery documents.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -479,15 +479,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The directory in which to save all documents currently in the <see cref="P:System.Web.Services.Discovery.DiscoveryClientProtocol.Documents" /> property. </param
-        >
+          />The directory in which to save all documents currently in the <see cref="P:System.Web.Services.Discovery.DiscoveryClientProtocol.Documents" /> property.
+        </param>
         <param name="topLevelFilename">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the file to create or overwrite containing a map of all documents saved. </param
-        >
+          />The name of the file to create or overwrite containing a map of all documents saved.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

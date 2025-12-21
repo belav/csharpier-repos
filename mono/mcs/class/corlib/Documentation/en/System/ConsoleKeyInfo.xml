@@ -74,36 +74,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The Unicode character that corresponds to the <paramref name="key" /> parameter. </param
-        >
+          />The Unicode character that corresponds to the <paramref name="key" /> parameter.
+        </param>
         <param name="key">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The console key that corresponds to the <paramref name="keyChar" /> parameter. </param
-        >
+          />The console key that corresponds to the <paramref name="keyChar" /> parameter.
+        </param>
         <param name="shift">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to indicate that a SHIFT key was pressed; otherwise, false. </param
-        >
+          />true to indicate that a SHIFT key was pressed; otherwise, false.
+        </param>
         <param name="alt">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to indicate that an ALT key was pressed; otherwise, false. </param
-        >
+          />true to indicate that an ALT key was pressed; otherwise, false.
+        </param>
         <param name="control">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to indicate that a CTRL key was pressed; otherwise, false. </param
-        >
+          />true to indicate that a CTRL key was pressed; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Equals">

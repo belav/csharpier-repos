@@ -250,8 +250,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the server control is loaded into the <see cref="T:System.Web.UI.Page" /> control. </para
-          >
+            >Occurs when the server control is loaded into the <see cref="T:System.Web.UI.Page" /> control.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>

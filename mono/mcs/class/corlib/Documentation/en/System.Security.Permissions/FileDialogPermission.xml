@@ -80,8 +80,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the <see cref="T:System.Security.Permissions.FileDialogPermissionAccess" /> values. </param
-        >
+          />A bitwise combination of the <see cref="T:System.Security.Permissions.FileDialogPermissionAccess" /> values.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -121,8 +121,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Security.Permissions.PermissionState" /> values (Unrestricted or None). </param
-        >
+          />One of the <see cref="T:System.Security.Permissions.PermissionState" /> values (Unrestricted or None).
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Access">
@@ -215,8 +215,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML encoding used to reconstruct the permission. </param
-        >
+          />The XML encoding used to reconstruct the permission.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Intersect">
@@ -258,8 +258,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission to intersect with the current permission. It must be the same type as the current permission. </param
-        >
+          />A permission to intersect with the current permission. It must be the same type as the current permission.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsSubsetOf">
@@ -303,8 +303,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission that is to be tested for the subset relationship. This permission must be the same type as the current permission. </param
-        >
+          />A permission that is to be tested for the subset relationship. This permission must be the same type as the current permission.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsUnrestricted">
@@ -463,8 +463,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission to combine with the current permission. It must be of the same type as the current permission. </param
-        >
+          />A permission to combine with the current permission. It must be of the same type as the current permission.
+        </param>
       </Docs>
     </Member>
   </Members>

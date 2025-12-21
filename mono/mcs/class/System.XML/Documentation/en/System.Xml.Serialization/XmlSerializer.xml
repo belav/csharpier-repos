@@ -29,8 +29,8 @@
         </format> to generate the classes based on an existing XML Schema definition (XSD) document. If you have an XML Schema, you can run the Xsd.exe to produce a set of classes that are strongly typed to the schema and annotated with attributes to adhere to the schema when serialized.</para
       >
       <para
-        >To transfer data between objects and XML requires a mapping from the programming language constructs to XML schema and from the XML schema to the programming language constructs. The <see cref="T:System.Xml.Serialization.XmlSerializer" /> and related tools like Xsd.exe provide the bridge between these two technologies at both design time and runtime. At design time, use the Xsd.exe to produce an XML schema document (.xsd) from your custom classes or to produce classes from a given schema. In either case, the classes are annotated with custom attributes to instruct the <see cref="T:System.Xml.Serialization.XmlSerializer" /> how to map between the XML schema system and the common language runtime. At runtime, instances of the classes can be serialized into XML documents that follow the given schema. Likewise, these XML documents can be deserialized into runtime objects. Note that the XML schema is optional, and not required at design time or runtime. </para
-      >
+        >To transfer data between objects and XML requires a mapping from the programming language constructs to XML schema and from the XML schema to the programming language constructs. The <see cref="T:System.Xml.Serialization.XmlSerializer" /> and related tools like Xsd.exe provide the bridge between these two technologies at both design time and runtime. At design time, use the Xsd.exe to produce an XML schema document (.xsd) from your custom classes or to produce classes from a given schema. In either case, the classes are annotated with custom attributes to instruct the <see cref="T:System.Xml.Serialization.XmlSerializer" /> how to map between the XML schema system and the common language runtime. At runtime, instances of the classes can be serialized into XML documents that follow the given schema. Likewise, these XML documents can be deserialized into runtime objects. Note that the XML schema is optional, and not required at design time or runtime.
+      </para>
       <format type="text/html">
         <h2>Controlling Generated XML</h2>
       </format>
@@ -292,8 +292,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the object that this <see cref="T:System.Xml.Serialization.XmlSerializer" /> can serialize. </param
-        >
+          />The type of the object that this <see cref="T:System.Xml.Serialization.XmlSerializer" /> can serialize.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -333,8 +333,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.Serialization.XmlTypeMapping" /> that maps one type to another. </param
-        >
+          />An <see cref="T:System.Xml.Serialization.XmlTypeMapping" /> that maps one type to another.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -370,15 +370,15 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the object that this <see cref="T:System.Xml.Serialization.XmlSerializer" /> can serialize. </param
-        >
+          />The type of the object that this <see cref="T:System.Xml.Serialization.XmlSerializer" /> can serialize.
+        </param>
         <param name="defaultNamespace">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The default namespace to use for all the XML elements. </param
-        >
+          />The default namespace to use for all the XML elements.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -419,15 +419,15 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the object that this <see cref="T:System.Xml.Serialization.XmlSerializer" /> can serialize. </param
-        >
+          />The type of the object that this <see cref="T:System.Xml.Serialization.XmlSerializer" /> can serialize.
+        </param>
         <param name="extraTypes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> array of additional object types to serialize. </param
-        >
+          />A <see cref="T:System.Type" /> array of additional object types to serialize.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -468,15 +468,15 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the object to serialize. </param
-        >
+          />The type of the object to serialize.
+        </param>
         <param name="overrides">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.Serialization.XmlAttributeOverrides" />. </param
-        >
+          />An <see cref="T:System.Xml.Serialization.XmlAttributeOverrides" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -517,15 +517,15 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the object that this <see cref="T:System.Xml.Serialization.XmlSerializer" /> can serialize. </param
-        >
+          />The type of the object that this <see cref="T:System.Xml.Serialization.XmlSerializer" /> can serialize.
+        </param>
         <param name="root">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.Serialization.XmlRootAttribute" /> that represents the XML root element. </param
-        >
+          />An <see cref="T:System.Xml.Serialization.XmlRootAttribute" /> that represents the XML root element.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -578,36 +578,36 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the object that this <see cref="T:System.Xml.Serialization.XmlSerializer" /> can serialize. </param
-        >
+          />The type of the object that this <see cref="T:System.Xml.Serialization.XmlSerializer" /> can serialize.
+        </param>
         <param name="overrides">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.Serialization.XmlAttributeOverrides" /> that extends or overrides the behavior of the class specified in the <paramref name="type" /> parameter. </param
-        >
+          />An <see cref="T:System.Xml.Serialization.XmlAttributeOverrides" /> that extends or overrides the behavior of the class specified in the <paramref name="type" /> parameter.
+        </param>
         <param name="extraTypes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> array of additional object types to serialize. </param
-        >
+          />A <see cref="T:System.Type" /> array of additional object types to serialize.
+        </param>
         <param name="root">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.Serialization.XmlRootAttribute" /> that defines the XML root element properties. </param
-        >
+          />An <see cref="T:System.Xml.Serialization.XmlRootAttribute" /> that defines the XML root element properties.
+        </param>
         <param name="defaultNamespace">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The default namespace of all XML elements in the XML document. </param
-        >
+          />The default namespace of all XML elements in the XML document.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -736,8 +736,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlReader" /> that points to the document to deserialize. </param
-        >
+          />An <see cref="T:System.Xml.XmlReader" /> that points to the document to deserialize.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateReader">
@@ -832,8 +832,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
             >Before deserializing, an <see cref="T:System.Xml.Serialization.XmlSerializer" /> must be constructed using the type of the object that is being deserialized.</para
           >
           <para
-            >Use the <paramref name="stream" /> parameter to specify an object that derives from the <see cref="T:System.IO.Stream" /> class, which is designed to write to streams. Classes that derive from the <see cref="T:System.IO.Stream" /> class include: </para
-          >
+            >Use the <paramref name="stream" /> parameter to specify an object that derives from the <see cref="T:System.IO.Stream" /> class, which is designed to write to streams. Classes that derive from the <see cref="T:System.IO.Stream" /> class include:
+          </para>
           <list type="bullet">
             <item>
               <para>
@@ -882,8 +882,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.Stream" /> that contains the XML document to deserialize. </param
-        >
+          />The <see cref="T:System.IO.Stream" /> that contains the XML document to deserialize.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Deserialize">
@@ -943,8 +943,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.TextReader" /> that contains the XML document to deserialize. </param
-        >
+          />The <see cref="T:System.IO.TextReader" /> that contains the XML document to deserialize.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Deserialize">
@@ -985,8 +985,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> that contains the XML document to deserialize. </param
-        >
+          />The <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> that contains the XML document to deserialize.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Deserialize">
@@ -1041,8 +1041,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.xml.XmlReader" /> that contains the XML document to deserialize. </param
-        >
+          />The <see cref="T:System.xml.XmlReader" /> that contains the XML document to deserialize.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Deserialize">
@@ -1096,15 +1096,15 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.xml.XmlReader" /> that contains the XML document to deserialize. </param
-        >
+          />The <see cref="T:System.xml.XmlReader" /> that contains the XML document to deserialize.
+        </param>
         <param name="encodingStyle">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The encoding style of the serialized XML. </param
-        >
+          />The encoding style of the serialized XML.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Deserialize">
@@ -1156,8 +1156,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An instance of the <see cref="T:System.Xml.Serialization.XmlDeserializationEvents" /> class. </param
-        >
+          />An instance of the <see cref="T:System.Xml.Serialization.XmlDeserializationEvents" /> class.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Deserialize">
@@ -1213,8 +1213,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An instance of the <see cref="T:System.Xml.Serialization.XmlDeserializationEvents" /> class. </param
-        >
+          />An instance of the <see cref="T:System.Xml.Serialization.XmlDeserializationEvents" /> class.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="FromMappings">
@@ -1255,8 +1255,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Xml.Serialization.XmlTypeMapping" /> that maps one type to another. </param
-        >
+          />An array of <see cref="T:System.Xml.Serialization.XmlTypeMapping" /> that maps one type to another.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="FromMappings">
@@ -1406,8 +1406,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Type" /> objects. </param
-        >
+          />An array of <see cref="T:System.Type" /> objects.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GenerateSerializer">
@@ -1550,8 +1550,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
             </format> creates an XML serialization assembly for types in a specified assembly to improve the run-time performance of an <see cref="T:System.Xml.Serialization.XmlSerializer" /> when it serializes or deserializes objects of the specified types. Use the <see cref="M:System.Xml.Serialization.XmlSerializer.GetXmlSerializerAssemblyName(System.Type)" /> to return the name of such an assembly.</para
           >
           <para
-            >If you are distributing such an assembly as part of a client application that calls a Web service, you can apply the <see cref="T:System.Xml.Serialization.XmlSerializerAssemblyAttribute" /> to the client type to specify the location and name of the assembly. </para
-          >
+            >If you are distributing such an assembly as part of a client application that calls a Web service, you can apply the <see cref="T:System.Xml.Serialization.XmlSerializerAssemblyAttribute" /> to the client type to specify the location and name of the assembly.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1607,8 +1607,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
             </format> creates an XML serialization assembly for types in a specified assembly to improve the run-time performance of an <see cref="T:System.Xml.Serialization.XmlSerializer" /> when it serializes or deserializes objects of the specified types. Use the <see cref="M:System.Xml.Serialization.XmlSerializer.GetXmlSerializerAssemblyName(System.Type)" /> to return the name of such an assembly.</para
           >
           <para
-            >If you are distributing such an assembly as part of a client application that calls a Web service, you can apply the <see cref="T:System.Xml.Serialization.XmlSerializerAssemblyAttribute" /> to the client type to specify the location and name of the assembly. </para
-          >
+            >If you are distributing such an assembly as part of a client application that calls a Web service, you can apply the <see cref="T:System.Xml.Serialization.XmlSerializerAssemblyAttribute" /> to the client type to specify the location and name of the assembly.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1663,8 +1663,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
             >The <see cref="M:System.Xml.Serialization.XmlSerializer.Serialize(System.IO.TextWriter,System.Object)" /> method converts the public fields and read/write properties of an object into XML. It does not convert methods, indexers, private fields, or read-only properties. To serialize all of an object's fields and properties, both public and private, use the <see cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" />.</para
           >
           <para
-            >In the <paramref name="stream" /> parameter, specify an object that derives from the abstract <see cref="T:System.IO.Stream" /> class. Classes that derive from <see cref="T:System.IO.Stream" /> include: </para
-          >
+            >In the <paramref name="stream" /> parameter, specify an object that derives from the abstract <see cref="T:System.IO.Stream" /> class. Classes that derive from <see cref="T:System.IO.Stream" /> include:
+          </para>
           <list type="bullet">
             <item>
               <para>
@@ -1709,15 +1709,15 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.Stream" /> used to write the XML document. </param
-        >
+          />The <see cref="T:System.IO.Stream" /> used to write the XML document.
+        </param>
         <param name="o">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to serialize. </param
-        >
+          />The <see cref="T:System.Object" /> to serialize.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Serialize">
@@ -1749,8 +1749,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
             >The <see cref="M:System.Xml.Serialization.XmlSerializer.Serialize(System.IO.TextWriter,System.Object)" /> method converts the public fields and read/write properties of an object into XML. It does not convert methods, indexers, private fields, or read-only properties. To serialize all an object's fields and properties, both public and private, use the <see cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" />.</para
           >
           <para
-            >In the <paramref name="textWriter" /> parameter, specify an object that derives from the abstract <see cref="T:System.IO.TextWriter" /> class. Classes that derive from <see cref="T:System.IO.TextWriter" /> include: </para
-          >
+            >In the <paramref name="textWriter" /> parameter, specify an object that derives from the abstract <see cref="T:System.IO.TextWriter" /> class. Classes that derive from <see cref="T:System.IO.TextWriter" /> include:
+          </para>
           <list type="bullet">
             <item>
               <para>
@@ -1785,15 +1785,15 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.TextWriter" /> used to write the XML document. </param
-        >
+          />The <see cref="T:System.IO.TextWriter" /> used to write the XML document.
+        </param>
         <param name="o">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to serialize. </param
-        >
+          />The <see cref="T:System.Object" /> to serialize.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Serialize">
@@ -1831,15 +1831,15 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to serialize. </param
-        >
+          />The <see cref="T:System.Object" /> to serialize.
+        </param>
         <param name="writer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> used to write the XML document. </param
-        >
+          />The <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> used to write the XML document.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Serialize">
@@ -1890,15 +1890,15 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.xml.XmlWriter" /> used to write the XML document. </param
-        >
+          />The <see cref="T:System.xml.XmlWriter" /> used to write the XML document.
+        </param>
         <param name="o">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to serialize. </param
-        >
+          />The <see cref="T:System.Object" /> to serialize.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Serialize">
@@ -1931,8 +1931,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
             >When the <see cref="M:System.Xml.Serialization.XmlSerializer.Serialize(System.IO.TextWriter,System.Object)" /> method is invoked, the public fields and read/write properties of an object are converted into XML. Methods, indexers, private fields, and read-only properties are not serialized. To serialize all fields and properties, both public and private, use the <see cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" />.</para
           >
           <para
-            >Use the <paramref name="stream" /> parameter to specify an object that derives from the abstract <see cref="T:System.IO.Stream" /> class, which is designed to write to streams. Classes that derive from the <see cref="T:System.IO.Stream" /> class include: </para
-          >
+            >Use the <paramref name="stream" /> parameter to specify an object that derives from the abstract <see cref="T:System.IO.Stream" /> class, which is designed to write to streams. Classes that derive from the <see cref="T:System.IO.Stream" /> class include:
+          </para>
           <list type="bullet">
             <item>
               <para>
@@ -1977,22 +1977,22 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.Stream" /> used to write the XML document. </param
-        >
+          />The <see cref="T:System.IO.Stream" /> used to write the XML document.
+        </param>
         <param name="o">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to serialize. </param
-        >
+          />The <see cref="T:System.Object" /> to serialize.
+        </param>
         <param name="namespaces">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.Serialization.XmlSerializerNamespaces" /> referenced by the object. </param
-        >
+          />The <see cref="T:System.Xml.Serialization.XmlSerializerNamespaces" /> referenced by the object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Serialize">
@@ -2025,8 +2025,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
             >When the <see cref="M:System.Xml.Serialization.XmlSerializer.Serialize(System.IO.TextWriter,System.Object)" /> method is invoked the public fields and read/write properties of an object are converted into XML. Methods, indexers, private fields, and read-only properties are not serialized. To serialize all fields and properties, both public and private, use the <see cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" />.</para
           >
           <para
-            >Use the <paramref name="textWriter" /> parameter to specify an object that derives from the abstract <see cref="T:System.IO.TextWriter" /> class. Classes that derive from <see cref="T:System.IO.TextWriter" /> class include: </para
-          >
+            >Use the <paramref name="textWriter" /> parameter to specify an object that derives from the abstract <see cref="T:System.IO.TextWriter" /> class. Classes that derive from <see cref="T:System.IO.TextWriter" /> class include:
+          </para>
           <list type="bullet">
             <item>
               <para>
@@ -2061,22 +2061,22 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.TextWriter" /> used to write the XML document. </param
-        >
+          />The <see cref="T:System.IO.TextWriter" /> used to write the XML document.
+        </param>
         <param name="o">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to serialize. </param
-        >
+          />The <see cref="T:System.Object" /> to serialize.
+        </param>
         <param name="namespaces">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.Serialization.XmlSerializerNamespaces" /> that contains namespaces for the generated XML document. </param
-        >
+          />The <see cref="T:System.Xml.Serialization.XmlSerializerNamespaces" /> that contains namespaces for the generated XML document.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Serialize">
@@ -2128,22 +2128,22 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.xml.XmlWriter" /> used to write the XML document. </param
-        >
+          />The <see cref="T:System.xml.XmlWriter" /> used to write the XML document.
+        </param>
         <param name="o">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to serialize. </param
-        >
+          />The <see cref="T:System.Object" /> to serialize.
+        </param>
         <param name="namespaces">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.Serialization.XmlSerializerNamespaces" /> referenced by the object. </param
-        >
+          />The <see cref="T:System.Xml.Serialization.XmlSerializerNamespaces" /> referenced by the object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Serialize">
@@ -2199,29 +2199,25 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.xml.XmlWriter" /> used to write the XML document. </param
-        >
+          />The <see cref="T:System.xml.XmlWriter" /> used to write the XML document.
+        </param>
         <param name="o">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The object to serialize. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The object to serialize.
+        </param>
         <param name="namespaces">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.Serialization.XmlSerializerNamespaces" /> referenced by the object. </param
-        >
+          />The <see cref="T:System.Xml.Serialization.XmlSerializerNamespaces" /> referenced by the object.
+        </param>
         <param name="encodingStyle">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The encoding style of the serialized XML. </param
-        >
+          />The encoding style of the serialized XML.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Serialize">
@@ -2257,8 +2253,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Serializes the specified <see cref="T:System.Object" /> and writes the XML document to a file using the specified <see cref="T:System.Xml.XmlWriter" />, XML namespaces, and encoding. </para
-          >
+            >Serializes the specified <see cref="T:System.Object" /> and writes the XML document to a file using the specified <see cref="T:System.Xml.XmlWriter" />, XML namespaces, and encoding.
+          </para>
         </summary>
         <param name="xmlWriter">
           <attribution
@@ -2293,8 +2289,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />For SOAP encoded messages, the base used to generate id attributes. </param
-        >
+          />For SOAP encoded messages, the base used to generate id attributes.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="UnknownAttribute">

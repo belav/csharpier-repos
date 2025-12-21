@@ -106,15 +106,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeExpression" /> that indicates the array the indexer targets. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeExpression" /> that indicates the array the indexer targets.
+        </param>
         <param name="indices">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index or indexes to reference. </param
-        >
+          />The index or indexes to reference.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Indices">

@@ -82,15 +82,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> to check for the ability to deserialize. </param
-        >
+          />The <see cref="T:System.Type" /> to check for the ability to deserialize.
+        </param>
         <param name="securityLevel">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.Formatters.TypeFilterLevel" /> property value. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.Formatters.TypeFilterLevel" /> property value.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetObjectData">
@@ -137,15 +137,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to write to the formatter. </param
-        >
+          />The object to write to the formatter.
+        </param>
         <param name="members">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The members to extract from the object. </param
-        >
+          />The members to extract from the object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetSafeUninitializedObject">
@@ -196,8 +196,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of object to create. </param
-        >
+          />The type of object to create.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetSerializableMembers">
@@ -241,12 +241,8 @@
           >
         </returns>
         <param name="type">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The type being serialized. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The type being serialized.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetSerializableMembers">
@@ -298,15 +294,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type being serialized or cloned. </param
-        >
+          />The type being serialized or cloned.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The context where the serialization occurs. </param
-        >
+          />The context where the serialization occurs.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetSurrogateForCyclicalReference">
@@ -398,15 +394,11 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The assembly where you want to look up the object. </param
-        >
+          />The assembly where you want to look up the object.
+        </param>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the object. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetUninitializedObject">
@@ -453,8 +445,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of object to create. </param
-        >
+          />The type of object to create.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="PopulateObjectMembers">
@@ -496,26 +488,22 @@
           <para>The newly populated object.</para>
         </returns>
         <param name="obj">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The object to populate. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The object to populate.
+        </param>
         <param name="members">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Reflection.MemberInfo" /> that describes which fields and properties to populate. </param
-        >
+          />An array of <see cref="T:System.Reflection.MemberInfo" /> that describes which fields and properties to populate.
+        </param>
         <param name="data">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Object" /> that specifies the values for each field and property to populate. </param
-        >
+          />An array of <see cref="T:System.Object" /> that specifies the values for each field and property to populate.
+        </param>
       </Docs>
     </Member>
   </Members>

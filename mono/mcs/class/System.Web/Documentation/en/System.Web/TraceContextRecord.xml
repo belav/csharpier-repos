@@ -13,8 +13,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.TraceContextRecord" /> object encapsulates the trace message, category, any associated <see cref="T:System.Exception" />, and whether the trace record was written by the <see cref="Overload:System.Web.TraceContext.Warn" /> method. </para
-      >
+        >The <see cref="T:System.Web.TraceContextRecord" /> object encapsulates the trace message, category, any associated <see cref="T:System.Exception" />, and whether the trace record was written by the <see cref="Overload:System.Web.TraceContext.Warn" /> method.
+      </para>
       <para
         >Every call to the <see cref="Overload:System.Web.TraceContext.Write" /> and <see cref="Overload:System.Web.TraceContext.Warn" /> methods generates a <see cref="T:System.Web.TraceContextRecord" /> object that is added to the <see cref="P:System.Web.TraceContextEventArgs.TraceRecords" /> messages collection. You can access the collection of records by handling the <see cref="E:System.Web.TraceContext.TraceFinished" /> event.</para
       >
@@ -50,8 +50,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.TraceContextRecord" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.TraceContextRecord" /> class.
+          </para>
         </summary>
         <param name="category">
           <attribution
@@ -75,8 +75,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Exception" /> object that contains additional error information. </param
-        >
+          />A <see cref="T:System.Exception" /> object that contains additional error information.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Category">

@@ -154,8 +154,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implement the <see cref="M:System.ServiceModel.Description.IEndpointBehavior.ApplyClientBehavior(System.ServiceModel.Description.ServiceEndpoint,System.ServiceModel.Dispatcher.ClientRuntime)" /> method to view, modify, or add custom extension to the client runtime across all messages used with an endpoint or for specific operations. For details about what customizations you can do with a client run-time object, see <see cref="T:System.ServiceModel.Dispatcher.ClientRuntime" /> and <see cref="T:System.ServiceModel.Dispatcher.ClientOperation" />. </para
-          >
+            >Implement the <see cref="M:System.ServiceModel.Description.IEndpointBehavior.ApplyClientBehavior(System.ServiceModel.Description.ServiceEndpoint,System.ServiceModel.Dispatcher.ClientRuntime)" /> method to view, modify, or add custom extension to the client runtime across all messages used with an endpoint or for specific operations. For details about what customizations you can do with a client run-time object, see <see cref="T:System.ServiceModel.Dispatcher.ClientRuntime" /> and <see cref="T:System.ServiceModel.Dispatcher.ClientOperation" />.
+          </para>
           <para
             >It is recommended that the <see cref="M:System.ServiceModel.Description.IEndpointBehavior.ApplyClientBehavior(System.ServiceModel.Description.ServiceEndpoint,System.ServiceModel.Dispatcher.ClientRuntime)" /> method throw a <see cref="T:System.NotImplementedException" /> if the behavior is only intended for use in a service application.</para
           >
@@ -198,8 +198,8 @@
             >Implement the <see cref="M:System.ServiceModel.Description.IEndpointBehavior.ApplyDispatchBehavior(System.ServiceModel.Description.ServiceEndpoint,System.ServiceModel.Dispatcher.EndpointDispatcher)" /> method to view, modify, or extend the service runtime across all messages or for specific operations in an endpoint. For details about what customizations you can do in a service application, see <see cref="T:System.ServiceModel.Dispatcher.DispatchRuntime" /> and <see cref="T:System.ServiceModel.Dispatcher.DispatchOperation" />.</para
           >
           <para
-            >It is recommended that the <see cref="M:System.ServiceModel.Description.IEndpointBehavior.ApplyDispatchBehavior(System.ServiceModel.Description.ServiceEndpoint,System.ServiceModel.Dispatcher.EndpointDispatcher)" /> method throw a <see cref="T:System.NotImplementedException" /> exception if the behavior is only intended for use in a client application. </para
-          >
+            >It is recommended that the <see cref="M:System.ServiceModel.Description.IEndpointBehavior.ApplyDispatchBehavior(System.ServiceModel.Description.ServiceEndpoint,System.ServiceModel.Dispatcher.EndpointDispatcher)" /> method throw a <see cref="T:System.NotImplementedException" /> exception if the behavior is only intended for use in a client application.
+          </para>
           <para
             >Note that there can be two operations with the same name in the description when using a callback contract (one operation in each direction). If you are iterating through operations, you must correlate the message direction between the endpoint <see cref="T:System.ServiceModel.Dispatcher.DispatchRuntime" /> and what is returned by the <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.CallbackClientRuntime" /> property.</para
           >

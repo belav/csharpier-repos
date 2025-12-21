@@ -23,8 +23,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The members of the <see cref="T:System.Reflection.GenericParameterAttributes" /> enumeration are divided into two groups, the variance group and the special constraints group. To test a <see cref="T:System.Reflection.GenericParameterAttributes" /> value for variance flags, first perform a bitwise AND operation with <see cref="F:System.Reflection.GenericParameterAttributes.VarianceMask" />. If the result is <see cref="F:System.Reflection.GenericParameterAttributes.None" />, there are no variance flags. Similarly, use <see cref="F:System.Reflection.GenericParameterAttributes.SpecialConstraintMask" /> to test for constraint flags. </para
-      >
+        >The members of the <see cref="T:System.Reflection.GenericParameterAttributes" /> enumeration are divided into two groups, the variance group and the special constraints group. To test a <see cref="T:System.Reflection.GenericParameterAttributes" /> value for variance flags, first perform a bitwise AND operation with <see cref="F:System.Reflection.GenericParameterAttributes.VarianceMask" />. If the result is <see cref="F:System.Reflection.GenericParameterAttributes.None" />, there are no variance flags. Similarly, use <see cref="F:System.Reflection.GenericParameterAttributes.SpecialConstraintMask" /> to test for constraint flags.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

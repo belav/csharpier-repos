@@ -155,14 +155,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.UI.HtmlControls.HtmlInputReset.CausesValidation" /> property is not intended to be used directly from your code. </para
-          >
+            >The <see cref="P:System.Web.UI.HtmlControls.HtmlInputReset.CausesValidation" /> property is not intended to be used directly from your code.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that indicates whether validation is performed when the <see cref="T:System.Web.UI.HtmlControls.HtmlInputReset" /> control is clicked. </para
-          >
+            >Gets or sets a value that indicates whether validation is performed when the <see cref="T:System.Web.UI.HtmlControls.HtmlInputReset" /> control is clicked.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -188,14 +188,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="E:System.Web.UI.HtmlControls.HtmlInputReset.ServerClick" /> event is not intended to be used directly from your code. </para
-          >
+            >The <see cref="E:System.Web.UI.HtmlControls.HtmlInputReset.ServerClick" /> event is not intended to be used directly from your code.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when an <see cref="T:System.Web.UI.HtmlControls.HtmlInputReset" /> control is clicked on the Web page. </para
-          >
+            >Occurs when an <see cref="T:System.Web.UI.HtmlControls.HtmlInputReset" /> control is clicked on the Web page.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -222,14 +222,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.UI.HtmlControls.HtmlInputReset.ValidationGroup" /> property is not intended to be used directly from your code. </para
-          >
+            >The <see cref="P:System.Web.UI.HtmlControls.HtmlInputReset.ValidationGroup" /> property is not intended to be used directly from your code.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the group of controls for which the <see cref="T:System.Web.UI.HtmlControls.HtmlInputReset" /> control causes validation when it posts back to the server. </para
-          >
+            >Gets or sets the group of controls for which the <see cref="T:System.Web.UI.HtmlControls.HtmlInputReset" /> control causes validation when it posts back to the server.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>

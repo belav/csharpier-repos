@@ -63,15 +63,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.ToolStrip" /> to which this <see cref="T:System.Windows.Forms.ToolStripItemCollection" /> belongs. </param
-        >
+          />The <see cref="T:System.Windows.Forms.ToolStrip" /> to which this <see cref="T:System.Windows.Forms.ToolStripItemCollection" /> belongs.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type <see cref="T:System.Windows.Forms.ToolStripItem" /> containing the initial controls for this <see cref="T:System.Windows.Forms.ToolStripItemCollection" />. </param
-        >
+          />An array of type <see cref="T:System.Windows.Forms.ToolStripItem" /> containing the initial controls for this <see cref="T:System.Windows.Forms.ToolStripItemCollection" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -181,8 +181,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.ToolStripItem" /> to add to the end of the collection. </param
-        >
+          />The <see cref="T:System.Windows.Forms.ToolStripItem" /> to add to the end of the collection.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -317,8 +317,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Windows.Forms.ToolStripItem" /> controls. </param
-        >
+          />An array of <see cref="T:System.Windows.Forms.ToolStripItem" /> controls.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -358,8 +358,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.ToolStripItemCollection" /> to be added to the current collection. </param
-        >
+          />The <see cref="T:System.Windows.Forms.ToolStripItemCollection" /> to be added to the current collection.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -425,8 +425,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.ToolStripItem" /> to search for in the <see cref="T:System.Windows.Forms.ToolStripItemCollection" />. </param
-        >
+          />The <see cref="T:System.Windows.Forms.ToolStripItem" /> to search for in the <see cref="T:System.Windows.Forms.ToolStripItemCollection" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -446,8 +446,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="key" /> parameter value corresponds to the <see cref="P:System.Windows.Forms.ToolStripItem.Name" /> property. </para
-          >
+            >The <paramref name="key" /> parameter value corresponds to the <see cref="P:System.Windows.Forms.ToolStripItem.Name" /> property.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -464,8 +464,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key to locate in the <see cref="T:System.Windows.Forms.ToolStripItemCollection" />. </param
-        >
+          />The key to locate in the <see cref="T:System.Windows.Forms.ToolStripItemCollection" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -498,15 +498,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array of type <see cref="T:System.Windows.Forms.ToolStripItem" /> to which to copy the collection. </param
-        >
+          />The array of type <see cref="T:System.Windows.Forms.ToolStripItem" /> to which to copy the collection.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position in the <see cref="T:System.Windows.Forms.ToolStripItem" /> array at which to paste the collection. </param
-        >
+          />The position in the <see cref="T:System.Windows.Forms.ToolStripItem" /> array at which to paste the collection.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -550,8 +550,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to search child items of the <see cref="T:System.Windows.Forms.ToolStripItem" /> specified by the <paramref name="key" /> parameter; otherwise, false. </param
-        >
+          />true to search child items of the <see cref="T:System.Windows.Forms.ToolStripItem" /> specified by the <paramref name="key" /> parameter; otherwise, false.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -587,8 +587,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.ToolStripItem" /> to locate in the <see cref="T:System.Windows.Forms.ToolStripItemCollection" />. </param
-        >
+          />The <see cref="T:System.Windows.Forms.ToolStripItem" /> to locate in the <see cref="T:System.Windows.Forms.ToolStripItemCollection" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -608,8 +608,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="key" /> parameter value corresponds to the <see cref="P:System.Windows.Forms.ToolStripItem.Name" /> property. </para
-          >
+            >The <paramref name="key" /> parameter value corresponds to the <see cref="P:System.Windows.Forms.ToolStripItem.Name" /> property.
+          </para>
           <para
             >If <see cref="M:System.Windows.Forms.ToolStripItemCollection.IndexOfKey(System.String)" /> is called successively, the last returned index will be checked for a key match first, and if there is no match, the search starts at the beginning of the collection.</para
           >
@@ -629,8 +629,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the <see cref="T:System.Windows.Forms.ToolStripItem" /> to search for. </param
-        >
+          />The name of the <see cref="T:System.Windows.Forms.ToolStripItem" /> to search for.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -661,15 +661,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The location in the <see cref="T:System.Windows.Forms.ToolStripItemCollection" /> at which to insert the <see cref="T:System.Windows.Forms.ToolStripItem" />. </param
-        >
+          />The location in the <see cref="T:System.Windows.Forms.ToolStripItemCollection" /> at which to insert the <see cref="T:System.Windows.Forms.ToolStripItem" />.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.ToolStripItem" /> to insert. </param
-        >
+          />The <see cref="T:System.Windows.Forms.ToolStripItem" /> to insert.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -777,8 +777,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.ToolStripItem" /> to remove from the <see cref="T:System.Windows.Forms.ToolStripItemCollection" />. </param
-        >
+          />The <see cref="T:System.Windows.Forms.ToolStripItem" /> to remove from the <see cref="T:System.Windows.Forms.ToolStripItemCollection" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -816,8 +816,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index value of the <see cref="T:System.Windows.Forms.ToolStripItem" /> to remove. </param
-        >
+          />The index value of the <see cref="T:System.Windows.Forms.ToolStripItem" /> to remove.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -837,8 +837,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="key" /> parameter value corresponds to the <see cref="P:System.Windows.Forms.ToolStripItem.Name" /> property. </para
-          >
+            >The <paramref name="key" /> parameter value corresponds to the <see cref="P:System.Windows.Forms.ToolStripItem.Name" /> property.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -849,8 +849,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key of the <see cref="T:System.Windows.Forms.ToolStripItem" /> to remove. </param
-        >
+          />The key of the <see cref="T:System.Windows.Forms.ToolStripItem" /> to remove.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

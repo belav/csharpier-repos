@@ -80,15 +80,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.Compiler.CompilerParameters" /> object that indicates the settings for compilation. </param
-        >
+          />A <see cref="T:System.CodeDom.Compiler.CompilerParameters" /> object that indicates the settings for compilation.
+        </param>
         <param name="compilationUnit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeCompileUnit" /> that indicates the code to compile. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeCompileUnit" /> that indicates the code to compile.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CompileAssemblyFromDomBatch">
@@ -133,8 +133,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.Compiler.CompilerParameters" /> object that indicates the settings for compilation. </param
-        >
+          />A <see cref="T:System.CodeDom.Compiler.CompilerParameters" /> object that indicates the settings for compilation.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CompileAssemblyFromFile">
@@ -176,15 +176,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.Compiler.CompilerParameters" /> object that indicates the settings for compilation. </param
-        >
+          />A <see cref="T:System.CodeDom.Compiler.CompilerParameters" /> object that indicates the settings for compilation.
+        </param>
         <param name="fileName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file name of the file that contains the source code to compile. </param
-        >
+          />The file name of the file that contains the source code to compile.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CompileAssemblyFromFileBatch">
@@ -227,8 +227,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.Compiler.CompilerParameters" /> object that indicates the settings for compilation. </param
-        >
+          />A <see cref="T:System.CodeDom.Compiler.CompilerParameters" /> object that indicates the settings for compilation.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CompileAssemblyFromSource">
@@ -270,15 +270,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.Compiler.CompilerParameters" /> object that indicates the settings for compilation. </param
-        >
+          />A <see cref="T:System.CodeDom.Compiler.CompilerParameters" /> object that indicates the settings for compilation.
+        </param>
         <param name="source">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The source code to compile. </param
-        >
+          />The source code to compile.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CompileAssemblyFromSourceBatch">
@@ -321,8 +321,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.Compiler.CompilerParameters" /> object that indicates the settings for compilation. </param
-        >
+          />A <see cref="T:System.CodeDom.Compiler.CompilerParameters" /> object that indicates the settings for compilation.
+        </param>
       </Docs>
     </Member>
   </Members>

@@ -22,8 +22,8 @@
         >The <see cref="T:System.ComponentModel.ISynchronizeInvoke" /> interface provides synchronous and asynchronous communication between objects about the occurrence of an event. Objects that implement this interface can receive notification that an event has occurred, and they can respond to queries about the event. In this way, clients can ensure that one request has been processed before they submit a subsequent request that depends on completion of the first.</para
       >
       <para
-        >The <see cref="T:System.ComponentModel.ISynchronizeInvoke" /> class provides two ways to invoke a process: </para
-      >
+        >The <see cref="T:System.ComponentModel.ISynchronizeInvoke" /> class provides two ways to invoke a process:
+      </para>
       <list type="ordered">
         <item>
           <para
@@ -102,15 +102,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Delegate" /> to a method that takes parameters of the same number and type that are contained in <paramref name="args" />. </param
-        >
+          />A <see cref="T:System.Delegate" /> to a method that takes parameters of the same number and type that are contained in <paramref name="args" />.
+        </param>
         <param name="args">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type <see cref="T:System.Object" /> to pass as arguments to the given method. This can be null if no arguments are needed. </param
-        >
+          />An array of type <see cref="T:System.Object" /> to pass as arguments to the given method. This can be null if no arguments are needed.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="EndInvoke">
@@ -155,8 +155,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.IAsyncResult" /> interface that represents the asynchronous operation started by calling <see cref="M:System.ComponentModel.ISynchronizeInvoke.BeginInvoke(System.Delegate,System.Object[])" />. </param
-        >
+          />An <see cref="T:System.IAsyncResult" /> interface that represents the asynchronous operation started by calling <see cref="M:System.ComponentModel.ISynchronizeInvoke.BeginInvoke(System.Delegate,System.Object[])" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Invoke">
@@ -204,15 +204,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Delegate" /> that contains a method to call, in the context of the thread for the control. </param
-        >
+          />A <see cref="T:System.Delegate" /> that contains a method to call, in the context of the thread for the control.
+        </param>
         <param name="args">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type <see cref="T:System.Object" /> that represents the arguments to pass to the given method. This can be null if no arguments are needed. </param
-        >
+          />An array of type <see cref="T:System.Object" /> that represents the arguments to pass to the given method. This can be null if no arguments are needed.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="InvokeRequired">

@@ -49,8 +49,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Data.DesignerDataConnection" /> class with the specified name, data provider, and connection string. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Data.DesignerDataConnection" /> class with the specified name, data provider, and connection string.
+          </para>
         </summary>
         <param name="name">
           <attribution
@@ -100,8 +100,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Data.DesignerDataConnection" /> class with the specified name, data provider, and connection string, and indicates whether the connection was loaded from a configuration file. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Data.DesignerDataConnection" /> class with the specified name, data provider, and connection string, and indicates whether the connection was loaded from a configuration file.
+          </para>
         </summary>
         <param name="name">
           <attribution

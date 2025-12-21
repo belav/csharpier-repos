@@ -27,8 +27,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Displays a graphic in a <see cref="T:System.Windows.Forms.DataGridView" /> control. </para
-      >
+        >Displays a graphic in a <see cref="T:System.Windows.Forms.DataGridView" /> control.
+      </para>
     </summary>
   </Docs>
   <Members>
@@ -149,14 +149,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new accessible object for the <see cref="T:System.Windows.Forms.DataGridViewImageCell" />. </para
-          >
+            >Creates a new accessible object for the <see cref="T:System.Windows.Forms.DataGridViewImageCell" />.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see cref="T:System.Windows.Forms.DataGridViewImageCell.DataGridViewImageCellAccessibleObject" /> for the <see cref="T:System.Windows.Forms.DataGridViewImageCell" />. </para
-          >
+            >A new <see cref="T:System.Windows.Forms.DataGridViewImageCell.DataGridViewImageCellAccessibleObject" /> for the <see cref="T:System.Windows.Forms.DataGridViewImageCell" />.
+          </para>
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -592,8 +592,8 @@
             >Setting the <see cref="P:System.Windows.Forms.DataGridViewImageColumn.ValuesAreIcons" /> property of the owning column also sets the <see cref="P:System.Windows.Forms.DataGridViewImageCell.ValueIsIcon" /> property of every cell in the column and refreshes the column display. To override the specified value for individual cells, set the cell values after you set the column value.</para
           >
           <para
-            >When the value of this property changes for a cell in the row for new records, the image displayed in the cell is updated to the current value of the <see cref="P:System.Windows.Forms.DataGridViewImageCell.DefaultNewRowValue" /> property. </para
-          >
+            >When the value of this property changes for a cell in the row for new records, the image displayed in the cell is updated to the current value of the <see cref="P:System.Windows.Forms.DataGridViewImageCell.DefaultNewRowValue" /> property.
+          </para>
           <para
             >Unlike the column <see cref="P:System.Windows.Forms.DataGridViewImageColumn.ValuesAreIcons" /> property, the cell <see cref="P:System.Windows.Forms.DataGridViewImageCell.ValueIsIcon" /> property does not automatically update the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" /> property of the associated cell style when you change its value. When you change the cell <see cref="P:System.Windows.Forms.DataGridViewImageCell.ValueIsIcon" /> property value to true, be sure to set the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" /> property of the object returned by the <see cref="P:System.Windows.Forms.DataGridViewCell.Style" /> property to a valid <see cref="T:System.Drawing.Icon" />. When you change the <see cref="P:System.Windows.Forms.DataGridViewImageCell.ValueIsIcon" /> property value to false, be sure to set the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" /> property to a valid <see cref="T:System.Drawing.Image" />.</para
           >

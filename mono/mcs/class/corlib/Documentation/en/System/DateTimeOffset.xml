@@ -57,8 +57,8 @@
         >Because <see cref="T:System.DateTimeOffset" /> is a structure, a <see cref="T:System.DateTimeOffset" /> object that has been declared but not otherwise initialized contains the default values for each of its member fields. This means that its <see cref="P:System.DateTimeOffset.DateTime" /> property is set to <see cref="F:System.DateTimeOffset.MinValue" /> and its <see cref="P:System.DateTimeOffset.Offset" /> property is set to <see cref="F:System.TimeSpan.Zero" />.</para
       >
       <para
-        >You can create a new <see cref="T:System.DateTimeOffset" /> value by calling any of the overloads of its constructor, which are similar to the overloaded constructors for the <see cref="T:System.DateTime" /> structure. You can also create a new <see cref="T:System.DateTimeOffset" /> value by assigning it a <see cref="T:System.DateTime" /> value. This is an implicit conversion; it does not require a casting operator (in C#) or call to a conversion method (in Visual Basic). You can also initialize a <see cref="T:System.DateTimeOffset" /> value from the string representation of a date and time by calling a number of static string parsing methods, which include <see cref="Overload:System.DateTimeOffset.Parse" />, <see cref="Overload:System.DateTimeOffset.ParseExact" />, <see cref="Overload:System.DateTimeOffset.TryParse" />, and <see cref="Overload:System.DateTimeOffset.TryParseExact" />. </para
-      >
+        >You can create a new <see cref="T:System.DateTimeOffset" /> value by calling any of the overloads of its constructor, which are similar to the overloaded constructors for the <see cref="T:System.DateTime" /> structure. You can also create a new <see cref="T:System.DateTimeOffset" /> value by assigning it a <see cref="T:System.DateTime" /> value. This is an implicit conversion; it does not require a casting operator (in C#) or call to a conversion method (in Visual Basic). You can also initialize a <see cref="T:System.DateTimeOffset" /> value from the string representation of a date and time by calling a number of static string parsing methods, which include <see cref="Overload:System.DateTimeOffset.Parse" />, <see cref="Overload:System.DateTimeOffset.ParseExact" />, <see cref="Overload:System.DateTimeOffset.TryParse" />, and <see cref="Overload:System.DateTimeOffset.TryParseExact" />.
+      </para>
       <para
         >The members of the <see cref="T:System.DateTimeOffset" /> structure provide functionality in the following areas:</para
       >
@@ -125,8 +125,8 @@
           <list type="bullet">
             <item>
               <para
-                >If the value of <see cref="P:System.DateTime.Kind" /> is <see cref="F:System.DateTimeKind.Utc" />, the <see cref="P:System.DateTimeOffset.DateTime" /> property of the new instance is set equal to <paramref name="dateTime" />, and the <see cref="P:System.DateTimeOffset.Offset" /> property is set equal to <see cref="F:System.TimeSpan.Zero" />. </para
-              >
+                >If the value of <see cref="P:System.DateTime.Kind" /> is <see cref="F:System.DateTimeKind.Utc" />, the <see cref="P:System.DateTimeOffset.DateTime" /> property of the new instance is set equal to <paramref name="dateTime" />, and the <see cref="P:System.DateTimeOffset.Offset" /> property is set equal to <see cref="F:System.TimeSpan.Zero" />.
+              </para>
             </item>
             <item>
               <para
@@ -142,8 +142,8 @@
           >
         </summary>
         <param name="dateTime">
-          <attribution license="cc4" from="Microsoft" modified="false" />A date and time.   </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A date and time.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -195,8 +195,8 @@
           >
         </summary>
         <param name="dateTime">
-          <attribution license="cc4" from="Microsoft" modified="false" />A date and time.   </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A date and time.
+        </param>
         <param name="offset">
           <attribution
             license="cc4"
@@ -313,8 +313,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The hours (0 through 23).   </param
-        >
+          />The hours (0 through 23).
+        </param>
         <param name="minute">
           <attribution
             license="cc4"
@@ -401,8 +401,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The hours (0 through 23).   </param
-        >
+          />The hours (0 through 23).
+        </param>
         <param name="minute">
           <attribution
             license="cc4"
@@ -493,8 +493,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The hours (0 through 23).   </param
-        >
+          />The hours (0 through 23).
+        </param>
         <param name="minute">
           <attribution
             license="cc4"
@@ -564,8 +564,8 @@
             >The <see cref="M:System.DateTimeOffset.Add(System.TimeSpan)" /> method does not affect the value of the current <see cref="T:System.DateTimeOffset" /> object's <see cref="P:System.DateTimeOffset.Offset" /> property.</para
           >
           <para
-            >Because a <see cref="T:System.DateTimeOffset" /> object does not represent the date and time in a specific time zone, the <see cref="M:System.DateTimeOffset.Add(System.TimeSpan)" /> method does not consider a particular time zone's adjustment rules when it performs date and time arithmetic. </para
-          >
+            >Because a <see cref="T:System.DateTimeOffset" /> object does not represent the date and time in a specific time zone, the <see cref="M:System.DateTimeOffset.Add(System.TimeSpan)" /> method does not consider a particular time zone's adjustment rules when it performs date and time arithmetic.
+          </para>
           <para
             >If the <paramref name="timeSpan" /> parameter is null, this method returns the value of the original <see cref="T:System.DateTimeOffset" /> object unchanged.</para
           >
@@ -620,11 +620,11 @@
             >
           </block>
           <para
-            >Because a <see cref="T:System.DateTimeOffset" /> object does not represent the date and time in a specific time zone, the <see cref="M:System.DateTimeOffset.AddDays(System.Double)" /> method does not consider a particular time zone's adjustment rules when it performs date and time arithmetic. </para
-          >
+            >Because a <see cref="T:System.DateTimeOffset" /> object does not represent the date and time in a specific time zone, the <see cref="M:System.DateTimeOffset.AddDays(System.Double)" /> method does not consider a particular time zone's adjustment rules when it performs date and time arithmetic.
+          </para>
           <para
-            >Converting time intervals of less than a day to a fraction can involve a loss of precision. If this is problematic, you can use the <see cref="M:System.DateTimeOffset.Add(System.TimeSpan)" /> method, which enables you to specify more than one kind of time interval in a single method call and eliminates the need to convert time intervals to fractional parts of a day.  </para
-          >
+            >Converting time intervals of less than a day to a fraction can involve a loss of precision. If this is problematic, you can use the <see cref="M:System.DateTimeOffset.Add(System.TimeSpan)" /> method, which enables you to specify more than one kind of time interval in a single method call and eliminates the need to convert time intervals to fractional parts of a day.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -676,11 +676,11 @@
             >
           </block>
           <para
-            >Because a <see cref="T:System.DateTimeOffset" /> object does not represent the date and time in a specific time zone, the <see cref="M:System.DateTimeOffset.AddHours(System.Double)" /> method does not consider a particular time zone's adjustment rules when it performs date and time arithmetic. </para
-          >
+            >Because a <see cref="T:System.DateTimeOffset" /> object does not represent the date and time in a specific time zone, the <see cref="M:System.DateTimeOffset.AddHours(System.Double)" /> method does not consider a particular time zone's adjustment rules when it performs date and time arithmetic.
+          </para>
           <para
-            >Converting time intervals of less than an hour to a fraction can involve a loss of precision. (For example, one minute is 0.01666 of an hour.) If this is problematic, you can use the <see cref="M:System.DateTimeOffset.Add(System.TimeSpan)" /> method, which enables you to specify more than one kind of time interval in a single method call and eliminates the need to convert time intervals to fractional parts of an hour. </para
-          >
+            >Converting time intervals of less than an hour to a fraction can involve a loss of precision. (For example, one minute is 0.01666 of an hour.) If this is problematic, you can use the <see cref="M:System.DateTimeOffset.Add(System.TimeSpan)" /> method, which enables you to specify more than one kind of time interval in a single method call and eliminates the need to convert time intervals to fractional parts of an hour.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -735,8 +735,8 @@
             >
           </block>
           <para
-            >Because a <see cref="T:System.DateTimeOffset" /> object does not represent the date and time in a specific time zone, the <see cref="M:System.DateTimeOffset.AddMilliseconds(System.Double)" /> method does not consider a particular time zone's adjustment rules when it performs date and time arithmetic. </para
-          >
+            >Because a <see cref="T:System.DateTimeOffset" /> object does not represent the date and time in a specific time zone, the <see cref="M:System.DateTimeOffset.AddMilliseconds(System.Double)" /> method does not consider a particular time zone's adjustment rules when it performs date and time arithmetic.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -755,8 +755,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A number of whole and fractional milliseconds. The number can be negative or positive.   </param
-        >
+          />A number of whole and fractional milliseconds. The number can be negative or positive.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddMinutes">
@@ -788,8 +788,8 @@
             >
           </block>
           <para
-            >Because a <see cref="T:System.DateTimeOffset" /> object does not represent the date and time in a specific time zone, the <see cref="M:System.DateTimeOffset.AddMinutes(System.Double)" /> method does not consider a particular time zone's adjustment rules when it performs date and time arithmetic. </para
-          >
+            >Because a <see cref="T:System.DateTimeOffset" /> object does not represent the date and time in a specific time zone, the <see cref="M:System.DateTimeOffset.AddMinutes(System.Double)" /> method does not consider a particular time zone's adjustment rules when it performs date and time arithmetic.
+          </para>
           <para
             >Converting time intervals of less than a minute to a fraction can involve a loss of precision. (For example, one second is 0.01666 of a minute.) If this is problematic, you can use the <see cref="M:System.DateTimeOffset.Add(System.TimeSpan)" /> method, which enables you to specify more than one kind of time interval in a single method call and eliminates the need to convert time intervals to fractional parts of a minute.</para
           >
@@ -811,8 +811,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A number of whole and fractional minutes. The number can be negative or positive.   </param
-        >
+          />A number of whole and fractional minutes. The number can be negative or positive.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddMonths">
@@ -933,8 +933,8 @@
             >
           </block>
           <para
-            >Because a <see cref="T:System.DateTimeOffset" /> object does not represent the date and time in a specific time zone, the <see cref="M:System.DateTimeOffset.AddSeconds(System.Double)" /> method does not consider a particular time zone's adjustment rules when it performs date and time arithmetic. </para
-          >
+            >Because a <see cref="T:System.DateTimeOffset" /> object does not represent the date and time in a specific time zone, the <see cref="M:System.DateTimeOffset.AddSeconds(System.Double)" /> method does not consider a particular time zone's adjustment rules when it performs date and time arithmetic.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1061,8 +1061,8 @@
             </item>
           </list>
           <para
-            >Because a <see cref="T:System.DateTimeOffset" /> object does not represent the date and time in a specific time zone, the <see cref="M:System.DateTimeOffset.AddTicks(System.Int64)" /> method does not consider a particular time zone's adjustment rules when it performs date and time arithmetic. </para
-          >
+            >Because a <see cref="T:System.DateTimeOffset" /> object does not represent the date and time in a specific time zone, the <see cref="M:System.DateTimeOffset.AddTicks(System.Int64)" /> method does not consider a particular time zone's adjustment rules when it performs date and time arithmetic.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1252,8 +1252,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method compares <see cref="T:System.DateTimeOffset" /> objects by comparing their <see cref="P:System.DateTimeOffset.UtcDateTime" /> values; that is, it determines whether the two objects represent a single point in time, and indicates whether the current object is earlier than, later than, or the same as the <paramref name="other" /> parameter. </para
-          >
+            >This method compares <see cref="T:System.DateTimeOffset" /> objects by comparing their <see cref="P:System.DateTimeOffset.UtcDateTime" /> values; that is, it determines whether the two objects represent a single point in time, and indicates whether the current object is earlier than, later than, or the same as the <paramref name="other" /> parameter.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1337,8 +1337,8 @@
             >This property removes any significant part of the time component from a <see cref="T:System.DateTimeOffset" /> object and returns only its significant date component. For example, if the <see cref="T:System.DateTimeOffset" /> object has a date and time value of "1/12/07 4:01pm +7:30", the property returns a <see cref="T:System.DateTime" /> value of "1/12/07 12:00:00 AM". The <see cref="T:System.DateTime" /> value can then be displayed by using any of the standard or custom format specifiers that display dates only. (See the Example section for an illustration.)</para
           >
           <para
-            >The value of the <see cref="P:System.DateTime.Kind" /> property of the returned <see cref="T:System.DateTime" /> object is always <see cref="F:System.DateTimeKind.Unspecified" />. It is not affected by the value of the <see cref="P:System.DateTimeOffset.Offset" /> property. </para
-          >
+            >The value of the <see cref="P:System.DateTime.Kind" /> property of the returned <see cref="T:System.DateTime" /> object is always <see cref="F:System.DateTimeKind.Unspecified" />. It is not affected by the value of the <see cref="P:System.DateTimeOffset.Offset" /> property.
+          </para>
           <para>To display a date without its time component, you can also use the "D" or "d" format specifiers; for an illustration, see the Example section.</para>
         </remarks>
         <summary>
@@ -1371,8 +1371,8 @@
             >The <see cref="P:System.DateTimeOffset.DateTime" /> property is not affected by the value of the <see cref="P:System.DateTimeOffset.Offset" /> property.</para
           >
           <para
-            >This property returns both the date and the time component of a <see cref="T:System.DateTimeOffset" /> object, which makes it useful for performing <see cref="T:System.DateTimeOffset" /> to <see cref="T:System.DateTime" /> conversion. For example, if the <see cref="T:System.DateTimeOffset" /> object has a date and time value of "1/12/07 4:01pm + 7:30", the property returns a date of "1/12/07 4:01pm". </para
-          >
+            >This property returns both the date and the time component of a <see cref="T:System.DateTimeOffset" /> object, which makes it useful for performing <see cref="T:System.DateTimeOffset" /> to <see cref="T:System.DateTime" /> conversion. For example, if the <see cref="T:System.DateTimeOffset" /> object has a date and time value of "1/12/07 4:01pm + 7:30", the property returns a date of "1/12/07 4:01pm".
+          </para>
           <para
             >The value of the <see cref="P:System.DateTime.Kind" /> property of the returned <see cref="T:System.DateTime" /> object is <see cref="F:System.DateTimeKind.Unspecified" />.</para
           >
@@ -1434,8 +1434,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the constants in the <see cref="T:System.DayOfWeek" /> enumeration ranges from <see cref="F:System.DayOfWeek.Sunday" /> to <see cref="F:System.DayOfWeek.Saturday" />. If cast to an integer, its value ranges from zero (which indicates <see cref="F:System.DayOfWeek.Sunday" />) to six (which indicates <see cref="F:System.DayOfWeek.Saturday" />). </para
-          >
+            >The value of the constants in the <see cref="T:System.DayOfWeek" /> enumeration ranges from <see cref="F:System.DayOfWeek.Sunday" /> to <see cref="F:System.DayOfWeek.Saturday" />. If cast to an integer, its value ranges from zero (which indicates <see cref="F:System.DayOfWeek.Sunday" />) to six (which indicates <see cref="F:System.DayOfWeek.Saturday" />).
+          </para>
           <para>You can also display the weekday name of a particular date by using the "D" format specifier or the "dddd" custom format specifier. For example:</para>
           <para>code reference: System.DateTimeOffset.Properties#4</para>
           <para
@@ -1504,8 +1504,8 @@
             >A <see cref="T:System.DateTimeOffset" /> object that is not null is considered to be later (or greater) than one that is null.</para
           >
           <para
-            >This overload of the <see cref="M:System.DateTimeOffset.Equals(System.DateTimeOffset)" /> method implements the <see cref="M:System.IEquatable`1.Equals(`0)" /> method. It offers slightly better performance than the <see cref="M:System.DateTimeOffset.Equals(System.Object)" /> overload because the <paramref name="other" /> parameter does not have to be converted from an object.  </para
-          >
+            >This overload of the <see cref="M:System.DateTimeOffset.Equals(System.DateTimeOffset)" /> method implements the <see cref="M:System.IEquatable`1.Equals(`0)" /> method. It offers slightly better performance than the <see cref="M:System.DateTimeOffset.Equals(System.Object)" /> overload because the <paramref name="other" /> parameter does not have to be converted from an object.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1524,8 +1524,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object to compare to the current <see cref="T:System.DateTimeOffset" /> object.   </param
-        >
+          />An object to compare to the current <see cref="T:System.DateTimeOffset" /> object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -1661,11 +1661,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Because multiple time zones share a single offset, a return value of true does not guarantee that the current and the <paramref name="other" /> object represent times in the same time zone. </para
-          >
+            >Because multiple time zones share a single offset, a return value of true does not guarantee that the current and the <paramref name="other" /> object represent times in the same time zone.
+          </para>
           <para
-            >Unlike the <see cref="M:System.DateTimeOffset.EqualsExact(System.DateTimeOffset)" /> method, the overloads of the <see cref="Overload:System.DateTimeOffset.Equals" /> method determine only whether two <see cref="T:System.DateTimeOffset" /> values represent a single point in time. They do not indicate that two values have the same date and time as well as the same offset. </para
-          >
+            >Unlike the <see cref="M:System.DateTimeOffset.EqualsExact(System.DateTimeOffset)" /> method, the overloads of the <see cref="Overload:System.DateTimeOffset.Equals" /> method determine only whether two <see cref="T:System.DateTimeOffset" /> values represent a single point in time. They do not indicate that two values have the same date and time as well as the same offset.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1684,8 +1684,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to compare to the current <see cref="T:System.DateTimeOffset" /> object. </param
-        >
+          />The object to compare to the current <see cref="T:System.DateTimeOffset" /> object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="FromFileTime">
@@ -1716,8 +1716,8 @@
             >A Windows file time is directly accessible through the Windows API by calling the GetFileTime function, which returns a FILETIME structure. The single function parameter is the handle of the file whose file time information is to be retrieved. The file handle is retrieved by calling the CreateFile function. The FILETIME structure's dwHighDateTime member contains the four high-order bytes of the file time, and its dwLowDateTime member contains the four low-order bytes. The example that follows illustrates how to retrieve Windows file time values and convert them to <see cref="T:System.DateTimeOffset" /> values.</para
           >
           <para
-            >Windows file time values can also be created from <see cref="T:System.DateTime" /> values by calling the <see cref="M:System.DateTime.ToFileTime" /> and <see cref="M:System.DateTime.ToFileTimeUtc" /> methods, and from <see cref="T:System.DateTimeOffset" /> values by calling the <see cref="M:System.DateTimeOffset.ToFileTime" /> method. </para
-          >
+            >Windows file time values can also be created from <see cref="T:System.DateTime" /> values by calling the <see cref="M:System.DateTime.ToFileTime" /> and <see cref="M:System.DateTime.ToFileTimeUtc" /> methods, and from <see cref="T:System.DateTimeOffset" /> values by calling the <see cref="M:System.DateTimeOffset.ToFileTime" /> method.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1783,11 +1783,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.DateTimeOffset.Hour" /> property is not affected by the value of the <see cref="P:System.DateTimeOffset.Offset" /> property. </para
-          >
+            >The <see cref="P:System.DateTimeOffset.Hour" /> property is not affected by the value of the <see cref="P:System.DateTimeOffset.Offset" /> property.
+          </para>
           <para
-            >You can also create a string representation of a <see cref="T:System.DateTimeOffset" /> object's hour component by calling the <see cref="Overload:System.DateTimeOffset.ToString" /> method with the "H", or "HH" custom format specifiers. </para
-          >
+            >You can also create a string representation of a <see cref="T:System.DateTimeOffset" /> object's hour component by calling the <see cref="Overload:System.DateTimeOffset.ToString" /> method with the "H", or "HH" custom format specifiers.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1866,8 +1866,8 @@
             >The <see cref="F:System.DateTimeOffset.MaxValue" /> property is used to determine whether the value of a new <see cref="T:System.DateTimeOffset" /> object or the <see cref="T:System.DateTimeOffset" /> value returned by an arithmetic operation is the same as or earlier than this maximum range value. If it is not, the method throws an <see cref="T:System.ArgumentOutOfRangeException" />. Any <see cref="T:System.DateTimeOffset" /> value is converted to Coordinated Universal Time (UTC) before the method compares it with <see cref="F:System.DateTimeOffset.MaxValue" />.  This means that a <see cref="T:System.DateTimeOffset" /> value whose date and time are close to the maximum range, but whose offset is negative, may throw an exception. For example, the value 12/31/9999 11:00 PM -02:00 is out of range because it is one hour later than <see cref="F:System.DateTimeOffset.MaxValue" /> when it is converted to UTC.</para
           >
           <para
-            >Some calendars, such as the <see cref="T:System.Globalization.UmAlQuraCalendar" />, support an upper date range that is earlier than <see cref="F:System.DateTime.MaxValue" />. In these cases, trying to access <see cref="F:System.DateTime.MaxValue" /> in variable assignments or formatting and parsing operations can throw an <see cref="T:System.ArgumentOutOfRangeException" />. Instead of retrieving the value of <see cref="F:System.DateTime.MaxValue" />, you can retrieve the value of the specified culture's latest valid date value from the <see cref="P:System.Globalization.Calendar.MaxSupportedDateTime" /> property. </para
-          >
+            >Some calendars, such as the <see cref="T:System.Globalization.UmAlQuraCalendar" />, support an upper date range that is earlier than <see cref="F:System.DateTime.MaxValue" />. In these cases, trying to access <see cref="F:System.DateTime.MaxValue" /> in variable assignments or formatting and parsing operations can throw an <see cref="T:System.ArgumentOutOfRangeException" />. Instead of retrieving the value of <see cref="F:System.DateTime.MaxValue" />, you can retrieve the value of the specified culture's latest valid date value from the <see cref="P:System.Globalization.Calendar.MaxSupportedDateTime" /> property.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1893,8 +1893,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can also create a string representation of a <see cref="T:System.DateTimeOffset" /> object's millisecond component by calling the <see cref="Overload:System.DateTimeOffset.ToString" /> method with the "fff" custom format specifier. </para
-          >
+            >You can also create a string representation of a <see cref="T:System.DateTimeOffset" /> object's millisecond component by calling the <see cref="Overload:System.DateTimeOffset.ToString" /> method with the "fff" custom format specifier.
+          </para>
           <para
             >If you rely on properties such as <see cref="P:System.DateTimeOffset.Now" /> or <see cref="P:System.DateTimeOffset.UtcNow" /> to accurately track the number of elapsed milliseconds, the precision of the time's millisecond component depends on the resolution of the system clock. On Windows NT 3.5 and later, and Windows Vista operating systems, the clock's resolution is approximately 10-15 milliseconds.</para
           >
@@ -2042,8 +2042,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the <see cref="P:System.TimeSpan.Hours" /> property of the returned <see cref="T:System.TimeSpan" /> object can range from -14 hours to 14 hours. </para
-          >
+            >The value of the <see cref="P:System.TimeSpan.Hours" /> property of the returned <see cref="T:System.TimeSpan" /> object can range from -14 hours to 14 hours.
+          </para>
           <para
             >The value of the <see cref="P:System.DateTimeOffset.Offset" /> property is precise to the minute.</para
           >
@@ -2083,8 +2083,8 @@
           >
           <para>code reference: System.DateTimeOffset.Operators#1</para>
           <para
-            >Languages that do not support custom operators and operator overloading can call the <see cref="M:System.DateTimeOffset.Add(System.TimeSpan)" /> method instead. </para
-          >
+            >Languages that do not support custom operators and operator overloading can call the <see cref="M:System.DateTimeOffset.Add(System.TimeSpan)" /> method instead.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2562,8 +2562,8 @@
           >
           <para>code reference: System.DateTimeOffset.Operators#14</para>
           <para
-            >Languages that do not support custom operators and operator overloading can call the <see cref="M:System.DateTimeOffset.Subtract(System.DateTimeOffset)" /> method instead. </para
-          >
+            >Languages that do not support custom operators and operator overloading can call the <see cref="M:System.DateTimeOffset.Subtract(System.DateTimeOffset)" /> method instead.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2578,8 +2578,8 @@
           >
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />The minuend.   </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The minuend.
+        </param>
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />The subtrahend.</param
         >
@@ -2614,8 +2614,8 @@
           >
           <para>code reference: System.DateTimeOffset.Operators#15</para>
           <para
-            >Languages that do not support custom operators and operator overloading can call the <see cref="M:System.DateTimeOffset.Subtract(System.TimeSpan)" /> method instead. </para
-          >
+            >Languages that do not support custom operators and operator overloading can call the <see cref="M:System.DateTimeOffset.Subtract(System.TimeSpan)" /> method instead.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2810,11 +2810,11 @@
             </item>
           </list>
           <para
-            >If <paramref name="formatprovider" /> is null, the <see cref="T:System.Globalization.CultureInfo" /> object that corresponds to the current culture is used. </para
-          >
+            >If <paramref name="formatprovider" /> is null, the <see cref="T:System.Globalization.CultureInfo" /> object that corresponds to the current culture is used.
+          </para>
           <para
-            >The positive or negative sign used in &lt;Offset&gt; must be either + or -. It is not defined by the <see cref="P:System.Globalization.NumberFormatInfo.PositiveSign" /> or <see cref="P:System.Globalization.NumberFormatInfo.NegativeSign" /> properties of the <see cref="T:System.Globalization.NumberFormatInfo" /> object of the <paramref name="formatProvider" /> parameter.   </para
-          >
+            >The positive or negative sign used in &lt;Offset&gt; must be either + or -. It is not defined by the <see cref="P:System.Globalization.NumberFormatInfo.PositiveSign" /> or <see cref="P:System.Globalization.NumberFormatInfo.NegativeSign" /> properties of the <see cref="T:System.Globalization.NumberFormatInfo" /> object of the <paramref name="formatProvider" /> parameter.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2833,8 +2833,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string that contains a date and time to convert.   </param
-        >
+          />A string that contains a date and time to convert.
+        </param>
         <param name="formatProvider">
           <attribution
             license="cc4"
@@ -2926,8 +2926,8 @@
           </list>
           <para>Each element can also be enclosed by leading or trailing white space, and the &lt;Date&gt; and &lt;Time&gt; elements can include inner white space (such as 6:   00:00). Only the &lt;Offset&gt; component cannot include inner white space.</para>
           <para
-            >If <paramref name="formatprovider" /> is null, the <see cref="T:System.Globalization.CultureInfo" /> object that corresponds to the current culture is used. </para
-          >
+            >If <paramref name="formatprovider" /> is null, the <see cref="T:System.Globalization.CultureInfo" /> object that corresponds to the current culture is used.
+          </para>
           <para
             >The positive or negative sign used in &lt;Offset&gt; must be either + or -. It is not defined by the <see cref="P:System.Globalization.NumberFormatInfo.PositiveSign" /> or <see cref="P:System.Globalization.NumberFormatInfo.NegativeSign" /> properties of the <see cref="T:System.Globalization.NumberFormatInfo" /> object returned by the <paramref name="formatProvider" /> parameter.</para
           >
@@ -3067,8 +3067,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string that contains a date and time to convert.   </param
-        >
+          />A string that contains a date and time to convert.
+        </param>
         <param name="formatProvider">
           <attribution
             license="cc4"
@@ -3081,8 +3081,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of enumeration values that indicates the permitted format of <paramref name="input" />. A typical value to specify is <see cref="F:System.Globalization.DateTimeStyles.None" />.   </param
-        >
+          />A bitwise combination of enumeration values that indicates the permitted format of <paramref name="input" />. A typical value to specify is <see cref="F:System.Globalization.DateTimeStyles.None" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ParseExact">
@@ -3139,8 +3139,8 @@
             </item>
           </list>
           <para
-            >If <paramref name="formatprovider" /> is null, the <see cref="T:System.Globalization.CultureInfo" /> object that corresponds to the current culture is used. </para
-          >
+            >If <paramref name="formatprovider" /> is null, the <see cref="T:System.Globalization.CultureInfo" /> object that corresponds to the current culture is used.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3232,8 +3232,8 @@
             </item>
           </list>
           <para
-            >If <paramref name="formatprovider" /> is null, the <see cref="T:System.Globalization.CultureInfo" /> object that corresponds to the current culture is used. </para
-          >
+            >If <paramref name="formatprovider" /> is null, the <see cref="T:System.Globalization.CultureInfo" /> object that corresponds to the current culture is used.
+          </para>
           <para
             >The <paramref name="styles" /> parameter defines whether white space is allowed in the input string, indicates how strings without an explicit offset component are parsed, and supports UTC conversion as part of the parsing operation. All members of the <see cref="T:System.Globalization.DateTimeStyles" /> enumeration are supported except <see cref="F:System.Globalization.DateTimeStyles.NoCurrentDateDefault" />. The following table lists the effect of each supported member.</para
           >
@@ -3460,8 +3460,8 @@
             </item>
           </list>
           <para
-            >If <paramref name="formatprovider" /> is null, the <see cref="T:System.Globalization.CultureInfo" /> object that corresponds to the current culture is used. </para
-          >
+            >If <paramref name="formatprovider" /> is null, the <see cref="T:System.Globalization.CultureInfo" /> object that corresponds to the current culture is used.
+          </para>
           <para
             >The <paramref name="styles" /> parameter defines whether white space is permitted in the input string, indicates how strings without an explicit offset component are parsed, and supports UTC conversion as part of the parsing operation. All members of the <see cref="T:System.Globalization.DateTimeStyles" /> enumeration are supported except <see cref="F:System.Globalization.DateTimeStyles.NoCurrentDateDefault" />. The following table lists the effect of each supported member.</para
           >
@@ -3687,8 +3687,8 @@
             >
           </block>
           <para
-            >Because neither the current <see cref="T:System.DateTimeOffset" /> object nor the <paramref name="value" /> parameter represent the date and time in a specific time zone, the <see cref="M:System.DateTimeOffset.Subtract(System.DateTimeOffset)" /> method does not consider a particular time zone's adjustment rules when it subtracts dates and times. </para
-          >
+            >Because neither the current <see cref="T:System.DateTimeOffset" /> object nor the <paramref name="value" /> parameter represent the date and time in a specific time zone, the <see cref="M:System.DateTimeOffset.Subtract(System.DateTimeOffset)" /> method does not consider a particular time zone's adjustment rules when it subtracts dates and times.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3707,8 +3707,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that represents the value to subtract. </param
-        >
+          />An object that represents the value to subtract.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Subtract">
@@ -3732,8 +3732,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see cref="M:System.DateTimeOffset.Subtract(System.TimeSpan)" /> method to subtract more than one kind of time interval (days, hours, minutes, seconds, or milliseconds) in a single operation. Its behavior is identical to the <see cref="M:System.DateTimeOffset.op_Subtraction(System.DateTimeOffset,System.TimeSpan)" /> method, which defines the subtraction operator. The <see cref="T:System.DateTimeOffset" /> structure also supports specialized addition methods (such as <see cref="M:System.DateTimeOffset.AddDays(System.Double)" />, <see cref="M:System.DateTimeOffset.AddHours(System.Double)" />, and <see cref="M:System.DateTimeOffset.AddMinutes(System.Double)" />) that allow you to perform subtraction by assigning a negative value to the method parameter. </para
-          >
+            >You can use the <see cref="M:System.DateTimeOffset.Subtract(System.TimeSpan)" /> method to subtract more than one kind of time interval (days, hours, minutes, seconds, or milliseconds) in a single operation. Its behavior is identical to the <see cref="M:System.DateTimeOffset.op_Subtraction(System.DateTimeOffset,System.TimeSpan)" /> method, which defines the subtraction operator. The <see cref="T:System.DateTimeOffset" /> structure also supports specialized addition methods (such as <see cref="M:System.DateTimeOffset.AddDays(System.Double)" />, <see cref="M:System.DateTimeOffset.AddHours(System.Double)" />, and <see cref="M:System.DateTimeOffset.AddMinutes(System.Double)" />) that allow you to perform subtraction by assigning a negative value to the method parameter.
+          </para>
           <block subset="none" type="note">
             <para
               >This method returns a new <see cref="T:System.DateTimeOffset" /> object. It does not modify the value of the current object by adding <paramref name="timeSpan" /> to its date and time.</para
@@ -3743,8 +3743,8 @@
             >The <see cref="M:System.DateTimeOffset.Subtract(System.TimeSpan)" /> method does not affect the value of the <see cref="T:System.DateTimeOffset" /> object's <see cref="P:System.DateTimeOffset.Offset" /> property. The returned <see cref="T:System.DateTimeOffset" /> object has the same offset as the original object.</para
           >
           <para
-            >Because the current <see cref="T:System.DateTimeOffset" /> object does not represent the date and time in a specific time zone, the <see cref="M:System.DateTimeOffset.Subtract(System.TimeSpan)" /> method does not consider a particular time zone's adjustment rules when it performs the subtraction. </para
-          >
+            >Because the current <see cref="T:System.DateTimeOffset" /> object does not represent the date and time in a specific time zone, the <see cref="M:System.DateTimeOffset.Subtract(System.TimeSpan)" /> method does not consider a particular time zone's adjustment rules when it performs the subtraction.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -4055,8 +4055,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In performing the conversion to local time, the method first converts the current <see cref="T:System.DateTimeOffset" /> object's date and time to Coordinated Universal Time (UTC) by subtracting the offset from the time. It then converts the UTC date and time to local time by adding the local time zone offset. In doing this, it takes account of any adjustment rules for the local time zone.  </para
-          >
+            >In performing the conversion to local time, the method first converts the current <see cref="T:System.DateTimeOffset" /> object's date and time to Coordinated Universal Time (UTC) by subtracting the offset from the time. It then converts the UTC date and time to local time by adding the local time zone offset. In doing this, it takes account of any adjustment rules for the local time zone.
+          </para>
           <para
             >Both the value of the current <see cref="T:System.DateTimeOffset" /> object and the value of the <see cref="T:System.DateTimeOffset" /> object returned by the method call represent the same point in time. That is, if both are passed to the <see cref="M:System.DateTimeOffset.Equals(System.DateTimeOffset,System.DateTimeOffset)" /> method, the method will return true.</para
           >
@@ -4099,8 +4099,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.DateTimeOffset.ToOffset(System.TimeSpan)" /> method is an alternative to calling the <see cref="M:System.TimeZoneInfo.ConvertTime(System.DateTimeOffset,System.TimeZoneInfo)" />  method. It can be useful for performing simple conversions from one time zone to another when the time zones' offsets from Coordinated Universal Time (UTC) are known. However, because neither the original <see cref="T:System.DateTimeOffset" /> object nor the new <see cref="T:System.DateTimeOffset" /> object returned by the method call are unambiguously related to a particular time zone, the method does not apply any time zone adjustment rules in the conversion. </para
-          >
+            >The <see cref="M:System.DateTimeOffset.ToOffset(System.TimeSpan)" /> method is an alternative to calling the <see cref="M:System.TimeZoneInfo.ConvertTime(System.DateTimeOffset,System.TimeZoneInfo)" />  method. It can be useful for performing simple conversions from one time zone to another when the time zones' offsets from Coordinated Universal Time (UTC) are known. However, because neither the original <see cref="T:System.DateTimeOffset" /> object nor the new <see cref="T:System.DateTimeOffset" /> object returned by the method call are unambiguously related to a particular time zone, the method does not apply any time zone adjustment rules in the conversion.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -4119,8 +4119,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The offset to convert the <see cref="T:System.DateTimeOffset" /> value to.   </param
-        >
+          />The offset to convert the <see cref="T:System.DateTimeOffset" /> value to.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ToString">
@@ -4667,11 +4667,11 @@
             </item>
           </list>
           <para
-            >The <see cref="P:System.DateTime.Kind" /> property of the returned <see cref="P:System.DateTimeOffset.DateTime" /> value is set to <see cref="F:System.DateTimeKind.Utc" />. </para
-          >
+            >The <see cref="P:System.DateTime.Kind" /> property of the returned <see cref="P:System.DateTimeOffset.DateTime" /> value is set to <see cref="F:System.DateTimeKind.Utc" />.
+          </para>
           <para
-            >Retrieving the value of the <see cref="P:System.DateTimeOffset.UtcDateTime" /> property is equivalent to calling the current <see cref="T:System.DateTimeOffset" /> object's ToUniversalTime.DateTime property, except that the <see cref="P:System.DateTime.Kind" /> property of the latter <see cref="T:System.DateTime" /> value is <see cref="F:System.DateTimeKind.Unspecified" />. </para
-          >
+            >Retrieving the value of the <see cref="P:System.DateTimeOffset.UtcDateTime" /> property is equivalent to calling the current <see cref="T:System.DateTimeOffset" /> object's ToUniversalTime.DateTime property, except that the <see cref="P:System.DateTime.Kind" /> property of the latter <see cref="T:System.DateTime" /> value is <see cref="F:System.DateTimeKind.Unspecified" />.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -4697,8 +4697,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.DateTimeOffset.UtcNow" /> property computes the current Universal Coordinated Time (UTC) based on the local system's clock time and an offset defined by the local system's time zone. </para
-          >
+            >The <see cref="P:System.DateTimeOffset.UtcNow" /> property computes the current Universal Coordinated Time (UTC) based on the local system's clock time and an offset defined by the local system's time zone.
+          </para>
           <para>The precision of the current UTC time's millisecond component depends on the resolution of the system clock. On Windows NT 3.5 and later, and Windows Vista operating systems, the clock's resolution is approximately 10-15 milliseconds.</para>
         </remarks>
         <summary>
@@ -4725,8 +4725,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the <see cref="P:System.DateTimeOffset.UtcTicks" /> property represents the number of 100-nanosecond intervals that have elapsed since 12:00:00 midnight on January 1, 0001 (the value of <see cref="F:System.DateTimeOffset.MinValue" />). It does not include ticks that would be added by leap seconds. A nanosecond is one billionth of a second; there are ten million ticks in a second. The value of the <see cref="P:System.DateTimeOffset.UtcTicks" /> property ranges from DateTimeOffset.MinValue.Ticks to DateTimeOffset.MaxValue.Ticks. </para
-          >
+            >The value of the <see cref="P:System.DateTimeOffset.UtcTicks" /> property represents the number of 100-nanosecond intervals that have elapsed since 12:00:00 midnight on January 1, 0001 (the value of <see cref="F:System.DateTimeOffset.MinValue" />). It does not include ticks that would be added by leap seconds. A nanosecond is one billionth of a second; there are ten million ticks in a second. The value of the <see cref="P:System.DateTimeOffset.UtcTicks" /> property ranges from DateTimeOffset.MinValue.Ticks to DateTimeOffset.MaxValue.Ticks.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

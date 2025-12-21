@@ -76,8 +76,8 @@
       <list type="bullet">
         <item>
           <para
-            >If the <see cref="M:System.ServiceModel.ICommunicationObject.Open" /> method fails for any reason, the object transitions to the faulted state. </para
-          >
+            >If the <see cref="M:System.ServiceModel.ICommunicationObject.Open" /> method fails for any reason, the object transitions to the faulted state.
+          </para>
         </item>
         <item>
           <para>If a session-based channel detects an error that it cannot recover from, it transitions to the faulted state. This can happen for instance if there is a protocol error (that is, it receives a protocol message at an invalid time) or if the remote endpoint aborts the session. </para>
@@ -90,8 +90,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines the states in which an <see cref="T:System.ServiceModel.ICommunicationObject" /> can exist. </para
-      >
+        >Defines the states in which an <see cref="T:System.ServiceModel.ICommunicationObject" /> can exist.
+      </para>
     </summary>
   </Docs>
   <Members>
@@ -132,8 +132,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates that the communication object is transitioning to the <see cref="F:System.ServiceModel.CommunicationState.Closed" /> state. </para
-          >
+            >Indicates that the communication object is transitioning to the <see cref="F:System.ServiceModel.CommunicationState.Closed" /> state.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -214,8 +214,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates that the communication object is being transitioned from the <see cref="F:System.ServiceModel.CommunicationState.Created" /> state to the <see cref="F:System.ServiceModel.CommunicationState.Opened" /> state. </para
-          >
+            >Indicates that the communication object is being transitioned from the <see cref="F:System.ServiceModel.CommunicationState.Created" /> state to the <see cref="F:System.ServiceModel.CommunicationState.Opened" /> state.
+          </para>
         </summary>
       </Docs>
     </Member>

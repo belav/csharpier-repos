@@ -14,13 +14,13 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Implement the <see cref="T:System.ServiceModel.Dispatcher.IParameterInspector" /> interface to create a custom parameter inspector that can view and modify the contents of a call both before the call and after the call in either client or service applications. </para
-      >
+        >Implement the <see cref="T:System.ServiceModel.Dispatcher.IParameterInspector" /> interface to create a custom parameter inspector that can view and modify the contents of a call both before the call and after the call in either client or service applications.
+      </para>
       <para>On outbound calls from a client, the inspector is invoked before the request contents are serialized and sent to the service. The inspector is also called after the response has been deserialized but before the return values have been dispatched to the proxy method. </para>
       <para>On inbound calls to a service, the inspector is invoked after parameters are deserialized but before they are dispatched to the service operation.</para>
       <para
-        >Use the <see cref="P:System.ServiceModel.Dispatcher.ClientOperation.ParameterInspectors" /> or the <see cref="P:System.ServiceModel.Dispatcher.DispatchOperation.ParameterInspectors" /> properties to add an <see cref="T:System.ServiceModel.Dispatcher.IParameterInspector" /> implementation to the inspectors collection for a particular operation.  </para
-      >
+        >Use the <see cref="P:System.ServiceModel.Dispatcher.ClientOperation.ParameterInspectors" /> or the <see cref="P:System.ServiceModel.Dispatcher.DispatchOperation.ParameterInspectors" /> properties to add an <see cref="T:System.ServiceModel.Dispatcher.IParameterInspector" /> implementation to the inspectors collection for a particular operation.
+      </para>
       <para
         >Note   Developers and administrators must ensure that the interaction with other <see cref="T:System.ServiceModel.Dispatcher.IParameterInspector" /> implementations is understood.</para
       >
@@ -85,8 +85,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Any correlation state returned from the <see cref="M:System.ServiceModel.Dispatcher.IParameterInspector.BeforeCall(System.String,System.Object[])" /> method, or null. </param
-        >
+          />Any correlation state returned from the <see cref="M:System.ServiceModel.Dispatcher.IParameterInspector.BeforeCall(System.String,System.Object[])" /> method, or null.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="BeforeCall">

@@ -34,14 +34,14 @@
         </format>.</para
       >
       <para
-        >If you specify a value of <see cref="F:System.Resources.UltimateResourceFallbackLocation.MainAssembly" /> or no value to the <see cref="T:System.Resources.NeutralResourcesLanguageAttribute" /> attribute and resource manager cannot load a resource set that belongs to the default culture, it throws a <see cref="T:System.Resources.MissingManifestResourceException" /> exception. If you specify a value of <see cref="F:System.Resources.UltimateResourceFallbackLocation.Satellite" /> to the <see cref="T:System.Resources.NeutralResourcesLanguageAttribute" /> and resource manager cannot load a resource set that belongs to the default culture, it throws a <see cref="T:System.Resources.MissingSatelliteAssemblyException" /> exception. </para
-      >
+        >If you specify a value of <see cref="F:System.Resources.UltimateResourceFallbackLocation.MainAssembly" /> or no value to the <see cref="T:System.Resources.NeutralResourcesLanguageAttribute" /> attribute and resource manager cannot load a resource set that belongs to the default culture, it throws a <see cref="T:System.Resources.MissingManifestResourceException" /> exception. If you specify a value of <see cref="F:System.Resources.UltimateResourceFallbackLocation.Satellite" /> to the <see cref="T:System.Resources.NeutralResourcesLanguageAttribute" /> and resource manager cannot load a resource set that belongs to the default culture, it throws a <see cref="T:System.Resources.MissingSatelliteAssemblyException" /> exception.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies whether a <see cref="T:System.Resources.ResourceManager" /> object looks for the resources of the app's default culture in the main assembly or in a satellite assembly. </para
-      >
+        >Specifies whether a <see cref="T:System.Resources.ResourceManager" /> object looks for the resources of the app's default culture in the main assembly or in a satellite assembly.
+      </para>
     </summary>
   </Docs>
   <Members>

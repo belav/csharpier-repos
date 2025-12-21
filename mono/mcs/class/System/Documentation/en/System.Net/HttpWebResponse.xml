@@ -174,15 +174,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that contains the information required to serialize the new <see cref="T:System.Net.HttpWebRequest" />. </param
-        >
+          />A <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that contains the information required to serialize the new <see cref="T:System.Net.HttpWebRequest" />.
+        </param>
         <param name="streamingContext">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains the source of the serialized stream that is associated with the new <see cref="T:System.Net.HttpWebRequest" />. </param
-        >
+          />A <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains the source of the serialized stream that is associated with the new <see cref="T:System.Net.HttpWebRequest" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CharacterSet">
@@ -474,8 +474,8 @@ value does not include header information.</para
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to releases only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to releases only unmanaged resources.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -555,8 +555,8 @@ value does not include header information.</para
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> to populate with data. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> to populate with data.
+        </param>
         <param name="streamingContext">
           <attribution
             license="cc4"
@@ -611,8 +611,8 @@ value does not include header information.</para
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The header value to return. </param
-        >
+          />The header value to return.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1134,8 +1134,8 @@ representing the resource that actually responded to the request.</para
               <a href="EB4E1AF0-3B48-4FBC-AD4E-FC2F64138BF9"
                 >[&lt;topic://cpconImplementingDisposeMethod&gt;]</a
               >
-            </format>. </para
-          >
+            </format>.
+          </para>
           <para
             >Note: Always call <see cref="M:System.Net.HttpWebResponse.System#IDisposable#Dispose" /> before you release your last reference to the <see cref="T:System.Net.HttpWebResponse" />. Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Net.HttpWebResponse" /> object's Finalize method.</para
           >
@@ -1183,15 +1183,15 @@ representing the resource that actually responded to the request.</para
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object into which this <see cref="T:System.Net.HttpWebResponse" /> will be serialized. </param
-        >
+          />The object into which this <see cref="T:System.Net.HttpWebResponse" /> will be serialized.
+        </param>
         <param name="streamingContext">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The destination of the serialization. </param
-        >
+          />The destination of the serialization.
+        </param>
       </Docs>
     </Member>
   </Members>

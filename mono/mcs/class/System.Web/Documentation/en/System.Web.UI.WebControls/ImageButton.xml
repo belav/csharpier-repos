@@ -85,8 +85,8 @@
         <h2>Introduction</h2>
       </format>
       <para
-        >Use the <see cref="T:System.Web.UI.WebControls.ImageButton" /> control to display an image that responds to mouse clicks. </para
-      >
+        >Use the <see cref="T:System.Web.UI.WebControls.ImageButton" /> control to display an image that responds to mouse clicks.
+      </para>
       <para
         >Both the <see cref="E:System.Web.UI.WebControls.ImageButton.Click" /> and <see cref="E:System.Web.UI.WebControls.ImageButton.Command" /> events are raised when the <see cref="T:System.Web.UI.WebControls.ImageButton" /> control is clicked.</para
       >
@@ -241,8 +241,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The output stream to render on the client. </param
-        >
+          />The output stream to render on the client.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -536,8 +536,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, the <see cref="T:System.Web.UI.WebControls.ImageButton" /> control renders the <see cref="P:System.Web.UI.WebControls.Image.AlternateText" /> property using an alt attribute. When the <see cref="P:System.Web.UI.WebControls.Image.AlternateText" /> property is not set, the <see cref="T:System.Web.UI.WebControls.ImageButton" /> control does not include the alt attribute to specify the alternate-text in the control rendering. </para
-          >
+            >By default, the <see cref="T:System.Web.UI.WebControls.ImageButton" /> control renders the <see cref="P:System.Web.UI.WebControls.Image.AlternateText" /> property using an alt attribute. When the <see cref="P:System.Web.UI.WebControls.Image.AlternateText" /> property is not set, the <see cref="T:System.Web.UI.WebControls.ImageButton" /> control does not include the alt attribute to specify the alternate-text in the control rendering.
+          </para>
           <para
             >The XHTML document type definition requires the alt attribute on image controls. However, accessibility best practices recommend that image controls that do not convey information relevant to the context of the Web page should not specify an alt attribute. You can meet both XHTML and accessibility requirements by setting the <see cref="P:System.Web.UI.WebControls.Image.AlternateText" /> property to true.</para
           >
@@ -634,8 +634,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key value used to index an entry in the collection. </param
-        >
+          />The key value used to index an entry in the collection.
+        </param>
         <param name="postCollection">
           <attribution
             license="cc4"
@@ -685,8 +685,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Web.UI.ImageClickEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Web.UI.ImageClickEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -776,8 +776,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Web.UI.WebControls.CommandEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Web.UI.WebControls.CommandEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -902,8 +902,8 @@ End Sub</code>
             >The <see cref="M:System.Web.UI.WebControls.ImageButton.RaisePostBackEvent(System.String)" /> member is used primarily by control developers when deriving a custom class from the <see cref="T:System.Web.UI.WebControls.ImageButton" /> control.</para
           >
           <para
-            >This method is used internally by the <see cref="T:System.Web.UI.WebControls.ImageButton" /> control, when it is clicked, to raise a <see cref="E:System.Web.UI.WebControls.ImageButton.Click" /> event and, if defined, a <see cref="E:System.Web.UI.WebControls.ImageButton.Command" /> event. </para
-          >
+            >This method is used internally by the <see cref="T:System.Web.UI.WebControls.ImageButton" /> control, when it is clicked, to raise a <see cref="E:System.Web.UI.WebControls.ImageButton.Click" /> event and, if defined, a <see cref="E:System.Web.UI.WebControls.ImageButton.Command" /> event.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -937,8 +937,8 @@ End Sub</code>
             >The <see cref="M:System.Web.UI.WebControls.ImageButton.RaisePostDataChangedEvent" /> member is used primarily by control developers when deriving a custom class from the <see cref="T:System.Web.UI.WebControls.ImageButton" /> control.</para
           >
           <para
-            >This method can be overridden in a derived class to raise change events for the <see cref="T:System.Web.UI.WebControls.ImageButton" /> control when it posts back to the server. </para
-          >
+            >This method can be overridden in a derived class to raise change events for the <see cref="T:System.Web.UI.WebControls.ImageButton" /> control when it posts back to the server.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -997,8 +997,8 @@ End Sub</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Collections.Specialized.NameValueCollection" /> collection that contains value information indexed by control identifiers. </param
-        >
+          />A <see cref="T:System.Collections.Specialized.NameValueCollection" /> collection that contains value information indexed by control identifiers.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.Web.UI.IPostBackDataHandler.RaisePostDataChangedEvent">

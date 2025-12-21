@@ -77,15 +77,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The major version number of the type library. </param
-        >
+          />The major version number of the type library.
+        </param>
         <param name="minor">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The minor version number of the type library. </param
-        >
+          />The minor version number of the type library.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="MajorVersion">

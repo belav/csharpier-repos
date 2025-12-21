@@ -25,11 +25,11 @@
         >The <see cref="T:System.Net.Sockets.SocketAsyncEventArgs" /> class is part of a set of enhancements to the <see cref="T:System.Net.Sockets.Socket" /> class that provide an alternative asynchronous pattern that can be used by specialized high-performance socket applications. This class was specifically designed for network server applications that require high performance. An application can use the enhanced asynchronous pattern exclusively or only in targeted hot areas (for example, when receiving large amounts of data).</para
       >
       <para
-        >The main feature of these enhancements is the avoidance of the repeated allocation and synchronization of objects during high-volume asynchronous socket I/O. The Begin/End design pattern currently implemented by the <see cref="T:System.Net.Sockets.Socket" /> class requires a <see cref="T:System.IAsyncResult" /> object be allocated for each asynchronous socket operation. </para
-      >
+        >The main feature of these enhancements is the avoidance of the repeated allocation and synchronization of objects during high-volume asynchronous socket I/O. The Begin/End design pattern currently implemented by the <see cref="T:System.Net.Sockets.Socket" /> class requires a <see cref="T:System.IAsyncResult" /> object be allocated for each asynchronous socket operation.
+      </para>
       <para
-        >In the new <see cref="T:System.Net.Sockets.Socket" /> class enhancements, asynchronous socket operations are described by reusable <see cref="T:System.Net.Sockets.SocketAsyncEventArgs" /> objects allocated and maintained by the application. High-performance socket applications know best the amount of overlapped socket operations that must be sustained. The application can create as many of the <see cref="T:System.Net.Sockets.SocketAsyncEventArgs" /> objects that it needs. For example, if a server application needs to have 15 socket accept operations outstanding at all times to support incoming client connection rates, it can allocate 15 reusable <see cref="T:System.Net.Sockets.SocketAsyncEventArgs" /> objects for that purpose. </para
-      >
+        >In the new <see cref="T:System.Net.Sockets.Socket" /> class enhancements, asynchronous socket operations are described by reusable <see cref="T:System.Net.Sockets.SocketAsyncEventArgs" /> objects allocated and maintained by the application. High-performance socket applications know best the amount of overlapped socket operations that must be sustained. The application can create as many of the <see cref="T:System.Net.Sockets.SocketAsyncEventArgs" /> objects that it needs. For example, if a server application needs to have 15 socket accept operations outstanding at all times to support incoming client connection rates, it can allocate 15 reusable <see cref="T:System.Net.Sockets.SocketAsyncEventArgs" /> objects for that purpose.
+      </para>
       <para>The pattern for performing an asynchronous socket operation with this class consists of the following steps:</para>
       <list type="ordered">
         <item>
@@ -191,14 +191,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is used with the <see cref="M:System.Net.Sockets.Socket.ReceiveAsync(System.Net.Sockets.SocketAsyncEventArgs)" /> and <see cref="M:System.Net.Sockets.Socket.SendAsync(System.Net.Sockets.SocketAsyncEventArgs)" /> methods. </para
-          >
+            >This property is used with the <see cref="M:System.Net.Sockets.Socket.ReceiveAsync(System.Net.Sockets.SocketAsyncEventArgs)" /> and <see cref="M:System.Net.Sockets.Socket.SendAsync(System.Net.Sockets.SocketAsyncEventArgs)" /> methods.
+          </para>
           <para
             >This property is used to provide multiple buffers of data to be sent or to provide multiple buffers in which to store received data for an asynchronous socket operation that can send or receive data. Multiple buffers using the <see cref="P:System.Net.Sockets.SocketAsyncEventArgs.BufferList" /> property are supported by the <see cref="M:System.Net.Sockets.Socket.ReceiveAsync(System.Net.Sockets.SocketAsyncEventArgs)" /> and <see cref="M:System.Net.Sockets.Socket.SendAsync(System.Net.Sockets.SocketAsyncEventArgs)" /> methods.</para
           >
           <para
-            >If the <see cref="P:System.Net.Sockets.SocketAsyncEventArgs.BufferList" /> property is set to a non-null value, the <see cref="P:System.Net.Sockets.SocketAsyncEventArgs.Buffer" /> property must be null and is ignored by the <see cref="M:System.Net.Sockets.Socket.ReceiveAsync(System.Net.Sockets.SocketAsyncEventArgs)" /> and <see cref="M:System.Net.Sockets.Socket.SendAsync(System.Net.Sockets.SocketAsyncEventArgs)" /> methods. </para
-          >
+            >If the <see cref="P:System.Net.Sockets.SocketAsyncEventArgs.BufferList" /> property is set to a non-null value, the <see cref="P:System.Net.Sockets.SocketAsyncEventArgs.Buffer" /> property must be null and is ignored by the <see cref="M:System.Net.Sockets.Socket.ReceiveAsync(System.Net.Sockets.SocketAsyncEventArgs)" /> and <see cref="M:System.Net.Sockets.Socket.SendAsync(System.Net.Sockets.SocketAsyncEventArgs)" /> methods.
+          </para>
           <para
             >If the <see cref="P:System.Net.Sockets.SocketAsyncEventArgs.Buffer" /> was set to a non-null value and an attempt is made to set the <see cref="P:System.Net.Sockets.SocketAsyncEventArgs.BufferList" /> property to a non-null value, an exception is thrown.</para
           >
@@ -262,8 +262,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="E:System.Net.Sockets.SocketAsyncEventArgs.Completed" /> event provides a way for client applications to complete an asynchronous socket operation. An event handler should be attached to the event within a <see cref="T:System.Net.Sockets.SocketAsyncEventArgs" /> instance when an asynchronous socket operation is initiated, otherwise the application will not be able to determine when the operation completes. </para
-          >
+            >The <see cref="E:System.Net.Sockets.SocketAsyncEventArgs.Completed" /> event provides a way for client applications to complete an asynchronous socket operation. An event handler should be attached to the event within a <see cref="T:System.Net.Sockets.SocketAsyncEventArgs" /> instance when an asynchronous socket operation is initiated, otherwise the application will not be able to determine when the operation completes.
+          </para>
           <para
             >The completion callback delegates referenced by the <see cref="E:System.Net.Sockets.SocketAsyncEventArgs.Completed" /> event contains program logic to finish processing the asynchronous socket operation for the client.</para
           >
@@ -295,11 +295,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In the case of a connection failure when a <see cref="T:System.Net.DnsEndPoint" /> was specified for the <see cref="P:System.Net.Sockets.SocketAsyncEventArgs.RemoteEndPoint" /> property, the <see cref="P:System.Net.Sockets.SocketAsyncEventArgs.ConnectByNameError" /> property will contain the exception that indicates the detailed cause of the socket error. </para
-          >
+            >In the case of a connection failure when a <see cref="T:System.Net.DnsEndPoint" /> was specified for the <see cref="P:System.Net.Sockets.SocketAsyncEventArgs.RemoteEndPoint" /> property, the <see cref="P:System.Net.Sockets.SocketAsyncEventArgs.ConnectByNameError" /> property will contain the exception that indicates the detailed cause of the socket error.
+          </para>
           <para
-            >When an <see cref="T:System.Net.IPEndPoint" /> was specified for the <see cref="P:System.Net.Sockets.SocketAsyncEventArgs.RemoteEndPoint" /> property and a connection failure occurs, the <see cref="P:System.Net.Sockets.SocketAsyncEventArgs.ConnectByNameError" /> property will be a null reference. </para
-          >
+            >When an <see cref="T:System.Net.IPEndPoint" /> was specified for the <see cref="P:System.Net.Sockets.SocketAsyncEventArgs.RemoteEndPoint" /> property and a connection failure occurs, the <see cref="P:System.Net.Sockets.SocketAsyncEventArgs.ConnectByNameError" /> property will be a null reference.
+          </para>
           <para
             >The <see cref="P:System.Net.Sockets.SocketAsyncEventArgs.SocketError" /> property is always set in the case of a connection failure. The <see cref="P:System.Net.Sockets.SocketAsyncEventArgs.ConnectByNameError" /> property contains more information about the failure if it was a failure connecting to a <see cref="T:System.Net.DnsEndPoint" />. If an application is only interested in whether the connect operation succeeded or failed, then the application only needs to check the <see cref="P:System.Net.Sockets.SocketAsyncEventArgs.SocketError" /> property.</para
           >
@@ -328,11 +328,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is set by calling the <see cref="Overload:System.Net.Sockets.SocketAsyncEventArgs.SetBuffer" /> method. </para
-          >
+            >This property is set by calling the <see cref="Overload:System.Net.Sockets.SocketAsyncEventArgs.SetBuffer" /> method.
+          </para>
           <para
-            >This property is used with the <see cref="M:System.Net.Sockets.Socket.AcceptAsync(System.Net.Sockets.SocketAsyncEventArgs)" />, <see cref="M:System.Net.Sockets.Socket.ConnectAsync(System.Net.Sockets.SocketAsyncEventArgs)" />, <see cref="M:System.Net.Sockets.Socket.ReceiveAsync(System.Net.Sockets.SocketAsyncEventArgs)" />, <see cref="M:System.Net.Sockets.Socket.ReceiveFromAsync(System.Net.Sockets.SocketAsyncEventArgs)" />, <see cref="M:System.Net.Sockets.Socket.ReceiveMessageFromAsync(System.Net.Sockets.SocketAsyncEventArgs)" />, <see cref="M:System.Net.Sockets.Socket.SendAsync(System.Net.Sockets.SocketAsyncEventArgs)" />, and <see cref="M:System.Net.Sockets.Socket.SendToAsync(System.Net.Sockets.SocketAsyncEventArgs)" /> methods. </para
-          >
+            >This property is used with the <see cref="M:System.Net.Sockets.Socket.AcceptAsync(System.Net.Sockets.SocketAsyncEventArgs)" />, <see cref="M:System.Net.Sockets.Socket.ConnectAsync(System.Net.Sockets.SocketAsyncEventArgs)" />, <see cref="M:System.Net.Sockets.Socket.ReceiveAsync(System.Net.Sockets.SocketAsyncEventArgs)" />, <see cref="M:System.Net.Sockets.Socket.ReceiveFromAsync(System.Net.Sockets.SocketAsyncEventArgs)" />, <see cref="M:System.Net.Sockets.Socket.ReceiveMessageFromAsync(System.Net.Sockets.SocketAsyncEventArgs)" />, <see cref="M:System.Net.Sockets.Socket.SendAsync(System.Net.Sockets.SocketAsyncEventArgs)" />, and <see cref="M:System.Net.Sockets.Socket.SendToAsync(System.Net.Sockets.SocketAsyncEventArgs)" /> methods.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -493,11 +493,11 @@
             >This property describes the starting byte offset of data in the <see cref="P:System.Net.Sockets.SocketAsyncEventArgs.Buffer" /> property. This value is set by calling the <see cref="Overload:System.Net.Sockets.SocketAsyncEventArgs.SetBuffer" /> method.</para
           >
           <para
-            >This property does not apply to the <see cref="P:System.Net.Sockets.SocketAsyncEventArgs.BufferList" /> property. </para
-          >
+            >This property does not apply to the <see cref="P:System.Net.Sockets.SocketAsyncEventArgs.BufferList" /> property.
+          </para>
           <para
-            >This property is used with the <see cref="M:System.Net.Sockets.Socket.AcceptAsync(System.Net.Sockets.SocketAsyncEventArgs)" />, <see cref="M:System.Net.Sockets.Socket.ConnectAsync(System.Net.Sockets.SocketAsyncEventArgs)" />, <see cref="M:System.Net.Sockets.Socket.ReceiveAsync(System.Net.Sockets.SocketAsyncEventArgs)" />, <see cref="M:System.Net.Sockets.Socket.ReceiveFromAsync(System.Net.Sockets.SocketAsyncEventArgs)" />, <see cref="M:System.Net.Sockets.Socket.ReceiveMessageFromAsync(System.Net.Sockets.SocketAsyncEventArgs)" />, <see cref="M:System.Net.Sockets.Socket.SendAsync(System.Net.Sockets.SocketAsyncEventArgs)" />, and <see cref="M:System.Net.Sockets.Socket.SendToAsync(System.Net.Sockets.SocketAsyncEventArgs)" /> methods. </para
-          >
+            >This property is used with the <see cref="M:System.Net.Sockets.Socket.AcceptAsync(System.Net.Sockets.SocketAsyncEventArgs)" />, <see cref="M:System.Net.Sockets.Socket.ConnectAsync(System.Net.Sockets.SocketAsyncEventArgs)" />, <see cref="M:System.Net.Sockets.Socket.ReceiveAsync(System.Net.Sockets.SocketAsyncEventArgs)" />, <see cref="M:System.Net.Sockets.Socket.ReceiveFromAsync(System.Net.Sockets.SocketAsyncEventArgs)" />, <see cref="M:System.Net.Sockets.Socket.ReceiveMessageFromAsync(System.Net.Sockets.SocketAsyncEventArgs)" />, <see cref="M:System.Net.Sockets.Socket.SendAsync(System.Net.Sockets.SocketAsyncEventArgs)" />, and <see cref="M:System.Net.Sockets.Socket.SendToAsync(System.Net.Sockets.SocketAsyncEventArgs)" /> methods.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -543,8 +543,8 @@
             >The caller's <see cref="M:System.Net.Sockets.SocketAsyncEventArgs.OnCompleted(System.Net.Sockets.SocketAsyncEventArgs)" /> method provides a way for client applications to complete an asynchronous socket operation. A callback delegate must be implemented when an asynchronous socket operation is initiated. The completion callback delegate(s) inherited from the <see cref="M:System.Net.Sockets.SocketAsyncEventArgs.OnCompleted(System.Net.Sockets.SocketAsyncEventArgs)" /> method must contain program logic to finish processing the asynchronous socket operation for the client.</para
           >
           <para
-            >When an asynchronous operation is signaled, the application uses the <see cref="T:System.Net.Sockets.SocketAsyncEventArgs" /> object parameter to obtain status of the completed asynchronous socket operation. </para
-          >
+            >When an asynchronous operation is signaled, the application uses the <see cref="T:System.Net.Sockets.SocketAsyncEventArgs" /> object parameter to obtain status of the completed asynchronous socket operation.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -752,8 +752,8 @@
             >This method sets the <see cref="P:System.Net.Sockets.SocketAsyncEventArgs.Count" /> property to the <paramref name="count" /> parameter and the <see cref="P:System.Net.Sockets.SocketAsyncEventArgs.Offset" /> property to the <paramref name="offset" /> parameter. If the <see cref="P:System.Net.Sockets.SocketAsyncEventArgs.Buffer" /> property is null, this method ignores the <paramref name="offset" /> and <paramref name="count" /> parameters and sets the <see cref="P:System.Net.Sockets.SocketAsyncEventArgs.Offset" /> and <see cref="P:System.Net.Sockets.SocketAsyncEventArgs.Count" /> properties to 0.</para
           >
           <para
-            >This method does not change the <see cref="P:System.Net.Sockets.SocketAsyncEventArgs.Buffer" /> property. </para
-          >
+            >This method does not change the <see cref="P:System.Net.Sockets.SocketAsyncEventArgs.Buffer" /> property.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

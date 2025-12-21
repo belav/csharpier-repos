@@ -19,14 +19,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class represents the gzip data format, which uses an industry-standard algorithm for lossless file compression and decompression. The format includes a cyclic redundancy check value for detecting data corruption. The gzip data format uses the same algorithm as the <see cref="T:System.IO.Compression.DeflateStream" /> class, but can be extended to use other compression formats. The format can be readily implemented in a manner not covered by patents. </para
-      >
+        >This class represents the gzip data format, which uses an industry-standard algorithm for lossless file compression and decompression. The format includes a cyclic redundancy check value for detecting data corruption. The gzip data format uses the same algorithm as the <see cref="T:System.IO.Compression.DeflateStream" /> class, but can be extended to use other compression formats. The format can be readily implemented in a manner not covered by patents.
+      </para>
       <para
         >Starting with the net_v45, the <see cref="T:System.IO.Compression.DeflateStream" /> class uses the zlib library for compression. As a result, it provides a better compression algorithm and, in most cases, a smaller compressed file than it provides in earlier versions of the .NET Framework.</para
       >
       <para
-        >Compressed <see cref="T:System.IO.Compression.GZipStream" /> objects written to a file with an extension of .gz can be decompressed using many common compression tools; however, this class does not inherently provide functionality for adding files to or extracting files from zip archives. </para
-      >
+        >Compressed <see cref="T:System.IO.Compression.GZipStream" /> objects written to a file with an extension of .gz can be decompressed using many common compression tools; however, this class does not inherently provide functionality for adding files to or extracting files from zip archives.
+      </para>
       <para
         >The compression functionality in <see cref="T:System.IO.Compression.DeflateStream" /> and <see cref="T:System.IO.Compression.GZipStream" /> is exposed as a stream. Data is read on a byte-by-byte basis, so it is not possible to perform multiple passes to determine the best method for compressing entire files or large blocks of data. The <see cref="T:System.IO.Compression.DeflateStream" /> and <see cref="T:System.IO.Compression.GZipStream" /> classes are best used on uncompressed sources of data. If the source data is already compressed, using these classes may actually increase the size of the stream.</para
       >
@@ -118,8 +118,8 @@
             >By default, <see cref="T:System.IO.Compression.GZipStream" /> owns the underlying stream, so closing the <paramref name="stream" /> parameter also closes the underlying stream. Note that the state of the underlying stream can affect the usability of the stream. Also, no explicit checks are performed, so no additional exceptions are thrown when the new instance is created.</para
           >
           <para
-            >If an instance of the <see cref="T:System.IO.Compression.GZipStream" /> class is created with the <paramref name="mode" /> parameter equal to Compress and no further action occurs, the stream will appear as a valid, empty compressed file. </para
-          >
+            >If an instance of the <see cref="T:System.IO.Compression.GZipStream" /> class is created with the <paramref name="mode" /> parameter equal to Compress and no further action occurs, the stream will appear as a valid, empty compressed file.
+          </para>
           <para
             >By default, the compression level is set to <see cref="F:System.IO.Compression.CompressionLevel.Optimal" /> when the compression mode is <see cref="F:System.IO.Compression.CompressionMode.Compress" />.</para
           >
@@ -229,8 +229,8 @@
             >By default, <see cref="T:System.IO.Compression.GZipStream" /> owns the underlying stream, so closing the <paramref name="stream" /> parameter also closes the underlying stream. Note that the state of the underlying stream can affect the usability of the stream. Also, no explicit checks are performed, so no additional exceptions are thrown when the new instance is created.</para
           >
           <para
-            >If an instance of the <see cref="T:System.IO.Compression.GZipStream" /> class is created with the <paramref name="mode" /> parameter equal to Compress and no further action occurs, the stream will appear as a valid, empty compressed file. </para
-          >
+            >If an instance of the <see cref="T:System.IO.Compression.GZipStream" /> class is created with the <paramref name="mode" /> parameter equal to Compress and no further action occurs, the stream will appear as a valid, empty compressed file.
+          </para>
           <para
             >By default, the compression level is set to <see cref="F:System.IO.Compression.CompressionLevel.Optimal" /> when the compression mode is <see cref="F:System.IO.Compression.CompressionMode.Compress" />.</para
           >

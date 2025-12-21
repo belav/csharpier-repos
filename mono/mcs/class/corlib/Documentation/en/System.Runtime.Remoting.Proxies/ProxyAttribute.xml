@@ -119,8 +119,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object type to create an instance of. </param
-        >
+          />The object type to create an instance of.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateProxy">
@@ -173,25 +173,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object reference to the remote object for which to create a proxy. </param
-        >
+          />The object reference to the remote object for which to create a proxy.
+        </param>
         <param name="serverType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the server where the remote object is located. </param
-        >
+          />The type of the server where the remote object is located.
+        </param>
         <param name="serverObject">
-          <attribution license="cc4" from="Microsoft" modified="false" />The server object. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The server object.
+        </param>
         <param name="serverContext">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The context in which the server object is located. </param
-        >
+          />The context in which the server object is located.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetPropertiesForNewContext">

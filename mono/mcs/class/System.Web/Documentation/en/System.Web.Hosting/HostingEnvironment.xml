@@ -17,8 +17,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Each managed application domain contains a static instance of the <see cref="T:System.Web.Hosting.HostingEnvironment" /> class, which provides access to application-management functions and application services. </para
-      >
+        >Each managed application domain contains a static instance of the <see cref="T:System.Web.Hosting.HostingEnvironment" /> class, which provides access to application-management functions and application services.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -41,8 +41,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.Hosting.HostingEnvironment" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.Hosting.HostingEnvironment" /> class.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -490,8 +490,8 @@
             </item>
             <item>
               <para
-                >When you wish to stop your object, call the <see cref="M:System.Web.Hosting.ApplicationManager.StopObject(System.String,System.Type)" /> method. The <see cref="M:System.Web.Hosting.ApplicationManager.StopObject(System.String,System.Type)" /> method in turn calls the <see cref="M:System.Web.Hosting.IRegisteredObject.Stop(System.Boolean)" /> method. </para
-              >
+                >When you wish to stop your object, call the <see cref="M:System.Web.Hosting.ApplicationManager.StopObject(System.String,System.Type)" /> method. The <see cref="M:System.Web.Hosting.ApplicationManager.StopObject(System.String,System.Type)" /> method in turn calls the <see cref="M:System.Web.Hosting.IRegisteredObject.Stop(System.Boolean)" /> method.
+              </para>
             </item>
             <item>
               <para

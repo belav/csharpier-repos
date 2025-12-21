@@ -44,14 +44,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The .NET Framework internally constructs a new instance of the <see cref="T:System.Web.UI.Design.WebControls.DataProviderNameConverter" /> class when the class is referenced by a <see cref="T:System.ComponentModel.TypeConverterAttribute" /> attribute. </para
-          >
+            >The .NET Framework internally constructs a new instance of the <see cref="T:System.Web.UI.Design.WebControls.DataProviderNameConverter" /> class when the class is referenced by a <see cref="T:System.ComponentModel.TypeConverterAttribute" /> attribute.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.WebControls.DataProviderNameConverter" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.WebControls.DataProviderNameConverter" /> class.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>

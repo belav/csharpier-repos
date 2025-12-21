@@ -37,11 +37,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A writing system is the collection of scripts and orthographic rules required to represent a language as text. The <see cref="T:System.Globalization.TextInfo" /> class represents a writing system.  </para
-      >
+        >A writing system is the collection of scripts and orthographic rules required to represent a language as text. The <see cref="T:System.Globalization.TextInfo" /> class represents a writing system.
+      </para>
       <para
-        >The application should use the <see cref="P:System.Globalization.CultureInfo.TextInfo" /> property to obtain the <see cref="T:System.Globalization.TextInfo" /> object for a particular <see cref="T:System.Globalization.CultureInfo" /> object. If a security decision depends on a string comparison or a case-change operation, the application should use the <see cref="P:System.Globalization.CultureInfo.TextInfo" /> property of the object returned by the <see cref="P:System.Globalization.CultureInfo.InvariantCulture" /> property to ensure that the behavior of the operation is consistent regardless of the operating system culture settings.  </para
-      >
+        >The application should use the <see cref="P:System.Globalization.CultureInfo.TextInfo" /> property to obtain the <see cref="T:System.Globalization.TextInfo" /> object for a particular <see cref="T:System.Globalization.CultureInfo" /> object. If a security decision depends on a string comparison or a case-change operation, the application should use the <see cref="P:System.Globalization.CultureInfo.TextInfo" /> property of the object returned by the <see cref="P:System.Globalization.CultureInfo.InvariantCulture" /> property to ensure that the behavior of the operation is consistent regardless of the operating system culture settings.
+      </para>
       <format type="text/html">
         <h2>Overrides</h2>
       </format>
@@ -140,11 +140,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Globalization.TextInfo" /> object is created from a specific culture, and the <see cref="P:System.Globalization.TextInfo.CultureName" /> property returns the name of that culture. </para
-          >
+            >A <see cref="T:System.Globalization.TextInfo" /> object is created from a specific culture, and the <see cref="P:System.Globalization.TextInfo.CultureName" /> property returns the name of that culture.
+          </para>
           <para
-            >The <see cref="P:System.Globalization.TextInfo.CultureName" /> property always reflects a specific culture rather than a neutral culture. If <see cref="P:System.Globalization.CultureInfo.Name" /> has a neutral culture as its value, then the corresponding <see cref="P:System.Globalization.TextInfo.CultureName" /> has as its value an arbitrary specific culture that uses the same language. For example, the <see cref="P:System.Globalization.CultureInfo.Name" /> property returns "en" for the English neutral culture, but the corresponding <see cref="P:System.Globalization.TextInfo.CultureName" /> property might return "en-US" for the English (United States) culture. If the <see cref="T:System.Globalization.TextInfo" /> object is associated with a specific culture instead of a neutral culture, the value of its <see cref="P:System.Globalization.TextInfo.CultureName" /> property is always identical to the <see cref="P:System.Globalization.CultureInfo.Name" /> property value of its associated <see cref="T:System.Globalization.CultureInfo" /> object. </para
-          >
+            >The <see cref="P:System.Globalization.TextInfo.CultureName" /> property always reflects a specific culture rather than a neutral culture. If <see cref="P:System.Globalization.CultureInfo.Name" /> has a neutral culture as its value, then the corresponding <see cref="P:System.Globalization.TextInfo.CultureName" /> has as its value an arbitrary specific culture that uses the same language. For example, the <see cref="P:System.Globalization.CultureInfo.Name" /> property returns "en" for the English neutral culture, but the corresponding <see cref="P:System.Globalization.TextInfo.CultureName" /> property might return "en-US" for the English (United States) culture. If the <see cref="T:System.Globalization.TextInfo" /> object is associated with a specific culture instead of a neutral culture, the value of its <see cref="P:System.Globalization.TextInfo.CultureName" /> property is always identical to the <see cref="P:System.Globalization.CultureInfo.Name" /> property value of its associated <see cref="T:System.Globalization.CultureInfo" /> object.
+          </para>
           <para
             >Similarly, the <see cref="P:System.Globalization.TextInfo.CultureName" /> property never reflects a particular sort. It always corresponds to a default sort order. For example, the default sort order for Spanish (Spain) is the international sort order. If <see cref="P:System.Globalization.CultureInfo.Name" /> is es-ES_tradnl (Spanish with the traditional sort order) then the corresponding <see cref="P:System.Globalization.TextInfo.CultureName" /> is es-ES (Spanish with the default international sort order).</para
           >
@@ -220,8 +220,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to compare with the current <see cref="T:System.Globalization.TextInfo" />. </param
-        >
+          />The object to compare with the current <see cref="T:System.Globalization.TextInfo" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -358,11 +358,11 @@
             >.</para
           >
           <para
-            >The <see cref="P:System.Globalization.TextInfo.LCID" /> property always reflects a specific culture identifier instead of a neutral culture identifier. If <see cref="P:System.Globalization.CultureInfo.LCID" /> is set to a neutral culture identifier, the corresponding <see cref="P:System.Globalization.TextInfo.LCID" /> has as its value an arbitrary specific culture identifier that uses the same language. For example, the <see cref="P:System.Globalization.CultureInfo.LCID" /> property returns 0x0009 for the English neutral culture, named "en". However, the corresponding <see cref="P:System.Globalization.TextInfo.LCID" /> property might return 0x0409 for the English (United States) culture, named en-US. </para
-          >
+            >The <see cref="P:System.Globalization.TextInfo.LCID" /> property always reflects a specific culture identifier instead of a neutral culture identifier. If <see cref="P:System.Globalization.CultureInfo.LCID" /> is set to a neutral culture identifier, the corresponding <see cref="P:System.Globalization.TextInfo.LCID" /> has as its value an arbitrary specific culture identifier that uses the same language. For example, the <see cref="P:System.Globalization.CultureInfo.LCID" /> property returns 0x0009 for the English neutral culture, named "en". However, the corresponding <see cref="P:System.Globalization.TextInfo.LCID" /> property might return 0x0409 for the English (United States) culture, named en-US.
+          </para>
           <para
-            >Similarly, the <see cref="P:System.Globalization.TextInfo.LCID" /> property always corresponds to a default sort order, and never reflects a specific sort order. For example, the default sort order for Spanish (Spain) is the international sort order. If <see cref="P:System.Globalization.CultureInfo.LCID" /> is set to "0x040A" (Spanish with the traditional sort order), the corresponding <see cref="P:System.Globalization.TextInfo.LCID" />  value is "0x0C0A" (Spanish with the default international sort order). </para
-          >
+            >Similarly, the <see cref="P:System.Globalization.TextInfo.LCID" /> property always corresponds to a default sort order, and never reflects a specific sort order. For example, the default sort order for Spanish (Spain) is the international sort order. If <see cref="P:System.Globalization.CultureInfo.LCID" /> is set to "0x040A" (Spanish with the traditional sort order), the corresponding <see cref="P:System.Globalization.TextInfo.LCID" />  value is "0x0C0A" (Spanish with the default international sort order).
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -529,8 +529,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The source of the deserialization event. </param
-        >
+          />The source of the deserialization event.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ToLower">
@@ -575,8 +575,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character to convert to lowercase. </param
-        >
+          />The character to convert to lowercase.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ToLower">
@@ -622,8 +622,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to convert to lowercase. </param
-        >
+          />The string to convert to lowercase.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ToString">
@@ -763,8 +763,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to convert to title case. </param
-        >
+          />The string to convert to title case.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ToUpper">
@@ -809,8 +809,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character to convert to uppercase. </param
-        >
+          />The character to convert to uppercase.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ToUpper">
@@ -856,8 +856,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to convert to uppercase. </param
-        >
+          />The string to convert to uppercase.
+        </param>
       </Docs>
     </Member>
   </Members>

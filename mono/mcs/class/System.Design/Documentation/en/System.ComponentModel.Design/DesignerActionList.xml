@@ -16,8 +16,8 @@
         >The DesignerAction feature enables components and controls to display context-sensitive information and commands. The DesignerAction feature can be thought of as a replacement for designer verbs, because a <see cref="T:System.ComponentModel.Design.DesignerActionItem" /> can be displayed in the smart tag panel and also in the shortcut menu associated with a component or control. The <see cref="T:System.ComponentModel.Design.DesignerActionList" /> class represents the main point of interaction for developers who want to add smart tag support to their custom components and controls.</para
       >
       <para>
-        <see cref="T:System.ComponentModel.Design.DesignerActionList" /> is the base class, derived from by component developers in order to populate a smart tag panel. A smart tag panel represents the menu-like user interface (UI) for smart tags. </para
-      >
+        <see cref="T:System.ComponentModel.Design.DesignerActionList" /> is the base class, derived from by component developers in order to populate a smart tag panel. A smart tag panel represents the menu-like user interface (UI) for smart tags.
+      </para>
       <para
         >This derived class may implement the virtual <see cref="M:System.ComponentModel.Design.DesignerActionList.GetSortedActionItems" /> method to return a collection of objects derived from <see cref="T:System.ComponentModel.Design.DesignerActionItem" />. These objects represent the smart tag panel items. Each item is displayed in the panel according to its type. For example, a <see cref="T:System.ComponentModel.Design.DesignerActionTextItem" /> is displayed as a static text label. Active panel items, represented by the <see cref="T:System.ComponentModel.Design.DesignerActionPropertyItem" /> and <see cref="T:System.ComponentModel.Design.DesignerActionMethodItem" /> types, have a corresponding publicly accessible property or method, respectively, that implements the functionality for that item.</para
       >
@@ -85,8 +85,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the property value is set to true, the component with which this <see cref="T:System.ComponentModel.Design.DesignerActionList" /> is associated will automatically expand and display the smart tag panel when the component is created. </para
-          >
+            >If the property value is set to true, the component with which this <see cref="T:System.ComponentModel.Design.DesignerActionList" /> is associated will automatically expand and display the smart tag panel when the component is created.
+          </para>
           <para
             >You can opt out of this behavior by setting the <see cref="P:System.Windows.Forms.Design.DesignerOptions.ObjectBoundSmartTagAutoShow" /> property to false.</para
           >

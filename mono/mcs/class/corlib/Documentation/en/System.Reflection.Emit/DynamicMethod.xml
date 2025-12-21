@@ -42,8 +42,8 @@
         </item>
         <item>
           <para
-            >If the dynamic method is associated with a module that you specify, the dynamic method is effectively global to that module. It can access all types in the module and all internal (Friend in Visual Basic) members of the types. You can associate a dynamic method with any module, regardless of whether you created the module, provided that a demand for <see cref="T:System.Security.Permissions.ReflectionPermission" /> with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" /> flag can be satisfied by the call stack that includes your code. If the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.MemberAccess" /> flag is included in the grant, the dynamic method can skip the JIT compiler's visibility checks and access the private data of all types declared in the module or in any other module in any assembly. </para
-          >
+            >If the dynamic method is associated with a module that you specify, the dynamic method is effectively global to that module. It can access all types in the module and all internal (Friend in Visual Basic) members of the types. You can associate a dynamic method with any module, regardless of whether you created the module, provided that a demand for <see cref="T:System.Security.Permissions.ReflectionPermission" /> with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" /> flag can be satisfied by the call stack that includes your code. If the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.MemberAccess" /> flag is included in the grant, the dynamic method can skip the JIT compiler's visibility checks and access the private data of all types declared in the module or in any other module in any assembly.
+          </para>
           <block subset="none" type="note">
             <para>When you specify the module with which a dynamic method is associated, that module must not be in the system-provided assembly that is used for anonymous hosting.</para>
           </block>
@@ -55,8 +55,8 @@
         </item>
       </list>
       <para
-        >The following table shows which types and members are accessible to an anonymously hosted dynamic method, with and without JIT visibility checks, depending on whether <see cref="T:System.Security.Permissions.ReflectionPermission" /> with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" /> flag is granted. </para
-      >
+        >The following table shows which types and members are accessible to an anonymously hosted dynamic method, with and without JIT visibility checks, depending on whether <see cref="T:System.Security.Permissions.ReflectionPermission" /> with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" /> flag is granted.
+      </para>
       <list type="table">
         <item>
           <term>
@@ -142,8 +142,8 @@
       <para>A dynamic method that is associated with a module has the permissions of that module. A dynamic method that is associated with a type has the permissions of the module containing that type. </para>
       <para>Dynamic methods and their parameters do not have to be named, but you can specify names to assist in debugging. Custom attributes are not supported on dynamic methods or their parameters.</para>
       <para
-        >Although dynamic methods are static methods (Shared methods in Visual Basic), the relaxed rules for delegate binding introduced in the dnprdnlong allow a dynamic method to be bound to an object, so that it acts like an instance method when called using that delegate instance. An example that demonstrates this is provided for the <see cref="M:System.Reflection.Emit.DynamicMethod.CreateDelegate(System.Type,System.Object)" /> method overload. </para
-      >
+        >Although dynamic methods are static methods (Shared methods in Visual Basic), the relaxed rules for delegate binding introduced in the dnprdnlong allow a dynamic method to be bound to an object, so that it acts like an instance method when called using that delegate instance. An example that demonstrates this is provided for the <see cref="M:System.Reflection.Emit.DynamicMethod.CreateDelegate(System.Type,System.Object)" /> method overload.
+      </para>
       <block subset="none" type="note">
         <para
           >In the dnprdnlong, dynamic methods do not support symbol information, that is, local variable names and line-number mapping. This limitation might be removed in a future version. You can use <see cref="T:System.Reflection.Emit.AssemblyBuilder" /> during development to simplify debugging the generated Microsoft intermediate language (MSIL), and then switch to dynamic methods during final deployment, because the <see cref="T:System.Reflection.Emit.ILGenerator" /> calls are the same in both cases.</para
@@ -153,8 +153,8 @@
         <h2>Verification</h2>
       </format>
       <para
-        >The following list summarizes the conditions under which dynamic methods can contain unverifiable code. (For example, a dynamic method is unverifiable if its <see cref="P:System.Reflection.Emit.DynamicMethod.InitLocals" /> property is set to false.) </para
-      >
+        >The following list summarizes the conditions under which dynamic methods can contain unverifiable code. (For example, a dynamic method is unverifiable if its <see cref="P:System.Reflection.Emit.DynamicMethod.InitLocals" /> property is set to false.)
+      </para>
       <list type="bullet">
         <item>
           <para>A dynamic method that is associated with a security-critical assembly is also security-critical, and can skip verification. For example, an assembly without security attributes that is run as a desktop application is treated as security-critical by the runtime. If you associate a dynamic method with the assembly, the dynamic method can contain unverifiable code.</para>
@@ -230,22 +230,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the dynamic method. This can be a zero-length string, but it cannot be null. </param
-        >
+          />The name of the dynamic method. This can be a zero-length string, but it cannot be null.
+        </param>
         <param name="returnType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> object that specifies the return type of the dynamic method, or null if the method has no return type. </param
-        >
+          />A <see cref="T:System.Type" /> object that specifies the return type of the dynamic method, or null if the method has no return type.
+        </param>
         <param name="parameterTypes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Type" /> objects specifying the types of the parameters of the dynamic method, or null if the method has no parameters. </param
-        >
+          />An array of <see cref="T:System.Type" /> objects specifying the types of the parameters of the dynamic method, or null if the method has no parameters.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -295,8 +295,8 @@
             >For example, a dynamic method that is created with <paramref name="restrictedSkipVisibility" /> set to true can access a private member of any assembly on the call stack if the call stack has been granted restricted member access. If the dynamic method is created with partially trusted code on the call stack, it cannot access a private member of a type in a dnprdnshort assembly, because such assemblies are fully trusted. </para
           >
           <para
-            >If <paramref name="restrictedSkipVisibility" /> is false, JIT visibility checks are enforced. The code in the dynamic method has access to public methods of public classes, and exceptions are thrown if it tries to access types or members that are private, protected, or internal. </para
-          >
+            >If <paramref name="restrictedSkipVisibility" /> is false, JIT visibility checks are enforced. The code in the dynamic method has access to public methods of public classes, and exceptions are thrown if it tries to access types or members that are private, protected, or internal.
+          </para>
           <para>When an anonymously hosted dynamic method is constructed, the call stack of the emitting assembly is included. When the method is invoked, the permissions of the emitting call stack are used instead of the permissions of the actual caller. Thus, the dynamic method cannot execute at a higher level of privilege than that of the assembly that emitted it, even if it is passed to and executed by an assembly that has a higher trust level.</para>
           <para
             >This constructor specifies the method attributes <see cref="F:System.Reflection.MethodAttributes.Public" /> and <see cref="F:System.Reflection.MethodAttributes.Static" />, and the calling convention <see cref="F:System.Reflection.CallingConventions.Standard" />.</para
@@ -314,29 +314,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the dynamic method. This can be a zero-length string, but it cannot be null. </param
-        >
+          />The name of the dynamic method. This can be a zero-length string, but it cannot be null.
+        </param>
         <param name="returnType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> object that specifies the return type of the dynamic method, or null if the method has no return type. </param
-        >
+          />A <see cref="T:System.Type" /> object that specifies the return type of the dynamic method, or null if the method has no return type.
+        </param>
         <param name="parameterTypes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Type" /> objects specifying the types of the parameters of the dynamic method, or null if the method has no parameters. </param
-        >
+          />An array of <see cref="T:System.Type" /> objects specifying the types of the parameters of the dynamic method, or null if the method has no parameters.
+        </param>
         <param name="restrictedSkipVisibility">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to skip JIT visibility checks on types and members accessed by the MSIL of the dynamic method, with this restriction: the trust level of the assemblies that contain those types and members must be equal to or less than the trust level of the call stack that emits the dynamic method; otherwise, false. </param
-        >
+          />true to skip JIT visibility checks on types and members accessed by the MSIL of the dynamic method, with this restriction: the trust level of the assemblies that contain those types and members must be equal to or less than the trust level of the call stack that emits the dynamic method; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -367,8 +367,8 @@
             >This constructor specifies method attributes <see cref="F:System.Reflection.MethodAttributes.Public" /> and <see cref="F:System.Reflection.MethodAttributes.Static" />, calling convention <see cref="F:System.Reflection.CallingConventions.Standard" />, and does not skip just-in-time (JIT) visibility checks.</para
           >
           <para
-            >The dynamic method created with this constructor has access to public and internal (Friend in Visual Basic) members of all the types contained in module <paramref name="m" />. </para
-          >
+            >The dynamic method created with this constructor has access to public and internal (Friend in Visual Basic) members of all the types contained in module <paramref name="m" />.
+          </para>
           <block subset="none" type="note">
             <para
               >For backward compatibility, this constructor demands <see cref="T:System.Security.Permissions.SecurityPermission" /> with the <see cref="F:System.Security.Permissions.SecurityPermissionFlag.ControlEvidence" /> flag if the following conditions are both true: <paramref name="m" /> is a module other than the calling module, and the demand for <see cref="T:System.Security.Permissions.ReflectionPermission" /> with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.MemberAccess" /> flag has failed. If the demand for <see cref="T:System.Security.Permissions.SecurityPermission" /> succeeds, the operation is allowed.</para
@@ -393,29 +393,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the dynamic method. This can be a zero-length string, but it cannot be null. </param
-        >
+          />The name of the dynamic method. This can be a zero-length string, but it cannot be null.
+        </param>
         <param name="returnType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> object that specifies the return type of the dynamic method, or null if the method has no return type. </param
-        >
+          />A <see cref="T:System.Type" /> object that specifies the return type of the dynamic method, or null if the method has no return type.
+        </param>
         <param name="parameterTypes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Type" /> objects specifying the types of the parameters of the dynamic method, or null if the method has no parameters. </param
-        >
+          />An array of <see cref="T:System.Type" /> objects specifying the types of the parameters of the dynamic method, or null if the method has no parameters.
+        </param>
         <param name="m">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Reflection.Module" /> representing the module with which the dynamic method is to be logically associated. </param
-        >
+          />A <see cref="T:System.Reflection.Module" /> representing the module with which the dynamic method is to be logically associated.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -472,29 +472,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the dynamic method. This can be a zero-length string, but it cannot be null. </param
-        >
+          />The name of the dynamic method. This can be a zero-length string, but it cannot be null.
+        </param>
         <param name="returnType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> object that specifies the return type of the dynamic method, or null if the method has no return type. </param
-        >
+          />A <see cref="T:System.Type" /> object that specifies the return type of the dynamic method, or null if the method has no return type.
+        </param>
         <param name="parameterTypes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Type" /> objects specifying the types of the parameters of the dynamic method, or null if the method has no parameters. </param
-        >
+          />An array of <see cref="T:System.Type" /> objects specifying the types of the parameters of the dynamic method, or null if the method has no parameters.
+        </param>
         <param name="owner">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> with which the dynamic method is logically associated. The dynamic method has access to all members of the type. </param
-        >
+          />A <see cref="T:System.Type" /> with which the dynamic method is logically associated. The dynamic method has access to all members of the type.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -552,36 +552,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the dynamic method. This can be a zero-length string, but it cannot be null. </param
-        >
+          />The name of the dynamic method. This can be a zero-length string, but it cannot be null.
+        </param>
         <param name="returnType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> object that specifies the return type of the dynamic method, or null if the method has no return type. </param
-        >
+          />A <see cref="T:System.Type" /> object that specifies the return type of the dynamic method, or null if the method has no return type.
+        </param>
         <param name="parameterTypes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Type" /> objects specifying the types of the parameters of the dynamic method, or null if the method has no parameters. </param
-        >
+          />An array of <see cref="T:System.Type" /> objects specifying the types of the parameters of the dynamic method, or null if the method has no parameters.
+        </param>
         <param name="m">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Reflection.Module" /> representing the module with which the dynamic method is to be logically associated. </param
-        >
+          />A <see cref="T:System.Reflection.Module" /> representing the module with which the dynamic method is to be logically associated.
+        </param>
         <param name="skipVisibility">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to skip JIT visibility checks on types and members accessed by the MSIL of the dynamic method. </param
-        >
+          />true to skip JIT visibility checks on types and members accessed by the MSIL of the dynamic method.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -639,22 +639,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the dynamic method. This can be a zero-length string, but it cannot be null. </param
-        >
+          />The name of the dynamic method. This can be a zero-length string, but it cannot be null.
+        </param>
         <param name="returnType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> object that specifies the return type of the dynamic method, or null if the method has no return type. </param
-        >
+          />A <see cref="T:System.Type" /> object that specifies the return type of the dynamic method, or null if the method has no return type.
+        </param>
         <param name="parameterTypes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Type" /> objects specifying the types of the parameters of the dynamic method, or null if the method has no parameters. </param
-        >
+          />An array of <see cref="T:System.Type" /> objects specifying the types of the parameters of the dynamic method, or null if the method has no parameters.
+        </param>
         <param name="owner">
           <attribution
             license="cc4"
@@ -667,8 +667,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to skip JIT visibility checks on types and members accessed by the MSIL of the dynamic method; otherwise, false. </param
-        >
+          />true to skip JIT visibility checks on types and members accessed by the MSIL of the dynamic method; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -699,8 +699,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The dynamic method created with this constructor has access to public and internal (Friend in Visual Basic) members of all the public and internal types contained in module <paramref name="m" />. </para
-          >
+            >The dynamic method created with this constructor has access to public and internal (Friend in Visual Basic) members of all the public and internal types contained in module <paramref name="m" />.
+          </para>
           <para>Skipping the JIT compiler's visibility checks allows the dynamic method to access private and protected members of all other types in the module and in all other assemblies as well. This is useful, for example, when writing code to serialize objects.</para>
           <block subset="none" type="note">
             <para
@@ -747,29 +747,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> object that specifies the return type of the dynamic method, or null if the method has no return type. </param
-        >
+          />A <see cref="T:System.Type" /> object that specifies the return type of the dynamic method, or null if the method has no return type.
+        </param>
         <param name="parameterTypes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Type" /> objects specifying the types of the parameters of the dynamic method, or null if the method has no parameters. </param
-        >
+          />An array of <see cref="T:System.Type" /> objects specifying the types of the parameters of the dynamic method, or null if the method has no parameters.
+        </param>
         <param name="m">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Reflection.Module" /> representing the module with which the dynamic method is to be logically associated. </param
-        >
+          />A <see cref="T:System.Reflection.Module" /> representing the module with which the dynamic method is to be logically associated.
+        </param>
         <param name="skipVisibility">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to skip JIT visibility checks on types and members accessed by the MSIL of the dynamic method; otherwise, false. </param
-        >
+          />true to skip JIT visibility checks on types and members accessed by the MSIL of the dynamic method; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -850,15 +850,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> object that specifies the return type of the dynamic method, or null if the method has no return type. </param
-        >
+          />A <see cref="T:System.Type" /> object that specifies the return type of the dynamic method, or null if the method has no return type.
+        </param>
         <param name="parameterTypes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Type" /> objects specifying the types of the parameters of the dynamic method, or null if the method has no parameters. </param
-        >
+          />An array of <see cref="T:System.Type" /> objects specifying the types of the parameters of the dynamic method, or null if the method has no parameters.
+        </param>
         <param name="owner">
           <attribution
             license="cc4"
@@ -988,8 +988,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A delegate type whose signature matches that of the dynamic method. </param
-        >
+          />A delegate type whose signature matches that of the dynamic method.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateDelegate">
@@ -1023,11 +1023,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overload creates a delegate bound to a particular object. Such a delegate is said to be closed over its first argument. Although the method is static, it acts as if it were an instance method; the instance is <paramref name="target" />. </para
-          >
+            >This method overload creates a delegate bound to a particular object. Such a delegate is said to be closed over its first argument. Although the method is static, it acts as if it were an instance method; the instance is <paramref name="target" />.
+          </para>
           <para
-            >This method overload requires <paramref name="target" /> to be of the same type as the first parameter of the dynamic method, or to be assignable to that type (for example, a derived class).  The signature of <paramref name="delegateType" /> has all the parameters of the dynamic method except the first. For example, if the dynamic method has the parameters <see cref="T:System.String" />, <see cref="T:System.Int32" />, and <see cref="T:System.Byte" />, then <paramref name="delegateType" /> has the parameters <see cref="T:System.Int32" /> and <see cref="T:System.Byte" />; <paramref name="target" /> is of type <see cref="T:System.String" />. </para
-          >
+            >This method overload requires <paramref name="target" /> to be of the same type as the first parameter of the dynamic method, or to be assignable to that type (for example, a derived class).  The signature of <paramref name="delegateType" /> has all the parameters of the dynamic method except the first. For example, if the dynamic method has the parameters <see cref="T:System.String" />, <see cref="T:System.Int32" />, and <see cref="T:System.Byte" />, then <paramref name="delegateType" /> has the parameters <see cref="T:System.Int32" /> and <see cref="T:System.Byte" />; <paramref name="target" /> is of type <see cref="T:System.String" />.
+          </para>
           <para
             >Calling the <see cref="M:System.Reflection.Emit.DynamicMethod.CreateDelegate(System.Type)" /> method or the <see cref="Overload:System.Reflection.Emit.DynamicMethod.Invoke" /> method completes the dynamic method. Any further attempt to alter the dynamic method, such as modifying parameter definitions or emitting more Microsoft intermediate language (MSIL), is ignored; no exception is thrown.</para
           >
@@ -1055,8 +1055,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object the delegate is bound to. Must be of the same type as the first parameter of the dynamic method. </param
-        >
+          />An object the delegate is bound to. Must be of the same type as the first parameter of the dynamic method.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DeclaringType">
@@ -1132,22 +1132,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position of the parameter in the parameter list. Parameters are indexed beginning with the number 1 for the first parameter. </param
-        >
+          />The position of the parameter in the parameter list. Parameters are indexed beginning with the number 1 for the first parameter.
+        </param>
         <param name="attributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of <see cref="T:System.Reflection.ParameterAttributes" /> values that specifies the attributes of the parameter. </param
-        >
+          />A bitwise combination of <see cref="T:System.Reflection.ParameterAttributes" /> values that specifies the attributes of the parameter.
+        </param>
         <param name="parameterName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the parameter. The name can be a zero-length string. </param
-        >
+          />The name of the parameter. The name can be a zero-length string.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Finalize">
@@ -1246,8 +1246,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to search the method's inheritance chain to find the custom attributes; false to check only the current method. </param
-        >
+          />true to search the method's inheritance chain to find the custom attributes; false to check only the current method.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttributes">
@@ -1299,15 +1299,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> representing the type of custom attribute to return. </param
-        >
+          />A <see cref="T:System.Type" /> representing the type of custom attribute to return.
+        </param>
         <param name="inherit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to search the method's inheritance chain to find the custom attributes; false to check only the current method. </param
-        >
+          />true to search the method's inheritance chain to find the custom attributes; false to check only the current method.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetDynamicILInfo">
@@ -1440,8 +1440,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The size of the MSIL stream, in bytes. </param
-        >
+          />The size of the MSIL stream, in bytes.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetMethodImplementationFlags">
@@ -1574,14 +1574,14 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>In addition to the listed exceptions, the calling code should be prepared to catch any exceptions thrown by the dynamic method.</para>
           <para
-            >Executing a dynamic method with a delegate created by the <see cref="Overload:System.Reflection.Emit.DynamicMethod.CreateDelegate" /> method is more efficient than executing it with the <see cref="M:System.Reflection.Emit.DynamicMethod.Invoke(System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" /> method. </para
-          >
+            >Executing a dynamic method with a delegate created by the <see cref="Overload:System.Reflection.Emit.DynamicMethod.CreateDelegate" /> method is more efficient than executing it with the <see cref="M:System.Reflection.Emit.DynamicMethod.Invoke(System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" /> method.
+          </para>
           <para
             >Calling the <see cref="M:System.Reflection.Emit.DynamicMethod.Invoke(System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" /> method or the <see cref="M:System.Reflection.Emit.DynamicMethod.CreateDelegate(System.Type)" /> method completes the dynamic method. Any further attempt to alter the dynamic method, such as modifying parameter definitions or emitting more Microsoft intermediate language (MSIL), is ignored; no exception is thrown.</para
           >
           <para
-            >All dynamic methods are static, so the <paramref name="obj" /> parameter is always ignored. To treat a dynamic method as if it were an instance method, use the <see cref="M:System.Reflection.Emit.DynamicMethod.CreateDelegate(System.Type,System.Object)" /> overload that takes an object instance. </para
-          >
+            >All dynamic methods are static, so the <paramref name="obj" /> parameter is always ignored. To treat a dynamic method as if it were an instance method, use the <see cref="M:System.Reflection.Emit.DynamicMethod.CreateDelegate(System.Type,System.Object)" /> overload that takes an object instance.
+          </para>
           <para
             >If the dynamic method has no parameters, the value of <paramref name="parameters" /> should be null. Otherwise the number, type, and order of elements in the parameters array should be identical to the number, type, and order of parameters of the dynamic method.</para
           >
@@ -1591,8 +1591,8 @@
             >
           </block>
           <para
-            >This method does not demand permissions directly, but invoking the dynamic method can result in security demands, depending on the method. For example, no demands are made for anonymously hosted dynamic methods that are created with the <paramref name="restrictedSkipVisibility" /> parameter set to false. On the other hand, if you create a method with <paramref name="restrictedSkipVisibility" /> set to true so it can access a hidden member of a target assembly, the method will cause a demand for the permissions of the target assembly plus <see cref="T:System.Security.Permissions.ReflectionPermission" /> with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.MemberAccess" /> flag. </para
-          >
+            >This method does not demand permissions directly, but invoking the dynamic method can result in security demands, depending on the method. For example, no demands are made for anonymously hosted dynamic methods that are created with the <paramref name="restrictedSkipVisibility" /> parameter set to false. On the other hand, if you create a method with <paramref name="restrictedSkipVisibility" /> set to true so it can access a hidden member of a target assembly, the method will cause a demand for the permissions of the target assembly plus <see cref="T:System.Security.Permissions.ReflectionPermission" /> with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.MemberAccess" /> flag.
+          </para>
           <block subset="none" type="note">
             <para
               >Prior to the net_v20sp1_long, this method required <see cref="T:System.Security.Permissions.ReflectionPermission" /> with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.MemberAccess" /> flag.</para
@@ -1614,8 +1614,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />This parameter is ignored for dynamic methods, because they are static. Specify null. </param
-        >
+          />This parameter is ignored for dynamic methods, because they are static. Specify null.
+        </param>
         <param name="invokeAttr">
           <attribution
             license="cc4"
@@ -1628,22 +1628,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Reflection.Binder" /> object that enables the binding, coercion of argument types, invocation of members, and retrieval of <see cref="T:System.Reflection.MemberInfo" /> objects through reflection. If <paramref name="binder" /> is null, the default binder is used. For more details, see <see cref="T:System.Reflection.Binder" />. </param
-        >
+          />A <see cref="T:System.Reflection.Binder" /> object that enables the binding, coercion of argument types, invocation of members, and retrieval of <see cref="T:System.Reflection.MemberInfo" /> objects through reflection. If <paramref name="binder" /> is null, the default binder is used. For more details, see <see cref="T:System.Reflection.Binder" />.
+        </param>
         <param name="parameters">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An argument list. This is an array of arguments with the same number, order, and type as the parameters of the method to be invoked. If there are no parameters this parameter should be null. </param
-        >
+          />An argument list. This is an array of arguments with the same number, order, and type as the parameters of the method to be invoked. If there are no parameters this parameter should be null.
+        </param>
         <param name="culture">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An instance of <see cref="T:System.Globalization.CultureInfo" /> used to govern the coercion of types. If this is null, the <see cref="T:System.Globalization.CultureInfo" /> for the current thread is used. For example, this information is needed to correctly convert a <see cref="T:System.String" /> that represents 1000 to a <see cref="T:System.Double" /> value, because 1000 is represented differently by different cultures. </param
-        >
+          />An instance of <see cref="T:System.Globalization.CultureInfo" /> used to govern the coercion of types. If this is null, the <see cref="T:System.Globalization.CultureInfo" /> for the current thread is used. For example, this information is needed to correctly convert a <see cref="T:System.String" /> that represents 1000 to a <see cref="T:System.Double" /> value, because 1000 is represented differently by different cultures.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsDefined">
@@ -1691,15 +1691,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> representing the type of custom attribute to search for. </param
-        >
+          />A <see cref="T:System.Type" /> representing the type of custom attribute to search for.
+        </param>
         <param name="inherit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to search the method's inheritance chain to find the custom attributes; false to check only the current method. </param
-        >
+          />true to search the method's inheritance chain to find the custom attributes; false to check only the current method.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="MethodHandle">

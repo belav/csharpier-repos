@@ -159,33 +159,29 @@
           <para>The defined document.</para>
         </returns>
         <param name="url">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The URL for the document. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The URL for the document.
+        </param>
         <param name="language">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The GUID that identifies the document language. This can be <see cref="F:System.Guid.Empty" />. </param
-        >
+          />The GUID that identifies the document language. This can be <see cref="F:System.Guid.Empty" />.
+        </param>
         <param name="languageVendor">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The GUID that identifies the document language vendor. This can be <see cref="F:System.Guid.Empty" />. </param
-        >
+          />The GUID that identifies the document language vendor. This can be <see cref="F:System.Guid.Empty" />.
+        </param>
         <param name="documentType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The GUID that identifies the document type. This can be <see cref="F:System.Guid.Empty" />. </param
-        >
+          />The GUID that identifies the document type. This can be <see cref="F:System.Guid.Empty" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefineEnum">
@@ -222,8 +218,8 @@
               <a href="7e4c5921-955d-4b06-8709-101873acf157"
                 >.NET Framework Class Library Overview</a
               >
-            </format>. </para
-          >
+            </format>.
+          </para>
           <block subset="none" type="note">
             <para
               >In the .NET Framework versions 1.0 and 1.1, it is necessary to define enumerations using <see cref="T:System.Reflection.Emit.TypeBuilder" /> because <see cref="T:System.Reflection.Emit.EnumBuilder" /> emits enumerations whose elements are of type <see cref="T:System.Int32" /> instead of the enumeration type. In the .NET Framework version 2.0, <see cref="T:System.Reflection.Emit.EnumBuilder" /> emits enumerations whose elements have the correct type.</para
@@ -254,22 +250,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The full path of the enumeration type. <paramref name="name" /> cannot contain embedded nulls. </param
-        >
+          />The full path of the enumeration type. <paramref name="name" /> cannot contain embedded nulls.
+        </param>
         <param name="visibility">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type attributes for the enumeration. The attributes are any bits defined by <see cref="F:System.Reflection.TypeAttributes.VisibilityMask" />. </param
-        >
+          />The type attributes for the enumeration. The attributes are any bits defined by <see cref="F:System.Reflection.TypeAttributes.VisibilityMask" />.
+        </param>
         <param name="underlyingType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The underlying type for the enumeration. This must be a built-in integer type. </param
-        >
+          />The underlying type for the enumeration. This must be a built-in integer type.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefineGlobalMethod">
@@ -325,29 +321,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the method. <paramref name="name" /> cannot contain embedded nulls. </param
-        >
+          />The name of the method. <paramref name="name" /> cannot contain embedded nulls.
+        </param>
         <param name="attributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The attributes of the method. <paramref name="attributes" /> must include <see cref="F:System.Reflection.MethodAttributes.Static" />. </param
-        >
+          />The attributes of the method. <paramref name="attributes" /> must include <see cref="F:System.Reflection.MethodAttributes.Static" />.
+        </param>
         <param name="returnType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The return type of the method. </param
-        >
+          />The return type of the method.
+        </param>
         <param name="parameterTypes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The types of the method's parameters. </param
-        >
+          />The types of the method's parameters.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefineGlobalMethod">
@@ -404,8 +400,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the method. <paramref name="name" /> cannot contain embedded nulls. </param
-        >
+          />The name of the method. <paramref name="name" /> cannot contain embedded nulls.
+        </param>
         <param name="attributes">
           <attribution
             license="cc4"
@@ -418,22 +414,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The calling convention for the method. </param
-        >
+          />The calling convention for the method.
+        </param>
         <param name="returnType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The return type of the method. </param
-        >
+          />The return type of the method.
+        </param>
         <param name="parameterTypes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The types of the method's parameters. </param
-        >
+          />The types of the method's parameters.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefineGlobalMethod">
@@ -495,8 +491,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the method. <paramref name="name" /> cannot contain embedded null characters. </param
-        >
+          />The name of the method. <paramref name="name" /> cannot contain embedded null characters.
+        </param>
         <param name="attributes">
           <attribution
             license="cc4"
@@ -509,36 +505,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The calling convention for the method. </param
-        >
+          />The calling convention for the method.
+        </param>
         <param name="returnType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The return type of the method. </param
-        >
+          />The return type of the method.
+        </param>
         <param name="requiredReturnTypeCustomModifiers">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of types representing the required custom modifiers for the return type, such as <see cref="T:System.Runtime.CompilerServices.IsConst" /> or <see cref="T:System.Runtime.CompilerServices.IsBoxed" />. If the return type has no required custom modifiers, specify null. </param
-        >
+          />An array of types representing the required custom modifiers for the return type, such as <see cref="T:System.Runtime.CompilerServices.IsConst" /> or <see cref="T:System.Runtime.CompilerServices.IsBoxed" />. If the return type has no required custom modifiers, specify null.
+        </param>
         <param name="optionalReturnTypeCustomModifiers">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of types representing the optional custom modifiers for the return type, such as <see cref="T:System.Runtime.CompilerServices.IsConst" /> or <see cref="T:System.Runtime.CompilerServices.IsBoxed" />. If the return type has no optional custom modifiers, specify null. </param
-        >
+          />An array of types representing the optional custom modifiers for the return type, such as <see cref="T:System.Runtime.CompilerServices.IsConst" /> or <see cref="T:System.Runtime.CompilerServices.IsBoxed" />. If the return type has no optional custom modifiers, specify null.
+        </param>
         <param name="parameterTypes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The types of the method's parameters. </param
-        >
+          />The types of the method's parameters.
+        </param>
         <param name="requiredParameterTypeCustomModifiers">
           <attribution
             license="cc4"
@@ -585,8 +581,8 @@
             <see cref="F:System.Reflection.FieldAttributes.Static" /> is automatically included in <paramref name="attributes" />.</para
           >
           <para
-            >The data defined by this method is not created until the <see cref="M:System.Reflection.Emit.ModuleBuilder.CreateGlobalFunctions" /> method is called.  </para
-          >
+            >The data defined by this method is not created until the <see cref="M:System.Reflection.Emit.ModuleBuilder.CreateGlobalFunctions" /> method is called.
+          </para>
           <block subset="none" type="note">
             <para
               >Starting with the net_v20sp1_long, this member no longer requires <see cref="T:System.Security.Permissions.ReflectionPermission" /> with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" /> flag. (See <format type="text/html">
@@ -610,22 +606,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name used to refer to the data. <paramref name="name" /> cannot contain embedded nulls. </param
-        >
+          />The name used to refer to the data. <paramref name="name" /> cannot contain embedded nulls.
+        </param>
         <param name="data">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The binary large object (BLOB) of data. </param
-        >
+          />The binary large object (BLOB) of data.
+        </param>
         <param name="attributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The attributes for the field. The default is Static. </param
-        >
+          />The attributes for the field. The default is Static.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefineManifestResource">
@@ -761,57 +757,53 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the PInvoke method. <paramref name="name" /> cannot contain embedded nulls. </param
-        >
+          />The name of the PInvoke method. <paramref name="name" /> cannot contain embedded nulls.
+        </param>
         <param name="dllName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the DLL in which the PInvoke method is defined. </param
-        >
+          />The name of the DLL in which the PInvoke method is defined.
+        </param>
         <param name="attributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The attributes of the method. </param
-        >
+          />The attributes of the method.
+        </param>
         <param name="callingConvention">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The method's calling convention. </param
-        >
+          />The method's calling convention.
+        </param>
         <param name="returnType">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The method's return type. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The method's return type.
+        </param>
         <param name="parameterTypes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The types of the method's parameters. </param
-        >
+          />The types of the method's parameters.
+        </param>
         <param name="nativeCallConv">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The native calling convention. </param
-        >
+          />The native calling convention.
+        </param>
         <param name="nativeCharSet">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The method's native character set. </param
-        >
+          />The method's native character set.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefinePInvokeMethod">
@@ -872,64 +864,60 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the PInvoke method. <paramref name="name" /> cannot contain embedded nulls. </param
-        >
+          />The name of the PInvoke method. <paramref name="name" /> cannot contain embedded nulls.
+        </param>
         <param name="dllName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the DLL in which the PInvoke method is defined. </param
-        >
+          />The name of the DLL in which the PInvoke method is defined.
+        </param>
         <param name="entryName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the entry point in the DLL. </param
-        >
+          />The name of the entry point in the DLL.
+        </param>
         <param name="attributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The attributes of the method. </param
-        >
+          />The attributes of the method.
+        </param>
         <param name="callingConvention">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The method's calling convention. </param
-        >
+          />The method's calling convention.
+        </param>
         <param name="returnType">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The method's return type. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The method's return type.
+        </param>
         <param name="parameterTypes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The types of the method's parameters. </param
-        >
+          />The types of the method's parameters.
+        </param>
         <param name="nativeCallConv">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The native calling convention. </param
-        >
+          />The native calling convention.
+        </param>
         <param name="nativeCharSet">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The method's native character set. </param
-        >
+          />The method's native character set.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefineResource">
@@ -984,15 +972,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the resource. <paramref name="name" /> cannot contain embedded nulls. </param
-        >
+          />The name of the resource. <paramref name="name" /> cannot contain embedded nulls.
+        </param>
         <param name="description">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The description of the resource. </param
-        >
+          />The description of the resource.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefineResource">
@@ -1048,22 +1036,18 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the resource. <paramref name="name" /> cannot contain embedded nulls. </param
-        >
+          />The name of the resource. <paramref name="name" /> cannot contain embedded nulls.
+        </param>
         <param name="description">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The description of the resource. </param
-        >
+          />The description of the resource.
+        </param>
         <param name="attribute">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The resource attributes. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The resource attributes.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefineType">
@@ -1114,8 +1098,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The full path of the type, including the namespace. <paramref name="name" /> cannot contain embedded nulls. </param
-        >
+          />The full path of the type, including the namespace. <paramref name="name" /> cannot contain embedded nulls.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefineType">
@@ -1167,15 +1151,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The full path of the type. <paramref name="name" /> cannot contain embedded nulls. </param
-        >
+          />The full path of the type. <paramref name="name" /> cannot contain embedded nulls.
+        </param>
         <param name="attr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The attributes of the defined type. </param
-        >
+          />The attributes of the defined type.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefineType">
@@ -1228,22 +1212,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The full path of the type. <paramref name="name" /> cannot contain embedded nulls. </param
-        >
+          />The full path of the type. <paramref name="name" /> cannot contain embedded nulls.
+        </param>
         <param name="attr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The attribute to be associated with the type. </param
-        >
+          />The attribute to be associated with the type.
+        </param>
         <param name="parent">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type that the defined type extends. </param
-        >
+          />The type that the defined type extends.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefineType">
@@ -1297,29 +1281,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The full path of the type. <paramref name="name" /> cannot contain embedded nulls. </param
-        >
+          />The full path of the type. <paramref name="name" /> cannot contain embedded nulls.
+        </param>
         <param name="attr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The attributes of the defined type. </param
-        >
+          />The attributes of the defined type.
+        </param>
         <param name="parent">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type that the defined type extends. </param
-        >
+          />The type that the defined type extends.
+        </param>
         <param name="typesize">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The total size of the type. </param
-        >
+          />The total size of the type.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefineType">
@@ -1373,29 +1357,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The full path of the type. <paramref name="name" /> cannot contain embedded nulls. </param
-        >
+          />The full path of the type. <paramref name="name" /> cannot contain embedded nulls.
+        </param>
         <param name="attr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The attributes of the defined type. </param
-        >
+          />The attributes of the defined type.
+        </param>
         <param name="parent">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type that the defined type extends. </param
-        >
+          />The type that the defined type extends.
+        </param>
         <param name="packsize">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The packing size of the type. </param
-        >
+          />The packing size of the type.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefineType">
@@ -1454,29 +1438,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The full path of the type. <paramref name="name" /> cannot contain embedded nulls. </param
-        >
+          />The full path of the type. <paramref name="name" /> cannot contain embedded nulls.
+        </param>
         <param name="attr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The attributes to be associated with the type. </param
-        >
+          />The attributes to be associated with the type.
+        </param>
         <param name="parent">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type that the defined type extends. </param
-        >
+          />The type that the defined type extends.
+        </param>
         <param name="interfaces">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The list of interfaces that the type implements. </param
-        >
+          />The list of interfaces that the type implements.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefineType">
@@ -1531,36 +1515,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The full path of the type. <paramref name="name" /> cannot contain embedded nulls. </param
-        >
+          />The full path of the type. <paramref name="name" /> cannot contain embedded nulls.
+        </param>
         <param name="attr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The attributes of the defined type. </param
-        >
+          />The attributes of the defined type.
+        </param>
         <param name="parent">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type that the defined type extends. </param
-        >
+          />The type that the defined type extends.
+        </param>
         <param name="packingSize">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The packing size of the type. </param
-        >
+          />The packing size of the type.
+        </param>
         <param name="typesize">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The total size of the type. </param
-        >
+          />The total size of the type.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefineUninitializedData">
@@ -1593,8 +1577,8 @@
             <see cref="F:System.Reflection.FieldAttributes.Static" /> is automatically included in <paramref name="attributes" />.</para
           >
           <para
-            >The data defined by this method is not created until the <see cref="M:System.Reflection.Emit.ModuleBuilder.CreateGlobalFunctions" /> method is called.  </para
-          >
+            >The data defined by this method is not created until the <see cref="M:System.Reflection.Emit.ModuleBuilder.CreateGlobalFunctions" /> method is called.
+          </para>
           <block subset="none" type="note">
             <para
               >Starting with the net_v20sp1_long, this member no longer requires <see cref="T:System.Security.Permissions.ReflectionPermission" /> with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" /> flag. (See <format type="text/html">
@@ -1618,22 +1602,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name used to refer to the data. <paramref name="name" /> cannot contain embedded nulls. </param
-        >
+          />The name used to refer to the data. <paramref name="name" /> cannot contain embedded nulls.
+        </param>
         <param name="size">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The size of the data field. </param
-        >
+          />The size of the data field.
+        </param>
         <param name="attributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The attributes for the field. </param
-        >
+          />The attributes for the field.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefineUnmanagedResource">
@@ -1682,8 +1666,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An opaque BLOB that represents an unmanaged resource </param
-        >
+          />An opaque BLOB that represents an unmanaged resource
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefineUnmanagedResource">
@@ -1732,8 +1716,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the unmanaged resource file. </param
-        >
+          />The name of the unmanaged resource file.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -1841,36 +1825,36 @@
           <para>The named method on an array class.</para>
         </returns>
         <param name="arrayClass">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array class. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />An array class.
+        </param>
         <param name="methodName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of a method on the array class. </param
-        >
+          />The name of a method on the array class.
+        </param>
         <param name="callingConvention">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The method's calling convention. </param
-        >
+          />The method's calling convention.
+        </param>
         <param name="returnType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The return type of the method. </param
-        >
+          />The return type of the method.
+        </param>
         <param name="parameterTypes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The types of the method's parameters. </param
-        >
+          />The types of the method's parameters.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetArrayMethodToken">
@@ -1914,40 +1898,36 @@
           <para>The token for the named method on an array class.</para>
         </returns>
         <param name="arrayClass">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The object for the array. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The object for the array.
+        </param>
         <param name="methodName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string that contains the name of the method. </param
-        >
+          />A string that contains the name of the method.
+        </param>
         <param name="callingConvention">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The calling convention for the method. </param
-        >
+          />The calling convention for the method.
+        </param>
         <param name="returnType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The return type of the method. </param
-        >
+          />The return type of the method.
+        </param>
         <param name="parameterTypes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The types of the parameters of the method. </param
-        >
+          />The types of the parameters of the method.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetConstructorToken">
@@ -1991,8 +1971,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The constructor to get a token for. </param
-        >
+          />The constructor to get a token for.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttributes">
@@ -2109,8 +2089,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you emit dynamic assemblies, fields in the .sdata region of the portable executable (PE) file are defined by using the <see cref="M:System.Reflection.Emit.ModuleBuilder.DefineInitializedData(System.String,System.Byte[],System.Reflection.FieldAttributes)" /> or <see cref="M:System.Reflection.Emit.ModuleBuilder.DefineUninitializedData(System.String,System.Int32,System.Reflection.FieldAttributes)" /> methods. </para
-          >
+            >When you emit dynamic assemblies, fields in the .sdata region of the portable executable (PE) file are defined by using the <see cref="M:System.Reflection.Emit.ModuleBuilder.DefineInitializedData(System.String,System.Byte[],System.Reflection.FieldAttributes)" /> or <see cref="M:System.Reflection.Emit.ModuleBuilder.DefineUninitializedData(System.String,System.Int32,System.Reflection.FieldAttributes)" /> methods.
+          </para>
           <block subset="none" type="note">
             <para
               >Module-level fields cannot be retrieved until after the <see cref="M:System.Reflection.Emit.ModuleBuilder.CreateGlobalFunctions" /> method has been called for the module.</para
@@ -2126,15 +2106,15 @@
           <para>A field that has the specified name and binding attributes, or null if the field does not exist.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The field name. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The field name.
+        </param>
         <param name="bindingAttr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A combination of the BindingFlags bit flags used to control the search. </param
-        >
+          />A combination of the BindingFlags bit flags used to control the search.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetFields">
@@ -2160,8 +2140,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you emit dynamic assemblies, fields in the .sdata region of the portable executable (PE) file are defined by using the <see cref="M:System.Reflection.Emit.ModuleBuilder.DefineInitializedData(System.String,System.Byte[],System.Reflection.FieldAttributes)" /> or <see cref="M:System.Reflection.Emit.ModuleBuilder.DefineUninitializedData(System.String,System.Int32,System.Reflection.FieldAttributes)" /> methods. </para
-          >
+            >When you emit dynamic assemblies, fields in the .sdata region of the portable executable (PE) file are defined by using the <see cref="M:System.Reflection.Emit.ModuleBuilder.DefineInitializedData(System.String,System.Byte[],System.Reflection.FieldAttributes)" /> or <see cref="M:System.Reflection.Emit.ModuleBuilder.DefineUninitializedData(System.String,System.Int32,System.Reflection.FieldAttributes)" /> methods.
+          </para>
           <block subset="none" type="note">
             <para
               >Module-level fields cannot be retrieved until after the <see cref="M:System.Reflection.Emit.ModuleBuilder.CreateGlobalFunctions" /> method has been called for the module.</para
@@ -2221,8 +2201,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The field to get a token for. </param
-        >
+          />The field to get a token for.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -2279,8 +2259,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method provides the implementation for all overloads of the inherited <see cref="Overload:System.Reflection.Module.GetMethod" /> method. Use the inherited <see cref="Overload:System.Reflection.Module.GetMethod" /> method to get methods that have been declared at the module level. Module-level methods are defined in emitted code by using the <see cref="Overload:System.Reflection.Emit.ModuleBuilder.DefineGlobalMethod" /> method. </para
-          >
+            >This method provides the implementation for all overloads of the inherited <see cref="Overload:System.Reflection.Module.GetMethod" /> method. Use the inherited <see cref="Overload:System.Reflection.Module.GetMethod" /> method to get methods that have been declared at the module level. Module-level methods are defined in emitted code by using the <see cref="Overload:System.Reflection.Emit.ModuleBuilder.DefineGlobalMethod" /> method.
+          </para>
           <block subset="none" type="note">
             <para
               >Module-level methods cannot be retrieved until after the <see cref="M:System.Reflection.Emit.ModuleBuilder.CreateGlobalFunctions" /> method has been called for the module.</para
@@ -2296,43 +2276,43 @@
           <para>A method that is defined at the module level, and matches the specified criteria; or null if such a method does not exist.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The method name. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The method name.
+        </param>
         <param name="bindingAttr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A combination of BindingFlags bit flags used to control the search. </param
-        >
+          />A combination of BindingFlags bit flags used to control the search.
+        </param>
         <param name="binder">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that implements Binder, containing properties related to this method. </param
-        >
+          />An object that implements Binder, containing properties related to this method.
+        </param>
         <param name="callConvention">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The calling convention for the method. </param
-        >
+          />The calling convention for the method.
+        </param>
         <param name="types">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The parameter types of the method. </param
-        >
+          />The parameter types of the method.
+        </param>
         <param name="modifiers">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of parameter modifiers used to make binding work with parameter signatures in which the types have been modified. </param
-        >
+          />An array of parameter modifiers used to make binding work with parameter signatures in which the types have been modified.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetMethods">
@@ -2358,8 +2338,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Module-level methods are defined in emitted code by using the <see cref="Overload:System.Reflection.Emit.ModuleBuilder.DefineGlobalMethod" /> method. </para
-          >
+            >Module-level methods are defined in emitted code by using the <see cref="Overload:System.Reflection.Emit.ModuleBuilder.DefineGlobalMethod" /> method.
+          </para>
           <block subset="none" type="note">
             <para
               >Module-level methods cannot be retrieved until after the <see cref="M:System.Reflection.Emit.ModuleBuilder.CreateGlobalFunctions" /> method has been called for the module.</para
@@ -2423,8 +2403,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The method to get a token for. </param
-        >
+          />The method to get a token for.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetSignatureToken">
@@ -2466,8 +2446,8 @@
           <para>A token for the defined signature.</para>
         </returns>
         <param name="sigHelper">
-          <attribution license="cc4" from="Microsoft" modified="false" />The signature. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The signature.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetSignatureToken">
@@ -2507,15 +2487,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The signature binary large object (BLOB). </param
-        >
+          />The signature binary large object (BLOB).
+        </param>
         <param name="sigLength">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The length of the signature BLOB. </param
-        >
+          />The length of the signature BLOB.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetStringConstant">
@@ -2559,8 +2539,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to add to the module's constant pool. </param
-        >
+          />The string to add to the module's constant pool.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetSymWriter">
@@ -2657,8 +2637,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the <see cref="T:System.Type" /> to get. </param
-        >
+          />The name of the <see cref="T:System.Type" /> to get.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetType">
@@ -2717,15 +2697,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the <see cref="T:System.Type" /> to get. </param
-        >
+          />The name of the <see cref="T:System.Type" /> to get.
+        </param>
         <param name="ignoreCase">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />If true, the search is case-insensitive. If false, the search is case-sensitive. </param
-        >
+          />If true, the search is case-insensitive. If false, the search is case-sensitive.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetType">
@@ -2788,22 +2768,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the <see cref="T:System.Type" /> to get. </param
-        >
+          />The name of the <see cref="T:System.Type" /> to get.
+        </param>
         <param name="throwOnError">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to throw an exception if the type cannot be found; false to return null. </param
-        >
+          />true to throw an exception if the type cannot be found; false to return null.
+        </param>
         <param name="ignoreCase">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />If true, the search is case-insensitive. If false, the search is case-sensitive. </param
-        >
+          />If true, the search is case-insensitive. If false, the search is case-sensitive.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetTypes">
@@ -2888,8 +2868,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the class, including the namespace. </param
-        >
+          />The name of the class, including the namespace.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetTypeToken">
@@ -2931,8 +2911,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type object that represents the class type. </param
-        >
+          />The type object that represents the class type.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsDefined">
@@ -3063,8 +3043,8 @@
                 >ECMA C# and Common Language Infrastructure Standards</see
               > on MSDN and <see cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
-              > on the ECMA Web site. </para
-            >
+              > on the ECMA Web site.
+            </para>
           </block>
         </remarks>
         <summary>
@@ -3100,8 +3080,8 @@
                 >ECMA C# and Common Language Infrastructure Standards</see
               > on MSDN and <see cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
-              > on the ECMA Web site. </para
-            >
+              > on the ECMA Web site.
+            </para>
           </block>
         </remarks>
         <summary>
@@ -3166,8 +3146,8 @@
                 >ECMA C# and Common Language Infrastructure Standards</see
               > on MSDN and <see cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
-              > on the ECMA Web site. </para
-            >
+              > on the ECMA Web site.
+            </para>
           </block>
           <para
             >For code that demonstrates token resolution using the generic context (that is, the generic type parameters of the generic type and/or the generic method in which the token is embedded) see the <see cref="M:System.Reflection.Module.ResolveMethod(System.Int32,System.Type[],System.Type[])" /> method.</para
@@ -3195,8 +3175,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Type" /> objects representing the generic type arguments of the type where the token is in scope, or null if that type is not generic. </param
-        >
+          />An array of <see cref="T:System.Type" /> objects representing the generic type arguments of the type where the token is in scope, or null if that type is not generic.
+        </param>
         <param name="genericMethodArguments">
           <attribution
             license="cc4"
@@ -3240,8 +3220,8 @@
                 >ECMA C# and Common Language Infrastructure Standards</see
               > on MSDN and <see cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
-              > on the ECMA Web site. </para
-            >
+              > on the ECMA Web site.
+            </para>
           </block>
           <para
             >For code that demonstrates token resolution using the generic context (that is, the generic type parameters of the generic type and/or the generic method in which the token is embedded) see the <see cref="M:System.Reflection.Module.ResolveMethod(System.Int32,System.Type[],System.Type[])" /> method.</para
@@ -3269,8 +3249,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Type" /> objects representing the generic type arguments of the type where the token is in scope, or null if that type is not generic. </param
-        >
+          />An array of <see cref="T:System.Type" /> objects representing the generic type arguments of the type where the token is in scope, or null if that type is not generic.
+        </param>
         <param name="genericMethodArguments">
           <attribution
             license="cc4"
@@ -3305,8 +3285,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="M:System.Type.GetGenericArguments" /> method on the type where <paramref name="metadataToken" /> is in scope to obtain an array of generic type arguments for <paramref name="genericTypeArguments" />. Use the <see cref="M:System.Reflection.MethodInfo.GetGenericArguments" /> method on the method where <paramref name="metadataToken" /> is in scope to obtain an array of generic type arguments for <paramref name="genericMethodArguments" />. It is always safe to provide these arguments, even when they are not needed. </para
-          >
+            >Use the <see cref="M:System.Type.GetGenericArguments" /> method on the type where <paramref name="metadataToken" /> is in scope to obtain an array of generic type arguments for <paramref name="genericTypeArguments" />. Use the <see cref="M:System.Reflection.MethodInfo.GetGenericArguments" /> method on the method where <paramref name="metadataToken" /> is in scope to obtain an array of generic type arguments for <paramref name="genericMethodArguments" />. It is always safe to provide these arguments, even when they are not needed.
+          </para>
           <block subset="none" type="note">
             <para
               >Information about metadata tokens can be found in the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics". The documentation is available online; see <see
@@ -3314,8 +3294,8 @@
                 >ECMA C# and Common Language Infrastructure Standards</see
               > on MSDN and <see cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
-              > on the ECMA Web site. </para
-            >
+              > on the ECMA Web site.
+            </para>
           </block>
           <para
             >For code that demonstrates token resolution using the generic context (that is, the generic type parameters of the generic type and/or the generic method in which the token is embedded) see the <see cref="M:System.Reflection.Module.ResolveMethod(System.Int32,System.Type[],System.Type[])" /> method.</para
@@ -3343,8 +3323,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Type" /> objects representing the generic type arguments of the type where the token is in scope, or null if that type is not generic. </param
-        >
+          />An array of <see cref="T:System.Type" /> objects representing the generic type arguments of the type where the token is in scope, or null if that type is not generic.
+        </param>
         <param name="genericMethodArguments">
           <attribution
             license="cc4"
@@ -3383,8 +3363,8 @@
                 >ECMA C# and Common Language Infrastructure Standards</see
               > on MSDN and <see cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
-              > on the ECMA Web site. </para
-            >
+              > on the ECMA Web site.
+            </para>
           </block>
         </remarks>
         <summary>
@@ -3433,8 +3413,8 @@
                 >ECMA C# and Common Language Infrastructure Standards</see
               > on MSDN and <see cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
-              > on the ECMA Web site. </para
-            >
+              > on the ECMA Web site.
+            </para>
           </block>
         </remarks>
         <summary>
@@ -3490,8 +3470,8 @@
                 >ECMA C# and Common Language Infrastructure Standards</see
               > on MSDN and <see cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
-              > on the ECMA Web site. </para
-            >
+              > on the ECMA Web site.
+            </para>
           </block>
           <para
             >For code that demonstrates token resolution using the generic context (that is, the generic type parameters of the generic type and/or the generic method in which the token is embedded) see the <see cref="M:System.Reflection.Module.ResolveMethod(System.Int32,System.Type[],System.Type[])" /> method.</para
@@ -3519,8 +3499,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Type" /> objects representing the generic type arguments of the type where the token is in scope, or null if that type is not generic. </param
-        >
+          />An array of <see cref="T:System.Type" /> objects representing the generic type arguments of the type where the token is in scope, or null if that type is not generic.
+        </param>
         <param name="genericMethodArguments">
           <attribution
             license="cc4"
@@ -3592,8 +3572,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An instance of a helper class that specifies the custom attribute to apply. </param
-        >
+          />An instance of a helper class that specifies the custom attribute to apply.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetCustomAttribute">
@@ -3653,15 +3633,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The constructor for the custom attribute. </param
-        >
+          />The constructor for the custom attribute.
+        </param>
         <param name="binaryAttribute">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A byte BLOB representing the attribute. </param
-        >
+          />A byte BLOB representing the attribute.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetSymCustomAttribute">
@@ -3709,15 +3689,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the custom attribute </param
-        >
+          />The name of the custom attribute
+        </param>
         <param name="data">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An opaque binary large object (BLOB) of bytes that represents the value of the custom attribute. </param
-        >
+          />An opaque binary large object (BLOB) of bytes that represents the value of the custom attribute.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetUserEntryPoint">
@@ -3760,12 +3740,8 @@
           <para>Sets the user entry point.</para>
         </summary>
         <param name="entryPoint">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The user entry point. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The user entry point.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.Runtime.InteropServices._ModuleBuilder.GetIDsOfNames">

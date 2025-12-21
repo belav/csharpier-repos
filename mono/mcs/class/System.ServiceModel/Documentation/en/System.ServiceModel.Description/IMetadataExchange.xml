@@ -27,8 +27,8 @@
         >Services implemented using indigo2 publish metadata by exposing one or more metadata endpoints. Metadata endpoints in indigo2 have an address, a binding and a contract like any other endpoint.  The <see cref="T:System.ServiceModel.Description.MetadataReference" /> interface specifies the service contract implemented by all metadata endpoints in indigo2.</para
       >
       <para
-        >There is no need to implement the <see cref="T:System.ServiceModel.Description.MetadataReference" /> contract in your service implementation.  Instead, add the <see cref="T:System.ServiceModel.Description.ServiceMetadataBehavior" /> to the service description. </para
-      >
+        >There is no need to implement the <see cref="T:System.ServiceModel.Description.MetadataReference" /> contract in your service implementation.  Instead, add the <see cref="T:System.ServiceModel.Description.ServiceMetadataBehavior" /> to the service description.
+      </para>
       <para
         >Or, when using configuration, set the contract attribute of the endpoint element to IMetadataExchange. For an example, see <format type="text/html">
           <a href="f061443f-92df-4824-b36a-609c4cd14a17"

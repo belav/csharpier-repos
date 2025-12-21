@@ -41,8 +41,8 @@
         </item>
         <item>
           <para
-            >Violating the canonical ordering of ACEs. If the ACE list in the DACL is not kept in the canonical order, users might inadvertently be given access to the secured object. For example, denied access rights must always appear before allowed access rights. <see cref="T:System.Security.AccessControl.RegistrySecurity" /> objects maintain the correct order internally. </para
-          >
+            >Violating the canonical ordering of ACEs. If the ACE list in the DACL is not kept in the canonical order, users might inadvertently be given access to the secured object. For example, denied access rights must always appear before allowed access rights. <see cref="T:System.Security.AccessControl.RegistrySecurity" /> objects maintain the correct order internally.
+          </para>
         </item>
         <item>
           <para>Manipulating security descriptor flags, which should be under resource manager control only. </para>
@@ -67,8 +67,8 @@
         </item>
       </list>
       <para
-        >To modify Windows access control security for a registry key, use the <see cref="M:Microsoft.Win32.RegistryKey.GetAccessControl" /> method to get the <see cref="T:System.Security.AccessControl.RegistrySecurity" /> object. Modify the security object by adding and removing rules, and then use the <see cref="M:Microsoft.Win32.RegistryKey.SetAccessControl(System.Security.AccessControl.RegistrySecurity)" /> method to reattach it. </para
-      >
+        >To modify Windows access control security for a registry key, use the <see cref="M:Microsoft.Win32.RegistryKey.GetAccessControl" /> method to get the <see cref="T:System.Security.AccessControl.RegistrySecurity" /> object. Modify the security object by adding and removing rules, and then use the <see cref="M:Microsoft.Win32.RegistryKey.SetAccessControl(System.Security.AccessControl.RegistrySecurity)" /> method to reattach it.
+      </para>
       <block subset="none" type="note">
         <para
           >Changes you make to a <see cref="T:System.Security.AccessControl.RegistrySecurity" /> object do not affect the access levels of the registry key until you call the <see cref="M:Microsoft.Win32.RegistryKey.SetAccessControl(System.Security.AccessControl.RegistrySecurity)" /> method to assign the altered security object to the registry key.</para
@@ -297,8 +297,8 @@
             >The <see cref="M:System.Security.AccessControl.RegistrySecurity.AddAccessRule(System.Security.AccessControl.RegistryAccessRule)" /> method searches for rules with the same user or group and the same <see cref="T:System.Security.AccessControl.AccessControlType" /> as <paramref name="rule" />. If none are found, <paramref name="rule" /> is added. If a matching rule is found, the rights in <paramref name="rule" /> are merged with the existing rule.</para
           >
           <para
-            >Rules cannot be merged if they have different inheritance flags. For example, if a user is allowed read access with no inheritance flags, and <see cref="M:System.Security.AccessControl.RegistrySecurity.AddAccessRule(System.Security.AccessControl.RegistryAccessRule)" /> is used to add a rule giving the user write access with inheritance for subkeys (<see cref="F:System.Security.AccessControl.InheritanceFlags.ContainerInherit" />), the two rules cannot be merged. </para
-          >
+            >Rules cannot be merged if they have different inheritance flags. For example, if a user is allowed read access with no inheritance flags, and <see cref="M:System.Security.AccessControl.RegistrySecurity.AddAccessRule(System.Security.AccessControl.RegistryAccessRule)" /> is used to add a rule giving the user write access with inheritance for subkeys (<see cref="F:System.Security.AccessControl.InheritanceFlags.ContainerInherit" />), the two rules cannot be merged.
+          </para>
           <para
             >Rules with different <see cref="T:System.Security.AccessControl.AccessControlType" /> values are never merged.</para
           >
@@ -347,8 +347,8 @@
             >The <see cref="M:System.Security.AccessControl.RegistrySecurity.AddAuditRule(System.Security.AccessControl.RegistryAuditRule)" /> method searches for rules with the same user or group as <paramref name="rule" />. If none are found, <paramref name="rule" /> is added. If a matching rule is found, the flags in <paramref name="rule" /> are merged into the existing rule.</para
           >
           <para
-            >Rules cannot be merged if they have different inheritance flags. For example, if failed attempts to write to a key are audited for a particular user, with no inheritance flags, and <see cref="M:System.Security.AccessControl.RegistrySecurity.AddAuditRule(System.Security.AccessControl.RegistryAuditRule)" /> is used to add a rule specifying that failed attempts to change permissions are to be audited for the same user, but with inheritance for subkeys (<see cref="F:System.Security.AccessControl.InheritanceFlags.ContainerInherit" />), the two rules cannot be merged. </para
-          >
+            >Rules cannot be merged if they have different inheritance flags. For example, if failed attempts to write to a key are audited for a particular user, with no inheritance flags, and <see cref="M:System.Security.AccessControl.RegistrySecurity.AddAuditRule(System.Security.AccessControl.RegistryAuditRule)" /> is used to add a rule specifying that failed attempts to change permissions are to be audited for the same user, but with inheritance for subkeys (<see cref="F:System.Security.AccessControl.InheritanceFlags.ContainerInherit" />), the two rules cannot be merged.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -511,8 +511,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current <see cref="T:System.Security.AccessControl.RegistrySecurity" /> is searched for a rule that has the same user and the same <see cref="T:System.Security.AccessControl.AccessControlType" /> value as <paramref name="rule" />. If no such rule is found, no action is taken, and the method returns false. If matching rules are found, their inheritance and compatibility flags are checked for compatibility with the flags specified in <paramref name="rule" />. If no compatible rule is found, no action is taken, and the method returns false. If a rule with compatible flags is found, the rights specified in <paramref name="rule" /> are removed from the compatible rule, and the method returns true. If <paramref name="rule" /> specifies rights not contained in the compatible rule, no action is taken with respect to those rights. If all rights are removed from the compatible rule, the entire rule is removed from the current <see cref="T:System.Security.AccessControl.RegistrySecurity" /> object. </para
-          >
+            >The current <see cref="T:System.Security.AccessControl.RegistrySecurity" /> is searched for a rule that has the same user and the same <see cref="T:System.Security.AccessControl.AccessControlType" /> value as <paramref name="rule" />. If no such rule is found, no action is taken, and the method returns false. If matching rules are found, their inheritance and compatibility flags are checked for compatibility with the flags specified in <paramref name="rule" />. If no compatible rule is found, no action is taken, and the method returns false. If a rule with compatible flags is found, the rights specified in <paramref name="rule" /> are removed from the compatible rule, and the method returns true. If <paramref name="rule" /> specifies rights not contained in the compatible rule, no action is taken with respect to those rights. If all rights are removed from the compatible rule, the entire rule is removed from the current <see cref="T:System.Security.AccessControl.RegistrySecurity" /> object.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -561,8 +561,8 @@
             >The current <see cref="T:System.Security.AccessControl.RegistrySecurity" /> is searched for rules that have the same user and the same <see cref="T:System.Security.AccessControl.AccessControlType" /> value as <paramref name="rule" />. Any rights, inheritance flags, or propagation flags specified by <paramref name="rule" /> are ignored when performing this search. If no matching rules are found, no action is taken.</para
           >
           <para
-            >For example, if a user has multiple rules that allow various rights with different inheritance and propagation flags, you can remove all those rules by creating a <see cref="T:System.Security.AccessControl.RegistryAccessRule" /> object that specifies the user and <see cref="F:System.Security.AccessControl.AccessControlType.Allow" />, with any arbitrary rights and flags, and passing that rule to the <see cref="M:System.Security.AccessControl.RegistrySecurity.RemoveAccessRuleAll(System.Security.AccessControl.RegistryAccessRule)" /> method. </para
-          >
+            >For example, if a user has multiple rules that allow various rights with different inheritance and propagation flags, you can remove all those rules by creating a <see cref="T:System.Security.AccessControl.RegistryAccessRule" /> object that specifies the user and <see cref="F:System.Security.AccessControl.AccessControlType.Allow" />, with any arbitrary rights and flags, and passing that rule to the <see cref="M:System.Security.AccessControl.RegistrySecurity.RemoveAccessRuleAll(System.Security.AccessControl.RegistryAccessRule)" /> method.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -608,8 +608,8 @@
           >
           <block subset="none" type="note">
             <para
-              >A rule represents one or more underlying access control entries (ACE), and these entries are split or combined as necessary when you modify the access security rules for a user. Thus, a rule might no longer exist in the specific form it had when it was added, and in that case the <see cref="M:System.Security.AccessControl.RegistrySecurity.RemoveAccessRuleSpecific(System.Security.AccessControl.RegistryAccessRule)" /> method cannot remove it. </para
-            >
+              >A rule represents one or more underlying access control entries (ACE), and these entries are split or combined as necessary when you modify the access security rules for a user. Thus, a rule might no longer exist in the specific form it had when it was added, and in that case the <see cref="M:System.Security.AccessControl.RegistrySecurity.RemoveAccessRuleSpecific(System.Security.AccessControl.RegistryAccessRule)" /> method cannot remove it.
+            </para>
           </block>
         </remarks>
         <summary>
@@ -650,8 +650,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current <see cref="T:System.Security.AccessControl.RegistrySecurity" /> is searched for an audit rule that has the same user as <paramref name="rule" />. If no such rule is found, no action is taken, and the method returns false. If matching rules are found, their inheritance and compatibility flags are checked for compatibility with the flags specified in <paramref name="rule" />. If no compatible rule is found, no action is taken, and the method returns false. If a rule with compatible flags is found, the rights specified in <paramref name="rule" /> are removed from the compatible rule, and the method returns true. If <paramref name="rule" /> specifies rights not contained in the compatible rule, no action is taken with respect to those rights. If all rights are removed from the compatible rule, the entire rule is removed from the current <see cref="T:System.Security.AccessControl.RegistrySecurity" /> object. </para
-          >
+            >The current <see cref="T:System.Security.AccessControl.RegistrySecurity" /> is searched for an audit rule that has the same user as <paramref name="rule" />. If no such rule is found, no action is taken, and the method returns false. If matching rules are found, their inheritance and compatibility flags are checked for compatibility with the flags specified in <paramref name="rule" />. If no compatible rule is found, no action is taken, and the method returns false. If a rule with compatible flags is found, the rights specified in <paramref name="rule" /> are removed from the compatible rule, and the method returns true. If <paramref name="rule" /> specifies rights not contained in the compatible rule, no action is taken with respect to those rights. If all rights are removed from the compatible rule, the entire rule is removed from the current <see cref="T:System.Security.AccessControl.RegistrySecurity" /> object.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -695,8 +695,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current <see cref="T:System.Security.AccessControl.RegistrySecurity" /> is searched for audit rules that have the same user as <paramref name="rule" />. Any rights, inheritance flags, or propagation flags specified by <paramref name="rule" /> are ignored when performing this search. If no matching rules are found, no action is taken. </para
-          >
+            >The current <see cref="T:System.Security.AccessControl.RegistrySecurity" /> is searched for audit rules that have the same user as <paramref name="rule" />. Any rights, inheritance flags, or propagation flags specified by <paramref name="rule" /> are ignored when performing this search. If no matching rules are found, no action is taken.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -740,8 +740,8 @@
           >
           <block subset="none" type="note">
             <para
-              >A rule represents one or more underlying access control entries (ACE), and these entries are split or combined as necessary when you modify the audit security rules for a user. Thus, a rule might no longer exist in the specific form it had when it was added, and in that case the <see cref="M:System.Security.AccessControl.RegistrySecurity.RemoveAuditRuleSpecific(System.Security.AccessControl.RegistryAuditRule)" /> method cannot remove it. </para
-            >
+              >A rule represents one or more underlying access control entries (ACE), and these entries are split or combined as necessary when you modify the audit security rules for a user. Thus, a rule might no longer exist in the specific form it had when it was added, and in that case the <see cref="M:System.Security.AccessControl.RegistrySecurity.RemoveAuditRuleSpecific(System.Security.AccessControl.RegistryAuditRule)" /> method cannot remove it.
+            </para>
           </block>
         </remarks>
         <summary>

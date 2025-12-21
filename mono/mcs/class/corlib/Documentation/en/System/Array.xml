@@ -50,8 +50,8 @@
         >The <see cref="T:System.Array" /> class is the base class for language implementations that support arrays. However, only the system and compilers can derive explicitly from the <see cref="T:System.Array" /> class. Users should employ the array constructs provided by the language.</para
       >
       <para
-        >An element is a value in an <see cref="T:System.Array" />. The length of an <see cref="T:System.Array" /> is the total number of elements it can contain. The rank of an <see cref="T:System.Array" /> is the number of dimensions in the <see cref="T:System.Array" />. The lower bound of a dimension of an <see cref="T:System.Array" /> is the starting index of that dimension of the <see cref="T:System.Array" />; a multidimensional <see cref="T:System.Array" /> can have different bounds for each dimension. An array can have a maximum of 32 dimensions. </para
-      >
+        >An element is a value in an <see cref="T:System.Array" />. The length of an <see cref="T:System.Array" /> is the total number of elements it can contain. The rank of an <see cref="T:System.Array" /> is the number of dimensions in the <see cref="T:System.Array" />. The lower bound of a dimension of an <see cref="T:System.Array" /> is the starting index of that dimension of the <see cref="T:System.Array" />; a multidimensional <see cref="T:System.Array" /> can have different bounds for each dimension. An array can have a maximum of 32 dimensions.
+      </para>
       <para
         >By default, the maximum size of an <see cref="T:System.Array" /> is 2 gigabytes (GB). In a 64-bit environment, you can avoid the size restriction by setting the enabled attribute of the <format type="text/html">
           <a href="5c7ea24a-39ac-4e5f-83b7-b9f9a1b556ab">gcAllowVeryLargeObjects</a>
@@ -59,8 +59,8 @@
       >
       <block subset="none" type="note">
         <para
-          >Starting with the .NET Framework 2.0, the <see cref="T:System.Array" /> class implements the <see cref="T:System.Collections.Generic.IList`1" />, <see cref="T:System.Collections.Generic.ICollection`1" />, and <see cref="T:System.Collections.Generic.IEnumerable`1" /> generic interfaces. The implementations are provided to arrays at run time, and therefore are not visible to the documentation build tools. As a result, the generic interfaces do not appear in the declaration syntax for the <see cref="T:System.Array" /> class, and there are no reference topics for interface members that are accessible only by casting an array to the generic interface type (explicit interface implementations). The key thing to be aware of when you cast an array to one of these interfaces is that members which add, insert, or remove elements throw <see cref="T:System.NotSupportedException" />. </para
-        >
+          >Starting with the .NET Framework 2.0, the <see cref="T:System.Array" /> class implements the <see cref="T:System.Collections.Generic.IList`1" />, <see cref="T:System.Collections.Generic.ICollection`1" />, and <see cref="T:System.Collections.Generic.IEnumerable`1" /> generic interfaces. The implementations are provided to arrays at run time, and therefore are not visible to the documentation build tools. As a result, the generic interfaces do not appear in the declaration syntax for the <see cref="T:System.Array" /> class, and there are no reference topics for interface members that are accessible only by casting an array to the generic interface type (explicit interface implementations). The key thing to be aware of when you cast an array to one of these interfaces is that members which add, insert, or remove elements throw <see cref="T:System.NotSupportedException" />.
+        </para>
       </block>
       <para>
         <see cref="T:System.Type" /> objects provide information about array type declarations. <see cref="T:System.Array" /> objects with the same array type share the same <see cref="T:System.Type" /> object.</para
@@ -179,12 +179,12 @@
       <Docs>
         <exception cref="T:System.ArgumentException">
           <para
-            >Both <paramref name="value" /> and at least one element of <paramref name="array" /> do not implement the <see cref="T:System.IComparable" /> interface. </para
-          >
+            >Both <paramref name="value" /> and at least one element of <paramref name="array" /> do not implement the <see cref="T:System.IComparable" /> interface.
+          </para>
           <para>-or-</para>
           <para>
-            <paramref name="value" /> is not assignment-compatible with at least one element of <paramref name="array" />. </para
-          >
+            <paramref name="value" /> is not assignment-compatible with at least one element of <paramref name="array" />.
+          </para>
           <para>-or-</para>
           <para>
             <paramref name="array" />.UpperBound == <see cref="F:System.Int32.MaxValue" />.</para
@@ -198,8 +198,8 @@
         </exception>
         <exception cref="T:System.InvalidOperationException">
           <para
-            >Both <paramref name="value" /> and at least one element of <paramref name="array" /> do not implement the <see cref="T:System.IComparable" /> interface. </para
-          >
+            >Both <paramref name="value" /> and at least one element of <paramref name="array" /> do not implement the <see cref="T:System.IComparable" /> interface.
+          </para>
         </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -207,8 +207,8 @@
             >This method does not support searching arrays that contain negative indexes. <paramref name="array" /> must be sorted before calling this method.</para
           >
           <para
-            >If the <see cref="T:System.Array" /> does not contain the specified value, the method returns a negative integer. You can apply the bitwise complement operator (~ in C#, Not in Visual Basic) to the negative result  to produce an index. If this index is one greater than the upper bound of the array, there are no elements larger than <paramref name="value" /> in the array. Otherwise, it is the index of the first element that is larger than <paramref name="value" />. </para
-          >
+            >If the <see cref="T:System.Array" /> does not contain the specified value, the method returns a negative integer. You can apply the bitwise complement operator (~ in C#, Not in Visual Basic) to the negative result  to produce an index. If this index is one greater than the upper bound of the array, there are no elements larger than <paramref name="value" /> in the array. Otherwise, it is the index of the first element that is larger than <paramref name="value" />.
+          </para>
           <para
             >Either <paramref name="value" /> or every element of <paramref name="array" /> must implement the <see cref="T:System.IComparable" /> interface, which is used for comparisons. The elements of <paramref name="array" /> must already be sorted in increasing value according to the sort order defined by the <see cref="T:System.IComparable" /> implementation; otherwise, the result might be incorrect.</para
           >
@@ -322,8 +322,8 @@
             >This method does not support searching arrays that contain negative indexes. <paramref name="array" /> must be sorted before calling this method.</para
           >
           <para
-            >If the <see cref="T:System.Array" /> does not contain the specified value, the method returns a negative integer. You can apply the bitwise complement operator (~ in C#, Not in Visual Basic) to the negative result  to produce an index. If this index is one greater than the upper bound of the array, there are no elements larger than <paramref name="value" /> in the array. Otherwise, it is the index of the first element that is larger than <paramref name="value" />. </para
-          >
+            >If the <see cref="T:System.Array" /> does not contain the specified value, the method returns a negative integer. You can apply the bitwise complement operator (~ in C#, Not in Visual Basic) to the negative result  to produce an index. If this index is one greater than the upper bound of the array, there are no elements larger than <paramref name="value" /> in the array. Otherwise, it is the index of the first element that is larger than <paramref name="value" />.
+          </para>
           <para
             >The comparer customizes how the elements are compared. For example, you can use a <see cref="T:System.Collections.CaseInsensitiveComparer" /> as the comparer to perform case-insensitive string searches.</para
           >
@@ -452,8 +452,8 @@
             >This method does not support searching arrays that contain negative indexes. <paramref name="array" /> must be sorted before calling this method.</para
           >
           <para
-            >If the <see cref="T:System.Array" /> does not contain the specified value, the method returns a negative integer. You can apply the bitwise complement operator (~ in C#, Not in Visual Basic) to the negative result  to produce an index. If this index is one greater than the upper bound of the array, there are no elements larger than <paramref name="value" /> in the array. Otherwise, it is the index of the first element that is larger than <paramref name="value" />. </para
-          >
+            >If the <see cref="T:System.Array" /> does not contain the specified value, the method returns a negative integer. You can apply the bitwise complement operator (~ in C#, Not in Visual Basic) to the negative result  to produce an index. If this index is one greater than the upper bound of the array, there are no elements larger than <paramref name="value" /> in the array. Otherwise, it is the index of the first element that is larger than <paramref name="value" />.
+          </para>
           <para
             >Either <paramref name="value" /> or every element of <paramref name="array" /> must implement the <see cref="T:System.IComparable" /> interface, which is used for comparisons. The elements of <paramref name="array" /> must already be sorted in increasing value according to the sort order defined by the <see cref="T:System.IComparable" /> implementation; otherwise, the result might be incorrect.</para
           >
@@ -614,8 +614,7 @@ class BinarySearchExample {
     }
   }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>The indices and elements of the array are:</para>
@@ -638,8 +637,8 @@ class BinarySearchExample {
             >This method does not support searching arrays that contain negative indexes. <paramref name="array" /> must be sorted before calling this method.</para
           >
           <para
-            >If the <see cref="T:System.Array" /> does not contain the specified value, the method returns a negative integer. You can apply the bitwise complement operator (~ in C#, Not in Visual Basic) to the negative result  to produce an index. If this index is one greater than the upper bound of the array, there are no elements larger than <paramref name="value" /> in the array. Otherwise, it is the index of the first element that is larger than <paramref name="value" />. </para
-          >
+            >If the <see cref="T:System.Array" /> does not contain the specified value, the method returns a negative integer. You can apply the bitwise complement operator (~ in C#, Not in Visual Basic) to the negative result  to produce an index. If this index is one greater than the upper bound of the array, there are no elements larger than <paramref name="value" /> in the array. Otherwise, it is the index of the first element that is larger than <paramref name="value" />.
+          </para>
           <para
             >The comparer customizes how the elements are compared. For example, you can use a <see cref="T:System.Collections.CaseInsensitiveComparer" /> as the comparer to perform case-insensitive string searches.</para
           >
@@ -658,8 +657,8 @@ class BinarySearchExample {
             >Duplicate elements are allowed. If the <see cref="T:System.Array" /> contains more than one element equal to <paramref name="value" />, the method returns the index of only one of the occurrences, and not necessarily the first one.</para
           >
           <para
-            >null can always be compared with any other reference type; therefore, comparisons with null do not generate an exception when using <see cref="T:System.IComparable" />. </para
-          >
+            >null can always be compared with any other reference type; therefore, comparisons with null do not generate an exception when using <see cref="T:System.IComparable" />.
+          </para>
           <block subset="none" type="note">
             <para
               >For every element tested, <paramref name="value" /> is passed to the appropriate <see cref="T:System.IComparable" /> implementation, even if <paramref name="value" /> is null. That is, the <see cref="T:System.IComparable" /> implementation determines how a given element compares to null.</para
@@ -854,8 +853,8 @@ class BinarySearchExample {
             >This method does not support searching arrays that contain negative indexes. <paramref name="array" /> must be sorted before calling this method.</para
           >
           <para
-            >If the <see cref="T:System.Array" /> does not contain the specified value, the method returns a negative integer. You can apply the bitwise complement operator (~ in C#, Not in Visual Basic) to the negative result to produce an index. If this index is equal to the size of the array, there are no elements larger than <paramref name="value" /> in the array. Otherwise, it is the index of the first element that is larger than <paramref name="value" />. </para
-          >
+            >If the <see cref="T:System.Array" /> does not contain the specified value, the method returns a negative integer. You can apply the bitwise complement operator (~ in C#, Not in Visual Basic) to the negative result to produce an index. If this index is equal to the size of the array, there are no elements larger than <paramref name="value" /> in the array. Otherwise, it is the index of the first element that is larger than <paramref name="value" />.
+          </para>
           <para
             >The comparer customizes how the elements are compared. For example, you can use a <see cref="T:System.Collections.CaseInsensitiveComparer" /> as the comparer to perform case-insensitive string searches.</para
           >
@@ -900,8 +899,8 @@ class BinarySearchExample {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The sorted one-dimensional, zero-based <see cref="T:System.Array" /> to search.  </param
-        >
+          />The sorted one-dimensional, zero-based <see cref="T:System.Array" /> to search.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
@@ -1087,8 +1086,8 @@ class BinarySearchExample {
             >This method does not support searching arrays that contain negative indexes. <paramref name="array" /> must be sorted before calling this method.</para
           >
           <para
-            >If the array does not contain the specified value, the method returns a negative integer. You can apply the bitwise complement operator (~ in C#, Not in Visual Basic) to the negative result  to produce an index. If this index is equal to the size of the array, there are no elements larger than <paramref name="value" /> in the array. Otherwise, it is the index of the first element that is larger than <paramref name="value" />. </para
-          >
+            >If the array does not contain the specified value, the method returns a negative integer. You can apply the bitwise complement operator (~ in C#, Not in Visual Basic) to the negative result  to produce an index. If this index is equal to the size of the array, there are no elements larger than <paramref name="value" /> in the array. Otherwise, it is the index of the first element that is larger than <paramref name="value" />.
+          </para>
           <para
             >The comparer customizes how the elements are compared. For example, you can use a <see cref="T:System.Collections.CaseInsensitiveComparer" /> as the comparer to perform case-insensitive string searches.</para
           >
@@ -1102,8 +1101,8 @@ class BinarySearchExample {
             >Duplicate elements are allowed. If the <see cref="T:System.Array" /> contains more than one element equal to <paramref name="value" />, the method returns the index of only one of the occurrences, and not necessarily the first one.</para
           >
           <para
-            >null can always be compared with any other reference type; therefore, comparisons with null do not generate an exception when using <see cref="T:System.IComparable`1" />. </para
-          >
+            >null can always be compared with any other reference type; therefore, comparisons with null do not generate an exception when using <see cref="T:System.IComparable`1" />.
+          </para>
           <block subset="none" type="note">
             <para
               >For every element tested, <paramref name="value" /> is passed to the appropriate <see cref="T:System.IComparable`1" /> implementation, even if <paramref name="value" /> is null. That is, the <see cref="T:System.IComparable`1" /> implementation determines how a given element compares to null.</para
@@ -1130,8 +1129,8 @@ class BinarySearchExample {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The sorted one-dimensional, zero-based <see cref="T:System.Array" /> to search. </param
-        >
+          />The sorted one-dimensional, zero-based <see cref="T:System.Array" /> to search.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
@@ -1215,8 +1214,8 @@ class BinarySearchExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method resets each element in an array to the element type's default value. It sets elements of reference types (including <see cref="T:System.String" /> elements) to null, and sets elements of value types to the default values shown in the following table. </para
-          >
+            >This method resets each element in an array to the element type's default value. It sets elements of reference types (including <see cref="T:System.String" /> elements) to null, and sets elements of value types to the default values shown in the following table.
+          </para>
           <list type="table">
             <listheader>
               <item>
@@ -1348,8 +1347,7 @@ public class ArrayCloneExample {
       Console.Write( "{0,3}", i );
   }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>The elements of the first array are: 3 4 5</para>
@@ -1648,8 +1646,7 @@ public class ArrayCopyExample {
          Console.Write( "{0,3}", dAryCopy[i] );
    }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>The elements of the first array are: 3 4 5</para>
@@ -1659,8 +1656,8 @@ public class ArrayCopyExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="sourceArray" /> and <paramref name="destinationArray" /> parameters must have the same number of dimensions. In addition, <paramref name="destinationArray" /> must already have been dimensioned and must have a sufficient number of elements to accommodate the copied data. </para
-          >
+            >The <paramref name="sourceArray" /> and <paramref name="destinationArray" /> parameters must have the same number of dimensions. In addition, <paramref name="destinationArray" /> must already have been dimensioned and must have a sufficient number of elements to accommodate the copied data.
+          </para>
           <para>When copying between multidimensional arrays, the array behaves like a long one-dimensional array, where the rows (or columns) are conceptually laid end to end. For example, if an array has three rows (or columns) with four elements each, copying six elements from the beginning of the array would copy all four elements of the first row (or column) and the first two elements of the second row (or column).</para>
           <para
             >If <paramref name="sourceArray" /> and <paramref name="destinationArray" /> overlap, this method behaves as if the original values of <paramref name="sourceArray" /> were preserved in a temporary location before <paramref name="destinationArray" /> is overwritten.</para
@@ -1684,8 +1681,8 @@ public class ArrayCopyExample {
             </item>
           </list>
           <para
-            >An <see cref="T:System.ArrayTypeMismatchException" /> is thrown if the arrays are of incompatible types. Type compatibility is defined as follows: </para
-          >
+            >An <see cref="T:System.ArrayTypeMismatchException" /> is thrown if the arrays are of incompatible types. Type compatibility is defined as follows:
+          </para>
           <list type="bullet">
             <item>
               <para>A type is compatible with itself.</para>
@@ -1806,8 +1803,8 @@ public class ArrayCopyExample {
             </item>
           </list>
           <para
-            >An <see cref="T:System.ArrayTypeMismatchException" /> is thrown if the arrays are of incompatible types. Type compatibility is defined as follows: </para
-          >
+            >An <see cref="T:System.ArrayTypeMismatchException" /> is thrown if the arrays are of incompatible types. Type compatibility is defined as follows:
+          </para>
           <list type="bullet">
             <item>
               <para>A type is compatible with itself.</para>
@@ -1969,8 +1966,7 @@ class ArrayCopyExample {
       Console.WriteLine();     
    }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>The elements of the array are: 0 10 20 30 40 50</para>
@@ -1981,8 +1977,8 @@ class ArrayCopyExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="sourceArray" /> and <paramref name="destinationArray" /> parameters must have the same number of dimensions. In addition, <paramref name="destinationArray" /> must already have been dimensioned and must have a sufficient number of elements starting from the <paramref name="destinationIndex" /> position to accommodate the copied data. </para
-          >
+            >The <paramref name="sourceArray" /> and <paramref name="destinationArray" /> parameters must have the same number of dimensions. In addition, <paramref name="destinationArray" /> must already have been dimensioned and must have a sufficient number of elements starting from the <paramref name="destinationIndex" /> position to accommodate the copied data.
+          </para>
           <para
             >When copying between multidimensional arrays, the array behaves like a long one-dimensional array, where the rows (or columns) are conceptually laid end-to-end. For example, if an array has three rows (or columns) with four elements each, copying six elements from the beginning of the array would copy all four elements of the first row (or column) and the first two elements of the second row (or column). To start copying from the second element of the third row (or column), <paramref name="sourceIndex" /> must be the upper bound of the first row (or column) plus the length of the second row (or column) plus two.</para
           >
@@ -2008,8 +2004,8 @@ class ArrayCopyExample {
             </item>
           </list>
           <para
-            >An <see cref="T:System.ArrayTypeMismatchException" /> is thrown if the arrays are of incompatible types. Type compatibility is defined as follows: </para
-          >
+            >An <see cref="T:System.ArrayTypeMismatchException" /> is thrown if the arrays are of incompatible types. Type compatibility is defined as follows:
+          </para>
           <list type="bullet">
             <item>
               <para>A type is compatible with itself.</para>
@@ -2121,8 +2117,8 @@ class ArrayCopyExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="sourceArray" /> and <paramref name="destinationArray" /> parameters must have the same number of dimensions. In addition, <paramref name="destinationArray" /> must already have been dimensioned and must have a sufficient number of elements starting from the <paramref name="destinationIndex" /> position to accommodate the copied data. </para
-          >
+            >The <paramref name="sourceArray" /> and <paramref name="destinationArray" /> parameters must have the same number of dimensions. In addition, <paramref name="destinationArray" /> must already have been dimensioned and must have a sufficient number of elements starting from the <paramref name="destinationIndex" /> position to accommodate the copied data.
+          </para>
           <para
             >When copying between multidimensional arrays, the array behaves like a long one-dimensional array, where the rows (or columns) are conceptually laid end-to-end. For example, if an array has three rows (or columns) with four elements each, copying six elements from the beginning of the array would copy all four elements of the first row (or column) and the first two elements of the second row (or column). To start copying from the second element of the third row (or column), <paramref name="sourceIndex" /> must be the upper bound of the first row (or column) plus the length of the second row (or column) plus two.</para
           >
@@ -2148,8 +2144,8 @@ class ArrayCopyExample {
             </item>
           </list>
           <para
-            >An <see cref="T:System.ArrayTypeMismatchException" /> is thrown if the arrays are of incompatible types. Type compatibility is defined as follows: </para
-          >
+            >An <see cref="T:System.ArrayTypeMismatchException" /> is thrown if the arrays are of incompatible types. Type compatibility is defined as follows:
+          </para>
           <list type="bullet">
             <item>
               <para>A type is compatible with itself.</para>
@@ -2312,8 +2308,7 @@ public class ArrayCopyToExample
          Console.Write("{0} ", o);
    }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <para>
             <c>The contents of the first array are:</c>
@@ -2337,8 +2332,8 @@ public class ArrayCopyToExample
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method copies all the elements of the current array instance to the <paramref name="array" /> destination array, starting at index <paramref name="index" />. The <paramref name="array" /> destination array must already have been dimensioned and must have a sufficient number of elements to accommodate the copied elements. Otherwise, the method throws an exception. </para
-          >
+            >This method copies all the elements of the current array instance to the <paramref name="array" /> destination array, starting at index <paramref name="index" />. The <paramref name="array" /> destination array must already have been dimensioned and must have a sufficient number of elements to accommodate the copied elements. Otherwise, the method throws an exception.
+          </para>
           <para
             >This method supports the <see cref="T:System.Collections.ICollection" /> interface. If implementing <see cref="T:System.Collections.ICollection" /> is not explicitly required, use <see cref="M:System.Array.Copy(System.Array,System.Array,System.Int32)" /> to avoid an extra indirection.</para
           >
@@ -2398,8 +2393,8 @@ public class ArrayCopyToExample
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method copies all the elements of the current array instance to the <paramref name="array" /> destination array, starting at index <paramref name="index" />. The <paramref name="array" /> destination array must already have been dimensioned and must have a sufficient number of elements to accommodate the copied elements. Otherwise, the method throws an exception. </para
-          >
+            >This method copies all the elements of the current array instance to the <paramref name="array" /> destination array, starting at index <paramref name="index" />. The <paramref name="array" /> destination array must already have been dimensioned and must have a sufficient number of elements to accommodate the copied elements. Otherwise, the method throws an exception.
+          </para>
           <para
             >This method supports the <see cref="T:System.Collections.ICollection" /> interface. If implementing <see cref="T:System.Collections.ICollection" /> is not explicitly required, use <see cref="M:System.Array.Copy(System.Array,System.Array,System.Int64)" /> to avoid an extra indirection.</para
           >
@@ -2490,8 +2485,7 @@ public class ArrayCreateInstanceExample
    }
 
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <para>
             <c>The values of the array are: 0 3 6 9 12</c>
@@ -2622,8 +2616,7 @@ public class CreateMultiDimArrayExample
       }
    }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <code>The elements of the array are:
   0   1   2   3   4
@@ -2821,8 +2814,7 @@ public class Create2DArrayExample
       }
    }
 } 
-  </code
-          >
+  </code>
           <para>The output is</para>
           <code>The elements of the array are:
  0  1  2
@@ -2909,8 +2901,8 @@ public class Create2DArrayExample
       <Docs>
         <exception cref="T:System.ArgumentNullException">
           <para>
-            <paramref name="elementType" />, <paramref name="lengths" />, or <paramref name="lowerBounds" /> is <see langword="null" />. </para
-          >
+            <paramref name="elementType" />, <paramref name="lengths" />, or <paramref name="lowerBounds" /> is <see langword="null" />.
+          </para>
         </exception>
         <exception cref="T:System.ArgumentException">
           <para><paramref name="elementType" /> is not a valid <see cref="T:System.Type" />.</para>
@@ -2966,8 +2958,7 @@ public class MultiDimNonZeroBoundExample
       }
    }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <code>The elements of the array are:
 321 322 323
@@ -3120,8 +3111,7 @@ public class Create3DArrayExample
       }
    }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <code>The elements of the array are:
   0   1   2
@@ -4114,8 +4104,7 @@ public class ArrayGetEnumerator {
          Console.Write( " {0}", sEnum.Current );
    }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>The elements of the array are: 1 one 2 two 3 three</para>
@@ -4298,8 +4287,8 @@ public class ArrayGetEnumerator {
             >The <see cref="M:System.Array.GetLowerBound(System.Int32)" /> method always returns a value that indicates the index of the lower bound of the array, even if the array is empty.</para
           >
           <para
-            >Note that, although most arrays in the .NET Framework are zero-based (that is, the <see cref="M:System.Array.GetLowerBound(System.Int32)" /> method returns zero for each dimension of an array), the .NET Framework does support arrays that are not zero-based. Such arrays can be created with the <see cref="M:System.Array.CreateInstance(System.Type,System.Int32[],System.Int32[])" /> method, and can also be returned from unmanaged code. </para
-          >
+            >Note that, although most arrays in the .NET Framework are zero-based (that is, the <see cref="M:System.Array.GetLowerBound(System.Int32)" /> method returns zero for each dimension of an array), the .NET Framework does support arrays that are not zero-based. Such arrays can be created with the <see cref="M:System.Array.CreateInstance(System.Type,System.Int32[],System.Int32[])" /> method, and can also be returned from unmanaged code.
+          </para>
           <para>This method is an O(1) operation.</para>
         </remarks>
         <summary>
@@ -4425,8 +4414,7 @@ public class ArrayGetValueExample {
          Console.Write( " '{0}' ", strAry.GetValue( i ) );
    }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <para>
             <c>The elements
@@ -4982,8 +4970,7 @@ public class ArrayIndexOfExample {
       Console.WriteLine( "The first occurrence of 1 is at index {0}", j );
    }
 }
-</code
-          >
+</code>
           <para> The output is</para>
           <c>
             <para>The values of the array are: 0 1 2 0 1</para>
@@ -5301,8 +5288,8 @@ public class ArrayIndexOfExample {
         </returns>
         <remarks>
           <para
-            >The elements are compared using <see cref="M:System.Object.Equals(System.Object)" />. The array is searched forward starting at the first element and ending at the last element.  Processing is stopped when the predicate returns <see langword="true" />. </para
-          >
+            >The elements are compared using <see cref="M:System.Object.Equals(System.Object)" />. The array is searched forward starting at the first element and ending at the last element.  Processing is stopped when the predicate returns <see langword="true" />.
+          </para>
         </remarks>
         <since version=".NET 2.0" />
         <exception cref="T:System.ArgumentNullException">
@@ -5352,8 +5339,8 @@ public class ArrayIndexOfExample {
         </returns>
         <remarks>
           <para
-            >The elements are compared using <see cref="M:System.Object.Equals(System.Object)" />. The array is searched forward starting at <paramref name="startIndex" /> and ending at the last element. Processing is stopped when the predicate returns <see langword="true" />. </para
-          >
+            >The elements are compared using <see cref="M:System.Object.Equals(System.Object)" />. The array is searched forward starting at <paramref name="startIndex" /> and ending at the last element. Processing is stopped when the predicate returns <see langword="true" />.
+          </para>
         </remarks>
         <since version=".NET 2.0" />
         <exception cref="T:System.ArgumentNullException">
@@ -5629,8 +5616,8 @@ public class ArrayIndexOfExample {
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="array" /> is <see langword="null" /> . </exception
-        >
+          <paramref name="array" /> is <see langword="null" /> .
+        </exception>
         <exception cref="T:System.RankException">
           <paramref name="array" /> has more than one dimension.</exception
         >
@@ -5653,8 +5640,7 @@ public class ArrayLastIndexOfExample {
       Console.WriteLine( "The last occurrence of 1 is at index {0}", j );
    }
 }
-</code
-          >
+</code>
           <para> The output is</para>
           <c>
             <para>The values of the array are: 0 1 2 0 1</para>
@@ -6218,8 +6204,8 @@ public class ArrayLastIndexOfExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the rank (number of dimensions) of the <see cref="T:System.Array" />. For example, a one-dimensional array returns 1, a two-dimensional array returns 2, and so on. </para
-          >
+            >Gets the rank (number of dimensions) of the <see cref="T:System.Array" />. For example, a one-dimensional array returns 1, a two-dimensional array returns 2, and so on.
+          </para>
         </summary>
       </Docs>
       <Excluded>0</Excluded>
@@ -6305,8 +6291,8 @@ public class ArrayLastIndexOfExample {
             >This method is an O(<paramref name="n" />) operation, where <paramref name="n" /> is the <see cref="P:System.Array.Length" /> of <paramref name="array" />.</para
           >
           <para
-            >As the following example shows, the <see cref="M:System.Array.Reverse(System.Array)" /> method can be used to reverse a jagged array. It initializes a jagged array with one element for each month of the current year in the current culture's calendar. Each element contains an array with as many elements as that month has days. The example displays the contents of the array, calls the <see cref="M:System.Array.Reverse(System.Array)" /> method, and then displays the contents of the reversed array. </para
-          >
+            >As the following example shows, the <see cref="M:System.Array.Reverse(System.Array)" /> method can be used to reverse a jagged array. It initializes a jagged array with one element for each month of the current year in the current culture's calendar. Each element contains an array with as many elements as that month has days. The example displays the contents of the array, calls the <see cref="M:System.Array.Reverse(System.Array)" /> method, and then displays the contents of the reversed array.
+          </para>
           <para>code reference: System.Array.Reverse#1</para>
         </remarks>
         <summary>
@@ -6391,8 +6377,7 @@ public class ArrayReverseExample {
          Console.Write( " {0}", str );
    }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>The elements of the array are: one two three</para>
@@ -6406,8 +6391,8 @@ public class ArrayReverseExample {
             >After a call to this method, the element at myArray[i], where <paramref name="i" /> is any index in the array, moves to myArray[j], where <paramref name="j" /> equals (myArray.Length + myArray.GetLowerBound(0)) - (i - myArray.GetLowerBound(0)) - 1.</para
           >
           <para
-            >The <see cref="M:System.Array.Reverse(System.Array)" /> method can be used to reverse a jagged array. </para
-          >
+            >The <see cref="M:System.Array.Reverse(System.Array)" /> method can be used to reverse a jagged array.
+          </para>
           <para
             >This method is an O(<paramref name="n" />) operation, where <paramref name="n" /> is <paramref name="length" />.</para
           >
@@ -6550,8 +6535,8 @@ public class ArrayReverseExample {
         >
         <exception cref="T:System.ArgumentException">
           <para
-            >The number of dimensions in the current instance is not equal to the number of elements in <paramref name="indices" />. </para
-          >
+            >The number of dimensions in the current instance is not equal to the number of elements in <paramref name="indices" />.
+          </para>
         </exception>
         <exception cref="T:System.IndexOutOfRangeException">
           <para
@@ -7112,8 +7097,7 @@ public class ArraySortExample {
          Console.Write( str + " " );
    }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>The original string array is: All's well that ends well</para>
@@ -7136,8 +7120,8 @@ public class ArraySortExample {
                 >If the partition size is fewer than 16 elements, it uses an <see
                   cref="http://en.wikipedia.org/wiki/Insertion_sort"
                   >insertion sort</see
-                > algorithm. </para
-              >
+                > algorithm.
+              </para>
             </item>
             <item>
               <para
@@ -7151,8 +7135,8 @@ public class ArraySortExample {
               <para
                 >Otherwise, it uses a <see cref="http://en.wikipedia.org/wiki/Quicksort"
                   >Quicksort</see
-                > algorithm. </para
-              >
+                > algorithm.
+              </para>
             </item>
           </list>
           <para>This implementation performs an unstable sort; that is, if two elements are equal, their order might not be preserved. In contrast, a stable sort preserves the order of elements that are equal. </para>
@@ -7248,8 +7232,7 @@ public class ArraySortExample {
          Console.Write( str + " " );
    }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>The original string array is: All's well that ends well</para>
@@ -7287,8 +7270,8 @@ public class ArraySortExample {
                 >If the partition size is fewer than 16 elements, it uses an <see
                   cref="http://en.wikipedia.org/wiki/Insertion_sort"
                   >insertion sort</see
-                > algorithm. </para
-              >
+                > algorithm.
+              </para>
             </item>
             <item>
               <para
@@ -7302,8 +7285,8 @@ public class ArraySortExample {
               <para
                 >Otherwise, it uses a <see cref="http://en.wikipedia.org/wiki/Quicksort"
                   >Quicksort</see
-                > algorithm. </para
-              >
+                > algorithm.
+              </para>
             </item>
           </list>
           <para>This implementation performs an unstable sort; that is, if two elements are equal, their order might not be preserved. In contrast, a stable sort preserves the order of elements that are equal.</para>
@@ -7368,11 +7351,11 @@ public class ArraySortExample {
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="array" /> is <see langword="null" />. </exception
-        >
+          <paramref name="array" /> is <see langword="null" />.
+        </exception>
         <exception cref="T:System.RankException">
-          <paramref name="array" /> has more than one dimension. </exception
-        >
+          <paramref name="array" /> has more than one dimension.
+        </exception>
         <exception cref="T:System.ArgumentException">
           <paramref name="comparer" /> is a null reference, and one or more elements in <paramref name="array" /> do not implement the <see cref="T:System.IComparable" /> interface.</exception
         >
@@ -7392,8 +7375,8 @@ public class ArraySortExample {
                 >If the partition size is fewer than 16 elements, it uses an <see
                   cref="http://en.wikipedia.org/wiki/Insertion_sort"
                   >insertion sort</see
-                > algorithm. </para
-              >
+                > algorithm.
+              </para>
             </item>
             <item>
               <para
@@ -7407,8 +7390,8 @@ public class ArraySortExample {
               <para
                 >Otherwise, it uses a <see cref="http://en.wikipedia.org/wiki/Quicksort"
                   >Quicksort</see
-                > algorithm. </para
-              >
+                > algorithm.
+              </para>
             </item>
           </list>
           <para>This implementation performs an unstable sort; that is, if two elements are equal, their order might not be preserved. In contrast, a stable sort preserves the order of elements that are equal.</para>
@@ -7484,8 +7467,8 @@ public class ArraySortExample {
         </exception>
         <exception cref="T:System.ArgumentException">
           <para>
-            <paramref name="items" /> is not a null reference, and <paramref name="keys" />.GetLowerBound(0) does not equal <paramref name="items" />.GetLowerBound(0). </para
-          >
+            <paramref name="items" /> is not a null reference, and <paramref name="keys" />.GetLowerBound(0) does not equal <paramref name="items" />.GetLowerBound(0).
+          </para>
           <para>-or-</para>
           <para>
             <paramref name="items" /> is not a null reference, and <paramref name="keys" />.Length &gt; <paramref name="items" />.Length.</para
@@ -7493,8 +7476,8 @@ public class ArraySortExample {
         </exception>
         <exception cref="T:System.InvalidOperationException">
           <para>
-            <paramref name="comparer" /> is a <see langword="null" />, and one or more elements in <paramref name="keys" /> that are used in a comparison do not implement the <see cref="T:System.IComparable" /> interface. </para
-          >
+            <paramref name="comparer" /> is a <see langword="null" />, and one or more elements in <paramref name="keys" /> that are used in a comparison do not implement the <see cref="T:System.IComparable" /> interface.
+          </para>
         </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -7521,8 +7504,8 @@ public class ArraySortExample {
                 >If the partition size is fewer than 16 elements, it uses an <see
                   cref="http://en.wikipedia.org/wiki/Insertion_sort"
                   >insertion sort</see
-                > algorithm. </para
-              >
+                > algorithm.
+              </para>
             </item>
             <item>
               <para
@@ -7536,8 +7519,8 @@ public class ArraySortExample {
               <para
                 >Otherwise, it uses a <see cref="http://en.wikipedia.org/wiki/Quicksort"
                   >Quicksort</see
-                > algorithm. </para
-              >
+                > algorithm.
+              </para>
             </item>
           </list>
           <para>This implementation performs an unstable sort; that is, if two elements are equal, their order might not be preserved. In contrast, a stable sort preserves the order of elements that are equal.</para>
@@ -7610,11 +7593,11 @@ public class ArraySortExample {
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="array" /> is <see langword="null" />. </exception
-        >
+          <paramref name="array" /> is <see langword="null" />.
+        </exception>
         <exception cref="T:System.RankException">
-          <paramref name="array" /> has more than one dimension. </exception
-        >
+          <paramref name="array" /> has more than one dimension.
+        </exception>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <para><paramref name="index" /> &lt; <paramref name="array" />.GetLowerBound(0).</para>
           <para>-or-</para>
@@ -7643,8 +7626,8 @@ public class ArraySortExample {
                 >If the partition size is fewer than 16 elements, it uses an <see
                   cref="http://en.wikipedia.org/wiki/Insertion_sort"
                   >insertion sort</see
-                > algorithm. </para
-              >
+                > algorithm.
+              </para>
             </item>
             <item>
               <para
@@ -7658,8 +7641,8 @@ public class ArraySortExample {
               <para
                 >Otherwise, it uses a <see cref="http://en.wikipedia.org/wiki/Quicksort"
                   >Quicksort</see
-                > algorithm. </para
-              >
+                > algorithm.
+              </para>
             </item>
           </list>
           <para>This implementation performs an unstable sort; that is, if two elements are equal, their order might not be preserved. In contrast, a stable sort preserves the order of elements that are equal.</para>
@@ -7748,16 +7731,16 @@ public class ArraySortExample {
         </exception>
         <exception cref="T:System.ArgumentException">
           <para>
-            <paramref name="items" /> is not a null reference, and <paramref name="keys" />.GetLowerBound(0) does not equal <paramref name="items" />.GetLowerBound(0). </para
-          >
+            <paramref name="items" /> is not a null reference, and <paramref name="keys" />.GetLowerBound(0) does not equal <paramref name="items" />.GetLowerBound(0).
+          </para>
           <para>-or- </para>
           <para>
-            <paramref name="index" /> and <paramref name="length" /> do not specify a valid range in <paramref name="keys" />. </para
-          >
+            <paramref name="index" /> and <paramref name="length" /> do not specify a valid range in <paramref name="keys" />.
+          </para>
           <para>-or- </para>
           <para>
-            <paramref name="items" /> is not a null reference, and <paramref name="index" /> and <paramref name="length" /> do not specify a valid range in <paramref name="items" />. </para
-          >
+            <paramref name="items" /> is not a null reference, and <paramref name="index" /> and <paramref name="length" /> do not specify a valid range in <paramref name="items" />.
+          </para>
         </exception>
         <exception cref="T:System.InvalidOperationException">
           <para
@@ -7789,8 +7772,8 @@ public class ArraySortExample {
                 >If the partition size is fewer than 16 elements, it uses an <see
                   cref="http://en.wikipedia.org/wiki/Insertion_sort"
                   >insertion sort</see
-                > algorithm. </para
-              >
+                > algorithm.
+              </para>
             </item>
             <item>
               <para
@@ -7804,8 +7787,8 @@ public class ArraySortExample {
               <para
                 >Otherwise, it uses a <see cref="http://en.wikipedia.org/wiki/Quicksort"
                   >Quicksort</see
-                > algorithm. </para
-              >
+                > algorithm.
+              </para>
             </item>
           </list>
           <para>This implementation performs an unstable sort; that is, if two elements are equal, their order might not be preserved. In contrast, a stable sort preserves the order of elements that are equal.</para>
@@ -7886,11 +7869,11 @@ public class ArraySortExample {
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="array" /> is <see langword="null" />. </exception
-        >
+          <paramref name="array" /> is <see langword="null" />.
+        </exception>
         <exception cref="T:System.RankException">
-          <paramref name="array" /> has more than one dimension. </exception
-        >
+          <paramref name="array" /> has more than one dimension.
+        </exception>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <para><paramref name="index" /> &lt; <paramref name="array" />.GetLowerBound(0).</para>
           <para>-or-</para>
@@ -7903,8 +7886,8 @@ public class ArraySortExample {
         </exception>
         <exception cref="T:System.InvalidOperationException">
           <para>
-            <paramref name="comparer" /> is <see langword="null" />, and one or more elements in <paramref name="array" /> that are used in a comparison do not implement the <see cref="T:System.IComparable" /> interface. </para
-          >
+            <paramref name="comparer" /> is <see langword="null" />, and one or more elements in <paramref name="array" /> that are used in a comparison do not implement the <see cref="T:System.IComparable" /> interface.
+          </para>
         </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -7919,8 +7902,8 @@ public class ArraySortExample {
                 >If the partition size is fewer than 16 elements, it uses an <see
                   cref="http://en.wikipedia.org/wiki/Insertion_sort"
                   >insertion sort</see
-                > algorithm. </para
-              >
+                > algorithm.
+              </para>
             </item>
             <item>
               <para
@@ -7934,8 +7917,8 @@ public class ArraySortExample {
               <para
                 >Otherwise, it uses a <see cref="http://en.wikipedia.org/wiki/Quicksort"
                   >Quicksort</see
-                > algorithm. </para
-              >
+                > algorithm.
+              </para>
             </item>
           </list>
           <para>This implementation performs an unstable sort; that is, if two elements are equal, their order might not be preserved. In contrast, a stable sort preserves the order of elements that are equal.</para>
@@ -8032,21 +8015,21 @@ public class ArraySortExample {
         </exception>
         <exception cref="T:System.ArgumentException">
           <para>
-            <paramref name="items" /> is not a null reference, and <paramref name="keys" />.GetLowerBound(0) does not equal <paramref name="items" />.GetLowerBound(0). </para
-          >
+            <paramref name="items" /> is not a null reference, and <paramref name="keys" />.GetLowerBound(0) does not equal <paramref name="items" />.GetLowerBound(0).
+          </para>
           <para>-or- </para>
           <para>
-            <paramref name="index" /> and <paramref name="length" /> do not specify a valid range in <paramref name="key" />. </para
-          >
+            <paramref name="index" /> and <paramref name="length" /> do not specify a valid range in <paramref name="key" />.
+          </para>
           <para>-or- </para>
           <para>
-            <paramref name="items" /> is not a null reference, and <paramref name="index" /> and <paramref name="length" /> do not specify a valid range in <paramref name="items" />. </para
-          >
+            <paramref name="items" /> is not a null reference, and <paramref name="index" /> and <paramref name="length" /> do not specify a valid range in <paramref name="items" />.
+          </para>
         </exception>
         <exception cref="T:System.InvalidOperationException">
           <para>
-            <paramref name="comparer" /> is <see langword="null" />, and one or more elements in <paramref name="keys" /> that are used in a comparison do not implement the <see cref="T:System.IComparable" /> interface. </para
-          >
+            <paramref name="comparer" /> is <see langword="null" />, and one or more elements in <paramref name="keys" /> that are used in a comparison do not implement the <see cref="T:System.IComparable" /> interface.
+          </para>
         </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -8073,8 +8056,8 @@ public class ArraySortExample {
                 >If the partition size is fewer than 16 elements, it uses an <see
                   cref="http://en.wikipedia.org/wiki/Insertion_sort"
                   >insertion sort</see
-                > algorithm. </para
-              >
+                > algorithm.
+              </para>
             </item>
             <item>
               <para
@@ -8088,8 +8071,8 @@ public class ArraySortExample {
               <para
                 >Otherwise, it uses a <see cref="http://en.wikipedia.org/wiki/Quicksort"
                   >Quicksort</see
-                > algorithm. </para
-              >
+                > algorithm.
+              </para>
             </item>
           </list>
           <para>This implementation performs an unstable sort; that is, if two elements are equal, their order might not be preserved. In contrast, a stable sort preserves the order of elements that are equal.</para>
@@ -8247,8 +8230,8 @@ public class ArraySortExample {
                 >If the partition size is fewer than 16 elements, it uses an <see
                   cref="http://en.wikipedia.org/wiki/Insertion_sort"
                   >insertion sort</see
-                > algorithm. </para
-              >
+                > algorithm.
+              </para>
             </item>
             <item>
               <para
@@ -8262,8 +8245,8 @@ public class ArraySortExample {
               <para
                 >Otherwise, it uses a <see cref="http://en.wikipedia.org/wiki/Quicksort"
                   >Quicksort</see
-                > algorithm. </para
-              >
+                > algorithm.
+              </para>
             </item>
           </list>
           <para>This implementation performs an unstable sort; that is, if two elements are equal, their order might not be preserved. In contrast, a stable sort preserves the order of elements that are equal.</para>
@@ -8341,8 +8324,8 @@ public class ArraySortExample {
                 >If the partition size is fewer than 16 elements, it uses an <see
                   cref="http://en.wikipedia.org/wiki/Insertion_sort"
                   >insertion sort</see
-                > algorithm. </para
-              >
+                > algorithm.
+              </para>
             </item>
             <item>
               <para
@@ -8356,8 +8339,8 @@ public class ArraySortExample {
               <para
                 >Otherwise, it uses a <see cref="http://en.wikipedia.org/wiki/Quicksort"
                   >Quicksort</see
-                > algorithm. </para
-              >
+                > algorithm.
+              </para>
             </item>
           </list>
           <para>This implementation performs an unstable sort; that is, if two elements are equal, their order might not be preserved. In contrast, a stable sort preserves the order of elements that are equal.</para>
@@ -8446,8 +8429,8 @@ public class ArraySortExample {
         <since version=".NET 2.0" />
         <exception cref="T:System.ArgumentException">
           <para>
-            <paramref name="index" /> and <paramref name="length" /> do not specify a valid range in <paramref name="array" />. </para
-          >
+            <paramref name="index" /> and <paramref name="length" /> do not specify a valid range in <paramref name="array" />.
+          </para>
         </exception>
         <exception cref="T:System.ArgumentNullException">
           <para><paramref name="array" /> is <see langword="null" />.</para>
@@ -8507,8 +8490,8 @@ public class ArraySortExample {
         </exception>
         <exception cref="T:System.ArgumentException">
           <para>
-            <paramref name="index" /> and <paramref name="length" /> do not specify a valid range in <paramref name="array" />. </para
-          >
+            <paramref name="index" /> and <paramref name="length" /> do not specify a valid range in <paramref name="array" />.
+          </para>
         </exception>
         <exception cref="T:System.InvalidOperationException">
           <para>
@@ -8528,8 +8511,8 @@ public class ArraySortExample {
                 >If the partition size is fewer than 16 elements, it uses an <see
                   cref="http://en.wikipedia.org/wiki/Insertion_sort"
                   >insertion sort</see
-                > algorithm. </para
-              >
+                > algorithm.
+              </para>
             </item>
             <item>
               <para
@@ -8543,8 +8526,8 @@ public class ArraySortExample {
               <para
                 >Otherwise, it uses a <see cref="http://en.wikipedia.org/wiki/Quicksort"
                   >Quicksort</see
-                > algorithm. </para
-              >
+                > algorithm.
+              </para>
             </item>
           </list>
           <para>This implementation performs an unstable sort; that is, if two elements are equal, their order might not be preserved. In contrast, a stable sort preserves the order of elements that are equal.</para>
@@ -8648,8 +8631,8 @@ public class ArraySortExample {
             >If <paramref name="items" /> is non-null, each key in <paramref name="keys" /> is required to have
    a corresponding item in <paramref name="items" />. When a key is repositioned during the sorting,
    the corresponding item in <paramref name="items" /> is similarly repositioned. Therefore, <paramref name="items" /> is sorted according to the arrangement of
-   the corresponding keys in <paramref name="keys" />. </para
-          >
+   the corresponding keys in <paramref name="keys" />.
+          </para>
           <para
             >Each key in <paramref name="keys" /> must implement the <see cref="T:System.IComparable&lt;K&gt;" /> or <see cref="T:System.IComparable" /> interface to be capable of comparisons with every other key.</para
           >
@@ -8743,8 +8726,8 @@ public class ArraySortExample {
                 >If the partition size is fewer than 16 elements, it uses an <see
                   cref="http://en.wikipedia.org/wiki/Insertion_sort"
                   >insertion sort</see
-                > algorithm. </para
-              >
+                > algorithm.
+              </para>
             </item>
             <item>
               <para
@@ -8758,8 +8741,8 @@ public class ArraySortExample {
               <para
                 >Otherwise, it uses a <see cref="http://en.wikipedia.org/wiki/Quicksort"
                   >Quicksort</see
-                > algorithm. </para
-              >
+                > algorithm.
+              </para>
             </item>
           </list>
           <para>This implementation performs an unstable sort; that is, if two elements are equal, their order might not be preserved. In contrast, a stable sort preserves the order of elements that are equal.</para>
@@ -8778,8 +8761,8 @@ public class ArraySortExample {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The one-dimensional, zero-based <see cref="T:System.Array" /> that contains the keys to sort. </param
-        >
+          />The one-dimensional, zero-based <see cref="T:System.Array" /> that contains the keys to sort.
+        </param>
         <param name="items">
           <attribution
             license="cc4"
@@ -8867,8 +8850,8 @@ public class ArraySortExample {
             >If <paramref name="items" /> is non-null, each key in <paramref name="keys" /> is required to have
    a corresponding item in <paramref name="items" />. When a key is repositioned during the sorting,
    the corresponding item in <paramref name="items" /> is similarly repositioned. Therefore, <paramref name="items" /> is sorted according to the arrangement of
-   the corresponding keys in <paramref name="keys" />. </para
-          >
+   the corresponding keys in <paramref name="keys" />.
+          </para>
           <para>If the sort is not successfully completed, the results are unspecified.</para>
           <para
             >Each key within the specified range of elements in <paramref name="keys" /> must implement the <see cref="T:System.IComparable&lt;K&gt;" /> or <see cref="T:System.IComparable" /> interface to be capable of comparisons with every other key.</para
@@ -8878,8 +8861,8 @@ public class ArraySortExample {
         <since version=".NET 2.0" />
         <exception cref="T:System.ArgumentException">
           <para>
-            <paramref name="index" /> and <paramref name="length" /> do not specify a valid range in <paramref name="keys" />. </para
-          >
+            <paramref name="index" /> and <paramref name="length" /> do not specify a valid range in <paramref name="keys" />.
+          </para>
           <para>-or- </para>
           <para>
             <paramref name="items" /> is not <see langword="null" />, and <paramref name="index" /> and <paramref name="length" /> do not specify a valid range in <paramref name="items" />.</para
@@ -8937,8 +8920,8 @@ public class ArraySortExample {
         <since version=".NET 2.0" />
         <exception cref="T:System.ArgumentException">
           <para>
-            <paramref name="index" /> and <paramref name="length" /> do not specify a valid range in <paramref name="keys" />. </para
-          >
+            <paramref name="index" /> and <paramref name="length" /> do not specify a valid range in <paramref name="keys" />.
+          </para>
           <para>-or- </para>
           <para>
             <paramref name="items" /> is not <see langword="null" />, and <paramref name="index" /> and <paramref name="length" /> do not specify a valid range in <paramref name="items" />.</para
@@ -8982,8 +8965,8 @@ public class ArraySortExample {
                 >If the partition size is fewer than 16 elements, it uses an <see
                   cref="http://en.wikipedia.org/wiki/Insertion_sort"
                   >insertion sort</see
-                > algorithm. </para
-              >
+                > algorithm.
+              </para>
             </item>
             <item>
               <para
@@ -8997,8 +8980,8 @@ public class ArraySortExample {
               <para
                 >Otherwise, it uses a <see cref="http://en.wikipedia.org/wiki/Quicksort"
                   >Quicksort</see
-                > algorithm. </para
-              >
+                > algorithm.
+              </para>
             </item>
           </list>
           <para>This implementation performs an unstable sort; that is, if two elements are equal, their order might not be preserved. In contrast, a stable sort preserves the order of elements that are equal.</para>
@@ -9017,8 +9000,8 @@ public class ArraySortExample {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The one-dimensional, zero-based <see cref="T:System.Array" /> that contains the keys to sort. </param
-        >
+          />The one-dimensional, zero-based <see cref="T:System.Array" /> that contains the keys to sort.
+        </param>
         <param name="items">
           <attribution
             license="cc4"
@@ -9595,8 +9578,8 @@ public class ArraySortExample {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that determines whether the current instance and <paramref name="other" /> are equal. </param
-        >
+          />An object that determines whether the current instance and <paramref name="other" /> are equal.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IStructuralEquatable.GetHashCode">
@@ -9674,8 +9657,8 @@ public class ArraySortExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Predicate`1" /> is a delegate to a method that returns true if the object passed to it matches the conditions defined in the delegate.  The elements of <paramref name="array" /> are individually passed to the <see cref="T:System.Predicate`1" />, and processing is stopped when the delegate returns false for any element. </para
-          >
+            >The <see cref="T:System.Predicate`1" /> is a delegate to a method that returns true if the object passed to it matches the conditions defined in the delegate.  The elements of <paramref name="array" /> are individually passed to the <see cref="T:System.Predicate`1" />, and processing is stopped when the delegate returns false for any element.
+          </para>
           <para
             >This method is an O(<paramref name="n" />) operation, where <paramref name="n" /> is the <see cref="P:System.Array.Length" /> of <paramref name="array" />.</para
           >

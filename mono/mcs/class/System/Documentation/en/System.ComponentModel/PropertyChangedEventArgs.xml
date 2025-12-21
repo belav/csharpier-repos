@@ -77,8 +77,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the property that changed. </param
-        >
+          />The name of the property that changed.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="PropertyName">

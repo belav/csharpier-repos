@@ -208,8 +208,8 @@
         </item>
       </list>
       <para
-        >In addition to <see cref="T:System.ComponentModel.ISite" />, the site also implements the following interfaces. </para
-      >
+        >In addition to <see cref="T:System.ComponentModel.ISite" />, the site also implements the following interfaces.
+      </para>
       <block subset="none" type="note">
         <para>Check for the existence of these interfaces, rather than use indiscriminate casting, because other site implementations may not implement them.</para>
       </block>
@@ -707,8 +707,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The public <see cref="M:System.ComponentModel.Design.DesignSurface.Dispose" /> method follows the standard <see cref="T:System.IDisposable" /> pattern. Calling this method destroys the design surface. The protected version of this method is virtual and follows the normal <see cref="T:System.IDisposable" /> pattern. </para
-          >
+            >The public <see cref="M:System.ComponentModel.Design.DesignSurface.Dispose" /> method follows the standard <see cref="T:System.IDisposable" /> pattern. Calling this method destroys the design surface. The protected version of this method is virtual and follows the normal <see cref="T:System.IDisposable" /> pattern.
+          </para>
           <block subset="none" type="note">
             <para
               >Because <see cref="T:System.ComponentModel.Design.DesignSurface" /> does not have any native code to clean up, it does not have a finalizer that calls <see cref="M:System.ComponentModel.Design.DesignSurface.Dispose(System.Boolean)" />. If you need to call <see cref="M:System.ComponentModel.Design.DesignSurface.Dispose(System.Boolean)" />, you must add a finalizer yourself.</para
@@ -719,8 +719,8 @@
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format> and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
           <block subset="none" type="note">
             <para
               >Always call <see cref="M:System.ComponentModel.Design.DesignSurface.Dispose" /> before you release your last reference to the <see cref="T:System.ComponentModel.Design.DesignSurface" />. Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.ComponentModel.Design.DesignSurface" /> object's Finalize method.</para
@@ -751,8 +751,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The public <see cref="M:System.ComponentModel.Design.DesignSurface.Dispose" /> method follows the standard <see cref="T:System.IDisposable" /> pattern. Calling this method destroys the design surface. The protected version of this method is virtual and follows the normal <see cref="T:System.IDisposable" /> pattern. </para
-          >
+            >The public <see cref="M:System.ComponentModel.Design.DesignSurface.Dispose" /> method follows the standard <see cref="T:System.IDisposable" /> pattern. Calling this method destroys the design surface. The protected version of this method is virtual and follows the normal <see cref="T:System.IDisposable" /> pattern.
+          </para>
           <block subset="none" type="note">
             <para
               >Because <see cref="T:System.ComponentModel.Design.DesignSurface" /> does not have any native code to clean up, it does not have a finalizer that calls <see cref="M:System.ComponentModel.Design.DesignSurface.Dispose(System.Boolean)" />. If you need to call <see cref="M:System.ComponentModel.Design.DesignSurface.Dispose(System.Boolean)" />, you must add a finalizer yourself.</para
@@ -883,8 +883,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of service to retrieve. </param
-        >
+          />The type of service to retrieve.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsLoaded">
@@ -924,8 +924,8 @@
             >The <see cref="E:System.ComponentModel.Design.DesignSurface.Loaded" /> event is raised for successful loads as well as unsuccessful ones. If code in this event handler throws an exception, the designer is unloaded.</para
           >
           <para
-            >The <see cref="T:System.ComponentModel.Design.LoadedEventArgs" /> object can be used to determine if loading succeeded, and it can also provide a list of errors that occurred during the load. </para
-          >
+            >The <see cref="T:System.ComponentModel.Design.LoadedEventArgs" /> object can be used to determine if loading succeeded, and it can also provide a list of errors that occurred during the load.
+          </para>
           <block subset="none" type="note">
             <para>Errors can occur for successful loads as well, provided that the serialization system can tolerate errors.</para>
           </block>
@@ -1199,8 +1199,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="Overload:System.ComponentModel.Design.DesignSurface.BeginLoad" /> method must be called beforehand to start the loading process. It is possible to return a view before the designer loader finishes loading because the root designer, which supplies the view, is the first object created by the designer loader. If a view is unavailable, <see cref="Overload:System.ComponentModel.Design.DesignSurface.BeginLoad" /> raises an exception. </para
-          >
+            >The <see cref="Overload:System.ComponentModel.Design.DesignSurface.BeginLoad" /> method must be called beforehand to start the loading process. It is possible to return a view before the designer loader finishes loading because the root designer, which supplies the view, is the first object created by the designer loader. If a view is unavailable, <see cref="Overload:System.ComponentModel.Design.DesignSurface.BeginLoad" /> raises an exception.
+          </para>
           <para
             >The notion of a view technology is obsolete. But, it remains in the interfaces for root designers for backward compatibility. Its use is hidden from anyone using <see cref="T:System.ComponentModel.Design.DesignSurface" /> objects. The <see cref="P:System.ComponentModel.Design.DesignSurface.View" /> property hides view technologies by passing the supported technologies back into the root designer.</para
           >

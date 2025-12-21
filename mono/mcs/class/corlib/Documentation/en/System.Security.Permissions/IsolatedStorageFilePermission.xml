@@ -85,8 +85,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Security.Permissions.PermissionState" /> values. </param
-        >
+          />One of the <see cref="T:System.Security.Permissions.PermissionState" /> values.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Copy">
@@ -159,8 +159,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission to intersect with the current permission object. It must be of the same type as the current permission. </param
-        >
+          />A permission to intersect with the current permission object. It must be of the same type as the current permission.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsSubsetOf">
@@ -202,8 +202,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission that is to be tested for the subset relationship. This permission must be of the same type as the current permission. </param
-        >
+          />A permission that is to be tested for the subset relationship. This permission must be of the same type as the current permission.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.Security.Permissions.IBuiltInPermission.GetTokenIndex">
@@ -294,8 +294,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The result of a call to <see cref="M:System.Security.Permissions.IsolatedStorageFilePermission.Union(System.Security.IPermission)" /> is a permission that represents all the operations represented by both the current permission and the specified permission. Any demand that passes either permission passes their union. </para
-          >
+            >The result of a call to <see cref="M:System.Security.Permissions.IsolatedStorageFilePermission.Union(System.Security.IPermission)" /> is a permission that represents all the operations represented by both the current permission and the specified permission. Any demand that passes either permission passes their union.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -310,8 +310,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission to combine with the current permission. It must be of the same type as the current permission. </param
-        >
+          />A permission to combine with the current permission. It must be of the same type as the current permission.
+        </param>
       </Docs>
     </Member>
   </Members>

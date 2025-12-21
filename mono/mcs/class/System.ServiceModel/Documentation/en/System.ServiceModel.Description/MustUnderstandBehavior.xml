@@ -36,8 +36,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Instructs indigo1 to disable the mandatory processing of headers not in the <see cref="P:System.ServiceModel.Channels.MessageHeaders.UnderstoodHeaders" /> collection that must be understood according to the SOAP 1.1 and 1.2 specifications.  </para
-      >
+        >Instructs indigo1 to disable the mandatory processing of headers not in the <see cref="P:System.ServiceModel.Channels.MessageHeaders.UnderstoodHeaders" /> collection that must be understood according to the SOAP 1.1 and 1.2 specifications.
+      </para>
     </summary>
   </Docs>
   <Members>
@@ -64,8 +64,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.MustUnderstandBehavior" /> class using the specified value. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.MustUnderstandBehavior" /> class using the specified value.
+          </para>
         </summary>
         <param name="validate">
           <attribution

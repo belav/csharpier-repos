@@ -34,8 +34,8 @@
         </item>
       </list>
       <para
-        >The <see cref="N:System.Windows.Forms.VisualStyles" /> namespace exposes hundreds of <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" /> objects that represent the controls and user interface elements that can be defined by a visual style. These objects are exposed as static properties of nested classes of <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" />. For each property, the qualified name of the owning class represents the class and the part of the drawn element, and the property name represents the state of the element. For example, the <see cref="P:System.Windows.Forms.VisualStyles.VisualStyleElement.Button.PushButton.Pressed" /> property returns a <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" /> that can be used to draw a button in the pressed state with visual styles. The Pressed property name corresponds to the state, PushButton corresponds to the part, and Button identifies the class of the visual style element. </para
-      >
+        >The <see cref="N:System.Windows.Forms.VisualStyles" /> namespace exposes hundreds of <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" /> objects that represent the controls and user interface elements that can be defined by a visual style. These objects are exposed as static properties of nested classes of <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" />. For each property, the qualified name of the owning class represents the class and the part of the drawn element, and the property name represents the state of the element. For example, the <see cref="P:System.Windows.Forms.VisualStyles.VisualStyleElement.Button.PushButton.Pressed" /> property returns a <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" /> that can be used to draw a button in the pressed state with visual styles. The Pressed property name corresponds to the state, PushButton corresponds to the part, and Button identifies the class of the visual style element.
+      </para>
       <para
         >To draw a visual style element, create a <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleRenderer" />, set it to the <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" /> you wish to draw, and then call the <see cref="Overload:System.Windows.Forms.VisualStyles.VisualStyleRenderer.DrawBackground" /> method. To determine whether the current visual style provides a definition for a particular element, call the <see cref="M:System.Windows.Forms.VisualStyles.VisualStyleRenderer.IsElementDefined(System.Windows.Forms.VisualStyles.VisualStyleElement)" /> method with the element as the argument.</para
       >
@@ -43,8 +43,8 @@
         <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" /> and <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleRenderer" /> wrap the functionality of the visual styles API from the Windows Shell portion of the Windows Platform SDK. For more information on visual styles, see "Using Windows XP Visual Styles" in the Platform SDK portion of the MSDN Library at <see
           cref="http://msdn.microsoft.com/library/"
           >http://msdn.microsoft.com/library</see
-        >. </para
-      >
+        >.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

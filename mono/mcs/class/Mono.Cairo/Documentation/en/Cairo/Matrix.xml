@@ -64,8 +64,7 @@ if (cs == Cairo.Status.Success) {
 	m.TransformPoint (ref point2x, ref point2Y);
 	// ...
 } 
- </code
-        >
+ </code>
       </example>
     </remarks>
   </Docs>
@@ -238,8 +237,7 @@ if (cs == Cairo.Status.Success) {
       <Docs>
         <param name="radians"
           >Angle of rotation, in radians. The direction of rotation is defined such that positive angles rotate in the direction from the positive X axis toward the positive Y axis. With the default axis orientation of cairo, positive angles rotate in a clockwise direction.
-</param
-        >
+</param>
         <summary>Initialize the matrix to a transformation that rotates by the specified radians value.</summary>
         <remarks />
       </Docs>
@@ -434,8 +432,7 @@ if (cs == Cairo.Status.Success) {
       <Docs>
         <param name="radians"
           >angle of rotation, in radians. The direction of rotation is defined such that positive angles rotate in the direction from the positive X axis toward the positive Y axis. With the default axis orientation of cairo, positive angles rotate in a clockwise direction.
-</param
-        >
+</param>
         <summary>Applies rotation by radians to the transformation in the matrix. The effect of the new transformation is to first rotate the coordinates by radians, then apply the original transformation to the coordinates.</summary>
         <remarks />
       </Docs>
@@ -514,9 +511,11 @@ if (cs == Cairo.Status.Success) {
 
           
 
+          
+
  Affine transformations are position invariant, so the same vector always transforms to the same vector. If (x1,y1) transforms to (x2,y2) then (x1+@x1,y1+dy1) will transform to (x1+dx2,y1+dy2) for all values of x1 and x2.
-</summary
-        >
+
+        </summary>
         <remarks>None.</remarks>
       </Docs>
       <AssemblyInfo>

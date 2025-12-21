@@ -82,15 +82,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A membership condition that tests evidence to determine whether this code group applies policy. </param
-        >
+          />A membership condition that tests evidence to determine whether this code group applies policy.
+        </param>
         <param name="access">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Security.Permissions.FileIOPermissionAccess" /> values. This value is used to construct the <see cref="T:System.Security.Permissions.FileIOPermission" /> that is granted. </param
-        >
+          />One of the <see cref="T:System.Security.Permissions.FileIOPermissionAccess" /> values. This value is used to construct the <see cref="T:System.Security.Permissions.FileIOPermission" /> that is granted.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AttributeString">
@@ -215,8 +215,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The code group to compare with the current code group. </param
-        >
+          />The code group to compare with the current code group.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -363,8 +363,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The evidence for the assembly. </param
-        >
+          />The evidence for the assembly.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ResolveMatchingCodeGroups">
@@ -411,8 +411,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The evidence for the assembly. </param
-        >
+          />The evidence for the assembly.
+        </param>
       </Docs>
     </Member>
   </Members>

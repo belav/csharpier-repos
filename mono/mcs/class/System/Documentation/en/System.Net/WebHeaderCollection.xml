@@ -161,15 +161,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Runtime.Serialization.SerializationInfo" /> containing the information required to serialize the <see cref="T:System.Net.WebHeaderCollection" />. </param
-        >
+          />A <see cref="T:System.Runtime.Serialization.SerializationInfo" /> containing the information required to serialize the <see cref="T:System.Net.WebHeaderCollection" />.
+        </param>
         <param name="streamingContext">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Runtime.Serialization.StreamingContext" /> containing the source of the serialized stream associated with the new <see cref="T:System.Net.WebHeaderCollection" />. </param
-        >
+          />A <see cref="T:System.Runtime.Serialization.StreamingContext" /> containing the source of the serialized stream associated with the new <see cref="T:System.Net.WebHeaderCollection" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Add">
@@ -206,8 +206,8 @@
           >
           <para>-or-</para>
           <para>
-            <paramref name="header" /> is a protected header that can only be set with a property accessor or by the system. </para
-          >
+            <paramref name="header" /> is a protected header that can only be set with a property accessor or by the system.
+          </para>
           <para>-or-</para>
           <para><c>value</c> contains invalid characters.</para>
         </exception>
@@ -229,8 +229,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The header to add, with the name and value separated by a colon. </param
-        >
+          />The header to add, with the name and value separated by a colon.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -274,15 +274,11 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The header to add to the collection. </param
-        >
+          />The header to add to the collection.
+        </param>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The content of the header. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The content of the header.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Add">
@@ -325,15 +321,11 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The header to add to the collection. </param
-        >
+          />The header to add to the collection.
+        </param>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The content of the header. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The content of the header.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Add">
@@ -392,15 +384,11 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The header to add to the collection. </param
-        >
+          />The header to add to the collection.
+        </param>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The content of the header. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The content of the header.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -453,15 +441,11 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The header to add to the collection. </param
-        >
+          />The header to add to the collection.
+        </param>
         <param name="headerValue">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The content of the header. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The content of the header.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -722,8 +706,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> to populate with data. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> to populate with data.
+        </param>
         <param name="streamingContext">
           <attribution
             license="cc4"
@@ -828,8 +812,7 @@ class GetValuesExample
          Console.WriteLine("{0}", s);
    }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <para>
 Transfer-Encoding:</para>
@@ -852,12 +835,8 @@ Transfer-Encoding:</para>
           <para>An array of header strings.</para>
         </returns>
         <param name="header">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The header to return. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The header to return.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -893,8 +872,8 @@ Transfer-Encoding:</para>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Net.WebHeaderCollection.IsRestricted(System.String)" /> method returns true to indicate that a header is restricted and must be set using properties instead of directly or is set by the system. The restricted headers are: </para
-          >
+            >The <see cref="M:System.Net.WebHeaderCollection.IsRestricted(System.String)" /> method returns true to indicate that a header is restricted and must be set using properties instead of directly or is set by the system. The restricted headers are:
+          </para>
           <list type="bullet">
             <item>
               <para>Accept </para>
@@ -946,8 +925,8 @@ Transfer-Encoding:</para>
           <para>true if the header is restricted; otherwise false.</para>
         </returns>
         <param name="headerName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The header to test. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The header to test.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -976,8 +955,8 @@ Transfer-Encoding:</para>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Net.WebHeaderCollection.IsRestricted(System.String,System.Boolean)" /> method returns true to indicate that a request or response header is restricted and must be set using properties instead of directly or is set by the system. The restricted headers are: </para
-          >
+            >The <see cref="M:System.Net.WebHeaderCollection.IsRestricted(System.String,System.Boolean)" /> method returns true to indicate that a request or response header is restricted and must be set using properties instead of directly or is set by the system. The restricted headers are:
+          </para>
           <list type="bullet">
             <item>
               <para>Accept </para>
@@ -1195,8 +1174,8 @@ Transfer-Encoding:</para>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Net.HttpRequestHeader" /> instance to remove from the collection. </param
-        >
+          />The <see cref="T:System.Net.HttpRequestHeader" /> instance to remove from the collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Remove">
@@ -1235,8 +1214,8 @@ Transfer-Encoding:</para>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Net.HttpResponseHeader" /> instance to remove from the collection. </param
-        >
+          />The <see cref="T:System.Net.HttpResponseHeader" /> instance to remove from the collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Remove">
@@ -1287,8 +1266,8 @@ Transfer-Encoding:</para>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the header to remove from the collection. </param
-        >
+          />The name of the header to remove from the collection.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1332,15 +1311,15 @@ Transfer-Encoding:</para>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Net.HttpRequestHeader" /> value to set. </param
-        >
+          />The <see cref="T:System.Net.HttpRequestHeader" /> value to set.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The content of the header to set. </param
-        >
+          />The content of the header to set.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Set">
@@ -1383,15 +1362,15 @@ Transfer-Encoding:</para>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Net.HttpResponseHeader" /> value to set. </param
-        >
+          />The <see cref="T:System.Net.HttpResponseHeader" /> value to set.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The content of the header to set. </param
-        >
+          />The content of the header to set.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Set">
@@ -1447,15 +1426,15 @@ Transfer-Encoding:</para>
           <para>Sets the specified header to the specified value.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The header to set. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The header to set.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The content of the header to set. </param
-        >
+          />The content of the header to set.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1494,15 +1473,15 @@ Transfer-Encoding:</para>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object into which this <see cref="T:System.Net.WebHeaderCollection" /> will be serialized. </param
-        >
+          />The object into which this <see cref="T:System.Net.WebHeaderCollection" /> will be serialized.
+        </param>
         <param name="streamingContext">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The destination of the serialization. </param
-        >
+          />The destination of the serialization.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ToByteArray">

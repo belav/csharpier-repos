@@ -82,8 +82,8 @@
         >All the methods in <see cref="T:System.ComponentModel.TypeDescriptor" /> are static. You cannot create an instance of this class, and this class cannot be inherited.</para
       >
       <para
-        >You can set property and event values two different ways: specify them in the component class or change them at design time. Because you can set these values two ways, the overloaded methods of <see cref="T:System.ComponentModel.TypeDescriptor" /> take two different types of parameters: a class type or an object instance. </para
-      >
+        >You can set property and event values two different ways: specify them in the component class or change them at design time. Because you can set these values two ways, the overloaded methods of <see cref="T:System.ComponentModel.TypeDescriptor" /> take two different types of parameters: a class type or an object instance.
+      </para>
       <para
         >When you want to access <see cref="T:System.ComponentModel.TypeDescriptor" /> information and you have an instance of the object, use the method that calls for a component. Use the method that calls for the class type only when you do not have an instance of the object.</para
       >
@@ -271,15 +271,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The editor base type to add the editor table for. If a table already exists for this type, this method will do nothing. </param
-        >
+          />The editor base type to add the editor table for. If a table already exists for this type, this method will do nothing.
+        </param>
         <param name="table">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Collections.Hashtable" /> to add. </param
-        >
+          />The <see cref="T:System.Collections.Hashtable" /> to add.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddProvider">
@@ -312,12 +312,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.ComponentModel.TypeDescriptor.AddProvider(System.ComponentModel.TypeDescriptionProvider,System.Object)" /> method adds a type description provider that supplies type information for a single instance of a component. If a provider is added by this method, the provider's <see cref="M:System.ComponentModel.TypeDescriptor.CreateInstance(System.IServiceProvider,System.Type,System.Type[],System.Object[])" /> method will not be called because the instance already exists. </para
-          >
+            >The <see cref="M:System.ComponentModel.TypeDescriptor.AddProvider(System.ComponentModel.TypeDescriptionProvider,System.Object)" /> method adds a type description provider that supplies type information for a single instance of a component. If a provider is added by this method, the provider's <see cref="M:System.ComponentModel.TypeDescriptor.CreateInstance(System.IServiceProvider,System.Type,System.Type[],System.Object[])" /> method will not be called because the instance already exists.
+          </para>
           <para>This method does not maintain a hard reference to the component, so it does not prevent the component from finalizing.</para>
           <para
-            >It is possible to add multiple type description providers for the same type or object. If this occurs, the first type description provider encountered that provides type information will be used exclusively. Since type information providers are stored in a stack, the last provider added will be the first one queried. This behavior enables the <see cref="M:System.ComponentModel.TypeDescriptor.AddProvider(System.ComponentModel.TypeDescriptionProvider,System.Object)" /> and <see cref="Overload:System.ComponentModel.TypeDescriptor.RemoveProvider" /> methods to be used to push and pop type description providers as required for particular scenarios. </para
-          >
+            >It is possible to add multiple type description providers for the same type or object. If this occurs, the first type description provider encountered that provides type information will be used exclusively. Since type information providers are stored in a stack, the last provider added will be the first one queried. This behavior enables the <see cref="M:System.ComponentModel.TypeDescriptor.AddProvider(System.ComponentModel.TypeDescriptionProvider,System.Object)" /> and <see cref="Overload:System.ComponentModel.TypeDescriptor.RemoveProvider" /> methods to be used to push and pop type description providers as required for particular scenarios.
+          </para>
           <para
             >If successful, this method calls the <see cref="M:System.ComponentModel.TypeDescriptor.Refresh(System.Object)" /> method on the <paramref name="instance" /> parameter.</para
           >
@@ -389,8 +389,8 @@
           </block>
           <para>This method does not maintain a hard reference to any object, so it does not prevent objects from finalizing.</para>
           <para
-            >It is possible to add multiple type description providers for the same type or object. If this occurs, the first type description provider encountered that provides type information will be used exclusively. Because type information providers are stored in a stack, the last provider added will be the first one queried. This behavior enables the <see cref="M:System.ComponentModel.TypeDescriptor.AddProvider(System.ComponentModel.TypeDescriptionProvider,System.Type)" /> and <see cref="Overload:System.ComponentModel.TypeDescriptor.RemoveProvider" /> methods to be used to push and pop type description providers as required for particular scenarios. </para
-          >
+            >It is possible to add multiple type description providers for the same type or object. If this occurs, the first type description provider encountered that provides type information will be used exclusively. Because type information providers are stored in a stack, the last provider added will be the first one queried. This behavior enables the <see cref="M:System.ComponentModel.TypeDescriptor.AddProvider(System.ComponentModel.TypeDescriptionProvider,System.Type)" /> and <see cref="Overload:System.ComponentModel.TypeDescriptor.RemoveProvider" /> methods to be used to push and pop type description providers as required for particular scenarios.
+          </para>
           <para
             >If successful, this method calls the <see cref="M:System.ComponentModel.TypeDescriptor.Refresh(System.Type)" /> method on the <paramref name="type" /> parameter.</para
           >
@@ -513,8 +513,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method can be called from partially trusted code. If <see cref="F:System.Security.Permissions.TypeDescriptorPermissionFlags.RestrictedRegistrationAccess" /> is defined, the caller can register a provider for the specified type if it is also partially trusted. </para
-          >
+            >This method can be called from partially trusted code. If <see cref="F:System.Security.Permissions.TypeDescriptorPermissionFlags.RestrictedRegistrationAccess" /> is defined, the caller can register a provider for the specified type if it is also partially trusted.
+          </para>
           <para
             >Use the <see cref="M:System.ComponentModel.TypeDescriptor.AddProvider(System.ComponentModel.TypeDescriptionProvider,System.Type)" /> method if you do not need to call from partially trusted code.</para
           >
@@ -646,8 +646,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.ComponentModel.TypeDescriptor.CreateAssociation(System.Object,System.Object)" /> method creates an association between a primary and a secondary object. Once an association is created, a designer or other filtering mechanism can add properties that route to either object into the primary object's property set. When a property invocation is made against the primary object, the <see cref="M:System.ComponentModel.TypeDescriptor.GetAssociation(System.Type,System.Object)" /> method will be called to resolve the actual object instance that is related to its type parameter. </para
-          >
+            >The <see cref="M:System.ComponentModel.TypeDescriptor.CreateAssociation(System.Object,System.Object)" /> method creates an association between a primary and a secondary object. Once an association is created, a designer or other filtering mechanism can add properties that route to either object into the primary object's property set. When a property invocation is made against the primary object, the <see cref="M:System.ComponentModel.TypeDescriptor.GetAssociation(System.Type,System.Object)" /> method will be called to resolve the actual object instance that is related to its type parameter.
+          </para>
           <para
             >A <see cref="T:System.WeakReference" /> is used to maintain the association between the primary and secondary object; therefore, this method does not prevent either object from being finalized and reclaimed by garbage collection.</para
           >
@@ -716,15 +716,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.IComponent" /> that specifies the component to associate with the designer. </param
-        >
+          />An <see cref="T:System.ComponentModel.IComponent" /> that specifies the component to associate with the designer.
+        </param>
         <param name="designerBaseType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> that represents the type of designer to create. </param
-        >
+          />A <see cref="T:System.Type" /> that represents the type of designer to create.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateEvent">
@@ -775,18 +775,18 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the component for which to create the new event. </param
-        >
+          />The type of the component for which to create the new event.
+        </param>
         <param name="oldEventDescriptor">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The existing event information. </param
-        >
+          />The existing event information.
+        </param>
         <param name="attributes">
-          <attribution license="cc4" from="Microsoft" modified="false" />The new attributes. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The new attributes.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateEvent">
@@ -836,29 +836,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the component the event lives on. </param
-        >
+          />The type of the component the event lives on.
+        </param>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the event. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the event.
+        </param>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the delegate that handles the event. </param
-        >
+          />The type of the delegate that handles the event.
+        </param>
         <param name="attributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The attributes for this event. </param
-        >
+          />The attributes for this event.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateInstance">
@@ -893,8 +889,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.ComponentModel.TypeDescriptor.CreateInstance(System.IServiceProvider,System.Type,System.Type[],System.Object[])" /> method will search for a <see cref="T:System.ComponentModel.TypeDescriptionProvider" /> that is associated with the specified <paramref name="objectType" /> data type. This method first tries to obtain a type description provider from the <paramref name="provider" /> parameter. If this fails, it searches its own internal tables for a provider (these entries were created through previous calls to <see cref="Overload:System.ComponentModel.TypeDescriptor.AddProvider" />). If it finds a provider, this method will delegate the creation call to that object. </para
-          >
+            >The <see cref="M:System.ComponentModel.TypeDescriptor.CreateInstance(System.IServiceProvider,System.Type,System.Type[],System.Object[])" /> method will search for a <see cref="T:System.ComponentModel.TypeDescriptionProvider" /> that is associated with the specified <paramref name="objectType" /> data type. This method first tries to obtain a type description provider from the <paramref name="provider" /> parameter. If this fails, it searches its own internal tables for a provider (these entries were created through previous calls to <see cref="Overload:System.ComponentModel.TypeDescriptor.AddProvider" />). If it finds a provider, this method will delegate the creation call to that object.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -932,8 +928,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An optional array of parameter values to pass to the object's constructor. If not null, the number of elements must be the same as <paramref name="argTypes" />. </param
-        >
+          />An optional array of parameter values to pass to the object's constructor. If not null, the number of elements must be the same as <paramref name="argTypes" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateProperty">
@@ -984,22 +980,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of the component that the property is a member of. </param
-        >
+          />The <see cref="T:System.Type" /> of the component that the property is a member of.
+        </param>
         <param name="oldPropertyDescriptor">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The existing property descriptor. </param
-        >
+          />The existing property descriptor.
+        </param>
         <param name="attributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new attributes for this property. </param
-        >
+          />The new attributes for this property.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateProperty">
@@ -1049,29 +1045,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of the component that the property is a member of. </param
-        >
+          />The <see cref="T:System.Type" /> of the component that the property is a member of.
+        </param>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the property. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the property.
+        </param>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of the property. </param
-        >
+          />The <see cref="T:System.Type" /> of the property.
+        </param>
         <param name="attributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new attributes for this property. </param
-        >
+          />The new attributes for this property.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetAssociation">
@@ -1190,8 +1182,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The component for which you want to get attributes. </param
-        >
+          />The component for which you want to get attributes.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetAttributes">
@@ -1246,8 +1238,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of the target component. </param
-        >
+          />The <see cref="T:System.Type" /> of the target component.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetAttributes">
@@ -1307,8 +1299,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The component for which you want to get attributes. </param
-        >
+          />The component for which you want to get attributes.
+        </param>
         <param name="noCustomTypeDesc">
           <attribution
             license="cc4"
@@ -1343,8 +1335,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Typically, this method returns the full <see cref="T:System.Type" /> name for the <paramref name="component" /> parameter type. For example, the class name for a button is "System.Windows.Forms.Button". If <paramref name="component" /> implements <see cref="T:System.ComponentModel.ICustomTypeDescriptor" />, it can return an alternate name. </para
-          >
+            >Typically, this method returns the full <see cref="T:System.Type" /> name for the <paramref name="component" /> parameter type. For example, the class name for a button is "System.Windows.Forms.Button". If <paramref name="component" /> implements <see cref="T:System.ComponentModel.ICustomTypeDescriptor" />, it can return an alternate name.
+          </para>
           <para
             >This method is equivalent to the overloaded <see cref="M:System.ComponentModel.TypeDescriptor.GetClassName(System.Object,System.Boolean)" /> method with a second parameter of false.</para
           >
@@ -1364,8 +1356,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> for which you want the class name. </param
-        >
+          />The <see cref="T:System.Object" /> for which you want the class name.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetClassName">
@@ -1448,8 +1440,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Typically, this method returns the full <see cref="T:System.Type" /> name for the <paramref name="component" /> parameter type. For example, the class name for a button is "System.Windows.Forms.Button". If the <paramref name="component" /> parameter implements <see cref="T:System.ComponentModel.ICustomTypeDescriptor" />, it can return an alternate name. </para
-          >
+            >Typically, this method returns the full <see cref="T:System.Type" /> name for the <paramref name="component" /> parameter type. For example, the class name for a button is "System.Windows.Forms.Button". If the <paramref name="component" /> parameter implements <see cref="T:System.ComponentModel.ICustomTypeDescriptor" />, it can return an alternate name.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1466,8 +1458,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> for which you want the class name. </param
-        >
+          />The <see cref="T:System.Object" /> for which you want the class name.
+        </param>
         <param name="noCustomTypeDesc">
           <attribution
             license="cc4"
@@ -1522,8 +1514,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> for which you want the class name. </param
-        >
+          />The <see cref="T:System.Object" /> for which you want the class name.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetComponentName">
@@ -1573,8 +1565,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> for which you want the class name. </param
-        >
+          />The <see cref="T:System.Object" /> for which you want the class name.
+        </param>
         <param name="noCustomTypeDesc">
           <attribution
             license="cc4"
@@ -1630,8 +1622,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A component to get the converter for. </param
-        >
+          />A component to get the converter for.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetConverter">
@@ -1678,8 +1670,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of the target component. </param
-        >
+          />The <see cref="T:System.Type" /> of the target component.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetConverter">
@@ -1731,8 +1723,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A component to get the converter for. </param
-        >
+          />A component to get the converter for.
+        </param>
         <param name="noCustomTypeDesc">
           <attribution
             license="cc4"
@@ -1785,8 +1777,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The component to get the event for. </param
-        >
+          />The component to get the event for.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetDefaultEvent">
@@ -1878,8 +1870,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The component to get the event for. </param
-        >
+          />The component to get the event for.
+        </param>
         <param name="noCustomTypeDesc">
           <attribution
             license="cc4"
@@ -1932,8 +1924,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The component to get the default property for. </param
-        >
+          />The component to get the default property for.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetDefaultProperty">
@@ -1980,8 +1972,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> that represents the class to get the property for. </param
-        >
+          />A <see cref="T:System.Type" /> that represents the class to get the property for.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetDefaultProperty">
@@ -2033,8 +2025,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The component to get the default property for. </param
-        >
+          />The component to get the default property for.
+        </param>
         <param name="noCustomTypeDesc">
           <attribution
             license="cc4"
@@ -2087,15 +2079,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The component to get the editor for. </param
-        >
+          />The component to get the editor for.
+        </param>
         <param name="editorBaseType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> that represents the base type of the editor you want to find. </param
-        >
+          />A <see cref="T:System.Type" /> that represents the base type of the editor you want to find.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetEditor">
@@ -2143,8 +2135,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> that represents the base type of the editor you are trying to find. </param
-        >
+          />A <see cref="T:System.Type" /> that represents the base type of the editor you are trying to find.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetEditor">
@@ -2196,15 +2188,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The component to get the editor for. </param
-        >
+          />The component to get the editor for.
+        </param>
         <param name="editorBaseType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> that represents the base type of the editor you want to find. </param
-        >
+          />A <see cref="T:System.Type" /> that represents the base type of the editor you want to find.
+        </param>
         <param name="noCustomTypeDesc">
           <attribution
             license="cc4"
@@ -2261,8 +2253,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A component to get the events for. </param
-        >
+          />A component to get the events for.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetEvents">
@@ -2343,8 +2335,8 @@
             >The events for the <paramref name="component" /> parameter can differ from the events of a class, because the site can add or remove events if the <paramref name="component" /> parameter is sited.</para
           >
           <para
-            >The <paramref name="attributes" /> array can have a mix of <see cref="T:System.Type" /> and <see cref="T:System.Attribute" /> objects. Filtering is defined by the following rules: </para
-          >
+            >The <paramref name="attributes" /> array can have a mix of <see cref="T:System.Type" /> and <see cref="T:System.Attribute" /> objects. Filtering is defined by the following rules:
+          </para>
           <list type="bullet">
             <item>
               <para
@@ -2385,15 +2377,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A component to get the events for. </param
-        >
+          />A component to get the events for.
+        </param>
         <param name="attributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type <see cref="T:System.Attribute" /> that you can use as a filter. </param
-        >
+          />An array of type <see cref="T:System.Attribute" /> that you can use as a filter.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetEvents">
@@ -2447,8 +2439,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A component to get the events for. </param
-        >
+          />A component to get the events for.
+        </param>
         <param name="noCustomTypeDesc">
           <attribution
             license="cc4"
@@ -2485,8 +2477,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Call this version of this method only when you do not have an instance of the object.</para>
           <para
-            >The <paramref name="attributes" /> parameter array can have a mix of <see cref="T:System.Type" /> and <see cref="T:System.Attribute" /> objects. Filtering is defined by the following rules: </para
-          >
+            >The <paramref name="attributes" /> parameter array can have a mix of <see cref="T:System.Type" /> and <see cref="T:System.Attribute" /> objects. Filtering is defined by the following rules:
+          </para>
           <list type="bullet">
             <item>
               <para
@@ -2536,8 +2528,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type <see cref="T:System.Attribute" /> that you can use as a filter. </param
-        >
+          />An array of type <see cref="T:System.Attribute" /> that you can use as a filter.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetEvents">
@@ -2575,8 +2567,8 @@
             >The events for the <paramref name="component" /> parameter can differ from the events of a class, because the site can add or remove events if the <paramref name="component" /> parameter is sited.</para
           >
           <para
-            >The <paramref name="attributes" /> parameter array can have a mix of <see cref="T:System.Type" /> and <see cref="T:System.Attribute" /> objects. Filtering is defined by the following rules: </para
-          >
+            >The <paramref name="attributes" /> parameter array can have a mix of <see cref="T:System.Type" /> and <see cref="T:System.Attribute" /> objects. Filtering is defined by the following rules:
+          </para>
           <list type="bullet">
             <item>
               <para
@@ -2617,15 +2609,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A component to get the events for. </param
-        >
+          />A component to get the events for.
+        </param>
         <param name="attributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type <see cref="T:System.Attribute" /> to use as a filter. </param
-        >
+          />An array of type <see cref="T:System.Attribute" /> to use as a filter.
+        </param>
         <param name="noCustomTypeDesc">
           <attribution
             license="cc4"
@@ -2729,8 +2721,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A component to get the properties for. </param
-        >
+          />A component to get the properties for.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetProperties">
@@ -2811,8 +2803,8 @@
             >The properties for the <paramref name="component" /> parameter can differ from the properties of a class, because the site can add or remove properties if the <paramref name="component" /> parameter is sited.</para
           >
           <para
-            >The <paramref name="attributes" /> parameter array is used to filter the array. Filtering is defined by the following rules: </para
-          >
+            >The <paramref name="attributes" /> parameter array is used to filter the array. Filtering is defined by the following rules:
+          </para>
           <list type="bullet">
             <item>
               <para
@@ -2853,15 +2845,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A component to get the properties for. </param
-        >
+          />A component to get the properties for.
+        </param>
         <param name="attributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type <see cref="T:System.Attribute" /> to use as a filter. </param
-        >
+          />An array of type <see cref="T:System.Attribute" /> to use as a filter.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetProperties">
@@ -2915,8 +2907,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A component to get the properties for. </param
-        >
+          />A component to get the properties for.
+        </param>
         <param name="noCustomTypeDesc">
           <attribution
             license="cc4"
@@ -2953,8 +2945,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Call this version of this method only when you do not have an instance of the object.</para>
           <para
-            >The <paramref name="attributes" /> parameter array is used to filter the array. Filtering is defined by the following rules: </para
-          >
+            >The <paramref name="attributes" /> parameter array is used to filter the array. Filtering is defined by the following rules:
+          </para>
           <list type="bullet">
             <item>
               <para
@@ -3004,8 +2996,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type <see cref="T:System.Attribute" /> to use as a filter. </param
-        >
+          />An array of type <see cref="T:System.Attribute" /> to use as a filter.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetProperties">
@@ -3038,8 +3030,8 @@
             >The properties for a <paramref name="component" /> can differ from the properties of a class, because the site can add or remove properties if the <paramref name="component" /> is sited.</para
           >
           <para
-            >The <paramref name="attributes" /> parameter array is used to filter the array. Filtering is defined by the following rules: </para
-          >
+            >The <paramref name="attributes" /> parameter array is used to filter the array. Filtering is defined by the following rules:
+          </para>
           <list type="bullet">
             <item>
               <para
@@ -3082,15 +3074,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A component to get the properties for. </param
-        >
+          />A component to get the properties for.
+        </param>
         <param name="attributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type <see cref="T:System.Attribute" /> to use as a filter. </param
-        >
+          />An array of type <see cref="T:System.Attribute" /> to use as a filter.
+        </param>
         <param name="noCustomTypeDesc">
           <attribution
             license="cc4"
@@ -3321,8 +3313,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.ComponentModel.TypeDescriptor.InterfaceType" /> property gets a <see cref="T:System.Type" /> object that you can pass to the <see cref="Overload:System.ComponentModel.TypeDescriptor.AddProvider" /> methods to define a type description provider for interface types. </para
-          >
+            >The <see cref="P:System.ComponentModel.TypeDescriptor.InterfaceType" /> property gets a <see cref="T:System.Type" /> object that you can pass to the <see cref="Overload:System.ComponentModel.TypeDescriptor.AddProvider" /> methods to define a type description provider for interface types.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3367,8 +3359,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A component for which the properties or events have changed. </param
-        >
+          />A component for which the properties or events have changed.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Refresh">
@@ -3414,8 +3406,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Reflection.Assembly" /> that represents the assembly to refresh. Each <see cref="T:System.Type" /> in this assembly will be refreshed. </param
-        >
+          />The <see cref="T:System.Reflection.Assembly" /> that represents the assembly to refresh. Each <see cref="T:System.Type" /> in this assembly will be refreshed.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Refresh">
@@ -3461,8 +3453,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Reflection.Module" /> that represents the module to refresh. Each <see cref="T:System.Type" /> in this module will be refreshed. </param
-        >
+          />The <see cref="T:System.Reflection.Module" /> that represents the module to refresh. Each <see cref="T:System.Type" /> in this module will be refreshed.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Refresh">
@@ -3532,8 +3524,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3917,8 +3909,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Collections.IList" /> that contains the descriptors to sort. </param
-        >
+          />An <see cref="T:System.Collections.IList" /> that contains the descriptors to sort.
+        </param>
       </Docs>
     </Member>
   </Members>

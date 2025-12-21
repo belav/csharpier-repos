@@ -89,8 +89,8 @@
         <para
           >The <see cref="T:System.Web.UI.WebControls.LinkButton" /> control renders JavaScript to the client browser. The client browser must have JavaScript enabled for this control to function properly. For more information on client script, see <format type="text/html">
             <a href="13edb6b9-2dea-43c6-b8c1-a47207de19aa">Client Script in ASP.NET Web Pages</a>
-          </format>. </para
-        >
+          </format>.
+        </para>
       </block>
       <para
         >You can create either a Submit button or a Command button. A Submit button does not have a command name associated with it. The button simply posts the Web page back to the server. By default, a <see cref="T:System.Web.UI.WebControls.LinkButton" /> control is a Submit button. You can provide an event handler for the <see cref="E:System.Web.UI.WebControls.LinkButton.Click" /> event to programmatically control the actions performed when the Submit button is clicked. On the other hand, a Command button has a command name associated with the button, such as Sort. Set the <see cref="P:System.Web.UI.WebControls.LinkButton.CommandName" /> property to specify the command name. This allows you to create multiple <see cref="T:System.Web.UI.WebControls.LinkButton" /> controls on a Web page and programmatically determine which <see cref="T:System.Web.UI.WebControls.LinkButton" /> control is clicked. You can also use the <see cref="P:System.Web.UI.WebControls.LinkButton.CommandArgument" /> property with a Command button to provide additional information about the command to perform, such as specifying ascending order. You can also provide an event handler for the <see cref="E:System.Web.UI.WebControls.LinkButton.Command" /> event to programmatically control the action performed when the Command button is clicked.</para
@@ -574,8 +574,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -665,8 +665,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Web.UI.WebControls.CommandEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Web.UI.WebControls.CommandEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -788,8 +788,8 @@ End Sub</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This event is used internally by the <see cref="T:System.Web.UI.WebControls.LinkButton" /> control, when it is clicked, to raise a <see cref="E:System.Web.UI.WebControls.LinkButton.Click" /> event, and if defined, a <see cref="E:System.Web.UI.WebControls.LinkButton.Command" /> event. </para
-          >
+            >This event is used internally by the <see cref="T:System.Web.UI.WebControls.LinkButton" /> control, when it is clicked, to raise a <see cref="E:System.Web.UI.WebControls.LinkButton.Click" /> event, and if defined, a <see cref="E:System.Web.UI.WebControls.LinkButton.Command" /> event.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -867,8 +867,8 @@ End Sub</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see cref="M:System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(System.String)" />. </para
-          >
+            >For a description of this member, see <see cref="M:System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(System.String)" />.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -951,8 +951,8 @@ End Sub</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Validation groups allow you to assign validation controls on a page to a specific category. Each validation group can be validated independently of other validation groups on the page. Use the <see cref="P:System.Web.UI.WebControls.LinkButton.ValidationGroup" /> property to specify the name of the validation group for which the <see cref="T:System.Web.UI.WebControls.LinkButton" /> control causes validation when it posts back to the server. </para
-          >
+            >Validation groups allow you to assign validation controls on a page to a specific category. Each validation group can be validated independently of other validation groups on the page. Use the <see cref="P:System.Web.UI.WebControls.LinkButton.ValidationGroup" /> property to specify the name of the validation group for which the <see cref="T:System.Web.UI.WebControls.LinkButton" /> control causes validation when it posts back to the server.
+          </para>
           <para
             >This property has an effect only when the value of the <see cref="P:System.Web.UI.WebControls.LinkButton.CausesValidation" /> property is set to true. When you specify a value for the <see cref="P:System.Web.UI.WebControls.LinkButton.ValidationGroup" /> property, only the validation controls that are part of the specified group are validated when the <see cref="T:System.Web.UI.WebControls.LinkButton" /> control posts back to the server. If you do not specify a value for this property and the <see cref="P:System.Web.UI.WebControls.LinkButton.CausesValidation" /> property is set to true, all validation controls on the page that are not assigned to a validation group are validated when the control posts back to the server.</para
           >

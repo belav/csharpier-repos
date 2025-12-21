@@ -42,11 +42,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Bags are useful for storing objects when ordering doesn't matter, and unlike sets, bags support duplicates. <see cref="T:System.Collections.Concurrent.ConcurrentBag`1" /> is a thread-safe bag implementation, optimized for scenarios where the same thread will be both producing and consuming data stored in the bag. </para
-      >
+        >Bags are useful for storing objects when ordering doesn't matter, and unlike sets, bags support duplicates. <see cref="T:System.Collections.Concurrent.ConcurrentBag`1" /> is a thread-safe bag implementation, optimized for scenarios where the same thread will be both producing and consuming data stored in the bag.
+      </para>
       <para>
-        <see cref="T:System.Collections.Concurrent.ConcurrentBag`1" /> accepts null as a valid value for reference types. </para
-      >
+        <see cref="T:System.Collections.Concurrent.ConcurrentBag`1" /> accepts null as a valid value for reference types.
+      </para>
       <para
         >For more information, see the entry <see
           cref="http://blogs.msdn.com/b/pfxteam/archive/2010/01/26/9953725.aspx"

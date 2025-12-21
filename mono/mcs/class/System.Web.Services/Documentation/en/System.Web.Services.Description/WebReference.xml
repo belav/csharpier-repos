@@ -41,8 +41,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="documents" /> collection should contain only <see cref="T:System.Web.Services.Description.ServiceDescription" /> and <see cref="T:System.Xml.Schema.XmlSchema" /> objects; the <see cref="M:System.Web.Services.Description.ServiceDescriptionImporter.GenerateWebReferences(System.Web.Services.Description.WebReferenceCollection,System.CodeDom.Compiler.CodeDomProvider,System.CodeDom.CodeCompileUnit,System.Web.Services.Description.WebReferenceOptions)" /> method is unable to interpret <see cref="T:System.Web.Services.Discovery.DiscoveryDocument" /> objects. </para
-          >
+            >The <paramref name="documents" /> collection should contain only <see cref="T:System.Web.Services.Description.ServiceDescription" /> and <see cref="T:System.Xml.Schema.XmlSchema" /> objects; the <see cref="M:System.Web.Services.Description.ServiceDescriptionImporter.GenerateWebReferences(System.Web.Services.Description.WebReferenceCollection,System.CodeDom.Compiler.CodeDomProvider,System.CodeDom.CodeCompileUnit,System.Web.Services.Description.WebReferenceOptions)" /> method is unable to interpret <see cref="T:System.Web.Services.Discovery.DiscoveryDocument" /> objects.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -254,8 +254,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The description document collection associated with a Web reference should contain only <see cref="T:System.Web.Services.Description.ServiceDescription" /> and <see cref="T:System.Xml.Schema.XmlSchema" /> objects; the <see cref="M:System.Web.Services.Description.ServiceDescriptionImporter.GenerateWebReferences(System.Web.Services.Description.WebReferenceCollection,System.CodeDom.Compiler.CodeDomProvider,System.CodeDom.CodeCompileUnit,System.Web.Services.Description.WebReferenceOptions)" /> method is unable to interpret <see cref="T:System.Web.Services.Discovery.DiscoveryDocument" /> objects. </para
-          >
+            >The description document collection associated with a Web reference should contain only <see cref="T:System.Web.Services.Description.ServiceDescription" /> and <see cref="T:System.Xml.Schema.XmlSchema" /> objects; the <see cref="M:System.Web.Services.Description.ServiceDescriptionImporter.GenerateWebReferences(System.Web.Services.Description.WebReferenceCollection,System.CodeDom.Compiler.CodeDomProvider,System.CodeDom.CodeCompileUnit,System.Web.Services.Description.WebReferenceOptions)" /> method is unable to interpret <see cref="T:System.Web.Services.Discovery.DiscoveryDocument" /> objects.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

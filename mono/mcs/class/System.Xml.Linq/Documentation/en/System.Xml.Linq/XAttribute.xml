@@ -65,8 +65,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Linq.XAttribute" /> class from another <see cref="T:System.Xml.Linq.XAttribute" /> object. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Linq.XAttribute" /> class from another <see cref="T:System.Xml.Linq.XAttribute" /> object.
+          </para>
         </summary>
         <param name="other">
           <attribution
@@ -123,8 +123,8 @@ XElement root = new XElement(aw + "Root",
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Linq.XAttribute" /> class from the specified name and value. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Linq.XAttribute" /> class from the specified name and value.
+          </para>
         </summary>
         <param name="name">
           <attribution

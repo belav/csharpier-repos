@@ -103,12 +103,8 @@
           >
         </summary>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name for the new type. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name for the new type.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="BaseTypes">
@@ -136,8 +132,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To generate a class in Visual Basic that does not inherit from a base type, but that does implement one or more interfaces, you must include <see cref="T:System.Object" /> as the first item in the <see cref="P:System.CodeDom.CodeTypeDeclaration.BaseTypes" /> collection. </para
-          >
+            >To generate a class in Visual Basic that does not inherit from a base type, but that does implement one or more interfaces, you must include <see cref="T:System.Object" /> as the first item in the <see cref="P:System.CodeDom.CodeTypeDeclaration.BaseTypes" /> collection.
+          </para>
           <block subset="none" type="note">
             <para
               >In the .NET Framework version 2.0 you do not need the <see cref="T:System.CodeDom.CodeTypeReference" /> for <see cref="T:System.Object" /> if the interface you are implementing already exists and you are referring to it by type. For example, if you are implementing the <see cref="T:System.Collections.ICollection" /> interface and add it to the collection with this statement, ctd.BaseTypes.Add(New CodeTypeReference(typeof(ICollection))), you do not need the preceding ctd.BaseTypes.Add(New CodeTypeReference(GetType(Object))) statement.</para
@@ -217,18 +213,18 @@ Implements Interface1</code>
 		memBlue.InitExpression=new CodeSnippetExpression("2");
 		colorEnum.Members.Add(memBlue);
 		colorEnum.Members.Add(new CodeMemberField(typeof(int),"Green"));
-  </code
-            >
+  </code>
 Generates the following code for the C# generator:
-<code lang="C#">
+<code
+              lang="C#"
+            >
     public enum Colors {
 
         BLUE = 2,
 
         Green,
     }
-</code
-            >
+</code>
           </example>
         </remarks>
         <summary>
@@ -426,8 +422,8 @@ Generates the following code for the C# generator:
           </block>
           <block subset="none" type="note">
             <para
-              >The pattern for setting the visibility flags (flags containing the words Public or Nested) is to mask out all visibility flags using the <see cref="F:System.Reflection.TypeAttributes.VisibilityMask" /> and then set the desired visibility flag. For example, the C# code statement to identify the <see cref="T:System.CodeDom.CodeTypeDeclaration" /> (named cd) as an internal class is cd.TypeAttributes = (cd.TypeAttributes &amp; ~TypeAttributes.VisibilityMask) | TypeAttributes.NotPublic;.  The code to set the same value in Visual Basic is cd.TypeAttributes = (cd.TypeAttributes And (TypeAttributes.VisibilityMask Xor -1)) Or TypeAttributes.NotPublic. Setting the <see cref="P:System.CodeDom.CodeTypeDeclaration.TypeAttributes" /> property directly to a visibility flag (cd.TypeAttributes = TypeAttributes.NotPublic;) erases all other flags that might be set. </para
-            >
+              >The pattern for setting the visibility flags (flags containing the words Public or Nested) is to mask out all visibility flags using the <see cref="F:System.Reflection.TypeAttributes.VisibilityMask" /> and then set the desired visibility flag. For example, the C# code statement to identify the <see cref="T:System.CodeDom.CodeTypeDeclaration" /> (named cd) as an internal class is cd.TypeAttributes = (cd.TypeAttributes &amp; ~TypeAttributes.VisibilityMask) | TypeAttributes.NotPublic;.  The code to set the same value in Visual Basic is cd.TypeAttributes = (cd.TypeAttributes And (TypeAttributes.VisibilityMask Xor -1)) Or TypeAttributes.NotPublic. Setting the <see cref="P:System.CodeDom.CodeTypeDeclaration.TypeAttributes" /> property directly to a visibility flag (cd.TypeAttributes = TypeAttributes.NotPublic;) erases all other flags that might be set.
+            </para>
             <para />
           </block>
         </remarks>
@@ -471,8 +467,8 @@ Generates the following code for the C# generator:
               <a href="afdd5477-6770-4686-8297-f58a4d749daf"
                 >Generics in the .NET Framework Class Library</a
               >
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

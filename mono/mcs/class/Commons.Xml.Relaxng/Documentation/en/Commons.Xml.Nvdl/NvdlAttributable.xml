@@ -34,8 +34,8 @@
         <summary>Holds the all foreign attributes.</summary>
         <value>A list that holds the entire foreign attributes.</value>
         <remarks
-          >This list holds the entire foreign attributes. Here "foreign" means those attributes whose namespace URI is neither empty nor NVDL structure namespace (see <see cref="F:Commons.Xml.Nvdl.Nvdl.NvdlNamespace" />). </remarks
-        >
+          >This list holds the entire foreign attributes. Here "foreign" means those attributes whose namespace URI is neither empty nor NVDL structure namespace (see <see cref="F:Commons.Xml.Nvdl.Nvdl.NvdlNamespace" />).
+        </remarks>
       </Docs>
     </Member>
   </Members>

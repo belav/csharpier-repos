@@ -31,8 +31,8 @@
         >Trust managers must implement the <see cref="T:System.Security.Policy.IApplicationTrustManager" /> interface. The host calls the <see cref="M:System.Security.Policy.IApplicationTrustManager.DetermineApplicationTrust(System.ActivationContext,System.Security.Policy.TrustManagerContext)" /> method to determine whether an application should be executed and which permissions should be granted to the application.</para
       >
       <para
-        >In the net_v40_long and later, there is only one trust manager, which can be a custom implementation of the <see cref="T:System.Security.Policy.IApplicationTrustManager" /> interface. The default trust manager implementation prompts the user for permission to install the application and to elevate the permissions granted to the application. Other trust manager implementations might provide different user experiences. For example, an implementation might check an enterprise list for trusted applications instead of prompting the user for that information. </para
-      >
+        >In the net_v40_long and later, there is only one trust manager, which can be a custom implementation of the <see cref="T:System.Security.Policy.IApplicationTrustManager" /> interface. The default trust manager implementation prompts the user for permission to install the application and to elevate the permissions granted to the application. Other trust manager implementations might provide different user experiences. For example, an implementation might check an enterprise list for trusted applications instead of prompting the user for that information.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

@@ -17,8 +17,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.UI.SimplePropertyEntry" /> class represents simple properties or those properties that are not collections. The <see cref="T:System.Web.UI.ComplexPropertyEntry" /> class represents complex types such as collections. </para
-      >
+        >The <see cref="T:System.Web.UI.SimplePropertyEntry" /> class represents simple properties or those properties that are not collections. The <see cref="T:System.Web.UI.ComplexPropertyEntry" /> class represents complex types such as collections.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

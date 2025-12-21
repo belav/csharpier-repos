@@ -37,8 +37,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.OperatingSystem" /> class contains information about an operating system. For example, the <see cref="P:System.Environment.OSVersion" /> property returns information about the currently executing operating system in an <see cref="T:System.OperatingSystem" /> object. </para
-      >
+        >The <see cref="T:System.OperatingSystem" /> class contains information about an operating system. For example, the <see cref="P:System.Environment.OSVersion" /> property returns information about the currently executing operating system in an <see cref="T:System.OperatingSystem" /> object.
+      </para>
       <para
         >By design, the <see cref="T:System.OperatingSystem" /> class is not a general purpose means of describing an operating system, and you cannot derive a more inclusive type from the <see cref="T:System.OperatingSystem" /> class. If you need a type to contain other information about an operating system, create your own type, then include a field of type <see cref="T:System.OperatingSystem" /> and any additional fields, properties, or methods you require.</para
       >
@@ -83,8 +83,7 @@ class SystemDemo
 		Console.WriteLine(o);
 	}
 }
-  </code
-            >
+  </code>
 prints
 <para>
 Microsoft Windows NT 5.1.2600.0
@@ -102,15 +101,15 @@ Microsoft Windows NT 5.1.2600.0
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.PlatformID" /> values that indicates the operating system platform. </param
-        >
+          />One of the <see cref="T:System.PlatformID" /> values that indicates the operating system platform.
+        </param>
         <param name="version">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Version" /> object that indicates the version of the operating system. </param
-        >
+          />A <see cref="T:System.Version" /> object that indicates the version of the operating system.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Clone">
@@ -302,8 +301,8 @@ Microsoft Windows NT 5.1.2600.0
           <para
             >See <see cref="http://msdn.microsoft.com/library/windows/desktop/ms724832.aspx"
               >Operating System Version</see
-            > on the Windows Dev Center for a list of Windows operating system versions and their corresponding version numbers. </para
-          >
+            > on the Windows Dev Center for a list of Windows operating system versions and their corresponding version numbers.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

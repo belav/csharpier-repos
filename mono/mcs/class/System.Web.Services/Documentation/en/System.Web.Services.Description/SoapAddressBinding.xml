@@ -50,8 +50,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.Services.Description.SoapAddressBinding" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Description.SoapAddressBinding" /> class.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>

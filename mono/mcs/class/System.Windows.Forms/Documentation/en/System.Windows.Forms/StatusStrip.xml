@@ -22,8 +22,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.Windows.Forms.StatusStrip" /> replaces the <see cref="T:System.Windows.Forms.StatusBar" /> control. Special features of <see cref="T:System.Windows.Forms.StatusStrip" /> include a custom table layout, support for the form's sizing and moving grips, and support for the <see cref="P:System.Windows.Forms.ToolStripStatusLabel.Spring" /> property, which allows a <see cref="T:System.Windows.Forms.ToolStripStatusLabel" /> to fill available space automatically. </para
-      >
+        <see cref="T:System.Windows.Forms.StatusStrip" /> replaces the <see cref="T:System.Windows.Forms.StatusBar" /> control. Special features of <see cref="T:System.Windows.Forms.StatusStrip" /> include a custom table layout, support for the form's sizing and moving grips, and support for the <see cref="P:System.Windows.Forms.ToolStripStatusLabel.Spring" /> property, which allows a <see cref="T:System.Windows.Forms.ToolStripStatusLabel" /> to fill available space automatically.
+      </para>
       <para
         >The following items are specifically designed to work seamlessly with both <see cref="T:System.Windows.Forms.ToolStripSystemRenderer" /> and <see cref="T:System.Windows.Forms.ToolStripProfessionalRenderer" /> in all orientations. They are available by default at design time for the <see cref="T:System.Windows.Forms.StatusStrip" /> control:</para
       >
@@ -50,8 +50,8 @@
         </item>
       </list>
       <para
-        >A <see cref="T:System.Windows.Forms.StatusStrip" /> control displays information about an object being viewed on a <see cref="T:System.Windows.Forms.Form" />, the object's components, or contextual information that relates to that object's operation within your application. Typically, a <see cref="T:System.Windows.Forms.StatusStrip" /> control consists of <see cref="T:System.Windows.Forms.ToolStripStatusLabel" /> objects, each of which displays text, an icon, or both. The <see cref="T:System.Windows.Forms.StatusStrip" /> can also contain <see cref="T:System.Windows.Forms.ToolStripDropDownButton" />, <see cref="T:System.Windows.Forms.ToolStripSplitButton" />, and <see cref="T:System.Windows.Forms.ToolStripProgressBar" /> controls. </para
-      >
+        >A <see cref="T:System.Windows.Forms.StatusStrip" /> control displays information about an object being viewed on a <see cref="T:System.Windows.Forms.Form" />, the object's components, or contextual information that relates to that object's operation within your application. Typically, a <see cref="T:System.Windows.Forms.StatusStrip" /> control consists of <see cref="T:System.Windows.Forms.ToolStripStatusLabel" /> objects, each of which displays text, an icon, or both. The <see cref="T:System.Windows.Forms.StatusStrip" /> can also contain <see cref="T:System.Windows.Forms.ToolStripDropDownButton" />, <see cref="T:System.Windows.Forms.ToolStripSplitButton" />, and <see cref="T:System.Windows.Forms.ToolStripProgressBar" /> controls.
+      </para>
       <para
         >The default <see cref="T:System.Windows.Forms.StatusStrip" /> has no panels. To add panels to a <see cref="T:System.Windows.Forms.StatusStrip" />, use the <see cref="M:System.Windows.Forms.ToolStripItemCollection.AddRange(System.Windows.Forms.ToolStripItem[])" /> method, or use the <format type="text/html">
           <a href="7c56677b-d5eb-4eca-949c-a22c4e3833a1">StatusStrip Items Collection Editor</a>
@@ -79,8 +79,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.StatusStrip" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.StatusStrip" /> class.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -333,16 +333,16 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see cref="T:System.Windows.Forms.StatusStrip" /> and optionally releases the managed resources. </para
-          >
+            >Releases the unmanaged resources used by the <see cref="T:System.Windows.Forms.StatusStrip" /> and optionally releases the managed resources.
+          </para>
         </summary>
         <param name="disposing">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -531,8 +531,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Override <see cref="M:System.Windows.Forms.StatusStrip.OnSpringTableLayoutCore" /> to do custom table layouts. The default value of <see cref="T:System.Windows.Forms.ToolStripLayoutStyle" /> is <see cref="F:System.Windows.Forms.ToolStripLayoutStyle.Table" />. </para
-          >
+            >Override <see cref="M:System.Windows.Forms.StatusStrip.OnSpringTableLayoutCore" /> to do custom table layouts. The default value of <see cref="T:System.Windows.Forms.ToolStripLayoutStyle" /> is <see cref="F:System.Windows.Forms.ToolStripLayoutStyle.Table" />.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -685,8 +685,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see cref="P:System.Windows.Forms.StatusStrip.SizingGrip" /> property to display a grip to provide an indication to the user of when a <see cref="T:System.Windows.Forms.StatusStrip" /> is resizable. </para
-          >
+            >You can use the <see cref="P:System.Windows.Forms.StatusStrip.SizingGrip" /> property to display a grip to provide an indication to the user of when a <see cref="T:System.Windows.Forms.StatusStrip" /> is resizable.
+          </para>
           <para
             >Even with the <see cref="P:System.Windows.Forms.StatusStrip.SizingGrip" /> property set to true and the <see cref="P:System.Windows.Forms.StatusStrip.GripStyle" /> property set to Visible, the sizing grip will not be displayed unless you also set the <see cref="P:System.Windows.Forms.ToolStrip.LayoutStyle" /> property to one of the overflow values. If the <see cref="P:System.Windows.Forms.ToolStrip.LayoutStyle" /> property is set to <see cref="F:System.Windows.Forms.ToolStripLayoutStyle.Flow" /> or <see cref="F:System.Windows.Forms.ToolStripLayoutStyle.Table" />, the sizing grip will not be displayed.</para
           >

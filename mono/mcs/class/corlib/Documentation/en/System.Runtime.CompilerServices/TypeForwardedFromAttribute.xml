@@ -55,16 +55,16 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.TypeForwardedFromAttribute" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.TypeForwardedFromAttribute" /> class.
+          </para>
         </summary>
         <param name="assemblyFullName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The source <see cref="T:System.Type" /> in another assembly. </param
-        >
+          />The source <see cref="T:System.Type" /> in another assembly.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AssemblyFullName">

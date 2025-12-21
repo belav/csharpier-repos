@@ -52,8 +52,7 @@ class ArrayTypeMisMatchExample {
  }
  }
 }
-   </code
-      >
+   </code>
       <para>The output is</para>
       <c>
         <para>Error: System.ArrayTypeMismatchException: Source array type cannot be
@@ -71,8 +70,8 @@ class ArrayTypeMisMatchExample {
         <see cref="T:System.ArrayTypeMismatchException" /> is thrown when the system cannot convert the element to the type declared for the array. For example, an element of type <see cref="T:System.String" /> cannot be stored in an <see cref="T:System.Int32" /> array because conversion between these types is not supported. It is generally unnecessary for applications to throw this exception.</para
       >
       <para
-        >The following Microsoft intermediate language (MSIL) instructions throw <see cref="T:System.ArrayTypeMismatchException" /> : </para
-      >
+        >The following Microsoft intermediate language (MSIL) instructions throw <see cref="T:System.ArrayTypeMismatchException" /> :
+      </para>
       <list type="bullet">
         <item>
           <para>ldelem.&lt;type&gt; </para>
@@ -239,8 +238,8 @@ class ArrayTypeMisMatchExample {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.String" /> that describes the error. </param
-        >
+          />A <see cref="T:System.String" /> that describes the error.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -285,15 +284,15 @@ class ArrayTypeMisMatchExample {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that holds the serialized object data. </param
-        >
+          />The object that holds the serialized object data.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The contextual information about the source or destination. </param
-        >
+          />The contextual information about the source or destination.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -373,15 +372,15 @@ class ArrayTypeMisMatchExample {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The error message that explains the reason for the exception. </param
-        >
+          />The error message that explains the reason for the exception.
+        </param>
         <param name="innerException">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The exception that is the cause of the current exception. If the <paramref name="innerException" /> parameter is not a null reference, the current exception is raised in a catch block that handles the inner exception. </param
-        >
+          />The exception that is the cause of the current exception. If the <paramref name="innerException" /> parameter is not a null reference, the current exception is raised in a catch block that handles the inner exception.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

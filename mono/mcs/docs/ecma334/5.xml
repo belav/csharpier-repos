@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <clause number="5" title="Notational conventions">
   <paragraph
-    >Lexical and syntactic grammars for C# are interspersed throughout this specification. The lexical grammar defines how characters can be combined to form tokens (<hyperlink>9.4</hyperlink>), the minimal lexical elements of the language. The syntactic grammar defines how tokens can be combined to make valid C# programs. </paragraph
-  >
+    >Lexical and syntactic grammars for C# are interspersed throughout this specification. The lexical grammar defines how characters can be combined to form tokens (<hyperlink>9.4</hyperlink>), the minimal lexical elements of the language. The syntactic grammar defines how tokens can be combined to make valid C# programs.
+  </paragraph>
   <paragraph
     >Grammar productions include both non-terminal and terminal symbols. In grammar productions,  non-terminal symbols are shown in italic type, and terminal symbols are shown in a fixed-width font. Each non-terminal is defined by a set of productions. The first line of a set of productions is the name of the  non-terminal, followed by a colon. Each successive indented line contains the right-hand side for a production that has the non-terminal symbol as the left-hand side. For example: <grammar_production>
       <name>
@@ -30,8 +30,8 @@
       </rhs>
     </grammar_production>defines the <non_terminal where="17.1.1"
       >class-modifier</non_terminal
-    > non-terminal as having seven productions. </paragraph
-  >
+    > non-terminal as having seven productions.
+  </paragraph>
   <paragraph
     >Alternatives are normally listed on separate lines, as shown above, though in cases where there are many alternatives, the phrase &quot;one of&quot; precedes a list of the options. This is simply shorthand for listing each of the alternatives on a separate line. For example: <grammar_production>
       <name>

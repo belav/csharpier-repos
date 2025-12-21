@@ -173,13 +173,13 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="E:System.ComponentModel.BindingList`1.AddingNew" /> event occurs before a new object is added to the collection represented by the <see cref="P:System.Collections.ObjectModel.Collection`1.Items" /> property. This event is raised after the <see cref="M:System.ComponentModel.BindingList`1.AddNew" /> method is called, but before the new item is created and added to the internal list. By handling this event, the programmer can provide custom item creation and insertion behavior without being forced to derive from the <see cref="T:System.ComponentModel.BindingList`1" /> class. </para
-          >
+            >The <see cref="E:System.ComponentModel.BindingList`1.AddingNew" /> event occurs before a new object is added to the collection represented by the <see cref="P:System.Collections.ObjectModel.Collection`1.Items" /> property. This event is raised after the <see cref="M:System.ComponentModel.BindingList`1.AddNew" /> method is called, but before the new item is created and added to the internal list. By handling this event, the programmer can provide custom item creation and insertion behavior without being forced to derive from the <see cref="T:System.ComponentModel.BindingList`1" /> class.
+          </para>
           <para
             >For more information about supplying custom new item functionality, see the <see cref="M:System.ComponentModel.BindingList`1.AddNew" /> method. For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -458,8 +458,8 @@
             >The <see cref="M:System.ComponentModel.BindingList`1.CancelNew(System.Int32)" /> method rolls back a pending new item that was added through the <see cref="M:System.ComponentModel.BindingList`1.AddNew" /> method, but has not yet been committed.</para
           >
           <para
-            >For more information about adding and committing new items, see the <see cref="M:System.ComponentModel.BindingList`1.AddNew" /> method </para
-          >
+            >For more information about adding and committing new items, see the <see cref="M:System.ComponentModel.BindingList`1.AddNew" /> method
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -470,8 +470,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the of the new item to be added </param
-        >
+          />The index of the of the new item to be added
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ClearItems">
@@ -493,8 +493,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.ComponentModel.BindingList`1.ClearItems" /> method removes all the items from the collection represented by the <see cref="P:System.Collections.ObjectModel.Collection`1.Items" /> property. </para
-          >
+            >The <see cref="M:System.ComponentModel.BindingList`1.ClearItems" /> method removes all the items from the collection represented by the <see cref="P:System.Collections.ObjectModel.Collection`1.Items" /> property.
+          </para>
           <para>
             <see cref="M:System.ComponentModel.BindingList`1.ClearItems" /> calls the <see cref="M:System.ComponentModel.BindingList`1.EndNew(System.Int32)" /> method before clearing out the collection and raises the <see cref="E:System.ComponentModel.BindingList`1.ListChanged" /> event after it has been cleared.</para
           >
@@ -655,8 +655,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ComponentModel.BindingList`1" /> class does not provide a base implementation of sorting, so <see cref="P:System.ComponentModel.BindingList`1.IsSortedCore" /> always returns false by default. </para
-          >
+            >The <see cref="T:System.ComponentModel.BindingList`1" /> class does not provide a base implementation of sorting, so <see cref="P:System.ComponentModel.BindingList`1.IsSortedCore" /> always returns false by default.
+          </para>
           <para
             >The <see cref="T:System.ComponentModel.BindingList`1" /> class does not provide a base implementation of sorting. To enable sorting, derive a class from <see cref="T:System.ComponentModel.BindingList`1" /> and:</para
           >
@@ -713,8 +713,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -768,8 +768,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.AddingNewEventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.ComponentModel.AddingNewEventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnListChanged">
@@ -810,8 +810,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.ComponentModel.ListChangedEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.ComponentModel.ListChangedEventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RaiseListChangedEvents">
@@ -874,8 +874,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index of the item to remove. </param
-        >
+          />The zero-based index of the item to remove.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RemoveSortCore">
@@ -897,8 +897,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ComponentModel.BindingList`1" /> class does not provide a base implementation of sorting, so <see cref="M:System.ComponentModel.BindingList`1.RemoveSortCore" /> always throws a <see cref="T:System.NotSupportedException" /> by default. For more information about sorting, see the <see cref="M:System.ComponentModel.BindingList`1.ApplySortCore(System.ComponentModel.PropertyDescriptor,System.ComponentModel.ListSortDirection)" /> method. </para
-          >
+            >The <see cref="T:System.ComponentModel.BindingList`1" /> class does not provide a base implementation of sorting, so <see cref="M:System.ComponentModel.BindingList`1.RemoveSortCore" /> always throws a <see cref="T:System.NotSupportedException" /> by default. For more information about sorting, see the <see cref="M:System.ComponentModel.BindingList`1.ApplySortCore(System.ComponentModel.PropertyDescriptor,System.ComponentModel.ListSortDirection)" /> method.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1024,8 +1024,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ComponentModel.BindingList`1" /> class does not provide a base implementation of sorting, so <see cref="P:System.ComponentModel.BindingList`1.SortDirectionCore" /> always returns <see cref="F:System.ComponentModel.ListSortDirection.Ascending" /> by default. For more information about sorting, see the <see cref="M:System.ComponentModel.IBindingList.ApplySort(System.ComponentModel.PropertyDescriptor,System.ComponentModel.ListSortDirection)" /> method. </para
-          >
+            >The <see cref="T:System.ComponentModel.BindingList`1" /> class does not provide a base implementation of sorting, so <see cref="P:System.ComponentModel.BindingList`1.SortDirectionCore" /> always returns <see cref="F:System.ComponentModel.ListSortDirection.Ascending" /> by default. For more information about sorting, see the <see cref="M:System.ComponentModel.IBindingList.ApplySort(System.ComponentModel.PropertyDescriptor,System.ComponentModel.ListSortDirection)" /> method.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1366,8 +1366,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sorts the list based on a <see cref="T:System.ComponentModel.PropertyDescriptor" /> and a <see cref="T:System.ComponentModel.ListSortDirection" />. For a complete description of this member, see <see cref="M:System.ComponentModel.IBindingList.ApplySort(System.ComponentModel.PropertyDescriptor,System.ComponentModel.ListSortDirection)" />. </para
-          >
+            >Sorts the list based on a <see cref="T:System.ComponentModel.PropertyDescriptor" /> and a <see cref="T:System.ComponentModel.ListSortDirection" />. For a complete description of this member, see <see cref="M:System.ComponentModel.IBindingList.ApplySort(System.ComponentModel.PropertyDescriptor,System.ComponentModel.ListSortDirection)" />.
+          </para>
         </summary>
         <param name="direction">
           <attribution

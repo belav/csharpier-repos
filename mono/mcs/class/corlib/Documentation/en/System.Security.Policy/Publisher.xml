@@ -87,8 +87,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> that contains the software publisher's public key. </param
-        >
+          />An <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> that contains the software publisher's public key.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Certificate">
@@ -190,8 +190,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.Policy.Evidence" /> from which to construct the identity permission. </param
-        >
+          />The <see cref="T:System.Security.Policy.Evidence" /> from which to construct the identity permission.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -236,8 +236,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.Policy.Publisher" /> to test for equivalence with the current object. </param
-        >
+          />The <see cref="T:System.Security.Policy.Publisher" /> to test for equivalence with the current object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">

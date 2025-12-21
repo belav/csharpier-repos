@@ -84,15 +84,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace that is to be coded. </param
-        >
+          />The namespace that is to be coded.
+        </param>
         <param name="assemblyName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the assembly that is to be coded. </param
-        >
+          />The name of the assembly that is to be coded.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DecodeXmlNamespaceForClrTypeNamespace">
@@ -243,15 +243,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML element name of the unknown object type. </param
-        >
+          />The XML element name of the unknown object type.
+        </param>
         <param name="xmlNamespace">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML namespace of the unknown object type. </param
-        >
+          />The XML namespace of the unknown object type.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetInteropTypeFromXmlType">
@@ -300,15 +300,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML type of the unknown object type. </param
-        >
+          />The XML type of the unknown object type.
+        </param>
         <param name="xmlTypeNamespace">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML type namespace of the unknown object type. </param
-        >
+          />The XML type namespace of the unknown object type.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetSoapActionFromMethodBase">
@@ -356,8 +356,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Reflection.MethodBase" /> that contains the method for which a SOAPAction is requested. </param
-        >
+          />The <see cref="T:System.Reflection.MethodBase" /> that contains the method for which a SOAPAction is requested.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetTypeAndMethodNameFromSoapAction">
@@ -462,8 +462,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Reflection.MethodBase" /> of the method for which the XML namespace was requested. </param
-        >
+          />The <see cref="T:System.Reflection.MethodBase" /> of the method for which the XML namespace was requested.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetXmlNamespaceForMethodResponse">
@@ -504,8 +504,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Reflection.MethodBase" /> of the method for which the XML namespace was requested. </param
-        >
+          />The <see cref="T:System.Reflection.MethodBase" /> of the method for which the XML namespace was requested.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetXmlTypeForInteropType">
@@ -586,8 +586,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace to check in the common language runtime. </param
-        >
+          />The namespace to check in the common language runtime.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsSoapActionValidForMethodBase">
@@ -631,15 +631,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The SOAPAction to check against the given <see cref="T:System.Reflection.MethodBase" />. </param
-        >
+          />The SOAPAction to check against the given <see cref="T:System.Reflection.MethodBase" />.
+        </param>
         <param name="mb">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Reflection.MethodBase" /> the specified SOAPAction is checked against. </param
-        >
+          />The <see cref="T:System.Reflection.MethodBase" /> the specified SOAPAction is checked against.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="PreLoad">
@@ -681,8 +681,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Reflection.Assembly" /> for each type of which to call <see cref="M:System.Runtime.Remoting.SoapServices.PreLoad(System.Type)" />. </param
-        >
+          />The <see cref="T:System.Reflection.Assembly" /> for each type of which to call <see cref="M:System.Runtime.Remoting.SoapServices.PreLoad(System.Type)" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="PreLoad">
@@ -721,8 +721,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> to preload. </param
-        >
+          />The <see cref="T:System.Type" /> to preload.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RegisterInteropXmlElement">
@@ -759,22 +759,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML element name to use in deserialization. </param
-        >
+          />The XML element name to use in deserialization.
+        </param>
         <param name="xmlNamespace">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML namespace to use in deserialization. </param
-        >
+          />The XML namespace to use in deserialization.
+        </param>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The run-time <see cref="T:System.Type" /> to use in deserialization. </param
-        >
+          />The run-time <see cref="T:System.Type" /> to use in deserialization.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RegisterInteropXmlType">
@@ -811,22 +811,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML type to use in deserialization. </param
-        >
+          />The XML type to use in deserialization.
+        </param>
         <param name="xmlTypeNamespace">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML namespace to use in deserialization. </param
-        >
+          />The XML namespace to use in deserialization.
+        </param>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The run-time <see cref="T:System.Type" /> to use in deserialization. </param
-        >
+          />The run-time <see cref="T:System.Type" /> to use in deserialization.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RegisterSoapActionForMethodBase">
@@ -869,8 +869,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Reflection.MethodBase" /> of the method to associate with the SOAPAction cached with it. </param
-        >
+          />The <see cref="T:System.Reflection.MethodBase" /> of the method to associate with the SOAPAction cached with it.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RegisterSoapActionForMethodBase">
@@ -911,15 +911,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Reflection.MethodBase" /> to associate with the provided SOAPAction. </param
-        >
+          />The <see cref="T:System.Reflection.MethodBase" /> to associate with the provided SOAPAction.
+        </param>
         <param name="soapAction">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The SOAPAction value to associate with the given <see cref="T:System.Reflection.MethodBase" />. </param
-        >
+          />The SOAPAction value to associate with the given <see cref="T:System.Reflection.MethodBase" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="XmlNsForClrType">

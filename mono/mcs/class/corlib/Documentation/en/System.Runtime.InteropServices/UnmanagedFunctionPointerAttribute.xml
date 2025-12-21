@@ -78,8 +78,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.UnmanagedFunctionPointerAttribute" /> class with the specified calling convention. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.UnmanagedFunctionPointerAttribute" /> class with the specified calling convention.
+          </para>
         </summary>
         <param name="callingConvention">
           <attribution
@@ -170,8 +170,8 @@
             >Use this field with a member of the <see cref="T:System.Runtime.InteropServices.CharSet" /> enumeration to specify the marshaling behavior of string parameters and to specify which entry-point name to invoke (the exact name given or a name ending with "A" or "W").</para
           >
           <para
-            >For more information, see <see cref="F:System.Runtime.InteropServices.DllImportAttribute.CharSet" />. </para
-          >
+            >For more information, see <see cref="F:System.Runtime.InteropServices.DllImportAttribute.CharSet" />.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

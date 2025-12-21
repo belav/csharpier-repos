@@ -121,15 +121,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A construction call to the object from which the new <see cref="T:System.Runtime.Remoting.Messaging.ReturnMessage" /> instance is returning. </param
-        >
+          />A construction call to the object from which the new <see cref="T:System.Runtime.Remoting.Messaging.ReturnMessage" /> instance is returning.
+        </param>
         <param name="retObj">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Runtime.Remoting.ObjRef" /> that represents the object that is constructed with the construction call in <paramref name="ctorMsg" />. </param
-        >
+          />A <see cref="T:System.Runtime.Remoting.ObjRef" /> that represents the object that is constructed with the construction call in <paramref name="ctorMsg" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SwitchWrappers">
@@ -176,15 +176,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A proxy that represents the old instance of a class that is referenced by a CCW. </param
-        >
+          />A proxy that represents the old instance of a class that is referenced by a CCW.
+        </param>
         <param name="newcp">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A proxy that represents the new instance of a class that is referenced by a CCW. </param
-        >
+          />A proxy that represents the new instance of a class that is referenced by a CCW.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WrapIUnknownWithComObject">
@@ -234,8 +234,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A pointer to the IUnknown COM interface to wrap. </param
-        >
+          />A pointer to the IUnknown COM interface to wrap.
+        </param>
       </Docs>
     </Member>
   </Members>

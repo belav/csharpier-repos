@@ -38,8 +38,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the instance with default values. <see cref="P:System.Threading.Tasks.ParallelOptions.MaxDegreeOfParallelism" /> is initialized to -1, signifying that there is no upper bound set on how much parallelism should be employed. <see cref="P:System.Threading.Tasks.ParallelOptions.CancellationToken" /> is initialized to a non-cancelable token, and <see cref="P:System.Threading.Tasks.ParallelOptions.TaskScheduler" /> is initialized to the default scheduler (TaskScheduler.Default). </para
-          >
+            >This constructor initializes the instance with default values. <see cref="P:System.Threading.Tasks.ParallelOptions.MaxDegreeOfParallelism" /> is initialized to -1, signifying that there is no upper bound set on how much parallelism should be employed. <see cref="P:System.Threading.Tasks.ParallelOptions.CancellationToken" /> is initialized to a non-cancelable token, and <see cref="P:System.Threading.Tasks.ParallelOptions.TaskScheduler" /> is initialized to the default scheduler (TaskScheduler.Default).
+          </para>
           <para> All of these defaults may be overwritten using the property set accessors on the instance.</para>
         </remarks>
         <summary>
@@ -100,8 +100,8 @@
             >If the <see cref="P:System.Threading.Tasks.ParallelOptions.MaxDegreeOfParallelism" /> property is positive, it limits the number of concurrent operations run by <see cref="T:System.Threading.Tasks.Parallel" /> method calls that are passed this <see cref="T:System.Threading.Tasks.ParallelOptions" /> instance to the set value. If it is -1,  there is no limit on the number of concurrently running operations.</para
           >
           <para
-            >By default, <see cref="Overload:System.Threading.Tasks.Parallel.For" /> and <see cref="Overload:System.Threading.Tasks.Parallel.ForEach" /> will utilize however many threads the underlying scheduler provides, so changing <see cref="P:System.Threading.Tasks.ParallelOptions.MaxDegreeOfParallelism" /> from the default only limits how many concurrent tasks will be used. </para
-          >
+            >By default, <see cref="Overload:System.Threading.Tasks.Parallel.For" /> and <see cref="Overload:System.Threading.Tasks.Parallel.ForEach" /> will utilize however many threads the underlying scheduler provides, so changing <see cref="P:System.Threading.Tasks.ParallelOptions.MaxDegreeOfParallelism" /> from the default only limits how many concurrent tasks will be used.
+          </para>
           <para>Ordinarily, you do not need to modify this setting. However, you may choose to set it explicitly in advanced usage scenarios such as the following: , Or, if </para>
           <list type="bullet">
             <item>

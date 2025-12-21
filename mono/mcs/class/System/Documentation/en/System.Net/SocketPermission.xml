@@ -92,8 +92,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Security.Permissions.PermissionState" /> values. </param
-        >
+          />One of the <see cref="T:System.Security.Permissions.PermissionState" /> values.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -150,29 +150,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Net.NetworkAccess" /> values. </param
-        >
+          />One of the <see cref="T:System.Net.NetworkAccess" /> values.
+        </param>
         <param name="transport">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Net.TransportType" /> values. </param
-        >
+          />One of the <see cref="T:System.Net.TransportType" /> values.
+        </param>
         <param name="hostName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The host name for the transport address. </param
-        >
+          />The host name for the transport address.
+        </param>
         <param name="portNumber">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The port number for the transport address. </param
-        >
+          />The port number for the transport address.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -245,29 +245,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Net.NetworkAccess" /> values. </param
-        >
+          />One of the <see cref="T:System.Net.NetworkAccess" /> values.
+        </param>
         <param name="transport">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Net.TransportType" /> values. </param
-        >
+          />One of the <see cref="T:System.Net.TransportType" /> values.
+        </param>
         <param name="hostName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The host name for the transport address. </param
-        >
+          />The host name for the transport address.
+        </param>
         <param name="portNumber">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The port number for the transport address. </param
-        >
+          />The port number for the transport address.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AllPorts">
@@ -423,8 +423,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML encoding used to reconstruct the <see cref="T:System.Net.SocketPermission" /> instance. </param
-        >
+          />The XML encoding used to reconstruct the <see cref="T:System.Net.SocketPermission" /> instance.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -480,8 +480,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Net.SocketPermission" /> instance to intersect with the current instance. </param
-        >
+          />The <see cref="T:System.Net.SocketPermission" /> instance to intersect with the current instance.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -536,8 +536,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Net.SocketPermission" /> that is to be tested for the subset relationship. </param
-        >
+          />A <see cref="T:System.Net.SocketPermission" /> that is to be tested for the subset relationship.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -674,8 +674,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Net.SocketPermission" /> instance to combine with the current instance. </param
-        >
+          />The <see cref="T:System.Net.SocketPermission" /> instance to combine with the current instance.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

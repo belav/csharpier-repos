@@ -38,13 +38,13 @@
         </item>
         <item>
           <para
-            >Double-click the <ui>Audit object access</ui> entry in the right pane of the Local Security Settings window to display the <ui>Audit object access Properties</ui> dialog box. </para
-          >
+            >Double-click the <ui>Audit object access</ui> entry in the right pane of the Local Security Settings window to display the <ui>Audit object access Properties</ui> dialog box.
+          </para>
         </item>
         <item>
           <para
-            >Select the <ui>Success</ui> or <ui>Failure</ui> boxes to log successes or failures.   </para
-          >
+            >Select the <ui>Success</ui> or <ui>Failure</ui> boxes to log successes or failures.
+          </para>
         </item>
       </list>
       <para>Note that an audit rule for a user account requires a corresponding access rule for the same user account.</para>

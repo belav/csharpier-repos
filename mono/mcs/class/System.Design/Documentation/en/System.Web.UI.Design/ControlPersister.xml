@@ -18,8 +18,8 @@
       >
       <block subset="none" type="note">
         <para
-          >The Web Forms page designer does not support the Reset<paramref name="PropertyName" /> method that is optionally exposed by Microsoft Windows Forms-based controls for property persistence. </para
-        >
+          >The Web Forms page designer does not support the Reset<paramref name="PropertyName" /> method that is optionally exposed by Microsoft Windows Forms-based controls for property persistence.
+        </para>
       </block>
       <para
         >To create a <see cref="T:System.Web.UI.Control" /> object or an <see cref="T:System.Web.UI.ITemplate" /> interface by parsing a string of control- or template-persistence data, use the <see cref="T:System.Web.UI.Design.ControlParser" /> class methods.</para
@@ -63,8 +63,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.UI.Control" /> to persist. </param
-        >
+          />The <see cref="T:System.Web.UI.Control" /> to persist.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -102,15 +102,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.TextWriter" /> to output the persisted control data to. </param
-        >
+          />The <see cref="T:System.IO.TextWriter" /> to output the persisted control data to.
+        </param>
         <param name="control">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.UI.Control" /> to persist. </param
-        >
+          />The <see cref="T:System.Web.UI.Control" /> to persist.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -150,15 +150,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.UI.Control" /> to persist. </param
-        >
+          />The <see cref="T:System.Web.UI.Control" /> to persist.
+        </param>
         <param name="host">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.Design.IDesignerHost" /> that is the designer host for the control. </param
-        >
+          />An <see cref="T:System.ComponentModel.Design.IDesignerHost" /> that is the designer host for the control.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -197,22 +197,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.TextWriter" /> to output the persisted control data to. </param
-        >
+          />The <see cref="T:System.IO.TextWriter" /> to output the persisted control data to.
+        </param>
         <param name="control">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.UI.Control" /> to persist. </param
-        >
+          />The <see cref="T:System.Web.UI.Control" /> to persist.
+        </param>
         <param name="host">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.Design.IDesignerHost" /> that is the designer host for the control. </param
-        >
+          />An <see cref="T:System.ComponentModel.Design.IDesignerHost" /> that is the designer host for the control.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -252,15 +252,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The component to persist the inner properties of. </param
-        >
+          />The component to persist the inner properties of.
+        </param>
         <param name="host">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.Design.IDesignerHost" /> that is the designer host for the control. </param
-        >
+          />An <see cref="T:System.ComponentModel.Design.IDesignerHost" /> that is the designer host for the control.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -299,22 +299,18 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.TextWriter" /> to use. </param
-        >
+          />The <see cref="T:System.IO.TextWriter" /> to use.
+        </param>
         <param name="component">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The component to persist. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The component to persist.
+        </param>
         <param name="host">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.Design.IDesignerHost" /> that is the designer host for the control. </param
-        >
+          />An <see cref="T:System.ComponentModel.Design.IDesignerHost" /> that is the designer host for the control.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

@@ -243,8 +243,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor sets the properties of the <see cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" /> object as follows: </para
-          >
+            >This constructor sets the properties of the <see cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" /> object as follows:
+          </para>
           <list type="table">
             <listheader>
               <item>
@@ -274,8 +274,8 @@
               </term>
               <description>
                 <para
-                  >A <see cref="T:System.Runtime.Serialization.StreamingContext" /> with a value that indicates that serialized data can be transmitted to or received from any of the other contexts. (<see cref="F:System.Runtime.Serialization.StreamingContextStates.All" />) </para
-                >
+                  >A <see cref="T:System.Runtime.Serialization.StreamingContext" /> with a value that indicates that serialized data can be transmitted to or received from any of the other contexts. (<see cref="F:System.Runtime.Serialization.StreamingContextStates.All" />)
+                </para>
               </description>
             </item>
           </list>
@@ -329,15 +329,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.ISurrogateSelector" /> to use. Can be null. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.ISurrogateSelector" /> to use. Can be null.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The source and destination for the serialized data. </param
-        >
+          />The source and destination for the serialized data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AssemblyFormat">
@@ -477,8 +477,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream from which to deserialize the object graph. </param
-        >
+          />The stream from which to deserialize the object graph.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Deserialize">
@@ -532,15 +532,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream from which to deserialize the object graph. </param
-        >
+          />The stream from which to deserialize the object graph.
+        </param>
         <param name="handler">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Remoting.Messaging.HeaderHandler" /> that handles any headers in the <paramref name="serializationStream" />. Can be null. </param
-        >
+          />The <see cref="T:System.Runtime.Remoting.Messaging.HeaderHandler" /> that handles any headers in the <paramref name="serializationStream" />. Can be null.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DeserializeMethodResponse">
@@ -592,22 +592,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream from which to deserialize the object graph. </param
-        >
+          />The stream from which to deserialize the object graph.
+        </param>
         <param name="handler">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Remoting.Messaging.HeaderHandler" /> that handles any headers in the <paramref name="serializationStream" />. Can be null. </param
-        >
+          />The <see cref="T:System.Runtime.Remoting.Messaging.HeaderHandler" /> that handles any headers in the <paramref name="serializationStream" />. Can be null.
+        </param>
         <param name="methodCallMessage">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" /> that contains details about where the call came from. </param
-        >
+          />The <see cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" /> that contains details about where the call came from.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="FilterLevel">
@@ -681,15 +681,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream to which the graph is to be serialized. </param
-        >
+          />The stream to which the graph is to be serialized.
+        </param>
         <param name="graph">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object at the root of the graph to serialize. </param
-        >
+          />The object at the root of the graph to serialize.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Serialize">
@@ -732,22 +732,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream to which the object is to be serialized. </param
-        >
+          />The stream to which the object is to be serialized.
+        </param>
         <param name="graph">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object at the root of the graph to serialize. </param
-        >
+          />The object at the root of the graph to serialize.
+        </param>
         <param name="headers">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Remoting headers to include in the serialization. Can be null. </param
-        >
+          />Remoting headers to include in the serialization. Can be null.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SurrogateSelector">
@@ -870,15 +870,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream from which to deserialize the object graph. </param
-        >
+          />The stream from which to deserialize the object graph.
+        </param>
         <param name="handler">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Remoting.Messaging.HeaderHandler" /> that handles any headers in the <paramref name="serializationStream" />. Can be null. </param
-        >
+          />The <see cref="T:System.Runtime.Remoting.Messaging.HeaderHandler" /> that handles any headers in the <paramref name="serializationStream" />. Can be null.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="UnsafeDeserializeMethodResponse">
@@ -946,22 +946,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream from which to deserialize the object graph. </param
-        >
+          />The stream from which to deserialize the object graph.
+        </param>
         <param name="handler">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Remoting.Messaging.HeaderHandler" /> that handles any headers in the <paramref name="serializationStream" />. Can be null. </param
-        >
+          />The <see cref="T:System.Runtime.Remoting.Messaging.HeaderHandler" /> that handles any headers in the <paramref name="serializationStream" />. Can be null.
+        </param>
         <param name="methodCallMessage">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" /> that contains details about where the call came from. </param
-        >
+          />The <see cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" /> that contains details about where the call came from.
+        </param>
       </Docs>
     </Member>
   </Members>

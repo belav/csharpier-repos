@@ -17,11 +17,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The new endpoint address can have its property values initialized from the property values of an existing endpoint address using the <see cref="M:System.ServiceModel.EndpointAddressBuilder.#ctor(System.ServiceModel.EndpointAddress)" /> constructor. </para
-      >
+        >The new endpoint address can have its property values initialized from the property values of an existing endpoint address using the <see cref="M:System.ServiceModel.EndpointAddressBuilder.#ctor(System.ServiceModel.EndpointAddress)" /> constructor.
+      </para>
       <para
-        >The endpoint addresses created can have their URI and identity values set using the <see cref="P:System.ServiceModel.EndpointAddressBuilder.Uri" /> and <see cref="P:System.ServiceModel.EndpointAddressBuilder.Identity" /> properties of the endpoint address builder. Note that <see cref="T:System.ServiceModel.EndpointAddress" /> is an immutable class. </para
-      >
+        >The endpoint addresses created can have their URI and identity values set using the <see cref="P:System.ServiceModel.EndpointAddressBuilder.Uri" /> and <see cref="P:System.ServiceModel.EndpointAddressBuilder.Identity" /> properties of the endpoint address builder. Note that <see cref="T:System.ServiceModel.EndpointAddress" /> is an immutable class.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -45,8 +45,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.EndpointAddressBuilder" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.EndpointAddressBuilder" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>

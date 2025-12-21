@@ -38,8 +38,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a callback delegate that has been registered with a <see cref="T:System.Threading.CancellationToken" />. </para
-      >
+        >Represents a callback delegate that has been registered with a <see cref="T:System.Threading.CancellationToken" />.
+      </para>
     </summary>
   </Docs>
   <Members>

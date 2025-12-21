@@ -27,8 +27,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Runtime.Serialization.NetDataContractSerializer" /> differs from the <see cref="T:System.Runtime.Serialization.DataContractSerializer" /> in one important way: the <see cref="T:System.Runtime.Serialization.NetDataContractSerializer" /> includes CLR type information in the serialized XML, whereas the <see cref="T:System.Runtime.Serialization.DataContractSerializer" /> does not. Therefore, the <see cref="T:System.Runtime.Serialization.NetDataContractSerializer" /> can be used only if both the serializing and deserializing ends share the same CLR types. </para
-      >
+        >The <see cref="T:System.Runtime.Serialization.NetDataContractSerializer" /> differs from the <see cref="T:System.Runtime.Serialization.DataContractSerializer" /> in one important way: the <see cref="T:System.Runtime.Serialization.NetDataContractSerializer" /> includes CLR type information in the serialized XML, whereas the <see cref="T:System.Runtime.Serialization.DataContractSerializer" /> does not. Therefore, the <see cref="T:System.Runtime.Serialization.NetDataContractSerializer" /> can be used only if both the serializing and deserializing ends share the same CLR types.
+      </para>
       <para
         >The serializer can serialize types to which either the <see cref="T:System.Runtime.Serialization.DataContractAttribute" /> or <see cref="T:System.SerializableAttribute" /> attribute has been applied. It also serializes types that implement <see cref="T:System.Runtime.Serialization.ISerializable" />.</para
       >
@@ -68,8 +68,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.NetDataContractSerializer" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.NetDataContractSerializer" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -99,8 +99,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.NetDataContractSerializer" /> class with the supplied streaming context data. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.NetDataContractSerializer" /> class with the supplied streaming context data.
+          </para>
         </summary>
         <param name="context">
           <attribution
@@ -229,8 +229,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="ignoreExtensionDataObject" /> parameter is used when the <see cref="T:System.Runtime.Serialization.IExtensibleDataObject" /> interface is implemented in the class that is being serialized or deserialized. </para
-          >
+            >The <paramref name="ignoreExtensionDataObject" /> parameter is used when the <see cref="T:System.Runtime.Serialization.IExtensibleDataObject" /> interface is implemented in the class that is being serialized or deserialized.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -250,8 +250,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum number of items in the graph to serialize or deserialize. </param
-        >
+          />The maximum number of items in the graph to serialize or deserialize.
+        </param>
         <param name="assemblyFormat">
           <attribution
             license="cc4"
@@ -301,8 +301,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="ignoreExtensionDataObject" /> parameter is used when the <see cref="T:System.Runtime.Serialization.IExtensibleDataObject" /> interface is implemented in the class that is being serialized or deserialized. </para
-          >
+            >The <paramref name="ignoreExtensionDataObject" /> parameter is used when the <see cref="T:System.Runtime.Serialization.IExtensibleDataObject" /> interface is implemented in the class that is being serialized or deserialized.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -336,8 +336,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum number of items in the graph to serialize or deserialize. </param
-        >
+          />The maximum number of items in the graph to serialize or deserialize.
+        </param>
         <param name="assemblyFormat">
           <attribution
             license="cc4"
@@ -390,8 +390,8 @@
             >The <see cref="T:System.Xml.XmlDictionaryString" /> can be used to optimize performance when the same set of strings is used across object instances.</para
           >
           <para
-            >The <paramref name="ignoreExtensionDataObject" /> parameter is used when the <see cref="T:System.Runtime.Serialization.IExtensibleDataObject" /> interface is implemented in the class that is being serialized or deserialized. </para
-          >
+            >The <paramref name="ignoreExtensionDataObject" /> parameter is used when the <see cref="T:System.Runtime.Serialization.IExtensibleDataObject" /> interface is implemented in the class that is being serialized or deserialized.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -425,8 +425,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum number of items in the graph to serialize or deserialize. </param
-        >
+          />The maximum number of items in the graph to serialize or deserialize.
+        </param>
         <param name="assemblyFormat">
           <attribution
             license="cc4"

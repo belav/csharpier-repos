@@ -14,8 +14,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Runtime.Serialization.IExtensibleDataObject" /> interface provides a single property that sets or returns a structure used to store data that is external to a data contract. The extra data is stored in an instance of the <see cref="T:System.Runtime.Serialization.ExtensionDataObject" /> class and accessed through the <see cref="P:System.Runtime.Serialization.IExtensibleDataObject.ExtensionData" /> property. In a roundtrip operation where data is received, processed, and sent back, the extra data is sent back to the original sender intact. This is useful to store data received from future versions of the contract. If you do not implement the interface, any extra data is ignored and discarded during a roundtrip operation. </para
-      >
+        >The <see cref="T:System.Runtime.Serialization.IExtensibleDataObject" /> interface provides a single property that sets or returns a structure used to store data that is external to a data contract. The extra data is stored in an instance of the <see cref="T:System.Runtime.Serialization.ExtensionDataObject" /> class and accessed through the <see cref="P:System.Runtime.Serialization.IExtensibleDataObject.ExtensionData" /> property. In a roundtrip operation where data is received, processed, and sent back, the extra data is sent back to the original sender intact. This is useful to store data received from future versions of the contract. If you do not implement the interface, any extra data is ignored and discarded during a roundtrip operation.
+      </para>
       <procedure>
         <format type="text/html">
           <h2>To use this versioning feature</h2>
@@ -59,8 +59,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides a data structure to store extra data encountered by the <see cref="T:System.Runtime.Serialization.XmlObjectSerializer" /> during deserialization of a type marked with the <see cref="T:System.Runtime.Serialization.DataContractAttribute" /> attribute. </para
-      >
+        >Provides a data structure to store extra data encountered by the <see cref="T:System.Runtime.Serialization.XmlObjectSerializer" /> during deserialization of a type marked with the <see cref="T:System.Runtime.Serialization.DataContractAttribute" /> attribute.
+      </para>
     </summary>
   </Docs>
   <Members>

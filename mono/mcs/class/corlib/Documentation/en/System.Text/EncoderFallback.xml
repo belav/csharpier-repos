@@ -19,14 +19,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >An encoding maps a Unicode character to an encoded sequence of bytes. A particular encoding is represented by a type that is derived from the <see cref="T:System.Text.Encoding" /> class. Specifically, a character is encoded to a byte sequence by calling the encoding type's <see cref="M:System.Text.Encoding.GetBytes(System.String)" /> method, and the byte sequence is decoded to a character array or a string by calling the <see cref="M:System.Text.Encoding.GetChars(System.Byte[])" /> or <see cref="M:System.Text.Encoding.GetString(System.Byte[])" /> method. </para
-      >
+        >An encoding maps a Unicode character to an encoded sequence of bytes. A particular encoding is represented by a type that is derived from the <see cref="T:System.Text.Encoding" /> class. Specifically, a character is encoded to a byte sequence by calling the encoding type's <see cref="M:System.Text.Encoding.GetBytes(System.String)" /> method, and the byte sequence is decoded to a character array or a string by calling the <see cref="M:System.Text.Encoding.GetChars(System.Byte[])" /> or <see cref="M:System.Text.Encoding.GetString(System.Byte[])" /> method.
+      </para>
       <para
-        >An encoding operation can fail if the input character cannot be represented by the encoding. For example, an <see cref="T:System.Text.ASCIIEncoding" /> object cannot encode a character whose Unicode code point value is outside the range U+0000 to U+007F. </para
-      >
+        >An encoding operation can fail if the input character cannot be represented by the encoding. For example, an <see cref="T:System.Text.ASCIIEncoding" /> object cannot encode a character whose Unicode code point value is outside the range U+0000 to U+007F.
+      </para>
       <para
-        >When an encoding conversion cannot be performed, the .NET Framework provides a failure-handling mechanism called a fallback. Your application can use predefined .NET Framework encoder fallbacks, or it can create a custom encoder fallback derived from the <see cref="T:System.Text.EncoderFallback" /> and <see cref="T:System.Text.EncoderFallbackBuffer" /> classes. </para
-      >
+        >When an encoding conversion cannot be performed, the .NET Framework provides a failure-handling mechanism called a fallback. Your application can use predefined .NET Framework encoder fallbacks, or it can create a custom encoder fallback derived from the <see cref="T:System.Text.EncoderFallback" /> and <see cref="T:System.Text.EncoderFallbackBuffer" /> classes.
+      </para>
       <para>
         <see cref="T:System.Text.EncoderFallback" /> and <see cref="T:System.Text.EncoderFallbackBuffer" /> are the base classes for all encoding fallback handlers in the .NET Framework. They support the following three kinds of fallback handling mechanisms:</para
       >
@@ -125,14 +125,14 @@
             >This method returns an object derived from <see cref="T:System.Text.EncoderFallbackBuffer" /> that is responsible for performing the fallback operation. For example, of the predefined <see cref="T:System.Text.EncoderFallback" /> implementations in the .NET Framework, the <see cref="M:System.Text.EncoderReplacementFallback.CreateFallbackBuffer" /> method returns an <see cref="T:System.Text.EncoderReplacementFallbackBuffer" /> object, and the <see cref="M:System.Text.EncoderExceptionFallback.CreateFallbackBuffer" /> method returns an <see cref="T:System.Text.EncoderExceptionFallbackBuffer" /> object.</para
           >
           <para
-            >The <see cref="M:System.Text.EncoderFallback.CreateFallbackBuffer" /> method is called by an encoder when it encounters the first character that it is unable to encode. The <see cref="T:System.Text.EncoderFallbackBuffer" /> object returned by this method provides the fallback implementation and is responsible for returning the byte array that replaces the character or characters that could not be encoded. </para
-          >
+            >The <see cref="M:System.Text.EncoderFallback.CreateFallbackBuffer" /> method is called by an encoder when it encounters the first character that it is unable to encode. The <see cref="T:System.Text.EncoderFallbackBuffer" /> object returned by this method provides the fallback implementation and is responsible for returning the byte array that replaces the character or characters that could not be encoded.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, initializes a new instance of the <see cref="T:System.Text.EncoderFallbackBuffer" /> class. </para
-          >
+            >When overridden in a derived class, initializes a new instance of the <see cref="T:System.Text.EncoderFallbackBuffer" /> class.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />

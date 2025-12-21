@@ -59,8 +59,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Windows.Forms.DataGridViewHeaderCell" /> is like a button in that it can be clicked to set states, such as sorting or performing row-level selection. The <see cref="P:System.Windows.Forms.DataGridViewHeaderCell.ButtonState" /> property uses <see cref="T:System.Windows.Forms.ButtonState" /> values to provide buttonlike visual states. </para
-          >
+            >A <see cref="T:System.Windows.Forms.DataGridViewHeaderCell" /> is like a button in that it can be clicked to set states, such as sorting or performing row-level selection. The <see cref="P:System.Windows.Forms.DataGridViewHeaderCell.ButtonState" /> property uses <see cref="T:System.Windows.Forms.ButtonState" /> values to provide buttonlike visual states.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -139,16 +139,16 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see cref="T:System.Windows.Forms.DataGridViewHeaderCell" /> and optionally releases the managed resources. </para
-          >
+            >Releases the unmanaged resources used by the <see cref="T:System.Windows.Forms.DataGridViewHeaderCell" /> and optionally releases the managed resources.
+          </para>
         </summary>
         <param name="disposing">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="FormattedValueType">

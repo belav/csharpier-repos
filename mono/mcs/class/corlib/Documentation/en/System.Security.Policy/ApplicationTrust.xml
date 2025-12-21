@@ -94,8 +94,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Policy.ApplicationTrust" /> class with an <see cref="T:System.ApplicationIdentity" />. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Policy.ApplicationTrust" /> class with an <see cref="T:System.ApplicationIdentity" />.
+          </para>
         </summary>
         <param name="applicationIdentity">
           <attribution
@@ -182,8 +182,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Security.Policy.ApplicationTrust.ApplicationIdentity" /> property uniquely identifies a manifest-based application to be activated in a new domain. </para
-          >
+            >The <see cref="P:System.Security.Policy.ApplicationTrust.ApplicationIdentity" /> property uniquely identifies a manifest-based application to be activated in a new domain.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -286,8 +286,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML encoding to use to reconstruct the <see cref="T:System.Security.Policy.ApplicationTrust" /> object. </param
-        >
+          />The XML encoding to use to reconstruct the <see cref="T:System.Security.Policy.ApplicationTrust" /> object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="FullTrustAssemblies">

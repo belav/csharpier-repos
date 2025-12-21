@@ -160,8 +160,8 @@
             </item>
             <item>
               <para>
-                <see cref="T:System.Net.Http.MultipartContent" /> - HTTP content that gets serialized using the multipart/* content type specification. </para
-              >
+                <see cref="T:System.Net.Http.MultipartContent" /> - HTTP content that gets serialized using the multipart/* content type specification.
+              </para>
             </item>
             <item>
               <para>
@@ -170,8 +170,8 @@
             </item>
             <item>
               <para>
-                <see cref="T:System.Net.Http.StreamContent" /> - HTTP content based on a stream. </para
-              >
+                <see cref="T:System.Net.Http.StreamContent" /> - HTTP content based on a stream.
+              </para>
             </item>
             <item>
               <para>

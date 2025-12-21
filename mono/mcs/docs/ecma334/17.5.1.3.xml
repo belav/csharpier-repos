@@ -5,8 +5,8 @@
     >When a formal parameter is an output parameter, the corresponding argument in a method invocation must consist of the keyword out followed by a <non_terminal
       where="12.4"
       >variable-reference</non_terminal
-    > (<hyperlink>12.3.3</hyperlink>) of the same type as the formal parameter. A variable need not be definitely assigned before it can be passed as an output parameter, but following an invocation where a variable was passed as an output parameter, the variable is considered definitely assigned. </paragraph
-  >
+    > (<hyperlink>12.3.3</hyperlink>) of the same type as the formal parameter. A variable need not be definitely assigned before it can be passed as an output parameter, but following an invocation where a variable was passed as an output parameter, the variable is considered definitely assigned.
+  </paragraph>
   <paragraph>Within a method, just like a local variable, an output parameter is initially considered unassigned and must be definitely assigned before its value is used. </paragraph>
   <paragraph>Every output parameter of a method must be definitely assigned before the method returns. </paragraph>
   <paragraph

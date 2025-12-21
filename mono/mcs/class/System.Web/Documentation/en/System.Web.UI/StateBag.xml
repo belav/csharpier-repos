@@ -83,8 +83,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to ignore case; otherwise, false. </param
-        >
+          />true to ignore case; otherwise, false.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -123,15 +123,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The attribute name for the <see cref="T:System.Web.UI.StateItem" />. </param
-        >
+          />The attribute name for the <see cref="T:System.Web.UI.StateItem" />.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value of the item to add to the <see cref="T:System.Web.UI.StateBag" />. </param
-        >
+          />The value of the item to add to the <see cref="T:System.Web.UI.StateBag" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -239,8 +239,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key of the item to check. </param
-        >
+          />The key of the item to check.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -316,8 +316,8 @@
           >
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />The item to remove. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The item to remove.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -386,8 +386,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key that identifies which <see cref="T:System.Web.UI.StateItem" /> in the <see cref="T:System.Web.UI.StateBag" /> to set. </param
-        >
+          />The key that identifies which <see cref="T:System.Web.UI.StateItem" /> in the <see cref="T:System.Web.UI.StateBag" /> to set.
+        </param>
         <param name="dirty">
           <attribution
             license="cc4"
@@ -541,8 +541,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to use as the value of the element to add. </param
-        >
+          />The <see cref="T:System.Object" /> to use as the value of the element to add.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IDictionary.Contains">
@@ -698,8 +698,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key of the element to remove. </param
-        >
+          />The key of the element to remove.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IEnumerable.GetEnumerator">

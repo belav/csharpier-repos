@@ -161,8 +161,8 @@
             >The <see cref="M:System.Web.UI.WebControls.MailDefinition.CreateMailMessage(System.String,System.Collections.IDictionary,System.Web.UI.Control)" /> method creates a new <see cref="T:System.Net.Mail.MailMessage" /> object that can be sent using the <see cref="M:System.Net.Mail.SmtpClient.Send(System.String,System.String,System.String,System.String)" /> method.</para
           >
           <para
-            >The <see cref="P:System.Web.Mail.MailMessage.BodyFormat" /> property must be set to indicate whether the mail message should be formatted as plain text (<see cref="F:System.Web.Mail.MailFormat.Text" />) or HTML (<see cref="F:System.Web.Mail.MailFormat.Html" />). </para
-          >
+            >The <see cref="P:System.Web.Mail.MailMessage.BodyFormat" /> property must be set to indicate whether the mail message should be formatted as plain text (<see cref="F:System.Web.Mail.MailFormat.Text" />) or HTML (<see cref="F:System.Web.Mail.MailFormat.Html" />).
+          </para>
           <para
             >The <paramref name="recipients" /> parameter contains a comma-separated list of recipients of the e-mail message. If the <paramref name="recipients" /> parameter contains an improperly formatted Internet e-mail address, the <see cref="M:System.Net.Mail.SmtpClient.Send(System.String,System.String,System.String,System.String)" /> method throws an <see cref="T:System.Web.HttpException" /> exception and the e-mail message is not sent.</para
           >
@@ -236,8 +236,8 @@
             >The <paramref name="replacements" /> parameter is an <see cref="T:System.Collections.IDictionary" /> instance that contains a list of strings to substitute. Strings are replaced in the order in which they were added to the <see cref="T:System.Collections.IDictionary" /> collection, and they can overwrite earlier replacements.</para
           >
           <para
-            >The <paramref name="body" /> parameter contains the text of the e-mail message. </para
-          >
+            >The <paramref name="body" /> parameter contains the text of the e-mail message.
+          </para>
           <para
             >The <paramref name="owner" /> parameter indicates which control is the parent of the <see cref="T:System.Web.UI.WebControls.MailDefinition" /> control. It determines which directory to search for the text file specified in the <see cref="P:System.Web.UI.WebControls.MailDefinition.BodyFileName" /> property.</para
           >

@@ -35,8 +35,8 @@
         >Instances of the <see cref="T:System.Web.HttpApplication" /> class are created in the ASP.NET infrastructure, not by the user directly. One instance of the <see cref="T:System.Web.HttpApplication" /> class is used to process many requests in its lifetime. However, it can process only one request at a time. Thus, member variables can be used to store per-request data.</para
       >
       <para
-        >An application raises events that can be handled by custom modules that implement the <see cref="T:System.Web.IHttpModule" /> interface or by event handler code that is defined in the Global.asax file. Custom modules that implement the <see cref="T:System.Web.IHttpModule" /> interface can be put in the App_Code folder or in a DLL in the Bin folder. </para
-      >
+        >An application raises events that can be handled by custom modules that implement the <see cref="T:System.Web.IHttpModule" /> interface or by event handler code that is defined in the Global.asax file. Custom modules that implement the <see cref="T:System.Web.IHttpModule" /> interface can be put in the App_Code folder or in a DLL in the Bin folder.
+      </para>
       <para>
         <see cref="T:System.Web.HttpApplication" /> is introduced in the .NET Framework version 3.5.  For more information, see <format type="text/html">
           <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
@@ -231,15 +231,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.BeginEventHandler" /> that starts asynchronous processing of the <see cref="E:System.Web.HttpApplication.AcquireRequestState" />. </param
-        >
+          />The <see cref="T:System.Web.BeginEventHandler" /> that starts asynchronous processing of the <see cref="E:System.Web.HttpApplication.AcquireRequestState" />.
+        </param>
         <param name="eh">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.EndEventHandler" /> that ends asynchronous processing of the <see cref="E:System.Web.HttpApplication.AcquireRequestState" />. </param
-        >
+          />The <see cref="T:System.Web.EndEventHandler" /> that ends asynchronous processing of the <see cref="E:System.Web.HttpApplication.AcquireRequestState" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -302,15 +302,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.BeginEventHandler" /> that starts asynchronous processing of the <see cref="E:System.Web.HttpApplication.AuthenticateRequest" />. </param
-        >
+          />The <see cref="T:System.Web.BeginEventHandler" /> that starts asynchronous processing of the <see cref="E:System.Web.HttpApplication.AuthenticateRequest" />.
+        </param>
         <param name="eh">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.EndEventHandler" /> that ends asynchronous processing of the <see cref="E:System.Web.HttpApplication.AuthenticateRequest" />. </param
-        >
+          />The <see cref="T:System.Web.EndEventHandler" /> that ends asynchronous processing of the <see cref="E:System.Web.HttpApplication.AuthenticateRequest" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -373,15 +373,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.BeginEventHandler" /> that starts asynchronous processing of the <see cref="E:System.Web.HttpApplication.AuthorizeRequest" />. </param
-        >
+          />The <see cref="T:System.Web.BeginEventHandler" /> that starts asynchronous processing of the <see cref="E:System.Web.HttpApplication.AuthorizeRequest" />.
+        </param>
         <param name="eh">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.EndEventHandler" /> that ends asynchronous processing of the <see cref="E:System.Web.HttpApplication.AuthorizeRequest" />. </param
-        >
+          />The <see cref="T:System.Web.EndEventHandler" /> that ends asynchronous processing of the <see cref="E:System.Web.HttpApplication.AuthorizeRequest" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -444,15 +444,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.BeginEventHandler" /> that starts asynchronous processing of the <see cref="E:System.Web.HttpApplication.BeginRequest" />. </param
-        >
+          />The <see cref="T:System.Web.BeginEventHandler" /> that starts asynchronous processing of the <see cref="E:System.Web.HttpApplication.BeginRequest" />.
+        </param>
         <param name="eh">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.EndEventHandler" /> that ends asynchronous processing of the <see cref="E:System.Web.HttpApplication.BeginRequest" />. </param
-        >
+          />The <see cref="T:System.Web.EndEventHandler" /> that ends asynchronous processing of the <see cref="E:System.Web.HttpApplication.BeginRequest" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -515,15 +515,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.BeginEventHandler" /> that starts asynchronous processing of the <see cref="E:System.Web.HttpApplication.EndRequest" />. </param
-        >
+          />The <see cref="T:System.Web.BeginEventHandler" /> that starts asynchronous processing of the <see cref="E:System.Web.HttpApplication.EndRequest" />.
+        </param>
         <param name="eh">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.EndEventHandler" /> that ends asynchronous processing of the <see cref="E:System.Web.HttpApplication.EndRequest" />. </param
-        >
+          />The <see cref="T:System.Web.EndEventHandler" /> that ends asynchronous processing of the <see cref="E:System.Web.HttpApplication.EndRequest" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -779,15 +779,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.BeginEventHandler" /> that starts asynchronous processing of the <see cref="E:System.Web.HttpApplication.PostAcquireRequestState" />. </param
-        >
+          />The <see cref="T:System.Web.BeginEventHandler" /> that starts asynchronous processing of the <see cref="E:System.Web.HttpApplication.PostAcquireRequestState" />.
+        </param>
         <param name="eh">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.EndEventHandler" /> that ends asynchronous processing of the <see cref="E:System.Web.HttpApplication.PostAcquireRequestState" />. </param
-        >
+          />The <see cref="T:System.Web.EndEventHandler" /> that ends asynchronous processing of the <see cref="E:System.Web.HttpApplication.PostAcquireRequestState" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddOnPostAcquireRequestStateAsync">
@@ -849,15 +849,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.BeginEventHandler" /> that starts asynchronous processing of the <see cref="E:System.Web.HttpApplication.PostAuthenticateRequest" />. </param
-        >
+          />The <see cref="T:System.Web.BeginEventHandler" /> that starts asynchronous processing of the <see cref="E:System.Web.HttpApplication.PostAuthenticateRequest" />.
+        </param>
         <param name="eh">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.EndEventHandler" /> that ends asynchronous processing of the <see cref="E:System.Web.HttpApplication.PostAuthenticateRequest" />. </param
-        >
+          />The <see cref="T:System.Web.EndEventHandler" /> that ends asynchronous processing of the <see cref="E:System.Web.HttpApplication.PostAuthenticateRequest" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddOnPostAuthenticateRequestAsync">
@@ -919,15 +919,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.BeginEventHandler" /> that starts asynchronous processing of the <see cref="E:System.Web.HttpApplication.PostAuthorizeRequest" />. </param
-        >
+          />The <see cref="T:System.Web.BeginEventHandler" /> that starts asynchronous processing of the <see cref="E:System.Web.HttpApplication.PostAuthorizeRequest" />.
+        </param>
         <param name="eh">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.EndEventHandler" /> that ends asynchronous processing of the <see cref="E:System.Web.HttpApplication.PostAuthorizeRequest" />. </param
-        >
+          />The <see cref="T:System.Web.EndEventHandler" /> that ends asynchronous processing of the <see cref="E:System.Web.HttpApplication.PostAuthorizeRequest" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddOnPostAuthorizeRequestAsync">
@@ -1084,15 +1084,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.BeginEventHandler" /> that starts asynchronous processing of the <see cref="E:System.Web.HttpApplication.PostMapRequestHandler" />. </param
-        >
+          />The <see cref="T:System.Web.BeginEventHandler" /> that starts asynchronous processing of the <see cref="E:System.Web.HttpApplication.PostMapRequestHandler" />.
+        </param>
         <param name="eh">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.EndEventHandler" /> that ends asynchronous processing of the <see cref="E:System.Web.HttpApplication.PostMapRequestHandler" />. </param
-        >
+          />The <see cref="T:System.Web.EndEventHandler" /> that ends asynchronous processing of the <see cref="E:System.Web.HttpApplication.PostMapRequestHandler" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddOnPostMapRequestHandlerAsync">
@@ -1154,15 +1154,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.BeginEventHandler" /> that starts asynchronous processing of the <see cref="E:System.Web.HttpApplication.PostReleaseRequestState" />. </param
-        >
+          />The <see cref="T:System.Web.BeginEventHandler" /> that starts asynchronous processing of the <see cref="E:System.Web.HttpApplication.PostReleaseRequestState" />.
+        </param>
         <param name="eh">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.EndEventHandler" /> that ends asynchronous processing of the <see cref="E:System.Web.HttpApplication.PostReleaseRequestState" />. </param
-        >
+          />The <see cref="T:System.Web.EndEventHandler" /> that ends asynchronous processing of the <see cref="E:System.Web.HttpApplication.PostReleaseRequestState" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddOnPostReleaseRequestStateAsync">
@@ -1221,15 +1221,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.BeginEventHandler" /> that starts asynchronous processing of the <see cref="E:System.Web.HttpApplication.PostRequestHandlerExecute" />. </param
-        >
+          />The <see cref="T:System.Web.BeginEventHandler" /> that starts asynchronous processing of the <see cref="E:System.Web.HttpApplication.PostRequestHandlerExecute" />.
+        </param>
         <param name="eh">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.EndEventHandler" /> that ends asynchronous processing of the <see cref="E:System.Web.HttpApplication.PostRequestHandlerExecute" />. </param
-        >
+          />The <see cref="T:System.Web.EndEventHandler" /> that ends asynchronous processing of the <see cref="E:System.Web.HttpApplication.PostRequestHandlerExecute" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1295,15 +1295,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.BeginEventHandler" /> that starts asynchronous processing of the <see cref="E:System.Web.HttpApplication.PostResolveRequestCache" />. </param
-        >
+          />The <see cref="T:System.Web.BeginEventHandler" /> that starts asynchronous processing of the <see cref="E:System.Web.HttpApplication.PostResolveRequestCache" />.
+        </param>
         <param name="eh">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.EndEventHandler" /> that ends asynchronous processing of the <see cref="E:System.Web.HttpApplication.PostResolveRequestCache" />. </param
-        >
+          />The <see cref="T:System.Web.EndEventHandler" /> that ends asynchronous processing of the <see cref="E:System.Web.HttpApplication.PostResolveRequestCache" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddOnPostResolveRequestCacheAsync">
@@ -1365,15 +1365,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.BeginEventHandler" /> that starts asynchronous processing of the <see cref="E:System.Web.HttpApplication.PostUpdateRequestCache" />. </param
-        >
+          />The <see cref="T:System.Web.BeginEventHandler" /> that starts asynchronous processing of the <see cref="E:System.Web.HttpApplication.PostUpdateRequestCache" />.
+        </param>
         <param name="eh">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.EndEventHandler" /> that ends asynchronous processing of the <see cref="E:System.Web.HttpApplication.PostUpdateRequestCache" />. </param
-        >
+          />The <see cref="T:System.Web.EndEventHandler" /> that ends asynchronous processing of the <see cref="E:System.Web.HttpApplication.PostUpdateRequestCache" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddOnPostUpdateRequestCacheAsync">
@@ -1432,15 +1432,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.BeginEventHandler" /> that starts asynchronous processing of the <see cref="E:System.Web.HttpApplication.PreRequestHandlerExecute" />. </param
-        >
+          />The <see cref="T:System.Web.BeginEventHandler" /> that starts asynchronous processing of the <see cref="E:System.Web.HttpApplication.PreRequestHandlerExecute" />.
+        </param>
         <param name="eh">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.EndEventHandler" /> that ends asynchronous processing of the <see cref="E:System.Web.HttpApplication.PreRequestHandlerExecute" />. </param
-        >
+          />The <see cref="T:System.Web.EndEventHandler" /> that ends asynchronous processing of the <see cref="E:System.Web.HttpApplication.PreRequestHandlerExecute" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1503,15 +1503,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.BeginEventHandler" /> that starts asynchronous processing of the <see cref="E:System.Web.HttpApplication.ReleaseRequestState" />. </param
-        >
+          />The <see cref="T:System.Web.BeginEventHandler" /> that starts asynchronous processing of the <see cref="E:System.Web.HttpApplication.ReleaseRequestState" />.
+        </param>
         <param name="eh">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.EndEventHandler" /> that ends asynchronous processing of the <see cref="E:System.Web.HttpApplication.ReleaseRequestState" />. </param
-        >
+          />The <see cref="T:System.Web.EndEventHandler" /> that ends asynchronous processing of the <see cref="E:System.Web.HttpApplication.ReleaseRequestState" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1574,15 +1574,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.BeginEventHandler" /> that starts asynchronous processing of the <see cref="E:System.Web.HttpApplication.ResolveRequestCache" />. </param
-        >
+          />The <see cref="T:System.Web.BeginEventHandler" /> that starts asynchronous processing of the <see cref="E:System.Web.HttpApplication.ResolveRequestCache" />.
+        </param>
         <param name="eh">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.EndEventHandler" /> that ends asynchronous processing of the <see cref="E:System.Web.HttpApplication.ResolveRequestCache" />. </param
-        >
+          />The <see cref="T:System.Web.EndEventHandler" /> that ends asynchronous processing of the <see cref="E:System.Web.HttpApplication.ResolveRequestCache" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1645,15 +1645,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.BeginEventHandler" /> that starts asynchronous processing of the <see cref="E:System.Web.HttpApplication.UpdateRequestCache" />. </param
-        >
+          />The <see cref="T:System.Web.BeginEventHandler" /> that starts asynchronous processing of the <see cref="E:System.Web.HttpApplication.UpdateRequestCache" />.
+        </param>
         <param name="eh">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.EndEventHandler" /> that ends asynchronous processing of the <see cref="E:System.Web.HttpApplication.UpdateRequestCache" />. </param
-        >
+          />The <see cref="T:System.Web.EndEventHandler" /> that ends asynchronous processing of the <see cref="E:System.Web.HttpApplication.UpdateRequestCache" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1763,8 +1763,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="E:System.Web.HttpApplication.AuthorizeRequest" /> event signals that ASP.NET has authorized the current request. Subscribing to the <see cref="E:System.Web.HttpApplication.AuthorizeRequest" /> event ensures that the request will be authenticated and authorized before processing the attached module or event handler. </para
-          >
+            >The <see cref="E:System.Web.HttpApplication.AuthorizeRequest" /> event signals that ASP.NET has authorized the current request. Subscribing to the <see cref="E:System.Web.HttpApplication.AuthorizeRequest" /> event ensures that the request will be authenticated and authorized before processing the attached module or event handler.
+          </para>
           <para
             >For more information about how to handle events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
@@ -1823,8 +1823,8 @@
 
 <para>
    If this method is invoked at any stage in the pipeline processing (described in more detail in <see cref="T:System.Web.HttpApplication" />) the remaining steps of the pipeline are not executed.  The only step executed is the EndRequest step.
-</para
-          >
+
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2028,8 +2028,8 @@
               <a href="b6c73735-a3cd-4d19-ba4d-0431881b0db0"
                 >How to: Cache Versions of a Page Using Custom Strings</a
               >
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2048,15 +2048,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Web.HttpContext" /> object that contains information about the current Web request. </param
-        >
+          />An <see cref="T:System.Web.HttpContext" /> object that contains information about the current Web request.
+        </param>
         <param name="custom">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The custom string that specifies which cached response is used to respond to the current request. </param
-        >
+          />The custom string that specifies which cached response is used to respond to the current request.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2786,8 +2786,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.IAsyncResult" /> that contains information about the status of the process. </param
-        >
+          />An <see cref="T:System.IAsyncResult" /> that contains information about the status of the process.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.Web.IHttpHandler.IsReusable">

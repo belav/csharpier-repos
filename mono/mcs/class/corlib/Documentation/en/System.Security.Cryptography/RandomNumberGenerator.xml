@@ -141,8 +141,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the random number generator implementation to use. </param
-        >
+          />The name of the random number generator implementation to use.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Dispose">
@@ -259,8 +259,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array to fill with cryptographically strong random bytes. </param
-        >
+          />The array to fill with cryptographically strong random bytes.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetNonZeroBytes">
@@ -295,8 +295,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array to fill with cryptographically strong random nonzero bytes. </param
-        >
+          />The array to fill with cryptographically strong random nonzero bytes.
+        </param>
       </Docs>
     </Member>
   </Members>

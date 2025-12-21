@@ -57,8 +57,7 @@ public class BadImageExample {
     }
   } 
 }
-   </code
-      >
+   </code>
       <para>The output is</para>
       <c>
         <para>Caught: The format of the file 'calc' is invalid.</para>
@@ -78,8 +77,8 @@ public class BadImageExample {
           >
           <para>code reference: System.BadImageFormatException.Class#1</para>
           <para
-            >To address this exception, access the methods defined in the DLL by using the features provided by your development language, such as the Declare statement in Visual Basic or the <see cref="T:System.Runtime.InteropServices.DllImportAttribute" /> attribute with the extern keyword in C#. </para
-          >
+            >To address this exception, access the methods defined in the DLL by using the features provided by your development language, such as the Declare statement in Visual Basic or the <see cref="T:System.Runtime.InteropServices.DllImportAttribute" /> attribute with the extern keyword in C#.
+          </para>
         </item>
         <item>
           <para>A DLL or executable is loaded as a 64-bit assembly, but it contains 32-bit features or resources. For example, it relies on COM interop or calls methods in a 32-bit dynamic link library.</para>
@@ -93,8 +92,8 @@ public class BadImageExample {
           >
           <para>code reference: System.BadImageFormatException.Class#2</para>
           <para
-            >The following example uses reflection to load an assembly named StringLib.dll. If the source code is compiled with a net_v11_short compiler, a <see cref="T:System.BadImageFormatException" /> is thrown by the <see cref="M:System.Reflection.Assembly.LoadFrom(System.String)" /> method. </para
-          >
+            >The following example uses reflection to load an assembly named StringLib.dll. If the source code is compiled with a net_v11_short compiler, a <see cref="T:System.BadImageFormatException" /> is thrown by the <see cref="M:System.Reflection.Assembly.LoadFrom(System.String)" /> method.
+          </para>
           <para>code reference: System.BadImageFormatException.Class#3</para>
           <para>To address this exception, ensure that the assembly from which the exception is thrown attempts to load an assembly that was developed by using a compatible version of the .NET Framework.</para>
         </item>
@@ -254,8 +253,8 @@ public class BadImageExample {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The message that describes the error. </param
-        >
+          />The message that describes the error.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -294,15 +293,15 @@ public class BadImageExample {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception being thrown. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception being thrown.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual information about the source or destination. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual information about the source or destination.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -382,15 +381,15 @@ public class BadImageExample {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The error message that explains the reason for the exception. </param
-        >
+          />The error message that explains the reason for the exception.
+        </param>
         <param name="inner">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The exception that is the cause of the current exception. If the <paramref name="inner" /> parameter is not a null reference, the current exception is raised in a catch block that handles the inner exception. </param
-        >
+          />The exception that is the cause of the current exception. If the <paramref name="inner" /> parameter is not a null reference, the current exception is raised in a catch block that handles the inner exception.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -468,15 +467,15 @@ public class BadImageExample {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A message that describes the error. </param
-        >
+          />A message that describes the error.
+        </param>
         <param name="fileName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The full name of the file with the invalid image. </param
-        >
+          />The full name of the file with the invalid image.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -511,8 +510,8 @@ public class BadImageExample {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The full name of the file with the invalid image. </param
-        >
+          />The full name of the file with the invalid image.
+        </param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -575,22 +574,22 @@ public class BadImageExample {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The error message that explains the reason for the exception. </param
-        >
+          />The error message that explains the reason for the exception.
+        </param>
         <param name="fileName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The full name of the file with the invalid image. </param
-        >
+          />The full name of the file with the invalid image.
+        </param>
         <param name="inner">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The exception that is the cause of the current exception. If the <paramref name="inner" /> parameter is not null, the current exception is raised in a catch block that handles the inner exception. </param
-        >
+          />The exception that is the cause of the current exception. If the <paramref name="inner" /> parameter is not null, the current exception is raised in a catch block that handles the inner exception.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -687,15 +686,15 @@ public class BadImageExample {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception being thrown. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception being thrown.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual information about the source or destination. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual information about the source or destination.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Message">

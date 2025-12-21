@@ -23,8 +23,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see cref="E:System.Windows.Forms.Binding.BindingComplete" /> event. </para
-      >
+        >Provides data for the <see cref="E:System.Windows.Forms.Binding.BindingComplete" /> event.
+      </para>
     </summary>
   </Docs>
   <Members>
@@ -72,8 +72,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.BindingCompleteContext" /> values. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.BindingCompleteContext" /> values.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -124,8 +124,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.BindingCompleteContext" /> values. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.BindingCompleteContext" /> values.
+        </param>
         <param name="errorText">
           <attribution
             license="cc4"
@@ -184,8 +184,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.BindingCompleteContext" /> values. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.BindingCompleteContext" /> values.
+        </param>
         <param name="errorText">
           <attribution
             license="cc4"
@@ -224,8 +224,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <paramref name="state" /> indicates whether the binding process was successful or an error or exception occurred. <paramref name="context" /> indicates whether the error occurred when updating the bound control or the data source. </para
-          >
+            <paramref name="state" /> indicates whether the binding process was successful or an error or exception occurred. <paramref name="context" /> indicates whether the error occurred when updating the bound control or the data source.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -252,8 +252,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.BindingCompleteContext" /> values. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.BindingCompleteContext" /> values.
+        </param>
         <param name="errorText">
           <attribution
             license="cc4"

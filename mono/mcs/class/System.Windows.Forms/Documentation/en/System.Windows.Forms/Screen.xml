@@ -139,8 +139,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to compare to this <see cref="T:System.Windows.Forms.Screen" />. </param
-        >
+          />The object to compare to this <see cref="T:System.Windows.Forms.Screen" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -178,8 +178,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.Control" /> for which to retrieve a <see cref="T:System.Windows.Forms.Screen" />. </param
-        >
+          />A <see cref="T:System.Windows.Forms.Control" /> for which to retrieve a <see cref="T:System.Windows.Forms.Screen" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -217,8 +217,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The window handle for which to retrieve the <see cref="T:System.Windows.Forms.Screen" />. </param
-        >
+          />The window handle for which to retrieve the <see cref="T:System.Windows.Forms.Screen" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -256,8 +256,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Drawing.Point" /> that specifies the location for which to retrieve a <see cref="T:System.Windows.Forms.Screen" />. </param
-        >
+          />A <see cref="T:System.Drawing.Point" /> that specifies the location for which to retrieve a <see cref="T:System.Windows.Forms.Screen" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -295,8 +295,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Drawing.Rectangle" /> that specifies the area for which to retrieve the display. </param
-        >
+          />A <see cref="T:System.Drawing.Rectangle" /> that specifies the area for which to retrieve the display.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -332,8 +332,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Drawing.Point" /> that specifies the coordinates for which to retrieve the display bounds. </param
-        >
+          />A <see cref="T:System.Drawing.Point" /> that specifies the coordinates for which to retrieve the display bounds.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -369,8 +369,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Drawing.Rectangle" /> that specifies the area for which to retrieve the display bounds. </param
-        >
+          />A <see cref="T:System.Drawing.Rectangle" /> that specifies the area for which to retrieve the display bounds.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -406,8 +406,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.Control" /> for which to retrieve the display bounds. </param
-        >
+          />The <see cref="T:System.Windows.Forms.Control" /> for which to retrieve the display bounds.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -469,8 +469,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Drawing.Point" /> that specifies the coordinates for which to retrieve the working area. </param
-        >
+          />A <see cref="T:System.Drawing.Point" /> that specifies the coordinates for which to retrieve the working area.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -506,8 +506,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.Rectangle" /> that specifies the area for which to retrieve the working area. </param
-        >
+          />The <see cref="T:System.Drawing.Rectangle" /> that specifies the area for which to retrieve the working area.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -543,8 +543,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.Control" /> for which to retrieve the working area. </param
-        >
+          />The <see cref="T:System.Windows.Forms.Control" /> for which to retrieve the working area.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -630,8 +630,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The working area is the desktop area of the display, excluding taskbars, docked windows, and docked tool bars.</para>
           <para>
-            <see cref="P:System.Windows.Forms.Screen.WorkingArea" /> will return the entire area of the screen if the Windows Taskbar is set to Auto-Hide, no matter whether the Taskbar is currently displayed or not. </para
-          >
+            <see cref="P:System.Windows.Forms.Screen.WorkingArea" /> will return the entire area of the screen if the Windows Taskbar is set to Auto-Hide, no matter whether the Taskbar is currently displayed or not.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

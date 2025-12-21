@@ -23,8 +23,8 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>This class represents the &lt;EncryptedKey&gt; element in XML encryption. The &lt;EncryptedKey&gt; element is used to send encryption keys. It can be created in a stand-alone XML document, be placed within an application document, or be inside an &lt;EncryptedData&gt; element as a child of a &lt;KeyInfo&gt; element. The key value is always encrypted to the recipient. When &lt;EncryptedKey&gt; is decrypted, the resulting key is made available to the &lt;EncryptionMethod&gt; algorithm without any additional processing.</para>
       <para
-        >The &lt;EncryptedKey&gt; element is similar to the &lt;EncryptedData&gt; element of the <see cref="T:System.Security.Cryptography.Xml.EncryptedData" /> class except that the data encrypted is always a key value. </para
-      >
+        >The &lt;EncryptedKey&gt; element is similar to the &lt;EncryptedData&gt; element of the <see cref="T:System.Security.Cryptography.Xml.EncryptedData" /> class except that the data encrypted is always a key value.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

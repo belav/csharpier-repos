@@ -85,8 +85,8 @@
               </term>
               <description>
                 <para>
-                  <see cref="F:System.Security.Cryptography.X509Certificates.X509IncludeOption.None" /> if <see cref="P:System.Security.Cryptography.Pkcs.CmsSigner.SignerIdentifierType" /> is <see cref="T:System.Security.Cryptography.Pkcs.SubjectIdentifierType" />, </para
-                >
+                  <see cref="F:System.Security.Cryptography.X509Certificates.X509IncludeOption.None" /> if <see cref="P:System.Security.Cryptography.Pkcs.CmsSigner.SignerIdentifierType" /> is <see cref="T:System.Security.Cryptography.Pkcs.SubjectIdentifierType" />,
+                </para>
                 <para>
                   <see cref="F:System.Security.Cryptography.X509Certificates.X509IncludeOption.ExcludeRoot" /> otherwise</para
                 >
@@ -338,8 +338,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Security.Cryptography.Pkcs.CmsSigner.Certificates" /> property retrieves the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" /> collection that contains certificates associated with the message to be signed.  </para
-          >
+            >The <see cref="P:System.Security.Cryptography.Pkcs.CmsSigner.Certificates" /> property retrieves the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" /> collection that contains certificates associated with the message to be signed.
+          </para>
         </summary>
       </Docs>
     </Member>

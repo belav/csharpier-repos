@@ -69,8 +69,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Web.Configuration.AnonymousIdentificationSection" /> object refers to the anonymousIdentification section of the configuration file. </para
-          >
+            >The <see cref="T:System.Web.Configuration.AnonymousIdentificationSection" /> object refers to the anonymousIdentification section of the configuration file.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -133,8 +133,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Web.Configuration.AuthorizationSection" /> object refers to the authorization section of the configuration file. </para
-          >
+            >The <see cref="T:System.Web.Configuration.AuthorizationSection" /> object refers to the authorization section of the configuration file.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -165,8 +165,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Configuration.DefaultSection" /> object refers to the browserCaps section of the configuration file. </para
-          >
+            >The <see cref="T:System.Configuration.DefaultSection" /> object refers to the browserCaps section of the configuration file.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -197,8 +197,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Web.Configuration.ClientTargetSection" /> object refers to the clientTarget section of the configuration file. </para
-          >
+            >The <see cref="T:System.Web.Configuration.ClientTargetSection" /> object refers to the clientTarget section of the configuration file.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -261,8 +261,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Web.Configuration.CustomErrorsSection" /> object refers to the customErrors section of the configuration file. </para
-          >
+            >The <see cref="T:System.Web.Configuration.CustomErrorsSection" /> object refers to the customErrors section of the configuration file.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -293,8 +293,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Web.Configuration.DeploymentSection" /> object refers to the deployement section of the configuration file. </para
-          >
+            >The <see cref="T:System.Web.Configuration.DeploymentSection" /> object refers to the deployement section of the configuration file.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -325,8 +325,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Configuration.DefaultSection" /> object refers to the deviceFilters section of the configuration file. </para
-          >
+            >The <see cref="T:System.Configuration.DefaultSection" /> object refers to the deviceFilters section of the configuration file.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -357,8 +357,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Web.Configuration.GlobalizationSection" /> object refers to the globalization section of the configuration file. </para
-          >
+            >The <see cref="T:System.Web.Configuration.GlobalizationSection" /> object refers to the globalization section of the configuration file.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -389,8 +389,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Web.Configuration.HealthMonitoringSection" /> object refers to the healthMonitoring section of the configuration file. </para
-          >
+            >The <see cref="T:System.Web.Configuration.HealthMonitoringSection" /> object refers to the healthMonitoring section of the configuration file.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -448,8 +448,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Web.Configuration.HttpCookiesSection" /> object refers to the httpCookies section of the configuration file. </para
-          >
+            >The <see cref="T:System.Web.Configuration.HttpCookiesSection" /> object refers to the httpCookies section of the configuration file.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -480,8 +480,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Web.Configuration.HttpHandlersSection" /> object refers to the httpHandlers section of the configuration file. </para
-          >
+            >The <see cref="T:System.Web.Configuration.HttpHandlersSection" /> object refers to the httpHandlers section of the configuration file.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -512,8 +512,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Web.Configuration.HttpModulesSection" /> object refers to the httpModules section of the configuration file. </para
-          >
+            >The <see cref="T:System.Web.Configuration.HttpModulesSection" /> object refers to the httpModules section of the configuration file.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -608,8 +608,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Web.Configuration.MachineKeySection" /> object refers to the machineKey section of the configuration file. </para
-          >
+            >The <see cref="T:System.Web.Configuration.MachineKeySection" /> object refers to the machineKey section of the configuration file.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -699,8 +699,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Web.Configuration.PagesSection" /> object refers to the pages section of the configuration file. </para
-          >
+            >The <see cref="T:System.Web.Configuration.PagesSection" /> object refers to the pages section of the configuration file.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -731,8 +731,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Web.Configuration.ProcessModelSection" /> object refers to the processModel section of the configuration file. </para
-          >
+            >The <see cref="T:System.Web.Configuration.ProcessModelSection" /> object refers to the processModel section of the configuration file.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -854,8 +854,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Web.Configuration.SecurityPolicySection" /> object refers to the securityPolicy section of the configuration file. </para
-          >
+            >The <see cref="T:System.Web.Configuration.SecurityPolicySection" /> object refers to the securityPolicy section of the configuration file.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -886,8 +886,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Web.Configuration.SessionStateSection" /> object refers to the sessionState section of the configuration file. </para
-          >
+            >The <see cref="T:System.Web.Configuration.SessionStateSection" /> object refers to the sessionState section of the configuration file.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -918,8 +918,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Web.Configuration.SiteMapSection" /> object refers to the siteMap section of the configuration file. </para
-          >
+            >The <see cref="T:System.Web.Configuration.SiteMapSection" /> object refers to the siteMap section of the configuration file.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -950,8 +950,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Web.Configuration.TraceSection" /> object refers to the trace section of the configuration file. </para
-          >
+            >The <see cref="T:System.Web.Configuration.TraceSection" /> object refers to the trace section of the configuration file.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -982,8 +982,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Web.Configuration.TrustSection" /> object refers to the trust section of the configuration file. </para
-          >
+            >The <see cref="T:System.Web.Configuration.TrustSection" /> object refers to the trust section of the configuration file.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

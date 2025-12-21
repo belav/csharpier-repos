@@ -74,8 +74,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The string supplied as the <paramref name="message" /> parameter is assigned to the <see cref="P:System.Exception.Message" /> property. It should be localized for the current culture. </para
-          >
+            >The string supplied as the <paramref name="message" /> parameter is assigned to the <see cref="P:System.Exception.Message" /> property. It should be localized for the current culture.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -124,8 +124,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that contains the serialized data. </param
-        >
+          />The object that contains the serialized data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -163,8 +163,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string that describes the exception.    </param
-        >
+          />A string that describes the exception.
+        </param>
       </Docs>
     </Member>
   </Members>

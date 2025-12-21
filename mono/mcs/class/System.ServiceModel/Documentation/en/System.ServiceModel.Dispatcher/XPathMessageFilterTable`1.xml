@@ -45,8 +45,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.ServiceModel.Dispatcher.XPathMessageFilterTable`1" /> implements the <see cref="T:System.ServiceModel.Dispatcher.IMessageFilterTable`1" /> interface. This filter table is optimized for declarative XPath filters, so the table key is a <see cref="T:System.ServiceModel.Dispatcher.XPathMessageFilter" />. </para
-      >
+        >The <see cref="T:System.ServiceModel.Dispatcher.XPathMessageFilterTable`1" /> implements the <see cref="T:System.ServiceModel.Dispatcher.IMessageFilterTable`1" /> interface. This filter table is optimized for declarative XPath filters, so the table key is a <see cref="T:System.ServiceModel.Dispatcher.XPathMessageFilter" />.
+      </para>
       <para
         >The <see cref="T:System.ServiceModel.Dispatcher.XPathMessageFilterTable`1" /> class optimizes matching for a subset of XPath that covers most of the messaging scenarios and also supports the full XPath 1.0 grammar. It has optimized algorithms for efficient parallel matching.</para
       >
@@ -73,8 +73,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Dispatcher.XPathMessageFilterTable`1" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Dispatcher.XPathMessageFilterTable`1" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -97,8 +97,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Dispatcher.XPathMessageFilterTable`1" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Dispatcher.XPathMessageFilterTable`1" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -693,8 +693,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method when multiple filters can be expected to match the message specified by the <see cref="T:System.Xml.XPath.XPathNavigator" /> and the matching filters are required. </para
-          >
+            >Use this method when multiple filters can be expected to match the message specified by the <see cref="T:System.Xml.XPath.XPathNavigator" /> and the matching filters are required.
+          </para>
           <para
             >If only one filter is expected to match the message, use the <see cref="M:System.ServiceModel.Dispatcher.XPathMessageFilterTable`1.GetMatchingFilter(System.Xml.XPath.XPathNavigator,System.ServiceModel.Dispatcher.MessageFilter@)" /> method.</para
           >
@@ -1031,8 +1031,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property implements <see cref="P:System.Collections.Generic.IDictionary`2.Keys" />. The <see cref="T:System.Collections.Generic.IDictionary`2" /> that the filter table implements uses the <see cref="T:System.ServiceModel.Dispatcher.MessageFilter" /> as the key and the <paramref name="FilterData" /> as the value of the pair. </para
-          >
+            >This property implements <see cref="P:System.Collections.Generic.IDictionary`2.Keys" />. The <see cref="T:System.Collections.Generic.IDictionary`2" /> that the filter table implements uses the <see cref="T:System.ServiceModel.Dispatcher.MessageFilter" /> as the key and the <paramref name="FilterData" /> as the value of the pair.
+          </para>
           <para
             >The order of the filters returned in the collection is unspecified, but it is guaranteed to be the same order as the corresponding <paramref name="FilterData" /> in the collection returned by the <see cref="P:System.ServiceModel.Dispatcher.XPathMessageFilterTable`1.Values" /> property.</para
           >

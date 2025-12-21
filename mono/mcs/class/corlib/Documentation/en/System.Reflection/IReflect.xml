@@ -79,15 +79,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the field to find. </param
-        >
+          />The name of the field to find.
+        </param>
         <param name="bindingAttr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The binding attributes used to control the search. </param
-        >
+          />The binding attributes used to control the search.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetFields">
@@ -135,8 +135,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The binding attributes used to control the search. </param
-        >
+          />The binding attributes used to control the search.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetMember">
@@ -185,15 +185,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the member to find. </param
-        >
+          />The name of the member to find.
+        </param>
         <param name="bindingAttr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The binding attributes used to control the search. </param
-        >
+          />The binding attributes used to control the search.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetMembers">
@@ -241,8 +241,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The binding attributes used to control the search. </param
-        >
+          />The binding attributes used to control the search.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetMethod">
@@ -286,15 +286,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the member to find. </param
-        >
+          />The name of the member to find.
+        </param>
         <param name="bindingAttr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The binding attributes used to control the search. </param
-        >
+          />The binding attributes used to control the search.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetMethod">
@@ -344,36 +344,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the member to find. </param
-        >
+          />The name of the member to find.
+        </param>
         <param name="bindingAttr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The binding attributes used to control the search. </param
-        >
+          />The binding attributes used to control the search.
+        </param>
         <param name="binder">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that implements <see cref="T:System.Reflection.Binder" />, containing properties related to this method. </param
-        >
+          />An object that implements <see cref="T:System.Reflection.Binder" />, containing properties related to this method.
+        </param>
         <param name="types">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array used to choose among overloaded methods. </param
-        >
+          />An array used to choose among overloaded methods.
+        </param>
         <param name="modifiers">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of parameter modifiers used to make binding work with parameter signatures in which the types have been modified. </param
-        >
+          />An array of parameter modifiers used to make binding work with parameter signatures in which the types have been modified.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetMethods">
@@ -421,8 +421,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The binding attributes used to control the search. </param
-        >
+          />The binding attributes used to control the search.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetProperties">
@@ -465,8 +465,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The binding attribute used to control the search. </param
-        >
+          />The binding attribute used to control the search.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetProperty">
@@ -510,15 +510,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the property to find. </param
-        >
+          />The name of the property to find.
+        </param>
         <param name="bindingAttr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The binding attributes used to control the search. </param
-        >
+          />The binding attributes used to control the search.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetProperty">
@@ -571,43 +571,39 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the member to find. </param
-        >
+          />The name of the member to find.
+        </param>
         <param name="bindingAttr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The binding attribute used to control the search. </param
-        >
+          />The binding attribute used to control the search.
+        </param>
         <param name="binder">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that implements <see cref="T:System.Reflection.Binder" />, containing properties related to this method. </param
-        >
+          />An object that implements <see cref="T:System.Reflection.Binder" />, containing properties related to this method.
+        </param>
         <param name="returnType">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The type of the property. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The type of the property.
+        </param>
         <param name="types">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array used to choose among overloaded methods with the same name. </param
-        >
+          />An array used to choose among overloaded methods with the same name.
+        </param>
         <param name="modifiers">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array used to choose the parameter modifiers. </param
-        >
+          />An array used to choose the parameter modifiers.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="InvokeMember">
@@ -666,57 +662,57 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the member to find. </param
-        >
+          />The name of the member to find.
+        </param>
         <param name="invokeAttr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Reflection.BindingFlags" /> invocation attributes. The <paramref name="invokeAttr" /> parameter may be a constructor, method, property, or field. A suitable invocation attribute must be specified. Invoke the default member of a class by passing the empty string ("") as the name of the member. </param
-        >
+          />One of the <see cref="T:System.Reflection.BindingFlags" /> invocation attributes. The <paramref name="invokeAttr" /> parameter may be a constructor, method, property, or field. A suitable invocation attribute must be specified. Invoke the default member of a class by passing the empty string ("") as the name of the member.
+        </param>
         <param name="binder">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Reflection.BindingFlags" /> bit flags. Implements <see cref="T:System.Reflection.Binder" />, containing properties related to this method. </param
-        >
+          />One of the <see cref="T:System.Reflection.BindingFlags" /> bit flags. Implements <see cref="T:System.Reflection.Binder" />, containing properties related to this method.
+        </param>
         <param name="target">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object on which to invoke the specified member. This parameter is ignored for static members. </param
-        >
+          />The object on which to invoke the specified member. This parameter is ignored for static members.
+        </param>
         <param name="args">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of objects that contains the number, order, and type of the parameters of the member to be invoked. This is an empty array if there are no parameters. </param
-        >
+          />An array of objects that contains the number, order, and type of the parameters of the member to be invoked. This is an empty array if there are no parameters.
+        </param>
         <param name="modifiers">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Reflection.ParameterModifier" /> objects. This array has the same length as the <paramref name="args" /> parameter, representing the invoked member's argument attributes in the metadata. A parameter can have the following attributes: pdIn, pdOut, pdRetval, pdOptional, and pdHasDefault. These represent [In], [Out], [retval], [optional], and a default parameter, respectively. These attributes are used by various interoperability services. </param
-        >
+          />An array of <see cref="T:System.Reflection.ParameterModifier" /> objects. This array has the same length as the <paramref name="args" /> parameter, representing the invoked member's argument attributes in the metadata. A parameter can have the following attributes: pdIn, pdOut, pdRetval, pdOptional, and pdHasDefault. These represent [In], [Out], [retval], [optional], and a default parameter, respectively. These attributes are used by various interoperability services.
+        </param>
         <param name="culture">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An instance of <see cref="T:System.Globalization.CultureInfo" /> used to govern the coercion of types. For example, <paramref name="culture" /> converts a String that represents 1000 to a Double value, since 1000 is represented differently by different cultures. If this parameter is null, the <see cref="T:System.Globalization.CultureInfo" /> for the current thread is used. </param
-        >
+          />An instance of <see cref="T:System.Globalization.CultureInfo" /> used to govern the coercion of types. For example, <paramref name="culture" /> converts a String that represents 1000 to a Double value, since 1000 is represented differently by different cultures. If this parameter is null, the <see cref="T:System.Globalization.CultureInfo" /> for the current thread is used.
+        </param>
         <param name="namedParameters">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A String array of parameters. </param
-        >
+          />A String array of parameters.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="UnderlyingSystemType">

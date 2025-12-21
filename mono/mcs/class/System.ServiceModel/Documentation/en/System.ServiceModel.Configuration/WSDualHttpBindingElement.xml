@@ -47,8 +47,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.WSDualHttpBindingElement" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.WSDualHttpBindingElement" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -208,8 +208,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The size of the messages that can be received on the wire by services using the <see cref="T:System.ServiceModel.WsDualHttpBinding" /> class is bounded by the amount of memory allocated for each message. This bound on message size is intended to limit exposure to DoS-style attacks. </para
-          >
+            >The size of the messages that can be received on the wire by services using the <see cref="T:System.ServiceModel.WsDualHttpBinding" /> class is bounded by the amount of memory allocated for each message. This bound on message size is intended to limit exposure to DoS-style attacks.
+          </para>
           <para
             >Note that the settings for <see cref="P:System.ServiceModel.Configuration.WSDualHttpBindingElement.MaxBufferPoolSize" /> and <see cref="P:System.ServiceModel.Configuration.WSDualHttpBindingElement.MaxReceivedMessageSize" />, are local behavioral settings. This means that they are not transmitted to other endpoints in metadata. If you generate a proxy to a service with a maximum message size of 2GB from metadata, the proxy still has a default value 64K. This leaves control of the appropriate bounds for message and message buffer size in the scope of local administrators.</para
           >

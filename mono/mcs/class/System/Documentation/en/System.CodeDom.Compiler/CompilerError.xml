@@ -98,36 +98,32 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file name of the file that the compiler was compiling when it encountered the error. </param
-        >
+          />The file name of the file that the compiler was compiling when it encountered the error.
+        </param>
         <param name="line">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The line of the source of the error. </param
-        >
+          />The line of the source of the error.
+        </param>
         <param name="column">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The column of the source of the error. </param
-        >
+          />The column of the source of the error.
+        </param>
         <param name="errorNumber">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The error number of the error. </param
-        >
+          />The error number of the error.
+        </param>
         <param name="errorText">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The error message text. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The error message text.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Column">

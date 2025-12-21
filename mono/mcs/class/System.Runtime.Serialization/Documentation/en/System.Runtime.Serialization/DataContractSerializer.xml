@@ -20,8 +20,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see cref="T:System.Runtime.Serialization.DataContractSerializer" /> class to serialize and deserialize instances of a type into an XML stream or document. For example, you can create a type named Person with properties that contain essential data, such as a name and address. You can then create and manipulate an instance of the Person class and write all of its property values in an XML document for later retrieval, or in an XML stream for immediate transport. Most important, the <see cref="T:System.Runtime.Serialization.DataContractSerializer" /> is used to serialize and deserialize data sent in indigo1 messages. Apply the <see cref="T:System.Runtime.Serialization.DataContractAttribute" /> attribute to classes, and the <see cref="T:System.Runtime.Serialization.DataMemberAttribute" /> attribute to class members to specify properties and fields that are serialized. </para
-      >
+        >Use the <see cref="T:System.Runtime.Serialization.DataContractSerializer" /> class to serialize and deserialize instances of a type into an XML stream or document. For example, you can create a type named Person with properties that contain essential data, such as a name and address. You can then create and manipulate an instance of the Person class and write all of its property values in an XML document for later retrieval, or in an XML stream for immediate transport. Most important, the <see cref="T:System.Runtime.Serialization.DataContractSerializer" /> is used to serialize and deserialize data sent in indigo1 messages. Apply the <see cref="T:System.Runtime.Serialization.DataContractAttribute" /> attribute to classes, and the <see cref="T:System.Runtime.Serialization.DataMemberAttribute" /> attribute to class members to specify properties and fields that are serialized.
+      </para>
       <para
         >crlist types that can be serialized, see <format type="text/html">
           <a href="7381b200-437a-4506-9556-d77bf1bc3f34"
@@ -30,8 +30,8 @@
         </format>.</para
       >
       <para
-        >To use the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />, first create an instance of a class and an object appropriate to writing or reading the format; for example, an instance of the <see cref="T:System.Xml.XmlDictionaryWriter" />. Then call the <see cref="M:System.Runtime.Serialization.XmlObjectSerializer.WriteObject(System.Xml.XmlDictionaryWriter,System.Object)" /> method to persist the data. To retrieve data, create an object appropriate to reading the data format (such as an <see cref="T:System.Xml.XmlDictionaryReader" /> for an XML document) and call the <see cref="Overload:System.Runtime.Serialization.DataContractSerializer.ReadObject" /> method. </para
-      >
+        >To use the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />, first create an instance of a class and an object appropriate to writing or reading the format; for example, an instance of the <see cref="T:System.Xml.XmlDictionaryWriter" />. Then call the <see cref="M:System.Runtime.Serialization.XmlObjectSerializer.WriteObject(System.Xml.XmlDictionaryWriter,System.Object)" /> method to persist the data. To retrieve data, create an object appropriate to reading the data format (such as an <see cref="T:System.Xml.XmlDictionaryReader" /> for an XML document) and call the <see cref="Overload:System.Runtime.Serialization.DataContractSerializer.ReadObject" /> method.
+      </para>
       <para
         >crabout using the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />, see <format type="text/html">
           <a href="3d71814c-bda7-424b-85b7-15084ff9377a">Using Stand-alone Serialization</a>
@@ -46,15 +46,15 @@
         <h2>Preparing Classes for Serialization or Deserialization</h2>
       </format>
       <para
-        >The <see cref="T:System.Runtime.Serialization.DataContractSerializer" /> is used in combination with the <see cref="T:System.Runtime.Serialization.DataContractAttribute" /> and <see cref="T:System.Runtime.Serialization.DataMemberAttribute" /> classes. To prepare a class for serialization, apply the <see cref="T:System.Runtime.Serialization.DataContractAttribute" /> to the class.  For each member of the class that returns data that you want to serialize, apply the <see cref="T:System.Runtime.Serialization.DataMemberAttribute" />. You can serialize fields and properties, regardless of accessibility: private, protected, internal, protected internal, or public. </para
-      >
+        >The <see cref="T:System.Runtime.Serialization.DataContractSerializer" /> is used in combination with the <see cref="T:System.Runtime.Serialization.DataContractAttribute" /> and <see cref="T:System.Runtime.Serialization.DataMemberAttribute" /> classes. To prepare a class for serialization, apply the <see cref="T:System.Runtime.Serialization.DataContractAttribute" /> to the class.  For each member of the class that returns data that you want to serialize, apply the <see cref="T:System.Runtime.Serialization.DataMemberAttribute" />. You can serialize fields and properties, regardless of accessibility: private, protected, internal, protected internal, or public.
+      </para>
       <para
-        >For example, your schema specifies a Customer with an ID property, but you already have an existing application that uses a type named Person with a Name property. To create a type that conforms to the contract, first apply the <see cref="T:System.Runtime.Serialization.DataContractAttribute" /> to the class.  Then apply the <see cref="T:System.Runtime.Serialization.DataMemberAttribute" /> to every field or property that you want to serialize. </para
-      >
+        >For example, your schema specifies a Customer with an ID property, but you already have an existing application that uses a type named Person with a Name property. To create a type that conforms to the contract, first apply the <see cref="T:System.Runtime.Serialization.DataContractAttribute" /> to the class.  Then apply the <see cref="T:System.Runtime.Serialization.DataMemberAttribute" /> to every field or property that you want to serialize.
+      </para>
       <block subset="none" type="note">
         <para
-          >You can apply the <see cref="T:System.Runtime.Serialization.DataMemberAttribute" /> to both private and public members. </para
-        >
+          >You can apply the <see cref="T:System.Runtime.Serialization.DataMemberAttribute" /> to both private and public members.
+        </para>
       </block>
       <para
         >The final format of the XML need not be text. Instead, the <see cref="T:System.Runtime.Serialization.DataContractSerializer" /> writes the data as an XML infoset, which allows you to write the data to any format recognized by the <see cref="T:System.Xml.XmlReader" /> and <see cref="T:System.Xml.XmlWriter" />. It is recommended that you use the <see cref="T:System.Xml.XmlDictionaryReader" /> and <see cref="T:System.Xml.XmlDictionaryWriter" /> classes to read and write, because both are optimized to work with the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />.</para
@@ -64,20 +64,20 @@
           <a href="aa4a3a6f-05ec-4efd-bdbf-2181e13e6468"
             >Version Tolerant Serialization Callbacks</a
           >
-        </format>. </para
-      >
+        </format>.
+      </para>
       <format type="text/html">
         <h2>Adding to the Collection of Known Types</h2>
       </format>
       <para
-        >When serializing or deserializing an object, it is required that the type is "known" to the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />. Begin by creating an instance of a class that implements <see cref="T:System.Collections.Generic.IEnumerable`1" /> (such as <see cref="T:System.Collections.Generic.List`1" />) and adding the known types to the collection. Then create an instance of the <see cref="T:System.Runtime.Serialization.DataContractSerializer" /> using one of the overloads that takes the <see cref="T:System.Collections.Generic.IEnumerable`1" /> (for example, <see cref="M:System.Runtime.Serialization.DataContractSerializer.#ctor(System.Type,System.Collections.Generic.IEnumerable{System.Type})" />. </para
-      >
+        >When serializing or deserializing an object, it is required that the type is "known" to the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />. Begin by creating an instance of a class that implements <see cref="T:System.Collections.Generic.IEnumerable`1" /> (such as <see cref="T:System.Collections.Generic.List`1" />) and adding the known types to the collection. Then create an instance of the <see cref="T:System.Runtime.Serialization.DataContractSerializer" /> using one of the overloads that takes the <see cref="T:System.Collections.Generic.IEnumerable`1" /> (for example, <see cref="M:System.Runtime.Serialization.DataContractSerializer.#ctor(System.Type,System.Collections.Generic.IEnumerable{System.Type})" />.
+      </para>
       <block subset="none" type="note">
         <para
           >Unlike other primitive types, the <see cref="T:System.DateTimeOffset" /> structure is not a known type by default, so it must be manually added to the list of known types (see <format type="text/html">
             <a href="1a0baea1-27b7-470d-9136-5bbad86c4337">Data Contract Known Types</a>
-          </format>). </para
-        >
+          </format>).
+        </para>
       </block>
       <format type="text/html">
         <h2>Forward Compatibility</h2>
@@ -1061,8 +1061,8 @@
           <para
             >The <see cref="P:System.Runtime.Serialization.DataContractSerializer.IgnoreExtensionDataObject" /> property is used when the class to which a <see cref="T:System.Runtime.Serialization.DataContractAttribute" /> has been applied also implements the <see cref="T:System.Runtime.Serialization.IExtensibleDataObject" /> interface. In this case, the data added in a future version of the contract is ignored on read and write. crdefault <format type="text/html">
               <a href="413c9044-26f8-4ecb-968c-18495ea52cd9">Forward Compatible Data Contracts</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1176,8 +1176,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Runtime.Serialization.DataContractSerializer.KnownTypes" /> property provides the set of known types that are used for serialization and deserialization. For example, if an instance of the <see cref="T:System.Collections.Hashtable" /> class contains instances of a Person class, add the Person type to an instance of the <see cref="T:System.Collections.Generic.List`1" /> class and use the instance to construct an instance of the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />. If you know of other types to add to the <see cref="T:System.Collections.Hashtable" />, then add those types to the collection. </para
-          >
+            >The <see cref="P:System.Runtime.Serialization.DataContractSerializer.KnownTypes" /> property provides the set of known types that are used for serialization and deserialization. For example, if an instance of the <see cref="T:System.Collections.Hashtable" /> class contains instances of a Person class, add the Person type to an instance of the <see cref="T:System.Collections.Generic.List`1" /> class and use the instance to construct an instance of the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />. If you know of other types to add to the <see cref="T:System.Collections.Hashtable" />, then add those types to the collection.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1303,8 +1303,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads the XML stream with an <see cref="T:System.Xml.XmlDictionaryReader" /> and returns the deserialized object, and also specifies whether a check is made to verify the object name before reading its value. </para
-          >
+            >Reads the XML stream with an <see cref="T:System.Xml.XmlDictionaryReader" /> and returns the deserialized object, and also specifies whether a check is made to verify the object name before reading its value.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1322,8 +1322,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to check whether the name of the object corresponds to the root name value supplied in the constructor; otherwise, false. </param
-        >
+          />true to check whether the name of the object corresponds to the root name value supplied in the constructor; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ReadObject">

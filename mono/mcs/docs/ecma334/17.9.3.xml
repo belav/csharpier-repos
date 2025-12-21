@@ -1,23 +1,21 @@
 <?xml version="1.0"?>
 <clause number="17.9.3" title="Conversion operators">
   <paragraph
-    >A conversion operator declaration introduces a user-defined conversion (<hyperlink>13.4</hyperlink>), which augments the  pre-defined implicit and explicit conversions. </paragraph
-  >
+    >A conversion operator declaration introduces a user-defined conversion (<hyperlink>13.4</hyperlink>), which augments the  pre-defined implicit and explicit conversions.
+  </paragraph>
   <paragraph
-    >A conversion operator declaration that includes the implicit keyword introduces a user-defined implicit conversion. Implicit conversions can occur in a variety of situations, including function member invocations, cast expressions, and assignments. This is described further in <hyperlink>13.1</hyperlink>. </paragraph
-  >
+    >A conversion operator declaration that includes the implicit keyword introduces a user-defined implicit conversion. Implicit conversions can occur in a variety of situations, including function member invocations, cast expressions, and assignments. This is described further in <hyperlink>13.1</hyperlink>.
+  </paragraph>
   <paragraph
-    >A conversion operator declaration that includes the explicit keyword introduces a user-defined explicit conversion. Explicit conversions can occur in cast expressions, and are described further in <hyperlink>13.2</hyperlink>. </paragraph
-  >
+    >A conversion operator declaration that includes the explicit keyword introduces a user-defined explicit conversion. Explicit conversions can occur in cast expressions, and are described further in <hyperlink>13.2</hyperlink>.
+  </paragraph>
   <paragraph
     >A conversion operator converts from a source type, indicated by the parameter type of the conversion operator, to a target type, indicated by the return type of the conversion operator. A class or struct is permitted to declare a conversion from a source type S to a target type T provided all of the following are true: <list>
       <list_item> S and T are different types. </list_item>
       <list_item> Either S or T is the class or struct type in which the operator declaration takes place. </list_item>
       <list_item
-        > Neither S nor T is object or an <non_terminal where="11.2"
-          >interface-type</non_terminal
-        >. </list_item
-      >
+        > Neither S nor T is object or an <non_terminal where="11.2">interface-type</non_terminal>.
+      </list_item>
       <list_item> T is not a base class of S, and S is not a base class of T. </list_item>
     </list>
   </paragraph>
@@ -38,8 +36,8 @@
     > succeeds only if the object being converted actually implements the specified <non_terminal
       where="11.2"
       >interface-type</non_terminal
-    >. </paragraph
-  >
+    >.
+  </paragraph>
   <paragraph>The signature of a conversion operator consists of the source type and the target type. (Note that this is the only form of member for which the return type participates in the signature.) The implicit or explicit classification of a conversion operator is not part of the operator's signature. Thus, a class or struct cannot declare both an implicit and an explicit conversion operator with the same source and target types. </paragraph>
   <paragraph>
     <note>[Note: In general, user-defined implicit conversions should be designed to never throw exceptions and never lose information. If a user-defined conversion can give rise to exceptions (for example, because the source argument is out of range) or loss of information (such as discarding high-order bits), then that conversion should be defined as an explicit conversion. end note]</note>

@@ -86,25 +86,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlNameTable" /> to use to atomize strings. If this is null, the name table used to construct the <paramref name="nsMgr" /> is used instead. For more information about atomized strings, see <see cref="T:System.Xml.XmlNameTable" />. </param
-        >
+          />The <see cref="T:System.Xml.XmlNameTable" /> to use to atomize strings. If this is null, the name table used to construct the <paramref name="nsMgr" /> is used instead. For more information about atomized strings, see <see cref="T:System.Xml.XmlNameTable" />.
+        </param>
         <param name="nsMgr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlNamespaceManager" /> to use for looking up namespace information, or null. </param
-        >
+          />The <see cref="T:System.Xml.XmlNamespaceManager" /> to use for looking up namespace information, or null.
+        </param>
         <param name="xmlLang">
-          <attribution license="cc4" from="Microsoft" modified="false" />The xml:lang scope. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The xml:lang scope.
+        </param>
         <param name="xmlSpace">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlSpace" /> value indicating the xml:space scope. </param
-        >
+          />An <see cref="T:System.Xml.XmlSpace" /> value indicating the xml:space scope.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -161,32 +161,32 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlNameTable" /> to use to atomize strings. If this is null, the name table used to construct the <paramref name="nsMgr" /> is used instead. For more information on atomized strings, see <see cref="T:System.Xml.XmlNameTable" />. </param
-        >
+          />The <see cref="T:System.Xml.XmlNameTable" /> to use to atomize strings. If this is null, the name table used to construct the <paramref name="nsMgr" /> is used instead. For more information on atomized strings, see <see cref="T:System.Xml.XmlNameTable" />.
+        </param>
         <param name="nsMgr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlNamespaceManager" /> to use for looking up namespace information, or null. </param
-        >
+          />The <see cref="T:System.Xml.XmlNamespaceManager" /> to use for looking up namespace information, or null.
+        </param>
         <param name="xmlLang">
-          <attribution license="cc4" from="Microsoft" modified="false" />The xml:lang scope. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The xml:lang scope.
+        </param>
         <param name="xmlSpace">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlSpace" /> value indicating the xml:space scope. </param
-        >
+          />An <see cref="T:System.Xml.XmlSpace" /> value indicating the xml:space scope.
+        </param>
         <param name="enc">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Text.Encoding" /> object indicating the encoding setting. </param
-        >
+          />An <see cref="T:System.Text.Encoding" /> object indicating the encoding setting.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -245,36 +245,28 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlNameTable" /> to use to atomize strings. If this is null, the name table used to construct the <paramref name="nsMgr" /> is used instead. For more information about atomized strings, see <see cref="T:System.Xml.XmlNameTable" />. </param
-        >
+          />The <see cref="T:System.Xml.XmlNameTable" /> to use to atomize strings. If this is null, the name table used to construct the <paramref name="nsMgr" /> is used instead. For more information about atomized strings, see <see cref="T:System.Xml.XmlNameTable" />.
+        </param>
         <param name="nsMgr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlNamespaceManager" /> to use for looking up namespace information, or null. </param
-        >
+          />The <see cref="T:System.Xml.XmlNamespaceManager" /> to use for looking up namespace information, or null.
+        </param>
         <param name="docTypeName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the document type declaration. </param
-        >
+          />The name of the document type declaration.
+        </param>
         <param name="pubId">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The public identifier. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The public identifier.
+        </param>
         <param name="sysId">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The system identifier. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The system identifier.
+        </param>
         <param name="internalSubset">
           <attribution
             license="cc4"
@@ -287,18 +279,18 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The base URI for the XML fragment (the location from which the fragment was loaded). </param
-        >
+          />The base URI for the XML fragment (the location from which the fragment was loaded).
+        </param>
         <param name="xmlLang">
-          <attribution license="cc4" from="Microsoft" modified="false" />The xml:lang scope. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The xml:lang scope.
+        </param>
         <param name="xmlSpace">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlSpace" /> value indicating the xml:space scope. </param
-        >
+          />An <see cref="T:System.Xml.XmlSpace" /> value indicating the xml:space scope.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -339,8 +331,8 @@
           <para
             >The constructor sets <see cref="P:System.Xml.XmlParserContext.BaseURI" /> to <paramref name="baseURI" />, <see cref="P:System.Xml.XmlParserContext.DocTypeName" /> to <paramref name="docTypeName" />, <see cref="P:System.Xml.XmlParserContext.InternalSubset" /> to <paramref name="internalSubset" />, <see cref="P:System.Xml.XmlParserContext.PublicId" /> to <paramref name="pubId" />, <see cref="P:System.Xml.XmlParserContext.SystemId" /> to <paramref name="sysId" />, and <see cref="P:System.Xml.XmlParserContext.XmlLang" /> to <paramref name="xmlLang" />. If
 <see langword="null" /> is passed for any of these parameters, the corresponding 
-   property is set to <see cref="F:System.String.Empty" />. </para
-          >
+   property is set to <see cref="F:System.String.Empty" />.
+          </para>
           <block subset="none" type="note">
             <para
               >The DocumentType (DTD) information stored in this
@@ -363,36 +355,28 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlNameTable" /> to use to atomize strings. If this is null, the name table used to construct the <paramref name="nsMgr" /> is used instead. For more information about atomized strings, see <see cref="T:System.Xml.XmlNameTable" />. </param
-        >
+          />The <see cref="T:System.Xml.XmlNameTable" /> to use to atomize strings. If this is null, the name table used to construct the <paramref name="nsMgr" /> is used instead. For more information about atomized strings, see <see cref="T:System.Xml.XmlNameTable" />.
+        </param>
         <param name="nsMgr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlNamespaceManager" /> to use for looking up namespace information, or null. </param
-        >
+          />The <see cref="T:System.Xml.XmlNamespaceManager" /> to use for looking up namespace information, or null.
+        </param>
         <param name="docTypeName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the document type declaration. </param
-        >
+          />The name of the document type declaration.
+        </param>
         <param name="pubId">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The public identifier. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The public identifier.
+        </param>
         <param name="sysId">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The system identifier. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The system identifier.
+        </param>
         <param name="internalSubset">
           <attribution
             license="cc4"
@@ -405,25 +389,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The base URI for the XML fragment (the location from which the fragment was loaded). </param
-        >
+          />The base URI for the XML fragment (the location from which the fragment was loaded).
+        </param>
         <param name="xmlLang">
-          <attribution license="cc4" from="Microsoft" modified="false" />The xml:lang scope. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The xml:lang scope.
+        </param>
         <param name="xmlSpace">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlSpace" /> value indicating the xml:space scope. </param
-        >
+          />An <see cref="T:System.Xml.XmlSpace" /> value indicating the xml:space scope.
+        </param>
         <param name="enc">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Text.Encoding" /> object indicating the encoding setting. </param
-        >
+          />An <see cref="T:System.Text.Encoding" /> object indicating the encoding setting.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -561,13 +545,10 @@
       <Docs>
         <value>
           <para
-            >A <see
-              cref="T:System.String"
-              qualify="true"
-            /> 
+            >A <see cref="T:System.String" qualify="true" /> 
 specifying
-the internal subset. </para
-          >
+the internal subset.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />

@@ -47,8 +47,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.TableFooterRow" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.TableFooterRow" /> class.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>

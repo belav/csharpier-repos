@@ -88,8 +88,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> object that represents the exception. </param
-        >
+          />The <see cref="T:System.Type" /> object that represents the exception.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="BeginExceptFilterBlock">
@@ -285,8 +285,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> object that represents the type of the local variable. </param
-        >
+          />A <see cref="T:System.Type" /> object that represents the type of the local variable.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DeclareLocal">
@@ -420,8 +420,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The Microsoft Intermediate Language (MSIL) instruction to be put onto the stream. </param
-        >
+          />The Microsoft Intermediate Language (MSIL) instruction to be put onto the stream.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Emit">
@@ -460,15 +460,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The MSIL instruction to be put onto the stream. </param
-        >
+          />The MSIL instruction to be put onto the stream.
+        </param>
         <param name="arg">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character argument pushed onto the stream immediately after the instruction. </param
-        >
+          />The character argument pushed onto the stream immediately after the instruction.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Emit">
@@ -507,15 +507,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The MSIL instruction to be put onto the stream. Defined in the OpCodes enumeration. </param
-        >
+          />The MSIL instruction to be put onto the stream. Defined in the OpCodes enumeration.
+        </param>
         <param name="arg">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The numerical argument pushed onto the stream immediately after the instruction. </param
-        >
+          />The numerical argument pushed onto the stream immediately after the instruction.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Emit">
@@ -554,15 +554,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The MSIL instruction to be emitted onto the stream. </param
-        >
+          />The MSIL instruction to be emitted onto the stream.
+        </param>
         <param name="arg">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The Int argument pushed onto the stream immediately after the instruction. </param
-        >
+          />The Int argument pushed onto the stream immediately after the instruction.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Emit">
@@ -601,15 +601,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The MSIL instruction to be put onto the stream. </param
-        >
+          />The MSIL instruction to be put onto the stream.
+        </param>
         <param name="arg">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The numerical argument pushed onto the stream immediately after the instruction. </param
-        >
+          />The numerical argument pushed onto the stream immediately after the instruction.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Emit">
@@ -648,15 +648,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The MSIL instruction to be put onto the stream. </param
-        >
+          />The MSIL instruction to be put onto the stream.
+        </param>
         <param name="arg">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The numerical argument pushed onto the stream immediately after the instruction. </param
-        >
+          />The numerical argument pushed onto the stream immediately after the instruction.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Emit">
@@ -703,15 +703,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The MSIL instruction to be emitted onto the stream. </param
-        >
+          />The MSIL instruction to be emitted onto the stream.
+        </param>
         <param name="con">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A ConstructorInfo representing a constructor. </param
-        >
+          />A ConstructorInfo representing a constructor.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Emit">
@@ -753,15 +753,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The MSIL instruction to be emitted onto the stream. </param
-        >
+          />The MSIL instruction to be emitted onto the stream.
+        </param>
         <param name="label">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The label to which to branch from this location. </param
-        >
+          />The label to which to branch from this location.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Emit">
@@ -804,15 +804,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The MSIL instruction to be emitted onto the stream. </param
-        >
+          />The MSIL instruction to be emitted onto the stream.
+        </param>
         <param name="labels">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array of label objects to which to branch from this location. All of the labels will be used. </param
-        >
+          />The array of label objects to which to branch from this location. All of the labels will be used.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Emit">
@@ -851,11 +851,11 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The MSIL instruction to be emitted onto the stream. </param
-        >
+          />The MSIL instruction to be emitted onto the stream.
+        </param>
         <param name="local">
-          <attribution license="cc4" from="Microsoft" modified="false" />A local variable. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A local variable.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Emit">
@@ -894,15 +894,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The MSIL instruction to be emitted onto the stream. </param
-        >
+          />The MSIL instruction to be emitted onto the stream.
+        </param>
         <param name="signature">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A helper for constructing a signature token. </param
-        >
+          />A helper for constructing a signature token.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Emit">
@@ -943,15 +943,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The MSIL instruction to be emitted onto the stream. </param
-        >
+          />The MSIL instruction to be emitted onto the stream.
+        </param>
         <param name="field">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A FieldInfo representing a field. </param
-        >
+          />A FieldInfo representing a field.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Emit">
@@ -996,15 +996,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The MSIL instruction to be emitted onto the stream. </param
-        >
+          />The MSIL instruction to be emitted onto the stream.
+        </param>
         <param name="meth">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A MethodInfo representing a method. </param
-        >
+          />A MethodInfo representing a method.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Emit">
@@ -1048,15 +1048,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The MSIL instruction to be put onto the stream. </param
-        >
+          />The MSIL instruction to be put onto the stream.
+        </param>
         <param name="arg">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character argument pushed onto the stream immediately after the instruction. </param
-        >
+          />The character argument pushed onto the stream immediately after the instruction.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Emit">
@@ -1095,15 +1095,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The MSIL instruction to be put onto the stream. </param
-        >
+          />The MSIL instruction to be put onto the stream.
+        </param>
         <param name="arg">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The Single argument pushed onto the stream immediately after the instruction. </param
-        >
+          />The Single argument pushed onto the stream immediately after the instruction.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Emit">
@@ -1144,15 +1144,11 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The MSIL instruction to be emitted onto the stream. </param
-        >
+          />The MSIL instruction to be emitted onto the stream.
+        </param>
         <param name="str">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The String to be emitted. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The String to be emitted.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Emit">
@@ -1193,11 +1189,11 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The MSIL instruction to be put onto the stream. </param
-        >
+          />The MSIL instruction to be put onto the stream.
+        </param>
         <param name="cls">
-          <attribution license="cc4" from="Microsoft" modified="false" />A Type. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A Type.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="EmitCall">
@@ -1230,14 +1226,14 @@
             >The <see cref="M:System.Reflection.Emit.ILGenerator.EmitCall(System.Reflection.Emit.OpCode,System.Reflection.MethodInfo,System.Type[])" /> method is used to emit calls to varargs methods because there is no overload of the <see cref="Overload:System.Reflection.Emit.ILGenerator.Emit" /> method that specifies the parameter types of the variable arguments.</para
           >
           <para
-            >To emit calls to methods that do not use the <see cref="F:System.Reflection.CallingConventions.VarArgs" /> calling convention, use the <see cref="M:System.Reflection.Emit.ILGenerator.Emit(System.Reflection.Emit.OpCode,System.Reflection.MethodInfo)" /> method overload. </para
-          >
+            >To emit calls to methods that do not use the <see cref="F:System.Reflection.CallingConventions.VarArgs" /> calling convention, use the <see cref="M:System.Reflection.Emit.ILGenerator.Emit(System.Reflection.Emit.OpCode,System.Reflection.MethodInfo)" /> method overload.
+          </para>
           <format type="text/html">
             <h2>Version Information</h2>
           </format>
           <para
-            >Beginning with the .NET Framework version 2.0, the <see cref="M:System.Reflection.Emit.ILGenerator.EmitCall(System.Reflection.Emit.OpCode,System.Reflection.MethodInfo,System.Type[])" /> method does not throw an exception when optional parameter types are specified for a method that is not varargs. <see cref="T:System.InvalidProgramException" /> is thrown when the call is executed. </para
-          >
+            >Beginning with the .NET Framework version 2.0, the <see cref="M:System.Reflection.Emit.ILGenerator.EmitCall(System.Reflection.Emit.OpCode,System.Reflection.MethodInfo,System.Type[])" /> method does not throw an exception when optional parameter types are specified for a method that is not varargs. <see cref="T:System.InvalidProgramException" /> is thrown when the call is executed.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1255,15 +1251,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The varargs method to be called. </param
-        >
+          />The varargs method to be called.
+        </param>
         <param name="optionalParameterTypes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The types of the optional arguments if the method is a varargs method; otherwise, null. </param
-        >
+          />The types of the optional arguments if the method is a varargs method; otherwise, null.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="EmitCalli">
@@ -1318,22 +1314,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The unmanaged calling convention to be used. </param
-        >
+          />The unmanaged calling convention to be used.
+        </param>
         <param name="returnType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of the result. </param
-        >
+          />The <see cref="T:System.Type" /> of the result.
+        </param>
         <param name="parameterTypes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The types of the required arguments to the instruction. </param
-        >
+          />The types of the required arguments to the instruction.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="EmitCalli">
@@ -1382,36 +1378,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The MSIL instruction to be emitted onto the stream. Must be <see cref="F:System.Reflection.Emit.OpCodes.Calli" />. </param
-        >
+          />The MSIL instruction to be emitted onto the stream. Must be <see cref="F:System.Reflection.Emit.OpCodes.Calli" />.
+        </param>
         <param name="callingConvention">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The managed calling convention to be used. </param
-        >
+          />The managed calling convention to be used.
+        </param>
         <param name="returnType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of the result. </param
-        >
+          />The <see cref="T:System.Type" /> of the result.
+        </param>
         <param name="parameterTypes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The types of the required arguments to the instruction. </param
-        >
+          />The types of the required arguments to the instruction.
+        </param>
         <param name="optionalParameterTypes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The types of the optional arguments for varargs calls. </param
-        >
+          />The types of the optional arguments for varargs calls.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="EmitWriteLine">
@@ -1453,8 +1449,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local variable whose value is to be written to the console. </param
-        >
+          />The local variable whose value is to be written to the console.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="EmitWriteLine">
@@ -1496,8 +1492,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The field whose value is to be written to the console. </param
-        >
+          />The field whose value is to be written to the console.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="EmitWriteLine">
@@ -1530,12 +1526,8 @@
           >
         </summary>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The string to be printed. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The string to be printed.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="EndExceptionBlock">
@@ -1659,8 +1651,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The label for which to set an index. </param
-        >
+          />The label for which to set an index.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="MarkSequencePoint">
@@ -1708,36 +1700,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The document for which the sequence point is being defined. </param
-        >
+          />The document for which the sequence point is being defined.
+        </param>
         <param name="startLine">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The line where the sequence point begins. </param
-        >
+          />The line where the sequence point begins.
+        </param>
         <param name="startColumn">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The column in the line where the sequence point begins. </param
-        >
+          />The column in the line where the sequence point begins.
+        </param>
         <param name="endLine">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The line where the sequence point ends. </param
-        >
+          />The line where the sequence point ends.
+        </param>
         <param name="endColumn">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The column in the line where the sequence point ends. </param
-        >
+          />The column in the line where the sequence point ends.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.Runtime.InteropServices._ILGenerator.GetIDsOfNames">
@@ -1931,8 +1923,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The class of the type of exception to throw. </param
-        >
+          />The class of the type of exception to throw.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="UsingNamespace">
@@ -1972,8 +1964,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace to be used in evaluating locals and watches for the current active lexical scope </param
-        >
+          />The namespace to be used in evaluating locals and watches for the current active lexical scope
+        </param>
       </Docs>
     </Member>
   </Members>

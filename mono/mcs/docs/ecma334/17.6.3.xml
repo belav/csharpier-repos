@@ -5,20 +5,20 @@
     >An abstract property declaration specifies that the accessors of the property are virtual, but does not provide an actual implementation of the accessors. Instead, non-abstract derived classes are required to provide their own implementation for the accessors by overriding the property. Because an accessor for an abstract property declaration provides no actual implementation, its <non_terminal
       where="17.6.2"
       >accessor-body</non_terminal
-    > simply consists of a semicolon. </paragraph
-  >
+    > simply consists of a semicolon.
+  </paragraph>
   <paragraph>A property declaration that includes both the abstract and override modifiers specifies that the property is abstract and overrides a base property. The accessors of such a property are also abstract. </paragraph>
   <paragraph
-    >Abstract property declarations are only permitted in abstract classes (<hyperlink>17.1.1.1</hyperlink>). The accessors of an inherited virtual property can be overridden in a derived class by including a property declaration that specifies an override directive. This is known as an overriding property declaration. An overriding property declaration does not declare a new property. Instead, it simply specializes the implementations of the accessors of an existing virtual property. </paragraph
-  >
+    >Abstract property declarations are only permitted in abstract classes (<hyperlink>17.1.1.1</hyperlink>). The accessors of an inherited virtual property can be overridden in a derived class by including a property declaration that specifies an override directive. This is known as an overriding property declaration. An overriding property declaration does not declare a new property. Instead, it simply specializes the implementations of the accessors of an existing virtual property.
+  </paragraph>
   <paragraph>An overriding property declaration must specify the exact same accessibility modifiers, type, and name as the inherited property. If the inherited property has only a single accessor (i.e., if the inherited property is read-only or write-only), the overriding property must include only that accessor. If the inherited property includes both accessors (i.e., if the inherited property is read-write), the overriding property can include either a single accessor or both accessors. </paragraph>
   <paragraph>An overriding property declaration may include the sealed modifier. Use of this modifier prevents a derived class from further overriding the property. The accessors of a sealed property are also sealed. </paragraph>
   <paragraph
     >Except for differences in declaration and invocation syntax, virtual, sealed, override, and abstract accessors behave exactly like virtual, sealed, override and abstract methods. Specifically, the rules described in <hyperlink>17.5.3</hyperlink>, <hyperlink>17.5.4</hyperlink>, <hyperlink>17.5.5</hyperlink>, and <hyperlink>17.5.6</hyperlink> apply as if accessors were methods of a corresponding form: <list>
       <list_item> A get accessor corresponds to a parameterless method with a return value of the property type and the same modifiers as the containing property. </list_item>
       <list_item
-        > A set accessor corresponds to a method with a single value parameter of the property type, a <keyword>void</keyword> return type, and the same modifiers as the containing property. </list_item
-      >
+        > A set accessor corresponds to a method with a single value parameter of the property type, a <keyword>void</keyword> return type, and the same modifiers as the containing property.
+      </list_item>
     </list>
   </paragraph>
   <paragraph>

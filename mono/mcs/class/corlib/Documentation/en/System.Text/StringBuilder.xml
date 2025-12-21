@@ -139,26 +139,26 @@
         <h2>The String and StringBuilder types</h2>
       </format>
       <para
-        >Although <see cref="T:System.Text.StringBuilder" /> and <see cref="T:System.String" /> both represent sequences of characters, they are implemented differently. <see cref="T:System.String" /> is an immutable type. That is, each operation that appears to modify a <see cref="T:System.String" /> object actually creates a new string. </para
-      >
+        >Although <see cref="T:System.Text.StringBuilder" /> and <see cref="T:System.String" /> both represent sequences of characters, they are implemented differently. <see cref="T:System.String" /> is an immutable type. That is, each operation that appears to modify a <see cref="T:System.String" /> object actually creates a new string.
+      </para>
       <para
-        >For example, the call to the <see cref="M:System.String.Concat(System.String[])" /> method in the following C# example appears to change the value of a string variable named value. In fact, the <see cref="M:System.String.Concat(System.String[])" /> method returns a value object that has a different value and address from the value object that was passed to the method. Note that the example must be compiled using the /unsafe compiler option. </para
-      >
+        >For example, the call to the <see cref="M:System.String.Concat(System.String[])" /> method in the following C# example appears to change the value of a string variable named value. In fact, the <see cref="M:System.String.Concat(System.String[])" /> method returns a value object that has a different value and address from the value object that was passed to the method. Note that the example must be compiled using the /unsafe compiler option.
+      </para>
       <para>code reference: System.Text.StringBuilder.Class#1</para>
       <para
-        >For routines that perform extensive string manipulation (such as apps that modify a string numerous times in a loop), modifying a string repeatedly can exact a significant performance penalty. The alternative is to use <see cref="T:System.Text.StringBuilder" />, which is a mutable string class. Mutability means that once an instance of the class has been created, it can be modified by appending, removing, replacing, or inserting characters. A <see cref="T:System.Text.StringBuilder" /> object maintains a buffer to accommodate expansions to the string. New data is appended to the buffer if room is available; otherwise, a new, larger buffer is allocated, data from the original buffer is copied to the new buffer, and the new data is then appended to the new buffer. </para
-      >
+        >For routines that perform extensive string manipulation (such as apps that modify a string numerous times in a loop), modifying a string repeatedly can exact a significant performance penalty. The alternative is to use <see cref="T:System.Text.StringBuilder" />, which is a mutable string class. Mutability means that once an instance of the class has been created, it can be modified by appending, removing, replacing, or inserting characters. A <see cref="T:System.Text.StringBuilder" /> object maintains a buffer to accommodate expansions to the string. New data is appended to the buffer if room is available; otherwise, a new, larger buffer is allocated, data from the original buffer is copied to the new buffer, and the new data is then appended to the new buffer.
+      </para>
       <block subset="none" type="note">
         <para
-          >Although the <see cref="T:System.Text.StringBuilder" /> class generally offers better performance than the <see cref="T:System.String" /> class, you should not automatically replace <see cref="T:System.String" /> with <see cref="T:System.Text.StringBuilder" /> whenever you want to manipulate strings. Performance depends on the size of the string, the amount of memory to be allocated for the new string, the system on which your app is executing, and the type of operation. You should be prepared to test your app to determine whether <see cref="T:System.Text.StringBuilder" /> actually offers a significant performance improvement. </para
-        >
+          >Although the <see cref="T:System.Text.StringBuilder" /> class generally offers better performance than the <see cref="T:System.String" /> class, you should not automatically replace <see cref="T:System.String" /> with <see cref="T:System.Text.StringBuilder" /> whenever you want to manipulate strings. Performance depends on the size of the string, the amount of memory to be allocated for the new string, the system on which your app is executing, and the type of operation. You should be prepared to test your app to determine whether <see cref="T:System.Text.StringBuilder" /> actually offers a significant performance improvement.
+        </para>
       </block>
       <para>Consider using the <see cref="T:System.String" /> class under these conditions: </para>
       <list type="bullet">
         <item>
           <para
-            >When the number of changes that your app will make to a string is small. In these cases, <see cref="T:System.Text.StringBuilder" /> might offer negligible or no performance improvement over <see cref="T:System.String" />. </para
-          >
+            >When the number of changes that your app will make to a string is small. In these cases, <see cref="T:System.Text.StringBuilder" /> might offer negligible or no performance improvement over <see cref="T:System.String" />.
+          </para>
         </item>
         <item>
           <para>When you are performing a fixed number of concatenation operations, particularly with string literals. In this case, the compiler might combine the concatenation operations into a single operation. </para>
@@ -167,13 +167,13 @@
           <para
             >When you have to perform extensive search operations while you are building your string. The <see cref="T:System.Text.StringBuilder" /> class lacks search methods such as IndexOf or StartsWith. You'll have to convert the <see cref="T:System.Text.StringBuilder" /> object to a <see cref="T:System.String" /> for these operations, and this can negate the performance benefit from using <see cref="T:System.Text.StringBuilder" />. For more information, see the <format type="text/html">
               <a href="#Searching">Searching the text in a StringBuilder object</a>
-            </format> section. </para
-          >
+            </format> section.
+          </para>
         </item>
       </list>
       <para
-        >Consider using the <see cref="T:System.Text.StringBuilder" /> class under these conditions: </para
-      >
+        >Consider using the <see cref="T:System.Text.StringBuilder" /> class under these conditions:
+      </para>
       <list type="bullet">
         <item>
           <para>When you expect your app to make an unknown number of changes to a string at design time (for example, when you are using a loop to concatenate a random number of strings that contain user input). </para>
@@ -189,11 +189,11 @@
         <h2>How StringBuilder works</h2>
       </format>
       <para
-        >The <see cref="P:System.Text.StringBuilder.Length" /> property indicates the number of characters the <see cref="T:System.Text.StringBuilder" /> object currently contains. If you add characters to the <see cref="T:System.Text.StringBuilder" /> object, its length increases until it equals the size of the <see cref="P:System.Text.StringBuilder.Capacity" /> property, which defines the number of characters that the object can contain. If the number of added characters causes the length of the <see cref="T:System.Text.StringBuilder" /> object to exceed its current capacity, new memory is allocated, the value of the <see cref="P:System.Text.StringBuilder.Capacity" /> property is doubled, new characters are added to the <see cref="T:System.Text.StringBuilder" /> object, and its <see cref="P:System.Text.StringBuilder.Length" /> property is adjusted. Additional memory for the <see cref="T:System.Text.StringBuilder" /> object is allocated dynamically until it reaches the value defined by the <see cref="P:System.Text.StringBuilder.MaxCapacity" /> property. When the maximum capacity is reached, no further memory can be allocated for the <see cref="T:System.Text.StringBuilder" /> object, and trying to add characters or expand it beyond its maximum capacity throws either an <see cref="T:System.ArgumentOutOfRangeException" /> or an <see cref="T:System.OutOfMemoryException" /> exception. </para
-      >
+        >The <see cref="P:System.Text.StringBuilder.Length" /> property indicates the number of characters the <see cref="T:System.Text.StringBuilder" /> object currently contains. If you add characters to the <see cref="T:System.Text.StringBuilder" /> object, its length increases until it equals the size of the <see cref="P:System.Text.StringBuilder.Capacity" /> property, which defines the number of characters that the object can contain. If the number of added characters causes the length of the <see cref="T:System.Text.StringBuilder" /> object to exceed its current capacity, new memory is allocated, the value of the <see cref="P:System.Text.StringBuilder.Capacity" /> property is doubled, new characters are added to the <see cref="T:System.Text.StringBuilder" /> object, and its <see cref="P:System.Text.StringBuilder.Length" /> property is adjusted. Additional memory for the <see cref="T:System.Text.StringBuilder" /> object is allocated dynamically until it reaches the value defined by the <see cref="P:System.Text.StringBuilder.MaxCapacity" /> property. When the maximum capacity is reached, no further memory can be allocated for the <see cref="T:System.Text.StringBuilder" /> object, and trying to add characters or expand it beyond its maximum capacity throws either an <see cref="T:System.ArgumentOutOfRangeException" /> or an <see cref="T:System.OutOfMemoryException" /> exception.
+      </para>
       <para
-        >The following example illustrates how a <see cref="T:System.Text.StringBuilder" /> object allocates new memory and increases its capacity dynamically as the string assigned to the object expands. The code creates a <see cref="T:System.Text.StringBuilder" /> object by calling its default (parameterless) constructor. The default capacity of this object is 16 characters, and its maximum capacity is more than 2 billion characters. Appending the string "This is a sentence." results in a new memory allocation because the string length (19 characters) exceeds the default capacity of the <see cref="T:System.Text.StringBuilder" /> object. The capacity of the object doubles to 32 characters, the new string is added, and the length of the object now equals 19 characters. The code then appends the string "This is an additional sentence." to the value of the <see cref="T:System.Text.StringBuilder" /> object 11 times. Whenever the append operation causes the length of the <see cref="T:System.Text.StringBuilder" /> object to exceed its capacity, its existing capacity is doubled and the <see cref="M:System.Text.StringBuilder.Append(System.String)" /> operation succeeds. </para
-      >
+        >The following example illustrates how a <see cref="T:System.Text.StringBuilder" /> object allocates new memory and increases its capacity dynamically as the string assigned to the object expands. The code creates a <see cref="T:System.Text.StringBuilder" /> object by calling its default (parameterless) constructor. The default capacity of this object is 16 characters, and its maximum capacity is more than 2 billion characters. Appending the string "This is a sentence." results in a new memory allocation because the string length (19 characters) exceeds the default capacity of the <see cref="T:System.Text.StringBuilder" /> object. The capacity of the object doubles to 32 characters, the new string is added, and the length of the object now equals 19 characters. The code then appends the string "This is an additional sentence." to the value of the <see cref="T:System.Text.StringBuilder" /> object 11 times. Whenever the append operation causes the length of the <see cref="T:System.Text.StringBuilder" /> object to exceed its capacity, its existing capacity is doubled and the <see cref="M:System.Text.StringBuilder.Append(System.String)" /> operation succeeds.
+      </para>
       <para>code reference: System.Text.StringBuilder.Class#3</para>
       <format type="text/html">
         <a href="#Memory" />
@@ -202,48 +202,48 @@
         <h2>Memory allocation</h2>
       </format>
       <para
-        >The default capacity of a <see cref="T:System.Text.StringBuilder" /> object is 16 characters, and its default maximum capacity is <see cref="F:System.Int32.MaxValue" />. These default values are used if you call the <see cref="M:System.Text.StringBuilder.#ctor" /> and <see cref="M:System.Text.StringBuilder.#ctor(System.String)" /> constructors. </para
-      >
+        >The default capacity of a <see cref="T:System.Text.StringBuilder" /> object is 16 characters, and its default maximum capacity is <see cref="F:System.Int32.MaxValue" />. These default values are used if you call the <see cref="M:System.Text.StringBuilder.#ctor" /> and <see cref="M:System.Text.StringBuilder.#ctor(System.String)" /> constructors.
+      </para>
       <para
-        >You can explicitly define the initial capacity of a <see cref="T:System.Text.StringBuilder" /> object in the following ways: </para
-      >
+        >You can explicitly define the initial capacity of a <see cref="T:System.Text.StringBuilder" /> object in the following ways:
+      </para>
       <list type="bullet">
         <item>
           <para
-            >By calling any of the <see cref="T:System.Text.StringBuilder" /> constructors that includes a <paramref name="capacity" /> parameter when you create the object.   </para
-          >
+            >By calling any of the <see cref="T:System.Text.StringBuilder" /> constructors that includes a <paramref name="capacity" /> parameter when you create the object.
+          </para>
         </item>
         <item>
           <para
-            >By explicitly assigning a new value to the <see cref="P:System.Text.StringBuilder.Capacity" /> property to expand an existing <see cref="T:System.Text.StringBuilder" /> object. Note that the property throws an exception if the new capacity is less than the existing capacity or greater than the <see cref="T:System.Text.StringBuilder" /> object's maximum capacity. </para
-          >
+            >By explicitly assigning a new value to the <see cref="P:System.Text.StringBuilder.Capacity" /> property to expand an existing <see cref="T:System.Text.StringBuilder" /> object. Note that the property throws an exception if the new capacity is less than the existing capacity or greater than the <see cref="T:System.Text.StringBuilder" /> object's maximum capacity.
+          </para>
         </item>
         <item>
           <para
-            >By calling the <see cref="M:System.Text.StringBuilder.EnsureCapacity(System.Int32)" /> method with the new capacity. The new capacity must not be greater than the <see cref="T:System.Text.StringBuilder" /> object's maximum capacity. However, unlike an assignment to the <see cref="P:System.Text.StringBuilder.Capacity" /> property, <see cref="M:System.Text.StringBuilder.EnsureCapacity(System.Int32)" /> does not throw an exception if the desired new capacity is less than the existing capacity; in this case, the method call has no effect. </para
-          >
+            >By calling the <see cref="M:System.Text.StringBuilder.EnsureCapacity(System.Int32)" /> method with the new capacity. The new capacity must not be greater than the <see cref="T:System.Text.StringBuilder" /> object's maximum capacity. However, unlike an assignment to the <see cref="P:System.Text.StringBuilder.Capacity" /> property, <see cref="M:System.Text.StringBuilder.EnsureCapacity(System.Int32)" /> does not throw an exception if the desired new capacity is less than the existing capacity; in this case, the method call has no effect.
+          </para>
         </item>
       </list>
       <para
-        >If the length of the string assigned to the <see cref="T:System.Text.StringBuilder" /> object in the constructor call exceeds either the default capacity or the specified capacity, the <see cref="P:System.Text.StringBuilder.Capacity" /> property is set to the length of the string specified with the <paramref name="value" /> parameter. </para
-      >
+        >If the length of the string assigned to the <see cref="T:System.Text.StringBuilder" /> object in the constructor call exceeds either the default capacity or the specified capacity, the <see cref="P:System.Text.StringBuilder.Capacity" /> property is set to the length of the string specified with the <paramref name="value" /> parameter.
+      </para>
       <para
-        >You can explicitly define the maximum capacity of a <see cref="T:System.Text.StringBuilder" /> object by calling the <see cref="M:System.Text.StringBuilder.#ctor(System.Int32,System.Int32)" /> constructor. You can't change the maximum capacity by assigning a new value to the <see cref="P:System.Text.StringBuilder.MaxCapacity" /> property, because it is read-only. </para
-      >
+        >You can explicitly define the maximum capacity of a <see cref="T:System.Text.StringBuilder" /> object by calling the <see cref="M:System.Text.StringBuilder.#ctor(System.Int32,System.Int32)" /> constructor. You can't change the maximum capacity by assigning a new value to the <see cref="P:System.Text.StringBuilder.MaxCapacity" /> property, because it is read-only.
+      </para>
       <para
-        >As the previous section shows, whenever the existing capacity is inadequate, additional memory is allocated and the capacity of a <see cref="T:System.Text.StringBuilder" /> object doubles up to the value defined by the <see cref="P:System.Text.StringBuilder.MaxCapacity" /> property. </para
-      >
+        >As the previous section shows, whenever the existing capacity is inadequate, additional memory is allocated and the capacity of a <see cref="T:System.Text.StringBuilder" /> object doubles up to the value defined by the <see cref="P:System.Text.StringBuilder.MaxCapacity" /> property.
+      </para>
       <para>In general, the default capacity and maximum capacity are adequate for most apps. You might consider setting these values under the following conditions: </para>
       <list type="bullet">
         <item>
           <para
-            >If the eventual size of the <see cref="T:System.Text.StringBuilder" /> object is likely to grow exceedingly large, typically in excess of several megabytes. In this case, there may be some performance benefit from setting the initial <see cref="P:System.Text.StringBuilder.Capacity" /> property to a significantly high value to eliminate the need for too many memory reallocations. </para
-          >
+            >If the eventual size of the <see cref="T:System.Text.StringBuilder" /> object is likely to grow exceedingly large, typically in excess of several megabytes. In this case, there may be some performance benefit from setting the initial <see cref="P:System.Text.StringBuilder.Capacity" /> property to a significantly high value to eliminate the need for too many memory reallocations.
+          </para>
         </item>
         <item>
           <para
-            >If your app is running on a system with limited memory. In this case, you may want to consider setting the <see cref="P:System.Text.StringBuilder.MaxCapacity" /> property to less than <see cref="F:System.Int32.MaxValue" /> if your app is handling large strings that may cause it to execute in a memory-constrained environment. </para
-          >
+            >If your app is running on a system with limited memory. In this case, you may want to consider setting the <see cref="P:System.Text.StringBuilder.MaxCapacity" /> property to less than <see cref="F:System.Int32.MaxValue" /> if your app is handling large strings that may cause it to execute in a memory-constrained environment.
+          </para>
         </item>
       </list>
       <format type="text/html">
@@ -253,8 +253,8 @@
         <h2>Instantiating a StringBuilder object</h2>
       </format>
       <para
-        >You instantiate a <see cref="T:System.Text.StringBuilder" /> object by calling one of its six overloaded class constructors, which are listed in the following table. Three of the constructors instantiate a <see cref="T:System.Text.StringBuilder" /> object whose value is an empty string, but set its <see cref="P:System.Text.StringBuilder.Capacity" /> and <see cref="P:System.Text.StringBuilder.MaxCapacity" /> values differently. The remaining three constructors define a <see cref="T:System.Text.StringBuilder" /> object that has a specific string value and capacity. Two of the three constructors use the default maximum capacity of <see cref="F:System.Int32.MaxValue" />, whereas the third allows you to set the maximum capacity. </para
-      >
+        >You instantiate a <see cref="T:System.Text.StringBuilder" /> object by calling one of its six overloaded class constructors, which are listed in the following table. Three of the constructors instantiate a <see cref="T:System.Text.StringBuilder" /> object whose value is an empty string, but set its <see cref="P:System.Text.StringBuilder.Capacity" /> and <see cref="P:System.Text.StringBuilder.MaxCapacity" /> values differently. The remaining three constructors define a <see cref="T:System.Text.StringBuilder" /> object that has a specific string value and capacity. Two of the three constructors use the default maximum capacity of <see cref="F:System.Int32.MaxValue" />, whereas the third allows you to set the maximum capacity.
+      </para>
       <list type="table">
         <listheader>
           <item>
@@ -378,8 +378,8 @@
           </term>
           <description>
             <para
-              >Defined by <paramref name="value" />. <see cref="M:System.String.Substring(System.Int32)" />(<paramref name="startIndex" />, <paramref name="length" />)  </para
-            >
+              >Defined by <paramref name="value" />. <see cref="M:System.String.Substring(System.Int32)" />(<paramref name="startIndex" />, <paramref name="length" />)
+            </para>
           </description>
           <description>
             <para
@@ -393,8 +393,8 @@
       </list>
       <para></para>
       <para
-        >The following example uses three of these constructor overloads to instantiate <see cref="T:System.Text.StringBuilder" /> objects. </para
-      >
+        >The following example uses three of these constructor overloads to instantiate <see cref="T:System.Text.StringBuilder" /> objects.
+      </para>
       <para>code reference: System.Text.StringBuilder.Class#6</para>
       <format type="text/html">
         <a href="#Calling" />
@@ -403,8 +403,8 @@
         <h2>Calling StringBuilder methods</h2>
       </format>
       <para
-        >Most of the methods that modify the string in a <see cref="T:System.Text.StringBuilder" /> instance return a reference to that same instance. This enables you to call <see cref="T:System.Text.StringBuilder" /> methods in two ways: </para
-      >
+        >Most of the methods that modify the string in a <see cref="T:System.Text.StringBuilder" /> instance return a reference to that same instance. This enables you to call <see cref="T:System.Text.StringBuilder" /> methods in two ways:
+      </para>
       <list type="bullet">
         <item>
           <para>You can make individual method calls and ignore the return value, as the following example does. </para>
@@ -422,8 +422,8 @@
         <h2>Performing StringBuilder operations</h2>
       </format>
       <para
-        >You can use the methods of the <see cref="T:System.Text.StringBuilder" /> class to iterate, add, delete, or modify characters in a <see cref="T:System.Text.StringBuilder" /> object. </para
-      >
+        >You can use the methods of the <see cref="T:System.Text.StringBuilder" /> class to iterate, add, delete, or modify characters in a <see cref="T:System.Text.StringBuilder" /> object.
+      </para>
       <format type="text/html">
         <a href="#Iterating" />
       </format>
@@ -431,11 +431,11 @@
         <h2>Iterating StringBuilder characters</h2>
       </format>
       <para
-        >You can access the characters in a <see cref="T:System.Text.StringBuilder" /> object by using the <see cref="P:System.Text.StringBuilder.Chars(System.Int32)" /> property. In C#, <see cref="P:System.Text.StringBuilder.Chars(System.Int32)" /> is an indexer; in Visual Basic, it is the default property of the <see cref="T:System.Text.StringBuilder" /> class. This enables you to set or retrieve individual characters by using their index only, without explicitly referencing the <see cref="P:System.Text.StringBuilder.Chars(System.Int32)" /> property. Characters in a <see cref="T:System.Text.StringBuilder" /> object begin at index 0 (zero) and continue to index <see cref="P:System.Text.StringBuilder.Length" /> - 1. </para
-      >
+        >You can access the characters in a <see cref="T:System.Text.StringBuilder" /> object by using the <see cref="P:System.Text.StringBuilder.Chars(System.Int32)" /> property. In C#, <see cref="P:System.Text.StringBuilder.Chars(System.Int32)" /> is an indexer; in Visual Basic, it is the default property of the <see cref="T:System.Text.StringBuilder" /> class. This enables you to set or retrieve individual characters by using their index only, without explicitly referencing the <see cref="P:System.Text.StringBuilder.Chars(System.Int32)" /> property. Characters in a <see cref="T:System.Text.StringBuilder" /> object begin at index 0 (zero) and continue to index <see cref="P:System.Text.StringBuilder.Length" /> - 1.
+      </para>
       <para
-        >The following example illustrates the <see cref="P:System.Text.StringBuilder.Chars(System.Int32)" /> property. It appends ten random numbers to a <see cref="T:System.Text.StringBuilder" /> object, and then iterates each character. If the character's Unicode category is <see cref="F:System.Globalization.UnicodeCategory.DecimalDigitNumber" />, it decreases the number by 1 (or changes the number to 9 if its value is 0). The example displays the contents of the <see cref="T:System.Text.StringBuilder" /> object both before and after the values of individual characters were changed. </para
-      >
+        >The following example illustrates the <see cref="P:System.Text.StringBuilder.Chars(System.Int32)" /> property. It appends ten random numbers to a <see cref="T:System.Text.StringBuilder" /> object, and then iterates each character. If the character's Unicode category is <see cref="F:System.Globalization.UnicodeCategory.DecimalDigitNumber" />, it decreases the number by 1 (or changes the number to 9 if its value is 0). The example displays the contents of the <see cref="T:System.Text.StringBuilder" /> object both before and after the values of individual characters were changed.
+      </para>
       <para>code reference: System.Text.StringBuilder.Class#7</para>
       <format type="text/html">
         <a href="#Adding" />
@@ -444,35 +444,35 @@
         <h2>Adding text to a StringBuilder object</h2>
       </format>
       <para
-        >The <see cref="T:System.Text.StringBuilder" /> class includes the following methods for expanding the contents of a <see cref="T:System.Text.StringBuilder" /> object: </para
-      >
+        >The <see cref="T:System.Text.StringBuilder" /> class includes the following methods for expanding the contents of a <see cref="T:System.Text.StringBuilder" /> object:
+      </para>
       <list type="bullet">
         <item>
           <para
-            >The <see cref="M:System.Text.StringBuilder.Append(System.String)" /> method appends a string, a substring, a character array, a portion of a character array, a single character repeated multiple times, or the string representation of a primitive data type to a <see cref="T:System.Text.StringBuilder" /> object.  </para
-          >
+            >The <see cref="M:System.Text.StringBuilder.Append(System.String)" /> method appends a string, a substring, a character array, a portion of a character array, a single character repeated multiple times, or the string representation of a primitive data type to a <see cref="T:System.Text.StringBuilder" /> object.
+          </para>
         </item>
         <item>
           <para
-            >The <see cref="M:System.Text.StringBuilder.AppendLine" /> method appends a line terminator or a string along with a line terminator to a <see cref="T:System.Text.StringBuilder" /> object.  </para
-          >
+            >The <see cref="M:System.Text.StringBuilder.AppendLine" /> method appends a line terminator or a string along with a line terminator to a <see cref="T:System.Text.StringBuilder" /> object.
+          </para>
         </item>
         <item>
           <para
             >The <see cref="M:System.Text.StringBuilder.AppendFormat(System.String,System.Object[])" /> method appends a <format type="text/html">
               <a href="87b7d528-73f6-43c6-b71a-f23043039a49">composite format string</a>
-            </format> to a <see cref="T:System.Text.StringBuilder" /> object. The string representations of objects included in the result string can reflect the formatting conventions of the current system culture or a specified culture. </para
-          >
+            </format> to a <see cref="T:System.Text.StringBuilder" /> object. The string representations of objects included in the result string can reflect the formatting conventions of the current system culture or a specified culture.
+          </para>
         </item>
         <item>
           <para
-            >The <see cref="M:System.Text.StringBuilder.Insert(System.Int32,System.String)" /> method inserts a string, a substring, multiple repetitions of a string, a character array, a portion of a character array, or the string representation of a primitive data type at a specified position in the <see cref="T:System.Text.StringBuilder" /> object. The position is defined by a zero-based index. </para
-          >
+            >The <see cref="M:System.Text.StringBuilder.Insert(System.Int32,System.String)" /> method inserts a string, a substring, multiple repetitions of a string, a character array, a portion of a character array, or the string representation of a primitive data type at a specified position in the <see cref="T:System.Text.StringBuilder" /> object. The position is defined by a zero-based index.
+          </para>
         </item>
       </list>
       <para
-        >The following example uses the <see cref="M:System.Text.StringBuilder.Append(System.String)" />, <see cref="M:System.Text.StringBuilder.AppendLine" />, <see cref="M:System.Text.StringBuilder.AppendFormat(System.String,System.Object[])" />, and <see cref="M:System.Text.StringBuilder.Insert(System.Int32,System.String)" /> methods to expand the text of a <see cref="T:System.Text.StringBuilder" /> object. </para
-      >
+        >The following example uses the <see cref="M:System.Text.StringBuilder.Append(System.String)" />, <see cref="M:System.Text.StringBuilder.AppendLine" />, <see cref="M:System.Text.StringBuilder.AppendFormat(System.String,System.Object[])" />, and <see cref="M:System.Text.StringBuilder.Insert(System.Int32,System.String)" /> methods to expand the text of a <see cref="T:System.Text.StringBuilder" /> object.
+      </para>
       <para>code reference: System.Text.StringBuilder.Class#9</para>
       <format type="text/html">
         <a href="#Deleting" />
@@ -481,11 +481,11 @@
         <h2>Deleting text from a StringBuilder object</h2>
       </format>
       <para
-        >The <see cref="T:System.Text.StringBuilder" /> class includes methods that can reduce the size of the current <see cref="T:System.Text.StringBuilder" /> instance. The <see cref="M:System.Text.StringBuilder.Clear" /> method removes all characters and sets the <see cref="P:System.Text.StringBuilder.Length" /> property to zero. The <see cref="M:System.Text.StringBuilder.Remove(System.Int32,System.Int32)" /> method deletes a specified number of characters starting at a particular index position. In addition, you can remove characters from the end of a <see cref="T:System.Text.StringBuilder" /> object by setting its <see cref="P:System.Text.StringBuilder.Length" /> property to a value that is less than the length of the current instance. </para
-      >
+        >The <see cref="T:System.Text.StringBuilder" /> class includes methods that can reduce the size of the current <see cref="T:System.Text.StringBuilder" /> instance. The <see cref="M:System.Text.StringBuilder.Clear" /> method removes all characters and sets the <see cref="P:System.Text.StringBuilder.Length" /> property to zero. The <see cref="M:System.Text.StringBuilder.Remove(System.Int32,System.Int32)" /> method deletes a specified number of characters starting at a particular index position. In addition, you can remove characters from the end of a <see cref="T:System.Text.StringBuilder" /> object by setting its <see cref="P:System.Text.StringBuilder.Length" /> property to a value that is less than the length of the current instance.
+      </para>
       <para
-        >The following example removes some of the text from a <see cref="T:System.Text.StringBuilder" /> object, displays its resulting capacity, maximum capacity, and length property values, and then calls the <see cref="M:System.Text.StringBuilder.Clear" /> method to remove all the characters from the <see cref="T:System.Text.StringBuilder" /> object. </para
-      >
+        >The following example removes some of the text from a <see cref="T:System.Text.StringBuilder" /> object, displays its resulting capacity, maximum capacity, and length property values, and then calls the <see cref="M:System.Text.StringBuilder.Clear" /> method to remove all the characters from the <see cref="T:System.Text.StringBuilder" /> object.
+      </para>
       <para>code reference: System.Text.StringBuilder.Class#10</para>
       <format type="text/html">
         <a href="#Modifying" />
@@ -494,8 +494,8 @@
         <h2>Modifying the text in a StringBuilder object</h2>
       </format>
       <para
-        >The <see cref="M:System.Text.StringBuilder.Replace(System.String,System.String)" /> method replaces all occurrences of a character or a string in the entire <see cref="T:System.Text.StringBuilder" /> object or in a particular character range. The following example uses the <see cref="M:System.Text.StringBuilder.Replace(System.String,System.String)" /> method to replace all exclamation points (!) with question marks (?) in the <see cref="T:System.Text.StringBuilder" /> object. </para
-      >
+        >The <see cref="M:System.Text.StringBuilder.Replace(System.String,System.String)" /> method replaces all occurrences of a character or a string in the entire <see cref="T:System.Text.StringBuilder" /> object or in a particular character range. The following example uses the <see cref="M:System.Text.StringBuilder.Replace(System.String,System.String)" /> method to replace all exclamation points (!) with question marks (?) in the <see cref="T:System.Text.StringBuilder" /> object.
+      </para>
       <para>code reference: System.Text.StringBuilder.Class#11</para>
       <format type="text/html">
         <a href="#Searching" />
@@ -504,8 +504,8 @@
         <h2>Searching the text in a StringBuilder object</h2>
       </format>
       <para
-        >The <see cref="T:System.Text.StringBuilder" /> class does not include methods similar to the <see cref="M:System.String.Contains(System.String)" />, <see cref="M:System.String.IndexOf(System.String)" />, and <see cref="M:System.String.StartsWith(System.String)" /> methods provided by the <see cref="T:System.String" /> class, which allow you to search the object for a particular character or a substring. Determining the presence or starting character position of a substring requires that you search a <see cref="T:System.String" /> value by using either a string search method or a regular expression method. There are four ways to implement such searches, as the following table shows. </para
-      >
+        >The <see cref="T:System.Text.StringBuilder" /> class does not include methods similar to the <see cref="M:System.String.Contains(System.String)" />, <see cref="M:System.String.IndexOf(System.String)" />, and <see cref="M:System.String.StartsWith(System.String)" /> methods provided by the <see cref="T:System.String" /> class, which allow you to search the object for a particular character or a substring. Determining the presence or starting character position of a substring requires that you search a <see cref="T:System.String" /> value by using either a string search method or a regular expression method. There are four ways to implement such searches, as the following table shows.
+      </para>
       <list type="table">
         <listheader>
           <item>
@@ -523,8 +523,8 @@
         <item>
           <term>
             <para
-              >Search string values before adding them to the <see cref="T:System.Text.StringBuilder" /> object. </para
-            >
+              >Search string values before adding them to the <see cref="T:System.Text.StringBuilder" /> object.
+            </para>
           </term>
           <description>
             <para>Useful for determining whether a substring exists. </para>
@@ -541,23 +541,23 @@
           </term>
           <description>
             <para
-              >Easy to use if you assign all the text to a <see cref="T:System.Text.StringBuilder" /> object, and then begin to modify it. </para
-            >
+              >Easy to use if you assign all the text to a <see cref="T:System.Text.StringBuilder" /> object, and then begin to modify it.
+            </para>
           </description>
           <description>
             <para
               >Cumbersome to repeatedly call <see cref="M:System.Text.StringBuilder.ToString" /> if you must make modifications before all text is added to the <see cref="T:System.Text.StringBuilder" /> object.</para
             >
             <para
-              >You must remember to work from the end of the <see cref="T:System.Text.StringBuilder" /> object's text if you're making changes. </para
-            >
+              >You must remember to work from the end of the <see cref="T:System.Text.StringBuilder" /> object's text if you're making changes.
+            </para>
           </description>
         </item>
         <item>
           <term>
             <para
-              >Use the <see cref="P:System.Text.StringBuilder.Chars(System.Int32)" /> property to sequentially search a range of characters. </para
-            >
+              >Use the <see cref="P:System.Text.StringBuilder.Chars(System.Int32)" /> property to sequentially search a range of characters.
+            </para>
           </term>
           <description>
             <para>Useful if you're concerned with individual characters or a small substring. </para>
@@ -569,16 +569,16 @@
         <item>
           <term>
             <para
-              >Convert the <see cref="T:System.Text.StringBuilder" /> object to a <see cref="T:System.String" /> object, and perform modifications on the <see cref="T:System.String" /> object. </para
-            >
+              >Convert the <see cref="T:System.Text.StringBuilder" /> object to a <see cref="T:System.String" /> object, and perform modifications on the <see cref="T:System.String" /> object.
+            </para>
           </term>
           <description>
             <para>Useful if the number of modifications is small. </para>
           </description>
           <description>
             <para
-              >Negates the performance benefit of the <see cref="T:System.Text.StringBuilder" /> class if the number of modifications is large. </para
-            >
+              >Negates the performance benefit of the <see cref="T:System.Text.StringBuilder" /> class if the number of modifications is large.
+            </para>
           </description>
         </item>
       </list>
@@ -587,22 +587,22 @@
       <list type="bullet">
         <item>
           <para
-            >If the goal of the search is to determine whether a particular substring exists (that is, if you aren't interested in the position of the substring), you can search strings before storing them in the <see cref="T:System.Text.StringBuilder" /> object. The following example provides one possible implementation. It defines a StringBuilderFinder class whose constructor is passed a reference to a <see cref="T:System.Text.StringBuilder" /> object and the substring to find in the string. In this case, the example tries to determine whether recorded temperatures are in Fahrenheit or Celsius, and adds the appropriate introductory text to the beginning of the <see cref="T:System.Text.StringBuilder" /> object. A random number generator is used to select an array that contains data in either degrees Celsius or degrees Fahrenheit.  </para
-          >
+            >If the goal of the search is to determine whether a particular substring exists (that is, if you aren't interested in the position of the substring), you can search strings before storing them in the <see cref="T:System.Text.StringBuilder" /> object. The following example provides one possible implementation. It defines a StringBuilderFinder class whose constructor is passed a reference to a <see cref="T:System.Text.StringBuilder" /> object and the substring to find in the string. In this case, the example tries to determine whether recorded temperatures are in Fahrenheit or Celsius, and adds the appropriate introductory text to the beginning of the <see cref="T:System.Text.StringBuilder" /> object. A random number generator is used to select an array that contains data in either degrees Celsius or degrees Fahrenheit.
+          </para>
           <para>code reference: System.Text.StringBuilder.Class#12</para>
         </item>
         <item>
           <para
-            >Call the <see cref="M:System.Text.StringBuilder.ToString" /> method to convert the <see cref="T:System.Text.StringBuilder" /> object to a <see cref="T:System.String" /> object. You can search the string by using methods such as <see cref="M:System.String.LastIndexOf(System.String)" /> or <see cref="M:System.String.StartsWith(System.String)" />, or you can use regular expressions and the <see cref="T:System.Text.RegularExpressions.Regex" /> class to search for patterns. Because both <see cref="T:System.Text.StringBuilder" /> and <see cref="T:System.String" /> objects use UTF-16 encoding to store characters, the index positions of characters, substrings, and regular expression matches are the same in both objects. This enables you to use <see cref="T:System.Text.StringBuilder" /> methods to make changes at the same position at which that text is found in the <see cref="T:System.String" /> object.  </para
-          >
+            >Call the <see cref="M:System.Text.StringBuilder.ToString" /> method to convert the <see cref="T:System.Text.StringBuilder" /> object to a <see cref="T:System.String" /> object. You can search the string by using methods such as <see cref="M:System.String.LastIndexOf(System.String)" /> or <see cref="M:System.String.StartsWith(System.String)" />, or you can use regular expressions and the <see cref="T:System.Text.RegularExpressions.Regex" /> class to search for patterns. Because both <see cref="T:System.Text.StringBuilder" /> and <see cref="T:System.String" /> objects use UTF-16 encoding to store characters, the index positions of characters, substrings, and regular expression matches are the same in both objects. This enables you to use <see cref="T:System.Text.StringBuilder" /> methods to make changes at the same position at which that text is found in the <see cref="T:System.String" /> object.
+          </para>
           <block subset="none" type="note">
             <para
-              >If you adopt this approach, you should work from the end of the <see cref="T:System.Text.StringBuilder" /> object to its beginning so that you don't have to repeatedly convert the <see cref="T:System.Text.StringBuilder" /> object to a string.  </para
-            >
+              >If you adopt this approach, you should work from the end of the <see cref="T:System.Text.StringBuilder" /> object to its beginning so that you don't have to repeatedly convert the <see cref="T:System.Text.StringBuilder" /> object to a string.
+            </para>
           </block>
           <para
-            >The following example illustrates this approach. It stores four occurrences of each letter of the English alphabet in a <see cref="T:System.Text.StringBuilder" /> object. It then converts the text to a <see cref="T:System.String" /> object and uses a regular expression to identify the starting position of each four-character sequence. Finally, it adds an underscore before each four-character sequence except for the first sequence, and converts the first character of the sequence to uppercase.  </para
-          >
+            >The following example illustrates this approach. It stores four occurrences of each letter of the English alphabet in a <see cref="T:System.Text.StringBuilder" /> object. It then converts the text to a <see cref="T:System.String" /> object and uses a regular expression to identify the starting position of each four-character sequence. Finally, it adds an underscore before each four-character sequence except for the first sequence, and converts the first character of the sequence to uppercase.
+          </para>
           <para>code reference: System.Text.StringBuilder.Class#13</para>
         </item>
         <item>
@@ -610,17 +610,17 @@
             >Use the <see cref="P:System.Text.StringBuilder.Chars(System.Int32)" /> property to sequentially search a range of characters in a <see cref="T:System.Text.StringBuilder" /> object. This approach may not be practical if the number of characters to be searched is large or the search logic is particularly complex.</para
           >
           <para
-            >The following example is identical in functionality to the previous example but differs in implementation. It uses the <see cref="P:System.Text.StringBuilder.Chars(System.Int32)" /> property to detect when a character value has changed, inserts an underscore at that position, and converts the first character in the new sequence to uppercase.  </para
-          >
+            >The following example is identical in functionality to the previous example but differs in implementation. It uses the <see cref="P:System.Text.StringBuilder.Chars(System.Int32)" /> property to detect when a character value has changed, inserts an underscore at that position, and converts the first character in the new sequence to uppercase.
+          </para>
           <para>code reference: System.Text.StringBuilder.Class#14</para>
         </item>
         <item>
           <para
-            >Store all the unmodified text in the <see cref="T:System.Text.StringBuilder" /> object, call the <see cref="M:System.Text.StringBuilder.ToString" /> method to convert the <see cref="T:System.Text.StringBuilder" /> object to a <see cref="T:System.String" /> object, and perform the modifications on the <see cref="T:System.String" /> object. You can use this approach if you have only a few modifications; otherwise, the cost of working with immutable strings may negate the performance benefits of using a <see cref="T:System.Text.StringBuilder" /> object. </para
-          >
+            >Store all the unmodified text in the <see cref="T:System.Text.StringBuilder" /> object, call the <see cref="M:System.Text.StringBuilder.ToString" /> method to convert the <see cref="T:System.Text.StringBuilder" /> object to a <see cref="T:System.String" /> object, and perform the modifications on the <see cref="T:System.String" /> object. You can use this approach if you have only a few modifications; otherwise, the cost of working with immutable strings may negate the performance benefits of using a <see cref="T:System.Text.StringBuilder" /> object.
+          </para>
           <para
-            >The following example is identical in functionality to the previous two examples but differs in implementation. It creates a <see cref="T:System.Text.StringBuilder" /> object, converts it to a <see cref="T:System.String" /> object, and then uses a regular expression to perform all remaining modifications on the string. The <see cref="M:System.Text.RegularExpressions.Regex.Replace(System.String,System.String,System.Text.RegularExpressions.MatchEvaluator)" /> method uses a lambda expression to perform the replacement on each match. </para
-          >
+            >The following example is identical in functionality to the previous two examples but differs in implementation. It creates a <see cref="T:System.Text.StringBuilder" /> object, converts it to a <see cref="T:System.String" /> object, and then uses a regular expression to perform all remaining modifications on the string. The <see cref="M:System.Text.RegularExpressions.Regex.Replace(System.String,System.String,System.Text.RegularExpressions.MatchEvaluator)" /> method uses a lambda expression to perform the replacement on each match.
+          </para>
           <para>code reference: System.Text.StringBuilder.Class#15</para>
         </item>
       </list>
@@ -631,8 +631,8 @@
         <h2>Converting the StringBuilder object to a string</h2>
       </format>
       <para
-        >You must convert the <see cref="T:System.Text.StringBuilder" /> object to a <see cref="T:System.String" /> object before you can pass the string represented by the <see cref="T:System.Text.StringBuilder" /> object to a method that has a <see cref="T:System.String" /> parameter or display it in the user interface. You perform this conversion by calling the <see cref="M:System.Text.StringBuilder.ToString" /> method. For an illustration, see the previous example, which calls the <see cref="M:System.Text.StringBuilder.ToString" /> method to convert a <see cref="T:System.Text.StringBuilder" /> object to a string so that it can be passed to a regular expression method. </para
-      >
+        >You must convert the <see cref="T:System.Text.StringBuilder" /> object to a <see cref="T:System.String" /> object before you can pass the string represented by the <see cref="T:System.Text.StringBuilder" /> object to a method that has a <see cref="T:System.String" /> parameter or display it in the user interface. You perform this conversion by calling the <see cref="M:System.Text.StringBuilder.ToString" /> method. For an illustration, see the previous example, which calls the <see cref="M:System.Text.StringBuilder.ToString" /> method to convert a <see cref="T:System.Text.StringBuilder" /> object to a string so that it can be passed to a regular expression method.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -718,8 +718,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The suggested starting size of this instance. </param
-        >
+          />The suggested starting size of this instance.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -761,8 +761,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string used to initialize the value of the instance. If <paramref name="value" /> is null, the new <see cref="T:System.Text.StringBuilder" /> will contain the empty string (that is, it contains <see cref="F:System.String.Empty" />). </param
-        >
+          />The string used to initialize the value of the instance. If <paramref name="value" /> is null, the new <see cref="T:System.Text.StringBuilder" /> will contain the empty string (that is, it contains <see cref="F:System.String.Empty" />).
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -795,8 +795,8 @@
             >If <paramref name="capacity" /> is zero, the implementation-specific default capacity is used.</para
           >
           <para
-            >The <paramref name="maxCapacity" /> property defines the maximum number of characters that the current instance can hold. Its value is assigned to the <see cref="P:System.Text.StringBuilder.MaxCapacity" /> property. If the number of characters to be stored in the current instance exceeds this <paramref name="maxCapacity" /> value, the <see cref="T:System.Text.StringBuilder" /> object does not allocate additional memory, but instead throws an exception. </para
-          >
+            >The <paramref name="maxCapacity" /> property defines the maximum number of characters that the current instance can hold. Its value is assigned to the <see cref="P:System.Text.StringBuilder.MaxCapacity" /> property. If the number of characters to be stored in the current instance exceeds this <paramref name="maxCapacity" /> value, the <see cref="T:System.Text.StringBuilder" /> object does not allocate additional memory, but instead throws an exception.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -809,15 +809,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The suggested starting size of the <see cref="T:System.Text.StringBuilder" />. </param
-        >
+          />The suggested starting size of the <see cref="T:System.Text.StringBuilder" />.
+        </param>
         <param name="maxCapacity">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum number of characters the current string can contain. </param
-        >
+          />The maximum number of characters the current string can contain.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -857,15 +857,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string used to initialize the value of the instance. If <paramref name="value" /> is null, the new <see cref="T:System.Text.StringBuilder" /> will contain the empty string (that is, it contains <see cref="F:System.String.Empty" />). </param
-        >
+          />The string used to initialize the value of the instance. If <paramref name="value" /> is null, the new <see cref="T:System.Text.StringBuilder" /> will contain the empty string (that is, it contains <see cref="F:System.String.Empty" />).
+        </param>
         <param name="capacity">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The suggested starting size of the <see cref="T:System.Text.StringBuilder" />. </param
-        >
+          />The suggested starting size of the <see cref="T:System.Text.StringBuilder" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -910,29 +910,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string that contains the substring used to initialize the value of this instance. If <paramref name="value" /> is null, the new <see cref="T:System.Text.StringBuilder" /> will contain the empty string (that is, it contains <see cref="F:System.String.Empty" />). </param
-        >
+          />The string that contains the substring used to initialize the value of this instance. If <paramref name="value" /> is null, the new <see cref="T:System.Text.StringBuilder" /> will contain the empty string (that is, it contains <see cref="F:System.String.Empty" />).
+        </param>
         <param name="startIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position within <paramref name="value" /> where the substring begins. </param
-        >
+          />The position within <paramref name="value" /> where the substring begins.
+        </param>
         <param name="length">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters in the substring. </param
-        >
+          />The number of characters in the substring.
+        </param>
         <param name="capacity">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The suggested starting size of the <see cref="T:System.Text.StringBuilder" />. </param
-        >
+          />The suggested starting size of the <see cref="T:System.Text.StringBuilder" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Append">
@@ -984,8 +984,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The Boolean value to append. </param
-        >
+          />The Boolean value to append.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1035,12 +1035,8 @@
           <para>A reference to this instance after the append operation has completed.</para>
         </returns>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The value to append. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to append.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1091,8 +1087,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The Unicode character to append. </param
-        >
+          />The Unicode character to append.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1146,8 +1142,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array of characters to append. </param
-        >
+          />The array of characters to append.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1197,12 +1193,8 @@
           <para>A reference to this instance after the append operation has completed.</para>
         </returns>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The value to append. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to append.
+        </param>
       </Docs>
       <Excluded>1</Excluded>
       <ExcludedLibrary>ExtendedNumerics</ExcludedLibrary>
@@ -1253,12 +1245,8 @@
           <para>A reference to this instance after the append operation has completed.</para>
         </returns>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The value to append. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to append.
+        </param>
       </Docs>
       <Excluded>1</Excluded>
       <ExcludedLibrary>ExtendedNumerics</ExcludedLibrary>
@@ -1309,12 +1297,8 @@
           <para>A reference to this instance after the append operation has completed.</para>
         </returns>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The value to append. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to append.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1361,12 +1345,8 @@
           <para>A reference to this instance after the append operation has completed.</para>
         </returns>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The value to append. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to append.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1416,12 +1396,8 @@
           <para>A reference to this instance after the append operation has completed.</para>
         </returns>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The value to append. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to append.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1471,12 +1447,8 @@
           <para>A reference to this instance after the append operation has completed.</para>
         </returns>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The object to append. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The object to append.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1531,12 +1503,8 @@
           <para>A reference to this instance after the append operation has completed.</para>
         </returns>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The value to append. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to append.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1586,12 +1554,8 @@
           <para>A reference to this instance after the append operation has completed.</para>
         </returns>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The value to append. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to append.
+        </param>
       </Docs>
       <Excluded>1</Excluded>
       <ExcludedLibrary>ExtendedNumerics</ExcludedLibrary>
@@ -1640,12 +1604,8 @@
           <para>A reference to this instance after the append operation has completed.</para>
         </returns>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The string to append. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The string to append.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1700,12 +1660,8 @@
           <para>A reference to this instance after the append operation has completed.</para>
         </returns>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The value to append. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to append.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1760,12 +1716,8 @@
           <para>A reference to this instance after the append operation has completed.</para>
         </returns>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The value to append. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to append.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1820,12 +1772,8 @@
           <para>A reference to this instance after the append operation has completed.</para>
         </returns>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The value to append. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to append.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1876,19 +1824,15 @@
           <para>A reference to this instance after the append operation has completed.</para>
         </returns>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The character to append. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The character to append.
+        </param>
         <param name="repeatCount">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of times to append <paramref name="value" />. </param
-        >
+          />The number of times to append <paramref name="value" />.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1952,22 +1896,22 @@
           <para>A reference to this instance after the append operation has completed.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />A character array. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A character array.
+        </param>
         <param name="startIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting position in <paramref name="value" />. </param
-        >
+          />The starting position in <paramref name="value" />.
+        </param>
         <param name="charCount">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters to append. </param
-        >
+          />The number of characters to append.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2004,12 +1948,12 @@
         >
         <exception cref="T:System.ArgumentOutOfRangeException">
           <para>
-            <paramref name="charCount" /> or <paramref name="startIndex" /> is less than zero. </para
-          >
+            <paramref name="charCount" /> or <paramref name="startIndex" /> is less than zero.
+          </para>
           <para> -or- </para>
           <para
-            >The sum of <paramref name="startIndex" /> and <paramref name="charCount" /> is greater than the length of <paramref name="value" /> . </para
-          >
+            >The sum of <paramref name="startIndex" /> and <paramref name="charCount" /> is greater than the length of <paramref name="value" /> .
+          </para>
         </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2035,22 +1979,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string that contains the substring to append. </param
-        >
+          />The string that contains the substring to append.
+        </param>
         <param name="startIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting position of the substring within <paramref name="value" />. </param
-        >
+          />The starting position of the substring within <paramref name="value" />.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters in <paramref name="value" /> to append. </param
-        >
+          />The number of characters in <paramref name="value" /> to append.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2099,8 +2043,7 @@ public class StringBuilderTest {
       Console.WriteLine( sb.AppendFormat("temperature today was {0, 6}.", 88) ); 
   }
 }
-      </code
-          >
+      </code>
           <para>The output is</para>
           <code>The high temperature today was     88.
  </code>
@@ -2179,8 +2122,8 @@ public class StringBuilderTest {
             <paramref name="arg0" /> represents the object to be formatted. Each format item in <paramref name="format" /> is replaced with the string representation of <paramref name="arg0" />. If the format item includes <paramref name="formatString" /> and <paramref name="arg0" /> implements the <see cref="T:System.IFormattable" /> interface, then arg0.Format(formatString, null) defines the formatting. Otherwise, arg0.ToString() defines the formatting.</para
           >
           <para
-            >If the string assigned to <paramref name="format" /> is "Thank you for your donation of {0:####} cans of food to our charitable organization." and <paramref name="arg0" /> is an integer with the value 10, the return value will be "Thank you for your donation of 10 cans of food to our charitable organization." </para
-          >
+            >If the string assigned to <paramref name="format" /> is "Thank you for your donation of {0:####} cans of food to our charitable organization." and <paramref name="arg0" /> is an integer with the value 10, the return value will be "Thank you for your donation of 10 cans of food to our charitable organization."
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2197,15 +2140,11 @@ public class StringBuilderTest {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A composite format string (see Remarks). </param
-        >
+          />A composite format string (see Remarks).
+        </param>
         <param name="arg0">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />An object to format. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />An object to format.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2262,8 +2201,7 @@ public class StringBuilderTest {
      Console.WriteLine( sb.AppendFormat("temperature today was {0}, {1} {2}{3}.", strings) ); 
   }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <para>
             <c>The high
@@ -2275,8 +2213,8 @@ public class StringBuilderTest {
           <para
             >This method uses the <format type="text/html">
               <a href="87b7d528-73f6-43c6-b71a-f23043039a49">composite formatting feature</a>
-            </format> of the .NET Framework to convert the value of an object to its text representation and embed that representation in the current <see cref="T:System.Text.StringBuilder" /> object. </para
-          >
+            </format> of the .NET Framework to convert the value of an object to its text representation and embed that representation in the current <see cref="T:System.Text.StringBuilder" /> object.
+          </para>
           <para
             >The <paramref name="format" /> parameter consists of zero or more runs of text intermixed with zero or more indexed placeholders, called format items, that correspond to objects in the parameter list of this method. The formatting process replaces each format item with the string representation of the corresponding object.</para
           >
@@ -2344,8 +2282,8 @@ public class StringBuilderTest {
             <paramref name="args" /> represents the objects to be formatted. Each format item in <paramref name="format" /> is replaced with the string representation of the corresponding object in <paramref name="args" />. If the format item includes <paramref name="formatString" /> and the corresponding object in <paramref name="args" /> implements the <see cref="T:System.IFormattable" /> interface, then args[index].Format(formatString, provider) defines the formatting. Otherwise, args[index].ToString(provider) defines the formatting.</para
           >
           <para
-            >If the string assigned to <paramref name="format" /> is "Thank you for your donation of {0:####} cans of food to our charitable organization." and <paramref name="arg0" /> is an integer with the value 10, the return value will be "Thank you for your donation of 10 cans of food to our charitable organization." </para
-          >
+            >If the string assigned to <paramref name="format" /> is "Thank you for your donation of {0:####} cans of food to our charitable organization." and <paramref name="arg0" /> is an integer with the value 10, the return value will be "Thank you for your donation of 10 cans of food to our charitable organization."
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2362,15 +2300,15 @@ public class StringBuilderTest {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A composite format string (see Remarks). </param
-        >
+          />A composite format string (see Remarks).
+        </param>
         <param name="args">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of objects to format. </param
-        >
+          />An array of objects to format.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2430,8 +2368,7 @@ public class StringBuilderTest {
      Console.WriteLine(sb.AppendFormat(null, "temperature today was {0}, {1} {2}.", a, b, c) ); 
   }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <para>
             <c>The high
@@ -2443,8 +2380,8 @@ public class StringBuilderTest {
           <para
             >This method uses the <format type="text/html">
               <a href="87b7d528-73f6-43c6-b71a-f23043039a49">composite formatting feature</a>
-            </format> of the .NET Framework to convert the value of an object to its text representation and embed that representation in the current <see cref="T:System.Text.StringBuilder" /> object. </para
-          >
+            </format> of the .NET Framework to convert the value of an object to its text representation and embed that representation in the current <see cref="T:System.Text.StringBuilder" /> object.
+          </para>
           <para
             >The <paramref name="format" /> parameter consists of zero or more runs of text intermixed with zero or more indexed placeholders, called format items, that correspond to objects in the parameter list of this method. The formatting process replaces each format item with the string representation of the corresponding object.</para
           >
@@ -2547,23 +2484,23 @@ public class StringBuilderTest {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A reference to this instance after the append operation has completed. After the append operation, this instance contains any data that existed before the operation, suffixed by a copy of <paramref name="format" /> where any format specification is replaced by the string representation of the corresponding object argument. </para
-          >
+            >A reference to this instance after the append operation has completed. After the append operation, this instance contains any data that existed before the operation, suffixed by a copy of <paramref name="format" /> where any format specification is replaced by the string representation of the corresponding object argument.
+          </para>
         </returns>
         <param name="provider">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that supplies culture-specific formatting information. </param
-        >
+          />An object that supplies culture-specific formatting information.
+        </param>
         <param name="format">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A composite format string (see Remarks). </param
-        >
+          />A composite format string (see Remarks).
+        </param>
         <param name="args">
           <attribution
             license="cc4"
@@ -2620,8 +2557,7 @@ public class StringBuilderTest {
      Console.WriteLine( sb.AppendFormat("temperature today was {0} {1}.", "very", "high") ); 
   }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>The high temperature today was very high.</para>
@@ -2632,8 +2568,8 @@ public class StringBuilderTest {
           <para
             >This method uses the <format type="text/html">
               <a href="87b7d528-73f6-43c6-b71a-f23043039a49">composite formatting feature</a>
-            </format> of the .NET Framework to convert the value of an object to its text representation and embed that representation in the current <see cref="T:System.Text.StringBuilder" /> object. </para
-          >
+            </format> of the .NET Framework to convert the value of an object to its text representation and embed that representation in the current <see cref="T:System.Text.StringBuilder" /> object.
+          </para>
           <para
             >The <paramref name="format" /> parameter consists of zero or more runs of text intermixed with zero or more indexed placeholders, called format items, that correspond to <paramref name="arg0" /> and <paramref name="arg1" />, the two objects in the parameter list of this method. The formatting process replaces each format item with the string representation of the corresponding object.</para
           >
@@ -2701,8 +2637,8 @@ public class StringBuilderTest {
             <paramref name="arg0" /> and <paramref name="arg1" /> represent the objects to be formatted. Each format item in <paramref name="format" /> is replaced with the string representation of either <paramref name="arg0" /> or <paramref name="arg1" />. If the format item includes <paramref name="formatString" /> and the corresponding object implements the <see cref="T:System.IFormattable" /> interface, then argx.ToString(formatString, provider) defines the formatting, where x is the index of the argument. Otherwise, argx.ToString(provider) defines the formatting.</para
           >
           <para
-            >If the string assigned to <paramref name="format" /> is "Thank you for your donation of {0:####} cans of food to our charitable organization." and <paramref name="arg0" /> is an integer with the value 10, the return value will be "Thank you for your donation of 10 cans of food to our charitable organization." </para
-          >
+            >If the string assigned to <paramref name="format" /> is "Thank you for your donation of {0:####} cans of food to our charitable organization." and <paramref name="arg0" /> is an integer with the value 10, the return value will be "Thank you for your donation of 10 cans of food to our charitable organization."
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2719,22 +2655,22 @@ public class StringBuilderTest {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A composite format string (see Remarks). </param
-        >
+          />A composite format string (see Remarks).
+        </param>
         <param name="arg0">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first object to format. </param
-        >
+          />The first object to format.
+        </param>
         <param name="arg1">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second object to format. </param
-        >
+          />The second object to format.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2785,8 +2721,7 @@ public class StringBuilderTest {
      Console.WriteLine( sb.AppendFormat("temperature today was {0} {1} {2}.", "very", "very", "high") ); 
   }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <para>
             <c>The high
@@ -2867,8 +2802,8 @@ public class StringBuilderTest {
             <paramref name="arg0" />, <paramref name="arg1" />, and <paramref name="arg2" /> represent the objects to be formatted. Each format item in <paramref name="format" /> is replaced with the string representation of either <paramref name="arg0" />, <paramref name="arg1" />, or <paramref name="arg2" />, depending on the index of the format item. If the format item includes <paramref name="formatString" /> and the corresponding object in <paramref name="args" /> implements the <see cref="T:System.IFormattable" /> interface, then argx.ToString(formatString, null) defines the formatting, where x is the index of the argument. Otherwise, argx.ToString() defines the formatting.</para
           >
           <para
-            >If the string assigned to <paramref name="format" /> is "Thank you for your donation of {0:####} cans of food to our charitable organization." and <paramref name="arg0" /> is an integer with the value 10, the return value will be "Thank you for your donation of 10 cans of food to our charitable organization." </para
-          >
+            >If the string assigned to <paramref name="format" /> is "Thank you for your donation of {0:####} cans of food to our charitable organization." and <paramref name="arg0" /> is an integer with the value 10, the return value will be "Thank you for your donation of 10 cans of food to our charitable organization."
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2885,29 +2820,29 @@ public class StringBuilderTest {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A composite format string (see Remarks). </param
-        >
+          />A composite format string (see Remarks).
+        </param>
         <param name="arg0">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first object to format. </param
-        >
+          />The first object to format.
+        </param>
         <param name="arg1">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second object to format. </param
-        >
+          />The second object to format.
+        </param>
         <param name="arg2">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The third object to format. </param
-        >
+          />The third object to format.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2997,12 +2932,8 @@ public class StringBuilderTest {
           <para>A reference to this instance after the append operation has completed.</para>
         </returns>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The string to append. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The string to append.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Capacity">
@@ -3168,8 +3099,8 @@ public class StringBuilderTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Text.StringBuilder.CopyTo(System.Int32,System.Char[],System.Int32,System.Int32)" /> method is intended to be used in the rare situation when you need to efficiently copy successive sections of a <see cref="T:System.Text.StringBuilder" /> object to an array. The array should be a fixed size, preallocated, reusable, and possibly globally accessible. </para
-          >
+            >The <see cref="M:System.Text.StringBuilder.CopyTo(System.Int32,System.Char[],System.Int32,System.Int32)" /> method is intended to be used in the rare situation when you need to efficiently copy successive sections of a <see cref="T:System.Text.StringBuilder" /> object to an array. The array should be a fixed size, preallocated, reusable, and possibly globally accessible.
+          </para>
           <para
             >For example, your application could populate a <see cref="T:System.Text.StringBuilder" /> object with a large number of characters then use the <see cref="M:System.Text.StringBuilder.CopyTo(System.Int32,System.Char[],System.Int32,System.Int32)" /> method to copy small, successive pieces of the <see cref="T:System.Text.StringBuilder" /> object to an array where the pieces are processed. When all the data in the <see cref="T:System.Text.StringBuilder" /> object is processed, the size of the <see cref="T:System.Text.StringBuilder" /> object is set to zero and the cycle is repeated.</para
           >
@@ -3234,8 +3165,8 @@ public class StringBuilderTest {
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentOutOfRangeException">
-          <paramref name="capacity" /> is less zero. </exception
-        >
+          <paramref name="capacity" /> is less zero.
+        </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -3257,8 +3188,8 @@ public class StringBuilderTest {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The minimum capacity to ensure. </param
-        >
+          />The minimum capacity to ensure.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -3301,8 +3232,8 @@ public class StringBuilderTest {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object to compare with this instance, or null. </param
-        >
+          />An object to compare with this instance, or null.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -3357,15 +3288,11 @@ public class StringBuilderTest {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position in this instance where insertion begins. </param
-        >
+          />The position in this instance where insertion begins.
+        </param>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The value to insert. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to insert.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -3420,15 +3347,11 @@ public class StringBuilderTest {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position in this instance where insertion begins. </param
-        >
+          />The position in this instance where insertion begins.
+        </param>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The value to insert. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to insert.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -3483,15 +3406,11 @@ public class StringBuilderTest {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position in this instance where insertion begins. </param
-        >
+          />The position in this instance where insertion begins.
+        </param>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The value to insert. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to insert.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -3547,15 +3466,15 @@ public class StringBuilderTest {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position in this instance where insertion begins. </param
-        >
+          />The position in this instance where insertion begins.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character array to insert. </param
-        >
+          />The character array to insert.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -3610,15 +3529,11 @@ public class StringBuilderTest {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position in this instance where insertion begins. </param
-        >
+          />The position in this instance where insertion begins.
+        </param>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The value to insert. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to insert.
+        </param>
       </Docs>
       <Excluded>1</Excluded>
       <ExcludedLibrary>ExtendedNumerics</ExcludedLibrary>
@@ -3674,15 +3589,11 @@ public class StringBuilderTest {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position in this instance where insertion begins. </param
-        >
+          />The position in this instance where insertion begins.
+        </param>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The value to insert. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to insert.
+        </param>
       </Docs>
       <Excluded>1</Excluded>
       <ExcludedLibrary>ExtendedNumerics</ExcludedLibrary>
@@ -3738,15 +3649,11 @@ public class StringBuilderTest {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position in this instance where insertion begins. </param
-        >
+          />The position in this instance where insertion begins.
+        </param>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The value to insert. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to insert.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -3801,15 +3708,11 @@ public class StringBuilderTest {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position in this instance where insertion begins. </param
-        >
+          />The position in this instance where insertion begins.
+        </param>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The value to insert. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to insert.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -3864,15 +3767,11 @@ public class StringBuilderTest {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position in this instance where insertion begins. </param
-        >
+          />The position in this instance where insertion begins.
+        </param>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The value to insert. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to insert.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -3930,15 +3829,15 @@ public class StringBuilderTest {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position in this instance where insertion begins. </param
-        >
+          />The position in this instance where insertion begins.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to insert, or null. </param
-        >
+          />The object to insert, or null.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -3998,15 +3897,11 @@ public class StringBuilderTest {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position in this instance where insertion begins. </param
-        >
+          />The position in this instance where insertion begins.
+        </param>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The value to insert. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to insert.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -4061,15 +3956,11 @@ public class StringBuilderTest {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position in this instance where insertion begins. </param
-        >
+          />The position in this instance where insertion begins.
+        </param>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The value to insert. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to insert.
+        </param>
       </Docs>
       <Excluded>1</Excluded>
       <ExcludedLibrary>ExtendedNumerics</ExcludedLibrary>
@@ -4126,15 +4017,11 @@ public class StringBuilderTest {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position in this instance where insertion begins. </param
-        >
+          />The position in this instance where insertion begins.
+        </param>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The string to insert. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The string to insert.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -4194,15 +4081,11 @@ public class StringBuilderTest {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position in this instance where insertion begins. </param
-        >
+          />The position in this instance where insertion begins.
+        </param>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The value to insert. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to insert.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -4262,15 +4145,11 @@ public class StringBuilderTest {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position in this instance where insertion begins. </param
-        >
+          />The position in this instance where insertion begins.
+        </param>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The value to insert. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to insert.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -4330,15 +4209,11 @@ public class StringBuilderTest {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position in this instance where insertion begins. </param
-        >
+          />The position in this instance where insertion begins.
+        </param>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The value to insert. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to insert.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -4397,22 +4272,18 @@ public class StringBuilderTest {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position in this instance where insertion begins. </param
-        >
+          />The position in this instance where insertion begins.
+        </param>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The string to insert. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The string to insert.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of times to insert <paramref name="value" />. </param
-        >
+          />The number of times to insert <paramref name="value" />.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -4474,25 +4345,25 @@ public class StringBuilderTest {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position in this instance where insertion begins. </param
-        >
+          />The position in this instance where insertion begins.
+        </param>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />A character array. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A character array.
+        </param>
         <param name="startIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting index within <paramref name="value" />. </param
-        >
+          />The starting index within <paramref name="value" />.
+        </param>
         <param name="charCount">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters to insert. </param
-        >
+          />The number of characters to insert.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -4525,11 +4396,11 @@ public class StringBuilderTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Like the <see cref="P:System.String.Length" /> property, the <see cref="P:System.Text.StringBuilder.Length" /> property indicates the length of the current string object. Unlike the <see cref="P:System.String.Length" /> property, which is read-only, the <see cref="P:System.Text.StringBuilder.Length" /> property allows you to modify the length of the string stored to the <see cref="T:System.Text.StringBuilder" /> object.  </para
-          >
+            >Like the <see cref="P:System.String.Length" /> property, the <see cref="P:System.Text.StringBuilder.Length" /> property indicates the length of the current string object. Unlike the <see cref="P:System.String.Length" /> property, which is read-only, the <see cref="P:System.Text.StringBuilder.Length" /> property allows you to modify the length of the string stored to the <see cref="T:System.Text.StringBuilder" /> object.
+          </para>
           <para
-            >If the specified length is less than the current length, the current <see cref="T:System.Text.StringBuilder" /> object is truncated to the specified length. If the specified length is greater than the current length, the end of the string value of the current <see cref="T:System.Text.StringBuilder" /> object is padded with the Unicode NULL character (U+0000). </para
-          >
+            >If the specified length is less than the current length, the current <see cref="T:System.Text.StringBuilder" /> object is truncated to the specified length. If the specified length is greater than the current length, the end of the string value of the current <see cref="T:System.Text.StringBuilder" /> object is padded with the Unicode NULL character (U+0000).
+          </para>
           <para
             >If the specified length is greater than the current capacity, <see cref="P:System.Text.StringBuilder.Capacity" /> increases so that it is greater than or equal to the specified length.</para
           >
@@ -4601,8 +4472,8 @@ public class StringBuilderTest {
       <Docs>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <para>
-            <paramref name="startIndex" /> or <paramref name="length" /> is less than zero </para
-          >
+            <paramref name="startIndex" /> or <paramref name="length" /> is less than zero
+          </para>
           <para>-or-</para>
           <para
             >The sum of <paramref name="startIndex" /> and <paramref name="length" /> is greater than the length of the current instance.</para
@@ -4622,8 +4493,7 @@ public class StringBuilderTest  {
       Console.WriteLine(sb);
    }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>0123456789</para>
@@ -4637,8 +4507,8 @@ public class StringBuilderTest  {
           >
           <block subset="none" type="note">
             <para
-              >The <see cref="M:System.Text.StringBuilder.Remove(System.Int32,System.Int32)" /> method modifies the value of the current <see cref="T:System.Text.StringBuilder" /> instance and returns that instance. It does not create and return a new <see cref="T:System.Text.StringBuilder" /> object. </para
-            >
+              >The <see cref="M:System.Text.StringBuilder.Remove(System.Int32,System.Int32)" /> method modifies the value of the current <see cref="T:System.Text.StringBuilder" /> instance and returns that instance. It does not create and return a new <see cref="T:System.Text.StringBuilder" /> object.
+            </para>
           </block>
           <para />
         </remarks>
@@ -4655,15 +4525,15 @@ public class StringBuilderTest  {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based position in this instance where removal begins. </param
-        >
+          />The zero-based position in this instance where removal begins.
+        </param>
         <param name="length">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters to remove. </param
-        >
+          />The number of characters to remove.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -4697,8 +4567,8 @@ public class StringBuilderTest  {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method performs an ordinal, case-sensitive comparison to identify occurrences of <paramref name="oldChar" /> in the current instance. The size of the current <see cref="T:System.Text.StringBuilder" /> instance is unchanged after the replacement. </para
-          >
+            >This method performs an ordinal, case-sensitive comparison to identify occurrences of <paramref name="oldChar" /> in the current instance. The size of the current <see cref="T:System.Text.StringBuilder" /> instance is unchanged after the replacement.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -4711,19 +4581,15 @@ public class StringBuilderTest  {
           >
         </returns>
         <param name="oldChar">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The character to replace. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The character to replace.
+        </param>
         <param name="newChar">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character that replaces <paramref name="oldChar" />. </param
-        >
+          />The character that replaces <paramref name="oldChar" />.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -4763,8 +4629,8 @@ public class StringBuilderTest  {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method performs an ordinal, case-sensitive comparison to identify occurrences of <paramref name="oldValue" /> in the current instance. If <paramref name="newValue" /> is null or <see cref="F:System.String.Empty" />, all occurrences of <paramref name="oldValue" /> are removed. </para
-          >
+            >This method performs an ordinal, case-sensitive comparison to identify occurrences of <paramref name="oldValue" /> in the current instance. If <paramref name="newValue" /> is null or <see cref="F:System.String.Empty" />, all occurrences of <paramref name="oldValue" /> are removed.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -4777,19 +4643,15 @@ public class StringBuilderTest  {
           >
         </returns>
         <param name="oldValue">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The string to replace. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The string to replace.
+        </param>
         <param name="newValue">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string that replaces <paramref name="oldValue" />, or null. </param
-        >
+          />The string that replaces <paramref name="oldValue" />, or null.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -4824,8 +4686,8 @@ public class StringBuilderTest  {
       <Docs>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <para
-            >The sum of <paramref name="startIndex" /> and <paramref name="count" /> is larger than the length of the current instance </para
-          >
+            >The sum of <paramref name="startIndex" /> and <paramref name="count" /> is larger than the length of the current instance
+          </para>
           <para>-or-</para>
           <para>
             <paramref name="startIndex" /> or <paramref name="count" /> is less than zero.</para
@@ -4834,8 +4696,8 @@ public class StringBuilderTest  {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method performs an ordinal, case-sensitive comparison to identify occurrences of <paramref name="oldChar" /> in the current instance. The size of the current <see cref="T:System.Text.StringBuilder" /> object is unchanged after the replacement. </para
-          >
+            >This method performs an ordinal, case-sensitive comparison to identify occurrences of <paramref name="oldChar" /> in the current instance. The size of the current <see cref="T:System.Text.StringBuilder" /> object is unchanged after the replacement.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -4848,33 +4710,29 @@ public class StringBuilderTest  {
           >
         </returns>
         <param name="oldChar">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The character to replace. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The character to replace.
+        </param>
         <param name="newChar">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character that replaces <paramref name="oldChar" />. </param
-        >
+          />The character that replaces <paramref name="oldChar" />.
+        </param>
         <param name="startIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position in this instance where the substring begins. </param
-        >
+          />The position in this instance where the substring begins.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The length of the substring. </param
-        >
+          />The length of the substring.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -4925,8 +4783,8 @@ public class StringBuilderTest  {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method performs an ordinal, case-sensitive comparison to identify occurrences of <paramref name="oldValue" /> in the specified substring. If <paramref name="newValue" /> is null or <see cref="F:System.String.Empty" />, all occurrences of <paramref name="oldValue" /> are removed. </para
-          >
+            >This method performs an ordinal, case-sensitive comparison to identify occurrences of <paramref name="oldValue" /> in the specified substring. If <paramref name="newValue" /> is null or <see cref="F:System.String.Empty" />, all occurrences of <paramref name="oldValue" /> are removed.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -4939,33 +4797,29 @@ public class StringBuilderTest  {
           >
         </returns>
         <param name="oldValue">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The string to replace. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The string to replace.
+        </param>
         <param name="newValue">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string that replaces <paramref name="oldValue" />, or null. </param
-        >
+          />The string that replaces <paramref name="oldValue" />, or null.
+        </param>
         <param name="startIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position in this instance where the substring begins. </param
-        >
+          />The position in this instance where the substring begins.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The length of the substring. </param
-        >
+          />The length of the substring.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -5087,12 +4941,12 @@ public class StringBuilderTest  {
       <Docs>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <para>
-            <paramref name="startIndex" /> or <paramref name="length" /> is less than zero. </para
-          >
+            <paramref name="startIndex" /> or <paramref name="length" /> is less than zero.
+          </para>
           <para> -or- </para>
           <para
-            >The sum of <paramref name="startIndex" /> and <paramref name="length" /> is greater than the length of the current instance. </para
-          >
+            >The sum of <paramref name="startIndex" /> and <paramref name="length" /> is greater than the length of the current instance.
+          </para>
         </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -5115,15 +4969,15 @@ public class StringBuilderTest  {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting position of the substring in this instance. </param
-        >
+          />The starting position of the substring in this instance.
+        </param>
         <param name="length">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The length of the substring. </param
-        >
+          />The length of the substring.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

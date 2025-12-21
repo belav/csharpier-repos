@@ -22,8 +22,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The base class for a collection of parameters relevant to a <see cref="T:System.Data.Common.DbCommand" />. </para
-      >
+        >The base class for a collection of parameters relevant to a <see cref="T:System.Data.Common.DbCommand" />.
+      </para>
     </summary>
   </Docs>
   <Members>
@@ -744,8 +744,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the <see cref="T:System.Data.Common.DbParameter" /> object at the specified index to a new value. </para
-          >
+            >Sets the <see cref="T:System.Data.Common.DbParameter" /> object at the specified index to a new value.
+          </para>
         </summary>
         <param name="index">
           <attribution

@@ -38,8 +38,8 @@
         </item>
         <item>
           <para
-            >The <see cref="M:System.IObserver`1.OnError(System.Exception)" /> method, which is typically called by the provider to indicate that data is unavailable, inaccessible, or corrupted, or that the provider has experienced some other error condition. </para
-          >
+            >The <see cref="M:System.IObserver`1.OnError(System.Exception)" /> method, which is typically called by the provider to indicate that data is unavailable, inaccessible, or corrupted, or that the provider has experienced some other error condition.
+          </para>
         </item>
         <item>
           <para
@@ -72,8 +72,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the observer's <see cref="M:System.IObserver`1.OnCompleted" /> implementation is called, the <see cref="M:System.IObserver`1.OnCompleted" /> method can optionally call the <see cref="M:System.IDisposable.Dispose" /> method of the <see cref="T:System.IDisposable" /> object that was returned to the observer when it called the <see cref="M:System.IObservable`1.Subscribe(System.IObserver{`0})" /> method. </para
-          >
+            >When the observer's <see cref="M:System.IObserver`1.OnCompleted" /> implementation is called, the <see cref="M:System.IObserver`1.OnCompleted" /> method can optionally call the <see cref="M:System.IDisposable.Dispose" /> method of the <see cref="T:System.IDisposable" /> object that was returned to the observer when it called the <see cref="M:System.IObservable`1.Subscribe(System.IObserver{`0})" /> method.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

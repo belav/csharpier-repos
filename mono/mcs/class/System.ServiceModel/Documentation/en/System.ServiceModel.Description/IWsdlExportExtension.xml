@@ -22,11 +22,11 @@
         >
       </block>
       <para>
-        <see cref="T:System.ServiceModel.Description.IWsdlExportExtension" /> does not export custom policy assertions even though indigo1 exports custom binding policy assertions to the appropriate element inside WSDL. If you want to export custom policy assertions, implement the <see cref="T:System.ServiceModel.Description.IPolicyExportExtension" /> interface. </para
-      >
+        <see cref="T:System.ServiceModel.Description.IWsdlExportExtension" /> does not export custom policy assertions even though indigo1 exports custom binding policy assertions to the appropriate element inside WSDL. If you want to export custom policy assertions, implement the <see cref="T:System.ServiceModel.Description.IPolicyExportExtension" /> interface.
+      </para>
       <para
-        >The metadata publication process begins by calling <see cref="M:System.ServiceModel.Description.WsdlExporter.ExportEndpoints(System.Collections.Generic.IEnumerable{System.ServiceModel.Description.ServiceEndpoint},System.Xml.XmlQualifiedName)" /> which in turn calls <see cref="M:System.ServiceModel.Description.WsdlExporter.ExportEndpoint(System.ServiceModel.Description.ServiceEndpoint)" /> for each endpoint. </para
-      >
+        >The metadata publication process begins by calling <see cref="M:System.ServiceModel.Description.WsdlExporter.ExportEndpoints(System.Collections.Generic.IEnumerable{System.ServiceModel.Description.ServiceEndpoint},System.Xml.XmlQualifiedName)" /> which in turn calls <see cref="M:System.ServiceModel.Description.WsdlExporter.ExportEndpoint(System.ServiceModel.Description.ServiceEndpoint)" /> for each endpoint.
+      </para>
       <para
         >The endpoint is exported by first exporting its contract.When exporting a contract the <see cref="T:System.ServiceModel.Description.WsdlExporter" /> calls the <see cref="M:System.ServiceModel.Description.IWsdlExportExtension.ExportContract(System.ServiceModel.Description.WsdlExporter,System.ServiceModel.Description.WsdlContractConversionContext)" /> method on all <see cref="T:System.ServiceModel.Description.IWsdlExportExtension" /> implementations on the contract, and operation behaviors for that contract. Operations that use wildcard actions are not exported in metadata, so <see cref="T:System.ServiceModel.Description.IWsdlExportExtension" /> implementations on operation behaviors for these operations are not exported.</para
       >
@@ -127,8 +127,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implement the <see cref="M:System.ServiceModel.Description.IWsdlExportExtension.ExportEndpoint(System.ServiceModel.Description.WsdlExporter,System.ServiceModel.Description.WsdlEndpointConversionContext)" /> method to modify the WSDL exported for an endpoint. This method is called after the contract has been exported by <see cref="M:System.ServiceModel.Description.IWsdlExportExtension.ExportContract(System.ServiceModel.Description.WsdlExporter,System.ServiceModel.Description.WsdlContractConversionContext)" />. </para
-          >
+            >Implement the <see cref="M:System.ServiceModel.Description.IWsdlExportExtension.ExportEndpoint(System.ServiceModel.Description.WsdlExporter,System.ServiceModel.Description.WsdlEndpointConversionContext)" /> method to modify the WSDL exported for an endpoint. This method is called after the contract has been exported by <see cref="M:System.ServiceModel.Description.IWsdlExportExtension.ExportContract(System.ServiceModel.Description.WsdlExporter,System.ServiceModel.Description.WsdlContractConversionContext)" />.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

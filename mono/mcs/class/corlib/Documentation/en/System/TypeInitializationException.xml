@@ -61,8 +61,7 @@ class TestTypeInit {
         }
     }
 }
-   </code
-      >
+   </code>
       <para>The output is</para>
       <code>
 Error: System.TypeInitializationException: The type initializer for "TypeInit" threw an exception. ---&gt; System.ApplicationException: Error in Class TypeInit
@@ -172,15 +171,15 @@ Error: System.TypeInitializationException: The type initializer for "TypeInit" t
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The fully qualified name of the type that fails to initialize. </param
-        >
+          />The fully qualified name of the type that fails to initialize.
+        </param>
         <param name="innerException">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The exception that is the cause of the current exception. If the <paramref name="innerException" /> parameter is not a null reference (Nothing in Visual Basic), the current exception is raised in a catch block that handles the inner exception. </param
-        >
+          />The exception that is the cause of the current exception. If the <paramref name="innerException" /> parameter is not a null reference (Nothing in Visual Basic), the current exception is raised in a catch block that handles the inner exception.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetObjectData">
@@ -218,15 +217,15 @@ Error: System.TypeInitializationException: The type initializer for "TypeInit" t
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception being thrown. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception being thrown.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual information about the source or destination. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual information about the source or destination.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="TypeName">

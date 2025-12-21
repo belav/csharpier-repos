@@ -88,8 +88,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.UI.WebControls.RoleGroup" /> to add to the collection. </param
-        >
+          />The <see cref="T:System.Web.UI.WebControls.RoleGroup" /> to add to the collection.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -123,8 +123,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.UI.WebControls.RoleGroup" /> to look for in the collection. </param
-        >
+          />The <see cref="T:System.Web.UI.WebControls.RoleGroup" /> to look for in the collection.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -261,8 +261,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.UI.WebControls.RoleGroup" /> to locate in the collection. </param
-        >
+          />The <see cref="T:System.Web.UI.WebControls.RoleGroup" /> to locate in the collection.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -300,15 +300,11 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index at which to insert the role group. </param
-        >
+          />The zero-based index at which to insert the role group.
+        </param>
         <param name="group">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The role group to insert. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The role group to insert.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -366,8 +362,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.UI.WebControls.RoleGroup" /> to remove from the collection. </param
-        >
+          />The <see cref="T:System.Web.UI.WebControls.RoleGroup" /> to remove from the collection.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

@@ -30,8 +30,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Security.Cryptography.Xml.KeyInfo" /> class represents the &lt;KeyInfo&gt; element, which contains a <see cref="T:System.Security.Cryptography.DSA" /> public key. </para
-      >
+        >The <see cref="T:System.Security.Cryptography.Xml.KeyInfo" /> class represents the &lt;KeyInfo&gt; element, which contains a <see cref="T:System.Security.Cryptography.DSA" /> public key.
+      </para>
       <para
         >Use <see cref="T:System.Security.Cryptography.Xml.DSAKeyValue" /> to identify the public key that corresponds to the <see cref="T:System.Security.Cryptography.DSA" /> private key that was used to create the digital signature.</para
       >
@@ -111,8 +111,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The instance of an implementation of the <see cref="T:System.Security.Cryptography.DSA" /> class that holds the public key. </param
-        >
+          />The instance of an implementation of the <see cref="T:System.Security.Cryptography.DSA" /> class that holds the public key.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetXml">
@@ -224,8 +224,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML element to load the <see cref="T:System.Security.Cryptography.Xml.DSAKeyValue" /> state from. </param
-        >
+          />The XML element to load the <see cref="T:System.Security.Cryptography.Xml.DSAKeyValue" /> state from.
+        </param>
       </Docs>
     </Member>
   </Members>

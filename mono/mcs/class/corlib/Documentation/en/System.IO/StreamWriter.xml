@@ -109,12 +109,8 @@
           >
         </summary>
         <param name="stream">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The stream to write to. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The stream to write to.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -172,8 +168,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a <see cref="T:System.IO.StreamWriter" /> with UTF-8 encoding without a Byte-Order Mark (BOM), so its <see cref="M:System.Text.Encoding.GetPreamble" /> method returns an empty byte array. The default UTF-8 encoding for this constructor throws an exception on invalid bytes. This behavior is different from the behavior provided by the encoding object in the <see cref="P:System.Text.Encoding.UTF8" /> property. To specify a BOM and determine whether an exception is thrown on invalid bytes, use a constructor that accepts an encoding object as a parameter, such as <see cref="M:System.IO.StreamWriter.#ctor(System.String,System.Boolean,System.Text.Encoding)" />. </para
-          >
+            >This constructor creates a <see cref="T:System.IO.StreamWriter" /> with UTF-8 encoding without a Byte-Order Mark (BOM), so its <see cref="M:System.Text.Encoding.GetPreamble" /> method returns an empty byte array. The default UTF-8 encoding for this constructor throws an exception on invalid bytes. This behavior is different from the behavior provided by the encoding object in the <see cref="P:System.Text.Encoding.UTF8" /> property. To specify a BOM and determine whether an exception is thrown on invalid bytes, use a constructor that accepts an encoding object as a parameter, such as <see cref="M:System.IO.StreamWriter.#ctor(System.String,System.Boolean,System.Text.Encoding)" />.
+          </para>
           <para
             >The <paramref name="path" /> parameter can be a file name, including a file on a Universal Naming Convention (UNC) share. If the file exists, it is overwritten; otherwise, a new file is created.</para
           >
@@ -200,8 +196,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The complete file path to write to. <paramref name="path" /> can be a file name. </param
-        >
+          />The complete file path to write to. <paramref name="path" /> can be a file name.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -260,19 +256,15 @@
           >
         </summary>
         <param name="stream">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The stream to write to. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The stream to write to.
+        </param>
         <param name="encoding">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character encoding to use. </param
-        >
+          />The character encoding to use.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -334,8 +326,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a <see cref="T:System.IO.StreamWriter" /> with UTF-8 encoding without a Byte-Order Mark (BOM), so its <see cref="M:System.Text.Encoding.GetPreamble" /> method returns an empty byte array. The default UTF-8 encoding for this constructor throws an exception on invalid bytes. This behavior is different from the behavior provided by the encoding object in the <see cref="P:System.Text.Encoding.UTF8" /> property. To specify a BOM and determine whether an exception is thrown on invalid bytes, use a constructor that accepts an encoding object as a parameter, such as <see cref="M:System.IO.StreamWriter.#ctor(System.String,System.Boolean,System.Text.Encoding)" />. </para
-          >
+            >This constructor creates a <see cref="T:System.IO.StreamWriter" /> with UTF-8 encoding without a Byte-Order Mark (BOM), so its <see cref="M:System.Text.Encoding.GetPreamble" /> method returns an empty byte array. The default UTF-8 encoding for this constructor throws an exception on invalid bytes. This behavior is different from the behavior provided by the encoding object in the <see cref="P:System.Text.Encoding.UTF8" /> property. To specify a BOM and determine whether an exception is thrown on invalid bytes, use a constructor that accepts an encoding object as a parameter, such as <see cref="M:System.IO.StreamWriter.#ctor(System.String,System.Boolean,System.Text.Encoding)" />.
+          </para>
           <para
             >The <paramref name="path" /> parameter can be a file name, including a file on a Universal Naming Convention (UNC) share.</para
           >
@@ -362,15 +354,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The complete file path to write to. </param
-        >
+          />The complete file path to write to.
+        </param>
         <param name="append">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to append data to the file; false to overwrite the file. If the specified file does not exist, this parameter has no effect, and the constructor creates a new file. </param
-        >
+          />true to append data to the file; false to overwrite the file. If the specified file does not exist, this parameter has no effect, and the constructor creates a new file.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -433,26 +425,18 @@
           >
         </summary>
         <param name="stream">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The stream to write to. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The stream to write to.
+        </param>
         <param name="encoding">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character encoding to use. </param
-        >
+          />The character encoding to use.
+        </param>
         <param name="bufferSize">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The buffer size, in bytes. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The buffer size, in bytes.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -546,8 +530,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The complete file path to write to. </param
-        >
+          />The complete file path to write to.
+        </param>
         <param name="append">
           <attribution
             license="cc4"
@@ -560,8 +544,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character encoding to use. </param
-        >
+          />The character encoding to use.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -727,8 +711,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The complete file path to write to. </param
-        >
+          />The complete file path to write to.
+        </param>
         <param name="append">
           <attribution
             license="cc4"
@@ -741,15 +725,11 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character encoding to use. </param
-        >
+          />The character encoding to use.
+        </param>
         <param name="bufferSize">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The buffer size, in bytes. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The buffer size, in bytes.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -922,8 +902,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1163,8 +1143,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character to write to the stream. </param
-        >
+          />The character to write to the stream.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1224,8 +1204,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A character array containing the data to write. If <paramref name="buffer" /> is null, nothing is written. </param
-        >
+          />A character array containing the data to write. If <paramref name="buffer" /> is null, nothing is written.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1283,8 +1263,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to write to the stream. If <paramref name="value" /> is null, nothing is written. </param
-        >
+          />The string to write to the stream. If <paramref name="value" /> is null, nothing is written.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1353,22 +1333,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A character array that contains the data to write. </param
-        >
+          />A character array that contains the data to write.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character position in the buffer at which to start reading data. </param
-        >
+          />The character position in the buffer at which to start reading data.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum number of characters to write. </param
-        >
+          />The maximum number of characters to write.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1523,8 +1503,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The line terminator is defined by the <see cref="P:System.IO.TextWriter.NewLine" /> property. </para
-          >
+            >The line terminator is defined by the <see cref="P:System.IO.TextWriter.NewLine" /> property.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1559,8 +1539,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The line terminator is defined by the <see cref="P:System.IO.TextWriter.NewLine" /> property. </para
-          >
+            >The line terminator is defined by the <see cref="P:System.IO.TextWriter.NewLine" /> property.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1602,8 +1582,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The line terminator is defined by the <see cref="P:System.IO.TextWriter.NewLine" /> property. </para
-          >
+            >The line terminator is defined by the <see cref="P:System.IO.TextWriter.NewLine" /> property.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1618,8 +1598,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to write. If the value is null, only a line terminator is written. </param
-        >
+          />The string to write. If the value is null, only a line terminator is written.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteLineAsync">
@@ -1647,8 +1627,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The line terminator is defined by the <see cref="P:System.IO.TextWriter.NewLine" /> property. </para
-          >
+            >The line terminator is defined by the <see cref="P:System.IO.TextWriter.NewLine" /> property.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

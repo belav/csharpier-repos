@@ -14,8 +14,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Windows.Forms.DataGridViewCellEventArgs" /> class provides data for the following <see cref="T:System.Windows.Forms.DataGridView" /> events: </para
-      >
+        >The <see cref="T:System.Windows.Forms.DataGridViewCellEventArgs" /> class provides data for the following <see cref="T:System.Windows.Forms.DataGridView" /> events:
+      </para>
       <list type="bullet">
         <item>
           <para>
@@ -123,8 +123,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridViewCellEventArgs" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridViewCellEventArgs" /> class.
+          </para>
         </summary>
         <param name="columnIndex">
           <attribution

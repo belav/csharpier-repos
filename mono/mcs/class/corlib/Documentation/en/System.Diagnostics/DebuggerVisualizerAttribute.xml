@@ -38,8 +38,8 @@
         <para
           >Visualizer and visualizer object source implementation is dependent upon the hosting debugger.  For information on creating a visualizer for vsprvslong, see <format type="text/html">
             <a href="625a0d4f-abcc-43f2-9f8c-31c131a4378e">How to: Write a Visualizer</a>
-          </format>.  </para
-        >
+          </format>.
+        </para>
       </block>
     </remarks>
     <summary>

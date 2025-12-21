@@ -185,8 +185,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string array of user names for profiles to be deleted. </param
-        >
+          />A string array of user names for profiles to be deleted.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -507,15 +507,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the <see cref="T:System.Web.Profile.SqlProfileProvider" /> instance to initialize. </param
-        >
+          />The name of the <see cref="T:System.Web.Profile.SqlProfileProvider" /> instance to initialize.
+        </param>
         <param name="config">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Collections.Specialized.NameValueCollection" /> that contains the names and values of configuration options for the profile provider. </param
-        >
+          />A <see cref="T:System.Collections.Specialized.NameValueCollection" /> that contains the names and values of configuration options for the profile provider.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

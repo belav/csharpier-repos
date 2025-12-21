@@ -103,8 +103,8 @@
         </item>
       </list>
       <para
-        >The <see cref="T:System.IO.FileInfo" /> class provides the following properties that enable you to retrieve information about a file. For an example of how to use each property, see the property pages. </para
-      >
+        >The <see cref="T:System.IO.FileInfo" /> class provides the following properties that enable you to retrieve information about a file. For an example of how to use each property, see the property pages.
+      </para>
       <list type="bullet">
         <item>
           <para
@@ -252,8 +252,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the new file to copy to. </param
-        >
+          />The name of the new file to copy to.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CopyTo">
@@ -303,15 +303,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the new file to copy to. </param
-        >
+          />The name of the new file to copy to.
+        </param>
         <param name="overwrite">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to allow an existing file to be overwritten; otherwise, false. </param
-        >
+          />true to allow an existing file to be overwritten; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -406,8 +406,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.IO.FileInfo.Decrypt" /> method allows you to decrypt a file that was encrypted using the <see cref="M:System.IO.FileInfo.Encrypt" /> method.  The <see cref="M:System.IO.FileInfo.Decrypt" /> method can decrypt only files that were encrypted using the current user account. </para
-          >
+            >The <see cref="M:System.IO.FileInfo.Decrypt" /> method allows you to decrypt a file that was encrypted using the <see cref="M:System.IO.FileInfo.Encrypt" /> method.  The <see cref="M:System.IO.FileInfo.Decrypt" /> method can decrypt only files that were encrypted using the current user account.
+          </para>
           <para
             >Both the <see cref="M:System.IO.FileInfo.Encrypt" /> method and the <see cref="M:System.IO.FileInfo.Decrypt" /> method use the cryptographic service provider (CSP) installed on the computer and the file encryption keys of the process calling the method.</para
           >
@@ -531,8 +531,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.IO.FileInfo.Encrypt" /> method allows you to encrypt a file so that only the account used to call this method can decrypt it.  Use the <see cref="M:System.IO.FileInfo.Decrypt" /> method to decrypt a file encrypted by the <see cref="M:System.IO.FileInfo.Encrypt" /> method. </para
-          >
+            >The <see cref="M:System.IO.FileInfo.Encrypt" /> method allows you to encrypt a file so that only the account used to call this method can decrypt it.  Use the <see cref="M:System.IO.FileInfo.Decrypt" /> method to decrypt a file encrypted by the <see cref="M:System.IO.FileInfo.Encrypt" /> method.
+          </para>
           <para
             >Both the <see cref="M:System.IO.FileInfo.Encrypt" /> method and the <see cref="M:System.IO.FileInfo.Decrypt" /> method use the cryptographic service provider (CSP) installed on the computer and the file encryption keys of the process calling the method.</para
           >
@@ -671,16 +671,16 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Security.AccessControl.FileSecurity" /> object that encapsulates the access control rules for the current file.     </para
-          >
+            >A <see cref="T:System.Security.AccessControl.FileSecurity" /> object that encapsulates the access control rules for the current file.
+          </para>
         </returns>
         <param name="includeSections">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Security.AccessControl.AccessControlSections" /> values that specifies which group of access control entries to retrieve. </param
-        >
+          />One of the <see cref="T:System.Security.AccessControl.AccessControlSections" /> values that specifies which group of access control entries to retrieve.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsReadOnly">
@@ -729,8 +729,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the <see cref="P:System.IO.FileInfo.Length" /> property is pre-cached if the current instance of the <see cref="T:System.IO.FileInfo" /> object was returned from any of the following <see cref="T:System.IO.DirectoryInfo" />methods: </para
-          >
+            >The value of the <see cref="P:System.IO.FileInfo.Length" /> property is pre-cached if the current instance of the <see cref="T:System.IO.FileInfo" /> object was returned from any of the following <see cref="T:System.IO.DirectoryInfo" />methods:
+          </para>
           <list type="bullet">
             <item>
               <para>
@@ -805,8 +805,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The path to move the file to, which can specify a different file name. </param
-        >
+          />The path to move the file to, which can specify a different file name.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Name">
@@ -872,8 +872,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.FileMode" /> constant specifying the mode (for example, Open or Append) in which to open the file. </param
-        >
+          />A <see cref="T:System.IO.FileMode" /> constant specifying the mode (for example, Open or Append) in which to open the file.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Open">
@@ -915,15 +915,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.FileMode" /> constant specifying the mode (for example, Open or Append) in which to open the file. </param
-        >
+          />A <see cref="T:System.IO.FileMode" /> constant specifying the mode (for example, Open or Append) in which to open the file.
+        </param>
         <param name="access">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.FileAccess" /> constant specifying whether to open the file with Read, Write, or ReadWrite file access. </param
-        >
+          />A <see cref="T:System.IO.FileAccess" /> constant specifying whether to open the file with Read, Write, or ReadWrite file access.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Open">
@@ -966,22 +966,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.FileMode" /> constant specifying the mode (for example, Open or Append) in which to open the file. </param
-        >
+          />A <see cref="T:System.IO.FileMode" /> constant specifying the mode (for example, Open or Append) in which to open the file.
+        </param>
         <param name="access">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.FileAccess" /> constant specifying whether to open the file with Read, Write, or ReadWrite file access. </param
-        >
+          />A <see cref="T:System.IO.FileAccess" /> constant specifying whether to open the file with Read, Write, or ReadWrite file access.
+        </param>
         <param name="share">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.FileShare" /> constant specifying the type of access other FileStream objects have to this file. </param
-        >
+          />A <see cref="T:System.IO.FileShare" /> constant specifying the type of access other FileStream objects have to this file.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OpenRead">
@@ -1198,8 +1198,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Replaces the contents of a specified file with the file described by the current <see cref="T:System.IO.FileInfo" /> object, deleting the original file, and creating a backup of the replaced file.  Also specifies whether to ignore merge errors. </para
-          >
+            >Replaces the contents of a specified file with the file described by the current <see cref="T:System.IO.FileInfo" /> object, deleting the original file, and creating a backup of the replaced file.  Also specifies whether to ignore merge errors.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1226,8 +1226,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to ignore merge errors (such as attributes and ACLs) from the replaced file to the replacement file; otherwise false. </param
-        >
+          />true to ignore merge errors (such as attributes and ACLs) from the replaced file to the replacement file; otherwise false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetAccessControl">
@@ -1255,11 +1255,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" /> method applies access control list (ACL) entries to the current file that represents the noninherited ACL list. </para
-          >
+            >The <see cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" /> method applies access control list (ACL) entries to the current file that represents the noninherited ACL list.
+          </para>
           <para
-            >Use the <see cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" /> method whenever you need to add or remove ACL entries from a file.  </para
-          >
+            >Use the <see cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" /> method whenever you need to add or remove ACL entries from a file.
+          </para>
           <block subset="none" type="note">
             <para
               >The ACL specified for the <paramref name="fileSecurity" /> parameter replaces the existing ACL for the file. To add permissions for a new user, use the <see cref="Overload:System.IO.Directory.GetAccessControl" /> method to obtain the existing ACL, modify it, and then use <see cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" /> to apply it back to the file.</para
@@ -1301,8 +1301,8 @@
             </item>
             <item>
               <para
-                >Set the destination <see cref="T:System.Security.AccessControl.FileSecurity" /> object to the destination file using the <see cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" /> method. </para
-              >
+                >Set the destination <see cref="T:System.Security.AccessControl.FileSecurity" /> object to the destination file using the <see cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" /> method.
+              </para>
             </item>
           </list>
         </remarks>
@@ -1341,8 +1341,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The string returned by the <see cref="M:System.IO.FileInfo.ToString" /> method represents path that was passed to the constructor.  When you create a <see cref="T:System.IO.FileInfo" /> object using the constructors, the <see cref="M:System.IO.FileInfo.ToString" /> method returns the fully qualified path.  However, there are cases where the string returned by the <see cref="M:System.IO.FileInfo.ToString" /> method does not represent the fully qualified path.  For example, when you create a <see cref="T:System.IO.FileInfo" /> object using the <see cref="Overload:System.IO.DirectoryInfo.GetFiles" /> method, the <see cref="M:System.IO.FileInfo.ToString" /> method does not represent the fully qualified path.      </para
-          >
+            >The string returned by the <see cref="M:System.IO.FileInfo.ToString" /> method represents path that was passed to the constructor.  When you create a <see cref="T:System.IO.FileInfo" /> object using the constructors, the <see cref="M:System.IO.FileInfo.ToString" /> method returns the fully qualified path.  However, there are cases where the string returned by the <see cref="M:System.IO.FileInfo.ToString" /> method does not represent the fully qualified path.  For example, when you create a <see cref="T:System.IO.FileInfo" /> object using the <see cref="Overload:System.IO.DirectoryInfo.GetFiles" /> method, the <see cref="M:System.IO.FileInfo.ToString" /> method does not represent the fully qualified path.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

@@ -54,8 +54,8 @@
         <see cref="T:System.Xml.XmlTextReader" /> provides forward-only, read-only access to a stream of XML data. The current node refers to the node on which the reader is positioned. The reader is advanced using any of the read methods and properties reflect the value of the current node.</para
       >
       <para
-        >This class implements <see cref="T:System.Xml.XmlReader" /> and conforms to the W3C Extensible Markup Language (XML) 1.0 and the Namespaces in XML recommendations. XmlTextReader provides the following functionality: </para
-      >
+        >This class implements <see cref="T:System.Xml.XmlReader" /> and conforms to the W3C Extensible Markup Language (XML) 1.0 and the Namespaces in XML recommendations. XmlTextReader provides the following functionality:
+      </para>
       <list type="bullet">
         <item>
           <para>Enforces the rules of well-formed XML.</para>
@@ -68,8 +68,8 @@
         </item>
         <item>
           <para
-            >For nodes where <see cref="P:System.Xml.XmlTextReader.NodeType" /> is XmlNodeType.EntityReference, a single empty EntityReference node is returned (that is, the <see cref="P:System.Xml.XmlTextReader.Value" /> property is String.Empty). </para
-          >
+            >For nodes where <see cref="P:System.Xml.XmlTextReader.NodeType" /> is XmlNodeType.EntityReference, a single empty EntityReference node is returned (that is, the <see cref="P:System.Xml.XmlTextReader.Value" /> property is String.Empty).
+          </para>
         </item>
       </list>
       <block subset="none" type="note">
@@ -232,8 +232,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream containing the XML data to read. </param
-        >
+          />The stream containing the XML data to read.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -280,8 +280,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The TextReader containing the XML data to read. </param
-        >
+          />The TextReader containing the XML data to read.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -307,8 +307,8 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.Xml.XmlException">
-          <paramref name="url" /> is <see langword="null" />. </exception
-        >
+          <paramref name="url" /> is <see langword="null" />.
+        </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
@@ -347,8 +347,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URL for the file containing the XML data. The <see cref="P:System.Xml.XmlTextReader.BaseURI" /> is set to this value. </param
-        >
+          />The URL for the file containing the XML data. The <see cref="P:System.Xml.XmlTextReader.BaseURI" /> is set to this value.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -396,12 +396,8 @@
           >
         </summary>
         <param name="nt">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The XmlNameTable to use. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The XmlNameTable to use.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -458,15 +454,11 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream containing the XML data to read. </param
-        >
+          />The stream containing the XML data to read.
+        </param>
         <param name="nt">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The XmlNameTable to use. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The XmlNameTable to use.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -520,15 +512,11 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The TextReader containing the XML data to read. </param
-        >
+          />The TextReader containing the XML data to read.
+        </param>
         <param name="nt">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The XmlNameTable to use. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The XmlNameTable to use.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -565,8 +553,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream containing the XML data to read. </param
-        >
+          />The stream containing the XML data to read.
+        </param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
@@ -588,15 +576,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URL to use for resolving external resources. The <see cref="P:System.Xml.XmlTextReader.BaseURI" /> is set to this value. </param
-        >
+          />The URL to use for resolving external resources. The <see cref="P:System.Xml.XmlTextReader.BaseURI" /> is set to this value.
+        </param>
         <param name="input">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream containing the XML data to read. </param
-        >
+          />The stream containing the XML data to read.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -630,8 +618,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The TextReader containing the XML data to read. </param
-        >
+          />The TextReader containing the XML data to read.
+        </param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
@@ -654,15 +642,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URL to use for resolving external resources. The <see cref="P:System.Xml.XmlTextReader.BaseURI" /> is set to this value. </param
-        >
+          />The URL to use for resolving external resources. The <see cref="P:System.Xml.XmlTextReader.BaseURI" /> is set to this value.
+        </param>
         <param name="input">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The TextReader containing the XML data to read. </param
-        >
+          />The TextReader containing the XML data to read.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -695,8 +683,8 @@
           <paramref name="nt" /> is <see langword="null" />.</exception
         >
         <exception cref="T:System.Xml.XmlException">
-          <paramref name="url" /> is <see langword="null" />. </exception
-        >
+          <paramref name="url" /> is <see langword="null" />.
+        </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
@@ -718,15 +706,11 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URL for the file containing the XML data to read. </param
-        >
+          />The URL for the file containing the XML data to read.
+        </param>
         <param name="nt">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The XmlNameTable to use. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The XmlNameTable to use.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -768,15 +752,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlNodeType" /> of the XML fragment. This also determines what the fragment can contain. (See table below.) </param
-        >
+          />The <see cref="T:System.Xml.XmlNodeType" /> of the XML fragment. This also determines what the fragment can contain. (See table below.)
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlParserContext" /> in which the <paramref name="xmlFragment" /> is to be parsed. This includes the <see cref="T:System.Xml.XmlNameTable" /> to use, encoding, namespace scope, the current xml:lang, and the xml:space scope. </param
-        >
+          />The <see cref="T:System.Xml.XmlParserContext" /> in which the <paramref name="xmlFragment" /> is to be parsed. This includes the <see cref="T:System.Xml.XmlNameTable" /> to use, encoding, namespace scope, the current xml:lang, and the xml:space scope.
+        </param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
@@ -853,22 +837,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream containing the XML fragment to parse. </param
-        >
+          />The stream containing the XML fragment to parse.
+        </param>
         <param name="fragType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlNodeType" /> of the XML fragment. This also determines what the fragment can contain. (See table below.) </param
-        >
+          />The <see cref="T:System.Xml.XmlNodeType" /> of the XML fragment. This also determines what the fragment can contain. (See table below.)
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlParserContext" /> in which the <paramref name="xmlFragment" /> is to be parsed. This includes the <see cref="T:System.Xml.XmlNameTable" /> to use, encoding, namespace scope, the current xml:lang, and the xml:space scope. </param
-        >
+          />The <see cref="T:System.Xml.XmlParserContext" /> in which the <paramref name="xmlFragment" /> is to be parsed. This includes the <see cref="T:System.Xml.XmlNameTable" /> to use, encoding, namespace scope, the current xml:lang, and the xml:space scope.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -906,15 +890,11 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URL to use for resolving external resources. The <see cref="P:System.Xml.XmlTextReader.BaseURI" /> is set to this value. If <paramref name="url" /> is null, BaseURI is set to String.Empty. </param
-        >
+          />The URL to use for resolving external resources. The <see cref="P:System.Xml.XmlTextReader.BaseURI" /> is set to this value. If <paramref name="url" /> is null, BaseURI is set to String.Empty.
+        </param>
         <param name="nt">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The XmlNameTable to use. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The XmlNameTable to use.
+        </param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
@@ -936,22 +916,18 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URL to use for resolving external resources. The <see cref="P:System.Xml.XmlTextReader.BaseURI" /> is set to this value. If <paramref name="url" /> is null, BaseURI is set to String.Empty. </param
-        >
+          />The URL to use for resolving external resources. The <see cref="P:System.Xml.XmlTextReader.BaseURI" /> is set to this value. If <paramref name="url" /> is null, BaseURI is set to String.Empty.
+        </param>
         <param name="input">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream containing the XML data to read. </param
-        >
+          />The stream containing the XML data to read.
+        </param>
         <param name="nt">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The XmlNameTable to use. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The XmlNameTable to use.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -989,15 +965,11 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The TextReader containing the XML data to read. </param
-        >
+          />The TextReader containing the XML data to read.
+        </param>
         <param name="nt">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The XmlNameTable to use. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The XmlNameTable to use.
+        </param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
@@ -1020,22 +992,18 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URL to use for resolving external resources. The <see cref="P:System.Xml.XmlTextReader.BaseURI" /> is set to this value. If <paramref name="url" /> is null, BaseURI is set to String.Empty. </param
-        >
+          />The URL to use for resolving external resources. The <see cref="P:System.Xml.XmlTextReader.BaseURI" /> is set to this value. If <paramref name="url" /> is null, BaseURI is set to String.Empty.
+        </param>
         <param name="input">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The TextReader containing the XML data to read. </param
-        >
+          />The TextReader containing the XML data to read.
+        </param>
         <param name="nt">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The XmlNameTable to use. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The XmlNameTable to use.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1077,15 +1045,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlNodeType" /> of the XML fragment. This also determines what the fragment string can contain. (See table below.) </param
-        >
+          />The <see cref="T:System.Xml.XmlNodeType" /> of the XML fragment. This also determines what the fragment string can contain. (See table below.)
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlParserContext" /> in which the <paramref name="xmlFragment" /> is to be parsed. This includes the <see cref="T:System.Xml.XmlNameTable" /> to use, encoding, namespace scope, the current xml:lang, and the xml:space scope. </param
-        >
+          />The <see cref="T:System.Xml.XmlParserContext" /> in which the <paramref name="xmlFragment" /> is to be parsed. This includes the <see cref="T:System.Xml.XmlNameTable" /> to use, encoding, namespace scope, the current xml:lang, and the xml:space scope.
+        </param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
@@ -1152,22 +1120,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string containing the XML fragment to parse. </param
-        >
+          />The string containing the XML fragment to parse.
+        </param>
         <param name="fragType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlNodeType" /> of the XML fragment. This also determines what the fragment string can contain. (See table below.) </param
-        >
+          />The <see cref="T:System.Xml.XmlNodeType" /> of the XML fragment. This also determines what the fragment string can contain. (See table below.)
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlParserContext" /> in which the <paramref name="xmlFragment" /> is to be parsed. This includes the <see cref="T:System.Xml.XmlNameTable" /> to use, encoding, namespace scope, the current xml:lang, and the xml:space scope. </param
-        >
+          />The <see cref="T:System.Xml.XmlParserContext" /> in which the <paramref name="xmlFragment" /> is to be parsed. This includes the <see cref="T:System.Xml.XmlNameTable" /> to use, encoding, namespace scope, the current xml:lang, and the xml:space scope.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1419,8 +1387,8 @@
               cref="T:System.Int32"
               qualify="true"
             /> containing the depth of the current node in the XML document.
-   </para
-          >
+
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1468,8 +1436,8 @@
             />, a <see
               cref="T:System.Text.Encoding"
               qualify="true"
-            />; otherwise <see langword="null" />. </para
-          >
+            />; otherwise <see langword="null" />.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1561,8 +1529,8 @@
             </item>
           </list>
           <para
-            >When EntityHandling is set to ExpandCharEntites, and <see cref="P:System.Xml.XmlTextReader.WhitespaceHandling" /> is set to Significant or All, the "doc" element expands the character entity and returns the general entity as a node: </para
-          >
+            >When EntityHandling is set to ExpandCharEntites, and <see cref="P:System.Xml.XmlTextReader.WhitespaceHandling" /> is set to Significant or All, the "doc" element expands the character entity and returns the general entity as a node:
+          </para>
           <list type="table">
             <listheader>
               <item>
@@ -1655,8 +1623,8 @@
               qualify="true"
             /> where <see langword="true" />
 indicates the reader is positioned at the end of the stream;
-otherwise, <see langword="false" />. </para
-          >
+otherwise, <see langword="false" />.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1735,8 +1703,8 @@ otherwise, <see langword="false" />. </para
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the attribute. The index is zero-based. (The first attribute has index 0.) </param
-        >
+          />The index of the attribute. The index is zero-based. (The first attribute has index 0.)
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1794,8 +1762,8 @@ otherwise, <see langword="false" />. </para
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The qualified name of the attribute. </param
-        >
+          />The qualified name of the attribute.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1867,8 +1835,7 @@ public class Reader {
                       str1, str2, str3);
   }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <para> urn:datatypes</para>
           <para> int - int - int</para>
@@ -1878,8 +1845,8 @@ public class Reader {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the attribute. </param
-        >
+          />The namespace URI of the attribute.
+        </param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
@@ -1914,15 +1881,15 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the attribute. </param
-        >
+          />The local name of the attribute.
+        </param>
         <param name="namespaceURI">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the attribute. </param
-        >
+          />The namespace URI of the attribute.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2284,8 +2251,8 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
               cref="T:System.Boolean"
               qualify="true"
             /> value <see langword="false" />. 
-   </para
-          >
+
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2713,8 +2680,8 @@ node or, for node types that do not have a name (like
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The prefix whose namespace URI you want to resolve. To match the default namespace, pass an empty string. This string does not have to be atomized. </param
-        >
+          />The prefix whose namespace URI you want to resolve. To match the default namespace, pass an empty string. This string does not have to be atomized.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2791,8 +2758,8 @@ node or, for node types that do not have a name (like
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the attribute. </param
-        >
+          />The index of the attribute.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2845,8 +2812,8 @@ node or, for node types that do not have a name (like
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The qualified name of the attribute. </param
-        >
+          />The qualified name of the attribute.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2903,15 +2870,15 @@ node or, for node types that do not have a name (like
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the attribute. </param
-        >
+          />The local name of the attribute.
+        </param>
         <param name="namespaceURI">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the attribute. </param
-        >
+          />The namespace URI of the attribute.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -3119,8 +3086,8 @@ have a name (like <see langword="Text" />, <see langword="Comment" /> , and so o
               qualify="true"
             /> where <see langword="true" /> indicates the reader supports namespaces; otherwise,
 <see langword="false" />. The default is <see langword="true" />.
-   </para
-          >
+
+          </para>
         </value>
         <exception cref="T:System.InvalidOperationException"
           >When attempting to set the property, the <see cref="P:System.Xml.XmlTextReader.ReadState" /> was not <see
@@ -3176,8 +3143,8 @@ have a name (like <see langword="Text" />, <see langword="Comment" /> , and so o
               cref="F:System.String.Empty"
               qualify="true"
             />.
-   </para
-          >
+
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3279,8 +3246,8 @@ have a name (like <see langword="Text" />, <see langword="Comment" /> , and so o
           <para
             > One of the members of the <see cref="T:System.Xml.XmlNodeType" /> enumeration representing the type of
    the current node.
-   </para
-          >
+
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3398,8 +3365,8 @@ have a name (like <see langword="Text" />, <see langword="Comment" /> , and so o
               cref="T:System.String"
               qualify="true"
             /> containing the namespace prefix associated with the current node.
-   </para
-          >
+
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3489,8 +3456,8 @@ have a name (like <see langword="Text" />, <see langword="Comment" /> , and so o
               qualify="true"
             /> specifying the quotation mark character (" or ') used to enclose the value of
    an attribute.
-   </para
-          >
+
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3645,8 +3612,8 @@ have a name (like <see langword="Text" />, <see langword="Comment" /> , and so o
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index into the array specifying where the method can begin to write to the buffer. </param
-        >
+          />The zero-based index into the array specifying where the method can begin to write to the buffer.
+        </param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
@@ -3657,8 +3624,8 @@ have a name (like <see langword="Text" />, <see langword="Comment" /> , and so o
             >
           </block>
           <para
-            >Like <see cref="M:System.Xml.XmlTextReader.ReadChars(System.Char[],System.Int32,System.Int32)" />, this method can be called successively to read large streams of embedded text. It decodes Base64 content and returns the decoded binary bytes (for example, an inline Base64 encoded GIF image) into the buffer. See RFC 1521. (You can obtain RFCs from the Request for Comments Web site at http://www.rfc-editor.org) </para
-          >
+            >Like <see cref="M:System.Xml.XmlTextReader.ReadChars(System.Char[],System.Int32,System.Int32)" />, this method can be called successively to read large streams of embedded text. It decodes Base64 content and returns the decoded binary bytes (for example, an inline Base64 encoded GIF image) into the buffer. See RFC 1521. (You can obtain RFCs from the Request for Comments Web site at http://www.rfc-editor.org)
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3673,22 +3640,22 @@ have a name (like <see langword="Text" />, <see langword="Comment" /> , and so o
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array of characters that serves as the buffer to which the text contents are written. </param
-        >
+          />The array of characters that serves as the buffer to which the text contents are written.
+        </param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index into the array specifying where the method can begin to write to the buffer. </param
-        >
+          />The zero-based index into the array specifying where the method can begin to write to the buffer.
+        </param>
         <param name="len">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes to write into the buffer. </param
-        >
+          />The number of bytes to write into the buffer.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -3736,8 +3703,8 @@ have a name (like <see langword="Text" />, <see langword="Comment" /> , and so o
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index into the array specifying where the method can begin to write to the buffer. </param
-        >
+          />The zero-based index into the array specifying where the method can begin to write to the buffer.
+        </param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
@@ -3764,22 +3731,22 @@ have a name (like <see langword="Text" />, <see langword="Comment" /> , and so o
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte array that serves as the buffer to which the decoded binary bytes are written. </param
-        >
+          />The byte array that serves as the buffer to which the decoded binary bytes are written.
+        </param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index into the array specifying where the method can begin to write to the buffer. </param
-        >
+          />The zero-based index into the array specifying where the method can begin to write to the buffer.
+        </param>
         <param name="len">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes to write into the buffer. </param
-        >
+          />The number of bytes to write into the buffer.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -3884,22 +3851,22 @@ have a name (like <see langword="Text" />, <see langword="Comment" /> , and so o
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array of characters that serves as the buffer to which the text contents are written. </param
-        >
+          />The array of characters that serves as the buffer to which the text contents are written.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position within <paramref name="buffer" /> where the method can begin writing text contents. </param
-        >
+          />The position within <paramref name="buffer" /> where the method can begin writing text contents.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters to write into <paramref name="buffer" />. </param
-        >
+          />The number of characters to write into <paramref name="buffer" />.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -4256,8 +4223,8 @@ have a name (like <see langword="Text" />, <see langword="Comment" /> , and so o
         <value>
           <para
             > One of the members of the <see cref="T:System.Xml.ReadState" /> enumeration.
-   </para
-          >
+
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -4527,8 +4494,8 @@ have a name (like <see langword="Text" />, <see langword="Comment" /> , and so o
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Xml.XmlTextReader" /> instance is cast to an <see cref="T:System.Xml.IXmlLineInfo" /> interface. </para
-          >
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Xml.XmlTextReader" /> instance is cast to an <see cref="T:System.Xml.IXmlLineInfo" /> interface.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

@@ -23,8 +23,8 @@
       >
       <para>This implementation of CMS/PKCS #7 supports only one level of countersignature.  That is, a signature can be signed, which forms a countersignature, but that countersignature cannot be signed again.</para>
       <para
-        >This class does not have a public constructor; therefore, it cannot be publicly instantiated. It is a read-only class accessible from the <see cref="P:System.Security.Cryptography.Pkcs.SignedCms.SignerInfos" /> property. </para
-      >
+        >This class does not have a public constructor; therefore, it cannot be publicly instantiated. It is a read-only class accessible from the <see cref="P:System.Security.Cryptography.Pkcs.SignedCms.SignerInfos" /> property.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -217,8 +217,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This implementation of CMS/PKCS #7 supports only one level of countersignature.  That is, a signature can be signed, which forms a countersignature, but that countersignature cannot be signed again.</para>
           <para
-            >This method displays a user interface in which you choose signers for this message. This requires that the current process is running in <newTerm>user interactive mode</newTerm>, meaning that the <see cref="P:System.Environment.UserInteractive" /> property is set to true. A process is normally in user interactive mode unless it is a service process or running inside a Web application. </para
-          >
+            >This method displays a user interface in which you choose signers for this message. This requires that the current process is running in <newTerm>user interactive mode</newTerm>, meaning that the <see cref="P:System.Environment.UserInteractive" /> property is set to true. A process is normally in user interactive mode unless it is a service process or running inside a Web application.
+          </para>
           <para>Signers whose certificates meet the following conditions will be displayed in the list:</para>
           <list type="bullet">
             <item>
@@ -349,8 +349,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Security.Cryptography.Pkcs.SignerInfo.CounterSignerInfos" /> property retrieves the set of counter signers associated with the signer information. </para
-          >
+            >The <see cref="P:System.Security.Cryptography.Pkcs.SignerInfo.CounterSignerInfos" /> property retrieves the set of counter signers associated with the signer information.
+          </para>
         </summary>
       </Docs>
     </Member>

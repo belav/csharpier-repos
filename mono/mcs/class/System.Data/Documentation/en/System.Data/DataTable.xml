@@ -124,8 +124,8 @@
               </term>
               <description>
                 <para
-                  >Same as the parent <see cref="T:System.Data.DataSet" />, if it belongs to one. Otherwise, false. </para
-                >
+                  >Same as the parent <see cref="T:System.Data.DataSet" />, if it belongs to one. Otherwise, false.
+                </para>
               </description>
             </item>
             <item>
@@ -142,8 +142,8 @@
               </term>
               <description>
                 <para
-                  >Same as the parent <see cref="T:System.Data.DataSet" /> object's <see cref="T:System.Globalization.CultureInfo" /> (returned by the <see cref="P:System.Data.DataSet.Locale" /> property); if no parent exists, the default is the current system <see cref="T:System.Globalization.CultureInfo" />. </para
-                >
+                  >Same as the parent <see cref="T:System.Data.DataSet" /> object's <see cref="T:System.Globalization.CultureInfo" /> (returned by the <see cref="P:System.Data.DataSet.Locale" /> property); if no parent exists, the default is the current system <see cref="T:System.Globalization.CultureInfo" />.
+                </para>
               </description>
             </item>
             <item>
@@ -189,8 +189,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name to give the table. If <paramref name="tableName" /> is null or an empty string, a default name is given when added to the <see cref="T:System.Data.DataTableCollection" />. </param
-        >
+          />The name to give the table. If <paramref name="tableName" /> is null or an empty string, a default name is given when added to the <see cref="T:System.Data.DataTableCollection" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -233,8 +233,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The source and destination of a given serialized stream. </param
-        >
+          />The source and destination of a given serialized stream.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -268,8 +268,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name to give the table. If <paramref name="tableName" /> is null or an empty string, a default name is given when added to the <see cref="T:System.Data.DataTableCollection" />. </param
-        >
+          />The name to give the table. If <paramref name="tableName" /> is null or an empty string, a default name is given when added to the <see cref="T:System.Data.DataTableCollection" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AcceptChanges">
@@ -318,8 +318,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Begins the initialization of a <see cref="T:System.Data.DataTable" /> that is used on a form or used by another component. The initialization occurs at run time. </para
-          >
+            >Begins the initialization of a <see cref="T:System.Data.DataTable" /> that is used on a form or used by another component. The initialization occurs at run time.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -614,19 +614,15 @@
           >
         </returns>
         <param name="expression">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The expression to compute. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The expression to compute.
+        </param>
         <param name="filter">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The filter to limit the rows that evaluate in the expression. </param
-        >
+          />The filter to limit the rows that evaluate in the expression.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1026,8 +1022,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Data.DataRowState" /> values. </param
-        >
+          />One of the <see cref="T:System.Data.DataRowState" /> values.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1261,8 +1257,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Data.DataRow" /> to be imported. </param
-        >
+          />The <see cref="T:System.Data.DataRow" /> to be imported.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1383,8 +1379,8 @@
               </term>
               <description>
                 <para
-                  >The <see cref="M:System.Data.DataTable.Load(System.Data.IDataReader)" /> method adds the extra columns to DataTable's schema. The method throws an exception if corresponding columns in the <see cref="T:System.Data.DataTable" /> and the loaded result set are not value compatible. The method also retrieves constraint information from the result set for all added columns. Except for the case of Primary Key constraint, this constraint information is used only if the current <see cref="T:System.Data.DataTable" /> does not contain any columns at the start of the load operation. </para
-                >
+                  >The <see cref="M:System.Data.DataTable.Load(System.Data.IDataReader)" /> method adds the extra columns to DataTable's schema. The method throws an exception if corresponding columns in the <see cref="T:System.Data.DataTable" /> and the loaded result set are not value compatible. The method also retrieves constraint information from the result set for all added columns. Except for the case of Primary Key constraint, this constraint information is used only if the current <see cref="T:System.Data.DataTable" /> does not contain any columns at the start of the load operation.
+                </para>
               </description>
             </item>
             <item>
@@ -1410,8 +1406,8 @@
             >In terms of event operations, the <see cref="E:System.Data.DataTable.RowChanging" /> event occurs before each row is changed, and the <see cref="E:System.Data.DataTable.RowChanged" /> event occurs after each row has been changed. In each case, the <see cref="P:System.Data.DataRowChangeEventArgs.Action" /> property of the <see cref="T:System.Data.DataRowChangeEventArgs" /> instance passed to the event handler contains information about the particular action associated with the event. This action value depends on the state of the row before the load operation. In each case, both events occur, and the action is the same for each. The action may be applied to either the current or original version of each row, or both, depending on the current row state.</para
           >
           <para
-            >The following table displays behavior for the Load method. The final row (labeled "(Not present)") describes the behavior for incoming rows that don't match any existing row. Each cell in this table describes the current and original value for a field within a row, along with the <see cref="T:System.Data.DataRowState" /> for the value after the Load method has completed. In this case, the method doesn't allow you to indicate the load option, and uses the default, PreserveChanges. </para
-          >
+            >The following table displays behavior for the Load method. The final row (labeled "(Not present)") describes the behavior for incoming rows that don't match any existing row. Each cell in this table describes the current and original value for a field within a row, along with the <see cref="T:System.Data.DataRowState" /> for the value after the Load method has completed. In this case, the method doesn't allow you to indicate the load option, and uses the default, PreserveChanges.
+          </para>
           <list type="table">
             <listheader>
               <item>
@@ -1561,8 +1557,8 @@
               </term>
               <description>
                 <para
-                  >The Load method adds the extra columns to DataTable’s schema. The method throws an exception if corresponding columns in the <see cref="T:System.Data.DataTable" /> and the loaded result set are not value compatible. The method also retrieves constraint information from the result set for all added columns. Except for the case of Primary Key constraint, this constraint information is used only if the current <see cref="T:System.Data.DataTable" /> does not contain any columns at the start of the load operation. </para
-                >
+                  >The Load method adds the extra columns to DataTable’s schema. The method throws an exception if corresponding columns in the <see cref="T:System.Data.DataTable" /> and the loaded result set are not value compatible. The method also retrieves constraint information from the result set for all added columns. Except for the case of Primary Key constraint, this constraint information is used only if the current <see cref="T:System.Data.DataTable" /> does not contain any columns at the start of the load operation.
+                </para>
               </description>
             </item>
             <item>
@@ -1580,8 +1576,8 @@
             </format> for more information.</para
           >
           <para
-            >In this method call, the specified <see cref="T:System.Data.LoadOption" /> parameter influences the processing of the incoming data. How should the Load method handle loading rows that have the same primary key as existing rows? Should it modify current values, original values, or both? These issues, and more, are controlled by the <paramref name="loadOption" /> parameter. </para
-          >
+            >In this method call, the specified <see cref="T:System.Data.LoadOption" /> parameter influences the processing of the incoming data. How should the Load method handle loading rows that have the same primary key as existing rows? Should it modify current values, original values, or both? These issues, and more, are controlled by the <paramref name="loadOption" /> parameter.
+          </para>
           <para>If the existing row and the incoming row contain corresponding primary key values, the row is processed using its current row state value, otherwise it's treated as a new row. </para>
           <para
             >In terms of event operations, the <see cref="E:System.Data.DataTable.RowChanging" /> event occurs before each row is changed, and the <see cref="E:System.Data.DataTable.RowChanged" /> event occurs after each row has been changed. In each case, the <see cref="P:System.Data.DataRowChangeEventArgs.Action" /> property of the <see cref="T:System.Data.DataRowChangeEventArgs" /> instance passed to the event handler contains information about the particular action associated with the event. This action value varies, depending on the state of the row before the load operation. In each case, both events occur, and the action is the same for each. The action may be applied to either the current or original version of each row, or both, depending on the current row state.</para
@@ -1793,8 +1789,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A value from the <see cref="T:System.Data.LoadOption" /> enumeration that indicates how rows already in the <see cref="T:System.Data.DataTable" /> are combined with incoming rows that share the same primary key. </param
-        >
+          />A value from the <see cref="T:System.Data.LoadOption" /> enumeration that indicates how rows already in the <see cref="T:System.Data.DataTable" /> are combined with incoming rows that share the same primary key.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Load">
@@ -1860,8 +1856,8 @@
               </term>
               <description>
                 <para
-                  >The Load method adds the extra column(s) to DataTable’s schema. The method throws an exception if corresponding columns in the <see cref="T:System.Data.DataTable" /> and the loaded result set are not value compatible. The method also retrieves constraint information from the result set for all added columns. Except for the case of Primary Key constraint, this constraint information is used only if the current <see cref="T:System.Data.DataTable" /> does not contain any columns at the start of the load operation. </para
-                >
+                  >The Load method adds the extra column(s) to DataTable’s schema. The method throws an exception if corresponding columns in the <see cref="T:System.Data.DataTable" /> and the loaded result set are not value compatible. The method also retrieves constraint information from the result set for all added columns. Except for the case of Primary Key constraint, this constraint information is used only if the current <see cref="T:System.Data.DataTable" /> does not contain any columns at the start of the load operation.
+                </para>
               </description>
             </item>
             <item>
@@ -1879,8 +1875,8 @@
             </format> for more information.</para
           >
           <para
-            >In this method call, the specified <see cref="T:System.Data.LoadOption" /> parameter influences the processing of the incoming data. How should the Load method handle loading rows that have the same primary key as existing rows? Should it modify current values, original values, or both? These issues, and more, are controlled by the <paramref name="loadOption" /> parameter. </para
-          >
+            >In this method call, the specified <see cref="T:System.Data.LoadOption" /> parameter influences the processing of the incoming data. How should the Load method handle loading rows that have the same primary key as existing rows? Should it modify current values, original values, or both? These issues, and more, are controlled by the <paramref name="loadOption" /> parameter.
+          </para>
           <para>If the existing row and the incoming row contain corresponding primary key values, the row is processed using its current row state value, otherwise it's treated as a new row. </para>
           <para
             >In terms of event operations, the <see cref="E:System.Data.DataTable.RowChanging" /> event occurs before each row is changed, and the <see cref="E:System.Data.DataTable.RowChanged" /> event occurs after each row has been changed. In each case, the <see cref="P:System.Data.DataRowChangeEventArgs.Action" /> property of the <see cref="T:System.Data.DataRowChangeEventArgs" /> instance passed to the event handler contains information about the particular action associated with the event. This action value varies, depending on the state of the row before the load operation. In each case, both events occur, and the action is the same for each. The action may be applied to either the current or original version of each row, or both, depending on the current row state.</para
@@ -2095,8 +2091,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A value from the <see cref="T:System.Data.LoadOption" /> enumeration that indicates how rows already in the <see cref="T:System.Data.DataTable" /> are combined with incoming rows that share the same primary key. </param
-        >
+          />A value from the <see cref="T:System.Data.LoadOption" /> enumeration that indicates how rows already in the <see cref="T:System.Data.DataTable" /> are combined with incoming rows that share the same primary key.
+        </param>
         <param name="errorHandler">
           <attribution
             license="cc4"
@@ -2151,15 +2147,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of values used to create the new row. </param
-        >
+          />An array of values used to create the new row.
+        </param>
         <param name="fAcceptChanges">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to accept changes; otherwise false. </param
-        >
+          />true to accept changes; otherwise false.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2214,15 +2210,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of values used to create the new row. </param
-        >
+          />An array of values used to create the new row.
+        </param>
         <param name="loadOption">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Used to determine how the array values are applied to the corresponding values in an existing row. </param
-        >
+          />Used to determine how the array values are applied to the corresponding values in an existing row.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Locale">
@@ -2364,8 +2360,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true, to preserve changes in the current DataTable; otherwise false. </param
-        >
+          />true, to preserve changes in the current DataTable; otherwise false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Merge">
@@ -2436,8 +2432,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Data.MissingSchemaAction" /> values. </param
-        >
+          />One of the <see cref="T:System.Data.MissingSchemaAction" /> values.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="MinimumCapacity">
@@ -2586,8 +2582,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.DataRowBuilder" /> object. </param
-        >
+          />A <see cref="T:System.Data.DataRowBuilder" /> object.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2624,8 +2620,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.DataColumnChangeEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Data.DataColumnChangeEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2662,8 +2658,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.DataColumnChangeEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Data.DataColumnChangeEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2706,8 +2702,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.ComponentModel.PropertyChangedEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.ComponentModel.PropertyChangedEventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnRemoveColumn">
@@ -2746,8 +2742,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Data.DataColumn" /> being removed. </param
-        >
+          />The <see cref="T:System.Data.DataColumn" /> being removed.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnRowChanged">
@@ -2780,8 +2776,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.DataRowChangeEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Data.DataRowChangeEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2818,8 +2814,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.DataRowChangeEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Data.DataRowChangeEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2856,8 +2852,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.DataRowChangeEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Data.DataRowChangeEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2894,8 +2890,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.DataRowChangeEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Data.DataRowChangeEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2938,8 +2934,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.DataTableClearEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Data.DataTableClearEventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnTableClearing">
@@ -2978,8 +2974,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.DataTableClearEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Data.DataTableClearEventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnTableNewRow">
@@ -3001,8 +2997,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.Data.DataTable.TableNewRow" /> event, which fires after a new <see cref="T:System.Data.DataRow" /> has been created using <see cref="M:System.Data.DataTable.NewRow" />. </para
-          >
+            >Raises the <see cref="E:System.Data.DataTable.TableNewRow" /> event, which fires after a new <see cref="T:System.Data.DataRow" /> has been created using <see cref="M:System.Data.DataTable.NewRow" />.
+          </para>
           <para
             >Raising an event invokes the event handler through a delegate. For an overview, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
@@ -3018,8 +3014,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.DataTableNewRowEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Data.DataTableNewRowEventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ParentRelations">
@@ -3139,8 +3135,8 @@
             >The current <see cref="T:System.Data.DataTable" /> and its descendents are loaded with the data from the supplied <see cref="T:System.IO.Stream" />. The behavior of this method is identical to that of the <see cref="M:System.Data.DataSet.ReadXml(System.IO.Stream)" /> method, except that in this case, data is loaded only for the current table and its descendants.</para
           >
           <para
-            >The <see cref="M:System.Data.DataTable.ReadXml(System.IO.Stream)" /> method provides a way to read either data only, or both data and schema into a <see cref="T:System.Data.DataTable" /> from an XML document, whereas the <see cref="Overload:System.Data.DataTable.ReadXmlSchema" /> method reads only the schema. </para
-          >
+            >The <see cref="M:System.Data.DataTable.ReadXml(System.IO.Stream)" /> method provides a way to read either data only, or both data and schema into a <see cref="T:System.Data.DataTable" /> from an XML document, whereas the <see cref="Overload:System.Data.DataTable.ReadXmlSchema" /> method reads only the schema.
+          </para>
           <para
             >Note that the same is true for the <see cref="Overload:System.Data.DataTable.WriteXml" /> and <see cref="Overload:System.Data.DataTable.WriteXmlSchema" /> methods, respectively. To write XML data, or both schema and data from the DataTable, use the WriteXml method. To write just the schema, use the WriteXmlSchema method.</para
           >
@@ -3299,8 +3295,8 @@ public class A {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the file from which to read the data. </param
-        >
+          />The name of the file from which to read the data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ReadXml">
@@ -3344,8 +3340,8 @@ public class A {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads XML Schema and Data into the <see cref="T:System.Data.DataTable" /> using the specified <see cref="T:System.Xml.XmlReader" />. </para
-          >
+            >Reads XML Schema and Data into the <see cref="T:System.Data.DataTable" /> using the specified <see cref="T:System.Xml.XmlReader" />.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3356,8 +3352,8 @@ public class A {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlReader" /> that will be used to read the data. </param
-        >
+          />The <see cref="T:System.Xml.XmlReader" /> that will be used to read the data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ReadXml_internal">
@@ -3423,8 +3419,8 @@ public class A {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream used to read the schema. </param
-        >
+          />The stream used to read the schema.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ReadXmlSchema">
@@ -3469,8 +3465,8 @@ public class A {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.TextReader" /> used to read the schema information. </param
-        >
+          />The <see cref="T:System.IO.TextReader" /> used to read the schema information.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ReadXmlSchema">
@@ -3512,8 +3508,8 @@ public class A {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the file from which to read the schema information. </param
-        >
+          />The name of the file from which to read the schema information.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ReadXmlSchema">
@@ -3560,8 +3556,8 @@ public class A {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlReader" /> used to read the schema information. </param
-        >
+          />The <see cref="T:System.Xml.XmlReader" /> used to read the schema information.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ReadXmlSerializable">
@@ -3942,8 +3938,8 @@ public class A {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string specifying the column and sort direction. </param
-        >
+          />A string specifying the column and sort direction.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -3997,8 +3993,8 @@ public class A {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string specifying the column and sort direction. </param
-        >
+          />A string specifying the column and sort direction.
+        </param>
         <param name="recordStates">
           <attribution
             license="cc4"
@@ -4267,8 +4263,8 @@ public class A {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="E:System.Data.DataTable.TableCleared" /> event is fired immediately after all rows have been successfully cleared but before the <see cref="M:System.Data.DataTable.Clear" /> method returns control back to the caller. The <see cref="E:System.Data.DataTable.TableCleared" /> event is not fired if there are any exceptions during the clear operation. </para
-          >
+            >The <see cref="E:System.Data.DataTable.TableCleared" /> event is fired immediately after all rows have been successfully cleared but before the <see cref="M:System.Data.DataTable.Clear" /> method returns control back to the caller. The <see cref="E:System.Data.DataTable.TableCleared" /> event is not fired if there are any exceptions during the clear operation.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -4429,8 +4425,8 @@ public class A {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream to which the data will be written. </param
-        >
+          />The stream to which the data will be written.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteXml">
@@ -4471,8 +4467,8 @@ public class A {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.TextWriter" /> with which to write the content. </param
-        >
+          />The <see cref="T:System.IO.TextWriter" /> with which to write the content.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteXml">
@@ -4555,8 +4551,8 @@ public class A {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlWriter" /> with which to write the contents. </param
-        >
+          />The <see cref="T:System.Xml.XmlWriter" /> with which to write the contents.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteXml">
@@ -4579,8 +4575,8 @@ public class A {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="Overload:System.Data.DataTable.WriteXmlSchema" /> method to write the schema for a <see cref="T:System.Data.DataTable" /> to an XML document. The schema includes table, relation, and constraint definitions. </para
-          >
+            >Use the <see cref="Overload:System.Data.DataTable.WriteXmlSchema" /> method to write the schema for a <see cref="T:System.Data.DataTable" /> to an XML document. The schema includes table, relation, and constraint definitions.
+          </para>
           <para>The XML schema is written using the XSD standard.</para>
           <para
             >To write the data to an XML document, use the <see cref="Overload:System.Data.DataTable.WriteXml" /> method.</para
@@ -4605,8 +4601,8 @@ public class A {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream to which the data will be written. </param
-        >
+          />The stream to which the data will be written.
+        </param>
         <param name="writeHierarchy">
           <attribution
             license="cc4"
@@ -4658,8 +4654,8 @@ public class A {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream to which the data will be written. </param
-        >
+          />The stream to which the data will be written.
+        </param>
         <param name="mode">
           <attribution
             license="cc4"
@@ -4711,8 +4707,8 @@ public class A {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.TextWriter" /> with which to write the content. </param
-        >
+          />The <see cref="T:System.IO.TextWriter" /> with which to write the content.
+        </param>
         <param name="writeHierarchy">
           <attribution
             license="cc4"
@@ -4764,15 +4760,15 @@ public class A {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.TextWriter" /> used to write the document. </param
-        >
+          />The <see cref="T:System.IO.TextWriter" /> used to write the document.
+        </param>
         <param name="mode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Data.XmlWriteMode" /> values. </param
-        >
+          />One of the <see cref="T:System.Data.XmlWriteMode" /> values.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteXml">
@@ -4873,15 +4869,15 @@ public class A {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the file to which the data will be written. </param
-        >
+          />The name of the file to which the data will be written.
+        </param>
         <param name="mode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Data.XmlWriteMode" /> values. </param
-        >
+          />One of the <see cref="T:System.Data.XmlWriteMode" /> values.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteXml">
@@ -4921,16 +4917,16 @@ public class A {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the current contents of the <see cref="T:System.Data.DataTable" /> as XML using the specified <see cref="T:System.Xml.XmlWriter" />. </para
-          >
+            >Writes the current contents of the <see cref="T:System.Data.DataTable" /> as XML using the specified <see cref="T:System.Xml.XmlWriter" />.
+          </para>
         </summary>
         <param name="writer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlWriter" /> with which to write the contents. </param
-        >
+          />The <see cref="T:System.Xml.XmlWriter" /> with which to write the contents.
+        </param>
         <param name="writeHierarchy">
           <attribution
             license="cc4"
@@ -4982,15 +4978,15 @@ public class A {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlWriter" /> used to write the document. </param
-        >
+          />The <see cref="T:System.Xml.XmlWriter" /> used to write the document.
+        </param>
         <param name="mode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Data.XmlWriteMode" /> values. </param
-        >
+          />One of the <see cref="T:System.Data.XmlWriteMode" /> values.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteXml">
@@ -5043,15 +5039,15 @@ public class A {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream to which the data will be written. </param
-        >
+          />The stream to which the data will be written.
+        </param>
         <param name="mode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Data.XmlWriteMode" /> values. </param
-        >
+          />One of the <see cref="T:System.Data.XmlWriteMode" /> values.
+        </param>
         <param name="writeHierarchy">
           <attribution
             license="cc4"
@@ -5113,15 +5109,15 @@ public class A {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.TextWriter" /> used to write the document. </param
-        >
+          />The <see cref="T:System.IO.TextWriter" /> used to write the document.
+        </param>
         <param name="mode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Data.XmlWriteMode" /> values. </param
-        >
+          />One of the <see cref="T:System.Data.XmlWriteMode" /> values.
+        </param>
         <param name="writeHierarchy">
           <attribution
             license="cc4"
@@ -5183,15 +5179,15 @@ public class A {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the file to which the data will be written. </param
-        >
+          />The name of the file to which the data will be written.
+        </param>
         <param name="mode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Data.XmlWriteMode" /> values. </param
-        >
+          />One of the <see cref="T:System.Data.XmlWriteMode" /> values.
+        </param>
         <param name="writeHierarchy">
           <attribution
             license="cc4"
@@ -5247,15 +5243,15 @@ public class A {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlWriter" /> used to write the document. </param
-        >
+          />The <see cref="T:System.Xml.XmlWriter" /> used to write the document.
+        </param>
         <param name="mode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Data.XmlWriteMode" /> values. </param
-        >
+          />One of the <see cref="T:System.Data.XmlWriteMode" /> values.
+        </param>
         <param name="writeHierarchy">
           <attribution
             license="cc4"
@@ -5284,8 +5280,8 @@ public class A {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="Overload:System.Data.DataTable.WriteXmlSchema" /> method to write the schema for a <see cref="T:System.Data.DataTable" /> to an XML document. The schema includes table, relation, and constraint definitions. </para
-          >
+            >Use the <see cref="Overload:System.Data.DataTable.WriteXmlSchema" /> method to write the schema for a <see cref="T:System.Data.DataTable" /> to an XML document. The schema includes table, relation, and constraint definitions.
+          </para>
           <para>The XML schema is written using the XSD standard.</para>
           <para
             >To write the data to an XML document, use the <see cref="Overload:System.Data.DataTable.WriteXml" /> method.</para
@@ -5302,8 +5298,8 @@ public class A {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream to which the XML schema will be written. </param
-        >
+          />The stream to which the XML schema will be written.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteXmlSchema">
@@ -5325,8 +5321,8 @@ public class A {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="Overload:System.Data.DataTable.WriteXmlSchema" /> method to write the schema for a <see cref="T:System.Data.DataTable" /> to an XML document. The schema includes table, relation, and constraint definitions. </para
-          >
+            >Use the <see cref="Overload:System.Data.DataTable.WriteXmlSchema" /> method to write the schema for a <see cref="T:System.Data.DataTable" /> to an XML document. The schema includes table, relation, and constraint definitions.
+          </para>
           <para>The XML schema is written using the XSD standard.</para>
           <para
             >To write the data to an XML document, use the <see cref="Overload:System.Data.DataTable.WriteXml" /> method.</para
@@ -5343,8 +5339,8 @@ public class A {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.TextWriter" /> with which to write. </param
-        >
+          />The <see cref="T:System.IO.TextWriter" /> with which to write.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteXmlSchema">
@@ -5363,8 +5359,8 @@ public class A {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="Overload:System.Data.DataTable.WriteXmlSchema" /> method to write the schema for a <see cref="T:System.Data.DataTable" /> to an XML document. The schema includes table, relation, and constraint definitions. </para
-          >
+            >Use the <see cref="Overload:System.Data.DataTable.WriteXmlSchema" /> method to write the schema for a <see cref="T:System.Data.DataTable" /> to an XML document. The schema includes table, relation, and constraint definitions.
+          </para>
           <para>The XML schema is written using the XSD standard.</para>
           <para
             >To write the data to an XML document, use the <see cref="Overload:System.Data.DataTable.WriteXml" /> method.</para
@@ -5381,8 +5377,8 @@ public class A {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the file to use. </param
-        >
+          />The name of the file to use.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteXmlSchema">
@@ -5404,8 +5400,8 @@ public class A {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="Overload:System.Data.DataTable.WriteXmlSchema" /> method to write the schema for a <see cref="T:System.Data.DataTable" /> to an XML document. The schema includes table, relation, and constraint definitions. </para
-          >
+            >Use the <see cref="Overload:System.Data.DataTable.WriteXmlSchema" /> method to write the schema for a <see cref="T:System.Data.DataTable" /> to an XML document. The schema includes table, relation, and constraint definitions.
+          </para>
           <para>The XML schema is written using the XSD standard.</para>
           <para
             >To write the data to an XML document, use the <see cref="Overload:System.Data.DataTable.WriteXml" /> method.</para
@@ -5422,8 +5418,8 @@ public class A {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlWriter" /> to use. </param
-        >
+          />The <see cref="T:System.Xml.XmlWriter" /> to use.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteXmlSchema">
@@ -5446,8 +5442,8 @@ public class A {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="Overload:System.Data.DataTable.WriteXmlSchema" /> method to write the schema for a <see cref="T:System.Data.DataTable" /> to an XML document. The schema includes table, relation, and constraint definitions. </para
-          >
+            >Use the <see cref="Overload:System.Data.DataTable.WriteXmlSchema" /> method to write the schema for a <see cref="T:System.Data.DataTable" /> to an XML document. The schema includes table, relation, and constraint definitions.
+          </para>
           <para>The XML schema is written using the XSD standard.</para>
           <para
             >To write the data to an XML document, use the <see cref="Overload:System.Data.DataTable.WriteXml" /> method.</para
@@ -5467,8 +5463,8 @@ public class A {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream to which the XML schema will be written. </param
-        >
+          />The stream to which the XML schema will be written.
+        </param>
         <param name="writeHierarchy">
           <attribution
             license="cc4"
@@ -5498,8 +5494,8 @@ public class A {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="Overload:System.Data.DataTable.WriteXmlSchema" /> method to write the schema for a <see cref="T:System.Data.DataTable" /> to an XML document. The schema includes table, relation, and constraint definitions. </para
-          >
+            >Use the <see cref="Overload:System.Data.DataTable.WriteXmlSchema" /> method to write the schema for a <see cref="T:System.Data.DataTable" /> to an XML document. The schema includes table, relation, and constraint definitions.
+          </para>
           <para>The XML schema is written using the XSD standard.</para>
           <para
             >To write the data to an XML document, use the <see cref="Overload:System.Data.DataTable.WriteXml" /> method.</para
@@ -5519,8 +5515,8 @@ public class A {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.TextWriter" /> with which to write. </param
-        >
+          />The <see cref="T:System.IO.TextWriter" /> with which to write.
+        </param>
         <param name="writeHierarchy">
           <attribution
             license="cc4"
@@ -5550,8 +5546,8 @@ public class A {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="Overload:System.Data.DataTable.WriteXmlSchema" /> method to write the schema for a <see cref="T:System.Data.DataTable" /> to an XML document. The schema includes table, relation, and constraint definitions. </para
-          >
+            >Use the <see cref="Overload:System.Data.DataTable.WriteXmlSchema" /> method to write the schema for a <see cref="T:System.Data.DataTable" /> to an XML document. The schema includes table, relation, and constraint definitions.
+          </para>
           <para>The XML schema is written using the XSD standard.</para>
           <para
             >To write the data to an XML document, use the <see cref="Overload:System.Data.DataTable.WriteXml" /> method.</para
@@ -5571,8 +5567,8 @@ public class A {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the file to use. </param
-        >
+          />The name of the file to use.
+        </param>
         <param name="writeHierarchy">
           <attribution
             license="cc4"
@@ -5602,8 +5598,8 @@ public class A {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="Overload:System.Data.DataTable.WriteXmlSchema" /> method to write the schema for a <see cref="T:System.Data.DataTable" /> to an XML document. The schema includes table, relation, and constraint definitions. </para
-          >
+            >Use the <see cref="Overload:System.Data.DataTable.WriteXmlSchema" /> method to write the schema for a <see cref="T:System.Data.DataTable" /> to an XML document. The schema includes table, relation, and constraint definitions.
+          </para>
           <para>The XML schema is written using the XSD standard.</para>
           <para
             >To write the data to an XML document, use the <see cref="Overload:System.Data.DataTable.WriteXml" /> method.</para
@@ -5623,8 +5619,8 @@ public class A {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlWriter" /> used to write the document. </param
-        >
+          />The <see cref="T:System.Xml.XmlWriter" /> used to write the document.
+        </param>
         <param name="writeHierarchy">
           <attribution
             license="cc4"

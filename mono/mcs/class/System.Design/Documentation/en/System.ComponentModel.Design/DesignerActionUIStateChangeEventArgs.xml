@@ -19,8 +19,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see cref="E:System.ComponentModel.Design.DesignerActionUIService.DesignerActionUIStateChange" /> event occurs when a smart tag panel is displayed or hidden. This event is not generated directly by the panel but rather by the <see cref="T:System.ComponentModel.Design.DesignerActionUIService" /> class when its <see cref="M:System.ComponentModel.Design.DesignerActionUIService.ShowUI(System.ComponentModel.IComponent)" /> and <see cref="M:System.ComponentModel.Design.DesignerActionUIService.HideUI(System.ComponentModel.IComponent)" /> methods are executed. </para
-      >
+        >A <see cref="E:System.ComponentModel.Design.DesignerActionUIService.DesignerActionUIStateChange" /> event occurs when a smart tag panel is displayed or hidden. This event is not generated directly by the panel but rather by the <see cref="T:System.ComponentModel.Design.DesignerActionUIService" /> class when its <see cref="M:System.ComponentModel.Design.DesignerActionUIService.ShowUI(System.ComponentModel.IComponent)" /> and <see cref="M:System.ComponentModel.Design.DesignerActionUIService.HideUI(System.ComponentModel.IComponent)" /> methods are executed.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

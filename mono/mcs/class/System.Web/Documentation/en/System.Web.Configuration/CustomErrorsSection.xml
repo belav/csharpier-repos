@@ -21,8 +21,8 @@
       >
       <block subset="none" type="note">
         <para
-          >The <see cref="T:System.Web.Configuration.CustomErrorsSection" /> can read and write information from and to the related section of the configuration file according to the section property <see cref="P:System.Configuration.SectionInformation.AllowDefinition" /> whose value is <see cref="F:System.Configuration.ConfigurationAllowDefinition.Everywhere" />. </para
-        >
+          >The <see cref="T:System.Web.Configuration.CustomErrorsSection" /> can read and write information from and to the related section of the configuration file according to the section property <see cref="P:System.Configuration.SectionInformation.AllowDefinition" /> whose value is <see cref="F:System.Configuration.ConfigurationAllowDefinition.Everywhere" />.
+        </para>
       </block>
     </remarks>
     <summary>

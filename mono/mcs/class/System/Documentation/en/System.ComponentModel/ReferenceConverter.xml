@@ -80,8 +80,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> that represents the type to associate with this reference converter. </param
-        >
+          />A <see cref="T:System.Type" /> that represents the type to associate with this reference converter.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CanConvertFrom">
@@ -126,15 +126,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context.
+        </param>
         <param name="sourceType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> that represents the type you wish to convert from. </param
-        >
+          />A <see cref="T:System.Type" /> that represents the type you wish to convert from.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ConvertFrom">
@@ -182,22 +182,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context.
+        </param>
         <param name="culture">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Globalization.CultureInfo" /> that specifies the culture used to represent the font. </param
-        >
+          />A <see cref="T:System.Globalization.CultureInfo" /> that specifies the culture used to represent the font.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to convert. </param
-        >
+          />The <see cref="T:System.Object" /> to convert.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ConvertTo">
@@ -245,29 +245,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context.
+        </param>
         <param name="culture">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Globalization.CultureInfo" /> that specifies the culture used to represent the font. </param
-        >
+          />A <see cref="T:System.Globalization.CultureInfo" /> that specifies the culture used to represent the font.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to convert. </param
-        >
+          />The <see cref="T:System.Object" /> to convert.
+        </param>
         <param name="destinationType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type to convert the object to. </param
-        >
+          />The type to convert the object to.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetStandardValues">
@@ -313,8 +313,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetStandardValuesExclusive">
@@ -362,8 +362,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetStandardValuesSupported">
@@ -409,8 +409,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsValueAllowed">
@@ -455,11 +455,11 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides an additional context. </param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides an additional context.
+        </param>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to check. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to check.
+        </param>
       </Docs>
     </Member>
   </Members>

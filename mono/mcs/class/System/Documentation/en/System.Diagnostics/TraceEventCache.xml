@@ -19,8 +19,8 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <block subset="none" type="note">
         <para
-          >The <see cref="T:System.Diagnostics.TraceEventCache" /> class, designed as a performance optimization for trace listener calls, is of interest only to developers creating custom trace listeners. </para
-        >
+          >The <see cref="T:System.Diagnostics.TraceEventCache" /> class, designed as a performance optimization for trace listener calls, is of interest only to developers creating custom trace listeners.
+        </para>
       </block>
       <para
         >The <see cref="T:System.Diagnostics.TraceEventCache" /> class is used as a parameter in tracing methods to accurately identify the source of a trace event. Examples of methods that use <see cref="T:System.Diagnostics.TraceEventCache" /> are <see cref="M:System.Diagnostics.TraceListener.TraceEvent(System.Diagnostics.TraceEventCache,System.String,System.Diagnostics.TraceEventType,System.Int32,System.String)" />   and <see cref="M:System.Diagnostics.TraceFilter.ShouldTrace(System.Diagnostics.TraceEventCache,System.String,System.Diagnostics.TraceEventType,System.Int32,System.String,System.Object[],System.Object,System.Object[])" />. The <see cref="P:System.Diagnostics.TraceEventCache.LogicalOperationStack" /> property contains data that can be used to correlate the trace with related traces.</para
@@ -49,8 +49,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Diagnostics.TraceEventCache" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.TraceEventCache" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>

@@ -67,15 +67,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index in the <see cref="P:System.Web.UI.Control.Controls" /> collection that the <see cref="T:System.Web.UI.WebControls.SiteMapPath" /> control uses to track the <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" /> object. </param
-        >
+          />The index in the <see cref="P:System.Web.UI.Control.Controls" /> collection that the <see cref="T:System.Web.UI.WebControls.SiteMapPath" /> control uses to track the <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" /> object.
+        </param>
         <param name="itemType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The functional type of <see cref="T:System.Web.SiteMapNode" /> that this <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" /> represents. </param
-        >
+          />The functional type of <see cref="T:System.Web.SiteMapNode" /> that this <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" /> represents.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -160,8 +160,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Web.UI.WebControls.SiteMapNodeItemType" /> values. </param
-        >
+          />One of the <see cref="T:System.Web.UI.WebControls.SiteMapNodeItemType" /> values.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SiteMapNode">
@@ -210,8 +210,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Typically, you should use the <see cref="P:System.Web.UI.WebControls.SiteMapNodeItem.SiteMapNode" /> property to access the data item represented by a <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" /> object. </para
-          >
+            >Typically, you should use the <see cref="P:System.Web.UI.WebControls.SiteMapNodeItem.SiteMapNode" /> property to access the data item represented by a <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" /> object.
+          </para>
           <para
             >The <see cref="P:System.Web.UI.WebControls.SiteMapNodeItem.System#Web#UI#IDataItemContainer#DataItem" /> member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" /> instance is cast to an <see cref="T:System.Web.UI.IDataItemContainer" /> interface.</para
           >
@@ -239,8 +239,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Typically, you should use the <see cref="P:System.Web.UI.WebControls.SiteMapNodeItem.ItemIndex" /> property to determine the index for a <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" /> object. </para
-          >
+            >Typically, you should use the <see cref="P:System.Web.UI.WebControls.SiteMapNodeItem.ItemIndex" /> property to determine the index for a <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" /> object.
+          </para>
           <para
             >The <see cref="P:System.Web.UI.WebControls.SiteMapNodeItem.System#Web#UI#IDataItemContainer#DataItemIndex" /> member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" /> instance is cast to an <see cref="T:System.Web.UI.IDataItemContainer" /> interface.</para
           >
@@ -268,8 +268,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Typically, you should use the <see cref="P:System.Web.UI.WebControls.SiteMapNodeItem.ItemIndex" /> property to determine the index for a <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" /> object. </para
-          >
+            >Typically, you should use the <see cref="P:System.Web.UI.WebControls.SiteMapNodeItem.ItemIndex" /> property to determine the index for a <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" /> object.
+          </para>
           <para
             >The <see cref="P:System.Web.UI.WebControls.SiteMapNodeItem.System#Web#UI#IDataItemContainer#DisplayIndex" /> member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" /> instance is cast to an <see cref="T:System.Web.UI.IDataItemContainer" /> interface.</para
           >

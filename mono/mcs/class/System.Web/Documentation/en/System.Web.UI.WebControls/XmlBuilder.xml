@@ -172,16 +172,16 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the <see cref="T:System.Web.UI.WebControls.Xml" /> control's inner text. </para
-          >
+            >Sets the <see cref="T:System.Web.UI.WebControls.Xml" /> control's inner text.
+          </para>
         </summary>
         <param name="text">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to insert as the inner text. </param
-        >
+          />The value to insert as the inner text.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

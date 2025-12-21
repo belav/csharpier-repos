@@ -29,8 +29,8 @@
         >A <see cref="T:System.Diagnostics.SwitchAttribute" /> attribute can be used on an assembly, class, constructor, method, property, or event.</para
       >
       <para
-        >The <see cref="T:System.Diagnostics.SwitchAttribute" /> attribute can be used by tools that inspect an assembly for configuration settings. </para
-      >
+        >The <see cref="T:System.Diagnostics.SwitchAttribute" /> attribute can be used by tools that inspect an assembly for configuration settings.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -66,8 +66,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Diagnostics.SwitchAttribute" /> class, specifying the name and the type of the switch. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.SwitchAttribute" /> class, specifying the name and the type of the switch.
+          </para>
         </summary>
         <param name="switchName">
           <attribution
@@ -140,8 +140,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Diagnostics.SwitchAttribute.SwitchDescription" /> property typically indicates the function of the switch. </para
-          >
+            >The <see cref="P:System.Diagnostics.SwitchAttribute.SwitchDescription" /> property typically indicates the function of the switch.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

@@ -23,8 +23,8 @@
       <para>One objective of the httpCookies element is to support the use of HttpOnly cookies. HttpOnly cookies (cookies with the HttpOnly attribute) were introduced in Internet Explorer 6 to help mitigate the risk of cross-site scripting. The HttpOnly attribute prevents cookies from being accessed through client-side script. Any information contained in an HttpOnly cookie is less likely to be disclosed to a hacker or a malicious Web site. For more information, search MSDN (msdn.microsoft.com) for "HttpOnly."</para>
       <block subset="none" type="note">
         <para
-          >The <see cref="T:System.Web.Configuration.HttpCookiesSection" /> can read and write information from and to the related section of the configuration file according to the section property <see cref="P:System.Configuration.SectionInformation.AllowDefinition" /> whose value is <see cref="F:System.Configuration.ConfigurationAllowDefinition.Everywhere" />. </para
-        >
+          >The <see cref="T:System.Web.Configuration.HttpCookiesSection" /> can read and write information from and to the related section of the configuration file according to the section property <see cref="P:System.Configuration.SectionInformation.AllowDefinition" /> whose value is <see cref="F:System.Configuration.ConfigurationAllowDefinition.Everywhere" />.
+        </para>
       </block>
     </remarks>
     <summary>
@@ -143,8 +143,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.Configuration.HttpCookiesSection.RequireSSL" /> property enables or disables output of the secure cookie attribute as described in RFC 2109. When used by compliant browsers, the cookie will only be sent back over a connection using SSL/TLS. The default is false. </para
-          >
+            >The <see cref="P:System.Web.Configuration.HttpCookiesSection.RequireSSL" /> property enables or disables output of the secure cookie attribute as described in RFC 2109. When used by compliant browsers, the cookie will only be sent back over a connection using SSL/TLS. The default is false.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

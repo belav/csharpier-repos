@@ -18,8 +18,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see cref="E:System.Windows.Forms.ToolStripRenderer.RenderArrow" /> event. </para
-      >
+        >Provides data for the <see cref="E:System.Windows.Forms.ToolStripRenderer.RenderArrow" /> event.
+      </para>
     </summary>
   </Docs>
   <Members>
@@ -42,8 +42,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripArrowRenderEventArgs" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripArrowRenderEventArgs" /> class.
+          </para>
         </summary>
         <param name="g">
           <attribution

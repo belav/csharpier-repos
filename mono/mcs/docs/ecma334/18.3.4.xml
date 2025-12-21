@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <clause number="18.3.4" title="Default values">
   <paragraph
-    >As described in <hyperlink>12.2</hyperlink>, several kinds of variables are automatically initialized to their default value when they are created. For variables of class types and other reference types, this default value is null. However, since structs are value types that cannot be null, the default value of a struct is the value produced by setting all value type fields to their default value and all reference type fields to null. </paragraph
-  >
+    >As described in <hyperlink>12.2</hyperlink>, several kinds of variables are automatically initialized to their default value when they are created. For variables of class types and other reference types, this default value is null. However, since structs are value types that cannot be null, the default value of a struct is the value produced by setting all value type fields to their default value and all reference type fields to null.
+  </paragraph>
   <paragraph>
     <example
       >[Example: Referring to the Point struct declared above, the example <code_example>
@@ -13,8 +13,8 @@ Point[] a = new Point[100];
     >
   </paragraph>
   <paragraph
-    >The default value of a struct corresponds to the value returned by the default constructor of the struct (<hyperlink>11.1.1</hyperlink>). Unlike a class, a struct is not permitted to declare a parameterless instance constructor. Instead, every struct implicitly has a parameterless instance constructor, which always returns the value that results from setting all value type fields to their default value and all reference type fields to null. </paragraph
-  >
+    >The default value of a struct corresponds to the value returned by the default constructor of the struct (<hyperlink>11.1.1</hyperlink>). Unlike a class, a struct is not permitted to declare a parameterless instance constructor. Instead, every struct implicitly has a parameterless instance constructor, which always returns the value that results from setting all value type fields to their default value and all reference type fields to null.
+  </paragraph>
   <paragraph>
     <note
       >[Note: Structs should be designed to consider the default initialization state a valid state. In the example <code_example>

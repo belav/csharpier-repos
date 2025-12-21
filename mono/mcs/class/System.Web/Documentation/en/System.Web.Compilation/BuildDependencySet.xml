@@ -14,8 +14,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.Compilation.BuildDependencySet" /> object for an application can be retrieved through the <see cref="M:System.Web.Compilation.BuildManager.GetCachedBuildDependencySet(System.Web.HttpContext,System.String)" /> method. It contains the properties that represent the list of dependencies. </para
-      >
+        >The <see cref="T:System.Web.Compilation.BuildDependencySet" /> object for an application can be retrieved through the <see cref="M:System.Web.Compilation.BuildManager.GetCachedBuildDependencySet(System.Web.HttpContext,System.String)" /> method. It contains the properties that represent the list of dependencies.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

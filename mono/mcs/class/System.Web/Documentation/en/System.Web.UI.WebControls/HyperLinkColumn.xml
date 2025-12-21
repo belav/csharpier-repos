@@ -387,8 +387,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The cell to be initialized. </param
-        >
+          />The cell to be initialized.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -455,8 +455,8 @@
             <para
               > The <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.Target" /> property renders as a target attribute. The target attribute on anchor elements is not allowed in the XHTML 1.1 document type definition. Do not set the <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.Target" /> property if the rendered output for the <see cref="T:System.Web.UI.WebControls.HyperLinkColumn" /> must be XHTML 1.1 compliant. For more information, refer to the topic <format type="text/html">
                 <a href="1b78d416-66bb-43a5-ac77-c703aab55b97">ASP.NET and XHTML Compliance</a>
-              </format>. </para
-            >
+              </format>.
+            </para>
             <para
               >When creating accessible Web pages, it is strongly recommended you avoid using the <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.Target" /> property to target another window. For more information, see <format type="text/html">
                 <a href="9b5f3e05-e88d-4248-a5f4-9e64850fa0ae">ASP.NET Accessibility</a>
@@ -464,8 +464,8 @@
             >
           </block>
           <para
-            >The <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.Target" /> value must begin with a letter in the range of A to Z (case-insensitive), except for the following special values, which begin with an underscore. </para
-          >
+            >The <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.Target" /> value must begin with a letter in the range of A to Z (case-insensitive), except for the following special values, which begin with an underscore.
+          </para>
           <list type="table">
             <listheader>
               <item>

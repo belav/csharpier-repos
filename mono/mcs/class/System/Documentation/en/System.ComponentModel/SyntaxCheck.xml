@@ -61,8 +61,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string containing the machine name to check. </param
-        >
+          />A string containing the machine name to check.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CheckPath">
@@ -100,8 +100,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string containing the path to check. </param
-        >
+          />A string containing the path to check.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CheckRootedPath">
@@ -139,8 +139,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string containing the path to check. </param
-        >
+          />A string containing the path to check.
+        </param>
       </Docs>
     </Member>
   </Members>

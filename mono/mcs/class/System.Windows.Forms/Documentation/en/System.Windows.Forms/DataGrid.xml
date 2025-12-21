@@ -47,8 +47,8 @@
         >The <see cref="T:System.Windows.Forms.DataGrid" /> displays Web-like links to child tables. You can click on a link to navigate to the child table. When a child table is displayed, a back button appears in the caption that can be clicked to navigate back to the parent table. The data from the parent rows is displayed below the caption and above the column headers. You can hide the parent row information by clicking the button to the right of the back button.</para
       >
       <para
-        >To display a table in the <see cref="T:System.Windows.Forms.DataGrid" /> at run time, use the <see cref="M:System.Windows.Forms.DataGrid.SetDataBinding(System.Object,System.String)" /> method to set the <see cref="P:System.Windows.Forms.DataGrid.DataSource" /> and <see cref="P:System.Windows.Forms.DataGrid.DataMember" /> properties to a valid data source. The following data sources are valid: </para
-      >
+        >To display a table in the <see cref="T:System.Windows.Forms.DataGrid" /> at run time, use the <see cref="M:System.Windows.Forms.DataGrid.SetDataBinding(System.Object,System.String)" /> method to set the <see cref="P:System.Windows.Forms.DataGrid.DataSource" /> and <see cref="P:System.Windows.Forms.DataGrid.DataMember" /> properties to a valid data source. The following data sources are valid:
+      </para>
       <list type="bullet">
         <item>
           <para>A <see cref="T:System.Data.DataTable" /></para>
@@ -67,13 +67,13 @@
         </item>
         <item>
           <para
-            >Any component that implements the <see cref="T:System.ComponentModel.IListSource" /> interface </para
-          >
+            >Any component that implements the <see cref="T:System.ComponentModel.IListSource" /> interface
+          </para>
         </item>
         <item>
           <para
-            >Any component that implements the <see cref="T:System.Collections.IList" /> interface </para
-          >
+            >Any component that implements the <see cref="T:System.Collections.IList" /> interface
+          </para>
         </item>
       </list>
       <para
@@ -126,8 +126,8 @@
         >You can also bind the <see cref="T:System.Windows.Forms.DataGrid" /> to an <see cref="T:System.Collections.ArrayList" />. A feature of the <see cref="T:System.Collections.ArrayList" /> is that it can contain objects of multiple types, but the <see cref="T:System.Windows.Forms.DataGrid" /> can only bind to such a list when all items in the list are of the same type as the first item. This means that all objects must either be of the same type, or they must inherit from the same class as the first item in the list. For example, if the first item in a list is a <see cref="T:System.Windows.Forms.Control" />, the second item could be a <see cref="T:System.Windows.Forms.TextBox" /> (which inherits from <see cref="T:System.Windows.Forms.Control" />). If, on the other hand, the first item is a <see cref="T:System.Windows.Forms.TextBox" />, the second object cannot be a <see cref="T:System.Windows.Forms.Control" />. Further, the <see cref="T:System.Collections.ArrayList" /> must have items in it when it is bound. An empty <see cref="T:System.Collections.ArrayList" /> will result in an empty grid. In addition, the objects in the <see cref="T:System.Collections.ArrayList" /> must contain public properties. When binding to an <see cref="T:System.Collections.ArrayList" />, set the <see cref="P:System.Windows.Forms.DataGridTableStyle.MappingName" /> of the <see cref="T:System.Windows.Forms.DataGridTableStyle" /> to "ArrayList" (the type name).</para
       >
       <para
-        >For each <see cref="T:System.Windows.Forms.DataGridTableStyle" />, you can set color and caption attributes that override the settings for the <see cref="T:System.Windows.Forms.DataGrid" /> control. However, if those properties are not set, the settings for the control are used by default. The following properties can be overridden by <see cref="T:System.Windows.Forms.DataGridTableStyle" /> properties: </para
-      >
+        >For each <see cref="T:System.Windows.Forms.DataGridTableStyle" />, you can set color and caption attributes that override the settings for the <see cref="T:System.Windows.Forms.DataGrid" /> control. However, if those properties are not set, the settings for the control are used by default. The following properties can be overridden by <see cref="T:System.Windows.Forms.DataGridTableStyle" /> properties:
+      </para>
       <list type="bullet">
         <item>
           <para>
@@ -241,8 +241,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Displays ADO.NET data in a scrollable grid. The <see cref="T:System.Windows.Forms.DataGridView" /> control replaces and adds functionality to the <see cref="T:System.Windows.Forms.DataGrid" /> control; however, the <see cref="T:System.Windows.Forms.DataGrid" /> control is retained for both backward compatibility and future use, if you choose. </para
-      >
+        >Displays ADO.NET data in a scrollable grid. The <see cref="T:System.Windows.Forms.DataGridView" /> control replaces and adds functionality to the <see cref="T:System.Windows.Forms.DataGrid" /> control; however, the <see cref="T:System.Windows.Forms.DataGrid" /> control is retained for both backward compatibility and future use, if you choose.
+      </para>
     </summary>
   </Docs>
   <Members>
@@ -344,8 +344,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is overridden by the <see cref="P:System.Windows.Forms.DataGridTableStyle.AllowSorting" /> property if there is a <see cref="T:System.Windows.Forms.DataGridTableStyle" /> currently in effect for the control. </para
-          >
+            >This property is overridden by the <see cref="P:System.Windows.Forms.DataGridTableStyle.AllowSorting" /> property if there is a <see cref="T:System.Windows.Forms.DataGridTableStyle" /> currently in effect for the control.
+          </para>
           <para>If sorting is allowed, clicking on a column header will sort the table data by that column.</para>
           <para
             >You can also sort using an expression for a <see cref="T:System.Data.DataColumn" />. See <see cref="P:System.Data.DataColumn.Expression" /> for details on creating a sort expression.</para
@@ -546,8 +546,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Windows.Forms.DataGrid.BackgroundImage" /> property is not meaningful for this control, although you can change its value and handle the <see cref="E:System.Windows.Forms.DataGrid.BackgroundImageChanged" /> event to detect the change. </para
-          >
+            >The <see cref="P:System.Windows.Forms.DataGrid.BackgroundImage" /> property is not meaningful for this control, although you can change its value and handle the <see cref="E:System.Windows.Forms.DataGrid.BackgroundImageChanged" /> event to detect the change.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -614,8 +614,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Windows.Forms.DataGrid.BackgroundImageLayout" /> property is not meaningful for this control, although you can change its value and handle the <see cref="E:System.Windows.Forms.DataGrid.BackgroundImageLayoutChanged" /> event to detect the change. </para
-          >
+            >The <see cref="P:System.Windows.Forms.DataGrid.BackgroundImageLayout" /> property is not meaningful for this control, although you can change its value and handle the <see cref="E:System.Windows.Forms.DataGrid.BackgroundImageLayoutChanged" /> event to detect the change.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -658,15 +658,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.DataGridColumnStyle" /> to edit. </param
-        >
+          />A <see cref="T:System.Windows.Forms.DataGridColumnStyle" /> to edit.
+        </param>
         <param name="rowNumber">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of the row to edit. </param
-        >
+          />The number of the row to edit.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -957,8 +957,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of the row to collapse. If set to -1, all rows are collapsed. </param
-        >
+          />The number of the row to collapse. If set to -1, all rows are collapsed.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1023,8 +1023,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.Rectangle" /> that defines the location of the edited column. </param
-        >
+          />The <see cref="T:System.Drawing.Rectangle" /> that defines the location of the edited column.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ColumnStartedEditing">
@@ -1061,8 +1061,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.Control" /> used to edit the column. </param
-        >
+          />The <see cref="T:System.Windows.Forms.Control" /> used to edit the column.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateAccessibilityInstance">
@@ -1082,8 +1082,8 @@
             >Derived classes should not call the base class's <see cref="M:System.Windows.Forms.Control.CreateAccessibilityInstance" /> method.</para
           >
           <para
-            >Only the following properties of the <see cref="T:System.Windows.Forms.AccessibleObject" /> should be set: </para
-          >
+            >Only the following properties of the <see cref="T:System.Windows.Forms.AccessibleObject" /> should be set:
+          </para>
           <list type="bullet">
             <item>
               <para>
@@ -1150,8 +1150,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ComponentModel.PropertyDescriptor" /> to use for creating the grid column style. </param
-        >
+          />The <see cref="T:System.ComponentModel.PropertyDescriptor" /> to use for creating the grid column style.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1188,15 +1188,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ComponentModel.PropertyDescriptor" /> to use for creating the grid column style. </param
-        >
+          />The <see cref="T:System.ComponentModel.PropertyDescriptor" /> to use for creating the grid column style.
+        </param>
         <param name="isDefault">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to set the column style as the default; otherwise, false. </param
-        >
+          />true to set the column style as the default; otherwise, false.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1292,8 +1292,8 @@
             >Setting the <see cref="P:System.Windows.Forms.DataGrid.CurrentRowIndex" /> property to a value other than its current value scrolls the control so that the specified row is in view.</para
           >
           <para
-            >The <see cref="P:System.Windows.Forms.DataGrid.CurrentRowIndex" /> property enables you to iterate through a parent table's rows even if you are viewing the child table rows. For example, if you are viewing a child table, incrementing the <see cref="P:System.Windows.Forms.DataGrid.CurrentRowIndex" /> will cause the <see cref="T:System.Windows.Forms.DataGrid" /> to display the next set of records in the child table that are linked to the parent table. </para
-          >
+            >The <see cref="P:System.Windows.Forms.DataGrid.CurrentRowIndex" /> property enables you to iterate through a parent table's rows even if you are viewing the child table rows. For example, if you are viewing a child table, incrementing the <see cref="P:System.Windows.Forms.DataGrid.CurrentRowIndex" /> will cause the <see cref="T:System.Windows.Forms.DataGrid" /> to display the next set of records in the child table that are linked to the parent table.
+          </para>
           <para>If the user is viewing a parent table, or a table with no child relations, then the property returns the zero-based index of the current row.</para>
         </remarks>
         <summary>
@@ -1354,8 +1354,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Windows.Forms.DataGrid.Cursor" /> property is not meaningful for this control, although you can change its value and handle the <see cref="E:System.Windows.Forms.DataGrid.CursorChanged" /> event to detect the change. </para
-          >
+            >The <see cref="P:System.Windows.Forms.DataGrid.Cursor" /> property is not meaningful for this control, although you can change its value and handle the <see cref="E:System.Windows.Forms.DataGrid.CursorChanged" /> event to detect the change.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1454,13 +1454,13 @@
             </item>
             <item>
               <para
-                >Any component that implements the <see cref="T:System.ComponentModel.IListSource" /> interface </para
-              >
+                >Any component that implements the <see cref="T:System.ComponentModel.IListSource" /> interface
+              </para>
             </item>
             <item>
               <para
-                >Any component that implements the <see cref="T:System.Collections.IList" /> interface </para
-              >
+                >Any component that implements the <see cref="T:System.Collections.IList" /> interface
+              </para>
             </item>
           </list>
           <para
@@ -1573,8 +1573,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1617,22 +1617,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.DataGridColumnStyle" /> to cease editing. </param
-        >
+          />The <see cref="T:System.Windows.Forms.DataGridColumnStyle" /> to cease editing.
+        </param>
         <param name="rowNumber">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of the row to cease editing. </param
-        >
+          />The number of the row to cease editing.
+        </param>
         <param name="shouldAbort">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Set to true if the current operation should be stopped. </param
-        >
+          />Set to true if the current operation should be stopped.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1685,8 +1685,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of the row to expand. If set to -1, all rows are expanded. </param
-        >
+          />The number of the row to expand. If set to -1, all rows are expanded.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1831,8 +1831,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.DataGridCell" /> to look up. </param
-        >
+          />The <see cref="T:System.Windows.Forms.DataGridCell" /> to look up.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1876,15 +1876,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of the cell's row. </param
-        >
+          />The number of the cell's row.
+        </param>
         <param name="col">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of the cell's column. </param
-        >
+          />The number of the cell's column.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1905,8 +1905,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To retrieve the cell bounds for a cell other than the current cell, use <see cref="Overload:System.Windows.Forms.DataGrid.GetCellBounds" />. </para
-          >
+            >To retrieve the cell bounds for a cell other than the current cell, use <see cref="Overload:System.Windows.Forms.DataGrid.GetCellBounds" />.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1973,15 +1973,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Object" /> that contains data about the control. </param
-        >
+          />An <see cref="T:System.Object" /> that contains data about the control.
+        </param>
         <param name="se">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.ScrollEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.ScrollEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2066,15 +2066,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Object" /> that contains data about the control. </param
-        >
+          />An <see cref="T:System.Object" /> that contains data about the control.
+        </param>
         <param name="se">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.ScrollEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.ScrollEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2188,8 +2188,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Drawing.Point" /> that represents single x,y coordinate. </param
-        >
+          />A <see cref="T:System.Drawing.Point" /> that represents single x,y coordinate.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2234,15 +2234,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The horizontal position of the coordinate. </param
-        >
+          />The horizontal position of the coordinate.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The vertical position of the coordinate. </param
-        >
+          />The vertical position of the coordinate.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2295,8 +2295,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of the row in question. </param
-        >
+          />The number of the row in question.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2316,8 +2316,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method with the <see cref="M:System.Windows.Forms.DataGrid.Select(System.Int32)" />, <see cref="M:System.Windows.Forms.DataGrid.UnSelect(System.Int32)" />, and <see cref="M:System.Windows.Forms.DataGrid.ResetSelection" /> methods to manipulate the selection state of a particular row. </para
-          >
+            >Use this method with the <see cref="M:System.Windows.Forms.DataGrid.Select(System.Int32)" />, <see cref="M:System.Windows.Forms.DataGrid.UnSelect(System.Int32)" />, and <see cref="M:System.Windows.Forms.DataGrid.ResetSelection" /> methods to manipulate the selection state of a particular row.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2332,8 +2332,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of the row you are interested in. </param
-        >
+          />The number of the row you are interested in.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2553,15 +2553,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of the row to navigate to. </param
-        >
+          />The number of the row to navigate to.
+        </param>
         <param name="relationName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the child relation to navigate to. </param
-        >
+          />The name of the child relation to navigate to.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2593,8 +2593,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2625,15 +2625,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Object" /> that contains data about the control. </param
-        >
+          />An <see cref="T:System.Object" /> that contains data about the control.
+        </param>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains data about the event. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains data about the event.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2677,8 +2677,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2710,8 +2710,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2755,8 +2755,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2788,8 +2788,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2821,8 +2821,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2854,8 +2854,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2899,8 +2899,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2927,8 +2927,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2960,8 +2960,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -3000,8 +3000,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -3045,8 +3045,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -3088,8 +3088,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -3131,8 +3131,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> containing the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> containing the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -3174,8 +3174,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.KeyEventArgs" /> that provides data about the <see cref="M:System.Windows.Forms.Control.OnKeyDown(System.Windows.Forms.KeyEventArgs)" /> event. </param
-        >
+          />A <see cref="T:System.Windows.Forms.KeyEventArgs" /> that provides data about the <see cref="M:System.Windows.Forms.Control.OnKeyDown(System.Windows.Forms.KeyEventArgs)" /> event.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -3217,8 +3217,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.KeyPressEventArgs" /> that contains data about the <see cref="M:System.Windows.Forms.Control.OnKeyPress(System.Windows.Forms.KeyPressEventArgs)" /> event </param
-        >
+          />A <see cref="T:System.Windows.Forms.KeyPressEventArgs" /> that contains data about the <see cref="M:System.Windows.Forms.Control.OnKeyPress(System.Windows.Forms.KeyPressEventArgs)" /> event
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -3262,8 +3262,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.LayoutEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.LayoutEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -3302,8 +3302,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -3342,8 +3342,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.MouseEventArgs" /> that contains data about the <see cref="M:System.Windows.Forms.Control.OnMouseDown(System.Windows.Forms.MouseEventArgs)" /> event. </param
-        >
+          />A <see cref="T:System.Windows.Forms.MouseEventArgs" /> that contains data about the <see cref="M:System.Windows.Forms.Control.OnMouseDown(System.Windows.Forms.MouseEventArgs)" /> event.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -3379,8 +3379,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains data about the <see cref="M:System.Windows.Forms.Control.OnMouseLeave(System.EventArgs)" /> event. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains data about the <see cref="M:System.Windows.Forms.Control.OnMouseLeave(System.EventArgs)" /> event.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -3419,8 +3419,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.MouseEventArgs" /> that contains data about the <see cref="M:System.Windows.Forms.Control.OnMouseMove(System.Windows.Forms.MouseEventArgs)" /> event. </param
-        >
+          />A <see cref="T:System.Windows.Forms.MouseEventArgs" /> that contains data about the <see cref="M:System.Windows.Forms.Control.OnMouseMove(System.Windows.Forms.MouseEventArgs)" /> event.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -3459,8 +3459,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.MouseEventArgs" /> that contains data about the <see cref="M:System.Windows.Forms.Control.OnMouseUp(System.Windows.Forms.MouseEventArgs)" /> event. </param
-        >
+          />A <see cref="T:System.Windows.Forms.MouseEventArgs" /> that contains data about the <see cref="M:System.Windows.Forms.Control.OnMouseUp(System.Windows.Forms.MouseEventArgs)" /> event.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -3499,8 +3499,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.MouseEventArgs" /> that contains data about the <see cref="M:System.Windows.Forms.Control.OnMouseUp(System.Windows.Forms.MouseEventArgs)" /> event. </param
-        >
+          />A <see cref="T:System.Windows.Forms.MouseEventArgs" /> that contains data about the <see cref="M:System.Windows.Forms.Control.OnMouseUp(System.Windows.Forms.MouseEventArgs)" /> event.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -3530,8 +3530,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.NavigateEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.NavigateEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -3570,8 +3570,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.PaintEventArgs" /> which contains data about the event. </param
-        >
+          />A <see cref="T:System.Windows.Forms.PaintEventArgs" /> which contains data about the event.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -3608,8 +3608,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.PaintEventArgs" /> that contains information about the control to paint. </param
-        >
+          />A <see cref="T:System.Windows.Forms.PaintEventArgs" /> that contains information about the control to paint.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -3653,8 +3653,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -3686,8 +3686,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -3723,16 +3723,16 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.Windows.Forms.DataGrid.ReadOnlyChanged" /> event </para
-          >
+            >Raises the <see cref="E:System.Windows.Forms.DataGrid.ReadOnlyChanged" /> event
+          </para>
         </summary>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -3768,8 +3768,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -3798,8 +3798,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -3826,8 +3826,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -3856,19 +3856,15 @@
           >
         </summary>
         <param name="sender">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The source of the event. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The source of the event.
+        </param>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -4123,8 +4119,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.Keys" /> that contains data about the pressed key. </param
-        >
+          />A <see cref="T:System.Windows.Forms.Keys" /> that contains data about the pressed key.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -4158,8 +4154,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.KeyEventArgs" /> that contains data about the key up or key down event. </param
-        >
+          />A <see cref="T:System.Windows.Forms.KeyEventArgs" /> that contains data about the key up or key down event.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -4216,8 +4212,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.Keys" /> that contains data about which the pressed key. </param
-        >
+          />A <see cref="T:System.Windows.Forms.Keys" /> that contains data about which the pressed key.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -4531,8 +4527,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method with the <see cref="M:System.Windows.Forms.DataGrid.IsSelected(System.Int32)" />, <see cref="M:System.Windows.Forms.DataGrid.Select(System.Int32)" />, and <see cref="M:System.Windows.Forms.DataGrid.UnSelect(System.Int32)" /> methods to manipulate the selection state of a particular row. </para
-          >
+            >Use this method with the <see cref="M:System.Windows.Forms.DataGrid.IsSelected(System.Int32)" />, <see cref="M:System.Windows.Forms.DataGrid.Select(System.Int32)" />, and <see cref="M:System.Windows.Forms.DataGrid.UnSelect(System.Int32)" /> methods to manipulate the selection state of a particular row.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -4704,8 +4700,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method with the <see cref="M:System.Windows.Forms.DataGrid.IsSelected(System.Int32)" />, <see cref="M:System.Windows.Forms.DataGrid.UnSelect(System.Int32)" />, and <see cref="M:System.Windows.Forms.DataGrid.ResetSelection" /> methods to manipulate the selection state of a particular row. </para
-          >
+            >Use this method with the <see cref="M:System.Windows.Forms.DataGrid.IsSelected(System.Int32)" />, <see cref="M:System.Windows.Forms.DataGrid.UnSelect(System.Int32)" />, and <see cref="M:System.Windows.Forms.DataGrid.ResetSelection" /> methods to manipulate the selection state of a particular row.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -4716,8 +4712,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the row to select. </param
-        >
+          />The index of the row to select.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -4810,15 +4806,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data source for the <see cref="T:System.Windows.Forms.DataGrid" /> control. </param
-        >
+          />The data source for the <see cref="T:System.Windows.Forms.DataGrid" /> control.
+        </param>
         <param name="dataMember">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="P:System.Windows.Forms.DataGrid.DataMember" /> string that specifies the table to bind to within the object returned by the <see cref="P:System.Windows.Forms.DataGrid.DataSource" /> property. </param
-        >
+          />The <see cref="P:System.Windows.Forms.DataGrid.DataMember" /> string that specifies the table to bind to within the object returned by the <see cref="P:System.Windows.Forms.DataGrid.DataSource" /> property.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -5373,8 +5369,8 @@
             >Use the <see cref="T:System.Windows.Forms.GridTableStylesCollection" /> retrieved through the <see cref="P:System.Windows.Forms.DataGrid.TableStyles" /> property to create customized views of each table displayed by the <see cref="T:System.Windows.Forms.DataGrid" /> control.</para
           >
           <para
-            >By default, the collection returned by <see cref="P:System.Windows.Forms.DataGrid.TableStyles" /> property does not contain any <see cref="T:System.Windows.Forms.DataGridTableStyle" /> objects. To create a set of customized views: </para
-          >
+            >By default, the collection returned by <see cref="P:System.Windows.Forms.DataGrid.TableStyles" /> property does not contain any <see cref="T:System.Windows.Forms.DataGridTableStyle" /> objects. To create a set of customized views:
+          </para>
           <list type="ordered">
             <item>
               <para>Create a <see cref="T:System.Windows.Forms.DataGridTableStyle" />.</para>
@@ -5469,8 +5465,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Windows.Forms.DataGrid.Text" /> property is not meaningful for this control, although you can change its value and handle the <see cref="E:System.Windows.Forms.DataGrid.TextChanged" /> event to detect the change. </para
-          >
+            >The <see cref="P:System.Windows.Forms.DataGrid.Text" /> property is not meaningful for this control, although you can change its value and handle the <see cref="E:System.Windows.Forms.DataGrid.TextChanged" /> event to detect the change.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -5497,8 +5493,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method with the <see cref="M:System.Windows.Forms.DataGrid.IsSelected(System.Int32)" />, <see cref="M:System.Windows.Forms.DataGrid.Select(System.Int32)" />, and <see cref="M:System.Windows.Forms.DataGrid.ResetSelection" /> methods to manipulate the selection state of a particular row. </para
-          >
+            >Use this method with the <see cref="M:System.Windows.Forms.DataGrid.IsSelected(System.Int32)" />, <see cref="M:System.Windows.Forms.DataGrid.Select(System.Int32)" />, and <see cref="M:System.Windows.Forms.DataGrid.ResetSelection" /> methods to manipulate the selection state of a particular row.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -5509,8 +5505,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the row to deselect. </param
-        >
+          />The index of the row to deselect.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

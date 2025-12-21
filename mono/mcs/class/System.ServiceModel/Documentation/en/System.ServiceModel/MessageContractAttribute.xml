@@ -40,8 +40,8 @@
         >
       </block>
       <para
-        >To implement a message contract for a type, annotate it with <see cref="T:System.ServiceModel.MessageContractAttribute" /> and annotate one or more of the class's fields or properties with <see cref="T:System.ServiceModel.MessageBodyMemberAttribute" />, <see cref="T:System.ServiceModel.MessageHeaderAttribute" />, or <see cref="T:System.ServiceModel.MessageHeaderArrayAttribute" />. </para
-      >
+        >To implement a message contract for a type, annotate it with <see cref="T:System.ServiceModel.MessageContractAttribute" /> and annotate one or more of the class's fields or properties with <see cref="T:System.ServiceModel.MessageBodyMemberAttribute" />, <see cref="T:System.ServiceModel.MessageHeaderAttribute" />, or <see cref="T:System.ServiceModel.MessageHeaderArrayAttribute" />.
+      </para>
       <block subset="none" type="note">
         <para>
           <see cref="T:System.ServiceModel.MessageParameterAttribute" /> is not a message contract attribute and cannot be used in conjunction with <see cref="T:System.ServiceModel.MessageContractAttribute" />.</para
@@ -90,8 +90,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.MessageContractAttribute" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.MessageContractAttribute" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>

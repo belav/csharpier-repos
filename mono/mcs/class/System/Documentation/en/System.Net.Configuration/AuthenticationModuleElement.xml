@@ -32,8 +32,8 @@
         </format> configuration element.</para
       >
       <para
-        >This class is used to specify modules registered to authenticate requests made with the <see cref="T:System.Net.WebRequest" /> and <see cref="T:System.Net.WebClient" /> classes. </para
-      >
+        >This class is used to specify modules registered to authenticate requests made with the <see cref="T:System.Net.WebRequest" /> and <see cref="T:System.Net.WebClient" /> classes.
+      </para>
       <para>This class provides programmatic access to information that can be stored in configuration files.</para>
     </remarks>
     <summary>
@@ -65,8 +65,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.Configuration.AuthenticationModuleElement" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.Configuration.AuthenticationModuleElement" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>

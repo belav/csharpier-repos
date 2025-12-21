@@ -26,8 +26,8 @@
         >You can use a class derived from <see cref="T:System.Web.Services.Description.SoapExtensionImporter" /> to extend the generation of client proxy code or abstract server code. You can use such a derived class in conjunction with a class derived from the abstract <see cref="T:System.Web.Services.Protocols.SoapExtension" /> class, which extends run-time processing of SOAP messages on the client or service.</para
       >
       <para
-        >You can specify <see cref="T:System.Web.Services.Description.SoapExtensionImporter" /> in a configuration file through the soapExtensionImporterTypes configuration element and its child add element. You can apply the configuration to: </para
-      >
+        >You can specify <see cref="T:System.Web.Services.Description.SoapExtensionImporter" /> in a configuration file through the soapExtensionImporterTypes configuration element and its child add element. You can apply the configuration to:
+      </para>
       <list type="bullet">
         <item>
           <para>An ASP.NET Web application: service or client.</para>
@@ -53,8 +53,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.Services.Description.SoapExtensionImporter" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Description.SoapExtensionImporter" /> class.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>

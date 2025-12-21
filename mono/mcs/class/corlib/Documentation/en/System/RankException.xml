@@ -56,8 +56,7 @@ public class RankExample {
       }
    }
 }
-   </code
-      >
+   </code>
       <para>The output is</para>
       <code>
 Error caught: System.RankException: The specified arrays must have the same number of dimensions.
@@ -223,8 +222,8 @@ Error caught: System.RankException: The specified arrays must have the same numb
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.String" /> that describes the error. </param
-        >
+          />A <see cref="T:System.String" /> that describes the error.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -267,15 +266,15 @@ Error caught: System.RankException: The specified arrays must have the same numb
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that holds the serialized object data. </param
-        >
+          />The object that holds the serialized object data.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The contextual information about the source or destination. </param
-        >
+          />The contextual information about the source or destination.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -355,15 +354,15 @@ Error caught: System.RankException: The specified arrays must have the same numb
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The error message that explains the reason for the exception. </param
-        >
+          />The error message that explains the reason for the exception.
+        </param>
         <param name="innerException">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The exception that is the cause of the current exception. If the <paramref name="innerException" /> parameter is not a null reference (Nothing in Visual Basic), the current exception is raised in a catch block that handles the inner exception. </param
-        >
+          />The exception that is the cause of the current exception. If the <paramref name="innerException" /> parameter is not a null reference (Nothing in Visual Basic), the current exception is raised in a catch block that handles the inner exception.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

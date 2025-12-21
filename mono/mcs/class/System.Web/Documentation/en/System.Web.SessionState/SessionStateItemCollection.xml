@@ -138,8 +138,8 @@
             >The <see cref="P:System.Web.SessionState.SessionStateItemCollection.Dirty" /> property is set to true when an object value is set or added to the collection using the <see cref="Overload:System.Web.SessionState.SessionStateItemCollection.Item" /> property and when one or more object values are removed from the collection using the <see cref="M:System.Web.SessionState.SessionStateItemCollection.Remove(System.String)" />, <see cref="M:System.Web.SessionState.SessionStateItemCollection.RemoveAt(System.Int32)" />, or <see cref="M:System.Web.SessionState.SessionStateItemCollection.Clear" /> methods.</para
           >
           <para
-            >The <see cref="P:System.Web.SessionState.SessionStateItemCollection.Dirty" /> property is also set to true when a mutable object is retrieved from the collection using the <see cref="Overload:System.Web.SessionState.SessionStateItemCollection.Item" /> property. </para
-          >
+            >The <see cref="P:System.Web.SessionState.SessionStateItemCollection.Dirty" /> property is also set to true when a mutable object is retrieved from the collection using the <see cref="Overload:System.Web.SessionState.SessionStateItemCollection.Item" /> property.
+          </para>
           <para
             >Calling the <see cref="M:System.Web.SessionState.SessionStateItemCollection.Deserialize(System.IO.BinaryReader)" /> method to populate a <see cref="T:System.Web.SessionState.SessionStateItemCollection" /> collection results in the <see cref="P:System.Web.SessionState.SessionStateItemCollection.Dirty" /> property being set to false.</para
           >
@@ -267,8 +267,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the item to delete from the collection. </param
-        >
+          />The name of the item to delete from the collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RemoveAt">
@@ -299,8 +299,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the item to remove from the collection. </param
-        >
+          />The index of the item to remove from the collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Serialize">

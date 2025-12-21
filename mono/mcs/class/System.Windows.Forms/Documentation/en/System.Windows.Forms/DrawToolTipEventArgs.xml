@@ -62,8 +62,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.Graphics" /> context used to draw the ToolTip. </param
-        >
+          />The <see cref="T:System.Drawing.Graphics" /> context used to draw the ToolTip.
+        </param>
         <param name="associatedWindow">
           <attribution
             license="cc4"
@@ -104,8 +104,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.Color" /> of the ToolTip text. </param
-        >
+          />The <see cref="T:System.Drawing.Color" /> of the ToolTip text.
+        </param>
         <param name="font">
           <attribution
             license="cc4"
@@ -160,8 +160,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When a window is owned by another window, the owned window is minimized and closed with the owner window. Owned windows are also never displayed behind their owner form. Here the ToolTip is owned by the native Win32 window represented by the <see cref="P:System.Windows.Forms.DrawToolTipEventArgs.AssociatedWindow" /> property. </para
-          >
+            >When a window is owned by another window, the owned window is minimized and closed with the owner window. Owned windows are also never displayed behind their owner form. Here the ToolTip is owned by the native Win32 window represented by the <see cref="P:System.Windows.Forms.DrawToolTipEventArgs.AssociatedWindow" /> property.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -211,8 +211,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method when you want to customize certain visual aspects of the <see cref="T:System.Windows.Forms.ToolTip" />, but want a standard ToolTip background drawn for you using the current value of <see cref="P:System.Drawing.SystemColors.Info" />. The background is drawn to fill the area specified by the <see cref="P:System.Windows.Forms.DrawToolTipEventArgs.Bounds" /> property. </para
-          >
+            >Use this method when you want to customize certain visual aspects of the <see cref="T:System.Windows.Forms.ToolTip" />, but want a standard ToolTip background drawn for you using the current value of <see cref="P:System.Drawing.SystemColors.Info" />. The background is drawn to fill the area specified by the <see cref="P:System.Windows.Forms.DrawToolTipEventArgs.Bounds" /> property.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

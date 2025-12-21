@@ -34,8 +34,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides the methods needed to substitute one type for another by the <see cref="T:System.Runtime.Serialization.DataContractSerializer" /> during serialization, deserialization, and export and import of XML schema documents (XSD). </para
-      >
+        >Provides the methods needed to substitute one type for another by the <see cref="T:System.Runtime.Serialization.DataContractSerializer" /> during serialization, deserialization, and export and import of XML schema documents (XSD).
+      </para>
     </summary>
   </Docs>
   <Members>
@@ -74,15 +74,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Reflection.MemberInfo" /> that describes the member. </param
-        >
+          />A <see cref="T:System.Reflection.MemberInfo" /> that describes the member.
+        </param>
         <param name="dataContractType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" />. </param
-        >
+          />A <see cref="T:System.Type" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetCustomDataToExport">
@@ -120,15 +120,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The CLR type to be replaced. </param
-        >
+          />The CLR type to be replaced.
+        </param>
         <param name="dataContractType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data contract type to be annotated. </param
-        >
+          />The data contract type to be annotated.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetDataContractType">
@@ -164,8 +164,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The CLR type <see cref="T:System.Type" /> to substitute. </param
-        >
+          />The CLR type <see cref="T:System.Type" /> to substitute.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetDeserializedObject">
@@ -217,8 +217,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> that the substituted object should be assigned to. </param
-        >
+          />The <see cref="T:System.Type" /> that the substituted object should be assigned to.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetKnownCustomDataTypes">
@@ -287,8 +287,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method must not return null because on deserialization the data will be cast to type <see cref="T:System.Object" /> and an <see cref="T:System.InvalidCastException" /> is thrown.  </para
-          >
+            >This method must not return null because on deserialization the data will be cast to type <see cref="T:System.Object" /> and an <see cref="T:System.InvalidCastException" /> is thrown.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -301,12 +301,8 @@
           >
         </returns>
         <param name="obj">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The object to substitute. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The object to substitute.
+        </param>
         <param name="targetType">
           <attribution
             license="cc4"

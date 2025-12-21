@@ -46,8 +46,8 @@
         >
       </block>
       <para
-        >When you use the <see cref="T:System.Action`4" /> delegate, you do not have to explicitly define a delegate that encapsulates a method with four parameters. For example, the following code explicitly declares a delegate named StringCopy and assigns a reference to the CopyStrings method to its delegate instance. </para
-      >
+        >When you use the <see cref="T:System.Action`4" /> delegate, you do not have to explicitly define a delegate that encapsulates a method with four parameters. For example, the following code explicitly declares a delegate named StringCopy and assigns a reference to the CopyStrings method to its delegate instance.
+      </para>
       <para>code reference: System.Action~4#1</para>
       <para
         >The following example simplifies this code by instantiating the <see cref="T:System.Action`4" /> delegate instead of explicitly defining a new delegate and assigning a named method to it.</para

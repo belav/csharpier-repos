@@ -35,23 +35,23 @@
       <list type="bullet">
         <item>
           <para
-            >The base type constraint specifies that any type assigned to the generic type parameter must derive from a particular base type. Set this constraint by using the <see cref="M:System.Reflection.Emit.GenericTypeParameterBuilder.SetBaseTypeConstraint(System.Type)" /> method. </para
-          >
+            >The base type constraint specifies that any type assigned to the generic type parameter must derive from a particular base type. Set this constraint by using the <see cref="M:System.Reflection.Emit.GenericTypeParameterBuilder.SetBaseTypeConstraint(System.Type)" /> method.
+          </para>
         </item>
         <item>
           <para
-            >An interface constraint specifies that any type assigned to the generic type parameter must implement a particular interface. Set the interface constraints by using the <see cref="M:System.Reflection.Emit.GenericTypeParameterBuilder.SetInterfaceConstraints(System.Type[])" /> method. </para
-          >
+            >An interface constraint specifies that any type assigned to the generic type parameter must implement a particular interface. Set the interface constraints by using the <see cref="M:System.Reflection.Emit.GenericTypeParameterBuilder.SetInterfaceConstraints(System.Type[])" /> method.
+          </para>
         </item>
         <item>
           <para
-            >Special constraints specify that any type assigned to the generic type parameter must have a default constructor, must be a reference type, or must be a value type. Set the special constraints for a type parameter by using the <see cref="M:System.Reflection.Emit.GenericTypeParameterBuilder.SetGenericParameterAttributes(System.Reflection.GenericParameterAttributes)" /> method. </para
-          >
+            >Special constraints specify that any type assigned to the generic type parameter must have a default constructor, must be a reference type, or must be a value type. Set the special constraints for a type parameter by using the <see cref="M:System.Reflection.Emit.GenericTypeParameterBuilder.SetGenericParameterAttributes(System.Reflection.GenericParameterAttributes)" /> method.
+          </para>
         </item>
       </list>
       <para
-        >Interface constraints and special constraints cannot be retrieved using methods of the <see cref="T:System.Reflection.Emit.GenericTypeParameterBuilder" /> class. Once you have created the generic type that contains the type parameters, you can use its <see cref="T:System.Type" /> object to reflect the constraints. Use the <see cref="M:System.Type.GetGenericArguments" /> method to get the type parameters, and for each type parameter use the <see cref="M:System.Type.GetGenericParameterConstraints" /> method to get the base type constraint and interface constraints, and the <see cref="P:System.Type.GenericParameterAttributes" /> property to get the special constraints. </para
-      >
+        >Interface constraints and special constraints cannot be retrieved using methods of the <see cref="T:System.Reflection.Emit.GenericTypeParameterBuilder" /> class. Once you have created the generic type that contains the type parameters, you can use its <see cref="T:System.Type" /> object to reflect the constraints. Use the <see cref="M:System.Type.GetGenericArguments" /> method to get the type parameters, and for each type parameter use the <see cref="M:System.Type.GetGenericParameterConstraints" /> method to get the base type constraint and interface constraints, and the <see cref="P:System.Type.GenericParameterAttributes" /> property to get the special constraints.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -161,8 +161,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Reflection.Emit.GenericTypeParameterBuilder" /> object always represents a generic type parameter. The value of the <see cref="P:System.Reflection.Emit.GenericTypeParameterBuilder.ContainsGenericParameters" /> property reflects that fact and does not imply anything about any generic type argument that might be assigned to the type parameter. </para
-          >
+            >A <see cref="T:System.Reflection.Emit.GenericTypeParameterBuilder" /> object always represents a generic type parameter. The value of the <see cref="P:System.Reflection.Emit.GenericTypeParameterBuilder.ContainsGenericParameters" /> property reflects that fact and does not imply anything about any generic type argument that might be assigned to the type parameter.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -612,8 +612,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />Not supported.</param
         >
         <param name="bindingAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />Not supported. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />Not supported.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetEvents">
@@ -1422,8 +1422,8 @@
           <para>Not supported for incomplete generic type parameters.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />Not supported. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />Not supported.
+        </param>
         <param name="invokeAttr">
           <attribution license="cc4" from="Microsoft" modified="false" />Not supported.</param
         >
@@ -1815,8 +1815,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Type.MakeArrayType" /> method provides a way to generate array types for parameter lists. </para
-          >
+            >The <see cref="M:System.Type.MakeArrayType" /> method provides a way to generate array types for parameter lists.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2113,8 +2113,8 @@
             >To retrieve the base type constraint use the <see cref="P:System.Reflection.Emit.GenericTypeParameterBuilder.BaseType" /> property.</para
           >
           <para
-            >Once you have created the generic type that contains the type parameter, you can use its <see cref="T:System.Type" /> object to reflect the type parameter and their constraints. To get the type parameters of a completed generic type, use the <see cref="M:System.Type.GetGenericArguments" /> method. For each type parameter, get the base type constraint and interface constraints by using the <see cref="M:System.Type.GetGenericParameterConstraints" /> method, and get the special constraints by using the <see cref="P:System.Type.GenericParameterAttributes" /> property. </para
-          >
+            >Once you have created the generic type that contains the type parameter, you can use its <see cref="T:System.Type" /> object to reflect the type parameter and their constraints. To get the type parameters of a completed generic type, use the <see cref="M:System.Type.GetGenericArguments" /> method. For each type parameter, get the base type constraint and interface constraints by using the <see cref="M:System.Type.GetGenericParameterConstraints" /> method, and get the special constraints by using the <see cref="P:System.Type.GenericParameterAttributes" /> property.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2249,8 +2249,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Special constraints can specify that any type assigned to the generic type parameter must have a default constructor, must be a reference type, or must be a value type. </para>
           <para
-            >Special constraints cannot be retrieved using methods of the <see cref="T:System.Reflection.Emit.GenericTypeParameterBuilder" /> class. Once you have created the generic type that contains the type parameter, you can use its <see cref="T:System.Type" /> object to reflect the type parameters and their constraints. To get the type parameters of a completed generic type, use the <see cref="M:System.Type.GetGenericArguments" /> method. To get the special constraints for each type parameter, use the <see cref="P:System.Type.GenericParameterAttributes" /> property. </para
-          >
+            >Special constraints cannot be retrieved using methods of the <see cref="T:System.Reflection.Emit.GenericTypeParameterBuilder" /> class. Once you have created the generic type that contains the type parameter, you can use its <see cref="T:System.Type" /> object to reflect the type parameters and their constraints. To get the type parameters of a completed generic type, use the <see cref="M:System.Type.GetGenericArguments" /> method. To get the special constraints for each type parameter, use the <see cref="P:System.Type.GenericParameterAttributes" /> property.
+          </para>
           <para
             >The <see cref="T:System.Reflection.GenericParameterAttributes" /> enumeration values that refer to the variance characteristics of a type parameter are relevant only in languages that support covariance and contravariance, such as Microsoft intermediate language (MSIL). Visual Basic and C# currently do not support covariance and contravariance.</para
           >
@@ -2304,8 +2304,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Interface constraints cannot be retrieved using methods of the <see cref="T:System.Reflection.Emit.GenericTypeParameterBuilder" /> class. Once you have created the generic type that contains the type parameter, you can use its <see cref="T:System.Type" /> object to reflect the type parameters and their constraints. To get the type parameters of a completed generic type, use the <see cref="M:System.Type.GetGenericArguments" /> method. For each type parameter, get the base type constraint and interface constraints by using the <see cref="M:System.Type.GetGenericParameterConstraints" /> method. </para
-          >
+            >Interface constraints cannot be retrieved using methods of the <see cref="T:System.Reflection.Emit.GenericTypeParameterBuilder" /> class. Once you have created the generic type that contains the type parameter, you can use its <see cref="T:System.Type" /> object to reflect the type parameters and their constraints. To get the type parameters of a completed generic type, use the <see cref="M:System.Type.GetGenericArguments" /> method. For each type parameter, get the base type constraint and interface constraints by using the <see cref="M:System.Type.GetGenericParameterConstraints" /> method.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

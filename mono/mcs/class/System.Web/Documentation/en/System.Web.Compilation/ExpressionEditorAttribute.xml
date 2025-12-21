@@ -19,8 +19,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.Compilation.ExpressionEditorAttribute" /> class specifies the design-time expression editor for the expressions that are handled by an <see cref="T:System.Web.Compilation.ExpressionBuilder" /> class. </para
-      >
+        >The <see cref="T:System.Web.Compilation.ExpressionEditorAttribute" /> class specifies the design-time expression editor for the expressions that are handled by an <see cref="T:System.Web.Compilation.ExpressionBuilder" /> class.
+      </para>
       <para>When editing a control property, you can set the property value to an expression by using an editor for the expression.</para>
       <para
         >When developing an expression builder, you can mark the builder with the <see cref="T:System.Web.Compilation.ExpressionEditorAttribute" /> attribute to set the editor type value.</para

@@ -57,8 +57,8 @@
         > If E is a <non_terminal where="14.5.4">predefined-type</non_terminal> or a <non_terminal
           where="14.5"
           >primary-expression</non_terminal
-        > classified as a type, and a member lookup (<hyperlink>14.3</hyperlink>) of I in E produces a match, then E.I is evaluated and classified as follows: </list_item
-      >
+        > classified as a type, and a member lookup (<hyperlink>14.3</hyperlink>) of I in E produces a match, then E.I is evaluated and classified as follows:
+      </list_item>
       <list>
         <list_item> If I identifies a type, then the result is that type. </list_item>
         <list_item> If I identifies one or more methods, then the result is a method group with no associated instance expression. </list_item>
@@ -74,8 +74,8 @@
             > If the reference occurs within the class or struct in which the event is declared, and the event was declared without <non_terminal
               where="17.7"
               >event-accessor-declarations</non_terminal
-            > (<hyperlink>17.7</hyperlink>), then E.I is processed exactly as if I was a static field. </list_item
-          >
+            > (<hyperlink>17.7</hyperlink>), then E.I is processed exactly as if I was a static field.
+          </list_item>
           <list_item> Otherwise, the result is an event access with no associated instance expression. </list_item>
         </list>
         <list_item> If I identifies a constant, then the result is a value, namely the value of that constant. </list_item>
@@ -83,19 +83,19 @@
         <list_item> Otherwise, E.I is an invalid member reference, and a compile-time error occurs. </list_item>
       </list>
       <list_item
-        > If E is a property access, indexer access, variable, or value, the type of which is T, and a member lookup (<hyperlink>14.3</hyperlink>) of I in T produces a match, then E.I is evaluated and classified as follows: </list_item
-      >
+        > If E is a property access, indexer access, variable, or value, the type of which is T, and a member lookup (<hyperlink>14.3</hyperlink>) of I in T produces a match, then E.I is evaluated and classified as follows:
+      </list_item>
       <list>
         <list_item
-          > First, if E is a property or indexer access, then the value of the property or indexer access is obtained (<hyperlink>14.1.1</hyperlink>) and E is reclassified as a value. </list_item
-        >
+          > First, if E is a property or indexer access, then the value of the property or indexer access is obtained (<hyperlink>14.1.1</hyperlink>) and E is reclassified as a value.
+        </list_item>
         <list_item> If I identifies one or more methods, then the result is a method group with an associated instance expression of E. </list_item>
         <list_item> If I identifies an instance property, then the result is a property access with an associated instance expression of E. </list_item>
         <list_item
           > If T is a <non_terminal where="11.2"
             >class-type</non_terminal
-          > and I identifies an instance field of that class-type: </list_item
-        >
+          > and I identifies an instance field of that class-type:
+        </list_item>
         <list>
           <list_item> If the value of E is null, then a System.NullReferenceException is thrown. </list_item>
           <list_item> Otherwise, if the field is readonly and the reference occurs outside an instance constructor of the class in which the field is declared, then the result is a value, namely the value of the field I in the object referenced by E. </list_item>
@@ -104,8 +104,8 @@
         <list_item
           > If T is a <non_terminal where="11.1"
             >struct-type</non_terminal
-          > and I identifies an instance field of that struct-type: </list_item
-        >
+          > and I identifies an instance field of that struct-type:
+        </list_item>
         <list>
           <list_item> If E is a value, or if the field is readonly and the reference occurs outside an instance constructor of the struct in which the field is declared, then the result is a value, namely the value of the field I in the struct instance given by E. </list_item>
           <list_item> Otherwise, the result is a variable, namely the field I in the struct instance given by E. </list_item>
@@ -116,8 +116,8 @@
             > If the reference occurs within the class or struct in which the event is declared, and the event was declared without <non_terminal
               where="17.7"
               >event-accessor-declarations</non_terminal
-            > (<hyperlink>17.7</hyperlink>), then E.I is processed exactly as if I was an instance field. </list_item
-          >
+            > (<hyperlink>17.7</hyperlink>), then E.I is processed exactly as if I was an instance field.
+          </list_item>
           <list_item> Otherwise, the result is an event access with an associated instance expression of E. </list_item>
         </list>
       </list>

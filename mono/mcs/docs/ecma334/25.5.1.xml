@@ -23,6 +23,6 @@
     >
   </paragraph>
   <paragraph
-    >For purposes of definite assignment analysis, a variable produced by evaluating an expression of the form *P is considered initially assigned (<hyperlink>12.3.1</hyperlink>). </paragraph
-  >
+    >For purposes of definite assignment analysis, a variable produced by evaluating an expression of the form *P is considered initially assigned (<hyperlink>12.3.1</hyperlink>).
+  </paragraph>
 </clause>

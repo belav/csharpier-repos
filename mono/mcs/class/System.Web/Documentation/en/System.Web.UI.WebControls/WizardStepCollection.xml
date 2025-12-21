@@ -151,8 +151,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="M:System.Web.UI.WebControls.WizardStepCollection.Clear" /> method to remove all the <see cref="T:System.Web.UI.WebControls.WizardStepBase" />-derived objects from the <see cref="T:System.Web.UI.WebControls.WizardStepCollection" /> collection. </para
-          >
+            >Use the <see cref="M:System.Web.UI.WebControls.WizardStepCollection.Clear" /> method to remove all the <see cref="T:System.Web.UI.WebControls.WizardStepBase" />-derived objects from the <see cref="T:System.Web.UI.WebControls.WizardStepCollection" /> collection.
+          </para>
           <block subset="none" type="note">
             <para
               >After the <see cref="M:System.Web.UI.WebControls.WizardStepCollection.Clear" /> method removes the <see cref="T:System.Web.UI.WebControls.WizardStepBase" />-derived objects from the collection, the <see cref="P:System.Web.UI.WebControls.WizardStepCollection.Count" /> property of the <see cref="T:System.Web.UI.WebControls.WizardStepCollection" /> collection has a value of zero.</para
@@ -540,8 +540,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="M:System.Web.UI.WebControls.WizardStepCollection.RemoveAt(System.Int32)" /> method to remove the <see cref="T:System.Web.UI.WebControls.WizardStepBase" />-derived object from the <see cref="T:System.Web.UI.WebControls.WizardStepCollection" /> collection at the specified index location. Alternatively, you can remove a specific <see cref="T:System.Web.UI.WebControls.WizardStepBase" />-derived object from the collection using the <see cref="M:System.Web.UI.WebControls.WizardStepCollection.Remove(System.Web.UI.WebControls.WizardStepBase)" /> method. </para
-          >
+            >Use the <see cref="M:System.Web.UI.WebControls.WizardStepCollection.RemoveAt(System.Int32)" /> method to remove the <see cref="T:System.Web.UI.WebControls.WizardStepBase" />-derived object from the <see cref="T:System.Web.UI.WebControls.WizardStepCollection" /> collection at the specified index location. Alternatively, you can remove a specific <see cref="T:System.Web.UI.WebControls.WizardStepBase" />-derived object from the collection using the <see cref="M:System.Web.UI.WebControls.WizardStepCollection.Remove(System.Web.UI.WebControls.WizardStepBase)" /> method.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

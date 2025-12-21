@@ -220,8 +220,8 @@
         >If you use <see cref="T:System.BitConverter" /> methods to round-trip data, make sure that the <see cref="Overload:System.BitConverter.GetBytes" /> overload and the ToType method specify the same type. As the following example illustrates, restoring an array that represents a signed integer by calling the <see cref="M:System.BitConverter.ToUInt32(System.Byte[],System.Int32)" /> method can result in a value that is different from the original. For more information, see the entry <see
           cref="http://go.microsoft.com/fwlink/?LinkId=186999"
           >Working with Signed Non-Decimal and Bitwise Values</see
-        > in the BCL Team Blog. </para
-      >
+        > in the BCL Team Blog.
+      </para>
       <para>code reference: System.BitConverter.Class#3</para>
       <para
         >The order of bytes in the array returned by the <see cref="Overload:System.BitConverter.GetBytes" /> method overloads (as well as the order of bits in the integer returned by the <see cref="M:System.BitConverter.DoubleToInt64Bits(System.Double)" /> method and the order of hexadecimal strings returned by the <see cref="M:System.BitConverter.ToString(System.Byte[])" /> method) depends on whether the computer architecture is little-endian or big-endian. Similarly, the order of bytes in the array and returned by the ToIntegerValue methods and the <see cref="M:System.BitConverter.ToChar(System.Byte[],System.Int32)" /> method depends on whether the computer architecture is little-endian or big-endian. The endianness of an architecture is indicated by the <see cref="F:System.BitConverter.IsLittleEndian" /> property, which returns true on little-endian systems and false on big-endian systems. On little-endian systems, lower-order bytes precede higher-order bytes. On big-endian system, higher-order bytes precede lower-order bytes. The following table illustrates the difference in the byte arrays that result from passing the integer 1,234,567,890 (0x499602D2) to the <see cref="M:System.BitConverter.GetBytes(System.Int32)" /> method. The bytes are listed in order from the byte at index 0 to the byte at index 3.</para
@@ -302,12 +302,8 @@
           >
         </returns>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The number to convert. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The number to convert.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetBytes">
@@ -339,8 +335,8 @@
           <para>An array of bytes with length 1.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />A Boolean value. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A Boolean value.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetBytes">
@@ -377,12 +373,8 @@
           <para>An array of bytes with length 2.</para>
         </returns>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />A character to convert. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A character to convert.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetBytes">
@@ -419,12 +411,8 @@
           <para>An array of bytes with length 8.</para>
         </returns>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The number to convert. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The number to convert.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetBytes">
@@ -461,12 +449,8 @@
           <para>An array of bytes with length 2.</para>
         </returns>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The number to convert. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The number to convert.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetBytes">
@@ -503,12 +487,8 @@
           <para>An array of bytes with length 4.</para>
         </returns>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The number to convert. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The number to convert.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetBytes">
@@ -545,12 +525,8 @@
           <para>An array of bytes with length 8.</para>
         </returns>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The number to convert. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The number to convert.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetBytes">
@@ -587,12 +563,8 @@
           <para>An array of bytes with length 4.</para>
         </returns>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The number to convert. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The number to convert.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetBytes">
@@ -634,12 +606,8 @@
           <para>An array of bytes with length 2.</para>
         </returns>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The number to convert. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The number to convert.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetBytes">
@@ -681,12 +649,8 @@
           <para>An array of bytes with length 4.</para>
         </returns>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The number to convert. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The number to convert.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetBytes">
@@ -728,12 +692,8 @@
           <para>An array of bytes with length 8.</para>
         </returns>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The number to convert. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The number to convert.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Int64BitsToDouble">
@@ -772,12 +732,8 @@
           >
         </returns>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The number to convert. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The number to convert.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsLittleEndian">
@@ -840,15 +796,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array of bytes. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />An array of bytes.
+        </param>
         <param name="startIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting position within <paramref name="value" />. </param
-        >
+          />The starting position within <paramref name="value" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ToChar">
@@ -877,8 +833,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.BitConverter.ToChar(System.Byte[],System.Int32)" /> method converts the bytes from index <paramref name="startIndex" /> to <paramref name="startIndex" /> + 1 to a <see cref="T:System.Char" /> value. The order of bytes in the array must reflect the endianness of the computer system's architecture; for more information, see the Remarks section of the <see cref="T:System.BitConverter" /> class topic. </para
-          >
+            >The <see cref="M:System.BitConverter.ToChar(System.Byte[],System.Int32)" /> method converts the bytes from index <paramref name="startIndex" /> to <paramref name="startIndex" /> + 1 to a <see cref="T:System.Char" /> value. The order of bytes in the array must reflect the endianness of the computer system's architecture; for more information, see the Remarks section of the <see cref="T:System.BitConverter" /> class topic.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -889,15 +845,15 @@
           <para>A character formed by two bytes beginning at <paramref name="startIndex" />.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />An array.
+        </param>
         <param name="startIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting position within <paramref name="value" />. </param
-        >
+          />The starting position within <paramref name="value" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ToDouble">
@@ -926,8 +882,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.BitConverter.ToDouble(System.Byte[],System.Int32)" /> method converts the bytes from index <paramref name="startIndex" /> to <paramref name="startIndex" /> + 7 to a <see cref="T:System.Double" /> value. The order of bytes in the array must reflect the endianness of the computer system's architecture; for more information, see the Remarks section of the <see cref="T:System.BitConverter" /> class topic. </para
-          >
+            >The <see cref="M:System.BitConverter.ToDouble(System.Byte[],System.Int32)" /> method converts the bytes from index <paramref name="startIndex" /> to <paramref name="startIndex" /> + 7 to a <see cref="T:System.Double" /> value. The order of bytes in the array must reflect the endianness of the computer system's architecture; for more information, see the Remarks section of the <see cref="T:System.BitConverter" /> class topic.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -940,15 +896,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array of bytes. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />An array of bytes.
+        </param>
         <param name="startIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting position within <paramref name="value" />. </param
-        >
+          />The starting position within <paramref name="value" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ToInt16">
@@ -977,8 +933,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.BitConverter.ToInt16(System.Byte[],System.Int32)" /> method converts the bytes from index <paramref name="startIndex" /> to <paramref name="startIndex" /> + 1 to an <see cref="T:System.Int16" /> value. The order of bytes in the array must reflect the endianness of the computer system's architecture; for more information, see the Remarks section of the <see cref="T:System.BitConverter" /> class topic. </para
-          >
+            >The <see cref="M:System.BitConverter.ToInt16(System.Byte[],System.Int32)" /> method converts the bytes from index <paramref name="startIndex" /> to <paramref name="startIndex" /> + 1 to an <see cref="T:System.Int16" /> value. The order of bytes in the array must reflect the endianness of the computer system's architecture; for more information, see the Remarks section of the <see cref="T:System.BitConverter" /> class topic.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -991,15 +947,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array of bytes. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />An array of bytes.
+        </param>
         <param name="startIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting position within <paramref name="value" />. </param
-        >
+          />The starting position within <paramref name="value" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ToInt32">
@@ -1042,15 +998,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array of bytes. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />An array of bytes.
+        </param>
         <param name="startIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting position within <paramref name="value" />. </param
-        >
+          />The starting position within <paramref name="value" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ToInt64">
@@ -1079,8 +1035,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.BitConverter.ToInt64(System.Byte[],System.Int32)" /> method converts the bytes from index <paramref name="startIndex" /> to <paramref name="startIndex" /> + 7 to a <see cref="T:System.Int64" /> value. The order of bytes in the array must reflect the endianness of the computer system's architecture; for more information, see the Remarks section of the <see cref="T:System.BitConverter" /> class topic. </para
-          >
+            >The <see cref="M:System.BitConverter.ToInt64(System.Byte[],System.Int32)" /> method converts the bytes from index <paramref name="startIndex" /> to <paramref name="startIndex" /> + 7 to a <see cref="T:System.Int64" /> value. The order of bytes in the array must reflect the endianness of the computer system's architecture; for more information, see the Remarks section of the <see cref="T:System.BitConverter" /> class topic.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1093,15 +1049,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array of bytes. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />An array of bytes.
+        </param>
         <param name="startIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting position within <paramref name="value" />. </param
-        >
+          />The starting position within <paramref name="value" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ToSingle">
@@ -1130,8 +1086,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.BitConverter.ToSingle(System.Byte[],System.Int32)" /> method converts the bytes from index <paramref name="startIndex" /> to <paramref name="startIndex" /> + 3 to a <see cref="T:System.Single" /> value. The order of bytes in the array must reflect the endianness of the computer system's architecture; for more information, see the Remarks section of <see cref="T:System.BitConverter" />. </para
-          >
+            >The <see cref="M:System.BitConverter.ToSingle(System.Byte[],System.Int32)" /> method converts the bytes from index <paramref name="startIndex" /> to <paramref name="startIndex" /> + 3 to a <see cref="T:System.Single" /> value. The order of bytes in the array must reflect the endianness of the computer system's architecture; for more information, see the Remarks section of <see cref="T:System.BitConverter" />.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1144,15 +1100,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array of bytes. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />An array of bytes.
+        </param>
         <param name="startIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting position within <paramref name="value" />. </param
-        >
+          />The starting position within <paramref name="value" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ToString">
@@ -1191,8 +1147,8 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array of bytes. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />An array of bytes.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ToString">
@@ -1235,15 +1191,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array of bytes. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />An array of bytes.
+        </param>
         <param name="startIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting position within <paramref name="value" />. </param
-        >
+          />The starting position within <paramref name="value" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ToString">
@@ -1290,22 +1246,22 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array of bytes. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />An array of bytes.
+        </param>
         <param name="startIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting position within <paramref name="value" />. </param
-        >
+          />The starting position within <paramref name="value" />.
+        </param>
         <param name="length">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of array elements in <paramref name="value" /> to convert. </param
-        >
+          />The number of array elements in <paramref name="value" /> to convert.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ToUInt16">
@@ -1339,8 +1295,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.BitConverter.ToUInt16(System.Byte[],System.Int32)" /> method converts the bytes from index <paramref name="startIndex" /> to <paramref name="startIndex" /> + 1 to a <see cref="T:System.UInt16" /> value. The order of bytes in the array must reflect the endianness of the computer system's architecture; for more information, see the Remarks section of the <see cref="T:System.BitConverter" /> class topic. </para
-          >
+            >The <see cref="M:System.BitConverter.ToUInt16(System.Byte[],System.Int32)" /> method converts the bytes from index <paramref name="startIndex" /> to <paramref name="startIndex" /> + 1 to a <see cref="T:System.UInt16" /> value. The order of bytes in the array must reflect the endianness of the computer system's architecture; for more information, see the Remarks section of the <see cref="T:System.BitConverter" /> class topic.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1353,15 +1309,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The array of bytes. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The array of bytes.
+        </param>
         <param name="startIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting position within <paramref name="value" />. </param
-        >
+          />The starting position within <paramref name="value" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ToUInt32">
@@ -1395,8 +1351,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.BitConverter.ToUInt32(System.Byte[],System.Int32)" /> method converts the bytes from index <paramref name="startIndex" /> to <paramref name="startIndex" /> + 3 to a <see cref="T:System.UInt32" /> value. The order of bytes in the array must reflect the endianness of the computer system's architecture; for more information, see the Remarks section of the <see cref="T:System.BitConverter" /> class topic. </para
-          >
+            >The <see cref="M:System.BitConverter.ToUInt32(System.Byte[],System.Int32)" /> method converts the bytes from index <paramref name="startIndex" /> to <paramref name="startIndex" /> + 3 to a <see cref="T:System.UInt32" /> value. The order of bytes in the array must reflect the endianness of the computer system's architecture; for more information, see the Remarks section of the <see cref="T:System.BitConverter" /> class topic.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1409,15 +1365,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array of bytes. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />An array of bytes.
+        </param>
         <param name="startIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting position within <paramref name="value" />. </param
-        >
+          />The starting position within <paramref name="value" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ToUInt64">
@@ -1451,8 +1407,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.BitConverter.ToUInt64(System.Byte[],System.Int32)" /> method converts the bytes from index <paramref name="startIndex" /> to <paramref name="startIndex" /> + 7 to a <see cref="T:System.UInt64" /> value. The order of bytes in the array must reflect the endianness of the computer system's architecture; for more information, see the Remarks section of the <see cref="T:System.BitConverter" /> class topic. </para
-          >
+            >The <see cref="M:System.BitConverter.ToUInt64(System.Byte[],System.Int32)" /> method converts the bytes from index <paramref name="startIndex" /> to <paramref name="startIndex" /> + 7 to a <see cref="T:System.UInt64" /> value. The order of bytes in the array must reflect the endianness of the computer system's architecture; for more information, see the Remarks section of the <see cref="T:System.BitConverter" /> class topic.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1465,15 +1421,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array of bytes. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />An array of bytes.
+        </param>
         <param name="startIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting position within <paramref name="value" />. </param
-        >
+          />The starting position within <paramref name="value" />.
+        </param>
       </Docs>
     </Member>
   </Members>

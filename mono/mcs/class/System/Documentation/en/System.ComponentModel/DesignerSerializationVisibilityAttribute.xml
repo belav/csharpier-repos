@@ -181,8 +181,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Another object to compare to. </param
-        >
+          />Another object to compare to.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">

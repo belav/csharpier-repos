@@ -71,8 +71,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Globalization.CultureInfo" /> of the resource for which to retrieve a resource reader. </param
-        >
+          />The <see cref="T:System.Globalization.CultureInfo" /> of the resource for which to retrieve a resource reader.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetResourceWriter">
@@ -116,8 +116,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Globalization.CultureInfo" /> of the resource for which to create a resource writer. </param
-        >
+          />The <see cref="T:System.Globalization.CultureInfo" /> of the resource for which to create a resource writer.
+        </param>
       </Docs>
     </Member>
   </Members>

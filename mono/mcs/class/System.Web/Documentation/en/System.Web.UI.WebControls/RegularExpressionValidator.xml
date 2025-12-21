@@ -82,8 +82,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.RegularExpressionValidator" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.RegularExpressionValidator" /> class.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -109,8 +109,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds to the specified <see cref="T:System.Web.UI.HtmlTextWriter" /> object the HTML attributes and styles that need to be rendered for the control. </para
-          >
+            >Adds to the specified <see cref="T:System.Web.UI.HtmlTextWriter" /> object the HTML attributes and styles that need to be rendered for the control.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>

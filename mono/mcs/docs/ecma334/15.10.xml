@@ -85,13 +85,13 @@
   <paragraph
     >When a catch clause specifies a <non_terminal where="11.2"
       >class-type</non_terminal
-    >, the type must be System.Exception or a type that derives from System.Exception. </paragraph
-  >
+    >, the type must be System.Exception or a type that derives from System.Exception.
+  </paragraph>
   <paragraph
     >When a catch clause specifies both a <non_terminal where="11.2"
       >class-type</non_terminal
-    > and an identifier, an exception variable of the given name and type is declared. The exception variable corresponds to a local variable with a scope that extends over the catch block. During execution of the catch block, the exception variable represents the exception currently being handled. For purposes of definite assignment checking, the exception variable is considered definitely assigned in its entire scope. </paragraph
-  >
+    > and an identifier, an exception variable of the given name and type is declared. The exception variable corresponds to a local variable with a scope that extends over the catch block. During execution of the catch block, the exception variable represents the exception currently being handled. For purposes of definite assignment checking, the exception variable is considered definitely assigned in its entire scope.
+  </paragraph>
   <paragraph>Unless a catch clause includes an exception variable name, it is impossible to access the exception object in the catch block. </paragraph>
   <paragraph>A catch clause that specifies neither an exception type nor an exception variable name is called a general catch clause. A try statement can only have one general catch clause, and if one is present it must be the last catch clause. </paragraph>
   <paragraph>
@@ -101,8 +101,8 @@
     >In order to locate a handler for an exception, catch clauses are examined in lexical order. A compile-time error occurs if a catch clause specifies a type that is the same as, or is derived from, a type that was specified in an earlier catch clause for the same try. <note>[Note: Without this restriction, it would be possible to write unreachable catch clauses. end note]</note>
   </paragraph>
   <paragraph
-    >Within a catch block, a throw statement (<hyperlink>15.9.5</hyperlink>) with no expression can be used to re-throw the exception that was caught by the catch block. Assignments to an exception variable do not alter the exception that is re-thrown. </paragraph
-  >
+    >Within a catch block, a throw statement (<hyperlink>15.9.5</hyperlink>) with no expression can be used to re-throw the exception that was caught by the catch block. Assignments to an exception variable do not alter the exception that is re-thrown.
+  </paragraph>
   <paragraph>
     <example
       >[Example: In the example <code_example>
@@ -188,8 +188,8 @@ Exception in Main: F
   </paragraph>
   <paragraph>The statements of a finally block are always executed when control leaves a try statement. This is true whether the control transfer occurs as a result of normal execution, as a result of executing a break, continue, goto, or return statement, or as a result of propagating an exception out of the try statement. </paragraph>
   <paragraph
-    >If an exception is thrown during execution of a finally block, the exception is propagated to the next enclosing try statement. If another exception was in the process of being propagated, that exception is lost. The process of propagating an exception is discussed further in the description of the throw statement (<hyperlink>15.9.5</hyperlink>). </paragraph
-  >
+    >If an exception is thrown during execution of a finally block, the exception is propagated to the next enclosing try statement. If another exception was in the process of being propagated, that exception is lost. The process of propagating an exception is discussed further in the description of the throw statement (<hyperlink>15.9.5</hyperlink>).
+  </paragraph>
   <paragraph>The try block of a try statement is reachable if the try statement is reachable. </paragraph>
   <paragraph>A catch block of a try statement is reachable if the try statement is reachable. </paragraph>
   <paragraph>The finally block of a try statement is reachable if the try statement is reachable. </paragraph>

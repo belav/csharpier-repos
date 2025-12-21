@@ -119,8 +119,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <newTerm>dead-letter queue</newTerm> is a queue managed by the sending application's queue manager that stores messages that have failed to be delivered or have expired. The reasons a message can fail to reach the receiving application include: </para
-          >
+            >The <newTerm>dead-letter queue</newTerm> is a queue managed by the sending application's queue manager that stores messages that have failed to be delivered or have expired. The reasons a message can fail to reach the receiving application include:
+          </para>
           <list type="bullet">
             <item>
               <para>A transactional message is sent to a non-transactional queue.</para>

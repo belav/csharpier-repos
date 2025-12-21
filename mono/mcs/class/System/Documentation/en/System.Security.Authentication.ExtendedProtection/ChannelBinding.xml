@@ -108,8 +108,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The size of the channel binding token may be used by derived classes when passing the <see cref="T:System.Security.Authentication.ExtendedProtection.ChannelBinding" /> instance that contains a channel binding token to other classes or to the native Windows security functions that implement extended protection. The channel binding token is used to provide extended protection for integrated Windows authentication. </para
-          >
+            >The size of the channel binding token may be used by derived classes when passing the <see cref="T:System.Security.Authentication.ExtendedProtection.ChannelBinding" /> instance that contains a channel binding token to other classes or to the native Windows security functions that implement extended protection. The channel binding token is used to provide extended protection for integrated Windows authentication.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

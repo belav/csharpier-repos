@@ -71,8 +71,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -97,8 +97,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>ASN.1 DER is the only certificate format supported by this class.</para>
           <para
-            >If you create an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> certificate by specifying a PKCS7 signed file store for <paramref name="data" />, the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> is created for the certificate that signed the store rather than for any of the certificates within the store. </para
-          >
+            >If you create an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> certificate by specifying a PKCS7 signed file store for <paramref name="data" />, the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> is created for the certificate that signed the store rather than for any of the certificates within the store.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -196,8 +196,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> class from which to initialize this class. </param
-        >
+          />A <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> class from which to initialize this class.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -220,14 +220,14 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>ASN.1 DER is the only certificate format supported by this class.</para>
           <para
-            >If you create an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> certificate by specifying a PKCS7 signed file store for <paramref name="fileName" />, the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> is created for the certificate that signed the store rather than for any of the certificates within the store. </para
-          >
+            >If you create an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> certificate by specifying a PKCS7 signed file store for <paramref name="fileName" />, the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> is created for the certificate that signed the store rather than for any of the certificates within the store.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> class using the name of a PKCS7 signed file. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> class using the name of a PKCS7 signed file.
+          </para>
         </summary>
         <param name="fileName">
           <attribution
@@ -265,12 +265,12 @@
             <para
               >Never hard code a password within your source code.  Hard-coded passwords can be retrieved from an assembly using the <format type="text/html">
                 <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a>
-              </format>, a hex editor, or by simply opening the assembly in a text editor such as Notepad.exe. </para
-            >
+              </format>, a hex editor, or by simply opening the assembly in a text editor such as Notepad.exe.
+            </para>
           </block>
           <para
-            >If you create an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> certificate by specifying a PKCS7 signed file store for <paramref name="rawData" />, the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> is created for the certificate that signed the store rather than for any of the certificates within the store. </para
-          >
+            >If you create an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> certificate by specifying a PKCS7 signed file store for <paramref name="rawData" />, the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> is created for the certificate that signed the store rather than for any of the certificates within the store.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -321,12 +321,12 @@
             <para
               >Never hard code a password within your source code.  Hard-coded passwords can be retrieved from an assembly using the <format type="text/html">
                 <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a>
-              </format>, a hex editor, or by simply opening the assembly in a text editor such as Notepad.exe. </para
-            >
+              </format>, a hex editor, or by simply opening the assembly in a text editor such as Notepad.exe.
+            </para>
           </block>
           <para
-            >If you create an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> certificate by specifying a PKCS7 signed file store for <paramref name="rawData" />, the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> is created for the certificate that signed the store rather than for any of the certificates within the store. </para
-          >
+            >If you create an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> certificate by specifying a PKCS7 signed file store for <paramref name="rawData" />, the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> is created for the certificate that signed the store rather than for any of the certificates within the store.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -420,12 +420,12 @@
             <para
               >Never hard code a password within your source code.  Hard-coded passwords can be retrieved from an assembly using the <format type="text/html">
                 <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a>
-              </format>, a hex editor, or by simply opening the assembly in a text editor such as Notepad.exe. </para
-            >
+              </format>, a hex editor, or by simply opening the assembly in a text editor such as Notepad.exe.
+            </para>
           </block>
           <para
-            >If you create an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> certificate by specifying a PKCS7 signed file store for <paramref name="fileName" />, the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> is created for the certificate that signed the store rather than for any of the certificates within the store. </para
-          >
+            >If you create an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> certificate by specifying a PKCS7 signed file store for <paramref name="fileName" />, the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> is created for the certificate that signed the store rather than for any of the certificates within the store.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -438,15 +438,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of a certificate file. </param
-        >
+          />The name of a certificate file.
+        </param>
         <param name="password">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The password required to access the X.509 certificate data. </param
-        >
+          />The password required to access the X.509 certificate data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -473,8 +473,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>ASN.1 DER is the only certificate format supported by this class.  Calling this constructor with the correct password decrypts the private key and saves it to a key container.</para>
           <para
-            >If you create an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> certificate by specifying a PKCS7 signed file store for <paramref name="fileName" />, the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> is created for the certificate that signed the store rather than for any of the certificates within the store. </para
-          >
+            >If you create an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> certificate by specifying a PKCS7 signed file store for <paramref name="fileName" />, the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> is created for the certificate that signed the store rather than for any of the certificates within the store.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -487,15 +487,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of a PKCS7 signed file. </param
-        >
+          />The name of a PKCS7 signed file.
+        </param>
         <param name="password">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The password required to access the X.509 certificate data. </param
-        >
+          />The password required to access the X.509 certificate data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -530,12 +530,12 @@
             <para
               >Never hard code a password within your source code.  Hard-coded passwords can be retrieved from an assembly using the <format type="text/html">
                 <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a>
-              </format>, a hex editor, or by simply opening the assembly in a text editor such as Notepad.exe. </para
-            >
+              </format>, a hex editor, or by simply opening the assembly in a text editor such as Notepad.exe.
+            </para>
           </block>
           <para
-            >If you create an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> certificate by specifying a PKCS7 signed file store for <paramref name="rawData" />, the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> is created for the certificate that signed the store rather than for any of the certificates within the store. </para
-          >
+            >If you create an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> certificate by specifying a PKCS7 signed file store for <paramref name="rawData" />, the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> is created for the certificate that signed the store rather than for any of the certificates within the store.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -548,22 +548,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A byte array that contains data from an X.509 certificate. </param
-        >
+          />A byte array that contains data from an X.509 certificate.
+        </param>
         <param name="password">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The password required to access the X.509 certificate data. </param
-        >
+          />The password required to access the X.509 certificate data.
+        </param>
         <param name="keyStorageFlags">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the enumeration values that control where and how to import the certificate. </param
-        >
+          />A bitwise combination of the enumeration values that control where and how to import the certificate.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -593,8 +593,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a new <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> object using a byte array, a password that is needed to access the certificate data, and a key storage flag.  Calling this constructor with the correct password decrypts the private key and saves it to a Microsoft Cryptographic API Cryptographic Service Provider (CSP). </para
-          >
+            >This constructor creates a new <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> object using a byte array, a password that is needed to access the certificate data, and a key storage flag.  Calling this constructor with the correct password decrypts the private key and saves it to a Microsoft Cryptographic API Cryptographic Service Provider (CSP).
+          </para>
           <para
             >The <see cref="T:System.Security.Cryptography.X509Certificates.X509KeyStorageFlags" /> value can be used to control where and how the private key is imported.</para
           >
@@ -603,12 +603,12 @@
             <para
               >Never hard code a password within your source code.  Hard-coded passwords can be retrieved from an assembly using the <format type="text/html">
                 <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a>
-              </format>, a hex editor, or by simply opening the assembly in a text editor such as Notepad.exe. </para
-            >
+              </format>, a hex editor, or by simply opening the assembly in a text editor such as Notepad.exe.
+            </para>
           </block>
           <para
-            >If you create an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> certificate by specifying a PKCS7 signed file store for <paramref name="rawData" />, the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> is created for the certificate that signed the store rather than for any of the certificates within the store. </para
-          >
+            >If you create an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> certificate by specifying a PKCS7 signed file store for <paramref name="rawData" />, the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> is created for the certificate that signed the store rather than for any of the certificates within the store.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -621,22 +621,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A byte array containing data from an X.509 certificate. </param
-        >
+          />A byte array containing data from an X.509 certificate.
+        </param>
         <param name="password">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The password required to access the X.509 certificate data. </param
-        >
+          />The password required to access the X.509 certificate data.
+        </param>
         <param name="keyStorageFlags">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the enumeration values that control where and how to import the certificate. </param
-        >
+          />A bitwise combination of the enumeration values that control where and how to import the certificate.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -666,36 +666,36 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you create an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> certificate by specifying a PKCS7 signed file store for <paramref name="fileName" />, the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> is created for the certificate that signed the store rather than for any of the certificates within the store. </para
-          >
+            >If you create an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> certificate by specifying a PKCS7 signed file store for <paramref name="fileName" />, the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> is created for the certificate that signed the store rather than for any of the certificates within the store.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> class using a certificate file name, a password, and a key storage flag. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> class using a certificate file name, a password, and a key storage flag.
+          </para>
         </summary>
         <param name="fileName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of a certificate file. </param
-        >
+          />The name of a certificate file.
+        </param>
         <param name="password">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The password required to access the X.509 certificate data. </param
-        >
+          />The password required to access the X.509 certificate data.
+        </param>
         <param name="keyStorageFlags">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the enumeration values that control where and how to import the certificate. </param
-        >
+          />A bitwise combination of the enumeration values that control where and how to import the certificate.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -725,36 +725,36 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you create an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> certificate by specifying a PKCS7 signed file store for <paramref name="fileName" />, the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> is created for the certificate that signed the store rather than for any of the certificates within the store. </para
-          >
+            >If you create an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> certificate by specifying a PKCS7 signed file store for <paramref name="fileName" />, the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> is created for the certificate that signed the store rather than for any of the certificates within the store.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> class using the name of a PKCS7 signed file, a password to access the certificate, and a key storage flag. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> class using the name of a PKCS7 signed file, a password to access the certificate, and a key storage flag.
+          </para>
         </summary>
         <param name="fileName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of a PKCS7 signed file. </param
-        >
+          />The name of a PKCS7 signed file.
+        </param>
         <param name="password">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The password required to access the X.509 certificate data. </param
-        >
+          />The password required to access the X.509 certificate data.
+        </param>
         <param name="keyStorageFlags">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the enumeration values that control where and how to import the certificate. </param
-        >
+          />A bitwise combination of the enumeration values that control where and how to import the certificate.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateFromCertFile">
@@ -799,8 +799,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The path of the PKCS7 signed file from which to create the X.509 certificate. </param
-        >
+          />The path of the PKCS7 signed file from which to create the X.509 certificate.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateFromSignedFile">
@@ -842,8 +842,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The path of the signed file from which to create the X.509 certificate. </param
-        >
+          />The path of the signed file from which to create the X.509 certificate.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -893,8 +893,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> object to compare to the current object. </param
-        >
+          />An <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> object to compare to the current object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -982,14 +982,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="contentType" /> parameter accepts only the following values of the <see cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" /> enumeration: <see cref="F:System.Security.Cryptography.X509Certificates.X509ContentType.Cert" />, <see cref="F:System.Security.Cryptography.X509Certificates.X509ContentType.SerializedCert" />, and <see cref="F:System.Security.Cryptography.X509Certificates.X509ContentType.Pkcs12" />.  Passing any other value causes a <see cref="T:System.Security.Cryptography.CryptographicException" /> to be thrown. </para
-          >
+            >The <paramref name="contentType" /> parameter accepts only the following values of the <see cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" /> enumeration: <see cref="F:System.Security.Cryptography.X509Certificates.X509ContentType.Cert" />, <see cref="F:System.Security.Cryptography.X509Certificates.X509ContentType.SerializedCert" />, and <see cref="F:System.Security.Cryptography.X509Certificates.X509ContentType.Pkcs12" />.  Passing any other value causes a <see cref="T:System.Security.Cryptography.CryptographicException" /> to be thrown.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Exports the current <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> object to a byte array in a format described by one of the <see cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" /> values. </para
-          >
+            >Exports the current <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> object to a byte array in a format described by one of the <see cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" /> values.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1002,8 +1002,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" /> values that describes how to format the output data. </param
-        >
+          />One of the <see cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" /> values that describes how to format the output data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Export">
@@ -1035,14 +1035,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="contentType" /> parameter accepts only the following values of the <see cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" /> enumeration: <see cref="F:System.Security.Cryptography.X509Certificates.X509ContentType.Cert" />, <see cref="F:System.Security.Cryptography.X509Certificates.X509ContentType.SerializedCert" />, and <see cref="F:System.Security.Cryptography.X509Certificates.X509ContentType.Pkcs12" />.  Passing any other value causes a <see cref="T:System.Security.Cryptography.CryptographicException" /> to be thrown. </para
-          >
+            >The <paramref name="contentType" /> parameter accepts only the following values of the <see cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" /> enumeration: <see cref="F:System.Security.Cryptography.X509Certificates.X509ContentType.Cert" />, <see cref="F:System.Security.Cryptography.X509Certificates.X509ContentType.SerializedCert" />, and <see cref="F:System.Security.Cryptography.X509Certificates.X509ContentType.Pkcs12" />.  Passing any other value causes a <see cref="T:System.Security.Cryptography.CryptographicException" /> to be thrown.
+          </para>
           <block subset="none" type="note">
             <para
               >Never hard code a password within your source code.  Hard-coded passwords can be retrieved from an assembly using the <format type="text/html">
                 <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a>
-              </format>, a hex editor, or by simply opening the assembly in a text editor such as Notepad.exe. </para
-            >
+              </format>, a hex editor, or by simply opening the assembly in a text editor such as Notepad.exe.
+            </para>
           </block>
         </remarks>
         <summary>
@@ -1107,14 +1107,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="contentType" /> parameter accepts only the following values of the <see cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" /> enumeration: <see cref="F:System.Security.Cryptography.X509Certificates.X509ContentType.Cert" />, <see cref="F:System.Security.Cryptography.X509Certificates.X509ContentType.SerializedCert" />, and <see cref="F:System.Security.Cryptography.X509Certificates.X509ContentType.Pkcs12" />.  Passing any other value causes a <see cref="T:System.Security.Cryptography.CryptographicException" /> to be thrown. </para
-          >
+            >The <paramref name="contentType" /> parameter accepts only the following values of the <see cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" /> enumeration: <see cref="F:System.Security.Cryptography.X509Certificates.X509ContentType.Cert" />, <see cref="F:System.Security.Cryptography.X509Certificates.X509ContentType.SerializedCert" />, and <see cref="F:System.Security.Cryptography.X509Certificates.X509ContentType.Pkcs12" />.  Passing any other value causes a <see cref="T:System.Security.Cryptography.CryptographicException" /> to be thrown.
+          </para>
           <block subset="none" type="note">
             <para
               >Never hard code a password within your source code.  Hard-coded passwords can be retrieved from an assembly using the <format type="text/html">
                 <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a>
-              </format>, a hex editor, or by simply opening the assembly in a text editor such as Notepad.exe. </para
-            >
+              </format>, a hex editor, or by simply opening the assembly in a text editor such as Notepad.exe.
+            </para>
           </block>
         </remarks>
         <summary>
@@ -1264,8 +1264,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The effective date is the date after which the X.509 certificate is considered valid.</para>
           <para
-            >The <see cref="M:System.Security.Cryptography.X509Certificates.X509Certificate.GetEffectiveDateString" /> method returns a string that shows the date formatted in Short Date Pattern followed by the time formatted in Long Time Pattern.  The date and time are formatted using the current culture and time zone.   </para
-          >
+            >The <see cref="M:System.Security.Cryptography.X509Certificates.X509Certificate.GetEffectiveDateString" /> method returns a string that shows the date formatted in Short Date Pattern followed by the time formatted in Long Time Pattern.  The date and time are formatted using the current culture and time zone.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1771,8 +1771,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A byte array containing data from an X.509 certificate. </param
-        >
+          />A byte array containing data from an X.509 certificate.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Import">
@@ -1816,8 +1816,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of a certificate file represented as a string. </param
-        >
+          />The name of a certificate file represented as a string.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Import">
@@ -1853,8 +1853,8 @@
             <para
               >Never hard code a password within your source code.  Hard-coded passwords can be retrieved from an assembly using the <format type="text/html">
                 <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a>
-              </format>, a hex editor, or by simply opening the assembly in a text editor such as Notepad.exe. </para
-            >
+              </format>, a hex editor, or by simply opening the assembly in a text editor such as Notepad.exe.
+            </para>
           </block>
         </remarks>
         <summary>
@@ -1868,22 +1868,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A byte array that contains data from an X.509 certificate. </param
-        >
+          />A byte array that contains data from an X.509 certificate.
+        </param>
         <param name="password">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The password required to access the X.509 certificate data. </param
-        >
+          />The password required to access the X.509 certificate data.
+        </param>
         <param name="keyStorageFlags">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the enumeration values that control where and how to import the certificate. </param
-        >
+          />A bitwise combination of the enumeration values that control where and how to import the certificate.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Import">
@@ -1935,22 +1935,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A byte array containing data from an X.509 certificate. </param
-        >
+          />A byte array containing data from an X.509 certificate.
+        </param>
         <param name="password">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The password required to access the X.509 certificate data. </param
-        >
+          />The password required to access the X.509 certificate data.
+        </param>
         <param name="keyStorageFlags">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the enumeration values that control where and how to import the certificate. </param
-        >
+          />A bitwise combination of the enumeration values that control where and how to import the certificate.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Import">
@@ -1986,8 +1986,8 @@
             <para
               >Never hard code a password within your source code.  Hard-coded passwords can be retrieved from an assembly using the <format type="text/html">
                 <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a>
-              </format>, a hex editor, or by simply opening the assembly in a text editor such as Notepad.exe. </para
-            >
+              </format>, a hex editor, or by simply opening the assembly in a text editor such as Notepad.exe.
+            </para>
           </block>
         </remarks>
         <summary>
@@ -2001,22 +2001,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of a certificate file. </param
-        >
+          />The name of a certificate file.
+        </param>
         <param name="password">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The password required to access the X.509 certificate data. </param
-        >
+          />The password required to access the X.509 certificate data.
+        </param>
         <param name="keyStorageFlags">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the enumeration values that control where and how to import the certificate. </param
-        >
+          />A bitwise combination of the enumeration values that control where and how to import the certificate.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Import">
@@ -2057,8 +2057,8 @@
             <para
               >Never hard-code a password within your source code.  Hard-coded passwords can be retrieved from an assembly using the <format type="text/html">
                 <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a>
-              </format>, a hex editor, or by simply opening the assembly in a text editor such as Notepad.exe. </para
-            >
+              </format>, a hex editor, or by simply opening the assembly in a text editor such as Notepad.exe.
+            </para>
           </block>
         </remarks>
         <summary>
@@ -2072,22 +2072,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of a certificate file represented as a string. </param
-        >
+          />The name of a certificate file represented as a string.
+        </param>
         <param name="password">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The password required to access the X.509 certificate data. </param
-        >
+          />The password required to access the X.509 certificate data.
+        </param>
         <param name="keyStorageFlags">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the enumeration values that control where and how to import the certificate. </param
-        >
+          />A bitwise combination of the enumeration values that control where and how to import the certificate.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Issuer">
@@ -2194,8 +2194,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implements the <see cref="T:System.Runtime.Serialization.ISerializable" /> interface and is called back by the deserialization event when deserialization is complete.  </para
-          >
+            >Implements the <see cref="T:System.Runtime.Serialization.ISerializable" /> interface and is called back by the deserialization event when deserialization is complete.
+          </para>
         </summary>
         <param name="sender">
           <attribution
@@ -2321,8 +2321,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to produce the verbose form of the string representation; otherwise, false. </param
-        >
+          />true to produce the verbose form of the string representation; otherwise, false.
+        </param>
       </Docs>
     </Member>
   </Members>

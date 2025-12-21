@@ -18,8 +18,8 @@
       <para
         >The <see cref="T:System.ServiceModel.InstanceContext" /> manages the association between the channel and the user-defined service objects. Use the <see cref="T:System.ServiceModel.InstanceContextMode" /> enumeration with the <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.InstanceContextMode" /> property to specify the lifetime of the <see cref="T:System.ServiceModel.InstanceContext" /> object. indigo1 can create a new <see cref="T:System.ServiceModel.InstanceContext" /> object for every call, every session or specify that the <see cref="T:System.ServiceModel.InstanceContext" /> object is bound to a single service object. For a working example, see the <format type="text/html">
           <a href="c290fa54-f6ae-45a1-9186-d9504ebc6ee6">Instancing Sample</a>
-        </format>. </para
-      >
+        </format>.
+      </para>
       <para
         >The <see cref="F:System.ServiceModel.InstanceContextMode.Single" /> value specifies that a single <see cref="T:System.ServiceModel.InstanceContext" /> object should be used for the lifetime of the service.</para
       >

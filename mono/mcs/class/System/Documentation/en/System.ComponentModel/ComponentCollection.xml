@@ -82,8 +82,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.ComponentModel.IComponent" /> objects to initialize the collection with. </param
-        >
+          />An array of <see cref="T:System.ComponentModel.IComponent" /> objects to initialize the collection with.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CopyTo">
@@ -119,15 +119,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.IComponent" /> array to copy the objects in the collection to. </param
-        >
+          />An <see cref="T:System.ComponentModel.IComponent" /> array to copy the objects in the collection to.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the <paramref name="array" /> at which copying to should begin. </param
-        >
+          />The index of the <paramref name="array" /> at which copying to should begin.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Item">

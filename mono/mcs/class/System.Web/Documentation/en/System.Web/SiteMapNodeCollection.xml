@@ -27,8 +27,8 @@
         >The <see cref="T:System.Web.SiteMapNodeCollection" /> class provides a strongly typed collection for <see cref="T:System.Web.SiteMapNode" /> objects. It stores <see cref="T:System.Web.SiteMapNode" /> objects internally in a zero-based array.</para
       >
       <para
-        >You can modify a <see cref="T:System.Web.SiteMapNodeCollection" /> collection when it is first created, and then use the following methods to add, copy, and remove <see cref="T:System.Web.SiteMapNode" /> objects: </para
-      >
+        >You can modify a <see cref="T:System.Web.SiteMapNodeCollection" /> collection when it is first created, and then use the following methods to add, copy, and remove <see cref="T:System.Web.SiteMapNode" /> objects:
+      </para>
       <list type="bullet">
         <item>
           <para
@@ -42,13 +42,13 @@
         </item>
         <item>
           <para
-            >To remove <see cref="T:System.Web.SiteMapNode" /> objects, use the <see cref="M:System.Web.SiteMapNodeCollection.Remove(System.Web.SiteMapNode)" /> method. </para
-          >
+            >To remove <see cref="T:System.Web.SiteMapNode" /> objects, use the <see cref="M:System.Web.SiteMapNodeCollection.Remove(System.Web.SiteMapNode)" /> method.
+          </para>
         </item>
       </list>
       <para
-        >You can create a read-only <see cref="T:System.Web.SiteMapNodeCollection" />, which does not permit adding, copying, nor removing <see cref="T:System.Web.SiteMapNode" /> objects, by using the static <see cref="M:System.Web.SiteMapNodeCollection.ReadOnly(System.Web.SiteMapNodeCollection)" /> method. The <see cref="T:System.Web.SiteMapNodeCollection" /> collections that are returned by the <see cref="M:System.Web.SiteMapNode.GetAllNodes" /> and <see cref="M:System.Web.UI.IHierarchyData.GetChildren" /> methods are read-only, as is the <see cref="T:System.Web.SiteMapNodeCollection" /> that is returned when the <see cref="P:System.Web.SiteMapNode.ChildNodes" /> property is accessed on a <see cref="T:System.Web.SiteMapNode" /> object that is returned from a provider. A <see cref="T:System.NotSupportedException" /> exception is thrown, if you attempt to modify a read-only <see cref="T:System.Web.SiteMapNodeCollection" /> by setting the default indexer property or by using any of the following methods: </para
-      >
+        >You can create a read-only <see cref="T:System.Web.SiteMapNodeCollection" />, which does not permit adding, copying, nor removing <see cref="T:System.Web.SiteMapNode" /> objects, by using the static <see cref="M:System.Web.SiteMapNodeCollection.ReadOnly(System.Web.SiteMapNodeCollection)" /> method. The <see cref="T:System.Web.SiteMapNodeCollection" /> collections that are returned by the <see cref="M:System.Web.SiteMapNode.GetAllNodes" /> and <see cref="M:System.Web.UI.IHierarchyData.GetChildren" /> methods are read-only, as is the <see cref="T:System.Web.SiteMapNodeCollection" /> that is returned when the <see cref="P:System.Web.SiteMapNode.ChildNodes" /> property is accessed on a <see cref="T:System.Web.SiteMapNode" /> object that is returned from a provider. A <see cref="T:System.NotSupportedException" /> exception is thrown, if you attempt to modify a read-only <see cref="T:System.Web.SiteMapNodeCollection" /> by setting the default indexer property or by using any of the following methods:
+      </para>
       <list type="bullet">
         <item>
           <para>
@@ -88,8 +88,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides a strongly typed collection for <see cref="T:System.Web.SiteMapNode" /> objects and implements the <see cref="T:System.Web.UI.IHierarchicalEnumerable" /> interface to support navigating through the collection. </para
-      >
+        >Provides a strongly typed collection for <see cref="T:System.Web.SiteMapNode" /> objects and implements the <see cref="T:System.Web.UI.IHierarchicalEnumerable" /> interface to support navigating through the collection.
+      </para>
     </summary>
   </Docs>
   <Members>
@@ -176,8 +176,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Web.SiteMapNode" /> to add to the <see cref="T:System.Web.SiteMapNodeCollection" />. </param
-        >
+          />A <see cref="T:System.Web.SiteMapNode" /> to add to the <see cref="T:System.Web.SiteMapNodeCollection" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -278,8 +278,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.SiteMapNode" /> to add to the <see cref="T:System.Web.SiteMapNodeCollection" />. </param
-        >
+          />The <see cref="T:System.Web.SiteMapNode" /> to add to the <see cref="T:System.Web.SiteMapNodeCollection" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -319,8 +319,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type <see cref="T:System.Web.SiteMapNode" /> to add to the current <see cref="T:System.Web.SiteMapNodeCollection" />. </param
-        >
+          />An array of type <see cref="T:System.Web.SiteMapNode" /> to add to the current <see cref="T:System.Web.SiteMapNodeCollection" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -360,8 +360,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Web.SiteMapNodeCollection" /> that contains the <see cref="T:System.Web.SiteMapNode" /> objects to add to the current <see cref="T:System.Web.SiteMapNodeCollection" />. </param
-        >
+          />A <see cref="T:System.Web.SiteMapNodeCollection" /> that contains the <see cref="T:System.Web.SiteMapNode" /> objects to add to the current <see cref="T:System.Web.SiteMapNodeCollection" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -431,8 +431,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.SiteMapNode" /> to locate in the <see cref="T:System.Web.SiteMapNodeCollection" />. </param
-        >
+          />The <see cref="T:System.Web.SiteMapNode" /> to locate in the <see cref="T:System.Web.SiteMapNodeCollection" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -468,15 +468,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The one-dimensional array that must have zero-based indexing and is the destination of the elements copied from the <see cref="T:System.Web.SiteMapNodeCollection" />. </param
-        >
+          />The one-dimensional array that must have zero-based indexing and is the destination of the elements copied from the <see cref="T:System.Web.SiteMapNodeCollection" />.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index in <paramref name="array" /> at which copying begins. </param
-        >
+          />The zero-based index in <paramref name="array" /> at which copying begins.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -680,8 +680,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.SiteMapNode" /> to locate in the <see cref="T:System.Web.SiteMapNodeCollection" />. </param
-        >
+          />The <see cref="T:System.Web.SiteMapNode" /> to locate in the <see cref="T:System.Web.SiteMapNodeCollection" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -719,15 +719,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index at which the <see cref="T:System.Web.SiteMapNode" /> is inserted. </param
-        >
+          />The zero-based index at which the <see cref="T:System.Web.SiteMapNode" /> is inserted.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.SiteMapNode" /> to insert. </param
-        >
+          />The <see cref="T:System.Web.SiteMapNode" /> to insert.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -834,8 +834,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.SiteMapNode" /> to validate. </param
-        >
+          />The <see cref="T:System.Web.SiteMapNode" /> to validate.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -878,8 +878,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.SiteMapNodeCollection" /> that contains the <see cref="T:System.Web.SiteMapNode" /> objects to add to the read-only <see cref="T:System.Web.SiteMapNodeCollection" />. </param
-        >
+          />The <see cref="T:System.Web.SiteMapNodeCollection" /> that contains the <see cref="T:System.Web.SiteMapNode" /> objects to add to the read-only <see cref="T:System.Web.SiteMapNodeCollection" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -919,8 +919,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.SiteMapNode" /> to remove from the <see cref="T:System.Web.SiteMapNodeCollection" />. </param
-        >
+          />The <see cref="T:System.Web.SiteMapNode" /> to remove from the <see cref="T:System.Web.SiteMapNodeCollection" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -957,8 +957,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index of the element to remove. </param
-        >
+          />The zero-based index of the element to remove.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1014,8 +1014,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A one-dimensional array that must have zero-based indexing and is the destination of the elements copied from the <see cref="T:System.Collections.CollectionBase" />. </param
-        >
+          />A one-dimensional array that must have zero-based indexing and is the destination of the elements copied from the <see cref="T:System.Collections.CollectionBase" />.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
@@ -1432,8 +1432,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object for which to return an <see cref="T:System.Web.UI.IHierarchyData" />. </param
-        >
+          />The object for which to return an <see cref="T:System.Web.UI.IHierarchyData" />.
+        </param>
       </Docs>
     </Member>
   </Members>

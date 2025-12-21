@@ -31,17 +31,17 @@
         <h2>Custom Authorization</h2>
       </format>
       <para
-        >This class does not perform any authorization and allows users to access all service operations. To provide more restrictive authorization, you must create a custom authorization manager that checks custom policies. To do this, inherit from this class and override the <see cref="M:System.ServiceModel.ServiceAuthorizationManager.CheckAccessCore(System.ServiceModel.OperationContext)" /> method. Specify the instance of the derived class through the <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.ServiceAuthorizationManager" /> property. </para
-      >
+        >This class does not perform any authorization and allows users to access all service operations. To provide more restrictive authorization, you must create a custom authorization manager that checks custom policies. To do this, inherit from this class and override the <see cref="M:System.ServiceModel.ServiceAuthorizationManager.CheckAccessCore(System.ServiceModel.OperationContext)" /> method. Specify the instance of the derived class through the <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.ServiceAuthorizationManager" /> property.
+      </para>
       <para
-        >In <see cref="M:System.ServiceModel.ServiceAuthorizationManager.CheckAccessCore(System.ServiceModel.OperationContext)" />, the application can use the <see cref="T:System.ServiceModel.OperationContext" /> object to access the caller identity (<see cref="P:System.ServiceModel.OperationContext.ServiceSecurityContext" />). </para
-      >
+        >In <see cref="M:System.ServiceModel.ServiceAuthorizationManager.CheckAccessCore(System.ServiceModel.OperationContext)" />, the application can use the <see cref="T:System.ServiceModel.OperationContext" /> object to access the caller identity (<see cref="P:System.ServiceModel.OperationContext.ServiceSecurityContext" />).
+      </para>
       <para
-        >By getting the <see cref="P:System.ServiceModel.OperationContext.IncomingMessageHeaders" /> property, which returns a <see cref="T:System.ServiceModel.Channels.MessageHeaders" /> object, the application can access the service (<see cref="P:System.ServiceModel.Channels.MessageHeaders.To" />), and the operation (<see cref="P:System.ServiceModel.Channels.MessageHeaders.Action" />). </para
-      >
+        >By getting the <see cref="P:System.ServiceModel.OperationContext.IncomingMessageHeaders" /> property, which returns a <see cref="T:System.ServiceModel.Channels.MessageHeaders" /> object, the application can access the service (<see cref="P:System.ServiceModel.Channels.MessageHeaders.To" />), and the operation (<see cref="P:System.ServiceModel.Channels.MessageHeaders.Action" />).
+      </para>
       <para
-        >By getting the <see cref="P:System.ServiceModel.OperationContext.RequestContext" /> property, which returns a <see cref="T:System.ServiceModel.Channels.RequestContext" /> object, the application can access the entire request message (<see cref="P:System.ServiceModel.Channels.RequestContext.RequestMessage" />) and perform the authorization decision accordingly. </para
-      >
+        >By getting the <see cref="P:System.ServiceModel.OperationContext.RequestContext" /> property, which returns a <see cref="T:System.ServiceModel.Channels.RequestContext" /> object, the application can access the entire request message (<see cref="P:System.ServiceModel.Channels.RequestContext.RequestMessage" />) and perform the authorization decision accordingly.
+      </para>
       <para
         >For an example, see <format type="text/html">
           <a href="6214afde-44c1-4bf5-ba07-5ad6493620ea"
@@ -96,8 +96,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.ServiceAuthorizationManager" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.ServiceAuthorizationManager" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -125,14 +125,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In general, applications should override <see cref="M:System.ServiceModel.ServiceAuthorizationManager.CheckAccessCore(System.ServiceModel.OperationContext)" /> instead of this method. </para
-          >
+            >In general, applications should override <see cref="M:System.ServiceModel.ServiceAuthorizationManager.CheckAccessCore(System.ServiceModel.OperationContext)" /> instead of this method.
+          </para>
           <para
             >Override <see cref="M:System.ServiceModel.ServiceAuthorizationManager.CheckAccess(System.ServiceModel.OperationContext)" /> if the application associates or introduces a different set of policies for the resulting <see cref="T:System.ServiceModel.ServiceSecurityContext" /> or provide a different policy evaluation (chaining) model.</para
           >
           <para
-            >This method is responsible for calling <see cref="M:System.ServiceModel.ServiceAuthorizationManager.CheckAccessCore(System.ServiceModel.OperationContext)" />. </para
-          >
+            >This method is responsible for calling <see cref="M:System.ServiceModel.ServiceAuthorizationManager.CheckAccessCore(System.ServiceModel.OperationContext)" />.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -201,11 +201,11 @@
           <para>Override this method to provide custom authorization decisions.</para>
           <para>This method can be used to make authorization decisions based on claim sets that are inferred based on incoming tokens, or added through external authorization policies. It can also make authorization decisions based on properties of the incoming message: for example, the action header.</para>
           <para
-            >In this method, the application can use the <paramref name="operationContext" /> parameter to access the caller identity (<see cref="P:System.ServiceModel.OperationContext.ServiceSecurityContext" />). By returning the <see cref="T:System.ServiceModel.Channels.RequestContext" /> object from the <see cref="P:System.ServiceModel.OperationContext.RequestContext" /> property, the application can access the entire request message (<see cref="P:System.ServiceModel.Channels.RequestContext.RequestMessage" />). By returning the <see cref="T:System.ServiceModel.Channels.MessageHeaders" /> object from the <see cref="P:System.ServiceModel.OperationContext.IncomingMessageHeaders" /> property, the application can access the service URL (<see cref="P:System.ServiceModel.Channels.MessageHeaders.To" />) and the operation (<see cref="P:System.ServiceModel.Channels.MessageHeaders.Action" />). With this information, the application can perform the authorization decision accordingly. </para
-          >
+            >In this method, the application can use the <paramref name="operationContext" /> parameter to access the caller identity (<see cref="P:System.ServiceModel.OperationContext.ServiceSecurityContext" />). By returning the <see cref="T:System.ServiceModel.Channels.RequestContext" /> object from the <see cref="P:System.ServiceModel.OperationContext.RequestContext" /> property, the application can access the entire request message (<see cref="P:System.ServiceModel.Channels.RequestContext.RequestMessage" />). By returning the <see cref="T:System.ServiceModel.Channels.MessageHeaders" /> object from the <see cref="P:System.ServiceModel.OperationContext.IncomingMessageHeaders" /> property, the application can access the service URL (<see cref="P:System.ServiceModel.Channels.MessageHeaders.To" />) and the operation (<see cref="P:System.ServiceModel.Channels.MessageHeaders.Action" />). With this information, the application can perform the authorization decision accordingly.
+          </para>
           <para
-            >The claims made by a user are found in the <see cref="T:System.IdentityModel.Claims.ClaimSet" /> returned by the <see cref="P:System.IdentityModel.Policy.AuthorizationContext.ClaimSets" /> property of the AuthorizationContext. The current AuthorizationContext is returned by the <see cref="P:System.ServiceModel.OperationContext.ServiceSecurityContext" /> property of the <see cref="T:System.ServiceModel.OperationContext" /> class. </para
-          >
+            >The claims made by a user are found in the <see cref="T:System.IdentityModel.Claims.ClaimSet" /> returned by the <see cref="P:System.IdentityModel.Policy.AuthorizationContext.ClaimSets" /> property of the AuthorizationContext. The current AuthorizationContext is returned by the <see cref="P:System.ServiceModel.OperationContext.ServiceSecurityContext" /> property of the <see cref="T:System.ServiceModel.OperationContext" /> class.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

@@ -16,8 +16,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.UI.Triplet" /> class is used as a basic structure to store three related objects. It is a utility class that is used in various ways throughout ASP.NET. You can use the <see cref="T:System.Web.UI.Triplet" /> class in your own code anywhere that you need a structure to contain three related objects and where data-hiding is not essential. The <see cref="T:System.Web.UI.Triplet" /> class does not encapsulate its object references, <see cref="F:System.Web.UI.Triplet.First" />, <see cref="F:System.Web.UI.Triplet.Second" />, and <see cref="F:System.Web.UI.Triplet.Third" />, in properties; it exposes them directly to all calling code as public class fields. </para
-      >
+        >The <see cref="T:System.Web.UI.Triplet" /> class is used as a basic structure to store three related objects. It is a utility class that is used in various ways throughout ASP.NET. You can use the <see cref="T:System.Web.UI.Triplet" /> class in your own code anywhere that you need a structure to contain three related objects and where data-hiding is not essential. The <see cref="T:System.Web.UI.Triplet" /> class does not encapsulate its object references, <see cref="F:System.Web.UI.Triplet.First" />, <see cref="F:System.Web.UI.Triplet.Second" />, and <see cref="F:System.Web.UI.Triplet.Third" />, in properties; it exposes them directly to all calling code as public class fields.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -35,8 +35,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.Triplet" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Triplet" /> class.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -57,8 +57,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.Triplet" /> class and sets the first two objects. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Triplet" /> class and sets the first two objects.
+          </para>
         </summary>
         <param name="x">
           <attribution
@@ -94,8 +94,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.Triplet" /> class with the provided three objects. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Triplet" /> class with the provided three objects.
+          </para>
         </summary>
         <param name="x">
           <attribution

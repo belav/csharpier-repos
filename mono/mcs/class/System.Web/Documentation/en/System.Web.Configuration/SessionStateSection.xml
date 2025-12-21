@@ -17,8 +17,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.Configuration.SessionStateSection" /> class refers to the element in the Machine.config or Web.config configuration file identified by the sessionState tag.  </para
-      >
+        >The <see cref="T:System.Web.Configuration.SessionStateSection" /> class refers to the element in the Machine.config or Web.config configuration file identified by the sessionState tag.
+      </para>
       <para
         >When a new client begins interacting with a Web application, a session ID is issued and associated with all the subsequent requests from the same client during the time that the session is valid. This ID is used to maintain server-side state associated with the client session across requests. The <see cref="T:System.Web.Configuration.SessionStateSection" /> controls how the ASP.NET application establishes and maintains this association on behalf of each client.</para
       >
@@ -106,11 +106,11 @@
           >
           <block subset="none" type="note">
             <para
-              > With UP.Browser 4.1 or UP.Browser 3.2, <see cref="M:System.Web.HttpResponse.Redirect(System.String)" /> always behaves as if the value of the <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.SupportsRedirectWithCookie" /> property of the <see cref="T:System.Web.HttpBrowserCapabilities" /> object is false, unless the <see cref="P:System.Web.Configuration.SessionStateSection.Cookieless" /> property in the <see cref="P:System.Web.Configuration.SystemWebSectionGroup.SessionState" /> section of Web.config has been explicitly set to true. </para
-            >
+              > With UP.Browser 4.1 or UP.Browser 3.2, <see cref="M:System.Web.HttpResponse.Redirect(System.String)" /> always behaves as if the value of the <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.SupportsRedirectWithCookie" /> property of the <see cref="T:System.Web.HttpBrowserCapabilities" /> object is false, unless the <see cref="P:System.Web.Configuration.SessionStateSection.Cookieless" /> property in the <see cref="P:System.Web.Configuration.SystemWebSectionGroup.SessionState" /> section of Web.config has been explicitly set to true.
+            </para>
             <para
-              >In ASP.NET version 1.1, the options for this setting were true or false, but with ASP.NET 2.0, the choices are expanded, and <see cref="F:System.Web.HttpCookieMode.AutoDetect" /> is now the default setting. If your Web application has the <see cref="P:System.Web.Configuration.SessionStateSection.Cookieless" /> property set to a Boolean value, then <see cref="M:System.Web.HttpResponse.Redirect(System.String)" /> should work as expected for these browsers. </para
-            >
+              >In ASP.NET version 1.1, the options for this setting were true or false, but with ASP.NET 2.0, the choices are expanded, and <see cref="F:System.Web.HttpCookieMode.AutoDetect" /> is now the default setting. If your Web application has the <see cref="P:System.Web.Configuration.SessionStateSection.Cookieless" /> property set to a Boolean value, then <see cref="M:System.Web.HttpResponse.Redirect(System.String)" /> should work as expected for these browsers.
+            </para>
           </block>
         </remarks>
         <summary>
@@ -434,8 +434,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This sqlConnectionString attribute is required when <see cref="P:System.Web.Configuration.SessionStateSection.Mode" /> is set to <see cref="F:System.Web.SessionState.SessionStateMode.SQLServer" />. </para
-          >
+            >This sqlConnectionString attribute is required when <see cref="P:System.Web.Configuration.SessionStateSection.Mode" /> is set to <see cref="F:System.Web.SessionState.SessionStateMode.SQLServer" />.
+          </para>
           <block subset="none" type="note">
             <para
               >To use the <see cref="F:System.Web.SessionState.SessionStateMode.SQLServer" /> session state mode, you must run the InstallSqlState.sql SQL script (which is installed in [drive:]\WINDOWS\Microsoft.NET\Framework\VersionNumber as part of the default .NET Framework installation) on the computer running SQL Server that will store the session state. This creates a database called ASPState with new stored procedures and creates new ASPStateTempApplications and ASPStateTempSessions tables in the TempDB database.</para
@@ -468,8 +468,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property specifies the server name and the port when the session state is stored remotely. The stateConnectionString attribute is required when the <see cref="P:System.Web.Configuration.SessionStateSection.Mode" /> is set to <see cref="F:System.Web.SessionState.SessionStateMode.StateServer" />. </para
-          >
+            >This property specifies the server name and the port when the session state is stored remotely. The stateConnectionString attribute is required when the <see cref="P:System.Web.Configuration.SessionStateSection.Mode" /> is set to <see cref="F:System.Web.SessionState.SessionStateMode.StateServer" />.
+          </para>
           <block subset="none" type="note">
             <para>Make sure the ASP.NET state service is running on the remote server that stores the session-state information. This service is installed with ASP.NET and is located by default at [drive:]\WINDOWS\Microsoft.NET\Framework\VersionNumber\aspnet_state.exe.</para>
           </block>

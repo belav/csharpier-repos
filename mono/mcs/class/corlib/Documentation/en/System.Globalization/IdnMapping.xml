@@ -25,16 +25,16 @@
       <para>The IDNA mechanism uses Punycode to map an internationalized domain name that contains Unicode characters outside the US-ASCII character range to the US-ASCII character range supported by the domain name system. The IDNA mechanism is used to convert only domain names, not data transmitted over the Internet. </para>
       <block subset="none" type="note">
         <para
-          >In the net_v45, the <see cref="T:System.Globalization.IdnMapping" /> class supports different versions of the IDNA standard, depending on the operating system in use: </para
-        >
+          >In the net_v45, the <see cref="T:System.Globalization.IdnMapping" /> class supports different versions of the IDNA standard, depending on the operating system in use:
+        </para>
         <list type="bullet">
           <item>
             <para
               >When run on win8, it supports the 2008 version of the IDNA standard outlined by <see
                 cref="http://go.microsoft.com/fwlink/?LinkId=231875"
                 >RFC 5891: Internationalized Domain Names in Applications (IDNA): Protocol</see
-              >. </para
-            >
+              >.
+            </para>
           </item>
           <item>
             <para
@@ -52,8 +52,8 @@
         >
       </block>
       <para
-        >The <see cref="Overload:System.Globalization.IdnMapping.GetAscii" /> method normalizes a domain name, converts the normalized name to a representation that consists of displayable Unicode characters in the US-ASCII code point range (U+0020 to U+007E), and prepends an ASCII-compatible encoding (ACE) prefix ("xn--") to each label. The <see cref="M:System.Globalization.IdnMapping.GetUnicode(System.String)" /> method restores the domain name labels converted by the <see cref="Overload:System.Globalization.IdnMapping.GetAscii" /> method. </para
-      >
+        >The <see cref="Overload:System.Globalization.IdnMapping.GetAscii" /> method normalizes a domain name, converts the normalized name to a representation that consists of displayable Unicode characters in the US-ASCII code point range (U+0020 to U+007E), and prepends an ASCII-compatible encoding (ACE) prefix ("xn--") to each label. The <see cref="M:System.Globalization.IdnMapping.GetUnicode(System.String)" /> method restores the domain name labels converted by the <see cref="Overload:System.Globalization.IdnMapping.GetAscii" /> method.
+      </para>
       <para
         >If the string to be converted includes the label separator characters IDEOGRAPHIC FULL STOP (U+3002), FULLWIDTH FULL STOP (U+FF0E), and HALFWIDTH IDEOGRAPHIC FULL STOP (U+FF61), the <see cref="M:System.Globalization.IdnMapping.GetAscii(System.String)" /> method converts them to the label separator FULL STOP (period, U+002E). The <see cref="M:System.Globalization.IdnMapping.GetUnicode(System.String)" /> method, however, does not restore the original label separator character.</para
       >
@@ -81,14 +81,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Globalization.IdnMapping.AllowUnassigned" /> and <see cref="P:System.Globalization.IdnMapping.UseStd3AsciiRules" /> properties are initialized to false. A small subset of ASCII characters other than A-Z, 0-9, the hyphen (-) character (U+002D), and the period (.) character are permitted in domain names, but unassigned Unicode code points are not. </para
-          >
+            >The <see cref="P:System.Globalization.IdnMapping.AllowUnassigned" /> and <see cref="P:System.Globalization.IdnMapping.UseStd3AsciiRules" /> properties are initialized to false. A small subset of ASCII characters other than A-Z, 0-9, the hyphen (-) character (U+002D), and the period (.) character are permitted in domain names, but unassigned Unicode code points are not.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Globalization.IdnMapping" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Globalization.IdnMapping" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -159,8 +159,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the object specified by the <paramref name="obj" /> parameter is derived from <see cref="T:System.Globalization.IdnMapping" /> and its <see cref="P:System.Globalization.IdnMapping.AllowUnassigned" /> and <see cref="P:System.Globalization.IdnMapping.UseStd3AsciiRules" /> properties are equal; otherwise, false. </para
-          >
+            >true if the object specified by the <paramref name="obj" /> parameter is derived from <see cref="T:System.Globalization.IdnMapping" /> and its <see cref="P:System.Globalization.IdnMapping.AllowUnassigned" /> and <see cref="P:System.Globalization.IdnMapping.UseStd3AsciiRules" /> properties are equal; otherwise, false.
+          </para>
         </returns>
         <param name="obj">
           <attribution
@@ -193,8 +193,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="unicode" /> parameter specifies a string of one or more labels that consist of valid Unicode characters. The labels are separated by label separators. The <paramref name="unicode" /> parameter cannot begin with a label separator, but it can include and optionally end with a separator. The label separators are FULL STOP (period, U+002E), IDEOGRAPHIC FULL STOP (U+3002), FULLWIDTH FULL STOP (U+FF0E), and HALFWIDTH IDEOGRAPHIC FULL STOP (U+FF61). For example, the domain name "www.adatum.com" consists of the labels, "www", "adatum", and "com", separated by periods. </para
-          >
+            >The <paramref name="unicode" /> parameter specifies a string of one or more labels that consist of valid Unicode characters. The labels are separated by label separators. The <paramref name="unicode" /> parameter cannot begin with a label separator, but it can include and optionally end with a separator. The label separators are FULL STOP (period, U+002E), IDEOGRAPHIC FULL STOP (U+3002), FULLWIDTH FULL STOP (U+FF0E), and HALFWIDTH IDEOGRAPHIC FULL STOP (U+FF61). For example, the domain name "www.adatum.com" consists of the labels, "www", "adatum", and "com", separated by periods.
+          </para>
           <para>A label cannot contain any of the following characters: </para>
           <list type="bullet">
             <item>
@@ -207,8 +207,8 @@
             </item>
             <item>
               <para
-                >Non-standard characters in the US-ASCII character range, such as the SPACE (U+0020), EXCLAMATION MARK (U+0021), and LOW LINE (U+005F) characters, if the value of the <see cref="P:System.Globalization.IdnMapping.UseStd3AsciiRules" /> property is true. </para
-              >
+                >Non-standard characters in the US-ASCII character range, such as the SPACE (U+0020), EXCLAMATION MARK (U+0021), and LOW LINE (U+005F) characters, if the value of the <see cref="P:System.Globalization.IdnMapping.UseStd3AsciiRules" /> property is true.
+              </para>
             </item>
             <item>
               <para
@@ -222,8 +222,8 @@
             </item>
           </list>
           <para
-            >The <see cref="Overload:System.Globalization.IdnMapping.GetAscii" /> method converts all label separators to FULL STOP (period, U+002E). </para
-          >
+            >The <see cref="Overload:System.Globalization.IdnMapping.GetAscii" /> method converts all label separators to FULL STOP (period, U+002E).
+          </para>
           <para
             >If <paramref name="unicode" /> contains no characters outside the US-ASCII character range and no characters within the US-ASCII character range are prohibited, the method returns <paramref name="unicode" /> unchanged.</para
           >
@@ -270,8 +270,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="unicode" /> and <paramref name="index" /> parameters define a substring with one or more labels that consist of valid Unicode characters. The labels are separated by label separators. The first character of the substring cannot begin with a label separator, but it can include and optionally end with a separator. The label separators are FULL STOP (period, U+002E), IDEOGRAPHIC FULL STOP (U+3002), FULLWIDTH FULL STOP (U+FF0E), and HALFWIDTH IDEOGRAPHIC FULL STOP (U+FF61). For example, the domain name "www.adatum.com" consists of the labels, "www", "adatum", and "com", separated by periods. </para
-          >
+            >The <paramref name="unicode" /> and <paramref name="index" /> parameters define a substring with one or more labels that consist of valid Unicode characters. The labels are separated by label separators. The first character of the substring cannot begin with a label separator, but it can include and optionally end with a separator. The label separators are FULL STOP (period, U+002E), IDEOGRAPHIC FULL STOP (U+3002), FULLWIDTH FULL STOP (U+FF0E), and HALFWIDTH IDEOGRAPHIC FULL STOP (U+FF61). For example, the domain name "www.adatum.com" consists of the labels, "www", "adatum", and "com", separated by periods.
+          </para>
           <para>A label cannot contain any of the following characters: </para>
           <list type="bullet">
             <item>
@@ -284,8 +284,8 @@
             </item>
             <item>
               <para
-                >Non-standard characters in the US-ASCII character range, such as the SPACE (U+0020), EXCLAMATION MARK (U+0021), and LOW LINE (U+005F) characters, depending on the value of the <see cref="P:System.Globalization.IdnMapping.UseStd3AsciiRules" /> property. </para
-              >
+                >Non-standard characters in the US-ASCII character range, such as the SPACE (U+0020), EXCLAMATION MARK (U+0021), and LOW LINE (U+005F) characters, depending on the value of the <see cref="P:System.Globalization.IdnMapping.UseStd3AsciiRules" /> property.
+              </para>
             </item>
             <item>
               <para
@@ -299,8 +299,8 @@
             </item>
           </list>
           <para
-            >The <see cref="Overload:System.Globalization.IdnMapping.GetAscii" /> method converts all label separators to FULL STOP (period, U+002E). </para
-          >
+            >The <see cref="Overload:System.Globalization.IdnMapping.GetAscii" /> method converts all label separators to FULL STOP (period, U+002E).
+          </para>
           <para
             >If <paramref name="unicode" /> contains no characters outside the US-ASCII character range and no characters within the US-ASCII character range are prohibited, the method returns <paramref name="unicode" /> unchanged.</para
           >
@@ -358,8 +358,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="Unicode" />, <paramref name="index" />, and <paramref name="count" /> parameters define a substring with one or more labels that consist of valid Unicode characters. The labels are separated by label separators. The first character of the substring cannot begin with a label separator, but it can include and optionally end with a separator. The label separators are FULL STOP (period, U+002E), IDEOGRAPHIC FULL STOP (U+3002), FULLWIDTH FULL STOP (U+FF0E), and HALFWIDTH IDEOGRAPHIC FULL STOP (U+FF61). For example, the domain name "www.adatum.com" consists of the labels, "www", "adatum", and "com", separated by periods. </para
-          >
+            >The <paramref name="Unicode" />, <paramref name="index" />, and <paramref name="count" /> parameters define a substring with one or more labels that consist of valid Unicode characters. The labels are separated by label separators. The first character of the substring cannot begin with a label separator, but it can include and optionally end with a separator. The label separators are FULL STOP (period, U+002E), IDEOGRAPHIC FULL STOP (U+3002), FULLWIDTH FULL STOP (U+FF0E), and HALFWIDTH IDEOGRAPHIC FULL STOP (U+FF61). For example, the domain name "www.adatum.com" consists of the labels, "www", "adatum", and "com", separated by periods.
+          </para>
           <para>A label cannot contain any of the following characters: </para>
           <list type="bullet">
             <item>
@@ -419,8 +419,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters to convert in the substring that starts at the position specified by  <paramref name="index" /> in the <paramref name="unicode" /> string. </param
-        >
+          />The number of characters to convert in the substring that starts at the position specified by  <paramref name="index" /> in the <paramref name="unicode" /> string.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -500,8 +500,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to decode, which consists of one or more labels in the US-ASCII character range (U+0020 to U+007E) encoded according to the IDNA standard. </param
-        >
+          />The string to decode, which consists of one or more labels in the US-ASCII character range (U+0020 to U+007E) encoded according to the IDNA standard.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetUnicode">
@@ -545,8 +545,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to decode, which consists of one or more labels in the US-ASCII character range (U+0020 to U+007E) encoded according to the IDNA standard. </param
-        >
+          />The string to decode, which consists of one or more labels in the US-ASCII character range (U+0020 to U+007E) encoded according to the IDNA standard.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
@@ -601,22 +601,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to decode, which consists of one or more labels in the US-ASCII character range (U+0020 to U+007E) encoded according to the IDNA standard. </param
-        >
+          />The string to decode, which consists of one or more labels in the US-ASCII character range (U+0020 to U+007E) encoded according to the IDNA standard.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A zero-based offset into <paramref name="ascii" /> that specifies the start of the substring. </param
-        >
+          />A zero-based offset into <paramref name="ascii" /> that specifies the start of the substring.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters to convert in the substring that starts at the position specified by <paramref name="index" /> in the <paramref name="ascii" /> string. </param
-        >
+          />The number of characters to convert in the substring that starts at the position specified by <paramref name="index" /> in the <paramref name="ascii" /> string.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="UseStd3AsciiRules">

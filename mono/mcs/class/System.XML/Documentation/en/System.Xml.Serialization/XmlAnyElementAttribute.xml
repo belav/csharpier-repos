@@ -134,8 +134,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the XML element that the <see cref="T:System.Xml.Serialization.XmlSerializer" /> generates. </param
-        >
+          />The name of the XML element that the <see cref="T:System.Xml.Serialization.XmlSerializer" /> generates.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -176,15 +176,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the XML element that the <see cref="T:System.Xml.Serialization.XmlSerializer" /> generates. </param
-        >
+          />The name of the XML element that the <see cref="T:System.Xml.Serialization.XmlSerializer" /> generates.
+        </param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML namespace of the XML element. </param
-        >
+          />The XML namespace of the XML element.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Name">
@@ -238,8 +238,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Namespace" /> property allows you to set a unique name for the XML attribute. The <see cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Namespace" /> property conforms to the rules for creating an XML namespace as found in the World Wide Web Consortium (www.w3.org) document, "Namespaces in XML." </para
-          >
+            >The <see cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Namespace" /> property allows you to set a unique name for the XML attribute. The <see cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Namespace" /> property conforms to the rules for creating an XML namespace as found in the World Wide Web Consortium (www.w3.org) document, "Namespaces in XML."
+          </para>
           <para
             >To set the <see cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Namespace" /> property to a prefixed name, create an <see cref="T:System.Xml.Serialization.XmlSerializerNamespaces" /> that contains the namespaces and prefixes used in the XML document. Set the <see cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Namespace" /> property to one of the namespaces in the <see cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />. When the XML is generated, the attribute name is correctly prefixed with the prefix associated with the specified namespace.</para
           >
@@ -267,8 +267,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="F:System.Xml.Serialization.CodeGenerationOptions.GenerateOrder" /> enumeration to instruct the <see cref="T:System.Web.Services.Description.ServiceDescriptionImporter" /> to generate code that sets the <see cref="P:System.Xml.Serialization.XmlElementAttribute.Order" /> property. </para
-          >
+            >Use the <see cref="F:System.Xml.Serialization.CodeGenerationOptions.GenerateOrder" /> enumeration to instruct the <see cref="T:System.Web.Services.Description.ServiceDescriptionImporter" /> to generate code that sets the <see cref="P:System.Xml.Serialization.XmlElementAttribute.Order" /> property.
+          </para>
           <block subset="none" type="note">
             <para
               >Once the <see cref="P:System.Xml.Serialization.XmlElementAttribute.Order" /> property has been used on one public property or field in a type, it must be applied to all public properties and fields for that type and all inherited types.</para

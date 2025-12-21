@@ -329,11 +329,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Threading.Tasks.TaskFactory.ContinueWhenAll(System.Threading.Tasks.Task[],System.Action{System.Threading.Tasks.Task[]})" /> method executes the <paramref name="continuationAction" /> delegate when all tasks in the <paramref name="tasks" /> array have completed, regardless of their completion status. </para
-          >
+            >The <see cref="M:System.Threading.Tasks.TaskFactory.ContinueWhenAll(System.Threading.Tasks.Task[],System.Action{System.Threading.Tasks.Task[]})" /> method executes the <paramref name="continuationAction" /> delegate when all tasks in the <paramref name="tasks" /> array have completed, regardless of their completion status.
+          </para>
           <para
-            >Exceptions thrown by tasks in the <paramref name="tasks" /> array are not available to the continuation task through structured exception handling. You can determine which exceptions were thrown by examining the <see cref="P:System.Threading.Tasks.Task.Exception" /> property of each task in the <paramref name="tasks" /> array. To use structured exception handling to handle exceptions thrown by tasks in the <paramref name="tasks" /> array, call the <see cref="M:System.Threading.Tasks.Task.WaitAll(System.Threading.Tasks.Task[])" /> method. </para
-          >
+            >Exceptions thrown by tasks in the <paramref name="tasks" /> array are not available to the continuation task through structured exception handling. You can determine which exceptions were thrown by examining the <see cref="P:System.Threading.Tasks.Task.Exception" /> property of each task in the <paramref name="tasks" /> array. To use structured exception handling to handle exceptions thrown by tasks in the <paramref name="tasks" /> array, call the <see cref="M:System.Threading.Tasks.Task.WaitAll(System.Threading.Tasks.Task[])" /> method.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -387,8 +387,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Threading.Tasks.TaskFactory.ContinueWhenAll(System.Threading.Tasks.Task[],System.Action{System.Threading.Tasks.Task[]},System.Threading.CancellationToken)" /> method executes the <paramref name="continuationAction" /> delegate when all tasks in the <paramref name="tasks" /> array have completed, regardless of their completion status. </para
-          >
+            >The <see cref="M:System.Threading.Tasks.TaskFactory.ContinueWhenAll(System.Threading.Tasks.Task[],System.Action{System.Threading.Tasks.Task[]},System.Threading.CancellationToken)" /> method executes the <paramref name="continuationAction" /> delegate when all tasks in the <paramref name="tasks" /> array have completed, regardless of their completion status.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -477,8 +477,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the enumeration values that control the behavior of the new continuation task. The NotOn* and OnlyOn* members are not supported. </param
-        >
+          />A bitwise combination of the enumeration values that control the behavior of the new continuation task. The NotOn* and OnlyOn* members are not supported.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ContinueWhenAll">
@@ -742,8 +742,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the enumeration values that control the behavior of the new continuation task. The NotOn* and OnlyOn* members are not supported. </param
-        >
+          />A bitwise combination of the enumeration values that control the behavior of the new continuation task. The NotOn* and OnlyOn* members are not supported.
+        </param>
         <typeparam name="TAntecedentResult">
           <attribution
             license="cc4"
@@ -1024,8 +1024,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the enumeration values that control the behavior of the new continuation task. The NotOn* and OnlyOn* members are not supported. </param
-        >
+          />A bitwise combination of the enumeration values that control the behavior of the new continuation task. The NotOn* and OnlyOn* members are not supported.
+        </param>
         <typeparam name="TResult">
           <attribution
             license="cc4"
@@ -1323,8 +1323,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the enumeration values that control the behavior of the new continuation task. The NotOn* and OnlyOn* members are not supported. </param
-        >
+          />A bitwise combination of the enumeration values that control the behavior of the new continuation task. The NotOn* and OnlyOn* members are not supported.
+        </param>
         <typeparam name="TAntecedentResult">
           <attribution
             license="cc4"
@@ -1410,8 +1410,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the enumeration values that control the behavior of the new continuation task. The NotOn* and OnlyOn* members are not supported. </param
-        >
+          />A bitwise combination of the enumeration values that control the behavior of the new continuation task. The NotOn* and OnlyOn* members are not supported.
+        </param>
         <param name="scheduler">
           <attribution
             license="cc4"
@@ -4723,8 +4723,8 @@
             >Calling <see cref="M:System.Threading.Tasks.TaskFactory.StartNew(System.Action)" /> is functionally equivalent to creating a task by using one of its constructors, and then calling the <see cref="M:System.Threading.Tasks.Task.Start" /> method to schedule the task for execution. Starting with the net_v45, you can use the <see cref="Overload:System.Threading.Tasks.Task.Run" /> method with an <see cref="System.Action" /> object as  a quick way to call <see cref="Overload:System.Threading.Tasks.TaskFactory.StartNew" /> with default parameters. For more information and code examples, see <see
               cref="http://blogs.msdn.com/b/pfxteam/archive/2011/10/24/10229468.aspx"
               >Task.Run vs Task.Factory.StartNew</see
-            > in the Parallel Programming with .NET blog. </para
-          >
+            > in the Parallel Programming with .NET blog.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -4770,8 +4770,8 @@
             >Calling StartNew is functionally equivalent to creating a Task using one of its constructors and then calling <see cref="M:System.Threading.Tasks.Task.Start" /> to schedule it for execution. Starting with the net_v45, you can use the <see cref="Overload:System.Threading.Tasks.Task.Run" /> method with an <see cref="System.Action" /> object as  a quick way to call <see cref="Overload:System.Threading.Tasks.TaskFactory.StartNew" /> with default parameters. For more information and code examples, see <see
               cref="http://blogs.msdn.com/b/pfxteam/archive/2011/10/24/10229468.aspx"
               >Task.Run vs Task.Factory.StartNew</see
-            > in the Parallel Programming with .NET blog. </para
-          >
+            > in the Parallel Programming with .NET blog.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -4827,8 +4827,8 @@
             > Starting with the net_v45, you can use the <see cref="Overload:System.Threading.Tasks.Task.Run" /> method with an <see cref="System.Action" /> object as  a quick way to call <see cref="Overload:System.Threading.Tasks.TaskFactory.StartNew" /> with default parameters. For more information and code examples, see <see
               cref="http://blogs.msdn.com/b/pfxteam/archive/2011/10/24/10229468.aspx"
               >Task.Run vs Task.Factory.StartNew</see
-            > in the Parallel Programming with .NET blog. </para
-          >
+            > in the Parallel Programming with .NET blog.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -4884,8 +4884,8 @@
             >Starting with the net_v45, you can use the <see cref="Overload:System.Threading.Tasks.Task.Run" /> method with an <see cref="System.Action" /> object as  a quick way to call <see cref="Overload:System.Threading.Tasks.TaskFactory.StartNew" /> with default parameters. For more information and code examples, see <see
               cref="http://blogs.msdn.com/b/pfxteam/archive/2011/10/24/10229468.aspx"
               >Task.Run vs Task.Factory.StartNew</see
-            > in the Parallel Programming with .NET blog. </para
-          >
+            > in the Parallel Programming with .NET blog.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -4942,8 +4942,8 @@
             > Starting with the net_v45, you can use the <see cref="Overload:System.Threading.Tasks.Task.Run" /> method with an <see cref="System.Action" /> object as  a quick way to call <see cref="Overload:System.Threading.Tasks.TaskFactory.StartNew" /> with default parameters. For more information and code examples, see <see
               cref="http://blogs.msdn.com/b/pfxteam/archive/2011/10/24/10229468.aspx"
               >Task.Run vs Task.Factory.StartNew</see
-            > in the Parallel Programming with .NET blog. </para
-          >
+            > in the Parallel Programming with .NET blog.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -5007,8 +5007,8 @@
             > Starting with the net_v45, you can use the <see cref="Overload:System.Threading.Tasks.Task.Run" /> method with an <see cref="System.Action" /> object as  a quick way to call <see cref="Overload:System.Threading.Tasks.TaskFactory.StartNew" /> with default parameters. For more information and code examples, see <see
               cref="http://blogs.msdn.com/b/pfxteam/archive/2011/10/24/10229468.aspx"
               >Task.Run vs Task.Factory.StartNew</see
-            > in the Parallel Programming with .NET blog. </para
-          >
+            > in the Parallel Programming with .NET blog.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -5073,8 +5073,8 @@
             > Starting with the net_v45, you can use the <see cref="Overload:System.Threading.Tasks.Task.Run" /> method with an <see cref="System.Action" /> object as  a quick way to call <see cref="Overload:System.Threading.Tasks.TaskFactory.StartNew" /> with default parameters. For more information and code examples, see <see
               cref="http://blogs.msdn.com/b/pfxteam/archive/2011/10/24/10229468.aspx"
               >Task.Run vs Task.Factory.StartNew</see
-            > in the Parallel Programming with .NET blog. </para
-          >
+            > in the Parallel Programming with .NET blog.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -5147,8 +5147,8 @@
             > Starting with the net_v45, you can use the <see cref="Overload:System.Threading.Tasks.Task.Run" /> method with an <see cref="System.Action" /> object as  a quick way to call <see cref="Overload:System.Threading.Tasks.TaskFactory.StartNew" /> with default parameters. For more information and code examples, see <see
               cref="http://blogs.msdn.com/b/pfxteam/archive/2011/10/24/10229468.aspx"
               >Task.Run vs Task.Factory.StartNew</see
-            > in the Parallel Programming with .NET blog. </para
-          >
+            > in the Parallel Programming with .NET blog.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

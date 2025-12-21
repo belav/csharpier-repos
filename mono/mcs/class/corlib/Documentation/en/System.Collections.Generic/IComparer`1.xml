@@ -30,8 +30,8 @@
         >The default implementation of this interface is the <see cref="T:System.Collections.Generic.Comparer`1" /> class. The <see cref="T:System.StringComparer" /> class implements this interface for type <see cref="T:System.String" />.</para
       >
       <para
-        >This interface supports ordering comparisons. That is, when the <see cref="M:System.Collections.Generic.Comparer`1.Compare(`0,`0)" /> method returns 0, it means that two objects sort the same. Implementation of exact equality comparisons is provided by the <see cref="T:System.Collections.Generic.IEqualityComparer`1" /> generic interface. </para
-      >
+        >This interface supports ordering comparisons. That is, when the <see cref="M:System.Collections.Generic.Comparer`1.Compare(`0,`0)" /> method returns 0, it means that two objects sort the same. Implementation of exact equality comparisons is provided by the <see cref="T:System.Collections.Generic.IEqualityComparer`1" /> generic interface.
+      </para>
       <para
         >We recommend that you derive from the <see cref="T:System.Collections.Generic.Comparer`1" /> class instead of implementing the <see cref="T:System.Collections.Generic.IComparer`1" /> interface, because the <see cref="T:System.Collections.Generic.Comparer`1" /> class provides an explicit interface implementation of the <see cref="M:System.Collections.Generic.Comparer`1.System#Collections#IComparer#Compare(System.Object,System.Object)" /> method and the <see cref="P:System.Collections.Generic.Comparer`1.Default" /> property that gets the default comparer for the object.</para
       >

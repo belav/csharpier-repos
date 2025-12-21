@@ -29,8 +29,8 @@
         >The <see cref="T:System.Text.RegularExpressions.Match" /> object is immutable and has no public constructor. An instance of the <see cref="T:System.Text.RegularExpressions.Match" /> class is returned by the <see cref="M:System.Text.RegularExpressions.Regex.Match(System.String)" /> method and represents the first pattern match in a string. Subsequent matches are represented by <see cref="T:System.Text.RegularExpressions.Match" /> objects returned by the <see cref="M:System.Text.RegularExpressions.Match.NextMatch" /> method. In addition, a <see cref="T:System.Text.RegularExpressions.MatchCollection" /> object that consists of zero, one, or more <see cref="T:System.Text.RegularExpressions.Match" /> objects is returned by the <see cref="M:System.Text.RegularExpressions.Regex.Matches(System.String)" /> method.</para
       >
       <para
-        >If the <see cref="M:System.Text.RegularExpressions.Regex.Matches(System.String)" /> method fails to match a regular expression pattern in an input string, it returns an empty <see cref="T:System.Text.RegularExpressions.MatchCollection" /> object. You can then use a foreach construct in C# or a For Each construct in Visual Basic to iterate the collection. </para
-      >
+        >If the <see cref="M:System.Text.RegularExpressions.Regex.Matches(System.String)" /> method fails to match a regular expression pattern in an input string, it returns an empty <see cref="T:System.Text.RegularExpressions.MatchCollection" /> object. You can then use a foreach construct in C# or a For Each construct in Visual Basic to iterate the collection.
+      </para>
       <para
         >If the <see cref="M:System.Text.RegularExpressions.Regex.Match(System.String)" /> method fails to match the regular expression pattern, it returns a <see cref="T:System.Text.RegularExpressions.Match" /> object that is equal to <see cref="P:System.Text.RegularExpressions.Match.Empty" />. You can use the <see cref="P:System.Text.RegularExpressions.Group.Success" /> property to determine whether the match was successful. The following example provides an illustration.</para
       >
@@ -39,8 +39,8 @@
         >If a pattern match is successful, the <see cref="P:System.Text.RegularExpressions.Capture.Value" /> property contains the matched substring, the <see cref="P:System.Text.RegularExpressions.Capture.Index" /> property indicates the zero-based starting position of the matched substring in the input string, and the <see cref="P:System.Text.RegularExpressions.Capture.Length" /> property indicates the length of matched substring in the input string.</para
       >
       <para
-        >Because a single match can involve multiple capturing groups, <see cref="T:System.Text.RegularExpressions.Match" /> has a <see cref="P:System.Text.RegularExpressions.Match.Groups" /> property that returns the <see cref="T:System.Text.RegularExpressions.GroupCollection" />. The <see cref="T:System.Text.RegularExpressions.GroupCollection" /> has accessors that return each group. The <see cref="T:System.Text.RegularExpressions.Match" /> instance itself is equivalent to the first object in the collection, at Match.Groups[0] (Match.Groups(0) in Visual Basic), which represents the entire match. </para
-      >
+        >Because a single match can involve multiple capturing groups, <see cref="T:System.Text.RegularExpressions.Match" /> has a <see cref="P:System.Text.RegularExpressions.Match.Groups" /> property that returns the <see cref="T:System.Text.RegularExpressions.GroupCollection" />. The <see cref="T:System.Text.RegularExpressions.GroupCollection" /> has accessors that return each group. The <see cref="T:System.Text.RegularExpressions.Match" /> instance itself is equivalent to the first object in the collection, at Match.Groups[0] (Match.Groups(0) in Visual Basic), which represents the entire match.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -111,8 +111,8 @@
               <a href="0fc18634-f590-4062-8d5c-f0b71abe405b"
                 >Grouping Constructs in Regular Expressions</a
               >
-            </format> article. </para
-          >
+            </format> article.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -143,8 +143,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is similar to calling <see cref="M:System.Text.RegularExpressions.Regex.Match(System.String,System.Int32)" /> again and passing (Index+Length) as the new starting position. </para
-          >
+            >This method is similar to calling <see cref="M:System.Text.RegularExpressions.Regex.Match(System.String,System.Int32)" /> again and passing (Index+Length) as the new starting position.
+          </para>
           <block subset="none" type="note">
             <para
               >This method does not modify the current instance. Instead, it returns a new <see cref="T:System.Text.RegularExpressions.Match" /> object that contains information about the next match.</para
@@ -209,8 +209,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The replacement pattern to use. </param
-        >
+          />The replacement pattern to use.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Synchronized">
@@ -256,8 +256,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A regular expression match equivalent to the one expected. </param
-        >
+          />A regular expression match equivalent to the one expected.
+        </param>
       </Docs>
     </Member>
   </Members>

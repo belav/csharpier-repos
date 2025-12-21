@@ -22,8 +22,8 @@
           >CodePlex</see
         > Web site and the MSDN article <see cref="http://go.microsoft.com/fwlink/?LinkID=198161"
           >Implementing Dynamic Interfaces</see
-        >. </para
-      >
+        >.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

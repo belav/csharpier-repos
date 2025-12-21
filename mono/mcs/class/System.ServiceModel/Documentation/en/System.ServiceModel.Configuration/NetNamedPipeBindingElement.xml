@@ -46,8 +46,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.NetNamedPipeBindingElement" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.NetNamedPipeBindingElement" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -189,8 +189,8 @@
           <para>If the buffer is full, excess data remains in the underlying socket until the buffer has space again.</para>
           <para>The value of this property must be less than or equal to MaxMessageSize and must be larger than the size of the headers of the message or the channel throws an exception. </para>
           <para
-            >If you receive more data than you can buffer, the channel throws a <see cref="T:System.ServiceModel.CommunicationException" />, which contains <see cref="T:System.ServiceModel.QuotaExceededException" /> as an inner exception. </para
-          >
+            >If you receive more data than you can buffer, the channel throws a <see cref="T:System.ServiceModel.CommunicationException" />, which contains <see cref="T:System.ServiceModel.QuotaExceededException" /> as an inner exception.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

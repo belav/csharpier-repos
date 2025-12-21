@@ -26,8 +26,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.IFormattable" /> interface converts an object to its string representation based on a format string and a format provider. </para
-      >
+        >The <see cref="T:System.IFormattable" /> interface converts an object to its string representation based on a format string and a format provider.
+      </para>
       <para>A format string typically defines the general appearance of an object. For example, the .NET Framework supports the following:</para>
       <list type="bullet">
         <item>
@@ -82,8 +82,8 @@
         </item>
         <item>
           <para
-            >The <see cref="T:System.Globalization.DateTimeFormatInfo" /> class, which returns an instance of itself for formatting date and time values. </para
-          >
+            >The <see cref="T:System.Globalization.DateTimeFormatInfo" /> class, which returns an instance of itself for formatting date and time values.
+          </para>
         </item>
       </list>
       <para
@@ -92,8 +92,8 @@
       <para
         >The <see cref="T:System.IFormattable" /> interface defines a single method, <see cref="M:System.IFormattable.ToString(System.String,System.IFormatProvider)" />, that supplies formatting services for the implementing type. The <see cref="M:System.IFormattable.ToString(System.String,System.IFormatProvider)" /> method can be called directly. In addition, it is called automatically by the <see cref="M:System.Convert.ToString(System.Object)" /> and <see cref="M:System.Convert.ToString(System.Object,System.IFormatProvider)" /> methods, and by methods that use the <format type="text/html">
           <a href="87b7d528-73f6-43c6-b71a-f23043039a49">composite formatting feature</a>
-        </format> in the .NET Framework. Such methods include <see cref="M:System.Console.WriteLine(System.String,System.Object)" />, <see cref="M:System.String.Format(System.String,System.Object[])" />, and <see cref="M:System.Text.StringBuilder.AppendFormat(System.String,System.Object)" />, among others. The <see cref="M:System.IFormattable.ToString(System.String,System.IFormatProvider)" /> method is called for each format item in the method's format string. </para
-      >
+        </format> in the .NET Framework. Such methods include <see cref="M:System.Console.WriteLine(System.String,System.Object)" />, <see cref="M:System.String.Format(System.String,System.Object[])" />, and <see cref="M:System.Text.StringBuilder.AppendFormat(System.String,System.Object)" />, among others. The <see cref="M:System.IFormattable.ToString(System.String,System.IFormatProvider)" /> method is called for each format item in the method's format string.
+      </para>
       <para
         >The <see cref="T:System.IFormattable" /> interface is implemented by the base data types.</para
       >
@@ -157,8 +157,7 @@ class FormattableExample {
 
     }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>123.12345678901234 as C: $123.12</para>

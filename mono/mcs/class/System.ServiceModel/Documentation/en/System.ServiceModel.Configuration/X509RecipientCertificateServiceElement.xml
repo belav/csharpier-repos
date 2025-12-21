@@ -43,8 +43,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.X509RecipientCertificateServiceElement" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.X509RecipientCertificateServiceElement" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -188,8 +188,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The type contained in <see cref="P:System.ServiceModel.Configuration.X509RecipientCertificateServiceElement.FindValue" /> must satisfy the requirements of this property. </para
-          >
+            >The type contained in <see cref="P:System.ServiceModel.Configuration.X509RecipientCertificateServiceElement.FindValue" /> must satisfy the requirements of this property.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

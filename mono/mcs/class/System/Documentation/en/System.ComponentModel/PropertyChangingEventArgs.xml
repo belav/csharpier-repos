@@ -19,8 +19,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see cref="E:System.ComponentModel.INotifyPropertyChanging.PropertyChanging" /> event. </para
-      >
+        >Provides data for the <see cref="E:System.ComponentModel.INotifyPropertyChanging.PropertyChanging" /> event.
+      </para>
     </summary>
   </Docs>
   <Members>
@@ -46,8 +46,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.PropertyChangingEventArgs" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.PropertyChangingEventArgs" /> class.
+          </para>
         </summary>
         <param name="propertyName">
           <attribution

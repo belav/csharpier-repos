@@ -72,8 +72,8 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The hash value. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The hash value.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -114,11 +114,11 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The algorithm used to generate the hash. Values for this parameter come from the <see cref="T:System.Configuration.Assemblies.AssemblyHashAlgorithm" /> enumeration. </param
-        >
+          />The algorithm used to generate the hash. Values for this parameter come from the <see cref="T:System.Configuration.Assemblies.AssemblyHashAlgorithm" /> enumeration.
+        </param>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The hash value. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The hash value.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Algorithm">
@@ -287,8 +287,8 @@
           <para>Sets the hash value.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The hash value. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The hash value.
+        </param>
       </Docs>
     </Member>
   </Members>

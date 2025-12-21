@@ -125,8 +125,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A path to the temporary directory to use for storing the temporary files. </param
-        >
+          />A path to the temporary directory to use for storing the temporary files.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -167,15 +167,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A path to the temporary directory to use for storing the temporary files. </param
-        >
+          />A path to the temporary directory to use for storing the temporary files.
+        </param>
         <param name="keepFiles">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if the temporary files should be kept after use; false if the temporary files should be deleted. </param
-        >
+          />true if the temporary files should be kept after use; false if the temporary files should be deleted.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddExtension">
@@ -215,8 +215,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file name extension for the auto-generated temporary file name to add to the collection. </param
-        >
+          />The file name extension for the auto-generated temporary file name to add to the collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddExtension">
@@ -260,15 +260,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file name extension for the auto-generated temporary file name to add to the collection. </param
-        >
+          />The file name extension for the auto-generated temporary file name to add to the collection.
+        </param>
         <param name="keepFile">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if the file should be kept after use; false if the file should be deleted. </param
-        >
+          />true if the file should be kept after use; false if the file should be deleted.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddFile">
@@ -306,15 +306,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the file to add to the collection. </param
-        >
+          />The name of the file to add to the collection.
+        </param>
         <param name="keepFile">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if the file should be kept after use; false if the file should be deleted. </param
-        >
+          />true if the file should be kept after use; false if the file should be deleted.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="BasePath">
@@ -368,15 +368,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array of strings to copy to. </param
-        >
+          />The array of strings to copy to.
+        </param>
         <param name="start">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the array to begin copying to. </param
-        >
+          />The index of the array to begin copying to.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Count">
@@ -420,8 +420,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.CodeDom.Compiler.TempFileCollection.Delete" /> method examines each file in the collection to determine, on an individual basis, whether the file is to be kept or deleted. Files can be explicitly marked to be kept when added to the collection using add methods that take a <paramref name="keepFile" /> parameter. When adding a file to the collection using the <see cref="M:System.CodeDom.Compiler.TempFileCollection.AddExtension(System.String)" /> overload that does not have a <paramref name="keepFile" /> parameter the value of the <see cref="P:System.CodeDom.Compiler.TempFileCollection.KeepFiles" /> property is used as the default keep file indicator. </para
-          >
+            >The <see cref="M:System.CodeDom.Compiler.TempFileCollection.Delete" /> method examines each file in the collection to determine, on an individual basis, whether the file is to be kept or deleted. Files can be explicitly marked to be kept when added to the collection using add methods that take a <paramref name="keepFile" /> parameter. When adding a file to the collection using the <see cref="M:System.CodeDom.Compiler.TempFileCollection.AddExtension(System.String)" /> overload that does not have a <paramref name="keepFile" /> parameter the value of the <see cref="P:System.CodeDom.Compiler.TempFileCollection.KeepFiles" /> property is used as the default keep file indicator.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -468,8 +468,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Finalize">

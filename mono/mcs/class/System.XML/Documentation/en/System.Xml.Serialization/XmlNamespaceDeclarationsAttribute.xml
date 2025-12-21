@@ -52,8 +52,8 @@
         >Without the <see cref="T:System.Xml.Serialization.XmlNamespaceDeclarationsAttribute" />, the association between the prefix and the namespace is lost.</para
       >
       <para
-        >To retain the association between the prefix and the namespace URI, add a member that returns an <see cref="T:System.Xml.Serialization.XmlSerializerNamespaces" /> object and apply the <see cref="T:System.Xml.Serialization.XmlNamespaceDeclarationsAttribute" /> attribute to the member, as shown in the following C# and Visual Basic code: </para
-      >
+        >To retain the association between the prefix and the namespace URI, add a member that returns an <see cref="T:System.Xml.Serialization.XmlSerializerNamespaces" /> object and apply the <see cref="T:System.Xml.Serialization.XmlNamespaceDeclarationsAttribute" /> attribute to the member, as shown in the following C# and Visual Basic code:
+      </para>
       <code> // C#
  public class Select {
    [XmlAttribute] public string path;
@@ -81,8 +81,8 @@
         >On deserialization, the xmlns field contains an <see cref="T:System.Xml.Serialization.XmlSerializerNamespaces" /> object that contains all namespace prefix definitions.</para
       >
       <para
-        >On serialization, the user can add prefix-namespace pairs to the <see cref="T:System.Xml.Serialization.XmlSerializerNamespaces" /> object using the <see cref="M:System.Xml.Serialization.XmlSerializerNamespaces.Add(System.String,System.String)" /> method. This is shown in the following C# and Visual Basic code: </para
-      >
+        >On serialization, the user can add prefix-namespace pairs to the <see cref="T:System.Xml.Serialization.XmlSerializerNamespaces" /> object using the <see cref="M:System.Xml.Serialization.XmlSerializerNamespaces.Add(System.String,System.String)" /> method. This is shown in the following C# and Visual Basic code:
+      </para>
       <code> // C#
  using System;
  using System.IO;

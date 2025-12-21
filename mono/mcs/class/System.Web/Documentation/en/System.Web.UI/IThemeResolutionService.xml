@@ -101,8 +101,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Web.UI.ThemeProvider" /> object that represents the customization theme on an ASP.NET page. </para
-          >
+            >Gets a <see cref="T:System.Web.UI.ThemeProvider" /> object that represents the customization theme on an ASP.NET page.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />

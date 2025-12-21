@@ -74,15 +74,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The server object for which the chain is being created. </param
-        >
+          />The server object for which the chain is being created.
+        </param>
         <param name="nextSink">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The chain of sinks composed so far. </param
-        >
+          />The chain of sinks composed so far.
+        </param>
       </Docs>
     </Member>
   </Members>

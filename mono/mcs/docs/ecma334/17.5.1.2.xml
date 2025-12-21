@@ -5,8 +5,8 @@
     >When a formal parameter is a reference parameter, the corresponding argument in a method invocation must consist of the keyword ref followed by a <non_terminal
       where="12.4"
       >variable-reference</non_terminal
-    > (<hyperlink>12.3.3</hyperlink>) of the same type as the formal parameter. A variable must be definitely assigned before it can be passed as a reference parameter. </paragraph
-  >
+    > (<hyperlink>12.3.3</hyperlink>) of the same type as the formal parameter. A variable must be definitely assigned before it can be passed as a reference parameter.
+  </paragraph>
   <paragraph>Within a method, a reference parameter is always considered definitely assigned. </paragraph>
   <paragraph>
     <example

@@ -75,8 +75,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object from which to construct the new instance of <see cref="T:System.Security.Principal.WindowsPrincipal" />. </param
-        >
+          />The object from which to construct the new instance of <see cref="T:System.Security.Principal.WindowsPrincipal" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Identity">
@@ -142,8 +142,8 @@
           </block>
           <para>Relative identifiers (RIDs) are components of a Windows user group's security identifier (SID) and are supported to help prevent cross-platform localization issues. Many user accounts, local groups, and global groups have a default RID value that is constant across all versions of Windows. </para>
           <para
-            >For example, the RID for the BUILTIN\Administrators role is 0x220. Using 0x220 as the input parameter for the <see cref="M:System.Security.Principal.WindowsPrincipal.IsInRole(System.Security.Principal.SecurityIdentifier)" /> method results in true being returned if the current principal is an administrator. </para
-          >
+            >For example, the RID for the BUILTIN\Administrators role is 0x220. Using 0x220 as the input parameter for the <see cref="M:System.Security.Principal.WindowsPrincipal.IsInRole(System.Security.Principal.SecurityIdentifier)" /> method results in true being returned if the current principal is an administrator.
+          </para>
           <para>The following tables list the default RID values.</para>
           <list type="table">
             <listheader>
@@ -299,8 +299,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The RID of the Windows user group in which to check for the principal’s membership status. </param
-        >
+          />The RID of the Windows user group in which to check for the principal’s membership status.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsInRole">
@@ -410,8 +410,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Security.Principal.WindowsBuiltInRole" /> values. </param
-        >
+          />One of the <see cref="T:System.Security.Principal.WindowsBuiltInRole" /> values.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsInRole">
@@ -507,8 +507,8 @@
             >For machine-specific roles, the <paramref name="role" /> string should be in the form "MachineName\RoleNameHere".</para
           >
           <para
-            >For domain-specific roles, the <paramref name="role" /> string should be in the form "DomainName\RoleNameHere"; for example, "SomeDomain\Domain Users". </para
-          >
+            >For domain-specific roles, the <paramref name="role" /> string should be in the form "DomainName\RoleNameHere"; for example, "SomeDomain\Domain Users".
+          </para>
           <block subset="none" type="note">
             <para
               >In the .NET Framework version 1.0, the <paramref name="role" /> parameter is case-sensitive. In the .NET Framework version 1.1 and later, the <paramref name="role" /> parameter is case-insensitive.</para
@@ -528,8 +528,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the Windows user group for which to check membership. </param
-        >
+          />The name of the Windows user group for which to check membership.
+        </param>
       </Docs>
     </Member>
   </Members>

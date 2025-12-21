@@ -67,8 +67,8 @@
         >To verify role membership programmatically, you can use the <see cref="T:System.Web.Security.Roles" /> class or the <see cref="P:System.Web.UI.Page.User" /> property with the <see cref="M:System.Web.Security.Roles.IsUserInRole(System.String)" /> method, or you can use the <see cref="P:System.Web.UI.Page.User" /> property with the <see cref="M:System.Security.Principal.IPrincipal.IsInRole(System.String)" /> method. For sample code that programmatically checks role membership, see the Example section in this topic.</para
       >
       <para
-        >The <see cref="T:System.Web.Security.Roles" /> class also enables you to create and delete roles and to add users to or remove users from roles. </para
-      >
+        >The <see cref="T:System.Web.Security.Roles" /> class also enables you to create and delete roles and to add users to or remove users from roles.
+      </para>
       <block subset="none" type="note">
         <para
           >If you have configured your application to use the <see cref="T:System.Web.Security.WindowsTokenRoleProvider" /> class, you cannot modify roles or role membership. The <see cref="T:System.Web.Security.WindowsTokenRoleProvider" /> class verifies membership in Windows security groups only. In this case, you must use Windows user account management rather than ASP.NET roles to create and delete groups and manage group membership.</para
@@ -78,8 +78,8 @@
       <list type="bullet">
         <item>
           <para
-            >You can use the <see cref="T:System.Web.Security.WindowsTokenRoleProvider" /> class to retrieve role information based on membership in Windows groups. </para
-          >
+            >You can use the <see cref="T:System.Web.Security.WindowsTokenRoleProvider" /> class to retrieve role information based on membership in Windows groups.
+          </para>
         </item>
         <item>
           <para
@@ -142,8 +142,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string array of user names to add to the specified role. </param
-        >
+          />A string array of user names to add to the specified role.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -186,8 +186,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string array of user names to add to the specified roles. </param
-        >
+          />A string array of user names to add to the specified roles.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -271,8 +271,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The user name to add to the specified roles. </param
-        >
+          />The user name to add to the specified roles.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -847,8 +847,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The user to return a list of roles for. </param
-        >
+          />The user to return a list of roles for.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -960,8 +960,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the user to search for. </param
-        >
+          />The name of the user to search for.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1164,8 +1164,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The user to remove from the specified roles. </param
-        >
+          />The user to remove from the specified roles.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1205,8 +1205,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string array of user names to remove from the specified roles. </param
-        >
+          />A string array of user names to remove from the specified roles.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1246,8 +1246,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string array of user names to remove from the specified roles. </param
-        >
+          />A string array of user names to remove from the specified roles.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

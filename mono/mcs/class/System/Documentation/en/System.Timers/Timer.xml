@@ -41,8 +41,8 @@
         >The <see cref="T:System.Timers.Timer" /> component is a server-based timer, which allows you to specify a recurring interval at which the <see cref="E:System.Timers.Timer.Elapsed" /> event is raised in your application. You can then handle this event to provide regular processing. For example, suppose you have a critical server that must be kept running 24 hours a day, 7 days a week. You could create a service that uses a <see cref="T:System.Timers.Timer" /> to periodically check the server and ensure that the system is up and running. If the system is not responding, the service could attempt to restart the server or notify an administrator.</para
       >
       <para
-        >The server-based <see cref="T:System.Timers.Timer" /> is designed for use with worker threads in a multithreaded environment. Server timers can move among threads to handle the raised <see cref="E:System.Timers.Timer.Elapsed" /> event, resulting in more accuracy than Windows timers in raising the event on time. </para
-      >
+        >The server-based <see cref="T:System.Timers.Timer" /> is designed for use with worker threads in a multithreaded environment. Server timers can move among threads to handle the raised <see cref="E:System.Timers.Timer.Elapsed" /> event, resulting in more accuracy than Windows timers in raising the event on time.
+      </para>
       <para
         >The <see cref="T:System.Timers.Timer" /> component raises the <see cref="E:System.Timers.Timer.Elapsed" /> event, based on the value of the <see cref="P:System.Timers.Timer.Interval" /> property. You can handle this event to perform the processing you need. For example, suppose that you have an online sales application that continuously posts sales orders to a database. The service that compiles the instructions for shipping operates on a batch of orders rather than processing each order individually. You could use a <see cref="T:System.Timers.Timer" /> to start the batch processing every 30 minutes.</para
       >
@@ -63,11 +63,11 @@
         >
       </block>
       <para
-        >Even if <see cref="P:System.Timers.Timer.SynchronizingObject" /> is not null, <see cref="E:System.Timers.Timer.Elapsed" /> events can occur after the <see cref="Overload:System.Timers.Timer.Dispose" /> or <see cref="M:System.Timers.Timer.Stop" /> method has been called or after the <see cref="P:System.Timers.Timer.Enabled" /> property has been set to false, because the signal to raise the <see cref="E:System.Timers.Timer.Elapsed" /> event is always queued for execution on a thread pool thread. One way to resolve this race condition is to set a flag that tells the event handler for the <see cref="E:System.Timers.Timer.Elapsed" /> event to ignore subsequent events. </para
-      >
+        >Even if <see cref="P:System.Timers.Timer.SynchronizingObject" /> is not null, <see cref="E:System.Timers.Timer.Elapsed" /> events can occur after the <see cref="Overload:System.Timers.Timer.Dispose" /> or <see cref="M:System.Timers.Timer.Stop" /> method has been called or after the <see cref="P:System.Timers.Timer.Enabled" /> property has been set to false, because the signal to raise the <see cref="E:System.Timers.Timer.Elapsed" /> event is always queued for execution on a thread pool thread. One way to resolve this race condition is to set a flag that tells the event handler for the <see cref="E:System.Timers.Timer.Elapsed" /> event to ignore subsequent events.
+      </para>
       <para
-        >If you use the <see cref="T:System.Timers.Timer" /> with a user interface element, such as a form or control, without placing the timer on that user interface element, assign the form or control that contains the <see cref="T:System.Timers.Timer" /> to the <see cref="P:System.Timers.Timer.SynchronizingObject" /> property, so that the event is marshaled to the user interface thread. </para
-      >
+        >If you use the <see cref="T:System.Timers.Timer" /> with a user interface element, such as a form or control, without placing the timer on that user interface element, assign the form or control that contains the <see cref="T:System.Timers.Timer" /> to the <see cref="P:System.Timers.Timer.SynchronizingObject" /> property, so that the event is marshaled to the user interface thread.
+      </para>
       <para>The <see cref="T:System.Timers.Timer" /> is not visible at run time.</para>
       <para
         >For a list of initial property values for an instance of <see cref="T:System.Timers.Timer" />, see the <see cref="M:System.Timers.Timer.#ctor" /> constructor.</para
@@ -329,8 +329,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Elapsed">
@@ -378,8 +378,8 @@
             >
           </block>
           <para
-            >Even if <see cref="P:System.Timers.Timer.SynchronizingObject" /> is not null, <see cref="E:System.Timers.Timer.Elapsed" /> events can occur after the <see cref="Overload:System.Timers.Timer.Dispose" /> or <see cref="M:System.Timers.Timer.Stop" /> method has been called or after the <see cref="P:System.Timers.Timer.Enabled" /> property has been set to false, because the signal to raise the <see cref="E:System.Timers.Timer.Elapsed" /> event is always queued for execution on a thread pool thread. One way to resolve this race condition is to set a flag that tells the event handler for the <see cref="E:System.Timers.Timer.Elapsed" /> event to ignore subsequent events. </para
-          >
+            >Even if <see cref="P:System.Timers.Timer.SynchronizingObject" /> is not null, <see cref="E:System.Timers.Timer.Elapsed" /> events can occur after the <see cref="Overload:System.Timers.Timer.Dispose" /> or <see cref="M:System.Timers.Timer.Stop" /> method has been called or after the <see cref="P:System.Timers.Timer.Enabled" /> property has been set to false, because the signal to raise the <see cref="E:System.Timers.Timer.Elapsed" /> event is always queued for execution on a thread pool thread. One way to resolve this race condition is to set a flag that tells the event handler for the <see cref="E:System.Timers.Timer.Elapsed" /> event to ignore subsequent events.
+          </para>
           <para
             >The <see cref="T:System.Timers.Timer" /> component catches and suppresses all exceptions thrown by event handlers for the <see cref="E:System.Timers.Timer.Elapsed" /> event. This behavior is subject to change in future releases of the .NET Framework.</para
           >
@@ -434,8 +434,8 @@
           >
           <block subset="none" type="note">
             <para
-              >Some visual designers, such as those in Microsoft Visual Studio, set the <see cref="P:System.Timers.Timer.Enabled" /> property to true when inserting a new <see cref="T:System.Timers.Timer" />. </para
-            >
+              >Some visual designers, such as those in Microsoft Visual Studio, set the <see cref="P:System.Timers.Timer.Enabled" /> property to true when inserting a new <see cref="T:System.Timers.Timer" />.
+            </para>
           </block>
         </remarks>
         <summary>

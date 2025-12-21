@@ -23,8 +23,8 @@
         wrapper over the <see cref="T:Mono.Unix.Native.Group" /> native type.
         It represents a single entry from the local group database, typically
         <c>/etc/group</c>.
-      </para
-      >
+
+      </para>
       <para>
         Unix Groups are part of the file system access rules.  
       </para>
@@ -36,8 +36,8 @@
         <see cref="T:Mono.Unix.FileAccessPermissions" /> is a nine-bit field
         specifying read, write, and execute access for the owner, group, and
         everyone else (other).
-      </para
-      >
+
+      </para>
       <para>
         Access by the file's owner group is controlled by the bits
         specified by <c>
@@ -47,8 +47,8 @@
         >.
         All group members get these access permissions, except for the file's
         owner (if they belong to the file's owner group).
-      </para
-      >
+
+      </para>
     </remarks>
   </Docs>
   <Members>
@@ -71,20 +71,20 @@
         <param name="group">
           A <see cref="T:Mono.Unix.Native.Group" /> containing the 
           group to get information about.
-        </param
-        >
+
+        </param>
         <summary>
           Constructs and initializes a new instance of 
           <see cref="T:Mono.Unix.UnixGroupInfo" /> by using the specified 
           <see cref="T:Mono.Unix.Native.Group" /> entry.
-        </summary
-        >
+
+        </summary>
         <remarks>
           This constructor wraps <paramref name="group" />,
           providing framework-compliant naming conventions over the native 
           <see cref="T:Mono.Unix.Native.Group" /> type.
-        </remarks
-        >
+
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -106,14 +106,14 @@
         <param name="group">
           A <see cref="T:System.Int64" /> containing the group id to get
           information about.
-        </param
-        >
+
+        </param>
         <summary>
           Constructs and initializes a new instance of 
           <see cref="T:Mono.Unix.UnixGroupInfo" /> by looking up the specifed
           group id in the local group database file.
-        </summary
-        >
+
+        </summary>
         <remarks>
           This constructor looks up the specified group id in the local
           group database.
@@ -121,8 +121,8 @@
         <exception cref="T:System.ArgumentException">
           The group id <paramref name="group" /> does not exist in the local
           group database.
-        </exception
-        >
+
+        </exception>
         <altmember cref="M:Mono.Unix.Native.Syscall.getgrgid_r" />
       </Docs>
     </Member>
@@ -145,14 +145,14 @@
         <param name="group">
           A <see cref="T:System.String" /> containing the group to get
           information about.
-        </param
-        >
+
+        </param>
         <summary>
           Constructs and initializes a new instance of 
           <see cref="T:Mono.Unix.UnixGroupInfo" /> by looking up the specifed
           group name in the local group database file.
-        </summary
-        >
+
+        </summary>
         <remarks>
           This constructor looks up the specified group name in the local
           group database.
@@ -160,8 +160,8 @@
         <exception cref="T:System.ArgumentException">
           The group name <paramref name="group" /> does not exist in the 
           local group database.
-        </exception
-        >
+
+        </exception>
         <altmember cref="M:Mono.Unix.Native.Syscall.getgrnam_r" />
       </Docs>
     </Member>
@@ -236,35 +236,35 @@
         <returns>
           A <see cref="T:Mono.Unix.UnixGroupInfo" /> array containing
           information about all the local groups.
-        </returns
-        >
+
+        </returns>
         <remarks></remarks>
         <exception cref="T:System.IO.IOException">
           <para
             >An I/O error occurred.
           [<see cref="F:Mono.Unix.Native.Errno.EIO" />]
-          </para
-          >
+
+          </para>
         </exception>
         <exception cref="T:Mono.Unix.UnixIOException">
           <para
             >Too many file descriptors in use by the process.
           [<see cref="F:Mono.Unix.Native.Errno.EMFILE" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >Too many files are currently open in the system.
           [<see cref="F:Mono.Unix.Native.Errno.ENFILE" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >Insufficient memory to allocate the group information
           structure.
           [<see cref="F:Mono.Unix.Native.Errno.ENOMEM" />]
-          </para
-          >
+
+          </para>
         </exception>
       </Docs>
     </Member>
@@ -291,16 +291,16 @@
         <returns>
           A <see cref="T:System.String" /> array containing the names of all
           group members.
-        </returns
-        >
+
+        </returns>
         <remarks>
           <block subset="none" type="note">
             There is no guarantee that the group member names returned are
             valid users on the system, i.e. that 
             <c>GetMemberNames().Select(m =&gt; new UnixUserInfo(m)).ToArray()</c>
             won't generate an exception.
-          </block
-          >
+
+          </block>
         </remarks>
         <altmember cref="F:Mono.Unix.Native.Group.gr_mem" />
       </Docs>
@@ -326,15 +326,15 @@
         <returns>
           A <see cref="T:Mono.Unix.UnixUserInfo" /> array containing
           information about all the group members.
-        </returns
-        >
+
+        </returns>
         <remarks>
           This is equivalent to creating a 
           <see cref="T:Mono.Unix.UnixUserInfo" /> instance over each name
           returned by <see cref="M:Mono.Unix.UnixGroupInfo.GetMemberNames" />,
           except that invalid user names will not be returned.
-        </remarks
-        >
+
+        </remarks>
         <altmember cref="F:Mono.Unix.Native.Group.gr_mem" />
       </Docs>
     </Member>
@@ -354,8 +354,8 @@
         <summary>Gets the group id.</summary>
         <value>
           A <see cref="T:System.Int64" /> containing the group's id.
-        </value
-        >
+
+        </value>
         <remarks></remarks>
         <altmember cref="F:Mono.Unix.Native.Group.gr_gid" />
       </Docs>
@@ -376,8 +376,8 @@
         <summary>Gets the group name.</summary>
         <value>
           A <see cref="T:System.String" /> containing the group name.
-        </value
-        >
+
+        </value>
         <remarks></remarks>
         <altmember cref="F:Mono.Unix.Native.Group.gr_name" />
       </Docs>
@@ -398,8 +398,8 @@
         <summary>Gets the group password.</summary>
         <value>
           A <see cref="T:System.String" /> containing the group password.
-        </value
-        >
+
+        </value>
         <remarks>
           The group password isn't actually used for anything...
         </remarks>
@@ -426,13 +426,13 @@
         <summary>
           Converts this <see cref="T:Mono.Unix.UnixGroupInfo" /> instance into
           an equivalent <see cref="T:Mono.Unix.Native.Group" /> instance.
-        </summary
-        >
+
+        </summary>
         <returns>
           A <see cref="T:Mono.Unix.Native.Group" /> instance containing the
           same information as this instance.
-        </returns
-        >
+
+        </returns>
         <remarks></remarks>
       </Docs>
     </Member>

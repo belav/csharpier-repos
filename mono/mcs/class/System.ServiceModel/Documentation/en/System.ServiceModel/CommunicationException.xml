@@ -22,8 +22,8 @@
       <list type="bullet">
         <item>
           <para>
-            <see cref="T:System.ServiceModel.FaultException`1" /> objects are thrown on the client when a SOAP fault that is specified in the operation contract is received in response to a two-way operation (that is, a method with an <see cref="T:System.ServiceModel.OperationContractAttribute" /> attribute with <see cref="P:System.ServiceModel.OperationContractAttribute.IsOneWay" /> set to false).  </para
-          >
+            <see cref="T:System.ServiceModel.FaultException`1" /> objects are thrown on the client when a SOAP fault that is specified in the operation contract is received in response to a two-way operation (that is, a method with an <see cref="T:System.ServiceModel.OperationContractAttribute" /> attribute with <see cref="P:System.ServiceModel.OperationContractAttribute.IsOneWay" /> set to false).
+          </para>
         </item>
       </list>
       <para>
@@ -31,8 +31,8 @@
       >
       <block subset="none" type="note">
         <para
-          >When implementing custom channels and binding elements, it is strongly recommended that your components throw only <see cref="T:System.TimeoutException" /> or <see cref="T:System.ServiceModel.CommunicationException" />-derived objects. In the case where your components throw a recoverable exception that is specific to the component, wrap that exception inside a <see cref="T:System.ServiceModel.CommunicationException" /> object. </para
-        >
+          >When implementing custom channels and binding elements, it is strongly recommended that your components throw only <see cref="T:System.TimeoutException" /> or <see cref="T:System.ServiceModel.CommunicationException" />-derived objects. In the case where your components throw a recoverable exception that is specific to the component, wrap that exception inside a <see cref="T:System.ServiceModel.CommunicationException" /> object.
+        </para>
       </block>
       <para
         >For more details about designing and using the indigo2 fault system, see <format type="text/html">
@@ -69,8 +69,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.CommunicationException" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.CommunicationException" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -120,8 +120,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.CommunicationException" /> class, using the specified serialization information and context objects. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.CommunicationException" /> class, using the specified serialization information and context objects.
+          </para>
         </summary>
         <param name="info">
           <attribution

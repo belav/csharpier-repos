@@ -30,8 +30,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >For information about file-based isolated storage, see the <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" /> class. </para
-      >
+        >For information about file-based isolated storage, see the <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" /> class.
+      </para>
       <block subset="none" type="note">
         <para
           >Isolated storage is not available for win8_appname_long apps. Instead, use the application data classes in the Windows.Storage namespaces included in the wrt API to store local data and files. For more information, see <see
@@ -66,8 +66,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.IO.IsolatedStorage.IsolatedStorage" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.IO.IsolatedStorage.IsolatedStorage" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -246,8 +246,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.PermissionSet" /> object that contains the set of permissions granted to code attempting to use isolated storage. </param
-        >
+          />The <see cref="T:System.Security.PermissionSet" /> object that contains the set of permissions granted to code attempting to use isolated storage.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IncreaseQuotaTo">
@@ -336,15 +336,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the <see cref="T:System.IO.IsolatedStorage.IsolatedStorageScope" /> values. </param
-        >
+          />A bitwise combination of the <see cref="T:System.IO.IsolatedStorage.IsolatedStorageScope" /> values.
+        </param>
         <param name="appEvidenceType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of <see cref="T:System.Security.Policy.Evidence" /> that you can choose from the list of <see cref="T:System.Security.Policy.Evidence" /> for the calling application. null lets the <see cref="T:System.IO.IsolatedStorage.IsolatedStorage" /> object choose the evidence. </param
-        >
+          />The type of <see cref="T:System.Security.Policy.Evidence" /> that you can choose from the list of <see cref="T:System.Security.Policy.Evidence" /> for the calling application. null lets the <see cref="T:System.IO.IsolatedStorage.IsolatedStorage" /> object choose the evidence.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="InitStore">
@@ -386,22 +386,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the <see cref="T:System.IO.IsolatedStorage.IsolatedStorageScope" /> values. </param
-        >
+          />A bitwise combination of the <see cref="T:System.IO.IsolatedStorage.IsolatedStorageScope" /> values.
+        </param>
         <param name="domainEvidenceType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of <see cref="T:System.Security.Policy.Evidence" /> that you can choose from the list of <see cref="T:System.Security.Policy.Evidence" /> present in the domain of the calling application. null lets the <see cref="T:System.IO.IsolatedStorage.IsolatedStorage" /> object choose the evidence. </param
-        >
+          />The type of <see cref="T:System.Security.Policy.Evidence" /> that you can choose from the list of <see cref="T:System.Security.Policy.Evidence" /> present in the domain of the calling application. null lets the <see cref="T:System.IO.IsolatedStorage.IsolatedStorage" /> object choose the evidence.
+        </param>
         <param name="assemblyEvidenceType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of <see cref="T:System.Security.Policy.Evidence" /> that you can choose from the list of <see cref="T:System.Security.Policy.Evidence" /> present in the assembly of the calling application. null lets the <see cref="T:System.IO.IsolatedStorage.IsolatedStorage" /> object choose the evidence. </param
-        >
+          />The type of <see cref="T:System.Security.Policy.Evidence" /> that you can choose from the list of <see cref="T:System.Security.Policy.Evidence" /> present in the assembly of the calling application. null lets the <see cref="T:System.IO.IsolatedStorage.IsolatedStorage" /> object choose the evidence.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="MaximumSize">

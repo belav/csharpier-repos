@@ -4,29 +4,29 @@
   <paragraph
     >Binary numeric promotion occurs for the operands of the predefined +, -, *, /, %, &amp;, |, ^, ==, !=, &gt;, &lt;, &gt;=, and &lt;= binary operators. Binary numeric promotion implicitly converts both operands to a common type which, in case of the non-relational operators, also becomes the result type of the operation. Binary numeric promotion consists of applying the following rules, in the order they appear here: <list>
       <list_item
-        > If either operand is of type <keyword>decimal</keyword>, the other operand is converted to type <keyword>decimal</keyword>, or a  compile-time error occurs if the other operand is of type <keyword>float</keyword> or <keyword>double</keyword>. </list_item
-      >
+        > If either operand is of type <keyword>decimal</keyword>, the other operand is converted to type <keyword>decimal</keyword>, or a  compile-time error occurs if the other operand is of type <keyword>float</keyword> or <keyword>double</keyword>.
+      </list_item>
       <list_item
-        > Otherwise, if either operand is of type <keyword>double</keyword>, the other operand is converted to type <keyword>double</keyword>. </list_item
-      >
+        > Otherwise, if either operand is of type <keyword>double</keyword>, the other operand is converted to type <keyword>double</keyword>.
+      </list_item>
       <list_item
-        > Otherwise, if either operand is of type <keyword>float</keyword>, the other operand is converted to type <keyword>float</keyword>. </list_item
-      >
+        > Otherwise, if either operand is of type <keyword>float</keyword>, the other operand is converted to type <keyword>float</keyword>.
+      </list_item>
       <list_item
-        > Otherwise, if either operand is of type <keyword>ulong</keyword>, the other operand is converted to type <keyword>ulong</keyword>, or a compile-time error occurs if the other operand is of type <keyword>sbyte</keyword>, <keyword>short</keyword>, <keyword>int</keyword>, or <keyword>long</keyword>. </list_item
-      >
+        > Otherwise, if either operand is of type <keyword>ulong</keyword>, the other operand is converted to type <keyword>ulong</keyword>, or a compile-time error occurs if the other operand is of type <keyword>sbyte</keyword>, <keyword>short</keyword>, <keyword>int</keyword>, or <keyword>long</keyword>.
+      </list_item>
       <list_item
-        > Otherwise, if either operand is of type <keyword>long</keyword>, the other operand is converted to type <keyword>long</keyword>. </list_item
-      >
+        > Otherwise, if either operand is of type <keyword>long</keyword>, the other operand is converted to type <keyword>long</keyword>.
+      </list_item>
       <list_item
-        > Otherwise, if either operand is of type <keyword>uint</keyword> and the other operand is of type <keyword>sbyte</keyword>, <keyword>short</keyword>, or <keyword>int</keyword>, both operands are converted to type <keyword>long</keyword>. </list_item
-      >
+        > Otherwise, if either operand is of type <keyword>uint</keyword> and the other operand is of type <keyword>sbyte</keyword>, <keyword>short</keyword>, or <keyword>int</keyword>, both operands are converted to type <keyword>long</keyword>.
+      </list_item>
       <list_item
-        > Otherwise, if either operand is of type <keyword>uint</keyword>, the other operand is converted to type <keyword>uint</keyword>. </list_item
-      >
+        > Otherwise, if either operand is of type <keyword>uint</keyword>, the other operand is converted to type <keyword>uint</keyword>.
+      </list_item>
       <list_item
-        > Otherwise, both operands are converted to type <keyword>int</keyword>. </list_item
-      >
+        > Otherwise, both operands are converted to type <keyword>int</keyword>.
+      </list_item>
     </list>
   </paragraph>
   <paragraph>

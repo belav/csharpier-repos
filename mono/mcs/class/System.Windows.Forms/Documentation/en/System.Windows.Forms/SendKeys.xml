@@ -402,11 +402,11 @@
       </block>
       <block subset="none" type="note">
         <para
-          >The <see cref="T:System.Windows.Forms.SendKeys" /> class has been updated for the .NET Framework 3.0 to enable its use in applications that run on Windows Vista. The enhanced security of Windows Vista (known as User Account Control or UAC) prevents the previous implementation from working as expected. </para
-        >
+          >The <see cref="T:System.Windows.Forms.SendKeys" /> class has been updated for the .NET Framework 3.0 to enable its use in applications that run on Windows Vista. The enhanced security of Windows Vista (known as User Account Control or UAC) prevents the previous implementation from working as expected.
+        </para>
         <para
-          >The <see cref="T:System.Windows.Forms.SendKeys" /> class is susceptible to timing issues, which some developers have had to work around. The updated implementation is still susceptible to timing issues, but is slightly faster and may require changes to the workarounds. The <see cref="T:System.Windows.Forms.SendKeys" /> class tries to use the previous implementation first, and if that fails, uses the new implementation. As a result, the <see cref="T:System.Windows.Forms.SendKeys" /> class may behave differently on different operating systems. Additionally, when the <see cref="T:System.Windows.Forms.SendKeys" /> class uses the new implementation, the <see cref="M:System.Windows.Forms.SendKeys.SendWait(System.String)" /> method will not wait for messages to be processed when they are sent to another process. </para
-        >
+          >The <see cref="T:System.Windows.Forms.SendKeys" /> class is susceptible to timing issues, which some developers have had to work around. The updated implementation is still susceptible to timing issues, but is slightly faster and may require changes to the workarounds. The <see cref="T:System.Windows.Forms.SendKeys" /> class tries to use the previous implementation first, and if that fails, uses the new implementation. As a result, the <see cref="T:System.Windows.Forms.SendKeys" /> class may behave differently on different operating systems. Additionally, when the <see cref="T:System.Windows.Forms.SendKeys" /> class uses the new implementation, the <see cref="M:System.Windows.Forms.SendKeys.SendWait(System.String)" /> method will not wait for messages to be processed when they are sent to another process.
+        </para>
         <para
           >If your application relies on consistent behavior regardless of the operating system, you can force the <see cref="T:System.Windows.Forms.SendKeys" /> class to use the new implementation by adding the following application setting to your app.config file.</para
         >
@@ -849,11 +849,11 @@
           </block>
           <block subset="none" type="note">
             <para
-              >The <see cref="T:System.Windows.Forms.SendKeys" /> class has been updated for the .NET Framework 3.0 to enable its use in applications that run on Windows Vista. The enhanced security of Windows Vista (known as User Account Control or UAC) prevents the previous implementation from working as expected. </para
-            >
+              >The <see cref="T:System.Windows.Forms.SendKeys" /> class has been updated for the .NET Framework 3.0 to enable its use in applications that run on Windows Vista. The enhanced security of Windows Vista (known as User Account Control or UAC) prevents the previous implementation from working as expected.
+            </para>
             <para
-              >The <see cref="T:System.Windows.Forms.SendKeys" /> class is susceptible to timing issues, which some developers have had to work around. The updated implementation is still susceptible to timing issues, but is slightly faster and may require changes to the workarounds. The <see cref="T:System.Windows.Forms.SendKeys" /> class tries to use the previous implementation first, and if that fails, uses the new implementation. As a result, the <see cref="T:System.Windows.Forms.SendKeys" /> class may behave differently on different operating systems. Additionally, when the <see cref="T:System.Windows.Forms.SendKeys" /> class uses the new implementation, the <see cref="M:System.Windows.Forms.SendKeys.SendWait(System.String)" /> method will not wait for messages to be processed when they are sent to another process. </para
-            >
+              >The <see cref="T:System.Windows.Forms.SendKeys" /> class is susceptible to timing issues, which some developers have had to work around. The updated implementation is still susceptible to timing issues, but is slightly faster and may require changes to the workarounds. The <see cref="T:System.Windows.Forms.SendKeys" /> class tries to use the previous implementation first, and if that fails, uses the new implementation. As a result, the <see cref="T:System.Windows.Forms.SendKeys" /> class may behave differently on different operating systems. Additionally, when the <see cref="T:System.Windows.Forms.SendKeys" /> class uses the new implementation, the <see cref="M:System.Windows.Forms.SendKeys.SendWait(System.String)" /> method will not wait for messages to be processed when they are sent to another process.
+            </para>
             <para
               >If your application relies on consistent behavior regardless of the operating system, you can force the <see cref="T:System.Windows.Forms.SendKeys" /> class to use the new implementation by adding the following application setting to your app.config file.</para
             >
@@ -874,8 +874,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string of keystrokes to send. </param
-        >
+          />The string of keystrokes to send.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -902,11 +902,11 @@
           </block>
           <block subset="none" type="note">
             <para
-              >The <see cref="T:System.Windows.Forms.SendKeys" /> class has been updated for the .NET Framework 3.0 to enable its use in applications that run on Windows Vista. The enhanced security of Windows Vista (known as User Account Control or UAC) prevents the previous implementation from working as expected. </para
-            >
+              >The <see cref="T:System.Windows.Forms.SendKeys" /> class has been updated for the .NET Framework 3.0 to enable its use in applications that run on Windows Vista. The enhanced security of Windows Vista (known as User Account Control or UAC) prevents the previous implementation from working as expected.
+            </para>
             <para
-              >The <see cref="T:System.Windows.Forms.SendKeys" /> class is susceptible to timing issues, which some developers have had to work around. The updated implementation is still susceptible to timing issues, but is slightly faster and may require changes to the workarounds. The <see cref="T:System.Windows.Forms.SendKeys" /> class tries to use the previous implementation first, and if that fails, uses the new implementation. As a result, the <see cref="T:System.Windows.Forms.SendKeys" /> class may behave differently on different operating systems. Additionally, when the <see cref="T:System.Windows.Forms.SendKeys" /> class uses the new implementation, the <see cref="M:System.Windows.Forms.SendKeys.SendWait(System.String)" /> method will not wait for messages to be processed when they are sent to another process. </para
-            >
+              >The <see cref="T:System.Windows.Forms.SendKeys" /> class is susceptible to timing issues, which some developers have had to work around. The updated implementation is still susceptible to timing issues, but is slightly faster and may require changes to the workarounds. The <see cref="T:System.Windows.Forms.SendKeys" /> class tries to use the previous implementation first, and if that fails, uses the new implementation. As a result, the <see cref="T:System.Windows.Forms.SendKeys" /> class may behave differently on different operating systems. Additionally, when the <see cref="T:System.Windows.Forms.SendKeys" /> class uses the new implementation, the <see cref="M:System.Windows.Forms.SendKeys.SendWait(System.String)" /> method will not wait for messages to be processed when they are sent to another process.
+            </para>
             <para
               >If your application relies on consistent behavior regardless of the operating system, you can force the <see cref="T:System.Windows.Forms.SendKeys" /> class to use the new implementation by adding the following application setting to your app.config file.</para
             >
@@ -927,8 +927,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string of keystrokes to send. </param
-        >
+          />The string of keystrokes to send.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

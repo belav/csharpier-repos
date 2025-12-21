@@ -39,8 +39,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.WindowsFormsSynchronizationContext" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.WindowsFormsSynchronizationContext" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -117,8 +117,8 @@
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format> and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
           <block subset="none" type="note">
             <para
               >Always call <see cref="M:System.Windows.Forms.WindowsFormsSynchronizationContext.Dispose" /> before you release your last reference to the <see cref="T:System.Windows.Forms.WindowsFormsSynchronizationContext" />. Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Windows.Forms.WindowsFormsSynchronizationContext" /> object's Finalize method.</para
@@ -128,8 +128,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the <see cref="T:System.Windows.Forms.WindowsFormsSynchronizationContext" />. </para
-          >
+            >Releases all resources used by the <see cref="T:System.Windows.Forms.WindowsFormsSynchronizationContext" />.
+          </para>
         </summary>
       </Docs>
     </Member>

@@ -70,8 +70,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The extender provider to add. </param
-        >
+          />The extender provider to add.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RemoveExtenderProvider">
@@ -109,8 +109,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The extender provider to remove. </param
-        >
+          />The extender provider to remove.
+        </param>
       </Docs>
     </Member>
   </Members>

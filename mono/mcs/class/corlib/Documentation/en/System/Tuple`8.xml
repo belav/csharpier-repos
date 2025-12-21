@@ -54,15 +54,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A tuple is a data structure that has a specific number and sequence of values. The <see cref="T:System.Tuple`8" /> class represents an n-tuple that has eight or more components. </para
-      >
+        >A tuple is a data structure that has a specific number and sequence of values. The <see cref="T:System.Tuple`8" /> class represents an n-tuple that has eight or more components.
+      </para>
       <para
-        >You can instantiate a <see cref="T:System.Tuple`8" /> object with exactly eight components by calling the static <see cref="M:System.Tuple.Create``8(``0,``1,``2,``3,``4,``5,``6,``7)" /> method. The following example creates an 8-tuple (octuple) that contains prime numbers that are less than 20. Note that it uses type inference to determine the type of each component. </para
-      >
+        >You can instantiate a <see cref="T:System.Tuple`8" /> object with exactly eight components by calling the static <see cref="M:System.Tuple.Create``8(``0,``1,``2,``3,``4,``5,``6,``7)" /> method. The following example creates an 8-tuple (octuple) that contains prime numbers that are less than 20. Note that it uses type inference to determine the type of each component.
+      </para>
       <para>code reference: System.Tuple.Create#17</para>
       <para
-        >You can also instantiate an n-tuple object with eight or more components by calling the <see cref="M:System.Tuple`8.#ctor(`0,`1,`2,`3,`4,`5,`6,`7)" /> constructor. The following example uses the <see cref="M:System.Tuple`8.#ctor(`0,`1,`2,`3,`4,`5,`6,`7)" /> constructor to create an 8-tuple that is equivalent to the tuple created in the previous example. </para
-      >
+        >You can also instantiate an n-tuple object with eight or more components by calling the <see cref="M:System.Tuple`8.#ctor(`0,`1,`2,`3,`4,`5,`6,`7)" /> constructor. The following example uses the <see cref="M:System.Tuple`8.#ctor(`0,`1,`2,`3,`4,`5,`6,`7)" /> constructor to create an 8-tuple that is equivalent to the tuple created in the previous example.
+      </para>
       <para>code reference: System.Tuple`8.Class#1</para>
       <block subset="none" type="note">
         <para
@@ -70,8 +70,8 @@
         >
       </block>
       <para
-        >To instantiate an n-tuple that has eight or more components with the <see cref="M:System.Tuple`8.#ctor(`0,`1,`2,`3,`4,`5,`6,`7)" /> constructor, you supply a generic Tuple object as the <paramref name="rest" /> parameter to define the eighth through nth components of the tuple. By nesting generic Tuple objects in this way, you can create a tuple that has no practical limitation on the number of its components. </para
-      >
+        >To instantiate an n-tuple that has eight or more components with the <see cref="M:System.Tuple`8.#ctor(`0,`1,`2,`3,`4,`5,`6,`7)" /> constructor, you supply a generic Tuple object as the <paramref name="rest" /> parameter to define the eighth through nth components of the tuple. By nesting generic Tuple objects in this way, you can create a tuple that has no practical limitation on the number of its components.
+      </para>
       <para
         >The following example creates a 17-tuple that contains population data for the city of Detroit, Michigan, for each national census from 1860 to 2000. The first component of the tuple is the city name. The second component is the start date of the data series, and the third component is the population at the start date. Each subsequent component provides the population at decade intervals. The 17-tuple is created by nesting a <see cref="T:System.Tuple`3" /> object inside a <see cref="T:System.Tuple`8" /> object. (That is, the <see cref="T:System.Tuple`3" /> object is supplied as the value of the <paramref name="rest" /> parameter in the <see cref="T:System.Tuple`8" /> class constructor.) This <see cref="T:System.Tuple`8" /> object is, in turn, nested in an outer <see cref="T:System.Tuple`8" /> object. (That is, the <see cref="T:System.Tuple`8" /> object is supplied as the value of the <paramref name="rest" /> parameter in the outer <see cref="T:System.Tuple`8" /> object's class constructor.)</para
       >
@@ -242,8 +242,8 @@
           <list type="bullet">
             <item>
               <para
-                >By calling the GetType method on the value that is returned by the <see cref="P:System.Tuple`8.Item1" /> property. </para
-              >
+                >By calling the GetType method on the value that is returned by the <see cref="P:System.Tuple`8.Item1" /> property.
+              </para>
             </item>
             <item>
               <para
@@ -280,8 +280,8 @@
           <list type="bullet">
             <item>
               <para
-                >By calling the GetType method on the value that is returned by the <see cref="P:System.Tuple`8.Item2" /> property. </para
-              >
+                >By calling the GetType method on the value that is returned by the <see cref="P:System.Tuple`8.Item2" /> property.
+              </para>
             </item>
             <item>
               <para
@@ -318,8 +318,8 @@
           <list type="bullet">
             <item>
               <para
-                >By calling the GetType method on the value that is returned by the <see cref="P:System.Tuple`8.Item3" /> property. </para
-              >
+                >By calling the GetType method on the value that is returned by the <see cref="P:System.Tuple`8.Item3" /> property.
+              </para>
             </item>
             <item>
               <para
@@ -356,8 +356,8 @@
           <list type="bullet">
             <item>
               <para
-                >By calling the GetType method on the value that is returned by the <see cref="P:System.Tuple`8.Item4" /> property. </para
-              >
+                >By calling the GetType method on the value that is returned by the <see cref="P:System.Tuple`8.Item4" /> property.
+              </para>
             </item>
             <item>
               <para
@@ -394,8 +394,8 @@
           <list type="bullet">
             <item>
               <para
-                >By calling the GetType method on the value that is returned by the <see cref="P:System.Tuple`8.Item5" /> property. </para
-              >
+                >By calling the GetType method on the value that is returned by the <see cref="P:System.Tuple`8.Item5" /> property.
+              </para>
             </item>
             <item>
               <para
@@ -432,8 +432,8 @@
           <list type="bullet">
             <item>
               <para
-                >By calling the GetType method on the value that is returned by the <see cref="P:System.Tuple`8.Item6" /> property. </para
-              >
+                >By calling the GetType method on the value that is returned by the <see cref="P:System.Tuple`8.Item6" /> property.
+              </para>
             </item>
             <item>
               <para
@@ -470,8 +470,8 @@
           <list type="bullet">
             <item>
               <para
-                >By calling the GetType method on the value that is returned by the <see cref="P:System.Tuple`8.Item7" /> property. </para
-              >
+                >By calling the GetType method on the value that is returned by the <see cref="P:System.Tuple`8.Item7" /> property.
+              </para>
             </item>
             <item>
               <para
@@ -649,8 +649,8 @@
             >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Tuple`8" /> instance is cast to an <see cref="T:System.Collections.IStructuralEquatable" /> interface.</para
           >
           <para
-            >The <see cref="M:System.Collections.IEqualityComparer.Equals(System.Object,System.Object)" /> implementation is called only if <paramref name="other" /> is not null, and if it can be successfully cast (in C#) or converted (in Visual Basic) to a <see cref="T:System.Tuple`8" /> object that has the same total number of components (including those in nested Tuple objects) of the same types as the current instance. The <see cref="M:System.Tuple`8.System#Collections#IStructuralEquatable#Equals(System.Object,System.Collections.IEqualityComparer)" /> method first passes the <see cref="P:System.Tuple`8.Item1" /> values of the <see cref="T:System.Tuple`8" /> objects to be compared to the <see cref="M:System.Collections.IEqualityComparer.Equals(System.Object,System.Object)" /> implementation. If this method call returns true, the method is called again and passed the <see cref="P:System.Tuple`8.Item2" /> values of the two <see cref="T:System.Tuple`8" /> objects. This continues until the method call returns false when it compares a specific pair of values, or the two <see cref="P:System.Tuple`8.Rest" /> values are passed to the method. </para
-          >
+            >The <see cref="M:System.Collections.IEqualityComparer.Equals(System.Object,System.Object)" /> implementation is called only if <paramref name="other" /> is not null, and if it can be successfully cast (in C#) or converted (in Visual Basic) to a <see cref="T:System.Tuple`8" /> object that has the same total number of components (including those in nested Tuple objects) of the same types as the current instance. The <see cref="M:System.Tuple`8.System#Collections#IStructuralEquatable#Equals(System.Object,System.Collections.IEqualityComparer)" /> method first passes the <see cref="P:System.Tuple`8.Item1" /> values of the <see cref="T:System.Tuple`8" /> objects to be compared to the <see cref="M:System.Collections.IEqualityComparer.Equals(System.Object,System.Object)" /> implementation. If this method call returns true, the method is called again and passed the <see cref="P:System.Tuple`8.Item2" /> values of the two <see cref="T:System.Tuple`8" /> objects. This continues until the method call returns false when it compares a specific pair of values, or the two <see cref="P:System.Tuple`8.Rest" /> values are passed to the method.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

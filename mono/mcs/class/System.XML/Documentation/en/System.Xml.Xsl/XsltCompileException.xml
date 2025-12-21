@@ -119,15 +119,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The SerializationInfo object containing all the properties of an XsltCompileException. </param
-        >
+          />The SerializationInfo object containing all the properties of an XsltCompileException.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The StreamingContext object containing the context information. </param
-        >
+          />The StreamingContext object containing the context information.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -169,8 +169,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The exception that is the cause of the current exception, or null if no inner exception is specified. </param
-        >
+          />The exception that is the cause of the current exception, or null if no inner exception is specified.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -206,29 +206,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Exception" /> that threw the XsltCompileException. </param
-        >
+          />The <see cref="T:System.Exception" /> that threw the XsltCompileException.
+        </param>
         <param name="sourceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The location path of the style sheet. </param
-        >
+          />The location path of the style sheet.
+        </param>
         <param name="lineNumber">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The line number indicating where the error occurred in the style sheet. </param
-        >
+          />The line number indicating where the error occurred in the style sheet.
+        </param>
         <param name="linePosition">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The line position indicating where the error occurred in the style sheet. </param
-        >
+          />The line position indicating where the error occurred in the style sheet.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetObjectData">
@@ -266,15 +266,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The SerializationInfo object. </param
-        >
+          />The SerializationInfo object.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The StreamingContext object. </param
-        >
+          />The StreamingContext object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Message">

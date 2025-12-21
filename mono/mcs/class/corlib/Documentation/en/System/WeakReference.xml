@@ -79,8 +79,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to track or null. </param
-        >
+          />The object to track or null.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -117,15 +117,15 @@
           >
         </summary>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />An object to track. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />An object to track.
+        </param>
         <param name="trackResurrection">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Indicates when to stop tracking the object. If true, the object is tracked after finalization; if false, the object is only tracked until finalization. </param
-        >
+          />Indicates when to stop tracking the object. If true, the object is tracked after finalization; if false, the object is only tracked until finalization.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -166,15 +166,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that holds all the data needed to serialize or deserialize the current <see cref="T:System.WeakReference" /> object. </param
-        >
+          />An object that holds all the data needed to serialize or deserialize the current <see cref="T:System.WeakReference" /> object.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />(Reserved) Describes the source and destination of the serialized stream specified by <paramref name="info" />. </param
-        >
+          />(Reserved) Describes the source and destination of the serialized stream specified by <paramref name="info" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Finalize">
@@ -246,15 +246,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that holds all the data needed to serialize or deserialize the current <see cref="T:System.WeakReference" /> object. </param
-        >
+          />An object that holds all the data needed to serialize or deserialize the current <see cref="T:System.WeakReference" /> object.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />(Reserved) The location where serialized data is stored and retrieved. </param
-        >
+          />(Reserved) The location where serialized data is stored and retrieved.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsAlive">

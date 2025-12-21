@@ -88,8 +88,8 @@
             must be part of the current argument, e.g. <c>-opt:foo</c> will 
             pass <c>"foo"</c> as the value to <c>-opt</c>, but <c>-opt foo</c> 
             will pass <see langword="null" /> as the value to <c>-opt</c>.
-            </para
-          >
+
+          </para>
         </summary>
       </Docs>
     </Member>

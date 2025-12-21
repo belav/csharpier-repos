@@ -57,8 +57,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new default instance of the <see cref="T:System.Net.Mime.ContentType" /> class. </para
-          >
+            >Initializes a new default instance of the <see cref="T:System.Net.Mime.ContentType" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -90,8 +90,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.Mime.ContentType" /> class using the specified string. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.Mime.ContentType" /> class using the specified string.
+          </para>
         </summary>
         <param name="contentType">
           <attribution
@@ -300,8 +300,8 @@
             >.</para
           >
           <para
-            >When specifying content for a <see cref="T:System.Net.Mail.Attachment" /> as a <see cref="T:System.IO.Stream" /> or <see cref="T:System.String" />, you can use <see cref="P:System.Net.Mime.ContentType.Name" /> to set the name of the file that stores the content on the recipient's system. </para
-          >
+            >When specifying content for a <see cref="T:System.Net.Mail.Attachment" /> as a <see cref="T:System.IO.Stream" /> or <see cref="T:System.String" />, you can use <see cref="P:System.Net.Mime.ContentType.Name" /> to set the name of the file that stores the content on the recipient's system.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -332,8 +332,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can set the parameters by specifying the entire Content-Header value when constructing a <see cref="T:System.Net.Mime.ContentType" /> object or you can add parameters to the <see cref="T:System.Collections.Specialized.StringDictionary" /> returned by the <see cref="P:System.Net.Mime.ContentType.Parameters" /> property. </para
-          >
+            >You can set the parameters by specifying the entire Content-Header value when constructing a <see cref="T:System.Net.Mime.ContentType" /> object or you can add parameters to the <see cref="T:System.Collections.Specialized.StringDictionary" /> returned by the <see cref="P:System.Net.Mime.ContentType.Parameters" /> property.
+          </para>
           <para>When adding a parameter entry to the dictionary, the name of the parameter is the entry's key and the value of the parameter is the entry's value.</para>
           <para
             >A grammar that details the syntax of the Content-Type header is described in RFC 2045 Section 5.1. RFC 2046 provides detailed information on MIME media types and their associated parameters. These RFCs are available at <see

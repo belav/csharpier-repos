@@ -140,8 +140,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ComponentModel.Design.MenuCommand" /> to add. </param
-        >
+          />The <see cref="T:System.ComponentModel.Design.MenuCommand" /> to add.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddVerb">
@@ -181,8 +181,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ComponentModel.Design.DesignerVerb" /> to add. </param
-        >
+          />The <see cref="T:System.ComponentModel.Design.DesignerVerb" /> to add.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="FindCommand">
@@ -223,8 +223,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ComponentModel.Design.CommandID" /> to search for. </param
-        >
+          />The <see cref="T:System.ComponentModel.Design.CommandID" /> to search for.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GlobalInvoke">
@@ -268,8 +268,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ComponentModel.Design.CommandID" /> of the command to search for and execute. </param
-        >
+          />The <see cref="T:System.ComponentModel.Design.CommandID" /> of the command to search for and execute.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RemoveCommand">
@@ -309,8 +309,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ComponentModel.Design.MenuCommand" /> to remove. </param
-        >
+          />The <see cref="T:System.ComponentModel.Design.MenuCommand" /> to remove.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RemoveVerb">
@@ -350,8 +350,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ComponentModel.Design.DesignerVerb" /> to remove. </param
-        >
+          />The <see cref="T:System.ComponentModel.Design.DesignerVerb" /> to remove.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ShowContextMenu">
@@ -381,8 +381,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.ComponentModel.Design.IMenuCommandService.ShowContextMenu(System.ComponentModel.Design.CommandID,System.Int32,System.Int32)" /> method can display any of the following Visual Studio shortcut menus containing menu commands at a specified point: </para
-          >
+            >The <see cref="M:System.ComponentModel.Design.IMenuCommandService.ShowContextMenu(System.ComponentModel.Design.CommandID,System.Int32,System.Int32)" /> method can display any of the following Visual Studio shortcut menus containing menu commands at a specified point:
+          </para>
           <list type="table">
             <listheader>
               <item>
@@ -446,22 +446,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ComponentModel.Design.CommandID" /> for the shortcut menu to show. </param
-        >
+          />The <see cref="T:System.ComponentModel.Design.CommandID" /> for the shortcut menu to show.
+        </param>
         <param name="x">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The x-coordinate at which to display the menu, in screen coordinates. </param
-        >
+          />The x-coordinate at which to display the menu, in screen coordinates.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The y-coordinate at which to display the menu, in screen coordinates. </param
-        >
+          />The y-coordinate at which to display the menu, in screen coordinates.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Verbs">

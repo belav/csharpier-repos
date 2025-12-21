@@ -87,8 +87,8 @@ namespace N3
   <paragraph
     >When more than one namespace imported by <non_terminal where="16.3.2"
       >using-namespace-directive</non_terminal
-    >s in the same compilation unit or namespace body contain types by the same name, references to that name are considered ambiguous. </paragraph
-  >
+    >s in the same compilation unit or namespace body contain types by the same name, references to that name are considered ambiguous.
+  </paragraph>
   <paragraph>
     <example
       >[Example: In the example <code_example>
@@ -130,8 +130,8 @@ namespace N3
     >Like a <non_terminal where="16.3.1">using-alias-directive</non_terminal>, a <non_terminal
       where="16.3.2"
       >using-namespace-directive</non_terminal
-    > does not contribute any new members to the underlying declaration space of the compilation unit or namespace, but, rather, affects only the compilation unit or namespace body in which it appears. </paragraph
-  >
+    > does not contribute any new members to the underlying declaration space of the compilation unit or namespace, but, rather, affects only the compilation unit or namespace body in which it appears.
+  </paragraph>
   <paragraph
     >The <non_terminal where="10.8">namespace-name</non_terminal> referenced by a <non_terminal
       where="16.3.2"
@@ -142,6 +142,6 @@ namespace N3
       >using-alias-directive</non_terminal
     >. Thus, <non_terminal where="16.3.2"
       >using-namespace-directive</non_terminal
-    >s in the same compilation unit or namespace body do not affect each other and can be written in any order. </paragraph
-  >
+    >s in the same compilation unit or namespace body do not affect each other and can be written in any order.
+  </paragraph>
 </clause>

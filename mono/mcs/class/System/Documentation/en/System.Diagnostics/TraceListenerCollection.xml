@@ -86,8 +86,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Diagnostics.TraceListener" /> to add to the list. </param
-        >
+          />A <see cref="T:System.Diagnostics.TraceListener" /> to add to the list.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddRange">
@@ -124,8 +124,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Diagnostics.TraceListener" /> objects to add to the list. </param
-        >
+          />An array of <see cref="T:System.Diagnostics.TraceListener" /> objects to add to the list.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddRange">
@@ -162,8 +162,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Another <see cref="T:System.Diagnostics.TraceListenerCollection" /> whose contents are added to the list. </param
-        >
+          />Another <see cref="T:System.Diagnostics.TraceListenerCollection" /> whose contents are added to the list.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Clear">
@@ -231,8 +231,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Diagnostics.TraceListener" /> to find in the list. </param
-        >
+          />A <see cref="T:System.Diagnostics.TraceListener" /> to find in the list.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CopyTo">
@@ -270,15 +270,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type <see cref="T:System.Array" /> to copy the elements into. </param
-        >
+          />An array of type <see cref="T:System.Array" /> to copy the elements into.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting index number in the current list to copy from. </param
-        >
+          />The starting index number in the current list to copy from.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Count">
@@ -369,8 +369,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Diagnostics.TraceListener" /> to find in the list. </param
-        >
+          />A <see cref="T:System.Diagnostics.TraceListener" /> to find in the list.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Insert">
@@ -410,15 +410,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position in the list to insert the new <see cref="T:System.Diagnostics.TraceListener" />. </param
-        >
+          />The position in the list to insert the new <see cref="T:System.Diagnostics.TraceListener" />.
+        </param>
         <param name="listener">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Diagnostics.TraceListener" /> to insert in the list. </param
-        >
+          />A <see cref="T:System.Diagnostics.TraceListener" /> to insert in the list.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Item">
@@ -511,8 +511,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Diagnostics.TraceListener" /> to remove from the list. </param
-        >
+          />A <see cref="T:System.Diagnostics.TraceListener" /> to remove from the list.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Remove">
@@ -551,8 +551,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the <see cref="T:System.Diagnostics.TraceListener" /> to remove from the list. </param
-        >
+          />The name of the <see cref="T:System.Diagnostics.TraceListener" /> to remove from the list.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RemoveAt">
@@ -591,8 +591,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index of the <see cref="T:System.Diagnostics.TraceListener" /> to remove from the list. </param
-        >
+          />The zero-based index of the <see cref="T:System.Diagnostics.TraceListener" /> to remove from the list.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.ICollection.CopyTo">
@@ -624,8 +624,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies a section of the current <see cref="T:System.Diagnostics.TraceListenerCollection" /> to the specified array of <see cref="T:System.Diagnostics.TraceListener" /> objects. </para
-          >
+            >Copies a section of the current <see cref="T:System.Diagnostics.TraceListenerCollection" /> to the specified array of <see cref="T:System.Diagnostics.TraceListener" /> objects.
+          </para>
         </summary>
         <param name="array">
           <attribution

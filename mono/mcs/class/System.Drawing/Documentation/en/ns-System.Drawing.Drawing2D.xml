@@ -10,8 +10,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The following table lists some of the important classes and enumerations in the<see cref="N:System.Drawing.Drawing2D" /> namespace, grouped into categories. </para
-      >
+        >The following table lists some of the important classes and enumerations in the<see cref="N:System.Drawing.Drawing2D" /> namespace, grouped into categories.
+      </para>
       <list type="table">
         <listheader>
           <item>

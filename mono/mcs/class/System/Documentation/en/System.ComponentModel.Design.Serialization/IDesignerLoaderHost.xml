@@ -88,22 +88,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The fully qualified name of the base class of the document that this designer is designing. </param
-        >
+          />The fully qualified name of the base class of the document that this designer is designing.
+        </param>
         <param name="successful">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if the designer is successfully loaded; otherwise, false. </param
-        >
+          />true if the designer is successfully loaded; otherwise, false.
+        </param>
         <param name="errorCollection">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A collection containing the errors encountered during load, if any. If no errors were encountered, pass either an empty collection or null. </param
-        >
+          />A collection containing the errors encountered during load, if any. If no errors were encountered, pass either an empty collection or null.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Reload">

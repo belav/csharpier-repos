@@ -26,11 +26,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="Overload:System.Threading.Overlapped.Pack" /> and <see cref="Overload:System.Threading.Overlapped.UnsafePack" /> methods transfer information from an <see cref="T:System.Threading.Overlapped" /> object to a <see cref="T:System.Threading.NativeOverlapped" /> structure that can be passed to Win32 API functions for asynchronous file I/O. The <see cref="M:System.Threading.Overlapped.Unpack(System.Threading.NativeOverlapped*)" /> method transfers information from a <see cref="T:System.Threading.NativeOverlapped" /> structure to an instance of the <see cref="T:System.Threading.Overlapped" /> class. </para
-      >
+        >The <see cref="Overload:System.Threading.Overlapped.Pack" /> and <see cref="Overload:System.Threading.Overlapped.UnsafePack" /> methods transfer information from an <see cref="T:System.Threading.Overlapped" /> object to a <see cref="T:System.Threading.NativeOverlapped" /> structure that can be passed to Win32 API functions for asynchronous file I/O. The <see cref="M:System.Threading.Overlapped.Unpack(System.Threading.NativeOverlapped*)" /> method transfers information from a <see cref="T:System.Threading.NativeOverlapped" /> structure to an instance of the <see cref="T:System.Threading.Overlapped" /> class.
+      </para>
       <para
-        >Changes to the properties of an <see cref="T:System.Threading.Overlapped" /> object affect its associated <see cref="T:System.Threading.NativeOverlapped" /> structure, and vice versa. </para
-      >
+        >Changes to the properties of an <see cref="T:System.Threading.Overlapped" /> object affect its associated <see cref="T:System.Threading.NativeOverlapped" /> structure, and vice versa.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -112,29 +112,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The low word of the file position at which to start the transfer. </param
-        >
+          />The low word of the file position at which to start the transfer.
+        </param>
         <param name="offsetHi">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The high word of the file position at which to start the transfer. </param
-        >
+          />The high word of the file position at which to start the transfer.
+        </param>
         <param name="hEvent">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The handle to an event that is signaled when the I/O operation is complete. </param
-        >
+          />The handle to an event that is signaled when the I/O operation is complete.
+        </param>
         <param name="ar">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that implements the <see cref="T:System.IAsyncResult" /> interface and provides status information on the I/O operation. </param
-        >
+          />An object that implements the <see cref="T:System.IAsyncResult" /> interface and provides status information on the I/O operation.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -179,29 +179,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The low word of the file position at which to start the transfer. </param
-        >
+          />The low word of the file position at which to start the transfer.
+        </param>
         <param name="offsetHi">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The high word of the file position at which to start the transfer. </param
-        >
+          />The high word of the file position at which to start the transfer.
+        </param>
         <param name="hEvent">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The handle to an event that is signaled when the I/O operation is complete. </param
-        >
+          />The handle to an event that is signaled when the I/O operation is complete.
+        </param>
         <param name="ar">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that implements the <see cref="T:System.IAsyncResult" /> interface and provides status information on the I/O operation. </param
-        >
+          />An object that implements the <see cref="T:System.IAsyncResult" /> interface and provides status information on the I/O operation.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AsyncResult">
@@ -416,8 +416,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The unmanaged pointer returned by this method can be passed to the operating system in overlapped I/O operations. The <see cref="T:System.Threading.NativeOverlapped" /> structure is fixed in physical memory until <see cref="M:System.Threading.Overlapped.Unpack(System.Threading.NativeOverlapped*)" /> is called. </para
-          >
+            >The unmanaged pointer returned by this method can be passed to the operating system in overlapped I/O operations. The <see cref="T:System.Threading.NativeOverlapped" /> structure is fixed in physical memory until <see cref="M:System.Threading.Overlapped.Unpack(System.Threading.NativeOverlapped*)" /> is called.
+          </para>
           <block subset="none" type="note">
             <para
               >The caller is responsible for pinning the buffer. If the application domain is unloaded, however, the handle to the pinned buffer is destroyed and the buffer is released, leaving the I/O operation to write to the freed address. For this reason, it is better to use the <see cref="M:System.Threading.Overlapped.Pack(System.Threading.IOCompletionCallback,System.Object)" /> method overload, in which the runtime pins the buffer.</para
@@ -433,8 +433,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An unmanaged pointer to a <see cref="T:System.Threading.NativeOverlapped" /> structure. </para
-          >
+            >An unmanaged pointer to a <see cref="T:System.Threading.NativeOverlapped" /> structure.
+          </para>
         </returns>
         <param name="iocb">
           <attribution
@@ -482,8 +482,8 @@
             >The unmanaged pointer returned by this method can be passed to the operating system in overlapped I/O operations. The <see cref="T:System.Threading.NativeOverlapped" /> structure is fixed in physical memory until <see cref="M:System.Threading.Overlapped.Unpack(System.Threading.NativeOverlapped*)" /> is called.</para
           >
           <para
-            >The buffer or buffers specified in <paramref name="userData" /> must be the same as those passed to the unmanaged operating system function that performs the asynchronous I/O. </para
-          >
+            >The buffer or buffers specified in <paramref name="userData" /> must be the same as those passed to the unmanaged operating system function that performs the asynchronous I/O.
+          </para>
           <block subset="none" type="note">
             <para
               >The runtime pins the buffer or buffers specified in <paramref name="userData" /> for the duration of the I/O operation. If the application domain is unloaded, the runtime keeps the memory pinned until the I/O operation completes.</para
@@ -499,8 +499,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An unmanaged pointer to a <see cref="T:System.Threading.NativeOverlapped" /> structure. </para
-          >
+            >An unmanaged pointer to a <see cref="T:System.Threading.NativeOverlapped" /> structure.
+          </para>
         </returns>
         <param name="iocb">
           <attribution
@@ -554,8 +554,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Unpacks the specified unmanaged <see cref="T:System.Threading.NativeOverlapped" /> structure into a managed <see cref="T:System.Threading.Overlapped" /> object. </para
-          >
+            >Unpacks the specified unmanaged <see cref="T:System.Threading.NativeOverlapped" /> structure into a managed <see cref="T:System.Threading.Overlapped" /> object.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -605,11 +605,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The unmanaged pointer returned by this method can be passed to the operating system in overlapped I/O operations. The <see cref="T:System.Threading.NativeOverlapped" /> structure is fixed in physical memory until <see cref="M:System.Threading.Overlapped.Unpack(System.Threading.NativeOverlapped*)" /> is called. </para
-          >
+            >The unmanaged pointer returned by this method can be passed to the operating system in overlapped I/O operations. The <see cref="T:System.Threading.NativeOverlapped" /> structure is fixed in physical memory until <see cref="M:System.Threading.Overlapped.Unpack(System.Threading.NativeOverlapped*)" /> is called.
+          </para>
           <para
-            >The caller is responsible for pinning the buffer. If the application domain is unloaded, however, the handle to the pinned buffer is destroyed and the buffer is released, leaving the I/O operation to write to the freed address. For this reason, it is better to use the <see cref="M:System.Threading.Overlapped.UnsafePack(System.Threading.IOCompletionCallback,System.Object)" /> method overload, in which the runtime pins the buffer. </para
-          >
+            >The caller is responsible for pinning the buffer. If the application domain is unloaded, however, the handle to the pinned buffer is destroyed and the buffer is released, leaving the I/O operation to write to the freed address. For this reason, it is better to use the <see cref="M:System.Threading.Overlapped.UnsafePack(System.Threading.IOCompletionCallback,System.Object)" /> method overload, in which the runtime pins the buffer.
+          </para>
           <block subset="none" type="note">
             <para
               >Using the <see cref="M:System.Threading.Overlapped.UnsafePack(System.Threading.IOCompletionCallback,System.Object)" /> method could inadvertently open up a security hole. Code access security bases its permission checks on the permissions of all the callers on the stack. The <see cref="M:System.Threading.Overlapped.UnsafePack(System.Threading.IOCompletionCallback,System.Object)" /> method does not propagate the calling stack. Malicious code might be able to exploit this to avoid permission checks.</para
@@ -625,8 +625,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An unmanaged pointer to a <see cref="T:System.Threading.NativeOverlapped" /> structure. </para
-          >
+            >An unmanaged pointer to a <see cref="T:System.Threading.NativeOverlapped" /> structure.
+          </para>
         </returns>
         <param name="iocb">
           <attribution
@@ -674,8 +674,8 @@
             >The unmanaged pointer returned by this method can be passed to the operating system in overlapped I/O operations. The <see cref="T:System.Threading.NativeOverlapped" /> structure is fixed in physical memory until <see cref="M:System.Threading.Overlapped.Unpack(System.Threading.NativeOverlapped*)" /> is called.</para
           >
           <para
-            >The buffer or buffers specified in <paramref name="userData" /> must be the same as those passed to the unmanaged operating system function that performs the asynchronous I/O. </para
-          >
+            >The buffer or buffers specified in <paramref name="userData" /> must be the same as those passed to the unmanaged operating system function that performs the asynchronous I/O.
+          </para>
           <para
             >The runtime pins the buffer or buffers specified in <paramref name="userData" /> for the duration of the I/O operation. If the application domain is unloaded, the runtime keeps the memory pinned until the I/O operation completes.</para
           >
@@ -694,8 +694,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An unmanaged pointer to a <see cref="T:System.Threading.NativeOverlapped" /> structure. </para
-          >
+            >An unmanaged pointer to a <see cref="T:System.Threading.NativeOverlapped" /> structure.
+          </para>
         </returns>
         <param name="iocb">
           <attribution

@@ -26,8 +26,8 @@
         >The <see cref="T:System.Net.Http.HttpClient" /> also acts as a base class for more specific HTTP clients. An example would be a FacebookHttpClient providing additional methods specific to a Facebook web service (a GetFriends method, for instance).</para
       >
       <para
-        >By default, <see cref="T:System.Net.HttpWebRequest" /> will be used to send requests to the server. This behavior can be modified by specifying a different channel in one of the constructor overloads taking a <see cref="T:System.Net.Http.HttpMessageHandler" /> instance as parameter. If features like authentication or caching are required, <see cref="T:System.Net.Http.WebRequestHandler" /> can be used to configure settings and the instance can be passed to the constructor. The returned handler can be passed to one of the constructor overloads taking a <see cref="T:System.Net.Http.HttpMessageHandler" /> parameter. </para
-      >
+        >By default, <see cref="T:System.Net.HttpWebRequest" /> will be used to send requests to the server. This behavior can be modified by specifying a different channel in one of the constructor overloads taking a <see cref="T:System.Net.Http.HttpMessageHandler" /> instance as parameter. If features like authentication or caching are required, <see cref="T:System.Net.Http.WebRequestHandler" /> can be used to configure settings and the instance can be passed to the constructor. The returned handler can be passed to one of the constructor overloads taking a <see cref="T:System.Net.Http.HttpMessageHandler" /> parameter.
+      </para>
       <para
         >If an app using <see cref="T:System.Net.Http.HttpClient" /> and related classes in the  <see cref="N:System.Net.Http" /> namespace intends to download large amounts of data (50 megabytes or more), then the app should stream those downloads and not use the default buffering. If the default buffering is used the client memory usage will get very large, potentially resulting in substantially reduced performance.</para
       >
@@ -141,8 +141,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The HTTP handler stack to use for sending requests. </param
-        >
+          />The HTTP handler stack to use for sending requests.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -945,8 +945,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This operation will not block. The returned <see cref="T:System.Threading.Tasks.Task`1" /> object will complete after the whole response body is read. </para
-          >
+            >This operation will not block. The returned <see cref="T:System.Threading.Tasks.Task`1" /> object will complete after the whole response body is read.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

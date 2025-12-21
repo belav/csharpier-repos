@@ -103,15 +103,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeTypeReference" /> that indicates the destination type of the cast. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeTypeReference" /> that indicates the destination type of the cast.
+        </param>
         <param name="expression">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.CodeDom.CodeExpression" /> to cast. </param
-        >
+          />The <see cref="T:System.CodeDom.CodeExpression" /> to cast.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -147,15 +147,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the destination type of the cast. </param
-        >
+          />The name of the destination type of the cast.
+        </param>
         <param name="expression">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.CodeDom.CodeExpression" /> to cast. </param
-        >
+          />The <see cref="T:System.CodeDom.CodeExpression" /> to cast.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -191,15 +191,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The destination data type of the cast. </param
-        >
+          />The destination data type of the cast.
+        </param>
         <param name="expression">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.CodeDom.CodeExpression" /> to cast. </param
-        >
+          />The <see cref="T:System.CodeDom.CodeExpression" /> to cast.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Expression">

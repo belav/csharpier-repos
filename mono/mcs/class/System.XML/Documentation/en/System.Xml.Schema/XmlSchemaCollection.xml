@@ -116,12 +116,8 @@
           >
         </summary>
         <param name="nametable">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The XmlNameTable to use. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The XmlNameTable to use.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Add">
@@ -180,8 +176,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XmlSchema to add to the collection. </param
-        >
+          />The XmlSchema to add to the collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Add">
@@ -235,8 +231,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XmlSchemaCollection you want to add to this collection. </param
-        >
+          />The XmlSchemaCollection you want to add to this collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Add">
@@ -294,23 +290,23 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Xml.Schema.XmlSchema" /> added to the schema collection; null if the schema being added is an XDR schema or if there are compilation errors in the schema. </para
-          >
+            >The <see cref="T:System.Xml.Schema.XmlSchema" /> added to the schema collection; null if the schema being added is an XDR schema or if there are compilation errors in the schema.
+          </para>
         </returns>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI associated with the schema. For XML Schemas, this will typically be the targetNamespace. </param
-        >
+          />The namespace URI associated with the schema. For XML Schemas, this will typically be the targetNamespace.
+        </param>
         <param name="uri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URL that specifies the schema to load. </param
-        >
+          />The URL that specifies the schema to load.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Add">
@@ -379,12 +375,12 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI associated with the schema. For XML Schemas, this will typically be the targetNamespace. </param
-        >
+          />The namespace URI associated with the schema. For XML Schemas, this will typically be the targetNamespace.
+        </param>
         <param name="reader">
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <see cref="T:System.Xml.XmlReader" /> containing the schema to add. </param
-        >
+          <see cref="T:System.Xml.XmlReader" /> containing the schema to add.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Add">
@@ -435,15 +431,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XmlSchema to add to the collection. </param
-        >
+          />The XmlSchema to add to the collection.
+        </param>
         <param name="resolver">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlResolver" /> used to resolve namespaces referenced in include and import elements. If this is null, external references are not resolved. </param
-        >
+          />The <see cref="T:System.Xml.XmlResolver" /> used to resolve namespaces referenced in include and import elements. If this is null, external references are not resolved.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Add">
@@ -502,19 +498,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI associated with the schema. For XML Schemas, this will typically be the targetNamespace. </param
-        >
+          />The namespace URI associated with the schema. For XML Schemas, this will typically be the targetNamespace.
+        </param>
         <param name="reader">
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <see cref="T:System.Xml.XmlReader" /> containing the schema to add. </param
-        >
+          <see cref="T:System.Xml.XmlReader" /> containing the schema to add.
+        </param>
         <param name="resolver">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlResolver" /> used to resolve namespaces referenced in include and import elements or x-schema attribute (XDR schemas). If this is null, external references are not resolved. </param
-        >
+          />The <see cref="T:System.Xml.XmlResolver" /> used to resolve namespaces referenced in include and import elements or x-schema attribute (XDR schemas). If this is null, external references are not resolved.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Contains">
@@ -557,8 +553,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI associated with the schema. For XML Schemas, this will typically be the target namespace. </param
-        >
+          />The namespace URI associated with the schema. For XML Schemas, this will typically be the target namespace.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Contains">
@@ -602,12 +598,8 @@
           <para>true if there is a schema in the collection with the same targetNamespace; otherwise, false.</para>
         </returns>
         <param name="schema">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The XmlSchema object. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The XmlSchema object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CopyTo">
@@ -650,15 +642,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array to copy the objects to. </param
-        >
+          />The array to copy the objects to.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index in <paramref name="array" /> where copying will begin. </param
-        >
+          />The index in <paramref name="array" /> where copying will begin.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Count">
@@ -823,15 +815,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array to copy the objects to. </param
-        >
+          />The array to copy the objects to.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index in <paramref name="array" /> where copying will begin. </param
-        >
+          />The index in <paramref name="array" /> where copying will begin.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.ICollection.Count">

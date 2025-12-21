@@ -134,8 +134,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the XML element that the <see cref="T:System.Xml.Serialization.XmlSerializer" /> generates. </param
-        >
+          />The name of the XML element that the <see cref="T:System.Xml.Serialization.XmlSerializer" /> generates.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ElementName">
@@ -192,14 +192,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Xml.Serialization.XmlArrayAttribute.Form" /> property determines whether an XML element name is qualified or unqualified. The <see cref="P:System.Xml.Serialization.XmlArrayAttribute.Form" /> property conforms to the 1999 World Wide Web Consortium (www.w3.org) document titled "Namespaces in XML." </para
-          >
+            >The <see cref="P:System.Xml.Serialization.XmlArrayAttribute.Form" /> property determines whether an XML element name is qualified or unqualified. The <see cref="P:System.Xml.Serialization.XmlArrayAttribute.Form" /> property conforms to the 1999 World Wide Web Consortium (www.w3.org) document titled "Namespaces in XML."
+          </para>
           <para
             >If the <see cref="P:System.Xml.Serialization.XmlAttributeAttribute.Namespace" /> property is set to any value, attempting to set the <see cref="P:System.Xml.Serialization.XmlElementAttribute.Form" /> property to XmlSchemaForm.Unqualified throws an exception.</para
           >
           <para
-            >The default setting, XmlSchemaForm.None, instructs the <see cref="T:System.Xml.Serialization.XmlSerializer" /> to check the schema for the XML document to determine whether the namespace is qualified. If the schema does not specify a value for an individual element or attribute, the <see cref="T:System.Xml.Serialization.XmlSerializer" /> uses the elementFormDefault and attributeFormDefault values to determine whether an element or attribute is qualified. The following XML code shows a schema: </para
-          >
+            >The default setting, XmlSchemaForm.None, instructs the <see cref="T:System.Xml.Serialization.XmlSerializer" /> to check the schema for the XML document to determine whether the namespace is qualified. If the schema does not specify a value for an individual element or attribute, the <see cref="T:System.Xml.Serialization.XmlSerializer" /> uses the elementFormDefault and attributeFormDefault values to determine whether an element or attribute is qualified. The following XML code shows a schema:
+          </para>
           <code> &lt;schema elementFormDefault="qualified" 
  attributeFormDefault="unqualified"... &gt;
     &lt;element name="Name"/&gt;
@@ -274,8 +274,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Xml.Serialization.XmlArrayAttribute.Namespace" /> property allows you to create qualified XML element names. The <see cref="P:System.Xml.Serialization.XmlArrayAttribute.Namespace" /> property conforms to the rules for creating an XML namespace as found in the 1999 World Wide Web Consortium (www.w3.org) document titled "Namespaces in XML." </para
-          >
+            >The <see cref="P:System.Xml.Serialization.XmlArrayAttribute.Namespace" /> property allows you to create qualified XML element names. The <see cref="P:System.Xml.Serialization.XmlArrayAttribute.Namespace" /> property conforms to the rules for creating an XML namespace as found in the 1999 World Wide Web Consortium (www.w3.org) document titled "Namespaces in XML."
+          </para>
           <para
             >To create namespaces that are associated with a prefix, you must create an instance of the <see cref="T:System.Xml.Serialization.XmlSerializerNamespaces" /> class that contains the namespaces and prefixes used in the XML document. As you set the namespace for each <see cref="T:System.Xml.Serialization.XmlArrayAttribute" />, it must match one of the namespaces in the <see cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />. When the XML is generated, each array is correctly prefixed with the prefix associated with the specified namespace.</para
           >
@@ -303,8 +303,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="F:System.Xml.Serialization.CodeGenerationOptions.GenerateOrder" /> enumeration to instruct the <see cref="T:System.Web.Services.Description.ServiceDescriptionImporter" /> to generate code that sets the <see cref="P:System.Xml.Serialization.XmlElementAttribute.Order" /> property. </para
-          >
+            >Use the <see cref="F:System.Xml.Serialization.CodeGenerationOptions.GenerateOrder" /> enumeration to instruct the <see cref="T:System.Web.Services.Description.ServiceDescriptionImporter" /> to generate code that sets the <see cref="P:System.Xml.Serialization.XmlElementAttribute.Order" /> property.
+          </para>
           <block subset="none" type="note">
             <para
               >Once the <see cref="P:System.Xml.Serialization.XmlElementAttribute.Order" /> property has been used on one public property or field in a type, it must be applied to all public properties and fields for that type and all inherited types.</para

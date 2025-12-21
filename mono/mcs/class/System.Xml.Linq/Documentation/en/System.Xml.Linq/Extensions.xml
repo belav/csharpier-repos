@@ -21,8 +21,8 @@
         >The two <see cref="Overload:System.Xml.Linq.Extensions.Remove" /> extension methods are not axis methods, however. These methods remove attributes or nodes from the XML tree.</para
       >
       <para
-        >Note that there is another category of axis methods, implemented in the <see cref="T:System.Xml.Linq.XElement" />, <see cref="T:System.Xml.Linq.XDocument" />, and <see cref="T:System.Xml.Linq.XNode" /> classes. These other axis methods operate on a single object, and return a collection of <see cref="T:System.Xml.Linq.XElement" />, <see cref="T:System.Xml.Linq.XAttribute" />, or <see cref="T:System.Xml.Linq.XNode" /> objects. </para
-      >
+        >Note that there is another category of axis methods, implemented in the <see cref="T:System.Xml.Linq.XElement" />, <see cref="T:System.Xml.Linq.XDocument" />, and <see cref="T:System.Xml.Linq.XNode" /> classes. These other axis methods operate on a single object, and return a collection of <see cref="T:System.Xml.Linq.XElement" />, <see cref="T:System.Xml.Linq.XAttribute" />, or <see cref="T:System.Xml.Linq.XNode" /> objects.
+      </para>
       <para>All of the axis extension methods use deferred execution. </para>
     </remarks>
     <summary>

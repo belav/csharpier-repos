@@ -34,8 +34,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see cref="T:System.Windows.Forms.ComboBox" /> displays a text box combined with a <see cref="T:System.Windows.Forms.ListBox" />, which enables the user to select items from the list or enter a new value. </para
-      >
+        >A <see cref="T:System.Windows.Forms.ComboBox" /> displays a text box combined with a <see cref="T:System.Windows.Forms.ListBox" />, which enables the user to select items from the list or enter a new value.
+      </para>
       <para
         >The <see cref="P:System.Windows.Forms.ComboBox.DropDownStyle" /> property specifies whether the list is always displayed or whether the list is displayed in a drop-down. The <see cref="P:System.Windows.Forms.ComboBox.DropDownStyle" /> property also specifies whether the text portion can be edited. See <see cref="T:System.Windows.Forms.ComboBoxStyle" /> for the available settings and their effects. There is no setting to always display the list and disallow entering a new value. To display a list to which no new values can be added, use a <see cref="T:System.Windows.Forms.ListBox" /> control.</para
       >
@@ -628,16 +628,16 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see cref="T:System.Windows.Forms.ComboBox" /> and optionally releases the managed resources. </para
-          >
+            >Releases the unmanaged resources used by the <see cref="T:System.Windows.Forms.ComboBox" /> and optionally releases the managed resources.
+          </para>
         </summary>
         <param name="disposing">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1002,8 +1002,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.String" /> to search for. </param
-        >
+          />The <see cref="T:System.String" /> to search for.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1044,15 +1044,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.String" /> to search for. </param
-        >
+          />The <see cref="T:System.String" /> to search for.
+        </param>
         <param name="startIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index of the item before the first item to be searched. Set to -1 to search from the beginning of the control. </param
-        >
+          />The zero-based index of the item before the first item to be searched. Set to -1 to search from the beginning of the control.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1090,8 +1090,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.String" /> to search for. </param
-        >
+          />The <see cref="T:System.String" /> to search for.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1136,15 +1136,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.String" /> to search for. </param
-        >
+          />The <see cref="T:System.String" /> to search for.
+        </param>
         <param name="startIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index of the item before the first item to be searched. Set to -1 to search from the beginning of the control. </param
-        >
+          />The zero-based index of the item before the first item to be searched. Set to -1 to search from the beginning of the control.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1259,8 +1259,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the item to return the height of. </param
-        >
+          />The index of the item to return the height of.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1407,8 +1407,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property enables you to obtain a reference to the list of items that are currently stored in the <see cref="T:System.Windows.Forms.ComboBox" />. With this reference, you can add items, remove items, and obtain a count of the items in the collection. </para
-          >
+            >This property enables you to obtain a reference to the list of items that are currently stored in the <see cref="T:System.Windows.Forms.ComboBox" />. With this reference, you can add items, remove items, and obtain a count of the items in the collection.
+          </para>
           <para
             >Although the <see cref="T:System.Windows.Forms.ComboBox" /> is typically used to display text items, you can add any object to the <see cref="T:System.Windows.Forms.ComboBox" />. Typically, the representation of an object in the <see cref="T:System.Windows.Forms.ComboBox" /> is the string returned by that object's <see cref="M:System.Object.ToString" /> method. If you want to have a member of the object displayed instead, choose the member that will be displayed by setting the <see cref="P:System.Windows.Forms.ListControl.DisplayMember" /> property to the name of the appropriate member. You can also choose a member of the object that will represent the value returned by the object by setting the <see cref="P:System.Windows.Forms.ListControl.ValueMember" /> property. For more information, see <see cref="T:System.Windows.Forms.ListControl" />.</para
           >
@@ -1700,8 +1700,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.DrawItemEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.DrawItemEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1739,8 +1739,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1785,8 +1785,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnDropDownStyleChanged">
@@ -1827,8 +1827,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1926,8 +1926,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2057,8 +2057,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.KeyEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.KeyEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2184,8 +2184,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.MeasureItemEventArgs" /> that was raised. </param
-        >
+          />The <see cref="T:System.Windows.Forms.MeasureItemEventArgs" /> that was raised.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2223,8 +2223,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2261,8 +2261,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2303,8 +2303,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data.  </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2341,8 +2341,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2387,8 +2387,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2433,8 +2433,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2468,16 +2468,16 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.Windows.Forms.ListControl.SelectedValueChanged" /> event. </para
-          >
+            >Raises the <see cref="E:System.Windows.Forms.ListControl.SelectedValueChanged" /> event.
+          </para>
         </summary>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2522,8 +2522,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2644,8 +2644,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.ComponentModel.CancelEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.ComponentModel.CancelEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2945,15 +2945,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position of the first character in the current text selection within the text box. </param
-        >
+          />The position of the first character in the current text selection within the text box.
+        </param>
         <param name="length">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters to select. </param
-        >
+          />The number of characters to select.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -3089,8 +3089,8 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see cref="T:System.Windows.Forms.ComboBox" /> class searches for the specified object by using the <see cref="M:System.Windows.Forms.ComboBox.ObjectCollection.IndexOf(System.Object)" /> method. This method uses the <see cref="M:System.Object.Equals(System.Object)" /> method to determine equality. </para
-            >
+              >The <see cref="T:System.Windows.Forms.ComboBox" /> class searches for the specified object by using the <see cref="M:System.Windows.Forms.ComboBox.ObjectCollection.IndexOf(System.Object)" /> method. This method uses the <see cref="M:System.Object.Equals(System.Object)" /> method to determine equality.
+            </para>
           </block>
         </remarks>
         <summary>
@@ -3124,17 +3124,17 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see cref="P:System.Windows.Forms.ComboBox.SelectedText" /> property to retrieve or change the currently selected text in a <see cref="T:System.Windows.Forms.ComboBox" /> control. However, you should be aware that the selection can change automatically because of user interaction. For example, if you retrieve the <see cref="P:System.Windows.Forms.ComboBox.SelectedText" /> value in a button <see cref="E:System.Windows.Forms.Control.Click" /> event handler, the value will be an empty string. This is because the selection is automatically cleared when the input focus moves from the combo box to the button. </para
-          >
+            >You can use the <see cref="P:System.Windows.Forms.ComboBox.SelectedText" /> property to retrieve or change the currently selected text in a <see cref="T:System.Windows.Forms.ComboBox" /> control. However, you should be aware that the selection can change automatically because of user interaction. For example, if you retrieve the <see cref="P:System.Windows.Forms.ComboBox.SelectedText" /> value in a button <see cref="E:System.Windows.Forms.Control.Click" /> event handler, the value will be an empty string. This is because the selection is automatically cleared when the input focus moves from the combo box to the button.
+          </para>
           <para
-            >When the combo box loses focus, the selection point moves to the beginning of the text and any selected text becomes unselected. In this case, getting the <see cref="P:System.Windows.Forms.ComboBox.SelectedText" /> property retrieves an empty string, and setting the <see cref="P:System.Windows.Forms.ComboBox.SelectedText" /> property adds the specified value to the beginning of the text. </para
-          >
+            >When the combo box loses focus, the selection point moves to the beginning of the text and any selected text becomes unselected. In this case, getting the <see cref="P:System.Windows.Forms.ComboBox.SelectedText" /> property retrieves an empty string, and setting the <see cref="P:System.Windows.Forms.ComboBox.SelectedText" /> property adds the specified value to the beginning of the text.
+          </para>
           <para
-            >When the combo box gains focus, the full text in the control is automatically selected. If you call the control's <see cref="M:System.Windows.Forms.Control.Focus" /> method to set the input focus, the full text is selected regardless of whether the control already had focus. </para
-          >
+            >When the combo box gains focus, the full text in the control is automatically selected. If you call the control's <see cref="M:System.Windows.Forms.Control.Focus" /> method to set the input focus, the full text is selected regardless of whether the control already had focus.
+          </para>
           <para
-            >When the user selects an item from the drop-down list or by using the UP ARROW and DOWN ARROW keys, the text for the new item is automatically selected. However, if you try to get the <see cref="P:System.Windows.Forms.ComboBox.SelectedText" /> value in a <see cref="E:System.Windows.Forms.ComboBox.SelectedIndexChanged" /> or <see cref="E:System.Windows.Forms.ListControl.SelectedValueChanged" /> event handler, the property returns an empty string. This is because, at the time of these events, the previous <see cref="P:System.Windows.Forms.ComboBox.SelectedText" /> value has been cleared and the new value has not yet been set. To retrieve the current value in a <see cref="E:System.Windows.Forms.ComboBox.SelectedIndexChanged" /> or <see cref="E:System.Windows.Forms.ListControl.SelectedValueChanged" /> event handler, use the <see cref="P:System.Windows.Forms.ComboBox.SelectedItem" /> property instead. </para
-          >
+            >When the user selects an item from the drop-down list or by using the UP ARROW and DOWN ARROW keys, the text for the new item is automatically selected. However, if you try to get the <see cref="P:System.Windows.Forms.ComboBox.SelectedText" /> value in a <see cref="E:System.Windows.Forms.ComboBox.SelectedIndexChanged" /> or <see cref="E:System.Windows.Forms.ListControl.SelectedValueChanged" /> event handler, the property returns an empty string. This is because, at the time of these events, the previous <see cref="P:System.Windows.Forms.ComboBox.SelectedText" /> value has been cleared and the new value has not yet been set. To retrieve the current value in a <see cref="E:System.Windows.Forms.ComboBox.SelectedIndexChanged" /> or <see cref="E:System.Windows.Forms.ListControl.SelectedValueChanged" /> event handler, use the <see cref="P:System.Windows.Forms.ComboBox.SelectedItem" /> property instead.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3279,36 +3279,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The horizontal location in pixels of the control. </param
-        >
+          />The horizontal location in pixels of the control.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The vertical location in pixels of the control. </param
-        >
+          />The vertical location in pixels of the control.
+        </param>
         <param name="width">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The width in pixels of the control. </param
-        >
+          />The width in pixels of the control.
+        </param>
         <param name="height">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The height in pixels of the control. </param
-        >
+          />The height in pixels of the control.
+        </param>
         <param name="specified">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.BoundsSpecified" /> values. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.BoundsSpecified" /> values.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

@@ -27,8 +27,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see cref="T:System.Runtime.Serialization.OnSerializedAttribute" /> to manipulate the object after serialization has occurred. </para
-      >
+        >Use the <see cref="T:System.Runtime.Serialization.OnSerializedAttribute" /> to manipulate the object after serialization has occurred.
+      </para>
       <para
         >To use the <see cref="T:System.Runtime.Serialization.OnSerializedAttribute" />, the method must contain a <see cref="T:System.Runtime.Serialization.StreamingContext" /> parameter. The attribute marks the method to be called by the serialization infrastructure and the <see cref="T:System.Runtime.Serialization.StreamingContext" />  provides additional data about the type of serialization taking place.  The usage is shown in the following code:</para
       >
@@ -64,8 +64,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.OnSerializedAttribute" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.OnSerializedAttribute" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>

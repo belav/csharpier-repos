@@ -17,8 +17,8 @@
         >Instances of the <see cref="T:System.Web.Compilation.AssemblyBuilder" /> class are used with <see cref="T:System.Web.Compilation.BuildProvider" /> class methods to build one or more files into a compiled assembly.</para
       >
       <para
-        >The <see cref="T:System.Web.Compilation.BuildProvider" /> class defines build functionality for individual files, and the <see cref="T:System.Web.Compilation.AssemblyBuilder" /> class combines the source code contributed by each <see cref="T:System.Web.Compilation.BuildProvider" /> instance into a single assembly. The ASP.NET build environment passes an <see cref="T:System.Web.Compilation.AssemblyBuilder" /> object to the <see cref="T:System.Web.Compilation.BuildProvider" /> methods when building an assembly from one or more files, so that each <see cref="T:System.Web.Compilation.BuildProvider" /> instance can contribute source code for its file to the overall assembly. </para
-      >
+        >The <see cref="T:System.Web.Compilation.BuildProvider" /> class defines build functionality for individual files, and the <see cref="T:System.Web.Compilation.AssemblyBuilder" /> class combines the source code contributed by each <see cref="T:System.Web.Compilation.BuildProvider" /> instance into a single assembly. The ASP.NET build environment passes an <see cref="T:System.Web.Compilation.AssemblyBuilder" /> object to the <see cref="T:System.Web.Compilation.BuildProvider" /> methods when building an assembly from one or more files, so that each <see cref="T:System.Web.Compilation.BuildProvider" /> instance can contribute source code for its file to the overall assembly.
+      </para>
       <para
         >The ASP.NET build environment determines the language and compiler required by files within the project, based on the <see cref="P:System.Web.Compilation.BuildProvider.CodeCompilerType" /> property. The build environment groups files based on their compiler settings and builds an assembly from files that require the same compiler.</para
       >
@@ -26,8 +26,8 @@
         >The <see cref="P:System.Web.Compilation.AssemblyBuilder.CodeDomProvider" /> property indicates the <see cref="T:System.CodeDom.Compiler.CodeDomProvider" /> implementation that the ASP.NET build environment uses to compile an assembly from the source code contributed by each <see cref="T:System.Web.Compilation.BuildProvider" /> implementation.</para
       >
       <para
-        >A <see cref="T:System.Web.Compilation.BuildProvider" /> object contributes source code in the form of a CodeDOM graph using the <see cref="M:System.Web.Compilation.AssemblyBuilder.AddCodeCompileUnit(System.Web.Compilation.BuildProvider,System.CodeDom.CodeCompileUnit)" /> method. A <see cref="T:System.Web.Compilation.BuildProvider" /> object contributes source code stored in a physical file using the <see cref="M:System.Web.Compilation.AssemblyBuilder.CreateCodeFile(System.Web.Compilation.BuildProvider)" /> method. </para
-      >
+        >A <see cref="T:System.Web.Compilation.BuildProvider" /> object contributes source code in the form of a CodeDOM graph using the <see cref="M:System.Web.Compilation.AssemblyBuilder.AddCodeCompileUnit(System.Web.Compilation.BuildProvider,System.CodeDom.CodeCompileUnit)" /> method. A <see cref="T:System.Web.Compilation.BuildProvider" /> object contributes source code stored in a physical file using the <see cref="M:System.Web.Compilation.AssemblyBuilder.CreateCodeFile(System.Web.Compilation.BuildProvider)" /> method.
+      </para>
       <para
         >After each <see cref="T:System.Web.Compilation.BuildProvider" /> object contributes source code using the appropriate <see cref="T:System.Web.Compilation.AssemblyBuilder" /> methods, the ASP.NET build environment uses the <see cref="T:System.Web.Compilation.AssemblyBuilder" /> class to compile the collected source code into an assembly.</para
       >
@@ -55,8 +55,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Web.Compilation.BuildProvider" /> implementation uses the <see cref="M:System.Web.Compilation.AssemblyBuilder.AddAssemblyReference(System.Reflection.Assembly)" /> method when generating source code that references types within the input assembly. </para
-          >
+            >A <see cref="T:System.Web.Compilation.BuildProvider" /> implementation uses the <see cref="M:System.Web.Compilation.AssemblyBuilder.AddAssemblyReference(System.Reflection.Assembly)" /> method when generating source code that references types within the input assembly.
+          </para>
           <para
             >The ASP.NET build environment initializes the default collection of assemblies available for reference through the build provider in the <see cref="P:System.Web.Compilation.BuildProvider.ReferencedAssemblies" /> property. If the build provider generates source code that references additional assemblies, the build provider adds the additional assemblies using the <see cref="M:System.Web.Compilation.AssemblyBuilder.AddAssemblyReference(System.Reflection.Assembly)" /> method. The ASP.NET build environment resolves external types during assembly compilation using both the referenced assemblies added by build providers and the default collection of assemblies available for reference.</para
           >
@@ -103,8 +103,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Web.Compilation.BuildProvider" /> implementation calls the <see cref="M:System.Web.Compilation.AssemblyBuilder.AddCodeCompileUnit(System.Web.Compilation.BuildProvider,System.CodeDom.CodeCompileUnit)" /> method when generating a CodeDOM graph for a virtual path. Source code added with <see cref="M:System.Web.Compilation.AssemblyBuilder.AddCodeCompileUnit(System.Web.Compilation.BuildProvider,System.CodeDom.CodeCompileUnit)" /> is included in the assembly compilation. </para
-          >
+            >A <see cref="T:System.Web.Compilation.BuildProvider" /> implementation calls the <see cref="M:System.Web.Compilation.AssemblyBuilder.AddCodeCompileUnit(System.Web.Compilation.BuildProvider,System.CodeDom.CodeCompileUnit)" /> method when generating a CodeDOM graph for a virtual path. Source code added with <see cref="M:System.Web.Compilation.AssemblyBuilder.AddCodeCompileUnit(System.Web.Compilation.BuildProvider,System.CodeDom.CodeCompileUnit)" /> is included in the assembly compilation.
+          </para>
           <para
             >Typically, a build provider's <see cref="M:System.Web.Compilation.BuildProvider.GenerateCode(System.Web.Compilation.AssemblyBuilder)" /> method implementation reads the <see cref="P:System.Web.Compilation.BuildProvider.VirtualPath" /> property, parses the contents, and then adds the generated source code to the specified <see cref="T:System.Web.Compilation.AssemblyBuilder" /> object. The build provider uses the <see cref="M:System.Web.Compilation.AssemblyBuilder.AddCodeCompileUnit(System.Web.Compilation.BuildProvider,System.CodeDom.CodeCompileUnit)" /> method to add source code as a CodeDOM graph to the assembly. Alternately, the build provider can use the <see cref="M:System.Web.Compilation.AssemblyBuilder.CreateCodeFile(System.Web.Compilation.BuildProvider)" /> method to add source code as a physical file to the assembly.</para
           >
@@ -179,8 +179,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Web.Compilation.BuildProvider" /> implementation calls the <see cref="M:System.Web.Compilation.AssemblyBuilder.CreateCodeFile(System.Web.Compilation.BuildProvider)" /> method when generating a source file for a virtual path. Source code added with <see cref="M:System.Web.Compilation.AssemblyBuilder.CreateCodeFile(System.Web.Compilation.BuildProvider)" /> is included in the assembly compilation. </para
-          >
+            >A <see cref="T:System.Web.Compilation.BuildProvider" /> implementation calls the <see cref="M:System.Web.Compilation.AssemblyBuilder.CreateCodeFile(System.Web.Compilation.BuildProvider)" /> method when generating a source file for a virtual path. Source code added with <see cref="M:System.Web.Compilation.AssemblyBuilder.CreateCodeFile(System.Web.Compilation.BuildProvider)" /> is included in the assembly compilation.
+          </para>
           <para
             >Typically, a build provider <see cref="M:System.Web.Compilation.BuildProvider.GenerateCode(System.Web.Compilation.AssemblyBuilder)" /> method implementation reads the <see cref="P:System.Web.Compilation.BuildProvider.VirtualPath" /> property, parses the contents, and then adds the generated source code to the specified <see cref="T:System.Web.Compilation.AssemblyBuilder" /> object. The build provider uses the <see cref="M:System.Web.Compilation.AssemblyBuilder.CreateCodeFile(System.Web.Compilation.BuildProvider)" /> method to add source code as a physical file to the assembly. Alternately, the build provider can use the <see cref="M:System.Web.Compilation.AssemblyBuilder.AddCodeCompileUnit(System.Web.Compilation.BuildProvider,System.CodeDom.CodeCompileUnit)" /> method to add source code as a CodeDOM graph to the assembly.</para
           >
@@ -310,8 +310,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Web.Compilation.BuildProvider" /> implementation calls the <see cref="M:System.Web.Compilation.AssemblyBuilder.GetTempFilePhysicalPath(System.String)" /> method to get a temporary file path that is deleted automatically after the assembly is compiled. </para
-          >
+            >A <see cref="T:System.Web.Compilation.BuildProvider" /> implementation calls the <see cref="M:System.Web.Compilation.AssemblyBuilder.GetTempFilePhysicalPath(System.String)" /> method to get a temporary file path that is deleted automatically after the assembly is compiled.
+          </para>
           <para
             >The <see cref="M:System.Web.Compilation.AssemblyBuilder.GetTempFilePhysicalPath(System.String)" /> method generates a unique temporary file path, but does not create the file.</para
           >

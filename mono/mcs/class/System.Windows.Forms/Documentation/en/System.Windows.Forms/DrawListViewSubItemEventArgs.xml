@@ -165,8 +165,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this property when handling the <see cref="E:System.Windows.Forms.ListView.DrawSubItem" /> event for subitems that you do not want to customize. If you set this property to true, the subitem will be drawn normally using the current values of the <see cref="P:System.Windows.Forms.ListViewItem.ListViewSubItem.BackColor" />, <see cref="P:System.Windows.Forms.ListViewItem.ListViewSubItem.ForeColor" />, and <see cref="P:System.Windows.Forms.ListViewItem.ListViewSubItem.Font" /> properties </para
-          >
+            >Use this property when handling the <see cref="E:System.Windows.Forms.ListView.DrawSubItem" /> event for subitems that you do not want to customize. If you set this property to true, the subitem will be drawn normally using the current values of the <see cref="P:System.Windows.Forms.ListViewItem.ListViewSubItem.BackColor" />, <see cref="P:System.Windows.Forms.ListViewItem.ListViewSubItem.ForeColor" />, and <see cref="P:System.Windows.Forms.ListViewItem.ListViewSubItem.Font" /> properties
+          </para>
           <block subset="none" type="note">
             <para
               >The <see cref="P:System.Windows.Forms.ListViewItem.UseItemStyleForSubItems" /> property of the parent <see cref="T:System.Windows.Forms.ListViewItem" /> must be set to false to prevent the <see cref="P:System.Windows.Forms.ListViewItem.BackColor" /> value of the parent item from overriding the subitem value.</para
@@ -292,8 +292,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of <see cref="T:System.Windows.Forms.TextFormatFlags" /> values. </param
-        >
+          />A bitwise combination of <see cref="T:System.Windows.Forms.TextFormatFlags" /> values.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Graphics">
@@ -361,11 +361,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this property to access the <see cref="T:System.Windows.Forms.ListViewItem" /> parent of the <see cref="T:System.Windows.Forms.ListViewItem.ListViewSubItem" /> to draw. This is useful when the <see cref="P:System.Windows.Forms.DrawListViewSubItemEventArgs.ItemState" /> property does not provide adequate information to meet your needs. The <see cref="P:System.Windows.Forms.DrawListViewSubItemEventArgs.ItemState" /> property provides only basic state information that you can use, for example, to determine whether the parent item is selected, checked, or focused. The <see cref="P:System.Windows.Forms.DrawListViewSubItemEventArgs.Item" /> property, on the other hand, allows you to access all members of the parent <see cref="T:System.Windows.Forms.ListViewItem" />. </para
-          >
+            >Use this property to access the <see cref="T:System.Windows.Forms.ListViewItem" /> parent of the <see cref="T:System.Windows.Forms.ListViewItem.ListViewSubItem" /> to draw. This is useful when the <see cref="P:System.Windows.Forms.DrawListViewSubItemEventArgs.ItemState" /> property does not provide adequate information to meet your needs. The <see cref="P:System.Windows.Forms.DrawListViewSubItemEventArgs.ItemState" /> property provides only basic state information that you can use, for example, to determine whether the parent item is selected, checked, or focused. The <see cref="P:System.Windows.Forms.DrawListViewSubItemEventArgs.Item" /> property, on the other hand, allows you to access all members of the parent <see cref="T:System.Windows.Forms.ListViewItem" />.
+          </para>
           <para
-            >To access the <see cref="T:System.Windows.Forms.ListViewItem.ListViewSubItem" /> being drawn, use the <see cref="P:System.Windows.Forms.DrawListViewSubItemEventArgs.SubItem" /> property. </para
-          >
+            >To access the <see cref="T:System.Windows.Forms.ListViewItem.ListViewSubItem" /> being drawn, use the <see cref="P:System.Windows.Forms.DrawListViewSubItemEventArgs.SubItem" /> property.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

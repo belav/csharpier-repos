@@ -135,8 +135,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The session identifier to decode. </param
-        >
+          />The session identifier to decode.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Encode">
@@ -175,8 +175,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The session identifier to encode. </param
-        >
+          />The session identifier to encode.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetSessionID">
@@ -397,8 +397,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The session identifier to validate. </param
-        >
+          />The session identifier to validate.
+        </param>
       </Docs>
     </Member>
   </Members>

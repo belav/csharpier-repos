@@ -11,8 +11,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This interface is implemented by classes such as <see cref="T:System.Windows.Forms.DataGridViewCheckBoxCell" /> that derive from <see cref="T:System.Windows.Forms.DataGridViewCell" /> and provide a user interface (UI) for specifying values without hosting an editing control. The UI in this case is displayed regardless of whether the cell is in edit mode. </para
-      >
+        >This interface is implemented by classes such as <see cref="T:System.Windows.Forms.DataGridViewCheckBoxCell" /> that derive from <see cref="T:System.Windows.Forms.DataGridViewCell" /> and provide a user interface (UI) for specifying values without hosting an editing control. The UI in this case is displayed regardless of whether the cell is in edit mode.
+      </para>
       <para
         >Other cell types, such as <see cref="T:System.Windows.Forms.DataGridViewButtonCell" />, provide a UI but do not store user-specified values. In this case, the cell type does not implement <see cref="T:System.Windows.Forms.IDataGridViewEditingCell" /> or host an editing control.</para
       >

@@ -45,6 +45,6 @@
     > must be a variable or value of a class, struct, or interface type that has one or more indexer members, in which case the <non_terminal
       where="14.5.6"
       >element-access</non_terminal
-    > is an indexer access (<hyperlink>14.5.6.2</hyperlink>). </paragraph
-  >
+    > is an indexer access (<hyperlink>14.5.6.2</hyperlink>).
+  </paragraph>
 </clause>

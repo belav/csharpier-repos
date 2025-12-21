@@ -56,8 +56,7 @@ public class IndexRangeTest {
    }
  }
 }
-   </code
-      >
+   </code>
       <para>The output is</para>
       <code>
 array[0] = 0
@@ -70,8 +69,8 @@ Error: System.IndexOutOfRangeException: Index was outside the bounds of the arra
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The following Microsoft intermediate language (MSIL) instructions throw <see cref="T:System.IndexOutOfRangeException" /> : </para
-      >
+        >The following Microsoft intermediate language (MSIL) instructions throw <see cref="T:System.IndexOutOfRangeException" /> :
+      </para>
       <list type="bullet">
         <item>
           <para>ldelem.&lt;type&gt; </para>
@@ -245,8 +244,8 @@ Error: System.IndexOutOfRangeException: Index was outside the bounds of the arra
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The message that describes the error. </param
-        >
+          />The message that describes the error.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -327,15 +326,15 @@ Error: System.IndexOutOfRangeException: Index was outside the bounds of the arra
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The error message that explains the reason for the exception. </param
-        >
+          />The error message that explains the reason for the exception.
+        </param>
         <param name="innerException">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The exception that is the cause of the current exception. If the <paramref name="innerException" /> parameter is not a null reference (Nothing in Visual Basic), the current exception is raised in a catch block that handles the inner exception. </param
-        >
+          />The exception that is the cause of the current exception. If the <paramref name="innerException" /> parameter is not a null reference (Nothing in Visual Basic), the current exception is raised in a catch block that handles the inner exception.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

@@ -108,8 +108,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the local variable to reference. </param
-        >
+          />The name of the local variable to reference.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="VariableName">

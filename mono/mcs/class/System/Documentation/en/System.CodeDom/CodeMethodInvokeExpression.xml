@@ -109,15 +109,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeMethodReferenceExpression" /> that indicates the method to invoke. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeMethodReferenceExpression" /> that indicates the method to invoke.
+        </param>
         <param name="parameters">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.CodeDom.CodeExpression" /> objects that indicate the parameters with which to invoke the method. </param
-        >
+          />An array of <see cref="T:System.CodeDom.CodeExpression" /> objects that indicate the parameters with which to invoke the method.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -160,22 +160,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeExpression" /> that indicates the target object with the method to invoke. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeExpression" /> that indicates the target object with the method to invoke.
+        </param>
         <param name="methodName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the method to invoke. </param
-        >
+          />The name of the method to invoke.
+        </param>
         <param name="parameters">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.CodeDom.CodeExpression" /> objects that indicate the parameters to call the method with. </param
-        >
+          />An array of <see cref="T:System.CodeDom.CodeExpression" /> objects that indicate the parameters to call the method with.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Method">

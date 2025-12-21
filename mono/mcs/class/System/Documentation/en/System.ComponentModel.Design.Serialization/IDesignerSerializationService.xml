@@ -75,8 +75,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object consisting of serialized data. </param
-        >
+          />An object consisting of serialized data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Serialize">
@@ -119,8 +119,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A collection of objects to serialize. </param
-        >
+          />A collection of objects to serialize.
+        </param>
       </Docs>
     </Member>
   </Members>

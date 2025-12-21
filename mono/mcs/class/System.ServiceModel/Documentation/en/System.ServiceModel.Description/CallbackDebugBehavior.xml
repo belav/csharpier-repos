@@ -24,12 +24,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Set the <see cref="P:System.ServiceModel.Description.CallbackDebugBehavior.IncludeExceptionDetailInFaults" /> property to true from an application configuration file or programmatically to enable the flow of managed exception information in a client callback object back to the service for debugging purposes. </para
-      >
+        >Set the <see cref="P:System.ServiceModel.Description.CallbackDebugBehavior.IncludeExceptionDetailInFaults" /> property to true from an application configuration file or programmatically to enable the flow of managed exception information in a client callback object back to the service for debugging purposes.
+      </para>
       <block subset="none" type="note">
         <para
-          >Returning managed exception information to services can be a security risk because exception details expose information about the internal client implementation that could be used by unauthorized services. In addition, although the <see cref="T:System.ServiceModel.Description.CallbackDebugBehavior" /> properties can also be set programmatically, it can be easy to forget to disable <see cref="P:System.ServiceModel.Description.CallbackDebugBehavior.IncludeExceptionDetailInFaults" /> when deploying. </para
-        >
+          >Returning managed exception information to services can be a security risk because exception details expose information about the internal client implementation that could be used by unauthorized services. In addition, although the <see cref="T:System.ServiceModel.Description.CallbackDebugBehavior" /> properties can also be set programmatically, it can be easy to forget to disable <see cref="P:System.ServiceModel.Description.CallbackDebugBehavior.IncludeExceptionDetailInFaults" /> when deploying.
+        </para>
       </block>
       <para>Because of the security issues involved, it is strongly recommended that:</para>
       <list type="bullet">
@@ -87,8 +87,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.CallbackDebugBehavior" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.CallbackDebugBehavior" /> class.
+          </para>
         </summary>
         <param name="includeExceptionDetailInFaults">
           <attribution
@@ -120,12 +120,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Set the <see cref="P:System.ServiceModel.Description.CallbackDebugBehavior.IncludeExceptionDetailInFaults" /> property to true from an application configuration file or programmatically to enable the flow of managed exception information in a client callback object back to the service for debugging purposes. </para
-          >
+            >Set the <see cref="P:System.ServiceModel.Description.CallbackDebugBehavior.IncludeExceptionDetailInFaults" /> property to true from an application configuration file or programmatically to enable the flow of managed exception information in a client callback object back to the service for debugging purposes.
+          </para>
           <block subset="none" type="note">
             <para
-              >Returning managed exception information to services can be a security risk because exception details expose information about the internal client implementation that could be used by unauthorized services. In addition, although the <see cref="T:System.ServiceModel.Description.CallbackDebugBehavior" /> properties can also be set programmatically, it can be easy to forget to disable <see cref="P:System.ServiceModel.Description.CallbackDebugBehavior.IncludeExceptionDetailInFaults" /> when deploying. </para
-            >
+              >Returning managed exception information to services can be a security risk because exception details expose information about the internal client implementation that could be used by unauthorized services. In addition, although the <see cref="T:System.ServiceModel.Description.CallbackDebugBehavior" /> properties can also be set programmatically, it can be easy to forget to disable <see cref="P:System.ServiceModel.Description.CallbackDebugBehavior.IncludeExceptionDetailInFaults" /> when deploying.
+            </para>
           </block>
           <para>Because of the security issues involved, it is strongly recommended that:</para>
           <list type="bullet">

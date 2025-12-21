@@ -49,8 +49,7 @@ public class HttpStatusCodeExample {
       }
    }
 }
-</code
-      >
+</code>
       <para>The output is</para>
       <c>
         <para>Request for http://www.contoso.com was

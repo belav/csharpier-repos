@@ -28,8 +28,8 @@ bool operator >=(double x, double y);
           <![CDATA[
 {UNICODE_150}{UNICODE_8734} < {UNICODE_150}max < {UNICODE_133} < {UNICODE_150}min < {UNICODE_150}0.0 == +0.0 < +min < {UNICODE_133} < +max < +{UNICODE_8734}  
 ]]>
-        </code_example>where min and max are the smallest and largest positive finite values that can be represented in the given floating-point format. Notable effects of this ordering are: </list_item
-      >
+        </code_example>where min and max are the smallest and largest positive finite values that can be represented in the given floating-point format. Notable effects of this ordering are:
+      </list_item>
       <list>
         <list_item> Negative and positive zeros are considered equal. </list_item>
         <list_item> A negative infinity is considered less than all other values, but equal to another negative infinity. </list_item>

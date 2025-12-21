@@ -24,11 +24,11 @@
         >Use the <see cref="T:System.ServiceModel.ServiceHost" /> class to configure and expose a service for use by client applications when you are not using Internet Information Services (IIS) or Windows Activation Services (WAS) to expose a service. Both IIS and WAS interact with a <see cref="T:System.ServiceModel.ServiceHost" /> object on your behalf.</para
       >
       <para
-        >To expose a service for use by callers, indigo2 requires a complete service description (represented by the <see cref="T:System.ServiceModel.Description.ServiceDescription" /> class). The <see cref="T:System.ServiceModel.ServiceHost" /> class creates a <see cref="T:System.ServiceModel.Description.ServiceDescription" /> from the service type and configuration information and then uses that description to create <see cref="T:System.ServiceModel.Dispatcher.ChannelDispatcher" /> objects for each endpoint in the description. </para
-      >
+        >To expose a service for use by callers, indigo2 requires a complete service description (represented by the <see cref="T:System.ServiceModel.Description.ServiceDescription" /> class). The <see cref="T:System.ServiceModel.ServiceHost" /> class creates a <see cref="T:System.ServiceModel.Description.ServiceDescription" /> from the service type and configuration information and then uses that description to create <see cref="T:System.ServiceModel.Dispatcher.ChannelDispatcher" /> objects for each endpoint in the description.
+      </para>
       <para
-        >Use a <see cref="T:System.ServiceModel.ServiceHost" /> object to load a service, configure endpoints, apply security settings, and start listeners to handle incoming requests. </para
-      >
+        >Use a <see cref="T:System.ServiceModel.ServiceHost" /> object to load a service, configure endpoints, apply security settings, and start listeners to handle incoming requests.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -57,8 +57,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.ServiceHost" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.ServiceHost" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -90,8 +90,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor as an alternative to implementing a custom <see cref="T:System.ServiceModel.Dispatcher.IInstanceContextInitializer" /> when you want to provide a specific object instance for use by a singleton service. You may want to use this overload when your service implementation type is difficult to construct (for example, if it does not implement a default public constructor that has no parameters). </para
-          >
+            >Use this constructor as an alternative to implementing a custom <see cref="T:System.ServiceModel.Dispatcher.IInstanceContextInitializer" /> when you want to provide a specific object instance for use by a singleton service. You may want to use this overload when your service implementation type is difficult to construct (for example, if it does not implement a default public constructor that has no parameters).
+          </para>
           <para
             >Note that when an object is provided to this overload, some features related to the indigo1 instancing behavior work differently. For example, calling <see cref="M:System.ServiceModel.InstanceContext.ReleaseServiceInstance" /> have no effect when a well-known object instance is provided using this constructor overload. Similarly, any other instance release mechanism is ignored. The <see cref="T:System.ServiceModel.ServiceHost" /> always behaves as if the <see cref="P:System.ServiceModel.OperationBehaviorAttribute.ReleaseInstanceMode" /> property is set to <see cref="F:System.ServiceModel.ReleaseInstanceMode.None" /> for all operations.</para
           >
@@ -532,8 +532,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="M:System.ServiceModel.ServiceHost.#ctor(System.Object,System.Uri[])" /> constructor to initialize a singleton instance of the service to be hosted when you want to control the instance of the service that is used. </para
-          >
+            >Use the <see cref="M:System.ServiceModel.ServiceHost.#ctor(System.Object,System.Uri[])" /> constructor to initialize a singleton instance of the service to be hosted when you want to control the instance of the service that is used.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

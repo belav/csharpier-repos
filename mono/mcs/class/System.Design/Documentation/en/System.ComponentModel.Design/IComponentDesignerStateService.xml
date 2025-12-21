@@ -16,8 +16,8 @@
       <para>Designer state is represented as a set of name/value pairs, in the form of a dictionary. Values stored in the dictionary must be serializable. The specified component should be sited in the designer and should have a non-empty name.</para>
       <block subset="none" type="note">
         <para
-          >Do not store sensitive information to the <see cref="T:System.ComponentModel.Design.IComponentDesignerStateService" />. Sensitive information includes password and authentication data, or any data you do not want to expose to an unwanted source. </para
-        >
+          >Do not store sensitive information to the <see cref="T:System.ComponentModel.Design.IComponentDesignerStateService" />. Sensitive information includes password and authentication data, or any data you do not want to expose to an unwanted source.
+        </para>
       </block>
     </remarks>
     <summary>

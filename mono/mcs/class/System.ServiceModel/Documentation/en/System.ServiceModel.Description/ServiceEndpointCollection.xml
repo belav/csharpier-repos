@@ -28,8 +28,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This collection of endpoints for a service is used by the metadata API to manage services with multiple endpoints. <see cref="T:System.ServiceModel.Description.ServiceEndpointCollection" /> is returned, for example, by the <see cref="P:System.ServiceModel.Description.ServiceDescription.Endpoints" /> property and by the <see cref="M:System.ServiceModel.Description.WsdlImporter.ImportAllEndpoints" /> method when creating service endpoints from WSDL port types. </para
-      >
+        >This collection of endpoints for a service is used by the metadata API to manage services with multiple endpoints. <see cref="T:System.ServiceModel.Description.ServiceEndpointCollection" /> is returned, for example, by the <see cref="P:System.ServiceModel.Description.ServiceDescription.Endpoints" /> property and by the <see cref="M:System.ServiceModel.Description.WsdlImporter.ImportAllEndpoints" /> method when creating service endpoints from WSDL port types.
+      </para>
       <para
         >The collection provides the functionality to <see cref="Overload:System.ServiceModel.Description.ServiceEndpointCollection.Find" /> the endpoints of a particular type, that have a specific name or address, or to <see cref="Overload:System.ServiceModel.Description.ServiceEndpointCollection.FindAll" /> of the endpoints for a service that meet a specified contract type or name criteria.</para
       >
@@ -64,8 +64,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This <see cref="M:System.ServiceModel.Description.ServiceEndpointCollection.Find(System.Type)" /> overload is specific to the indigo1 programming model. It looks at the <see cref="P:System.ServiceModel.Description.ContractDescription.ContractType" /> property for each endpoint. The <see cref="P:System.ServiceModel.Description.ContractDescription.ContractType" /> may be null if the <see cref="T:System.ServiceModel.Description.ContractDescription" /> was not created from the indigo2 programming model (types with *Contract attributes). </para
-          >
+            >This <see cref="M:System.ServiceModel.Description.ServiceEndpointCollection.Find(System.Type)" /> overload is specific to the indigo1 programming model. It looks at the <see cref="P:System.ServiceModel.Description.ContractDescription.ContractType" /> property for each endpoint. The <see cref="P:System.ServiceModel.Description.ContractDescription.ContractType" /> may be null if the <see cref="T:System.ServiceModel.Description.ContractDescription" /> was not created from the indigo2 programming model (types with *Contract attributes).
+          </para>
           <para
             >There are potentially multiple endpoints that could satisfy the criteria. The method returns the first one encountered in the collection. If you need to find all of the <see cref="T:System.ServiceModel.Description.ServiceEndpoint" /> objects that satisfy the specified criteria, use one of the <see cref="Overload:System.ServiceModel.Description.ServiceEndpointCollection.FindAll" /> methods instead.</para
           >

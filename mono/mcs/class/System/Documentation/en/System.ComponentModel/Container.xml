@@ -63,8 +63,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.Container" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Container" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -104,12 +104,8 @@
           >
         </summary>
         <param name="component">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The component to add. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The component to add.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Add">
@@ -149,12 +145,8 @@
           >
         </summary>
         <param name="component">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The component to add. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The component to add.
+        </param>
         <param name="name">
           <attribution
             license="cc4"
@@ -246,15 +238,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ComponentModel.IComponent" /> to create a site for. </param
-        >
+          />The <see cref="T:System.ComponentModel.IComponent" /> to create a site for.
+        </param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name to assign to <paramref name="component" />, or null to skip the name assignment. </param
-        >
+          />The name to assign to <paramref name="component" />, or null to skip the name assignment.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Dispose">
@@ -281,8 +273,8 @@
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format> and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
           <block subset="none" type="note">
             <para
               >Always call <see cref="Overload:System.ComponentModel.Container.Dispose" /> before you release your last reference to the <see cref="T:System.ComponentModel.Container" />. Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.ComponentModel.Container" /> object's Finalize method.</para
@@ -336,8 +328,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Finalize">
@@ -360,8 +352,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overrides <see cref="M:System.Object.Finalize" />. Application code should not call this method; an object's Finalize method is automatically invoked during garbage collection, unless finalization by the garbage collector has been disabled by a call to the <see cref="M:System.GC.SuppressFinalize(System.Object)" /> method. </para
-          >
+            >This method overrides <see cref="M:System.Object.Finalize" />. Application code should not call this method; an object's Finalize method is automatically invoked during garbage collection, unless finalization by the garbage collector has been disabled by a call to the <see cref="M:System.GC.SuppressFinalize(System.Object)" /> method.
+          </para>
           <para
             >For more information, see <format type="text/html">
               <a href="fd376774-1643-499b-869e-9546a3aeea70">Finalize Methods and Destructors</a>
@@ -420,8 +412,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of the service to retrieve. </param
-        >
+          />The <see cref="T:System.Type" /> of the service to retrieve.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Remove">
@@ -457,12 +449,8 @@
           >
         </summary>
         <param name="component">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The component to remove. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The component to remove.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RemoveWithoutUnsiting">

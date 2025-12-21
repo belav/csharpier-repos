@@ -198,8 +198,8 @@
           <para
             >The calling code can access the resource identified by the current permission object, even if callers higher in the stack have not been granted permission to access the resource (see <format type="text/html">
               <a href="1E40F4D3-FB7D-4F19-B334-B6076D469EA9">[&lt;topic://cpconassert&gt;]</a>
-            </format>). </para
-          >
+            </format>).
+          </para>
         </summary>
       </Docs>
       <Excluded>0</Excluded>

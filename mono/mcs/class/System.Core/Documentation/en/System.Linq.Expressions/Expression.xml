@@ -116,8 +116,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This default implementation for <see cref="F:System.Linq.Expressions.ExpressionType.Extension" /> nodes calls <see cref="M:System.Linq.Expressions.ExpressionVisitor.VisitExtension(System.Linq.Expressions.Expression)" />. Override this method to call into a more specific method on a derived visitor class of the <see cref="T:System.Linq.Expressions.ExpressionVisitor" /> class. However, it should still support unknown visitors by calling <see cref="M:System.Linq.Expressions.ExpressionVisitor.VisitExtension(System.Linq.Expressions.Expression)" />. </para
-          >
+            >This default implementation for <see cref="F:System.Linq.Expressions.ExpressionType.Extension" /> nodes calls <see cref="M:System.Linq.Expressions.ExpressionVisitor.VisitExtension(System.Linq.Expressions.Expression)" />. Override this method to call into a more specific method on a derived visitor class of the <see cref="T:System.Linq.Expressions.ExpressionVisitor" /> class. However, it should still support unknown visitors by calling <see cref="M:System.Linq.Expressions.ExpressionVisitor.VisitExtension(System.Linq.Expressions.Expression)" />.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -9313,8 +9313,8 @@
             >The elements of <paramref name="parameters" /> must be reference equal to the parameter expressions in <paramref name="body" />.</para
           >
           <para
-            >The <see cref="P:System.Linq.Expressions.Expression.Type" /> property of the resulting object is equal to <paramref name="delegateType" />. If <paramref name="parameters" /> is null, the <see cref="P:System.Linq.Expressions.LambdaExpression.Parameters" /> property of the resulting object is an empty collection. </para
-          >
+            >The <see cref="P:System.Linq.Expressions.Expression.Type" /> property of the resulting object is equal to <paramref name="delegateType" />. If <paramref name="parameters" /> is null, the <see cref="P:System.Linq.Expressions.LambdaExpression.Parameters" /> property of the resulting object is an empty collection.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -9672,8 +9672,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Linq.Expressions.Expression" /> to set the <see cref="P:System.Linq.Expressions.LambdaExpression.Body" /> property equal to. </param
-        >
+          />An <see cref="T:System.Linq.Expressions.Expression" /> to set the <see cref="P:System.Linq.Expressions.LambdaExpression.Body" /> property equal to.
+        </param>
         <param name="name">
           <attribution
             license="cc4"
@@ -9686,15 +9686,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Boolean" /> that indicates if tail call optimization will be applied when compiling the created expression. </param
-        >
+          />A <see cref="T:System.Boolean" /> that indicates if tail call optimization will be applied when compiling the created expression.
+        </param>
         <param name="parameters">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Collections.Generic.IEnumerable`1" /> that contains <see cref="T:System.Linq.Expressions.ParameterExpression" /> objects to use to populate the <see cref="P:System.Linq.Expressions.LambdaExpression.Parameters" /> collection. </param
-        >
+          />An <see cref="T:System.Collections.Generic.IEnumerable`1" /> that contains <see cref="T:System.Linq.Expressions.ParameterExpression" /> objects to use to populate the <see cref="P:System.Linq.Expressions.LambdaExpression.Parameters" /> collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Lambda&lt;TDelegate&gt;">
@@ -9905,12 +9905,8 @@
           />An <see cref="T:System.Collections.Generic.IEnumerable`1" /> that contains <see cref="T:System.Linq.Expressions.ParameterExpression" /> objects to use to populate the <see cref="P:System.Linq.Expressions.LambdaExpression.Parameters" /> collection.</param
         >
         <typeparam name="TDelegate">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The delegate type. </typeparam
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The delegate type.
+        </typeparam>
       </Docs>
     </Member>
     <Member MemberName="Lambda&lt;TDelegate&gt;">
@@ -9979,12 +9975,8 @@
           />An array that contains <see cref="T:System.Linq.Expressions.ParameterExpression" /> objects to use to populate the <see cref="P:System.Linq.Expressions.LambdaExpression.Parameters" /> collection.</param
         >
         <typeparam name="TDelegate">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The delegate type. </typeparam
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The delegate type.
+        </typeparam>
       </Docs>
     </Member>
     <Member MemberName="Lambda&lt;TDelegate&gt;">
@@ -10050,12 +10042,8 @@
           />An <see cref="T:System.Collections.Generic.IEnumerable`1" /> that contains <see cref="T:System.Linq.Expressions.ParameterExpression" /> objects to use to populate the <see cref="P:System.Linq.Expressions.Expression`1.Parameters" /> collection.</param
         >
         <typeparam name="TDelegate">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The delegate type. </typeparam
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The delegate type.
+        </typeparam>
       </Docs>
     </Member>
     <Member MemberName="Lambda&lt;TDelegate&gt;">
@@ -10129,12 +10117,8 @@
           />An <see cref="T:System.Collections.Generic.IEnumerable`1" /> that contains <see cref="T:System.Linq.Expressions.ParameterExpression" /> objects to use to populate the <see cref="P:System.Linq.Expressions.LambdaExpression.Parameters" /> collection.</param
         >
         <typeparam name="TDelegate">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The delegate type. </typeparam
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The delegate type.
+        </typeparam>
       </Docs>
     </Member>
     <Member MemberName="LeftShift">

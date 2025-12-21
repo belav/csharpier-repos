@@ -101,8 +101,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Data.DataColumn" /> to add. </param
-        >
+          />The <see cref="T:System.Data.DataColumn" /> to add.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -146,12 +146,8 @@
           <para>The newly created <see cref="T:System.Data.DataColumn" />.</para>
         </returns>
         <param name="columnName">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the column. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the column.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -197,15 +193,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="P:System.Data.DataColumn.ColumnName" /> to use when you create the column. </param
-        >
+          />The <see cref="P:System.Data.DataColumn.ColumnName" /> to use when you create the column.
+        </param>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="P:System.Data.DataColumn.DataType" /> of the new column. </param
-        >
+          />The <see cref="P:System.Data.DataColumn.DataType" /> of the new column.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -252,22 +248,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name to use when you create the column. </param
-        >
+          />The name to use when you create the column.
+        </param>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="P:System.Data.DataColumn.DataType" /> of the new column. </param
-        >
+          />The <see cref="P:System.Data.DataColumn.DataType" /> of the new column.
+        </param>
         <param name="expression">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The expression to assign to the <see cref="P:System.Data.DataColumn.Expression" /> property. </param
-        >
+          />The expression to assign to the <see cref="P:System.Data.DataColumn.Expression" /> property.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -299,8 +295,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array of <see cref="T:System.Data.DataColumn" /> objects to add to the collection. </param
-        >
+          />The array of <see cref="T:System.Data.DataColumn" /> objects to add to the collection.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -444,8 +440,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="P:System.Data.DataColumn.ColumnName" /> of the column to look for. </param
-        >
+          />The <see cref="P:System.Data.DataColumn.ColumnName" /> of the column to look for.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -479,8 +475,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Data.DataColumn" /> objects to copy the collection into. </param
-        >
+          />An array of <see cref="T:System.Data.DataColumn" /> objects to copy the collection into.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
@@ -521,8 +517,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the column to return. </param
-        >
+          />The name of the column to return.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -553,8 +549,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the column to find. </param
-        >
+          />The name of the column to find.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -720,8 +716,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Data.DataColumn" /> to remove. </param
-        >
+          />The <see cref="T:System.Data.DataColumn" /> to remove.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -755,8 +751,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the column to remove. </param
-        >
+          />The name of the column to remove.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -788,8 +784,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the column to remove. </param
-        >
+          />The index of the column to remove.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

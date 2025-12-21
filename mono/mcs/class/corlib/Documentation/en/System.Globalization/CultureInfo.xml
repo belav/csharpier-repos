@@ -52,8 +52,8 @@
         <h2>Culture Names and Identifiers</h2>
       </format>
       <para
-        >The <see cref="T:System.Globalization.CultureInfo" /> class specifies a unique name for each culture, based on RFC 4646. The name is a combination of an ISO 639 two-letter lowercase culture code associated with a language and an ISO 3166 two-letter uppercase subculture code associated with a country or region. </para
-      >
+        >The <see cref="T:System.Globalization.CultureInfo" /> class specifies a unique name for each culture, based on RFC 4646. The name is a combination of an ISO 639 two-letter lowercase culture code associated with a language and an ISO 3166 two-letter uppercase subculture code associated with a country or region.
+      </para>
       <block subset="none" type="note">
         <para
           >When a culture name is passed to a class constructor or a method such as <see cref="M:System.Globalization.CultureInfo.CreateSpecificCulture(System.String)" /> or <see cref="T:System.Globalization.CultureInfo" />, its case is not significant.</para
@@ -98,8 +98,8 @@
       </format>
       <para>The cultures are generally grouped into three sets: invariant cultures, neutral cultures, and specific cultures.</para>
       <para
-        >An invariant culture is culture-insensitive. Your application specifies the invariant culture by name using an empty string ("") or by its identifier. <see cref="P:System.Globalization.CultureInfo.InvariantCulture" /> defines an instance of the invariant culture. It is associated with the English language but not with any country/region. It is used in almost any method in the Globalization namespace that requires a culture. </para
-      >
+        >An invariant culture is culture-insensitive. Your application specifies the invariant culture by name using an empty string ("") or by its identifier. <see cref="P:System.Globalization.CultureInfo.InvariantCulture" /> defines an instance of the invariant culture. It is associated with the English language but not with any country/region. It is used in almost any method in the Globalization namespace that requires a culture.
+      </para>
       <para>A neutral culture is a culture that is associated with a language but not with a country/region. A specific culture is a culture that is associated with a language and a country/region. For example, fr is the neutral name for the French culture, and fr-FR is the name of the specific French (France) culture. Note that Chinese (Simplified) and Chinese (Traditional) are also considered neutral cultures.</para>
       <para
         >Creating an instance of a <see cref="T:System.Globalization.CompareInfo" /> class for a neutral culture is not recommended because the data it contains is arbitrary. To display and sort data, specify both the language and region. Additionally, the <see cref="P:System.Globalization.CompareInfo.Name" /> property of a <see cref="T:System.Globalization.CompareInfo" /> object created for a neutral culture returns only the country and does not include the region.</para
@@ -128,8 +128,8 @@
       <list type="bullet">
         <item>
           <para
-            >New cultures that supplement the cultures available in Windows or the .NET Framework. For example, an application could install a <see cref="T:System.Globalization.CultureInfo" /> object that represents the fj-FJ (or Fijan (Fiji)) culture on a system. </para
-          >
+            >New cultures that supplement the cultures available in Windows or the .NET Framework. For example, an application could install a <see cref="T:System.Globalization.CultureInfo" /> object that represents the fj-FJ (or Fijan (Fiji)) culture on a system.
+          </para>
         </item>
         <item>
           <para>Replacement cultures whose properties are different from the properties of the standard cultures supported by Windows and the .NET Framework. </para>
@@ -174,8 +174,8 @@
       <para>When a new application thread is started, its current culture and current UI culture are defined by the current system culture, and not by the current thread culture. The following example illustrates the difference. It sets the current culture and current UI culture of an application thread to the French (France) culture (fr-FR). If the current culture is already fr-FR, the example sets it to the English (United States) culture (en-US). It displays three random numbers as currency values and then creates a new thread, which, in turn, displays three more random numbers as currency values. But as the output from the example shows, the currency values displayed by the new thread do not reflect the formatting conventions of the French (France) culture, unlike the output from the main application thread.</para>
       <para>code reference: System.Globalization.CultureInfo.Class.Thread#1</para>
       <para
-        >In versions of the .NET Framework before the net_v45, the most common way to ensure that the main application thread shares the same culture with all other worker threads is to pass either the name of the application-wide culture or a <see cref="T:System.Globalization.CultureInfo" /> object that represents the application-wide culture to a <see cref="T:System.Threading.ParameterizedThreadStart" /> delegate. The following example uses this approach to ensure that the currency values displayed by two threads reflect the formatting conventions of the same culture. </para
-      >
+        >In versions of the .NET Framework before the net_v45, the most common way to ensure that the main application thread shares the same culture with all other worker threads is to pass either the name of the application-wide culture or a <see cref="T:System.Globalization.CultureInfo" /> object that represents the application-wide culture to a <see cref="T:System.Threading.ParameterizedThreadStart" /> delegate. The following example uses this approach to ensure that the currency values displayed by two threads reflect the formatting conventions of the same culture.
+      </para>
       <para>code reference: System.Globalization.CultureInfo.Class.Thread#2</para>
       <para
         >You can set the culture and UI culture of thread pool threads in a similar manner by calling the <see cref="M:System.Threading.ThreadPool.QueueUserWorkItem(System.Threading.WaitCallback,System.Object)" /> method.</para
@@ -323,8 +323,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A predefined <see cref="T:System.Globalization.CultureInfo" /> identifier, <see cref="P:System.Globalization.CultureInfo.LCID" /> property of an existing <see cref="T:System.Globalization.CultureInfo" /> object, or Windows-only culture identifier. </param
-        >
+          />A predefined <see cref="T:System.Globalization.CultureInfo" /> identifier, <see cref="P:System.Globalization.CultureInfo.LCID" /> property of an existing <see cref="T:System.Globalization.CultureInfo" /> object, or Windows-only culture identifier.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -352,8 +352,8 @@
             > at the Go Global Developer Center.</para
           >
           <para
-            >If <paramref name="name" /> is <see cref="F:System.String.Empty" />, the constructor creates an instance of the invariant culture; this is equivalent to retrieving the value of the <see cref="P:System.Globalization.CultureInfo.InvariantCulture" /> property. </para
-          >
+            >If <paramref name="name" /> is <see cref="F:System.String.Empty" />, the constructor creates an instance of the invariant culture; this is equivalent to retrieving the value of the <see cref="P:System.Globalization.CultureInfo.InvariantCulture" /> property.
+          </para>
           <para
             >The user might choose to override some of the values associated with the current culture of Windows through the regional and language options portion of Control Panel. For example, the user might choose to display the date in a different format or to use a currency other than the default for the culture. If the culture identifier associated with <paramref name="name" /> matches the culture identifier of the current Windows culture, this constructor creates a <see cref="T:System.Globalization.CultureInfo" /> object that uses those overrides, including user settings for the properties of the <see cref="T:System.Globalization.DateTimeFormatInfo" /> instance returned by the <see cref="P:System.Globalization.CultureInfo.DateTimeFormat" /> property, and the properties of the <see cref="T:System.Globalization.NumberFormatInfo" /> instance returned by the <see cref="P:System.Globalization.CultureInfo.NumberFormat" /> property. If the user settings are incompatible with the culture associated with the <see cref="T:System.Globalization.CultureInfo" />, for example, if the selected calendar is not one of the <see cref="P:System.Globalization.CultureInfo.OptionalCalendars" />, the results of the methods and the values of the properties are undefined.</para
           >
@@ -491,15 +491,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A predefined <see cref="T:System.Globalization.CultureInfo" /> identifier, <see cref="P:System.Globalization.CultureInfo.LCID" /> property of an existing <see cref="T:System.Globalization.CultureInfo" /> object, or Windows-only culture identifier. </param
-        >
+          />A predefined <see cref="T:System.Globalization.CultureInfo" /> identifier, <see cref="P:System.Globalization.CultureInfo.LCID" /> property of an existing <see cref="T:System.Globalization.CultureInfo" /> object, or Windows-only culture identifier.
+        </param>
         <param name="useUserOverride">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A Boolean that denotes whether to use the user-selected culture settings (true) or the default culture settings (false). </param
-        >
+          />A Boolean that denotes whether to use the user-selected culture settings (true) or the default culture settings (false).
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -597,8 +597,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A Boolean that denotes whether to use the user-selected culture settings (true) or the default culture settings (false). </param
-        >
+          />A Boolean that denotes whether to use the user-selected culture settings (true) or the default culture settings (false).
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Calendar">
@@ -660,11 +660,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Information, such as the default culture and format patterns, is cached the first time it is requested. That information can change during the life of the <see cref="T:System.AppDomain" />, for example, when the user modifies the regional and language options portion of Control Panel. However, the <see cref="T:System.Globalization.CultureInfo" /> class does not automatically detect changes in the system settings. </para
-          >
+            >Information, such as the default culture and format patterns, is cached the first time it is requested. That information can change during the life of the <see cref="T:System.AppDomain" />, for example, when the user modifies the regional and language options portion of Control Panel. However, the <see cref="T:System.Globalization.CultureInfo" /> class does not automatically detect changes in the system settings.
+          </para>
           <para
-            >The <see cref="M:System.Globalization.CultureInfo.ClearCachedData" /> method clears the cache of <see cref="T:System.Globalization.CultureInfo" /> objects created by <see cref="Overload:System.Globalization.CultureInfo.GetCultureInfo" /> and refreshes the information in the <see cref="P:System.Globalization.CultureInfo.CurrentCulture" />, <see cref="P:System.Globalization.CultureInfo.CurrentUICulture" />, and <see cref="P:System.Globalization.RegionInfo.CurrentRegion" /> properties, based on the current system settings. </para
-          >
+            >The <see cref="M:System.Globalization.CultureInfo.ClearCachedData" /> method clears the cache of <see cref="T:System.Globalization.CultureInfo" /> objects created by <see cref="Overload:System.Globalization.CultureInfo.GetCultureInfo" /> and refreshes the information in the <see cref="P:System.Globalization.CultureInfo.CurrentCulture" />, <see cref="P:System.Globalization.CultureInfo.CurrentUICulture" />, and <see cref="P:System.Globalization.RegionInfo.CurrentRegion" /> properties, based on the current system settings.
+          </para>
           <para
             >The <see cref="M:System.Globalization.CultureInfo.ClearCachedData" /> method does not refresh the information in the <see cref="P:System.Threading.Thread.CurrentCulture" /> property for existing threads. However, future threads will have any new <see cref="T:System.Globalization.CultureInfo" /> property values.</para
           >
@@ -904,8 +904,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current UI culture is a per-thread property. That is, each thread has its own current UI culture. This read-only property is equivalent to retrieving the <see cref="T:System.Globalization.CultureInfo" /> object returned by the  System.Threading.Thread.CurrentThread.CurrentUICulture property. When a thread is started, its UI culture is initially determined as follows: </para
-          >
+            >The current UI culture is a per-thread property. That is, each thread has its own current UI culture. This read-only property is equivalent to retrieving the <see cref="T:System.Globalization.CultureInfo" /> object returned by the  System.Threading.Thread.CurrentThread.CurrentUICulture property. When a thread is started, its UI culture is initially determined as follows:
+          </para>
           <list type="bullet">
             <item>
               <para
@@ -918,8 +918,8 @@
           </list>
           <block subset="none" type="note">
             <para
-              >In the compact, the <see cref="P:System.Globalization.CultureInfo.CurrentUICulture" /> property is read-only. The current UI culture is determined by the system's regional settings and cannot be changed programmatically. </para
-            >
+              >In the compact, the <see cref="P:System.Globalization.CultureInfo.CurrentUICulture" /> property is read-only. The current UI culture is determined by the system's regional settings and cannot be changed programmatically.
+            </para>
           </block>
           <para
             >To change the user interface culture used by a thread, set the <see cref="P:System.Threading.Thread.CurrentUICulture" /> property to the new culture. If you explicitly change a thread's UI culture in this way, that change persists if the thread crosses application domain boundaries.</para
@@ -941,8 +941,8 @@
           <list type="bullet">
             <item>
               <para
-                >By using the culture defined by the <see cref="P:System.Globalization.CultureInfo.DefaultThreadCurrentUICulture" /> property for the current application domain if the  property value is not null. </para
-              >
+                >By using the culture defined by the <see cref="P:System.Globalization.CultureInfo.DefaultThreadCurrentUICulture" /> property for the current application domain if the  property value is not null.
+              </para>
             </item>
             <item>
               <para>By using the system's default culture. On systems that use the Windows operating system, the common language runtime calls the Windows GetUserDefaultUILanguage function to set the current  UI culture. GetUserDefaultUILanguage returns the default UI culture set by the user. If the user has not set a default UI language, it returns the culture originally installed on the system.</para>
@@ -1110,8 +1110,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property represents the localized name of the <see cref="T:System.Globalization.CultureInfo" /> object. </para
-          >
+            >This property represents the localized name of the <see cref="T:System.Globalization.CultureInfo" /> object.
+          </para>
           <para>Culture names may vary due to scripting or formatting conventions. You should use the returned name for display, and not attempt to parse it.</para>
           <para
             >If a custom culture is created by means of the <see cref="T:System.Globalization.CultureAndRegionInfoBuilder" /> class, the <see cref="P:System.Globalization.CultureInfo.DisplayName" /> property is initialized to the value of the <see cref="P:System.Globalization.CultureInfo.NativeName" /> property.</para
@@ -1193,8 +1193,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to compare with the current <see cref="T:System.Globalization.CultureInfo" />. </param
-        >
+          />The object to compare with the current <see cref="T:System.Globalization.CultureInfo" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetConsoleFallbackUICulture">
@@ -2195,8 +2195,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >We recommend that you use the string overload of this method (<see cref="M:System.Globalization.CultureInfo.GetCultureInfo(System.String)" />), because locale names should be used instead of LCIDs. For custom locales, the locale name is required. </para
-          >
+            >We recommend that you use the string overload of this method (<see cref="M:System.Globalization.CultureInfo.GetCultureInfo(System.String)" />), because locale names should be used instead of LCIDs. For custom locales, the locale name is required.
+          </para>
           <para
             >If <paramref name="culture" /> is the locale identifier of the current culture, the returned <see cref="T:System.Globalization.CultureInfo" /> object does not reflect any user overrides.</para
           >
@@ -2249,14 +2249,14 @@
             > at the Go Global Developer Center.</para
           >
           <para
-            >The <see cref="Overload:System.Globalization.CultureInfo.GetCultureInfo" /> method retrieves a cached, read-only <see cref="T:System.Globalization.CultureInfo" /> object. It offers better performance than a corresponding call to the <see cref="M:System.Globalization.CultureInfo.#ctor(System.String)" /> constructor. </para
-          >
+            >The <see cref="Overload:System.Globalization.CultureInfo.GetCultureInfo" /> method retrieves a cached, read-only <see cref="T:System.Globalization.CultureInfo" /> object. It offers better performance than a corresponding call to the <see cref="M:System.Globalization.CultureInfo.#ctor(System.String)" /> constructor.
+          </para>
           <para
-            >If <paramref name="name" /> is the name of the current culture, the returned <see cref="T:System.Globalization.CultureInfo" /> object does not reflect any user overrides. This makes the method suitable for server applications or tools that do not have a real user account on the system and that need to load multiple cultures efficiently. </para
-          >
+            >If <paramref name="name" /> is the name of the current culture, the returned <see cref="T:System.Globalization.CultureInfo" /> object does not reflect any user overrides. This makes the method suitable for server applications or tools that do not have a real user account on the system and that need to load multiple cultures efficiently.
+          </para>
           <para
-            > If <paramref name="name" /> is <see cref="F:System.String.Empty" />, the method returns the invariant culture. This is equivalent to retrieving the value of the <see cref="P:System.Globalization.CultureInfo.InvariantCulture" /> property. </para
-          >
+            > If <paramref name="name" /> is <see cref="F:System.String.Empty" />, the method returns the invariant culture. This is equivalent to retrieving the value of the <see cref="P:System.Globalization.CultureInfo.InvariantCulture" /> property.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2307,8 +2307,8 @@
             > at the Go Global Developer Center.</para
           >
           <para
-            >The <see cref="Overload:System.Globalization.CultureInfo.GetCultureInfo" /> method obtains a cached, read-only <see cref="T:System.Globalization.CultureInfo" /> object. It offers better performance than a corresponding call to a <see cref="Overload:System.Globalization.CultureInfo.#ctor" /> constructor. The method is used to create a culture similar to that specified by the <paramref name="name" /> parameter, but with different sorting and casing rules. </para
-          >
+            >The <see cref="Overload:System.Globalization.CultureInfo.GetCultureInfo" /> method obtains a cached, read-only <see cref="T:System.Globalization.CultureInfo" /> object. It offers better performance than a corresponding call to a <see cref="Overload:System.Globalization.CultureInfo.#ctor" /> constructor. The method is used to create a culture similar to that specified by the <paramref name="name" /> parameter, but with different sorting and casing rules.
+          </para>
           <para
             >If <paramref name="name" /> or <paramref name="altName" /> is the name of the current culture, the returned objects do not reflect any user overrides. If <paramref name="name" /> is <see cref="F:System.String.Empty" />, the method returns the invariant culture. This is equivalent to retrieving the value of the <see cref="P:System.Globalization.CultureInfo.InvariantCulture" /> property. If <paramref name="altName" /> is <see cref="F:System.String.Empty" />, the method uses the writing system and comparison rules specified by the invariant culture.</para
           >
@@ -2368,16 +2368,16 @@
             >
           </block>
           <para
-            >The RFC 4646 standard that is maintained by the Internet Engineering Task Force (IETF) defines an IETF language tag, which provides a uniform means of identifying a language. The format of an IETF language tag is the same as the culture name returned by the <see cref="P:System.Globalization.CultureInfo.Name" /> property, but does not identify a culture uniquely. Different cultures share the same IETF language tag if those cultures have identical linguistic characteristics. The linguistic characteristics of a culture are contained in the <see cref="T:System.Globalization.TextInfo" /> object associated with a <see cref="T:System.Globalization.CultureInfo" /> object. </para
-          >
+            >The RFC 4646 standard that is maintained by the Internet Engineering Task Force (IETF) defines an IETF language tag, which provides a uniform means of identifying a language. The format of an IETF language tag is the same as the culture name returned by the <see cref="P:System.Globalization.CultureInfo.Name" /> property, but does not identify a culture uniquely. Different cultures share the same IETF language tag if those cultures have identical linguistic characteristics. The linguistic characteristics of a culture are contained in the <see cref="T:System.Globalization.TextInfo" /> object associated with a <see cref="T:System.Globalization.CultureInfo" /> object.
+          </para>
           <para>An IETF language tag consists of a mandatory language identifier, an optional script identifier, and an optional region identifier. </para>
           <para>Your applications should use the retrieved culture to control language-specific tasks, such as managing a spelling or grammar checker. Applications should not use the retrieved culture to control culture-specific tasks, such as sorting text or formatting times and dates.</para>
           <para
             >For more information, see RFC 4646, "Tags for Identifying Languages," and the most recent draft standard, Draft-phillips-langtags-05.txt, at <see
               cref="http://go.microsoft.com/fwlink/?LinkId=100231"
               >http://go.microsoft.com/fwlink/?LinkId=100231</see
-            >.         </para
-          >
+            >.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2423,8 +2423,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Globalization.CultureInfo.GetCultures(System.Globalization.CultureTypes)" /> method is most commonly called with the <paramref name="types" /> parameter set to the following values:  </para
-          >
+            >The <see cref="M:System.Globalization.CultureInfo.GetCultures(System.Globalization.CultureTypes)" /> method is most commonly called with the <paramref name="types" /> parameter set to the following values:
+          </para>
           <list type="bullet">
             <item>
               <para>
@@ -2465,8 +2465,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the enumeration values that filter the cultures to retrieve. </param
-        >
+          />A bitwise combination of the enumeration values that filter the cultures to retrieve.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetFormat">
@@ -2516,8 +2516,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> for which to get a formatting object. This method only supports the <see cref="T:System.Globalization.NumberFormatInfo" /> and <see cref="T:System.Globalization.DateTimeFormatInfo" /> types. </param
-        >
+          />The <see cref="T:System.Type" /> for which to get a formatting object. This method only supports the <see cref="T:System.Globalization.NumberFormatInfo" /> and <see cref="T:System.Globalization.DateTimeFormatInfo" /> types.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -2584,8 +2584,8 @@
             >
           </block>
           <para
-            >The RFC 4646 standard that is maintained by the Internet Engineering Task Force (IETF) defines an IETF language tag, which provides a uniform means of identifying a language. The format of an IETF language tag is similar to the culture name returned by the <see cref="P:System.Globalization.CultureInfo.Name" /> property, but does not identify a culture uniquely. That is, different cultures share the same IETF language tag if those cultures have identical linguistic characteristics. The linguistic characteristics of a culture are contained in the <see cref="T:System.Globalization.TextInfo" /> object associated with a <see cref="T:System.Globalization.CultureInfo" /> object. </para
-          >
+            >The RFC 4646 standard that is maintained by the Internet Engineering Task Force (IETF) defines an IETF language tag, which provides a uniform means of identifying a language. The format of an IETF language tag is similar to the culture name returned by the <see cref="P:System.Globalization.CultureInfo.Name" /> property, but does not identify a culture uniquely. That is, different cultures share the same IETF language tag if those cultures have identical linguistic characteristics. The linguistic characteristics of a culture are contained in the <see cref="T:System.Globalization.TextInfo" /> object associated with a <see cref="T:System.Globalization.CultureInfo" /> object.
+          </para>
           <para>An IETF language tag consists of a mandatory language identifier, an optional script identifier, and an optional region identifier. </para>
           <para
             >For more information, see <see cref="http://go.microsoft.com/fwlink/?LinkId=230876"
@@ -2663,8 +2663,8 @@
             <h2>String Operations</h2>
           </format>
           <para
-            >You can use the invariant culture for culture-sensitive string operations that are not affected by the conventions of the current thread culture and that are consistent across cultures. For example, you may want sorted data to appear in a fixed order or apply a standard set of casing conventions to strings regardless of the current thread culture. To do this, you pass the <see cref="P:System.Globalization.CultureInfo.InvariantCulture" /> object to a method that has a <see cref="T:System.Globalization.CultureInfo" /> parameter, such as <see cref="M:System.String.Compare(System.String,System.String,System.Boolean,System.Globalization.CultureInfo)" /> and <see cref="M:System.String.ToUpper(System.Globalization.CultureInfo)" />. </para
-          >
+            >You can use the invariant culture for culture-sensitive string operations that are not affected by the conventions of the current thread culture and that are consistent across cultures. For example, you may want sorted data to appear in a fixed order or apply a standard set of casing conventions to strings regardless of the current thread culture. To do this, you pass the <see cref="P:System.Globalization.CultureInfo.InvariantCulture" /> object to a method that has a <see cref="T:System.Globalization.CultureInfo" /> parameter, such as <see cref="M:System.String.Compare(System.String,System.String,System.Boolean,System.Globalization.CultureInfo)" /> and <see cref="M:System.String.ToUpper(System.Globalization.CultureInfo)" />.
+          </para>
           <format type="text/html">
             <h2>Persisting Data</h2>
           </format>
@@ -2672,8 +2672,8 @@
             >The <see cref="P:System.Globalization.CultureInfo.InvariantCulture" /> property can be used to persist data in a culture-independent format. This provides a known format that does not change and that can be used to serialize and deserialize data across cultures. After the data is deserialized, it can be formatted appropriately based on the cultural conventions of the current user.</para
           >
           <para
-            >For example, if you choose to persist date and time data in string form, you can pass the <see cref="P:System.Globalization.CultureInfo.InvariantCulture" /> object to the <see cref="M:System.DateTime.ToString(System.String,System.IFormatProvider)" /> or <see cref="M:System.DateTimeOffset.ToString(System.IFormatProvider)" /> method to create the string, and you can pass the <see cref="P:System.Globalization.CultureInfo.InvariantCulture" /> object to the <see cref="M:System.DateTime.Parse(System.String,System.IFormatProvider)" /> or <see cref="M:System.DateTimeOffset.Parse(System.String,System.IFormatProvider,System.Globalization.DateTimeStyles)" /> method to convert the string back to a date and time value. This technique ensures that the underlying date and time values do not change when the data is read or written by users from different cultures. </para
-          >
+            >For example, if you choose to persist date and time data in string form, you can pass the <see cref="P:System.Globalization.CultureInfo.InvariantCulture" /> object to the <see cref="M:System.DateTime.ToString(System.String,System.IFormatProvider)" /> or <see cref="M:System.DateTimeOffset.ToString(System.IFormatProvider)" /> method to create the string, and you can pass the <see cref="P:System.Globalization.CultureInfo.InvariantCulture" /> object to the <see cref="M:System.DateTime.Parse(System.String,System.IFormatProvider)" /> or <see cref="M:System.DateTimeOffset.Parse(System.String,System.IFormatProvider,System.Globalization.DateTimeStyles)" /> method to convert the string back to a date and time value. This technique ensures that the underlying date and time values do not change when the data is read or written by users from different cultures.
+          </para>
           <para
             >The following example uses the invariant culture to persist a <see cref="T:System.DateTime" /> value as a string. It then parses the string and displays its value by using the formatting conventions of the French (France) and German (Germany) cultures.</para
           >
@@ -2824,8 +2824,8 @@
             > at the Go Global Developer Center. Note that culture names are subject to change, and that they also can reflect the names of custom cultures.</para
           >
           <para
-            >The <see cref="P:System.Globalization.CultureInfo.Name" /> property follows the naming standards provided in the <see cref="T:System.Globalization.CultureInfo" /> class topic. It returns the short form of the culture name that excludes any indication of an alternate sort order. For example, if you instantiate a <see cref="T:System.Globalization.CultureInfo" /> object by using the string "de-DE_phoneb" to reflect an alternate sort order, the <see cref="P:System.Globalization.CultureInfo.Name" /> property returns "de-DE". </para
-          >
+            >The <see cref="P:System.Globalization.CultureInfo.Name" /> property follows the naming standards provided in the <see cref="T:System.Globalization.CultureInfo" /> class topic. It returns the short form of the culture name that excludes any indication of an alternate sort order. For example, if you instantiate a <see cref="T:System.Globalization.CultureInfo" /> object by using the string "de-DE_phoneb" to reflect an alternate sort order, the <see cref="P:System.Globalization.CultureInfo.Name" /> property returns "de-DE".
+          </para>
           <para
             >To get the full name of the culture, you should use the <see cref="P:System.Globalization.CultureInfo.DisplayName" />, <see cref="P:System.Globalization.CultureInfo.EnglishName" />, or <see cref="P:System.Globalization.CultureInfo.NativeName" /> property.</para
           >
@@ -3017,8 +3017,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Globalization.CultureInfo" /> to wrap. </param
-        >
+          />The <see cref="T:System.Globalization.CultureInfo" /> to wrap.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="TextInfo">
@@ -3147,8 +3147,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overrides <see cref="M:System.Object.ToString" />. It returns a normalized version of the culture name that is passed to the <see cref="M:System.Globalization.CultureInfo.#ctor(System.String)" /> or <see cref="M:System.Globalization.CultureInfo.#ctor(System.String,System.Boolean)" /> constructor or to the <see cref="M:System.Globalization.CultureInfo.CreateSpecificCulture(System.String)" /> or <see cref="M:System.Globalization.CultureInfo.GetCultureInfo(System.String)" /> method. It normalizes the result string by converting characters in languagecode2 to lowercase and converting characters in country/regioncode2 to uppercase if necessary. </para
-          >
+            >This method overrides <see cref="M:System.Object.ToString" />. It returns a normalized version of the culture name that is passed to the <see cref="M:System.Globalization.CultureInfo.#ctor(System.String)" /> or <see cref="M:System.Globalization.CultureInfo.#ctor(System.String,System.Boolean)" /> constructor or to the <see cref="M:System.Globalization.CultureInfo.CreateSpecificCulture(System.String)" /> or <see cref="M:System.Globalization.CultureInfo.GetCultureInfo(System.String)" /> method. It normalizes the result string by converting characters in languagecode2 to lowercase and converting characters in country/regioncode2 to uppercase if necessary.
+          </para>
           <para
             >Predefined culture names are listed in the <see
               cref="http://go.microsoft.com/fwlink/?LinkId=200048"
@@ -3193,8 +3193,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For example, the two-letter abbreviation for English is "en". The <see cref="P:System.Globalization.CultureInfo.TwoLetterISOLanguageName" /> property value for the invariant culture is "iv". </para
-          >
+            >For example, the two-letter abbreviation for English is "en". The <see cref="P:System.Globalization.CultureInfo.TwoLetterISOLanguageName" /> property value for the invariant culture is "iv".
+          </para>
           <block subset="none" type="note">
             <para
               >When communicating between processes or persisting data it is usually better to use the full <see cref="P:System.Globalization.CultureInfo.Name" />. Using just the language can lose context and data.</para

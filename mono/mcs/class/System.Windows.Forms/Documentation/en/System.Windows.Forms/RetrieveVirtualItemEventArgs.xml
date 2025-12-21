@@ -18,8 +18,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see cref="E:System.Windows.Forms.ListView.RetrieveVirtualItem" /> event. </para
-      >
+        >Provides data for the <see cref="E:System.Windows.Forms.ListView.RetrieveVirtualItem" /> event.
+      </para>
     </summary>
   </Docs>
   <Members>
@@ -35,8 +35,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.RetrieveVirtualItemEventArgs" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.RetrieveVirtualItemEventArgs" /> class.
+          </para>
         </summary>
         <param name="itemIndex">
           <attribution
@@ -65,8 +65,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When handling the <see cref="E:System.Windows.Forms.ListView.RetrieveVirtualItem" /> event, set the <see cref="P:System.Windows.Forms.RetrieveVirtualItemEventArgs.Item" /> property to the item you wish to be retrieved. </para
-          >
+            >When handling the <see cref="E:System.Windows.Forms.ListView.RetrieveVirtualItem" /> event, set the <see cref="P:System.Windows.Forms.RetrieveVirtualItemEventArgs.Item" /> property to the item you wish to be retrieved.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

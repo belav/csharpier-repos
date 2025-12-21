@@ -33,11 +33,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When using the <see cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" /> or <see cref="T:System.Runtime.Serialization.Formatters.Soap.SoapFormatter" /> classes to serialize an object, use the <see cref="T:System.NonSerializedAttribute" /> attribute to prevent a field from being serialized. For example, you can use this attribute to prevent the serialization of sensitive data. </para
-      >
+        >When using the <see cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" /> or <see cref="T:System.Runtime.Serialization.Formatters.Soap.SoapFormatter" /> classes to serialize an object, use the <see cref="T:System.NonSerializedAttribute" /> attribute to prevent a field from being serialized. For example, you can use this attribute to prevent the serialization of sensitive data.
+      </para>
       <para
-        >The target objects for the <see cref="T:System.NonSerializedAttribute" /> attribute are public and private fields of a serializable class. By default, classes are not serializable unless they are marked with <see cref="T:System.SerializableAttribute" />. During the serialization process all the public and private fields of a class are serialized by default. Fields marked with <see cref="T:System.NonSerializedAttribute" /> are excluded during serialization. If you are using the <see cref="T:System.Xml.Serialization.XmlSerializer" /> class to serialize an object, use the <see cref="T:System.Xml.Serialization.XmlIgnoreAttribute" /> class to get the same functionality. Alternatively, implement the <see cref="T:System.Runtime.Serialization.ISerializable" /> interface to explicitly control the serialization process. Note that classes that implement <see cref="T:System.Runtime.Serialization.ISerializable" /> must still be marked with <see cref="T:System.SerializableAttribute" />. </para
-      >
+        >The target objects for the <see cref="T:System.NonSerializedAttribute" /> attribute are public and private fields of a serializable class. By default, classes are not serializable unless they are marked with <see cref="T:System.SerializableAttribute" />. During the serialization process all the public and private fields of a class are serialized by default. Fields marked with <see cref="T:System.NonSerializedAttribute" /> are excluded during serialization. If you are using the <see cref="T:System.Xml.Serialization.XmlSerializer" /> class to serialize an object, use the <see cref="T:System.Xml.Serialization.XmlIgnoreAttribute" /> class to get the same functionality. Alternatively, implement the <see cref="T:System.Runtime.Serialization.ISerializable" /> interface to explicitly control the serialization process. Note that classes that implement <see cref="T:System.Runtime.Serialization.ISerializable" /> must still be marked with <see cref="T:System.SerializableAttribute" />.
+      </para>
       <para
         >To apply the <see cref="T:System.NonSerializedAttribute" /> class to an event, set the attribute location to field, as shown in the following C# code.</para
       >
@@ -49,8 +49,8 @@ public event ChangedEventHandler Changed;</code>
       <para
         >For more information about using attributes, see <format type="text/html">
           <a href="30386922-1E00-4602-9EBF-526B271A8B87">Extending Metadata Using Attributes</a>
-        </format>. </para
-      >
+        </format>.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

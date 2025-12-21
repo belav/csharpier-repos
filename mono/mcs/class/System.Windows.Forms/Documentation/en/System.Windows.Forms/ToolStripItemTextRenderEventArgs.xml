@@ -47,8 +47,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripItemTextRenderEventArgs" /> class with the specified text and text properties. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripItemTextRenderEventArgs" /> class with the specified text and text properties.
+          </para>
         </summary>
         <param name="g">
           <attribution
@@ -216,8 +216,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the color of the <see cref="T:System.Windows.Forms.ToolStripItem" /> text. </para
-          >
+            >Gets or sets the color of the <see cref="T:System.Windows.Forms.ToolStripItem" /> text.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>

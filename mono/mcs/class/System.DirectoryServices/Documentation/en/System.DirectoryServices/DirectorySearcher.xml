@@ -187,8 +187,8 @@
               </term>
               <description>
                 <para
-                  >An empty <see cref="T:System.Collections.Specialized.StringCollection" /> object </para
-                >
+                  >An empty <see cref="T:System.Collections.Specialized.StringCollection" /> object
+                </para>
               </description>
             </item>
             <item>
@@ -282,8 +282,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.DirectoryServices.DirectorySearcher" /> class with the specified search filter.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.DirectoryServices.DirectorySearcher" /> class with the specified search filter.
+          </para>
         </summary>
         <param name="filter">
           <attribution
@@ -350,8 +350,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.DirectoryServices.DirectorySearcher" /> class with the specified search root and search filter.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.DirectoryServices.DirectorySearcher" /> class with the specified search root and search filter.
+          </para>
         </summary>
         <param name="searchRoot">
           <attribution
@@ -423,8 +423,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.DirectoryServices.DirectorySearcher" /> class with the specified search filter and properties to retrieve. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.DirectoryServices.DirectorySearcher" /> class with the specified search filter and properties to retrieve.
+          </para>
         </summary>
         <param name="filter">
           <attribution
@@ -556,8 +556,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.DirectoryServices.DirectorySearcher" /> class with the specified search filter, properties to retrieve, and search scope. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.DirectoryServices.DirectorySearcher" /> class with the specified search filter, properties to retrieve, and search scope.
+          </para>
         </summary>
         <param name="filter">
           <attribution
@@ -599,8 +599,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.DirectoryServices.DirectorySearcher" /> class with the specified search root, search filter, properties to retrieve, and search scope. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.DirectoryServices.DirectorySearcher" /> class with the specified search root, search filter, properties to retrieve, and search scope.
+          </para>
         </summary>
         <param name="searchRoot">
           <attribution
@@ -707,8 +707,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the search returns a large result set, the search will be more efficient if this property is set to false to avoid the transfer of the result set to the client computer.  If you do so, however, you will not be able to enumerate the results twice, because the <see cref="T:System.DirectoryServices.SearchResultCollection" /> object creates a new enumerator object each time it is called. </para
-          >
+            >If the search returns a large result set, the search will be more efficient if this property is set to false to avoid the transfer of the result set to the client computer.  If you do so, however, you will not be able to enumerate the results twice, because the <see cref="T:System.DirectoryServices.SearchResultCollection" /> object creates a new enumerator object each time it is called.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -784,8 +784,8 @@
             >For more information about the LDAP search string format, see "Search Filter Syntax" in the MSDN Library at <see
               cref="http://msdn.microsoft.com/library"
               >http://msdn.microsoft.com/library</see
-            >. </para
-          >
+            >.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -850,8 +850,8 @@
             >The property "ADsPath" is always retrieved during the search. On Win2kFamily and earlier operating systems, the account that performs the search must be a member of the Administrators group to retrieve the ntSecurityDescriptor property. If this is not the case, the property value that is returned for ntSecurityDescriptor will be null. For more information, see the topic "NT-Security-Descriptor" in the MSDN Library at <see
               cref="http://msdn.microsoft.com/library"
               >http://msdn.microsoft.com/library</see
-            >. </para
-          >
+            >.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1137,8 +1137,8 @@ DirectorySearcher search = new DirectorySearcher(entry);</code>
         </format>.</para
       >
       <para
-        >When you create an instance of <see cref="T:System.DirectoryServices.DirectorySearcher" />, you specify the root you want to retrieve, and an optional list of properties to retrieve. The <see cref="P:System.DirectoryServices.DirectorySearcher.SearchRoot" /> property enables you to set additional properties to do the following tasks: </para
-      >
+        >When you create an instance of <see cref="T:System.DirectoryServices.DirectorySearcher" />, you specify the root you want to retrieve, and an optional list of properties to retrieve. The <see cref="P:System.DirectoryServices.DirectorySearcher.SearchRoot" /> property enables you to set additional properties to do the following tasks:
+      </para>
       <list type="bullet">
         <item>
           <para
@@ -1147,8 +1147,8 @@ DirectorySearcher search = new DirectorySearcher(entry);</code>
         </item>
         <item>
           <para
-            >Specify the length of time to search, using the  <see cref="P:System.DirectoryServices.DirectorySearcher.ServerTimeLimit" /> property. </para
-          >
+            >Specify the length of time to search, using the  <see cref="P:System.DirectoryServices.DirectorySearcher.ServerTimeLimit" /> property.
+          </para>
         </item>
         <item>
           <para

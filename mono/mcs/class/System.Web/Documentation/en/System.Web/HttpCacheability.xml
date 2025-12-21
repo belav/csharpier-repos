@@ -120,8 +120,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Applies the settings of both <see cref="F:System.Web.HttpCacheability.Server" /> and <see cref="F:System.Web.HttpCacheability.NoCache" /> to indicate that the content is cached at the server but all others are explicitly denied the ability to cache the response. </para
-          >
+            >Applies the settings of both <see cref="F:System.Web.HttpCacheability.Server" /> and <see cref="F:System.Web.HttpCacheability.NoCache" /> to indicate that the content is cached at the server but all others are explicitly denied the ability to cache the response.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>

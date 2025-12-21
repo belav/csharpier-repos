@@ -52,8 +52,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.DisplayFormatAttribute" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.DisplayFormatAttribute" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -186,8 +186,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sometimes a data field's value is stored as null values in the source. You can specify custom text to display for data fields that have a null value by setting the <see cref="P:System.ComponentModel.DataAnnotations.DisplayFormatAttribute.NullDisplayText" /> property. If this property is not set, null field values are displayed as empty strings (""). </para
-          >
+            >Sometimes a data field's value is stored as null values in the source. You can specify custom text to display for data fields that have a null value by setting the <see cref="P:System.ComponentModel.DataAnnotations.DisplayFormatAttribute.NullDisplayText" /> property. If this property is not set, null field values are displayed as empty strings ("").
+          </para>
           <block subset="none" type="note">
             <para
               >To convert an empty string field value to a null value, you must set the <see cref="P:System.ComponentModel.DataAnnotations.DisplayFormatAttribute.ConvertEmptyStringToNull" /> property to true.</para

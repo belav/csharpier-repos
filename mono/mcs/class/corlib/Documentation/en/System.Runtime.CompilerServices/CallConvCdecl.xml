@@ -80,8 +80,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.CallConvCdecl" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.CallConvCdecl" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>

@@ -33,8 +33,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The members of this class are used to specify infinite time-out intervals in threading operations. <see cref="F:System.Threading.Timeout.Infinite" /> is used by methods that accept an integer <paramref name="millisecondsTimeout" /> parameter, such as <see cref="M:System.Threading.Thread.Sleep(System.Int32)" />, <see cref="M:System.Threading.Thread.Join(System.Int32)" />, and <see cref="M:System.Threading.ReaderWriterLock.AcquireReaderLock(System.Int32)" />. <see cref="F:System.Threading.Timeout.InfiniteTimeSpan" /> is used by methods that accept a <paramref name="timeout" /> parameter of type <see cref="T:System.TimeSpan" />, such as <see cref="M:System.Threading.Thread.Sleep(System.TimeSpan)" />, <see cref="M:System.Threading.Thread.Join(System.TimeSpan)" />, and <see cref="M:System.Threading.ReaderWriterLock.AcquireReaderLock(System.TimeSpan)" />. </para
-      >
+        >The members of this class are used to specify infinite time-out intervals in threading operations. <see cref="F:System.Threading.Timeout.Infinite" /> is used by methods that accept an integer <paramref name="millisecondsTimeout" /> parameter, such as <see cref="M:System.Threading.Thread.Sleep(System.Int32)" />, <see cref="M:System.Threading.Thread.Join(System.Int32)" />, and <see cref="M:System.Threading.ReaderWriterLock.AcquireReaderLock(System.Int32)" />. <see cref="F:System.Threading.Timeout.InfiniteTimeSpan" /> is used by methods that accept a <paramref name="timeout" /> parameter of type <see cref="T:System.TimeSpan" />, such as <see cref="M:System.Threading.Thread.Sleep(System.TimeSpan)" />, <see cref="M:System.Threading.Thread.Join(System.TimeSpan)" />, and <see cref="M:System.Threading.ReaderWriterLock.AcquireReaderLock(System.TimeSpan)" />.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -70,8 +70,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A constant used to specify an infinite waiting period, for threading methods that accept an <see cref="T:System.Int32" /> parameter. </para
-          >
+            >A constant used to specify an infinite waiting period, for threading methods that accept an <see cref="T:System.Int32" /> parameter.
+          </para>
         </summary>
       </Docs>
       <Excluded>0</Excluded>

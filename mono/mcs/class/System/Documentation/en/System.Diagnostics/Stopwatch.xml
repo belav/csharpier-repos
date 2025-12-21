@@ -322,8 +322,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Diagnostics.Stopwatch" /> instance calculates and retains the cumulative elapsed time across multiple time intervals, until the instance is reset. Use <see cref="M:System.Diagnostics.Stopwatch.Stop" /> to stop the current interval measurement and retain the cumulative elapsed time value. Use <see cref="M:System.Diagnostics.Stopwatch.Reset" /> to stop any interval measurement in progress and clear the elapsed time value. </para
-          >
+            >A <see cref="T:System.Diagnostics.Stopwatch" /> instance calculates and retains the cumulative elapsed time across multiple time intervals, until the instance is reset. Use <see cref="M:System.Diagnostics.Stopwatch.Stop" /> to stop the current interval measurement and retain the cumulative elapsed time value. Use <see cref="M:System.Diagnostics.Stopwatch.Reset" /> to stop any interval measurement in progress and clear the elapsed time value.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

@@ -39,8 +39,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.Services.Discovery.XmlSchemaSearchPattern" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Discovery.XmlSchemaSearchPattern" /> class.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -64,8 +64,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The concrete <see cref="T:System.Web.Services.Discovery.SchemaReference" /> class inherits from the abstract <see cref="T:System.Web.Services.Discovery.DiscoveryReference" /> class. </para
-          >
+            >The concrete <see cref="T:System.Web.Services.Discovery.SchemaReference" /> class inherits from the abstract <see cref="T:System.Web.Services.Discovery.DiscoveryReference" /> class.
+          </para>
           <para
             >A <see cref="T:System.Web.Services.Discovery.SchemaReference" /> instance contains the location of the .xsd file.</para
           >

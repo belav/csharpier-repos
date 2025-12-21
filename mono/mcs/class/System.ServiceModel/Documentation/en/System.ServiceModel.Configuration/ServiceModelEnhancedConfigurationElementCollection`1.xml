@@ -99,8 +99,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a Boolean value that indicates whether an attempt to add a duplicate <see cref="T:System.Configuration.ConfigurationElement" /> to this collection causes an exception to be thrown. </para
-          >
+            >Gets a Boolean value that indicates whether an attempt to add a duplicate <see cref="T:System.Configuration.ConfigurationElement" /> to this collection causes an exception to be thrown.
+          </para>
         </summary>
       </Docs>
     </Member>

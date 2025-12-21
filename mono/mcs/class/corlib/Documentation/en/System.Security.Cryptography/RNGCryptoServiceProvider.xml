@@ -138,8 +138,8 @@ On Windows operating systems the random numbers comes directly from CryptoAPI.
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The parameters to pass to the cryptographic service provider (CSP). </param
-        >
+          />The parameters to pass to the cryptographic service provider (CSP).
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -256,8 +256,8 @@ On Windows operating systems the random numbers comes directly from CryptoAPI.
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array to fill with a cryptographically strong sequence of random values. </param
-        >
+          />The array to fill with a cryptographically strong sequence of random values.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetNonZeroBytes">
@@ -292,8 +292,8 @@ On Windows operating systems the random numbers comes directly from CryptoAPI.
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array to fill with a cryptographically strong sequence of random nonzero values. </param
-        >
+          />The array to fill with a cryptographically strong sequence of random nonzero values.
+        </param>
       </Docs>
     </Member>
   </Members>

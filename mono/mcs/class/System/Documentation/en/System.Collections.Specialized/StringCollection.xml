@@ -63,8 +63,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Collections.Specialized.StringCollection" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Collections.Specialized.StringCollection" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -111,8 +111,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to add to the end of the <see cref="T:System.Collections.Specialized.StringCollection" />. The value can be null. </param
-        >
+          />The string to add to the end of the <see cref="T:System.Collections.Specialized.StringCollection" />. The value can be null.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddRange">
@@ -154,8 +154,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of strings to add to the end of the <see cref="T:System.Collections.Specialized.StringCollection" />. The array itself can not be null but it can contain elements that are null. </param
-        >
+          />An array of strings to add to the end of the <see cref="T:System.Collections.Specialized.StringCollection" />. The array itself can not be null but it can contain elements that are null.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Clear">
@@ -243,8 +243,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to locate in the <see cref="T:System.Collections.Specialized.StringCollection" />. The value can be null. </param
-        >
+          />The string to locate in the <see cref="T:System.Collections.Specialized.StringCollection" />. The value can be null.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CopyTo">
@@ -288,15 +288,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The one-dimensional array of strings that is the destination of the elements copied from <see cref="T:System.Collections.Specialized.StringCollection" />. The <see cref="T:System.Array" /> must have zero-based indexing. </param
-        >
+          />The one-dimensional array of strings that is the destination of the elements copied from <see cref="T:System.Collections.Specialized.StringCollection" />. The <see cref="T:System.Array" /> must have zero-based indexing.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index in <paramref name="array" /> at which copying begins. </param
-        >
+          />The zero-based index in <paramref name="array" /> at which copying begins.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Count">
@@ -425,8 +425,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to locate. The value can be null. </param
-        >
+          />The string to locate. The value can be null.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Insert">
@@ -473,15 +473,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index at which <paramref name="value" /> is inserted. </param
-        >
+          />The zero-based index at which <paramref name="value" /> is inserted.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to insert. The value can be null. </param
-        >
+          />The string to insert. The value can be null.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsReadOnly">
@@ -620,8 +620,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to remove from the <see cref="T:System.Collections.Specialized.StringCollection" />. The value can be null. </param
-        >
+          />The string to remove from the <see cref="T:System.Collections.Specialized.StringCollection" />. The value can be null.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RemoveAt">
@@ -661,8 +661,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index of the string to remove. </param
-        >
+          />The zero-based index of the string to remove.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SyncRoot">
@@ -740,15 +740,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The one-dimensional <see cref="T:System.Array" /> that is the destination of the elements copied from <see cref="T:System.Collections.Specialized.StringCollection" />. The <see cref="T:System.Array" /> must have zero-based indexing. </param
-        >
+          />The one-dimensional <see cref="T:System.Array" /> that is the destination of the elements copied from <see cref="T:System.Collections.Specialized.StringCollection" />. The <see cref="T:System.Array" /> must have zero-based indexing.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index in <paramref name="array" /> at which copying begins. </param
-        >
+          />The zero-based index in <paramref name="array" /> at which copying begins.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IEnumerable.GetEnumerator">
@@ -853,8 +853,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to be added to the end of the <see cref="T:System.Collections.Specialized.StringCollection" />. The value can be null. </param
-        >
+          />The <see cref="T:System.Object" /> to be added to the end of the <see cref="T:System.Collections.Specialized.StringCollection" />. The value can be null.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IList.Contains">
@@ -905,8 +905,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to locate in the <see cref="T:System.Collections.Specialized.StringCollection" />. The value can be null. </param
-        >
+          />The <see cref="T:System.Object" /> to locate in the <see cref="T:System.Collections.Specialized.StringCollection" />. The value can be null.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IList.IndexOf">
@@ -960,8 +960,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to locate in the <see cref="T:System.Collections.Specialized.StringCollection" />. The value can be null. </param
-        >
+          />The <see cref="T:System.Object" /> to locate in the <see cref="T:System.Collections.Specialized.StringCollection" />. The value can be null.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IList.Insert">
@@ -1008,15 +1008,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index at which <paramref name="value" /> should be inserted. </param
-        >
+          />The zero-based index at which <paramref name="value" /> should be inserted.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to insert. The value can be null. </param
-        >
+          />The <see cref="T:System.Object" /> to insert. The value can be null.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IList.IsFixedSize">
@@ -1152,8 +1152,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to remove from the <see cref="T:System.Collections.Specialized.StringCollection" />. The value can be null. </param
-        >
+          />The <see cref="T:System.Object" /> to remove from the <see cref="T:System.Collections.Specialized.StringCollection" />. The value can be null.
+        </param>
       </Docs>
     </Member>
   </Members>

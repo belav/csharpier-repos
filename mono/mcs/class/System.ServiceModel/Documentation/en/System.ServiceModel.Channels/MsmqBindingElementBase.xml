@@ -321,8 +321,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When this property is set to <see cref="F:System.ServiceModel.ReceiveErrorHandling.Fault" />, the channel listener is faulted and a <see cref="T:System.ServiceModel.ProtocolException" /> (wrapping a <see cref="T:System.ServiceModel.MsmqPoisonMessageException" />) is traced and thrown. The message is left in the queue and must be removed by some manual method. The <see cref="T:System.ServiceModel.MsmqPoisonMessageException" /> contains a <see cref="P:System.ServiceModel.MsmqPoisonMessageException.MessageLookupId" /> that can be used to identify and manually remove the offending message from the poison-message queue. </para
-          >
+            >When this property is set to <see cref="F:System.ServiceModel.ReceiveErrorHandling.Fault" />, the channel listener is faulted and a <see cref="T:System.ServiceModel.ProtocolException" /> (wrapping a <see cref="T:System.ServiceModel.MsmqPoisonMessageException" />) is traced and thrown. The message is left in the queue and must be removed by some manual method. The <see cref="T:System.ServiceModel.MsmqPoisonMessageException" /> contains a <see cref="P:System.ServiceModel.MsmqPoisonMessageException.MessageLookupId" /> that can be used to identify and manually remove the offending message from the poison-message queue.
+          </para>
           <para
             >When this property is set to <see cref="F:System.ServiceModel.ReceiveErrorHandling.Drop" />, the message is dropped.</para
           >

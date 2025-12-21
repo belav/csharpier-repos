@@ -19,8 +19,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You can create new controls in Windows Forms derived either from an existing control or from <see cref="T:System.Windows.Forms.UserControl" />. Use this attribute on new controls to describe how the control should dock by default when placed on a form. </para
-      >
+        >You can create new controls in Windows Forms derived either from an existing control or from <see cref="T:System.Windows.Forms.UserControl" />. Use this attribute on new controls to describe how the control should dock by default when placed on a form.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -38,8 +38,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DockingAttribute" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DockingAttribute" /> class.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -61,8 +61,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DockingAttribute" /> class with the given docking behavior. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DockingAttribute" /> class with the given docking behavior.
+          </para>
         </summary>
         <param name="dockingBehavior">
           <attribution

@@ -11,11 +11,11 @@
       <list_item> Following the normal completion of a function member invocation, each variable that was passed as an output parameter is considered assigned in that execution path. </list_item>
       <list_item> Within a function member, an output parameter is considered initially unassigned. </list_item>
       <list_item
-        > Every output parameter of a function member must be definitely assigned (<hyperlink>12.3</hyperlink>) before the function member returns normally. </list_item
-      >
+        > Every output parameter of a function member must be definitely assigned (<hyperlink>12.3</hyperlink>) before the function member returns normally.
+      </list_item>
     </list>
   </paragraph>
   <paragraph
-    >Within an instance constructor of a struct type, the this keyword behaves exactly as an output parameter of the struct type (<hyperlink>14.5.7</hyperlink>). </paragraph
-  >
+    >Within an instance constructor of a struct type, the this keyword behaves exactly as an output parameter of the struct type (<hyperlink>14.5.7</hyperlink>).
+  </paragraph>
 </clause>

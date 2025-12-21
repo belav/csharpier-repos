@@ -12,8 +12,8 @@
     </list>
   </paragraph>
   <paragraph
-    >Explicit conversions can occur in cast expressions (<hyperlink>14.6.6</hyperlink>). </paragraph
-  >
+    >Explicit conversions can occur in cast expressions (<hyperlink>14.6.6</hyperlink>).
+  </paragraph>
   <paragraph
     >The set of explicit conversions includes all implicit conversions. <note>[Note: This means that redundant cast expressions are allowed. end note]</note>
   </paragraph>

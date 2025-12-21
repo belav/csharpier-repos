@@ -27,8 +27,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The purpose of this class is to implement <see cref="T:System.Collections.IEqualityComparer" /> and <see cref="T:System.Collections.Generic.IEqualityComparer`1" />. Classes that require identity (such as <see cref="T:System.Collections.Generic.Dictionary`2" /> ) require an instance of a class that implements one of these interfaces. </para
-      >
+        >The purpose of this class is to implement <see cref="T:System.Collections.IEqualityComparer" /> and <see cref="T:System.Collections.Generic.IEqualityComparer`1" />. Classes that require identity (such as <see cref="T:System.Collections.Generic.Dictionary`2" /> ) require an instance of a class that implements one of these interfaces.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -52,8 +52,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Linq.XNodeEqualityComparer" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Linq.XNodeEqualityComparer" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -87,33 +87,33 @@
             </item>
             <item>
               <para
-                >Two <see cref="T:System.Xml.Linq.XNode" /> objects of different types are never equal. </para
-              >
+                >Two <see cref="T:System.Xml.Linq.XNode" /> objects of different types are never equal.
+              </para>
             </item>
             <item>
               <para
-                >Two <see cref="T:System.Xml.Linq.XText" /> nodes are equal if they contain the same text. </para
-              >
+                >Two <see cref="T:System.Xml.Linq.XText" /> nodes are equal if they contain the same text.
+              </para>
             </item>
             <item>
               <para
-                >Two <see cref="T:System.Xml.Linq.XElement" /> nodes are equal if they have the same tag name, the same set of attributes with the same values, and (ignoring comments and processing instructions), contain two equal-length sequences of pairwise equal content nodes. </para
-              >
+                >Two <see cref="T:System.Xml.Linq.XElement" /> nodes are equal if they have the same tag name, the same set of attributes with the same values, and (ignoring comments and processing instructions), contain two equal-length sequences of pairwise equal content nodes.
+              </para>
             </item>
             <item>
               <para
-                >Two <see cref="T:System.Xml.Linq.XDocument" /> objects are equal if their root nodes are equal. </para
-              >
+                >Two <see cref="T:System.Xml.Linq.XDocument" /> objects are equal if their root nodes are equal.
+              </para>
             </item>
             <item>
               <para
-                >Two <see cref="T:System.Xml.Linq.XComment" /> nodes are equal if they contain the same comment text. </para
-              >
+                >Two <see cref="T:System.Xml.Linq.XComment" /> nodes are equal if they contain the same comment text.
+              </para>
             </item>
             <item>
               <para
-                >Two <see cref="T:System.Xml.Linq.XProcessingInstruction" /> nodes are equal if they have the same target and data. </para
-              >
+                >Two <see cref="T:System.Xml.Linq.XProcessingInstruction" /> nodes are equal if they have the same target and data.
+              </para>
             </item>
             <item>
               <para
@@ -220,33 +220,33 @@
             </item>
             <item>
               <para
-                >Two <see cref="T:System.Xml.Linq.XNode" /> objects of different types are never equal. </para
-              >
+                >Two <see cref="T:System.Xml.Linq.XNode" /> objects of different types are never equal.
+              </para>
             </item>
             <item>
               <para
-                >Two <see cref="T:System.Xml.Linq.XText" /> nodes are equal if they contain the same text. </para
-              >
+                >Two <see cref="T:System.Xml.Linq.XText" /> nodes are equal if they contain the same text.
+              </para>
             </item>
             <item>
               <para
-                >Two <see cref="T:System.Xml.Linq.XElement" /> nodes are equal if they have the same tag name, the same set of attributes with the same values, and (ignoring comments and processing instructions), contain two equa-length sequences of pairwise equal content nodes. </para
-              >
+                >Two <see cref="T:System.Xml.Linq.XElement" /> nodes are equal if they have the same tag name, the same set of attributes with the same values, and (ignoring comments and processing instructions), contain two equa-length sequences of pairwise equal content nodes.
+              </para>
             </item>
             <item>
               <para
-                >Two <see cref="T:System.Xml.Linq.XDocument" /> objects are equal if their root nodes are equal. </para
-              >
+                >Two <see cref="T:System.Xml.Linq.XDocument" /> objects are equal if their root nodes are equal.
+              </para>
             </item>
             <item>
               <para
-                >Two <see cref="T:System.Xml.Linq.XComment" /> nodes are equal if they contain the same comment text. </para
-              >
+                >Two <see cref="T:System.Xml.Linq.XComment" /> nodes are equal if they contain the same comment text.
+              </para>
             </item>
             <item>
               <para
-                >Two <see cref="T:System.Xml.Linq.XProcessingInstruction" /> nodes are equal if they have the same target and data. </para
-              >
+                >Two <see cref="T:System.Xml.Linq.XProcessingInstruction" /> nodes are equal if they have the same target and data.
+              </para>
             </item>
             <item>
               <para

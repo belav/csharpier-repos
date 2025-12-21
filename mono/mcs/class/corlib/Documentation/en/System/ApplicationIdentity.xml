@@ -65,8 +65,8 @@
             >The format of the <paramref name="applicationIdentityFullName" /> parameter is a comma-delimited Unicode string that begins with the name, as follows:</para
           >
           <code
-            >applicationURL<codeFeaturedElement>#</codeFeaturedElement>deploymentIdentity<codeFeaturedElement>\</codeFeaturedElement>applicationIdentity </code
-          >
+            >applicationURL<codeFeaturedElement>#</codeFeaturedElement>deploymentIdentity<codeFeaturedElement>\</codeFeaturedElement>applicationIdentity
+          </code>
           <para>Where deploymentIdentity = </para>
           <code
             >deploymentManifest<codeFeaturedElement>, Version = </codeFeaturedElement>Major.Minor.Build.Revision<codeFeaturedElement>, Culture = </codeFeaturedElement>CultureInfo<codeFeaturedElement>, PublicKeyToken=</codeFeaturedElement>TokenNumber<codeFeaturedElement>, processorArchitecture=</codeFeaturedElement>processorArchitecture</code
@@ -84,8 +84,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ApplicationIdentity" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ApplicationIdentity" /> class.
+          </para>
         </summary>
         <param name="applicationIdentityFullName">
           <attribution

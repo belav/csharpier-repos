@@ -118,8 +118,8 @@
         </item>
       </list>
       <para
-        >Use the Enter and Exit methods to mark the beginning and end of a critical section. If the critical section is a set of contiguous instructions, then the lock acquired by the Enter method guarantees that only a single thread can execute the enclosed code with the locked object. In this case, it is recommended you place those instructions in a try block and place the Exit instruction in a finally block. This facility is typically used to synchronize access to a static or instance method of a class. The functionality provided by the Enter and Exit methods is identical to that provided by the C# lock statement (SyncLock in Visual Basic), except that lock and SyncLock wrap the <see cref="M:System.Threading.Monitor.Enter(System.Object,System.Boolean@)" /> method overload and the <see cref="M:System.Threading.Monitor.Exit(System.Object)" /> method in a try…finally block (Try…Finally in Visual Basic) to ensure that the monitor is released. </para
-      >
+        >Use the Enter and Exit methods to mark the beginning and end of a critical section. If the critical section is a set of contiguous instructions, then the lock acquired by the Enter method guarantees that only a single thread can execute the enclosed code with the locked object. In this case, it is recommended you place those instructions in a try block and place the Exit instruction in a finally block. This facility is typically used to synchronize access to a static or instance method of a class. The functionality provided by the Enter and Exit methods is identical to that provided by the C# lock statement (SyncLock in Visual Basic), except that lock and SyncLock wrap the <see cref="M:System.Threading.Monitor.Enter(System.Object,System.Boolean@)" /> method overload and the <see cref="M:System.Threading.Monitor.Exit(System.Object)" /> method in a try…finally block (Try…Finally in Visual Basic) to ensure that the monitor is released.
+      </para>
       <para
         >Beginning with the net_v40_long, there are two sets of overloads for the <see cref="Overload:System.Threading.Monitor.Enter" /> and <see cref="Overload:System.Threading.Monitor.TryEnter" /> methods. One set of overloads has a ref (ByRef in Visual Basic) <see cref="T:System.Boolean" /> parameter that is atomically set to true if the lock is acquired, even if an exception is thrown when acquiring the lock. Use these overloads if it is critical to release the lock in all cases, even when the resources the lock is protecting might not be in a consistent state. </para
       >
@@ -187,8 +187,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object on which to acquire the monitor lock. </param
-        >
+          />The object on which to acquire the monitor lock.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -271,8 +271,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object on which to release the lock. </param
-        >
+          />The object on which to release the lock.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -296,11 +296,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method works only for locks that are acquired by using the methods of the <see cref="T:System.Threading.Monitor" /> class, or by using the C# lock statement or the Visual Basic SyncLock statement, which are implemented with <see cref="T:System.Threading.Monitor" />. </para
-          >
+            >This method works only for locks that are acquired by using the methods of the <see cref="T:System.Threading.Monitor" /> class, or by using the C# lock statement or the Visual Basic SyncLock statement, which are implemented with <see cref="T:System.Threading.Monitor" />.
+          </para>
           <para
-            >Use this method with diagnostic tools, such as the <see cref="M:System.Diagnostics.Debug.Assert(System.Boolean)" /> method and the <see cref="T:System.Diagnostics.Contracts.Contract" /> class, to debug locking issues that involve the <see cref="T:System.Threading.Monitor" /> class. </para
-          >
+            >Use this method with diagnostic tools, such as the <see cref="M:System.Diagnostics.Debug.Assert(System.Boolean)" /> method and the <see cref="T:System.Diagnostics.Contracts.Contract" /> class, to debug locking issues that involve the <see cref="T:System.Threading.Monitor" /> class.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -313,8 +313,8 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object to test. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The object to test.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Pulse">
@@ -357,8 +357,8 @@
           </block>
           <para>Note that a synchronized object holds several references, including a reference to the thread that currently holds the lock, a reference to the ready queue, which contains the threads that are ready to obtain the lock, and a reference to the waiting queue, which contains the threads that are waiting for notification of a change in the object's state. </para>
           <para
-            >The Pulse, <see cref="M:System.Threading.Monitor.PulseAll(System.Object)" />, and <see cref="M:System.Threading.Monitor.Wait(System.Object,System.Int32,System.Boolean)" /> methods must be invoked from within a synchronized block of code. </para
-          >
+            >The Pulse, <see cref="M:System.Threading.Monitor.PulseAll(System.Object)" />, and <see cref="M:System.Threading.Monitor.Wait(System.Object,System.Int32,System.Boolean)" /> methods must be invoked from within a synchronized block of code.
+          </para>
           <para
             >To signal multiple threads, use the <see cref="M:System.Threading.Monitor.PulseAll(System.Object)" /> method.</para
           >
@@ -372,8 +372,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object a thread is waiting for. </param
-        >
+          />The object a thread is waiting for.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -411,8 +411,8 @@
           <para>The thread that currently owns the lock on the specified object invokes this method to signal all threads waiting to acquire the lock on the object. After the signal is sent, the waiting threads are moved to the ready queue. When the thread that invoked PulseAll releases the lock, the next thread in the ready queue acquires the lock.</para>
           <para>Note that a synchronized object holds several references, including a reference to the thread that currently holds the lock, a reference to the ready queue, which contains the threads that are ready to obtain the lock, and a reference to the waiting queue, which contains the threads that are waiting for notification of a change in the object's state. </para>
           <para
-            >The <see cref="M:System.Threading.Monitor.Pulse(System.Object)" />, PulseAll, and <see cref="M:System.Threading.Monitor.Wait(System.Object,System.Int32,System.Boolean)" /> methods must be invoked from within a synchronized block of code. </para
-          >
+            >The <see cref="M:System.Threading.Monitor.Pulse(System.Object)" />, PulseAll, and <see cref="M:System.Threading.Monitor.Wait(System.Object,System.Int32,System.Boolean)" /> methods must be invoked from within a synchronized block of code.
+          </para>
           <para
             >The remarks for the <see cref="M:System.Threading.Monitor.Pulse(System.Object)" /> method explain what happens if <see cref="M:System.Threading.Monitor.Pulse(System.Object)" /> is called when no threads are waiting.</para
           >
@@ -427,8 +427,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that sends the pulse. </param
-        >
+          />The object that sends the pulse.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -487,8 +487,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object on which to acquire the lock. </param
-        >
+          />The object on which to acquire the lock.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -550,15 +550,15 @@
           <paramref name="obj " />is <see langword="null" />.</exception
         >
         <exception cref="T:System.ArgumentOutOfRangeException">
-          <paramref name="millisecondsTimeout " />is negative, and not equal to <see cref="F:System.Threading.Timeout.Infinite" /> . </exception
-        >
+          <paramref name="millisecondsTimeout " />is negative, and not equal to <see cref="F:System.Threading.Timeout.Infinite" /> .
+        </exception>
         <param name="millisecondsTimeout">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of milliseconds to wait for the lock. </param
-        >
+          />The number of milliseconds to wait for the lock.
+        </param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -585,15 +585,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object on which to acquire the lock. </param
-        >
+          />The object on which to acquire the lock.
+        </param>
         <param name="millisecondsTimeout">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of milliseconds to wait for the lock. </param
-        >
+          />The number of milliseconds to wait for the lock.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -663,8 +663,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object on which to acquire the lock. </param
-        >
+          />The object on which to acquire the lock.
+        </param>
         <param name="timeout">
           <attribution
             license="cc4"
@@ -793,8 +793,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object on which to wait. </param
-        >
+          />The object on which to wait.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -844,8 +844,8 @@
             >The time-out ensures that the current thread does not block indefinitely if another thread releases the lock without first calling the <see cref="M:System.Threading.Monitor.Pulse(System.Object)" /> or <see cref="M:System.Threading.Monitor.PulseAll(System.Object)" /> method. It also moves the thread to the ready queue, bypassing other threads ahead of it in the wait queue, so that it can reacquire the lock sooner. The thread can test the return value of the <see cref="M:System.Threading.Monitor.Wait(System.Object,System.Int32)" /> method to determine whether it reacquired the lock prior to the time-out. The thread can evaluate the conditions that caused it to enter the wait, and if necessary call the <see cref="M:System.Threading.Monitor.Wait(System.Object,System.Int32)" /> method again.</para
           >
           <para
-            >When a thread calls Wait, it releases the lock on the object and enters the object's waiting queue. The next thread in the object's ready queue (if there is one) acquires the lock and has exclusive use of the object. The thread that invoked Wait remains in the waiting queue until either a thread that holds the lock invokes <see cref="M:System.Threading.Monitor.PulseAll(System.Object)" />, or it is the next in the queue and a thread that holds the lock invokes <see cref="M:System.Threading.Monitor.Pulse(System.Object)" />. However, if <paramref name="millisecondsTimeout" /> elapses before another thread invokes this object's <see cref="M:System.Threading.Monitor.Pulse(System.Object)" /> or <see cref="M:System.Threading.Monitor.PulseAll(System.Object)" /> method, the original thread is moved to the ready queue in order to regain the lock. </para
-          >
+            >When a thread calls Wait, it releases the lock on the object and enters the object's waiting queue. The next thread in the object's ready queue (if there is one) acquires the lock and has exclusive use of the object. The thread that invoked Wait remains in the waiting queue until either a thread that holds the lock invokes <see cref="M:System.Threading.Monitor.PulseAll(System.Object)" />, or it is the next in the queue and a thread that holds the lock invokes <see cref="M:System.Threading.Monitor.Pulse(System.Object)" />. However, if <paramref name="millisecondsTimeout" /> elapses before another thread invokes this object's <see cref="M:System.Threading.Monitor.Pulse(System.Object)" /> or <see cref="M:System.Threading.Monitor.PulseAll(System.Object)" /> method, the original thread is moved to the ready queue in order to regain the lock.
+          </para>
           <block subset="none" type="note">
             <para
               >If <see cref="F:System.Threading.Timeout.Infinite" /> is specified for the <paramref name="millisecondsTimeout" /> parameter, this method blocks indefinitely unless the holder of the lock calls <see cref="M:System.Threading.Monitor.Pulse(System.Object)" /> or <see cref="M:System.Threading.Monitor.PulseAll(System.Object)" />. If <paramref name="millisecondsTimeout" /> equals 0, the thread that calls Wait releases the lock and then immediately enters the ready queue in order to regain the lock.</para
@@ -877,15 +877,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object on which to wait. </param
-        >
+          />The object on which to wait.
+        </param>
         <param name="millisecondsTimeout">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of milliseconds to wait before the thread enters the ready queue. </param
-        >
+          />The number of milliseconds to wait before the thread enters the ready queue.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -935,8 +935,8 @@
             >The time-out ensures that the current thread does not block indefinitely if another thread releases the lock without first calling the <see cref="M:System.Threading.Monitor.Pulse(System.Object)" /> or <see cref="M:System.Threading.Monitor.PulseAll(System.Object)" /> method. It also moves the thread to the ready queue, bypassing other threads ahead of it in the wait queue, so that it can reacquire the lock sooner. The thread can test the return value of the <see cref="M:System.Threading.Monitor.Wait(System.Object,System.TimeSpan)" /> method to determine whether it reacquired the lock prior to the time-out. The thread can evaluate the conditions that caused it to enter the wait, and if necessary call the <see cref="M:System.Threading.Monitor.Wait(System.Object,System.TimeSpan)" /> method again.</para
           >
           <para
-            >When a thread calls Wait, it releases the lock on the object and enters the object's waiting queue. The next thread in the object's ready queue (if there is one) acquires the lock and has exclusive use of the object. The thread that invoked Wait remains in the waiting queue until either a thread that holds the lock invokes <see cref="M:System.Threading.Monitor.PulseAll(System.Object)" />, or it is the next in the queue and a thread that holds the lock invokes <see cref="M:System.Threading.Monitor.Pulse(System.Object)" />. However, if <paramref name="timeout" /> elapses before another thread invokes this object's <see cref="M:System.Threading.Monitor.Pulse(System.Object)" /> or <see cref="M:System.Threading.Monitor.PulseAll(System.Object)" /> method, the original thread is moved to the ready queue in order to regain the lock. </para
-          >
+            >When a thread calls Wait, it releases the lock on the object and enters the object's waiting queue. The next thread in the object's ready queue (if there is one) acquires the lock and has exclusive use of the object. The thread that invoked Wait remains in the waiting queue until either a thread that holds the lock invokes <see cref="M:System.Threading.Monitor.PulseAll(System.Object)" />, or it is the next in the queue and a thread that holds the lock invokes <see cref="M:System.Threading.Monitor.Pulse(System.Object)" />. However, if <paramref name="timeout" /> elapses before another thread invokes this object's <see cref="M:System.Threading.Monitor.Pulse(System.Object)" /> or <see cref="M:System.Threading.Monitor.PulseAll(System.Object)" /> method, the original thread is moved to the ready queue in order to regain the lock.
+          </para>
           <block subset="none" type="note">
             <para
               >If a <see cref="T:System.TimeSpan" /> representing –1 millisecond is specified for the <paramref name="timeout" /> parameter, this method blocks indefinitely unless the holder of the lock calls <see cref="M:System.Threading.Monitor.Pulse(System.Object)" /> or <see cref="M:System.Threading.Monitor.PulseAll(System.Object)" />. If <paramref name="timeout" /> is 0 milliseconds, the thread that calls Wait releases the lock and then immediately enters the ready queue in order to regain the lock.</para
@@ -968,15 +968,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object on which to wait. </param
-        >
+          />The object on which to wait.
+        </param>
         <param name="timeout">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.TimeSpan" /> representing the amount of time to wait before the thread enters the ready queue. </param
-        >
+          />A <see cref="T:System.TimeSpan" /> representing the amount of time to wait before the thread enters the ready queue.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1014,8 +1014,8 @@
             >The time-out ensures that the current thread does not block indefinitely if another thread releases the lock without first calling the <see cref="M:System.Threading.Monitor.Pulse(System.Object)" /> or <see cref="M:System.Threading.Monitor.PulseAll(System.Object)" /> method. It also moves the thread to the ready queue, bypassing other threads ahead of it in the wait queue, so that it can reacquire the lock sooner. The thread can test the return value of the <see cref="M:System.Threading.Monitor.Wait(System.Object,System.Int32,System.Boolean)" /> method to determine whether it reacquired the lock prior to the time-out. The thread can evaluate the conditions that caused it to enter the wait, and if necessary call the <see cref="M:System.Threading.Monitor.Wait(System.Object,System.Int32,System.Boolean)" /> method again.</para
           >
           <para
-            >When a thread calls Wait, it releases the lock and enters the waiting queue. At this point, the next thread in the ready queue (if there is one) is allowed to take control of the lock. The thread that invoked Wait remains in the waiting queue until either a thread that holds the lock invokes <see cref="M:System.Threading.Monitor.PulseAll(System.Object)" />, or it is the next in the queue and a thread that holds the lock invokes <see cref="M:System.Threading.Monitor.Pulse(System.Object)" />. However, if <paramref name="millisecondsTimeout" /> elapses before another thread invokes this object's <see cref="M:System.Threading.Monitor.Pulse(System.Object)" /> or <see cref="M:System.Threading.Monitor.PulseAll(System.Object)" /> method, the original thread is moved to the ready queue in order to regain the lock. </para
-          >
+            >When a thread calls Wait, it releases the lock and enters the waiting queue. At this point, the next thread in the ready queue (if there is one) is allowed to take control of the lock. The thread that invoked Wait remains in the waiting queue until either a thread that holds the lock invokes <see cref="M:System.Threading.Monitor.PulseAll(System.Object)" />, or it is the next in the queue and a thread that holds the lock invokes <see cref="M:System.Threading.Monitor.Pulse(System.Object)" />. However, if <paramref name="millisecondsTimeout" /> elapses before another thread invokes this object's <see cref="M:System.Threading.Monitor.Pulse(System.Object)" /> or <see cref="M:System.Threading.Monitor.PulseAll(System.Object)" /> method, the original thread is moved to the ready queue in order to regain the lock.
+          </para>
           <block subset="none" type="note">
             <para
               >If <see cref="F:System.Threading.Timeout.Infinite" /> is specified for the <paramref name="millisecondsTimeout" /> parameter, this method blocks indefinitely unless the holder of the lock calls <see cref="M:System.Threading.Monitor.Pulse(System.Object)" /> or <see cref="M:System.Threading.Monitor.PulseAll(System.Object)" />. If <paramref name="millisecondsTimeout" /> equals 0, the thread that calls Wait releases the lock and then immediately enters the ready queue in order to regain the lock.</para
@@ -1059,22 +1059,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object on which to wait. </param
-        >
+          />The object on which to wait.
+        </param>
         <param name="millisecondsTimeout">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of milliseconds to wait before the thread enters the ready queue. </param
-        >
+          />The number of milliseconds to wait before the thread enters the ready queue.
+        </param>
         <param name="exitContext">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to exit and reacquire the synchronization domain for the context (if in a synchronized context) before the wait; otherwise, false. </param
-        >
+          />true to exit and reacquire the synchronization domain for the context (if in a synchronized context) before the wait; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Wait">
@@ -1111,8 +1111,8 @@
             >The time-out ensures that the current thread does not block indefinitely if another thread releases the lock without first calling the <see cref="M:System.Threading.Monitor.Pulse(System.Object)" /> or <see cref="M:System.Threading.Monitor.PulseAll(System.Object)" /> method. It also moves the thread to the ready queue, bypassing other threads ahead of it in the wait queue, so that it can reacquire the lock sooner. The thread can test the return value of the <see cref="M:System.Threading.Monitor.Wait(System.Object,System.TimeSpan,System.Boolean)" /> method to determine whether it reacquired the lock prior to the time-out. The thread can evaluate the conditions that caused it to enter the wait, and if necessary call the <see cref="M:System.Threading.Monitor.Wait(System.Object,System.TimeSpan,System.Boolean)" /> method again.</para
           >
           <para
-            >When a thread calls Wait, it releases the lock and enters the waiting queue. At this point, the next thread in the ready queue (if there is one) is allowed to take control of the lock. The thread that invoked Wait remains in the waiting queue until either a thread that holds the lock invokes <see cref="M:System.Threading.Monitor.PulseAll(System.Object)" />, or it is the next in the queue and a thread that holds the lock invokes <see cref="M:System.Threading.Monitor.Pulse(System.Object)" />. However, if <paramref name="timeout" /> milliseconds elapse before another thread invokes this object's <see cref="M:System.Threading.Monitor.Pulse(System.Object)" /> or <see cref="M:System.Threading.Monitor.PulseAll(System.Object)" /> method, the original thread is moved to the ready queue in order to regain the lock. </para
-          >
+            >When a thread calls Wait, it releases the lock and enters the waiting queue. At this point, the next thread in the ready queue (if there is one) is allowed to take control of the lock. The thread that invoked Wait remains in the waiting queue until either a thread that holds the lock invokes <see cref="M:System.Threading.Monitor.PulseAll(System.Object)" />, or it is the next in the queue and a thread that holds the lock invokes <see cref="M:System.Threading.Monitor.Pulse(System.Object)" />. However, if <paramref name="timeout" /> milliseconds elapse before another thread invokes this object's <see cref="M:System.Threading.Monitor.Pulse(System.Object)" /> or <see cref="M:System.Threading.Monitor.PulseAll(System.Object)" /> method, the original thread is moved to the ready queue in order to regain the lock.
+          </para>
           <block subset="none" type="note">
             <para
               >If a <see cref="T:System.TimeSpan" /> representing -1 millisecond is specified for the <paramref name="timeout" /> parameter, this method blocks indefinitely unless the holder of the lock calls <see cref="M:System.Threading.Monitor.Pulse(System.Object)" /> or <see cref="M:System.Threading.Monitor.PulseAll(System.Object)" />. If <paramref name="timeout" /> is 0 milliseconds, the thread that calls Wait releases the lock and then immediately enters the ready queue in order to regain the lock.</para
@@ -1156,22 +1156,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object on which to wait. </param
-        >
+          />The object on which to wait.
+        </param>
         <param name="timeout">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.TimeSpan" /> representing the amount of time to wait before the thread enters the ready queue. </param
-        >
+          />A <see cref="T:System.TimeSpan" /> representing the amount of time to wait before the thread enters the ready queue.
+        </param>
         <param name="exitContext">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to exit and reacquire the synchronization domain for the context (if in a synchronized context) before the wait; otherwise, false. </param
-        >
+          />true to exit and reacquire the synchronization domain for the context (if in a synchronized context) before the wait; otherwise, false.
+        </param>
       </Docs>
     </Member>
   </Members>

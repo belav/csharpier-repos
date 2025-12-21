@@ -78,8 +78,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The chain of sinks composed so far. </param
-        >
+          />The chain of sinks composed so far.
+        </param>
       </Docs>
     </Member>
   </Members>

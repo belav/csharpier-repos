@@ -113,8 +113,8 @@
         <h2>Introduction</h2>
       </format>
       <para
-        >The <see cref="T:System.Web.UI.WebControls.XmlDataSource" /> control is a data source control that presents XML data to data-bound controls. The <see cref="T:System.Web.UI.WebControls.XmlDataSource" /> control can be used by data-bound controls to display both hierarchical and tabular data. The <see cref="T:System.Web.UI.WebControls.XmlDataSource" /> control is typically used to display hierarchical XML data in read-only scenarios. Because the <see cref="T:System.Web.UI.WebControls.XmlDataSource" /> control extends the <see cref="T:System.Web.UI.HierarchicalDataSourceControl" /> class, it works with hierarchical data. The <see cref="T:System.Web.UI.WebControls.XmlDataSource" /> control also implements the <see cref="T:System.Web.UI.IDataSource" /> interface and works with tabular, or list-style, data. </para
-      >
+        >The <see cref="T:System.Web.UI.WebControls.XmlDataSource" /> control is a data source control that presents XML data to data-bound controls. The <see cref="T:System.Web.UI.WebControls.XmlDataSource" /> control can be used by data-bound controls to display both hierarchical and tabular data. The <see cref="T:System.Web.UI.WebControls.XmlDataSource" /> control is typically used to display hierarchical XML data in read-only scenarios. Because the <see cref="T:System.Web.UI.WebControls.XmlDataSource" /> control extends the <see cref="T:System.Web.UI.HierarchicalDataSourceControl" /> class, it works with hierarchical data. The <see cref="T:System.Web.UI.WebControls.XmlDataSource" /> control also implements the <see cref="T:System.Web.UI.IDataSource" /> interface and works with tabular, or list-style, data.
+      </para>
       <block subset="none" type="note">
         <para
           >For security purposes, none of the <see cref="T:System.Web.UI.WebControls.XmlDataSource" /> control properties are stored in view state. Since it is technically possible to decode the contents of view state on the client, storing sensitive information about the data structure or its contents could expose you to an information disclosure threat. Note that if you need to store information such as <see cref="P:System.Web.UI.WebControls.XmlDataSource.XPath" /> property in view state, you can enable encryption to protect the contents by setting <see cref="P:System.Web.UI.Page.ViewStateEncryptionMode" /> on the @ Page directive.</para
@@ -130,8 +130,8 @@
         <h2>Sources of XML Data</h2>
       </format>
       <para
-        >The <see cref="T:System.Web.UI.WebControls.XmlDataSource" /> typically loads XML data from an XML file, which is specified by the <see cref="P:System.Web.UI.WebControls.XmlDataSource.DataFile" /> property. XML data can also be stored directly by the data source control in string form using the <see cref="P:System.Web.UI.WebControls.XmlDataSource.Data" /> property. If you want to transform the XML data before it is displayed by a data-bound control, you can provide an Extensible Stylesheet Language (XSL) style sheet for the transformation. As with the XML data, you typically load the style sheet from a file, indicated by the <see cref="P:System.Web.UI.WebControls.XmlDataSource.TransformFile" /> property, but you can also store it in string form directly using the <see cref="P:System.Web.UI.WebControls.XmlDataSource.Transform" /> property. </para
-      >
+        >The <see cref="T:System.Web.UI.WebControls.XmlDataSource" /> typically loads XML data from an XML file, which is specified by the <see cref="P:System.Web.UI.WebControls.XmlDataSource.DataFile" /> property. XML data can also be stored directly by the data source control in string form using the <see cref="P:System.Web.UI.WebControls.XmlDataSource.Data" /> property. If you want to transform the XML data before it is displayed by a data-bound control, you can provide an Extensible Stylesheet Language (XSL) style sheet for the transformation. As with the XML data, you typically load the style sheet from a file, indicated by the <see cref="P:System.Web.UI.WebControls.XmlDataSource.TransformFile" /> property, but you can also store it in string form directly using the <see cref="P:System.Web.UI.WebControls.XmlDataSource.Transform" /> property.
+      </para>
       <format type="text/html">
         <a href="#updating_xml_data" />
       </format>
@@ -139,11 +139,11 @@
         <h2>Updating XML Data</h2>
       </format>
       <para
-        >The <see cref="T:System.Web.UI.WebControls.XmlDataSource" /> control is commonly used in read-only data scenarios where a data-bound control displays XML data. However, you can also use the <see cref="T:System.Web.UI.WebControls.XmlDataSource" /> control to edit XML data. To edit the XML data, call the <see cref="M:System.Web.UI.WebControls.XmlDataSource.GetXmlDocument" /> method to retrieve an <see cref="T:System.Xml.XmlDataDocument" /> object that is an in-memory representation of the XML data. You can use the object model exposed by the <see cref="T:System.Xml.XmlDataDocument" /> and <see cref="T:System.Xml.XmlNode" /> objects it contains or use an XPath filtering expression to manipulate data in the document. When you have made changes to the in-memory representation of the XML data, you can save it to disk by calling the <see cref="M:System.Web.UI.WebControls.XmlDataSource.Save" /> method. </para
-      >
+        >The <see cref="T:System.Web.UI.WebControls.XmlDataSource" /> control is commonly used in read-only data scenarios where a data-bound control displays XML data. However, you can also use the <see cref="T:System.Web.UI.WebControls.XmlDataSource" /> control to edit XML data. To edit the XML data, call the <see cref="M:System.Web.UI.WebControls.XmlDataSource.GetXmlDocument" /> method to retrieve an <see cref="T:System.Xml.XmlDataDocument" /> object that is an in-memory representation of the XML data. You can use the object model exposed by the <see cref="T:System.Xml.XmlDataDocument" /> and <see cref="T:System.Xml.XmlNode" /> objects it contains or use an XPath filtering expression to manipulate data in the document. When you have made changes to the in-memory representation of the XML data, you can save it to disk by calling the <see cref="M:System.Web.UI.WebControls.XmlDataSource.Save" /> method.
+      </para>
       <para
-        >There are some restrictions to the editing capabilities of the <see cref="T:System.Web.UI.WebControls.XmlDataSource" /> control: </para
-      >
+        >There are some restrictions to the editing capabilities of the <see cref="T:System.Web.UI.WebControls.XmlDataSource" /> control:
+      </para>
       <list type="bullet">
         <item>
           <para
@@ -379,16 +379,16 @@
             </item>
             <item>
               <para
-                >The <see cref="P:System.Web.UI.WebControls.XmlDataSource.CacheDuration" /> property is set to a value greater than 0, which indicates the number of seconds that the cache stores data before the cache is invalidated. </para
-              >
+                >The <see cref="P:System.Web.UI.WebControls.XmlDataSource.CacheDuration" /> property is set to a value greater than 0, which indicates the number of seconds that the cache stores data before the cache is invalidated.
+              </para>
             </item>
           </list>
           <para
             >Any change to the <see cref="P:System.Web.UI.WebControls.XmlDataSource.Data" /> property or the contents of the file that contains the XML data causes the cache to be invalidated.</para
           >
           <para
-            >By default, the <see cref="P:System.Web.UI.WebControls.XmlDataSource.CacheDuration" /> property is set to 0, which indicates an indefinite cache, and the data source will cache data until the XML file that it depends on is changed. </para
-          >
+            >By default, the <see cref="P:System.Web.UI.WebControls.XmlDataSource.CacheDuration" /> property is set to 0, which indicates an indefinite cache, and the data source will cache data until the XML file that it depends on is changed.
+          </para>
           <para
             >The behavior of the cache is governed by a combination of the duration and the <see cref="P:System.Web.UI.WebControls.XmlDataSource.CacheExpirationPolicy" /> setting. If <see cref="P:System.Web.UI.WebControls.XmlDataSource.CacheExpirationPolicy" /> is set to <see cref="F:System.Web.UI.DataSourceCacheExpiry.Absolute" />, the <see cref="T:System.Web.UI.WebControls.XmlDataSource" /> control caches data on the first data retrieval operation, holds it in memory for the amount of time specified by <see cref="P:System.Web.UI.WebControls.XmlDataSource.CacheDuration" />, and invalidates it after the time has lapsed. The cache is then refreshed upon the next operation. If <see cref="P:System.Web.UI.WebControls.XmlDataSource.CacheExpirationPolicy" /> is set to <see cref="F:System.Web.UI.DataSourceCacheExpiry.Sliding" />, the data source control caches data on the first data retrieval operation, but resets the time window that it holds the cache for upon each subsequent operation. The cache will only expire if there is no activity for a time equal to the <see cref="P:System.Web.UI.WebControls.XmlDataSource.CacheDuration" /> since the last data retrieval.</para
           >
@@ -619,8 +619,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An XPath expression that identifies a node from which the current hierarchical view is built. </param
-        >
+          />An XPath expression that identifies a node from which the current hierarchical view is built.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -694,8 +694,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -833,8 +833,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the view to retrieve. If <see cref="F:System.String.Empty" /> is specified, the default view for the <see cref="T:System.Web.UI.WebControls.XmlDataSource" /> control is retrieved. </param
-        >
+          />The name of the view to retrieve. If <see cref="F:System.String.Empty" /> is specified, the default view for the <see cref="T:System.Web.UI.WebControls.XmlDataSource" /> control is retrieved.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.Web.UI.IDataSource.GetViewNames">
@@ -904,8 +904,8 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see cref="T:System.Web.UI.WebControls.XmlDataSource" /> class uses the deprecated <see cref="T:System.Xml.Xsl.XslTransform" /> class to perform XSL transformations. If you want to use style sheet features that were introduced after the <see cref="T:System.Xml.Xsl.XslTransform" /> class was deprecated, apply the transforms manually by using the <see cref="T:System.Xml.Xsl.XslCompiledTransform" /> class. </para
-            >
+              >The <see cref="T:System.Web.UI.WebControls.XmlDataSource" /> class uses the deprecated <see cref="T:System.Xml.Xsl.XslTransform" /> class to perform XSL transformations. If you want to use style sheet features that were introduced after the <see cref="T:System.Xml.Xsl.XslTransform" /> class was deprecated, apply the transforms manually by using the <see cref="T:System.Xml.Xsl.XslCompiledTransform" /> class.
+            </para>
           </block>
         </remarks>
         <summary>

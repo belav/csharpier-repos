@@ -59,8 +59,8 @@
               </term>
               <description>
                 <para
-                  >A newly created <see cref="T:System.Windows.Forms.DataGridViewTextBoxCell" />. </para
-                >
+                  >A newly created <see cref="T:System.Windows.Forms.DataGridViewTextBoxCell" />.
+                </para>
               </description>
             </item>
             <item>

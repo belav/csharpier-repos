@@ -43,14 +43,14 @@
       <para>The Gregorian calendar has 12 months with 28 to 31 days each: January (31 days), February (28 or 29 days), March (31 days), April (30 days), May (31 days), June (30 days), July (31 days), August (31 days), September (30 days), October (31 days), November (30 days), and December (31 days). February has 29 days during leap years and 28 during common years.</para>
       <block subset="none" type="note">
         <para
-          >By default, all <see cref="T:System.DateTime" /> and <see cref="T:System.DateTimeOffset" /> values express dates and times in the Gregorian calendar. </para
-        >
+          >By default, all <see cref="T:System.DateTime" /> and <see cref="T:System.DateTimeOffset" /> values express dates and times in the Gregorian calendar.
+        </para>
       </block>
       <para
         >The Gregorian calendar was developed as a replacement for the Julian calendar (which is represented by the <see cref="T:System.Globalization.JulianCalendar" /> class) and was first introduced in a small number of cultures on October 15, 1582. When working with historic dates that precede a culture's adoption of the Gregorian calendar, you should use the original calendar if it is available in the .NET Framework. For example, Denmark changed from the Julian calendar to the Gregorian calendar on February 19 (in the Julian calendar) or March 1 (in the Gregorian calendar) of 1700. In this case, for dates before the adoption of the Gregorian calendar, you should use the Julian calendar. However, note that no culture offers intrinsic support for the <see cref="T:System.Globalization.JulianCalendar" /> class. You must use the <see cref="T:System.Globalization.JulianCalendar" /> class as a standalone calendar. For more information, see <format type="text/html">
           <a href="0c1534e5-979b-4c8a-a588-1c24301aefb3">Working with Calendars</a>
-        </format>. </para
-      >
+        </format>.
+      </para>
       <para>The following example illustrates that February 18, 1700 in the Julian calendar, which is the last day the Julian calendar was officially used in Denmark, is one day earlier than March 1, 1700 in the Gregorian calendar.</para>
       <para>code reference: System.Globalization.GregorianCalendar.Class#1</para>
       <para
@@ -127,8 +127,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Globalization.GregorianCalendarTypes" /> value that denotes which language version of the calendar to create. </param
-        >
+          />The <see cref="T:System.Globalization.GregorianCalendarTypes" /> value that denotes which language version of the calendar to create.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddMonths">
@@ -187,15 +187,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.DateTime" /> to which to add months. </param
-        >
+          />The <see cref="T:System.DateTime" /> to which to add months.
+        </param>
         <param name="months">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of months to add. </param
-        >
+          />The number of months to add.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddYears">
@@ -254,15 +254,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.DateTime" /> to which to add years. </param
-        >
+          />The <see cref="T:System.DateTime" /> to which to add years.
+        </param>
         <param name="years">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of years to add. </param
-        >
+          />The number of years to add.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ADEra">
@@ -419,8 +419,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.DateTime" /> to read. </param
-        >
+          />The <see cref="T:System.DateTime" /> to read.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetDayOfWeek">
@@ -468,8 +468,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.DateTime" /> to read. </param
-        >
+          />The <see cref="T:System.DateTime" /> to read.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetDayOfYear">
@@ -514,8 +514,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.DateTime" /> to read. </param
-        >
+          />The <see cref="T:System.DateTime" /> to read.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetDaysInMonth">
@@ -561,22 +561,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the year. </param
-        >
+          />An integer that represents the year.
+        </param>
         <param name="month">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer from 1 to 12 that represents the month. </param
-        >
+          />An integer from 1 to 12 that represents the month.
+        </param>
         <param name="era">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the era. </param
-        >
+          />An integer that represents the era.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetDaysInYear">
@@ -621,15 +621,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the year. </param
-        >
+          />An integer that represents the year.
+        </param>
         <param name="era">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the era. </param
-        >
+          />An integer that represents the era.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetEra">
@@ -670,8 +670,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.DateTime" /> to read. </param
-        >
+          />The <see cref="T:System.DateTime" /> to read.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetLeapMonth">
@@ -757,8 +757,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.DateTime" /> to read. </param
-        >
+          />The <see cref="T:System.DateTime" /> to read.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetMonthsInYear">
@@ -798,15 +798,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the year. </param
-        >
+          />An integer that represents the year.
+        </param>
         <param name="era">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the era. </param
-        >
+          />An integer that represents the era.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetWeekOfYear">
@@ -867,22 +867,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.DateTime" /> object to read. </param
-        >
+          />The <see cref="T:System.DateTime" /> object to read.
+        </param>
         <param name="rule">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Globalization.CalendarWeekRule" /> values that defines a calendar week. </param
-        >
+          />One of the <see cref="T:System.Globalization.CalendarWeekRule" /> values that defines a calendar week.
+        </param>
         <param name="firstDayOfWeek">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.DayOfWeek" /> values that represents the first day of the week. </param
-        >
+          />One of the <see cref="T:System.DayOfWeek" /> values that represents the first day of the week.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetYear">
@@ -918,8 +918,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.DateTime" /> to read. </param
-        >
+          />The <see cref="T:System.DateTime" /> to read.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsLeapDay">
@@ -965,29 +965,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the year. </param
-        >
+          />An integer that represents the year.
+        </param>
         <param name="month">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer from 1 to 12 that represents the month. </param
-        >
+          />An integer from 1 to 12 that represents the month.
+        </param>
         <param name="day">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer from 1 to 31 that represents the day. </param
-        >
+          />An integer from 1 to 31 that represents the day.
+        </param>
         <param name="era">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the era. </param
-        >
+          />An integer that represents the era.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsLeapMonth">
@@ -1032,22 +1032,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the year. </param
-        >
+          />An integer that represents the year.
+        </param>
         <param name="month">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer from 1 to 12 that represents the month. </param
-        >
+          />An integer from 1 to 12 that represents the month.
+        </param>
         <param name="era">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the era. </param
-        >
+          />An integer that represents the era.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsLeapYear">
@@ -1087,15 +1087,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the year. </param
-        >
+          />An integer that represents the year.
+        </param>
         <param name="era">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the era. </param
-        >
+          />An integer that represents the era.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="MaxSupportedDateTime">
@@ -1160,8 +1160,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Although the value of the <see cref="P:System.Globalization.GregorianCalendar.MinSupportedDateTime" /> property is the first moment of January 1, 0001 C.E., the Gregorian calendar was not introduced until October 15, 1582, and its adoption throughout the European continent and worldwide was slow. Until they adopted the Gregorian calendar, most cultures in the European, American, and Australian continents used the Julian calendar, which is represented by the <see cref="T:System.Globalization.JulianCalendar" /> class. </para
-          >
+            >Although the value of the <see cref="P:System.Globalization.GregorianCalendar.MinSupportedDateTime" /> property is the first moment of January 1, 0001 C.E., the Gregorian calendar was not introduced until October 15, 1582, and its adoption throughout the European continent and worldwide was slow. Until they adopted the Gregorian calendar, most cultures in the European, American, and Australian continents used the Julian calendar, which is represented by the <see cref="T:System.Globalization.JulianCalendar" /> class.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1218,57 +1218,57 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the year. </param
-        >
+          />An integer that represents the year.
+        </param>
         <param name="month">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer from 1 to 12 that represents the month. </param
-        >
+          />An integer from 1 to 12 that represents the month.
+        </param>
         <param name="day">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer from 1 to 31 that represents the day. </param
-        >
+          />An integer from 1 to 31 that represents the day.
+        </param>
         <param name="hour">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer from 0 to 23 that represents the hour. </param
-        >
+          />An integer from 0 to 23 that represents the hour.
+        </param>
         <param name="minute">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer from 0 to 59 that represents the minute. </param
-        >
+          />An integer from 0 to 59 that represents the minute.
+        </param>
         <param name="second">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer from 0 to 59 that represents the second. </param
-        >
+          />An integer from 0 to 59 that represents the second.
+        </param>
         <param name="millisecond">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer from 0 to 999 that represents the millisecond. </param
-        >
+          />An integer from 0 to 999 that represents the millisecond.
+        </param>
         <param name="era">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the era. </param
-        >
+          />An integer that represents the era.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ToFourDigitYear">
@@ -1316,8 +1316,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A two-digit or four-digit integer that represents the year to convert. </param
-        >
+          />A two-digit or four-digit integer that represents the year to convert.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="TwoDigitYearMax">

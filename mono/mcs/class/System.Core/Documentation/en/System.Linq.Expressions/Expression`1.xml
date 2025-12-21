@@ -203,8 +203,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="P:System.Linq.Expressions.LambdaExpression.Parameters" /> property of the result. </param
-        >
+          />The <see cref="P:System.Linq.Expressions.LambdaExpression.Parameters" /> property of the result.
+        </param>
       </Docs>
     </Member>
   </Members>

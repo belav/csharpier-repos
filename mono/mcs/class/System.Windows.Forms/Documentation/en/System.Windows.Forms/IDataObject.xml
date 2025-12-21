@@ -85,8 +85,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The format of the data to retrieve. See <see cref="T:System.Windows.Forms.DataFormats" /> for predefined formats. </param
-        >
+          />The format of the data to retrieve. See <see cref="T:System.Windows.Forms.DataFormats" /> for predefined formats.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -129,8 +129,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> representing the format of the data to retrieve. See <see cref="T:System.Windows.Forms.DataFormats" /> for predefined formats. </param
-        >
+          />A <see cref="T:System.Type" /> representing the format of the data to retrieve. See <see cref="T:System.Windows.Forms.DataFormats" /> for predefined formats.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -182,15 +182,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The format of the data to retrieve. See <see cref="T:System.Windows.Forms.DataFormats" /> for predefined formats. </param
-        >
+          />The format of the data to retrieve. See <see cref="T:System.Windows.Forms.DataFormats" /> for predefined formats.
+        </param>
         <param name="autoConvert">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to convert the data to the specified format; otherwise, false. </param
-        >
+          />true to convert the data to the specified format; otherwise, false.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -232,8 +232,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The format for which to check. See <see cref="T:System.Windows.Forms.DataFormats" /> for predefined formats. </param
-        >
+          />The format for which to check. See <see cref="T:System.Windows.Forms.DataFormats" /> for predefined formats.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -275,8 +275,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> representing the format for which to check. See <see cref="T:System.Windows.Forms.DataFormats" /> for predefined formats. </param
-        >
+          />A <see cref="T:System.Type" /> representing the format for which to check. See <see cref="T:System.Windows.Forms.DataFormats" /> for predefined formats.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -348,15 +348,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The format for which to check. See <see cref="T:System.Windows.Forms.DataFormats" /> for predefined formats. </param
-        >
+          />The format for which to check. See <see cref="T:System.Windows.Forms.DataFormats" /> for predefined formats.
+        </param>
         <param name="autoConvert">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to determine whether data stored in this instance can be converted to the specified format; false to check whether the data is in the specified format. </param
-        >
+          />true to determine whether data stored in this instance can be converted to the specified format; false to check whether the data is in the specified format.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -432,8 +432,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to retrieve all formats that data stored in this instance is associated with or can be converted to; false to retrieve only native data formats. </param
-        >
+          />true to retrieve all formats that data stored in this instance is associated with or can be converted to; false to retrieve only native data formats.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -463,8 +463,8 @@
           <para>Stores the specified data in this instance, using the class of the data for the format.</para>
         </summary>
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />The data to store. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The data to store.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -499,11 +499,11 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The format associated with the data. See <see cref="T:System.Windows.Forms.DataFormats" /> for predefined formats. </param
-        >
+          />The format associated with the data. See <see cref="T:System.Windows.Forms.DataFormats" /> for predefined formats.
+        </param>
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />The data to store. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The data to store.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -538,11 +538,11 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> representing the format associated with the data. See <see cref="T:System.Windows.Forms.DataFormats" /> for predefined formats. </param
-        >
+          />A <see cref="T:System.Type" /> representing the format associated with the data. See <see cref="T:System.Windows.Forms.DataFormats" /> for predefined formats.
+        </param>
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />The data to store. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The data to store.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -580,18 +580,18 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The format associated with the data. See <see cref="T:System.Windows.Forms.DataFormats" /> for predefined formats. </param
-        >
+          />The format associated with the data. See <see cref="T:System.Windows.Forms.DataFormats" /> for predefined formats.
+        </param>
         <param name="autoConvert">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to allow the data to be converted to another format; otherwise, false. </param
-        >
+          />true to allow the data to be converted to another format; otherwise, false.
+        </param>
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />The data to store. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The data to store.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

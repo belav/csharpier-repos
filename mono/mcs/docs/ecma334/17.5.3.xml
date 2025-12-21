@@ -2,13 +2,13 @@
 <clause number="17.5.3" title="Virtual methods">
   <paragraph>When an instance method declaration includes a virtual modifier, that method is said to be a virtual method. When no virtual modifier is present, the method is said to be a non-virtual method. </paragraph>
   <paragraph
-    >The implementation of a non-virtual method is invariant: The implementation is the same whether the method is invoked on an instance of the class in which it is declared or an instance of a derived class. In contrast, the implementation of a virtual method can be superseded by derived classes. The process of superseding the implementation of an inherited virtual method is known as overriding that method (<hyperlink>17.5.4</hyperlink>). </paragraph
-  >
+    >The implementation of a non-virtual method is invariant: The implementation is the same whether the method is invoked on an instance of the class in which it is declared or an instance of a derived class. In contrast, the implementation of a virtual method can be superseded by derived classes. The process of superseding the implementation of an inherited virtual method is known as overriding that method (<hyperlink>17.5.4</hyperlink>).
+  </paragraph>
   <paragraph
     >In a virtual method invocation, the run-time type of the instance for which that invocation takes place determines the actual method implementation to invoke. In a non-virtual method invocation, the  compile-time type of the instance is the determining factor. In precise terms, when a method named N is invoked with an argument list A on an instance with a compile-time type C and a run-time type R (where R is either C or a class derived from C), the invocation is processed as follows: <list>
       <list_item
-        > First, overload resolution is applied to C, N, and A, to select a specific method M from the set of methods declared in and inherited by C. This is described in <hyperlink>14.5.5.1</hyperlink>. </list_item
-      >
+        > First, overload resolution is applied to C, N, and A, to select a specific method M from the set of methods declared in and inherited by C. This is described in <hyperlink>14.5.5.1</hyperlink>.
+      </list_item>
       <list_item> Then, if M is a non-virtual method, M is invoked. </list_item>
       <list_item> Otherwise, M is a virtual method, and the most derived implementation of M with respect to R is invoked. </list_item>
     </list>

@@ -252,8 +252,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The default value of this parameter. </param
-        >
+          />The default value of this parameter.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetCustomAttribute">
@@ -288,8 +288,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An instance of a helper class to define the custom attribute. </param
-        >
+          />An instance of a helper class to define the custom attribute.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetCustomAttribute">
@@ -340,15 +340,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The constructor for the custom attribute. </param
-        >
+          />The constructor for the custom attribute.
+        </param>
         <param name="binaryAttribute">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A byte blob representing the attributes. </param
-        >
+          />A byte blob representing the attributes.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetMarshal">
@@ -394,8 +394,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The marshaling information for this parameter. </param
-        >
+          />The marshaling information for this parameter.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.Runtime.InteropServices._ParameterBuilder.GetIDsOfNames">

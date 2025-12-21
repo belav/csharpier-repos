@@ -43,8 +43,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.NetTcpBindingElement" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.NetTcpBindingElement" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -66,8 +66,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.NetTcpBindingElement" /> class with the specified configuration name. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.NetTcpBindingElement" /> class with the specified configuration name.
+          </para>
         </summary>
         <param name="name">
           <attribution
@@ -211,8 +211,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If the buffer is full, excess data remains in the underlying socket until the buffer has space again. </para>
           <para
-            >This value cannot be less than <see cref="P:System.ServiceModel.Configuration.NetTcpBindingElement.MaxReceivedMessageSize" />, whose default value is also 65,536 (64 KB). </para
-          >
+            >This value cannot be less than <see cref="P:System.ServiceModel.Configuration.NetTcpBindingElement.MaxReceivedMessageSize" />, whose default value is also 65,536 (64 KB).
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

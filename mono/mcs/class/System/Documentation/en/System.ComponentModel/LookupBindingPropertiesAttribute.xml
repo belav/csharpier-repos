@@ -32,8 +32,8 @@
         >The <see cref="T:System.ComponentModel.LookupBindingPropertiesAttribute" /> is used to specify the properties used with lookup-based binding, particularly <see cref="T:System.Windows.Forms.ListBox" /> and <see cref="T:System.Windows.Forms.ComboBox" /> controls.</para
       >
       <para
-        >The <see cref="T:System.ComponentModel.LookupBindingPropertiesAttribute" /> is specified at the class level. The class can be inherited and does not allow multiple attributes on the same class. </para
-      >
+        >The <see cref="T:System.ComponentModel.LookupBindingPropertiesAttribute" /> is specified at the class level. The class can be inherited and does not allow multiple attributes on the same class.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -57,14 +57,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default constructor sets the <see cref="P:System.ComponentModel.LookupBindingPropertiesAttribute.DataSource" />, <see cref="P:System.ComponentModel.LookupBindingPropertiesAttribute.DisplayMember" />, <see cref="P:System.ComponentModel.LookupBindingPropertiesAttribute.ValueMember" />, and <see cref="P:System.ComponentModel.LookupBindingPropertiesAttribute.LookupMember" /> properties to null. </para
-          >
+            >The default constructor sets the <see cref="P:System.ComponentModel.LookupBindingPropertiesAttribute.DataSource" />, <see cref="P:System.ComponentModel.LookupBindingPropertiesAttribute.DisplayMember" />, <see cref="P:System.ComponentModel.LookupBindingPropertiesAttribute.ValueMember" />, and <see cref="P:System.ComponentModel.LookupBindingPropertiesAttribute.LookupMember" /> properties to null.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.LookupBindingPropertiesAttribute" /> class using no parameters. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.LookupBindingPropertiesAttribute" /> class using no parameters.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -98,8 +98,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.LookupBindingPropertiesAttribute" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.LookupBindingPropertiesAttribute" /> class.
+          </para>
         </summary>
         <param name="dataSource">
           <attribution
@@ -244,8 +244,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified <see cref="T:System.Object" /> is equal to the current <see cref="T:System.ComponentModel.LookupBindingPropertiesAttribute" /> instance. </para
-          >
+            >Determines whether the specified <see cref="T:System.Object" /> is equal to the current <see cref="T:System.ComponentModel.LookupBindingPropertiesAttribute" /> instance.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -256,8 +256,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to compare with the current <see cref="T:System.ComponentModel.LookupBindingPropertiesAttribute" /> instance </param
-        >
+          />The <see cref="T:System.Object" /> to compare with the current <see cref="T:System.ComponentModel.LookupBindingPropertiesAttribute" /> instance
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">

@@ -16,8 +16,8 @@
   </paragraph>
   <paragraph>In a pointer member access of the form P-&gt;I, P must be an expression of a pointer type other than void*, and I must denote an accessible member of the type to which P points. </paragraph>
   <paragraph
-    >A pointer member access of the form P-&gt;I is evaluated exactly as (*P).I. For a description of the pointer indirection operator (*), see <hyperlink>25.5.1</hyperlink>. For a description of the member access operator (.), see <hyperlink>14.5.4</hyperlink>. </paragraph
-  >
+    >A pointer member access of the form P-&gt;I is evaluated exactly as (*P).I. For a description of the pointer indirection operator (*), see <hyperlink>25.5.1</hyperlink>. For a description of the member access operator (.), see <hyperlink>14.5.4</hyperlink>.
+  </paragraph>
   <paragraph>
     <example
       >[Example: In the example <code_example>

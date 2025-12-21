@@ -65,8 +65,8 @@ http://test2.fabrikam.com/Service.svc</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.BaseAddressPrefixFilterElement" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.BaseAddressPrefixFilterElement" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -96,8 +96,8 @@ http://test2.fabrikam.com/Service.svc</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A filter that causes the service to listen on all URIs that start with this specific prefix. </param
-        >
+          />A filter that causes the service to listen on all URIs that start with this specific prefix.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Prefix">

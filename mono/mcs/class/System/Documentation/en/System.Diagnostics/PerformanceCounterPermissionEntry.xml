@@ -79,22 +79,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the <see cref="T:System.Diagnostics.PerformanceCounterPermissionAccess" /> values. The <see cref="P:System.Diagnostics.PerformanceCounterPermissionEntry.PermissionAccess" /> property is set to this value. </param
-        >
+          />A bitwise combination of the <see cref="T:System.Diagnostics.PerformanceCounterPermissionAccess" /> values. The <see cref="P:System.Diagnostics.PerformanceCounterPermissionEntry.PermissionAccess" /> property is set to this value.
+        </param>
         <param name="machineName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The server on which the category of the performance counter resides. </param
-        >
+          />The server on which the category of the performance counter resides.
+        </param>
         <param name="categoryName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the performance counter category (performance object) with which this performance counter is associated. </param
-        >
+          />The name of the performance counter category (performance object) with which this performance counter is associated.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CategoryName">

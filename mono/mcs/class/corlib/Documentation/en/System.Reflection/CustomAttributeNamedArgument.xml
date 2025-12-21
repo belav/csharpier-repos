@@ -24,15 +24,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Code that is being examined in the reflection-only context cannot be executed, so it is not always possible to examine custom attributes by creating instances of them and then examining their properties, using methods like <see cref="Overload:System.Attribute.GetCustomAttributes" />, <see cref="Overload:System.Reflection.MemberInfo.GetCustomAttributes" />, and so on. If the code for the attribute type itself is loaded into the reflection-only context, it cannot be executed. </para
-      >
+        >Code that is being examined in the reflection-only context cannot be executed, so it is not always possible to examine custom attributes by creating instances of them and then examining their properties, using methods like <see cref="Overload:System.Attribute.GetCustomAttributes" />, <see cref="Overload:System.Reflection.MemberInfo.GetCustomAttributes" />, and so on. If the code for the attribute type itself is loaded into the reflection-only context, it cannot be executed.
+      </para>
       <para
         >The <see cref="T:System.Reflection.CustomAttributeNamedArgument" /> structure is used by the <see cref="T:System.Reflection.CustomAttributeData" /> class to provide access to a named argument specified for a custom attribute instance, without executing the code of the corresponding property of the custom attribute type. The <see cref="P:System.Reflection.CustomAttributeNamedArgument.TypedValue" /> property returns a <see cref="T:System.Reflection.CustomAttributeTypedArgument" /> structure that contains the type and value of the named argument.</para
       >
       <block subset="none" type="note">
         <para
-          >Whether an argument is named or positional, you must access its type and value by using the <see cref="T:System.Reflection.CustomAttributeTypedArgument" /> structure. </para
-        >
+          >Whether an argument is named or positional, you must access its type and value by using the <see cref="T:System.Reflection.CustomAttributeTypedArgument" /> structure.
+        </para>
       </block>
       <para
         >To create instances of the <see cref="T:System.Reflection.CustomAttributeData" /> class, use the static <see cref="Overload:System.Reflection.CustomAttributeData.GetCustomAttributes" /> factory method.</para

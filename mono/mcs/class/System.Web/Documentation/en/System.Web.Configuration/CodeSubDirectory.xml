@@ -17,8 +17,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see cref="T:System.Web.Configuration.CodeSubDirectory" /> is referenced as an attribute of the Add element within the codeSubDirectories node of the compilation section of the configuration. </para
-      >
+        >A <see cref="T:System.Web.Configuration.CodeSubDirectory" /> is referenced as an attribute of the Add element within the codeSubDirectories node of the compilation section of the configuration.
+      </para>
       <para>The build order is inferred from the top-down order of the codeSubDirectories in the configuration. The \App_Code directory is built last. However, there are no build-order dependencies, which means the build order does not matter here.</para>
     </remarks>
     <summary>

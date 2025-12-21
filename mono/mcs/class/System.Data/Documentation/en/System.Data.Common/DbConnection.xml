@@ -162,8 +162,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value supplied in the <paramref name="databaseName" /> parameter must be a valid database name for the current instance. </para
-          >
+            >The value supplied in the <paramref name="databaseName" /> parameter must be a valid database name for the current instance.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -370,8 +370,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the connection to the database is closed, the <see cref="P:System.Data.Common.DbConnection.DataSource" /> returns whatever is contained in the <see cref="P:System.Data.Common.DbConnection.ConnectionString" /> for the DataSource keyword. If the connection is open and the <see cref="P:System.Data.Common.DbConnection.ConnectionString" /> data source keyword's value starts with "|datadirectory|", the property returns whatever is contained in the <see cref="P:System.Data.Common.DbConnection.ConnectionString" /> for the DataSource keyword only. If the connection to the database is open, the property returns what the native provider returns for the DBPROP_INIT_DATASOURCE, and if that is empty, the native provider's DBPROP_DATASOURCENAME is returned. </para
-          >
+            >If the connection to the database is closed, the <see cref="P:System.Data.Common.DbConnection.DataSource" /> returns whatever is contained in the <see cref="P:System.Data.Common.DbConnection.ConnectionString" /> for the DataSource keyword. If the connection is open and the <see cref="P:System.Data.Common.DbConnection.ConnectionString" /> data source keyword's value starts with "|datadirectory|", the property returns whatever is contained in the <see cref="P:System.Data.Common.DbConnection.ConnectionString" /> for the DataSource keyword only. If the connection to the database is open, the property returns what the native provider returns for the DBPROP_INIT_DATASOURCE, and if that is empty, the native provider's DBPROP_DATASOURCENAME is returned.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -399,8 +399,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >New in ADO.NET 2.0 is support for using the EnlistTransaction method to enlist in a distributed transaction. Because it enlists a connection in a <see cref="T:System.Transactions.Transaction" /> instance, EnlistTransaction takes advantage of functionality available in the <see cref="N:System.Transactions" /> namespace for managing distributed transactions. Once a connection is explicitly enlisted in a transaction, it cannot be unenlisted or enlisted in another transaction until the first transaction finishes. </para
-          >
+            >New in ADO.NET 2.0 is support for using the EnlistTransaction method to enlist in a distributed transaction. Because it enlists a connection in a <see cref="T:System.Transactions.Transaction" /> instance, EnlistTransaction takes advantage of functionality available in the <see cref="N:System.Transactions" /> namespace for managing distributed transactions. Once a connection is explicitly enlisted in a transaction, it cannot be unenlisted or enlisted in another transaction until the first transaction finishes.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -479,8 +479,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Specifies the name of the schema to return. </param
-        >
+          />Specifies the name of the schema to return.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -560,8 +560,8 @@
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2"
                 >[&lt;topic://cpconProvidingEventFunctionality&gt;]</a
               >
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

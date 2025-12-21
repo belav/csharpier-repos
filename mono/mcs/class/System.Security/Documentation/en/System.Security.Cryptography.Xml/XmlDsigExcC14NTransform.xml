@@ -31,15 +31,15 @@
         >Use the <see cref="T:System.Security.Cryptography.Xml.XmlDsigC14NTransform" /> class when you need to canonicalize an XML subdocument so that it is independent from its XML context. For example, applications such as Web services that use signed XML within complex communication protocols often need to canonicalize XML in this manner.  Such applications often envelop XML within various dynamically constructed elements, which can substantially change the document and cause XML signature verification to fail.  The <see cref="T:System.Security.Cryptography.Xml.XmlDsigExcC14NTransform" /> class solves this problem by excluding such ancestor context from the canonical subdocument.</para
       >
       <para
-        >Typically, you do not create a new instance of a canonicalization transform class. To specify a canonicalization transform, pass the Uniform Resource Identifier (URI) that describes a transform to the <see cref="P:System.Security.Cryptography.Xml.SignedInfo.CanonicalizationMethod" /> property, which is accessible from the <see cref="P:System.Security.Cryptography.Xml.SignedXml.SignedInfo" /> property. To acquire a reference to the canonicalization transform, use the <see cref="P:System.Security.Cryptography.Xml.SignedInfo.CanonicalizationMethodObject" /> property, which is accessible from the <see cref="P:System.Security.Cryptography.Xml.SignedXml.SignedInfo" /> property.  </para
-      >
+        >Typically, you do not create a new instance of a canonicalization transform class. To specify a canonicalization transform, pass the Uniform Resource Identifier (URI) that describes a transform to the <see cref="P:System.Security.Cryptography.Xml.SignedInfo.CanonicalizationMethod" /> property, which is accessible from the <see cref="P:System.Security.Cryptography.Xml.SignedXml.SignedInfo" /> property. To acquire a reference to the canonicalization transform, use the <see cref="P:System.Security.Cryptography.Xml.SignedInfo.CanonicalizationMethodObject" /> property, which is accessible from the <see cref="P:System.Security.Cryptography.Xml.SignedXml.SignedInfo" /> property.
+      </para>
       <para>You are required to create a new instance of a canonicalization transform class only when you want to manually hash an XML document or use your own canonicalization algorithm.</para>
       <para
-        >The URI that describes the <see cref="T:System.Security.Cryptography.Xml.XmlDsigExcC14NWithCommentsTransform" /> class is defined by the <see cref="F:System.Security.Cryptography.Xml.SignedXml.XmlDsigExcC14NWithCommentsTransformUrl" /> field.  </para
-      >
+        >The URI that describes the <see cref="T:System.Security.Cryptography.Xml.XmlDsigExcC14NWithCommentsTransform" /> class is defined by the <see cref="F:System.Security.Cryptography.Xml.SignedXml.XmlDsigExcC14NWithCommentsTransformUrl" /> field.
+      </para>
       <para
-        >The URI that describes the <see cref="T:System.Security.Cryptography.Xml.XmlDsigExcC14NTransform" /> class is defined by the <see cref="F:System.Security.Cryptography.Xml.SignedXml.XmlDsigExcC14NTransformUrl" /> field.  </para
-      >
+        >The URI that describes the <see cref="T:System.Security.Cryptography.Xml.XmlDsigExcC14NTransform" /> class is defined by the <see cref="F:System.Security.Cryptography.Xml.SignedXml.XmlDsigExcC14NTransformUrl" /> field.
+      </para>
       <para>For more information about the exclusive C14N transform, see the XMLDSIG specification, which is available from the World Wide Web Consortium (W3C) at www.w3.org/TR/xmldsig-core/. The canonicalization algorithm is defined in the W3C Canonical XML specification, which is available at www.w3.org/2001/10/xml-exc-c14n.</para>
     </remarks>
     <summary>
@@ -66,8 +66,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.XmlDsigExcC14NTransform" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.XmlDsigExcC14NTransform" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -94,8 +94,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.XmlDsigExcC14NTransform" /> class specifying a value that determines whether to include comments. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.XmlDsigExcC14NTransform" /> class specifying a value that determines whether to include comments.
+          </para>
         </summary>
         <param name="includeComments">
           <attribution
@@ -134,8 +134,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.XmlDsigExcC14NTransform" /> class specifying a list of namespace prefixes to canonicalize using the standard canonicalization algorithm. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.XmlDsigExcC14NTransform" /> class specifying a list of namespace prefixes to canonicalize using the standard canonicalization algorithm.
+          </para>
         </summary>
         <param name="inclusiveNamespacesPrefixList">
           <attribution
@@ -175,8 +175,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.XmlDsigExcC14NTransform" /> class specifying whether to include comments, and specifying a list of namespace prefixes. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.XmlDsigExcC14NTransform" /> class specifying whether to include comments, and specifying a list of namespace prefixes.
+          </para>
         </summary>
         <param name="includeComments">
           <attribution
@@ -377,8 +377,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Security.Cryptography.Xml.XmlDsigExcC14NTransform.InclusiveNamespacesPrefixList" /> property contains a whitespace-delimited list of namespace prefixes to canonicalize using the standard canonicalization algorithm rather than the exclusive canonicalization algorithm.  To specify the default namespace, which does not have a prefix, pass the special prefix "#default".  </para
-          >
+            >The <see cref="P:System.Security.Cryptography.Xml.XmlDsigExcC14NTransform.InclusiveNamespacesPrefixList" /> property contains a whitespace-delimited list of namespace prefixes to canonicalize using the standard canonicalization algorithm rather than the exclusive canonicalization algorithm.  To specify the default namespace, which does not have a prefix, pass the special prefix "#default".
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

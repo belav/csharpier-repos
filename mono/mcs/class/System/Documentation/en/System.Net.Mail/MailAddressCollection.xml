@@ -94,8 +94,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The e-mail addresses to add to the <see cref="T:System.Net.Mail.MailAddressCollection" />. Multiple e-mail addresses must be separated with a comma character (","). </param
-        >
+          />The e-mail addresses to add to the <see cref="T:System.Net.Mail.MailAddressCollection" />. Multiple e-mail addresses must be separated with a comma character (",").
+        </param>
       </Docs>
     </Member>
     <Member MemberName="InsertItem">

@@ -54,8 +54,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.HMAC" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.HMAC" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -150,8 +150,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >HMAC supports a number of hash algorithms, including MD5, SHA-1, SHA-256, and RIPEMD160. For the full list, see the supported values for the <paramref name="algorithmName" /> parameter. </para
-          >
+            >HMAC supports a number of hash algorithms, including MD5, SHA-1, SHA-256, and RIPEMD160. For the full list, see the supported values for the <paramref name="algorithmName" /> parameter.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -209,8 +209,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="HashCore">
@@ -249,22 +249,22 @@
           >
         </summary>
         <param name="rgb">
-          <attribution license="cc4" from="Microsoft" modified="false" />The input data. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The input data.
+        </param>
         <param name="ib">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The offset into the byte array from which to begin using data. </param
-        >
+          />The offset into the byte array from which to begin using data.
+        </param>
         <param name="cb">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes in the array to use as data. </param
-        >
+          />The number of bytes in the array to use as data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="HashFinal">

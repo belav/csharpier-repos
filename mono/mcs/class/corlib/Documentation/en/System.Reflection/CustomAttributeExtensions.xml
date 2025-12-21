@@ -45,8 +45,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="M:System.Reflection.CustomAttributeExtensions.GetCustomAttributes(System.Reflection.Assembly,System.Type)" /> extension method if you expect more than one value to be returned, or <see cref="T:System.Reflection.AmbiguousMatchException" /> will be thrown. </para
-          >
+            >Use the <see cref="M:System.Reflection.CustomAttributeExtensions.GetCustomAttributes(System.Reflection.Assembly,System.Type)" /> extension method if you expect more than one value to be returned, or <see cref="T:System.Reflection.AmbiguousMatchException" /> will be thrown.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -98,8 +98,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="M:System.Reflection.CustomAttributeExtensions.GetCustomAttributes(System.Reflection.Assembly,System.Type)" /> extension method if you expect more than one value to be returned, or <see cref="T:System.Reflection.AmbiguousMatchException" /> will be thrown. </para
-          >
+            >Use the <see cref="M:System.Reflection.CustomAttributeExtensions.GetCustomAttributes(System.Reflection.Assembly,System.Type)" /> extension method if you expect more than one value to be returned, or <see cref="T:System.Reflection.AmbiguousMatchException" /> will be thrown.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -151,8 +151,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="M:System.Reflection.CustomAttributeExtensions.GetCustomAttributes(System.Reflection.Assembly,System.Type)" /> extension method if you expect more than one value to be returned, or <see cref="T:System.Reflection.AmbiguousMatchException" /> will be thrown. </para
-          >
+            >Use the <see cref="M:System.Reflection.CustomAttributeExtensions.GetCustomAttributes(System.Reflection.Assembly,System.Type)" /> extension method if you expect more than one value to be returned, or <see cref="T:System.Reflection.AmbiguousMatchException" /> will be thrown.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -204,8 +204,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="M:System.Reflection.CustomAttributeExtensions.GetCustomAttributes(System.Reflection.Assembly,System.Type)" /> extension method if you expect more than one value to be returned, or <see cref="T:System.Reflection.AmbiguousMatchException" /> will be thrown. </para
-          >
+            >Use the <see cref="M:System.Reflection.CustomAttributeExtensions.GetCustomAttributes(System.Reflection.Assembly,System.Type)" /> extension method if you expect more than one value to be returned, or <see cref="T:System.Reflection.AmbiguousMatchException" /> will be thrown.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -258,8 +258,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="M:System.Reflection.CustomAttributeExtensions.GetCustomAttributes(System.Reflection.Assembly,System.Type)" /> extension method if you expect more than one value to be returned, or <see cref="T:System.Reflection.AmbiguousMatchException" /> will be thrown. </para
-          >
+            >Use the <see cref="M:System.Reflection.CustomAttributeExtensions.GetCustomAttributes(System.Reflection.Assembly,System.Type)" /> extension method if you expect more than one value to be returned, or <see cref="T:System.Reflection.AmbiguousMatchException" /> will be thrown.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -290,8 +290,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to inspect the ancestors of <paramref name="element" />; otherwise, false. </param
-        >
+          />true to inspect the ancestors of <paramref name="element" />; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttribute">
@@ -319,8 +319,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="M:System.Reflection.CustomAttributeExtensions.GetCustomAttributes(System.Reflection.Assembly,System.Type)" /> extension method if you expect more than one value to be returned, or <see cref="T:System.Reflection.AmbiguousMatchException" /> will be thrown. </para
-          >
+            >Use the <see cref="M:System.Reflection.CustomAttributeExtensions.GetCustomAttributes(System.Reflection.Assembly,System.Type)" /> extension method if you expect more than one value to be returned, or <see cref="T:System.Reflection.AmbiguousMatchException" /> will be thrown.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -351,8 +351,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to inspect the ancestors of <paramref name="element" />; otherwise, false. </param
-        >
+          />true to inspect the ancestors of <paramref name="element" />; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttribute&lt;T&gt;">
@@ -385,8 +385,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="M:System.Reflection.CustomAttributeExtensions.GetCustomAttributes(System.Reflection.Assembly,System.Type)" /> extension method if you expect more than one value to be returned, or <see cref="T:System.Reflection.AmbiguousMatchException" /> will be thrown. </para
-          >
+            >Use the <see cref="M:System.Reflection.CustomAttributeExtensions.GetCustomAttributes(System.Reflection.Assembly,System.Type)" /> extension method if you expect more than one value to be returned, or <see cref="T:System.Reflection.AmbiguousMatchException" /> will be thrown.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -444,8 +444,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="M:System.Reflection.CustomAttributeExtensions.GetCustomAttributes(System.Reflection.Assembly,System.Type)" /> extension method if you expect more than one value to be returned, or <see cref="T:System.Reflection.AmbiguousMatchException" /> will be thrown. </para
-          >
+            >Use the <see cref="M:System.Reflection.CustomAttributeExtensions.GetCustomAttributes(System.Reflection.Assembly,System.Type)" /> extension method if you expect more than one value to be returned, or <see cref="T:System.Reflection.AmbiguousMatchException" /> will be thrown.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -503,8 +503,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="M:System.Reflection.CustomAttributeExtensions.GetCustomAttributes(System.Reflection.Assembly,System.Type)" /> extension method if you expect more than one value to be returned, or <see cref="T:System.Reflection.AmbiguousMatchException" /> will be thrown. </para
-          >
+            >Use the <see cref="M:System.Reflection.CustomAttributeExtensions.GetCustomAttributes(System.Reflection.Assembly,System.Type)" /> extension method if you expect more than one value to be returned, or <see cref="T:System.Reflection.AmbiguousMatchException" /> will be thrown.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -562,8 +562,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="M:System.Reflection.CustomAttributeExtensions.GetCustomAttributes(System.Reflection.Assembly,System.Type)" /> extension method if you expect more than one value to be returned, or <see cref="T:System.Reflection.AmbiguousMatchException" /> will be thrown. </para
-          >
+            >Use the <see cref="M:System.Reflection.CustomAttributeExtensions.GetCustomAttributes(System.Reflection.Assembly,System.Type)" /> extension method if you expect more than one value to be returned, or <see cref="T:System.Reflection.AmbiguousMatchException" /> will be thrown.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -622,8 +622,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="M:System.Reflection.CustomAttributeExtensions.GetCustomAttributes(System.Reflection.Assembly,System.Type)" /> extension method if you expect more than one value to be returned, or <see cref="T:System.Reflection.AmbiguousMatchException" /> will be thrown. </para
-          >
+            >Use the <see cref="M:System.Reflection.CustomAttributeExtensions.GetCustomAttributes(System.Reflection.Assembly,System.Type)" /> extension method if you expect more than one value to be returned, or <see cref="T:System.Reflection.AmbiguousMatchException" /> will be thrown.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -647,8 +647,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to inspect the ancestors of <paramref name="element" />; otherwise, false. </param
-        >
+          />true to inspect the ancestors of <paramref name="element" />; otherwise, false.
+        </param>
         <typeparam name="T">
           <attribution
             license="cc4"
@@ -689,8 +689,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="M:System.Reflection.CustomAttributeExtensions.GetCustomAttributes(System.Reflection.Assembly,System.Type)" /> extension method if you expect more than one value to be returned, or <see cref="T:System.Reflection.AmbiguousMatchException" /> will be thrown. </para
-          >
+            >Use the <see cref="M:System.Reflection.CustomAttributeExtensions.GetCustomAttributes(System.Reflection.Assembly,System.Type)" /> extension method if you expect more than one value to be returned, or <see cref="T:System.Reflection.AmbiguousMatchException" /> will be thrown.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -714,8 +714,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to inspect the ancestors of <paramref name="element" />; otherwise, false. </param
-        >
+          />true to inspect the ancestors of <paramref name="element" />; otherwise, false.
+        </param>
         <typeparam name="T">
           <attribution
             license="cc4"
@@ -753,8 +753,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A collection of the custom attributes that are applied to <paramref name="element" />, or an empty collection if no such attributes exist. </para
-          >
+            >A collection of the custom attributes that are applied to <paramref name="element" />, or an empty collection if no such attributes exist.
+          </para>
         </returns>
         <param name="element">
           <attribution
@@ -793,8 +793,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A collection of the custom attributes that are applied to <paramref name="element" />, or an empty collection if no such attributes exist. </para
-          >
+            >A collection of the custom attributes that are applied to <paramref name="element" />, or an empty collection if no such attributes exist.
+          </para>
         </returns>
         <param name="element">
           <attribution
@@ -833,8 +833,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A collection of the custom attributes that are applied to <paramref name="element" />, or an empty collection if no such attributes exist. </para
-          >
+            >A collection of the custom attributes that are applied to <paramref name="element" />, or an empty collection if no such attributes exist.
+          </para>
         </returns>
         <param name="element">
           <attribution
@@ -873,8 +873,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A collection of the custom attributes that are applied to <paramref name="element" />, or an empty collection if no such attributes exist. </para
-          >
+            >A collection of the custom attributes that are applied to <paramref name="element" />, or an empty collection if no such attributes exist.
+          </para>
         </returns>
         <param name="element">
           <attribution
@@ -914,8 +914,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A collection of the custom attributes that are applied to <paramref name="element" /> and that match <paramref name="attributeType" />, or an empty collection if no such attributes exist. </para
-          >
+            >A collection of the custom attributes that are applied to <paramref name="element" /> and that match <paramref name="attributeType" />, or an empty collection if no such attributes exist.
+          </para>
         </returns>
         <param name="element">
           <attribution
@@ -962,8 +962,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A collection of the custom attributes that are applied to <paramref name="element" /> that match the specified criteria, or an empty collection if no such attributes exist. </para
-          >
+            >A collection of the custom attributes that are applied to <paramref name="element" /> that match the specified criteria, or an empty collection if no such attributes exist.
+          </para>
         </returns>
         <param name="element">
           <attribution
@@ -977,8 +977,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to inspect the ancestors of <paramref name="element" />; otherwise, false. </param
-        >
+          />true to inspect the ancestors of <paramref name="element" />; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttributes">
@@ -1010,8 +1010,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A collection of the custom attributes that are applied to <paramref name="element" /> and that match <paramref name="attributeType" />, or an empty collection if no such attributes exist. </para
-          >
+            >A collection of the custom attributes that are applied to <paramref name="element" /> and that match <paramref name="attributeType" />, or an empty collection if no such attributes exist.
+          </para>
         </returns>
         <param name="element">
           <attribution
@@ -1106,8 +1106,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A collection of the custom attributes that are applied to <paramref name="element" />, or an empty collection if no such attributes exist. </para
-          >
+            >A collection of the custom attributes that are applied to <paramref name="element" />, or an empty collection if no such attributes exist.
+          </para>
         </returns>
         <param name="element">
           <attribution
@@ -1121,8 +1121,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to inspect the ancestors of <paramref name="element" />; otherwise, false. </param
-        >
+          />true to inspect the ancestors of <paramref name="element" />; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttributes">
@@ -1154,8 +1154,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A collection of the custom attributes that are applied to <paramref name="element" /> and that match <paramref name="attributeType" />, or an empty collection if no such attributes exist. </para
-          >
+            >A collection of the custom attributes that are applied to <paramref name="element" /> and that match <paramref name="attributeType" />, or an empty collection if no such attributes exist.
+          </para>
         </returns>
         <param name="element">
           <attribution
@@ -1225,8 +1225,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to inspect the ancestors of <paramref name="element" />; otherwise, false. </param
-        >
+          />true to inspect the ancestors of <paramref name="element" />; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttributes">
@@ -1259,8 +1259,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A collection of the custom attributes that are applied to <paramref name="element" /> and that match <paramref name="attributeType" />, or an empty collection if no such attributes exist. </para
-          >
+            >A collection of the custom attributes that are applied to <paramref name="element" /> and that match <paramref name="attributeType" />, or an empty collection if no such attributes exist.
+          </para>
         </returns>
         <param name="element">
           <attribution
@@ -1281,8 +1281,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to inspect the ancestors of <paramref name="element" />; otherwise, false. </param
-        >
+          />true to inspect the ancestors of <paramref name="element" />; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttributes&lt;T&gt;">
@@ -1320,8 +1320,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A collection of the custom attributes that are applied to <paramref name="element" /> and that match <paramref name="T" />, or an empty collection if no such attributes exist. </para
-          >
+            >A collection of the custom attributes that are applied to <paramref name="element" /> and that match <paramref name="T" />, or an empty collection if no such attributes exist.
+          </para>
         </returns>
         <param name="element">
           <attribution
@@ -1374,8 +1374,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A collection of the custom attributes that are applied to <paramref name="element" /> and that match <paramref name="T" />, or an empty collection if no such attributes exist. </para
-          >
+            >A collection of the custom attributes that are applied to <paramref name="element" /> and that match <paramref name="T" />, or an empty collection if no such attributes exist.
+          </para>
         </returns>
         <param name="element">
           <attribution
@@ -1428,8 +1428,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A collection of the custom attributes that are applied to <paramref name="element" /> and that match <paramref name="T" />, or an empty collection if no such attributes exist. </para
-          >
+            >A collection of the custom attributes that are applied to <paramref name="element" /> and that match <paramref name="T" />, or an empty collection if no such attributes exist.
+          </para>
         </returns>
         <param name="element">
           <attribution
@@ -1482,8 +1482,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A collection of the custom attributes that are applied to <paramref name="element" /> and that match <paramref name="T" />, or an empty collection if no such attributes exist. </para
-          >
+            >A collection of the custom attributes that are applied to <paramref name="element" /> and that match <paramref name="T" />, or an empty collection if no such attributes exist.
+          </para>
         </returns>
         <param name="element">
           <attribution
@@ -1537,8 +1537,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A collection of the custom attributes that are applied to <paramref name="element" /> and that match <paramref name="T" />, or an empty collection if no such attributes exist. </para
-          >
+            >A collection of the custom attributes that are applied to <paramref name="element" /> and that match <paramref name="T" />, or an empty collection if no such attributes exist.
+          </para>
         </returns>
         <param name="element">
           <attribution
@@ -1552,8 +1552,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to inspect the ancestors of <paramref name="element" />; otherwise, false. </param
-        >
+          />true to inspect the ancestors of <paramref name="element" />; otherwise, false.
+        </param>
         <typeparam name="T">
           <attribution
             license="cc4"
@@ -1599,8 +1599,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A collection of the custom attributes that are applied to <paramref name="element" /> and that match <paramref name="T" />, or an empty collection if no such attributes exist. </para
-          >
+            >A collection of the custom attributes that are applied to <paramref name="element" /> and that match <paramref name="T" />, or an empty collection if no such attributes exist.
+          </para>
         </returns>
         <param name="element">
           <attribution
@@ -1614,8 +1614,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to inspect the ancestors of <paramref name="element" />; otherwise, false. </param
-        >
+          />true to inspect the ancestors of <paramref name="element" />; otherwise, false.
+        </param>
         <typeparam name="T">
           <attribution
             license="cc4"
@@ -1869,8 +1869,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to inspect the ancestors of <paramref name="element" />; otherwise, false. </param
-        >
+          />true to inspect the ancestors of <paramref name="element" />; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsDefined">
@@ -1925,8 +1925,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to inspect the ancestors of <paramref name="element" />; otherwise, false. </param
-        >
+          />true to inspect the ancestors of <paramref name="element" />; otherwise, false.
+        </param>
       </Docs>
     </Member>
   </Members>

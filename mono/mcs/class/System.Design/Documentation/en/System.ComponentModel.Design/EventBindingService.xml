@@ -48,8 +48,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.EventBindingService" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.EventBindingService" /> class.
+          </para>
         </summary>
         <param name="provider">
           <attribution
@@ -226,8 +226,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.ComponentModel.Design.EventBindingService.ShowCode" /> method does not display any particular code; generally it displays the last code the user typed. </para
-          >
+            >The <see cref="M:System.ComponentModel.Design.EventBindingService.ShowCode" /> method does not display any particular code; generally it displays the last code the user typed.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

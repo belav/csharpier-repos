@@ -34,8 +34,8 @@
     <see cref="F:Mono.Unix.Native.FcntlCommand.F_GETLK" />, 
     <see cref="F:Mono.Unix.Native.FcntlCommand.F_SETLK" />, and
     <see cref="F:Mono.Unix.Native.FcntlCommand.F_SETLKW" />.
-    </remarks
-    >
+
+    </remarks>
     <altmember cref="M:Mono.Unix.Native.Syscall.fcntl(int,Mono.Unix.Native.FcntlCommand,Mono.Unix.Native.Flock&amp;)" />
   </Docs>
   <Members>

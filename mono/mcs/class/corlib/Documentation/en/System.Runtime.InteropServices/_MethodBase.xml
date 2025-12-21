@@ -286,15 +286,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of attribute to search for. Only attributes that are assignable to this type are returned. </param
-        >
+          />The type of attribute to search for. Only attributes that are assignable to this type are returned.
+        </param>
         <param name="inherit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to search this member's inheritance chain to find the attributes; otherwise, false. </param
-        >
+          />true to search this member's inheritance chain to find the attributes; otherwise, false.
+        </param>
       </Docs>
       <AssemblyVersion>2.0.0.0</AssemblyVersion>
     </Member>
@@ -618,8 +618,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The instance that created this method. </param
-        >
+          />The instance that created this method.
+        </param>
         <param name="parameters">
           <attribution
             license="cc4"
@@ -890,15 +890,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The Type object to which the custom attributes are applied. </param
-        >
+          />The Type object to which the custom attributes are applied.
+        </param>
         <param name="inherit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to search this member's inheritance chain to find the attributes; otherwise, false. </param
-        >
+          />true to search this member's inheritance chain to find the attributes; otherwise, false.
+        </param>
       </Docs>
       <AssemblyVersion>2.0.0.0</AssemblyVersion>
     </Member>

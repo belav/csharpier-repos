@@ -294,8 +294,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see cref="P:System.Windows.Forms.DataGridView.EditMode" /> property of the <see cref="T:System.Windows.Forms.DataGridView" /> control is set to <see cref="F:System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke" /> or <see cref="F:System.Windows.Forms.DataGridViewEditMode.EditOnKeystrokeOrF2" />, the control uses this method to determine whether a key other than F2 that is pressed by the user while this cell has focus will cause the cell to enter edit mode. </para
-          >
+            >When the <see cref="P:System.Windows.Forms.DataGridView.EditMode" /> property of the <see cref="T:System.Windows.Forms.DataGridView" /> control is set to <see cref="F:System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke" /> or <see cref="F:System.Windows.Forms.DataGridViewEditMode.EditOnKeystrokeOrF2" />, the control uses this method to determine whether a key other than F2 that is pressed by the user while this cell has focus will cause the cell to enter edit mode.
+          </para>
           <para
             >This method returns true if the e parameter indicates an ordinary data-entry key (such as a letter, number, punctuation mark, or the SPACE key) unmodified by ALT or CTRL, excluding SHIFT+SPACE, which is used by the control for selection purposes. For more information, see <format type="text/html">
               <a href="4519b928-bfc8-4e8b-bb9c-b1e76a0ca552"

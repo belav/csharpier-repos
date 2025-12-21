@@ -23,8 +23,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class is used with <see cref="T:System.ServiceModel.Channels.StreamSecurityUpgradeAcceptor" /> and <see cref="T:System.ServiceModel.Channels.StreamSecurityUpgradeProvider" /> to implement a custom stream upgrade.  </para
-      >
+        >This class is used with <see cref="T:System.ServiceModel.Channels.StreamSecurityUpgradeAcceptor" /> and <see cref="T:System.ServiceModel.Channels.StreamSecurityUpgradeProvider" /> to implement a custom stream upgrade.
+      </para>
       <para
         >For a detailed description of the upgrade process, see <see cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" />.</para
       >

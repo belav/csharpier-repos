@@ -20,8 +20,8 @@
       <para
         >Request validation detects potentially malicious client input and throws this exception to abort processing of the request. A request abort can indicate an attempt to compromise the security of your application, such as a cross-site scripting attack. It is strongly recommended that your application explicitly check all input regarding request aborts. However, you can disable request validation by setting the validateRequest attribute in the <format type="text/html">
           <a href="f06cf9e5-22bb-461d-8b8f-549e53ff40a4">@ Page</a>
-        </format> directive to false, as shown in the following example: </para
-      >
+        </format> directive to false, as shown in the following example:
+      </para>
       <para>&lt;%@ Page validateRequest="false" %&gt;</para>
       <para>To disable request validation for your application, you must modify or create a Web.config file for your application and set the validateRequest attribute of the pages section to false, as shown in the following example: </para>
       <code>&lt;configuration&gt; 

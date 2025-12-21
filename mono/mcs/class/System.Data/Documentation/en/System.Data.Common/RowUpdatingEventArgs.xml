@@ -56,29 +56,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Data.DataRow" /> to <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />. </param
-        >
+          />The <see cref="T:System.Data.DataRow" /> to <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />.
+        </param>
         <param name="command">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Data.IDbCommand" /> to execute when <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" /> is called. </param
-        >
+          />The <see cref="T:System.Data.IDbCommand" /> to execute when <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" /> is called.
+        </param>
         <param name="statementType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of SQL statement to execute. </param
-        >
+          />The type of SQL statement to execute.
+        </param>
         <param name="tableMapping">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Data.Common.DataTableMapping" /> to send through an <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />. </param
-        >
+          />The <see cref="T:System.Data.Common.DataTableMapping" /> to send through an <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -192,8 +192,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="P:System.Data.Common.RowUpdatingEventArgs.StatementType" /> can be one of the following values: </para
-          >
+            <see cref="P:System.Data.Common.RowUpdatingEventArgs.StatementType" /> can be one of the following values:
+          </para>
           <list type="bullet">
             <item>
               <para>Select </para>

@@ -164,8 +164,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the enumeration values that determines whether the underlying handle can be inherited by child processes. Must be set to either <see cref="F:System.IO.HandleInheritability.None" /> or <see cref="F:System.IO.HandleInheritability.Inheritable" />. </param
-        >
+          />One of the enumeration values that determines whether the underlying handle can be inherited by child processes. Must be set to either <see cref="F:System.IO.HandleInheritability.None" /> or <see cref="F:System.IO.HandleInheritability.Inheritable" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -280,8 +280,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The size of the buffer. This value must be greater than or equal to 0. </param
-        >
+          />The size of the buffer. This value must be greater than or equal to 0.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -335,8 +335,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The size of the buffer. This value must be greater than or equal to 0. </param
-        >
+          />The size of the buffer. This value must be greater than or equal to 0.
+        </param>
         <param name="pipeSecurity">
           <attribution
             license="cc4"

@@ -258,8 +258,8 @@
               </term>
               <description>
                 <para
-                  >The <see cref="T:System.Web.UI.WebControls.HotSpot" /> navigates to a URL. </para
-                >
+                  >The <see cref="T:System.Web.UI.WebControls.HotSpot" /> navigates to a URL.
+                </para>
               </description>
             </item>
             <item>
@@ -268,8 +268,8 @@
               </term>
               <description>
                 <para
-                  >The <see cref="T:System.Web.UI.WebControls.HotSpot" /> generates a postback to the server. </para
-                >
+                  >The <see cref="T:System.Web.UI.WebControls.HotSpot" /> generates a postback to the server.
+                </para>
               </description>
             </item>
           </list>
@@ -297,8 +297,8 @@
             >
           </block>
           <para
-            >If you specify HotSpotMode.Inactive for the <see cref="P:System.Web.UI.WebControls.HotSpot.HotSpotMode" /> property, the <see cref="T:System.Web.UI.WebControls.HotSpot" /> object does not have any behavior when it is clicked. You can use this value to create an inactive hot spot within a larger active hot spot. This option is provided to allow you to create more complex hot-spot zones within an <see cref="T:System.Web.UI.WebControls.ImageMap" /> control. </para
-          >
+            >If you specify HotSpotMode.Inactive for the <see cref="P:System.Web.UI.WebControls.HotSpot.HotSpotMode" /> property, the <see cref="T:System.Web.UI.WebControls.HotSpot" /> object does not have any behavior when it is clicked. You can use this value to create an inactive hot spot within a larger active hot spot. This option is provided to allow you to create more complex hot-spot zones within an <see cref="T:System.Web.UI.WebControls.ImageMap" /> control.
+          </para>
           <para
             >To create an inactive area within an active hot spot, you must specify the inactive hot spot before the active hot spot in the <see cref="T:System.Web.UI.WebControls.ImageMap" /> control. For example, the following <see cref="T:System.Web.UI.WebControls.ImageMap" /> defines an active ring by specifying an inactive circular hot spot within a larger active circular hot spot:</para
           >
@@ -389,8 +389,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Object" /> that represents the <see cref="T:System.Web.UI.WebControls.HotSpot" /> object to restore. </param
-        >
+          />An <see cref="T:System.Object" /> that represents the <see cref="T:System.Web.UI.WebControls.HotSpot" /> object to restore.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -413,8 +413,8 @@
             >The <see cref="P:System.Web.UI.WebControls.HotSpot.MarkupName" /> member is used primarily by control developers when deriving a custom implementation from the <see cref="T:System.Web.UI.WebControls.HotSpot" /> class.</para
           >
           <para
-            >When overridden in a derived class, the <see cref="P:System.Web.UI.WebControls.HotSpot.MarkupName" /> property gets a string that represents the name of the <see cref="T:System.Web.UI.WebControls.HotSpot" /> object's shape. </para
-          >
+            >When overridden in a derived class, the <see cref="P:System.Web.UI.WebControls.HotSpot.MarkupName" /> property gets a string that represents the name of the <see cref="T:System.Web.UI.WebControls.HotSpot" /> object's shape.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -526,13 +526,13 @@
               <a href="de0d8a1c-b1bc-48e1-b246-26e32289a82f"
                 >ASP.NET Application Life Cycle Overview</a
               >
-            </format>. </para
-          >
+            </format>.
+          </para>
           <para
             >When view state is saved, this string object is returned to the client as a variable that is stored in a hidden HTML input element. When you author custom server controls, you can improve efficiency by overriding this method and modifying your server control's ViewState property. For more information, see <format type="text/html">
               <a href="0218d965-5d30-445b-b6a6-8870e70e63ce">ASP.NET State Management Overview</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -568,8 +568,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Typically, you should use the <see cref="P:System.Web.UI.WebControls.HotSpot.IsTrackingViewState" /> member to determine whether a <see cref="T:System.Web.UI.WebControls.HotSpot" /> object is tracking view-state changes. </para
-          >
+            >Typically, you should use the <see cref="P:System.Web.UI.WebControls.HotSpot.IsTrackingViewState" /> member to determine whether a <see cref="T:System.Web.UI.WebControls.HotSpot" /> object is tracking view-state changes.
+          </para>
           <para
             >The <see cref="P:System.Web.UI.WebControls.HotSpot.System#Web#UI#IStateManager#IsTrackingViewState" /> member is an explicit interface member implementation. It can be used only when a <see cref="T:System.Web.UI.WebControls.HotSpot" /> instance is cast to an <see cref="T:System.Web.UI.IStateManager" /> interface.</para
           >
@@ -577,8 +577,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see cref="T:System.Web.UI.WebControls.HotSpot" /> object is tracking its view-state changes.  </para
-          >
+            >Gets a value indicating whether the <see cref="T:System.Web.UI.WebControls.HotSpot" /> object is tracking its view-state changes.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -601,8 +601,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Typically, you should use the <see cref="M:System.Web.UI.WebControls.HotSpot.LoadViewState(System.Object)" /> member to restore the view state for a <see cref="T:System.Web.UI.WebControls.HotSpot" /> object. </para
-          >
+            >Typically, you should use the <see cref="M:System.Web.UI.WebControls.HotSpot.LoadViewState(System.Object)" /> member to restore the view state for a <see cref="T:System.Web.UI.WebControls.HotSpot" /> object.
+          </para>
           <para
             >The <see cref="M:System.Web.UI.WebControls.HotSpot.System#Web#UI#IStateManager#LoadViewState(System.Object)" /> member is an explicit interface member implementation. It can be used only when a <see cref="T:System.Web.UI.WebControls.HotSpot" /> instance is cast to an <see cref="T:System.Web.UI.IStateManager" /> interface.</para
           >
@@ -618,8 +618,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Object" /> that contains the saved view state values for the <see cref="T:System.Web.UI.WebControls.HotSpot" /> object to restore. </param
-        >
+          />An <see cref="T:System.Object" /> that contains the saved view state values for the <see cref="T:System.Web.UI.WebControls.HotSpot" /> object to restore.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.Web.UI.IStateManager.SaveViewState">
@@ -636,8 +636,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Typically, you should use the <see cref="M:System.Web.UI.WebControls.HotSpot.SaveViewState" /> method to save the view state for the <see cref="T:System.Web.UI.WebControls.HotSpot" /> region. </para
-          >
+            >Typically, you should use the <see cref="M:System.Web.UI.WebControls.HotSpot.SaveViewState" /> method to save the view state for the <see cref="T:System.Web.UI.WebControls.HotSpot" /> region.
+          </para>
           <para
             >The <see cref="M:System.Web.UI.WebControls.HotSpot.System#Web#UI#IStateManager#SaveViewState" /> method is an explicit interface member implementation. It can be used only when a <see cref="T:System.Web.UI.WebControls.HotSpot" /> instance is cast to an <see cref="T:System.Web.UI.IStateManager" /> interface.</para
           >
@@ -670,8 +670,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Typically, you should use the <see cref="M:System.Web.UI.WebControls.HotSpot.TrackViewState" /> method to start tracking view-state changes for the <see cref="T:System.Web.UI.WebControls.HotSpot" /> region. </para
-          >
+            >Typically, you should use the <see cref="M:System.Web.UI.WebControls.HotSpot.TrackViewState" /> method to start tracking view-state changes for the <see cref="T:System.Web.UI.WebControls.HotSpot" /> region.
+          </para>
           <para
             >The <see cref="M:System.Web.UI.WebControls.HotSpot.System#Web#UI#IStateManager#TrackViewState" /> method is an explicit interface member implementation. It can be used only when a <see cref="T:System.Web.UI.WebControls.HotSpot" /> instance is cast to an <see cref="T:System.Web.UI.IStateManager" /> interface.</para
           >
@@ -701,8 +701,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.Web.UI.WebControls.HotSpot.TabIndex" /> property to specify or determine the tab index of a <see cref="T:System.Web.UI.WebControls.HotSpot" /> region on the Web Forms page. </para
-          >
+            >Use the <see cref="P:System.Web.UI.WebControls.HotSpot.TabIndex" /> property to specify or determine the tab index of a <see cref="T:System.Web.UI.WebControls.HotSpot" /> region on the Web Forms page.
+          </para>
           <para
             >When you press the TAB key, the order in which the Web server controls receive focus is determined by the <see cref="P:System.Web.UI.WebControls.HotSpot.TabIndex" /> property of each control. When a page is initially loaded, the first item that receives focus when the TAB key is pressed is the address bar. Next, the controls on the Web Forms page are tabbed to in ascending order, based on the value of the <see cref="P:System.Web.UI.WebControls.HotSpot.TabIndex" /> property of each control, starting with the smallest positive, nonzero value. If multiple controls share the same tab index, the controls will receive focus in the order they are declared on the Web Forms page. Finally, controls that have a tab index of zero are tabbed to in the order they are declared.</para
           >
@@ -756,8 +756,8 @@
             <para
               > The <see cref="P:System.Web.UI.WebControls.HotSpot.Target" /> property renders as a target attribute. The target attribute on ANCHOR elements is not allowed in the XHTML 1.1 document type definition. Do not set the <see cref="P:System.Web.UI.WebControls.HotSpot.Target" /> property if the rendered output for the <see cref="T:System.Web.UI.WebControls.HotSpot" /> must be XHTML 1.1 compliant. For more information, refer to the topic <format type="text/html">
                 <a href="1b78d416-66bb-43a5-ac77-c703aab55b97">ASP.NET and XHTML Compliance</a>
-              </format>. </para
-            >
+              </format>.
+            </para>
           </block>
           <block subset="none" type="note">
             <para
@@ -767,8 +767,8 @@
             >
           </block>
           <para
-            >The <see cref="P:System.Web.UI.WebControls.HotSpot.Target" /> value must begin with a letter in the range of A to Z (case-insensitive), except for the following special values, which begin with an underscore. </para
-          >
+            >The <see cref="P:System.Web.UI.WebControls.HotSpot.Target" /> value must begin with a letter in the range of A to Z (case-insensitive), except for the following special values, which begin with an underscore.
+          </para>
           <list type="table">
             <listheader>
               <item>
@@ -922,8 +922,8 @@
           <para
             >A server control's view state is the accumulation of all its property values. In order to preserve these values across HTTP requests, ASP.NET server controls use the <see cref="P:System.Web.UI.WebControls.HotSpot.ViewState" /> property, which is an instance of the <see cref="T:System.Web.UI.StateBag" /> class, to store the property values. The values are then passed as a variable to a hidden HTML element when subsequent requests are processed. For more information about saving server control view state, see <format type="text/html">
               <a href="0218d965-5d30-445b-b6a6-8870e70e63ce">ASP.NET State Management Overview</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
           <para
             >View state is enabled for all server controls by default, but there are circumstances in which you will want to disable it. For more information, see <format type="text/html">
               <a href="f882bf1b-a009-4312-ac06-74370ffabc0b">Performance Overview</a>

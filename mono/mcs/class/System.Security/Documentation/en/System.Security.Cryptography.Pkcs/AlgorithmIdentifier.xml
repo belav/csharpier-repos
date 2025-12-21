@@ -77,14 +77,14 @@
             </item>
           </list>
           <para
-            >To gain the highest degree of control over an application constructing an instance of this class, use one of the constructors that allows the algorithm to be set by passing in its  <see cref="T:System.Security.Cryptography.Oid" /> object.  This guards against the possibility that the default algorithm could change because of security or other considerations. </para
-          >
+            >To gain the highest degree of control over an application constructing an instance of this class, use one of the constructors that allows the algorithm to be set by passing in its  <see cref="T:System.Security.Cryptography.Oid" /> object.  This guards against the possibility that the default algorithm could change because of security or other considerations.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Security.Cryptography.Pkcs.AlgorithmIdentifier.#ctor" /> constructor creates an instance of the <see cref="T:System.Security.Cryptography.Pkcs.AlgorithmIdentifier" /> class by using a set of default parameters. </para
-          >
+            >The <see cref="M:System.Security.Cryptography.Pkcs.AlgorithmIdentifier.#ctor" /> constructor creates an instance of the <see cref="T:System.Security.Cryptography.Pkcs.AlgorithmIdentifier" /> class by using a set of default parameters.
+          </para>
         </summary>
       </Docs>
     </Member>

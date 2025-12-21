@@ -49,8 +49,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.Services.Discovery.DiscoveryRequestHandler" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Discovery.DiscoveryRequestHandler" /> class.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -70,8 +70,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value of true, indicates whether the instance of <see cref="T:System.Web.Services.Discovery.DiscoveryRequestHandler" /> (or a derived class) is reusable. </para
-          >
+            >Gets a value of true, indicates whether the instance of <see cref="T:System.Web.Services.Discovery.DiscoveryRequestHandler" /> (or a derived class) is reusable.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>

@@ -37,8 +37,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.Runtime.Remoting.Channels.BaseChannelObjectWithProperties" /> is the base class for <see cref="T:System.Runtime.Remoting.Channels.BaseChannelWithProperties" /> and <see cref="T:System.Runtime.Remoting.Channels.BaseChannelSinkWithProperties" />. </para
-      >
+        <see cref="T:System.Runtime.Remoting.Channels.BaseChannelObjectWithProperties" /> is the base class for <see cref="T:System.Runtime.Remoting.Channels.BaseChannelWithProperties" /> and <see cref="T:System.Runtime.Remoting.Channels.BaseChannelSinkWithProperties" />.
+      </para>
       <para>
         <see cref="T:System.Runtime.Remoting.Channels.BaseChannelWithProperties" /> and <see cref="T:System.Runtime.Remoting.Channels.BaseChannelSinkWithProperties" /> can be used as the base classes for channels and channel sinks that provide named properties.</para
       >
@@ -118,11 +118,11 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key that is associated with the object in the <paramref name="value" /> parameter. </param
-        >
+          />The key that is associated with the object in the <paramref name="value" /> parameter.
+        </param>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to add. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to add.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Clear">
@@ -187,8 +187,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key of the property to look for. </param
-        >
+          />The key of the property to look for.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CopyTo">
@@ -221,15 +221,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array to copy the properties to. </param
-        >
+          />The array to copy the properties to.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index at which to begin copying. </param
-        >
+          />The index at which to begin copying.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Count">
@@ -483,8 +483,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key of the object to be removed. </param
-        >
+          />The key of the object to be removed.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SyncRoot">

@@ -124,8 +124,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Globalization.CultureInfo" /> to use for the new <see cref="T:System.Collections.CaseInsensitiveComparer" />. </param
-        >
+          />The <see cref="T:System.Globalization.CultureInfo" /> to use for the new <see cref="T:System.Collections.CaseInsensitiveComparer" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Compare">
@@ -188,8 +188,8 @@
               </term>
               <description>
                 <para>
-                  <paramref name="a" /> is less than <paramref name="b" />, with casing ignored. </para
-                >
+                  <paramref name="a" /> is less than <paramref name="b" />, with casing ignored.
+                </para>
               </description>
             </item>
             <item>
@@ -198,8 +198,8 @@
               </term>
               <description>
                 <para>
-                  <paramref name="a" /> equals <paramref name="b" />, with casing ignored. </para
-                >
+                  <paramref name="a" /> equals <paramref name="b" />, with casing ignored.
+                </para>
               </description>
             </item>
             <item>
@@ -208,8 +208,8 @@
               </term>
               <description>
                 <para>
-                  <paramref name="a" /> is greater than <paramref name="b" />, with casing ignored. </para
-                >
+                  <paramref name="a" /> is greater than <paramref name="b" />, with casing ignored.
+                </para>
               </description>
             </item>
           </list>
@@ -219,15 +219,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first object to compare. </param
-        >
+          />The first object to compare.
+        </param>
         <param name="b">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second object to compare. </param
-        >
+          />The second object to compare.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Default">

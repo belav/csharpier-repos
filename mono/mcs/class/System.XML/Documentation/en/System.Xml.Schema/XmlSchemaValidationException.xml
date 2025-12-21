@@ -327,8 +327,8 @@
             >When an <see cref="T:System.Xml.Schema.XmlSchemaValidationException" /> is thrown during validation of a class that implements the <see cref="T:System.Xml.XPath.IXPathNavigable" /> interface such as the <see cref="T:System.Xml.XPath.XPathNavigator" /> or <see cref="T:System.Xml.XmlNode" /> class, the object returned by the <see cref="P:System.Xml.Schema.XmlSchemaValidationException.SourceObject" /> property is an instance of a class that implements the <see cref="T:System.Xml.XPath.IXPathNavigable" /> interface.</para
           >
           <para
-            >When an <see cref="T:System.Xml.Schema.XmlSchemaValidationException" /> is thrown during validation by a validating <see cref="T:System.Xml.XmlReader" /> object, the value of the <see cref="P:System.Xml.Schema.XmlSchemaValidationException.SourceObject" /> property is null. </para
-          >
+            >When an <see cref="T:System.Xml.Schema.XmlSchemaValidationException" /> is thrown during validation by a validating <see cref="T:System.Xml.XmlReader" /> object, the value of the <see cref="P:System.Xml.Schema.XmlSchemaValidationException.SourceObject" /> property is null.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

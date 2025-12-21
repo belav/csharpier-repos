@@ -106,8 +106,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XmlReader to read from while validating. The current implementation supports only <see cref="T:System.Xml.XmlTextReader" />. </param
-        >
+          />The XmlReader to read from while validating. The current implementation supports only <see cref="T:System.Xml.XmlTextReader" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -216,22 +216,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream containing the XML fragment to parse. </param
-        >
+          />The stream containing the XML fragment to parse.
+        </param>
         <param name="fragType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlNodeType" /> of the XML fragment. This determines what the fragment can contain (see table below). </param
-        >
+          />The <see cref="T:System.Xml.XmlNodeType" /> of the XML fragment. This determines what the fragment can contain (see table below).
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlParserContext" /> in which the XML fragment is to be parsed. This includes the <see cref="T:System.Xml.XmlNameTable" /> to use, encoding, namespace scope, current xml:lang, and xml:space scope. </param
-        >
+          />The <see cref="T:System.Xml.XmlParserContext" /> in which the XML fragment is to be parsed. This includes the <see cref="T:System.Xml.XmlNameTable" /> to use, encoding, namespace scope, current xml:lang, and xml:space scope.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -328,22 +328,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string containing the XML fragment to parse. </param
-        >
+          />The string containing the XML fragment to parse.
+        </param>
         <param name="fragType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlNodeType" /> of the XML fragment. This also determines what the fragment string can contain (see table below). </param
-        >
+          />The <see cref="T:System.Xml.XmlNodeType" /> of the XML fragment. This also determines what the fragment string can contain (see table below).
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlParserContext" /> in which the XML fragment is to be parsed. This includes the <see cref="T:System.Xml.NameTable" /> to use, encoding, namespace scope, current xml:lang, and xml:space scope. </param
-        >
+          />The <see cref="T:System.Xml.XmlParserContext" /> in which the XML fragment is to be parsed. This includes the <see cref="T:System.Xml.NameTable" /> to use, encoding, namespace scope, current xml:lang, and xml:space scope.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AttributeCount">
@@ -662,8 +662,8 @@
             </item>
           </list>
           <para
-            >When EntityHandling is set to ExpandCharEntites, and <see cref="P:System.Xml.XmlTextReader.WhitespaceHandling" /> is set to Significant or All, the "doc" element expands the character entity and returns the general entity as a node: </para
-          >
+            >When EntityHandling is set to ExpandCharEntites, and <see cref="P:System.Xml.XmlTextReader.WhitespaceHandling" /> is set to Significant or All, the "doc" element expands the character entity and returns the general entity as a node:
+          </para>
           <list type="table">
             <listheader>
               <item>
@@ -808,8 +808,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the attribute. The index is zero-based. (The first attribute has index 0.) </param
-        >
+          />The index of the attribute. The index is zero-based. (The first attribute has index 0.)
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetAttribute">
@@ -858,8 +858,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The qualified name of the attribute. </param
-        >
+          />The qualified name of the attribute.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetAttribute">
@@ -921,15 +921,15 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the attribute. </param
-        >
+          />The local name of the attribute.
+        </param>
         <param name="namespaceURI">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the attribute. </param
-        >
+          />The namespace URI of the attribute.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="HasLineInfo">
@@ -1386,8 +1386,8 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The prefix whose namespace Uniform Resource Identifier (URI) you want to resolve. To match the default namespace, pass an empty string. </param
-        >
+          />The prefix whose namespace Uniform Resource Identifier (URI) you want to resolve. To match the default namespace, pass an empty string.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Mono.Xml.IHasXmlParserContext.ParserContext">
@@ -1454,8 +1454,8 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the attribute. </param
-        >
+          />The index of the attribute.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="MoveToAttribute">
@@ -1505,8 +1505,8 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The qualified name of the attribute. </param
-        >
+          />The qualified name of the attribute.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="MoveToAttribute">
@@ -1560,15 +1560,15 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the attribute. </param
-        >
+          />The local name of the attribute.
+        </param>
         <param name="namespaceURI">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the attribute. </param
-        >
+          />The namespace URI of the attribute.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="MoveToElement">
@@ -2011,8 +2011,8 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <para>For example, suppose you have the following XML: &lt;test name="a &amp;b; c"/&gt; </para>
           <para>where the entity b is defined in the document type definition (DTD) as follows: &lt;!ENTITY b "123"&gt; </para>
           <para
-            >If <see cref="P:System.Xml.XmlValidatingReader.EntityHandling" /> is set to ExpandCharEntities, the following C# code returns the attribute value as two text nodes and one entity reference node: </para
-          >
+            >If <see cref="P:System.Xml.XmlValidatingReader.EntityHandling" /> is set to ExpandCharEntities, the following C# code returns the attribute value as two text nodes and one entity reference node:
+          </para>
           <code>reader.MoveToAttribute("name");
   while (reader.ReadAttributeValue())
   {
@@ -2486,8 +2486,8 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <para>If positioned on an element, ReadString concatenates all text, significant white space, white space, and CDATA section node types together and returns the concatenated data as the element content. The reader stops when any markup is encountered, including comments and processing instructions. This could occur in a mixed content model, or when an element end tag is read.</para>
           <para>If positioned on a text node, ReadString performs the same concatenation from the text node to the element end tag. If the reader is positioned on an attribute text node, ReadString has the same functionality as if the reader were position on the element start tag. It returns all the concatenated element text nodes.</para>
           <para
-            >The <see cref="P:System.Xml.XmlValidatingReader.EntityHandling" /> property determines how ReadString works as follows: </para
-          >
+            >The <see cref="P:System.Xml.XmlValidatingReader.EntityHandling" /> property determines how ReadString works as follows:
+          </para>
           <list type="table">
             <listheader>
               <item>

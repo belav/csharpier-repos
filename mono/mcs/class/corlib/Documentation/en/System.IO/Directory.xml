@@ -33,8 +33,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see cref="T:System.IO.Directory" /> class for typical operations such as copying, moving, renaming, creating, and deleting directories. </para
-      >
+        >Use the <see cref="T:System.IO.Directory" /> class for typical operations such as copying, moving, renaming, creating, and deleting directories.
+      </para>
       <list type="bullet">
         <item>
           <para
@@ -61,8 +61,8 @@
         >The static methods of the <see cref="T:System.IO.Directory" /> class perform security checks on all methods. If you are going to reuse an object several times, consider using the corresponding instance method of <see cref="T:System.IO.DirectoryInfo" /> instead, because the security check will not always be necessary.</para
       >
       <para
-        >If you are performing only one directory-related action, it might be more efficient to use a static <see cref="T:System.IO.Directory" /> method rather than a corresponding <see cref="T:System.IO.DirectoryInfo" /> instance method. Most <see cref="T:System.IO.Directory" /> methods require the path to the directory that you are manipulating. </para
-      >
+        >If you are performing only one directory-related action, it might be more efficient to use a static <see cref="T:System.IO.Directory" /> method rather than a corresponding <see cref="T:System.IO.DirectoryInfo" /> instance method. Most <see cref="T:System.IO.Directory" /> methods require the path to the directory that you are manipulating.
+      </para>
       <block subset="none" type="note">
         <para
           >In members that accept a string <paramref name="path" /> parameter, that path must be well-formed or an exception is raised. For example, if a path is fully qualified but begins with a space (" c:\temp"), the path string isn't trimmed, so the path is considered malformed and an exception is raised. In addition, a path or a combination of paths cannot be fully qualified twice. For example, "c:\temp c:\windows" also raises an exception. Ensure that your paths are well-formed when using methods that accept a path string. For more information see <see cref="T:System.IO.Path" />.</para
@@ -128,8 +128,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Any and all directories specified in <paramref name="path" /> are created, unless they already exist or unless some part of <paramref name="path" /> is invalid. If the directory already exists, this method does not create a new directory, but it returns a <see cref="T:System.IO.DirectoryInfo" /> object for the existing directory. </para
-          >
+            >Any and all directories specified in <paramref name="path" /> are created, unless they already exist or unless some part of <paramref name="path" /> is invalid. If the directory already exists, this method does not create a new directory, but it returns a <see cref="T:System.IO.DirectoryInfo" /> object for the existing directory.
+          </para>
           <para
             >The <paramref name="path" /> parameter specifies a directory path, not a file path.</para
           >
@@ -137,8 +137,8 @@
             >Trailing spaces are removed from the end of the <paramref name="path" /> parameter before creating the directory.</para
           >
           <para
-            >You can create a directory on a remote computer, on a share that you have write access to. UNC paths are supported; for example, you can specify the following for <paramref name="path" />: \\2009\Archives\December in Visual Basic, and \\\\2009\\Archives\\December in C#. </para
-          >
+            >You can create a directory on a remote computer, on a share that you have write access to. UNC paths are supported; for example, you can specify the following for <paramref name="path" />: \\2009\Archives\December in Visual Basic, and \\\\2009\\Archives\\December in C#.
+          </para>
           <para>Creating a directory with only the colon character (:) is not supported, and will cause a NotSupportedException to be thrown.</para>
         </remarks>
         <summary>
@@ -150,12 +150,8 @@
           <para>An object that represents the directory at the specified path. This object is returned regardless of whether a directory at the specified path already exists.</para>
         </returns>
         <param name="path">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The directory to create. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The directory to create.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateDirectory">
@@ -194,8 +190,8 @@
             >Trailing spaces are removed from the end of the <paramref name="path" /> parameter before creating the directory.</para
           >
           <para
-            >You can create a directory on a remote computer, on a share that you have write access to. UNC paths are supported; for example, you can specify the following for <paramref name="path" />: \\2009\Archives\December in Visual Basic, and \\\\2009\\Archives\\December in C#. </para
-          >
+            >You can create a directory on a remote computer, on a share that you have write access to. UNC paths are supported; for example, you can specify the following for <paramref name="path" />: \\2009\Archives\December in Visual Basic, and \\\\2009\\Archives\\December in C#.
+          </para>
           <para>Creating a directory with only the colon character (:) is not supported and causes a NotSupportedException to be thrown.</para>
         </remarks>
         <summary>
@@ -300,8 +296,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the empty directory to remove. This directory must be writable and empty. </param
-        >
+          />The name of the empty directory to remove. This directory must be writable and empty.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -385,15 +381,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the directory to remove. </param
-        >
+          />The name of the directory to remove.
+        </param>
         <param name="recursive">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to remove directories, subdirectories, and files in <paramref name="path" />; otherwise, false. </param
-        >
+          />true to remove directories, subdirectories, and files in <paramref name="path" />; otherwise, false.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -423,8 +419,8 @@
             >You can specify relative or absolute path information in the <paramref name="path" /> parameter. Relative path information is interpreted as relative to the current working directory, which you can determine by using the <see cref="M:System.IO.Directory.GetCurrentDirectory" /> method. The returned directory names are prefixed with the value you provided in the <paramref name="path" /> parameter. For example, if you provide a relative path in the <paramref name="path" /> parameter, the returned directory names will contain a relative path.</para
           >
           <para
-            >The <see cref="Overload:System.IO.Directory.EnumerateDirectories" /> and <see cref="Overload:System.IO.Directory.GetDirectories" /> methods differ as follows: When you use <see cref="Overload:System.IO.Directory.EnumerateDirectories" />, you can start enumerating the collection of names before the whole collection is returned; when you use <see cref="Overload:System.IO.Directory.GetDirectories" />, you must wait for the whole array of names to be returned before you can access the array. Therefore, when you are working with many files and directories, <see cref="Overload:System.IO.Directory.EnumerateDirectories" /> can be more efficient. </para
-          >
+            >The <see cref="Overload:System.IO.Directory.EnumerateDirectories" /> and <see cref="Overload:System.IO.Directory.GetDirectories" /> methods differ as follows: When you use <see cref="Overload:System.IO.Directory.EnumerateDirectories" />, you can start enumerating the collection of names before the whole collection is returned; when you use <see cref="Overload:System.IO.Directory.GetDirectories" />, you must wait for the whole array of names to be returned before you can access the array. Therefore, when you are working with many files and directories, <see cref="Overload:System.IO.Directory.EnumerateDirectories" /> can be more efficient.
+          </para>
           <para
             >The returned collection is not cached; each call to the <see cref="M:System.Collections.Generic.IEnumerable`1.GetEnumerator" /> on the collection will start a new enumeration.</para
           >
@@ -671,8 +667,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can specify relative path information with the <paramref name="path" /> parameter. Relative path information is interpreted as relative to the current working directory, which you can determine by using the <see cref="M:System.IO.Directory.GetCurrentDirectory" /> method. </para
-          >
+            >You can specify relative path information with the <paramref name="path" /> parameter. Relative path information is interpreted as relative to the current working directory, which you can determine by using the <see cref="M:System.IO.Directory.GetCurrentDirectory" /> method.
+          </para>
           <para
             >The <see cref="Overload:System.IO.Directory.EnumerateFiles" /> and <see cref="Overload:System.IO.Directory.GetFiles" /> methods differ as follows: When you use <see cref="Overload:System.IO.Directory.EnumerateFiles" />, you can start enumerating the collection of names before the whole collection is returned; when you use <see cref="Overload:System.IO.Directory.GetFiles" />, you must wait for the whole array of names to be returned before you can access the array. Therefore, when you are working with many files and directories, <see cref="Overload:System.IO.Directory.EnumerateFiles" /> can be more efficient.</para
           >
@@ -791,8 +787,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The search string to match against the names of files in <paramref name="path" />.  This parameter can contain a combination of valid literal path and wildcard (* and ?) characters (see Remarks), but doesn't support regular expressions. </param
-        >
+          />The search string to match against the names of files in <paramref name="path" />.  This parameter can contain a combination of valid literal path and wildcard (* and ?) characters (see Remarks), but doesn't support regular expressions.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="EnumerateFiles">
@@ -888,8 +884,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The search string to match against the names of files in <paramref name="path" />.  This parameter can contain a combination of valid literal path and wildcard (* and ?) characters (see Remarks), but doesn't support regular expressions.  </param
-        >
+          />The search string to match against the names of files in <paramref name="path" />.  This parameter can contain a combination of valid literal path and wildcard (* and ?) characters (see Remarks), but doesn't support regular expressions.
+        </param>
         <param name="searchOption">
           <attribution
             license="cc4"
@@ -1035,15 +1031,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The relative or absolute path to the directory to search. This string is not case-sensitive. </param
-        >
+          />The relative or absolute path to the directory to search. This string is not case-sensitive.
+        </param>
         <param name="searchPattern">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The search string to match against the names of file-system entries in <paramref name="path" />.  This parameter can contain a combination of valid literal path and wildcard (* and ?) characters (see Remarks), but doesn't support regular expressions.  </param
-        >
+          />The search string to match against the names of file-system entries in <paramref name="path" />.  This parameter can contain a combination of valid literal path and wildcard (* and ?) characters (see Remarks), but doesn't support regular expressions.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="EnumerateFileSystemEntries">
@@ -1198,8 +1194,8 @@
           >
           <para>The <paramref name="path" /> parameter is not case-sensitive.</para>
           <para
-            >If you do not have at a minimum read-only permission to the directory, the <see cref="M:System.IO.Directory.Exists(System.String)" /> method will return false.  </para
-          >
+            >If you do not have at a minimum read-only permission to the directory, the <see cref="M:System.IO.Directory.Exists(System.String)" /> method will return false.
+          </para>
           <para
             >The <see cref="M:System.IO.Directory.Exists(System.String)" /> method returns false if any error occurs while trying to determine if the specified file exists. This can occur in situations that raise exceptions such as passing a file name with invalid characters or too many characters, a failing or missing disk, or if the caller does not have permission to read the file.</para
           >
@@ -1218,8 +1214,8 @@
           >
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />The path to test. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The path to test.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1436,12 +1432,8 @@
           <para>A structure that is set to the creation date and time for the specified directory. This value is expressed in local time.</para>
         </returns>
         <param name="path">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The path of the directory. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The path of the directory.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1486,12 +1478,8 @@
           <para>A structure that is set to the creation date and time for the specified directory. This value is expressed in UTC time.</para>
         </returns>
         <param name="path">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The path of the directory. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The path of the directory.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetCurrentDirectory">
@@ -1571,8 +1559,8 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="path " />is <see langword="null" />. </exception
-        >
+          <paramref name="path " />is <see langword="null" />.
+        </exception>
         <exception cref="T:System.Security.SecurityException"
           >The caller does not have the required permission.</exception
         >
@@ -1600,8 +1588,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is identical to <see cref="M:System.IO.Directory.GetDirectories(System.String,System.String)" />  with the asterisk (*) specified as the search pattern, so it returns all subdirectories.If you need to search subdirectories, use the <see cref="M:System.IO.Directory.GetDirectories(System.String,System.String,System.IO.SearchOption)" /> method, which enables you to specify a search of subdirectories with the <paramref name="searchOption" /> parameter. </para
-          >
+            >This method is identical to <see cref="M:System.IO.Directory.GetDirectories(System.String,System.String)" />  with the asterisk (*) specified as the search pattern, so it returns all subdirectories.If you need to search subdirectories, use the <see cref="M:System.IO.Directory.GetDirectories(System.String,System.String,System.IO.SearchOption)" /> method, which enables you to specify a search of subdirectories with the <paramref name="searchOption" /> parameter.
+          </para>
           <para
             >The <see cref="Overload:System.IO.Directory.EnumerateDirectories" /> and <see cref="Overload:System.IO.Directory.GetDirectories" /> methods differ as follows: When you use <see cref="Overload:System.IO.Directory.EnumerateDirectories" />, you can start enumerating the collection of names before the whole collection is returned; when you use <see cref="Overload:System.IO.Directory.GetDirectories" />, you must wait for the whole array of names to be returned before you can access the array. Therefore, when you are working with many files and directories, <see cref="Overload:System.IO.Directory.EnumerateDirectories" /> can be more efficient.</para
           >
@@ -1664,8 +1652,8 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="path " />or<paramref name=" searchPattern " />is <see langword="null" />. </exception
-        >
+          <paramref name="path " />or<paramref name=" searchPattern " />is <see langword="null" />.
+        </exception>
         <exception cref="T:System.Security.SecurityException"
           >The caller does not have permission to access the requested information.</exception
         >
@@ -1696,8 +1684,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method returns all subdirectories directly under the specified directory that match the specified search pattern. If the specified directory has no subdirectories, or no subdirectories match the <paramref name="searchPattern" /> parameter, this method returns an empty array. Only the top directory is searched. If you want to search the subdirectories as well, use the <see cref="M:System.IO.Directory.GetDirectories(System.String,System.String,System.IO.SearchOption)" /> method and specify <see cref="F:System.IO.SearchOption.AllDirectories" /> in the <paramref name="searchOption" /> parameter. </para
-          >
+            >This method returns all subdirectories directly under the specified directory that match the specified search pattern. If the specified directory has no subdirectories, or no subdirectories match the <paramref name="searchPattern" /> parameter, this method returns an empty array. Only the top directory is searched. If you want to search the subdirectories as well, use the <see cref="M:System.IO.Directory.GetDirectories(System.String,System.String,System.IO.SearchOption)" /> method and specify <see cref="F:System.IO.SearchOption.AllDirectories" /> in the <paramref name="searchOption" /> parameter.
+          </para>
           <para>
             <paramref name="searchPattern" /> can be a combination of literal and wildcard characters, but doesn't support regular expressions. The following wildcard specifiers are permitted in <paramref name="searchPattern" />.</para
           >
@@ -1739,8 +1727,8 @@
             >The <paramref name="path" /> parameter can specify relative or absolute path information, and is not case-sensitive.  Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see cref="M:System.IO.Directory.GetCurrentDirectory" />.</para
           >
           <para
-            >The <see cref="Overload:System.IO.Directory.EnumerateDirectories" /> and <see cref="Overload:System.IO.Directory.GetDirectories" /> methods differ as follows: When you use <see cref="Overload:System.IO.Directory.EnumerateDirectories" />, you can start enumerating the collection of names before the whole collection is returned; when you use <see cref="Overload:System.IO.Directory.GetDirectories" />, you must wait for the whole array of names to be returned before you can access the array. Therefore, when you are working with many files and directories, <see cref="Overload:System.IO.Directory.EnumerateDirectories" /> can be more efficient. </para
-          >
+            >The <see cref="Overload:System.IO.Directory.EnumerateDirectories" /> and <see cref="Overload:System.IO.Directory.GetDirectories" /> methods differ as follows: When you use <see cref="Overload:System.IO.Directory.EnumerateDirectories" />, you can start enumerating the collection of names before the whole collection is returned; when you use <see cref="Overload:System.IO.Directory.GetDirectories" />, you must wait for the whole array of names to be returned before you can access the array. Therefore, when you are working with many files and directories, <see cref="Overload:System.IO.Directory.EnumerateDirectories" /> can be more efficient.
+          </para>
           <para
             >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
@@ -1767,8 +1755,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The search string to match against the names of subdirectories in <paramref name="path" />. This parameter can contain a combination of valid literal and wildcard characters (see Remarks), but doesn't support regular expressions. </param
-        >
+          />The search string to match against the names of subdirectories in <paramref name="path" />. This parameter can contain a combination of valid literal and wildcard characters (see Remarks), but doesn't support regular expressions.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1839,8 +1827,8 @@
             <paramref name="searchPattern" /> cannot end in two periods ("..") or contain two periods ("..") followed by <see cref="F:System.IO.Path.DirectorySeparatorChar" /> or <see cref="F:System.IO.Path.AltDirectorySeparatorChar" />, nor can it contain any invalid characters. You can query for invalid characters by using the <see cref="M:System.IO.Path.GetInvalidPathChars" /> method.</para
           >
           <para
-            >The <see cref="Overload:System.IO.Directory.EnumerateDirectories" /> and <see cref="Overload:System.IO.Directory.GetDirectories" /> methods differ as follows: When you use <see cref="Overload:System.IO.Directory.EnumerateDirectories" />, you can start enumerating the collection of names before the whole collection is returned; when you use <see cref="Overload:System.IO.Directory.GetDirectories" />, you must wait for the whole array of names to be returned before you can access the array. Therefore, when you are working with many files and directories, <see cref="Overload:System.IO.Directory.EnumerateDirectories" /> can be more efficient. </para
-          >
+            >The <see cref="Overload:System.IO.Directory.EnumerateDirectories" /> and <see cref="Overload:System.IO.Directory.GetDirectories" /> methods differ as follows: When you use <see cref="Overload:System.IO.Directory.EnumerateDirectories" />, you can start enumerating the collection of names before the whole collection is returned; when you use <see cref="Overload:System.IO.Directory.GetDirectories" />, you must wait for the whole array of names to be returned before you can access the array. Therefore, when you are working with many files and directories, <see cref="Overload:System.IO.Directory.EnumerateDirectories" /> can be more efficient.
+          </para>
           <para
             >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
@@ -1874,8 +1862,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the enumeration values that specifies whether the search operation should include all subdirectories or only the current directory. </param
-        >
+          />One of the enumeration values that specifies whether the search operation should include all subdirectories or only the current directory.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetDirectoryRoot">
@@ -1903,8 +1891,8 @@
       <Docs>
         <exception cref="T:System.ArgumentException">
           <para>
-            <paramref name="path" /> is a zero-length string, contains only white space, or contains one or more implementation-specific invalid characters. </para
-          >
+            <paramref name="path" /> is a zero-length string, contains only white space, or contains one or more implementation-specific invalid characters.
+          </para>
         </exception>
         <exception cref="T:System.ArgumentNullException">
           <paramref name="path" /> is <see langword="null" />.</exception
@@ -1944,8 +1932,7 @@ class GetDirectoryTest {
     }
   }
 }
-</code
-          >
+</code>
           <para>The output is </para>
           <c>
             <para>Path: \ecmatest\examples\pathtests.txt Directory Root is C:\</para>
@@ -1987,8 +1974,8 @@ class GetDirectoryTest {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The path of a file or directory. </param
-        >
+          />The path of a file or directory.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2057,8 +2044,8 @@ class GetDirectoryTest {
             >The <paramref name="path" /> parameter can specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see cref="M:System.IO.Directory.GetCurrentDirectory" />.</para
           >
           <para
-            >The order of the returned file names is not guaranteed; use the <see cref="Overload:System.Array.Sort" /> method if a specific sort order is required. </para
-          >
+            >The order of the returned file names is not guaranteed; use the <see cref="Overload:System.Array.Sort" /> method if a specific sort order is required.
+          </para>
           <para>The <paramref name="path" /> parameter is not case-sensitive.</para>
           <para
             >For a list of common I/O tasks, see <format type="text/html">
@@ -2145,8 +2132,8 @@ class GetDirectoryTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The returned file names are appended to the supplied <paramref name="path" /> parameter and the order of the returned file names is not guaranteed; use the <see cref="Overload:System.Array.Sort" /> method if a specific sort order is required. </para
-          >
+            >The returned file names are appended to the supplied <paramref name="path" /> parameter and the order of the returned file names is not guaranteed; use the <see cref="Overload:System.Array.Sort" /> method if a specific sort order is required.
+          </para>
           <para>
             <paramref name="searchPattern" /> can be a combination of literal and wildcard characters, but doesn't support regular expressions. The following wildcard specifiers are permitted in <paramref name="searchPattern" />.</para
           >
@@ -2186,8 +2173,8 @@ class GetDirectoryTest {
           >
           <block subset="none" type="note">
             <para
-              >When you use the asterisk wildcard character in a <paramref name="searchPattern" /> such as "*.txt", the number of characters in the specified extension affects the search as follows: </para
-            >
+              >When you use the asterisk wildcard character in a <paramref name="searchPattern" /> such as "*.txt", the number of characters in the specified extension affects the search as follows:
+            </para>
             <list type="bullet">
               <item>
                 <para>If the specified extension is exactly three characters long, the method returns files with extensions that begin with the specified extension. For example, "*.xls" returns both "book.xls" and "book.xlsx".</para>
@@ -2266,8 +2253,8 @@ class GetDirectoryTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The returned file names are appended to the supplied  parameter <paramref name="path" /> and the order of the returned file names is not guaranteed; use the <see cref="Overload:System.Array.Sort" /> method if a specific sort order is required. </para
-          >
+            >The returned file names are appended to the supplied  parameter <paramref name="path" /> and the order of the returned file names is not guaranteed; use the <see cref="Overload:System.Array.Sort" /> method if a specific sort order is required.
+          </para>
           <para>
             <paramref name="searchPattern" /> can be a combination of literal and wildcard characters, but doesn't support regular expressions. The following wildcard specifiers are permitted in <paramref name="searchPattern" />.</para
           >
@@ -2307,8 +2294,8 @@ class GetDirectoryTest {
           >
           <block subset="none" type="note">
             <para
-              >When you use the asterisk wildcard character in a <paramref name="searchPattern" /> such as "*.txt", the number of characters in the specified extension affects the search as follows: </para
-            >
+              >When you use the asterisk wildcard character in a <paramref name="searchPattern" /> such as "*.txt", the number of characters in the specified extension affects the search as follows:
+            </para>
             <list type="bullet">
               <item>
                 <para>If the specified extension is exactly three characters long, the method returns files with extensions that begin with the specified extension. For example, "*.xls" returns both "book.xls" and "book.xlsx".</para>
@@ -2363,8 +2350,8 @@ class GetDirectoryTest {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the enumeration values that specifies whether the search operation should include all subdirectories or only the current directory. </param
-        >
+          />One of the enumeration values that specifies whether the search operation should include all subdirectories or only the current directory.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetFileSystemEntries">
@@ -2561,8 +2548,8 @@ class GetDirectoryTest {
           >
           <block subset="none" type="note">
             <para
-              >When you use the asterisk wildcard character in a <paramref name="searchPattern" /> such as "*.txt", the number of characters in the specified extension affects the search as follows: </para
-            >
+              >When you use the asterisk wildcard character in a <paramref name="searchPattern" /> such as "*.txt", the number of characters in the specified extension affects the search as follows:
+            </para>
             <list type="bullet">
               <item>
                 <para>If the specified extension is exactly three characters long, the method returns files with extensions that begin with the specified extension. For example, "*.xls" returns both "book.xls" and "book.xlsx".</para>
@@ -2674,8 +2661,8 @@ class GetDirectoryTest {
           >
           <block subset="none" type="note">
             <para
-              >When you use the asterisk wildcard character in a <paramref name="searchPattern" /> such as "*.txt", the number of characters in the specified extension affects the search as follows: </para
-            >
+              >When you use the asterisk wildcard character in a <paramref name="searchPattern" /> such as "*.txt", the number of characters in the specified extension affects the search as follows:
+            </para>
             <list type="bullet">
               <item>
                 <para>If the specified extension is exactly three characters long, the method returns files with extensions that begin with the specified extension. For example, "*.xls" returns both "book.xls" and "book.xlsx".</para>
@@ -2806,8 +2793,8 @@ class GetDirectoryTest {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file or directory for which to obtain access date and time information. </param
-        >
+          />The file or directory for which to obtain access date and time information.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2860,8 +2847,8 @@ class GetDirectoryTest {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file or directory for which to obtain access date and time information. </param
-        >
+          />The file or directory for which to obtain access date and time information.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetLastWriteTime">
@@ -2943,8 +2930,8 @@ class GetDirectoryTest {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file or directory for which to obtain modification date and time information. </param
-        >
+          />The file or directory for which to obtain modification date and time information.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2997,8 +2984,8 @@ class GetDirectoryTest {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file or directory for which to obtain modification date and time information. </param
-        >
+          />The file or directory for which to obtain modification date and time information.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetLogicalDrives">
@@ -3092,8 +3079,8 @@ class GetDirectoryTest {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The path for which to retrieve the parent directory. </param
-        >
+          />The path for which to retrieve the parent directory.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Move">
@@ -3184,8 +3171,8 @@ class GetDirectoryTest {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The path of the file or directory to move. </param
-        >
+          />The path of the file or directory to move.
+        </param>
         <param name="destDirName">
           <attribution
             license="cc4"
@@ -3268,8 +3255,8 @@ class GetDirectoryTest {
             </item>
             <item>
               <para
-                >Set the destination <see cref="T:System.Security.AccessControl.DirectorySecurity" /> object to the destination file using the <see cref="M:System.IO.Directory.SetAccessControl(System.String,System.Security.AccessControl.DirectorySecurity)" /> method. </para
-              >
+                >Set the destination <see cref="T:System.Security.AccessControl.DirectorySecurity" /> object to the destination file using the <see cref="M:System.IO.Directory.SetAccessControl(System.String,System.Security.AccessControl.DirectorySecurity)" /> method.
+              </para>
             </item>
           </list>
           <para
@@ -3368,8 +3355,8 @@ class GetDirectoryTest {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file or directory for which to set the creation date and time information. </param
-        >
+          />The file or directory for which to set the creation date and time information.
+        </param>
         <param name="creationTime">
           <attribution
             license="cc4"
@@ -3424,8 +3411,8 @@ class GetDirectoryTest {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file or directory for which to set the creation date and time information. </param
-        >
+          />The file or directory for which to set the creation date and time information.
+        </param>
         <param name="creationTimeUtc">
           <attribution
             license="cc4"
@@ -3502,8 +3489,8 @@ class GetDirectoryTest {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The path to which the current working directory is set. </param
-        >
+          />The path to which the current working directory is set.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -3585,15 +3572,15 @@ class GetDirectoryTest {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file or directory for which to set the access date and time information. </param
-        >
+          />The file or directory for which to set the access date and time information.
+        </param>
         <param name="lastAccessTime">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that contains the value to set for the access date and time of <paramref name="path" />. This value is expressed in local time. </param
-        >
+          />An object that contains the value to set for the access date and time of <paramref name="path" />. This value is expressed in local time.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -3641,15 +3628,15 @@ class GetDirectoryTest {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file or directory for which to set the access date and time information. </param
-        >
+          />The file or directory for which to set the access date and time information.
+        </param>
         <param name="lastAccessTimeUtc">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that  contains the value to set for the access date and time of <paramref name="path" />. This value is expressed in UTC time. </param
-        >
+          />An object that  contains the value to set for the access date and time of <paramref name="path" />. This value is expressed in UTC time.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetLastWriteTime">
@@ -3726,19 +3713,15 @@ class GetDirectoryTest {
           <para>Sets the date and time a directory was last written to.</para>
         </summary>
         <param name="path">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The path of the directory. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The path of the directory.
+        </param>
         <param name="lastWriteTime">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The date and time the directory was last written to. This value is expressed in local time.  </param
-        >
+          />The date and time the directory was last written to. This value is expressed in local time.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -3782,19 +3765,15 @@ class GetDirectoryTest {
           <para>Sets the date and time, in Coordinated Universal Time (UTC) format, that a directory was last written to.</para>
         </summary>
         <param name="path">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The path of the directory. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The path of the directory.
+        </param>
         <param name="lastWriteTimeUtc">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The date and time the directory was last written to. This value is expressed in UTC time. </param
-        >
+          />The date and time the directory was last written to. This value is expressed in UTC time.
+        </param>
       </Docs>
     </Member>
   </Members>

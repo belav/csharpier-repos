@@ -92,15 +92,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The security action to be taken (Demand, Assert, and so on). </param
-        >
+          />The security action to be taken (Demand, Assert, and so on).
+        </param>
         <param name="pset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The set of permissions the action applies to. </param
-        >
+          />The set of permissions the action applies to.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Attributes">
@@ -226,15 +226,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array containing valid MSIL instructions. If this parameter is null, the method's body is cleared. </param
-        >
+          />An array containing valid MSIL instructions. If this parameter is null, the method's body is cleared.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of valid bytes in the MSIL array. This value is ignored if MSIL is null. </param
-        >
+          />The number of valid bytes in the MSIL array. This value is ignored if MSIL is null.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DeclaringType">
@@ -350,8 +350,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Reflection.Emit.ParameterBuilder" /> object returned by this method can be used to set the default value for a parameter or to apply custom attributes. </para
-          >
+            >The <see cref="T:System.Reflection.Emit.ParameterBuilder" /> object returned by this method can be used to set the default value for a parameter or to apply custom attributes.
+          </para>
           <para
             >Parameter numbering begins with 1, so <paramref name="position" /> is 1 for the first parameter. If <paramref name="position" /> is zero, this method affects the return value.</para
           >
@@ -374,22 +374,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position of the parameter in the parameter list. Parameters are indexed beginning with the number 1 for the first parameter; the number 0 represents the return value of the method. </param
-        >
+          />The position of the parameter in the parameter list. Parameters are indexed beginning with the number 1 for the first parameter; the number 0 represents the return value of the method.
+        </param>
         <param name="attributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The parameter attributes of the parameter. </param
-        >
+          />The parameter attributes of the parameter.
+        </param>
         <param name="strParamName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the parameter. The name can be the null string. </param
-        >
+          />The name of the parameter. The name can be the null string.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -430,8 +430,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to compare with this MethodBuilder instance. </param
-        >
+          />The object to compare with this MethodBuilder instance.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetBaseDefinition">
@@ -504,8 +504,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Specifies whether to search this member's inheritance chain to find the custom attributes. </param
-        >
+          />Specifies whether to search this member's inheritance chain to find the custom attributes.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttributes">
@@ -543,19 +543,15 @@
           >
         </returns>
         <param name="attributeType">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The custom attribute type. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The custom attribute type.
+        </param>
         <param name="inherit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Specifies whether to search this member's inheritance chain to find the custom attributes. </param
-        >
+          />Specifies whether to search this member's inheritance chain to find the custom attributes.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetGenericArguments">
@@ -593,8 +589,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see cref="T:System.Reflection.Emit.GenericTypeParameterBuilder" /> objects representing the type parameters, if the method is generic, or null if the method is not generic. </para
-          >
+            >An array of <see cref="T:System.Reflection.Emit.GenericTypeParameterBuilder" /> objects representing the type parameters, if the method is generic, or null if the method is not generic.
+          </para>
         </returns>
       </Docs>
     </Member>
@@ -634,8 +630,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current instance of <see cref="T:System.Reflection.Emit.MethodBuilder" />. </para
-          >
+            >The current instance of <see cref="T:System.Reflection.Emit.MethodBuilder" />.
+          </para>
         </returns>
       </Docs>
     </Member>
@@ -734,8 +730,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The size of the MSIL stream, in bytes. </param
-        >
+          />The size of the MSIL stream, in bytes.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetMethodImplementationFlags">
@@ -932,36 +928,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object on which to invoke the specified method. If the method is static, this parameter is ignored. </param
-        >
+          />The object on which to invoke the specified method. If the method is static, this parameter is ignored.
+        </param>
         <param name="invokeAttr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />This must be a bit flag from <see cref="T:System.Reflection.BindingFlags" /> : InvokeMethod, NonPublic, and so on. </param
-        >
+          />This must be a bit flag from <see cref="T:System.Reflection.BindingFlags" /> : InvokeMethod, NonPublic, and so on.
+        </param>
         <param name="binder">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that enables the binding, coercion of argument types, invocation of members, and retrieval of MemberInfo objects via reflection. If binder is null, the default binder is used. For more details, see <see cref="T:System.Reflection.Binder" />. </param
-        >
+          />An object that enables the binding, coercion of argument types, invocation of members, and retrieval of MemberInfo objects via reflection. If binder is null, the default binder is used. For more details, see <see cref="T:System.Reflection.Binder" />.
+        </param>
         <param name="parameters">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An argument list. This is an array of arguments with the same number, order, and type as the parameters of the method to be invoked. If there are no parameters this should be null. </param
-        >
+          />An argument list. This is an array of arguments with the same number, order, and type as the parameters of the method to be invoked. If there are no parameters this should be null.
+        </param>
         <param name="culture">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An instance of <see cref="T:System.Globalization.CultureInfo" /> used to govern the coercion of types. If this is null, the <see cref="T:System.Globalization.CultureInfo" /> for the current thread is used. (Note that this is necessary to, for example, convert a <see cref="T:System.String" /> that represents 1000 to a <see cref="T:System.Double" /> value, since 1000 is represented differently by different cultures.) </param
-        >
+          />An instance of <see cref="T:System.Globalization.CultureInfo" /> used to govern the coercion of types. If this is null, the <see cref="T:System.Globalization.CultureInfo" /> for the current thread is used. (Note that this is necessary to, for example, convert a <see cref="T:System.String" /> that represents 1000 to a <see cref="T:System.Double" /> value, since 1000 is represented differently by different cultures.)
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsDefined">
@@ -997,19 +993,15 @@
           <para>true if the specified custom attribute type is defined; otherwise, false.</para>
         </returns>
         <param name="attributeType">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The custom attribute type. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The custom attribute type.
+        </param>
         <param name="inherit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Specifies whether to search this member's inheritance chain to find the custom attributes. </param
-        >
+          />Specifies whether to search this member's inheritance chain to find the custom attributes.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsGenericMethod">
@@ -1256,8 +1248,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Reflection.ParameterInfo" /> object that contains information about the return type of the method, such as whether the return type has custom modifiers. </para
-          >
+            >Gets a <see cref="T:System.Reflection.ParameterInfo" /> object that contains information about the return type of the method, such as whether the return type has custom modifiers.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -1360,8 +1352,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An instance of a helper class to describe the custom attribute. </param
-        >
+          />An instance of a helper class to describe the custom attribute.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetCustomAttribute">
@@ -1415,15 +1407,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The constructor for the custom attribute. </param
-        >
+          />The constructor for the custom attribute.
+        </param>
         <param name="binaryAttribute">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A byte blob representing the attributes. </param
-        >
+          />A byte blob representing the attributes.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetImplementationFlags">
@@ -1461,8 +1453,8 @@
             </item>
             <item>
               <para
-                >When you set implementation flags, call the <see cref="M:System.Reflection.Emit.MethodBuilder.GetMethodImplementationFlags" /> method to retrieve the existing flags, use bitwise OR to add your flag, and then call the <see cref="M:System.Reflection.Emit.MethodBuilder.SetImplementationFlags(System.Reflection.MethodImplAttributes)" /> method. </para
-              >
+                >When you set implementation flags, call the <see cref="M:System.Reflection.Emit.MethodBuilder.GetMethodImplementationFlags" /> method to retrieve the existing flags, use bitwise OR to add your flag, and then call the <see cref="M:System.Reflection.Emit.MethodBuilder.SetImplementationFlags(System.Reflection.MethodImplAttributes)" /> method.
+              </para>
             </item>
           </list>
         </remarks>
@@ -1475,8 +1467,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The implementation flags to set. </param
-        >
+          />The implementation flags to set.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetMarshal">
@@ -1516,8 +1508,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Marshaling information for the return type of this method. </param
-        >
+          />Marshaling information for the return type of this method.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetParameters">
@@ -1592,8 +1584,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to set the return type of a generic method, when the return type is specified by one of the generic type parameters of the method. If the return type has optional or required custom modifiers, such as <see cref="T:System.Runtime.CompilerServices.IsConst" />, use the <see cref="M:System.Reflection.Emit.MethodBuilder.SetSignature(System.Type,System.Type[],System.Type[],System.Type[],System.Type[][],System.Type[][])" /> method overload. </para
-          >
+            >Use this method to set the return type of a generic method, when the return type is specified by one of the generic type parameters of the method. If the return type has optional or required custom modifiers, such as <see cref="T:System.Runtime.CompilerServices.IsConst" />, use the <see cref="M:System.Reflection.Emit.MethodBuilder.SetSignature(System.Type,System.Type[],System.Type[],System.Type[],System.Type[][],System.Type[][])" /> method overload.
+          </para>
           <para
             >Calling this method replaces a return type established using the <see cref="Overload:System.Reflection.Emit.TypeBuilder.DefineMethod" /> method.</para
           >
@@ -1734,15 +1726,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the symbolic custom attribute. </param
-        >
+          />The name of the symbolic custom attribute.
+        </param>
         <param name="data">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte blob that represents the value of the symbolic custom attribute. </param
-        >
+          />The byte blob that represents the value of the symbolic custom attribute.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Signature">

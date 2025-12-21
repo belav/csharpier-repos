@@ -179,8 +179,7 @@ class MethodAttributesExample
    }
 
 }
-      </code
-          >
+      </code>
           <para>The output is</para>
           <c>
             <para>Method MyPublicInstanceMethod is:</para>
@@ -259,14 +258,14 @@ class MethodAttributesExample
             >A generic method can be invoked only if there are no generic type definitions or open constructed types in the type arguments of the method itself or in any enclosing types. Because types can be arbitrarily complex, making this recursive determination is difficult. For convenience, and to reduce the chance of error, the <see cref="P:System.Reflection.MethodBase.ContainsGenericParameters" /> property provides a standard way to distinguish between closed constructed methods, which can be invoked, and open constructed methods, which cannot. If the <see cref="P:System.Reflection.MethodBase.ContainsGenericParameters" /> property returns true, the method cannot be invoked.</para
           >
           <para
-            >The <see cref="P:System.Reflection.MethodBase.ContainsGenericParameters" /> property searches recursively for type parameters. For example, it returns true for any method in an open type A&lt;T&gt; (A(Of T) in Visual Basic), even though the method itself is not generic. Contrast this with the behavior of the <see cref="P:System.Reflection.MethodBase.IsGenericMethod" /> property, which returns false for such a method. </para
-          >
+            >The <see cref="P:System.Reflection.MethodBase.ContainsGenericParameters" /> property searches recursively for type parameters. For example, it returns true for any method in an open type A&lt;T&gt; (A(Of T) in Visual Basic), even though the method itself is not generic. Contrast this with the behavior of the <see cref="P:System.Reflection.MethodBase.IsGenericMethod" /> property, which returns false for such a method.
+          </para>
           <para
             >Similarly, the <see cref="P:System.Reflection.MethodBase.ContainsGenericParameters" /> property parameter returns true for any constructor in an open type, even though constructors cannot have type parameters of their own.</para
           >
           <para
-            >For a list of the invariant conditions for terms specific to generic methods, see the <see cref="P:System.Reflection.MethodInfo.IsGenericMethod" /> property. For a list of the invariant conditions for other terms used in generic reflection, see the <see cref="P:System.Type.IsGenericType" /> property. </para
-          >
+            >For a list of the invariant conditions for terms specific to generic methods, see the <see cref="P:System.Reflection.MethodInfo.IsGenericMethod" /> property. For a list of the invariant conditions for other terms used in generic reflection, see the <see cref="P:System.Type.IsGenericType" /> property.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -381,8 +380,8 @@ class MethodAttributesExample
           <list type="bullet">
             <item>
               <para
-                >If the current method is a closed constructed method (that is, the <see cref="P:System.Reflection.MethodBase.ContainsGenericParameters" /> property returns false), the array returned by the <see cref="M:System.Reflection.MethodBase.GetGenericArguments" /> method contains the types that have been assigned to the generic type parameters of the generic method definition. </para
-              >
+                >If the current method is a closed constructed method (that is, the <see cref="P:System.Reflection.MethodBase.ContainsGenericParameters" /> property returns false), the array returned by the <see cref="M:System.Reflection.MethodBase.GetGenericArguments" /> method contains the types that have been assigned to the generic type parameters of the generic method definition.
+              </para>
             </item>
             <item>
               <para>If the current method is a generic method definition, the array contains the type parameters. </para>
@@ -397,8 +396,8 @@ class MethodAttributesExample
             >Generic constructors are not supported in the .NET Framework version 2.0. This property throws <see cref="T:System.NotSupportedException" /> if not overridden in a derived class, so an exception is thrown if the current instance is of type <see cref="T:System.Reflection.ConstructorInfo" />.</para
           >
           <para
-            >For a list of the invariant conditions for terms specific to generic methods, see the <see cref="P:System.Reflection.MethodInfo.IsGenericMethod" /> property. For a list of the invariant conditions for other terms used in generic reflection, see the <see cref="P:System.Type.IsGenericType" /> property. </para
-          >
+            >For a list of the invariant conditions for terms specific to generic methods, see the <see cref="P:System.Reflection.MethodInfo.IsGenericMethod" /> property. For a list of the invariant conditions for other terms used in generic reflection, see the <see cref="P:System.Type.IsGenericType" /> property.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -519,12 +518,8 @@ class MethodAttributesExample
           <para>A MethodBase containing information about the method.</para>
         </returns>
         <param name="handle">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The method's handle. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The method's handle.
+        </param>
       </Docs>
       <Excluded>1</Excluded>
       <ExcludedLibrary>RuntimeInfrastructure</ExcludedLibrary>
@@ -744,14 +739,14 @@ class MethodAttributesExample
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This is a convenience method that calls the <see cref="M:System.Reflection.MethodBase.Invoke(System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" /> method overload, passing <see cref="F:System.Reflection.BindingFlags.Default" /> for <paramref name="invokeAttr" /> and null for <paramref name="binder" /> and <paramref name="culture" />. </para
-          >
+            >This is a convenience method that calls the <see cref="M:System.Reflection.MethodBase.Invoke(System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" /> method overload, passing <see cref="F:System.Reflection.BindingFlags.Default" /> for <paramref name="invokeAttr" /> and null for <paramref name="binder" /> and <paramref name="culture" />.
+          </para>
           <para
             >If the invoked method throws an exception, the <see cref="M:System.Exception.GetBaseException" /> method returns the exception.</para
           >
           <para
-            >To invoke a static method using its <see cref="T:System.Reflection.MethodInfo" /> object, pass null for <paramref name="obj" />. </para
-          >
+            >To invoke a static method using its <see cref="T:System.Reflection.MethodInfo" /> object, pass null for <paramref name="obj" />.
+          </para>
           <block subset="none" type="note">
             <para
               >If this method overload is used to invoke an instance constructor, the object supplied for <paramref name="obj" /> is reinitialized; that is, all instance initializers are executed. The return value is null. If a class constructor is invoked, the class is reinitialized; that is, all class initializers are executed. The return value is null.</para
@@ -763,13 +758,13 @@ class MethodAttributesExample
                 <a href="42d9dc2a-8fcc-4ff3-b002-4ff260ef3dc5"
                   >Security Considerations for Reflection</a
                 >
-              </format>.) </para
-            >
+              </format>.)
+            </para>
             <para>To use this functionality, your application should target the net_v35_long or later.</para>
           </block>
           <para
-            >If a parameter of the current method is a value type, and the corresponding argument in <paramref name="parameters" /> is null, the runtime passes a zero-initialized instance of the value type. </para
-          >
+            >If a parameter of the current method is a value type, and the corresponding argument in <paramref name="parameters" /> is null, the runtime passes a zero-initialized instance of the value type.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -789,8 +784,8 @@ class MethodAttributesExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object on which to invoke the method or constructor. If a method is static, this argument is ignored. If a constructor is static, this argument must be null or an instance of the class that defines the constructor. </param
-        >
+          />The object on which to invoke the method or constructor. If a method is static, this argument is ignored. If a constructor is static, this argument must be null or an instance of the class that defines the constructor.
+        </param>
         <param name="parameters">
           <attribution
             license="cc4"
@@ -857,15 +852,15 @@ class MethodAttributesExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitmask that is a combination of 0 or more bit flags from <see cref="T:System.Reflection.BindingFlags" />. If <paramref name="binder" /> is null, this parameter is assigned the value <see cref="F:System.Reflection.BindingFlags.Default" />; thus, whatever you pass in is ignored. </param
-        >
+          />A bitmask that is a combination of 0 or more bit flags from <see cref="T:System.Reflection.BindingFlags" />. If <paramref name="binder" /> is null, this parameter is assigned the value <see cref="F:System.Reflection.BindingFlags.Default" />; thus, whatever you pass in is ignored.
+        </param>
         <param name="binder">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that enables the binding, coercion of argument types, invocation of members, and retrieval of MemberInfo objects via reflection. If <paramref name="binder" /> is null, the default binder is used. </param
-        >
+          />An object that enables the binding, coercion of argument types, invocation of members, and retrieval of MemberInfo objects via reflection. If <paramref name="binder" /> is null, the default binder is used.
+        </param>
         <param name="parameters">
           <attribution
             license="cc4"
@@ -878,8 +873,8 @@ class MethodAttributesExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An instance of CultureInfo used to govern the coercion of types. If this is null, the CultureInfo for the current thread is used. (This is necessary to convert a String that represents 1000 to a Double value, for example, since 1000 is represented differently by different cultures.) </param
-        >
+          />An instance of CultureInfo used to govern the coercion of types. If this is null, the CultureInfo for the current thread is used. (This is necessary to convert a String that represents 1000 to a Double value, for example, since 1000 is represented differently by different cultures.)
+        </param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -896,8 +891,8 @@ class MethodAttributesExample
             >For example, if the method reflected by this instance is declared as public boolean Compare(String a, String b), then <paramref name="parameters" /> should be an array of Objects with length 2 such that parameters[0] = new Object("SomeString1") and parameters[1] = new Object("SomeString2").</para
           >
           <para
-            >If a parameter of the current method is a value type, and the corresponding argument in <paramref name="parameters" /> is null, the runtime passes a zero-initialized instance of the value type. </para
-          >
+            >If a parameter of the current method is a value type, and the corresponding argument in <paramref name="parameters" /> is null, the runtime passes a zero-initialized instance of the value type.
+          </para>
           <para>Reflection uses dynamic method lookup when invoking virtual methods. For example, suppose that class B inherits from class A and both implement a virtual method named M. Now suppose that you have a MethodInfo object that represents M on class A. If you use the Invoke method to invoke M on an object of type B, then reflection will use the implementation given by class B. Even if the object of type B is cast to A, the implementation given by class B is used (see code sample below).</para>
           <para>On the other hand, if the method is non-virtual, then reflection will use the implementation given by the type from which the MethodInfo was obtained, regardless of the type of the object passed as the target.</para>
           <para>Access restrictions are ignored for fully trusted code. That is, private constructors, methods, fields, and properties can be accessed and invoked via reflection whenever the code is fully trusted.</para>
@@ -908,8 +903,8 @@ class MethodAttributesExample
                 <a href="42d9dc2a-8fcc-4ff3-b002-4ff260ef3dc5"
                   >Security Considerations for Reflection</a
                 >
-              </format>.) </para
-            >
+              </format>.)
+            </para>
             <para>To use this functionality, your application should target the net_v35_long or later.</para>
           </block>
         </remarks>
@@ -938,15 +933,15 @@ class MethodAttributesExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitmask that is a combination of 0 or more bit flags from <see cref="T:System.Reflection.BindingFlags" />. If <paramref name="binder" /> is null, this parameter is assigned the value <see cref="F:System.Reflection.BindingFlags.Default" />; thus, whatever you pass in is ignored. </param
-        >
+          />A bitmask that is a combination of 0 or more bit flags from <see cref="T:System.Reflection.BindingFlags" />. If <paramref name="binder" /> is null, this parameter is assigned the value <see cref="F:System.Reflection.BindingFlags.Default" />; thus, whatever you pass in is ignored.
+        </param>
         <param name="binder">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that enables the binding, coercion of argument types, invocation of members, and retrieval of MemberInfo objects via reflection. If <paramref name="binder" /> is null, the default binder is used. </param
-        >
+          />An object that enables the binding, coercion of argument types, invocation of members, and retrieval of MemberInfo objects via reflection. If <paramref name="binder" /> is null, the default binder is used.
+        </param>
         <param name="parameters">
           <attribution
             license="cc4"
@@ -959,8 +954,8 @@ class MethodAttributesExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An instance of CultureInfo used to govern the coercion of types. If this is null, the CultureInfo for the current thread is used. (This is necessary to convert a String that represents 1000 to a Double value, for example, since 1000 is represented differently by different cultures.) </param
-        >
+          />An instance of CultureInfo used to govern the coercion of types. If this is null, the CultureInfo for the current thread is used. (This is necessary to convert a String that represents 1000 to a Double value, for example, since 1000 is represented differently by different cultures.)
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1011,8 +1006,8 @@ class MethodAttributesExample
             >The actual visibility of a method is limited by the visibility of its type. The <see cref="P:System.Reflection.MethodBase.IsAssembly" /> property might be true for a method, but if it is a method of a private nested type then the method is not visible outside the containing type.</para
           >
           <para
-            >The visibility of a method or constructor is exactly described by <see cref="F:System.Reflection.MethodAttributes.Assembly" /> if the only visibility modifier is internal (Friend in Visual Basic). This property is false for methods that are protected internal in C# (Protected Friend in Visual Basic, protected public in C++); use the <see cref="P:System.Reflection.MethodBase.IsFamilyOrAssembly" /> property to identify such methods. </para
-          >
+            >The visibility of a method or constructor is exactly described by <see cref="F:System.Reflection.MethodAttributes.Assembly" /> if the only visibility modifier is internal (Friend in Visual Basic). This property is false for methods that are protected internal in C# (Protected Friend in Visual Basic, protected public in C++); use the <see cref="P:System.Reflection.MethodBase.IsFamilyOrAssembly" /> property to identify such methods.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1134,8 +1129,8 @@ class MethodAttributesExample
             >The actual visibility of a method is limited by the visibility of its type. The <see cref="P:System.Reflection.MethodBase.IsFamilyOrAssembly" /> property might be true for a method, but if it is a method of a private nested type then the method is not visible outside the containing type.</para
           >
           <para
-            >The visibility of a method or constructor is exactly described by <see cref="F:System.Reflection.MethodAttributes.FamORAssem" /> if the visibility modifier is protected internal in C# (Protected Friend in Visual Basic, protected public in C++). </para
-          >
+            >The visibility of a method or constructor is exactly described by <see cref="F:System.Reflection.MethodAttributes.FamORAssem" /> if the visibility modifier is protected internal in C# (Protected Friend in Visual Basic, protected public in C++).
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1201,8 +1196,8 @@ class MethodAttributesExample
             >
           </block>
           <para
-            >For a list of the invariant conditions for terms specific to generic methods, see the <see cref="P:System.Reflection.MethodInfo.IsGenericMethod" /> property. For a list of the invariant conditions for other terms used in generic reflection, see the <see cref="P:System.Type.IsGenericType" /> property. </para
-          >
+            >For a list of the invariant conditions for terms specific to generic methods, see the <see cref="P:System.Reflection.MethodInfo.IsGenericMethod" /> property. For a list of the invariant conditions for other terms used in generic reflection, see the <see cref="P:System.Type.IsGenericType" /> property.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1267,8 +1262,8 @@ class MethodAttributesExample
             >
           </block>
           <para
-            >For a list of the invariant conditions for terms specific to generic methods, see the <see cref="P:System.Reflection.MethodInfo.IsGenericMethod" /> property. For a list of the invariant conditions for other terms used in generic reflection, see the <see cref="P:System.Type.IsGenericType" /> property. </para
-          >
+            >For a list of the invariant conditions for terms specific to generic methods, see the <see cref="P:System.Reflection.MethodInfo.IsGenericMethod" /> property. For a list of the invariant conditions for other terms used in generic reflection, see the <see cref="P:System.Type.IsGenericType" /> property.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1293,8 +1288,8 @@ class MethodAttributesExample
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When a member in a derived class is declared with the C# new modifier or the Visual Basic Shadows modifier, it can hide a member of the same name in the base class. C# hides base class members by signature. That is, if the base class member has multiple overloads, the only one that is hidden is the one that has the identical signature. By contrast, Visual Basic hides all the base class overloads. Thus, <see cref="P:System.Reflection.MethodBase.IsHideBySig" /> returns false on a member declared with the Visual Basic Shadows modifier, and true on a member declared with the C# new modifier. </para
-          >
+            >When a member in a derived class is declared with the C# new modifier or the Visual Basic Shadows modifier, it can hide a member of the same name in the base class. C# hides base class members by signature. That is, if the base class member has multiple overloads, the only one that is hidden is the one that has the identical signature. By contrast, Visual Basic hides all the base class overloads. Thus, <see cref="P:System.Reflection.MethodBase.IsHideBySig" /> returns false on a member declared with the Visual Basic Shadows modifier, and true on a member declared with the C# new modifier.
+          </para>
           <block subset="none" type="note">
             <para
               >This property does not determine whether a method has the <see cref="F:System.Reflection.MethodAttributes.NewSlot" /> attribute. A method that is declared with either the new or the Shadows modifier will have the <see cref="F:System.Reflection.MethodAttributes.NewSlot" /> attribute, but only methods declared with new (that is, only C# methods) will have the <see cref="P:System.Reflection.MethodBase.IsHideBySig" /> property set to true.  To determine whether a method has the <see cref="F:System.Reflection.MethodAttributes.NewSlot" /> attribute, use code similar to the following: if ((myMethodInfo.Attributes &amp; MethodAttributes.VtableLayoutMask) == MethodAttributes.NewSlot) in C# or If (myMethodInfo.Attributes And MethodAttributes.VtableLayoutMask) = MethodAttributes.NewSlot in Visual Basic. Note, however, that although all methods declared with new or Shadows have the <see cref="F:System.Reflection.MethodAttributes.NewSlot" /> attribute, not all methods that have the <see cref="F:System.Reflection.MethodAttributes.NewSlot" /> attribute are declared with new or Shadows.</para
@@ -1437,8 +1432,8 @@ class MethodAttributesExample
           <para>Using these properties is much simpler than examining the security annotations of an assembly and its types and members, checking the current trust level, and attempting to duplicate the runtime's rules.</para>
           <block subset="none" type="note">
             <para
-              >For partial-trust assemblies, the value of this property depends on the current trust level of the assembly. If the assembly is loaded into a partially trusted application domain (for example, into a sandboxed application domain), the runtime ignores the security annotations of the assembly. The assembly and all its types are treated as transparent. The runtime pays attention to the security annotations of a partial-trust assembly only when that assembly is loaded into a fully trusted application domain (for example, into the default application domain of a desktop application). By contrast, a trusted assembly (that is, a strong-named assembly that is installed in the global assembly cache) is always loaded with full trust regardless of the trust level of the application domain, so its current trust level is always fully trusted. You can determine the current trust levels of assemblies and application domains by using the <see cref="P:System.Reflection.Assembly.IsFullyTrusted" /> and <see cref="P:System.AppDomain.IsFullyTrusted" /> properties. </para
-            >
+              >For partial-trust assemblies, the value of this property depends on the current trust level of the assembly. If the assembly is loaded into a partially trusted application domain (for example, into a sandboxed application domain), the runtime ignores the security annotations of the assembly. The assembly and all its types are treated as transparent. The runtime pays attention to the security annotations of a partial-trust assembly only when that assembly is loaded into a fully trusted application domain (for example, into the default application domain of a desktop application). By contrast, a trusted assembly (that is, a strong-named assembly that is installed in the global assembly cache) is always loaded with full trust regardless of the trust level of the application domain, so its current trust level is always fully trusted. You can determine the current trust levels of assemblies and application domains by using the <see cref="P:System.Reflection.Assembly.IsFullyTrusted" /> and <see cref="P:System.AppDomain.IsFullyTrusted" /> properties.
+            </para>
           </block>
           <para
             >For more information about reflection and transparency, see <format type="text/html">
@@ -1538,8 +1533,8 @@ class MethodAttributesExample
           <para>Using these properties is much simpler than examining the security annotations of an assembly and its types and members, checking the current trust level, and attempting to duplicate the runtime's rules.</para>
           <block subset="none" type="note">
             <para
-              >For partial-trust assemblies, the value of this property depends on the current trust level of the assembly. If the assembly is loaded into a partially trusted application domain (for example, into a sandboxed application domain), the runtime ignores the security annotations of the assembly. The assembly and all its types are treated as transparent. The runtime pays attention to the security annotations of a partial-trust assembly only when that assembly is loaded into a fully trusted application domain (for example, into the default application domain of a desktop application). By contrast, a trusted assembly (that is, a strong-named assembly that is installed in the global assembly cache) is always loaded with full trust regardless of the trust level of the application domain, so its current trust level is always fully trusted. You can determine the current trust levels of assemblies and application domains by using the <see cref="P:System.Reflection.Assembly.IsFullyTrusted" /> and <see cref="P:System.AppDomain.IsFullyTrusted" /> properties. </para
-            >
+              >For partial-trust assemblies, the value of this property depends on the current trust level of the assembly. If the assembly is loaded into a partially trusted application domain (for example, into a sandboxed application domain), the runtime ignores the security annotations of the assembly. The assembly and all its types are treated as transparent. The runtime pays attention to the security annotations of a partial-trust assembly only when that assembly is loaded into a fully trusted application domain (for example, into the default application domain of a desktop application). By contrast, a trusted assembly (that is, a strong-named assembly that is installed in the global assembly cache) is always loaded with full trust regardless of the trust level of the application domain, so its current trust level is always fully trusted. You can determine the current trust levels of assemblies and application domains by using the <see cref="P:System.Reflection.Assembly.IsFullyTrusted" /> and <see cref="P:System.AppDomain.IsFullyTrusted" /> properties.
+            </para>
           </block>
           <para
             >For more information about reflection and transparency, see <format type="text/html">
@@ -1581,8 +1576,8 @@ class MethodAttributesExample
           >
           <block subset="none" type="note">
             <para
-              >For partial-trust assemblies, the value of this property depends on the current trust level of the assembly. If the assembly is loaded into a partially trusted application domain (for example, into a sandboxed application domain), the runtime ignores the security annotations of the assembly. The assembly and all its types are treated as transparent. The runtime pays attention to the security annotations of a partial-trust assembly only when that assembly is loaded into a fully trusted application domain (for example, into the default application domain of a desktop application). By contrast, a trusted assembly (that is, a strong-named assembly that is installed in the global assembly cache) is always loaded with full trust regardless of the trust level of the application domain, so its current trust level is always fully trusted. You can determine the current trust levels of assemblies and application domains by using the <see cref="P:System.Reflection.Assembly.IsFullyTrusted" /> and <see cref="P:System.AppDomain.IsFullyTrusted" /> properties. </para
-            >
+              >For partial-trust assemblies, the value of this property depends on the current trust level of the assembly. If the assembly is loaded into a partially trusted application domain (for example, into a sandboxed application domain), the runtime ignores the security annotations of the assembly. The assembly and all its types are treated as transparent. The runtime pays attention to the security annotations of a partial-trust assembly only when that assembly is loaded into a fully trusted application domain (for example, into the default application domain of a desktop application). By contrast, a trusted assembly (that is, a strong-named assembly that is installed in the global assembly cache) is always loaded with full trust regardless of the trust level of the application domain, so its current trust level is always fully trusted. You can determine the current trust levels of assemblies and application domains by using the <see cref="P:System.Reflection.Assembly.IsFullyTrusted" /> and <see cref="P:System.AppDomain.IsFullyTrusted" /> properties.
+            </para>
           </block>
           <para
             >For more information about reflection and transparency, see <format type="text/html">

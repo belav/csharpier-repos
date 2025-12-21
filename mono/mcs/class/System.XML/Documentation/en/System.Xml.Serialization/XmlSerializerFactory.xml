@@ -43,8 +43,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlSerializerFactory" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlSerializerFactory" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -184,8 +184,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The default namespace to use for all the XML elements. </param
-        >
+          />The default namespace to use for all the XML elements.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateSerializer">
@@ -428,8 +428,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The default namespace of all XML elements in the XML document. </param
-        >
+          />The default namespace of all XML elements in the XML document.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateSerializer">

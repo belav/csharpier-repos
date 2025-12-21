@@ -85,29 +85,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The major version number of the assembly. </param
-        >
+          />The major version number of the assembly.
+        </param>
         <param name="minor">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The minor version number of the assembly. </param
-        >
+          />The minor version number of the assembly.
+        </param>
         <param name="build">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The build number of the assembly. </param
-        >
+          />The build number of the assembly.
+        </param>
         <param name="revision">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The revision number of the assembly. </param
-        >
+          />The revision number of the assembly.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="BuildNumber">

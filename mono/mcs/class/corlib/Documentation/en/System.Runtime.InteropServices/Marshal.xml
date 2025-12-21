@@ -1159,8 +1159,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The memory pointer to copy from. </param
-        >
+          />The memory pointer to copy from.
+        </param>
         <param name="destination">
           <attribution
             license="cc4"
@@ -1224,29 +1224,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The memory pointer to copy from. </param
-        >
+          />The memory pointer to copy from.
+        </param>
         <param name="destination">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The array to copy to. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The array to copy to.
+        </param>
         <param name="startIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index in the destination array where copying should start. </param
-        >
+          />The zero-based index in the destination array where copying should start.
+        </param>
         <param name="length">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of array elements to copy. </param
-        >
+          />The number of array elements to copy.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Copy">
@@ -1354,29 +1350,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The one-dimensional array to copy from. </param
-        >
+          />The one-dimensional array to copy from.
+        </param>
         <param name="startIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index in the source array where copying should start. </param
-        >
+          />The zero-based index in the source array where copying should start.
+        </param>
         <param name="destination">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The memory pointer to copy to. </param
-        >
+          />The memory pointer to copy to.
+        </param>
         <param name="length">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of array elements to copy. </param
-        >
+          />The number of array elements to copy.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateAggregatedObject">
@@ -1525,19 +1521,15 @@
           <para>The newly wrapped object that is an instance of the desired type.</para>
         </returns>
         <param name="o">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The object to be wrapped. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The object to be wrapped.
+        </param>
         <param name="t">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of wrapper to create. </param
-        >
+          />The type of wrapper to create.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateWrapperOfType&lt;T,TWrapper&gt;">
@@ -1624,8 +1616,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A pointer to an unmanaged block of memory. </param
-        >
+          />A pointer to an unmanaged block of memory.
+        </param>
         <param name="structuretype">
           <attribution
             license="cc4"
@@ -1680,15 +1672,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A pointer to an unmanaged block of memory. </param
-        >
+          />A pointer to an unmanaged block of memory.
+        </param>
         <typeparam name="T">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the formatted structure. This provides the layout information necessary to delete the buffer in the <paramref name="ptr" /> parameter. </typeparam
-        >
+          />The type of the formatted structure. This provides the layout information necessary to delete the buffer in the <paramref name="ptr" /> parameter.
+        </typeparam>
       </Docs>
     </Member>
     <Member MemberName="FinalReleaseComObject">
@@ -1789,8 +1781,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The address of the BSTR to be freed. </param
-        >
+          />The address of the BSTR to be freed.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="FreeCoTaskMem">
@@ -1836,8 +1828,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The address of the memory to be freed. </param
-        >
+          />The address of the memory to be freed.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="FreeHGlobal">
@@ -1888,8 +1880,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The handle returned by the original matching call to <see cref="M:System.Runtime.InteropServices.Marshal.AllocHGlobal(System.IntPtr)" />. </param
-        >
+          />The handle returned by the original matching call to <see cref="M:System.Runtime.InteropServices.Marshal.AllocHGlobal(System.IntPtr)" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GenerateGuidForType">
@@ -1930,8 +1922,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type to generate a GUID for. </param
-        >
+          />The type to generate a GUID for.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GenerateProgIdForType">
@@ -1973,8 +1965,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type to get a ProgID for. </param
-        >
+          />The type to get a ProgID for.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetActiveObject">
@@ -2067,8 +2059,8 @@
             <see cref="M:System.Runtime.InteropServices.Marshal.GetComInterfaceForObject(System.Object,System.Type)" /> is useful when calling a method that exposes a COM object parameter as an <see cref="T:System.IntPtr" /> type, or with custom marshaling. Although less common, you can use this method on a managed object to obtain a pointer to the object's COM callable wrapper. For example, you can use <see cref="M:System.Runtime.InteropServices.Marshal.GetComInterfaceForObject(System.Object,System.Type)" /> on a managed object that is exported to COM to obtain an interface pointer for <see cref="T:System.Runtime.InteropServices.UCOMIConnectionPointContainer" />. You cannot obtain a pointer to a class interface since a class interface lacks the corresponding type to pass to the second parameter (<paramref name="t" />). Instead, use <see cref="M:System.Runtime.InteropServices.Marshal.GetIDispatchForObject(System.Object)" /> to invoke the members on the default interface of the COM callable wrapper, which is usually an auto-dispatch class interface.</para
           >
           <para
-            >The <see cref="M:System.Runtime.InteropServices.Marshal.GetComInterfaceForObject(System.Object,System.Type)" /> method overload allows query interface customization by default. To specify whether to apply query interface customization, use the <see cref="M:System.Runtime.InteropServices.Marshal.GetComInterfaceForObject(System.Object,System.Type,System.Runtime.InteropServices.CustomQueryInterfaceMode)" /> method overload. </para
-          >
+            >The <see cref="M:System.Runtime.InteropServices.Marshal.GetComInterfaceForObject(System.Object,System.Type)" /> method overload allows query interface customization by default. To specify whether to apply query interface customization, use the <see cref="M:System.Runtime.InteropServices.Marshal.GetComInterfaceForObject(System.Object,System.Type,System.Runtime.InteropServices.CustomQueryInterfaceMode)" /> method overload.
+          </para>
           <para
             >For additional information, see the <format type="text/html">
               <a href="d04be3b5-27b9-4f5b-8469-a44149fabf78">COM Callable Wrapper</a>
@@ -2096,15 +2088,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that provides the interface. </param
-        >
+          />The object that provides the interface.
+        </param>
         <param name="T">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of interface that is requested. </param
-        >
+          />The type of interface that is requested.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetComInterfaceForObject&lt;T,TInterface&gt;">
@@ -2410,8 +2402,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see cref="M:System.Runtime.InteropServices.Marshal.GetDelegateForFunctionPointer``1(System.IntPtr)" /> and <see cref="M:System.Runtime.InteropServices.Marshal.GetFunctionPointerForDelegate``1(``0)" /> methods to marshal delegates in both directions. </para
-          >
+            >You can use the <see cref="M:System.Runtime.InteropServices.Marshal.GetDelegateForFunctionPointer``1(System.IntPtr)" /> and <see cref="M:System.Runtime.InteropServices.Marshal.GetFunctionPointerForDelegate``1(``0)" /> methods to marshal delegates in both directions.
+          </para>
           <para
             >The <see cref="M:System.Runtime.InteropServices.Marshal.GetDelegateForFunctionPointer``1(System.IntPtr)" /> method has the following restrictions:</para
           >
@@ -2446,15 +2438,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The unmanaged function pointer to convert. </param
-        >
+          />The unmanaged function pointer to convert.
+        </param>
         <typeparam name="TDelegate">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the delegate to return. </typeparam
-        >
+          />The type of the delegate to return.
+        </typeparam>
       </Docs>
     </Member>
     <Member MemberName="GetEndComSlot">
@@ -2654,8 +2646,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A pointer to the IErrorInfo interface that provides more information about the error. You can specify IntPtr(0) to use the current IErrorInfo interface, or IntPtr(-1) to ignore the current IErrorInfo interface and construct the exception just from the error code. </param
-        >
+          />A pointer to the IErrorInfo interface that provides more information about the error. You can specify IntPtr(0) to use the current IErrorInfo interface, or IntPtr(-1) to ignore the current IErrorInfo interface and construct the exception just from the error code.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetExceptionPointers">
@@ -3472,8 +3464,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A pointer to the IUnknown interface. </param
-        >
+          />A pointer to the IUnknown interface.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetObjectForNativeVariant">
@@ -3555,8 +3547,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="M:System.Runtime.InteropServices.Marshal.GetObjectForNativeVariant``1(System.IntPtr)" /> returns a managed object of type <paramref name="T" /> that corresponds to a raw pointer to an unmanaged VARIANT type. The interop marshaler performs the identical transformation when exposing a VARIANT type to managed code. </para
-          >
+            <see cref="M:System.Runtime.InteropServices.Marshal.GetObjectForNativeVariant``1(System.IntPtr)" /> returns a managed object of type <paramref name="T" /> that corresponds to a raw pointer to an unmanaged VARIANT type. The interop marshaler performs the identical transformation when exposing a VARIANT type to managed code.
+          </para>
           <para>
             <see cref="M:System.Runtime.InteropServices.Marshal.GetObjectForNativeVariant``1(System.IntPtr)" /> provides the opposite functionality of <see cref="M:System.Runtime.InteropServices.Marshal.GetNativeVariantForObject``1(``0,System.IntPtr)" />.</para
           >
@@ -3569,23 +3561,23 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An object of the specified type that corresponds to the <paramref name="pSrcNativeVariant" /> parameter. </para
-          >
+            >An object of the specified type that corresponds to the <paramref name="pSrcNativeVariant" /> parameter.
+          </para>
         </returns>
         <param name="pSrcNativeVariant">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A pointer to a COM VARIANT. </param
-        >
+          />A pointer to a COM VARIANT.
+        </param>
         <typeparam name="T">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type to which to convert the COM VARIANT. </typeparam
-        >
+          />The type to which to convert the COM VARIANT.
+        </typeparam>
       </Docs>
     </Member>
     <Member MemberName="GetObjectsForNativeVariants">
@@ -3623,8 +3615,8 @@
           <para
             >Converts an array of COM <see cref="http://go.microsoft.com/fwlink/?LinkId=148670"
               >VARIANTs</see
-            > to an array of objects. </para
-          >
+            > to an array of objects.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3685,30 +3677,30 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <paramref name="T" /> objects that corresponds to <paramref name="aSrcNativeVariant" />. </para
-          >
+            >An array of <paramref name="T" /> objects that corresponds to <paramref name="aSrcNativeVariant" />.
+          </para>
         </returns>
         <param name="aSrcNativeVariant">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A pointer to the first element of an array of COM VARIANTs. </param
-        >
+          />A pointer to the first element of an array of COM VARIANTs.
+        </param>
         <param name="cVars">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The count of COM VARIANTs in <paramref name="aSrcNativeVariant" />. </param
-        >
+          />The count of COM VARIANTs in <paramref name="aSrcNativeVariant" />.
+        </param>
         <typeparam name="T">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the array to return. </typeparam
-        >
+          />The type of the array to return.
+        </typeparam>
       </Docs>
     </Member>
     <Member MemberName="GetStartComSlot">
@@ -3928,8 +3920,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The ITypeInfo interface to marshal. </param
-        >
+          />The ITypeInfo interface to marshal.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetTypeInfoName">
@@ -4033,8 +4025,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that represents an ITypeInfo pointer. </param
-        >
+          />An object that represents an ITypeInfo pointer.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetTypeLibGuid">
@@ -4140,8 +4132,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type library whose LIBID is to be retrieved. </param
-        >
+          />The type library whose LIBID is to be retrieved.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetTypeLibGuidForAssembly">
@@ -4774,23 +4766,23 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The offset, in bytes, for the <paramref name="fieldName" /> parameter within the specified class that is declared by platform invoke. </para
-          >
+            >The offset, in bytes, for the <paramref name="fieldName" /> parameter within the specified class that is declared by platform invoke.
+          </para>
         </returns>
         <param name="fieldName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the field in the <paramref name="T" /> type. </param
-        >
+          />The name of the field in the <paramref name="T" /> type.
+        </param>
         <typeparam name="T">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A managed value type or formatted reference type. You must apply the <see cref="T:System.Runtime.InteropServices.StructLayoutAttribute" /> attribute to the class. </typeparam
-        >
+          />A managed value type or formatted reference type. You must apply the <see cref="T:System.Runtime.InteropServices.StructLayoutAttribute" /> attribute to the class.
+        </typeparam>
       </Docs>
     </Member>
     <Member MemberName="Prelink">
@@ -5397,8 +5389,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="M:System.Runtime.InteropServices.Marshal.PtrToStructure``1(System.IntPtr)" /> is often necessary in COM interop and platform invoke when structure parameters are represented as <see cref="T:System.IntPtr" /> values. You can pass a value type to this method overload. </para
-          >
+            <see cref="M:System.Runtime.InteropServices.Marshal.PtrToStructure``1(System.IntPtr)" /> is often necessary in COM interop and platform invoke when structure parameters are represented as <see cref="T:System.IntPtr" /> values. You can pass a value type to this method overload.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -5408,23 +5400,23 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A managed object that contains the data that the <paramref name="ptr" /> parameter points to. </para
-          >
+            >A managed object that contains the data that the <paramref name="ptr" /> parameter points to.
+          </para>
         </returns>
         <param name="ptr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A pointer to an unmanaged block of memory. </param
-        >
+          />A pointer to an unmanaged block of memory.
+        </param>
         <typeparam name="T">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the object to which the data is to be copied. This must be a formatted class or a structure. </typeparam
-        >
+          />The type of the object to which the data is to be copied. This must be a formatted class or a structure.
+        </typeparam>
       </Docs>
     </Member>
     <Member MemberName="PtrToStructure&lt;T&gt;">
@@ -6363,8 +6355,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="M:System.Runtime.InteropServices.Marshal.ReAllocHGlobal(System.IntPtr,System.IntPtr)" /> is one of two memory reallocation API methods in the <see cref="T:System.Runtime.InteropServices.Marshal" /> class. (<see cref="M:System.Runtime.InteropServices.Marshal.ReAllocCoTaskMem(System.IntPtr,System.Int32)" /> is the other.) </para
-          >
+            <see cref="M:System.Runtime.InteropServices.Marshal.ReAllocHGlobal(System.IntPtr,System.IntPtr)" /> is one of two memory reallocation API methods in the <see cref="T:System.Runtime.InteropServices.Marshal" /> class. (<see cref="M:System.Runtime.InteropServices.Marshal.ReAllocCoTaskMem(System.IntPtr,System.Int32)" /> is the other.)
+          </para>
           <para
             >This method exposes the Win32 <see cref="http://go.microsoft.com/fwlink/?LinkId=148780"
               >GlobalReAlloc</see
@@ -6973,8 +6965,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>You can use this method when you do not have a structure. The layout must be sequential or explicit.</para>
           <para
-            >The size returned is the size of the unmanaged type. The unmanaged and managed sizes of an object can differ. For character types, the size is affected by the <see cref="T:System.Runtime.InteropServices.CharSet" /> value applied to that class. </para
-          >
+            >The size returned is the size of the unmanaged type. The unmanaged and managed sizes of an object can differ. For character types, the size is affected by the <see cref="T:System.Runtime.InteropServices.CharSet" /> value applied to that class.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -6984,16 +6976,16 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The size, in bytes, of the type that is specified by the <paramref name="T" /> generic type parameter. </para
-          >
+            >The size, in bytes, of the type that is specified by the <paramref name="T" /> generic type parameter.
+          </para>
         </returns>
         <typeparam name="T">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type whose size is to be returned. </typeparam
-        >
+          />The type whose size is to be returned.
+        </typeparam>
       </Docs>
     </Member>
     <Member MemberName="SizeOf&lt;T&gt;">
@@ -7389,40 +7381,40 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref name="structure" /> is a value type, it can be boxed or unboxed. If it is boxed, it is unboxed before copying. </para
-          >
+            >If <paramref name="structure" /> is a value type, it can be boxed or unboxed. If it is boxed, it is unboxed before copying.
+          </para>
           <para
-            >A formatted class is a reference type whose layout is specified by the <see cref="T:System.Runtime.InteropServices.StructLayoutAttribute" /> attribute, as either <see cref="F:System.Runtime.InteropServices.LayoutKind.Explicit" /> or <see cref="F:System.Runtime.InteropServices.LayoutKind.Sequential" />. </para
-          >
+            >A formatted class is a reference type whose layout is specified by the <see cref="T:System.Runtime.InteropServices.StructLayoutAttribute" /> attribute, as either <see cref="F:System.Runtime.InteropServices.LayoutKind.Explicit" /> or <see cref="F:System.Runtime.InteropServices.LayoutKind.Sequential" />.
+          </para>
           <para>
-            <see cref="M:System.Runtime.InteropServices.Marshal.StructureToPtr(System.Object,System.IntPtr,System.Boolean)" /> copies the contents of <paramref name="structure" /> to the pre-allocated block of memory that the <paramref name="ptr" /> parameter points to. If <paramref name="structure" /> contains reference types that marshal to COM interface pointers (interfaces, classes without layout, and <see cref="T:System.Object" />), the managed objects are kept alive with reference counts. All other reference types (for example, strings and arrays) are marshaled to copies. To release these managed or unmanaged objects, you must call the <see cref="M:System.Runtime.InteropServices.Marshal.DestroyStructure(System.IntPtr,System.Type)" /> method before you free the memory block. </para
-          >
+            <see cref="M:System.Runtime.InteropServices.Marshal.StructureToPtr(System.Object,System.IntPtr,System.Boolean)" /> copies the contents of <paramref name="structure" /> to the pre-allocated block of memory that the <paramref name="ptr" /> parameter points to. If <paramref name="structure" /> contains reference types that marshal to COM interface pointers (interfaces, classes without layout, and <see cref="T:System.Object" />), the managed objects are kept alive with reference counts. All other reference types (for example, strings and arrays) are marshaled to copies. To release these managed or unmanaged objects, you must call the <see cref="M:System.Runtime.InteropServices.Marshal.DestroyStructure(System.IntPtr,System.Type)" /> method before you free the memory block.
+          </para>
           <para
-            >If you use the <see cref="M:System.Runtime.InteropServices.Marshal.StructureToPtr(System.Object,System.IntPtr,System.Boolean)" /> method to copy a different instance to the memory block at a later time, specify true for <paramref name="fDeleteOld" /> to remove reference counts for reference types in the previous instance. Otherwise, the managed reference types and unmanaged copies are effectively leaked. </para
-          >
+            >If you use the <see cref="M:System.Runtime.InteropServices.Marshal.StructureToPtr(System.Object,System.IntPtr,System.Boolean)" /> method to copy a different instance to the memory block at a later time, specify true for <paramref name="fDeleteOld" /> to remove reference counts for reference types in the previous instance. Otherwise, the managed reference types and unmanaged copies are effectively leaked.
+          </para>
           <para
             >The overall pattern for using <see cref="M:System.Runtime.InteropServices.Marshal.StructureToPtr(System.Object,System.IntPtr,System.Boolean)" /> is as follows:</para
           >
           <list type="ordered">
             <item>
               <para
-                >On the first call to the <see cref="M:System.Runtime.InteropServices.Marshal.StructureToPtr(System.Object,System.IntPtr,System.Boolean)" /> method after a memory block has been allocated, <paramref name="fDeleteOld" /> must be false, because there are no contents to clear. </para
-              >
+                >On the first call to the <see cref="M:System.Runtime.InteropServices.Marshal.StructureToPtr(System.Object,System.IntPtr,System.Boolean)" /> method after a memory block has been allocated, <paramref name="fDeleteOld" /> must be false, because there are no contents to clear.
+              </para>
               <block subset="none" type="note">
                 <para
-                  >Specify true for <paramref name="fDeleteOld" /> only if the block contains valid data. </para
-                >
+                  >Specify true for <paramref name="fDeleteOld" /> only if the block contains valid data.
+                </para>
               </block>
             </item>
             <item>
               <para
-                >If you copy a different instance to the memory block, and the object contains reference types, <paramref name="fDeleteOld" /> must be true to free reference types in the old contents. </para
-              >
+                >If you copy a different instance to the memory block, and the object contains reference types, <paramref name="fDeleteOld" /> must be true to free reference types in the old contents.
+              </para>
             </item>
             <item>
               <para
-                >If the object contains reference types, you must call the <see cref="M:System.Runtime.InteropServices.Marshal.DestroyStructure(System.IntPtr,System.Type)" /> method before you free the memory block. </para
-              >
+                >If the object contains reference types, you must call the <see cref="M:System.Runtime.InteropServices.Marshal.DestroyStructure(System.IntPtr,System.Type)" /> method before you free the memory block.
+              </para>
             </item>
           </list>
           <block subset="none" type="note">
@@ -7442,8 +7434,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A managed object that holds the data to be marshaled. This object must be a structure or an instance of a formatted class. </param
-        >
+          />A managed object that holds the data to be marshaled. This object must be a structure or an instance of a formatted class.
+        </param>
         <param name="ptr">
           <attribution
             license="cc4"
@@ -8213,8 +8205,8 @@ public static void ThrowExceptionForHR(int errorCode,IntPtr errorInfo)</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An additional byte offset, which is added to the <paramref name="ptr" /> parameter before writing. </param
-        >
+          />An additional byte offset, which is added to the <paramref name="ptr" /> parameter before writing.
+        </param>
         <param name="val">
           <attribution license="cc4" from="Microsoft" modified="false" />The value to write.</param
         >

@@ -38,8 +38,8 @@
       >
       <block subset="none" type="note">
         <para
-          >In the dnprdnext, the methods made available in the code generator and code compiler are available directly from the code provider. You do not need to call <see cref="M:System.CodeDom.Compiler.CodeDomProvider.CreateGenerator" /> or <see cref="M:System.CodeDom.Compiler.CodeDomProvider.CreateCompiler" /> to access the methods, and those methods are marked as obsolete. This applies to preexisting as well as new code provider implementations. </para
-        >
+          >In the dnprdnext, the methods made available in the code generator and code compiler are available directly from the code provider. You do not need to call <see cref="M:System.CodeDom.Compiler.CodeDomProvider.CreateGenerator" /> or <see cref="M:System.CodeDom.Compiler.CodeDomProvider.CreateCompiler" /> to access the methods, and those methods are marked as obsolete. This applies to preexisting as well as new code provider implementations.
+        </para>
       </block>
       <para
         >A <see cref="T:System.CodeDom.Compiler.CodeDomProvider" /> implementation typically provides code generation and/or code compilation interfaces for generating code and managing compilation for a single programming language. Several languages are supported by <see cref="T:System.CodeDom.Compiler.CodeDomProvider" /> implementations that ship with the winsdklong. These languages include C#, Visual Basic, C++, and JScript. Developers or compiler vendors can implement the <see cref="T:System.CodeDom.Compiler.ICodeGenerator" /> and <see cref="T:System.CodeDom.Compiler.ICodeCompiler" /> interfaces and provide a <see cref="T:System.CodeDom.Compiler.CodeDomProvider" /> that extends CodeDOM support to other programming languages.</para
@@ -72,8 +72,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides a base class for <see cref="T:System.CodeDom.Compiler.CodeDomProvider" /> implementations. This class is abstract. </para
-      >
+        >Provides a base class for <see cref="T:System.CodeDom.Compiler.CodeDomProvider" /> implementations. This class is abstract.
+      </para>
     </summary>
   </Docs>
   <Members>
@@ -96,8 +96,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.Compiler.CodeDomProvider" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.Compiler.CodeDomProvider" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -216,15 +216,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.Compiler.CompilerParameters" /> object that indicates the settings for the compilation. </param
-        >
+          />A <see cref="T:System.CodeDom.Compiler.CompilerParameters" /> object that indicates the settings for the compilation.
+        </param>
         <param name="fileNames">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of the names of the files to compile. </param
-        >
+          />An array of the names of the files to compile.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CompileAssemblyFromSource">
@@ -278,15 +278,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.Compiler.CompilerParameters" /> object that indicates the compiler settings for this compilation. </param
-        >
+          />A <see cref="T:System.CodeDom.Compiler.CompilerParameters" /> object that indicates the compiler settings for this compilation.
+        </param>
         <param name="sources">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of source code strings to compile. </param
-        >
+          />An array of source code strings to compile.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateCompiler">
@@ -327,8 +327,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.CodeDom.Compiler.ICodeCompiler" /> that can be used for compilation of <see cref="N:System.CodeDom" /> based source code representations. </para
-          >
+            >An <see cref="T:System.CodeDom.Compiler.ICodeCompiler" /> that can be used for compilation of <see cref="N:System.CodeDom" /> based source code representations.
+          </para>
         </returns>
       </Docs>
     </Member>
@@ -474,8 +474,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.TextWriter" /> to use to output. </param
-        >
+          />A <see cref="T:System.IO.TextWriter" /> to use to output.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateGenerator">
@@ -524,8 +524,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file name to output to. </param
-        >
+          />The file name to output to.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateParser">
@@ -596,12 +596,12 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >This method is most commonly used to create an instance of a code provider in an application that may optionally use one of several providers. <see cref="M:System.CodeDom.Compiler.CodeDomProvider.CreateProvider(System.String)" /> allows you to specify at run time the code provider you wish to instantiate. If you know at design time which code provider is to be used, you should create an instance of that code provider rather than use the <see cref="M:System.CodeDom.Compiler.CodeDomProvider.CreateProvider(System.String)" /> method. </para
-            >
+              >This method is most commonly used to create an instance of a code provider in an application that may optionally use one of several providers. <see cref="M:System.CodeDom.Compiler.CodeDomProvider.CreateProvider(System.String)" /> allows you to specify at run time the code provider you wish to instantiate. If you know at design time which code provider is to be used, you should create an instance of that code provider rather than use the <see cref="M:System.CodeDom.Compiler.CodeDomProvider.CreateProvider(System.String)" /> method.
+            </para>
           </block>
           <para
-            >The <see cref="M:System.CodeDom.Compiler.CodeDomProvider.CreateProvider(System.String)" /> method returns a <see cref="T:System.CodeDom.Compiler.CodeDomProvider" /> instance for a specific language name; it is similar to calling the <see cref="M:System.Activator.CreateInstance(System.Type,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" /> method with the language provider type. Use <see cref="M:System.CodeDom.Compiler.CodeDomProvider.CreateProvider(System.String)" /> when you want to dynamically find a configured provider implementation for a language name. </para
-          >
+            >The <see cref="M:System.CodeDom.Compiler.CodeDomProvider.CreateProvider(System.String)" /> method returns a <see cref="T:System.CodeDom.Compiler.CodeDomProvider" /> instance for a specific language name; it is similar to calling the <see cref="M:System.Activator.CreateInstance(System.Type,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" /> method with the language provider type. Use <see cref="M:System.CodeDom.Compiler.CodeDomProvider.CreateProvider(System.String)" /> when you want to dynamically find a configured provider implementation for a language name.
+          </para>
           <para
             >If more than one provider implementation is configured for the language name, <see cref="M:System.CodeDom.Compiler.CodeDomProvider.CreateProvider(System.String)" /> returns a provider instance for the last matching configuration element.</para
           >
@@ -614,8 +614,8 @@
           <para
             >The <see cref="M:System.CodeDom.Compiler.CodeDomProvider.GetAllCompilerInfo" /> method can be used to determine all <see cref="T:System.CodeDom.Compiler.CodeDomProvider" /> implementations on a computer, including additional implementations provided by developers and compiler vendors that are identified in the <format type="text/html">
               <a href="672a68f7-e69f-4479-ac30-e980085ec4fe">&lt;system.codedom&gt;</a>
-            </format> in the machine configuration file (Machine.config). </para
-          >
+            </format> in the machine configuration file (Machine.config).
+          </para>
           <para
             >The <see cref="M:System.CodeDom.Compiler.CodeDomProvider.CreateProvider(System.String)" /> method returns an instance of a <see cref="T:System.CodeDom.Compiler.CodeDomProvider" /> implementation for a specific language.</para
           >
@@ -632,8 +632,8 @@
           <para>A CodeDOM provider that is implemented for the specified language name.</para>
         </returns>
         <param name="language">
-          <attribution license="cc4" from="Microsoft" modified="false" />The language name. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The language name.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateProvider">
@@ -669,15 +669,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >This method is most commonly used to create an instance of a code provider in an application that may optionally use one of several providers. <see cref="M:System.CodeDom.Compiler.CodeDomProvider.CreateProvider(System.String,System.Collections.Generic.IDictionary{System.String,System.String})" /> enables you to specify at run time the version of the code provider you want to instantiate. If you know at design time which code provider is to be used, you should create an instance of that code provider instead of using the <see cref="M:System.CodeDom.Compiler.CodeDomProvider.CreateProvider(System.String,System.Collections.Generic.IDictionary{System.String,System.String})" /> method. </para
-            >
+              >This method is most commonly used to create an instance of a code provider in an application that may optionally use one of several providers. <see cref="M:System.CodeDom.Compiler.CodeDomProvider.CreateProvider(System.String,System.Collections.Generic.IDictionary{System.String,System.String})" /> enables you to specify at run time the version of the code provider you want to instantiate. If you know at design time which code provider is to be used, you should create an instance of that code provider instead of using the <see cref="M:System.CodeDom.Compiler.CodeDomProvider.CreateProvider(System.String,System.Collections.Generic.IDictionary{System.String,System.String})" /> method.
+            </para>
           </block>
           <para
             >Use <see cref="M:System.CodeDom.Compiler.CodeDomProvider.CreateProvider(System.String,System.Collections.Generic.IDictionary{System.String,System.String})" /> when you want to dynamically find a configured provider implementation for a specific language and options. Language names are case-insensitive. For information about supported provider options, see the specific CodeDOM provider documentation.</para
           >
           <para
-            >For information about validating a provider and calling a provider if more than one provider implementation is configured for the language name, see the Remarks section of the <see cref="M:System.CodeDom.Compiler.CodeDomProvider.CreateProvider(System.String)" /> method.  </para
-          >
+            >For information about validating a provider and calling a provider if more than one provider implementation is configured for the language name, see the Remarks section of the <see cref="M:System.CodeDom.Compiler.CodeDomProvider.CreateProvider(System.String)" /> method.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -814,22 +814,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeCompileUnit" /> for which to generate code. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeCompileUnit" /> for which to generate code.
+        </param>
         <param name="writer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.TextWriter" /> to which the output code is sent. </param
-        >
+          />The <see cref="T:System.IO.TextWriter" /> to which the output code is sent.
+        </param>
         <param name="options">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.Compiler.CodeGeneratorOptions" /> that indicates the options to use for generating code. </param
-        >
+          />A <see cref="T:System.CodeDom.Compiler.CodeGeneratorOptions" /> that indicates the options to use for generating code.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GenerateCodeFromExpression">
@@ -872,22 +872,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeExpression" /> object that indicates the expression for which to generate code. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeExpression" /> object that indicates the expression for which to generate code.
+        </param>
         <param name="writer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.TextWriter" /> to which output code is sent. </param
-        >
+          />The <see cref="T:System.IO.TextWriter" /> to which output code is sent.
+        </param>
         <param name="options">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.Compiler.CodeGeneratorOptions" /> that indicates the options to use for generating code. </param
-        >
+          />A <see cref="T:System.CodeDom.Compiler.CodeGeneratorOptions" /> that indicates the options to use for generating code.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GenerateCodeFromMember">
@@ -928,22 +928,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeTypeMember" /> object that indicates the member for which to generate code. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeTypeMember" /> object that indicates the member for which to generate code.
+        </param>
         <param name="writer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.TextWriter" /> to which output code is sent. </param
-        >
+          />The <see cref="T:System.IO.TextWriter" /> to which output code is sent.
+        </param>
         <param name="options">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.Compiler.CodeGeneratorOptions" /> that indicates the options to use for generating code. </param
-        >
+          />A <see cref="T:System.CodeDom.Compiler.CodeGeneratorOptions" /> that indicates the options to use for generating code.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GenerateCodeFromNamespace">
@@ -986,22 +986,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeNamespace" /> object that indicates the namespace for which to generate code. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeNamespace" /> object that indicates the namespace for which to generate code.
+        </param>
         <param name="writer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.TextWriter" /> to which output code is sent. </param
-        >
+          />The <see cref="T:System.IO.TextWriter" /> to which output code is sent.
+        </param>
         <param name="options">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.Compiler.CodeGeneratorOptions" /> that indicates the options to use for generating code. </param
-        >
+          />A <see cref="T:System.CodeDom.Compiler.CodeGeneratorOptions" /> that indicates the options to use for generating code.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GenerateCodeFromStatement">
@@ -1044,22 +1044,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeStatement" /> containing the CodeDOM elements for which to generate code. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeStatement" /> containing the CodeDOM elements for which to generate code.
+        </param>
         <param name="writer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.TextWriter" /> to which output code is sent. </param
-        >
+          />The <see cref="T:System.IO.TextWriter" /> to which output code is sent.
+        </param>
         <param name="options">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.Compiler.CodeGeneratorOptions" /> that indicates the options to use for generating code. </param
-        >
+          />A <see cref="T:System.CodeDom.Compiler.CodeGeneratorOptions" /> that indicates the options to use for generating code.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GenerateCodeFromType">
@@ -1102,22 +1102,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeTypeDeclaration" /> object that indicates the type for which to generate code. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeTypeDeclaration" /> object that indicates the type for which to generate code.
+        </param>
         <param name="writer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.TextWriter" /> to which output code is sent. </param
-        >
+          />The <see cref="T:System.IO.TextWriter" /> to which output code is sent.
+        </param>
         <param name="options">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.Compiler.CodeGeneratorOptions" /> that indicates the options to use for generating code. </param
-        >
+          />A <see cref="T:System.CodeDom.Compiler.CodeGeneratorOptions" /> that indicates the options to use for generating code.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetAllCompilerInfo">
@@ -1147,14 +1147,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="M:System.CodeDom.Compiler.CodeDomProvider.GetAllCompilerInfo" /> method to enumerate the language provider settings on a computer. </para
-          >
+            >Use the <see cref="M:System.CodeDom.Compiler.CodeDomProvider.GetAllCompilerInfo" /> method to enumerate the language provider settings on a computer.
+          </para>
           <block subset="none" type="note">
             <para
               > In the dnprdnext, the default language providers supplied by the .NET Framework are not specified in the <format type="text/html">
                 <a href="672a68f7-e69f-4479-ac30-e980085ec4fe">&lt;system.codedom&gt;</a>
-              </format> compiler configuration section and cannot be removed, so this method returns information about the default providers and any specified in the configuration file. </para
-            >
+              </format> compiler configuration section and cannot be removed, so this method returns information about the default providers and any specified in the configuration file.
+            </para>
           </block>
         </remarks>
         <summary>
@@ -1223,8 +1223,8 @@
           >
         </returns>
         <param name="language">
-          <attribution license="cc4" from="Microsoft" modified="false" />A language name. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A language name.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetConverter">
@@ -1270,8 +1270,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of object to retrieve a type converter for. </param
-        >
+          />The type of object to retrieve a type converter for.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetLanguageFromExtension">
@@ -1328,12 +1328,8 @@
           >
         </returns>
         <param name="extension">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />A file name extension. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A file name extension.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetTypeOutput">
@@ -1434,12 +1430,8 @@
           >
         </returns>
         <param name="extension">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />A file name extension. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A file name extension.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsDefinedLanguage">
@@ -1490,8 +1482,8 @@
           >
         </returns>
         <param name="language">
-          <attribution license="cc4" from="Microsoft" modified="false" />The language name. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The language name.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsValidIdentifier">
@@ -1618,8 +1610,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.TextReader" /> object that is used to read the code to be parsed. </param
-        >
+          />A <see cref="T:System.IO.TextReader" /> object that is used to read the code to be parsed.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Supports">

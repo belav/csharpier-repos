@@ -27,8 +27,8 @@
       >
       <para>Text pattern matching provides a way for Web services to retrieve HTML content without converting it to XML documents that must be bound to XML Schema definitions. Regular expression search targets are specified in a Web Services Description Language (WSDL) document via match XML elements within text elements. Both elements belong to the namespace http://microsoft.com/wsdl/mime/textMatching/.</para>
       <para
-        >When match elements are specified in a WSDL document, the Wsdl.exe tool applies <see cref="T:System.Web.Services.Protocols.MatchAttribute" /> attributes to the corresponding Web methods in the client proxy class that is generated. Also, <see cref="T:System.Web.Services.Protocols.TextReturnReader" /> is used in place of <see cref="T:System.Web.Services.Protocols.XmlReturnReader" />, the default class for deserializing Web method return values according to the .NET Framework's implementations of Web services via the HTTP-GET and HTTP-POST operations. </para
-      >
+        >When match elements are specified in a WSDL document, the Wsdl.exe tool applies <see cref="T:System.Web.Services.Protocols.MatchAttribute" /> attributes to the corresponding Web methods in the client proxy class that is generated. Also, <see cref="T:System.Web.Services.Protocols.TextReturnReader" /> is used in place of <see cref="T:System.Web.Services.Protocols.XmlReturnReader" />, the default class for deserializing Web method return values according to the .NET Framework's implementations of Web services via the HTTP-GET and HTTP-POST operations.
+      </para>
       <para
         >You typically will not need to use the <see cref="T:System.Web.Services.Protocols.TextReturnReader" /> class directly.</para
       >
@@ -49,8 +49,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.Services.Protocols.TextReturnReader" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Protocols.TextReturnReader" /> class.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -74,8 +74,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An initializer is an object passed as a parameter to the <see cref="M:System.Web.Services.Protocols.TextReturnReader.Initialize(System.Object)" /> method. For the <see cref="T:System.Web.Services.Protocols.TextReturnReader" /> class, the initializer is a <see cref="T:System.Web.Services.Protocols.PatternMatcher" /> object based on the return type of the Web method. </para
-          >
+            >An initializer is an object passed as a parameter to the <see cref="M:System.Web.Services.Protocols.TextReturnReader.Initialize(System.Object)" /> method. For the <see cref="T:System.Web.Services.Protocols.TextReturnReader" /> class, the initializer is a <see cref="T:System.Web.Services.Protocols.PatternMatcher" /> object based on the return type of the Web method.
+          </para>
           <para
             >The <see cref="M:System.Web.Services.Protocols.TextReturnReader.GetInitializer(System.Web.Services.Protocols.LogicalMethodInfo)" /> method is invoked during service initialization. Later, at the time a response is processed, the initializer object is passed to the <see cref="M:System.Web.Services.Protocols.TextReturnReader.Initialize(System.Object)" /> method of another <see cref="T:System.Web.Services.Protocols.TextReturnReader" /> instance. The other instance performs the actual reading.</para
           >

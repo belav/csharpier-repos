@@ -70,8 +70,8 @@
         <item>
           <term>
             <para
-              >Another thread calls the <see cref="M:System.Threading.Thread.Start" /> method on the new thread, and the call returns. </para
-            >
+              >Another thread calls the <see cref="M:System.Threading.Thread.Start" /> method on the new thread, and the call returns.
+            </para>
             <para
               >The <see cref="M:System.Threading.Thread.Start" /> method does not return until the new thread has started running. There is no way to know at what point the new thread will start running, during the call to <see cref="M:System.Threading.Thread.Start" />.</para
             >
@@ -93,8 +93,8 @@
         <item>
           <term>
             <para
-              >The thread calls <see cref="M:System.Threading.Monitor.Wait(System.Object,System.Int32,System.Boolean)" /> on another object. </para
-            >
+              >The thread calls <see cref="M:System.Threading.Monitor.Wait(System.Object,System.Int32,System.Boolean)" /> on another object.
+            </para>
           </term>
           <description>
             <para>WaitSleepJoin </para>
@@ -103,8 +103,8 @@
         <item>
           <term>
             <para
-              >The thread calls <see cref="M:System.Threading.Thread.Join" /> on another thread. </para
-            >
+              >The thread calls <see cref="M:System.Threading.Thread.Join" /> on another thread.
+            </para>
           </term>
           <description>
             <para>WaitSleepJoin </para>
@@ -129,8 +129,8 @@
         <item>
           <term>
             <para
-              >The thread responds to a <see cref="M:System.Threading.Thread.Suspend" /> request. </para
-            >
+              >The thread responds to a <see cref="M:System.Threading.Thread.Suspend" /> request.
+            </para>
           </term>
           <description>
             <para>Suspended </para>
@@ -157,8 +157,8 @@
         <item>
           <term>
             <para
-              >The thread responds to a <see cref="M:System.Threading.Thread.Abort(System.Object)" /> request. </para
-            >
+              >The thread responds to a <see cref="M:System.Threading.Thread.Abort(System.Object)" /> request.
+            </para>
           </term>
           <description>
             <para>Stopped </para>
@@ -475,8 +475,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The thread is blocked. This could be the result of calling <see cref="M:System.Threading.Thread.Sleep(System.Int32)" /> or <see cref="M:System.Threading.Thread.Join" />, of requesting a lock — for example, by calling <see cref="M:System.Threading.Monitor.Enter(System.Object)" /> or <see cref="M:System.Threading.Monitor.Wait(System.Object,System.Int32,System.Boolean)" /> — or of waiting on a thread synchronization object such as <see cref="T:System.Threading.ManualResetEvent" />. </para
-          >
+            >The thread is blocked. This could be the result of calling <see cref="M:System.Threading.Thread.Sleep(System.Int32)" /> or <see cref="M:System.Threading.Thread.Join" />, of requesting a lock — for example, by calling <see cref="M:System.Threading.Monitor.Enter(System.Object)" /> or <see cref="M:System.Threading.Monitor.Wait(System.Object,System.Int32,System.Boolean)" /> — or of waiting on a thread synchronization object such as <see cref="T:System.Threading.ManualResetEvent" />.
+          </para>
         </summary>
       </Docs>
       <Excluded>0</Excluded>

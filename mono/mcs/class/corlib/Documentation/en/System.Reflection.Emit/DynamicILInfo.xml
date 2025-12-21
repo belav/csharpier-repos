@@ -23,8 +23,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Reflection.Emit.DynamicILInfo" /> class allows developers to write their own MSIL generators instead of using <see cref="T:System.Reflection.Emit.ILGenerator" />. </para
-      >
+        >The <see cref="T:System.Reflection.Emit.DynamicILInfo" /> class allows developers to write their own MSIL generators instead of using <see cref="T:System.Reflection.Emit.ILGenerator" />.
+      </para>
       <para
         >To create instances of other types, call methods, and so on, the MSIL you generate must include tokens for those entities. The <see cref="T:System.Reflection.Emit.DynamicILInfo" /> class provides several overloads of the <see cref="Overload:System.Reflection.Emit.DynamicILInfo.GetTokenFor" /> method, which return tokens valid in the scope of the current <see cref="T:System.Reflection.Emit.DynamicILInfo" />. For example, if you need to call an overload of the <see cref="Overload:System.Console.WriteLine" /> method, you can obtain a <see cref="T:System.RuntimeMethodHandle" /> for that overload and pass it to the <see cref="Overload:System.Reflection.Emit.DynamicILInfo.GetTokenFor" /> method to obtain a token to embed in your MSIL.</para
       >
@@ -41,8 +41,8 @@
       >
       <block subset="none" type="note">
         <para
-          >Do not use <see cref="T:System.Reflection.Emit.DynamicILInfo" /> to generate code that creates a delegate to another dynamic method by calling the delegate constructor directly. Instead, use the <see cref="M:System.Reflection.Emit.DynamicMethod.CreateDelegate(System.Type)" /> method to create the delegate. A delegate that is created with the delegate constructor does not have a reference to the target dynamic method. The dynamic method might be reclaimed by garbage collection while the delegate is still in use. </para
-        >
+          >Do not use <see cref="T:System.Reflection.Emit.DynamicILInfo" /> to generate code that creates a delegate to another dynamic method by calling the delegate constructor directly. Instead, use the <see cref="M:System.Reflection.Emit.DynamicMethod.CreateDelegate(System.Type)" /> method to create the delegate. A delegate that is created with the delegate constructor does not have a reference to the target dynamic method. The dynamic method might be reclaimed by garbage collection while the delegate is still in use.
+        </para>
       </block>
     </remarks>
     <summary>
@@ -213,12 +213,8 @@
           >
         </returns>
         <param name="field">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The field to be accessed. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The field to be accessed.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetTokenFor">
@@ -706,8 +702,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The local variable signature describes the layout of a method's local variables. To simplify construction of the local variable signature, use the static (Shared in Visual Basic) <see cref="M:System.Reflection.Emit.SignatureHelper.GetLocalVarSigHelper(System.Reflection.Module)" /> method to get a <see cref="T:System.Reflection.Emit.SignatureHelper" /> for the local signature. </para
-          >
+            >The local variable signature describes the layout of a method's local variables. To simplify construction of the local variable signature, use the static (Shared in Visual Basic) <see cref="M:System.Reflection.Emit.SignatureHelper.GetLocalVarSigHelper(System.Reflection.Module)" /> method to get a <see cref="T:System.Reflection.Emit.SignatureHelper" /> for the local signature.
+          </para>
           <para
             >For information on local variable signatures, see the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics". The documentation is available online; see <see
               cref="http://go.microsoft.com/fwlink/?LinkID=99212"
@@ -760,8 +756,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The local variable signature describes the layout of a method's local variables. To simplify construction of the local variable signature, use the static (Shared in Visual Basic) <see cref="M:System.Reflection.Emit.SignatureHelper.GetLocalVarSigHelper(System.Reflection.Module)" /> method to get a <see cref="T:System.Reflection.Emit.SignatureHelper" /> for the local signature. </para
-          >
+            >The local variable signature describes the layout of a method's local variables. To simplify construction of the local variable signature, use the static (Shared in Visual Basic) <see cref="M:System.Reflection.Emit.SignatureHelper.GetLocalVarSigHelper(System.Reflection.Module)" /> method to get a <see cref="T:System.Reflection.Emit.SignatureHelper" /> for the local signature.
+          </para>
           <para
             >For information on local variable signatures, see the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics". The documentation is available online; see <see
               cref="http://go.microsoft.com/fwlink/?LinkID=99212"

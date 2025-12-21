@@ -61,8 +61,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The exception that was just thrown by managed code, and that will be examined by the <see cref="E:System.AppDomain.UnhandledException" /> event. </param
-        >
+          />The exception that was just thrown by managed code, and that will be examined by the <see cref="E:System.AppDomain.UnhandledException" /> event.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Exception">
@@ -83,8 +83,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The method that handles the <see cref="E:System.AppDomain.UnhandledException" /> event can examine the exception and perform appropriate logging or other notification services. </para
-          >
+            >The method that handles the <see cref="E:System.AppDomain.UnhandledException" /> event can examine the exception and perform appropriate logging or other notification services.
+          </para>
           <para
             >For example code, see <see cref="T:System.Runtime.ExceptionServices.FirstChanceExceptionEventArgs" />.</para
           >

@@ -114,8 +114,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array of values that are used to create the new row. </param
-        >
+          />The array of values that are used to create the new row.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -175,8 +175,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value of the primary key to test for. </param
-        >
+          />The value of the primary key to test for.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -217,8 +217,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of primary key values to test for. </param
-        >
+          />An array of primary key values to test for.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -351,8 +351,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The primary key value of the <see cref="T:System.Data.DataRow" /> to find. </param
-        >
+          />The primary key value of the <see cref="T:System.Data.DataRow" /> to find.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -390,8 +390,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of primary key values to find. The type of the array is Object. </param
-        >
+          />An array of primary key values to find. The type of the array is Object.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -486,15 +486,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Data.DataRow" /> to add. </param
-        >
+          />The <see cref="T:System.Data.DataRow" /> to add.
+        </param>
         <param name="pos">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The (zero-based) location in the collection where you want to add the DataRow. </param
-        >
+          />The (zero-based) location in the collection where you want to add the DataRow.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -576,8 +576,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Data.DataRow" /> to remove. </param
-        >
+          />The <see cref="T:System.Data.DataRow" /> to remove.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -612,8 +612,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the row to remove. </param
-        >
+          />The index of the row to remove.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

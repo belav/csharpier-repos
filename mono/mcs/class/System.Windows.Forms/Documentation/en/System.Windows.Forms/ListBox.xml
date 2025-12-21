@@ -64,8 +64,8 @@
           </term>
           <description>
             <para
-              >Contains all items contained in the <see cref="T:System.Windows.Forms.ListBox" /> control. </para
-            >
+              >Contains all items contained in the <see cref="T:System.Windows.Forms.ListBox" /> control.
+            </para>
           </description>
         </item>
         <item>
@@ -76,8 +76,8 @@
           </term>
           <description>
             <para
-              >Contains a collection of the selected items which is a subset of the items contained in the <see cref="T:System.Windows.Forms.ListBox" /> control. </para
-            >
+              >Contains a collection of the selected items which is a subset of the items contained in the <see cref="T:System.Windows.Forms.ListBox" /> control.
+            </para>
           </description>
         </item>
         <item>
@@ -88,8 +88,8 @@
           </term>
           <description>
             <para
-              >Contains a collection of the selected indexes, which is a subset of the indexes of the <see cref="T:System.Windows.Forms.ListBox.ObjectCollection" />. These indexes specify items that are selected. </para
-            >
+              >Contains a collection of the selected indexes, which is a subset of the indexes of the <see cref="T:System.Windows.Forms.ListBox.ObjectCollection" />. These indexes specify items that are selected.
+            </para>
           </description>
         </item>
       </list>
@@ -872,12 +872,8 @@
           <para>The zero-based index of the first item found; returns ListBox.NoMatches if no match is found.</para>
         </returns>
         <param name="s">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The text to search for. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The text to search for.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -917,19 +913,15 @@
           <para>The zero-based index of the first item found; returns ListBox.NoMatches if no match is found.</para>
         </returns>
         <param name="s">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The text to search for. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The text to search for.
+        </param>
         <param name="startIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index of the item before the first item to be searched. Set to negative one (-1) to search from the beginning of the control. </param
-        >
+          />The zero-based index of the item before the first item to be searched. Set to negative one (-1) to search from the beginning of the control.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -963,12 +955,8 @@
           <para>The zero-based index of the first item found; returns ListBox.NoMatches if no match is found.</para>
         </returns>
         <param name="s">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The text to search for. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The text to search for.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1011,19 +999,15 @@
           <para>The zero-based index of the first item found; returns ListBox.NoMatches if no match is found.</para>
         </returns>
         <param name="s">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The text to search for. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The text to search for.
+        </param>
         <param name="startIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index of the item before the first item to be searched. Set to negative one (-1) to search from the beginning of the control. </param
-        >
+          />The zero-based index of the item before the first item to be searched. Set to negative one (-1) to search from the beginning of the control.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1105,8 +1089,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index of the item to return the height for. </param
-        >
+          />The zero-based index of the item to return the height for.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1149,8 +1133,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index of item whose bounding rectangle you want to return. </param
-        >
+          />The zero-based index of item whose bounding rectangle you want to return.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1252,8 +1236,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index of the item that determines whether it is selected. </param
-        >
+          />The zero-based index of the item that determines whether it is selected.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1355,8 +1339,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Drawing.Point" /> object containing the coordinates used to obtain the item index. </param
-        >
+          />A <see cref="T:System.Drawing.Point" /> object containing the coordinates used to obtain the item index.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1393,15 +1377,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The x-coordinate of the location to search. </param
-        >
+          />The x-coordinate of the location to search.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The y-coordinate of the location to search. </param
-        >
+          />The y-coordinate of the location to search.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1430,11 +1414,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When this property is set to true, the control automatically resizes to ensure that an item is not partially displayed. If you want to maintain the original size of the <see cref="T:System.Windows.Forms.ListBox" /> based on the space requirements of your form, set this property to false. </para
-          >
+            >When this property is set to true, the control automatically resizes to ensure that an item is not partially displayed. If you want to maintain the original size of the <see cref="T:System.Windows.Forms.ListBox" /> based on the space requirements of your form, set this property to false.
+          </para>
           <para
-            >By default, the <see cref="T:System.Windows.Forms.ListBox" /> and the <see cref="T:System.Windows.Forms.CheckedListBox" /> sizes are such that they show only whole items. If you want the <see cref="T:System.Windows.Forms.ListBox" /> or <see cref="T:System.Windows.Forms.CheckedListBox" /> to completely fill a docked area, set <see cref="P:System.Windows.Forms.ListBox.IntegralHeight" /> to false. This causes the control to completely fill the area, but the last item is not fully displayed. </para
-          >
+            >By default, the <see cref="T:System.Windows.Forms.ListBox" /> and the <see cref="T:System.Windows.Forms.CheckedListBox" /> sizes are such that they show only whole items. If you want the <see cref="T:System.Windows.Forms.ListBox" /> or <see cref="T:System.Windows.Forms.CheckedListBox" /> to completely fill a docked area, set <see cref="P:System.Windows.Forms.ListBox.IntegralHeight" /> to false. This causes the control to completely fill the area, but the last item is not fully displayed.
+          </para>
           <para
             >If the <see cref="T:System.Windows.Forms.ListBox" /> does not contain any items, this property has no effect.</para
           >
@@ -1794,8 +1778,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.DrawItemEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.DrawItemEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1925,8 +1909,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.MeasureItemEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.MeasureItemEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2116,8 +2100,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2469,8 +2453,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see cref="P:System.Windows.Forms.ListBox.SelectedIndex" /> property or the <see cref="P:System.Windows.Forms.ListBox.SelectedIndices" /> collection has changed. </para
-          >
+            >Occurs when the <see cref="P:System.Windows.Forms.ListBox.SelectedIndex" /> property or the <see cref="P:System.Windows.Forms.ListBox.SelectedIndices" /> collection has changed.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2652,11 +2636,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The height of the <see cref="T:System.Windows.Forms.ListBox" /> control increases and decreases by a multiple of the <see cref="P:System.Windows.Forms.ListBox.ItemHeight" /> property. If height is a number that is not a multiple of <see cref="P:System.Windows.Forms.ListBox.ItemHeight" />, the height of the <see cref="T:System.Windows.Forms.ListBox" /> will change by the largest multiple that is less than height.  </para
-          >
+            >The height of the <see cref="T:System.Windows.Forms.ListBox" /> control increases and decreases by a multiple of the <see cref="P:System.Windows.Forms.ListBox.ItemHeight" /> property. If height is a number that is not a multiple of <see cref="P:System.Windows.Forms.ListBox.ItemHeight" />, the height of the <see cref="T:System.Windows.Forms.ListBox" /> will change by the largest multiple that is less than height.
+          </para>
           <para
-            >Typically, the parameters that correspond to the bounds not included in the specified parameter are passed in with their current values. For example, the <paramref name="height" />, <paramref name="width" />, or the <paramref name="x" /> or <paramref name="y" /> properties of the <see cref="P:System.Windows.Forms.Control.Location" /> property can be passed in with a reference to the current instance of the control. However, all values passed in are honored and applied to the control. </para
-          >
+            >Typically, the parameters that correspond to the bounds not included in the specified parameter are passed in with their current values. For example, the <paramref name="height" />, <paramref name="width" />, or the <paramref name="x" /> or <paramref name="y" /> properties of the <see cref="P:System.Windows.Forms.Control.Location" /> property can be passed in with a reference to the current instance of the control. However, all values passed in are honored and applied to the control.
+          </para>
           <para
             >The <paramref name="specified" /> parameter represents the elements of the controls <see cref="P:System.Windows.Forms.Control.Bounds" /> changed by your application. For example, if you change the <see cref="P:System.Windows.Forms.Control.Size" /> of the control, the <paramref name="specified" /> parameter value is <see cref="F:System.Windows.Forms.BoundsSpecified.Size" />. However, if the <see cref="P:System.Windows.Forms.Control.Size" /> is adjusted in response to the <see cref="P:System.Windows.Forms.Control.Dock" /> property being set, the <paramref name="specified" /> parameter value is <see cref="F:System.Windows.Forms.BoundsSpecified.None" />.</para
           >
@@ -2768,8 +2752,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of objects to insert into the control. </param
-        >
+          />An array of objects to insert into the control.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2804,15 +2788,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index of the item in a <see cref="T:System.Windows.Forms.ListBox" /> to select or clear the selection for. </param
-        >
+          />The zero-based index of the item in a <see cref="T:System.Windows.Forms.ListBox" /> to select or clear the selection for.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to select the specified item; otherwise, false. </param
-        >
+          />true to select the specified item; otherwise, false.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2862,8 +2846,8 @@
             >Use the <see cref="P:System.Windows.Forms.ListBox.Sorted" /> property to automatically sort strings alphabetically in a <see cref="T:System.Windows.Forms.ListBox" />. As items are added to a sorted <see cref="T:System.Windows.Forms.ListBox" />, the items are moved to the appropriate location in the sorted list. When adding items to a <see cref="T:System.Windows.Forms.ListBox" />, it is more efficient to sort the items first and then add new items.</para
           >
           <para
-            >A <see cref="T:System.Windows.Forms.ListBox" /> with its <see cref="P:System.Windows.Forms.ListBox.Sorted" /> set to true should not be bound to data using the <see cref="P:System.Windows.Forms.ListControl.DataSource" /> property. To display sorted data in a bound <see cref="T:System.Windows.Forms.ListBox" />, you should bind to a data source that supports sorting and have the data source provide the sorting. </para
-          >
+            >A <see cref="T:System.Windows.Forms.ListBox" /> with its <see cref="P:System.Windows.Forms.ListBox.Sorted" /> set to true should not be bound to data using the <see cref="P:System.Windows.Forms.ListControl.DataSource" /> property. To display sorted data in a bound <see cref="T:System.Windows.Forms.ListBox" />, you should bind to a data source that supports sorting and have the data source provide the sorting.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

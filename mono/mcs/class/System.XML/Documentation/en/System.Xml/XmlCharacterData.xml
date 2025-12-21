@@ -101,8 +101,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to insert into the existing string. </param
-        >
+          />The string to insert into the existing string.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Data">
@@ -168,15 +168,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position within the string to start deleting. </param
-        >
+          />The position within the string to start deleting.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters to delete. </param
-        >
+          />The number of characters to delete.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="InnerText">
@@ -239,15 +239,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position within the string to insert the supplied string data. </param
-        >
+          />The position within the string to insert the supplied string data.
+        </param>
         <param name="strData">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string data that is to be inserted into the existing string. </param
-        >
+          />The string data that is to be inserted into the existing string.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Length">
@@ -308,22 +308,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position within the string to start replacing. </param
-        >
+          />The position within the string to start replacing.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters to replace. </param
-        >
+          />The number of characters to replace.
+        </param>
         <param name="strData">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new data that replaces the old string data. </param
-        >
+          />The new data that replaces the old string data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Substring">
@@ -363,15 +363,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position within the string to start retrieving. An offset of zero indicates the starting point is at the start of the data. </param
-        >
+          />The position within the string to start retrieving. An offset of zero indicates the starting point is at the start of the data.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters to retrieve. </param
-        >
+          />The number of characters to retrieve.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Value">

@@ -101,8 +101,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The node to add. All the contents of the node to be added are moved into the specified location. </param
-        >
+          />The node to add. All the contents of the node to be added are moved into the specified location.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Attributes">
@@ -152,8 +152,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A networked XML document is comprised of chunks of data aggregated using various W3C standard inclusion mechanisms and therefore contains nodes that come from different places. The BaseURI tells you where these nodes came from.</para>
           <para
-            >The value of this property varies depending on the node type. For example, Document nodes return the location of the <see cref="T:System.Xml.XmlDocument" /> object. Nodes which are child nodes of external EntityReference nodes return the location of the entity itself. For example, consider the following XML document: </para
-          >
+            >The value of this property varies depending on the node type. For example, Document nodes return the location of the <see cref="T:System.Xml.XmlDocument" /> object. Nodes which are child nodes of external EntityReference nodes return the location of the entity itself. For example, consider the following XML document:
+          </para>
           <code> &lt;!DOCTYPE item [
  &lt;!ENTITY xyz SYSTEM "a/b.xml"&gt;
  ]&gt;
@@ -307,8 +307,8 @@
               <description>
                 <para>http://localhost/mydata.xml </para>
                 <para
-                  >The <see cref="P:System.Xml.XmlDocumentType.SystemId" /> or <see cref="P:System.Xml.XmlDocumentType.PublicId" /> properties can be used to identify where the DTD file was loaded from. </para
-                >
+                  >The <see cref="P:System.Xml.XmlDocumentType.SystemId" /> or <see cref="P:System.Xml.XmlDocumentType.PublicId" /> properties can be used to identify where the DTD file was loaded from.
+                </para>
               </description>
             </item>
             <item>
@@ -807,8 +807,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to recursively clone the subtree under the specified node; false to clone only the node itself. </param
-        >
+          />true to recursively clone the subtree under the specified node; false to clone only the node itself.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateNavigator">
@@ -953,8 +953,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The prefix whose namespace URI you want to find. </param
-        >
+          />The prefix whose namespace URI you want to find.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetPrefixOfNamespace">
@@ -996,8 +996,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI whose prefix you want to find. </param
-        >
+          />The namespace URI whose prefix you want to find.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="HasChildNodes">
@@ -1130,19 +1130,15 @@
           <para>The node being inserted.</para>
         </returns>
         <param name="newChild">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The XmlNode to insert. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The XmlNode to insert.
+        </param>
         <param name="refChild">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XmlNode that is the reference node. The <paramref name="newNode" /> is placed after the <paramref name="refNode" />. </param
-        >
+          />The XmlNode that is the reference node. The <paramref name="newNode" /> is placed after the <paramref name="refNode" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="InsertBefore">
@@ -1190,19 +1186,15 @@
           <para>The node being inserted.</para>
         </returns>
         <param name="newChild">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The XmlNode to insert. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The XmlNode to insert.
+        </param>
         <param name="refChild">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XmlNode that is the reference node. The <paramref name="newChild" /> is placed before this node. </param
-        >
+          />The XmlNode that is the reference node. The <paramref name="newChild" /> is placed before this node.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsReadOnly">
@@ -1732,12 +1724,8 @@
           <para>The node removed.</para>
         </returns>
         <param name="oldChild">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The node being removed. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The node being removed.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ReplaceChild">
@@ -1787,15 +1775,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new node to put in the child list. </param
-        >
+          />The new node to put in the child list.
+        </param>
         <param name="oldChild">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The node being replaced in the list. </param
-        >
+          />The node being replaced in the list.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SchemaInfo">
@@ -1893,12 +1881,8 @@
           >
         </returns>
         <param name="xpath">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The XPath expression. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The XPath expression.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SelectNodes">
@@ -1977,19 +1961,15 @@
           >
         </returns>
         <param name="xpath">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The XPath expression. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The XPath expression.
+        </param>
         <param name="nsmgr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlNamespaceManager" /> to use for resolving namespaces for prefixes in the XPath expression. </param
-        >
+          />An <see cref="T:System.Xml.XmlNamespaceManager" /> to use for resolving namespaces for prefixes in the XPath expression.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SelectSingleNode">
@@ -2050,12 +2030,8 @@
           <para>The first XmlNode that matches the XPath query or null if no matching node is found. The XmlNode should not be expected to be connected "live" to the XML document. That is, changes that appear in the XML document may not appear in the XmlNode, and vice versa.</para>
         </returns>
         <param name="xpath">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The XPath expression. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The XPath expression.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SelectSingleNode">
@@ -2129,19 +2105,15 @@
           <para>The first XmlNode that matches the XPath query or null if no matching node is found. The XmlNode should not be expected to be connected "live" to the XML document. That is, changes that appear in the XML document may not appear in the XmlNode, and vice versa.</para>
         </returns>
         <param name="xpath">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The XPath expression. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The XPath expression.
+        </param>
         <param name="nsmgr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlNamespaceManager" /> to use for resolving namespaces for prefixes in the XPath expression. </param
-        >
+          />An <see cref="T:System.Xml.XmlNamespaceManager" /> to use for resolving namespaces for prefixes in the XPath expression.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Supports">
@@ -2214,15 +2186,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The package name of the feature to test. This name is not case-sensitive. </param
-        >
+          />The package name of the feature to test. This name is not case-sensitive.
+        </param>
         <param name="version">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The version number of the package name to test. If the version is not specified (null), supporting any version of the feature causes the method to return true. </param
-        >
+          />The version number of the package name to test. If the version is not specified (null), supporting any version of the feature causes the method to return true.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IEnumerable.GetEnumerator">
@@ -2359,8 +2331,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XmlWriter to which you want to save. </param
-        >
+          />The XmlWriter to which you want to save.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteTo">
@@ -2402,8 +2374,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XmlWriter to which you want to save. </param
-        >
+          />The XmlWriter to which you want to save.
+        </param>
       </Docs>
     </Member>
   </Members>

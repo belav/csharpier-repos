@@ -26,8 +26,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Using the static methods and properties of the <see cref="T:System.Configuration.ConfigurationSettings" /> type is the recommended method for reading configuration information at runtime for versions 1.0 and 1.1 applications. </para
-      >
+        >Using the static methods and properties of the <see cref="T:System.Configuration.ConfigurationSettings" /> type is the recommended method for reading configuration information at runtime for versions 1.0 and 1.1 applications.
+      </para>
       <block subset="none" type="note">
         <para
           >The <see cref="T:System.Configuration.ConfigurationSettings" /> class provides backward compatibility only. For new applications you should use the <see cref="T:System.Configuration.ConfigurationManager" /> class or <see cref="T:System.Web.Configuration.WebConfigurationManager" /> class instead. To use these two classes, you must add a reference in your project or application to the System.Configuration namespace.</para

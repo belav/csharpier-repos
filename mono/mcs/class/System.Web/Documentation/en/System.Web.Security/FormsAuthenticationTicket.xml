@@ -200,29 +200,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The version number of the ticket. </param
-        >
+          />The version number of the ticket.
+        </param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The user name associated with the ticket. </param
-        >
+          />The user name associated with the ticket.
+        </param>
         <param name="issueDate">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local date and time at which the ticket was issued. </param
-        >
+          />The local date and time at which the ticket was issued.
+        </param>
         <param name="expiration">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local date and time at which the ticket expires. </param
-        >
+          />The local date and time at which the ticket expires.
+        </param>
         <param name="isPersistent">
           <attribution
             license="cc4"
@@ -235,15 +235,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The user-specific data to be stored with the ticket. </param
-        >
+          />The user-specific data to be stored with the ticket.
+        </param>
         <param name="cookiePath">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The path for the ticket when stored in a cookie. </param
-        >
+          />The path for the ticket when stored in a cookie.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

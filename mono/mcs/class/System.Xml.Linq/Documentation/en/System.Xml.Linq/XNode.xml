@@ -519,18 +519,18 @@
             </item>
             <item>
               <para
-                >Two <see cref="T:System.Xml.Linq.XNode" /> objects of different types are never equal. </para
-              >
+                >Two <see cref="T:System.Xml.Linq.XNode" /> objects of different types are never equal.
+              </para>
             </item>
             <item>
               <para
-                >Two <see cref="T:System.Xml.Linq.XText" /> nodes are equal if they contain the same text. </para
-              >
+                >Two <see cref="T:System.Xml.Linq.XText" /> nodes are equal if they contain the same text.
+              </para>
             </item>
             <item>
               <para
-                >Two <see cref="T:System.Xml.Linq.XElement" /> nodes are equal if they have the same tag name, the same set of attributes with the same values, and (ignoring comments and processing instructions) contain two equal length sequences of equal content nodes. </para
-              >
+                >Two <see cref="T:System.Xml.Linq.XElement" /> nodes are equal if they have the same tag name, the same set of attributes with the same values, and (ignoring comments and processing instructions) contain two equal length sequences of equal content nodes.
+              </para>
             </item>
             <item>
               <para
@@ -539,13 +539,13 @@
             </item>
             <item>
               <para
-                >Two <see cref="T:System.Xml.Linq.XComment" /> nodes are equal if they contain the same comment text. </para
-              >
+                >Two <see cref="T:System.Xml.Linq.XComment" /> nodes are equal if they contain the same comment text.
+              </para>
             </item>
             <item>
               <para
-                >Two <see cref="T:System.Xml.Linq.XProcessingInstruction" /> nodes are equal if they have the same target and data. </para
-              >
+                >Two <see cref="T:System.Xml.Linq.XProcessingInstruction" /> nodes are equal if they have the same target and data.
+              </para>
             </item>
             <item>
               <para

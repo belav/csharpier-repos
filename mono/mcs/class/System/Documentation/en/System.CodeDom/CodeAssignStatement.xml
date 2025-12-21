@@ -96,19 +96,11 @@
           >
         </summary>
         <param name="left">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The variable to assign to. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The variable to assign to.
+        </param>
         <param name="right">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The value to assign. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to assign.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Left">

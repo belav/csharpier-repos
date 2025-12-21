@@ -140,8 +140,8 @@
               </term>
               <description>
                 <para>
-                  <paramref name="string1" /> is greater than <paramref name="string2" />. </para
-                >
+                  <paramref name="string1" /> is greater than <paramref name="string2" />.
+                </para>
               </description>
             </item>
           </list>
@@ -151,15 +151,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first string to compare. </param
-        >
+          />The first string to compare.
+        </param>
         <param name="string2">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second string to compare. </param
-        >
+          />The second string to compare.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Compare">
@@ -239,8 +239,8 @@
               </term>
               <description>
                 <para>
-                  <paramref name="string1" /> is greater than <paramref name="string2" />. </para
-                >
+                  <paramref name="string1" /> is greater than <paramref name="string2" />.
+                </para>
               </description>
             </item>
           </list>
@@ -250,15 +250,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first string to compare. </param
-        >
+          />The first string to compare.
+        </param>
         <param name="string2">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second string to compare. </param
-        >
+          />The second string to compare.
+        </param>
         <param name="options">
           <attribution
             license="cc4"
@@ -336,8 +336,8 @@
               </term>
               <description>
                 <para
-                  >The specified section of <paramref name="string1" /> is less than the specified section of <paramref name="string2" />. </para
-                >
+                  >The specified section of <paramref name="string1" /> is less than the specified section of <paramref name="string2" />.
+                </para>
               </description>
             </item>
             <item>
@@ -346,8 +346,8 @@
               </term>
               <description>
                 <para
-                  >The specified section of <paramref name="string1" /> is greater than the specified section of <paramref name="string2" />. </para
-                >
+                  >The specified section of <paramref name="string1" /> is greater than the specified section of <paramref name="string2" />.
+                </para>
               </description>
             </item>
           </list>
@@ -357,29 +357,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first string to compare. </param
-        >
+          />The first string to compare.
+        </param>
         <param name="offset1">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index of the character in <paramref name="string1" /> at which to start comparing. </param
-        >
+          />The zero-based index of the character in <paramref name="string1" /> at which to start comparing.
+        </param>
         <param name="string2">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second string to compare. </param
-        >
+          />The second string to compare.
+        </param>
         <param name="offset2">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index of the character in <paramref name="string2" /> at which to start comparing. </param
-        >
+          />The zero-based index of the character in <paramref name="string2" /> at which to start comparing.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Compare">
@@ -453,8 +453,8 @@
               </term>
               <description>
                 <para
-                  >The specified section of <paramref name="string1" /> is less than the specified section of <paramref name="string2" />. </para
-                >
+                  >The specified section of <paramref name="string1" /> is less than the specified section of <paramref name="string2" />.
+                </para>
               </description>
             </item>
             <item>
@@ -463,8 +463,8 @@
               </term>
               <description>
                 <para
-                  >The specified section of <paramref name="string1" /> is greater than the specified section of <paramref name="string2" />. </para
-                >
+                  >The specified section of <paramref name="string1" /> is greater than the specified section of <paramref name="string2" />.
+                </para>
               </description>
             </item>
           </list>
@@ -474,29 +474,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first string to compare. </param
-        >
+          />The first string to compare.
+        </param>
         <param name="offset1">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index of the character in <paramref name="string1" /> at which to start comparing. </param
-        >
+          />The zero-based index of the character in <paramref name="string1" /> at which to start comparing.
+        </param>
         <param name="string2">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second string to compare. </param
-        >
+          />The second string to compare.
+        </param>
         <param name="offset2">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index of the character in <paramref name="string2" /> at which to start comparing. </param
-        >
+          />The zero-based index of the character in <paramref name="string2" /> at which to start comparing.
+        </param>
         <param name="options">
           <attribution
             license="cc4"
@@ -576,8 +576,8 @@
               </term>
               <description>
                 <para
-                  >The specified section of <paramref name="string1" /> is less than the specified section of <paramref name="string2" />. </para
-                >
+                  >The specified section of <paramref name="string1" /> is less than the specified section of <paramref name="string2" />.
+                </para>
               </description>
             </item>
             <item>
@@ -586,8 +586,8 @@
               </term>
               <description>
                 <para
-                  >The specified section of <paramref name="string1" /> is greater than the specified section of <paramref name="string2" />. </para
-                >
+                  >The specified section of <paramref name="string1" /> is greater than the specified section of <paramref name="string2" />.
+                </para>
               </description>
             </item>
           </list>
@@ -597,43 +597,43 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first string to compare. </param
-        >
+          />The first string to compare.
+        </param>
         <param name="offset1">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index of the character in <paramref name="string1" /> at which to start comparing. </param
-        >
+          />The zero-based index of the character in <paramref name="string1" /> at which to start comparing.
+        </param>
         <param name="length1">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of consecutive characters in <paramref name="string1" /> to compare. </param
-        >
+          />The number of consecutive characters in <paramref name="string1" /> to compare.
+        </param>
         <param name="string2">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second string to compare. </param
-        >
+          />The second string to compare.
+        </param>
         <param name="offset2">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index of the character in <paramref name="string2" /> at which to start comparing. </param
-        >
+          />The zero-based index of the character in <paramref name="string2" /> at which to start comparing.
+        </param>
         <param name="length2">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of consecutive characters in <paramref name="string2" /> to compare. </param
-        >
+          />The number of consecutive characters in <paramref name="string2" /> to compare.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Compare">
@@ -709,8 +709,8 @@
               </term>
               <description>
                 <para
-                  >The specified section of <paramref name="string1" /> is less than the specified section of <paramref name="string2" />. </para
-                >
+                  >The specified section of <paramref name="string1" /> is less than the specified section of <paramref name="string2" />.
+                </para>
               </description>
             </item>
             <item>
@@ -719,8 +719,8 @@
               </term>
               <description>
                 <para
-                  >The specified section of <paramref name="string1" /> is greater than the specified section of <paramref name="string2" />. </para
-                >
+                  >The specified section of <paramref name="string1" /> is greater than the specified section of <paramref name="string2" />.
+                </para>
               </description>
             </item>
           </list>
@@ -730,43 +730,43 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first string to compare. </param
-        >
+          />The first string to compare.
+        </param>
         <param name="offset1">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index of the character in <paramref name="string1" /> at which to start comparing. </param
-        >
+          />The zero-based index of the character in <paramref name="string1" /> at which to start comparing.
+        </param>
         <param name="length1">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of consecutive characters in <paramref name="string1" /> to compare. </param
-        >
+          />The number of consecutive characters in <paramref name="string1" /> to compare.
+        </param>
         <param name="string2">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second string to compare. </param
-        >
+          />The second string to compare.
+        </param>
         <param name="offset2">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index of the character in <paramref name="string2" /> at which to start comparing. </param
-        >
+          />The zero-based index of the character in <paramref name="string2" /> at which to start comparing.
+        </param>
         <param name="length2">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of consecutive characters in <paramref name="string2" /> to compare. </param
-        >
+          />The number of consecutive characters in <paramref name="string2" /> to compare.
+        </param>
         <param name="options">
           <attribution
             license="cc4"
@@ -822,8 +822,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to compare with the current <see cref="T:System.Globalization.CompareInfo" />. </param
-        >
+          />The object to compare with the current <see cref="T:System.Globalization.CompareInfo" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Finalize">
@@ -882,8 +882,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer representing the culture identifier. </param
-        >
+          />An integer representing the culture identifier.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetCompareInfo">
@@ -926,8 +926,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string representing the culture name. </param
-        >
+          />A string representing the culture name.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetCompareInfo">
@@ -980,15 +980,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer representing the culture identifier. </param
-        >
+          />An integer representing the culture identifier.
+        </param>
         <param name="assembly">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Reflection.Assembly" /> that contains the string comparison methods to use. </param
-        >
+          />An <see cref="T:System.Reflection.Assembly" /> that contains the string comparison methods to use.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetCompareInfo">
@@ -1040,15 +1040,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string representing the culture name. </param
-        >
+          />A string representing the culture name.
+        </param>
         <param name="assembly">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Reflection.Assembly" /> that contains the string comparison methods to use. </param
-        >
+          />An <see cref="T:System.Reflection.Assembly" /> that contains the string comparison methods to use.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -1132,8 +1132,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string for which a <see cref="T:System.Globalization.SortKey" /> object is obtained. </param
-        >
+          />The string for which a <see cref="T:System.Globalization.SortKey" /> object is obtained.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetSortKey">
@@ -1182,8 +1182,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string for which a <see cref="T:System.Globalization.SortKey" /> object is obtained. </param
-        >
+          />The string for which a <see cref="T:System.Globalization.SortKey" /> object is obtained.
+        </param>
         <param name="options">
           <attribution
             license="cc4"
@@ -1239,19 +1239,15 @@
           >
         </returns>
         <param name="source">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The string to search. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The string to search.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character to locate within <paramref name="source" />. </param
-        >
+          />The character to locate within <paramref name="source" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IndexOf">
@@ -1300,19 +1296,15 @@
           >
         </returns>
         <param name="source">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The string to search. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The string to search.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to locate within <paramref name="source" />. </param
-        >
+          />The string to locate within <paramref name="source" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IndexOf">
@@ -1367,19 +1359,15 @@
           >
         </returns>
         <param name="source">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The string to search. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The string to search.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character to locate within <paramref name="source" />. </param
-        >
+          />The character to locate within <paramref name="source" />.
+        </param>
         <param name="options">
           <attribution
             license="cc4"
@@ -1438,26 +1426,22 @@
           >
         </returns>
         <param name="source">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The string to search. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The string to search.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character to locate within <paramref name="source" />. </param
-        >
+          />The character to locate within <paramref name="source" />.
+        </param>
         <param name="startIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based starting index of the search. </param
-        >
+          />The zero-based starting index of the search.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IndexOf">
@@ -1512,19 +1496,15 @@
           >
         </returns>
         <param name="source">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The string to search. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The string to search.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to locate within <paramref name="source" />. </param
-        >
+          />The string to locate within <paramref name="source" />.
+        </param>
         <param name="options">
           <attribution
             license="cc4"
@@ -1583,26 +1563,22 @@
           >
         </returns>
         <param name="source">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The string to search. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The string to search.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to locate within <paramref name="source" />. </param
-        >
+          />The string to locate within <paramref name="source" />.
+        </param>
         <param name="startIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based starting index of the search. </param
-        >
+          />The zero-based starting index of the search.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IndexOf">
@@ -1660,26 +1636,22 @@
           >
         </returns>
         <param name="source">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The string to search. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The string to search.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character to locate within <paramref name="source" />. </param
-        >
+          />The character to locate within <paramref name="source" />.
+        </param>
         <param name="startIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based starting index of the search. </param
-        >
+          />The zero-based starting index of the search.
+        </param>
         <param name="options">
           <attribution
             license="cc4"
@@ -1739,33 +1711,29 @@
           >
         </returns>
         <param name="source">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The string to search. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The string to search.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character to locate within <paramref name="source" />. </param
-        >
+          />The character to locate within <paramref name="source" />.
+        </param>
         <param name="startIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based starting index of the search. </param
-        >
+          />The zero-based starting index of the search.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of elements in the section to search. </param
-        >
+          />The number of elements in the section to search.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IndexOf">
@@ -1823,26 +1791,22 @@
           >
         </returns>
         <param name="source">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The string to search. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The string to search.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to locate within <paramref name="source" />. </param
-        >
+          />The string to locate within <paramref name="source" />.
+        </param>
         <param name="startIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based starting index of the search. </param
-        >
+          />The zero-based starting index of the search.
+        </param>
         <param name="options">
           <attribution
             license="cc4"
@@ -1902,33 +1866,29 @@
           >
         </returns>
         <param name="source">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The string to search. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The string to search.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to locate within <paramref name="source" />. </param
-        >
+          />The string to locate within <paramref name="source" />.
+        </param>
         <param name="startIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based starting index of the search. </param
-        >
+          />The zero-based starting index of the search.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of elements in the section to search. </param
-        >
+          />The number of elements in the section to search.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IndexOf">
@@ -1987,33 +1947,29 @@
           >
         </returns>
         <param name="source">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The string to search. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The string to search.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character to locate within <paramref name="source" />. </param
-        >
+          />The character to locate within <paramref name="source" />.
+        </param>
         <param name="startIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based starting index of the search. </param
-        >
+          />The zero-based starting index of the search.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of elements in the section to search. </param
-        >
+          />The number of elements in the section to search.
+        </param>
         <param name="options">
           <attribution
             license="cc4"
@@ -2079,33 +2035,29 @@
           >
         </returns>
         <param name="source">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The string to search. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The string to search.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to locate within <paramref name="source" />. </param
-        >
+          />The string to locate within <paramref name="source" />.
+        </param>
         <param name="startIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based starting index of the search. </param
-        >
+          />The zero-based starting index of the search.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of elements in the section to search. </param
-        >
+          />The number of elements in the section to search.
+        </param>
         <param name="options">
           <attribution
             license="cc4"
@@ -2160,19 +2112,15 @@
           >
         </returns>
         <param name="source">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The string to search in. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The string to search in.
+        </param>
         <param name="prefix">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to compare with the beginning of <paramref name="source" />. </param
-        >
+          />The string to compare with the beginning of <paramref name="source" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsPrefix">
@@ -2226,19 +2174,15 @@
           >
         </returns>
         <param name="source">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The string to search in. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The string to search in.
+        </param>
         <param name="prefix">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to compare with the beginning of <paramref name="source" />. </param
-        >
+          />The string to compare with the beginning of <paramref name="source" />.
+        </param>
         <param name="options">
           <attribution
             license="cc4"
@@ -2385,19 +2329,15 @@
           >
         </returns>
         <param name="source">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The string to search in. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The string to search in.
+        </param>
         <param name="suffix">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to compare with the end of <paramref name="source" />. </param
-        >
+          />The string to compare with the end of <paramref name="source" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsSuffix">
@@ -2451,19 +2391,15 @@
           >
         </returns>
         <param name="source">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The string to search in. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The string to search in.
+        </param>
         <param name="suffix">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to compare with the end of <paramref name="source" />. </param
-        >
+          />The string to compare with the end of <paramref name="source" />.
+        </param>
         <param name="options">
           <attribution
             license="cc4"
@@ -2519,19 +2455,15 @@
           >
         </returns>
         <param name="source">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The string to search. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The string to search.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character to locate within <paramref name="source" />. </param
-        >
+          />The character to locate within <paramref name="source" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="LastIndexOf">
@@ -2580,19 +2512,15 @@
           >
         </returns>
         <param name="source">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The string to search. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The string to search.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to locate within <paramref name="source" />. </param
-        >
+          />The string to locate within <paramref name="source" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="LastIndexOf">
@@ -2647,19 +2575,15 @@
           >
         </returns>
         <param name="source">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The string to search. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The string to search.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character to locate within <paramref name="source" />. </param
-        >
+          />The character to locate within <paramref name="source" />.
+        </param>
         <param name="options">
           <attribution
             license="cc4"
@@ -2718,26 +2642,22 @@
           >
         </returns>
         <param name="source">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The string to search. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The string to search.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character to locate within <paramref name="source" />. </param
-        >
+          />The character to locate within <paramref name="source" />.
+        </param>
         <param name="startIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based starting index of the backward search. </param
-        >
+          />The zero-based starting index of the backward search.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="LastIndexOf">
@@ -2792,19 +2712,15 @@
           >
         </returns>
         <param name="source">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The string to search. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The string to search.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to locate within <paramref name="source" />. </param
-        >
+          />The string to locate within <paramref name="source" />.
+        </param>
         <param name="options">
           <attribution
             license="cc4"
@@ -2863,26 +2779,22 @@
           >
         </returns>
         <param name="source">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The string to search. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The string to search.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to locate within <paramref name="source" />. </param
-        >
+          />The string to locate within <paramref name="source" />.
+        </param>
         <param name="startIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based starting index of the backward search. </param
-        >
+          />The zero-based starting index of the backward search.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="LastIndexOf">
@@ -2940,26 +2852,22 @@
           >
         </returns>
         <param name="source">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The string to search. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The string to search.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character to locate within <paramref name="source" />. </param
-        >
+          />The character to locate within <paramref name="source" />.
+        </param>
         <param name="startIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based starting index of the backward search. </param
-        >
+          />The zero-based starting index of the backward search.
+        </param>
         <param name="options">
           <attribution
             license="cc4"
@@ -3019,33 +2927,29 @@
           >
         </returns>
         <param name="source">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The string to search. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The string to search.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character to locate within <paramref name="source" />. </param
-        >
+          />The character to locate within <paramref name="source" />.
+        </param>
         <param name="startIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based starting index of the backward search. </param
-        >
+          />The zero-based starting index of the backward search.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of elements in the section to search. </param
-        >
+          />The number of elements in the section to search.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="LastIndexOf">
@@ -3103,26 +3007,22 @@
           >
         </returns>
         <param name="source">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The string to search. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The string to search.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to locate within <paramref name="source" />. </param
-        >
+          />The string to locate within <paramref name="source" />.
+        </param>
         <param name="startIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based starting index of the backward search. </param
-        >
+          />The zero-based starting index of the backward search.
+        </param>
         <param name="options">
           <attribution
             license="cc4"
@@ -3182,33 +3082,29 @@
           >
         </returns>
         <param name="source">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The string to search. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The string to search.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to locate within <paramref name="source" />. </param
-        >
+          />The string to locate within <paramref name="source" />.
+        </param>
         <param name="startIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based starting index of the backward search. </param
-        >
+          />The zero-based starting index of the backward search.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of elements in the section to search. </param
-        >
+          />The number of elements in the section to search.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="LastIndexOf">
@@ -3267,33 +3163,29 @@
           >
         </returns>
         <param name="source">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The string to search. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The string to search.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character to locate within <paramref name="source" />. </param
-        >
+          />The character to locate within <paramref name="source" />.
+        </param>
         <param name="startIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based starting index of the backward search. </param
-        >
+          />The zero-based starting index of the backward search.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of elements in the section to search. </param
-        >
+          />The number of elements in the section to search.
+        </param>
         <param name="options">
           <attribution
             license="cc4"
@@ -3355,37 +3247,33 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based index of the last occurrence of <paramref name="value" />, if found, within the section of <paramref name="source" /> that contains the number of elements specified by <paramref name="count" /> and that ends at <paramref name="startIndex" />, using the specified comparison options; otherwise, -1. Returns <paramref name="startIndex" /> if <paramref name="value" /> is an ignorable character. </para
-          >
+            >The zero-based index of the last occurrence of <paramref name="value" />, if found, within the section of <paramref name="source" /> that contains the number of elements specified by <paramref name="count" /> and that ends at <paramref name="startIndex" />, using the specified comparison options; otherwise, -1. Returns <paramref name="startIndex" /> if <paramref name="value" /> is an ignorable character.
+          </para>
         </returns>
         <param name="source">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The string to search. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The string to search.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to locate within <paramref name="source" />. </param
-        >
+          />The string to locate within <paramref name="source" />.
+        </param>
         <param name="startIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based starting index of the backward search. </param
-        >
+          />The zero-based starting index of the backward search.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of elements in the section to search. </param
-        >
+          />The number of elements in the section to search.
+        </param>
         <param name="options">
           <attribution
             license="cc4"
@@ -3487,8 +3375,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that initiated the callback. </param
-        >
+          />The object that initiated the callback.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ToString">
@@ -3511,8 +3399,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overrides the <see cref="M:System.Object.ToString" /> method. It returns a string that consists of the class name and the value of the instance <see cref="P:System.Globalization.CompareInfo.Name" /> property, separated by a hyphen. </para
-          >
+            >This method overrides the <see cref="M:System.Object.ToString" /> method. It returns a string that consists of the class name and the value of the instance <see cref="P:System.Globalization.CompareInfo.Name" /> property, separated by a hyphen.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

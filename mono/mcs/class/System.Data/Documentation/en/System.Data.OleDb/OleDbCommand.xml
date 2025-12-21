@@ -39,8 +39,8 @@
         >When an instance of <see cref="T:System.Data.OleDb.OleDbCommand" /> is created, the read/write properties are set to their initial values. For a list of these values, see the <see cref="T:System.Data.OleDb.OleDbCommand" /> constructor.</para
       >
       <para>
-        <see cref="T:System.Data.OleDb.OleDbCommand" /> features the following methods executing commands at a data source: </para
-      >
+        <see cref="T:System.Data.OleDb.OleDbCommand" /> features the following methods executing commands at a data source:
+      </para>
       <list type="table">
         <listheader>
           <item>
@@ -60,8 +60,8 @@
           </term>
           <description>
             <para
-              >Executes commands that return rows. <see cref="M:System.Data.OleDb.OleDbCommand.ExecuteReader" /> may not have the effect that you want if used to execute commands such as SQL SET statements. </para
-            >
+              >Executes commands that return rows. <see cref="M:System.Data.OleDb.OleDbCommand.ExecuteReader" /> may not have the effect that you want if used to execute commands such as SQL SET statements.
+            </para>
           </description>
         </item>
         <item>
@@ -249,12 +249,8 @@
           >
         </summary>
         <param name="cmdText">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The text of the query. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The text of the query.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -329,8 +325,8 @@
               </term>
               <description>
                 <para
-                  >A new <see cref="T:System.Data.OleDb.OleDbConnection" /> that is the value for the <paramref name="connection" /> parameter. </para
-                >
+                  >A new <see cref="T:System.Data.OleDb.OleDbConnection" /> that is the value for the <paramref name="connection" /> parameter.
+                </para>
               </description>
             </item>
           </list>
@@ -343,19 +339,15 @@
           >
         </summary>
         <param name="cmdText">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The text of the query. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The text of the query.
+        </param>
         <param name="connection">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Data.OleDb.OleDbConnection" /> that represents the connection to a data source. </param
-        >
+          />An <see cref="T:System.Data.OleDb.OleDbConnection" /> that represents the connection to a data source.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -431,8 +423,8 @@
               </term>
               <description>
                 <para
-                  >A new <see cref="T:System.Data.OleDb.OleDbConnection" /> that is the value for the <paramref name="connection" /> parameter. </para
-                >
+                  >A new <see cref="T:System.Data.OleDb.OleDbConnection" /> that is the value for the <paramref name="connection" /> parameter.
+                </para>
               </description>
             </item>
           </list>
@@ -445,26 +437,22 @@
           >
         </summary>
         <param name="cmdText">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The text of the query. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The text of the query.
+        </param>
         <param name="connection">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Data.OleDb.OleDbConnection" /> that represents the connection to a data source. </param
-        >
+          />An <see cref="T:System.Data.OleDb.OleDbConnection" /> that represents the connection to a data source.
+        </param>
         <param name="transaction">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The transaction in which the <see cref="T:System.Data.OleDb.OleDbCommand" /> executes. </param
-        >
+          />The transaction in which the <see cref="T:System.Data.OleDb.OleDbCommand" /> executes.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -542,8 +530,8 @@
             >You cannot set the <see cref="P:System.Data.OleDb.OleDbCommand.Connection" />, <see cref="P:System.Data.OleDb.OleDbCommand.CommandType" />, and <see cref="P:System.Data.OleDb.OleDbCommand.CommandText" /> properties if the current connection is performing an execute or fetch operation.</para
           >
           <para
-            >The OLE DB.NET Provider does not support named parameters for passing parameters to an SQL Statement or a stored procedure called by an <see cref="T:System.Data.OleDb.OleDbCommand" /> when <see cref="P:System.Data.OleDb.OleDbCommand.CommandType" /> is set to Text. In this case, the question mark (?) placeholder must be used. For example: </para
-          >
+            >The OLE DB.NET Provider does not support named parameters for passing parameters to an SQL Statement or a stored procedure called by an <see cref="T:System.Data.OleDb.OleDbCommand" /> when <see cref="P:System.Data.OleDb.OleDbCommand.CommandType" /> is set to Text. In this case, the question mark (?) placeholder must be used. For example:
+          </para>
           <para>SELECT * FROM Customers WHERE CustomerID = ? </para>
           <para
             >Therefore, the order in which <see cref="T:System.Data.OleDb.OleDbParameter" /> objects are added to the <see cref="T:System.Data.OleDb.OleDbParameterCollection" /> must directly correspond to the position of the question mark placeholder for the parameter.</para
@@ -989,8 +977,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Data.CommandBehavior" /> values. </param
-        >
+          />One of the <see cref="T:System.Data.CommandBehavior" /> values.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1011,8 +999,8 @@
             >Use the <see cref="M:System.Data.OleDb.OleDbCommand.ExecuteScalar" /> method to retrieve a single value, for example, an aggregate value, from a data source. This requires less code than using the <see cref="M:System.Data.OleDb.OleDbCommand.ExecuteReader" /> method, and then performing the operations that are required to generate the single value using the data returned by an <see cref="T:System.Data.OleDb.OleDbDataReader" />.</para
           >
           <para
-            >A typical <see cref="M:System.Data.OleDb.OleDbCommand.ExecuteScalar" /> query can be formatted as in the following C# example: </para
-          >
+            >A typical <see cref="M:System.Data.OleDb.OleDbCommand.ExecuteScalar" /> query can be formatted as in the following C# example:
+          </para>
           <code>CommandText = "SELECT COUNT(*) FROM region";
 Int32 count = (int32) ExecuteScalar();</code>
         </remarks>
@@ -1044,8 +1032,8 @@ Int32 count = (int32) ExecuteScalar();</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The OLE DB .NET Provider does not support named parameters for passing parameters to an SQL statement or a stored procedure called by an <see cref="T:System.Data.OleDb.OleDbCommand" /> when <see cref="P:System.Data.OleDb.OleDbCommand.CommandType" /> is set to Text. In this case, the question mark (?) placeholder must be used. For example: </para
-          >
+            >The OLE DB .NET Provider does not support named parameters for passing parameters to an SQL statement or a stored procedure called by an <see cref="T:System.Data.OleDb.OleDbCommand" /> when <see cref="P:System.Data.OleDb.OleDbCommand.CommandType" /> is set to Text. In this case, the question mark (?) placeholder must be used. For example:
+          </para>
           <para>SELECT * FROM Customers WHERE CustomerID = ?</para>
           <para
             >Therefore, the order in which <see cref="T:System.Data.OleDb.OleDbParameter" /> objects are added to the <see cref="T:System.Data.OleDb.OleDbParameterCollection" /> must directly correspond to the position of the question mark placeholder for the parameter in the command text.</para

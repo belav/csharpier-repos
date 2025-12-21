@@ -37,8 +37,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Computes the <see cref="T:System.Security.Cryptography.SHA256" /> hash for the input data using the managed library. </para
-      >
+        >Computes the <see cref="T:System.Security.Cryptography.SHA256" /> hash for the input data using the managed library.
+      </para>
     </summary>
   </Docs>
   <Members>
@@ -64,8 +64,8 @@
             >The hash size for the <see cref="T:System.Security.Cryptography.SHA256Managed" /> algorithm is 256 bits.</para
           >
           <para
-            >Important   If you enable the following security setting either in the Local Security Policy or as part of Group Policy you will get an <see cref="T:System.InvalidOperationException" /> when you attempt to use this constructor: </para
-          >
+            >Important   If you enable the following security setting either in the Local Security Policy or as part of Group Policy you will get an <see cref="T:System.InvalidOperationException" /> when you attempt to use this constructor:
+          </para>
           <para>
             <userInputLocalizable>System cryptography: Use FIPS compliant algorithms for encryption, hashing, and signing</userInputLocalizable>
           </para>
@@ -114,22 +114,22 @@
           >
         </summary>
         <param name="rgb">
-          <attribution license="cc4" from="Microsoft" modified="false" />The input data. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The input data.
+        </param>
         <param name="ibStart">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The offset into the byte array from which to begin using data. </param
-        >
+          />The offset into the byte array from which to begin using data.
+        </param>
         <param name="cbSize">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes in the array to use as data. </param
-        >
+          />The number of bytes in the array to use as data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="HashFinal">

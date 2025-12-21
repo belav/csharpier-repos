@@ -40,15 +40,15 @@
           <a href="05026813-f3bd-4d7c-9e0b-fc588eb3d114"
             >How to: Create a Public/Private Key Pair</a
           >
-        </format>. </para
-      >
+        </format>.
+      </para>
       <para>You can use public-key systems to form digital signatures. Digital signatures are used to help to protect the integrity of data. For example, to use a public-key system to digitally sign a message, the sender first applies a hash function to the message to create a message digest. The sender then encrypts the message digest with the sender's private key to create the sender's personal signature. Upon receiving the message and signature, the receiver decrypts the signature using the sender's public key to recover the message digest and hashes the message using the same hash algorithm that the sender used. If the message digest that the receiver computes matches the message digest received from the sender, the receiver can assume that the message was not altered while in transit. Note that anyone can verify a signature, because the sender's public key is common knowledge. This technique does not retain the secrecy of the message; for the message to be secret, it must also be encrypted. </para>
       <para
-        >The .NET Framework provides the following classes that implement digital signature algorithms: <see cref="T:System.Security.Cryptography.DSACryptoServiceProvider" />, <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" />, <see cref="T:System.Security.Cryptography.ECDsa" /> (base class), and <see cref="T:System.Security.Cryptography.ECDsaCng" />. </para
-      >
+        >The .NET Framework provides the following classes that implement digital signature algorithms: <see cref="T:System.Security.Cryptography.DSACryptoServiceProvider" />, <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" />, <see cref="T:System.Security.Cryptography.ECDsa" /> (base class), and <see cref="T:System.Security.Cryptography.ECDsaCng" />.
+      </para>
       <para
-        >The <see cref="N:System.Security.Cryptography" /> namespace provides concrete classes for <see cref="T:System.Security.Cryptography.RSA" /> and <see cref="T:System.Security.Cryptography.DSA" /> only. </para
-      >
+        >The <see cref="N:System.Security.Cryptography" /> namespace provides concrete classes for <see cref="T:System.Security.Cryptography.RSA" /> and <see cref="T:System.Security.Cryptography.DSA" /> only.
+      </para>
       <para>To learn how to use the RSA algorithm to encrypt and decrypt XML data, and create and verify XML digital signatures, see these articles:</para>
       <list type="bullet">
         <item>
@@ -317,8 +317,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="FromXmlString">
@@ -355,8 +355,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML string to use to reconstruct the <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" /> object. </param
-        >
+          />The XML string to use to reconstruct the <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" /> object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="KeyExchangeAlgorithm">
@@ -585,8 +585,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to include private parameters; otherwise, false. </param
-        >
+          />true to include private parameters; otherwise, false.
+        </param>
       </Docs>
     </Member>
   </Members>

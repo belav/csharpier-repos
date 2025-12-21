@@ -46,8 +46,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see cref="T:System.Runtime.Remoting.Messaging.MethodResponse" /> is generated as a result of a method called on a remote object, and is used to return the results of the method call back to the caller. The message includes a return value and out arguments. </para
-      >
+        >A <see cref="T:System.Runtime.Remoting.Messaging.MethodResponse" /> is generated as a result of a method called on a remote object, and is used to return the results of the method call back to the caller. The message includes a return value and out arguments.
+      </para>
       <para
         >The <see cref="T:System.Runtime.Remoting.Messaging.MethodResponse" /> class is used by the remoting infrastructure of the .NET Framework. You do not need to create an instance of the <see cref="T:System.Runtime.Remoting.Messaging.MethodResponse" /> class directly; instead, use the <see cref="T:System.Runtime.Remoting.Messaging.IMethodReturnMessage" /> interface.</para
       >
@@ -93,8 +93,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Messaging.MethodResponse" /> class from an array of remoting headers and a request message. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Messaging.MethodResponse" /> class from an array of remoting headers and a request message.
+          </para>
         </summary>
         <param name="h1">
           <attribution
@@ -216,8 +216,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies an <see cref="T:System.Collections.IDictionary" /> interface that represents a collection of the remoting message's properties. </para
-          >
+            >Specifies an <see cref="T:System.Collections.IDictionary" /> interface that represents a collection of the remoting message's properties.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -333,8 +333,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Runtime.Remoting.Messaging.MethodResponse.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" /> method is not implemented. </para
-          >
+            >The <see cref="M:System.Runtime.Remoting.Messaging.MethodResponse.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" /> method is not implemented.
+          </para>
         </summary>
         <param name="info">
           <attribution
@@ -523,8 +523,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies an <see cref="T:System.Collections.IDictionary" /> interface that represents a collection of the remoting message's properties. </para
-          >
+            >Specifies an <see cref="T:System.Collections.IDictionary" /> interface that represents a collection of the remoting message's properties.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -555,8 +555,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" /> for the current method call. </para
-          >
+            >Gets the <see cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" /> for the current method call.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -715,8 +715,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see cref="T:System.Collections.IDictionary" /> interface that represents a collection of the remoting message's properties. </para
-          >
+            >Gets an <see cref="T:System.Collections.IDictionary" /> interface that represents a collection of the remoting message's properties.
+          </para>
         </summary>
       </Docs>
     </Member>

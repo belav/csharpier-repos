@@ -419,8 +419,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If true and the control is rendered as a <see cref="T:System.Web.UI.WebControls.Table" />, a "scope" attribute with value "col" is added and a table header cell (&lt;th&gt;) is rendered instead of a table cell (&lt;td&gt;) for the header cells when the <see cref="T:System.Web.UI.WebControls.Table" /> is rendered. This attribute can be used by screen readers. </para
-          >
+            >If true and the control is rendered as a <see cref="T:System.Web.UI.WebControls.Table" />, a "scope" attribute with value "col" is added and a table header cell (&lt;th&gt;) is rendered instead of a table cell (&lt;td&gt;) for the header cells when the <see cref="T:System.Web.UI.WebControls.Table" /> is rendered. This attribute can be used by screen readers.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

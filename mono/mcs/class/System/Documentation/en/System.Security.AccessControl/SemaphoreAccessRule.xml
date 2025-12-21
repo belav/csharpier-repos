@@ -38,8 +38,8 @@
         >To get a list of the rules currently applied to a named semaphore, use the <see cref="M:System.Threading.Semaphore.GetAccessControl" /> method to get a <see cref="T:System.Security.AccessControl.SemaphoreSecurity" /> object, then use its <see cref="M:System.Security.AccessControl.CommonObjectSecurity.GetAccessRules(System.Boolean,System.Boolean,System.Type)" /> method to obtain a collection of <see cref="T:System.Security.AccessControl.SemaphoreAccessRule" /> objects.</para
       >
       <para>
-        <see cref="T:System.Security.AccessControl.SemaphoreAccessRule" /> objects do not map one-to-one with access control entries in the underlying discretionary access control list (DACL). When you get the set of all access rules for a semaphore, the set contains the minimum number of rules currently required to express all the access control entries. </para
-      >
+        <see cref="T:System.Security.AccessControl.SemaphoreAccessRule" /> objects do not map one-to-one with access control entries in the underlying discretionary access control list (DACL). When you get the set of all access rules for a semaphore, the set contains the minimum number of rules currently required to express all the access control entries.
+      </para>
       <block subset="none" type="note">
         <para>The underlying access control entries change as you apply and remove rules. The information in rules is merged if possible, to maintain the smallest number of access control entries. Thus, when you read the current list of rules, it might not look exactly like the list of all the rules you have added.</para>
       </block>
@@ -55,8 +55,8 @@
         >
       </block>
       <para>
-        <see cref="T:System.Security.AccessControl.SemaphoreAccessRule" /> objects are immutable. Security for a semaphore is modified using the methods of the <see cref="T:System.Security.AccessControl.SemaphoreSecurity" /> class to add or remove rules; as you do this, the underlying access control entries are modified. </para
-      >
+        <see cref="T:System.Security.AccessControl.SemaphoreAccessRule" /> objects are immutable. Security for a semaphore is modified using the methods of the <see cref="T:System.Security.AccessControl.SemaphoreSecurity" /> class to add or remove rules; as you do this, the underlying access control entries are modified.
+      </para>
       <block subset="none" type="note">
         <para>Security on synchronization objects is not supported for Windows 98 or Windows Millennium Edition.</para>
       </block>

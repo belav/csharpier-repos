@@ -32,8 +32,8 @@
         </format> configuration element.</para
       >
       <para
-        >This class is used to specify modules registered to authenticate requests made with the <see cref="T:System.Net.WebRequest" /> and <see cref="T:System.Net.WebClient" /> classes. </para
-      >
+        >This class is used to specify modules registered to authenticate requests made with the <see cref="T:System.Net.WebRequest" /> and <see cref="T:System.Net.WebClient" /> classes.
+      </para>
       <para>This class provides programmatic access to information that can be stored in configuration files.</para>
       <para>The .NET Framework version 2.0 provides Web request modules that create requests for resources with the following prefixes:</para>
       <list type="bullet">
@@ -75,8 +75,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.Configuration.WebRequestModuleElement" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.Configuration.WebRequestModuleElement" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -112,8 +112,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.Configuration.WebRequestModuleElement" /> class using the specified URI prefix and type information. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.Configuration.WebRequestModuleElement" /> class using the specified URI prefix and type information.
+          </para>
         </summary>
         <param name="prefix">
           <attribution
@@ -175,8 +175,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> that identifies the class that handles creating requests for resources that use the <paramref name="prefix" /> URI prefix. </param
-        >
+          />A <see cref="T:System.Type" /> that identifies the class that handles creating requests for resources that use the <paramref name="prefix" /> URI prefix.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Prefix">

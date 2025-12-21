@@ -36,8 +36,8 @@
         >The <see cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" /> class allows you to address an XML document using the XPath language.  This class uses an XPath expression to select the XML nodes you want to sign or encrypt while removing all others from either cryptographic operation.</para
       >
       <para
-        >Use the <see cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" /> class to sign or encrypt specific parts of an XML document using an XPath expression.  For information on initializing the <see cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" /> class to the value of an XPath transform string, see the <see cref="M:System.Security.Cryptography.Xml.XmlDsigXPathTransform.LoadInnerXml(System.Xml.XmlNodeList)" /> method. </para
-      >
+        >Use the <see cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" /> class to sign or encrypt specific parts of an XML document using an XPath expression.  For information on initializing the <see cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" /> class to the value of an XPath transform string, see the <see cref="M:System.Security.Cryptography.Xml.XmlDsigXPathTransform.LoadInnerXml(System.Xml.XmlNodeList)" /> method.
+      </para>
       <para
         >The Uniform Resource Identifier (URI) that describes the <see cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" /> class is defined by the <see cref="F:System.Security.Cryptography.Xml.SignedXml.XmlDsigXPathTransformUrl" /> field.</para
       >
@@ -131,8 +131,8 @@
             >The type of the returned object must be <see cref="T:System.Xml.XmlNodeList" />.</para
           >
           <para
-            >Use the <see cref="M:System.Security.Cryptography.Xml.XmlDsigXPathTransform.GetOutput" /> method to retrieve a <see cref="T:System.Xml.XmlNodeList" /> object that contains an XML representation of an XPath transform.  </para
-          >
+            >Use the <see cref="M:System.Security.Cryptography.Xml.XmlDsigXPathTransform.GetOutput" /> method to retrieve a <see cref="T:System.Xml.XmlNodeList" /> object that contains an XML representation of an XPath transform.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -173,8 +173,8 @@
             >The type of the returned object must be <see cref="T:System.Xml.XmlNodeList" />.</para
           >
           <para
-            >Use the <see cref="M:System.Security.Cryptography.Xml.XmlDsigXPathTransform.GetOutput(System.Type)" /> method to retrieve a <see cref="T:System.Xml.XmlNodeList" /> object that contains an XML representation of an XPath transform.  </para
-          >
+            >Use the <see cref="M:System.Security.Cryptography.Xml.XmlDsigXPathTransform.GetOutput(System.Type)" /> method to retrieve a <see cref="T:System.Xml.XmlNodeList" /> object that contains an XML representation of an XPath transform.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -193,8 +193,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the output to return. <see cref="T:System.Xml.XmlNodeList" /> is the only valid type for this parameter. </param
-        >
+          />The type of the output to return. <see cref="T:System.Xml.XmlNodeList" /> is the only valid type for this parameter.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="InputTypes">
@@ -251,11 +251,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="M:System.Security.Cryptography.Xml.XmlDsigXPathTransform.LoadInnerXml(System.Xml.XmlNodeList)" /> method to initialize the <see cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" /> class with an XPath transform.  </para
-          >
+            >Use the <see cref="M:System.Security.Cryptography.Xml.XmlDsigXPathTransform.LoadInnerXml(System.Xml.XmlNodeList)" /> method to initialize the <see cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" /> class with an XPath transform.
+          </para>
           <para
-            >To initialize the <see cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" /> class with an XPath transform, complete the following steps. </para
-          >
+            >To initialize the <see cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" /> class with an XPath transform, complete the following steps.
+          </para>
           <list type="ordered">
             <item>
               <para
@@ -264,8 +264,8 @@
             </item>
             <item>
               <para
-                >Call the <see cref="Overload:System.Xml.XmlNode.SelectNodes" /> method to create an <see cref="T:System.Xml.XmlNodeList" /> object that represents the transform. </para
-              >
+                >Call the <see cref="Overload:System.Xml.XmlNode.SelectNodes" /> method to create an <see cref="T:System.Xml.XmlNodeList" /> object that represents the transform.
+              </para>
             </item>
             <item>
               <para
@@ -285,8 +285,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlNodeList" /> object to load into the current <see cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" /> object. </param
-        >
+          />An <see cref="T:System.Xml.XmlNodeList" /> object to load into the current <see cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" /> object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="LoadInput">
@@ -328,8 +328,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The input to load into the current <see cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" /> object. </param
-        >
+          />The input to load into the current <see cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" /> object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OutputTypes">

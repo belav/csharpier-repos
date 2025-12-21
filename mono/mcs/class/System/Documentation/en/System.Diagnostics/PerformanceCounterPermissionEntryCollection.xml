@@ -75,8 +75,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Diagnostics.PerformanceCounterPermissionEntry" /> object to add. </param
-        >
+          />The <see cref="T:System.Diagnostics.PerformanceCounterPermissionEntry" /> object to add.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddRange">
@@ -111,8 +111,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type <see cref="T:System.Diagnostics.PerformanceCounterPermissionEntry" /> objects that contains the permission entries to add. </param
-        >
+          />An array of type <see cref="T:System.Diagnostics.PerformanceCounterPermissionEntry" /> objects that contains the permission entries to add.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddRange">
@@ -150,8 +150,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Diagnostics.PerformanceCounterPermissionEntryCollection" /> that contains the permission entries to add. </param
-        >
+          />A <see cref="T:System.Diagnostics.PerformanceCounterPermissionEntryCollection" /> that contains the permission entries to add.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Contains">
@@ -194,8 +194,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Diagnostics.PerformanceCounterPermissionEntry" /> object to find. </param
-        >
+          />The <see cref="T:System.Diagnostics.PerformanceCounterPermissionEntry" /> object to find.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CopyTo">
@@ -231,15 +231,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type <see cref="T:System.Diagnostics.PerformanceCounterPermissionEntry" /> that receives this collection's permission entries. </param
-        >
+          />An array of type <see cref="T:System.Diagnostics.PerformanceCounterPermissionEntry" /> that receives this collection's permission entries.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index at which to begin copying the permission entries. </param
-        >
+          />The zero-based index at which to begin copying the permission entries.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IndexOf">
@@ -278,8 +278,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The permission entry for which to search. </param
-        >
+          />The permission entry for which to search.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Insert">
@@ -315,15 +315,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index of the collection at which to insert the permission entry. </param
-        >
+          />The zero-based index of the collection at which to insert the permission entry.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The permission entry to insert into this collection. </param
-        >
+          />The permission entry to insert into this collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Item">
@@ -411,15 +411,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index at which to insert <paramref name="value" />. </param
-        >
+          />The zero-based index at which to insert <paramref name="value" />.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new value of the permission entry at <paramref name="index" />. </param
-        >
+          />The new value of the permission entry at <paramref name="index" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnRemove">
@@ -455,15 +455,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index at which <paramref name="value" /> can be found. </param
-        >
+          />The zero-based index at which <paramref name="value" /> can be found.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The permission entry to remove from <paramref name="index" />. </param
-        >
+          />The permission entry to remove from <paramref name="index" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnSet">
@@ -500,22 +500,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index at which <paramref name="oldValue" /> can be found. </param
-        >
+          />The zero-based index at which <paramref name="oldValue" /> can be found.
+        </param>
         <param name="oldValue">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to replace with <paramref name="newValue" />. </param
-        >
+          />The value to replace with <paramref name="newValue" />.
+        </param>
         <param name="newValue">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new value of the permission entry at <paramref name="index" />. </param
-        >
+          />The new value of the permission entry at <paramref name="index" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Remove">
@@ -550,8 +550,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The permission entry to remove. </param
-        >
+          />The permission entry to remove.
+        </param>
       </Docs>
     </Member>
   </Members>

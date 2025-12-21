@@ -14,8 +14,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Windows.Forms.GroupBoxRenderer" /> class provides a set of static methods that can be used to render a group box control. Rendering a control refers to drawing the user interface of a control. To draw a group box, use one of the <see cref="Overload:System.Windows.Forms.GroupBoxRenderer.DrawGroupBox" /> methods. These methods provide a variety of text drawing options. </para
-      >
+        >The <see cref="T:System.Windows.Forms.GroupBoxRenderer" /> class provides a set of static methods that can be used to render a group box control. Rendering a control refers to drawing the user interface of a control. To draw a group box, use one of the <see cref="Overload:System.Windows.Forms.GroupBoxRenderer.DrawGroupBox" /> methods. These methods provide a variety of text drawing options.
+      </para>
       <para
         >If visual styles are enabled in the operating system and visual styles are applied to the current application, <see cref="Overload:System.Windows.Forms.GroupBoxRenderer.DrawGroupBox" /> will draw the group box with the current visual style. Otherwise, <see cref="Overload:System.Windows.Forms.GroupBoxRenderer.DrawGroupBox" /> will draw the group box with the classic Windows style. This is useful if you are drawing a custom control that should automatically match the current visual style setting of the operating system.</para
       >

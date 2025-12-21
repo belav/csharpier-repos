@@ -64,8 +64,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.ServiceModel.EndpointAddress" /> that represents the address of the peer node within the mesh. </param
-        >
+          />A <see cref="T:System.ServiceModel.EndpointAddress" /> that represents the address of the peer node within the mesh.
+        </param>
         <param name="ipAddresses">
           <attribution
             license="cc4"

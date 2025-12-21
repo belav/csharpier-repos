@@ -30,8 +30,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see cref="T:System.Runtime.Serialization.OnDeserializedAttribute" /> when you need to fix values on a deserialized object after it has been deserialized and before the graph is returned. This attribute can be used instead of the  <see cref="T:System.Runtime.Serialization.IDeserializationCallback" /> interface. </para
-      >
+        >Use the <see cref="T:System.Runtime.Serialization.OnDeserializedAttribute" /> when you need to fix values on a deserialized object after it has been deserialized and before the graph is returned. This attribute can be used instead of the  <see cref="T:System.Runtime.Serialization.IDeserializationCallback" /> interface.
+      </para>
       <para
         >To use the <see cref="T:System.Runtime.Serialization.OnDeserializedAttribute" />, the method must contain a <see cref="T:System.Runtime.Serialization.StreamingContext" /> parameter. The attribute marks the method to be called by the serialization infrastructure and the <see cref="T:System.Runtime.Serialization.StreamingContext" /> provides additional data about the type of serialization taking place.  The usage is shown in the following code:</para
       >
@@ -66,8 +66,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.OnDeserializedAttribute" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.OnDeserializedAttribute" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>

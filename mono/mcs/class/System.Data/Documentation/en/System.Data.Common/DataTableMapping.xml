@@ -91,15 +91,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The case-sensitive source table name from a data source. </param
-        >
+          />The case-sensitive source table name from a data source.
+        </param>
         <param name="dataSetTable">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The table name from a <see cref="T:System.Data.DataSet" /> to map to. </param
-        >
+          />The table name from a <see cref="T:System.Data.DataSet" /> to map to.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -131,22 +131,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The case-sensitive source table name from a data source. </param
-        >
+          />The case-sensitive source table name from a data source.
+        </param>
         <param name="dataSetTable">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The table name from a <see cref="T:System.Data.DataSet" /> to map to. </param
-        >
+          />The table name from a <see cref="T:System.Data.DataSet" /> to map to.
+        </param>
         <param name="columnMappings">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Data.Common.DataColumnMapping" /> objects. </param
-        >
+          />An array of <see cref="T:System.Data.Common.DataColumnMapping" /> objects.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -227,8 +227,8 @@
             >If the <see cref="T:System.Data.Common.DataColumnMapping" /> exists, it is returned.</para
           >
           <para
-            >If the <see cref="T:System.Data.Common.DataColumnMapping" /> does not exist, for a given <see cref="T:System.Data.MissingMappingAction" />, the following actions occur: </para
-          >
+            >If the <see cref="T:System.Data.Common.DataColumnMapping" /> does not exist, for a given <see cref="T:System.Data.MissingMappingAction" />, the following actions occur:
+          </para>
           <list type="table">
             <listheader>
               <item>
@@ -246,8 +246,8 @@
               </term>
               <description>
                 <para
-                  >Creates a <see cref="T:System.Data.Common.DataColumnMapping" /> with the specified source column name as both the source column name and the <see cref="T:System.Data.DataSet" /> column name. This <see cref="T:System.Data.Common.DataColumnMapping" /> is not added to the collection. </para
-                >
+                  >Creates a <see cref="T:System.Data.Common.DataColumnMapping" /> with the specified source column name as both the source column name and the <see cref="T:System.Data.DataSet" /> column name. This <see cref="T:System.Data.Common.DataColumnMapping" /> is not added to the collection.
+                </para>
               </description>
             </item>
             <item>
@@ -256,8 +256,8 @@
               </term>
               <description>
                 <para
-                  >An <see cref="T:System.InvalidOperationException" /> is generated if the specified column mapping is missing. </para
-                >
+                  >An <see cref="T:System.InvalidOperationException" /> is generated if the specified column mapping is missing.
+                </para>
               </description>
             </item>
             <item>
@@ -285,15 +285,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the <see cref="T:System.Data.DataColumn" />. </param
-        >
+          />The name of the <see cref="T:System.Data.DataColumn" />.
+        </param>
         <param name="mappingAction">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Data.MissingMappingAction" /> values. </param
-        >
+          />One of the <see cref="T:System.Data.MissingMappingAction" /> values.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -346,8 +346,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the <see cref="T:System.Data.DataColumn" />. </param
-        >
+          />The name of the <see cref="T:System.Data.DataColumn" />.
+        </param>
         <param name="dataType">
           <attribution
             license="cc4"
@@ -360,22 +360,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The table name from a <see cref="T:System.Data.DataSet" /> to map to. </param
-        >
+          />The table name from a <see cref="T:System.Data.DataSet" /> to map to.
+        </param>
         <param name="mappingAction">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Data.MissingMappingAction" /> values. </param
-        >
+          />One of the <see cref="T:System.Data.MissingMappingAction" /> values.
+        </param>
         <param name="schemaAction">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Data.MissingSchemaAction" /> values. </param
-        >
+          />One of the <see cref="T:System.Data.MissingSchemaAction" /> values.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetDataTableBySchemaAction">
@@ -413,15 +413,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Data.DataSet" /> from which to get the <see cref="T:System.Data.DataTable" />. </param
-        >
+          />The <see cref="T:System.Data.DataSet" /> from which to get the <see cref="T:System.Data.DataTable" />.
+        </param>
         <param name="schemaAction">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Data.MissingSchemaAction" /> values. </param
-        >
+          />One of the <see cref="T:System.Data.MissingSchemaAction" /> values.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

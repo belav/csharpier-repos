@@ -60,29 +60,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.Graphics" /> surface on which to draw. </param
-        >
+          />The <see cref="T:System.Drawing.Graphics" /> surface on which to draw.
+        </param>
         <param name="node">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.TreeNode" /> to draw. </param
-        >
+          />The <see cref="T:System.Windows.Forms.TreeNode" /> to draw.
+        </param>
         <param name="bounds">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.Rectangle" /> within which to draw. </param
-        >
+          />The <see cref="T:System.Drawing.Rectangle" /> within which to draw.
+        </param>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the <see cref="T:System.Windows.Forms.TreeNodeStates" /> values indicating the current state of the <see cref="T:System.Windows.Forms.TreeNode" /> to draw. </param
-        >
+          />A bitwise combination of the <see cref="T:System.Windows.Forms.TreeNodeStates" /> values indicating the current state of the <see cref="T:System.Windows.Forms.TreeNode" /> to draw.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

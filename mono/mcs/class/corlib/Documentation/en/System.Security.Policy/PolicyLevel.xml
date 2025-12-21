@@ -97,8 +97,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Security.Policy.PolicyLevel.AddFullTrustAssembly(System.Security.Policy.StrongName)" /> method is not supported in version 2.0 or later of the .NET Framework because the list of full trust assemblies is not used in those versions. </para
-          >
+            >The <see cref="M:System.Security.Policy.PolicyLevel.AddFullTrustAssembly(System.Security.Policy.StrongName)" /> method is not supported in version 2.0 or later of the .NET Framework because the list of full trust assemblies is not used in those versions.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -111,8 +111,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.Policy.StrongName" /> used to create the <see cref="T:System.Security.Policy.StrongNameMembershipCondition" /> to add to the list of <see cref="T:System.Security.Policy.StrongNameMembershipCondition" /> objects used to determine whether an assembly is a member of the group of assemblies that should not be evaluated. </param
-        >
+          />The <see cref="T:System.Security.Policy.StrongName" /> used to create the <see cref="T:System.Security.Policy.StrongNameMembershipCondition" /> to add to the list of <see cref="T:System.Security.Policy.StrongNameMembershipCondition" /> objects used to determine whether an assembly is a member of the group of assemblies that should not be evaluated.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddFullTrustAssembly">
@@ -145,8 +145,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Security.Policy.PolicyLevel.AddFullTrustAssembly(System.Security.Policy.StrongNameMembershipCondition)" /> method is not supported in version 2.0 or later of the .NET Framework because the list of full trust assemblies is not used in those versions. </para
-          >
+            >The <see cref="M:System.Security.Policy.PolicyLevel.AddFullTrustAssembly(System.Security.Policy.StrongNameMembershipCondition)" /> method is not supported in version 2.0 or later of the .NET Framework because the list of full trust assemblies is not used in those versions.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -159,8 +159,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.Policy.StrongNameMembershipCondition" /> to add to the list of <see cref="T:System.Security.Policy.StrongNameMembershipCondition" /> objects used to determine whether an assembly is a member of the group of assemblies that should not be evaluated. </param
-        >
+          />The <see cref="T:System.Security.Policy.StrongNameMembershipCondition" /> to add to the list of <see cref="T:System.Security.Policy.StrongNameMembershipCondition" /> objects used to determine whether an assembly is a member of the group of assemblies that should not be evaluated.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddNamedPermissionSet">
@@ -200,8 +200,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.NamedPermissionSet" /> to add to the current policy level. </param
-        >
+          />The <see cref="T:System.Security.NamedPermissionSet" /> to add to the current policy level.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ChangeNamedPermissionSet">
@@ -245,15 +245,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the <see cref="T:System.Security.NamedPermissionSet" /> to replace. </param
-        >
+          />The name of the <see cref="T:System.Security.NamedPermissionSet" /> to replace.
+        </param>
         <param name="pSet">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.PermissionSet" /> that replaces the <see cref="T:System.Security.NamedPermissionSet" /> specified by the <paramref name="name" /> parameter. </param
-        >
+          />The <see cref="T:System.Security.PermissionSet" /> that replaces the <see cref="T:System.Security.NamedPermissionSet" /> specified by the <paramref name="name" /> parameter.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateAppDomainLevel">
@@ -324,8 +324,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML encoding to use to reconstruct the security object. </param
-        >
+          />The XML encoding to use to reconstruct the security object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="FullTrustAssemblies">
@@ -410,8 +410,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the <see cref="T:System.Security.NamedPermissionSet" /> to find. </param
-        >
+          />The name of the <see cref="T:System.Security.NamedPermissionSet" /> to find.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Label">
@@ -533,8 +533,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Security.Policy.PolicyLevel.RemoveFullTrustAssembly(System.Security.Policy.StrongName)" /> method is not supported in version 2.0 or later of the .NET Framework because the list of full trust assemblies is not used in those versions. </para
-          >
+            >The <see cref="M:System.Security.Policy.PolicyLevel.RemoveFullTrustAssembly(System.Security.Policy.StrongName)" /> method is not supported in version 2.0 or later of the .NET Framework because the list of full trust assemblies is not used in those versions.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -547,8 +547,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.Policy.StrongName" /> of the assembly to remove from the list of assemblies used to evaluate policy. </param
-        >
+          />The <see cref="T:System.Security.Policy.StrongName" /> of the assembly to remove from the list of assemblies used to evaluate policy.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RemoveFullTrustAssembly">
@@ -595,8 +595,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.Policy.StrongNameMembershipCondition" /> of the assembly to remove from the list of assemblies used to evaluate policy. </param
-        >
+          />The <see cref="T:System.Security.Policy.StrongNameMembershipCondition" /> of the assembly to remove from the list of assemblies used to evaluate policy.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RemoveNamedPermissionSet">
@@ -637,8 +637,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.NamedPermissionSet" /> to remove from the current policy level. </param
-        >
+          />The <see cref="T:System.Security.NamedPermissionSet" /> to remove from the current policy level.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RemoveNamedPermissionSet">
@@ -679,8 +679,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the <see cref="T:System.Security.NamedPermissionSet" /> to remove. </param
-        >
+          />The name of the <see cref="T:System.Security.NamedPermissionSet" /> to remove.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Reset">
@@ -754,8 +754,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.Policy.Evidence" /> used to resolve the <see cref="T:System.Security.Policy.PolicyLevel" />. </param
-        >
+          />The <see cref="T:System.Security.Policy.Evidence" /> used to resolve the <see cref="T:System.Security.Policy.PolicyLevel" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ResolveMatchingCodeGroups">
@@ -800,8 +800,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.Policy.Evidence" /> used to resolve policy. </param
-        >
+          />The <see cref="T:System.Security.Policy.Evidence" /> used to resolve policy.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RootCodeGroup">

@@ -71,8 +71,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the counter, which often describes the quantity that is being counted. </param
-        >
+          />The name of the counter, which often describes the quantity that is being counted.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Contains">
@@ -113,8 +113,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the instance to find in this collection. </param
-        >
+          />The name of the instance to find in this collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CopyTo">
@@ -150,15 +150,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The one-dimensional <see cref="T:System.Array" /> that is the destination of the values copied from the collection. </param
-        >
+          />The one-dimensional <see cref="T:System.Array" /> that is the destination of the values copied from the collection.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index value at which to add the new instances. </param
-        >
+          />The zero-based index value at which to add the new instances.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CounterName">

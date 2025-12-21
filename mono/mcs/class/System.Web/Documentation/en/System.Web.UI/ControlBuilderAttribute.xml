@@ -25,8 +25,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This attribute specifies the builder <see cref="T:System.Type" /> to be used to create a custom control as shown in the following code: </para
-      >
+        >This attribute specifies the builder <see cref="T:System.Type" /> to be used to create a custom control as shown in the following code:
+      </para>
       <code>[ControlBuilderAttribute(typeof(ControlBuilderType))]</code>
     </remarks>
     <summary>
@@ -55,12 +55,8 @@
           <para>Specifies the control builder for a custom control.</para>
         </summary>
         <param name="builderType">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The control builder type </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The control builder type
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -126,8 +122,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the current <see cref="T:System.Web.UI.ControlBuilderAttribute" /> is identical to the specified object. </para
-          >
+            >Gets a value indicating whether the current <see cref="T:System.Web.UI.ControlBuilderAttribute" /> is identical to the specified object.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -160,8 +156,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the hash code of the <see cref="T:System.Web.UI.ControlBuilderAttribute" /> object. </para
-          >
+            >Returns the hash code of the <see cref="T:System.Web.UI.ControlBuilderAttribute" /> object.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />

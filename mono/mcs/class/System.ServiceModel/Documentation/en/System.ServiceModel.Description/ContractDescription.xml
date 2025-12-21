@@ -23,11 +23,11 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>A indigo2 contract is a collection of operations that specifies what the endpoint communicates to the outside world. Each operation is a message exchange. For example, a request message and an associated reply message form a request/reply message exchange. </para>
       <para
-        >A <see cref="T:System.ServiceModel.Description.ContractDescription" /> object is used to describe indigo2 contracts and their operations. Within a <see cref="T:System.ServiceModel.Description.ContractDescription" />, each contract operation has a corresponding <see cref="T:System.ServiceModel.Description.OperationDescription" /> that describes aspects of the each operation that is part of the contract, such as whether the operation is one-way or request/reply. Each <see cref="T:System.ServiceModel.Description.OperationDescription" /> also describes the messages that make up the operation using a <see cref="T:System.ServiceModel.Description.MessageDescriptionCollection" />. <see cref="T:System.ServiceModel.Description.ContractDescription" /> contains a reference to an interface that defines the contract using the programming model. This interface is marked with <see cref="T:System.ServiceModel.ServiceContractAttribute" /> and its methods that correspond to endpoint operations are marked with the <see cref="T:System.ServiceModel.OperationContractAttribute" />. </para
-      >
+        >A <see cref="T:System.ServiceModel.Description.ContractDescription" /> object is used to describe indigo2 contracts and their operations. Within a <see cref="T:System.ServiceModel.Description.ContractDescription" />, each contract operation has a corresponding <see cref="T:System.ServiceModel.Description.OperationDescription" /> that describes aspects of the each operation that is part of the contract, such as whether the operation is one-way or request/reply. Each <see cref="T:System.ServiceModel.Description.OperationDescription" /> also describes the messages that make up the operation using a <see cref="T:System.ServiceModel.Description.MessageDescriptionCollection" />. <see cref="T:System.ServiceModel.Description.ContractDescription" /> contains a reference to an interface that defines the contract using the programming model. This interface is marked with <see cref="T:System.ServiceModel.ServiceContractAttribute" /> and its methods that correspond to endpoint operations are marked with the <see cref="T:System.ServiceModel.OperationContractAttribute" />.
+      </para>
       <para
-        >A <newTerm>duplex</newTerm> contract defines the following logical sets of operations: </para
-      >
+        >A <newTerm>duplex</newTerm> contract defines the following logical sets of operations:
+      </para>
       <list type="bullet">
         <item>
           <para>A set that the service exposes for the client to call. </para>
@@ -37,8 +37,8 @@
         </item>
       </list>
       <para
-        >The programming model for defining a duplex contract is to split each set in a separate interface and apply attributes to each interface. In this case, <see cref="T:System.ServiceModel.Description.ContractDescription" /> contains a reference to each of the interfaces that groups them into one duplex contract. </para
-      >
+        >The programming model for defining a duplex contract is to split each set in a separate interface and apply attributes to each interface. In this case, <see cref="T:System.ServiceModel.Description.ContractDescription" /> contains a reference to each of the interfaces that groups them into one duplex contract.
+      </para>
       <para
         >Similar to bindings, each contract has a <see cref="P:System.ServiceModel.Description.ContractDescription.Name" /> and <see cref="P:System.ServiceModel.Description.ContractDescription.Namespace" /> that uniquely identify it in the metadata of the service.</para
       >
@@ -566,8 +566,8 @@
             >A reliable session is a way of correlating a set of messages exchanged between two or more endpoints (using the <see
               cref="http://go.microsoft.com/fwlink/?LinkId=96680"
               >WS-ReliableMessaging</see
-            > specification) to provide assurances of the reliability of the connection. </para
-          >
+            > specification) to provide assurances of the reliability of the connection.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

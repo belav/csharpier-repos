@@ -31,11 +31,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.String" /> always uses the default <see cref="T:System.Globalization.CultureInfo" /> from the current thread, but <see cref="T:System.Data.SqlTypes.SqlString" /> contains its own locale Id and compare flags. The comparison result of two <see cref="T:System.Data.SqlTypes.SqlString" /> structures is independent of operating system and current thread locale. </para
-      >
+        <see cref="T:System.String" /> always uses the default <see cref="T:System.Globalization.CultureInfo" /> from the current thread, but <see cref="T:System.Data.SqlTypes.SqlString" /> contains its own locale Id and compare flags. The comparison result of two <see cref="T:System.Data.SqlTypes.SqlString" /> structures is independent of operating system and current thread locale.
+      </para>
       <para
-        >When you use <see cref="T:System.Data.SqlTypes.SqlString" /> comparison operators, note that if the LCIDs of arguments are different, comparison functions throw an exception because they cannot be compared. For example, the statement </para
-      >
+        >When you use <see cref="T:System.Data.SqlTypes.SqlString" /> comparison operators, note that if the LCIDs of arguments are different, comparison functions throw an exception because they cannot be compared. For example, the statement
+      </para>
       <code> SqlString mySqlString = new SqlString("abc");</code>
       <para>is equivalent to </para>
       <code> SqlString mySqlString = new SqlString("abc", CultureInfo.CurrentCulture.LCID);</code>
@@ -64,12 +64,8 @@
           >
         </summary>
         <param name="data">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The string to store. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The string to store.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -93,19 +89,15 @@
           >
         </summary>
         <param name="data">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The string to store. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The string to store.
+        </param>
         <param name="lcid">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Specifies the geographical locale and language for the new <see cref="T:System.Data.SqlTypes.SqlString" /> structure. </param
-        >
+          />Specifies the geographical locale and language for the new <see cref="T:System.Data.SqlTypes.SqlString" /> structure.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -137,22 +129,18 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Specifies the geographical locale and language for the new <see cref="T:System.Data.SqlTypes.SqlString" /> structure. </param
-        >
+          />Specifies the geographical locale and language for the new <see cref="T:System.Data.SqlTypes.SqlString" /> structure.
+        </param>
         <param name="compareOptions">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Specifies the compare options for the new <see cref="T:System.Data.SqlTypes.SqlString" /> structure. </param
-        >
+          />Specifies the compare options for the new <see cref="T:System.Data.SqlTypes.SqlString" /> structure.
+        </param>
         <param name="data">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The data array to store. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The data array to store.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -180,26 +168,22 @@
           >
         </summary>
         <param name="data">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The string to store. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The string to store.
+        </param>
         <param name="lcid">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Specifies the geographical locale and language for the new <see cref="T:System.Data.SqlTypes.SqlString" /> structure. </param
-        >
+          />Specifies the geographical locale and language for the new <see cref="T:System.Data.SqlTypes.SqlString" /> structure.
+        </param>
         <param name="compareOptions">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Specifies the compare options for the new <see cref="T:System.Data.SqlTypes.SqlString" /> structure. </param
-        >
+          />Specifies the compare options for the new <see cref="T:System.Data.SqlTypes.SqlString" /> structure.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -232,29 +216,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Specifies the geographical locale and language for the new <see cref="T:System.Data.SqlTypes.SqlString" /> structure. </param
-        >
+          />Specifies the geographical locale and language for the new <see cref="T:System.Data.SqlTypes.SqlString" /> structure.
+        </param>
         <param name="compareOptions">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Specifies the compare options for the new <see cref="T:System.Data.SqlTypes.SqlString" /> structure. </param
-        >
+          />Specifies the compare options for the new <see cref="T:System.Data.SqlTypes.SqlString" /> structure.
+        </param>
         <param name="data">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The data array to store. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The data array to store.
+        </param>
         <param name="fUnicode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if Unicode encoded. Otherwise, false. </param
-        >
+          />true if Unicode encoded. Otherwise, false.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -288,36 +268,32 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Specifies the geographical locale and language for the new <see cref="T:System.Data.SqlTypes.SqlString" /> structure. </param
-        >
+          />Specifies the geographical locale and language for the new <see cref="T:System.Data.SqlTypes.SqlString" /> structure.
+        </param>
         <param name="compareOptions">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Specifies the compare options for the new <see cref="T:System.Data.SqlTypes.SqlString" /> structure. </param
-        >
+          />Specifies the compare options for the new <see cref="T:System.Data.SqlTypes.SqlString" /> structure.
+        </param>
         <param name="data">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The data array to store. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The data array to store.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting index within the array. </param
-        >
+          />The starting index within the array.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters from index to copy. </param
-        >
+          />The number of characters from index to copy.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -352,43 +328,39 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Specifies the geographical locale and language for the new <see cref="T:System.Data.SqlTypes.SqlString" /> structure. </param
-        >
+          />Specifies the geographical locale and language for the new <see cref="T:System.Data.SqlTypes.SqlString" /> structure.
+        </param>
         <param name="compareOptions">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Specifies the compare options for the new <see cref="T:System.Data.SqlTypes.SqlString" /> structure. </param
-        >
+          />Specifies the compare options for the new <see cref="T:System.Data.SqlTypes.SqlString" /> structure.
+        </param>
         <param name="data">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The data array to store. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The data array to store.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting index within the array. </param
-        >
+          />The starting index within the array.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters from index to copy. </param
-        >
+          />The number of characters from index to copy.
+        </param>
         <param name="fUnicode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if Unicode encoded. Otherwise, false. </param
-        >
+          />true if Unicode encoded. Otherwise, false.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -435,15 +407,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlString" />. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlString" />.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlString" />. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlString" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="BinarySort">
@@ -553,8 +525,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlCompareOptions" /> value that describes the comparison options for this <see cref="T:System.Data.SqlTypes.SqlString" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlCompareOptions" /> value that describes the comparison options for this <see cref="T:System.Data.SqlTypes.SqlString" /> structure.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -699,8 +671,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to be compared. </param
-        >
+          />The <see cref="T:System.Object" /> to be compared.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -739,15 +711,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlString" />. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlString" />.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlString" />. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlString" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -802,12 +774,8 @@
           >
         </returns>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The object to be compared. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The object to be compared.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -844,15 +812,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlString" />. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlString" />.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlString" />. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlString" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1006,15 +974,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlString" />. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlString" />.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlString" />. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlString" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1053,15 +1021,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlString" />. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlString" />.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlString" />. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlString" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1254,15 +1222,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlString" />. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlString" />.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlString" />. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlString" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1301,15 +1269,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlString" />. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlString" />.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlString" />. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlString" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1348,15 +1316,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlString" />. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlString" />.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlString" />. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlString" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1430,15 +1398,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlString" />. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlString" />.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlString" />. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlString" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="op_Equality">
@@ -1477,15 +1445,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlString" />. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlString" />.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlString" />. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlString" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="op_Explicit">
@@ -1800,15 +1768,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlString" />. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlString" />.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlString" />. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlString" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="op_GreaterThanOrEqual">
@@ -1847,15 +1815,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlString" />. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlString" />.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlString" />. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlString" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
@@ -1917,15 +1885,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlString" />. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlString" />.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlString" />. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlString" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="op_LessThan">
@@ -1964,15 +1932,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlString" />. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlString" />.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlString" />. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlString" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="op_LessThanOrEqual">
@@ -2011,15 +1979,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlString" />. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlString" />.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlString" />. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlString" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SqlCompareOptions">
@@ -2309,14 +2277,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts this <see cref="T:System.Data.SqlTypes.SqlString" /> structure to <see cref="T:System.Data.SqlTypes.SqlInt16" />. </para
-          >
+            >Converts this <see cref="T:System.Data.SqlTypes.SqlString" /> structure to <see cref="T:System.Data.SqlTypes.SqlInt16" />.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see cref="T:System.Data.SqlTypes.SqlInt16" /> that is equal to the numeric value of this <see cref="T:System.Data.SqlTypes.SqlString" />. </para
-          >
+            >A new <see cref="T:System.Data.SqlTypes.SqlInt16" /> that is equal to the numeric value of this <see cref="T:System.Data.SqlTypes.SqlString" />.
+          </para>
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -2342,8 +2310,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see cref="T:System.Data.SqlTypes.SqlInt32" /> that is equal to the numeric value of this <see cref="T:System.Data.SqlTypes.SqlString" />. </para
-          >
+            >A new <see cref="T:System.Data.SqlTypes.SqlInt32" /> that is equal to the numeric value of this <see cref="T:System.Data.SqlTypes.SqlString" />.
+          </para>
         </returns>
       </Docs>
       <AssemblyInfo>

@@ -29,8 +29,8 @@
         >To display localized category strings in the Event Viewer, you must use an event source configured with a category resource file, and set the <see cref="P:System.Diagnostics.EventInstance.CategoryId" /> to a resource identifier in the category resource file. If the event source does not have a configured category resource file, or the specified <see cref="P:System.Diagnostics.EventInstance.CategoryId" /> does not index a string in the category resource file, and then the Event Viewer displays the numeric category value for that entry. Configure the category resource file, along with the number of category strings in the resource file, using the <see cref="T:System.Diagnostics.EventLogInstaller" /> or the <see cref="T:System.Diagnostics.EventSourceCreationData" /> class.</para
       >
       <para
-        >You must register a source for an event log before using <see cref="T:System.Diagnostics.EventInstance" /> to write an event with the <see cref="Overload:System.Diagnostics.EventLog.WriteEvent" /> method. The source must be configured for writing localized entries to the log and the source must define at least a message resource file. </para
-      >
+        >You must register a source for an event log before using <see cref="T:System.Diagnostics.EventInstance" /> to write an event with the <see cref="Overload:System.Diagnostics.EventLog.WriteEvent" /> method. The source must be configured for writing localized entries to the log and the source must define at least a message resource file.
+      </para>
       <para
         >Create the new event source during the installation of your application. This allows time for the operating system to refresh its list of registered event sources and their configurations. If the operating system has not refreshed its list of event sources, and you attempt to write an event with the new source, the write operation will fail. You can configure a new source using an <see cref="T:System.Diagnostics.EventLogInstaller" />, or using the <see cref="Overload:System.Diagnostics.EventLog.CreateEventSource" /> method. You must have administrative rights on the computer to create a new event source.</para
       >
@@ -92,8 +92,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A resource identifier that corresponds to a string defined in the category resource file of the event source, or zero to specify no category for the event. </param
-        >
+          />A resource identifier that corresponds to a string defined in the category resource file of the event source, or zero to specify no category for the event.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -138,22 +138,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A resource identifier that corresponds to a string defined in the message resource file of the event source. </param
-        >
+          />A resource identifier that corresponds to a string defined in the message resource file of the event source.
+        </param>
         <param name="categoryId">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A resource identifier that corresponds to a string defined in the category resource file of the event source, or zero to specify no category for the event. </param
-        >
+          />A resource identifier that corresponds to a string defined in the category resource file of the event source, or zero to specify no category for the event.
+        </param>
         <param name="entryType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Diagnostics.EventLogEntryType" /> value that indicates the event type. </param
-        >
+          />An <see cref="T:System.Diagnostics.EventLogEntryType" /> value that indicates the event type.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CategoryId">

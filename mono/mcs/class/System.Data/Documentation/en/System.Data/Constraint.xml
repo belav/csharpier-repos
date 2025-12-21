@@ -204,8 +204,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Data.DataSet" /> to which this constraint will belong. </param
-        >
+          />The <see cref="T:System.Data.DataSet" /> to which this constraint will belong.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Table">

@@ -62,8 +62,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.NetTcpBinding" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.NetTcpBinding" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -521,8 +521,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.NetTcpSecurity" /> provides the types of security and settings available to the <see cref="T:System.ServiceModel.NetTcpBinding" />. </para
-          >
+            >The <see cref="T:System.ServiceModel.NetTcpSecurity" /> provides the types of security and settings available to the <see cref="T:System.ServiceModel.NetTcpBinding" />.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

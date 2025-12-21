@@ -102,8 +102,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of <see cref="T:System.Net.Cookie" /> instances that the <see cref="T:System.Net.CookieContainer" /> can hold. </param
-        >
+          />The number of <see cref="T:System.Net.Cookie" /> instances that the <see cref="T:System.Net.CookieContainer" /> can hold.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -145,22 +145,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of <see cref="T:System.Net.Cookie" /> instances that the <see cref="T:System.Net.CookieContainer" /> can hold. </param
-        >
+          />The number of <see cref="T:System.Net.Cookie" /> instances that the <see cref="T:System.Net.CookieContainer" /> can hold.
+        </param>
         <param name="perDomainCapacity">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of <see cref="T:System.Net.Cookie" /> instances per domain. </param
-        >
+          />The number of <see cref="T:System.Net.Cookie" /> instances per domain.
+        </param>
         <param name="maxCookieSize">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum size in bytes for any single <see cref="T:System.Net.Cookie" /> in a <see cref="T:System.Net.CookieContainer" />. </param
-        >
+          />The maximum size in bytes for any single <see cref="T:System.Net.Cookie" /> in a <see cref="T:System.Net.CookieContainer" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Add">
@@ -199,8 +199,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Net.Cookie" /> to be added to the <see cref="T:System.Net.CookieContainer" />. </param
-        >
+          />The <see cref="T:System.Net.Cookie" /> to be added to the <see cref="T:System.Net.CookieContainer" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Add">
@@ -242,8 +242,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Net.CookieCollection" /> to be added to the <see cref="T:System.Net.CookieContainer" />. </param
-        >
+          />The <see cref="T:System.Net.CookieCollection" /> to be added to the <see cref="T:System.Net.CookieContainer" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Add">
@@ -293,15 +293,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URI of the <see cref="T:System.Net.Cookie" /> to be added to the <see cref="T:System.Net.CookieContainer" />. </param
-        >
+          />The URI of the <see cref="T:System.Net.Cookie" /> to be added to the <see cref="T:System.Net.CookieContainer" />.
+        </param>
         <param name="cookie">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Net.Cookie" /> to be added to the <see cref="T:System.Net.CookieContainer" />. </param
-        >
+          />The <see cref="T:System.Net.Cookie" /> to be added to the <see cref="T:System.Net.CookieContainer" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Add">
@@ -351,15 +351,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URI of the <see cref="T:System.Net.CookieCollection" /> to be added to the <see cref="T:System.Net.CookieContainer" />. </param
-        >
+          />The URI of the <see cref="T:System.Net.CookieCollection" /> to be added to the <see cref="T:System.Net.CookieContainer" />.
+        </param>
         <param name="cookies">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Net.CookieCollection" /> to be added to the <see cref="T:System.Net.CookieContainer" />. </param
-        >
+          />The <see cref="T:System.Net.CookieCollection" /> to be added to the <see cref="T:System.Net.CookieContainer" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Capacity">
@@ -561,8 +561,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URI of the <see cref="T:System.Net.Cookie" /> instances desired. </param
-        >
+          />The URI of the <see cref="T:System.Net.Cookie" /> instances desired.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetCookies">
@@ -610,8 +610,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URI of the <see cref="T:System.Net.Cookie" /> instances desired. </param
-        >
+          />The URI of the <see cref="T:System.Net.Cookie" /> instances desired.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="MaxCookieSize">
@@ -712,15 +712,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URI of the <see cref="T:System.Net.CookieCollection" />. </param
-        >
+          />The URI of the <see cref="T:System.Net.CookieCollection" />.
+        </param>
         <param name="cookieHeader">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The contents of an HTTP set-cookie header as returned by a HTTP server, with <see cref="T:System.Net.Cookie" /> instances delimited by commas. </param
-        >
+          />The contents of an HTTP set-cookie header as returned by a HTTP server, with <see cref="T:System.Net.Cookie" /> instances delimited by commas.
+        </param>
       </Docs>
     </Member>
   </Members>

@@ -45,8 +45,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.KeyNameIdentifierClause" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.KeyNameIdentifierClause" /> class.
+          </para>
         </summary>
         <param name="keyName">
           <attribution license="cc4" from="Microsoft" modified="false" />The key name.</param
@@ -97,8 +97,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Checks whether a <see cref="T:System.IdentityModel.Tokens.SecurityKeyIdentifierClause" /> matches the current instance of this class. </para
-          >
+            >Checks whether a <see cref="T:System.IdentityModel.Tokens.SecurityKeyIdentifierClause" /> matches the current instance of this class.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />

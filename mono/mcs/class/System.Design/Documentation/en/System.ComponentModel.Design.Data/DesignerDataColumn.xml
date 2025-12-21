@@ -45,8 +45,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Data.DesignerDataColumn" /> class with the specified name and data type. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Data.DesignerDataColumn" /> class with the specified name and data type.
+          </para>
         </summary>
         <param name="name">
           <attribution
@@ -88,8 +88,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Data.DesignerDataColumn" /> class with the specified name, data type, and default value. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Data.DesignerDataColumn" /> class with the specified name, data type, and default value.
+          </para>
         </summary>
         <param name="name">
           <attribution
@@ -138,14 +138,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="M:System.ComponentModel.Design.Data.DesignerDataColumn.#ctor(System.String,System.Data.DbType,System.Object,System.Boolean,System.Boolean,System.Boolean,System.Int32,System.Int32,System.Int32)" /> constructor to set all the properties of a <see cref="T:System.ComponentModel.Design.Data.DesignerDataColumn" /> object. </para
-          >
+            >Use the <see cref="M:System.ComponentModel.Design.Data.DesignerDataColumn.#ctor(System.String,System.Data.DbType,System.Object,System.Boolean,System.Boolean,System.Boolean,System.Int32,System.Int32,System.Int32)" /> constructor to set all the properties of a <see cref="T:System.ComponentModel.Design.Data.DesignerDataColumn" /> object.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Data.DesignerDataColumn" /> class with the specified values. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Data.DesignerDataColumn" /> class with the specified values.
+          </para>
         </summary>
         <param name="name">
           <attribution

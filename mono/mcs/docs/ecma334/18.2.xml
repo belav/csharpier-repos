@@ -48,6 +48,6 @@
     </grammar_production>
   </paragraph>
   <paragraph
-    >Except for the differences noted in <hyperlink>18.3</hyperlink>, the descriptions of class members provided in <hyperlink>17.2</hyperlink> through <hyperlink>17.11</hyperlink> apply to struct members as well. </paragraph
-  >
+    >Except for the differences noted in <hyperlink>18.3</hyperlink>, the descriptions of class members provided in <hyperlink>17.2</hyperlink> through <hyperlink>17.11</hyperlink> apply to struct members as well.
+  </paragraph>
 </clause>

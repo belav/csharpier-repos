@@ -65,22 +65,22 @@
           <para>Indicates that a call is returning.</para>
         </summary>
         <param name="replyMsg">
-          <attribution license="cc4" from="Microsoft" modified="false" />A reply message. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A reply message.
+        </param>
         <param name="bCliSide">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A value of true if the method is invoked on the client side and false if it is invoked on the server side. </param
-        >
+          />A value of true if the method is invoked on the client side and false if it is invoked on the server side.
+        </param>
         <param name="bAsync">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A value of true if this is an asynchronic call and false if it is a synchronic call. </param
-        >
+          />A value of true if this is an asynchronic call and false if it is a synchronic call.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ProcessMessageStart">
@@ -118,22 +118,22 @@
           <para>Indicates that a call is starting.</para>
         </summary>
         <param name="reqMsg">
-          <attribution license="cc4" from="Microsoft" modified="false" />A request message. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A request message.
+        </param>
         <param name="bCliSide">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A value of true if the method is invoked on the client side and false if the method is on the server side. </param
-        >
+          />A value of true if the method is invoked on the client side and false if the method is on the server side.
+        </param>
         <param name="bAsync">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A value of true if this is an asynchronic call and false if it is a synchronic call. </param
-        >
+          />A value of true if this is an asynchronic call and false if it is a synchronic call.
+        </param>
       </Docs>
     </Member>
   </Members>

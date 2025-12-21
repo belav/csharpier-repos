@@ -20,8 +20,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >To enable packet routing a <newTerm>one-way conversion</newTerm> layer is required, which this class provides. This class is a binding in the stack of bindings that performs a message-level shape change called OneWayBindingElement. This shape change can take a <see cref="T:System.ServiceModel.Channels.IDuplexSessionChannel" /> or a <see cref="T:System.ServiceModel.Channels.IRequestChannel" /> and expose it as a <see cref="T:System.ServiceModel.Channels.IInputChannel" />, or conversely it can take a <see cref="T:System.ServiceModel.Channels.IDuplexSessionChannel" /> or a <see cref="T:System.ServiceModel.Channels.IRequestChannel" /> and expose it as a <see cref="T:System.ServiceModel.Channels.IOutputChannel" />. A user can create a custom binding that layers this binding over a session-aware or request-reply transport to make it packet routable. </para
-      >
+        >To enable packet routing a <newTerm>one-way conversion</newTerm> layer is required, which this class provides. This class is a binding in the stack of bindings that performs a message-level shape change called OneWayBindingElement. This shape change can take a <see cref="T:System.ServiceModel.Channels.IDuplexSessionChannel" /> or a <see cref="T:System.ServiceModel.Channels.IRequestChannel" /> and expose it as a <see cref="T:System.ServiceModel.Channels.IInputChannel" />, or conversely it can take a <see cref="T:System.ServiceModel.Channels.IDuplexSessionChannel" /> or a <see cref="T:System.ServiceModel.Channels.IRequestChannel" /> and expose it as a <see cref="T:System.ServiceModel.Channels.IOutputChannel" />. A user can create a custom binding that layers this binding over a session-aware or request-reply transport to make it packet routable.
+      </para>
       <para>This class is also useful when you want to expose one-way methods in a more native fashion. More transformations can be applied over this layer, such as Composite Duplex and Reliable Messaging.</para>
     </remarks>
     <summary>
@@ -46,8 +46,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.OneWayBindingElement" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.OneWayBindingElement" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -85,8 +85,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.Channels.IChannelFactory`1" /> of type <see cref="T:System.ServiceModel.Channels.IChannel" /> initialized from the <paramref name="context" />. </para
-          >
+            >The <see cref="T:System.ServiceModel.Channels.IChannelFactory`1" /> of type <see cref="T:System.ServiceModel.Channels.IChannel" /> initialized from the <paramref name="context" />.
+          </para>
         </returns>
         <param name="context">
           <attribution
@@ -151,8 +151,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Channels.BindingContext" /> that provides context for the binding element.  </param
-        >
+          />The <see cref="T:System.ServiceModel.Channels.BindingContext" /> that provides context for the binding element.
+        </param>
         <typeparam name="TChannel">
           <attribution
             license="cc4"
@@ -205,8 +205,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Channels.BindingContext" /> that provides context for the binding element.  </param
-        >
+          />The <see cref="T:System.ServiceModel.Channels.BindingContext" /> that provides context for the binding element.
+        </param>
         <typeparam name="TChannel">
           <attribution
             license="cc4"
@@ -264,8 +264,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Channels.BindingContext" /> that provides context for the binding element.  </param
-        >
+          />The <see cref="T:System.ServiceModel.Channels.BindingContext" /> that provides context for the binding element.
+        </param>
         <typeparam name="TChannel">
           <attribution
             license="cc4"
@@ -377,8 +377,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Channels.BindingContext" /> that provides context for the binding element.  </param
-        >
+          />The <see cref="T:System.ServiceModel.Channels.BindingContext" /> that provides context for the binding element.
+        </param>
         <typeparam name="T">
           <attribution
             license="cc4"

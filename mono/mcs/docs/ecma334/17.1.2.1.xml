@@ -9,8 +9,8 @@
       >class-base</non_terminal
     >, or if the <non_terminal where="17.1.2"
       >class-base</non_terminal
-    > lists only interface types, the direct base class is assumed to be object. A class inherits members from its direct base class, as described in <hyperlink>17.2.1</hyperlink>. </paragraph
-  >
+    > lists only interface types, the direct base class is assumed to be object. A class inherits members from its direct base class, as described in <hyperlink>17.2.1</hyperlink>.
+  </paragraph>
   <paragraph>
     <example
       >[Example: In the example <code_example>
@@ -22,8 +22,8 @@ class B: A {}
     >
   </paragraph>
   <paragraph
-    >The direct base class of a class type must be at least as accessible as the class type itself (<hyperlink>10.5.4</hyperlink>). For example, it is a compile-time error for a public class to derive from a private or internal class. </paragraph
-  >
+    >The direct base class of a class type must be at least as accessible as the class type itself (<hyperlink>10.5.4</hyperlink>). For example, it is a compile-time error for a public class to derive from a private or internal class.
+  </paragraph>
   <paragraph>The direct base class of a class type must not be any of the following types: System.Array, System.Delegate, System.Enum, or System.ValueType. </paragraph>
   <paragraph
     >The base classes of a class are the direct base class and its base classes. In other words, the set of base classes is the transitive closure of the direct base class relationship. <note>[Note: Referring to the example above, the base classes of B are A and object. end note]</note>

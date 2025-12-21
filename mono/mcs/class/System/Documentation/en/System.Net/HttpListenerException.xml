@@ -54,8 +54,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.HttpListenerException" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.HttpListenerException" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -176,15 +176,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Runtime.Serialization.SerializationInfo" /> object that contains the information required to deserialize the new <see cref="T:System.Net.HttpListenerException" /> object. </param
-        >
+          />A <see cref="T:System.Runtime.Serialization.SerializationInfo" /> object that contains the information required to deserialize the new <see cref="T:System.Net.HttpListenerException" /> object.
+        </param>
         <param name="streamingContext">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Runtime.Serialization.StreamingContext" /> object. </param
-        >
+          />A <see cref="T:System.Runtime.Serialization.StreamingContext" /> object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ErrorCode">

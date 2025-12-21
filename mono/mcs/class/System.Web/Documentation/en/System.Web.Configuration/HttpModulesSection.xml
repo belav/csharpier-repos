@@ -24,8 +24,8 @@
       >
       <block subset="none" type="note">
         <para
-          >The <see cref="T:System.Web.Configuration.HttpModulesSection" /> can read and write information from and to the related section of the configuration file according to the section property <see cref="P:System.Configuration.SectionInformation.AllowDefinition" /> whose value is <see cref="F:System.Configuration.ConfigurationAllowDefinition.Everywhere" />. </para
-        >
+          >The <see cref="T:System.Web.Configuration.HttpModulesSection" /> can read and write information from and to the related section of the configuration file according to the section property <see cref="P:System.Configuration.SectionInformation.AllowDefinition" /> whose value is <see cref="F:System.Configuration.ConfigurationAllowDefinition.Everywhere" />.
+        </para>
         <para />
       </block>
     </remarks>
@@ -50,8 +50,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.Configuration.HttpModulesSection" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.HttpModulesSection" /> class.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -109,8 +109,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the properties collection for the <see cref="T:System.Web.Configuration.HttpModulesSection" />. </para
-          >
+            >Gets the properties collection for the <see cref="T:System.Web.Configuration.HttpModulesSection" />.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>

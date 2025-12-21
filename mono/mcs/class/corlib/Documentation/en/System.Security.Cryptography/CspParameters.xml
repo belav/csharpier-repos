@@ -43,8 +43,8 @@
               <a href="0dbcbd8d-0dcf-40e9-9f0c-e3f162d35ccc"
                 >How to: Store Asymmetric Keys in a Key Container</a
               >
-            </format>. </para
-          >
+            </format>.
+          </para>
         </item>
         <item>
           <para
@@ -77,11 +77,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This form of <see cref="M:System.Security.Cryptography.CspParameters.#ctor" /> initializes the <see cref="F:System.Security.Cryptography.CspParameters.ProviderType" /> field to a value of 24, which specifies the PROV_RSA_AES provider.  This default provider is compatible with the <see cref="T:System.Security.Cryptography.Aes" /> algorithm.  </para
-          >
+            >This form of <see cref="M:System.Security.Cryptography.CspParameters.#ctor" /> initializes the <see cref="F:System.Security.Cryptography.CspParameters.ProviderType" /> field to a value of 24, which specifies the PROV_RSA_AES provider.  This default provider is compatible with the <see cref="T:System.Security.Cryptography.Aes" /> algorithm.
+          </para>
           <para
-            >For information about other provider types, see the <see cref="F:System.Security.Cryptography.CspParameters.ProviderType" /> field. </para
-          >
+            >For information about other provider types, see the <see cref="F:System.Security.Cryptography.CspParameters.ProviderType" /> field.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -146,8 +146,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A provider type code that specifies the kind of provider to create. </param
-        >
+          />A provider type code that specifies the kind of provider to create.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -174,8 +174,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="M:System.Security.Cryptography.CspParameters.#ctor(System.Int32,System.String)" /> constructor to specify a provider type and name.  </para
-          >
+            >Use the <see cref="M:System.Security.Cryptography.CspParameters.#ctor(System.Int32,System.String)" /> constructor to specify a provider type and name.
+          </para>
           <para>Specify a provider type by passing a numeric value that represents the desired provider type.  The numeric values that represent the default provider types are defined in the WinCrypt.h header file:</para>
           <list type="bullet">
             <item>
@@ -207,8 +207,8 @@
           />A provider type code that specifies the kind of provider to create.</param
         >
         <param name="strProviderNameIn">
-          <attribution license="cc4" from="Microsoft" modified="false" />A provider name. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A provider name.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -270,11 +270,11 @@
           />The provider type code that specifies the kind of provider to create.</param
         >
         <param name="strProviderNameIn">
-          <attribution license="cc4" from="Microsoft" modified="false" />A provider name. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A provider name.
+        </param>
         <param name="strContainerNameIn">
-          <attribution license="cc4" from="Microsoft" modified="false" />A container name. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A container name.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -326,8 +326,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.CspParameters" /> class using a provider type, a provider name, a container name, access information, and a handle to an unmanaged smart card password dialog. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.CspParameters" /> class using a provider type, a provider name, a container name, access information, and a handle to an unmanaged smart card password dialog.
+          </para>
         </summary>
         <param name="providerType">
           <attribution
@@ -337,11 +337,11 @@
           />The provider type code that specifies the kind of provider to create.</param
         >
         <param name="providerName">
-          <attribution license="cc4" from="Microsoft" modified="false" />A provider name. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A provider name.
+        </param>
         <param name="keyContainerName">
-          <attribution license="cc4" from="Microsoft" modified="false" />A container name. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A container name.
+        </param>
         <param name="cryptoKeySecurity">
           <attribution
             license="cc4"
@@ -418,18 +418,18 @@
           />The provider type code that specifies the kind of provider to create.</param
         >
         <param name="providerName">
-          <attribution license="cc4" from="Microsoft" modified="false" />A provider name. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A provider name.
+        </param>
         <param name="keyContainerName">
-          <attribution license="cc4" from="Microsoft" modified="false" />A container name. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A container name.
+        </param>
         <param name="cryptoKeySecurity">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that represents access rights and audit rules for a container. </param
-        >
+          />An object that represents access rights and audit rules for a container.
+        </param>
         <param name="keyPassword">
           <attribution
             license="cc4"
@@ -468,8 +468,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see cref="T:System.Security.AccessControl.CryptoKeySecurity" /> object that represents access rights and audit rules for a container. </para
-          >
+            >Gets or sets a <see cref="T:System.Security.AccessControl.CryptoKeySecurity" /> object that represents access rights and audit rules for a container.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -519,15 +519,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="F:System.Security.Cryptography.CspParameters.KeyContainerName" /> field to specify a name for your key container.  You can use the container name to retrieve the persisted key within that container. </para
-          >
+            >Use the <see cref="F:System.Security.Cryptography.CspParameters.KeyContainerName" /> field to specify a name for your key container.  You can use the container name to retrieve the persisted key within that container.
+          </para>
           <para
             >For more information about creating key containers, see <format type="text/html">
               <a href="0dbcbd8d-0dcf-40e9-9f0c-e3f162d35ccc"
                 >How to: Store Asymmetric Keys in a Key Container</a
               >
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -554,11 +554,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="F:System.Security.Cryptography.CspParameters.KeyNumber" /> field initializes the <see cref="P:System.Security.Cryptography.CspKeyContainerInfo.KeyNumber" /> property when you initialize a <see cref="T:System.Security.Cryptography.CspKeyContainerInfo" /> object with a <see cref="T:System.Security.Cryptography.CspParameters" /> object.   </para
-          >
+            >The <see cref="F:System.Security.Cryptography.CspParameters.KeyNumber" /> field initializes the <see cref="P:System.Security.Cryptography.CspKeyContainerInfo.KeyNumber" /> property when you initialize a <see cref="T:System.Security.Cryptography.CspKeyContainerInfo" /> object with a <see cref="T:System.Security.Cryptography.CspParameters" /> object.
+          </para>
           <para
-            >An exchange key is an asymmetric key pair used to encrypt session keys so that they can be safely stored and exchanged with other users.  You can use the <see cref="F:System.Security.Cryptography.KeyNumber.Exchange" /> value (1) to specify an exchange key.  This value corresponds to the AT_KEYEXCHANGE value used in the unmanaged Microsoft Cryptographic API (CAPI).  </para
-          >
+            >An exchange key is an asymmetric key pair used to encrypt session keys so that they can be safely stored and exchanged with other users.  You can use the <see cref="F:System.Security.Cryptography.KeyNumber.Exchange" /> value (1) to specify an exchange key.  This value corresponds to the AT_KEYEXCHANGE value used in the unmanaged Microsoft Cryptographic API (CAPI).
+          </para>
           <para
             >A signature key is an asymmetric key pair used for authenticating digitally signed messages or files.  You can use the <see cref="F:System.Security.Cryptography.KeyNumber.Signature" /> value (2) to specify a signature key.  This value corresponds to the AT_SIGNATURE value used in CAPI.</para
           >
@@ -595,8 +595,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.Security.Cryptography.CspParameters.KeyPassword" /> property to supply a password for a smart card key.  When you specify a password using this property, a password dialog box will not be presented to the user.  </para
-          >
+            >Use the <see cref="P:System.Security.Cryptography.CspParameters.KeyPassword" /> property to supply a password for a smart card key.  When you specify a password using this property, a password dialog box will not be presented to the user.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -621,8 +621,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.Security.Cryptography.CspParameters.ParentWindowHandle" /> property to specify a handle to the unmanaged parent window for a smart card password dialog box.  When you specify a handle using this property, a smart card password dialog box will be presented to the user.  </para
-          >
+            >Use the <see cref="P:System.Security.Cryptography.CspParameters.ParentWindowHandle" /> property to specify a handle to the unmanaged parent window for a smart card password dialog box.  When you specify a handle using this property, a smart card password dialog box will be presented to the user.
+          </para>
           <para
             >You can avoid presenting a smart card password dialog box by explicitly specifying a password by using the <see cref="P:System.Security.Cryptography.CspParameters.KeyPassword" /> property.</para
           >

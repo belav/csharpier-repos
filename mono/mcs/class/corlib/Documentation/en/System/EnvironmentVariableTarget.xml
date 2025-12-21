@@ -23,8 +23,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.EnvironmentVariableTarget" /> enumeration is used by certain overloads of the <see cref="Overload:System.Environment.SetEnvironmentVariable" />, <see cref="Overload:System.Environment.GetEnvironmentVariable" />, and <see cref="Overload:System.Environment.GetEnvironmentVariables" /> methods to specify the location, or target, where the name and value of an environment variable is stored or retrieved. </para
-      >
+        >The <see cref="T:System.EnvironmentVariableTarget" /> enumeration is used by certain overloads of the <see cref="Overload:System.Environment.SetEnvironmentVariable" />, <see cref="Overload:System.Environment.GetEnvironmentVariable" />, and <see cref="Overload:System.Environment.GetEnvironmentVariables" /> methods to specify the location, or target, where the name and value of an environment variable is stored or retrieved.
+      </para>
       <para>The target can be one of three locations: the environment block associated with the current process, the Windows operating system registry key reserved for environment variables associated with the current user, or the registry key reserved for environment variables associated with all users on the local machine. </para>
     </remarks>
     <summary>

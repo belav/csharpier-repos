@@ -19,13 +19,13 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.UI.WebResourceAttribute" /> class is valid only when used on assembly declarations. It is used to enable a specified embedded resource in an assembly for use as a Web resource. </para
-      >
+        >The <see cref="T:System.Web.UI.WebResourceAttribute" /> class is valid only when used on assembly declarations. It is used to enable a specified embedded resource in an assembly for use as a Web resource.
+      </para>
       <para
         >For more information on resources, see <format type="text/html">
           <a href="0936b3b2-9e6e-4abe-9c06-364efef9dbbd">ASP.NET Web Page Resources Overview</a>
-        </format>. </para
-      >
+        </format>.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -86,8 +86,8 @@
             >Examples of content types are "image/jpeg" and "text/xml". For more information on MIME types, go to the <see
               cref="http://go.microsoft.com/fwlink/?LinkId=43988"
               >Internet Assigned Numbers Authority</see
-            > Web site and refer to the section on media types. </para
-          >
+            > Web site and refer to the section on media types.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

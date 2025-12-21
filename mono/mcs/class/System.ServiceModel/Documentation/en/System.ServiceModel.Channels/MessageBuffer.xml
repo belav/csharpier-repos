@@ -27,11 +27,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The body of a <see cref="T:System.ServiceModel.Channels.Message" /> instance can only be consumed or written once. If you wish to consume a <see cref="T:System.ServiceModel.Channels.Message" /> instance more than once, you should use the <see cref="T:System.ServiceModel.Channels.MessageBuffer" /> class to completely store an entire <see cref="T:System.ServiceModel.Channels.Message" /> instance into memory. </para
-      >
+        >The body of a <see cref="T:System.ServiceModel.Channels.Message" /> instance can only be consumed or written once. If you wish to consume a <see cref="T:System.ServiceModel.Channels.Message" /> instance more than once, you should use the <see cref="T:System.ServiceModel.Channels.MessageBuffer" /> class to completely store an entire <see cref="T:System.ServiceModel.Channels.Message" /> instance into memory.
+      </para>
       <para
-        >A <see cref="T:System.ServiceModel.Channels.MessageBuffer" /> instance is constructed by calling <see cref="M:System.ServiceModel.Channels.Message.CreateBufferedCopy(System.Int32)" /> of a <see cref="T:System.ServiceModel.Channels.Message" /> instance. A new <see cref="T:System.ServiceModel.Channels.MessageBuffer" /> is then created and returned, which assumes ownership of the <see cref="T:System.ServiceModel.Channels.Message" /> and reads the entire content into memory. </para
-      >
+        >A <see cref="T:System.ServiceModel.Channels.MessageBuffer" /> instance is constructed by calling <see cref="M:System.ServiceModel.Channels.Message.CreateBufferedCopy(System.Int32)" /> of a <see cref="T:System.ServiceModel.Channels.Message" /> instance. A new <see cref="T:System.ServiceModel.Channels.MessageBuffer" /> is then created and returned, which assumes ownership of the <see cref="T:System.ServiceModel.Channels.Message" /> and reads the entire content into memory.
+      </para>
       <para
         >In order to retrieve a copy of a <see cref="T:System.ServiceModel.Channels.Message" /> from the <see cref="T:System.ServiceModel.Channels.MessageBuffer" />, you must call the <see cref="M:System.ServiceModel.Channels.MessageBuffer.CreateMessage" /> method of the <see cref="T:System.ServiceModel.Channels.MessageBuffer" />. This returns an identical copy of the original <see cref="T:System.ServiceModel.Channels.Message" /> instance you provided.</para
       >
@@ -85,8 +85,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.MessageBuffer" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.MessageBuffer" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -111,8 +111,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the approximate number of bytes consumed by this <see cref="T:System.ServiceModel.Channels.MessageBuffer" />. </para
-          >
+            >Gets the approximate number of bytes consumed by this <see cref="T:System.ServiceModel.Channels.MessageBuffer" />.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -177,8 +177,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An identical copy of the original <see cref="T:System.ServiceModel.Channels.Message" /> instance you previously provided to the <see cref="M:System.ServiceModel.Channels.Message.CreateBufferedCopy(System.Int32)" /> method of a <see cref="T:System.ServiceModel.Channels.Message" /> instance. </para
-          >
+            >An identical copy of the original <see cref="T:System.ServiceModel.Channels.Message" /> instance you previously provided to the <see cref="M:System.ServiceModel.Channels.Message.CreateBufferedCopy(System.Int32)" /> method of a <see cref="T:System.ServiceModel.Channels.Message" /> instance.
+          </para>
         </returns>
       </Docs>
     </Member>
@@ -386,8 +386,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call this method when you are finished using the <see cref="T:System.ServiceModel.Channels.MessageBuffer" />. This method leaves the <see cref="T:System.ServiceModel.Channels.MessageBuffer" /> in an unusable state. After calling this method, you must release all references to the <see cref="T:System.ServiceModel.Channels.MessageBuffer" /> so the garbage collector can reclaim the memory that the <see cref="T:System.ServiceModel.Channels.MessageBuffer" /> was occupying. </para
-          >
+            >Call this method when you are finished using the <see cref="T:System.ServiceModel.Channels.MessageBuffer" />. This method leaves the <see cref="T:System.ServiceModel.Channels.MessageBuffer" /> in an unusable state. After calling this method, you must release all references to the <see cref="T:System.ServiceModel.Channels.MessageBuffer" /> so the garbage collector can reclaim the memory that the <see cref="T:System.ServiceModel.Channels.MessageBuffer" /> was occupying.
+          </para>
           <block subset="none" type="note">
             <para
               >Always call this method before you release your last reference to the <see cref="T:System.ServiceModel.Channels.MessageBuffer" />. Otherwise, the resources it is using are not freed until the garbage collector calls the <see cref="T:System.ServiceModel.Channels.MessageBuffer" /> object's Finalize method.</para

@@ -22,8 +22,8 @@
         >The <see cref="T:System.Security.Cryptography.Xml.EncryptedXml" /> class is the main class used for XML encryption in the .NET Framework. XML Encryption is a standards-based, interoperable way to encrypt all or part of an XML document or any arbitrary data. The .NET Framework XML encryption classes implement the World Wide Web Consortium (W3C) specification for XML encryption located at http://www.w3.org/TR/xmlenc-core/.</para
       >
       <para
-        >Use the <see cref="T:System.Security.Cryptography.Xml.EncryptedXml" /> class whenever you need to share encrypted XML data between applications or organizations in a standard way. Any data encrypted using this class can be decrypted by any implementation of the W3C specification for XML encryption.  </para
-      >
+        >Use the <see cref="T:System.Security.Cryptography.Xml.EncryptedXml" /> class whenever you need to share encrypted XML data between applications or organizations in a standard way. Any data encrypted using this class can be decrypted by any implementation of the W3C specification for XML encryption.
+      </para>
       <para>XML encryption replaces any plain text XML element or document with the &lt;EncryptedData&gt; element, which contains an encrypted (or cipher text) representation of plain text XML or any arbitrary data. The &lt;EncryptedData&gt; element can optionally contain information about where to find a key that will decrypt the cipher text, and which cryptographic algorithm was used to encrypt the plain text.</para>
       <para>The &lt;EncryptedKey&gt; element is similar to the &lt;EncryptedData&gt; element in style and usage, except that it allows you to encrypt a key that will decrypt the value of the &lt;EncryptedData&gt; element. Note that the &lt;EncryptedKey&gt; element and the &lt;EncryptedData&gt; element will never contain an unencrypted key.</para>
       <para>Use one of the following methods to exchange key information:  </para>
@@ -836,8 +836,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="M:System.Security.Cryptography.Xml.EncryptedXml.EncryptKey(System.Byte[],System.Security.Cryptography.RSA,System.Boolean)" /> method to encrypt the key that a recipient uses to decrypt an &lt;EncryptedData&gt; element. This method accepts a value for <paramref name="rsa" /> that represents either the RSA PKCS#1 v1.5 algorithm or the RSA PKCS#1 type 2 algorithm (also called OAEP). </para
-          >
+            >Use the <see cref="M:System.Security.Cryptography.Xml.EncryptedXml.EncryptKey(System.Byte[],System.Security.Cryptography.RSA,System.Boolean)" /> method to encrypt the key that a recipient uses to decrypt an &lt;EncryptedData&gt; element. This method accepts a value for <paramref name="rsa" /> that represents either the RSA PKCS#1 v1.5 algorithm or the RSA PKCS#1 type 2 algorithm (also called OAEP).
+          </para>
           <para>Note that this method does not automatically place the encrypted key within an &lt;EncryptedKey&gt; element.  You must manually create the &lt;EncryptedKey&gt; element within your document.</para>
         </remarks>
         <summary>

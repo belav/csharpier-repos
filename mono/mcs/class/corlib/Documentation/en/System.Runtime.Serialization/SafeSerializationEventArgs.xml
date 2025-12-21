@@ -58,8 +58,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The class or structure that implements the <see cref="T:System.Runtime.Serialization.ISafeSerializationData" /> allows you to serialize custom data in security-transparent code. </para
-          >
+            >The class or structure that implements the <see cref="T:System.Runtime.Serialization.ISafeSerializationData" /> allows you to serialize custom data in security-transparent code.
+          </para>
           <para
             >For more information and an example, see the <see cref="T:System.Runtime.Serialization.ISafeSerializationData" /> class.</para
           >

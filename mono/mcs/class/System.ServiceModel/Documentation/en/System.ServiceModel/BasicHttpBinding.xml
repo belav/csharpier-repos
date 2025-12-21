@@ -23,8 +23,8 @@
         >The <see cref="T:System.ServiceModel.BasicHttpBinding" /> uses HTTP as the transport for sending SOAP 1.1 messages. A service can use this binding to expose endpoints that conform to WS-I BP 1.1, such as those that ASMX clients access. Similarly, a client can use the <see cref="T:System.ServiceModel.BasicHttpBinding" /> to communicate with services exposing endpoints that conform to WS-I BP 1.1, such as ASMX Web services or indigo1 services configured with the <see cref="T:System.ServiceModel.BasicHttpBinding" />.</para
       >
       <para
-        >Security is turned off by default, but can be added setting the <see cref="T:System.ServiceModel.BasicHttpSecurityMode" /> to a value other than <see cref="F:System.ServiceModel.BasicHttpSecurityMode.None" /> in the <see cref="M:System.ServiceModel.BasicHttpBinding.#ctor(System.ServiceModel.BasicHttpSecurityMode)" /> constructor. It uses a "Text" message encoding and UTF-8 text encoding by default. </para
-      >
+        >Security is turned off by default, but can be added setting the <see cref="T:System.ServiceModel.BasicHttpSecurityMode" /> to a value other than <see cref="F:System.ServiceModel.BasicHttpSecurityMode.None" /> in the <see cref="M:System.ServiceModel.BasicHttpBinding.#ctor(System.ServiceModel.BasicHttpSecurityMode)" /> constructor. It uses a "Text" message encoding and UTF-8 text encoding by default.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -114,8 +114,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.BasicHttpBinding" /> class with a binding specified by its configuration name. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.BasicHttpBinding" /> class with a binding specified by its configuration name.
+          </para>
         </summary>
         <param name="configurationName">
           <attribution
@@ -227,8 +227,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, the SOAP message is not secured and the client is not authenticated. To use a non-default type of security, use the <see cref="M:System.ServiceModel.BasicHttpBinding.#ctor(System.ServiceModel.BasicHttpSecurityMode)" /> constructor. </para
-          >
+            >By default, the SOAP message is not secured and the client is not authenticated. To use a non-default type of security, use the <see cref="M:System.ServiceModel.BasicHttpBinding.#ctor(System.ServiceModel.BasicHttpSecurityMode)" /> constructor.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

@@ -42,8 +42,8 @@
         > assigns a code point (a number) to each character in every supported script. A Unicode Transformation Format (UTF) is a way to encode that code point. The <see
           cref="http://go.microsoft.com/fwlink/?linkid=37123"
           >Unicode Standard</see
-        > uses the following UTFs: </para
-      >
+        > uses the following UTFs:
+      </para>
       <list type="bullet">
         <item>
           <para>UTF-8, which represents each code point as a sequence of one to four bytes.</para>
@@ -70,8 +70,8 @@
         >Likewise, the <see cref="M:System.Text.UnicodeEncoding.GetCharCount(System.Byte[],System.Int32,System.Int32)" /> method determines how many characters result in decoding a sequence of bytes, and the <see cref="M:System.Text.UnicodeEncoding.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" /> and <see cref="M:System.Text.UnicodeEncoding.GetString(System.Byte[],System.Int32,System.Int32)" /> methods perform the actual decoding.</para
       >
       <para>
-        <see cref="T:System.Text.UnicodeEncoding" /> corresponds to the Windows code pages 1200 (little endian byte order) and 1201 (big endian byte order). </para
-      >
+        <see cref="T:System.Text.UnicodeEncoding" /> corresponds to the Windows code pages 1200 (little endian byte order) and 1201 (big endian byte order).
+      </para>
       <para>The encoder can use the big endian byte order (most significant byte first) or the little endian byte order (least significant byte first). For example, the Latin Capital Letter A (code point U+0041) is serialized as follows (in hexadecimal): </para>
       <list type="bullet">
         <item>
@@ -83,8 +83,8 @@
       </list>
       <para>It is generally more efficient to store Unicode characters using the native byte order. For example, it is better to use the little endian byte order on little endian platforms, such as Intel computers.</para>
       <para
-        >Optionally, the <see cref="T:System.Text.UnicodeEncoding" /> object provides a preamble, which is an array of bytes that can be prefixed to the sequence of bytes resulting from the encoding process. If the preamble contains a byte order mark (BOM), it helps the decoder determine the byte order and the transformation format or UTF. The <see cref="M:System.Text.UnicodeEncoding.GetPreamble" /> method retrieves an array of bytes that can include the BOM. </para
-      >
+        >Optionally, the <see cref="T:System.Text.UnicodeEncoding" /> object provides a preamble, which is an array of bytes that can be prefixed to the sequence of bytes resulting from the encoding process. If the preamble contains a byte order mark (BOM), it helps the decoder determine the byte order and the transformation format or UTF. The <see cref="M:System.Text.UnicodeEncoding.GetPreamble" /> method retrieves an array of bytes that can include the BOM.
+      </para>
       <block subset="none" type="note">
         <para
           >To enable error detection and to make the class instance more secure, the application should use the <see cref="M:System.Text.UnicodeEncoding.#ctor" /> constructor that takes a <paramref name="throwOnInvalidBytes" /> parameter, and set that parameter to true. With error detection, a method that detects an invalid sequence of characters or bytes throws a <see cref="T:System.ArgumentException" />. Without error detection, no exception is thrown, and the invalid sequence is generally ignored.</para
@@ -179,15 +179,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to use the big endian byte order (most significant byte first), or false to use the little endian byte order (least significant byte first). </param
-        >
+          />true to use the big endian byte order (most significant byte first), or false to use the little endian byte order (least significant byte first).
+        </param>
         <param name="byteOrderMark">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to specify that a Unicode byte order mark is provided; otherwise, false. </param
-        >
+          />true to specify that a Unicode byte order mark is provided; otherwise, false.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -234,22 +234,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to use the big endian byte order (most significant byte first); false to use the little endian byte order (least significant byte first). </param
-        >
+          />true to use the big endian byte order (most significant byte first); false to use the little endian byte order (least significant byte first).
+        </param>
         <param name="byteOrderMark">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to specify that a Unicode byte order mark is provided; otherwise, false. </param
-        >
+          />true to specify that a Unicode byte order mark is provided; otherwise, false.
+        </param>
         <param name="throwOnInvalidBytes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to specify that an exception should be thrown when an invalid encoding is detected; otherwise, false. </param
-        >
+          />true to specify that an exception should be thrown when an invalid encoding is detected; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CharSize">
@@ -302,8 +302,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Two <see cref="T:System.Text.UnicodeEncoding" /> objects are considered equal if all of the following conditions are true: </para
-          >
+            >Two <see cref="T:System.Text.UnicodeEncoding" /> objects are considered equal if all of the following conditions are true:
+          </para>
           <list type="bullet">
             <item>
               <para>Both objects use the same byte order.</para>
@@ -333,8 +333,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to compare with the current object. </param
-        >
+          />The <see cref="T:System.Object" /> to compare with the current object.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -391,8 +391,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.String" /> containing the set of characters to encode. </param
-        >
+          />The <see cref="T:System.String" /> containing the set of characters to encode.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -452,15 +452,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A pointer to the first character to encode. </param
-        >
+          />A pointer to the first character to encode.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters to encode. </param
-        >
+          />The number of characters to encode.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetByteCount">
@@ -492,8 +492,8 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="chars " /> is <see langword="null" /> . </exception
-        >
+          <paramref name="chars " /> is <see langword="null" /> .
+        </exception>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <para><paramref name="index" /> &lt; 0.</para>
           <para>-or-</para>
@@ -528,22 +528,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character array containing the set of characters to encode. </param
-        >
+          />The character array containing the set of characters to encode.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the first character to encode. </param
-        >
+          />The index of the first character to encode.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters to encode. </param
-        >
+          />The number of characters to encode.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -562,8 +562,8 @@
       </Parameters>
       <Docs>
         <param name="s"
-          >A <see cref="T:System.String" /> to encode as Unicode-encoded characters. </param
-        >
+          >A <see cref="T:System.String" /> to encode as Unicode-encoded characters.
+        </param>
         <summary>
           <para>Encodes the specified string as Unicode-encoded characters. </para>
         </summary>
@@ -655,29 +655,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A pointer to the first character to encode. </param
-        >
+          />A pointer to the first character to encode.
+        </param>
         <param name="charCount">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters to encode. </param
-        >
+          />The number of characters to encode.
+        </param>
         <param name="bytes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A pointer to the location at which to start writing the resulting sequence of bytes. </param
-        >
+          />A pointer to the location at which to start writing the resulting sequence of bytes.
+        </param>
         <param name="byteCount">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum number of bytes to write. </param
-        >
+          />The maximum number of bytes to write.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetBytes">
@@ -761,36 +761,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character array containing the set of characters to encode. </param
-        >
+          />The character array containing the set of characters to encode.
+        </param>
         <param name="charIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the first character to encode. </param
-        >
+          />The index of the first character to encode.
+        </param>
         <param name="charCount">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters to encode. </param
-        >
+          />The number of characters to encode.
+        </param>
         <param name="bytes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte array to contain the resulting sequence of bytes. </param
-        >
+          />The byte array to contain the resulting sequence of bytes.
+        </param>
         <param name="byteIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index at which to start writing the resulting sequence of bytes. </param
-        >
+          />The index at which to start writing the resulting sequence of bytes.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -877,36 +877,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.String" /> containing the set of characters to encode. </param
-        >
+          />The <see cref="T:System.String" /> containing the set of characters to encode.
+        </param>
         <param name="charIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the first character to encode. </param
-        >
+          />The index of the first character to encode.
+        </param>
         <param name="charCount">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters to encode. </param
-        >
+          />The number of characters to encode.
+        </param>
         <param name="bytes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte array to contain the resulting sequence of bytes. </param
-        >
+          />The byte array to contain the resulting sequence of bytes.
+        </param>
         <param name="byteIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index at which to start writing the resulting sequence of bytes. </param
-        >
+          />The index at which to start writing the resulting sequence of bytes.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -963,15 +963,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A pointer to the first byte to decode. </param
-        >
+          />A pointer to the first byte to decode.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes to decode. </param
-        >
+          />The number of bytes to decode.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetCharCount">
@@ -1003,8 +1003,8 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="bytes " /> is <see langword="null" />. </exception
-        >
+          <paramref name="bytes " /> is <see langword="null" />.
+        </exception>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <para><paramref name="index" /> &lt; 0.</para>
           <para> -or-</para>
@@ -1036,22 +1036,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte array containing the sequence of bytes to decode. </param
-        >
+          />The byte array containing the sequence of bytes to decode.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the first byte to decode. </param
-        >
+          />The index of the first byte to decode.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes to decode. </param
-        >
+          />The number of bytes to decode.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1115,29 +1115,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A pointer to the first byte to decode. </param
-        >
+          />A pointer to the first byte to decode.
+        </param>
         <param name="byteCount">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes to decode. </param
-        >
+          />The number of bytes to decode.
+        </param>
         <param name="chars">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A pointer to the location at which to start writing the resulting set of characters. </param
-        >
+          />A pointer to the location at which to start writing the resulting set of characters.
+        </param>
         <param name="charCount">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum number of characters to write. </param
-        >
+          />The maximum number of characters to write.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetChars">
@@ -1188,8 +1188,8 @@
           <para><paramref name="charIndex" /> &lt; 0.</para>
           <para>-or-</para>
           <para>
-            <paramref name="byteIndex" /> and <paramref name="byteCount" /> do not specify a valid range in <paramref name="bytes" /> (i.e. (<paramref name="byteIndex " />+ <paramref name="byteCount " />) &gt; <paramref name="bytes" />.Length). </para
-          >
+            <paramref name="byteIndex" /> and <paramref name="byteCount" /> do not specify a valid range in <paramref name="bytes" /> (i.e. (<paramref name="byteIndex " />+ <paramref name="byteCount " />) &gt; <paramref name="bytes" />.Length).
+          </para>
           <para>-or-</para>
           <para><paramref name="charIndex" /> &gt; <paramref name="chars" />.Length.</para>
         </exception>
@@ -1218,36 +1218,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte array containing the sequence of bytes to decode. </param
-        >
+          />The byte array containing the sequence of bytes to decode.
+        </param>
         <param name="byteIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the first byte to decode. </param
-        >
+          />The index of the first byte to decode.
+        </param>
         <param name="byteCount">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes to decode. </param
-        >
+          />The number of bytes to decode.
+        </param>
         <param name="chars">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character array to contain the resulting set of characters. </param
-        >
+          />The character array to contain the resulting set of characters.
+        </param>
         <param name="charIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index at which to start writing the resulting set of characters. </param
-        >
+          />The index at which to start writing the resulting set of characters.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1440,8 +1440,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters to encode. </param
-        >
+          />The number of characters to encode.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1502,8 +1502,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes to decode. </param
-        >
+          />The number of bytes to decode.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1531,8 +1531,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Optionally, the <see cref="T:System.Text.UnicodeEncoding" /> object provides a preamble that is an array of bytes that can be prefixed to the sequence of bytes resulting from the encoding process. If the preamble contains a byte order mark (in Unicode, code point U+FEFF), it helps the decoder determine the byte order and the transformation format or UTF. </para
-          >
+            >Optionally, the <see cref="T:System.Text.UnicodeEncoding" /> object provides a preamble that is an array of bytes that can be prefixed to the sequence of bytes resulting from the encoding process. If the preamble contains a byte order mark (in Unicode, code point U+FEFF), it helps the decoder determine the byte order and the transformation format or UTF.
+          </para>
           <para>The Unicode byte order mark (BOM) is serialized as follows (in hexadecimal): </para>
           <list type="bullet">
             <item>
@@ -1613,22 +1613,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte array containing the sequence of bytes to decode. </param
-        >
+          />The byte array containing the sequence of bytes to decode.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the first byte to decode. </param
-        >
+          />The index of the first byte to decode.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes to decode. </param
-        >
+          />The number of bytes to decode.
+        </param>
       </Docs>
     </Member>
   </Members>

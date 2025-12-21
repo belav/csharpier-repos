@@ -87,8 +87,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.NameTable" /> to use. </param
-        >
+          />The <see cref="T:System.Xml.NameTable" /> to use.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CompareDocument">
@@ -138,15 +138,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The base URI of the first document to compare. </param
-        >
+          />The base URI of the first document to compare.
+        </param>
         <param name="nextbaseUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The base URI of the second document to compare. </param
-        >
+          />The base URI of the second document to compare.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="PreserveWhitespace">
@@ -185,8 +185,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The white space node that is to be preserved or stripped in the current context. </param
-        >
+          />The white space node that is to be preserved or stripped in the current context.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ResolveFunction">
@@ -231,22 +231,18 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The prefix of the function as it appears in the XPath expression. </param
-        >
+          />The prefix of the function as it appears in the XPath expression.
+        </param>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the function. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the function.
+        </param>
         <param name="ArgTypes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of argument types for the function being resolved. This allows you to select between methods with the same name (for example, overloaded methods). </param
-        >
+          />An array of argument types for the function being resolved. This allows you to select between methods with the same name (for example, overloaded methods).
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ResolveVariable">
@@ -295,15 +291,11 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The prefix of the variable as it appears in the XPath expression. </param
-        >
+          />The prefix of the variable as it appears in the XPath expression.
+        </param>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the variable. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the variable.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Whitespace">

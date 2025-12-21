@@ -27,8 +27,8 @@
         >After you create a <see cref="T:System.Xml.Serialization.SoapAttributeOverrides" />, you create an <see cref="T:System.Xml.Serialization.XmlTypeMapping" /> using the <see cref="M:System.Xml.Serialization.SoapReflectionImporter.ImportTypeMapping(System.Type)" /> method of the <see cref="T:System.Xml.Serialization.SoapReflectionImporter" /> class. Pass the resulting object as an argument to the <see cref="M:System.Xml.Serialization.XmlSerializer.#ctor" /> constructor. The resulting <see cref="T:System.Xml.Serialization.XmlSerializer" /> uses the data contained by the <see cref="T:System.Xml.Serialization.SoapAttributeOverrides" /> to override attributes that control how objects are serialized. To accomplish this, the <see cref="T:System.Xml.Serialization.SoapAttributeOverrides" /> contains a collection of the object types that are overridden, as well as a <see cref="T:System.Xml.Serialization.SoapAttributes" /> associated with each overridden object type. Each <see cref="T:System.Xml.Serialization.SoapAttributes" /> contains an appropriate set of attribute objects that control how each field, property, or class is serialized.</para
       >
       <para
-        >The process for creating and using a <see cref="T:System.Xml.Serialization.SoapAttributeOverrides" /> is as follows: </para
-      >
+        >The process for creating and using a <see cref="T:System.Xml.Serialization.SoapAttributeOverrides" /> is as follows:
+      </para>
       <list type="ordered">
         <item>
           <para>Create a <see cref="T:System.Xml.Serialization.SoapAttributes" />.</para>
@@ -95,8 +95,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.SoapAttributeOverrides" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.SoapAttributeOverrides" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -143,15 +143,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of the object that is overridden. </param
-        >
+          />The <see cref="T:System.Type" /> of the object that is overridden.
+        </param>
         <param name="attributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Xml.Serialization.SoapAttributes" /> that represents the overriding attributes. </param
-        >
+          />A <see cref="T:System.Xml.Serialization.SoapAttributes" /> that represents the overriding attributes.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Add">
@@ -199,22 +199,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of the object to override. </param
-        >
+          />The <see cref="T:System.Type" /> of the object to override.
+        </param>
         <param name="member">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the member to override. </param
-        >
+          />The name of the member to override.
+        </param>
         <param name="attributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Xml.Serialization.SoapAttributes" /> that represents the overriding attributes. </param
-        >
+          />A <see cref="T:System.Xml.Serialization.SoapAttributes" /> that represents the overriding attributes.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Item">

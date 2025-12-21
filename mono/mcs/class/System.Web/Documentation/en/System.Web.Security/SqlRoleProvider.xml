@@ -273,8 +273,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.Security.SqlRoleProvider.GetAllRoles" /> method is called by the <see cref="T:System.Web.Security.Roles" /> class to retrieve a list of all the roles in the SQL Server database specified in the ASP.NET application's configuration file (Web.config). </para
-          >
+            >The <see cref="M:System.Web.Security.SqlRoleProvider.GetAllRoles" /> method is called by the <see cref="T:System.Web.Security.Roles" /> class to retrieve a list of all the roles in the SQL Server database specified in the ASP.NET application's configuration file (Web.config).
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -306,8 +306,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.Security.SqlRoleProvider.GetRolesForUser(System.String)" /> method is called by the <see cref="T:System.Web.Security.Roles" /> class to retrieve a list of a specified user's roles from the SQL Server database specified in the ASP.NET application's configuration file (Web.config). </para
-          >
+            >The <see cref="M:System.Web.Security.SqlRoleProvider.GetRolesForUser(System.String)" /> method is called by the <see cref="T:System.Web.Security.Roles" /> class to retrieve a list of a specified user's roles from the SQL Server database specified in the ASP.NET application's configuration file (Web.config).
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -322,8 +322,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The user to return a list of roles for. </param
-        >
+          />The user to return a list of roles for.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -347,8 +347,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.Security.SqlRoleProvider.GetUsersInRole(System.String)" /> method is called by the <see cref="T:System.Web.Security.Roles" /> class to retrieve the list of users associated with the specified role in the SQL Server database specified in the ASP.NET application's configuration file (Web.config). </para
-          >
+            >The <see cref="M:System.Web.Security.SqlRoleProvider.GetUsersInRole(System.String)" /> method is called by the <see cref="T:System.Web.Security.Roles" /> class to retrieve the list of users associated with the specified role in the SQL Server database specified in the ASP.NET application's configuration file (Web.config).
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -393,15 +393,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the <see cref="T:System.Web.Security.SqlRoleProvider" /> instance to initialize. </param
-        >
+          />The name of the <see cref="T:System.Web.Security.SqlRoleProvider" /> instance to initialize.
+        </param>
         <param name="config">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Collections.Specialized.NameValueCollection" /> that contains the names and values of configuration options for the role provider. </param
-        >
+          />A <see cref="T:System.Collections.Specialized.NameValueCollection" /> that contains the names and values of configuration options for the role provider.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -426,8 +426,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.Security.SqlRoleProvider.IsUserInRole(System.String,System.String)" /> method is called by the <see cref="T:System.Web.Security.Roles" /> class and the <see cref="M:System.Security.Principal.IPrincipal.IsInRole(System.String)" /> method of the <see cref="P:System.Web.UI.Page.User" /> property to determine whether a user is associated with a role in the SQL Server database specified in the ASP.NET application's configuration file (Web.config). </para
-          >
+            >The <see cref="M:System.Web.Security.SqlRoleProvider.IsUserInRole(System.String,System.String)" /> method is called by the <see cref="T:System.Web.Security.Roles" /> class and the <see cref="M:System.Security.Principal.IPrincipal.IsInRole(System.String)" /> method of the <see cref="P:System.Web.UI.Page.User" /> property to determine whether a user is associated with a role in the SQL Server database specified in the ASP.NET application's configuration file (Web.config).
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -442,8 +442,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The user name to search for. </param
-        >
+          />The user name to search for.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -484,8 +484,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string array of user names to be removed from the specified roles. </param
-        >
+          />A string array of user names to be removed from the specified roles.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -506,8 +506,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.Security.SqlRoleProvider.RoleExists(System.String)" /> method is called by the <see cref="T:System.Web.Security.Roles" /> class to determine whether a role name exists in the SQL Server database specified in the ASP.NET application's configuration file (Web.config). </para
-          >
+            >The <see cref="M:System.Web.Security.SqlRoleProvider.RoleExists(System.String)" /> method is called by the <see cref="T:System.Web.Security.Roles" /> class to determine whether a role name exists in the SQL Server database specified in the ASP.NET application's configuration file (Web.config).
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

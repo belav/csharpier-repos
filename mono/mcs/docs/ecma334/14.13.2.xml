@@ -14,8 +14,8 @@
   </paragraph>
   <paragraph>When the left operand of a compound assignment is a property access or indexer access, the property or indexer must have both a get accessor and a set accessor. If this is not the case, a compile-time error occurs. </paragraph>
   <paragraph
-    >The second rule above permits x op= y to be evaluated as x = (T)(x op y) in certain contexts. The rule exists such that the predefined operators can be used as compound operators when the left operand is of type <keyword>sbyte</keyword>, <keyword>byte</keyword>, <keyword>short</keyword>, <keyword>ushort</keyword>, or <keyword>char</keyword>. Even when both arguments are of one of those types, the predefined operators produce a result of type <keyword>int</keyword>, as described in <hyperlink>14.2.6.2</hyperlink>. Thus, without a cast it would not be possible to assign the result to the left operand. </paragraph
-  >
+    >The second rule above permits x op= y to be evaluated as x = (T)(x op y) in certain contexts. The rule exists such that the predefined operators can be used as compound operators when the left operand is of type <keyword>sbyte</keyword>, <keyword>byte</keyword>, <keyword>short</keyword>, <keyword>ushort</keyword>, or <keyword>char</keyword>. Even when both arguments are of one of those types, the predefined operators produce a result of type <keyword>int</keyword>, as described in <hyperlink>14.2.6.2</hyperlink>. Thus, without a cast it would not be possible to assign the result to the left operand.
+  </paragraph>
   <paragraph
     >The intuitive effect of the rule for predefined operators is simply that x op= y is permitted if both of x op y and x = y are permitted. <example
       >[Example: In the example <code_example>

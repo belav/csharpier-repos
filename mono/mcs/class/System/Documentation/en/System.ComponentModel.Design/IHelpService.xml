@@ -69,22 +69,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the attribute to add. </param
-        >
+          />The name of the attribute to add.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value of the attribute. </param
-        >
+          />The value of the attribute.
+        </param>
         <param name="keywordType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the keyword, from the enumeration <see cref="T:System.ComponentModel.Design.HelpKeywordType" />. </param
-        >
+          />The type of the keyword, from the enumeration <see cref="T:System.ComponentModel.Design.HelpKeywordType" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ClearContextAttributes">
@@ -149,8 +149,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The priority type of the subcontext to add. </param
-        >
+          />The priority type of the subcontext to add.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RemoveContextAttribute">
@@ -186,15 +186,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the attribute to remove. </param
-        >
+          />The name of the attribute to remove.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value of the attribute to remove. </param
-        >
+          />The value of the attribute to remove.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RemoveLocalContext">
@@ -231,8 +231,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local context <see cref="T:System.ComponentModel.Design.IHelpService" /> to remove. </param
-        >
+          />The local context <see cref="T:System.ComponentModel.Design.IHelpService" /> to remove.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ShowHelpFromKeyword">
@@ -270,8 +270,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The keyword of the Help topic to display. </param
-        >
+          />The keyword of the Help topic to display.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ShowHelpFromUrl">
@@ -306,8 +306,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URL of the Help topic to display. </param
-        >
+          />The URL of the Help topic to display.
+        </param>
       </Docs>
     </Member>
   </Members>

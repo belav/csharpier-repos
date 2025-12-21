@@ -124,8 +124,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Net.IPAddress" /> of the multicast group. </param
-        >
+          />The <see cref="T:System.Net.IPAddress" /> of the multicast group.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -218,15 +218,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The group <see cref="T:System.Net.IPAddress" />. </param
-        >
+          />The group <see cref="T:System.Net.IPAddress" />.
+        </param>
         <param name="mcint">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local <see cref="T:System.Net.IPAddress" />. </param
-        >
+          />The local <see cref="T:System.Net.IPAddress" />.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

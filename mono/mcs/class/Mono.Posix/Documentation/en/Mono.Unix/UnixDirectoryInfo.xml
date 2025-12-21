@@ -92,8 +92,8 @@
               >To obtain the current working 
           directory, see 
           <see cref="M:.Mono.Unix.UnixDirectoryInfo.GetCurrentDirectory" />.
-          </block
-            >
+
+            </block>
           </para>
           <para
             >It is valid to construct 
@@ -109,13 +109,13 @@
         </remarks>
         <exception cref="T:System.ArgumentNullException">
           <paramref name="path" /> is <see langword="null" />.
-        </exception
-        >
+
+        </exception>
         <exception cref="T:System.ArgumentException">
           <paramref name="path" /> contains invalid characters; see
           <see cref="M:Mono.Unix.UnixPath.GetInvalidPathChars" />.
-        </exception
-        >
+
+        </exception>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -148,58 +148,58 @@
           <block subset="none" type="note">
             The <c>Create</c> obeys the process'
             <see cref="M:Mono.Unix.Native.Syscall.umask" /> value.
-          </block
-          >
+
+          </block>
         </remarks>
         <exception cref="T:System.UnauthorizedAccessException">
           <para
             >Search permission is denied for a component of 
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />.
             [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />]
-            </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >Write permission is denied on the parent directory of
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />.
             [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />]
-          </para
-          >
+
+          </para>
         </exception>
         <exception cref="T:System.IO.DirectoryNotFoundException">
           A component of 
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is not a
           directory.
           [<see cref="F:Mono.Unix.Native.Errno.ENOTDIR" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:System.IO.FileNotFoundException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> does not
           exist.
           [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:System.IO.IOException">
           <para
             >An I/O error occurred while making the file system entry or
           allocating the inode.
           [<see cref="F:Mono.Unix.Native.Errno.EIO" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >An I/O error occurred while reading from or writing to the
           file system.
           [<see cref="F:Mono.Unix.Native.Errno.EIO" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >The directory entry to be created resides in a read-only file
           system.
           [<see cref="F:Mono.Unix.Native.Errno.EROFS" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> cannot
@@ -207,51 +207,51 @@
           will contain the directory.  See
           <see cref="P:Mono.Unix.UnixDriveInfo.AvailableFreeSpace" />.
           [<see cref="F:Mono.Unix.Native.Errno.ENOSPC" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >There are no free inodes on the file system on which the
           directory is being created.
           [<see cref="F:Mono.Unix.Native.Errno.ENOSPC" />]
-          </para
-          >
+
+          </para>
         </exception>
         <exception cref="T:System.IO.PathTooLongException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> was too long.
           [<see cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:Mono.Unix.UnixIOException">
           <para
             >Too many symbolic links were encountered in translating 
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />.
           [<see cref="F:Mono.Unix.Native.Errno.ELOOP" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> already
           exists.
           [<see cref="F:Mono.Unix.Native.Errno.EEXIST" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> cannot
           be created because the user's quota of disk blocks on the file
           system that will contain the directory has been exhausted.
           [<see cref="F:Mono.Unix.Native.Errno.EDQUOT" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> cannot
           be created because the user's quota of inodes on the file system on
           which the directory is being created has been exhausted.
           [<see cref="F:Mono.Unix.Native.Errno.EDQUOT" />]
-          </para
-          >
+
+          </para>
         </exception>
       </Docs>
     </Member>
@@ -290,58 +290,58 @@
           <block subset="none" type="note">
             The <c>Create</c> obeys the process'
             <see cref="M:Mono.Unix.Native.Syscall.umask" /> value.
-          </block
-          >
+
+          </block>
         </remarks>
         <exception cref="T:System.UnauthorizedAccessException">
           <para
             >Search permission is denied for a component of 
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />.
           [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >Write permission is denied on the parent directory of
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />.
           [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />]
-          </para
-          >
+
+          </para>
         </exception>
         <exception cref="T:System.IO.DirectoryNotFoundException">
           A component of 
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is not a
           directory.
           [<see cref="F:Mono.Unix.Native.Errno.ENOTDIR" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:System.IO.FileNotFoundException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> does not
           exist.
           [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:System.IO.IOException">
           <para
             >An I/O error occurred while making the file system entry or
           allocating the inode.
           [<see cref="F:Mono.Unix.Native.Errno.EIO" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >An I/O error occurred while reading from or writing to the
           file system.
           [<see cref="F:Mono.Unix.Native.Errno.EIO" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >The directory entry to be created resides in a read-only file
           system.
           [<see cref="F:Mono.Unix.Native.Errno.EROFS" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> cannot
@@ -349,51 +349,51 @@
           will contain the directory.  See
           <see cref="P:Mono.Unix.UnixDriveInfo.AvailableFreeSpace" />.
           [<see cref="F:Mono.Unix.Native.Errno.ENOSPC" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >There are no free inodes on the file system on which the
           directory is being created.
           [<see cref="F:Mono.Unix.Native.Errno.ENOSPC" />]
-          </para
-          >
+
+          </para>
         </exception>
         <exception cref="T:System.IO.PathTooLongException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> was too long.
           [<see cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:Mono.Unix.UnixIOException">
           <para
             >Too many symbolic links were encountered in translating 
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />.
           [<see cref="F:Mono.Unix.Native.Errno.ELOOP" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> already
           exists.
           [<see cref="F:Mono.Unix.Native.Errno.EEXIST" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> cannot
           be created because the user's quota of disk blocks on the file
           system that will contain the directory has been exhausted.
           [<see cref="F:Mono.Unix.Native.Errno.EDQUOT" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> cannot
           be created because the user's quota of inodes on the file system on
           which the directory is being created has been exhausted.
           [<see cref="F:Mono.Unix.Native.Errno.EDQUOT" />]
-          </para
-          >
+
+          </para>
         </exception>
         <altmember cref="M:Mono.Unix.Native.Syscall.mkdir" />
       </Docs>
@@ -440,50 +440,50 @@
             >Search permission is denied for a component of 
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />.
           [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >Write permission is denied on the parent directory of
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />.
           [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />]
-          </para
-          >
+
+          </para>
         </exception>
         <exception cref="T:System.IO.DirectoryNotFoundException">
           A component of 
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is not a
           directory.
           [<see cref="F:Mono.Unix.Native.Errno.ENOTDIR" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:System.IO.FileNotFoundException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> does not
           exist.
           [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:System.IO.IOException">
           <para
             >An I/O error occurred while making the file system entry or
           allocating the inode.
           [<see cref="F:Mono.Unix.Native.Errno.EIO" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >An I/O error occurred while reading from or writing to the
           file system.
           [<see cref="F:Mono.Unix.Native.Errno.EIO" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >The directory entry to be created resides in a read-only file
           system.
           [<see cref="F:Mono.Unix.Native.Errno.EROFS" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> cannot
@@ -491,51 +491,51 @@
           will contain the directory.  See
           <see cref="P:Mono.Unix.UnixDriveInfo.AvailableFreeSpace" />.
           [<see cref="F:Mono.Unix.Native.Errno.ENOSPC" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >There are no free inodes on the file system on which the
           directory is being created.
           [<see cref="F:Mono.Unix.Native.Errno.ENOSPC" />]
-          </para
-          >
+
+          </para>
         </exception>
         <exception cref="T:System.IO.PathTooLongException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> was too long.
           [<see cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:Mono.Unix.UnixIOException">
           <para
             >Too many symbolic links were encountered in translating 
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />.
           [<see cref="F:Mono.Unix.Native.Errno.ELOOP" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> already
           exists.
           [<see cref="F:Mono.Unix.Native.Errno.EEXIST" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> cannot
           be created because the user's quota of disk blocks on the file
           system that will contain the directory has been exhausted.
           [<see cref="F:Mono.Unix.Native.Errno.EDQUOT" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> cannot
           be created because the user's quota of inodes on the file system on
           which the directory is being created has been exhausted.
           [<see cref="F:Mono.Unix.Native.Errno.EDQUOT" />]
-          </para
-          >
+
+          </para>
         </exception>
         <altmember cref="M:Mono.Unix.Native.Syscall.mkdir" />
       </Docs>
@@ -589,8 +589,8 @@
           >Deletes <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />
         and, if indicated, removes all files and directories within
         Deletes <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />.
-        </summary
-        >
+
+        </summary>
         <remarks>
           <para>
             <see langword="false" /> is the default value for the 
@@ -605,8 +605,8 @@
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> does not
           support the removal of file system entries.
           [<see cref="F:Mono.Unix.Native.Errno.EPERM" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >The directory containing 
@@ -617,8 +617,8 @@
           neither the uid of the file to be deleted nor that of the directory
           containing it.
           [<see cref="F:Mono.Unix.Native.Errno.EPERM" />]
-          </para
-          >
+
+          </para>
         </exception>
         <exception cref="T:System.UnauthorizedAccessException">
           <para
@@ -627,71 +627,71 @@
           allowed for the processe's effective user id 
           <see cref="P:Mono.Unix.UnixEnvironment.EffectiveUserId" />.
           [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >One of the directories in 
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> did not have
           search (execute) permissions.
           [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />]
-          </para
-          >
+
+          </para>
         </exception>
         <exception cref="T:System.IO.DirectoryNotFoundException">
           A component of 
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> is not a
           directory.  
           [<see cref="F:Mono.Unix.Native.Errno.ENOTDIR" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:System.IO.FileNotFoundException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> does not
           exist.
           [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:System.IO.IOException">
           <para>
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> contains 
           files other than '<c>.</c>' and '<c>..</c>' in it.
           [<see cref="F:Mono.Unix.Native.Errno.ENOTEMPTY" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >An I/O error occurred while deleting the file system entry or
           deallocating the inode.
           [<see cref="F:Mono.Unix.Native.Errno.EIO" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >The directory entry to be removed resides in a read-only file
           system.
           [<see cref="F:Mono.Unix.Native.Errno.EROFS" />]
-          </para
-          >
+
+          </para>
         </exception>
         <exception cref="T:System.IO.PathTooLongException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" /> was too long.
           [<see cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:Mono.Unix.UnixIOException">
           <para
             >Too many symbolic links were encountered in translating 
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />.
           [<see cref="F:Mono.Unix.Native.Errno.ELOOP" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >The directory to be removed is the mount point for a mounted
           filesystem.
           [<see cref="F:Mono.Unix.Native.Errno.EBUSY" />]
-          </para
-          >
+
+          </para>
         </exception>
         <altmember cref="M:Mono.Unix.Native.rmdir" />
       </Docs>
@@ -724,13 +724,13 @@
           Permission to read or search a component of the current working
           directory was denied.
           [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:System.IO.FileNotFoundException">
           The current working directory has been unlinked.
           [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />]
-        </exception
-        >
+
+        </exception>
         <altmember cref="M:Mono.Unix.Native.Syscall.getcwd" />
       </Docs>
     </Member>
@@ -759,8 +759,8 @@
           >A <see cref="T:Mono.Unix.Native.Dirent" /> array containing
         all file system entries within the 
         <see cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" /> directory.
-        </returns
-        >
+
+        </returns>
         <remarks>
           <para
             >The <see cref="F:Mono.Unix.Native.Dirent.d_name" /> field of
@@ -779,38 +779,38 @@
         <exception cref="T:System.UnauthorizedAccessException">
           The process cannot access <see cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" />.
           [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:System.IO.DirectoryNotFoundException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" /> is not a
           directory.
           [<see cref="F:Mono.Unix.Native.Errno.ENOTDIR" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:System.IO.FileNotFoundException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" /> doesn't exist,
           or is an empty string.
           [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:Mono.Unix.UnixIOException">
           <para
             >Insufficient memory to complete the operation.
           [<see cref="F:Mono.Unix.Native.Errno.ENOMEM" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >Too many file descriptors in use by the process.
           [<see cref="F:Mono.Unix.Native.Errno.EMFILE" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >Too many files are currently open in the system.
           [<see cref="F:Mono.Unix.Native.Errno.ENFILE" />]
-          </para
-          >
+
+          </para>
         </exception>
       </Docs>
     </Member>
@@ -850,8 +850,8 @@
           >A <see cref="T:Mono.Unix.Native.Dirent" /> array containing
         all file system entries within the 
         <see cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" /> directory.
-        </returns
-        >
+
+        </returns>
         <remarks>
           <para>
             <paramref name="regex" /> is matched against 
@@ -875,38 +875,38 @@
         <exception cref="T:System.UnauthorizedAccessException">
           The process cannot access <see cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" />.
           [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:System.IO.DirectoryNotFoundException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" /> is not a
           directory.
           [<see cref="F:Mono.Unix.Native.Errno.ENOTDIR" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:System.IO.FileNotFoundException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" /> doesn't exist,
           or is an empty string.
           [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:Mono.Unix.UnixIOException">
           <para
             >Insufficient memory to complete the operation.
           [<see cref="F:Mono.Unix.Native.Errno.ENOMEM" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >Too many file descriptors in use by the process.
           [<see cref="F:Mono.Unix.Native.Errno.EMFILE" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >Too many files are currently open in the system.
           [<see cref="F:Mono.Unix.Native.Errno.ENFILE" />]
-          </para
-          >
+
+          </para>
         </exception>
       </Docs>
     </Member>
@@ -946,8 +946,8 @@
           >A <see cref="T:Mono.Unix.Native.Dirent" /> array containing
         all file system entries within the 
         <see cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" /> directory.
-        </returns
-        >
+
+        </returns>
         <remarks>
           <para>
             <paramref name="regex" /> is matched against 
@@ -971,38 +971,38 @@
         <exception cref="T:System.UnauthorizedAccessException">
           The process cannot access <see cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" />.
           [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:System.IO.DirectoryNotFoundException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" /> is not a
           directory.
           [<see cref="F:Mono.Unix.Native.Errno.ENOTDIR" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:System.IO.FileNotFoundException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" /> doesn't exist,
           or is an empty string.
           [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:Mono.Unix.UnixIOException">
           <para
             >Insufficient memory to complete the operation.
           [<see cref="F:Mono.Unix.Native.Errno.ENOMEM" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >Too many file descriptors in use by the process.
           [<see cref="F:Mono.Unix.Native.Errno.EMFILE" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >Too many files are currently open in the system.
           [<see cref="F:Mono.Unix.Native.Errno.ENFILE" />]
-          </para
-          >
+
+          </para>
         </exception>
       </Docs>
     </Member>
@@ -1034,44 +1034,44 @@
           >A <see cref="T:Mono.Unix.UnixFileSystemInfo" /> array containing
         all file system entries within the 
         <see cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" /> directory.
-        </returns
-        >
+
+        </returns>
         <remarks></remarks>
         <exception cref="T:System.UnauthorizedAccessException">
           The process cannot access <see cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" />.
           [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:System.IO.DirectoryNotFoundException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" /> is not a
           directory.
           [<see cref="F:Mono.Unix.Native.Errno.ENOTDIR" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:System.IO.FileNotFoundException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" /> doesn't exist,
           or is an empty string.
           [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:Mono.Unix.UnixIOException">
           <para
             >Insufficient memory to complete the operation.
           [<see cref="F:Mono.Unix.Native.Errno.ENOMEM" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >Too many file descriptors in use by the process.
           [<see cref="F:Mono.Unix.Native.Errno.EMFILE" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >Too many files are currently open in the system.
           [<see cref="F:Mono.Unix.Native.Errno.ENFILE" />]
-          </para
-          >
+
+          </para>
         </exception>
       </Docs>
     </Member>
@@ -1110,44 +1110,44 @@
           >A <see cref="T:Mono.Unix.UnixFileSystemInfo" /> array containing
         all file system entries within the 
         <see cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" /> directory.
-        </returns
-        >
+
+        </returns>
         <remarks></remarks>
         <exception cref="T:System.UnauthorizedAccessException">
           The process cannot access <see cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" />.
           [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:System.IO.DirectoryNotFoundException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" /> is not a
           directory.
           [<see cref="F:Mono.Unix.Native.Errno.ENOTDIR" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:System.IO.FileNotFoundException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" /> doesn't exist,
           or is an empty string.
           [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:Mono.Unix.UnixIOException">
           <para
             >Insufficient memory to complete the operation.
           [<see cref="F:Mono.Unix.Native.Errno.ENOMEM" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >Too many file descriptors in use by the process.
           [<see cref="F:Mono.Unix.Native.Errno.EMFILE" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >Too many files are currently open in the system.
           [<see cref="F:Mono.Unix.Native.Errno.ENFILE" />]
-          </para
-          >
+
+          </para>
         </exception>
       </Docs>
     </Member>
@@ -1186,44 +1186,44 @@
           >A <see cref="T:Mono.Unix.UnixFileSystemInfo" /> array containing
         all file system entries within the 
         <see cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" /> directory.
-        </returns
-        >
+
+        </returns>
         <remarks></remarks>
         <exception cref="T:System.UnauthorizedAccessException">
           The process cannot access <see cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" />.
           [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:System.IO.DirectoryNotFoundException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" /> is not a
           directory.
           [<see cref="F:Mono.Unix.Native.Errno.ENOTDIR" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:System.IO.FileNotFoundException">
           <see cref="P:Mono.Unix.UnixFileSystemInfo.FullPath" /> doesn't exist,
           or is an empty string.
           [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:Mono.Unix.UnixIOException">
           <para
             >Insufficient memory to complete the operation.
             [<see cref="F:Mono.Unix.Native.Errno.ENOMEM" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >Too many file descriptors in use by the process.
             [<see cref="F:Mono.Unix.Native.Errno.EMFILE" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para
             >Too many files are currently open in the system.
             [<see cref="F:Mono.Unix.Native.Errno.ENFILE" />]
-          </para
-          >
+
+          </para>
         </exception>
       </Docs>
     </Member>
@@ -1290,8 +1290,8 @@
       <Docs>
         <summary
           >Gets the path root component of
-        <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />. </summary
-        >
+        <see cref="P:Mono.Unix.UnixFileSystemInfo.FullName" />.
+        </summary>
         <value
           >A <see cref="T:Mono.Unix.UnixDirectoryInfo" /> containing
         information about the path root component for
@@ -1347,41 +1347,41 @@
                 cref="M:Mono.Unix.UnixDirectoryInfo.GetCurrentDirectory"
                 qualify="true"
               />.
-          </block
-            >
+
+            </block>
           </para>
         </remarks>
         <exception cref="T:System.UnauthorizedAccessException">
           The process cannot access <paramref name="path" />.
           [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:System.IO.DirectoryNotFoundException">
           A component of <paramref name="path" /> is not a directory.
           [<see cref="F:Mono.Unix.Native.Errno.ENOTDIR" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:System.IO.FileNotFoundException">
           <paramref name="path" /> does not exist.
           [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:System.IO.PathTooLongException">
           <paramref name="path" /> is too long.
           [<see cref="F:Mono.Unix.Native.Errno.ENAMETOOLONG" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:System.IO.IOException">
           An I/O error occurred.
           [<see cref="F:Mono.Unix.Native.Errno.EIO" />]
-        </exception
-        >
+
+        </exception>
         <exception cref="T:Mono.Unix.UnixIOException">
           Too many symbolic links were encountered in resolving 
           <paramref name="path" />.
           [<see cref="F:Mono.Unix.Native.Errno.ELOOP" />]
-        </exception
-        >
+
+        </exception>
         <altmember cref="M:Mono.Unix.Native.Syscall.chdir" />
       </Docs>
     </Member>

@@ -3,15 +3,11 @@
   <paragraph
     >In an unsafe context, the set of available implicit conversions (<hyperlink>13.1</hyperlink>) is extended to include the following implicit pointer conversions: <list>
       <list_item
-        > From any <non_terminal where="25.2"
-          >pointer-type</non_terminal
-        > to the type void*. </list_item
-      >
+        > From any <non_terminal where="25.2">pointer-type</non_terminal> to the type void*.
+      </list_item>
       <list_item
-        > From the null type to any <non_terminal where="25.2"
-          >pointer-type</non_terminal
-        >. </list_item
-      >
+        > From the null type to any <non_terminal where="25.2">pointer-type</non_terminal>.
+      </list_item>
     </list>
   </paragraph>
   <paragraph
@@ -20,28 +16,26 @@
         > From any <non_terminal where="25.2">pointer-type</non_terminal> to any other <non_terminal
           where="25.2"
           >pointer-type</non_terminal
-        >. </list_item
-      >
+        >.
+      </list_item>
       <list_item
         > From <keyword>sbyte</keyword>, <keyword>byte</keyword>, <keyword>short</keyword>, <keyword>ushort</keyword>, <keyword>int</keyword>, <keyword>uint</keyword>, <keyword>long</keyword>, or <keyword>ulong</keyword> to any <non_terminal
           where="25.2"
           >pointer-type</non_terminal
-        >. </list_item
-      >
+        >.
+      </list_item>
       <list_item
         > From any <non_terminal where="25.2"
           >pointer-type</non_terminal
-        > to <keyword>sbyte</keyword>, <keyword>byte</keyword>, <keyword>short</keyword>, <keyword>ushort</keyword>, <keyword>int</keyword>, <keyword>uint</keyword>, <keyword>long</keyword>, or <keyword>ulong</keyword>. </list_item
-      >
+        > to <keyword>sbyte</keyword>, <keyword>byte</keyword>, <keyword>short</keyword>, <keyword>ushort</keyword>, <keyword>int</keyword>, <keyword>uint</keyword>, <keyword>long</keyword>, or <keyword>ulong</keyword>.
+      </list_item>
     </list>
   </paragraph>
   <paragraph
     >Finally, in an unsafe context, the set of standard implicit conversions (<hyperlink>13.3.1</hyperlink>) includes the following pointer conversion: <list>
       <list_item
-        > From any <non_terminal where="25.2"
-          >pointer-type</non_terminal
-        > to the type void*. </list_item
-      >
+        > From any <non_terminal where="25.2">pointer-type</non_terminal> to the type void*.
+      </list_item>
     </list>
   </paragraph>
   <paragraph>Conversions between two pointer types never change the actual pointer value. In other words, a conversion from one pointer type to another has no effect on the underlying address given by the pointer. </paragraph>

@@ -446,8 +446,8 @@
         <h2>Writing typed data</h2>
       </format>
       <para
-        >The <see cref="Overload:System.Xml.XmlWriter.WriteValue" /> method accepts a common language runtime (CLR) object, converts the input value to its string representation according to XML schema definition language (XSD) data type conversion rules, and writes it out by using the <see cref="M:System.Xml.XmlWriter.WriteString(System.String)" /> method. This is easier than using the methods in the <see cref="T:System.Xml.XmlConvert" /> class to convert the typed data to a string value before writing it out. </para
-      >
+        >The <see cref="Overload:System.Xml.XmlWriter.WriteValue" /> method accepts a common language runtime (CLR) object, converts the input value to its string representation according to XML schema definition language (XSD) data type conversion rules, and writes it out by using the <see cref="M:System.Xml.XmlWriter.WriteString(System.String)" /> method. This is easier than using the methods in the <see cref="T:System.Xml.XmlConvert" /> class to convert the typed data to a string value before writing it out.
+      </para>
       <para
         >When writing to text, the typed value is serialized to text by using the <see cref="T:System.Xml.XmlConvert" /> rules for that schema type.</para
       >
@@ -455,8 +455,8 @@
         >For default XSD data types that correspond to CLR types, see the <see cref="Overload:System.Xml.XmlWriter.WriteValue" /> method.</para
       >
       <para
-        >The <see cref="T:System.Xml.XmlWriter" /> can also be used to write to an XML data store. For example, the <see cref="T:System.Xml.XPath.XPathNavigator" /> class can create an <see cref="T:System.Xml.XmlWriter" /> object to create nodes for an <see cref="T:System.Xml.XmlDocument" /> object. If the data store has schema information available to it, the <see cref="Overload:System.Xml.XmlWriter.WriteValue" /> method throws an exception if you try to convert to a type that is not allowed.If the data store does not have schema information available to it, the <see cref="Overload:System.Xml.XmlWriter.WriteValue" /> method treats all values as an xsd:anySimpleType type. </para
-      >
+        >The <see cref="T:System.Xml.XmlWriter" /> can also be used to write to an XML data store. For example, the <see cref="T:System.Xml.XPath.XPathNavigator" /> class can create an <see cref="T:System.Xml.XmlWriter" /> object to create nodes for an <see cref="T:System.Xml.XmlDocument" /> object. If the data store has schema information available to it, the <see cref="Overload:System.Xml.XmlWriter.WriteValue" /> method throws an exception if you try to convert to a type that is not allowed.If the data store does not have schema information available to it, the <see cref="Overload:System.Xml.XmlWriter.WriteValue" /> method treats all values as an xsd:anySimpleType type.
+      </para>
       <format type="text/html">
         <a href="#close" />
       </format>
@@ -594,8 +594,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you use this overload, an <see cref="T:System.Xml.XmlWriterSettings" /> object with the following default settings is used to create the XML writer: </para
-          >
+            >When you use this overload, an <see cref="T:System.Xml.XmlWriterSettings" /> object with the following default settings is used to create the XML writer:
+          </para>
           <list type="table">
             <listheader>
               <item>
@@ -797,8 +797,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you use this overload, an <see cref="T:System.Xml.XmlWriterSettings" /> object with default settings is used to create the XML writer. </para
-          >
+            >When you use this overload, an <see cref="T:System.Xml.XmlWriterSettings" /> object with default settings is used to create the XML writer.
+          </para>
           <list type="table">
             <listheader>
               <item>
@@ -997,8 +997,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you use this overload, an <see cref="T:System.Xml.XmlWriterSettings" /> object with default settings is used to create the XML writer. </para
-          >
+            >When you use this overload, an <see cref="T:System.Xml.XmlWriterSettings" /> object with default settings is used to create the XML writer.
+          </para>
           <list type="table">
             <listheader>
               <item>
@@ -1197,8 +1197,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you use this overload, an <see cref="T:System.Xml.XmlWriterSettings" /> object with default settings is used to create the XML writer. </para
-          >
+            >When you use this overload, an <see cref="T:System.Xml.XmlWriterSettings" /> object with default settings is used to create the XML writer.
+          </para>
           <list type="table">
             <listheader>
               <item>
@@ -1400,8 +1400,8 @@
             >This method allows you add features to an underlying <see cref="T:System.Xml.XmlWriter" /> object. The underlying <see cref="T:System.Xml.XmlWriter" /> object can be an object created by the <see cref="Overload:System.Xml.XmlWriter.Create" /> method, or an object created using the <see cref="T:System.Xml.XmlTextWriter" /> implementation.</para
           >
           <para
-            >When you use this overload, an <see cref="T:System.Xml.XmlWriterSettings" /> object with default settings is used to create the XML writer. </para
-          >
+            >When you use this overload, an <see cref="T:System.Xml.XmlWriterSettings" /> object with default settings is used to create the XML writer.
+          </para>
           <list type="table">
             <listheader>
               <item>
@@ -2000,8 +2000,7 @@
             <block subset="none" type="overrides"
               > This method must be overridden in order
       to provide the functionality described above, as there is no default implementation.
-   </block
-            >
+   </block>
           </para>
         </remarks>
         <exception cref="T:System.ArgumentException">
@@ -4382,8 +4381,7 @@ public class Copier {
     xtReader.Close();
   }
 }
-</code
-          >
+</code>
         </example>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -4405,8 +4403,8 @@ public class Copier {
               </term>
               <description>
                 <para
-                  >Writes out all the nodes irrespective of type. That is, the writer consumes the <see cref="T:System.Xml.XmlReader" /> and writes out all the nodes read including attributes, processing instructions, comments, and so on. </para
-                >
+                  >Writes out all the nodes irrespective of type. That is, the writer consumes the <see cref="T:System.Xml.XmlReader" /> and writes out all the nodes read including attributes, processing instructions, comments, and so on.
+                </para>
                 <para
                   >This situation occurs when the <see cref="T:System.Xml.XmlReader" /> is in an initial state. (The <see cref="P:System.Xml.XmlReader.ReadState" /> property returns ReaderState.Initial).</para
                 >
@@ -4620,8 +4618,8 @@ while (!reader.EOF){
               </term>
               <description>
                 <para
-                  >No operation. Use <see cref="M:System.Xml.XmlWriter.WriteStartAttribute(System.String,System.String)" /> or <see cref="M:System.Xml.XmlWriter.WriteAttributeString(System.String,System.String,System.String)" /> instead. </para
-                >
+                  >No operation. Use <see cref="M:System.Xml.XmlWriter.WriteStartAttribute(System.String,System.String)" /> or <see cref="M:System.Xml.XmlWriter.WriteAttributeString(System.String,System.String,System.String)" /> instead.
+                </para>
               </description>
             </item>
             <item>
@@ -4843,8 +4841,8 @@ while (!reader.EOF){
           >
           <para> - or -</para>
           <para
-            >This method is being used to create an XML declaration after <see cref="M:System.Xml.XmlWriter.WriteStartDocument" /> has already been called. </para
-          >
+            >This method is being used to create an XML declaration after <see cref="M:System.Xml.XmlWriter.WriteStartDocument" /> has already been called.
+          </para>
         </exception>
         <exception cref="T:System.InvalidOperationException"
           >The <see cref="P:System.Xml.XmlWriter.WriteState" /> is <see
@@ -5849,8 +5847,8 @@ writer.Close();</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >After calling this method you can either write attributes, or create content using <see cref="M:System.Xml.XmlWriter.WriteComment(System.String)" />, <see cref="M:System.Xml.XmlWriter.WriteString(System.String)" />, or WriteStartElement for child elements. You can close the element with either <see cref="M:System.Xml.XmlWriter.WriteEndElement" /> or <see cref="M:System.Xml.XmlWriter.WriteFullEndElement" />. For example, the following C# code: </para
-          >
+            >After calling this method you can either write attributes, or create content using <see cref="M:System.Xml.XmlWriter.WriteComment(System.String)" />, <see cref="M:System.Xml.XmlWriter.WriteString(System.String)" />, or WriteStartElement for child elements. You can close the element with either <see cref="M:System.Xml.XmlWriter.WriteEndElement" /> or <see cref="M:System.Xml.XmlWriter.WriteFullEndElement" />. For example, the following C# code:
+          </para>
           <code> writer.WriteStartElement("item",null);
  writer.WriteString("some text");
  writer.WriteEndElement();</code>
@@ -6040,8 +6038,8 @@ writer.Close();</code>
         <value>
           <para
             > One of the members of the <see cref="T:System.Xml.WriteState" /> enumeration.
-   </para
-          >
+
+          </para>
         </value>
         <remarks>
           <block subset="none" type="behaviors">
@@ -6051,15 +6049,13 @@ writer.Close();</code>
           <para>
             <block subset="none" type="overrides">
       This property must be overridden in order to provide the functionality as described herein, as there is no default implementation.
-      </block
-            >
+      </block>
           </para>
           <para>
             <block subset="none" type="usage"
               >Use this property to query the current state, for
       example, whether the writer is newly initialized, writing specific XML structures, or
-      closed. </block
-            >
+      closed. </block>
           </para>
         </remarks>
         <summary>
@@ -6222,8 +6218,8 @@ writer.Close();</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is only applicable on systems that use UTF-16 encoding.</para>
           <para
-            >The surrogate character entity is written in hexadecimal format. The range for surrogate characters is #x10000 to #x10FFFF. The following formula is used to generate the surrogate character entity: (<paramref name="highChar" /> -0xD800) * 0x400 + (<paramref name="lowChar" /> -0xDC00) + 0x10000 </para
-          >
+            >The surrogate character entity is written in hexadecimal format. The range for surrogate characters is #x10000 to #x10FFFF. The following formula is used to generate the surrogate character entity: (<paramref name="highChar" /> -0xD800) * 0x400 + (<paramref name="lowChar" /> -0xDC00) + 0x10000
+          </para>
           <para>For both HTML and XML, the document character set (and therefore the notation of numeric character references) is based on UCS [ISO-10646]. A single numeric character reference in a source document may therefore in some cases correspond to two 16-bit units in a string (a high surrogate and a low surrogate). These 16-bit units are referred to as a surrogate pair.</para>
           <para>For more information regarding surrogates or characters, refer to section 3.7 of the Unicode 3.0/Unicode 2.0 standard located at http://www.unicode.org, or section 2.2 of the W3C XML 1.0 Recommendation located at http://www.w3.org/TR/REC-xml#charsets.</para>
           <para
@@ -6932,8 +6928,8 @@ attribute is not specified for the element.</para
               cref="T:System.Xml.XmlSpace"
               qualify="true"
             /> enumeration, or <see cref="F:System.Xml.XmlSpace.None" /> if the white space
-   attribute is not specified for the element. </para
-          >
+   attribute is not specified for the element.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />

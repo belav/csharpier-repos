@@ -71,19 +71,15 @@
           <para>The return value from the compiler.</para>
         </returns>
         <param name="cmd">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The command to execute. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The command to execute.
+        </param>
         <param name="tempFiles">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.Compiler.TempFileCollection" /> with which to manage and store references to intermediate files generated during compilation. </param
-        >
+          />A <see cref="T:System.CodeDom.Compiler.TempFileCollection" /> with which to manage and store references to intermediate files generated during compilation.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ExecWaitWithCapture">

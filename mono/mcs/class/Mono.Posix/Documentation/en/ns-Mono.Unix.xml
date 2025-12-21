@@ -8,8 +8,8 @@
         usage conventions over the low-level 
         <see cref="T:Mono.Unix.Native.Syscall" /> and 
         <see cref="T:Mono.Unix.Native.Stdlib" /> functionality.
-      </para
-      >
+
+      </para>
       <para>
 				If an exception is generated due to an operating system-level error
 				(as opposed to invalid arguments or some fully managed reason), the
@@ -64,8 +64,7 @@ are met:
 4. Neither the name of the University nor the names of its contributors
    may be used to endorse or promote products derived from this software
    without specific prior written permission.
-      </code
-        >
+      </code>
       </example>
     </remarks>
   </Docs>

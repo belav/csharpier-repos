@@ -17,11 +17,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.Threading.SpinWait" /> encapsulates common spinning logic. On single-processor machines, yields are always used instead of busy waits, and on computers with Intel processors employing Hyper-Threading technology, it helps to prevent hardware thread starvation. SpinWait encapsulates a good mixture of spinning and true yielding. </para
-      >
+        <see cref="T:System.Threading.SpinWait" /> encapsulates common spinning logic. On single-processor machines, yields are always used instead of busy waits, and on computers with Intel processors employing Hyper-Threading technology, it helps to prevent hardware thread starvation. SpinWait encapsulates a good mixture of spinning and true yielding.
+      </para>
       <para>
-        <see cref="T:System.Threading.SpinWait" /> is a value type, which means that low-level code can utilize SpinWait without fear of unnecessary allocation overheads. SpinWait is not generally useful for ordinary applications. In most cases, you should use the synchronization classes provided by the .NET Framework, such as <see cref="T:System.Threading.Monitor" />. For most purposes where spin waiting is required, however, the <see cref="T:System.Threading.SpinWait" /> type should be preferred over the <see cref="M:System.Threading.Thread.SpinWait(System.Int32)" /> method. </para
-      >
+        <see cref="T:System.Threading.SpinWait" /> is a value type, which means that low-level code can utilize SpinWait without fear of unnecessary allocation overheads. SpinWait is not generally useful for ordinary applications. In most cases, you should use the synchronization classes provided by the .NET Framework, such as <see cref="T:System.Threading.Monitor" />. For most purposes where spin waiting is required, however, the <see cref="T:System.Threading.SpinWait" /> type should be preferred over the <see cref="M:System.Threading.Thread.SpinWait(System.Int32)" /> method.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

@@ -55,15 +55,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Uri" /> representing the location of the document to which the <see cref="T:System.Windows.Forms.WebBrowser" /> control is navigating. </param
-        >
+          />A <see cref="T:System.Uri" /> representing the location of the document to which the <see cref="T:System.Windows.Forms.WebBrowser" /> control is navigating.
+        </param>
         <param name="targetFrameName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the Web page frame in which the new document will be loaded. </param
-        >
+          />The name of the Web page frame in which the new document will be loaded.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

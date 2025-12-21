@@ -14,8 +14,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="N:System.Windows.Forms.VisualStyles" /> namespace exposes <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" /> objects that represent all of the controls and user interface (UI) elements that are supported by visual styles. To draw or get information about a particular element, you must set a <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleRenderer" /> to the element you are interested in. A <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleRenderer" /> is automatically set to a specified <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" /> in the <see cref="Overload:System.Windows.Forms.VisualStyles.VisualStyleRenderer.#ctor" /> constructor, but you can also set an existing <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleRenderer" /> to a different element by calling the <see cref="Overload:System.Windows.Forms.VisualStyles.VisualStyleRenderer.SetParameters" /> method. </para
-      >
+        >The <see cref="N:System.Windows.Forms.VisualStyles" /> namespace exposes <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" /> objects that represent all of the controls and user interface (UI) elements that are supported by visual styles. To draw or get information about a particular element, you must set a <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleRenderer" /> to the element you are interested in. A <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleRenderer" /> is automatically set to a specified <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" /> in the <see cref="Overload:System.Windows.Forms.VisualStyles.VisualStyleRenderer.#ctor" /> constructor, but you can also set an existing <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleRenderer" /> to a different element by calling the <see cref="Overload:System.Windows.Forms.VisualStyles.VisualStyleRenderer.SetParameters" /> method.
+      </para>
       <para
         >To draw an element, use the <see cref="Overload:System.Windows.Forms.VisualStyles.VisualStyleRenderer.DrawBackground" /> method. The <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleRenderer" /> class also includes methods, such as <see cref="M:System.Windows.Forms.VisualStyles.VisualStyleRenderer.GetColor(System.Windows.Forms.VisualStyles.ColorProperty)" /> and <see cref="M:System.Windows.Forms.VisualStyles.VisualStyleRenderer.GetEnumValue(System.Windows.Forms.VisualStyles.EnumProperty)" />, that provide information about how an element is defined by the current visual style.</para
       >
@@ -171,11 +171,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method draws the background of the current visual style element specified by the <see cref="P:System.Windows.Forms.VisualStyles.VisualStyleRenderer.Class" />, <see cref="P:System.Windows.Forms.VisualStyles.VisualStyleRenderer.Part" />, and <see cref="P:System.Windows.Forms.VisualStyles.VisualStyleRenderer.State" /> properties. </para
-          >
+            >This method draws the background of the current visual style element specified by the <see cref="P:System.Windows.Forms.VisualStyles.VisualStyleRenderer.Class" />, <see cref="P:System.Windows.Forms.VisualStyles.VisualStyleRenderer.Part" />, and <see cref="P:System.Windows.Forms.VisualStyles.VisualStyleRenderer.State" /> properties.
+          </para>
           <para
-            >If the <see cref="P:System.Drawing.Rectangle.Width" /> or <see cref="P:System.Drawing.Rectangle.Height" /> of the rectangle specified by the <paramref name="bounds" /> parameter is less than 0, the <see cref="M:System.Windows.Forms.VisualStyles.VisualStyleRenderer.DrawBackground(System.Drawing.IDeviceContext,System.Drawing.Rectangle)" /> method will return without drawing the background. </para
-          >
+            >If the <see cref="P:System.Drawing.Rectangle.Width" /> or <see cref="P:System.Drawing.Rectangle.Height" /> of the rectangle specified by the <paramref name="bounds" /> parameter is less than 0, the <see cref="M:System.Windows.Forms.VisualStyles.VisualStyleRenderer.DrawBackground(System.Drawing.IDeviceContext,System.Drawing.Rectangle)" /> method will return without drawing the background.
+          </para>
           <para
             >The background of a visual style element can be a bitmap file or a filled border. To determine the background type, call the <see cref="M:System.Windows.Forms.VisualStyles.VisualStyleRenderer.GetEnumValue(System.Windows.Forms.VisualStyles.EnumProperty)" /> method with an argument value of <see cref="F:System.Windows.Forms.VisualStyles.EnumProperty.BackgroundType" />. To determine whether the element background will scale to fit the specified bounds, call the <see cref="M:System.Windows.Forms.VisualStyles.VisualStyleRenderer.GetEnumValue(System.Windows.Forms.VisualStyles.EnumProperty)" /> method with an argument value of <see cref="F:System.Windows.Forms.VisualStyles.EnumProperty.SizingType" />.</para
           >
@@ -225,8 +225,8 @@
             >This method draws the background of the current visual style element specified by the <see cref="P:System.Windows.Forms.VisualStyles.VisualStyleRenderer.Class" />, <see cref="P:System.Windows.Forms.VisualStyles.VisualStyleRenderer.Part" />, and <see cref="P:System.Windows.Forms.VisualStyles.VisualStyleRenderer.State" /> properties. The background will be clipped to the area specified by the <paramref name="clipRectangle " />parameter.</para
           >
           <para
-            >If the <see cref="P:System.Drawing.Rectangle.Width" /> or <see cref="P:System.Drawing.Rectangle.Height" /> of the rectangle specified by either the <paramref name="bounds" /> or <paramref name="clipRectangle" /> parameters is less than 0, the <see cref="M:System.Windows.Forms.VisualStyles.VisualStyleRenderer.DrawBackground(System.Drawing.IDeviceContext,System.Drawing.Rectangle,System.Drawing.Rectangle)" /> method will return without drawing the background. </para
-          >
+            >If the <see cref="P:System.Drawing.Rectangle.Width" /> or <see cref="P:System.Drawing.Rectangle.Height" /> of the rectangle specified by either the <paramref name="bounds" /> or <paramref name="clipRectangle" /> parameters is less than 0, the <see cref="M:System.Windows.Forms.VisualStyles.VisualStyleRenderer.DrawBackground(System.Drawing.IDeviceContext,System.Drawing.Rectangle,System.Drawing.Rectangle)" /> method will return without drawing the background.
+          </para>
           <para
             >The background of a visual style element can be a bitmap file or a filled border. To determine the background type, call the <see cref="M:System.Windows.Forms.VisualStyles.VisualStyleRenderer.GetEnumValue(System.Windows.Forms.VisualStyles.EnumProperty)" /> method with an argument value of <see cref="F:System.Windows.Forms.VisualStyles.EnumProperty.BackgroundType" />. To determine whether the element background will scale to fit the specified bounds, call the <see cref="M:System.Windows.Forms.VisualStyles.VisualStyleRenderer.GetEnumValue(System.Windows.Forms.VisualStyles.EnumProperty)" /> method with an argument value of <see cref="F:System.Windows.Forms.VisualStyles.EnumProperty.SizingType" />.</para
           >
@@ -254,8 +254,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Drawing.Rectangle" /> that defines a clipping rectangle for the drawing operation. </param
-        >
+          />A <see cref="T:System.Drawing.Rectangle" /> that defines a clipping rectangle for the drawing operation.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1133,8 +1133,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Drawing.Size" /> that contains the size specified by the <paramref name="type" /> parameter for the current visual style part. </para
-          >
+            >A <see cref="T:System.Drawing.Size" /> that contains the size specified by the <paramref name="type" /> parameter for the current visual style part.
+          </para>
         </returns>
         <param name="dc">
           <attribution
@@ -1316,8 +1316,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Drawing.Rectangle" /> that contains the area required to fit the rendered text. </para
-          >
+            >A <see cref="T:System.Drawing.Rectangle" /> that contains the area required to fit the rendered text.
+          </para>
         </returns>
         <param name="dc">
           <attribution
@@ -1370,8 +1370,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Drawing.Rectangle" /> that contains the area required to fit the rendered text. </para
-          >
+            >A <see cref="T:System.Drawing.Rectangle" /> that contains the area required to fit the rendered text.
+          </para>
         </returns>
         <param name="dc">
           <attribution
@@ -1428,8 +1428,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Windows.Forms.VisualStyles.TextMetrics" /> that provides information about the font specified by the current visual style element. </para
-          >
+            >A <see cref="T:System.Windows.Forms.VisualStyles.TextMetrics" /> that provides information about the font specified by the current visual style element.
+          </para>
         </returns>
         <param name="dc">
           <attribution
@@ -1719,8 +1719,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the combination of the <see cref="P:System.Windows.Forms.VisualStyles.VisualStyleElement.ClassName" /> and <see cref="P:System.Windows.Forms.VisualStyles.VisualStyleElement.Part" /> properties of <paramref name="element" /> are defined; otherwise, false. </para
-          >
+            >true if the combination of the <see cref="P:System.Windows.Forms.VisualStyles.VisualStyleElement.ClassName" /> and <see cref="P:System.Windows.Forms.VisualStyles.VisualStyleElement.Part" /> properties of <paramref name="element" /> are defined; otherwise, false.
+          </para>
         </returns>
         <param name="element">
           <attribution

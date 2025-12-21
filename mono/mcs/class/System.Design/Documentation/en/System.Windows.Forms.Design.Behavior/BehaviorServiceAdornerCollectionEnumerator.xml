@@ -24,8 +24,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Supports iteration over a <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />. </para
-      >
+        >Supports iteration over a <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />.
+      </para>
     </summary>
   </Docs>
   <Members>
@@ -49,16 +49,16 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollectionEnumerator" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollectionEnumerator" /> class.
+          </para>
         </summary>
         <param name="mappings">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" /> for which to create the enumerator. </param
-        >
+          />The <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" /> for which to create the enumerator.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Current">

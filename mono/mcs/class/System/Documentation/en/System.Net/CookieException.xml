@@ -100,15 +100,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> to be used. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> to be used.
+        </param>
         <param name="streamingContext">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.StreamingContext" /> to be used. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.StreamingContext" /> to be used.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetObjectData">

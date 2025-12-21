@@ -26,8 +26,8 @@
         </format>, you may need to track the lifetime of each asynchronous operation invoked on an instance of your class. The <see cref="T:System.ComponentModel.AsyncOperation" /> class provides ways to track and report the progress of an asynchronous task.</para
       >
       <para
-        >The following list identifies ways to use an <see cref="T:System.ComponentModel.AsyncOperation" /> object: </para
-      >
+        >The following list identifies ways to use an <see cref="T:System.ComponentModel.AsyncOperation" /> object:
+      </para>
       <list type="bullet">
         <item>
           <para
@@ -147,15 +147,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Threading.SendOrPostCallback" /> object that wraps the delegate to be called when the operation ends. </param
-        >
+          />A <see cref="T:System.Threading.SendOrPostCallback" /> object that wraps the delegate to be called when the operation ends.
+        </param>
         <param name="arg">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An argument for the delegate contained in the <paramref name="d" /> parameter. </param
-        >
+          />An argument for the delegate contained in the <paramref name="d" /> parameter.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="PostOperationCompleted">
@@ -202,15 +202,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Threading.SendOrPostCallback" /> object that wraps the delegate to be called when the operation ends. </param
-        >
+          />A <see cref="T:System.Threading.SendOrPostCallback" /> object that wraps the delegate to be called when the operation ends.
+        </param>
         <param name="arg">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An argument for the delegate contained in the <paramref name="d" /> parameter. </param
-        >
+          />An argument for the delegate contained in the <paramref name="d" /> parameter.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SynchronizationContext">

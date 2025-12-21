@@ -74,8 +74,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of a <see cref="T:System.Type" /> that represents the installer for the component this attribute is bound to. This class must implement <see cref="T:System.ComponentModel.Design.IDesigner" />. </param
-        >
+          />The name of a <see cref="T:System.Type" /> that represents the installer for the component this attribute is bound to. This class must implement <see cref="T:System.ComponentModel.Design.IDesigner" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -107,8 +107,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> that represents the installer for the component this attribute is bound to. This class must implement <see cref="T:System.ComponentModel.Design.IDesigner" />. </param
-        >
+          />A <see cref="T:System.Type" /> that represents the installer for the component this attribute is bound to. This class must implement <see cref="T:System.ComponentModel.Design.IDesigner" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -146,8 +146,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to test the value equality of. </param
-        >
+          />The object to test the value equality of.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">

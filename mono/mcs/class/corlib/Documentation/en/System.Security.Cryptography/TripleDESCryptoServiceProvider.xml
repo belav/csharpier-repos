@@ -117,15 +117,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The secret key to use for the symmetric algorithm. </param
-        >
+          />The secret key to use for the symmetric algorithm.
+        </param>
         <param name="rgbIV">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The initialization vector to use for the symmetric algorithm. </param
-        >
+          />The initialization vector to use for the symmetric algorithm.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateEncryptor">
@@ -174,15 +174,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The secret key to use for the symmetric algorithm. </param
-        >
+          />The secret key to use for the symmetric algorithm.
+        </param>
         <param name="rgbIV">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The initialization vector to use for the symmetric algorithm. </param
-        >
+          />The initialization vector to use for the symmetric algorithm.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GenerateIV">

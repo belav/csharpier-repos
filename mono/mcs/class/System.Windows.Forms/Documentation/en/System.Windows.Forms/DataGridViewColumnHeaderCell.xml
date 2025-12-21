@@ -92,14 +92,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new accessible object for the <see cref="T:System.Windows.Forms.DataGridViewColumnHeaderCell" />. </para
-          >
+            >Creates a new accessible object for the <see cref="T:System.Windows.Forms.DataGridViewColumnHeaderCell" />.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see cref="T:System.Windows.Forms.AccessibleObject" /> for the <see cref="T:System.Windows.Forms.DataGridViewColumnHeaderCell" />. </para
-          >
+            >A new <see cref="T:System.Windows.Forms.AccessibleObject" /> for the <see cref="T:System.Windows.Forms.DataGridViewColumnHeaderCell" />.
+          </para>
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -128,11 +128,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Depending on the value of the <see cref="P:System.Windows.Forms.DataGridView.ClipboardCopyMode" /> property of the <see cref="T:System.Windows.Forms.DataGridView" /> control, this method is called by the control's <see cref="M:System.Windows.Forms.DataGridView.GetClipboardContent" /> method to retrieve a clipboard-formatted value that represents the cell. </para
-          >
+            >Depending on the value of the <see cref="P:System.Windows.Forms.DataGridView.ClipboardCopyMode" /> property of the <see cref="T:System.Windows.Forms.DataGridView" /> control, this method is called by the control's <see cref="M:System.Windows.Forms.DataGridView.GetClipboardContent" /> method to retrieve a clipboard-formatted value that represents the cell.
+          </para>
           <para
-            >The position-related parameters of this method indicate where this cell is located in the table of data representing the region defined by the selected cells in the <see cref="T:System.Windows.Forms.DataGridView" /> control. Depending on the cell's position, formatting information may be returned by this method in addition to the cell value. For example, the HTML format for a cell in the first column of a row will include the tag that indicates the beginning of a row. </para
-          >
+            >The position-related parameters of this method indicate where this cell is located in the table of data representing the region defined by the selected cells in the <see cref="T:System.Windows.Forms.DataGridView" /> control. Depending on the cell's position, formatting information may be returned by this method in addition to the cell value. For example, the HTML format for a cell in the first column of a row will include the tag that indicates the beginning of a row.
+          </para>
           <para
             >The supported clipboard formats include <see cref="F:System.Windows.Forms.DataFormats.Text" />, <see cref="F:System.Windows.Forms.DataFormats.UnicodeText" />, <see cref="F:System.Windows.Forms.DataFormats.Html" />, and <see cref="F:System.Windows.Forms.DataFormats.CommaSeparatedValue" />.</para
           >
@@ -336,22 +336,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.DataGridViewCellStyle" /> to be populated with the inherited cell style. </param
-        >
+          />A <see cref="T:System.Windows.Forms.DataGridViewCellStyle" /> to be populated with the inherited cell style.
+        </param>
         <param name="rowIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the cell's parent row. </param
-        >
+          />The index of the cell's parent row.
+        </param>
         <param name="includeColors">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to include inherited colors in the returned cell style; otherwise, false. </param
-        >
+          />true to include inherited colors in the returned cell style; otherwise, false.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -632,15 +632,11 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the cell's parent row. </param
-        >
+          />The index of the cell's parent row.
+        </param>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The cell value to set. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The cell value to set.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

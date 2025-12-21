@@ -42,8 +42,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method in an implementation of the <see cref="P:System.ComponentModel.IListSource.ContainsListCollection" /> property, passing a reference to a data source control. </para
-          >
+            >Use this method in an implementation of the <see cref="P:System.ComponentModel.IListSource.ContainsListCollection" /> property, passing a reference to a data source control.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -97,8 +97,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Collections.IList" /> of one <see cref="T:System.Web.UI.IDataSource" />, if the <see cref="T:System.Web.UI.IDataSource" /> has one or more associated <see cref="T:System.Web.UI.DataSourceView" /> objects; otherwise, returns null. </para
-          >
+            >An <see cref="T:System.Collections.IList" /> of one <see cref="T:System.Web.UI.IDataSource" />, if the <see cref="T:System.Web.UI.IDataSource" /> has one or more associated <see cref="T:System.Web.UI.DataSourceView" /> objects; otherwise, returns null.
+          </para>
         </returns>
         <param name="dataSource">
           <attribution

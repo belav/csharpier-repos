@@ -59,15 +59,15 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />A managed array. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A managed array.
+        </param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The offset in bytes, of the element to be passed through platform invoke. </param
-        >
+          />The offset in bytes, of the element to be passed through platform invoke.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -107,8 +107,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Object to compare with this instance. </param
-        >
+          />Object to compare with this instance.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -283,8 +283,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Runtime.InteropServices.ArrayWithOffset" /> object to compare with the <paramref name="b" /> parameter. </param
-        >
+          />An <see cref="T:System.Runtime.InteropServices.ArrayWithOffset" /> object to compare with the <paramref name="b" /> parameter.
+        </param>
         <param name="b">
           <attribution
             license="cc4"
@@ -334,8 +334,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Runtime.InteropServices.ArrayWithOffset" /> object to compare with the <paramref name="b" /> parameter. </param
-        >
+          />An <see cref="T:System.Runtime.InteropServices.ArrayWithOffset" /> object to compare with the <paramref name="b" /> parameter.
+        </param>
         <param name="b">
           <attribution
             license="cc4"

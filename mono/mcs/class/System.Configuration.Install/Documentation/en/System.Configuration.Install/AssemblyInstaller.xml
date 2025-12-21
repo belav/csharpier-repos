@@ -62,8 +62,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Reflection.Assembly" /> to install. </param
-        >
+          />The <see cref="T:System.Reflection.Assembly" /> to install.
+        </param>
         <param name="commandLine">
           <attribution
             license="cc4"
@@ -100,8 +100,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file name of the assembly to install. </param
-        >
+          />The file name of the assembly to install.
+        </param>
         <param name="commandLine">
           <attribution
             license="cc4"
@@ -153,8 +153,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Configuration.Install.AssemblyInstaller.CheckIfInstallable(System.String)" /> method determines whether the specified assembly can be installed. To avoid an exception being thrown, the file must meet the following criteria: </para
-          >
+            >The <see cref="M:System.Configuration.Install.AssemblyInstaller.CheckIfInstallable(System.String)" /> method determines whether the specified assembly can be installed. To avoid an exception being thrown, the file must meet the following criteria:
+          </para>
           <list type="bullet">
             <item>
               <para>The file exists.</para>
@@ -187,8 +187,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The assembly in which to search for installers. </param
-        >
+          />The assembly in which to search for installers.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -247,8 +247,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Collections.IDictionary" /> that contains the state of the computer after all the installers in the installer collection have run. </param
-        >
+          />An <see cref="T:System.Collections.IDictionary" /> that contains the state of the computer after all the installers in the installer collection have run.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -305,8 +305,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Collections.IDictionary" /> used to save information needed to perform a commit, rollback, or uninstall operation. </param
-        >
+          />An <see cref="T:System.Collections.IDictionary" /> used to save information needed to perform a commit, rollback, or uninstall operation.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -360,8 +360,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Collections.IDictionary" /> that contains the pre-installation state of the computer. </param
-        >
+          />An <see cref="T:System.Collections.IDictionary" /> that contains the pre-installation state of the computer.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -401,8 +401,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Collections.IDictionary" /> that contains the post-installation state of the computer. </param
-        >
+          />An <see cref="T:System.Collections.IDictionary" /> that contains the post-installation state of the computer.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

@@ -181,8 +181,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of <see cref="T:System.Security.Cryptography.Oid" /> objects in a collection. </para
-          >
+            >Gets the number of <see cref="T:System.Security.Cryptography.Oid" /> objects in a collection.
+          </para>
         </summary>
       </Docs>
     </Member>

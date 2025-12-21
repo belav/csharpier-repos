@@ -47,8 +47,8 @@
   <paragraph
     >The type of a <non_terminal where="15.5.1"
       >local-variable-declaration</non_terminal
-    > specifies the type of the variables introduced by the declaration. </paragraph
-  >
+    > specifies the type of the variables introduced by the declaration.
+  </paragraph>
   <paragraph
     >The type is followed by a list of <non_terminal where="15.5.1"
       >local-variable-declarator</non_terminal
@@ -57,21 +57,21 @@
     > consists of an identifier that names the variable, optionally followed by an &quot;=&quot; token and a <non_terminal
       where="15.5.1"
       >local-variable-initializer</non_terminal
-    > that gives the initial value of the variable. </paragraph
-  >
+    > that gives the initial value of the variable.
+  </paragraph>
   <paragraph
     >The value of a local variable is obtained in an expression using a <non_terminal where="14.5.2"
       >simple-name</non_terminal
-    > (<hyperlink>14.5.2</hyperlink>), and the value of a local variable is modified using an assignment (<hyperlink>14.13</hyperlink>). A local variable must be definitely assigned (<hyperlink>12.3</hyperlink>) at each location where its value is obtained. </paragraph
-  >
+    > (<hyperlink>14.5.2</hyperlink>), and the value of a local variable is modified using an assignment (<hyperlink>14.13</hyperlink>). A local variable must be definitely assigned (<hyperlink>12.3</hyperlink>) at each location where its value is obtained.
+  </paragraph>
   <paragraph
     >The scope of a local variable declared in a <non_terminal where="15.5.1"
       >local-variable-declaration</non_terminal
     > is the block in which the declaration occurs. It is an error to refer to a local variable in a textual position that precedes the  <non_terminal
       where="15.5.1"
       >local-variable-declarator</non_terminal
-    > of the local variable. Within the scope of a local variable, it is a compile-time error to declare another local variable or constant with the same name. </paragraph
-  >
+    > of the local variable. Within the scope of a local variable, it is a compile-time error to declare another local variable or constant with the same name.
+  </paragraph>
   <paragraph>A local variable declaration that declares multiple variables is equivalent to multiple declarations of single variables with the same type. Furthermore, a variable initializer in a local variable declaration corresponds exactly to an assignment statement that is inserted immediately after the declaration. </paragraph>
   <paragraph>
     <example

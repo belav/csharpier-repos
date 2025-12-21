@@ -83,8 +83,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="M:System.DirectoryServices.DirectoryServicesPermissionAttribute.#ctor(System.Security.Permissions.SecurityAction)" /> class.          </para
-          >
+            >Initializes a new instance of the <see cref="M:System.DirectoryServices.DirectoryServicesPermissionAttribute.#ctor(System.Security.Permissions.SecurityAction)" /> class.
+          </para>
         </summary>
         <param name="action">
           <attribution
@@ -134,8 +134,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Allows declarative <see cref="N:System.DirectoryServices" /> permission checks.          </para
-      >
+        >Allows declarative <see cref="N:System.DirectoryServices" /> permission checks.
+      </para>
     </summary>
   </Docs>
 </Type>

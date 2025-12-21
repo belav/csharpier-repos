@@ -17,8 +17,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.Configuration.LowerCaseStringConverter" /> class allows an object to be converted to a lowercase string. This class also provides support to verify that an object type can be converted to a lowercase string before the conversion is made. </para
-      >
+        >The <see cref="T:System.Web.Configuration.LowerCaseStringConverter" /> class allows an object to be converted to a lowercase string. This class also provides support to verify that an object type can be converted to a lowercase string before the conversion is made.
+      </para>
       <para
         >The methods of <see cref="T:System.Web.Configuration.LowerCaseStringConverter" /> take as a parameter an object that implements the <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> interface. This interface provides contextual information about a component. Typically, this interface is used at design time to provide information about a design-time container. The <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> is commonly used in type conversion.</para
       >

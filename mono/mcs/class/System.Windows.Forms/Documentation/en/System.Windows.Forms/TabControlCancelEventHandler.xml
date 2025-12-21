@@ -36,8 +36,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the method that will handle the <see cref="E:System.Windows.Forms.TabControl.Selecting" /> or <see cref="E:System.Windows.Forms.TabControl.Deselecting" /> event of a <see cref="T:System.Windows.Forms.TabControl" /> control. </para
-      >
+        >Represents the method that will handle the <see cref="E:System.Windows.Forms.TabControl.Selecting" /> or <see cref="E:System.Windows.Forms.TabControl.Deselecting" /> event of a <see cref="T:System.Windows.Forms.TabControl" /> control.
+      </para>
     </summary>
   </Docs>
 </Type>

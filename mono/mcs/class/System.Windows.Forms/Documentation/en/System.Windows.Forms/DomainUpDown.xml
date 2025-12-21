@@ -85,8 +85,8 @@
           >
           <block subset="none" type="note">
             <para
-              >To get or set the <see cref="P:System.Windows.Forms.Control.AccessibilityObject" /> property, you must add a reference to the Accessibility assembly installed with the .NET Framework. </para
-            >
+              >To get or set the <see cref="P:System.Windows.Forms.Control.AccessibilityObject" /> property, you must add a reference to the Accessibility assembly installed with the .NET Framework.
+            </para>
           </block>
         </remarks>
         <summary>
@@ -242,19 +242,15 @@
           >
         </summary>
         <param name="source">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The source of the event. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The source of the event.
+        </param>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -304,8 +300,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see cref="P:System.Windows.Forms.UpDownBase.ReadOnly" /> property is set to true, the <see cref="T:System.Windows.Forms.DomainUpDown" /> control chooses the item on the list that begins with the character. If more than one item in the collection starts with the same character, the <see cref="T:System.Windows.Forms.DomainUpDown" /> control selects the next item that begins with the typed character, starting from the currently selected position. </para
-          >
+            >If the <see cref="P:System.Windows.Forms.UpDownBase.ReadOnly" /> property is set to true, the <see cref="T:System.Windows.Forms.DomainUpDown" /> control chooses the item on the list that begins with the character. If more than one item in the collection starts with the same character, the <see cref="T:System.Windows.Forms.DomainUpDown" /> control selects the next item that begins with the typed character, starting from the currently selected position.
+          </para>
           <para
             >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
@@ -320,19 +316,15 @@
           <para>Raises the <see cref="E:System.Windows.Forms.Control.KeyPress" /> event. </para>
         </summary>
         <param name="source">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The source of the event. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The source of the event.
+        </param>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.KeyPressEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.KeyPressEventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Padding">
@@ -363,8 +355,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Even if you set the <see cref="P:System.Windows.Forms.DomainUpDown.Padding" /> property, it will have a value of <see cref="F:System.Windows.Forms.Padding.Empty" />. </para
-          >
+            >Even if you set the <see cref="P:System.Windows.Forms.DomainUpDown.Padding" /> property, it will have a value of <see cref="F:System.Windows.Forms.Padding.Empty" />.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -397,8 +389,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -554,8 +546,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string that represents the current <see cref="T:System.Windows.Forms.DomainUpDown" />. </para
-          >
+            >A string that represents the current <see cref="T:System.Windows.Forms.DomainUpDown" />.
+          </para>
         </returns>
       </Docs>
       <AssemblyInfo>

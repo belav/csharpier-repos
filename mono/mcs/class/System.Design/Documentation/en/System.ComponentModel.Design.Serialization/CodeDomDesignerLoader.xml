@@ -75,8 +75,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="P:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.CodeDomProvider" /> this designer loader will use. </para
-          >
+            >Gets the <see cref="P:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.CodeDomProvider" /> this designer loader will use.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -101,8 +101,8 @@
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format> and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
           <block subset="none" type="note">
             <para
               >Always call <see cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.Dispose" /> before you release your last reference to the <see cref="T:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader" />. Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader" /> object's Finalize method.</para
@@ -234,8 +234,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information on the <see cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.OnBeginLoad" /> method, see <see cref="M:System.ComponentModel.Design.Serialization.BasicDesignerLoader.OnBeginLoad" />. </para
-          >
+            >For more information on the <see cref="M:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader.OnBeginLoad" /> method, see <see cref="M:System.ComponentModel.Design.Serialization.BasicDesignerLoader.OnBeginLoad" />.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -288,8 +288,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentRename" /> event. </para
-          >
+            >Raises the <see cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentRename" /> event.
+          </para>
         </summary>
         <param name="component">
           <attribution

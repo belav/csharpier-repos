@@ -141,8 +141,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The required name for the data slot. </param
-        >
+          />The required name for the data slot.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ContextID">
@@ -260,8 +260,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The delegate used to request the callback. </param
-        >
+          />The delegate used to request the callback.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Finalize">
@@ -325,8 +325,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the data slot to free. </param
-        >
+          />The name of the data slot to free.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Freeze">
@@ -392,8 +392,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data slot that contains the data. </param
-        >
+          />The data slot that contains the data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetNamedDataSlot">
@@ -431,8 +431,8 @@
           <para>Returns a local data slot.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The data slot name. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The data slot name.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetProperty">
@@ -467,12 +467,8 @@
           <para>The specified context property.</para>
         </returns>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the property. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the property.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RegisterDynamicProperty">
@@ -529,22 +525,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The dynamic property to register. </param
-        >
+          />The dynamic property to register.
+        </param>
         <param name="obj">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object/proxy for which the <paramref name="property" /> is registered. </param
-        >
+          />The object/proxy for which the <paramref name="property" /> is registered.
+        </param>
         <param name="ctx">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The context for which the <paramref name="property" /> is registered. </param
-        >
+          />The context for which the <paramref name="property" /> is registered.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetData">
@@ -580,15 +576,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data slot where the data is to be added. </param
-        >
+          />The data slot where the data is to be added.
+        </param>
         <param name="data">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data that is to be added. </param
-        >
+          />The data that is to be added.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetProperty">
@@ -626,8 +622,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The actual context property. </param
-        >
+          />The actual context property.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ToString">
@@ -700,22 +696,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the dynamic property to unregister. </param
-        >
+          />The name of the dynamic property to unregister.
+        </param>
         <param name="obj">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object/proxy for which the <paramref name="property" /> is registered. </param
-        >
+          />The object/proxy for which the <paramref name="property" /> is registered.
+        </param>
         <param name="ctx">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The context for which the <paramref name="property" /> is registered. </param
-        >
+          />The context for which the <paramref name="property" /> is registered.
+        </param>
       </Docs>
     </Member>
   </Members>

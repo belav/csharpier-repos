@@ -224,8 +224,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -939,8 +939,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1107,8 +1107,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.MouseEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.MouseEventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnMouseUp">
@@ -1150,8 +1150,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.MouseEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.MouseEventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnMouseWheel">
@@ -1190,8 +1190,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.MouseEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.MouseEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1234,8 +1234,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.PaintEventArgs" />  that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.PaintEventArgs" />  that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnTextBoxKeyDown">
@@ -1271,19 +1271,15 @@
           <para>Raises the <see cref="E:System.Windows.Forms.Control.KeyDown" /> event.</para>
         </summary>
         <param name="source">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The source of the event. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The source of the event.
+        </param>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.KeyEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.KeyEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1320,19 +1316,15 @@
           <para>Raises the <see cref="E:System.Windows.Forms.Control.KeyPress" /> event.</para>
         </summary>
         <param name="source">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The source of the event. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The source of the event.
+        </param>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.KeyPressEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.KeyPressEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1370,19 +1362,15 @@
           <para>Raises the <see cref="E:System.Windows.Forms.Control.LostFocus" /> event.</para>
         </summary>
         <param name="source">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The source of the event. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The source of the event.
+        </param>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1420,19 +1408,15 @@
           <para>Raises the <see cref="E:System.Windows.Forms.Control.Resize" /> event.</para>
         </summary>
         <param name="source">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The source of the event. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The source of the event.
+        </param>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1469,19 +1453,15 @@
           <para>Raises the <see cref="E:System.Windows.Forms.Control.TextChanged" /> event.</para>
         </summary>
         <param name="source">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The source of the event. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The source of the event.
+        </param>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1583,15 +1563,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position of the first character to be selected. </param
-        >
+          />The position of the first character to be selected.
+        </param>
         <param name="length">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The total number of characters to be selected. </param
-        >
+          />The total number of characters to be selected.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

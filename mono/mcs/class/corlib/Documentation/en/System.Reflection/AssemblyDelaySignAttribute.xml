@@ -78,8 +78,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if the feature this attribute represents is activated; otherwise, false. </param
-        >
+          />true if the feature this attribute represents is activated; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DelaySign">

@@ -62,8 +62,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The Decimal to be wrapped and marshaled as VT_CY. </param
-        >
+          />The Decimal to be wrapped and marshaled as VT_CY.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -95,8 +95,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object containing the Decimal to be wrapped and marshaled as VT_CY. </param
-        >
+          />The object containing the Decimal to be wrapped and marshaled as VT_CY.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WrappedObject">

@@ -40,8 +40,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Serialization.SerializeAbsoluteContext" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Serialization.SerializeAbsoluteContext" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -67,8 +67,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Serialization.SerializeAbsoluteContext" /> class with the option of binding to a specific member. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Serialization.SerializeAbsoluteContext" /> class with the option of binding to a specific member.
+          </para>
         </summary>
         <param name="member">
           <attribution

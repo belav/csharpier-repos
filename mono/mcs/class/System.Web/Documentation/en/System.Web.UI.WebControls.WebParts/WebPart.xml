@@ -27,8 +27,8 @@
         >When you create controls with Web Parts functionality, you have two basic options. You can create custom controls that derive from the <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> class, or you can create or use other server controls. Existing ASP.NET controls, custom server controls, and user controls can all be given full Web Parts functionality by declaring them within (or adding them programmatically to) a <see cref="T:System.Web.UI.WebControls.WebParts.WebPartZone" /> zone control, with the result that they will be wrapped with <see cref="T:System.Web.UI.WebControls.WebParts.GenericWebPart" /> objects at run time and treated as true <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> controls. For details, see the documentation for the <see cref="T:System.Web.UI.WebControls.WebParts.GenericWebPart" /> class. For speed of development and maximum reuse of code, using existing server controls can be a good option. For maximum programmatic control over the behavior and Web Parts functionality of controls, creating a custom control that inherits from the <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> class is often the best option.</para
       >
       <para
-        >The abstract <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> class inherits from the base <see cref="T:System.Web.UI.WebControls.WebParts.Part" /> control and provides the basic elements for all <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> controls. The class includes a common set of properties that affect the appearance of the UI. The <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.AllowClose" />, <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.AllowConnect" />, <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.AllowEdit" />, <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.AllowHide" />, <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.AllowMinimize" />, and <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.AllowZoneChange" /> properties each specify whether the user of a Web application is permitted to interact with the part control in the way indicated by the given property name. The <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.CatalogIconImageUrl" />, <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.ChromeState" />, <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.ChromeType" />, <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.Description" />, <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.Height" />, <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.HelpUrl" />, <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.Hidden" />, <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.Title" />, <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.TitleIconImageUrl" />, <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.TitleUrl" />, and <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.Width" /> properties determine the size, visibility, appearance, and supporting content (such as a title and a description) for a <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> control. </para
-      >
+        >The abstract <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> class inherits from the base <see cref="T:System.Web.UI.WebControls.WebParts.Part" /> control and provides the basic elements for all <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> controls. The class includes a common set of properties that affect the appearance of the UI. The <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.AllowClose" />, <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.AllowConnect" />, <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.AllowEdit" />, <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.AllowHide" />, <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.AllowMinimize" />, and <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.AllowZoneChange" /> properties each specify whether the user of a Web application is permitted to interact with the part control in the way indicated by the given property name. The <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.CatalogIconImageUrl" />, <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.ChromeState" />, <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.ChromeType" />, <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.Description" />, <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.Height" />, <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.HelpUrl" />, <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.Hidden" />, <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.Title" />, <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.TitleIconImageUrl" />, <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.TitleUrl" />, and <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.Width" /> properties determine the size, visibility, appearance, and supporting content (such as a title and a description) for a <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> control.
+      </para>
       <para
         >The relationship of a <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> control to its context within the Web Parts control set is determined by properties such as <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.WebPartManager" />, which holds a reference to the control's associated <see cref="T:System.Web.UI.WebControls.WebParts.WebPartManager" /> object, and <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.Zone" />, which references the <see cref="T:System.Web.UI.WebControls.WebParts.WebZone" /> that contains the control. There can be only one <see cref="T:System.Web.UI.WebControls.WebParts.WebPartManager" /> control per page, and each instance of a <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> control can reside within only one <see cref="T:System.Web.UI.WebControls.WebParts.WebZone" /> at a time.</para
       >
@@ -41,8 +41,8 @@
         >Several other important properties affect unique features of <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> controls. The <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.AuthorizationFilter" /> property allows developers to set an arbitrary string that can be used as a filter at run time to determine whether a control is added to the page. Used together with a feature such as role management, the <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.AuthorizationFilter" /> property provides a useful mechanism for creating views based on defined user roles. The <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.ExportMode" /> property indicates whether, during an export, all the available property data on a control is exported, or only the non-sensitive data. This allows developers to distinguish between data that is sensitive and data that is not, for security purposes. The <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.WebBrowsableObject" /> property returns a reference to an instance of a <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> control, so that an <see cref="T:System.Web.UI.WebControls.WebParts.EditorPart" /> control can edit it when the page is in edit mode. Finally, there are several properties that indicate the status of the control relative to the rest of the page. The <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.IsClosed" /> property indicates whether a control is closed (and thus added to a <see cref="T:System.Web.UI.WebControls.WebParts.PageCatalogPart" /> object), or if it is open and available on the page. The <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.IsShared" /> property indicates whether a control is a shared control (versus a user-specific control), meaning that it is visible to all users of a Web page. The <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.IsStandalone" /> property indicates whether a control is currently contained in a <see cref="T:System.Web.UI.WebControls.WebParts.WebPartZoneBase" />-derived zone (such as <see cref="T:System.Web.UI.WebControls.WebParts.WebPartZone" />). A value of false indicates the control is inside a zone and thus has full Web Parts functionality. The <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.IsStatic" /> property indicates whether a control is static or dynamic. A static control is declared in the markup of a Web page, whereas a dynamic control is added programmatically.</para
       >
       <para
-        >The <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> class also provides several methods that determine what happens at various points in the control's life cycle. For example, the <see cref="M:System.Web.UI.WebControls.WebParts.WebPart.OnConnectModeChanged(System.EventArgs)" /> and <see cref="M:System.Web.UI.WebControls.WebParts.WebPart.OnEditModeChanged(System.EventArgs)" /> methods can both be overridden in a derived class to provide programmatic control over the rendering of a control's contents during the event that corresponds to each method's name. </para
-      >
+        >The <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> class also provides several methods that determine what happens at various points in the control's life cycle. For example, the <see cref="M:System.Web.UI.WebControls.WebParts.WebPart.OnConnectModeChanged(System.EventArgs)" /> and <see cref="M:System.Web.UI.WebControls.WebParts.WebPart.OnEditModeChanged(System.EventArgs)" /> methods can both be overridden in a derived class to provide programmatic control over the rendering of a control's contents during the event that corresponds to each method's name.
+      </para>
       <para
         >Classes that derive from <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> can add <see cref="T:System.Web.UI.WebControls.WebParts.WebPartVerb" /> objects to the <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.Verbs" /> collection. The verbs are rendered in a verbs menu, which appears in the title bar of a <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> control. <see cref="T:System.Web.UI.WebControls.WebParts.WebPartVerb" /> objects provide simple UI elements for common user actions such as hiding or minimizing the control or displaying Help.</para
       >
@@ -53,8 +53,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Serves as the base class for custom ASP.NET Web Parts controls, adding to the base <see cref="T:System.Web.UI.WebControls.WebParts.Part" /> class features some additional user interface (UI) properties, the ability to create connections, and personalization behavior. </para
-      >
+        >Serves as the base class for custom ASP.NET Web Parts controls, adding to the base <see cref="T:System.Web.UI.WebControls.WebParts.Part" /> class features some additional user interface (UI) properties, the ability to create connections, and personalization behavior.
+      </para>
     </summary>
   </Docs>
   <Members>
@@ -95,15 +95,15 @@
           >
           <block subset="none" type="note">
             <para
-              >A closed <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> control can be added back to a page either programmatically, or by a user who selects the closed control from the page catalog when the page is in catalog display mode. </para
-            >
+              >A closed <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> control can be added back to a page either programmatically, or by a user who selects the closed control from the page catalog when the page is in catalog display mode.
+            </para>
           </block>
           <para
             >Closing a <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> control is different from deleting it. A closed control can be added back to a page, while a deleted control is permanently removed. For more information on deleting controls, see the <see cref="M:System.Web.UI.WebControls.WebParts.WebPartManager.DeleteWebPart(System.Web.UI.WebControls.WebParts.WebPart)" /> method. Closing a control is also different from hiding it. A control that is hidden is still present on the page, still participates in page life cycle events, and is only hidden from the user's view, but a closed control is not even rendered on a page.</para
           >
           <para
-            >Both static and dynamic <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> controls (static controls are declared in a page's markup, while dynamic controls are added programmatically) can be closed. </para
-          >
+            >Both static and dynamic <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> controls (static controls are declared in a page's markup, while dynamic controls are added programmatically) can be closed.
+          </para>
           <para
             >If a developer sets the <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.AllowClose" /> property to false, a close verb does not appear on the control, and the user is not able to close the control.</para
           >
@@ -175,8 +175,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To allow end users to edit a <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> control, the <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.AllowEdit" /> property must be set to true (the default), and the page's display mode must be in edit mode. Display modes are represented by fields in the <see cref="T:System.Web.UI.WebControls.WebParts.WebPartManager" /> control. In this case, the mode is <see cref="F:System.Web.UI.WebControls.WebParts.WebPartManager.EditDisplayMode" />. For details about page display modes and how to change them, see the <see cref="T:System.Web.UI.WebControls.WebParts.WebPartDisplayMode" /> class overview. </para
-          >
+            >To allow end users to edit a <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> control, the <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.AllowEdit" /> property must be set to true (the default), and the page's display mode must be in edit mode. Display modes are represented by fields in the <see cref="T:System.Web.UI.WebControls.WebParts.WebPartManager" /> control. In this case, the mode is <see cref="F:System.Web.UI.WebControls.WebParts.WebPartManager.EditDisplayMode" />. For details about page display modes and how to change them, see the <see cref="T:System.Web.UI.WebControls.WebParts.WebPartDisplayMode" /> class overview.
+          </para>
           <para
             >When the <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.AllowEdit" /> property is set to false either declaratively or programmatically, editing options are limited. The only possible editing operations are changes to the page's layout, using a <see cref="T:System.Web.UI.WebControls.WebParts.LayoutEditorPart" /> control, or other basic operations enabled through custom <see cref="T:System.Web.UI.WebControls.WebParts.EditorPart" /> controls.</para
           >
@@ -233,8 +233,8 @@
             >The <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.AllowHide" /> property determines whether users can modify the <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.Hidden" /> property. In the default case, when the property value is true, users can change the value when the control is being edited. By default, controls are not hidden and their <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.Hidden" /> property value is false. When a <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> control is being edited, if a user selects a check box to hide the control (which sets the <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.Hidden" /> property to true), the control will no longer be visible when the page returns to browse mode.</para
           >
           <para
-            >Hidden controls are distinct from controls that are closed, because the <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.Hidden" /> property has a distinct meaning within the Web Parts control set. Closed controls are not even rendered on a page, and do not participate in page life cycle events. In contrast, while hidden <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> controls are not visible to users, they are still rendered on a Web page, are still contained in a zone, and can still maintain connections with other <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> controls as part of a Web Parts application. </para
-          >
+            >Hidden controls are distinct from controls that are closed, because the <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.Hidden" /> property has a distinct meaning within the Web Parts control set. Closed controls are not even rendered on a page, and do not participate in page life cycle events. In contrast, while hidden <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> controls are not visible to users, they are still rendered on a Web page, are still contained in a zone, and can still maintain connections with other <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> controls as part of a Web Parts application.
+          </para>
           <para
             >This property cannot be set by themes or style sheet themes. For more information, see <see cref="T:System.Web.UI.ThemeableAttribute" /> and <format type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
@@ -364,8 +364,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets an arbitrary string to determine whether a <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> control is authorized to be added to a page. </para
-          >
+            >Gets or sets an arbitrary string to determine whether a <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> control is authorized to be added to a page.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -416,8 +416,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A part control's <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.ChromeState" /> property value can be normal or minimized. The <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> class overrides the base property so that end users can personalize it. </para
-          >
+            >A part control's <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.ChromeState" /> property value can be normal or minimized. The <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> class overrides the base property so that end users can personalize it.
+          </para>
           <para
             >For a code example that uses this property, see the base <see cref="P:System.Web.UI.WebControls.WebParts.Part.ChromeState" /> property.</para
           >
@@ -446,8 +446,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A part control's <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.WebPartManager" /> property determines what kind of border surrounds the control. Options include showing a title only, a border only, a title and border, neither, or the default option, which simply uses the value of the <see cref="P:System.Web.UI.WebControls.WebParts.WebZone.PartChromeType" /> property. </para
-          >
+            >A part control's <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.WebPartManager" /> property determines what kind of border surrounds the control. Options include showing a title only, a border only, a title and border, neither, or the default option, which simply uses the value of the <see cref="P:System.Web.UI.WebControls.WebParts.WebZone.PartChromeType" /> property.
+          </para>
           <para
             >The <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> class overrides the base property so that end users can personalize it.</para
           >
@@ -562,8 +562,8 @@
             >The <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.DisplayTitle" /> property returns either the current value of the <see cref="P:System.Web.UI.WebControls.WebParts.Part.Title" /> property or, if the control has no title, a calculated value. The calculated value consists of a localizable resource string for untitled controls, plus (if there are multiple controls within the zone) a number based on the index of the control within the zone.</para
           >
           <para
-            >For custom <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> controls where the <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.Subtitle" /> property has been overridden to return a string value to use as a subtitle, the <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.DisplayTitle" /> property is concatenated with the subtitle to produce a complete title. </para
-          >
+            >For custom <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> controls where the <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.Subtitle" /> property has been overridden to return a string value to use as a subtitle, the <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.DisplayTitle" /> property is concatenated with the subtitle to produce a complete title.
+          </para>
           <para
             >The <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.DisplayTitle" /> property value also serves as part of a ToolTip that appears when a user positions the mouse pointer over the title bar of a control. The full ToolTip consists of the <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.DisplayTitle" /> value, followed by a hyphen, followed by the value of the control's <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.Description" /> property.</para
           >
@@ -597,8 +597,8 @@
             >By default, a <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> control cannot be exported and its <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.ExportMode" /> property is set to <see cref="F:System.Web.UI.WebControls.WebParts.WebPartExportMode.None" />. To enable exporting all properties for the control, set the <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.ExportMode" /> value to <see cref="F:System.Web.UI.WebControls.WebParts.WebPartExportMode.All" />. To export only certain properties while preventing the export of properties that contain sensitive data, you set the property value to <see cref="F:System.Web.UI.WebControls.WebParts.WebPartExportMode.NonSensitiveData" />.</para
           >
           <para
-            >To export property value descriptions for a <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> control, the properties must also be marked with the Personalizable attribute in the metadata for the property's source code. For details, see <see cref="T:System.Web.UI.WebControls.WebParts.PersonalizableAttribute" />. </para
-          >
+            >To export property value descriptions for a <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> control, the properties must also be marked with the Personalizable attribute in the metadata for the property's source code. For details, see <see cref="T:System.Web.UI.WebControls.WebParts.PersonalizableAttribute" />.
+          </para>
           <block subset="none" type="note">
             <para>To enable the export feature for a Web application that includes Web Parts controls, in the Web.config file for your application, you must add an attribute to the &lt;webParts&gt; element within the &lt;system.web&gt; section, as in the following markup.</para>
             <para>&lt;webParts  enableExport="true"&gt;</para>
@@ -618,8 +618,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets whether all, some, or none of a <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> control's properties can be exported. </para
-          >
+            >Gets or sets whether all, some, or none of a <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> control's properties can be exported.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -695,8 +695,8 @@
             > property.</para
           >
           <para
-            >When Internet Explorer renders a page in standards mode, under some circumstances it might not resize cells in tables, even when a cell's HTML markup is &lt;td height="100%"&gt;. As a result, <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> controls and their containing zone are rendered so that the controls do not stretch to the full height of the zone. </para
-          >
+            >When Internet Explorer renders a page in standards mode, under some circumstances it might not resize cells in tables, even when a cell's HTML markup is &lt;td height="100%"&gt;. As a result, <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> controls and their containing zone are rendered so that the controls do not stretch to the full height of the zone.
+          </para>
           <para>When Internet Explorer is in standard mode, controls do not render to stretch to their full height in the following cases:</para>
           <list type="bullet">
             <item>
@@ -813,8 +813,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To enable a verb menu with a help verb in the verbs menu of a <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> control, you must provide a value for the <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.HelpUrl" /> property. The manner in which the Help content is displayed in the browser is determined by the value of the <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.HelpMode" /> property. </para
-          >
+            >To enable a verb menu with a help verb in the verbs menu of a <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> control, you must provide a value for the <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.HelpUrl" /> property. The manner in which the Help content is displayed in the browser is determined by the value of the <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.HelpMode" /> property.
+          </para>
           <para
             >This property cannot be set by themes or style sheet themes. For more information, see <see cref="T:System.Web.UI.ThemeableAttribute" /> and <format type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
@@ -849,11 +849,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> control that is hidden remains in its zone, is actually rendered on its page, and participates in page life cycle phases such as the PreRender phase, even though it is not visible in a browser. This is different from <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> controls that are closed, because closed controls are not even rendered on a page, while hidden controls are rendered and active in Web Parts applications, though not visible to users. The Web Parts control set hides the <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> control by setting its cascading style sheet (CSS) style to a value of display:none. </para
-          >
+            >A <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> control that is hidden remains in its zone, is actually rendered on its page, and participates in page life cycle phases such as the PreRender phase, even though it is not visible in a browser. This is different from <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> controls that are closed, because closed controls are not even rendered on a page, while hidden controls are rendered and active in Web Parts applications, though not visible to users. The Web Parts control set hides the <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> control by setting its cascading style sheet (CSS) style to a value of display:none.
+          </para>
           <para
-            >Even if the <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.Hidden" /> property for a control is set to true, the control is still displayed if the current display mode on the page allows hidden controls to be displayed. For example, edit mode allows hidden controls to be displayed, so that users can edit them. When hidden controls are visible in certain display modes, the title of the control displays a string indicating that the control is in hidden status. </para
-          >
+            >Even if the <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.Hidden" /> property for a control is set to true, the control is still displayed if the current display mode on the page allows hidden controls to be displayed. For example, edit mode allows hidden controls to be displayed, so that users can edit them. When hidden controls are visible in certain display modes, the title of the control displays a string indicating that the control is in hidden status.
+          </para>
           <para
             >When the <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.Hidden" /> property on a <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> control is set to false, which is the default, the control is displayed on the page. Note that if the <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.AllowHide" /> property is set to false, end users are not allowed to edit the <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.Hidden" /> property value.</para
           >
@@ -1053,8 +1053,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnConnectModeChanged">
@@ -1177,20 +1177,20 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.WebControls.WebParts.WebPart.SetPersonalizationDirty" /> method sets a flag indicating that control state data has been changed (personalized) on a <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> control, and that the <see cref="T:System.Web.UI.WebControls.WebParts.WebPartManager" /> control therefore needs to persist the personalization data to long term storage. </para
-          >
+            >The <see cref="M:System.Web.UI.WebControls.WebParts.WebPart.SetPersonalizationDirty" /> method sets a flag indicating that control state data has been changed (personalized) on a <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> control, and that the <see cref="T:System.Web.UI.WebControls.WebParts.WebPartManager" /> control therefore needs to persist the personalization data to long term storage.
+          </para>
           <para
             >Normally the <see cref="T:System.Web.UI.WebControls.WebParts.WebPartManager" /> persists personalization changes on <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> controls without a need for developers to call the <see cref="M:System.Web.UI.WebControls.WebParts.WebPart.SetPersonalizationDirty" /> method. But there are two cases in which developers do need to call this method. The first case is when control state data is changed during an HTTP GET request to a page. By default, changes to control state data during a GET request are not persisted (for security purposes). But the <see cref="M:System.Web.UI.WebControls.WebParts.WebPart.SetPersonalizationDirty" /> method provides a way to persist legitimate personalization changes to <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> controls in this case.</para
           >
           <para
-            >The second case for calling the <see cref="M:System.Web.UI.WebControls.WebParts.WebPart.SetPersonalizationDirty" /> method occurs during an HTTP POST request to a page. If a <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> control has complex personalizable properties (such as a property that contains an <see cref="T:System.Collections.ArrayList" /> object), and control state data in those properties is personalized during a POST request, developers must call the <see cref="M:System.Web.UI.WebControls.WebParts.WebPart.SetPersonalizationDirty" /> method to ensure that the changes are persisted. </para
-          >
+            >The second case for calling the <see cref="M:System.Web.UI.WebControls.WebParts.WebPart.SetPersonalizationDirty" /> method occurs during an HTTP POST request to a page. If a <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> control has complex personalizable properties (such as a property that contains an <see cref="T:System.Collections.ArrayList" /> object), and control state data in those properties is personalized during a POST request, developers must call the <see cref="M:System.Web.UI.WebControls.WebParts.WebPart.SetPersonalizationDirty" /> method to ensure that the changes are persisted.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets a flag indicating that personalization data has changed for the current <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> control instance. </para
-          >
+            >Sets a flag indicating that personalization data has changed for the current <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> control instance.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1214,8 +1214,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.WebControls.WebParts.WebPart.SetPersonalizationDirty(System.Web.UI.Control)" /> method has the same purpose as the <see cref="M:System.Web.UI.WebControls.WebParts.WebPart.SetPersonalizationDirty" /> method, which is to set a flag indicating that control state data has been changed (personalized) on a server control during an HTTP GET request. The difference between these methods is that the <see cref="M:System.Web.UI.WebControls.WebParts.WebPart.SetPersonalizationDirty(System.Web.UI.Control)" /> method is used for server controls that do not inherit from the <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> class, but are placed within <see cref="T:System.Web.UI.WebControls.WebParts.WebPartZoneBase" /> zones to participate in Web Parts applications. </para
-          >
+            >The <see cref="M:System.Web.UI.WebControls.WebParts.WebPart.SetPersonalizationDirty(System.Web.UI.Control)" /> method has the same purpose as the <see cref="M:System.Web.UI.WebControls.WebParts.WebPart.SetPersonalizationDirty" /> method, which is to set a flag indicating that control state data has been changed (personalized) on a server control during an HTTP GET request. The difference between these methods is that the <see cref="M:System.Web.UI.WebControls.WebParts.WebPart.SetPersonalizationDirty(System.Web.UI.Control)" /> method is used for server controls that do not inherit from the <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> class, but are placed within <see cref="T:System.Web.UI.WebControls.WebParts.WebPartZoneBase" /> zones to participate in Web Parts applications.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1247,11 +1247,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.Subtitle" /> property optionally to return a standard subtitle string in your custom <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> control that will be appended to the control's title. </para
-          >
+            >Use the <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.Subtitle" /> property optionally to return a standard subtitle string in your custom <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> control that will be appended to the control's title.
+          </para>
           <para
-            >If you provide a value for the <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.Subtitle" /> property in a custom <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> control, the Web Parts control set automatically appends it to the value of the <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.Title" /> property to create a complete title for the control. </para
-          >
+            >If you provide a value for the <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.Subtitle" /> property in a custom <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> control, the Web Parts control set automatically appends it to the value of the <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.Title" /> property to create a complete title for the control.
+          </para>
           <para
             >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see cref="T:System.ComponentModel.LocalizableAttribute" /> and <format type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
@@ -1263,8 +1263,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a string that is concatenated with the <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.Title" /> property value to form a complete title for a <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> control. </para
-          >
+            >Gets a string that is concatenated with the <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.Title" /> property value to form a complete title for a <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> control.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1283,8 +1283,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a developer assigns a value to the <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.Title" /> property, then that value determines all (or at least part of) the text in the control's title bar. The title text also appears as part of the ToolTip text when you position your mouse pointer over the title bar of a <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> control or other server control that appears in a <see cref="T:System.Web.UI.WebControls.WebParts.WebPartZone" /> zone. </para
-          >
+            >If a developer assigns a value to the <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.Title" /> property, then that value determines all (or at least part of) the text in the control's title bar. The title text also appears as part of the ToolTip text when you position your mouse pointer over the title bar of a <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> control or other server control that appears in a <see cref="T:System.Web.UI.WebControls.WebParts.WebPartZone" /> zone.
+          </para>
           <para
             >The complete text displayed in a control's title bar is also affected by the <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.Subtitle" /> property. If that property has a value assigned to it, the value is concatenated to the title. If no value is assigned to the <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.Title" /> property, a calculated title is displayed. At any point, developers can retrieve the actual, total text displayed in a <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> control's title bar by getting the value of the <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.DisplayTitle" /> property.</para
           >
@@ -1361,8 +1361,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a URL to supplemental information about a <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> control. </para
-          >
+            >Gets or sets a URL to supplemental information about a <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" /> control.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>

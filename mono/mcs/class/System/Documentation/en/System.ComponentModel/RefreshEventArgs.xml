@@ -72,8 +72,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The component that changed. </param
-        >
+          />The component that changed.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -105,8 +105,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> that changed. </param
-        >
+          />The <see cref="T:System.Type" /> that changed.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ComponentChanged">

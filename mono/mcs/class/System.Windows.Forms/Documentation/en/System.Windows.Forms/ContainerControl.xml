@@ -226,8 +226,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Windows.Forms.ContainerControl.AutoScaleMode" /> property specifies the current automatic scaling mode of this control. Scaling by <see cref="F:System.Windows.Forms.AutoScaleMode.Font" /> is useful if you want to have a control or form stretch or shrink according to the size of the fonts in the operating system, and should be used when the absolute size of the control or form does not matter. Scaling by <see cref="F:System.Windows.Forms.AutoScaleMode.Dpi" /> is useful when you want to size a control or form relative to the screen. For example, you may want to use dots per inch (DPI) scaling on a control displaying a chart or other graphic so that it always occupies a certain percentage of the screen. </para
-          >
+            >The <see cref="P:System.Windows.Forms.ContainerControl.AutoScaleMode" /> property specifies the current automatic scaling mode of this control. Scaling by <see cref="F:System.Windows.Forms.AutoScaleMode.Font" /> is useful if you want to have a control or form stretch or shrink according to the size of the fonts in the operating system, and should be used when the absolute size of the control or form does not matter. Scaling by <see cref="F:System.Windows.Forms.AutoScaleMode.Dpi" /> is useful when you want to size a control or form relative to the screen. For example, you may want to use dots per inch (DPI) scaling on a control displaying a chart or other graphic so that it always occupies a certain percentage of the screen.
+          </para>
           <para
             >For more information about automatic scaling, see <format type="text/html">
               <a href="68fad25b-afbc-44bd-8e1b-966fc43507a4">Automatic Scaling in Windows Forms</a>
@@ -278,8 +278,8 @@
             </format>.</para
           >
           <para
-            >Setting this property to a new value will raise the <see cref="E:System.Windows.Forms.ContainerControl.AutoValidateChanged" /> event. </para
-          >
+            >Setting this property to a new value will raise the <see cref="E:System.Windows.Forms.ContainerControl.AutoValidateChanged" /> event.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -310,8 +310,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -429,8 +429,8 @@
             </item>
             <item>
               <para
-                >If the mode is <see cref="F:System.Windows.Forms.AutoScaleMode.Font" />, this property represents the average font character size in pixels. </para
-              >
+                >If the mode is <see cref="F:System.Windows.Forms.AutoScaleMode.Font" />, this property represents the average font character size in pixels.
+              </para>
             </item>
           </list>
           <para
@@ -600,8 +600,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.LayoutEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.LayoutEventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnParentChanged">
@@ -670,8 +670,8 @@
             >An explicit call to the <see cref="M:System.Windows.Forms.ContainerControl.PerformAutoScale" /> method is typically only required after programmatic changes to the layout during run time. <see cref="M:System.Windows.Forms.ContainerControl.PerformAutoScale" /> is implicitly called from the <see cref="M:System.Windows.Forms.ContainerControl.OnLayout(System.Windows.Forms.LayoutEventArgs)" /> method.</para
           >
           <para>
-            <see cref="M:System.Windows.Forms.ContainerControl.PerformAutoScale" /> is recursive; each child control, if it is a container, will have its version of this method called when the container's version executes. </para
-          >
+            <see cref="M:System.Windows.Forms.ContainerControl.PerformAutoScale" /> is recursive; each child control, if it is a container, will have its version of this method called when the container's version executes.
+          </para>
           <para
             >For more information about automatic scaling, see <format type="text/html">
               <a href="68fad25b-afbc-44bd-8e1b-966fc43507a4">Automatic Scaling in Windows Forms</a>
@@ -811,8 +811,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to cycle forward through the controls in the <see cref="T:System.Windows.Forms.ContainerControl" />; otherwise, false. </param
-        >
+          />true to cycle forward through the controls in the <see cref="T:System.Windows.Forms.ContainerControl" />; otherwise, false.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -924,8 +924,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Verifies the value of the control losing focus by causing the <see cref="E:System.Windows.Forms.Control.Validating" /> and <see cref="E:System.Windows.Forms.Control.Validated" /> events to occur, in that order. </para
-          >
+            >Verifies the value of the control losing focus by causing the <see cref="E:System.Windows.Forms.Control.Validating" /> and <see cref="E:System.Windows.Forms.Control.Validated" /> events to occur, in that order.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -960,8 +960,8 @@
           <list type="bullet">
             <item>
               <para
-                >If the <paramref name="checkAutoValidate" /> parameter is true, validation always occurs for child controls that are not validated. </para
-              >
+                >If the <paramref name="checkAutoValidate" /> parameter is true, validation always occurs for child controls that are not validated.
+              </para>
             </item>
             <item>
               <para
@@ -1014,8 +1014,8 @@
             <see cref="M:System.Windows.Forms.ContainerControl.ValidateChildren" /> will descend a control's hierarchy and examine each control to see if it supports validation. If the control can be selected by the user and its <see cref="P:System.Windows.Forms.Control.CausesValidation" /> property is true, <see cref="M:System.Windows.Forms.ContainerControl.ValidateChildren" /> will cause the <see cref="E:System.Windows.Forms.Control.Validating" /> event to occur. If any of the controls cancel the <see cref="E:System.Windows.Forms.Control.Validating" /> event, this method will return false; otherwise, it will return true.</para
           >
           <para
-            >If a control is bound to a data source, and the <see cref="E:System.Windows.Forms.Control.Validating" /> event occurs, it will cause the control to push its current data back to the data source. </para
-          >
+            >If a control is bound to a data source, and the <see cref="E:System.Windows.Forms.Control.Validating" /> event occurs, it will cause the control to push its current data back to the data source.
+          </para>
           <para
             >Calling <see cref="M:System.Windows.Forms.ContainerControl.ValidateChildren" /> is equivalent to calling <see cref="M:System.Windows.Forms.ContainerControl.ValidateChildren(System.Windows.Forms.ValidationConstraints)" /> with a <see cref="T:System.Windows.Forms.ValidationConstraints" /> of <see cref="F:System.Windows.Forms.ValidationConstraints.None" />.</para
           >
@@ -1059,17 +1059,17 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="M:System.Windows.Forms.ContainerControl.ValidateChildren(System.Windows.Forms.ValidationConstraints)" /> will examine all the children of the current control, causing the <see cref="E:System.Windows.Forms.Control.Validating" /> event to occur on a control if it meets the criteria spelled out by <see cref="T:System.Windows.Forms.ValidationConstraints" />. </para
-          >
+            <see cref="M:System.Windows.Forms.ContainerControl.ValidateChildren(System.Windows.Forms.ValidationConstraints)" /> will examine all the children of the current control, causing the <see cref="E:System.Windows.Forms.Control.Validating" /> event to occur on a control if it meets the criteria spelled out by <see cref="T:System.Windows.Forms.ValidationConstraints" />.
+          </para>
           <para
             >You may use several <see cref="T:System.Windows.Forms.ValidationConstraints" /> parameters at once by combining them with a bitwise OR operator. Combining parameters with a bitwise OR operator will result in a logical AND operation. For example, calling ValidateChildren(ValidationConstraints.ImmediateChildren | ValidationConstraints.Enabled) will only raise the <see cref="E:System.Windows.Forms.Control.Validating" /> event on controls that are both immediate children of the container AND are enabled.</para
           >
           <para
-            >Regardless of which parameters you specify for this method, a control must have its <see cref="P:System.Windows.Forms.Control.CausesValidation" /> property set to true in order for its <see cref="E:System.Windows.Forms.Control.Validating" /> event to occur. You should also set the <see cref="P:System.Windows.Forms.ContainerControl.AutoValidate" /> property of the control or of the control's container to false if you want validation to happen only when you call <see cref="M:System.Windows.Forms.ContainerControl.ValidateChildren(System.Windows.Forms.ValidationConstraints)" />, and not when the user shifts focus from the control. </para
-          >
+            >Regardless of which parameters you specify for this method, a control must have its <see cref="P:System.Windows.Forms.Control.CausesValidation" /> property set to true in order for its <see cref="E:System.Windows.Forms.Control.Validating" /> event to occur. You should also set the <see cref="P:System.Windows.Forms.ContainerControl.AutoValidate" /> property of the control or of the control's container to false if you want validation to happen only when you call <see cref="M:System.Windows.Forms.ContainerControl.ValidateChildren(System.Windows.Forms.ValidationConstraints)" />, and not when the user shifts focus from the control.
+          </para>
           <para
-            >If a control is bound to a data source, and the <see cref="E:System.Windows.Forms.Control.Validating" /> event occurs, it will cause the control to push its current data back to the data source. </para
-          >
+            >If a control is bound to a data source, and the <see cref="E:System.Windows.Forms.Control.Validating" /> event occurs, it will cause the control to push its current data back to the data source.
+          </para>
           <para
             >You cannot achieve the opposite effect of a <see cref="T:System.Windows.Forms.ValidationConstraints" /> parameter by applying a bitwise negation operator. For example, if you supply the negative value of the <see cref="F:System.Windows.Forms.ValidationConstraints.Visible" /> field to <see cref="M:System.Windows.Forms.ContainerControl.ValidateChildren(System.Windows.Forms.ValidationConstraints)" />, it will not validate all children that are not visible on the container. Supplying any negative parameter to <see cref="M:System.Windows.Forms.ContainerControl.ValidateChildren(System.Windows.Forms.ValidationConstraints)" /> will have no effect on the container or its children.</para
           >

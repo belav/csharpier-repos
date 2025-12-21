@@ -21,8 +21,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A message header contains optional metadata that describe a message, encapsulated by the <see cref="T:System.ServiceModel.Channels.Message" /> class.  </para
-      >
+        >A message header contains optional metadata that describe a message, encapsulated by the <see cref="T:System.ServiceModel.Channels.Message" /> class.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -46,8 +46,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.MessageHeader`1" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.MessageHeader`1" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>

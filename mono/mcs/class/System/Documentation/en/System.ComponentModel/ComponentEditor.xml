@@ -50,8 +50,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.ComponentEditor" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.ComponentEditor" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -91,8 +91,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The component to be edited. </param
-        >
+          />The component to be edited.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="EditComponent">
@@ -135,15 +135,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An optional context object that can be used to obtain further information about the edit. </param
-        >
+          />An optional context object that can be used to obtain further information about the edit.
+        </param>
         <param name="component">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The component to be edited. </param
-        >
+          />The component to be edited.
+        </param>
       </Docs>
     </Member>
   </Members>

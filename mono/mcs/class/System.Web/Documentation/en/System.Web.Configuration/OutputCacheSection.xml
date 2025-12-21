@@ -17,8 +17,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.Configuration.OutputCacheSection" /> class allows you to programmatically access and modify the OutputCache section. </para
-      >
+        >The <see cref="T:System.Web.Configuration.OutputCacheSection" /> class allows you to programmatically access and modify the OutputCache section.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -68,8 +68,8 @@
           <para
             >If the <see cref="P:System.Web.Configuration.OutputCacheSection.EnableFragmentCache" /> property is set to false, no user control output is cached, regardless of the <format type="text/html">
               <a href="28a9e101-fb44-4198-9cb6-b8a52312fec2">OutputCache</a>
-            </format> directive or caching profile used. For more information, see <see cref="T:System.Web.Configuration.OutputCacheSettingsSection" /> and <see cref="T:System.Web.Configuration.OutputCacheProfile" />. </para
-          >
+            </format> directive or caching profile used. For more information, see <see cref="T:System.Web.Configuration.OutputCacheSettingsSection" /> and <see cref="T:System.Web.Configuration.OutputCacheProfile" />.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -136,8 +136,8 @@
           <para
             >If the <see cref="P:System.Web.Configuration.OutputCacheSection.EnableFragmentCache" /> property is set to false, no page is cached on the server, regardless of the settings in <format type="text/html">
               <a href="28a9e101-fb44-4198-9cb6-b8a52312fec2">@ OutputCache</a>
-            </format> directive or caching profile used by the page. For more information, see <see cref="T:System.Web.Configuration.OutputCacheSettingsSection" /> and <see cref="T:System.Web.Configuration.OutputCacheProfile" />. </para
-          >
+            </format> directive or caching profile used by the page. For more information, see <see cref="T:System.Web.Configuration.OutputCacheSettingsSection" /> and <see cref="T:System.Web.Configuration.OutputCacheProfile" />.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

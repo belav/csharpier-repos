@@ -27,8 +27,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies how to read XML data and a relational schema into a <see cref="T:System.Data.DataSet" />. </para
-      >
+        >Specifies how to read XML data and a relational schema into a <see cref="T:System.Data.DataSet" />.
+      </para>
     </summary>
   </Docs>
   <Members>

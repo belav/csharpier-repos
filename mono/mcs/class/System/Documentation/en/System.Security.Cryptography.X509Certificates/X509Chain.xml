@@ -86,8 +86,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to use the machine context; false to use the current user context. </param
-        >
+          />true to use the machine context; false to use the current user context.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">

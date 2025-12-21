@@ -85,15 +85,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.Stream" /> from which the data is deserialized. </param
-        >
+          />The <see cref="T:System.IO.Stream" /> from which the data is deserialized.
+        </param>
         <param name="handler">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The delegate designed to handle <see cref="T:System.Runtime.Remoting.Messaging.Header" /> objects. Can be null. </param
-        >
+          />The delegate designed to handle <see cref="T:System.Runtime.Remoting.Messaging.Header" /> objects. Can be null.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Serialize">
@@ -138,22 +138,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.Stream" /> onto which the specified graph is serialized. </param
-        >
+          />The <see cref="T:System.IO.Stream" /> onto which the specified graph is serialized.
+        </param>
         <param name="graph">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The root of the object graph to be serialized. </param
-        >
+          />The root of the object graph to be serialized.
+        </param>
         <param name="headers">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array of <see cref="T:System.Runtime.Remoting.Messaging.Header" /> objects to transmit with the graph specified by the <paramref name="graph" /> parameter. Can be null. </param
-        >
+          />The array of <see cref="T:System.Runtime.Remoting.Messaging.Header" /> objects to transmit with the graph specified by the <paramref name="graph" /> parameter. Can be null.
+        </param>
       </Docs>
     </Member>
   </Members>

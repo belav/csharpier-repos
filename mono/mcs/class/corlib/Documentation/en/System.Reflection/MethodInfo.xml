@@ -55,8 +55,8 @@
         >Instances of <see cref="T:System.Reflection.MethodInfo" /> are obtained by calling the <see cref="Overload:System.Type.GetMethods" /> or <see cref="Overload:System.Type.GetMethod" /> method of a <see cref="T:System.Type" /> object or of an object that derives from <see cref="T:System.Type" />, or by calling the <see cref="M:System.Reflection.MethodInfo.MakeGenericMethod(System.Type[])" /> method of a <see cref="T:System.Reflection.MethodInfo" /> that represents a generic method definition.</para
       >
       <para
-        >For a list of the invariant conditions for terms specific to generic methods, see the <see cref="P:System.Reflection.MethodInfo.IsGenericMethod" /> property. For a list of the invariant conditions for other terms used in generic reflection, see the <see cref="P:System.Type.IsGenericType" /> property. </para
-      >
+        >For a list of the invariant conditions for terms specific to generic methods, see the <see cref="P:System.Reflection.MethodInfo.IsGenericMethod" /> property. For a list of the invariant conditions for other terms used in generic reflection, see the <see cref="P:System.Type.IsGenericType" /> property.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -118,8 +118,8 @@
             >The <see cref="P:System.Reflection.MethodInfo.ContainsGenericParameters" /> property searches recursively for type parameters. For example, it returns true for any method in an open type A&lt;T&gt; (A(Of T) in Visual Basic), even though the method itself is not generic. Contrast this with the behavior of the <see cref="P:System.Reflection.MethodInfo.IsGenericMethod" /> property, which returns false for such a method.</para
           >
           <para
-            >For a list of the invariant conditions for terms specific to generic methods, see the <see cref="P:System.Reflection.MethodInfo.IsGenericMethod" /> property. For a list of the invariant conditions for other terms used in generic reflection, see the <see cref="P:System.Type.IsGenericType" /> property. </para
-          >
+            >For a list of the invariant conditions for terms specific to generic methods, see the <see cref="P:System.Reflection.MethodInfo.IsGenericMethod" /> property. For a list of the invariant conditions for other terms used in generic reflection, see the <see cref="P:System.Type.IsGenericType" /> property.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -376,8 +376,8 @@ if (mi.IsGenericMethod)
           <list type="bullet">
             <item>
               <para
-                >If the current method is a closed constructed method (that is, the <see cref="P:System.Reflection.MethodInfo.ContainsGenericParameters" /> property returns false), the array returned by the <see cref="M:System.Reflection.MethodInfo.GetGenericArguments" /> method contains the types that have been assigned to the generic type parameters of the generic method definition. </para
-              >
+                >If the current method is a closed constructed method (that is, the <see cref="P:System.Reflection.MethodInfo.ContainsGenericParameters" /> property returns false), the array returned by the <see cref="M:System.Reflection.MethodInfo.GetGenericArguments" /> method contains the types that have been assigned to the generic type parameters of the generic method definition.
+              </para>
             </item>
             <item>
               <para>If the current method is a generic method definition, the array contains the type parameters. </para>
@@ -389,8 +389,8 @@ if (mi.IsGenericMethod)
             </item>
           </list>
           <para
-            >For a list of the invariant conditions for terms specific to generic methods, see the <see cref="P:System.Reflection.MethodInfo.IsGenericMethod" /> property. For a list of the invariant conditions for other terms used in generic reflection, see the <see cref="P:System.Type.IsGenericType" /> property. </para
-          >
+            >For a list of the invariant conditions for terms specific to generic methods, see the <see cref="P:System.Reflection.MethodInfo.IsGenericMethod" /> property. For a list of the invariant conditions for other terms used in generic reflection, see the <see cref="P:System.Type.IsGenericType" /> property.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -432,8 +432,8 @@ if (mi.IsGenericMethod)
       <Docs>
         <since version=".NET 2.0" />
         <exception cref="T:System.InvalidOperationException"
-          >The current method is not a generic method. That is, <see cref="P:System.Reflection.MethodInfo.IsGenericMethod" /> returns <see langword="false" />. </exception
-        >
+          >The current method is not a generic method. That is, <see cref="P:System.Reflection.MethodInfo.IsGenericMethod" /> returns <see langword="false" />.
+        </exception>
         <example>
           <para
             >The following code shows a class with a generic method and the code required to obtain a <see cref="T:System.Reflection.MethodInfo" />  for the method, bind the method to type arguments, and get the original generic type definition back from the bound method. (It is part of a larger example for the method <see cref="M:System.Reflection.MethodInfo.MakeGenericMethod" />.)</para
@@ -473,8 +473,7 @@ DisplayGenericMethodInfo(miBound);
 MethodInfo miDef = miBound.GetGenericMethodDefinition();
 Console.WriteLine("\nThe definition is the same: {0}",
        miDef == mi);
-</code
-          >
+</code>
         </example>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -506,11 +505,11 @@ public:
     generic &lt;typename S&gt; B&lt;T,S&gt;^ M() {...};
 };</code>
           <para
-            >In the constructed type C&lt;int&gt; (C(Of Integer) in Visual Basic), the generic method M returns B&lt;int, S&gt;. In the open type C&lt;T&gt;, M returns B&lt;T, S&gt;. In both cases, the <see cref="P:System.Reflection.MethodInfo.IsGenericMethodDefinition" /> property returns true for the <see cref="T:System.Reflection.MethodInfo" /> that represents M, so <see cref="M:System.Reflection.MethodInfo.MakeGenericMethod(System.Type[])" /> can be called on both <see cref="T:System.Reflection.MethodInfo" /> objects. In the case of the constructed type, the result of calling <see cref="M:System.Reflection.MethodInfo.MakeGenericMethod(System.Type[])" /> is a <see cref="T:System.Reflection.MethodInfo" /> that can be invoked. In the case of the open type, the <see cref="T:System.Reflection.MethodInfo" /> returned by <see cref="M:System.Reflection.MethodInfo.MakeGenericMethod(System.Type[])" /> cannot be invoked.  </para
-          >
+            >In the constructed type C&lt;int&gt; (C(Of Integer) in Visual Basic), the generic method M returns B&lt;int, S&gt;. In the open type C&lt;T&gt;, M returns B&lt;T, S&gt;. In both cases, the <see cref="P:System.Reflection.MethodInfo.IsGenericMethodDefinition" /> property returns true for the <see cref="T:System.Reflection.MethodInfo" /> that represents M, so <see cref="M:System.Reflection.MethodInfo.MakeGenericMethod(System.Type[])" /> can be called on both <see cref="T:System.Reflection.MethodInfo" /> objects. In the case of the constructed type, the result of calling <see cref="M:System.Reflection.MethodInfo.MakeGenericMethod(System.Type[])" /> is a <see cref="T:System.Reflection.MethodInfo" /> that can be invoked. In the case of the open type, the <see cref="T:System.Reflection.MethodInfo" /> returned by <see cref="M:System.Reflection.MethodInfo.MakeGenericMethod(System.Type[])" /> cannot be invoked.
+          </para>
           <para
-            >For a list of the invariant conditions for terms specific to generic methods, see the <see cref="P:System.Reflection.MethodInfo.IsGenericMethod" /> property. For a list of the invariant conditions for other terms used in generic reflection, see the <see cref="P:System.Type.IsGenericType" /> property. </para
-          >
+            >For a list of the invariant conditions for terms specific to generic methods, see the <see cref="P:System.Reflection.MethodInfo.IsGenericMethod" /> property. For a list of the invariant conditions for other terms used in generic reflection, see the <see cref="P:System.Type.IsGenericType" /> property.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -610,8 +609,8 @@ public:
                   >Defines a generic method. A constructed method is created by calling the <see cref="M:System.Reflection.MethodInfo.MakeGenericMethod(System.Type[])" /> method on a <see cref="T:System.Reflection.MethodInfo" /> object that represents a generic method definition, and specifying an array of type arguments.</para
                 >
                 <para>
-                  <see cref="M:System.Reflection.MethodInfo.MakeGenericMethod(System.Type[])" /> can be called only on generic method definitions. </para
-                >
+                  <see cref="M:System.Reflection.MethodInfo.MakeGenericMethod(System.Type[])" /> can be called only on generic method definitions.
+                </para>
                 <para>Any generic method definition is a generic method, but the converse is not true.</para>
               </description>
             </item>
@@ -769,8 +768,8 @@ public:
             >In the constructed type C&lt;int&gt; (C(Of Integer) in Visual Basic), the generic method M returns B&lt;int, S&gt;. In the open type C&lt;T&gt;, M returns B&lt;T, S&gt;. In both cases, the <see cref="P:System.Reflection.MethodInfo.IsGenericMethodDefinition" /> property returns true for the <see cref="T:System.Reflection.MethodInfo" /> that represents M.</para
           >
           <para
-            >For a list of the invariant conditions for terms specific to generic methods, see the <see cref="P:System.Reflection.MethodInfo.IsGenericMethod" /> property. For a list of the invariant conditions for other terms used in generic reflection, see the <see cref="P:System.Type.IsGenericType" /> property. </para
-          >
+            >For a list of the invariant conditions for terms specific to generic methods, see the <see cref="P:System.Reflection.MethodInfo.IsGenericMethod" /> property. For a list of the invariant conditions for other terms used in generic reflection, see the <see cref="P:System.Type.IsGenericType" /> property.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -977,14 +976,13 @@ Here it is: 42
 The definition is the same: True
 
  */
-</code
-          >
+</code>
         </example>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Reflection.MethodInfo.MakeGenericMethod(System.Type[])" /> method allows you to write code that assigns specific types to the type parameters of a generic method definition, thus creating a <see cref="T:System.Reflection.MethodInfo" /> object that represents a particular constructed method. If the <see cref="P:System.Reflection.MethodInfo.ContainsGenericParameters" /> property of this <see cref="T:System.Reflection.MethodInfo" /> object returns true, you can use it to invoke the method or to create a delegate to invoke the method. </para
-          >
+            >The <see cref="M:System.Reflection.MethodInfo.MakeGenericMethod(System.Type[])" /> method allows you to write code that assigns specific types to the type parameters of a generic method definition, thus creating a <see cref="T:System.Reflection.MethodInfo" /> object that represents a particular constructed method. If the <see cref="P:System.Reflection.MethodInfo.ContainsGenericParameters" /> property of this <see cref="T:System.Reflection.MethodInfo" /> object returns true, you can use it to invoke the method or to create a delegate to invoke the method.
+          </para>
           <para
             >Methods constructed with the <see cref="M:System.Reflection.MethodInfo.MakeGenericMethod(System.Type[])" /> method can be open, that is, some of their type arguments can be type parameters of enclosing generic types. You might use such open constructed methods when you generate dynamic assemblies. For example, consider the following C#, Visual Basic, and C++ code.</para
           >
@@ -1020,8 +1018,8 @@ public:
             >The method body of M contains a call to method N, specifying the type parameter of M and the type <see cref="T:System.Int32" />. The <see cref="P:System.Reflection.MethodInfo.IsGenericMethodDefinition" /> property returns false for method N&lt;V,int&gt;. The <see cref="P:System.Reflection.MethodInfo.ContainsGenericParameters" /> property returns true, so method N&lt;V,int&gt; cannot be invoked.</para
           >
           <para
-            >For a list of the invariant conditions for terms specific to generic methods, see the <see cref="P:System.Reflection.MethodInfo.IsGenericMethod" /> property. For a list of the invariant conditions for other terms used in generic reflection, see the <see cref="P:System.Type.IsGenericType" /> property. </para
-          >
+            >For a list of the invariant conditions for terms specific to generic methods, see the <see cref="P:System.Reflection.MethodInfo.IsGenericMethod" /> property. For a list of the invariant conditions for other terms used in generic reflection, see the <see cref="P:System.Type.IsGenericType" /> property.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1209,8 +1207,8 @@ public:
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Reflection.ParameterInfo" /> object that contains information about the return type of the method, such as whether the return type has custom modifiers. </para
-          >
+            >Gets a <see cref="T:System.Reflection.ParameterInfo" /> object that contains information about the return type of the method, such as whether the return type has custom modifiers.
+          </para>
         </summary>
       </Docs>
     </Member>

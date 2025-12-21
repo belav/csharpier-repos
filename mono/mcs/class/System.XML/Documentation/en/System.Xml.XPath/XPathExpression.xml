@@ -104,8 +104,8 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Collections.IComparer" /> object that provides the specific data type comparisons for comparing two objects for equivalence. </param
-        >
+          />An <see cref="T:System.Collections.IComparer" /> object that provides the specific data type comparisons for comparing two objects for equivalence.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddSort">
@@ -161,15 +161,15 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object representing the sort key. This can be the string value of the node or an <see cref="T:System.Xml.XPath.XPathExpression" /> object with a compiled XPath expression. </param
-        >
+          />An object representing the sort key. This can be the string value of the node or an <see cref="T:System.Xml.XPath.XPathExpression" /> object with a compiled XPath expression.
+        </param>
         <param name="order">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XPath.XmlSortOrder" /> value indicating the sort order. </param
-        >
+          />An <see cref="T:System.Xml.XPath.XmlSortOrder" /> value indicating the sort order.
+        </param>
         <param name="caseOrder">
           <attribution
             license="cc4"
@@ -182,15 +182,15 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The language to use for comparison. Uses the <see cref="T:System.Globalization.CultureInfo" /> class that can be passed to the <see cref="Overload:System.String.Compare" /> method for the language types, for example, "us-en" for U.S. English. If an empty string is specified, the system environment is used to determine the <see cref="T:System.Globalization.CultureInfo" />. </param
-        >
+          />The language to use for comparison. Uses the <see cref="T:System.Globalization.CultureInfo" /> class that can be passed to the <see cref="Overload:System.String.Compare" /> method for the language types, for example, "us-en" for U.S. English. If an empty string is specified, the system environment is used to determine the <see cref="T:System.Globalization.CultureInfo" />.
+        </param>
         <param name="dataType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XPath.XmlDataType" /> value indicating the sort order for the data type. </param
-        >
+          />An <see cref="T:System.Xml.XPath.XmlDataType" /> value indicating the sort order for the data type.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Clone">
@@ -561,8 +561,8 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlNamespaceManager" /> object to use for namespace resolution. </param
-        >
+          />An <see cref="T:System.Xml.XmlNamespaceManager" /> object to use for namespace resolution.
+        </param>
       </Docs>
     </Member>
   </Members>

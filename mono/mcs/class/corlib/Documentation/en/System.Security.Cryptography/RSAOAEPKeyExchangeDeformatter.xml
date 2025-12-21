@@ -107,8 +107,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The instance of the <see cref="T:System.Security.Cryptography.RSA" /> algorithm that holds the private key. </param
-        >
+          />The instance of the <see cref="T:System.Security.Cryptography.RSA" /> algorithm that holds the private key.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DecryptKeyExchange">
@@ -150,8 +150,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key exchange data within which the secret information is hidden. </param
-        >
+          />The key exchange data within which the secret information is hidden.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Parameters">
@@ -212,8 +212,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The instance of the <see cref="T:System.Security.Cryptography.RSA" /> algorithm that holds the private key. </param
-        >
+          />The instance of the <see cref="T:System.Security.Cryptography.RSA" /> algorithm that holds the private key.
+        </param>
       </Docs>
     </Member>
   </Members>

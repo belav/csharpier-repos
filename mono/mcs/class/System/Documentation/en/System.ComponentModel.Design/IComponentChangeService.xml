@@ -27,8 +27,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.ComponentModel.Design.IComponentChangeService" /> provides an interface that can be used to indicate the methods that handle the following events: </para
-      >
+        <see cref="T:System.ComponentModel.Design.IComponentChangeService" /> provides an interface that can be used to indicate the methods that handle the following events:
+      </para>
       <list type="bullet">
         <item>
           <para>
@@ -344,29 +344,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The component that has changed. </param
-        >
+          />The component that has changed.
+        </param>
         <param name="member">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The member that has changed. This is null if this change is not related to a single member. </param
-        >
+          />The member that has changed. This is null if this change is not related to a single member.
+        </param>
         <param name="oldValue">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The old value of the member. This is valid only if the member is not null. </param
-        >
+          />The old value of the member. This is valid only if the member is not null.
+        </param>
         <param name="newValue">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new value of the member. This is valid only if the member is not null. </param
-        >
+          />The new value of the member. This is valid only if the member is not null.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnComponentChanging">
@@ -410,15 +410,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The component that is about to change. </param
-        >
+          />The component that is about to change.
+        </param>
         <param name="member">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The member that is changing. This is null if this change is not related to a single member. </param
-        >
+          />The member that is changing. This is null if this change is not related to a single member.
+        </param>
       </Docs>
     </Member>
   </Members>

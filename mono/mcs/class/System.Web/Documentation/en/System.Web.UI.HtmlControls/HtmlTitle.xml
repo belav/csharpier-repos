@@ -17,8 +17,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see cref="T:System.Web.UI.HtmlControls.HtmlTitle" /> class to programmatically specify the HTML &lt;title&gt; element of a Web Forms page. </para
-      >
+        >Use the <see cref="T:System.Web.UI.HtmlControls.HtmlTitle" /> class to programmatically specify the HTML &lt;title&gt; element of a Web Forms page.
+      </para>
       <block subset="none" type="note">
         <para
           >You can also set the page title by using the title attribute of the <format type="text/html">

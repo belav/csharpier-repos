@@ -21,8 +21,8 @@
         </format>.</para
       >
       <para
-        >Strongly typed resource support is a compile-time feature that encapsulates access to resources by creating classes that contain a set of static, read-only (get) properties. This provides an alternative way to consume resources instead of calling the <see cref="Overload:System.Resources.ResourceManager.GetString" /> and <see cref="Overload:System.Resources.ResourceManager.GetObject" /> methods. </para
-      >
+        >Strongly typed resource support is a compile-time feature that encapsulates access to resources by creating classes that contain a set of static, read-only (get) properties. This provides an alternative way to consume resources instead of calling the <see cref="Overload:System.Resources.ResourceManager.GetString" /> and <see cref="Overload:System.Resources.ResourceManager.GetObject" /> methods.
+      </para>
       <para
         >The basic functionality for strongly typed resource support is provided by the <see cref="T:System.Resources.Tools.StronglyTypedResourceBuilder" /> class (as well as the /str command-line option in the <format type="text/html">
           <a href="8ef159de-b660-4bec-9213-c3fbc4d1c6f4">Resource File Generator (Resgen.exe)</a>

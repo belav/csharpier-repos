@@ -193,8 +193,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="T:System.ServiceModel.PeerResolvers.ResolveResponseInfo" /> that contains the endpoints for the registration entry in the lookup table that matches the information supplied in the <paramref name="resolveInfo" /> parameter. </para
-          >
+            <see cref="T:System.ServiceModel.PeerResolvers.ResolveResponseInfo" /> that contains the endpoints for the registration entry in the lookup table that matches the information supplied in the <paramref name="resolveInfo" /> parameter.
+          </para>
         </returns>
         <param name="resolveInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />

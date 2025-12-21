@@ -102,8 +102,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.Stream" /> of resources to be read. The stream should refer to an existing resources file. </param
-        >
+          />The <see cref="T:System.IO.Stream" /> of resources to be read. The stream should refer to an existing resources file.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -143,8 +143,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The reader that will be used. </param
-        >
+          />The reader that will be used.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -172,12 +172,8 @@
           >
         </summary>
         <param name="fileName">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />Resource file to read. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />Resource file to read.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Close">
@@ -289,8 +285,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Indicates whether the objects contained in the current instance should be explicitly closed. </param
-        >
+          />Indicates whether the objects contained in the current instance should be explicitly closed.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetDefaultReader">
@@ -454,8 +450,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Case-sensitive name of the resource to search for. </param
-        >
+          />Case-sensitive name of the resource to search for.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetObject">
@@ -503,15 +499,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Name of the resource to search for. </param
-        >
+          />Name of the resource to search for.
+        </param>
         <param name="ignoreCase">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Indicates whether the case of the specified name should be ignored. </param
-        >
+          />Indicates whether the case of the specified name should be ignored.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetString">
@@ -549,8 +545,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Name of the resource to search for. </param
-        >
+          />Name of the resource to search for.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetString">
@@ -600,15 +596,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Name of the resource to search for. </param
-        >
+          />Name of the resource to search for.
+        </param>
         <param name="ignoreCase">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Indicates whether the case of the case of the specified name should be ignored. </param
-        >
+          />Indicates whether the case of the case of the specified name should be ignored.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Reader">

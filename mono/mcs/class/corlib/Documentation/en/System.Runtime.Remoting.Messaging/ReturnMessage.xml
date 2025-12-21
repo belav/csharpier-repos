@@ -87,15 +87,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The exception that was thrown during execution of the remotely called method. </param
-        >
+          />The exception that was thrown during execution of the remotely called method.
+        </param>
         <param name="mcm">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" /> with which to create an instance of the <see cref="T:System.Runtime.Remoting.Messaging.ReturnMessage" /> class. </param
-        >
+          />An <see cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" /> with which to create an instance of the <see cref="T:System.Runtime.Remoting.Messaging.ReturnMessage" /> class.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -134,36 +134,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object returned by the invoked method from which the current <see cref="T:System.Runtime.Remoting.Messaging.ReturnMessage" /> instance originated. </param
-        >
+          />The object returned by the invoked method from which the current <see cref="T:System.Runtime.Remoting.Messaging.ReturnMessage" /> instance originated.
+        </param>
         <param name="outArgs">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The objects returned from the invoked method as out parameters. </param
-        >
+          />The objects returned from the invoked method as out parameters.
+        </param>
         <param name="outArgsCount">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of out parameters returned from the invoked method. </param
-        >
+          />The number of out parameters returned from the invoked method.
+        </param>
         <param name="callCtx">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" /> of the method call. </param
-        >
+          />The <see cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" /> of the method call.
+        </param>
         <param name="mcm">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The original method call to the invoked method. </param
-        >
+          />The original method call to the invoked method.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ArgCount">
@@ -265,8 +265,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index of the requested argument. </param
-        >
+          />The zero-based index of the requested argument.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetArgName">
@@ -302,8 +302,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index of the requested argument name. </param
-        >
+          />The zero-based index of the requested argument name.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetOutArg">
@@ -339,8 +339,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index of the requested out or ref parameter. </param
-        >
+          />The zero-based index of the requested out or ref parameter.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetOutArgName">
@@ -376,8 +376,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index of the requested argument. </param
-        >
+          />The zero-based index of the requested argument.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="HasVarArgs">

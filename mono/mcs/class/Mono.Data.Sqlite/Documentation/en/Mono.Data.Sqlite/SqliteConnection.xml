@@ -68,8 +68,8 @@
           <description>
             <b>True</b> - Store GUID columns in binary form<br />
             <b>False</b> - Store GUID columns as text
-	    </description
-          >
+
+          </description>
           <description>N</description>
           <description>True</description>
         </item>
@@ -85,8 +85,8 @@
             <b>Normal</b> - Normal file flushing behavior<br />
             <b>Full</b> - Full flushing after all writes<br />
             <b>Off</b> - Underlying OS flushes I/O's
-	    </description
-          >
+
+          </description>
           <description>N</description>
           <description>Normal</description>
         </item>
@@ -107,8 +107,8 @@
           <description>
             <b>Y</b> - Automatically enlist in distributed transactions<br />
             <b>N</b> - No automatic enlistment
-	    </description
-          >
+
+          </description>
           <description>N</description>
           <description>Y</description>
         </item>
@@ -117,8 +117,8 @@
           <description>
             <b>True</b> - Use connection pooling<br />
             <b>False</b> - Do not use connection pooling
-	    </description
-          >
+
+          </description>
           <description>N</description>
           <description>False</description>
         </item>
@@ -127,8 +127,8 @@
           <description>
             <b>True</b> - Don't create the database if it does not exist, throw an error instead<br />
             <b>False</b> - Automatically create the database if it does not exist
-	    </description
-          >
+
+          </description>
           <description>N</description>
           <description>False</description>
         </item>
@@ -143,8 +143,8 @@
           <description>
             <b>True</b> - Use the more compatible legacy 3.x database format<br />
             <b>False</b> - Use the newer 3.3x database format which compresses numbers more effectively
-	    </description
-          >
+
+          </description>
           <description>N</description>
           <description>False</description>
         </item>
@@ -160,8 +160,8 @@
             <b>Delete</b> - Delete the journal file after a commit<br />
             <b>Persist</b> - Zero out and leave the journal file on disk after a commit<br />
             <b>Off</b> - Disable the rollback journal entirely
-	    </description
-          >
+
+          </description>
           <description>N</description>
           <description>Delete</description>
         </item>
@@ -170,8 +170,8 @@
           <description>
             <b>True</b> - Open the database for read only access<br />
             <b>False</b> - Open the database for normal read/write access
-	    </description
-          >
+
+          </description>
           <description>N</description>
           <description>False</description>
         </item>

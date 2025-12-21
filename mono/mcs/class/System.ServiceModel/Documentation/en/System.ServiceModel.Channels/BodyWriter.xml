@@ -17,8 +17,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A message consists of headers and a body. The headers are buffered and the body is streamed. Because the body is streamed, the user cannot pass the actual content of the body to a message. Instead the user must pass a class that knows how to write the body when asked to do so. This is done by passing a class derived from <see cref="T:System.ServiceModel.Channels.BodyWriter" /> to the <see cref="T:System.ServiceModel.Channels.Message" />. A message calls the class derived from <see cref="T:System.ServiceModel.Channels.BodyWriter" /> whenever it requires the body to be written using an <see cref="T:System.Xml.XmlWriter" />. </para
-      >
+        >A message consists of headers and a body. The headers are buffered and the body is streamed. Because the body is streamed, the user cannot pass the actual content of the body to a message. Instead the user must pass a class that knows how to write the body when asked to do so. This is done by passing a class derived from <see cref="T:System.ServiceModel.Channels.BodyWriter" /> to the <see cref="T:System.ServiceModel.Channels.Message" />. A message calls the class derived from <see cref="T:System.ServiceModel.Channels.BodyWriter" /> whenever it requires the body to be written using an <see cref="T:System.Xml.XmlWriter" />.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -43,8 +43,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref name="isBuffered" /> is false then the message calls the write method once and buffers the contents. </para
-          >
+            >If <paramref name="isBuffered" /> is false then the message calls the write method once and buffers the contents.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -121,8 +121,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref name="isBuffered" /> is false then the message calls the write method once and buffers the contents. </para
-          >
+            >If <paramref name="isBuffered" /> is false then the message calls the write method once and buffers the contents.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

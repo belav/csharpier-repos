@@ -264,8 +264,8 @@ The routine internally uses a technique similar to thread local storage to fetch
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is a static property of the <see cref="T:System.Web.HttpContext" /> class. The property stores the <see cref="T:System.Web.HttpContext" /> instance that applies to the current request. The properties of this instance are the non-static properties of the <see cref="T:System.Web.HttpContext" /> class. </para
-          >
+            >This property is a static property of the <see cref="T:System.Web.HttpContext" /> class. The property stores the <see cref="T:System.Web.HttpContext" /> instance that applies to the current request. The properties of this instance are the non-static properties of the <see cref="T:System.Web.HttpContext" /> class.
+          </para>
           <para
             >You can also use the <see cref="P:System.Web.UI.Page.Context" /> property to access the <see cref="T:System.Web.HttpContext" /> object for the current HTTP request.</para
           >
@@ -341,8 +341,8 @@ The routine internally uses a technique similar to thread local storage to fetch
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Web.RequestNotification" /> value that indicates the current <see cref="T:System.Web.HttpApplication" /> event that is processing. </para
-          >
+            >Gets a <see cref="T:System.Web.RequestNotification" /> value that indicates the current <see cref="T:System.Web.HttpApplication" /> event that is processing.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -420,8 +420,8 @@ The routine internally uses a technique similar to thread local storage to fetch
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.HttpContext.GetConfig(System.String)" /> method has been deprecated. Use the <see cref="M:System.Web.HttpContext.GetSection(System.String)" /> method to get configuration information for the current HTTP request. </para
-          >
+            >The <see cref="M:System.Web.HttpContext.GetConfig(System.String)" /> method has been deprecated. Use the <see cref="M:System.Web.HttpContext.GetSection(System.String)" /> method to get configuration information for the current HTTP request.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -430,8 +430,8 @@ The routine internally uses a technique similar to thread local storage to fetch
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The specified <see cref="T:System.Configuration.ConfigurationSection" />, null if the section does not exist, or an internal object if the section is not accessible at run time. (Cast the returned object to the appropriate configuration type before use.) </para
-          >
+            >The specified <see cref="T:System.Configuration.ConfigurationSection" />, null if the section does not exist, or an internal object if the section is not accessible at run time. (Cast the returned object to the appropriate configuration type before use.)
+          </para>
         </returns>
         <param name="name">
           <attribution
@@ -730,8 +730,8 @@ The routine internally uses a technique similar to thread local storage to fetch
               <a href="f540bdeb-d22e-4e1d-ba8a-fe6c9926283b"
                 >HTTP Handlers and HTTP Modules Overview</a
               >
-            </format>. </para
-          >
+            </format>.
+          </para>
           <para
             >The reference to the <see cref="P:System.Web.HttpContext.Handler" /> property will remain the same even after the current page has been changed by a server-side method, such as the <see cref="Overload:System.Web.HttpServerUtility.Execute" /> method or the <see cref="Overload:System.Web.HttpServerUtility.Transfer" /> method.</para
           >
@@ -800,8 +800,8 @@ The routine internally uses a technique similar to thread local storage to fetch
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.HttpContext.IsPostNotification" /> property is only supported with the integrated mode in iisver and at least the .NET Framework 3.0. When available, the property returns a Boolean value that indicates whether an event in the <see cref="T:System.Web.HttpApplication" /> object has finished processing. </para
-          >
+            >The <see cref="P:System.Web.HttpContext.IsPostNotification" /> property is only supported with the integrated mode in iisver and at least the .NET Framework 3.0. When available, the property returns a Boolean value that indicates whether an event in the <see cref="T:System.Web.HttpApplication" /> object has finished processing.
+          </para>
           <para
             >The <see cref="P:System.Web.HttpContext.IsPostNotification" /> property is not intended to be set. Instead, it is provided by iisver to the ASP.NET runtime for each notification. Setting the <see cref="P:System.Web.HttpContext.IsPostNotification" /> property will result in a compilation error.</para
           >
@@ -817,8 +817,8 @@ The routine internally uses a technique similar to thread local storage to fetch
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that is the current processing point in the ASP.NET pipeline just after an <see cref="T:System.Web.HttpApplication" /> event has finished processing. </para
-          >
+            >Gets a value that is the current processing point in the ASP.NET pipeline just after an <see cref="T:System.Web.HttpApplication" /> event has finished processing.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -889,8 +889,8 @@ The routine internally uses a technique similar to thread local storage to fetch
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="P:System.Web.HttpContext.Profile" /> property is used for persistent storage of structured data using a type-safe API. When a <see cref="P:System.Web.HttpContext.Profile" /> property is accessed but no value is present, an empty instance is returned; null is not returned. </para
-          >
+            >A <see cref="P:System.Web.HttpContext.Profile" /> property is used for persistent storage of structured data using a type-safe API. When a <see cref="P:System.Web.HttpContext.Profile" /> property is accessed but no value is present, an empty instance is returned; null is not returned.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1063,8 +1063,8 @@ The routine internally uses a technique similar to thread local storage to fetch
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.HttpContext.RewritePath(System.String,System.String,System.String)" /> method redirects a request for a resource to another resource without changing the URL. </para
-          >
+            >The <see cref="M:System.Web.HttpContext.RewritePath(System.String,System.String,System.String)" /> method redirects a request for a resource to another resource without changing the URL.
+          </para>
           <para
             >The <paramref name="filePath" /> parameter does not include the <paramref name="pathInfo" /> parameter content. For the URL http://www.microsoft.com/virdir/page.html/tail, the <paramref name="filePath" /> parameter is http://www.microsoft.com/virdir/page.html, and the <paramref name="pathInfo" /> parameter is tail.</para
           >
@@ -1214,8 +1214,8 @@ The routine internally uses a technique similar to thread local storage to fetch
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.HttpContext.Session" /> property provides programmatic access to the properties and methods of the <see cref="T:System.Web.SessionState.HttpSessionState" /> class. </para
-          >
+            >The <see cref="P:System.Web.HttpContext.Session" /> property provides programmatic access to the properties and methods of the <see cref="T:System.Web.SessionState.HttpSessionState" /> class.
+          </para>
           <para
             >In order to use session state you have to enable it. For information about how to enable session state, see Configuring Session State in <format type="text/html">
               <a href="6d60d381-6521-4e1d-9089-da6464f2a9bc">ASP.NET Session State Overview</a>
@@ -1230,8 +1230,8 @@ The routine internally uses a technique similar to thread local storage to fetch
               <a href="2ef449bc-5c17-4785-b7cf-378c601af8f5"
                 >How to: Read Values from Session State</a
               >
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1371,8 +1371,8 @@ The routine internally uses a technique similar to thread local storage to fetch
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.HttpContext.User" /> property provides programmatic access to the properties and methods of the <see cref="T:System.Security.Principal.IPrincipal" /> interface. </para
-          >
+            >The <see cref="P:System.Web.HttpContext.User" /> property provides programmatic access to the properties and methods of the <see cref="T:System.Security.Principal.IPrincipal" /> interface.
+          </para>
           <para
             >Because ASP.NET pages contain a default reference to the <see cref="N:System.Web" /> namespace (which contains the <see cref="T:System.Web.HttpContext" /> class), you can reference the members of <see cref="T:System.Web.HttpContext" /> on an .aspx page without using the fully qualified class reference to <see cref="T:System.Web.HttpContext" />. For example, you can use User.Identity.Name to get the name of the user on whose behalf the current process is running. However, if you want to use the members of <see cref="T:System.Security.Principal.IPrincipal" /> from an ASP.NET code-behind module, you must include a reference to the <see cref="N:System.Web" /> namespace in the module and a fully qualified reference to both the currently active request/response context and the class in <see cref="N:System.Web" /> that you want to use. For example, in a code-behind page you must specify the fully qualified name HttpContext.Current.User.Identity.Name.</para
           >

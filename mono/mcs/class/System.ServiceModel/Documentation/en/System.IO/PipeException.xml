@@ -37,8 +37,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.IO.PipeException" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.IO.PipeException" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -60,8 +60,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.IO.PipeException" /> class with a specified error message. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.IO.PipeException" /> class with a specified error message.
+          </para>
         </summary>
         <param name="message">
           <attribution
@@ -135,8 +135,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.IO.PipeException" /> class with the specified error message and the inner exception.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.IO.PipeException" /> class with the specified error message and the inner exception.
+          </para>
         </summary>
         <param name="message">
           <attribution
@@ -150,8 +150,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Exception" /> that caused the current exception to be thrown. </param
-        >
+          />The <see cref="T:System.Exception" /> that caused the current exception to be thrown.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -176,8 +176,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.IO.PipeException" /> class with a specified error message and error code. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.IO.PipeException" /> class with a specified error message and error code.
+          </para>
         </summary>
         <param name="message">
           <attribution

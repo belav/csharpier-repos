@@ -145,8 +145,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream that contains the data to deserialize. </param
-        >
+          />The stream that contains the data to deserialize.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Serialize">
@@ -188,15 +188,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream where the formatter puts the serialized data. This stream can reference a variety of backing stores (such as files, network, memory, and so on). </param
-        >
+          />The stream where the formatter puts the serialized data. This stream can reference a variety of backing stores (such as files, network, memory, and so on).
+        </param>
         <param name="graph">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object, or root of the object graph, to serialize. All child objects of this root object are automatically serialized. </param
-        >
+          />The object, or root of the object graph, to serialize. All child objects of this root object are automatically serialized.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SurrogateSelector">

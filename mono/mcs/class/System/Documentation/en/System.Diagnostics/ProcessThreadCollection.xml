@@ -88,8 +88,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Diagnostics.ProcessThread" /> instances with which to initialize this <see cref="T:System.Diagnostics.ProcessThreadCollection" /> instance. </param
-        >
+          />An array of <see cref="T:System.Diagnostics.ProcessThread" /> instances with which to initialize this <see cref="T:System.Diagnostics.ProcessThreadCollection" /> instance.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Add">
@@ -128,8 +128,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The thread to add to the collection. </param
-        >
+          />The thread to add to the collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Contains">
@@ -171,8 +171,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Diagnostics.ProcessThread" /> instance that indicates the thread to find in this collection. </param
-        >
+          />A <see cref="T:System.Diagnostics.ProcessThread" /> instance that indicates the thread to find in this collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CopyTo">
@@ -210,15 +210,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Diagnostics.ProcessThread" /> instances to add to the collection. </param
-        >
+          />An array of <see cref="T:System.Diagnostics.ProcessThread" /> instances to add to the collection.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The location at which to add the new instances. </param
-        >
+          />The location at which to add the new instances.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IndexOf">
@@ -259,8 +259,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Diagnostics.ProcessThread" /> whose index is retrieved. </param
-        >
+          />The <see cref="T:System.Diagnostics.ProcessThread" /> whose index is retrieved.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Insert">
@@ -296,15 +296,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index indicating the location at which to insert the thread. </param
-        >
+          />The zero-based index indicating the location at which to insert the thread.
+        </param>
         <param name="thread">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The thread to insert into the collection. </param
-        >
+          />The thread to insert into the collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Item">
@@ -367,8 +367,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The thread to remove from the collection. </param
-        >
+          />The thread to remove from the collection.
+        </param>
       </Docs>
     </Member>
   </Members>

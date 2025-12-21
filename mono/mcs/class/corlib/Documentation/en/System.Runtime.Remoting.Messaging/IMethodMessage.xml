@@ -120,8 +120,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of the requested argument. </param
-        >
+          />The number of the requested argument.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetArgName">
@@ -157,8 +157,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of the requested argument. </param
-        >
+          />The number of the requested argument.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="HasVarArgs">

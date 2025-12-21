@@ -26,8 +26,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Configures a timeout that helps mitigate denial of service attacks by terminating any request that takes longer than the <see cref="P:System.Web.Services.Configuration.SoapEnvelopeProcessingElement.ReadTimeout" /> property value. </para
-      >
+        >Configures a timeout that helps mitigate denial of service attacks by terminating any request that takes longer than the <see cref="P:System.Web.Services.Configuration.SoapEnvelopeProcessingElement.ReadTimeout" /> property value.
+      </para>
     </summary>
   </Docs>
   <Members>
@@ -41,8 +41,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.Services.Configuration.SoapEnvelopeProcessingElement" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Configuration.SoapEnvelopeProcessingElement" /> class.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -64,8 +64,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.Services.Configuration.SoapEnvelopeProcessingElement" /> class using the provided <see cref="T:System.Int32" /> value. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Configuration.SoapEnvelopeProcessingElement" /> class using the provided <see cref="T:System.Int32" /> value.
+          </para>
         </summary>
         <param name="readTimeout">
           <attribution
@@ -136,8 +136,8 @@
           >
           <block subset="none" type="note">
             <para
-              >Because exceptions are not thrown for all unexpected elements and attributes, the <see cref="P:System.Web.Services.Configuration.SoapEnvelopeProcessingElement.IsStrict" /> property should not be relied upon except as a debugging aid. For example, unexpected xml:lang and xml:space attributes may not cause an exception. </para
-            >
+              >Because exceptions are not thrown for all unexpected elements and attributes, the <see cref="P:System.Web.Services.Configuration.SoapEnvelopeProcessingElement.IsStrict" /> property should not be relied upon except as a debugging aid. For example, unexpected xml:lang and xml:space attributes may not cause an exception.
+            </para>
           </block>
         </remarks>
         <summary>

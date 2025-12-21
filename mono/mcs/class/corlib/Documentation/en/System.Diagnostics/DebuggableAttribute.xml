@@ -33,8 +33,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Diagnostics.DebuggableAttribute" /> controls how the runtime treats code within the module. The runtime might track extra information about generated code, and it might disable certain optimizations based on the values contained within this attribute.  </para
-      >
+        >The <see cref="T:System.Diagnostics.DebuggableAttribute" /> controls how the runtime treats code within the module. The runtime might track extra information about generated code, and it might disable certain optimizations based on the values contained within this attribute.
+      </para>
       <para
         >A debugger might choose to ignore the <see cref="T:System.Diagnostics.DebuggableAttribute" /> settings when loading an assembly. However, attaching a debugger to a running program may prevent the debugger from changing the settings because they have already been applied.</para
       >
@@ -107,8 +107,8 @@
             >An <paramref name="isJITTrackingEnabaled" /> parameter value of true causes the runtime to track information important to the debugger during code generation; a value of false results in no tracking, but does not prevent debugging. This parameter has no effect in the .NET Framework version 2.0.  In version 2.0, JIT tracking information, the Microsoft intermediate language (MSIL) offset to the native-code offset within a method, is always generated.</para
           >
           <para
-            >An <paramref name="isJITOptimizerDisabled" /> parameter value of true optimizes for debugging; a value of false optimizes for execution.  </para
-          >
+            >An <paramref name="isJITOptimizerDisabled" /> parameter value of true optimizes for debugging; a value of false optimizes for execution.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -121,15 +121,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to enable debugging; otherwise, false. </param
-        >
+          />true to enable debugging; otherwise, false.
+        </param>
         <param name="isJITOptimizerDisabled">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to disable the optimizer for execution; otherwise, false. </param
-        >
+          />true to disable the optimizer for execution; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DebuggingFlags">

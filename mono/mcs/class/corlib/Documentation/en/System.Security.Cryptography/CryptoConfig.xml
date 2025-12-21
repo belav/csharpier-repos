@@ -440,8 +440,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.CryptoConfig" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.CryptoConfig" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -607,8 +607,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The simple name of the cryptographic object of which to create an instance. </param
-        >
+          />The simple name of the cryptographic object of which to create an instance.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateFromName">
@@ -659,15 +659,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The simple name of the cryptographic object of which to create an instance. </param
-        >
+          />The simple name of the cryptographic object of which to create an instance.
+        </param>
         <param name="args">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The arguments used to create the specified cryptographic object. </param
-        >
+          />The arguments used to create the specified cryptographic object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="EncodeOID">
@@ -703,8 +703,8 @@ A <see cref="T:System.Security.Cryptography.CryptographicUnexpectedOperationExce
           </para>
           <para>
 A <see cref="T:System.OverflowException" /> will be thrown if a part of the OID is bigger than <see cref="T:System.Int32" />.<see cref="M:System.Int32.MaxValue" />.
-</para
-          >
+
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -715,8 +715,8 @@ A <see cref="T:System.OverflowException" /> will be thrown if a part of the OID 
           <para>A byte array containing the encoded OID.</para>
         </returns>
         <param name="str">
-          <attribution license="cc4" from="Microsoft" modified="false" />The OID to encode. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The OID to encode.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="MapNameToOID">
@@ -757,8 +757,8 @@ A <see cref="T:System.OverflowException" /> will be thrown if a part of the OID 
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The simple name of the algorithm for which to get the OID. </param
-        >
+          />The simple name of the algorithm for which to get the OID.
+        </param>
       </Docs>
     </Member>
   </Members>

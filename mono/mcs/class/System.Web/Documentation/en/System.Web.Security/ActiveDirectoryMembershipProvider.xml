@@ -393,8 +393,8 @@
           </term>
           <description>
             <para
-              >The <see cref="T:System.Web.Security.ActiveDirectoryMembershipProvider" /> class will attempt to connect to Active Directory using SSL. If SSL fails, a second attempt to connect to Active Directory using sign-and-seal will be made. If both attempts fail, the <see cref="T:System.Web.Security.ActiveDirectoryMembershipProvider" /> instance will throw a <see cref="T:System.Configuration.Provider.ProviderException" /> exception. </para
-            >
+              >The <see cref="T:System.Web.Security.ActiveDirectoryMembershipProvider" /> class will attempt to connect to Active Directory using SSL. If SSL fails, a second attempt to connect to Active Directory using sign-and-seal will be made. If both attempts fail, the <see cref="T:System.Web.Security.ActiveDirectoryMembershipProvider" /> instance will throw a <see cref="T:System.Configuration.Provider.ProviderException" /> exception.
+            </para>
             <para>Both process credentials and explicit credentials are supported.</para>
           </description>
         </item>
@@ -436,8 +436,8 @@
           </term>
           <description>
             <para
-              >The <see cref="T:System.Web.Security.ActiveDirectoryMembershipProvider" /> class will attempt to connect to the ADAM server using SSL. If a connection cannot be made, the <see cref="T:System.Web.Security.ActiveDirectoryMembershipProvider" /> instance will throw a <see cref="T:System.Configuration.Provider.ProviderException" /> exception. </para
-            >
+              >The <see cref="T:System.Web.Security.ActiveDirectoryMembershipProvider" /> class will attempt to connect to the ADAM server using SSL. If a connection cannot be made, the <see cref="T:System.Web.Security.ActiveDirectoryMembershipProvider" /> instance will throw a <see cref="T:System.Configuration.Provider.ProviderException" /> exception.
+            </para>
             <para>Both process credentials and explicit credentials are supported.</para>
           </description>
         </item>
@@ -624,8 +624,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The method is called by the <see cref="T:System.Web.Security.ActiveDirectoryMembershipUser" /> class to update the password question and answer for a user in the Active Directory membership store. </para
-          >
+            >The method is called by the <see cref="T:System.Web.Security.ActiveDirectoryMembershipUser" /> class to update the password question and answer for a user in the Active Directory membership store.
+          </para>
           <para
             >Requiring a password question and answer provides an additional layer of security when resetting a user's password. When creating a user name, a user can supply a question and answer that can later be used to reset a forgotten password. The <see cref="M:System.Web.Security.ActiveDirectoryMembershipProvider.ChangePasswordQuestionAndAnswer(System.String,System.String,System.String,System.String)" /> method updates the password question and answer for a membership user to new values.</para
           >
@@ -647,8 +647,8 @@
             >The <see cref="T:System.Web.Security.ActiveDirectoryMembershipProvider" /> instance connects to the Active Directory data store with the credentials provided in the <paramref name="username" /> and <paramref name="password" /> parameters to validate the user name/password combination. The actual update of the question and answer is performed with the configured connection credentials of the provider.</para
           >
           <para
-            >If an incorrect password is supplied to the <see cref="M:System.Web.Security.ActiveDirectoryMembershipProvider.ChangePasswordQuestionAndAnswer(System.String,System.String,System.String,System.String)" /> method, the directory server will increment the counters that track invalid password attempts. This can result in the user being locked and unable to log on until either the lock status is cleared by a call to the <see cref="M:System.Web.Security.ActiveDirectoryMembershipProvider.UnlockUser(System.String)" /> method or the locked duration specified in the directory passes. </para
-          >
+            >If an incorrect password is supplied to the <see cref="M:System.Web.Security.ActiveDirectoryMembershipProvider.ChangePasswordQuestionAndAnswer(System.String,System.String,System.String,System.String)" /> method, the directory server will increment the counters that track invalid password attempts. This can result in the user being locked and unable to log on until either the lock status is cleared by a call to the <see cref="M:System.Web.Security.ActiveDirectoryMembershipProvider.UnlockUser(System.String)" /> method or the locked duration specified in the directory passes.
+          </para>
           <para
             >If the update to the question and answer succeeds and the <see cref="P:System.Web.Security.ActiveDirectoryMembershipProvider.EnablePasswordReset" /> property is true, the user's bad password answer tracking counters are reset.</para
           >
@@ -820,8 +820,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />This parameter is ignored by the <see cref="M:System.Web.Security.ActiveDirectoryMembershipProvider.DeleteUser(System.String,System.Boolean)" /> method. </param
-        >
+          />This parameter is ignored by the <see cref="M:System.Web.Security.ActiveDirectoryMembershipProvider.DeleteUser(System.String,System.Boolean)" /> method.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -897,8 +897,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Web.Security.ActiveDirectoryMembershipProvider" /> class does not support password retrieval. </para
-          >
+            >The <see cref="T:System.Web.Security.ActiveDirectoryMembershipProvider" /> class does not support password retrieval.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1180,8 +1180,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.Security.ActiveDirectoryMembershipProvider.GetUser(System.String,System.Boolean)" /> method is called by the <see cref="T:System.Web.Security.Membership" /> class to retrieve information on the specified user from the Active Directory data store. </para
-          >
+            >The <see cref="M:System.Web.Security.ActiveDirectoryMembershipProvider.GetUser(System.String,System.Boolean)" /> method is called by the <see cref="T:System.Web.Security.Membership" /> class to retrieve information on the specified user from the Active Directory data store.
+          </para>
           <para
             >The search looks for a user instance where the objectSID attribute matches the <paramref name="providerUserKey" /> parameter.</para
           >
@@ -1236,8 +1236,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.Security.ActiveDirectoryMembershipProvider.GetUser(System.String,System.Boolean)" /> method is called by the <see cref="T:System.Web.Security.Membership" /> class to retrieve information on the specified user from the Active Directory data store. </para
-          >
+            >The <see cref="M:System.Web.Security.ActiveDirectoryMembershipProvider.GetUser(System.String,System.Boolean)" /> method is called by the <see cref="T:System.Web.Security.Membership" /> class to retrieve information on the specified user from the Active Directory data store.
+          </para>
           <para
             >The provider uses a subtree search starting at the search point specified in the connection string. See the <see cref="T:System.Web.Security.ActiveDirectoryMembershipProvider" /> class topic for more information about connection strings.</para
           >
@@ -1595,8 +1595,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.Security.ActiveDirectoryMembershipProvider.PasswordStrengthRegularExpression" /> property gets the regular expression used to evaluate password complexity. </para
-          >
+            >The <see cref="P:System.Web.Security.ActiveDirectoryMembershipProvider.PasswordStrengthRegularExpression" /> property gets the regular expression used to evaluate password complexity.
+          </para>
           <para
             >The <see cref="P:System.Web.Security.ActiveDirectoryMembershipProvider.PasswordStrengthRegularExpression" /> property is not used to validate auto-generated passwords in the <see cref="M:System.Web.Security.ActiveDirectoryMembershipProvider.ResetPassword(System.String,System.String)" /> method.</para
           >
@@ -1670,8 +1670,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see cref="P:System.Web.Security.ActiveDirectoryMembershipProvider.RequiresUniqueEmail" /> property is true, the <see cref="T:System.Web.Security.ActiveDirectoryMembershipProvider" /> instance ensures that the e-mail address is not used by any other user within the current scope when either the <see cref="M:System.Web.Security.ActiveDirectoryMembershipProvider.CreateUser(System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Object,System.Web.Security.MembershipCreateStatus@)" /> or <see cref="M:System.Web.Security.ActiveDirectoryMembershipProvider.UpdateUser(System.Web.Security.MembershipUser)" /> method is called. </para
-          >
+            >When the <see cref="P:System.Web.Security.ActiveDirectoryMembershipProvider.RequiresUniqueEmail" /> property is true, the <see cref="T:System.Web.Security.ActiveDirectoryMembershipProvider" /> instance ensures that the e-mail address is not used by any other user within the current scope when either the <see cref="M:System.Web.Security.ActiveDirectoryMembershipProvider.CreateUser(System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Object,System.Web.Security.MembershipCreateStatus@)" /> or <see cref="M:System.Web.Security.ActiveDirectoryMembershipProvider.UpdateUser(System.Web.Security.MembershipUser)" /> method is called.
+          </para>
           <para
             >The <see cref="P:System.Web.Security.ActiveDirectoryMembershipProvider.RequiresUniqueEmail" /> property is set in your application's configuration file using the requiresUniqueEmail attribute of the <format type="text/html">
               <a href="b9c1ee8f-33ca-4361-8666-b42a0fe86049">membership</a>
@@ -1913,8 +1913,8 @@
           <list type="bullet">
             <item>
               <para
-                >To confirm that a user exists within the search scope as determined by the <see cref="T:System.Web.Security.ActiveDirectoryMembershipProvider" /> instance's connection string. The provider uses a subtree search starting at the search point specified in the connection string to determine whether a user exists. The user must exist in the specified container. Credentials that are valid outside the connection string's specified container will not be validated. See the <see cref="T:System.Web.Security.ActiveDirectoryMembershipProvider" /> class topic for more information about connection strings. </para
-              >
+                >To confirm that a user exists within the search scope as determined by the <see cref="T:System.Web.Security.ActiveDirectoryMembershipProvider" /> instance's connection string. The provider uses a subtree search starting at the search point specified in the connection string to determine whether a user exists. The user must exist in the specified container. Credentials that are valid outside the connection string's specified container will not be validated. See the <see cref="T:System.Web.Security.ActiveDirectoryMembershipProvider" /> class topic for more information about connection strings.
+              </para>
             </item>
             <item>
               <para

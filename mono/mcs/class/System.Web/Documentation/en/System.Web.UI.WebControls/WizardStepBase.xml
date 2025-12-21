@@ -28,11 +28,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You cannot directly create an instance of the <see cref="T:System.Web.UI.WebControls.WizardStepBase" /> class. Instead, this class is inherited by the <see cref="T:System.Web.UI.WebControls.WizardStep" /> class and the <see cref="T:System.Web.UI.WebControls.TemplatedWizardStep" /> class to provide the basic functionality of a step in a control that acts as a wizard. </para
-      >
+        >You cannot directly create an instance of the <see cref="T:System.Web.UI.WebControls.WizardStepBase" /> class. Instead, this class is inherited by the <see cref="T:System.Web.UI.WebControls.WizardStep" /> class and the <see cref="T:System.Web.UI.WebControls.TemplatedWizardStep" /> class to provide the basic functionality of a step in a control that acts as a wizard.
+      </para>
       <para
-        >You can derive from the <see cref="T:System.Web.UI.WebControls.WizardStepBase" /> class to create a custom class that represents a unique step in a wizard control. </para
-      >
+        >You can derive from the <see cref="T:System.Web.UI.WebControls.WizardStepBase" /> class to create a custom class that represents a unique step in a wizard control.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -52,8 +52,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.WizardStepBase" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.WizardStepBase" /> class.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -144,8 +144,8 @@
             <item>
               <term>
                 <para
-                  >Using the Visual Studio Designer and <see cref="P:System.Web.UI.WebControls.Wizard.ActiveStepIndex" /> : The control has 5 steps, you are working on step 4, and you run the page. </para
-                >
+                  >Using the Visual Studio Designer and <see cref="P:System.Web.UI.WebControls.Wizard.ActiveStepIndex" /> : The control has 5 steps, you are working on step 4, and you run the page.
+                </para>
               </term>
               <description>
                 <para
@@ -156,13 +156,13 @@
             <item>
               <term>
                 <para
-                  >Start Step and Non-Linear Navigation: A user visits step 3 and step 4 and then step 1 which has <see cref="P:System.Web.UI.WebControls.WizardStepBase.StepType" /> set to <see cref="F:System.Web.UI.WebControls.WizardStepType.Start" />. </para
-                >
+                  >Start Step and Non-Linear Navigation: A user visits step 3 and step 4 and then step 1 which has <see cref="P:System.Web.UI.WebControls.WizardStepBase.StepType" /> set to <see cref="F:System.Web.UI.WebControls.WizardStepType.Start" />.
+                </para>
               </term>
               <description>
                 <para
-                  >The wizard does not add a <ui>Previous</ui> button when the <see cref="P:System.Web.UI.WebControls.WizardStepBase.StepType" /> is set to <see cref="F:System.Web.UI.WebControls.WizardStepType.Start" /> regardless of how the user navigates to that step. </para
-                >
+                  >The wizard does not add a <ui>Previous</ui> button when the <see cref="P:System.Web.UI.WebControls.WizardStepBase.StepType" /> is set to <see cref="F:System.Web.UI.WebControls.WizardStepType.Start" /> regardless of how the user navigates to that step.
+                </para>
               </description>
             </item>
             <item>
@@ -173,8 +173,8 @@
               </term>
               <description>
                 <para
-                  >The wizard control checks to see if the <ui>Previous</ui> step in the history is the "same" step that the user is currently on. If the step is the same, the wizard control looks back in the history to determine the preceding "different" step and bases the display of the <ui>Previous</ui> button and destination based on the "different step" in the history. </para
-                >
+                  >The wizard control checks to see if the <ui>Previous</ui> step in the history is the "same" step that the user is currently on. If the step is the same, the wizard control looks back in the history to determine the preceding "different" step and bases the display of the <ui>Previous</ui> button and destination based on the "different step" in the history.
+                </para>
               </description>
             </item>
           </list>
@@ -192,8 +192,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the user is allowed to return to the current step from a subsequent step in a <see cref="T:System.Web.UI.WebControls.WizardStepCollection" /> collection. </para
-          >
+            >Gets or sets a value indicating whether the user is allowed to return to the current step from a subsequent step in a <see cref="T:System.Web.UI.WebControls.WizardStepCollection" /> collection.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>

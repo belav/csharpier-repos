@@ -23,8 +23,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.ICustomFormatter" /> interface includes a single method, <see cref="M:System.ICustomFormatter.Format(System.String,System.Object,System.IFormatProvider)" />. When this interface is implemented by a reference or value type, the <see cref="M:System.ICustomFormatter.Format(System.String,System.Object,System.IFormatProvider)" /> method returns a custom-formatted string representation of an object's value. </para
-      >
+        >The <see cref="T:System.ICustomFormatter" /> interface includes a single method, <see cref="M:System.ICustomFormatter.Format(System.String,System.Object,System.IFormatProvider)" />. When this interface is implemented by a reference or value type, the <see cref="M:System.ICustomFormatter.Format(System.String,System.Object,System.IFormatProvider)" /> method returns a custom-formatted string representation of an object's value.
+      </para>
       <para
         >Typically, the <see cref="T:System.ICustomFormatter" /> interface is implemented with the <see cref="T:System.IFormatProvider" /> interface to customize the behavior of two .NET Framework composite string formatting methods that include an <see cref="T:System.IFormatProvider" /> parameter. Specifically, the <see cref="T:System.ICustomFormatter" /> interface can provide custom formatting of the value of an object passed to the <see cref="M:System.String.Format(System.IFormatProvider,System.String,System.Object[])" /> and <see cref="M:System.Text.StringBuilder.AppendFormat(System.IFormatProvider,System.String,System.Object[])" /> methods.</para
       >
@@ -42,8 +42,8 @@
         </item>
         <item>
           <para
-            >Pass the <see cref="T:System.IFormatProvider" /> implementation as the <paramref name="provider" /> argument of the <see cref="M:System.String.Format(System.IFormatProvider,System.String,System.Object[])" /> method or a comparable method. </para
-          >
+            >Pass the <see cref="T:System.IFormatProvider" /> implementation as the <paramref name="provider" /> argument of the <see cref="M:System.String.Format(System.IFormatProvider,System.String,System.Object[])" /> method or a comparable method.
+          </para>
         </item>
       </list>
       <para>The .NET Framework method will then use your custom formatting instead of its own.</para>
@@ -87,11 +87,11 @@
           >
           <para>code reference: System.ICustomFormatter.Class#4</para>
           <para
-            >The <paramref name="arg" /> parameter is the object in the object list whose zero-based position corresponds to the index of a particular format item. </para
-          >
+            >The <paramref name="arg" /> parameter is the object in the object list whose zero-based position corresponds to the index of a particular format item.
+          </para>
           <para
-            >The <paramref name="format" /> parameter contains a format string, which is the <paramref name="formatString" /> component of a format item. If the format item has no <paramref name="formatString" /> component, the value of <paramref name="format" /> is null. If <paramref name="format" /> is null, depending on the type of <paramref name="arg" />, you may be able to use the default format specification of your choice. </para
-          >
+            >The <paramref name="format" /> parameter contains a format string, which is the <paramref name="formatString" /> component of a format item. If the format item has no <paramref name="formatString" /> component, the value of <paramref name="format" /> is null. If <paramref name="format" /> is null, depending on the type of <paramref name="arg" />, you may be able to use the default format specification of your choice.
+          </para>
           <para
             >The <paramref name="formatProvider" /> parameter is the <see cref="T:System.IFormatProvider" /> implementation that provides formatting for <paramref name="arg" />. Typically, it is an instance of your <see cref="T:System.ICustomFormatter" /> implementation. If <paramref name="formatProvider" /> is null, ignore that parameter.</para
           >
@@ -115,22 +115,18 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A format string containing formatting specifications. </param
-        >
+          />A format string containing formatting specifications.
+        </param>
         <param name="arg">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />An object to format. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />An object to format.
+        </param>
         <param name="formatProvider">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that supplies format information about the current instance. </param
-        >
+          />An object that supplies format information about the current instance.
+        </param>
       </Docs>
     </Member>
   </Members>

@@ -40,8 +40,8 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>You can apply this attribute to fields.</para>
       <para
-        >This attribute is used when <see cref="T:System.Runtime.InteropServices.StructLayoutAttribute" />, with <see cref="F:System.Runtime.InteropServices.LayoutKind.Explicit" /> passed to its constructor, is applied to a class or structure to specify the offset of each non- static or constant member within the unmanaged representation of that class or structure. </para
-      >
+        >This attribute is used when <see cref="T:System.Runtime.InteropServices.StructLayoutAttribute" />, with <see cref="F:System.Runtime.InteropServices.LayoutKind.Explicit" /> passed to its constructor, is applied to a class or structure to specify the offset of each non- static or constant member within the unmanaged representation of that class or structure.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -94,8 +94,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The offset in bytes from the beginning of the structure to the beginning of the field. </param
-        >
+          />The offset in bytes from the beginning of the structure to the beginning of the field.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

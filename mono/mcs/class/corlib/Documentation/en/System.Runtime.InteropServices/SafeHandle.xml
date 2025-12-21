@@ -26,16 +26,16 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Runtime.InteropServices.SafeHandle" /> class provides critical finalization of handle resources, preventing handles from being reclaimed prematurely by garbage collection and from being recycled by Windows to reference unintended unmanaged objects. Before the .NET Framework version 2.0, all operating system handles could only be encapsulated in the <see cref="T:System.IntPtr" /> managed wrapper object. </para
-      >
+        >The <see cref="T:System.Runtime.InteropServices.SafeHandle" /> class provides critical finalization of handle resources, preventing handles from being reclaimed prematurely by garbage collection and from being recycled by Windows to reference unintended unmanaged objects. Before the .NET Framework version 2.0, all operating system handles could only be encapsulated in the <see cref="T:System.IntPtr" /> managed wrapper object.
+      </para>
       <para
         >The <see cref="T:System.Runtime.InteropServices.SafeHandle" /> class contains a finalizer that ensures that the handle is closed and is guaranteed to run, even during unexpected <see cref="T:System.AppDomain" /> unloads when a host may not trust the consistency of the state of the <see cref="T:System.AppDomain" />. </para
       >
       <para
         >For more information about the benefits of using a <see cref="T:System.Runtime.InteropServices.SafeHandle" />, see <format type="text/html">
           <a href="3c515c3e-6f52-4a6a-883d-82cacad23478">Safe Handles and Critical Finalization</a>
-        </format>. </para
-      >
+        </format>.
+      </para>
       <para
         >This class is abstract because you cannot create a generic handle. To implement <see cref="T:System.Runtime.InteropServices.SafeHandle" />, you must create a derived class. To create <see cref="T:System.Runtime.InteropServices.SafeHandle" /> derived classes, you must know how to create and free an operating system handle. This process is different for different handle types because some use CloseHandle, while others use more specific methods such as UnmapViewOfFile or FindClose. For this reason, you must create a derived class of <see cref="T:System.Runtime.InteropServices.SafeHandle" /> for each operating system handle type; such as MySafeRegistryHandle, MySafeFileHandle, and MySpecialSafeFileHandle. Some of these derived classes are prewritten and provided for you in the <see cref="N:Microsoft.Win32.SafeHandles" /> namespace.</para
       >
@@ -99,8 +99,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to reliably let <see cref="T:System.Runtime.InteropServices.SafeHandle" /> release the handle during the finalization phase; otherwise, false (not recommended). </param
-        >
+          />true to reliably let <see cref="T:System.Runtime.InteropServices.SafeHandle" /> release the handle during the finalization phase; otherwise, false (not recommended).
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Close">
@@ -130,8 +130,8 @@
             >Calling the <see cref="M:System.Runtime.InteropServices.SafeHandle.Close" /> or <see cref="M:System.Runtime.InteropServices.SafeHandle.Dispose" /> method allows the resources to be freed. This might not happen immediately if other threads are using the same safe handle object, but will happen as soon as that is no longer the case. Although most classes that use the <see cref="T:System.Runtime.InteropServices.SafeHandle" /> class do not need to provide a finalizer, this is sometimes necessary (for example, to flush out file buffers or to write some data back into memory). In this case, the class can provide a finalizer that is guaranteed to run before the <see cref="T:System.Runtime.InteropServices.SafeHandle" /> critical finalizer runs.</para
           >
           <para
-            >Call the <see cref="M:System.Runtime.InteropServices.SafeHandle.Close" /> or <see cref="M:System.Runtime.InteropServices.SafeHandle.Dispose" /> method when you are finished using the <see cref="T:System.Runtime.InteropServices.SafeHandle" /> object. </para
-          >
+            >Call the <see cref="M:System.Runtime.InteropServices.SafeHandle.Close" /> or <see cref="M:System.Runtime.InteropServices.SafeHandle.Dispose" /> method when you are finished using the <see cref="T:System.Runtime.InteropServices.SafeHandle" /> object.
+          </para>
           <block subset="none" type="note">
             <para
               >Always call <see cref="M:System.Runtime.InteropServices.SafeHandle.Close" /> or <see cref="M:System.Runtime.InteropServices.SafeHandle.Dispose" /> before you release your last reference to the <see cref="T:System.Runtime.InteropServices.SafeHandle" /> object. Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Runtime.InteropServices.SafeHandle" /> object's <see cref="M:System.Runtime.InteropServices.SafeHandle.Finalize" /> method.</para
@@ -557,8 +557,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The pre-existing handle to use. </param
-        >
+          />The pre-existing handle to use.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetHandleAsInvalid">

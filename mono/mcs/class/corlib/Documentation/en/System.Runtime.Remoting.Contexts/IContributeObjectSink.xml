@@ -79,15 +79,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The server object which provides the message sink that is to be chained in front of the given chain. </param
-        >
+          />The server object which provides the message sink that is to be chained in front of the given chain.
+        </param>
         <param name="nextSink">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The chain of sinks composed so far. </param
-        >
+          />The chain of sinks composed so far.
+        </param>
       </Docs>
     </Member>
   </Members>

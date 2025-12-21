@@ -56,8 +56,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of a class that inherits from the <see cref="T:System.Data.Common.DbCommandBuilder" /> class. </para
-          >
+            >Initializes a new instance of a class that inherits from the <see cref="T:System.Data.Common.DbCommandBuilder" /> class.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -98,29 +98,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.Common.DbParameter" /> to which the additional modifications are applied. </param
-        >
+          />A <see cref="T:System.Data.Common.DbParameter" /> to which the additional modifications are applied.
+        </param>
         <param name="row">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Data.DataRow" /> from the schema table provided by <see cref="M:System.Data.Common.DbDataReader.GetSchemaTable" />. </param
-        >
+          />The <see cref="T:System.Data.DataRow" /> from the schema table provided by <see cref="M:System.Data.Common.DbDataReader.GetSchemaTable" />.
+        </param>
         <param name="statementType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of command being generated; INSERT, UPDATE or DELETE. </param
-        >
+          />The type of command being generated; INSERT, UPDATE or DELETE.
+        </param>
         <param name="whereClause">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if the parameter is part of the update or delete WHERE clause, false if it is part of the insert or update values. </param
-        >
+          />true if the parameter is part of the update or delete WHERE clause, false if it is part of the insert or update values.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -350,8 +350,8 @@
             >An application can use the <see cref="M:System.Data.Common.DbCommandBuilder.GetDeleteCommand" /> method for informational or troubleshooting purposes because it returns the <see cref="T:System.Data.Common.DbCommand" /> object to be executed.</para
           >
           <para
-            >You can also use <see cref="M:System.Data.Common.DbCommandBuilder.GetDeleteCommand" /> as the basis of a modified command. For example, you might call <see cref="M:System.Data.Common.DbCommandBuilder.GetDeleteCommand" /> and modify the command text, and then explicitly set that on the <see cref="T:System.Data.Common.DbDataAdapter" />. </para
-          >
+            >You can also use <see cref="M:System.Data.Common.DbCommandBuilder.GetDeleteCommand" /> as the basis of a modified command. For example, you might call <see cref="M:System.Data.Common.DbCommandBuilder.GetDeleteCommand" /> and modify the command text, and then explicitly set that on the <see cref="T:System.Data.Common.DbDataAdapter" />.
+          </para>
           <para
             >After the SQL statement is first generated, the application must explicitly call <see cref="M:System.Data.Common.DbCommandBuilder.RefreshSchema" /> if it changes the statement in any way. Otherwise, the <see cref="M:System.Data.Common.DbCommandBuilder.GetDeleteCommand" /> will still be using information from the previous statement, which might not be correct. The SQL statements are first generated either when the application calls <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" /> or <see cref="M:System.Data.Common.DbCommandBuilder.GetDeleteCommand" />.</para
           >
@@ -1027,8 +1027,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Registers the <see cref="T:System.Data.Common.DbCommandBuilder" /> to handle the <see cref="E:System.Data.OleDb.OleDbDataAdapter.RowUpdating" /> event for a <see cref="T:System.Data.Common.DbDataAdapter" />. </para
-          >
+            >Registers the <see cref="T:System.Data.Common.DbCommandBuilder" /> to handle the <see cref="E:System.Data.OleDb.OleDbDataAdapter.RowUpdating" /> event for a <see cref="T:System.Data.Common.DbDataAdapter" />.
+          </para>
         </summary>
         <param name="adapter">
           <attribution

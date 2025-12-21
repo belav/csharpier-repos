@@ -98,15 +98,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> that represents the type to create. </param
-        >
+          />A <see cref="T:System.Type" /> that represents the type to create.
+        </param>
         <param name="creationContext">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.ComponentModel.LicenseContext" /> that specifies when you can use the licensed instance. </param
-        >
+          />A <see cref="T:System.ComponentModel.LicenseContext" /> that specifies when you can use the licensed instance.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateWithContext">
@@ -152,22 +152,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> that represents the type to create. </param
-        >
+          />A <see cref="T:System.Type" /> that represents the type to create.
+        </param>
         <param name="creationContext">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.ComponentModel.LicenseContext" /> that specifies when you can use the licensed instance. </param
-        >
+          />A <see cref="T:System.ComponentModel.LicenseContext" /> that specifies when you can use the licensed instance.
+        </param>
         <param name="args">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type <see cref="T:System.Object" /> that represents the arguments for the type. </param
-        >
+          />An array of type <see cref="T:System.Object" /> that represents the arguments for the type.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CurrentContext">
@@ -238,8 +238,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> to find a valid license for. </param
-        >
+          />The <see cref="T:System.Type" /> to find a valid license for.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsValid">
@@ -283,8 +283,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> that represents the type of object that requests the <see cref="T:System.ComponentModel.License" />. </param
-        >
+          />A <see cref="T:System.Type" /> that represents the type of object that requests the <see cref="T:System.ComponentModel.License" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsValid">
@@ -355,8 +355,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object whose current context you want to lock. </param
-        >
+          />The object whose current context you want to lock.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="UnlockContext">
@@ -398,8 +398,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object whose current context you want to unlock. </param
-        >
+          />The object whose current context you want to unlock.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="UsageMode">
@@ -470,8 +470,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> that represents the type of object that requests the license. </param
-        >
+          />A <see cref="T:System.Type" /> that represents the type of object that requests the license.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Validate">
@@ -519,15 +519,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> that represents the type of object that requests the license. </param
-        >
+          />A <see cref="T:System.Type" /> that represents the type of object that requests the license.
+        </param>
         <param name="instance">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Object" /> of the specified type or a type derived from the specified type. </param
-        >
+          />An <see cref="T:System.Object" /> of the specified type or a type derived from the specified type.
+        </param>
       </Docs>
     </Member>
   </Members>

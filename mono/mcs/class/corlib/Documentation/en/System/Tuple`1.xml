@@ -167,8 +167,8 @@
           <list type="bullet">
             <item>
               <para
-                >By calling the GetType method on the value that is returned by the <see cref="P:System.Tuple`1.Item1" /> property. </para
-              >
+                >By calling the GetType method on the value that is returned by the <see cref="P:System.Tuple`1.Item1" /> property.
+              </para>
             </item>
             <item>
               <para
@@ -181,8 +181,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the <see cref="T:System.Tuple`1" /> object's single component. </para
-          >
+            >Gets the value of the <see cref="T:System.Tuple`1" /> object's single component.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -418,8 +418,8 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see cref="M:System.Tuple`1.System#IComparable#CompareTo(System.Object)" /> method is intended for use in sorting operations. It should not be used when the primary purpose of a comparison is to determine whether two objects are equal. To determine whether two objects are equal, call the <see cref="M:System.Tuple`1.Equals(System.Object)" /> method. </para
-            >
+              >The <see cref="M:System.Tuple`1.System#IComparable#CompareTo(System.Object)" /> method is intended for use in sorting operations. It should not be used when the primary purpose of a comparison is to determine whether two objects are equal. To determine whether two objects are equal, call the <see cref="M:System.Tuple`1.Equals(System.Object)" /> method.
+            </para>
           </block>
           <para
             >The <see cref="M:System.Tuple`1.System#IComparable#CompareTo(System.Object)" /> method uses the default object  comparer.</para

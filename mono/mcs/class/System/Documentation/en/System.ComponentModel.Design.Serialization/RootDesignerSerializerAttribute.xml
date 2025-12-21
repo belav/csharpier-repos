@@ -101,22 +101,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The fully qualified name of the data type of the serializer. </param
-        >
+          />The fully qualified name of the data type of the serializer.
+        </param>
         <param name="baseSerializerTypeName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the base type of the serializer. A class can include multiple serializers as they all have different base types. </param
-        >
+          />The name of the base type of the serializer. A class can include multiple serializers as they all have different base types.
+        </param>
         <param name="reloadable">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if this serializer supports dynamic reloading of the document; otherwise, false. </param
-        >
+          />true if this serializer supports dynamic reloading of the document; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -156,22 +156,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The fully qualified name of the data type of the serializer. </param
-        >
+          />The fully qualified name of the data type of the serializer.
+        </param>
         <param name="baseSerializerType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the base type of the serializer. A class can include multiple serializers, as they all have different base types. </param
-        >
+          />The name of the base type of the serializer. A class can include multiple serializers, as they all have different base types.
+        </param>
         <param name="reloadable">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if this serializer supports dynamic reloading of the document; otherwise, false. </param
-        >
+          />true if this serializer supports dynamic reloading of the document; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -211,22 +211,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data type of the serializer. </param
-        >
+          />The data type of the serializer.
+        </param>
         <param name="baseSerializerType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The base type of the serializer. A class can include multiple serializers as they all have different base types. </param
-        >
+          />The base type of the serializer. A class can include multiple serializers as they all have different base types.
+        </param>
         <param name="reloadable">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if this serializer supports dynamic reloading of the document; otherwise, false. </param
-        >
+          />true if this serializer supports dynamic reloading of the document; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Reloadable">

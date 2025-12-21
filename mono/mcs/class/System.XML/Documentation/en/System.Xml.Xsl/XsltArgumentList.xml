@@ -120,15 +120,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI to associate with the object. To use the default namespace, specify an empty string. </param
-        >
+          />The namespace URI to associate with the object. To use the default namespace, specify an empty string.
+        </param>
         <param name="extension">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to add to the list. </param
-        >
+          />The object to add to the list.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddParam">
@@ -263,22 +263,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name to associate with the parameter. </param
-        >
+          />The name to associate with the parameter.
+        </param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI to associate with the parameter. To use the default namespace, specify an empty string. </param
-        >
+          />The namespace URI to associate with the parameter. To use the default namespace, specify an empty string.
+        </param>
         <param name="parameter">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The parameter value or object to add to the list. </param
-        >
+          />The parameter value or object to add to the list.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Clear">
@@ -343,8 +343,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the object. </param
-        >
+          />The namespace URI of the object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetParam">
@@ -384,15 +384,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the parameter. <see cref="T:System.Xml.Xsl.XsltArgumentList" /> does not check to ensure the name passed is a valid local name; however, the name cannot be null. </param
-        >
+          />The name of the parameter. <see cref="T:System.Xml.Xsl.XsltArgumentList" /> does not check to ensure the name passed is a valid local name; however, the name cannot be null.
+        </param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI associated with the parameter. </param
-        >
+          />The namespace URI associated with the parameter.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RemoveExtensionObject">
@@ -433,8 +433,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI associated with the object to remove. </param
-        >
+          />The namespace URI associated with the object to remove.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RemoveParam">
@@ -476,15 +476,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the parameter to remove. <see cref="T:System.Xml.Xsl.XsltArgumentList" /> does not check to ensure the name passed is a valid local name; however, the name cannot be null. </param
-        >
+          />The name of the parameter to remove. <see cref="T:System.Xml.Xsl.XsltArgumentList" /> does not check to ensure the name passed is a valid local name; however, the name cannot be null.
+        </param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the parameter to remove. </param
-        >
+          />The namespace URI of the parameter to remove.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="XsltMessageEncountered">

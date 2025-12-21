@@ -25,8 +25,8 @@
 	discarding the result.  If you want to get the results of
 	executing an expression use the <see cref="M:Mono.CSharp.Evaluator.Evaluate(string)" /> method
 	instead.
-      </para
-      >
+
+      </para>
       <para>
 	Variables declared during evaluation will continue to be made
 	available on upcoming invocations.  This allows variables to
@@ -37,8 +37,8 @@
 	that are not explicitly referenced through the Evaluator's
 	<see cref="M:Mono.CSharp.Evaluator.ReferenceAssembly(System.Reflection.Assembly)" />
 	method.
-      </para
-      >
+
+      </para>
       <para>
 	The API exposes similar entry points, some are used for
 	read-eval-print loops where more control over partial-input is
@@ -57,8 +57,8 @@
 	across multiple evaluations, you will have to create a new
 	<see cref="T:System.AppDomain" /> and invoke the compiler
 	there.
-      </para
-      >
+
+      </para>
     </remarks>
   </Docs>
 </Namespace>

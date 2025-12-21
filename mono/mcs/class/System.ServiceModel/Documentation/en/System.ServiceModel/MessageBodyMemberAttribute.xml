@@ -25,8 +25,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see cref="T:System.ServiceModel.MessageBodyMemberAttribute" /> attribute to specify that a data member is serialized into the SOAP body and to control some serialization items. </para
-      >
+        >Use the <see cref="T:System.ServiceModel.MessageBodyMemberAttribute" /> attribute to specify that a data member is serialized into the SOAP body and to control some serialization items.
+      </para>
       <para
         >The <see cref="P:System.ServiceModel.MessageBodyMemberAttribute.Order" /> property is used to specify the order of body parts in cases where the default alphabetical order is not appropriate.</para
       >
@@ -75,8 +75,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.MessageBodyMemberAttribute" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.MessageBodyMemberAttribute" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -98,8 +98,8 @@
             >Use the <see cref="P:System.ServiceModel.MessageBodyMemberAttribute.Order" /> property to specify the location of a data member in the SOAP body element. The value is not required to be consecutive, because it does not represent the position of the member, only the sorting key.</para
           >
           <para
-            >The order of the body elements is alphabetical by default. The semantics of this property are the same as the semantics of the <see cref="P:System.Runtime.Serialization.DataMemberAttribute.Order" /> property. </para
-          >
+            >The order of the body elements is alphabetical by default. The semantics of this property are the same as the semantics of the <see cref="P:System.Runtime.Serialization.DataMemberAttribute.Order" /> property.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

@@ -99,8 +99,8 @@
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format> and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
           <block subset="none" type="note">
             <para
               >Always call <see cref="M:System.Drawing.Image.Dispose" /> before you release your last reference to the <see cref="T:System.Drawing.Image" />. Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Drawing.Image" /> object's Finalize method.</para
@@ -143,8 +143,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see cref="T:System.Drawing.Image" /> and optionally releases the managed resources. </para
-          >
+            >Releases the unmanaged resources used by the <see cref="T:System.Drawing.Image" /> and optionally releases the managed resources.
+          </para>
         </summary>
         <param name="disposing">
           <attribution
@@ -424,8 +424,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string that contains the name of the file from which to create the <see cref="T:System.Drawing.Image" />. </param
-        >
+          />A string that contains the name of the file from which to create the <see cref="T:System.Drawing.Image" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -496,15 +496,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string that contains the name of the file from which to create the <see cref="T:System.Drawing.Image" />. </param
-        >
+          />A string that contains the name of the file from which to create the <see cref="T:System.Drawing.Image" />.
+        </param>
         <param name="useEmbeddedColorManagement">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Set to true to use color management information embedded in the image file; otherwise, false. </param
-        >
+          />Set to true to use color management information embedded in the image file; otherwise, false.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -545,8 +545,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The ndptecgdi bitmap handle from which to create the <see cref="T:System.Drawing.Bitmap" />. </param
-        >
+          />The ndptecgdi bitmap handle from which to create the <see cref="T:System.Drawing.Bitmap" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -588,15 +588,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The ndptecgdi bitmap handle from which to create the <see cref="T:System.Drawing.Bitmap" />. </param
-        >
+          />The ndptecgdi bitmap handle from which to create the <see cref="T:System.Drawing.Bitmap" />.
+        </param>
         <param name="hpalette">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A handle to a ndptecgdi palette used to define the bitmap colors if the bitmap specified in the <paramref name="hBitmap" /> parameter is not a device-independent bitmap (DIB). </param
-        >
+          />A handle to a ndptecgdi palette used to define the bitmap colors if the bitmap specified in the <paramref name="hBitmap" /> parameter is not a device-independent bitmap (DIB).
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -643,8 +643,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.Stream" /> that contains the data for this <see cref="T:System.Drawing.Image" />. </param
-        >
+          />A <see cref="T:System.IO.Stream" /> that contains the data for this <see cref="T:System.Drawing.Image" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -695,15 +695,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.Stream" /> that contains the data for this <see cref="T:System.Drawing.Image" />. </param
-        >
+          />A <see cref="T:System.IO.Stream" /> that contains the data for this <see cref="T:System.Drawing.Image" />.
+        </param>
         <param name="useEmbeddedColorManagement">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to use color management information embedded in the data stream; otherwise, false. </param
-        >
+          />true to use color management information embedded in the data stream; otherwise, false.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -755,15 +755,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.Stream" /> that contains the data for this <see cref="T:System.Drawing.Image" />. </param
-        >
+          />A <see cref="T:System.IO.Stream" /> that contains the data for this <see cref="T:System.Drawing.Image" />.
+        </param>
         <param name="useEmbeddedColorManagement">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to use color management information embedded in the data stream; otherwise, false. </param
-        >
+          />true to use color management information embedded in the data stream; otherwise, false.
+        </param>
         <param name="validateImageData">
           <attribution
             license="cc4"
@@ -825,8 +825,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A GUID that specifies the image encoder. </param
-        >
+          />A GUID that specifies the image encoder.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -867,8 +867,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Drawing.Imaging.FrameDimension" /> that specifies the identity of the dimension type. </param
-        >
+          />A <see cref="T:System.Drawing.Imaging.FrameDimension" /> that specifies the identity of the dimension type.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -902,8 +902,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.Imaging.PixelFormat" /> member that specifies the format for which to find the size. </param
-        >
+          />The <see cref="T:System.Drawing.Imaging.PixelFormat" /> member that specifies the format for which to find the size.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -926,8 +926,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a list of property item IDs and links to more information, see <see cref="P:System.Drawing.Imaging.PropertyItem.Id" />. </para
-          >
+            >For a list of property item IDs and links to more information, see <see cref="P:System.Drawing.Imaging.PropertyItem.Id" />.
+          </para>
           <para
             >It is difficult to set property items, because the <see cref="T:System.Drawing.Imaging.PropertyItem" /> class has no public constructors. One way to work around this restriction is to obtain a <see cref="T:System.Drawing.Imaging.PropertyItem" /> by retrieving the <see cref="P:System.Drawing.Image.PropertyItems" /> property value or calling the <see cref="M:System.Drawing.Image.GetPropertyItem(System.Int32)" /> method of an <see cref="T:System.Drawing.Image" /> that already has property items. Then you can set the fields of the <see cref="T:System.Drawing.Imaging.PropertyItem" /> and pass it to <see cref="M:System.Drawing.Image.SetPropertyItem(System.Drawing.Imaging.PropertyItem)" />.</para
           >
@@ -947,8 +947,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The ID of the property item to get. </param
-        >
+          />The ID of the property item to get.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1066,8 +1066,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.Imaging.PixelFormat" /> to test. </param
-        >
+          />The <see cref="T:System.Drawing.Imaging.PixelFormat" /> to test.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1104,8 +1104,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.Imaging.PixelFormat" /> to test. </param
-        >
+          />The <see cref="T:System.Drawing.Imaging.PixelFormat" /> to test.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1139,8 +1139,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.Imaging.PixelFormat" /> enumeration to test. </param
-        >
+          />The <see cref="T:System.Drawing.Imaging.PixelFormat" /> enumeration to test.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1162,8 +1162,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property returns a copy of the <see cref="T:System.Drawing.Imaging.ColorPalette" /> object used by this <see cref="T:System.Drawing.Image" />. </para
-          >
+            >This property returns a copy of the <see cref="T:System.Drawing.Imaging.ColorPalette" /> object used by this <see cref="T:System.Drawing.Image" />.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1343,8 +1343,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The ID of the property item to remove. </param
-        >
+          />The ID of the property item to remove.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1367,8 +1367,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Drawing.Image.RotateFlip(System.Drawing.RotateFlipType)" /> method rotates the image clockwise. </para
-          >
+            >The <see cref="M:System.Drawing.Image.RotateFlip(System.Drawing.RotateFlipType)" /> method rotates the image clockwise.
+          </para>
           <para>If you wish to draw on an image once it has been rotated, you should always retrieve a new graphics object from the image, otherwise an exception could occur.</para>
         </remarks>
         <summary>
@@ -1382,8 +1382,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Drawing.RotateFlipType" /> member that specifies the type of rotation and flip to apply to the image. </param
-        >
+          />A <see cref="T:System.Drawing.RotateFlipType" /> member that specifies the type of rotation and flip to apply to the image.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1418,8 +1418,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string that contains the name of the file to which to save this <see cref="T:System.Drawing.Image" />. </param
-        >
+          />A string that contains the name of the file to which to save this <see cref="T:System.Drawing.Image" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1454,15 +1454,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.Stream" /> where the image will be saved. </param
-        >
+          />The <see cref="T:System.IO.Stream" /> where the image will be saved.
+        </param>
         <param name="format">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Drawing.Imaging.ImageFormat" /> that specifies the format of the saved image. </param
-        >
+          />An <see cref="T:System.Drawing.Imaging.ImageFormat" /> that specifies the format of the saved image.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1495,15 +1495,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string that contains the name of the file to which to save this <see cref="T:System.Drawing.Image" />. </param
-        >
+          />A string that contains the name of the file to which to save this <see cref="T:System.Drawing.Image" />.
+        </param>
         <param name="format">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.Imaging.ImageFormat" /> for this <see cref="T:System.Drawing.Image" />. </param
-        >
+          />The <see cref="T:System.Drawing.Imaging.ImageFormat" /> for this <see cref="T:System.Drawing.Image" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1539,8 +1539,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.Stream" /> where the image will be saved. </param
-        >
+          />The <see cref="T:System.IO.Stream" /> where the image will be saved.
+        </param>
         <param name="encoder">
           <attribution
             license="cc4"
@@ -1553,8 +1553,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Drawing.Imaging.EncoderParameters" /> that specifies parameters used by the image encoder. </param
-        >
+          />An <see cref="T:System.Drawing.Imaging.EncoderParameters" /> that specifies parameters used by the image encoder.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1591,22 +1591,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string that contains the name of the file to which to save this <see cref="T:System.Drawing.Image" />. </param
-        >
+          />A string that contains the name of the file to which to save this <see cref="T:System.Drawing.Image" />.
+        </param>
         <param name="encoder">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.Imaging.ImageCodecInfo" /> for this <see cref="T:System.Drawing.Image" />. </param
-        >
+          />The <see cref="T:System.Drawing.Imaging.ImageCodecInfo" /> for this <see cref="T:System.Drawing.Image" />.
+        </param>
         <param name="encoderParams">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Drawing.Imaging.EncoderParameters" /> to use for this <see cref="T:System.Drawing.Image" />. </param
-        >
+          />An <see cref="T:System.Drawing.Imaging.EncoderParameters" /> to use for this <see cref="T:System.Drawing.Image" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1642,8 +1642,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Drawing.Imaging.EncoderParameters" /> that holds parameters required by the image encoder that is used by the save-add operation. </param
-        >
+          />An <see cref="T:System.Drawing.Imaging.EncoderParameters" /> that holds parameters required by the image encoder that is used by the save-add operation.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1680,15 +1680,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Drawing.Image" /> that contains the frame to add. </param
-        >
+          />An <see cref="T:System.Drawing.Image" /> that contains the frame to add.
+        </param>
         <param name="encoderParams">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Drawing.Imaging.EncoderParameters" /> that holds parameters required by the image encoder that is used by the save-add operation. </param
-        >
+          />An <see cref="T:System.Drawing.Imaging.EncoderParameters" /> that holds parameters required by the image encoder that is used by the save-add operation.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1731,15 +1731,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Drawing.Imaging.FrameDimension" /> that specifies the identity of the dimension type. </param
-        >
+          />A <see cref="T:System.Drawing.Imaging.FrameDimension" /> that specifies the identity of the dimension type.
+        </param>
         <param name="frameIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the active frame. </param
-        >
+          />The index of the active frame.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1783,8 +1783,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.Imaging.PropertyItem" /> to be stored. </param
-        >
+          />The <see cref="T:System.Drawing.Imaging.PropertyItem" /> to be stored.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

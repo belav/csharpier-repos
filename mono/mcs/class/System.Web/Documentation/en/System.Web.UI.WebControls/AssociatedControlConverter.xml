@@ -53,8 +53,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.AssociatedControlConverter" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.AssociatedControlConverter" /> class.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -93,8 +93,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The control instance to test whether it is a <see cref="T:System.Web.UI.WebControls.WebControl" />. </param
-        >
+          />The control instance to test whether it is a <see cref="T:System.Web.UI.WebControls.WebControl" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

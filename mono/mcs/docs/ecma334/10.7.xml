@@ -9,8 +9,8 @@
           >namespace-member-declaration</non_terminal
         > (<hyperlink>16.4</hyperlink>) with no enclosing <non_terminal where="16.2"
           >namespace-declaration</non_terminal
-        > is the entire program text. </list_item
-      >
+        > is the entire program text.
+      </list_item>
       <list_item
         > The scope of a namespace member declared by a <non_terminal where="16.4"
           >namespace-member-declaration</non_terminal
@@ -20,8 +20,8 @@
           >namespace-body</non_terminal
         > of every <non_terminal where="16.2"
           >namespace-declaration</non_terminal
-        > whose fully qualified name is N or starts with N, followed by a period. </list_item
-      >
+        > whose fully qualified name is N or starts with N, followed by a period.
+      </list_item>
       <list_item
         > The scope of a name defined or imported by a <non_terminal where="16.3"
           >using-directive</non_terminal
@@ -44,10 +44,8 @@
           >using-directive</non_terminal
         > is not transitive, but, rather, affects only the <non_terminal where="16.1"
           >compilation-unit</non_terminal
-        > or  <non_terminal where="16.2"
-          >namespace-body</non_terminal
-        > in which it occurs. </list_item
-      >
+        > or  <non_terminal where="16.2">namespace-body</non_terminal> in which it occurs.
+      </list_item>
       <list_item
         > The scope of a member declared by a <non_terminal where="17.2"
           >class-member-declaration</non_terminal
@@ -56,69 +54,67 @@
         > in which the declaration occurs. In addition, the scope of a class member extends to the <non_terminal
           where="17.1.3"
           >class-body</non_terminal
-        > of those derived classes that are included in the accessibility domain (<hyperlink>10.5.2</hyperlink>) of the member. </list_item
-      >
+        > of those derived classes that are included in the accessibility domain (<hyperlink>10.5.2</hyperlink>) of the member.
+      </list_item>
       <list_item
         > The scope of a member declared by a <non_terminal where="18.2"
           >struct-member-declaration</non_terminal
         > (<hyperlink>18.2</hyperlink>) is the <non_terminal where="18.1.3"
           >struct-body</non_terminal
-        > in which the declaration occurs. </list_item
-      >
+        > in which the declaration occurs.
+      </list_item>
       <list_item
         > The scope of a member declared by an <non_terminal where="21.3"
           >enum-member-declaration</non_terminal
         > (<hyperlink>21.3</hyperlink>) is the <non_terminal where="21.1"
           >enum-body</non_terminal
-        > in which the declaration occurs. </list_item
-      >
+        > in which the declaration occurs.
+      </list_item>
       <list_item
         > The scope of a parameter declared in a <non_terminal where="17.5"
           >method-declaration</non_terminal
         > (<hyperlink>17.5</hyperlink>) is the <non_terminal where="17.5"
           >method-body</non_terminal
-        > of that  <non_terminal where="17.5">method-declaration</non_terminal>. </list_item
-      >
+        > of that  <non_terminal where="17.5">method-declaration</non_terminal>.
+      </list_item>
       <list_item
         > The scope of a parameter declared in an <non_terminal where="17.8"
           >indexer-declaration</non_terminal
         > (<hyperlink>17.8</hyperlink>) is the <non_terminal where="17.6.2"
           >accessor-declarations</non_terminal
-        > of that <non_terminal where="17.8">indexer-declaration</non_terminal>. </list_item
-      >
+        > of that <non_terminal where="17.8">indexer-declaration</non_terminal>.
+      </list_item>
       <list_item
         > The scope of a parameter declared in an <non_terminal where="17.9"
           >operator-declaration</non_terminal
         > (<hyperlink>17.9</hyperlink>) is the block of that  <non_terminal where="17.9"
           >operator-declaration</non_terminal
-        >. </list_item
-      >
+        >.
+      </list_item>
       <list_item
         > The scope of a parameter declared in a <non_terminal where="17.10"
           >constructor-declaration</non_terminal
         > (<hyperlink>17.10</hyperlink>) is the <non_terminal where="17.10"
           >constructor-initializer</non_terminal
-        > and block of that <non_terminal where="17.10"
-          >constructor-declaration</non_terminal
-        >. </list_item
-      >
+        > and block of that <non_terminal where="17.10">constructor-declaration</non_terminal>.
+      </list_item>
       <list_item
         > The scope of a label declared in a <non_terminal where="15.4"
           >labeled-statement</non_terminal
-        > (<hyperlink>15.4</hyperlink>) is the block in which the declaration occurs. </list_item
-      >
+        > (<hyperlink>15.4</hyperlink>) is the block in which the declaration occurs.
+      </list_item>
       <list_item
         > The scope of a local variable declared in a <non_terminal where="15.5.1"
           >local-variable-declaration</non_terminal
-        > (<hyperlink>15.5.1</hyperlink>) is the block in which the declaration occurs. </list_item
-      >
+        > (<hyperlink>15.5.1</hyperlink>) is the block in which the declaration occurs.
+      </list_item>
       <list_item
         > The scope of a local variable declared in a <non_terminal where="15.7.2"
           >switch-block</non_terminal
         > of a switch statement (<hyperlink>15.7.2</hyperlink>) is the  <non_terminal where="15.7.2"
           >switch-block</non_terminal
-        >. </list_item
-      >
+        >.
+      </list_item>
       <list_item
         > The scope of a local variable declared in a <non_terminal where="15.8.3"
           >for-initializer</non_terminal
@@ -127,16 +123,16 @@
         >, the <non_terminal where="15.8.3">for-condition</non_terminal>, the <non_terminal
           where="15.8.3"
           >for-iterator</non_terminal
-        >, and the contained statement of the for statement. </list_item
-      >
+        >, and the contained statement of the for statement.
+      </list_item>
       <list_item
         > The scope of a local constant declared in a <non_terminal where="15.5.2"
           >local-constant-declaration</non_terminal
         > (<hyperlink>15.5.2</hyperlink>) is the block in which the declaration occurs. It is a compile-time error to refer to a local constant in a textual position that precedes its <non_terminal
           where="17.3"
           >constant-declarator</non_terminal
-        >. </list_item
-      >
+        >.
+      </list_item>
     </list>
   </paragraph>
   <paragraph

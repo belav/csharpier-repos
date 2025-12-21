@@ -62,8 +62,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of a <see cref="T:System.Web.UI.UrlPropertyAttribute" /> class created with this constructor is initialized with the <see cref="P:System.Web.UI.UrlPropertyAttribute.Filter" /> property set to <paramref name="filter" />. </para
-          >
+            >An instance of a <see cref="T:System.Web.UI.UrlPropertyAttribute" /> class created with this constructor is initialized with the <see cref="P:System.Web.UI.UrlPropertyAttribute.Filter" /> property set to <paramref name="filter" />.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

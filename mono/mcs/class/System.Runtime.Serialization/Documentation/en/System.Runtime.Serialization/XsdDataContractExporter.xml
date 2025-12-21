@@ -24,18 +24,18 @@
           <a href="7381b200-437a-4506-9556-d77bf1bc3f34"
             >Types Supported by the Data Contract Serializer</a
           >
-        </format>.) The schemas can then be exposed through a Web Services Description Language (WSDL) document for use by others who need to interoperate with your service. </para
-      >
+        </format>.) The schemas can then be exposed through a Web Services Description Language (WSDL) document for use by others who need to interoperate with your service.
+      </para>
       <para
-        >Conversely, if you are creating a Web service that must interoperate with an existing Web service, use the <see cref="T:System.Runtime.Serialization.XsdDataContractImporter" /> to transform XML schemas and create the CLR types that represent the data in a selected programming language. </para
-      >
+        >Conversely, if you are creating a Web service that must interoperate with an existing Web service, use the <see cref="T:System.Runtime.Serialization.XsdDataContractImporter" /> to transform XML schemas and create the CLR types that represent the data in a selected programming language.
+      </para>
       <para
         >The <see cref="T:System.Runtime.Serialization.XsdDataContractExporter" /> generates an <see cref="T:System.Xml.Schema.XmlSchemaSet" /> object that contains the collection of schemas. Access the set of schemas through the <see cref="M:System.Xml.Schema.XmlSchemaSet.Schemas" /> property.</para
       >
       <block subset="none" type="note">
         <para
-          >To quickly generate XML schema definition (XSD) files that other Web services can consume, use the <see cref="T:System.Runtime.Serialization.XsdDataContractExporter" />. </para
-        >
+          >To quickly generate XML schema definition (XSD) files that other Web services can consume, use the <see cref="T:System.Runtime.Serialization.XsdDataContractExporter" />.
+        </para>
       </block>
       <format type="text/html">
         <h2>Exporting Schemas Into an XmlSchemaSet</h2>
@@ -90,8 +90,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.XsdDataContractExporter" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.XsdDataContractExporter" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -115,22 +115,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this overload when you have an existing <see cref="T:System.Xml.Schema.XmlSchemaSet" /> to which you want to add new schemas. After you construct a <see cref="T:System.Runtime.Serialization.XsdDataContractExporter" /> with this overload, call the <see cref="M:System.Runtime.Serialization.XsdDataContractExporter.Export(System.Collections.Generic.IList{System.Reflection.Assembly})" /> method to add new types to the existing set. </para
-          >
+            >Use this overload when you have an existing <see cref="T:System.Xml.Schema.XmlSchemaSet" /> to which you want to add new schemas. After you construct a <see cref="T:System.Runtime.Serialization.XsdDataContractExporter" /> with this overload, call the <see cref="M:System.Runtime.Serialization.XsdDataContractExporter.Export(System.Collections.Generic.IList{System.Reflection.Assembly})" /> method to add new types to the existing set.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.XsdDataContractExporter" /> class with the specified set of schemas.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.XsdDataContractExporter" /> class with the specified set of schemas.
+          </para>
         </summary>
         <param name="schemas">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.Schema.XmlSchemaSet" /> that contains the schemas to be exported. </param
-        >
+          />An <see cref="T:System.Xml.Schema.XmlSchemaSet" /> that contains the schemas to be exported.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CanExport">
@@ -198,8 +198,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the set of .common language runtime (CLR) types contained in a <see cref="T:System.Collections.Generic.ICollection`1" /> can be exported. </para
-          >
+            >Gets a value that indicates whether the set of .common language runtime (CLR) types contained in a <see cref="T:System.Collections.Generic.ICollection`1" /> can be exported.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -245,8 +245,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> to export. </param
-        >
+          />The <see cref="T:System.Type" /> to export.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Export">
@@ -354,8 +354,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> to transform into an XML schema. </param
-        >
+          />The <see cref="T:System.Type" /> to transform into an XML schema.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetRootElementName">
@@ -388,8 +388,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Xml.XmlQualifiedName" /> that represents the top-level name and namespace for this <see cref="T:System.Type" />, which is written to the stream when writing this object. </para
-          >
+            >The <see cref="T:System.Xml.XmlQualifiedName" /> that represents the top-level name and namespace for this <see cref="T:System.Type" />, which is written to the stream when writing this object.
+          </para>
         </returns>
         <param name="type">
           <attribution
@@ -433,8 +433,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Xml.Schema.XmlSchemaType" /> that contains the XML schema. </para
-          >
+            >An <see cref="T:System.Xml.Schema.XmlSchemaType" /> that contains the XML schema.
+          </para>
         </returns>
         <param name="type">
           <attribution
@@ -483,8 +483,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> that was exported. </param
-        >
+          />The <see cref="T:System.Type" /> that was exported.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Options">
@@ -509,8 +509,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets an <see cref="T:System.Runtime.Serialization.ExportOptions" /> that contains options that can be set for the export operation. </para
-          >
+            >Gets or sets an <see cref="T:System.Runtime.Serialization.ExportOptions" /> that contains options that can be set for the export operation.
+          </para>
         </summary>
       </Docs>
     </Member>

@@ -50,8 +50,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.CommunicationObjectAbortedException" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.CommunicationObjectAbortedException" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -82,8 +82,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.CommunicationObjectAbortedException" /> class with the specified message. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.CommunicationObjectAbortedException" /> class with the specified message.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -112,8 +112,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.CommunicationObjectAbortedException" /> class used to deserialize data into a <see cref="T:System.ServiceModel.CommunicationObjectAbortedException" /> object. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.CommunicationObjectAbortedException" /> class used to deserialize data into a <see cref="T:System.ServiceModel.CommunicationObjectAbortedException" /> object.
+          </para>
         </summary>
         <param name="info">
           <attribution
@@ -160,8 +160,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.CommunicationObjectAbortedException" /> class using the specified message and inner exception. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.CommunicationObjectAbortedException" /> class using the specified message and inner exception.
+          </para>
         </summary>
       </Docs>
     </Member>

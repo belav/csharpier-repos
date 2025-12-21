@@ -26,8 +26,8 @@
         >For more information about service principal name, see <see
           cref="http://go.microsoft.com/fwlink/?LinkId=96656"
           >Service Principal Names</see
-        >. </para
-      >
+        >.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -51,8 +51,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.ServicePrincipalNameElement" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.ServicePrincipalNameElement" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>

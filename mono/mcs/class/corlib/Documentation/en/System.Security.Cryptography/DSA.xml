@@ -64,8 +64,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.DSA" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.DSA" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -141,8 +141,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the specific implementation of <see cref="T:System.Security.Cryptography.DSA" /> to use. </param
-        >
+          />The name of the specific implementation of <see cref="T:System.Security.Cryptography.DSA" /> to use.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateSignature">
@@ -181,12 +181,8 @@
           <para>The digital signature for the specified data.</para>
         </returns>
         <param name="rgbHash">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The data to be signed. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The data to be signed.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ExportParameters">
@@ -229,8 +225,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to include private parameters; otherwise, false. </param
-        >
+          />true to include private parameters; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="FromXmlString">
@@ -267,8 +263,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML string to use to reconstruct the <see cref="T:System.Security.Cryptography.DSA" /> object. </param
-        >
+          />The XML string to use to reconstruct the <see cref="T:System.Security.Cryptography.DSA" /> object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ImportParameters">
@@ -307,8 +303,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The parameters for <see cref="T:System.Security.Cryptography.DSA" />. </param
-        >
+          />The parameters for <see cref="T:System.Security.Cryptography.DSA" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ToXmlString">
@@ -351,8 +347,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to include private parameters; otherwise, false. </param
-        >
+          />true to include private parameters; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="VerifySignature">
@@ -398,15 +394,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The hash of the data signed with <paramref name="rgbSignature" />. </param
-        >
+          />The hash of the data signed with <paramref name="rgbSignature" />.
+        </param>
         <param name="rgbSignature">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The signature to be verified for <paramref name="rgbData" />. </param
-        >
+          />The signature to be verified for <paramref name="rgbData" />.
+        </param>
       </Docs>
     </Member>
   </Members>

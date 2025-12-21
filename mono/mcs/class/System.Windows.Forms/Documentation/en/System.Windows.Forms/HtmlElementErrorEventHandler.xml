@@ -35,8 +35,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the method that will handle the <see cref="E:System.Windows.Forms.HtmlWindow.Error" /> event of an <see cref="T:System.Windows.Forms.HtmlWindow" />. </para
-      >
+        >Represents the method that will handle the <see cref="E:System.Windows.Forms.HtmlWindow.Error" /> event of an <see cref="T:System.Windows.Forms.HtmlWindow" />.
+      </para>
     </summary>
   </Docs>
 </Type>

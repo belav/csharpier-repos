@@ -44,8 +44,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.SiteMap" /> class is an in-memory representation of the navigation structure for a site, which is provided by one or more site map providers. This class cannot be inherited. </para
-      >
+        >The <see cref="T:System.Web.SiteMap" /> class is an in-memory representation of the navigation structure for a site, which is provided by one or more site map providers. This class cannot be inherited.
+      </para>
     </summary>
   </Docs>
   <Members>
@@ -64,12 +64,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Web.SiteMap" /> class retrieves the <see cref="P:System.Web.SiteMap.CurrentNode" /> property by requesting it from the provider. </para
-          >
+            >The <see cref="T:System.Web.SiteMap" /> class retrieves the <see cref="P:System.Web.SiteMap.CurrentNode" /> property by requesting it from the provider.
+          </para>
           <para>If no representative node exists for the page in the site map information, or if security trimming is enabled and the node cannot be returned for the current user, null is returned.  </para>
           <para
-            >The <see cref="E:System.Web.SiteMap.SiteMapResolve" /> event is raised by the default site map provider if one or more subscriptions exist. </para
-          >
+            >The <see cref="E:System.Web.SiteMap.SiteMapResolve" /> event is raised by the default site map provider if one or more subscriptions exist.
+          </para>
           <para
             >If you implement your own <see cref="T:System.Web.SiteMapProvider" /> object, you might create your own mechanism to find and retrieve the <see cref="P:System.Web.SiteMapProvider.CurrentNode" />. However, if you extend the <see cref="T:System.Web.StaticSiteMapProvider" /> class and use a URL-based scheme to identify pages, you can override the <see cref="M:System.Web.StaticSiteMapProvider.FindSiteMapNode(System.String)" /> method.</para
           >
@@ -226,8 +226,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see cref="P:System.Web.SiteMap.CurrentNode" /> property is accessed. </para
-          >
+            >Occurs when the <see cref="P:System.Web.SiteMap.CurrentNode" /> property is accessed.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>

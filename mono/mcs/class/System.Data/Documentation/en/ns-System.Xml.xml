@@ -143,8 +143,8 @@
         > section of the W3C spec.</para
       >
       <para
-        >For example, the following schema includes elements that have the same name but different types in the same content model, and substitution groups are used. This should cause an error, but <see cref="N:System.Xml" /> compiles and validates the schema without errors. </para
-      >
+        >For example, the following schema includes elements that have the same name but different types in the same content model, and substitution groups are used. This should cause an error, but <see cref="N:System.Xml" /> compiles and validates the schema without errors.
+      </para>
       <code>&lt;?xml version="1.0" encoding="utf-8" ?&gt; 
 &lt;xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"&gt;
 
@@ -209,8 +209,8 @@
   &lt;xs:element name="e3" type="t3"/&gt;
 &lt;/xs:schema&gt;</code>
       <para
-        >If you try to validate the following XML against the schema above, the validation will fail with the following message: "The element 'e3' has invalid child element 'e2'." and an <see cref="T:System.Xml.Schema.XmlSchemaValidationException" /> exception will be thrown. </para
-      >
+        >If you try to validate the following XML against the schema above, the validation will fail with the following message: "The element 'e3' has invalid child element 'e2'." and an <see cref="T:System.Xml.Schema.XmlSchemaValidationException" /> exception will be thrown.
+      </para>
       <code>&lt;e3&gt;
   &lt;e2&gt;1&lt;/e2&gt;
   &lt;e2&gt;2&lt;/e2&gt;
@@ -267,8 +267,8 @@
       >
       <para>Denial of service</para>
       <para
-        >The following scenarios are considered to be less vulnerable to denial of service attacks because the <see cref="N:System.Xml" /> classes provide a means of protection from such attacks. </para
-      >
+        >The following scenarios are considered to be less vulnerable to denial of service attacks because the <see cref="N:System.Xml" /> classes provide a means of protection from such attacks.
+      </para>
       <list type="bullet">
         <item>
           <para>Parsing text XML data.</para>
@@ -309,8 +309,8 @@
         </item>
       </list>
       <para
-        >If you are concerned about denial of service issues or if you are dealing with untrusted sources, do not enable DTD processing. This is disabled by default on <see cref="T:System.Xml.XmlReader" /> objects that the <see cref="Overload:System.Xml.XmlReader.Create" /> method creates. </para
-      >
+        >If you are concerned about denial of service issues or if you are dealing with untrusted sources, do not enable DTD processing. This is disabled by default on <see cref="T:System.Xml.XmlReader" /> objects that the <see cref="Overload:System.Xml.XmlReader.Create" /> method creates.
+      </para>
       <block subset="none" type="note">
         <para
           >The <see cref="T:System.Xml.XmlTextReader" /> allows DTD processing by default. Use the <see cref="P:System.Xml.XmlTextReader.DtdProcessing" /> property to disable this feature.</para

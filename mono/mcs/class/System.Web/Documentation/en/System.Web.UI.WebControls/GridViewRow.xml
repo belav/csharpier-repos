@@ -21,8 +21,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.UI.WebControls.GridViewRow" /> class is used represent an individual row in a <see cref="T:System.Web.UI.WebControls.GridView" /> control. Each row in the <see cref="T:System.Web.UI.WebControls.GridView" /> control has a designated row type using the <see cref="T:System.Web.UI.WebControls.DataControlRowType" /> enumeration. The following table lists the different row types. </para
-      >
+        >The <see cref="T:System.Web.UI.WebControls.GridViewRow" /> class is used represent an individual row in a <see cref="T:System.Web.UI.WebControls.GridView" /> control. Each row in the <see cref="T:System.Web.UI.WebControls.GridView" /> control has a designated row type using the <see cref="T:System.Web.UI.WebControls.DataControlRowType" /> enumeration. The following table lists the different row types.
+      </para>
       <list type="table">
         <listheader>
           <item>
@@ -157,8 +157,8 @@
         >The <see cref="T:System.Web.UI.WebControls.GridView" /> control stores all of its data rows in the <see cref="P:System.Web.UI.WebControls.GridView.Rows" /> collection. To determine the index of a <see cref="T:System.Web.UI.WebControls.GridViewRow" /> object in the <see cref="P:System.Web.UI.WebControls.GridView.Rows" /> collection, use the <see cref="P:System.Web.UI.WebControls.GridViewRow.RowIndex" /> property.</para
       >
       <para
-        >You can access the properties of the underlying data object that is bound to the <see cref="T:System.Web.UI.WebControls.GridViewRow" /> object by using the <see cref="P:System.Web.UI.WebControls.GridViewRow.DataItem" /> property. </para
-      >
+        >You can access the properties of the underlying data object that is bound to the <see cref="T:System.Web.UI.WebControls.GridViewRow" /> object by using the <see cref="P:System.Web.UI.WebControls.GridViewRow.DataItem" /> property.
+      </para>
       <block subset="none" type="note">
         <para
           >The <see cref="P:System.Web.UI.WebControls.GridViewRow.DataItem" /> property is available only during and after the <see cref="E:System.Web.UI.WebControls.GridView.RowDataBound" /> event of a <see cref="T:System.Web.UI.WebControls.GridView" /> control.</para

@@ -29,8 +29,8 @@
         >The <see cref="T:System.Net.Sockets.TcpClient" /> class provides simple methods for connecting, sending, and receiving stream data over a network in synchronous blocking mode.</para
       >
       <para
-        >In order for <see cref="T:System.Net.Sockets.TcpClient" /> to connect and exchange data, a <see cref="T:System.Net.Sockets.TcpListener" /> or <see cref="T:System.Net.Sockets.Socket" /> created with the TCP <see cref="T:System.Net.Sockets.ProtocolType" /> must be listening for incoming connection requests. You can connect to this listener in one of the following two ways: </para
-      >
+        >In order for <see cref="T:System.Net.Sockets.TcpClient" /> to connect and exchange data, a <see cref="T:System.Net.Sockets.TcpListener" /> or <see cref="T:System.Net.Sockets.Socket" /> created with the TCP <see cref="T:System.Net.Sockets.ProtocolType" /> must be listening for incoming connection requests. You can connect to this listener in one of the following two ways:
+      </para>
       <list type="bullet">
         <item>
           <para
@@ -142,8 +142,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Net.IPEndPoint" /> to which you bind the TCP <see cref="T:System.Net.Sockets.Socket" />. </param
-        >
+          />The <see cref="T:System.Net.IPEndPoint" /> to which you bind the TCP <see cref="T:System.Net.Sockets.Socket" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -188,8 +188,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="P:System.Net.IPAddress.AddressFamily" /> of the IP protocol. </param
-        >
+          />The <see cref="P:System.Net.IPAddress.AddressFamily" /> of the IP protocol.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -244,15 +244,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The DNS name of the remote host to which you intend to connect. </param
-        >
+          />The DNS name of the remote host to which you intend to connect.
+        </param>
         <param name="port">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The port number of the remote host to which you intend to connect. </param
-        >
+          />The port number of the remote host to which you intend to connect.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Active">
@@ -382,8 +382,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.AsyncCallback" /> delegate that references the method to invoke when the operation is complete. </param
-        >
+          />An <see cref="T:System.AsyncCallback" /> delegate that references the method to invoke when the operation is complete.
+        </param>
         <param name="state">
           <attribution
             license="cc4"
@@ -608,8 +608,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Net.Sockets.TcpClient.Close" /> method marks the instance as disposed and requests that the associated <see cref="T:System.Net.Sockets.Socket" /> close the TCP connection. Based on the <see cref="P:System.Net.Sockets.TcpClient.LingerState" /> property, the TCP connection may stay open for some time after the <see cref="M:System.Net.Sockets.TcpClient.Close" /> method is called when data remains to be sent. There is no notification provided when the underlying connection has completed closing. </para
-          >
+            >The <see cref="M:System.Net.Sockets.TcpClient.Close" /> method marks the instance as disposed and requests that the associated <see cref="T:System.Net.Sockets.Socket" /> close the TCP connection. Based on the <see cref="P:System.Net.Sockets.TcpClient.LingerState" /> property, the TCP connection may stay open for some time after the <see cref="M:System.Net.Sockets.TcpClient.Close" /> method is called when data remains to be sent. There is no notification provided when the underlying connection has completed closing.
+          </para>
           <para
             >Calling this method will eventually result in the close of the associated <see cref="T:System.Net.Sockets.Socket" /> and will also close the associated <see cref="T:System.Net.Sockets.NetworkStream" /> that is used to send and receive data if one was created.</para
           >
@@ -682,8 +682,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Net.IPEndPoint" /> to which you intend to connect. </param
-        >
+          />The <see cref="T:System.Net.IPEndPoint" /> to which you intend to connect.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Connect">
@@ -738,15 +738,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Net.IPAddress" /> of the host to which you intend to connect. </param
-        >
+          />The <see cref="T:System.Net.IPAddress" /> of the host to which you intend to connect.
+        </param>
         <param name="port">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The port number to which you intend to connect. </param
-        >
+          />The port number to which you intend to connect.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Connect">
@@ -866,15 +866,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The DNS name of the remote host to which you intend to connect. </param
-        >
+          />The DNS name of the remote host to which you intend to connect.
+        </param>
         <param name="port">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The port number of the remote host to which you intend to connect. </param
-        >
+          />The port number of the remote host to which you intend to connect.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ConnectAsync">
@@ -935,15 +935,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Net.IPAddress" /> of the host to which you intend to connect. </param
-        >
+          />The <see cref="T:System.Net.IPAddress" /> of the host to which you intend to connect.
+        </param>
         <param name="port">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The port number to which you intend to connect. </param
-        >
+          />The port number to which you intend to connect.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ConnectAsync">
@@ -1079,15 +1079,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The DNS name of the remote host to which you intend to connect. </param
-        >
+          />The DNS name of the remote host to which you intend to connect.
+        </param>
         <param name="port">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The port number of the remote host to which you intend to connect. </param
-        >
+          />The port number of the remote host to which you intend to connect.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Connected">
@@ -1168,8 +1168,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Set to true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />Set to true to release both managed and unmanaged resources; false to release only unmanaged resources.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="EndConnect">
@@ -1236,8 +1236,8 @@
             >By default, multiple clients can use a specific port; however, only one of the clients can perform operations on the network traffic sent to the port. You can use the <see cref="P:System.Net.Sockets.TcpClient.ExclusiveAddressUse" /> property to prevent multiple clients from using a specific port.</para
           >
           <para
-            >This property must be set before the underlying socket is bound to a client port. If you call <see cref="Overload:System.Net.Sockets.TcpClient.Connect" />, <see cref="Overload:System.Net.Sockets.TcpClient.BeginConnect" />, <see cref="M:System.Net.Sockets.TcpClient.#ctor(System.Net.IPEndPoint)" />, or <see cref="M:System.Net.Sockets.TcpClient.#ctor(System.String,System.Int32)" />, the client port is bound as a side effect of the method, and you cannot subsequently set the <see cref="P:System.Net.Sockets.TcpClient.ExclusiveAddressUse" /> property </para
-          >
+            >This property must be set before the underlying socket is bound to a client port. If you call <see cref="Overload:System.Net.Sockets.TcpClient.Connect" />, <see cref="Overload:System.Net.Sockets.TcpClient.BeginConnect" />, <see cref="M:System.Net.Sockets.TcpClient.#ctor(System.Net.IPEndPoint)" />, or <see cref="M:System.Net.Sockets.TcpClient.#ctor(System.String,System.Int32)" />, the client port is bound as a side effect of the method, and you cannot subsequently set the <see cref="P:System.Net.Sockets.TcpClient.ExclusiveAddressUse" /> property
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1380,11 +1380,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Net.Sockets.TcpClient.LingerState" /> property changes the way <see cref="M:System.Net.Sockets.Socket.Close" /> method behaves. This property when set modifies the conditions under which the connection can be reset by Winsock. Connection resets can still occur based on the IP protocol behavior. </para
-          >
+            >The <see cref="P:System.Net.Sockets.TcpClient.LingerState" /> property changes the way <see cref="M:System.Net.Sockets.Socket.Close" /> method behaves. This property when set modifies the conditions under which the connection can be reset by Winsock. Connection resets can still occur based on the IP protocol behavior.
+          </para>
           <para
-            >This property controls the length of time that the TCP connection will remain open after a call to <see cref="M:System.Net.Sockets.TcpClient.Close" /> when data remains to be sent. When you call the <see cref="M:System.Net.Sockets.NetworkStream.Write(System.Byte[],System.Int32,System.Int32)" /> method, data is placed in the outgoing network buffer. This property can be used to ensure that this data is sent to the remote host before the <see cref="M:System.Net.Sockets.TcpClient.Close" /> method drops the connection. </para
-          >
+            >This property controls the length of time that the TCP connection will remain open after a call to <see cref="M:System.Net.Sockets.TcpClient.Close" /> when data remains to be sent. When you call the <see cref="M:System.Net.Sockets.NetworkStream.Write(System.Byte[],System.Int32,System.Int32)" /> method, data is placed in the outgoing network buffer. This property can be used to ensure that this data is sent to the remote host before the <see cref="M:System.Net.Sockets.TcpClient.Close" /> method drops the connection.
+          </para>
           <para
             >To enable lingering, create a <see cref="T:System.Net.Sockets.LingerOption" /> instance containing the desired values, and set the <see cref="P:System.Net.Sockets.TcpClient.LingerState" /> property to this instance.</para
           >
@@ -1443,8 +1443,8 @@
             >The IP stack computes the default IP protocol time-out period to use based on the round trip time of the connection. In most cases, the time-out computed by the stack is more relevant than one defined by an application. This is the default behavior for a socket when the <see cref="P:System.Net.Sockets.TcpClient.LingerState" /> property is not set.</para
           >
           <para
-            >When the <see cref="P:System.Net.Sockets.LingerOption.LingerTime" /> property stored in the <see cref="P:System.Net.Sockets.TcpClient.LingerState" /> property is set greater than the default IP protocol time-out, the default IP protocol time-out will still apply and override. </para
-          >
+            >When the <see cref="P:System.Net.Sockets.LingerOption.LingerTime" /> property stored in the <see cref="P:System.Net.Sockets.TcpClient.LingerState" /> property is set greater than the default IP protocol time-out, the default IP protocol time-out will still apply and override.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1634,8 +1634,8 @@
               <a href="EB4E1AF0-3B48-4FBC-AD4E-FC2F64138BF9"
                 >[&lt;topic://cpconImplementingDisposeMethod&gt;]</a
               >
-            </format>. </para
-          >
+            </format>.
+          </para>
           <para
             >Note: Always call <see cref="M:System.Net.Sockets.TcpClient.System#IDisposable#Dispose" /> before you release your last reference to the <see cref="T:System.Net.Sockets.TcpClient" />. Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Net.Sockets.TcpClient" /> object's Finalize method.</para
           >
@@ -1643,8 +1643,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the <see cref="T:System.Net.Sockets.TcpClient" />. </para
-          >
+            >Releases all resources used by the <see cref="T:System.Net.Sockets.TcpClient" />.
+          </para>
         </summary>
       </Docs>
     </Member>

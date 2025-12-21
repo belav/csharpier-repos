@@ -69,8 +69,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The named permission set from which to create the new instance. </param
-        >
+          />The named permission set from which to create the new instance.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -107,8 +107,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name for the new named permission set. </param
-        >
+          />The name for the new named permission set.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -149,15 +149,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name for the new named permission set. </param
-        >
+          />The name for the new named permission set.
+        </param>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Security.Permissions.PermissionState" /> values. </param
-        >
+          />One of the <see cref="T:System.Security.Permissions.PermissionState" /> values.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -193,15 +193,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name for the named permission set. </param
-        >
+          />The name for the named permission set.
+        </param>
         <param name="permSet">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The permission set from which to take the value of the new named permission set. </param
-        >
+          />The permission set from which to take the value of the new named permission set.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Copy">
@@ -271,8 +271,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name for the new named permission set. </param
-        >
+          />The name for the new named permission set.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Description">
@@ -346,8 +346,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.NamedPermissionSet" /> object to compare with the current <see cref="T:System.Security.NamedPermissionSet" />. </param
-        >
+          />The <see cref="T:System.Security.NamedPermissionSet" /> object to compare with the current <see cref="T:System.Security.NamedPermissionSet" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="FromXml">
@@ -387,8 +387,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A security element containing the XML representation of the named permission set. </param
-        >
+          />A security element containing the XML representation of the named permission set.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">

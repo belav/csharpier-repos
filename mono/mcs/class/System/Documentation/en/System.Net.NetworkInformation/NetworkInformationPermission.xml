@@ -336,8 +336,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Security.IPermission" /> to intersect with the current permission. It must be of the same type as the current permission. </param
-        >
+          />An <see cref="T:System.Security.IPermission" /> to intersect with the current permission. It must be of the same type as the current permission.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsSubsetOf">
@@ -513,8 +513,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Net.NetworkInformation.NetworkInformationPermission" />  permission to combine with the current permission. </param
-        >
+          />A <see cref="T:System.Net.NetworkInformation.NetworkInformationPermission" />  permission to combine with the current permission.
+        </param>
       </Docs>
     </Member>
   </Members>

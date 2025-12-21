@@ -32,8 +32,8 @@
         >The <see cref="T:System.Windows.Forms.DataGridViewRowCollection" /> contains the <see cref="T:System.Windows.Forms.DataGridViewRow" /> objects in a <see cref="T:System.Windows.Forms.DataGridView" /> control. You can retrieve an instance of this class through the control <see cref="P:System.Windows.Forms.DataGridView.Rows" /> property. The collection maintains a reference to the control through the <see cref="P:System.Windows.Forms.DataGridViewRowCollection.DataGridView" /> property.</para
       >
       <para
-        >To improve performance, a <see cref="T:System.Windows.Forms.DataGridViewRowCollection" /> includes shared and unshared rows. Shared rows share memory to reduce the cost of a large record set. If your record set is very large, you should be careful to keep the rows shared as much as possible. </para
-      >
+        >To improve performance, a <see cref="T:System.Windows.Forms.DataGridViewRowCollection" /> includes shared and unshared rows. Shared rows share memory to reduce the cost of a large record set. If your record set is very large, you should be careful to keep the rows shared as much as possible.
+      </para>
       <para
         >For more information, see <format type="text/html">
           <a href="8321a8a6-6340-4fd1-b475-fa090b905aaf"
@@ -63,8 +63,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridViewRowCollection" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridViewRowCollection" /> class.
+          </para>
         </summary>
         <param name="dataGridView">
           <attribution
@@ -404,8 +404,8 @@
           >
           <block subset="none" type="note">
             <para
-              >Due to a bug, the <see cref="M:System.Windows.Forms.DataGridViewRowCollection.AddRange(System.Windows.Forms.DataGridViewRow[])" /> method will make your application stop responding if the <see cref="P:System.Windows.Forms.DataGridView.AllowUserToAddRows" /> property is true and the row for new records is selected. To work around this bug, you must cancel the selection of the row before calling this method, and then reselect the row. For more information, see the code example in this topic. </para
-            >
+              >Due to a bug, the <see cref="M:System.Windows.Forms.DataGridViewRowCollection.AddRange(System.Windows.Forms.DataGridViewRow[])" /> method will make your application stop responding if the <see cref="P:System.Windows.Forms.DataGridView.AllowUserToAddRows" /> property is true and the row for new records is selected. To work around this bug, you must cancel the selection of the row before calling this method, and then reselect the row. For more information, see the code example in this topic.
+            </para>
           </block>
         </remarks>
         <summary>
@@ -468,8 +468,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1403,8 +1403,8 @@
           >
           <block subset="none" type="note">
             <para
-              >Due to a bug, the <see cref="M:System.Windows.Forms.DataGridViewRowCollection.InsertRange(System.Int32,System.Windows.Forms.DataGridViewRow[])" /> method will make your application stop responding if any rows with an index greater than <paramref name="rowIndex" /> are selected. To work around this bug, you must cancel the selection of these rows before calling this method, and reselect the rows afterward. For more information, see the code example in this topic. </para
-            >
+              >Due to a bug, the <see cref="M:System.Windows.Forms.DataGridViewRowCollection.InsertRange(System.Int32,System.Windows.Forms.DataGridViewRow[])" /> method will make your application stop responding if any rows with an index greater than <paramref name="rowIndex" /> are selected. To work around this bug, you must cancel the selection of these rows before calling this method, and reselect the rows afterward. For more information, see the code example in this topic.
+            </para>
           </block>
         </remarks>
         <summary>
@@ -1519,8 +1519,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.ComponentModel.CollectionChangeEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.ComponentModel.CollectionChangeEventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Remove">
@@ -1657,15 +1657,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The one-dimensional <see cref="T:System.Array" /> that is the destination of the elements copied from the <see cref="T:System.Windows.Forms.DataGridViewRowCollection" />. The <see cref="T:System.Array" /> must have zero-based indexing. </param
-        >
+          />The one-dimensional <see cref="T:System.Array" /> that is the destination of the elements copied from the <see cref="T:System.Windows.Forms.DataGridViewRowCollection" />. The <see cref="T:System.Array" /> must have zero-based indexing.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index in <paramref name="array" /> at which copying begins. </param
-        >
+          />The zero-based index in <paramref name="array" /> at which copying begins.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.ICollection.Count">
@@ -1794,8 +1794,8 @@
             >This method is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.DataGridViewRowCollection" /> instance is cast to an <see cref="T:System.Collections.IList" /> interface.</para
           >
           <para
-            >This method calls the <see cref="M:System.Windows.Forms.DataGridViewRowCollection.Add(System.Windows.Forms.DataGridViewRow)" /> overload, passing in <paramref name="value" /> after casting it to a <see cref="T:System.Windows.Forms.DataGridViewRow" />. </para
-          >
+            >This method calls the <see cref="M:System.Windows.Forms.DataGridViewRowCollection.Add(System.Windows.Forms.DataGridViewRow)" /> overload, passing in <paramref name="value" /> after casting it to a <see cref="T:System.Windows.Forms.DataGridViewRow" />.
+          </para>
           <para
             >Rows in the control are not automatically sorted when new rows are added. To sort new rows into their correct position, call the <see cref="Overload:System.Windows.Forms.DataGridView.Sort" /> method in a <see cref="E:System.Windows.Forms.DataGridView.RowsAdded" /> event handler. You might also want to call the <see cref="Overload:System.Windows.Forms.DataGridView.Sort" /> method in a <see cref="E:System.Windows.Forms.DataGridView.CellValueChanged" /> event handler to sort the rows when the user modifies a cell.</para
           >

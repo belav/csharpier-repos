@@ -96,8 +96,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A value that controls how the changes for the stream object are committed. </param
-        >
+          />A value that controls how the changes for the stream object are committed.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CopyTo">
@@ -138,29 +138,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A reference to the destination stream. </param
-        >
+          />A reference to the destination stream.
+        </param>
         <param name="cb">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes to copy from the source stream. </param
-        >
+          />The number of bytes to copy from the source stream.
+        </param>
         <param name="pcbRead">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />On successful return, contains the actual number of bytes read from the source. </param
-        >
+          />On successful return, contains the actual number of bytes read from the source.
+        </param>
         <param name="pcbWritten">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />On successful return, contains the actual number of bytes written to the destination. </param
-        >
+          />On successful return, contains the actual number of bytes written to the destination.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="LockRegion">
@@ -200,22 +200,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte offset for the beginning of the range. </param
-        >
+          />The byte offset for the beginning of the range.
+        </param>
         <param name="cb">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The length of the range, in bytes, to restrict. </param
-        >
+          />The length of the range, in bytes, to restrict.
+        </param>
         <param name="dwLockType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The requested restrictions on accessing the range. </param
-        >
+          />The requested restrictions on accessing the range.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Read">
@@ -262,15 +262,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes to read from the stream object. </param
-        >
+          />The number of bytes to read from the stream object.
+        </param>
         <param name="pcbRead">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A pointer to a ULONG variable that receives the actual number of bytes read from the stream object. </param
-        >
+          />A pointer to a ULONG variable that receives the actual number of bytes read from the stream object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Revert">
@@ -339,22 +339,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The displacement to add to <paramref name="dwOrigin" />. </param
-        >
+          />The displacement to add to <paramref name="dwOrigin" />.
+        </param>
         <param name="dwOrigin">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The origin of the seek. The origin can be the beginning of the file, the current seek pointer, or the end of the file. </param
-        >
+          />The origin of the seek. The origin can be the beginning of the file, the current seek pointer, or the end of the file.
+        </param>
         <param name="plibNewPosition">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />On successful return, contains the offset of the seek pointer from the beginning of the stream. </param
-        >
+          />On successful return, contains the offset of the seek pointer from the beginning of the stream.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetSize">
@@ -389,8 +389,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new size of the stream as a number of bytes. </param
-        >
+          />The new size of the stream as a number of bytes.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Stat">
@@ -465,22 +465,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte offset for the beginning of the range. </param
-        >
+          />The byte offset for the beginning of the range.
+        </param>
         <param name="cb">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The length, in bytes, of the range to restrict. </param
-        >
+          />The length, in bytes, of the range to restrict.
+        </param>
         <param name="dwLockType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The access restrictions previously placed on the range. </param
-        >
+          />The access restrictions previously placed on the range.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -520,22 +520,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The buffer to write this stream to. </param
-        >
+          />The buffer to write this stream to.
+        </param>
         <param name="cb">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes to write to the stream. </param
-        >
+          />The number of bytes to write to the stream.
+        </param>
         <param name="pcbWritten">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />On successful return, contains the actual number of bytes written to the stream object. If the caller sets this pointer to <see cref="F:System.IntPtr.Zero" />, this method does not provide the actual number of bytes written. </param
-        >
+          />On successful return, contains the actual number of bytes written to the stream object. If the caller sets this pointer to <see cref="F:System.IntPtr.Zero" />, this method does not provide the actual number of bytes written.
+        </param>
       </Docs>
     </Member>
   </Members>

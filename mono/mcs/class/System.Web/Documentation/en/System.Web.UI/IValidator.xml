@@ -25,8 +25,8 @@
           <a href="f3ece2ad-2e88-40df-bb8b-3fe53ecf21ab"
             >How to: Validate with a Custom Function for ASP.NET Server Controls</a
           >
-        </format>. </para
-      >
+        </format>.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -48,8 +48,8 @@
           <para
             >ASP.NET developers access this property declaratively in the opening tag of a validation server control. For more information, see <format type="text/html">
               <a href="96d2c59e-693c-4079-9b53-b3ff0d9e9133">Validation Server Controls</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

@@ -45,8 +45,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the abstract class from which all implementations of the <see cref="T:System.Security.Cryptography.MD5" /> hash algorithm inherit. </para
-      >
+        >Represents the abstract class from which all implementations of the <see cref="T:System.Security.Cryptography.MD5" /> hash algorithm inherit.
+      </para>
     </summary>
   </Docs>
   <Members>
@@ -159,8 +159,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the specific implementation of <see cref="T:System.Security.Cryptography.MD5" /> to use. </param
-        >
+          />The name of the specific implementation of <see cref="T:System.Security.Cryptography.MD5" /> to use.
+        </param>
       </Docs>
     </Member>
   </Members>

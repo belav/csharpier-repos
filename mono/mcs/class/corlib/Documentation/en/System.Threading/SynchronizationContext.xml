@@ -19,8 +19,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Threading.SynchronizationContext" /> class is a base class that provides a free-threaded context with no synchronization. </para
-      >
+        >The <see cref="T:System.Threading.SynchronizationContext" /> class is a base class that provides a free-threaded context with no synchronization.
+      </para>
       <para>The purpose of the synchronization model implemented by this class is to allow the internal asynchronous/synchronous operations of the common language runtime to behave properly with different synchronization models. This model also simplifies some of the requirements that managed applications have had to follow in order to work correctly under different synchronization environments.</para>
       <para>Providers of synchronization models can extend this class and provide their own implementations for these methods. </para>
       <para
@@ -85,8 +85,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default implementation returns an empty <see cref="T:System.Threading.SynchronizationContext" /> object.  </para
-          >
+            >The default implementation returns an empty <see cref="T:System.Threading.SynchronizationContext" /> object.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -236,8 +236,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Threading.SynchronizationContext.Post(System.Threading.SendOrPostCallback,System.Object)" /> method starts an asynchronous request to post a message. </para
-          >
+            >The <see cref="M:System.Threading.SynchronizationContext.Post(System.Threading.SendOrPostCallback,System.Object)" /> method starts an asynchronous request to post a message.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -304,8 +304,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object passed to the delegate. </param
-        >
+          />The object passed to the delegate.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetSynchronizationContext">
@@ -426,8 +426,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to wait for all handles; false to wait for any handle. </param
-        >
+          />true to wait for all handles; false to wait for any handle.
+        </param>
         <param name="millisecondsTimeout">
           <attribution
             license="cc4"
@@ -498,8 +498,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to wait for all handles;  false to wait for any handle. </param
-        >
+          />true to wait for all handles;  false to wait for any handle.
+        </param>
         <param name="millisecondsTimeout">
           <attribution
             license="cc4"

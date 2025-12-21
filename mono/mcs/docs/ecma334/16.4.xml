@@ -30,6 +30,6 @@
   <paragraph
     >A compilation unit or a namespace body can contain <non_terminal where="16.4"
       >namespace-member-declaration</non_terminal
-    >s, and such declarations contribute new members to the underlying declaration space of the containing compilation unit or namespace body. </paragraph
-  >
+    >s, and such declarations contribute new members to the underlying declaration space of the containing compilation unit or namespace body.
+  </paragraph>
 </clause>

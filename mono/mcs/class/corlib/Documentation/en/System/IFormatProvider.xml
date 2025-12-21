@@ -29,17 +29,17 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.IFormatProvider" /> interface supplies an object that provides formatting information for formatting and parsing operations. Formatting operations convert the value of a type to the string representation of that value. Typical formatting methods are the ToString methods of a type, as well as <see cref="M:System.String.Format(System.String,System.Object)" />. Parsing operations convert the string representation of a value to a type with that value. Typical parsing methods are Parse and TryParse. </para
-      >
+        >The <see cref="T:System.IFormatProvider" /> interface supplies an object that provides formatting information for formatting and parsing operations. Formatting operations convert the value of a type to the string representation of that value. Typical formatting methods are the ToString methods of a type, as well as <see cref="M:System.String.Format(System.String,System.Object)" />. Parsing operations convert the string representation of a value to a type with that value. Typical parsing methods are Parse and TryParse.
+      </para>
       <para
-        >The <see cref="T:System.IFormatProvider" /> interface consists of a single method, <see cref="M:System.IFormatProvider.GetFormat(System.Type)" />. <see cref="M:System.IFormatProvider.GetFormat(System.Type)" /> is a callback method: The parsing or formatting method calls it and passes it a <see cref="T:System.Type" /> object that represents the type of object that the formatting or parsing method expects will provide formatting information. The <see cref="M:System.IFormatProvider.GetFormat(System.Type)" /> method is responsible for returning an object of that type. </para
-      >
+        >The <see cref="T:System.IFormatProvider" /> interface consists of a single method, <see cref="M:System.IFormatProvider.GetFormat(System.Type)" />. <see cref="M:System.IFormatProvider.GetFormat(System.Type)" /> is a callback method: The parsing or formatting method calls it and passes it a <see cref="T:System.Type" /> object that represents the type of object that the formatting or parsing method expects will provide formatting information. The <see cref="M:System.IFormatProvider.GetFormat(System.Type)" /> method is responsible for returning an object of that type.
+      </para>
       <para>
         <see cref="T:System.IFormatProvider" /> implementations are often used implicitly by formatting and parsing methods. For example, the <see cref="M:System.DateTime.ToString(System.String)" /> method implicitly uses an <see cref="T:System.IFormatProvider" /> implementation that represents the system's current culture. <see cref="T:System.IFormatProvider" /> implementations can also be specified explicitly by methods that have a parameter of type <see cref="T:System.IFormatProvider" />, such as <see cref="M:System.Int32.Parse(System.String,System.IFormatProvider)" /> and <see cref="M:System.String.Format(System.IFormatProvider,System.String,System.Object[])" />.</para
       >
       <para
-        >The .NET Framework includes the following three predefined <see cref="T:System.IFormatProvider" /> implementations to provide culture-specific information that is used in formatting or parsing numeric and date and time values: </para
-      >
+        >The .NET Framework includes the following three predefined <see cref="T:System.IFormatProvider" /> implementations to provide culture-specific information that is used in formatting or parsing numeric and date and time values:
+      </para>
       <list type="bullet">
         <item>
           <para
@@ -47,8 +47,8 @@
               <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">Standard Numeric Format Strings</a>
             </format> and <format type="text/html">
               <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </item>
         <item>
           <para
@@ -127,8 +127,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that specifies the type of format object to return. </param
-        >
+          />An object that specifies the type of format object to return.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

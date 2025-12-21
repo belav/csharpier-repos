@@ -38,8 +38,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A formatter that serializes a <see cref="T:System.ServiceModel.Syndication.ServiceDocument" /> instance to and from XML using Atom 1.0 formats. </para
-      >
+        >A formatter that serializes a <see cref="T:System.ServiceModel.Syndication.ServiceDocument" /> instance to and from XML using Atom 1.0 formats.
+      </para>
     </summary>
   </Docs>
   <Members>
@@ -59,8 +59,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the Atom 1.0-based <see cref="T:System.ServiceModel.Syndication.ServiceDocumentFormatter" /> class. </para
-          >
+            >Creates a new instance of the Atom 1.0-based <see cref="T:System.ServiceModel.Syndication.ServiceDocumentFormatter" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -128,8 +128,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the Atom 1.0-based <see cref="T:System.ServiceModel.Syndication.ServiceDocumentFormatter" /> class. </para
-          >
+            >Creates a new instance of the Atom 1.0-based <see cref="T:System.ServiceModel.Syndication.ServiceDocumentFormatter" /> class.
+          </para>
         </summary>
         <param name="documentTypeToCreate">
           <attribution
@@ -205,8 +205,8 @@ true if the XML reader does contain a valid service document; otherwise false.
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
 Returns an instance of a <see cref="T:System.ServiceModel.Syndication.ServiceDocument" />.
-</para
-          >
+
+          </para>
         </returns>
       </Docs>
     </Member>

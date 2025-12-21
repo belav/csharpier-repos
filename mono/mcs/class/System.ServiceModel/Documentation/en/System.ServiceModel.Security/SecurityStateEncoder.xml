@@ -27,8 +27,8 @@
         >Microsoft’s version of <see cref="T:System.ServiceModel.Security.SecurityStateEncoder" /> is <see cref="T:System.ServiceModel.Security.DataProtectionSecurityStateEncoder" />. It uses Microsoft’s <see
           cref="http://go.microsoft.com/fwlink/?LinkId=96704"
           >Windows Data Protection (DPAPI)</see
-        > technology to encrypt/decrypt the cookie. You can plug in a different mechanism for encrypting and decrypting cookies by implementing this class. </para
-      >
+        > technology to encrypt/decrypt the cookie. You can plug in a different mechanism for encrypting and decrypting cookies by implementing this class.
+      </para>
       <para>The encoding of the security state must ensure that the state is signed and encrypted for the service. </para>
       <para>This class is used by the server when sending the security state as a cookie in the SecurityContextToken issued to the client.</para>
       <para>An example implementation of this class is an X509CertificateSecurityStateEncoder that uses the service's certificate to sign and encrypt the security state.</para>
@@ -55,8 +55,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.SecurityStateEncoder" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.SecurityStateEncoder" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>

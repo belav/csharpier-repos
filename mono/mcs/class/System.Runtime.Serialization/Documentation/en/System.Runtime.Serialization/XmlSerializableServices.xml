@@ -20,8 +20,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Using indigo1, you can generate CLR types representing data contracts from XML schemas. In certain cases when doing so, the schemas may not all be represented as data contracts. In this case, you can use the <see cref="P:System.Runtime.Serialization.ImportOptions.ImportXmlType" /> property of the <see cref="T:System.Runtime.Serialization.ImportOptions" /> class.  Setting the property to true specifies that these types are imported as XML types that implement the <see cref="T:System.Xml.Serialization.IXmlSerializable" /> interface. In the process, the generated types can store anything, but they are read and written as XML by the serializer. </para
-      >
+        >Using indigo1, you can generate CLR types representing data contracts from XML schemas. In certain cases when doing so, the schemas may not all be represented as data contracts. In this case, you can use the <see cref="P:System.Runtime.Serialization.ImportOptions.ImportXmlType" /> property of the <see cref="T:System.Runtime.Serialization.ImportOptions" /> class.  Setting the property to true specifies that these types are imported as XML types that implement the <see cref="T:System.Xml.Serialization.IXmlSerializable" /> interface. In the process, the generated types can store anything, but they are read and written as XML by the serializer.
+      </para>
       <para
         >The <see cref="T:System.Runtime.Serialization.XmlSerializableServices" /> is an abstract helper class that contains code that is used by the generated <see cref="T:System.Xml.Serialization.IXmlSerializable" /> types to read and write XML. It also contains code for generating schema for the generated types. Note that details about the schemas are not stored. Only the name is stored in the generated type. This class generates a default schema that represents the XML schema type anyType with the appropriate schema type name as the contract name.</para
       >
@@ -73,8 +73,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlQualifiedName" /> that specifies the type name to assign the schema to. </param
-        >
+          />An <see cref="T:System.Xml.XmlQualifiedName" /> that specifies the type name to assign the schema to.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ReadNodes">

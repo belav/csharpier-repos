@@ -156,8 +156,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new <see cref="T:System.ServiceModel.Security.MessagePartSpecification" /> with an array of message headers.  </para
-          >
+            >Initializes a new <see cref="T:System.ServiceModel.Security.MessagePartSpecification" /> with an array of message headers.
+          </para>
         </summary>
         <param name="isBodyIncluded">
           <attribution

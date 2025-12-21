@@ -26,14 +26,14 @@
         >The <see cref="Overload:System.Convert.ToBase64CharArray" /> and <see cref="Overload:System.Convert.ToBase64String" /> methods convert the value of an array of 8-bit unsigned integers to an equivalent string representation that consists of base 64 digits. The string representation can contain one or more line breaks, where a line break is defined as a carriage return character (U+000D) followed by a line feed character (U+000A).</para
       >
       <para
-        >The <see cref="F:System.Base64FormattingOptions.None" /> and <see cref="F:System.Base64FormattingOptions.InsertLineBreaks" /> values are mutually exclusive. Therefore, although the <see cref="T:System.Base64FormattingOptions" /> enumeration is marked with the <see cref="T:System.FlagsAttribute" /> attribute, it makes no sense to perform a bitwise combination of these two values. </para
-      >
+        >The <see cref="F:System.Base64FormattingOptions.None" /> and <see cref="F:System.Base64FormattingOptions.InsertLineBreaks" /> values are mutually exclusive. Therefore, although the <see cref="T:System.Base64FormattingOptions" /> enumeration is marked with the <see cref="T:System.FlagsAttribute" /> attribute, it makes no sense to perform a bitwise combination of these two values.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies whether relevant <see cref="Overload:System.Convert.ToBase64CharArray" /> and <see cref="Overload:System.Convert.ToBase64String" /> methods insert line breaks in their output. </para
-      >
+        >Specifies whether relevant <see cref="Overload:System.Convert.ToBase64CharArray" /> and <see cref="Overload:System.Convert.ToBase64String" /> methods insert line breaks in their output.
+      </para>
     </summary>
   </Docs>
   <Members>

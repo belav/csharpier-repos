@@ -51,8 +51,8 @@ False
   </paragraph>
   <paragraph>
     <example
-      >The s and t variables refer to two distinct string instances containing the same characters. The first comparison outputs True because the predefined string equality operator (<hyperlink>14.9.7</hyperlink>) is selected when both operands are of type string. The remaining comparisons all output False because the predefined reference type equality operator is selected when one or both of the operands are of type object. </example
-    >
+      >The s and t variables refer to two distinct string instances containing the same characters. The first comparison outputs True because the predefined string equality operator (<hyperlink>14.9.7</hyperlink>) is selected when both operands are of type string. The remaining comparisons all output False because the predefined reference type equality operator is selected when one or both of the operands are of type object.
+    </example>
   </paragraph>
   <paragraph>
     <example

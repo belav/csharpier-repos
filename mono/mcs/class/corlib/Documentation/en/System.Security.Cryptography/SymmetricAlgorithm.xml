@@ -40,8 +40,8 @@
         <see cref="T:System.Security.Cryptography.RijndaelManaged" />, <see cref="T:System.Security.Cryptography.DESCryptoServiceProvider" />, <see cref="T:System.Security.Cryptography.RC2CryptoServiceProvider" />, and <see cref="T:System.Security.Cryptography.TripleDESCryptoServiceProvider" /> are implementations of symmetric algorithms.</para
       >
       <para
-        >Note that when using derived classes, it is not enough, from a security perspective, to simply force a garbage collection after you have finished using the object. You must explicitly call the <see cref="M:System.Security.Cryptography.SymmetricAlgorithm.Clear" /> method on the object to zero out any sensitive data within the object before it is released. Note that garbage collection does not zero out the contents of collected objects but simply marks the memory as available for reallocation. Thus the data contained within a garbage collected object may still be present in the memory heap in unallocated memory. In the case of cryptographic objects, this data could contain sensitive information such as key data or a block of plain text. </para
-      >
+        >Note that when using derived classes, it is not enough, from a security perspective, to simply force a garbage collection after you have finished using the object. You must explicitly call the <see cref="M:System.Security.Cryptography.SymmetricAlgorithm.Clear" /> method on the object to zero out any sensitive data within the object before it is released. Note that garbage collection does not zero out the contents of collected objects but simply marks the memory as available for reallocation. Thus the data contained within a garbage collected object may still be present in the memory heap in unallocated memory. In the case of cryptographic objects, this data could contain sensitive information such as key data or a block of plain text.
+      </para>
       <para
         >All cryptographic classes in the .NET Framework that hold sensitive data implement a Clear method. When called, the Clear method overwrites all sensitive data within the object with zeros and then releases the object so that it can be safely garbage collected. When the object has been zeroed and released, you should then call the Dispose method with the <paramref name="disposing" /> parameter set to True to dispose of all managed and unmanaged resources associated with the object.</para
       >
@@ -150,8 +150,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Note that when using derived classes, it is not enough, from a security perspective, to simply force a garbage collection after you have finished using the object. You must explicitly call the <see cref="M:System.Security.Cryptography.SymmetricAlgorithm.Clear" /> method on the object to zero out any sensitive data within the object before it is released. Note that garbage collection does not zero out the contents of collected objects but simply marks the memory as available for reallocation. Thus the data contained within a garbage collected object may still be present in the memory heap in unallocated memory. In the case of cryptographic objects, this data could contain sensitive information such as key data or a block of plain text. </para
-          >
+            >Note that when using derived classes, it is not enough, from a security perspective, to simply force a garbage collection after you have finished using the object. You must explicitly call the <see cref="M:System.Security.Cryptography.SymmetricAlgorithm.Clear" /> method on the object to zero out any sensitive data within the object before it is released. Note that garbage collection does not zero out the contents of collected objects but simply marks the memory as available for reallocation. Thus the data contained within a garbage collected object may still be present in the memory heap in unallocated memory. In the case of cryptographic objects, this data could contain sensitive information such as key data or a block of plain text.
+          </para>
           <para
             >All cryptographic classes in the .NET Framework that hold sensitive data implement a Clear method. When called, the Clear method overwrites all sensitive data within the object with zeros and then releases the object so that it can be safely garbage collected. When the object has been zeroed and released, you should then call the Dispose method with the <paramref name="disposing" /> parameter set to True to dispose of all managed and unmanaged resources associated with the object.</para
           >
@@ -231,8 +231,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the specific implementation of the <see cref="T:System.Security.Cryptography.SymmetricAlgorithm" /> class to use. </param
-        >
+          />The name of the specific implementation of the <see cref="T:System.Security.Cryptography.SymmetricAlgorithm" /> class to use.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateDecryptor">
@@ -317,15 +317,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The secret key to use for the symmetric algorithm. </param
-        >
+          />The secret key to use for the symmetric algorithm.
+        </param>
         <param name="rgbIV">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The initialization vector to use for the symmetric algorithm. </param
-        >
+          />The initialization vector to use for the symmetric algorithm.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateEncryptor">
@@ -413,15 +413,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The secret key to use for the symmetric algorithm. </param
-        >
+          />The secret key to use for the symmetric algorithm.
+        </param>
         <param name="rgbIV">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The initialization vector to use for the symmetric algorithm. </param
-        >
+          />The initialization vector to use for the symmetric algorithm.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Dispose">
@@ -504,8 +504,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="FeedbackSize">
@@ -632,8 +632,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, generates a random key (<see cref="P:System.Security.Cryptography.SymmetricAlgorithm.Key" />) to use for the algorithm. </para
-          >
+            >When overridden in a derived class, generates a random key (<see cref="P:System.Security.Cryptography.SymmetricAlgorithm.Key" />) to use for the algorithm.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -654,14 +654,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Security.Cryptography.SymmetricAlgorithm.IV" /> property is automatically set to a new random value whenever you create a new instance of one of the <see cref="T:System.Security.Cryptography.SymmetricAlgorithm" /> classes or when you manually call the <see cref="M:System.Security.Cryptography.SymmetricAlgorithm.GenerateIV" /> method.  The size of the <see cref="P:System.Security.Cryptography.SymmetricAlgorithm.IV" /> property must be the same as the <see cref="P:System.Security.Cryptography.SymmetricAlgorithm.BlockSize" /> property divided by 8. </para
-          >
+            >The <see cref="P:System.Security.Cryptography.SymmetricAlgorithm.IV" /> property is automatically set to a new random value whenever you create a new instance of one of the <see cref="T:System.Security.Cryptography.SymmetricAlgorithm" /> classes or when you manually call the <see cref="M:System.Security.Cryptography.SymmetricAlgorithm.GenerateIV" /> method.  The size of the <see cref="P:System.Security.Cryptography.SymmetricAlgorithm.IV" /> property must be the same as the <see cref="P:System.Security.Cryptography.SymmetricAlgorithm.BlockSize" /> property divided by 8.
+          </para>
           <para
-            >The classes that derive from the <see cref="T:System.Security.Cryptography.SymmetricAlgorithm" /> class use a chaining mode called cipher block chaining (CBC), which requires a key and an initialization vector to perform cryptographic transformations on data.  To decrypt data that was encrypted using one of the <see cref="T:System.Security.Cryptography.SymmetricAlgorithm" /> classes, you must set the <see cref="P:System.Security.Cryptography.SymmetricAlgorithm.Key" /> property and <see cref="P:System.Security.Cryptography.SymmetricAlgorithm.IV" /> property to the same values that were used for encryption.    </para
-          >
+            >The classes that derive from the <see cref="T:System.Security.Cryptography.SymmetricAlgorithm" /> class use a chaining mode called cipher block chaining (CBC), which requires a key and an initialization vector to perform cryptographic transformations on data.  To decrypt data that was encrypted using one of the <see cref="T:System.Security.Cryptography.SymmetricAlgorithm" /> classes, you must set the <see cref="P:System.Security.Cryptography.SymmetricAlgorithm.Key" /> property and <see cref="P:System.Security.Cryptography.SymmetricAlgorithm.IV" /> property to the same values that were used for encryption.
+          </para>
           <para
-            >For a given secret key <legacyItalic>k</legacyItalic>, a simple block cipher that does not use an initialization vector will encrypt the same input block of plain text into the same output block of cipher text. If you have duplicate blocks within your plain text stream, you will have duplicate blocks within your cipher text stream. If unauthorized users know anything about the structure of a block of your plain text, they can use that information to decipher the known cipher text block and possibly recover your key. To combat this problem, information from the previous block is mixed into the process of encrypting the next block. Thus, the output of two identical plain text blocks is different. Because this technique uses the previous block to encrypt the next block, an initialization vector is needed to encrypt the first block of data. </para
-          >
+            >For a given secret key <legacyItalic>k</legacyItalic>, a simple block cipher that does not use an initialization vector will encrypt the same input block of plain text into the same output block of cipher text. If you have duplicate blocks within your plain text stream, you will have duplicate blocks within your cipher text stream. If unauthorized users know anything about the structure of a block of your plain text, they can use that information to decipher the known cipher text block and possibly recover your key. To combat this problem, information from the previous block is mixed into the process of encrypting the next block. Thus, the output of two identical plain text blocks is different. Because this technique uses the previous block to encrypt the next block, an initialization vector is needed to encrypt the first block of data.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1084,8 +1084,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see cref="T:System.Security.Cryptography.SymmetricAlgorithm" /> and optionally releases the managed resources. </para
-          >
+            >Releases the unmanaged resources used by the <see cref="T:System.Security.Cryptography.SymmetricAlgorithm" /> and optionally releases the managed resources.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1126,8 +1126,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The length, in bits, to check for a valid key size. </param
-        >
+          />The length, in bits, to check for a valid key size.
+        </param>
       </Docs>
     </Member>
   </Members>

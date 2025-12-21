@@ -54,8 +54,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.SerializationObjectManager" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.SerializationObjectManager" /> class.
+          </para>
         </summary>
         <param name="context">
           <attribution
@@ -117,8 +117,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Runtime.Serialization.SerializationObjectManager.RaiseOnSerializedEvent" /> method will be called on the registered object. </para
-          >
+            >The <see cref="M:System.Runtime.Serialization.SerializationObjectManager.RaiseOnSerializedEvent" /> method will be called on the registered object.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

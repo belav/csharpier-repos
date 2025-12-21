@@ -21,8 +21,8 @@
     <remarks>
       <para>
         This class implements abstract UNIX domain sockets as found in the Linux operating system. Unlike <see cref="T:Mono.Unix.UnixEndPoint" />, the path used to create this type of endpoint need not be a filename in the filesystem as it is just a unique string in the abstract namespace.
-      </para
-      >
+
+      </para>
       <example>
         <code lang="C#">
 try

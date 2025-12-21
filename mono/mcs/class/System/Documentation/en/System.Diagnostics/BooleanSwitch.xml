@@ -111,8 +111,8 @@
             >When you create a <see cref="T:System.Diagnostics.BooleanSwitch" />, the <paramref name="displayName" /> parameter is used to find initial switch settings. If the constructor cannot find initial settings, the <see cref="P:System.Diagnostics.BooleanSwitch.Enabled" /> property is set to false (disabled).</para
           >
           <para
-            >To set the level of your <see cref="T:System.Diagnostics.BooleanSwitch" />, edit the configuration file corresponding to the name of your application. Within this file, you can add a switch and set its value, remove a switch, or clear all switches previously set by the application. The configuration file should be formatted like the following example: </para
-          >
+            >To set the level of your <see cref="T:System.Diagnostics.BooleanSwitch" />, edit the configuration file corresponding to the name of your application. Within this file, you can add a switch and set its value, remove a switch, or clear all switches previously set by the application. The configuration file should be formatted like the following example:
+          </para>
           <code> &lt;configuration&gt;
      &lt;system.diagnostics&gt;
         &lt;switches&gt;
@@ -138,15 +138,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name to display on a user interface. </param
-        >
+          />The name to display on a user interface.
+        </param>
         <param name="description">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The description of the switch. </param
-        >
+          />The description of the switch.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -178,23 +178,23 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Diagnostics.BooleanSwitch" /> class with the specified display name, description, and default switch value. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.BooleanSwitch" /> class with the specified display name, description, and default switch value.
+          </para>
         </summary>
         <param name="displayName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name to display on the user interface. </param
-        >
+          />The name to display on the user interface.
+        </param>
         <param name="description">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The description of the switch. </param
-        >
+          />The description of the switch.
+        </param>
         <param name="defaultSwitchValue">
           <attribution
             license="cc4"

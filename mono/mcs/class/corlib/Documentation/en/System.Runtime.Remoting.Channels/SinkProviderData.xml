@@ -66,8 +66,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the sink provider that the data in the current <see cref="T:System.Runtime.Remoting.Channels.SinkProviderData" /> object is associated with. </param
-        >
+          />The name of the sink provider that the data in the current <see cref="T:System.Runtime.Remoting.Channels.SinkProviderData" /> object is associated with.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Children">

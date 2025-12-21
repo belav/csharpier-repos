@@ -59,8 +59,8 @@
         </item>
         <item>
           <para
-            >To provide easy access to, and manipulation of, a data set. The following example defines a <see cref="T:System.Tuple`6" /> object that contains population data for New York City for each census from 1960 through 2000. The sextuple is passed to the ComputePopulationChange method, which calculates the annual rate of change between censuses, as well as the annual rate of change for the entire 50 year period. </para
-          >
+            >To provide easy access to, and manipulation of, a data set. The following example defines a <see cref="T:System.Tuple`6" /> object that contains population data for New York City for each census from 1960 through 2000. The sextuple is passed to the ComputePopulationChange method, which calculates the annual rate of change between censuses, as well as the annual rate of change for the entire 50 year period.
+          </para>
           <para>code reference: System.Tuple`6.Class#1</para>
         </item>
         <item>
@@ -212,8 +212,8 @@
           <list type="bullet">
             <item>
               <para
-                >By calling the GetType method on the value that is returned by the <see cref="P:System.Tuple`6.Item1" /> property. </para
-              >
+                >By calling the GetType method on the value that is returned by the <see cref="P:System.Tuple`6.Item1" /> property.
+              </para>
             </item>
             <item>
               <para
@@ -250,8 +250,8 @@
           <list type="bullet">
             <item>
               <para
-                >By calling the GetType method on the value that is returned by the <see cref="P:System.Tuple`6.Item2" /> property. </para
-              >
+                >By calling the GetType method on the value that is returned by the <see cref="P:System.Tuple`6.Item2" /> property.
+              </para>
             </item>
             <item>
               <para
@@ -288,8 +288,8 @@
           <list type="bullet">
             <item>
               <para
-                >By calling the GetType method on the value that is returned by the <see cref="P:System.Tuple`6.Item3" /> property. </para
-              >
+                >By calling the GetType method on the value that is returned by the <see cref="P:System.Tuple`6.Item3" /> property.
+              </para>
             </item>
             <item>
               <para
@@ -326,8 +326,8 @@
           <list type="bullet">
             <item>
               <para
-                >By calling the GetType method on the value that is returned by the <see cref="P:System.Tuple`6.Item4" /> property. </para
-              >
+                >By calling the GetType method on the value that is returned by the <see cref="P:System.Tuple`6.Item4" /> property.
+              </para>
             </item>
             <item>
               <para
@@ -364,8 +364,8 @@
           <list type="bullet">
             <item>
               <para
-                >By calling the GetType method on the value that is returned by the <see cref="P:System.Tuple`6.Item5" /> property. </para
-              >
+                >By calling the GetType method on the value that is returned by the <see cref="P:System.Tuple`6.Item5" /> property.
+              </para>
             </item>
             <item>
               <para
@@ -402,8 +402,8 @@
           <list type="bullet">
             <item>
               <para
-                >By calling the GetType method on the value that is returned by the <see cref="P:System.Tuple`6.Item6" /> property. </para
-              >
+                >By calling the GetType method on the value that is returned by the <see cref="P:System.Tuple`6.Item6" /> property.
+              </para>
             </item>
             <item>
               <para
@@ -447,8 +447,8 @@
             >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Tuple`6" /> instance is cast to an <see cref="T:System.Collections.IStructuralComparable" /> interface.</para
           >
           <para
-            >This method lets you define customized comparisons of <see cref="T:System.Tuple`6" /> objects. For example, you can use this method to order <see cref="T:System.Tuple`6" /> objects based on the value of a specific component. </para
-          >
+            >This method lets you define customized comparisons of <see cref="T:System.Tuple`6" /> objects. For example, you can use this method to order <see cref="T:System.Tuple`6" /> objects based on the value of a specific component.
+          </para>
           <para
             >Although this method can be called directly, it is most commonly called by collection-sorting methods that include <see cref="T:System.Collections.IComparer" /> parameters to order the members of a collection. For example, it is called by the <see cref="M:System.Array.Sort(System.Array,System.Collections.IComparer)" /> method and the <see cref="M:System.Collections.SortedList.Add(System.Object,System.Object)" /> method of a <see cref="T:System.Collections.SortedList" /> object that is instantiated by using the <see cref="M:System.Collections.SortedList.#ctor(System.Collections.IComparer)" /> constructor.</para
           >
@@ -551,8 +551,8 @@
             >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Tuple`6" /> instance is cast to an <see cref="T:System.Collections.IStructuralEquatable" /> interface.</para
           >
           <para
-            >The <see cref="M:System.Collections.IEqualityComparer.Equals(System.Object,System.Object)" /> implementation is called only if <paramref name="other" /> is not null, and if it can be successfully cast (in C#) or converted (in Visual Basic) to a <see cref="T:System.Tuple`6" /> object whose components are of the same types as the current instance. The <see cref="M:System.Tuple`6.System#Collections#IStructuralEquatable#Equals(System.Object,System.Collections.IEqualityComparer)" /> method first passes the <see cref="P:System.Tuple`6.Item1" /> values of the <see cref="T:System.Tuple`6" /> objects to be compared to the <see cref="M:System.Collections.IEqualityComparer.Equals(System.Object,System.Object)" /> implementation. If this method call returns true, the method is called again and passed the <see cref="P:System.Tuple`6.Item2" /> values of the two <see cref="T:System.Tuple`6" /> objects. This continues until the method call returns false when it compares a specific pair of Item values, or the two <see cref="P:System.Tuple`6.Item6" /> values are passed to the method. </para
-          >
+            >The <see cref="M:System.Collections.IEqualityComparer.Equals(System.Object,System.Object)" /> implementation is called only if <paramref name="other" /> is not null, and if it can be successfully cast (in C#) or converted (in Visual Basic) to a <see cref="T:System.Tuple`6" /> object whose components are of the same types as the current instance. The <see cref="M:System.Tuple`6.System#Collections#IStructuralEquatable#Equals(System.Object,System.Collections.IEqualityComparer)" /> method first passes the <see cref="P:System.Tuple`6.Item1" /> values of the <see cref="T:System.Tuple`6" /> objects to be compared to the <see cref="M:System.Collections.IEqualityComparer.Equals(System.Object,System.Object)" /> implementation. If this method call returns true, the method is called again and passed the <see cref="P:System.Tuple`6.Item2" /> values of the two <see cref="T:System.Tuple`6" /> objects. This continues until the method call returns false when it compares a specific pair of Item values, or the two <see cref="P:System.Tuple`6.Item6" /> values are passed to the method.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

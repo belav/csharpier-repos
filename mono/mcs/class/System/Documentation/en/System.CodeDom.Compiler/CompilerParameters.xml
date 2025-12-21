@@ -108,8 +108,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The names of the assemblies to reference. </param
-        >
+          />The names of the assemblies to reference.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -146,8 +146,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The names of the assemblies to reference. </param
-        >
+          />The names of the assemblies to reference.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -186,8 +186,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The names of the assemblies to reference. </param
-        >
+          />The names of the assemblies to reference.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CompilerOptions">

@@ -139,8 +139,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the enumeration values that specifies the location of the X.509 certificate store. </param
-        >
+          />One of the enumeration values that specifies the location of the X.509 certificate store.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -182,8 +182,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the enumeration values that specifies the name of the X.509 certificate store. </param
-        >
+          />One of the enumeration values that specifies the name of the X.509 certificate store.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -219,8 +219,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string value that represents the store name. See <see cref="T:System.Security.Cryptography.X509Certificates.StoreName" />  for more information. </param
-        >
+          />A string value that represents the store name. See <see cref="T:System.Security.Cryptography.X509Certificates.StoreName" />  for more information.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -266,15 +266,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the enumeration values that specifies the name of the X.509 certificate store. </param
-        >
+          />One of the enumeration values that specifies the name of the X.509 certificate store.
+        </param>
         <param name="storeLocation">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the enumeration values that specifies the location of the X.509 certificate store. </param
-        >
+          />One of the enumeration values that specifies the location of the X.509 certificate store.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -317,15 +317,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string that represents a value from the <see cref="T:System.Security.Cryptography.X509Certificates.StoreName" /> enumeration. </param
-        >
+          />A string that represents a value from the <see cref="T:System.Security.Cryptography.X509Certificates.StoreName" /> enumeration.
+        </param>
         <param name="storeLocation">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the enumeration values that specifies the location of the X.509 certificate store. </param
-        >
+          />One of the enumeration values that specifies the location of the X.509 certificate store.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Add">
@@ -362,12 +362,8 @@
           <para>Adds a certificate to an X.509 certificate store.</para>
         </summary>
         <param name="certificate">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The certificate to add. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The certificate to add.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddRange">
@@ -413,8 +409,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The collection of certificates to add. </param
-        >
+          />The collection of certificates to add.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Certificates">
@@ -569,8 +565,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of enumeration values that specifies the way to open the X.509 certificate store. </param
-        >
+          />A bitwise combination of enumeration values that specifies the way to open the X.509 certificate store.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Remove">

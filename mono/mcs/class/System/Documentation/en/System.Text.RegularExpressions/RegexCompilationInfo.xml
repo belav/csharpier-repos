@@ -25,8 +25,8 @@
         >An array of <see cref="T:System.Text.RegularExpressions.RegexCompilationInfo" /> objects is passed to the <see cref="M:System.Text.RegularExpressions.Regex.CompileToAssembly(System.Text.RegularExpressions.RegexCompilationInfo[],System.Reflection.AssemblyName)" /> method to provide information about each regular expression to be included in the assembly. Each compiled regular expression that is included in the assembly is represented as a class derived from <see cref="T:System.Text.RegularExpressions.Regex" />. The properties of the <see cref="T:System.Text.RegularExpressions.RegexCompilationInfo" /> type define the regular expression's class name, its fully qualified name (that is, its namespace and its type name), its regular expression pattern, any additional options (such as whether the regular expression is case-insensitive), and a time-out interval that specifies how long the regular expression engine should search for a match.</para
       >
       <para
-        >You can instantiate a <see cref="T:System.Text.RegularExpressions.RegexCompilationInfo" /> object by calling its overloaded class constructor. </para
-      >
+        >You can instantiate a <see cref="T:System.Text.RegularExpressions.RegexCompilationInfo" /> object by calling its overloaded class constructor.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -61,56 +61,56 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Each parameter of the <see cref="M:System.Text.RegularExpressions.RegexCompilationInfo.#ctor(System.String,System.Text.RegularExpressions.RegexOptions,System.String,System.String,System.Boolean)" /> constructor directly corresponds to a property of the <see cref="T:System.Text.RegularExpressions.RegexCompilationInfo" /> class. Because all properties are read/write, their values can also be assigned directly. </para
-          >
+            >Each parameter of the <see cref="M:System.Text.RegularExpressions.RegexCompilationInfo.#ctor(System.String,System.Text.RegularExpressions.RegexOptions,System.String,System.String,System.Boolean)" /> constructor directly corresponds to a property of the <see cref="T:System.Text.RegularExpressions.RegexCompilationInfo" /> class. Because all properties are read/write, their values can also be assigned directly.
+          </para>
           <para
-            >The <see cref="M:System.Text.RegularExpressions.Regex.CompileToAssembly(System.Text.RegularExpressions.RegexCompilationInfo[],System.Reflection.AssemblyName)" /> method generates an assembly that contains compiled regular expressions. Therefore, you should not specify <see cref="F:System.Text.RegularExpressions.RegexOptions.Compiled" /> as one of the values of <paramref name="options" />. </para
-          >
+            >The <see cref="M:System.Text.RegularExpressions.Regex.CompileToAssembly(System.Text.RegularExpressions.RegexCompilationInfo[],System.Reflection.AssemblyName)" /> method generates an assembly that contains compiled regular expressions. Therefore, you should not specify <see cref="F:System.Text.RegularExpressions.RegexOptions.Compiled" /> as one of the values of <paramref name="options" />.
+          </para>
           <para
-            >If <paramref name="ispublic" /> is true, the compiled regular expression class is given public accessibility. That is, it can be instantiated from code that executes in any assembly. If <paramref name="ispublic" /> is false, the compiled regular expression class is given internal (in C#) or Friend (in Visual Basic) accessibility. That is, it can be instantiated only from code that executes in the same assembly as the regular expression class.   </para
-          >
+            >If <paramref name="ispublic" /> is true, the compiled regular expression class is given public accessibility. That is, it can be instantiated from code that executes in any assembly. If <paramref name="ispublic" /> is false, the compiled regular expression class is given internal (in C#) or Friend (in Visual Basic) accessibility. That is, it can be instantiated only from code that executes in the same assembly as the regular expression class.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Text.RegularExpressions.RegexCompilationInfo" /> class that contains information about a regular expression to be included in an assembly. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Text.RegularExpressions.RegexCompilationInfo" /> class that contains information about a regular expression to be included in an assembly.
+          </para>
         </summary>
         <param name="pattern">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The regular expression to compile. </param
-        >
+          />The regular expression to compile.
+        </param>
         <param name="options">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The regular expression options to use when compiling the regular expression. </param
-        >
+          />The regular expression options to use when compiling the regular expression.
+        </param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the type that represents the compiled regular expression. </param
-        >
+          />The name of the type that represents the compiled regular expression.
+        </param>
         <param name="fullnamespace">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace to which the new type belongs. </param
-        >
+          />The namespace to which the new type belongs.
+        </param>
         <param name="ispublic">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to make the compiled regular expression publicly visible; otherwise, false. </param
-        >
+          />true to make the compiled regular expression publicly visible; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsPublic">
@@ -158,8 +158,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Text.RegularExpressions.RegexCompilationInfo" /> class is used to define a compiled regular expression, which is represented as a class derived from <see cref="T:System.Text.RegularExpressions.Regex" />. The <see cref="P:System.Text.RegularExpressions.RegexCompilationInfo.Name" /> property defines the class name of the regular expression type, and the <see cref="P:System.Text.RegularExpressions.RegexCompilationInfo.Namespace" /> and <see cref="P:System.Text.RegularExpressions.RegexCompilationInfo.Name" /> properties together define its fully qualified name. </para
-          >
+            >The <see cref="T:System.Text.RegularExpressions.RegexCompilationInfo" /> class is used to define a compiled regular expression, which is represented as a class derived from <see cref="T:System.Text.RegularExpressions.Regex" />. The <see cref="P:System.Text.RegularExpressions.RegexCompilationInfo.Name" /> property defines the class name of the regular expression type, and the <see cref="P:System.Text.RegularExpressions.RegexCompilationInfo.Namespace" /> and <see cref="P:System.Text.RegularExpressions.RegexCompilationInfo.Name" /> properties together define its fully qualified name.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -218,8 +218,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Text.RegularExpressions.Regex.CompileToAssembly(System.Text.RegularExpressions.RegexCompilationInfo[],System.Reflection.AssemblyName)" /> method generates an assembly that contains compiled regular expressions. Therefore, you do not have to specify <see cref="F:System.Text.RegularExpressions.RegexOptions.Compiled" /> as one of the values of this property. If it is present, the <see cref="F:System.Text.RegularExpressions.RegexOptions.Compiled" /> option is ignored. </para
-          >
+            >The <see cref="M:System.Text.RegularExpressions.Regex.CompileToAssembly(System.Text.RegularExpressions.RegexCompilationInfo[],System.Reflection.AssemblyName)" /> method generates an assembly that contains compiled regular expressions. Therefore, you do not have to specify <see cref="F:System.Text.RegularExpressions.RegexOptions.Compiled" /> as one of the values of this property. If it is present, the <see cref="F:System.Text.RegularExpressions.RegexOptions.Compiled" /> option is ignored.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

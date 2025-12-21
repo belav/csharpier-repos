@@ -112,8 +112,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the XML root element. </param
-        >
+          />The name of the XML root element.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DataType">
@@ -662,14 +662,14 @@
             >The XML schema specification for structures allows an XML document to explicitly signal that an element's content is missing. Such an element contains the attribute xsi:nil set to true. For more information, see the http://www.w3.org/TR/xmlschema-1/ specification named <paramref name="XML Schema Part 1: Structures" />.</para
           >
           <para
-            >If the <see cref="P:System.Xml.Serialization.XmlRootAttribute.IsNullable" /> property is set to true, the xsi:nil attribute is generated as shown in the following XML: </para
-          >
+            >If the <see cref="P:System.Xml.Serialization.XmlRootAttribute.IsNullable" /> property is set to true, the xsi:nil attribute is generated as shown in the following XML:
+          </para>
           <code> &lt;?xml version="1.0" encoding="utf-8"?&gt;
  &lt;Group xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
  xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:nil="true" /&gt;</code>
           <para
-            >If the <see cref="P:System.Xml.Serialization.XmlRootAttribute.IsNullable" /> property is false, an empty element is created as shown in the following code: </para
-          >
+            >If the <see cref="P:System.Xml.Serialization.XmlRootAttribute.IsNullable" /> property is false, an empty element is created as shown in the following code:
+          </para>
           <code> &lt;?xml version="1.0" encoding="utf-8"?&gt;
  &lt;Group xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
  xmlns:xsd="http://www.w3.org/2001/XMLSchema" /&gt;</code>

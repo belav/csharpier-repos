@@ -56,8 +56,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="Overload:System.ComponentModel.Design.Serialization.CodeDomLocalizationProvider.#ctor" /> constructor creates a new adapter and attaches it to the serialization manager. This adds itself as a serializer for resources into the serialization manager, and, if not already added, adds itself as an extender provider to the root component. </para
-          >
+            >The <see cref="Overload:System.ComponentModel.Design.Serialization.CodeDomLocalizationProvider.#ctor" /> constructor creates a new adapter and attaches it to the serialization manager. This adds itself as a serializer for resources into the serialization manager, and, if not already added, adds itself as an extender provider to the root component.
+          </para>
           <para
             >If the <paramref name="model" /> parameter is not <see cref="F:System.ComponentModel.Design.Serialization.CodeDomLocalizationModel.None" />, the <see cref="T:System.ComponentModel.Design.Serialization.CodeDomLocalizationProvider" /> provides the Language and Localizable properties.</para
           >
@@ -65,8 +65,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Serialization.CodeDomLocalizationProvider" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Serialization.CodeDomLocalizationProvider" /> class.
+          </para>
         </summary>
         <param name="provider">
           <attribution
@@ -80,8 +80,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.ComponentModel.Design.Serialization.CodeDomLocalizationModel" /> value indicating the localization model to be used by the CodeDOM resource adapter </param
-        >
+          />A <see cref="T:System.ComponentModel.Design.Serialization.CodeDomLocalizationModel" /> value indicating the localization model to be used by the CodeDOM resource adapter
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -117,8 +117,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Serialization.CodeDomLocalizationProvider" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Serialization.CodeDomLocalizationProvider" /> class.
+          </para>
         </summary>
         <param name="provider">
           <attribution
@@ -132,8 +132,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.ComponentModel.Design.Serialization.CodeDomLocalizationModel" /> value indicating the localization model to be used by the CodeDOM resource adapter </param
-        >
+          />A <see cref="T:System.ComponentModel.Design.Serialization.CodeDomLocalizationModel" /> value indicating the localization model to be used by the CodeDOM resource adapter
+        </param>
         <param name="supportedCultures">
           <attribution
             license="cc4"
@@ -206,29 +206,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The serialization manager requesting the serializer. </param
-        >
+          />The serialization manager requesting the serializer.
+        </param>
         <param name="currentSerializer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An instance of the current serializer of the specified type. This can be null if no serializer of the specified type exists. </param
-        >
+          />An instance of the current serializer of the specified type. This can be null if no serializer of the specified type exists.
+        </param>
         <param name="objectType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data type of the object to serialize. </param
-        >
+          />The data type of the object to serialize.
+        </param>
         <param name="serializerType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data type of the serializer to create. </param
-        >
+          />The data type of the serializer to create.
+        </param>
       </Docs>
     </Member>
   </Members>

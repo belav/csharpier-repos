@@ -40,8 +40,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Aids implementation of the <see cref="T:System.Data.IDbDataAdapter" /> interface. Inheritors of <see cref="T:System.Data.Common.DbDataAdapter" /> implement a set of functions to provide strong typing, but inherit most of the functionality needed to fully implement a DataAdapter. </para
-      >
+        >Aids implementation of the <see cref="T:System.Data.IDbDataAdapter" /> interface. Inheritors of <see cref="T:System.Data.Common.DbDataAdapter" /> implement a set of functions to provide strong typing, but inherit most of the functionality needed to fully implement a DataAdapter.
+      </para>
     </summary>
   </Docs>
   <Members>
@@ -169,8 +169,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A DataAdapter object used to create the new DataAdapter. </param
-        >
+          />A DataAdapter object used to create the new DataAdapter.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddToBatch">
@@ -271,29 +271,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Data.DataRow" /> used to update the data source. </param
-        >
+          />The <see cref="T:System.Data.DataRow" /> used to update the data source.
+        </param>
         <param name="command">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Data.IDbCommand" /> executed during the <see cref="M:System.Data.IDataAdapter.Update(System.Data.DataSet)" />. </param
-        >
+          />The <see cref="T:System.Data.IDbCommand" /> executed during the <see cref="M:System.Data.IDataAdapter.Update(System.Data.DataSet)" />.
+        </param>
         <param name="statementType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Whether the command is an UPDATE, INSERT, DELETE, or SELECT statement. </param
-        >
+          />Whether the command is an UPDATE, INSERT, DELETE, or SELECT statement.
+        </param>
         <param name="tableMapping">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.Common.DataTableMapping" /> object. </param
-        >
+          />A <see cref="T:System.Data.Common.DataTableMapping" /> object.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -334,29 +334,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Data.DataRow" /> that updates the data source. </param
-        >
+          />The <see cref="T:System.Data.DataRow" /> that updates the data source.
+        </param>
         <param name="command">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Data.IDbCommand" /> to execute during the <see cref="M:System.Data.IDataAdapter.Update(System.Data.DataSet)" />. </param
-        >
+          />The <see cref="T:System.Data.IDbCommand" /> to execute during the <see cref="M:System.Data.IDataAdapter.Update(System.Data.DataSet)" />.
+        </param>
         <param name="statementType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Whether the command is an UPDATE, INSERT, DELETE, or SELECT statement. </param
-        >
+          />Whether the command is an UPDATE, INSERT, DELETE, or SELECT statement.
+        </param>
         <param name="tableMapping">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.Common.DataTableMapping" /> object. </param
-        >
+          />A <see cref="T:System.Data.Common.DataTableMapping" /> object.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -448,8 +448,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -513,8 +513,8 @@
             >When the SELECT statement used to populate the <see cref="T:System.Data.DataSet" /> returns multiple results, such as batch SQL statements, if one of the results contains an error, all subsequent results are skipped and are not added to the <see cref="T:System.Data.DataSet" />.</para
           >
           <para
-            >When using subsequent <see cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataSet)" /> calls to refresh the contents of the <see cref="T:System.Data.DataSet" />, two conditions must be met: </para
-          >
+            >When using subsequent <see cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataSet)" /> calls to refresh the contents of the <see cref="T:System.Data.DataSet" />, two conditions must be met:
+          </para>
           <list type="ordered">
             <item>
               <para
@@ -554,8 +554,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.DataSet" /> to fill with records and, if necessary, schema. </param
-        >
+          />A <see cref="T:System.Data.DataSet" /> to fill with records and, if necessary, schema.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -631,8 +631,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the <see cref="T:System.Data.DataTable" /> to use for table mapping. </param
-        >
+          />The name of the <see cref="T:System.Data.DataTable" /> to use for table mapping.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -681,8 +681,8 @@
  adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly named table is in the DataSet.</code>
           <para>If an error or an exception is encountered while populating the data tables, rows added prior to the occurrence of the error remain in the data tables. The remainder of the operation is aborted.</para>
           <para
-            >When the SELECT statement used to populate the <see cref="T:System.Data.DataSet" /> returns multiple results, such as a batch SQL statement, be aware of the following: </para
-          >
+            >When the SELECT statement used to populate the <see cref="T:System.Data.DataSet" /> returns multiple results, such as a batch SQL statement, be aware of the following:
+          </para>
           <list type="bullet">
             <item>
               <para
@@ -691,8 +691,8 @@
             </item>
           </list>
           <para
-            >When using subsequent <see cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataSet)" /> calls to refresh the contents of the <see cref="T:System.Data.DataSet" />, two conditions must be met: </para
-          >
+            >When using subsequent <see cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataSet)" /> calls to refresh the contents of the <see cref="T:System.Data.DataSet" />, two conditions must be met:
+          </para>
           <list type="ordered">
             <item>
               <para
@@ -733,15 +733,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.DataSet" /> to fill with records and, if necessary, schema. </param
-        >
+          />A <see cref="T:System.Data.DataSet" /> to fill with records and, if necessary, schema.
+        </param>
         <param name="srcTable">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the source table to use for table mapping. </param
-        >
+          />The name of the source table to use for table mapping.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -832,15 +832,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.DataTable" /> to fill with records and, if necessary, schema. </param
-        >
+          />A <see cref="T:System.Data.DataTable" /> to fill with records and, if necessary, schema.
+        </param>
         <param name="command">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The SQL SELECT statement used to retrieve rows from the data source. </param
-        >
+          />The SQL SELECT statement used to retrieve rows from the data source.
+        </param>
         <param name="behavior">
           <attribution
             license="cc4"
@@ -923,15 +923,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based record number to start with. </param
-        >
+          />The zero-based record number to start with.
+        </param>
         <param name="maxRecords">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum number of records to retrieve. </param
-        >
+          />The maximum number of records to retrieve.
+        </param>
         <param name="dataTables">
           <attribution
             license="cc4"
@@ -991,8 +991,8 @@ dataset.Tables.Add("aaa");
 adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly named table is in the DataSet.</code>
           <para>If an error or an exception is encountered while populating the data tables, rows added prior to the occurrence of the error remain in the data tables. The remainder of the operation is aborted.</para>
           <para
-            >When the SELECT statement used to populate the <see cref="T:System.Data.DataSet" /> returns multiple results, such as batch SQL statements, be aware of the following: </para
-          >
+            >When the SELECT statement used to populate the <see cref="T:System.Data.DataSet" /> returns multiple results, such as batch SQL statements, be aware of the following:
+          </para>
           <list type="bullet">
             <item>
               <para
@@ -1006,8 +1006,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
             </item>
           </list>
           <para
-            >When using subsequent <see cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataSet)" /> calls to refresh the contents of the <see cref="T:System.Data.DataSet" />, two conditions must be met: </para
-          >
+            >When using subsequent <see cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataSet)" /> calls to refresh the contents of the <see cref="T:System.Data.DataSet" />, two conditions must be met:
+          </para>
           <list type="ordered">
             <item>
               <para
@@ -1054,29 +1054,29 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.DataSet" /> to fill with records and, if necessary, schema. </param
-        >
+          />A <see cref="T:System.Data.DataSet" /> to fill with records and, if necessary, schema.
+        </param>
         <param name="startRecord">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based record number to start with. </param
-        >
+          />The zero-based record number to start with.
+        </param>
         <param name="maxRecords">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum number of records to retrieve. </param
-        >
+          />The maximum number of records to retrieve.
+        </param>
         <param name="srcTable">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the source table to use for table mapping. </param
-        >
+          />The name of the source table to use for table mapping.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1164,8 +1164,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
  adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly named table is in the DataSet.</code>
           <para>If an error or an exception is encountered while populating the data tables, rows added prior to the occurrence of the error remain in the data tables. The remainder of the operation is aborted.</para>
           <para
-            >When the SELECT statement used to populate the <see cref="T:System.Data.DataTable" /> objects returns multiple results, such as a batch SQL statement, be aware of the following: </para
-          >
+            >When the SELECT statement used to populate the <see cref="T:System.Data.DataTable" /> objects returns multiple results, such as a batch SQL statement, be aware of the following:
+          </para>
           <list type="bullet">
             <item>
               <para
@@ -1303,43 +1303,43 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.DataSet" /> to fill with records and, if necessary, schema. </param
-        >
+          />A <see cref="T:System.Data.DataSet" /> to fill with records and, if necessary, schema.
+        </param>
         <param name="startRecord">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based record number to start with. </param
-        >
+          />The zero-based record number to start with.
+        </param>
         <param name="maxRecords">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum number of records to retrieve. </param
-        >
+          />The maximum number of records to retrieve.
+        </param>
         <param name="srcTable">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the source table to use for table mapping. </param
-        >
+          />The name of the source table to use for table mapping.
+        </param>
         <param name="command">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The SQL SELECT statement used to retrieve rows from the data source. </param
-        >
+          />The SQL SELECT statement used to retrieve rows from the data source.
+        </param>
         <param name="behavior">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Data.CommandBehavior" /> values. </param
-        >
+          />One of the <see cref="T:System.Data.CommandBehavior" /> values.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1410,8 +1410,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
             >This method retrieves the schema information from the data source using the <see cref="P:System.Data.IDbDataAdapter.SelectCommand" />.</para
           >
           <para
-            >A <see cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" /> operation adds a <see cref="T:System.Data.DataTable" /> to the destination <see cref="T:System.Data.DataSet" />. It then adds columns to the <see cref="T:System.Data.DataColumnCollection" /> of the <see cref="T:System.Data.DataTable" />, and configures the following <see cref="T:System.Data.DataColumn" /> properties if they exist at the data source: </para
-          >
+            >A <see cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" /> operation adds a <see cref="T:System.Data.DataTable" /> to the destination <see cref="T:System.Data.DataSet" />. It then adds columns to the <see cref="T:System.Data.DataColumnCollection" /> of the <see cref="T:System.Data.DataTable" />, and configures the following <see cref="T:System.Data.DataColumn" /> properties if they exist at the data source:
+          </para>
           <list type="bullet">
             <item>
               <para>
@@ -1440,8 +1440,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
             </item>
           </list>
           <para>
-            <see cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" /> also configures the <see cref="P:System.Data.DataTable.PrimaryKey" /> and <see cref="P:System.Data.DataTable.Constraints" /> properties according to the following rules: </para
-          >
+            <see cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" /> also configures the <see cref="P:System.Data.DataTable.PrimaryKey" /> and <see cref="P:System.Data.DataTable.Constraints" /> properties according to the following rules:
+          </para>
           <list type="bullet">
             <item>
               <para
@@ -1503,15 +1503,15 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.DataSet" /> to insert the schema in. </param
-        >
+          />A <see cref="T:System.Data.DataSet" /> to insert the schema in.
+        </param>
         <param name="schemaType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Data.SchemaType" /> values that specify how to insert the schema. </param
-        >
+          />One of the <see cref="T:System.Data.SchemaType" /> values that specify how to insert the schema.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1538,8 +1538,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
             >The <see cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" /> method retrieves the schema from the data source using the <see cref="P:System.Data.IDbDataAdapter.SelectCommand" />. The connection object associated with the <see cref="P:System.Data.IDbDataAdapter.SelectCommand" /> must be valid, but it does not need to be open. If the connection is closed before <see cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" /> is called, it is opened to retrieve data, then closed. If the connection is open before <see cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" /> is called, it remains open.</para
           >
           <para
-            >A <see cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" /> operation returns a <see cref="T:System.Data.DataTable" />. It then adds columns to the <see cref="T:System.Data.DataColumnCollection" /> of the <see cref="T:System.Data.DataTable" />, and configures the following <see cref="T:System.Data.DataColumn" /> properties if they exist at the data source: </para
-          >
+            >A <see cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" /> operation returns a <see cref="T:System.Data.DataTable" />. It then adds columns to the <see cref="T:System.Data.DataColumnCollection" /> of the <see cref="T:System.Data.DataTable" />, and configures the following <see cref="T:System.Data.DataColumn" /> properties if they exist at the data source:
+          </para>
           <list type="bullet">
             <item>
               <para>
@@ -1568,8 +1568,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
             </item>
           </list>
           <para>
-            <see cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" /> also configures the <see cref="P:System.Data.DataTable.PrimaryKey" /> and <see cref="P:System.Data.DataTable.Constraints" /> properties according to the following rules: </para
-          >
+            <see cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" /> also configures the <see cref="P:System.Data.DataTable.PrimaryKey" /> and <see cref="P:System.Data.DataTable.Constraints" /> properties according to the following rules:
+          </para>
           <list type="bullet">
             <item>
               <para
@@ -1631,15 +1631,15 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Data.DataTable" /> to be filled with the schema from the data source. </param
-        >
+          />The <see cref="T:System.Data.DataTable" /> to be filled with the schema from the data source.
+        </param>
         <param name="schemaType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Data.SchemaType" /> values. </param
-        >
+          />One of the <see cref="T:System.Data.SchemaType" /> values.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1667,8 +1667,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
             >This method retrieves the schema information from the data source using the <see cref="P:System.Data.IDbDataAdapter.SelectCommand" />.</para
           >
           <para
-            >A <see cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" /> operation adds a <see cref="T:System.Data.DataTable" /> to the destination <see cref="T:System.Data.DataSet" />. It then adds columns to the <see cref="T:System.Data.DataColumnCollection" /> of the <see cref="T:System.Data.DataTable" />, and configures the following <see cref="T:System.Data.DataColumn" /> properties if they exist at the data source: </para
-          >
+            >A <see cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" /> operation adds a <see cref="T:System.Data.DataTable" /> to the destination <see cref="T:System.Data.DataSet" />. It then adds columns to the <see cref="T:System.Data.DataColumnCollection" /> of the <see cref="T:System.Data.DataTable" />, and configures the following <see cref="T:System.Data.DataColumn" /> properties if they exist at the data source:
+          </para>
           <list type="bullet">
             <item>
               <para>
@@ -1697,8 +1697,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
             </item>
           </list>
           <para>
-            <see cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" /> also configures the <see cref="P:System.Data.DataTable.PrimaryKey" /> and <see cref="P:System.Data.DataTable.Constraints" /> properties according to the following rules: </para
-          >
+            <see cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" /> also configures the <see cref="P:System.Data.DataTable.PrimaryKey" /> and <see cref="P:System.Data.DataTable.Constraints" /> properties according to the following rules:
+          </para>
           <list type="bullet">
             <item>
               <para
@@ -1774,22 +1774,22 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.DataSet" /> to insert the schema in. </param
-        >
+          />A <see cref="T:System.Data.DataSet" /> to insert the schema in.
+        </param>
         <param name="schemaType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Data.SchemaType" /> values that specify how to insert the schema. </param
-        >
+          />One of the <see cref="T:System.Data.SchemaType" /> values that specify how to insert the schema.
+        </param>
         <param name="srcTable">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the source table to use for table mapping. </param
-        >
+          />The name of the source table to use for table mapping.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1818,8 +1818,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
             >The <see cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" /> method retrieves the schema from the data source using the <see cref="P:System.Data.IDbDataAdapter.SelectCommand" />. The connection object associated with the <see cref="P:System.Data.IDbDataAdapter.SelectCommand" /> must be valid, but it does not need to be open. If the connection is closed before <see cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" /> is called, it is opened to retrieve data, then closed. If the connection is open before <see cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" /> is called, it remains open.</para
           >
           <para
-            >A <see cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" /> operation adds a <see cref="T:System.Data.DataTable" /> to the destination <see cref="T:System.Data.DataSet" />. It then adds columns to the <see cref="T:System.Data.DataColumnCollection" /> of the <see cref="T:System.Data.DataTable" />, and configures the following <see cref="T:System.Data.DataColumn" /> properties if they exist at the data source: </para
-          >
+            >A <see cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" /> operation adds a <see cref="T:System.Data.DataTable" /> to the destination <see cref="T:System.Data.DataSet" />. It then adds columns to the <see cref="T:System.Data.DataColumnCollection" /> of the <see cref="T:System.Data.DataTable" />, and configures the following <see cref="T:System.Data.DataColumn" /> properties if they exist at the data source:
+          </para>
           <list type="bullet">
             <item>
               <para>
@@ -1848,8 +1848,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
             </item>
           </list>
           <para>
-            <see cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" /> also configures the <see cref="P:System.Data.DataTable.PrimaryKey" /> and <see cref="P:System.Data.DataTable.Constraints" /> properties according to the following rules: </para
-          >
+            <see cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" /> also configures the <see cref="P:System.Data.DataTable.PrimaryKey" /> and <see cref="P:System.Data.DataTable.Constraints" /> properties according to the following rules:
+          </para>
           <list type="bullet">
             <item>
               <para
@@ -1908,29 +1908,29 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Data.DataTable" /> to be filled with the schema from the data source. </param
-        >
+          />The <see cref="T:System.Data.DataTable" /> to be filled with the schema from the data source.
+        </param>
         <param name="schemaType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Data.SchemaType" /> values. </param
-        >
+          />One of the <see cref="T:System.Data.SchemaType" /> values.
+        </param>
         <param name="command">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The SQL SELECT statement used to retrieve rows from the data source. </param
-        >
+          />The SQL SELECT statement used to retrieve rows from the data source.
+        </param>
         <param name="behavior">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Data.CommandBehavior" /> values. </param
-        >
+          />One of the <see cref="T:System.Data.CommandBehavior" /> values.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1960,8 +1960,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
             >The <see cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" /> method retrieves the schema from the data source using the <see cref="P:System.Data.IDbDataAdapter.SelectCommand" />. The connection object associated with the <see cref="P:System.Data.IDbDataAdapter.SelectCommand" /> must be valid, but it does not need to be open. If the connection is closed before <see cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" /> is called, it is opened to retrieve data, then closed. If the connection is open before <see cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" /> is called, it remains open.</para
           >
           <para
-            >A <see cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" /> operation adds a <see cref="T:System.Data.DataTable" /> to the destination <see cref="T:System.Data.DataSet" />. It then adds columns to the <see cref="T:System.Data.DataColumnCollection" /> of the <see cref="T:System.Data.DataTable" />, and configures the following <see cref="T:System.Data.DataColumn" /> properties if they exist at the data source: </para
-          >
+            >A <see cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" /> operation adds a <see cref="T:System.Data.DataTable" /> to the destination <see cref="T:System.Data.DataSet" />. It then adds columns to the <see cref="T:System.Data.DataColumnCollection" /> of the <see cref="T:System.Data.DataTable" />, and configures the following <see cref="T:System.Data.DataColumn" /> properties if they exist at the data source:
+          </para>
           <list type="bullet">
             <item>
               <para>
@@ -1990,8 +1990,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
             </item>
           </list>
           <para>
-            <see cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" /> also configures the <see cref="P:System.Data.DataTable.PrimaryKey" /> and <see cref="P:System.Data.DataTable.Constraints" /> properties according to the following rules: </para
-          >
+            <see cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" /> also configures the <see cref="P:System.Data.DataTable.PrimaryKey" /> and <see cref="P:System.Data.DataTable.Constraints" /> properties according to the following rules:
+          </para>
           <list type="bullet">
             <item>
               <para
@@ -2064,36 +2064,36 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Data.DataSet" /> to be filled with the schema from the data source. </param
-        >
+          />The <see cref="T:System.Data.DataSet" /> to be filled with the schema from the data source.
+        </param>
         <param name="schemaType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Data.SchemaType" /> values. </param
-        >
+          />One of the <see cref="T:System.Data.SchemaType" /> values.
+        </param>
         <param name="command">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The SQL SELECT statement used to retrieve rows from the data source. </param
-        >
+          />The SQL SELECT statement used to retrieve rows from the data source.
+        </param>
         <param name="srcTable">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the source table to use for table mapping. </param
-        >
+          />The name of the source table to use for table mapping.
+        </param>
         <param name="behavior">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Data.CommandBehavior" /> values. </param
-        >
+          />One of the <see cref="T:System.Data.CommandBehavior" /> values.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2318,8 +2318,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.Common.RowUpdatedEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Data.Common.RowUpdatedEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2356,8 +2356,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Data.Common.RowUpdatingEventArgs" />  that contains the event data. </param
-        >
+          />An <see cref="T:System.Data.Common.RowUpdatingEventArgs" />  that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2600,8 +2600,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
             >After any data is loaded back into the <see cref="T:System.Data.DataSet" />, the <see cref="M:System.Data.Common.DbDataAdapter.OnRowUpdated(System.Data.Common.RowUpdatedEventArgs)" /> event is raised, allowing the user to inspect the reconciled <see cref="T:System.Data.DataSet" /> row and any output parameters returned by the command. After a row updates successfully, the changes to that row are accepted.</para
           >
           <para
-            >When using <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />, the order of execution is as follows: </para
-          >
+            >When using <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />, the order of execution is as follows:
+          </para>
           <list type="ordered">
             <item>
               <para
@@ -2658,8 +2658,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
               </term>
               <description>
                 <para
-                  >Use the source column names and table names in the <see cref="T:System.Data.DataSet" /> if no mapping is present. </para
-                >
+                  >Use the source column names and table names in the <see cref="T:System.Data.DataSet" /> if no mapping is present.
+                </para>
               </description>
             </item>
             <item>
@@ -2668,8 +2668,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
               </term>
               <description>
                 <para
-                  >A <see cref="T:System.SystemException" /> is generated. When the mappings are explicitly set, a missing mapping for an input parameter is usually the result of an error. </para
-                >
+                  >A <see cref="T:System.SystemException" /> is generated. When the mappings are explicitly set, a missing mapping for an input parameter is usually the result of an error.
+                </para>
               </description>
             </item>
             <item>
@@ -2706,8 +2706,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Data.DataRow" /> objects used to update the data source. </param
-        >
+          />An array of <see cref="T:System.Data.DataRow" /> objects used to update the data source.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2751,8 +2751,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
             >After any data is loaded back into the <see cref="T:System.Data.DataSet" />, the <see cref="M:System.Data.Common.DbDataAdapter.OnRowUpdated(System.Data.Common.RowUpdatedEventArgs)" /> event is raised, allowing the user to inspect the reconciled <see cref="T:System.Data.DataSet" /> row and any output parameters returned by the command. After a row updates successfully, the changes to that row are accepted.</para
           >
           <para
-            >When using <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />, the order of execution is as follows: </para
-          >
+            >When using <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />, the order of execution is as follows:
+          </para>
           <list type="ordered">
             <item>
               <para
@@ -2809,8 +2809,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
               </term>
               <description>
                 <para
-                  >Use the source column names and table names in the <see cref="T:System.Data.DataSet" /> if no mapping is present. </para
-                >
+                  >Use the source column names and table names in the <see cref="T:System.Data.DataSet" /> if no mapping is present.
+                </para>
               </description>
             </item>
             <item>
@@ -2819,8 +2819,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
               </term>
               <description>
                 <para
-                  >A <see cref="T:System.SystemException" /> is generated. When the mappings are explicitly set, a missing mapping for an input parameter is usually the result of an error. </para
-                >
+                  >A <see cref="T:System.SystemException" /> is generated. When the mappings are explicitly set, a missing mapping for an input parameter is usually the result of an error.
+                </para>
               </description>
             </item>
             <item>
@@ -2857,8 +2857,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Data.DataSet" /> used to update the data source. </param
-        >
+          />The <see cref="T:System.Data.DataSet" /> used to update the data source.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2899,8 +2899,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
             >After any data is loaded back into the <see cref="T:System.Data.DataSet" />, the <see cref="M:System.Data.Common.DbDataAdapter.OnRowUpdated(System.Data.Common.RowUpdatedEventArgs)" /> event is raised, allowing the user to inspect the reconciled <see cref="T:System.Data.DataSet" /> row and any output parameters returned by the command. After a row updates successfully, the changes to that row are accepted.</para
           >
           <para
-            >When using <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />, the order of execution is as follows: </para
-          >
+            >When using <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />, the order of execution is as follows:
+          </para>
           <list type="ordered">
             <item>
               <para
@@ -2957,8 +2957,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
               </term>
               <description>
                 <para
-                  >Use the source column names and table names in the <see cref="T:System.Data.DataSet" /> if no mapping is present. </para
-                >
+                  >Use the source column names and table names in the <see cref="T:System.Data.DataSet" /> if no mapping is present.
+                </para>
               </description>
             </item>
             <item>
@@ -2967,8 +2967,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
               </term>
               <description>
                 <para
-                  >A <see cref="T:System.SystemException" /> is generated. When the mappings are explicitly set, a missing mapping for an input parameter is usually the result of an error. </para
-                >
+                  >A <see cref="T:System.SystemException" /> is generated. When the mappings are explicitly set, a missing mapping for an input parameter is usually the result of an error.
+                </para>
               </description>
             </item>
             <item>
@@ -3005,8 +3005,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Data.DataTable" /> used to update the data source. </param
-        >
+          />The <see cref="T:System.Data.DataTable" /> used to update the data source.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -3051,8 +3051,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
             >After any data is loaded back into the <see cref="T:System.Data.DataSet" />, the <see cref="M:System.Data.Common.DbDataAdapter.OnRowUpdated(System.Data.Common.RowUpdatedEventArgs)" /> event is raised, allowing the user to inspect the reconciled <see cref="T:System.Data.DataSet" /> row and any output parameters returned by the command. After a row updates successfully, the changes to that row are accepted.</para
           >
           <para
-            >When using <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />, the order of execution is as follows: </para
-          >
+            >When using <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />, the order of execution is as follows:
+          </para>
           <list type="ordered">
             <item>
               <para
@@ -3109,8 +3109,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
               </term>
               <description>
                 <para
-                  >Use the source column names and table names in the <see cref="T:System.Data.DataSet" /> if no mapping is present. </para
-                >
+                  >Use the source column names and table names in the <see cref="T:System.Data.DataSet" /> if no mapping is present.
+                </para>
               </description>
             </item>
             <item>
@@ -3119,8 +3119,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
               </term>
               <description>
                 <para
-                  >A <see cref="T:System.SystemException" /> is generated. When the mappings are explicitly set, a missing mapping for an input parameter is usually the result of an error. </para
-                >
+                  >A <see cref="T:System.SystemException" /> is generated. When the mappings are explicitly set, a missing mapping for an input parameter is usually the result of an error.
+                </para>
               </description>
             </item>
             <item>
@@ -3157,15 +3157,15 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Data.DataRow" /> objects used to update the data source. </param
-        >
+          />An array of <see cref="T:System.Data.DataRow" /> objects used to update the data source.
+        </param>
         <param name="tableMapping">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="P:System.Data.IDataAdapter.TableMappings" /> collection to use. </param
-        >
+          />The <see cref="P:System.Data.IDataAdapter.TableMappings" /> collection to use.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -3225,8 +3225,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
             >After any data is loaded back into the <see cref="T:System.Data.DataSet" />, the <see cref="M:System.Data.Common.DbDataAdapter.OnRowUpdated(System.Data.Common.RowUpdatedEventArgs)" /> event is raised, allowing the user to inspect the reconciled <see cref="T:System.Data.DataSet" /> row and any output parameters returned by the command. After a row updates successfully, the changes to that row are accepted.</para
           >
           <para
-            >When using <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />, the order of execution is as follows: </para
-          >
+            >When using <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />, the order of execution is as follows:
+          </para>
           <list type="ordered">
             <item>
               <para
@@ -3283,8 +3283,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
               </term>
               <description>
                 <para
-                  >Use the source column names and table names in the <see cref="T:System.Data.DataSet" /> if no mapping is present. </para
-                >
+                  >Use the source column names and table names in the <see cref="T:System.Data.DataSet" /> if no mapping is present.
+                </para>
               </description>
             </item>
             <item>
@@ -3293,8 +3293,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
               </term>
               <description>
                 <para
-                  >A <see cref="T:System.SystemException" /> is generated. When the mappings are explicitly set, a missing mapping for an input parameter is usually the result of an error. </para
-                >
+                  >A <see cref="T:System.SystemException" /> is generated. When the mappings are explicitly set, a missing mapping for an input parameter is usually the result of an error.
+                </para>
               </description>
             </item>
             <item>
@@ -3331,15 +3331,15 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Data.DataSet" /> to use to update the data source. </param
-        >
+          />The <see cref="T:System.Data.DataSet" /> to use to update the data source.
+        </param>
         <param name="srcTable">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the source table to use for table mapping. </param
-        >
+          />The name of the source table to use for table mapping.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -3365,8 +3365,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.Data.Common.DbDataAdapter.UpdateBatchSize" /> property to update a data source with changes from a <see cref="T:System.Data.DataSet" />. If the data provider supports batch processing, this can increase application performance by reducing the number of round-trips to the server. In ADO.NET 2.0, this property is supported for the .NET data providers for SQL Server (SqlClient) and Oracle (OracleClient). </para
-          >
+            >Use the <see cref="P:System.Data.Common.DbDataAdapter.UpdateBatchSize" /> property to update a data source with changes from a <see cref="T:System.Data.DataSet" />. If the data provider supports batch processing, this can increase application performance by reducing the number of round-trips to the server. In ADO.NET 2.0, this property is supported for the .NET data providers for SQL Server (SqlClient) and Oracle (OracleClient).
+          </para>
           <para>Executing an extremely large batch could decrease performance. Therefore, you should test for the optimum batch size setting before implementing your application.</para>
           <para
             >An <see cref="T:System.ArgumentOutOfRangeException" /> will be thrown if the value is set to a number less than zero.</para

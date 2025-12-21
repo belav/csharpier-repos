@@ -94,8 +94,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array of <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> objects with which to initialize the new object. </param
-        >
+          />The array of <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> objects with which to initialize the new object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -133,8 +133,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" /> with which to initialize the new object. </param
-        >
+          />The <see cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" /> with which to initialize the new object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Add">
@@ -180,8 +180,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> to add to the current <see cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />. </param
-        >
+          />The <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> to add to the current <see cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddRange">
@@ -221,8 +221,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array of type <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> containing the objects to add to the current <see cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />. </param
-        >
+          />The array of type <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> containing the objects to add to the current <see cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddRange">
@@ -262,8 +262,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" /> containing the objects to add to the collection. </param
-        >
+          />The <see cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" /> containing the objects to add to the collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Contains">
@@ -309,8 +309,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> to locate. </param
-        >
+          />The <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> to locate.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CopyTo">
@@ -351,15 +351,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The one-dimensional <see cref="T:System.Array" /> that is the destination of the values copied from <see cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />. </param
-        >
+          />The one-dimensional <see cref="T:System.Array" /> that is the destination of the values copied from <see cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index into <paramref name="array" /> to begin copying. </param
-        >
+          />The index into <paramref name="array" /> to begin copying.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetEnumerator">
@@ -472,8 +472,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> to locate. </param
-        >
+          />The <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> to locate.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Insert">
@@ -514,15 +514,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index where <paramref name="value" /> should be inserted. </param
-        >
+          />The zero-based index where <paramref name="value" /> should be inserted.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> to insert. </param
-        >
+          />The <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> to insert.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Item">
@@ -590,8 +590,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> to remove from the current <see cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />. </param
-        >
+          />The <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> to remove from the current <see cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />.
+        </param>
       </Docs>
     </Member>
   </Members>

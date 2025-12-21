@@ -26,8 +26,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides a <see cref="T:System.Web.UI.ControlBuilder" /> object used at design time to apply control skins to controls. </para
-      >
+        >Provides a <see cref="T:System.Web.UI.ControlBuilder" /> object used at design time to apply control skins to controls.
+      </para>
     </summary>
   </Docs>
   <Members>
@@ -76,15 +76,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Web.UI.ControlBuilder" /> provided by the <see cref="T:System.Web.UI.ThemeProvider" /> for the control's type. </param
-        >
+          />A <see cref="T:System.Web.UI.ControlBuilder" /> provided by the <see cref="T:System.Web.UI.ThemeProvider" /> for the control's type.
+        </param>
         <param name="themePath">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The absolute path to the theme file. </param
-        >
+          />The absolute path to the theme file.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -108,8 +108,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Applies a theme and a control skin to the current control at design time, if a <see cref="T:System.Web.UI.SkinBuilder" /> object is associated with the control. </para
-          >
+            >Applies a theme and a control skin to the current control at design time, if a <see cref="T:System.Web.UI.SkinBuilder" /> object is associated with the control.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />

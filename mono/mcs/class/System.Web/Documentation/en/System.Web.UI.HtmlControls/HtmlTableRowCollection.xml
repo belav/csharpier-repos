@@ -70,8 +70,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.UI.HtmlControls.HtmlTableRow" /> to add to the collection. </param
-        >
+          />The <see cref="T:System.Web.UI.HtmlControls.HtmlTableRow" /> to add to the collection.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -137,15 +137,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A zero-based <see cref="T:System.Array" /> that receives the copied items from the <see cref="T:System.Web.UI.HtmlControls.HtmlTableRowCollection" />. </param
-        >
+          />A zero-based <see cref="T:System.Array" /> that receives the copied items from the <see cref="T:System.Web.UI.HtmlControls.HtmlTableRowCollection" />.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first index in the specified array to receive the items. </param
-        >
+          />The first index in the specified array to receive the items.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -258,15 +258,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The location in the <see cref="T:System.Web.UI.HtmlControls.HtmlTableRowCollection" /> at which to add the <see cref="T:System.Web.UI.HtmlControls.HtmlTableRow" />. </param
-        >
+          />The location in the <see cref="T:System.Web.UI.HtmlControls.HtmlTableRowCollection" /> at which to add the <see cref="T:System.Web.UI.HtmlControls.HtmlTableRow" />.
+        </param>
         <param name="row">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.UI.HtmlControls.HtmlTableRow" /> to add to the <see cref="T:System.Web.UI.HtmlControls.HtmlTableRowCollection" />. </param
-        >
+          />The <see cref="T:System.Web.UI.HtmlControls.HtmlTableRow" /> to add to the <see cref="T:System.Web.UI.HtmlControls.HtmlTableRowCollection" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -386,8 +386,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.UI.HtmlControls.HtmlTableRow" /> to remove from the <see cref="T:System.Web.UI.HtmlControls.HtmlTableRowCollection" />. </param
-        >
+          />The <see cref="T:System.Web.UI.HtmlControls.HtmlTableRow" /> to remove from the <see cref="T:System.Web.UI.HtmlControls.HtmlTableRowCollection" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -424,8 +424,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the <see cref="T:System.Web.UI.HtmlControls.HtmlTableRow" /> to remove from the <see cref="T:System.Web.UI.HtmlControls.HtmlTableRowCollection" />. </param
-        >
+          />The index of the <see cref="T:System.Web.UI.HtmlControls.HtmlTableRow" /> to remove from the <see cref="T:System.Web.UI.HtmlControls.HtmlTableRowCollection" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

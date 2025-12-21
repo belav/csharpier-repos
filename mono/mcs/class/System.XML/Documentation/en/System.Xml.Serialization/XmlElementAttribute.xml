@@ -61,8 +61,8 @@
         >If you apply the <see cref="T:System.Xml.Serialization.XmlElementAttribute" /> to a field or property that returns an array, the items in the array are encoded as a sequence of XML elements.</para
       >
       <para
-        >In contrast if an <see cref="T:System.Xml.Serialization.XmlElementAttribute" /> is not applied to such a field or property, the items in the array are encoded as a sequence of elements, nested under an element named after the field or property. (Use the <see cref="T:System.Xml.Serialization.XmlArrayAttribute" /> and <see cref="T:System.Xml.Serialization.XmlArrayItemAttribute" /> attributes to control how an array is serialized.) </para
-      >
+        >In contrast if an <see cref="T:System.Xml.Serialization.XmlElementAttribute" /> is not applied to such a field or property, the items in the array are encoded as a sequence of elements, nested under an element named after the field or property. (Use the <see cref="T:System.Xml.Serialization.XmlArrayAttribute" /> and <see cref="T:System.Xml.Serialization.XmlArrayItemAttribute" /> attributes to control how an array is serialized.)
+      </para>
       <para
         >You can set the <see cref="P:System.Xml.Serialization.XmlElementAttribute.Type" /> property to specify a type that is derived from the type of the original field or property--that is, the field or property to which you have applied the <see cref="T:System.Xml.Serialization.XmlElementAttribute" />.</para
       >
@@ -146,8 +146,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML element name of the serialized member. </param
-        >
+          />The XML element name of the serialized member.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -184,8 +184,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of an object derived from the member's type. </param
-        >
+          />The <see cref="T:System.Type" /> of an object derived from the member's type.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -229,15 +229,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML element name of the serialized member. </param
-        >
+          />The XML element name of the serialized member.
+        </param>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of an object derived from the member's type. </param
-        >
+          />The <see cref="T:System.Type" /> of an object derived from the member's type.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DataType">
@@ -785,8 +785,8 @@
             >The <see cref="P:System.Xml.Serialization.XmlAttributeAttribute.Form" /> property determines whether an XML element is qualified or unqualified. The <see cref="P:System.Xml.Serialization.XmlAttributeAttribute.Form" /> property conforms to the World Wide Web Consortium (www.w3.org) 1999 specification, "Namespaces in XML".</para
           >
           <para
-            >If the <see cref="P:System.Xml.Serialization.XmlAttributeAttribute.Namespace" /> property is set to any value, attempting to set the <see cref="P:System.Xml.Serialization.XmlElementAttribute.Form" /> property to XmlSchemaForm.Unqualified throws an exception. The default setting, XmlSchemaForm.None, instructs the <see cref="T:System.Xml.Serialization.XmlSerializer" /> to check the schema for the XML document to determine whether the namespace is qualified. If the schema does not specify a value for an individual element or attribute, the <see cref="T:System.Xml.Serialization.XmlSerializer" /> uses the elementFormDefault and attributeFormDefault values to determine whether an element or attribute is qualified. The following XML code shows a schema: </para
-          >
+            >If the <see cref="P:System.Xml.Serialization.XmlAttributeAttribute.Namespace" /> property is set to any value, attempting to set the <see cref="P:System.Xml.Serialization.XmlElementAttribute.Form" /> property to XmlSchemaForm.Unqualified throws an exception. The default setting, XmlSchemaForm.None, instructs the <see cref="T:System.Xml.Serialization.XmlSerializer" /> to check the schema for the XML document to determine whether the namespace is qualified. If the schema does not specify a value for an individual element or attribute, the <see cref="T:System.Xml.Serialization.XmlSerializer" /> uses the elementFormDefault and attributeFormDefault values to determine whether an element or attribute is qualified. The following XML code shows a schema:
+          </para>
           <code> &lt;schema elementFormDefault="qualified" 
  attributeFormDefault="unqualified"... &gt;
   &lt;element name="Name"/&gt;
@@ -888,8 +888,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="F:System.Xml.Serialization.CodeGenerationOptions.GenerateOrder" /> enumeration to instruct the <see cref="T:System.Web.Services.Description.ServiceDescriptionImporter" /> to generate code that sets the <see cref="P:System.Xml.Serialization.XmlElementAttribute.Order" /> property. </para
-          >
+            >Use the <see cref="F:System.Xml.Serialization.CodeGenerationOptions.GenerateOrder" /> enumeration to instruct the <see cref="T:System.Web.Services.Description.ServiceDescriptionImporter" /> to generate code that sets the <see cref="P:System.Xml.Serialization.XmlElementAttribute.Order" /> property.
+          </para>
           <block subset="none" type="note">
             <para
               >Once the <see cref="P:System.Xml.Serialization.XmlElementAttribute.Order" /> property has been used on one public property or field in a type, it must be applied to all public properties and fields for that type and all inherited types.</para

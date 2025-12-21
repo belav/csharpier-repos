@@ -78,8 +78,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object with which to compare the current object. </param
-        >
+          />The object with which to compare the current object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -155,8 +155,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value whose target's type is to be returned. </param
-        >
+          />The value whose target's type is to be returned.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="MakeTypedReference">
@@ -190,24 +190,24 @@
         <exception cref="T:System.ArgumentException">
           <para
             >The 
-<paramref name="flds" /> array has no elements. </para
-          >
+<paramref name="flds" /> array has no elements.
+          </para>
           <para>-or-</para>
           <para
-            >An element of <paramref name="flds" /> is not a <see cref="T:System.Reflection.FieldInfo" />. </para
-          >
+            >An element of <paramref name="flds" /> is not a <see cref="T:System.Reflection.FieldInfo" />.
+          </para>
         </exception>
         <exception cref="T:System.ArgumentNullException">
           <para>
-            <paramref name="target" /> or <paramref name="flds" /> is <see langword="null" />. </para
-          >
+            <paramref name="target" /> or <paramref name="flds" /> is <see langword="null" />.
+          </para>
           <para>-or-</para>
           <para>An element of <paramref name="flds" /> is <see langword="null" />. </para>
         </exception>
         <exception cref="T:System.MissingMemberException">
           <para
-            >Parameter <paramref name="target" /> does not contain the field described by the first element of <paramref name="flds" />, or an element of <paramref name="flds" /> describes a field that is not contained in the field described by the succeeding element of <paramref name="flds" />. </para
-          >
+            >Parameter <paramref name="target" /> does not contain the field described by the first element of <paramref name="flds" />, or an element of <paramref name="flds" /> describes a field that is not contained in the field described by the succeeding element of <paramref name="flds" />.
+          </para>
           <para>-or-</para>
           <para
             >The field described by an element of <paramref name="flds" /> is not a value type.</para
@@ -229,8 +229,8 @@
                 <a href="42d9dc2a-8fcc-4ff3-b002-4ff260ef3dc5"
                   >Security Considerations for Reflection</a
                 >
-              </format>.) </para
-            >
+              </format>.)
+            </para>
             <para>To use this functionality, your application should target the net_v35_long or later.</para>
           </block>
         </remarks>
@@ -249,8 +249,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that contains the field described by the first element of <paramref name="flds" />. </param
-        >
+          />An object that contains the field described by the first element of <paramref name="flds" />.
+        </param>
         <param name="flds">
           <attribution
             license="cc4"
@@ -310,15 +310,11 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The target of the conversion. </param
-        >
+          />The target of the conversion.
+        </param>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The value to be converted. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to be converted.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="TargetTypeToken">
@@ -357,8 +353,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The TypedReference for which the type handle is requested. </param
-        >
+          />The TypedReference for which the type handle is requested.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ToObject">
@@ -400,8 +396,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The TypedReference to be converted. </param
-        >
+          />The TypedReference to be converted.
+        </param>
       </Docs>
     </Member>
   </Members>

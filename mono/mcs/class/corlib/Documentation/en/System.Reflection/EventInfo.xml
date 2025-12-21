@@ -49,12 +49,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see cref="T:System.Reflection.EventInfo" /> class to inspect events and to hook up event handlers, as shown in the example code for the <see cref="M:System.Reflection.EventInfo.AddEventHandler(System.Object,System.Delegate)" /> method. </para
-      >
+        >Use the <see cref="T:System.Reflection.EventInfo" /> class to inspect events and to hook up event handlers, as shown in the example code for the <see cref="M:System.Reflection.EventInfo.AddEventHandler(System.Object,System.Delegate)" /> method.
+      </para>
       <block subset="none" type="note">
         <para>
-          <see cref="T:System.Reflection.EventInfo" /> is not intended to be used to raise events. An object raises events as dictated by its internal state. </para
-        >
+          <see cref="T:System.Reflection.EventInfo" /> is not intended to be used to raise events. An object raises events as dictated by its internal state.
+        </para>
       </block>
       <para>Events are used with delegates. An event listener instantiates an event-handler delegate that is invoked whenever the event is raised by an event source. In order to connect to the event source, the event listener adds this delegate to the invocation list on the source. When the event is raised, the invoke method of the event-handler delegate is called. Both multicast and single-cast event notifications are supported. The Add and Remove methods, as well as the event-handler delegate class associated with an event, must be marked in the metadata.</para>
       <para>Delegates are object-oriented function pointers. In C or C++, a function pointer is a reference to a method. In contrast to the C or C++ function pointer, a delegate contains two references: a reference to a method and a reference to an object that supports the method. Delegates can invoke a method without knowing the class type that declares or inherits the method. Delegates need only know the return type and parameter list of the method.</para>
@@ -146,15 +146,15 @@
           <para>Adds an event handler to an event source.</para>
         </summary>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />The event source. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The event source.
+        </param>
         <param name="handler">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Encapsulates a method or methods to be invoked when the event is raised by the target. </param
-        >
+          />Encapsulates a method or methods to be invoked when the event is raised by the target.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -380,8 +380,8 @@
           <paramref name="nonPublic" /> is <see langword="true" />, the method used to add an event handler delegate is non-public, and the caller does not have permission to reflect on non-public methods.</exception
         >
         <permission cref="T:System.Security.Permissions.ReflectionPermission"
-          >Requires permission to reflect non-public members of a type in loaded assemblies. See <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.TypeInformation" />. </permission
-        >
+          >Requires permission to reflect non-public members of a type in loaded assemblies. See <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.TypeInformation" />.
+        </permission>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The GetAddMethod initializes and adds the event subscribe method as a Boolean value. The AddEventHandler method is used to add an event-handler delegate to the invocation list of an event source.</para>
@@ -403,8 +403,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if non-public methods can be returned; otherwise, false. </param
-        >
+          />true if non-public methods can be returned; otherwise, false.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -630,8 +630,8 @@
           <paramref name="nonPublic" /> is <see langword="true" />, the method used to raise the event is non-public, and the caller does not have permission to reflect on non-public methods.</exception
         >
         <permission cref="T:System.Security.Permissions.ReflectionPermission"
-          >Requires permission to reflect non-public members of a type in loaded assemblies. See <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.TypeInformation" />. </permission
-        >
+          >Requires permission to reflect non-public members of a type in loaded assemblies. See <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.TypeInformation" />.
+        </permission>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method usually returns null for events declared with the C# event keyword or the Visual Basic Event keyword. This is because the C# and Visual Basic compilers do not generate such a method by default.</para>
@@ -649,8 +649,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if non-public methods can be returned; otherwise, false. </param
-        >
+          />true if non-public methods can be returned; otherwise, false.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -746,8 +746,8 @@
           <paramref name="nonPublic" /> is <see langword="true" />, the method used to remove an event handler delegate is non-public, and the caller does not have permission to reflect on non-public methods.</exception
         >
         <permission cref="T:System.Security.Permissions.ReflectionPermission"
-          >Requires permission to reflect non-public members of a type in loaded assemblies. See <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.TypeInformation" />. </permission
-        >
+          >Requires permission to reflect non-public members of a type in loaded assemblies. See <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.TypeInformation" />.
+        </permission>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>When overridden in a derived class, retrieves the MethodInfo object for removing a method of the event, specifying whether to return non-public methods.</para>
@@ -763,8 +763,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if non-public methods can be returned; otherwise, false. </param
-        >
+          />true if non-public methods can be returned; otherwise, false.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1043,15 +1043,15 @@
           <para>Removes an event handler from an event source.</para>
         </summary>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />The event source. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The event source.
+        </param>
         <param name="handler">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The delegate to be disassociated from the events raised by target. </param
-        >
+          />The delegate to be disassociated from the events raised by target.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

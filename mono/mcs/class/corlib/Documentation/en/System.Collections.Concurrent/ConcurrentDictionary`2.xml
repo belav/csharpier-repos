@@ -55,8 +55,8 @@
         </format> configuration element to true in the run-time environment.</para
       >
       <para
-        >Like the <see cref="T:System.Collections.Generic.Dictionary`2" /> class, <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" /> implements the <see cref="T:System.Collections.Generic.IDictionary`2" /> interface. In addition, <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" /> provides several methods for adding or updating key/value pairs in the dictionary, as described in the following table.  </para
-      >
+        >Like the <see cref="T:System.Collections.Generic.Dictionary`2" /> class, <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" /> implements the <see cref="T:System.Collections.Generic.IDictionary`2" /> interface. In addition, <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" /> provides several methods for adding or updating key/value pairs in the dictionary, as described in the following table.
+      </para>
       <list type="table">
         <listheader>
           <item>

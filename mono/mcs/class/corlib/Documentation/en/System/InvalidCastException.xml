@@ -52,8 +52,7 @@ public class InvalidCastExample {
    }
  }
 }
-   </code
-      >
+   </code>
       <para>The output is</para>
       <code>
 Caught: System.InvalidCastException: Specified cast is not valid.
@@ -63,8 +62,8 @@ Caught: System.InvalidCastException: Specified cast is not valid.
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >An <see cref="T:System.InvalidCastException" /> exception is thrown when the conversion of an instance of one type to another type is not supported. It differs from an <see cref="T:System.OverflowException" /> exception, which is thrown when a conversion of one type to another is supported, but the value of the source type is outside the range of the target type. </para
-      >
+        >An <see cref="T:System.InvalidCastException" /> exception is thrown when the conversion of an instance of one type to another type is not supported. It differs from an <see cref="T:System.OverflowException" /> exception, which is thrown when a conversion of one type to another is supported, but the value of the source type is outside the range of the target type.
+      </para>
       <para
         >For information about conversions supported by the system, see the <see cref="T:System.Convert" /> class. For errors that occur when the destination type can store source type values, but is not large enough to store a specific source value, see the <see cref="T:System.OverflowException" /> exception.</para
       >
@@ -72,24 +71,24 @@ Caught: System.InvalidCastException: Specified cast is not valid.
         <para>In many cases, your language compiler detects that no conversion exists between the source type and the target type and issues a compiler error. </para>
       </block>
       <para
-        >Some of the conditions under which an attempted conversion throws an <see cref="T:System.InvalidCastException" /> exception include the following: </para
-      >
+        >Some of the conditions under which an attempted conversion throws an <see cref="T:System.InvalidCastException" /> exception include the following:
+      </para>
       <list type="bullet">
         <item>
           <para
-            >You directly or indirectly call a primitive type's <see cref="T:System.IConvertible" /> implementation that does not support a particular conversion. For example, trying to convert a <see cref="T:System.Boolean" /> value to a <see cref="T:System.Char" /> or a <see cref="T:System.DateTime" /> value to an <see cref="T:System.Int32" /> throws an <see cref="T:System.InvalidCastException" /> exception. The following example calls both the <see cref="M:System.Boolean.System#IConvertible#ToChar(System.IFormatProvider)" /> and <see cref="M:System.Convert.ToChar(System.Boolean)" /> methods to convert a <see cref="T:System.Boolean" /> value to a <see cref="T:System.Char" />. In both cases, the method call throws an <see cref="T:System.InvalidCastException" /> exception.  </para
-          >
+            >You directly or indirectly call a primitive type's <see cref="T:System.IConvertible" /> implementation that does not support a particular conversion. For example, trying to convert a <see cref="T:System.Boolean" /> value to a <see cref="T:System.Char" /> or a <see cref="T:System.DateTime" /> value to an <see cref="T:System.Int32" /> throws an <see cref="T:System.InvalidCastException" /> exception. The following example calls both the <see cref="M:System.Boolean.System#IConvertible#ToChar(System.IFormatProvider)" /> and <see cref="M:System.Convert.ToChar(System.Boolean)" /> methods to convert a <see cref="T:System.Boolean" /> value to a <see cref="T:System.Char" />. In both cases, the method call throws an <see cref="T:System.InvalidCastException" /> exception.
+          </para>
           <para>code reference: System.InvalidCastException#2</para>
         </item>
         <item>
           <para
-            >You've called the <see cref="M:System.Convert.ChangeType(System.Object,System.Type)" /> method to convert an object from one type to another, but one or both types don't implement the <see cref="T:System.IConvertible" /> interface. </para
-          >
+            >You've called the <see cref="M:System.Convert.ChangeType(System.Object,System.Type)" /> method to convert an object from one type to another, but one or both types don't implement the <see cref="T:System.IConvertible" /> interface.
+          </para>
         </item>
         <item>
           <para
-            >Neither the source type nor the target type defines an explicit or narrowing conversion between the two types, and the <see cref="T:System.IConvertible" /> implementation of one or both types doesn't support a conversion from the source type to the target type. </para
-          >
+            >Neither the source type nor the target type defines an explicit or narrowing conversion between the two types, and the <see cref="T:System.IConvertible" /> implementation of one or both types doesn't support a conversion from the source type to the target type.
+          </para>
         </item>
         <item>
           <para>You are downcasting, that is, trying to convert an instance of a base type to one of its derived types. In the following example, trying to convert a Person object to a PersonWithID object fails. </para>
@@ -99,8 +98,8 @@ Caught: System.InvalidCastException: Specified cast is not valid.
       </list>
       <para>For an explicit reference conversion to be successful, the source value must be null, or the object type referenced by the source argument must be convertible to the destination type by an implicit reference conversion.</para>
       <para
-        >The following intermediate language (IL) instructions throw an <see cref="T:System.InvalidCastException" /> exception: </para
-      >
+        >The following intermediate language (IL) instructions throw an <see cref="T:System.InvalidCastException" /> exception:
+      </para>
       <list type="bullet">
         <item>
           <para>
@@ -273,8 +272,8 @@ Caught: System.InvalidCastException: Specified cast is not valid.
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The message that describes the error. </param
-        >
+          />The message that describes the error.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -317,15 +316,15 @@ Caught: System.InvalidCastException: Specified cast is not valid.
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that holds the serialized object data. </param
-        >
+          />The object that holds the serialized object data.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The contextual information about the source or destination. </param
-        >
+          />The contextual information about the source or destination.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -405,15 +404,15 @@ Caught: System.InvalidCastException: Specified cast is not valid.
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The error message that explains the reason for the exception. </param
-        >
+          />The error message that explains the reason for the exception.
+        </param>
         <param name="innerException">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The exception that is the cause of the current exception. If the <paramref name="innerException" /> parameter is not null, the current exception is raised in a catch block that handles the inner exception. </param
-        >
+          />The exception that is the cause of the current exception. If the <paramref name="innerException" /> parameter is not null, the current exception is raised in a catch block that handles the inner exception.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

@@ -9,6 +9,6 @@ long b = a;     // implicit conversion from int to long
 int c = (int) b;  // explicit conversion from long to int  
 ]]>
       </code_example>end example]</example
-    > Some conversions are defined by the language. Programs may also define their own conversions (<hyperlink>13.4</hyperlink>). </paragraph
-  >
+    > Some conversions are defined by the language. Programs may also define their own conversions (<hyperlink>13.4</hyperlink>).
+  </paragraph>
 </clause>

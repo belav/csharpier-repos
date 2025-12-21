@@ -39,8 +39,8 @@
       <para>set APPDOMAIN_MANAGER_ASM=customappDomainmanager, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f1368f7b12a08d72</para>
       <block subset="none" type="note">
         <para
-          >If the assembly that contains your subclass of <see cref="T:System.AppDomainManager" /> depends on assemblies that are marked with the conditional <see cref="T:System.Security.AllowPartiallyTrustedCallersAttribute" /> (APTCA) attribute, you must include those assemblies in the list that you pass to the <see cref="P:System.AppDomainSetup.PartialTrustVisibleAssemblies" /> property of the <see cref="T:System.AppDomainSetup" /> you use to create application domains. Otherwise, the assemblies that are marked with the conditional APTCA attribute will be disabled. </para
-        >
+          >If the assembly that contains your subclass of <see cref="T:System.AppDomainManager" /> depends on assemblies that are marked with the conditional <see cref="T:System.Security.AllowPartiallyTrustedCallersAttribute" /> (APTCA) attribute, you must include those assemblies in the list that you pass to the <see cref="P:System.AppDomainSetup.PartialTrustVisibleAssemblies" /> property of the <see cref="T:System.AppDomainSetup" /> you use to create application domains. Otherwise, the assemblies that are marked with the conditional APTCA attribute will be disabled.
+        </para>
       </block>
       <para
         >The <see cref="T:System.AppDomainManager" /> is the managed equivalent of the unmanaged host. An <see cref="T:System.AppDomainManager" /> object participates in the creation of new application domains in a process and can customize the new <see cref="T:System.AppDomain" /> before other managed code runs. The <see cref="T:System.AppDomainManager" /> can also supply host managers that participate in other aspects of common language runtime execution. For example, an <see cref="T:System.AppDomainManager" /> can identify a <see cref="T:System.Security.HostSecurityManager" /> object that participates in the security decisions of the application domain.</para
@@ -92,8 +92,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.AppDomainManager" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.AppDomainManager" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -222,8 +222,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The friendly name of the domain. </param
-        >
+          />The friendly name of the domain.
+        </param>
         <param name="securityInfo">
           <attribution
             license="cc4"
@@ -284,8 +284,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The friendly name of the domain. </param
-        >
+          />The friendly name of the domain.
+        </param>
         <param name="securityInfo">
           <attribution
             license="cc4"
@@ -357,8 +357,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property allows a host to provide a <see cref="T:System.Threading.HostExecutionContextManager" /> that can participate in the flow of the execution context across asynchronous calls. </para
-          >
+            >This property allows a host to provide a <see cref="T:System.Threading.HostExecutionContextManager" /> that can participate in the flow of the execution context across asynchronous calls.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -389,8 +389,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property allows a host to provide a <see cref="T:System.Security.HostSecurityManager" /> to participate in the security decisions for the application domain. </para
-          >
+            >This property allows a host to provide a <see cref="T:System.Security.HostSecurityManager" /> to participate in the security decisions for the application domain.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

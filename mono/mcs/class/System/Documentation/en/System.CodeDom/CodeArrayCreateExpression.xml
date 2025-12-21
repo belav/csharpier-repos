@@ -106,15 +106,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeTypeReference" /> indicating the data type of the array to create. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeTypeReference" /> indicating the data type of the array to create.
+        </param>
         <param name="size">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An expression that indicates the number of indexes of the array to create. </param
-        >
+          />An expression that indicates the number of indexes of the array to create.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -156,15 +156,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeTypeReference" /> that indicates the data type of the array to create. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeTypeReference" /> that indicates the data type of the array to create.
+        </param>
         <param name="initializers">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of expressions to use to initialize the array. </param
-        >
+          />An array of expressions to use to initialize the array.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -200,15 +200,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeTypeReference" /> indicating the data type of the array to create. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeTypeReference" /> indicating the data type of the array to create.
+        </param>
         <param name="size">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of indexes of the array to create. </param
-        >
+          />The number of indexes of the array to create.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -244,15 +244,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the data type of the array to create. </param
-        >
+          />The name of the data type of the array to create.
+        </param>
         <param name="size">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An expression that indicates the number of indexes of the array to create. </param
-        >
+          />An expression that indicates the number of indexes of the array to create.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -294,15 +294,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the data type of the array to create. </param
-        >
+          />The name of the data type of the array to create.
+        </param>
         <param name="initializers">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of expressions to use to initialize the array. </param
-        >
+          />An array of expressions to use to initialize the array.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -338,15 +338,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the data type of the array to create. </param
-        >
+          />The name of the data type of the array to create.
+        </param>
         <param name="size">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of indexes of the array to create. </param
-        >
+          />The number of indexes of the array to create.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -382,15 +382,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data type of the array to create. </param
-        >
+          />The data type of the array to create.
+        </param>
         <param name="size">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An expression that indicates the number of indexes of the array to create. </param
-        >
+          />An expression that indicates the number of indexes of the array to create.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -432,15 +432,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data type of the array to create. </param
-        >
+          />The data type of the array to create.
+        </param>
         <param name="initializers">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of expressions to use to initialize the array. </param
-        >
+          />An array of expressions to use to initialize the array.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -476,15 +476,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data type of the array to create. </param
-        >
+          />The data type of the array to create.
+        </param>
         <param name="size">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of indexes of the array to create. </param
-        >
+          />The number of indexes of the array to create.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateType">

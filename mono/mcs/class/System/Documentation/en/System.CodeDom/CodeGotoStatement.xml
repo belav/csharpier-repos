@@ -73,8 +73,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeGotoStatement" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeGotoStatement" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -107,8 +107,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the label at which to continue program execution. </param
-        >
+          />The name of the label at which to continue program execution.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Label">

@@ -47,8 +47,8 @@
         >The <see cref="P:System.Windows.Forms.ProgressBar.Style" /> property determines the style of <see cref="T:System.Windows.Forms.ProgressBar" /> that is displayed. Note that the <see cref="T:System.Windows.Forms.ProgressBar" /> control can only be oriented horizontally. For an example of how to create a vertically oriented <see cref="T:System.Windows.Forms.ProgressBar" />, see the <see cref="T:System.Windows.Forms.ProgressBarRenderer" /> class. The <see cref="T:System.Windows.Forms.ProgressBar" /> control is typically used when an application performs tasks such as copying files or printing documents. Users of an application might consider an application unresponsive if there is no visual cue. By using the <see cref="T:System.Windows.Forms.ProgressBar" /> in your application, you alert the user that the application is performing a lengthy task and that the application is still responding.</para
       >
       <para
-        >The <see cref="P:System.Windows.Forms.ProgressBar.Maximum" /> and <see cref="P:System.Windows.Forms.ProgressBar.Minimum" /> properties define the range of values to represent the progress of a task. The <see cref="P:System.Windows.Forms.ProgressBar.Minimum" /> property is typically set to a value of 0, and the <see cref="P:System.Windows.Forms.ProgressBar.Maximum" /> property is typically set to a value indicating the completion of a task. For example, to properly display the progress when copying a group of files, the <see cref="P:System.Windows.Forms.ProgressBar.Maximum" /> property could be set to the total number of files to be copied. </para
-      >
+        >The <see cref="P:System.Windows.Forms.ProgressBar.Maximum" /> and <see cref="P:System.Windows.Forms.ProgressBar.Minimum" /> properties define the range of values to represent the progress of a task. The <see cref="P:System.Windows.Forms.ProgressBar.Minimum" /> property is typically set to a value of 0, and the <see cref="P:System.Windows.Forms.ProgressBar.Maximum" /> property is typically set to a value indicating the completion of a task. For example, to properly display the progress when copying a group of files, the <see cref="P:System.Windows.Forms.ProgressBar.Maximum" /> property could be set to the total number of files to be copied.
+      </para>
       <para
         >The <see cref="P:System.Windows.Forms.ProgressBar.Value" /> property represents the progress that the application has made toward completing the operation. The value displayed by the <see cref="T:System.Windows.Forms.ProgressBar" /> only approximates the current value of the <see cref="P:System.Windows.Forms.ProgressBar.Value" /> property. Based on the size of the <see cref="T:System.Windows.Forms.ProgressBar" />, the <see cref="P:System.Windows.Forms.ProgressBar.Value" /> property determines when to display the next block or increase the size of the bar.</para
       >
@@ -729,8 +729,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The amount by which to increment the progress bar's current position. </param
-        >
+          />The amount by which to increment the progress bar's current position.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1038,8 +1038,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnForeColorChanged">
@@ -1077,8 +1077,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.Windows.Forms.Control.ForeColorChanged" /> event. </para
-          >
+            >Raises the <see cref="E:System.Windows.Forms.Control.ForeColorChanged" /> event.
+          </para>
         </summary>
         <param name="e">
           <attribution
@@ -1199,16 +1199,16 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="P:System.Windows.Forms.ProgressBar.RightToLeftLayout" /> event. </para
-          >
+            >Raises the <see cref="P:System.Windows.Forms.ProgressBar.RightToLeftLayout" /> event.
+          </para>
         </summary>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Padding">
@@ -1273,8 +1273,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1446,14 +1446,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Windows.Forms.ProgressBar.RightToLeftLayout" /> property is useful when creating an application for use with languages that read from right to left. </para
-          >
+            >The <see cref="P:System.Windows.Forms.ProgressBar.RightToLeftLayout" /> property is useful when creating an application for use with languages that read from right to left.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <see cref="T:System.Windows.Forms.ProgressBar" /> and any text it contains is displayed from right to left. </para
-          >
+            >Gets or sets a value indicating whether the <see cref="T:System.Windows.Forms.ProgressBar" /> and any text it contains is displayed from right to left.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -1472,8 +1472,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1688,8 +1688,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string that represents the current <see cref="T:System.Windows.Forms.ProgressBar" />. </para
-          >
+            >A string that represents the current <see cref="T:System.Windows.Forms.ProgressBar" />.
+          </para>
         </returns>
       </Docs>
       <AssemblyInfo>

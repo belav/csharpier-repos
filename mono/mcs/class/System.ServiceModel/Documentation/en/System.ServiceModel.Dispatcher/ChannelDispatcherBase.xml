@@ -23,14 +23,14 @@
         >This is used by developers who want to keep the indigo1 programming model but replace the system-provided runtime. Such applications will pull messages out of channels and handle them directly with user-defined dispatchers. To use <see cref="T:System.ServiceModel.Dispatcher.ChannelDispatcherBase" /> , create a class derived from it, extend <see cref="T:System.ServiceModel.ServiceHost" /> and override <see cref="M:System.ServiceModel.ServiceHostBase.InitializeRuntime" />, adding instances of your class derived from <see cref="T:System.ServiceModel.Dispatcher.ChannelDispatcherBase" /> to <see cref="P:System.ServiceModel.ServiceHostBase.ChannelDispatchers" />.</para
       >
       <para
-        >The <see cref="T:System.ServiceModel.Channels.IChannelListener" /> and the <see cref="T:System.ServiceModel.ServiceHost" />, associated with the <see cref="T:System.ServiceModel.Dispatcher.ChannelDispatcherBase" /> object are available for inspection or modification through the <see cref="P:System.ServiceModel.Dispatcher.ChannelDispatcherBase.Listener" /> and <see cref="P:System.ServiceModel.Dispatcher.ChannelDispatcherBase.Host" /> respectively. </para
-      >
+        >The <see cref="T:System.ServiceModel.Channels.IChannelListener" /> and the <see cref="T:System.ServiceModel.ServiceHost" />, associated with the <see cref="T:System.ServiceModel.Dispatcher.ChannelDispatcherBase" /> object are available for inspection or modification through the <see cref="P:System.ServiceModel.Dispatcher.ChannelDispatcherBase.Listener" /> and <see cref="P:System.ServiceModel.Dispatcher.ChannelDispatcherBase.Host" /> respectively.
+      </para>
       <para>
         <see cref="T:System.ServiceModel.ServiceHost" /> calls the <see cref="M:System.ServiceModel.Dispatcher.ChannelDispatcherBase.Attach(System.ServiceModel.ServiceHostBase)" /> or <see cref="M:System.ServiceModel.Dispatcher.ChannelDispatcherBase.Detach(System.ServiceModel.ServiceHostBase)" /> methods when adding or removing a <see cref="T:System.ServiceModel.Dispatcher.ChannelDispatcherBase" /> item from its <see cref="P:System.ServiceModel.ServiceHostBase.ChannelDispatchers" /> collection.</para
       >
       <para>
-        <see cref="T:System.ServiceModel.ServiceHost" /> calls the <see cref="M:System.ServiceModel.Dispatcher.ChannelDispatcherBase.CloseInput" /> during shutdown before closing InstanceContexts. indigo1 uses this call to close datagram channels and wait for all messages to get to an InstanceContext.  </para
-      >
+        <see cref="T:System.ServiceModel.ServiceHost" /> calls the <see cref="M:System.ServiceModel.Dispatcher.ChannelDispatcherBase.CloseInput" /> during shutdown before closing InstanceContexts. indigo1 uses this call to close datagram channels and wait for all messages to get to an InstanceContext.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -54,8 +54,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Dispatcher.ChannelDispatcherBase" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Dispatcher.ChannelDispatcherBase" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>

@@ -69,8 +69,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ComponentModel.Design.IDesignerHost" /> of the document. </param
-        >
+          />The <see cref="T:System.ComponentModel.Design.IDesignerHost" /> of the document.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Designer">

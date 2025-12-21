@@ -149,8 +149,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.IFormatProvider" /> object that controls formatting. </param
-        >
+          />An <see cref="T:System.IFormatProvider" /> object that controls formatting.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -306,8 +306,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -620,8 +620,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The TextWriter to synchronize. </param
-        >
+          />The TextWriter to synchronize.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -687,8 +687,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The Boolean value to write. </param
-        >
+          />The Boolean value to write.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -734,8 +734,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character to write to the text stream. </param
-        >
+          />The character to write to the text stream.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -786,8 +786,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character array to write to the text stream. </param
-        >
+          />The character array to write to the text stream.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -830,8 +830,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The decimal value to write. </param
-        >
+          />The decimal value to write.
+        </param>
       </Docs>
       <Excluded>1</Excluded>
       <ExcludedLibrary>ExtendedNumerics</ExcludedLibrary>
@@ -880,8 +880,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The 8-byte floating-point value to write. </param
-        >
+          />The 8-byte floating-point value to write.
+        </param>
       </Docs>
       <Excluded>1</Excluded>
       <ExcludedLibrary>ExtendedNumerics</ExcludedLibrary>
@@ -930,8 +930,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The 4-byte signed integer to write. </param
-        >
+          />The 4-byte signed integer to write.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -986,8 +986,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The 8-byte signed integer to write. </param
-        >
+          />The 8-byte signed integer to write.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1034,12 +1034,8 @@
           <para>Writes the text representation of an object to the text string or stream by calling the ToString method on that object.</para>
         </summary>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The object to write. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The object to write.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1087,8 +1083,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The 4-byte floating-point value to write. </param
-        >
+          />The 4-byte floating-point value to write.
+        </param>
       </Docs>
       <Excluded>1</Excluded>
       <ExcludedLibrary>ExtendedNumerics</ExcludedLibrary>
@@ -1137,12 +1133,8 @@
           <para>Writes a string to the text string or stream.</para>
         </summary>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The string to write. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The string to write.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1196,8 +1188,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The 4-byte unsigned integer to write. </param
-        >
+          />The 4-byte unsigned integer to write.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1251,8 +1243,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The 8-byte unsigned integer to write. </param
-        >
+          />The 8-byte unsigned integer to write.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1304,8 +1296,8 @@
               <para
                 >For more information about the composite formatting feature, see <format type="text/html">
                   <a href="87b7d528-73f6-43c6-b71a-f23043039a49">Composite Formatting</a>
-                </format>. </para
-              >
+                </format>.
+              </para>
             </item>
             <item>
               <para
@@ -1313,8 +1305,8 @@
                   <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">Standard Numeric Format Strings</a>
                 </format> and <format type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
-                </format>. </para
-              >
+                </format>.
+              </para>
             </item>
             <item>
               <para
@@ -1324,8 +1316,8 @@
                   >
                 </format> and <format type="text/html">
                   <a href="98b374e3-0cc2-4c78-ab44-efb671d71984">Custom DateTime Format Strings</a>
-                </format>. </para
-              >
+                </format>.
+              </para>
             </item>
             <item>
               <para
@@ -1338,13 +1330,13 @@
               <para
                 >For more information about formatting, see <format type="text/html">
                   <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Types</a>
-                </format>. </para
-              >
+                </format>.
+              </para>
             </item>
           </list>
           <para
-            >The <paramref name="format" /> parameter consists of zero or more runs of text intermixed with zero or more indexed placeholders, called format items, that correspond to an object in the parameter list of this method. The formatting process replaces each format item with the string representation of the value of the corresponding object. </para
-          >
+            >The <paramref name="format" /> parameter consists of zero or more runs of text intermixed with zero or more indexed placeholders, called format items, that correspond to an object in the parameter list of this method. The formatting process replaces each format item with the string representation of the value of the corresponding object.
+          </para>
           <para>The syntax of a format item is as follows:</para>
           <para>{index[,length][:formatString]}</para>
           <para
@@ -1369,8 +1361,8 @@
               </term>
               <description>
                 <para
-                  >The zero-based position in the parameter list of the object to be formatted. If the object specified by index is null, the format item is replaced by <see cref="F:System.String.Empty" />. Because this overload has only a single object in its parameter list, the value of index must always be 0. If there is no parameter in the index position, a <see cref="T:System.FormatException" /> is thrown. </para
-                >
+                  >The zero-based position in the parameter list of the object to be formatted. If the object specified by index is null, the format item is replaced by <see cref="F:System.String.Empty" />. Because this overload has only a single object in its parameter list, the value of index must always be 0. If there is no parameter in the index position, a <see cref="T:System.FormatException" /> is thrown.
+                </para>
               </description>
             </item>
             <item>
@@ -1416,15 +1408,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A composite format string (see Remarks). </param
-        >
+          />A composite format string (see Remarks).
+        </param>
         <param name="arg0">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to format and write. </param
-        >
+          />The object to format and write.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1487,8 +1479,8 @@
               <para
                 >For more information about the composite formatting feature, see <format type="text/html">
                   <a href="87b7d528-73f6-43c6-b71a-f23043039a49">Composite Formatting</a>
-                </format>. </para
-              >
+                </format>.
+              </para>
             </item>
             <item>
               <para
@@ -1496,8 +1488,8 @@
                   <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">Standard Numeric Format Strings</a>
                 </format> and <format type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
-                </format>. </para
-              >
+                </format>.
+              </para>
             </item>
             <item>
               <para
@@ -1507,8 +1499,8 @@
                   >
                 </format> and <format type="text/html">
                   <a href="98b374e3-0cc2-4c78-ab44-efb671d71984">Custom DateTime Format Strings</a>
-                </format>. </para
-              >
+                </format>.
+              </para>
             </item>
             <item>
               <para
@@ -1521,13 +1513,13 @@
               <para
                 >For more information about formatting, see <format type="text/html">
                   <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Types</a>
-                </format>. </para
-              >
+                </format>.
+              </para>
             </item>
           </list>
           <para
-            >The <paramref name="format" /> parameter consists of zero or more runs of text intermixed with zero or more indexed placeholders, called format items, that correspond to an object in the parameter list of this method. The formatting process replaces each format item with the string representation of the value of the corresponding object. </para
-          >
+            >The <paramref name="format" /> parameter consists of zero or more runs of text intermixed with zero or more indexed placeholders, called format items, that correspond to an object in the parameter list of this method. The formatting process replaces each format item with the string representation of the value of the corresponding object.
+          </para>
           <para>The syntax of a format item is as follows:</para>
           <para>{index[,length][:formatString]}</para>
           <para
@@ -1552,8 +1544,8 @@
               </term>
               <description>
                 <para
-                  >The zero-based position in the parameter list of the object to be formatted. If the object specified by index is null, the format item is replaced by <see cref="F:System.String.Empty" />. Because this overload has an array in its parameter list, the value of index must always be less than the length of the array. If there is no parameter in the index position, a <see cref="T:System.FormatException" /> is thrown. </para
-                >
+                  >The zero-based position in the parameter list of the object to be formatted. If the object specified by index is null, the format item is replaced by <see cref="F:System.String.Empty" />. Because this overload has an array in its parameter list, the value of index must always be less than the length of the array. If there is no parameter in the index position, a <see cref="T:System.FormatException" /> is thrown.
+                </para>
               </description>
             </item>
             <item>
@@ -1599,15 +1591,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A composite format string (see Remarks). </param
-        >
+          />A composite format string (see Remarks).
+        </param>
         <param name="arg">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object array that contains zero or more objects to format and write. </param
-        >
+          />An object array that contains zero or more objects to format and write.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1673,22 +1665,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character array to write data from. </param
-        >
+          />The character array to write data from.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character position in the buffer at which to start retrieving data. </param
-        >
+          />The character position in the buffer at which to start retrieving data.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters to write. </param
-        >
+          />The number of characters to write.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1741,8 +1733,8 @@
               <para
                 >For more information about the composite formatting feature, see <format type="text/html">
                   <a href="87b7d528-73f6-43c6-b71a-f23043039a49">Composite Formatting</a>
-                </format>. </para
-              >
+                </format>.
+              </para>
             </item>
             <item>
               <para
@@ -1750,8 +1742,8 @@
                   <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">Standard Numeric Format Strings</a>
                 </format> and <format type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
-                </format>. </para
-              >
+                </format>.
+              </para>
             </item>
             <item>
               <para
@@ -1761,8 +1753,8 @@
                   >
                 </format> and <format type="text/html">
                   <a href="98b374e3-0cc2-4c78-ab44-efb671d71984">Custom DateTime Format Strings</a>
-                </format>. </para
-              >
+                </format>.
+              </para>
             </item>
             <item>
               <para
@@ -1775,13 +1767,13 @@
               <para
                 >For more information about formatting, see <format type="text/html">
                   <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Types</a>
-                </format>. </para
-              >
+                </format>.
+              </para>
             </item>
           </list>
           <para
-            >The <paramref name="format" /> parameter consists of zero or more runs of text intermixed with zero or more indexed placeholders, called format items, that correspond to an object in the parameter list of this method. The formatting process replaces each format item with the string representation of the value of the corresponding object. </para
-          >
+            >The <paramref name="format" /> parameter consists of zero or more runs of text intermixed with zero or more indexed placeholders, called format items, that correspond to an object in the parameter list of this method. The formatting process replaces each format item with the string representation of the value of the corresponding object.
+          </para>
           <para>The syntax of a format item is as follows:</para>
           <para>{index[,length][:formatString]}</para>
           <para
@@ -1806,8 +1798,8 @@
               </term>
               <description>
                 <para
-                  >The zero-based position in the parameter list of the object to be formatted. If the object specified by index is null, the format item is replaced by <see cref="F:System.String.Empty" />. Because this overload has two objects in its parameter list, the value of index must always be 0 or 1. If there is no parameter in the index position, a <see cref="T:System.FormatException" /> is thrown. </para
-                >
+                  >The zero-based position in the parameter list of the object to be formatted. If the object specified by index is null, the format item is replaced by <see cref="F:System.String.Empty" />. Because this overload has two objects in its parameter list, the value of index must always be 0 or 1. If there is no parameter in the index position, a <see cref="T:System.FormatException" /> is thrown.
+                </para>
               </description>
             </item>
             <item>
@@ -1853,22 +1845,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A composite format string (see Remarks). </param
-        >
+          />A composite format string (see Remarks).
+        </param>
         <param name="arg0">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first object to format and write. </param
-        >
+          />The first object to format and write.
+        </param>
         <param name="arg1">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second object to format and write. </param
-        >
+          />The second object to format and write.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1922,8 +1914,8 @@
               <para
                 >For more information about the composite formatting feature, see <format type="text/html">
                   <a href="87b7d528-73f6-43c6-b71a-f23043039a49">Composite Formatting</a>
-                </format>. </para
-              >
+                </format>.
+              </para>
             </item>
             <item>
               <para
@@ -1931,8 +1923,8 @@
                   <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">Standard Numeric Format Strings</a>
                 </format> and <format type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
-                </format>. </para
-              >
+                </format>.
+              </para>
             </item>
             <item>
               <para
@@ -1942,8 +1934,8 @@
                   >
                 </format> and <format type="text/html">
                   <a href="98b374e3-0cc2-4c78-ab44-efb671d71984">Custom DateTime Format Strings</a>
-                </format>. </para
-              >
+                </format>.
+              </para>
             </item>
             <item>
               <para
@@ -1956,13 +1948,13 @@
               <para
                 >For more information about formatting, see <format type="text/html">
                   <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Types</a>
-                </format>. </para
-              >
+                </format>.
+              </para>
             </item>
           </list>
           <para
-            >The <paramref name="format" /> parameter consists of zero or more runs of text intermixed with zero or more indexed placeholders, called format items, that correspond to an object in the parameter list of this method. The formatting process replaces each format item with the string representation of the value of the corresponding object. </para
-          >
+            >The <paramref name="format" /> parameter consists of zero or more runs of text intermixed with zero or more indexed placeholders, called format items, that correspond to an object in the parameter list of this method. The formatting process replaces each format item with the string representation of the value of the corresponding object.
+          </para>
           <para>The syntax of a format item is as follows:</para>
           <para>{index[,length][:formatString]}</para>
           <para
@@ -1987,8 +1979,8 @@
               </term>
               <description>
                 <para
-                  >The zero-based position in the parameter list of the object to be formatted. If the object specified by index is null, the format item is replaced by <see cref="F:System.String.Empty" />. Because this overload has three objects in its parameter list, the value of index must always be 0, 1, or 2. If there is no parameter in the index position, a <see cref="T:System.FormatException" /> is thrown. </para
-                >
+                  >The zero-based position in the parameter list of the object to be formatted. If the object specified by index is null, the format item is replaced by <see cref="F:System.String.Empty" />. Because this overload has three objects in its parameter list, the value of index must always be 0, 1, or 2. If there is no parameter in the index position, a <see cref="T:System.FormatException" /> is thrown.
+                </para>
               </description>
             </item>
             <item>
@@ -2034,29 +2026,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A composite format string (see Remarks). </param
-        >
+          />A composite format string (see Remarks).
+        </param>
         <param name="arg0">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first object to format and write. </param
-        >
+          />The first object to format and write.
+        </param>
         <param name="arg1">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second object to format and write. </param
-        >
+          />The second object to format and write.
+        </param>
         <param name="arg2">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The third object to format and write. </param
-        >
+          />The third object to format and write.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2225,22 +2217,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character array to write data from. </param
-        >
+          />The character array to write data from.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character position in the buffer at which to start retrieving data. </param
-        >
+          />The character position in the buffer at which to start retrieving data.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters to write. </param
-        >
+          />The number of characters to write.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteLine">
@@ -2330,8 +2322,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The Boolean value to write. </param
-        >
+          />The Boolean value to write.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2382,8 +2374,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character to write to the text stream. </param
-        >
+          />The character to write to the text stream.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2437,8 +2429,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character array from which data is read. </param
-        >
+          />The character array from which data is read.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2486,8 +2478,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The decimal value to write. </param
-        >
+          />The decimal value to write.
+        </param>
       </Docs>
       <Excluded>1</Excluded>
       <ExcludedLibrary>ExtendedNumerics</ExcludedLibrary>
@@ -2536,8 +2528,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The 8-byte floating-point value to write. </param
-        >
+          />The 8-byte floating-point value to write.
+        </param>
       </Docs>
       <Excluded>1</Excluded>
       <ExcludedLibrary>ExtendedNumerics</ExcludedLibrary>
@@ -2589,8 +2581,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The 4-byte signed integer to write. </param
-        >
+          />The 4-byte signed integer to write.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2641,8 +2633,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The 8-byte signed integer to write. </param
-        >
+          />The 8-byte signed integer to write.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2693,8 +2685,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to write. If <paramref name="value" /> is null, only the line terminator is written. </param
-        >
+          />The object to write. If <paramref name="value" /> is null, only the line terminator is written.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2742,8 +2734,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The 4-byte floating-point value to write. </param
-        >
+          />The 4-byte floating-point value to write.
+        </param>
       </Docs>
       <Excluded>1</Excluded>
       <ExcludedLibrary>ExtendedNumerics</ExcludedLibrary>
@@ -2798,8 +2790,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to write. If <paramref name="value" /> is null, only the line terminator is written. </param
-        >
+          />The string to write. If <paramref name="value" /> is null, only the line terminator is written.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2856,8 +2848,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The 4-byte unsigned integer to write. </param
-        >
+          />The 4-byte unsigned integer to write.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2914,8 +2906,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The 8-byte unsigned integer to write. </param
-        >
+          />The 8-byte unsigned integer to write.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2967,8 +2959,8 @@
               <para
                 >For more information about the composite formatting feature, see <format type="text/html">
                   <a href="87b7d528-73f6-43c6-b71a-f23043039a49">Composite Formatting</a>
-                </format>. </para
-              >
+                </format>.
+              </para>
             </item>
             <item>
               <para
@@ -2976,8 +2968,8 @@
                   <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">Standard Numeric Format Strings</a>
                 </format> and <format type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
-                </format>. </para
-              >
+                </format>.
+              </para>
             </item>
             <item>
               <para
@@ -2987,8 +2979,8 @@
                   >
                 </format> and <format type="text/html">
                   <a href="98b374e3-0cc2-4c78-ab44-efb671d71984">Custom DateTime Format Strings</a>
-                </format>. </para
-              >
+                </format>.
+              </para>
             </item>
             <item>
               <para
@@ -3001,13 +2993,13 @@
               <para
                 >For more information about formatting, see <format type="text/html">
                   <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Types</a>
-                </format>. </para
-              >
+                </format>.
+              </para>
             </item>
           </list>
           <para
-            >The <paramref name="format" /> parameter consists of zero or more runs of text intermixed with zero or more indexed placeholders, called format items, that correspond to an object in the parameter list of this method. The formatting process replaces each format item with the string representation of the value of the corresponding object. </para
-          >
+            >The <paramref name="format" /> parameter consists of zero or more runs of text intermixed with zero or more indexed placeholders, called format items, that correspond to an object in the parameter list of this method. The formatting process replaces each format item with the string representation of the value of the corresponding object.
+          </para>
           <para>The syntax of a format item is as follows:</para>
           <para>{index[,length][:formatString]}</para>
           <para
@@ -3032,8 +3024,8 @@
               </term>
               <description>
                 <para
-                  >The zero-based position in the parameter list of the object to be formatted. If the object specified by index is null, the format item is replaced by <see cref="F:System.String.Empty" />. Because this overload has only a single object in its parameter list, the value of index must always be 0. If there is no parameter in the index position, a <see cref="T:System.FormatException" /> is thrown. </para
-                >
+                  >The zero-based position in the parameter list of the object to be formatted. If the object specified by index is null, the format item is replaced by <see cref="F:System.String.Empty" />. Because this overload has only a single object in its parameter list, the value of index must always be 0. If there is no parameter in the index position, a <see cref="T:System.FormatException" /> is thrown.
+                </para>
               </description>
             </item>
             <item>
@@ -3089,8 +3081,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to format and write. </param
-        >
+          />The object to format and write.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -3151,8 +3143,8 @@
               <para
                 >For more information about the composite formatting feature, see <format type="text/html">
                   <a href="87b7d528-73f6-43c6-b71a-f23043039a49">Composite Formatting</a>
-                </format>. </para
-              >
+                </format>.
+              </para>
             </item>
             <item>
               <para
@@ -3160,8 +3152,8 @@
                   <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">Standard Numeric Format Strings</a>
                 </format> and <format type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
-                </format>. </para
-              >
+                </format>.
+              </para>
             </item>
             <item>
               <para
@@ -3171,8 +3163,8 @@
                   >
                 </format> and <format type="text/html">
                   <a href="98b374e3-0cc2-4c78-ab44-efb671d71984">Custom DateTime Format Strings</a>
-                </format>. </para
-              >
+                </format>.
+              </para>
             </item>
             <item>
               <para
@@ -3185,13 +3177,13 @@
               <para
                 >For more information about formatting, see <format type="text/html">
                   <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Types</a>
-                </format>. </para
-              >
+                </format>.
+              </para>
             </item>
           </list>
           <para
-            >The <paramref name="format" /> parameter consists of zero or more runs of text intermixed with zero or more indexed placeholders, called format items, that correspond to an object in the parameter list of this method. The formatting process replaces each format item with the string representation of the value of the corresponding object. </para
-          >
+            >The <paramref name="format" /> parameter consists of zero or more runs of text intermixed with zero or more indexed placeholders, called format items, that correspond to an object in the parameter list of this method. The formatting process replaces each format item with the string representation of the value of the corresponding object.
+          </para>
           <para>The syntax of a format item is as follows:</para>
           <para>{index[,length][:formatString]}</para>
           <para
@@ -3216,8 +3208,8 @@
               </term>
               <description>
                 <para
-                  >The zero-based position in the parameter list of the object to be formatted. If the object specified by index is null, the format item is replaced by <see cref="F:System.String.Empty" />. Because this overload has an array in its parameter list, the value of index must always be less than the length of the array. If there is no parameter in the index position, a <see cref="T:System.FormatException" /> is thrown. </para
-                >
+                  >The zero-based position in the parameter list of the object to be formatted. If the object specified by index is null, the format item is replaced by <see cref="F:System.String.Empty" />. Because this overload has an array in its parameter list, the value of index must always be less than the length of the array. If there is no parameter in the index position, a <see cref="T:System.FormatException" /> is thrown.
+                </para>
               </description>
             </item>
             <item>
@@ -3273,8 +3265,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object array that contains zero or more objects to format and write. </param
-        >
+          />An object array that contains zero or more objects to format and write.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -3344,22 +3336,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character array from which data is read. </param
-        >
+          />The character array from which data is read.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character position in <paramref name="buffer" /> at which to start reading data. </param
-        >
+          />The character position in <paramref name="buffer" /> at which to start reading data.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum number of characters to write. </param
-        >
+          />The maximum number of characters to write.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -3412,8 +3404,8 @@
               <para
                 >For more information about the composite formatting feature, see <format type="text/html">
                   <a href="87b7d528-73f6-43c6-b71a-f23043039a49">Composite Formatting</a>
-                </format>. </para
-              >
+                </format>.
+              </para>
             </item>
             <item>
               <para
@@ -3421,8 +3413,8 @@
                   <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">Standard Numeric Format Strings</a>
                 </format> and <format type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
-                </format>. </para
-              >
+                </format>.
+              </para>
             </item>
             <item>
               <para
@@ -3432,8 +3424,8 @@
                   >
                 </format> and <format type="text/html">
                   <a href="98b374e3-0cc2-4c78-ab44-efb671d71984">Custom DateTime Format Strings</a>
-                </format>. </para
-              >
+                </format>.
+              </para>
             </item>
             <item>
               <para
@@ -3446,13 +3438,13 @@
               <para
                 >For more information about formatting, see <format type="text/html">
                   <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Types</a>
-                </format>. </para
-              >
+                </format>.
+              </para>
             </item>
           </list>
           <para
-            >The <paramref name="format" /> parameter consists of zero or more runs of text intermixed with zero or more indexed placeholders, called format items, that correspond to an object in the parameter list of this method. The formatting process replaces each format item with the string representation of the value of the corresponding object. </para
-          >
+            >The <paramref name="format" /> parameter consists of zero or more runs of text intermixed with zero or more indexed placeholders, called format items, that correspond to an object in the parameter list of this method. The formatting process replaces each format item with the string representation of the value of the corresponding object.
+          </para>
           <para>The syntax of a format item is as follows:</para>
           <para>{index[,length][:formatString]}</para>
           <para
@@ -3477,8 +3469,8 @@
               </term>
               <description>
                 <para
-                  >The zero-based position in the parameter list of the object to be formatted. If the object specified by index is null, the format item is replaced by <see cref="F:System.String.Empty" />. Because this overload has two objects in its parameter list, the value of index must always be 0 or 1. If there is no parameter in the index position, a <see cref="T:System.FormatException" /> is thrown. </para
-                >
+                  >The zero-based position in the parameter list of the object to be formatted. If the object specified by index is null, the format item is replaced by <see cref="F:System.String.Empty" />. Because this overload has two objects in its parameter list, the value of index must always be 0 or 1. If there is no parameter in the index position, a <see cref="T:System.FormatException" /> is thrown.
+                </para>
               </description>
             </item>
             <item>
@@ -3534,15 +3526,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first object to format and write. </param
-        >
+          />The first object to format and write.
+        </param>
         <param name="arg1">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second object to format and write. </param
-        >
+          />The second object to format and write.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -3596,8 +3588,8 @@
               <para
                 >For more information about the composite formatting feature, see <format type="text/html">
                   <a href="87b7d528-73f6-43c6-b71a-f23043039a49">Composite Formatting</a>
-                </format>. </para
-              >
+                </format>.
+              </para>
             </item>
             <item>
               <para
@@ -3605,8 +3597,8 @@
                   <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">Standard Numeric Format Strings</a>
                 </format> and <format type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
-                </format>. </para
-              >
+                </format>.
+              </para>
             </item>
             <item>
               <para
@@ -3616,8 +3608,8 @@
                   >
                 </format> and <format type="text/html">
                   <a href="98b374e3-0cc2-4c78-ab44-efb671d71984">Custom DateTime Format Strings</a>
-                </format>. </para
-              >
+                </format>.
+              </para>
             </item>
             <item>
               <para
@@ -3630,13 +3622,13 @@
               <para
                 >For more information about formatting, see <format type="text/html">
                   <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Types</a>
-                </format>. </para
-              >
+                </format>.
+              </para>
             </item>
           </list>
           <para
-            >The <paramref name="format" /> parameter consists of zero or more runs of text intermixed with zero or more indexed placeholders, called format items, that correspond to an object in the parameter list of this method. The formatting process replaces each format item with the string representation of the value of the corresponding object. </para
-          >
+            >The <paramref name="format" /> parameter consists of zero or more runs of text intermixed with zero or more indexed placeholders, called format items, that correspond to an object in the parameter list of this method. The formatting process replaces each format item with the string representation of the value of the corresponding object.
+          </para>
           <para>The syntax of a format item is as follows:</para>
           <para>{index[,length][:formatString]}</para>
           <para
@@ -3661,8 +3653,8 @@
               </term>
               <description>
                 <para
-                  >The zero-based position in the parameter list of the object to be formatted. If the object specified by index is null, the format item is replaced by <see cref="F:System.String.Empty" />. Because this overload has three objects in its parameter list, the value of index must always be 0, 1, or 2. If there is no parameter in the index position, a <see cref="T:System.FormatException" /> is thrown. </para
-                >
+                  >The zero-based position in the parameter list of the object to be formatted. If the object specified by index is null, the format item is replaced by <see cref="F:System.String.Empty" />. Because this overload has three objects in its parameter list, the value of index must always be 0, 1, or 2. If there is no parameter in the index position, a <see cref="T:System.FormatException" /> is thrown.
+                </para>
               </description>
             </item>
             <item>
@@ -3718,22 +3710,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first object to format and write. </param
-        >
+          />The first object to format and write.
+        </param>
         <param name="arg1">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second object to format and write. </param
-        >
+          />The second object to format and write.
+        </param>
         <param name="arg2">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The third object to format and write. </param
-        >
+          />The third object to format and write.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -3758,8 +3750,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The line terminator is defined by the <see cref="F:System.IO.TextWriter.CoreNewLine" /> field. </para
-          >
+            >The line terminator is defined by the <see cref="F:System.IO.TextWriter.CoreNewLine" /> field.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3794,8 +3786,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The line terminator is defined by the <see cref="F:System.IO.TextWriter.CoreNewLine" /> field. </para
-          >
+            >The line terminator is defined by the <see cref="F:System.IO.TextWriter.CoreNewLine" /> field.
+          </para>
           <para
             >The <see cref="T:System.IO.TextWriter" /> class is an abstract class. Therefore, you do not instantiate it in your code. For an example of using the <see cref="M:System.IO.TextWriter.WriteLineAsync(System.Char)" />  method, see the <see cref="M:System.IO.StreamWriter.WriteLineAsync(System.Char)" />  method.</para
           >
@@ -3840,8 +3832,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The line terminator is defined by the <see cref="F:System.IO.TextWriter.CoreNewLine" /> field. </para
-          >
+            >The line terminator is defined by the <see cref="F:System.IO.TextWriter.CoreNewLine" /> field.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3856,8 +3848,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character array to write to the text stream. If the character array is null, only the line terminator is written. </param
-        >
+          />The character array to write to the text stream. If the character array is null, only the line terminator is written.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteLineAsync">
@@ -3902,8 +3894,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to write. If the value is null, only a line terminator is written. </param
-        >
+          />The string to write. If the value is null, only a line terminator is written.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteLineAsync">
@@ -3950,22 +3942,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character array to write data from. </param
-        >
+          />The character array to write data from.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character position in the buffer at which to start retrieving data. </param
-        >
+          />The character position in the buffer at which to start retrieving data.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters to write. </param
-        >
+          />The number of characters to write.
+        </param>
       </Docs>
     </Member>
   </Members>

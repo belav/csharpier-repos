@@ -20,18 +20,18 @@
         >The <see cref="T:System.Windows.Forms.DataGridViewButtonColumn" /> class is a specialized type of the <see cref="T:System.Windows.Forms.DataGridViewColumn" /> class used to logically host cells that respond to simple user input. A <see cref="T:System.Windows.Forms.DataGridViewButtonColumn" /> has an associated <see cref="T:System.Windows.Forms.DataGridViewButtonCell" /> in every <see cref="T:System.Windows.Forms.DataGridViewRow" /> that intersects it. Each cell supplies a user interface (UI) that is similar to a <see cref="T:System.Windows.Forms.Button" /> control.</para
       >
       <para
-        >To display the same button text for every cell, set the <see cref="P:System.Windows.Forms.DataGridViewButtonColumn.UseColumnTextForButtonValue" /> property to true and set the <see cref="P:System.Windows.Forms.DataGridViewButtonColumn.Text" /> property to the desired button text. </para
-      >
+        >To display the same button text for every cell, set the <see cref="P:System.Windows.Forms.DataGridViewButtonColumn.UseColumnTextForButtonValue" /> property to true and set the <see cref="P:System.Windows.Forms.DataGridViewButtonColumn.Text" /> property to the desired button text.
+      </para>
       <para
         >The default sort mode for this column type is <see cref="F:System.Windows.Forms.DataGridViewColumnSortMode.NotSortable" />.</para
       >
       <para
-        >To respond to user button clicks, handle the <see cref="E:System.Windows.Forms.DataGridView.CellClick" /> or <see cref="E:System.Windows.Forms.DataGridView.CellContentClick" /> event. In the event handler, you can use the <see cref="P:System.Windows.Forms.DataGridViewCellEventArgs.ColumnIndex" /> property to determine whether the click occurred in the button column. You can use the <see cref="P:System.Windows.Forms.DataGridViewCellEventArgs.RowIndex" /> property to determine whether the click occurred in a button cell and not on the column header. </para
-      >
+        >To respond to user button clicks, handle the <see cref="E:System.Windows.Forms.DataGridView.CellClick" /> or <see cref="E:System.Windows.Forms.DataGridView.CellContentClick" /> event. In the event handler, you can use the <see cref="P:System.Windows.Forms.DataGridViewCellEventArgs.ColumnIndex" /> property to determine whether the click occurred in the button column. You can use the <see cref="P:System.Windows.Forms.DataGridViewCellEventArgs.RowIndex" /> property to determine whether the click occurred in a button cell and not on the column header.
+      </para>
       <block subset="none" type="note">
         <para
-          >When visual styles are enabled, the buttons in a button column are painted using a <see cref="T:System.Windows.Forms.ButtonRenderer" />, and cell styles specified through properties such as <see cref="P:System.Windows.Forms.DataGridViewButtonColumn.DefaultCellStyle" /> have no effect. </para
-        >
+          >When visual styles are enabled, the buttons in a button column are painted using a <see cref="T:System.Windows.Forms.ButtonRenderer" />, and cell styles specified through properties such as <see cref="P:System.Windows.Forms.DataGridViewButtonColumn.DefaultCellStyle" /> have no effect.
+        </para>
       </block>
     </remarks>
     <summary>
@@ -188,8 +188,8 @@
           >
           <block subset="none" type="note">
             <para
-              >When visual styles are enabled, the buttons in a button column are painted using a <see cref="T:System.Windows.Forms.ButtonRenderer" /> and cell styles specified through properties such as <see cref="P:System.Windows.Forms.DataGridViewButtonColumn.DefaultCellStyle" /> have no effect. </para
-            >
+              >When visual styles are enabled, the buttons in a button column are painted using a <see cref="T:System.Windows.Forms.ButtonRenderer" /> and cell styles specified through properties such as <see cref="P:System.Windows.Forms.DataGridViewButtonColumn.DefaultCellStyle" /> have no effect.
+            </para>
           </block>
         </remarks>
         <summary>
@@ -305,8 +305,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, the <see cref="P:System.Windows.Forms.DataGridViewCell.FormattedValue" /> of a button cell is displayed as the text on the button. The <see cref="P:System.Windows.Forms.DataGridViewButtonColumn.UseColumnTextForButtonValue" /> property allows you to either set the button text for each cell, or to use the <see cref="P:System.Windows.Forms.DataGridViewButtonColumn.Text" /> property value for all of the button cells. </para
-          >
+            >By default, the <see cref="P:System.Windows.Forms.DataGridViewCell.FormattedValue" /> of a button cell is displayed as the text on the button. The <see cref="P:System.Windows.Forms.DataGridViewButtonColumn.UseColumnTextForButtonValue" /> property allows you to either set the button text for each cell, or to use the <see cref="P:System.Windows.Forms.DataGridViewButtonColumn.Text" /> property value for all of the button cells.
+          </para>
           <para
             >Getting or setting this property gets or sets the <see cref="P:System.Windows.Forms.DataGridViewButtonCell.UseColumnTextForButtonValue" /> property of the object returned by the <see cref="P:System.Windows.Forms.DataGridViewButtonColumn.CellTemplate" /> property. Setting this property also sets the <see cref="P:System.Windows.Forms.DataGridViewButtonCell.UseColumnTextForButtonValue" /> property of every cell in the column and refreshes the column display. To override the specified value for individual cells, set the cell values after you set the column value.</para
           >

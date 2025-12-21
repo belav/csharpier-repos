@@ -25,8 +25,8 @@
         >A Visual Studio project with source code is available to accompany this topic: <see
           cref="http://go.microsoft.com/fwlink/?linkid=158686"
           >Download</see
-        >. </para
-      >
+        >.
+      </para>
       <para
         >MVC uses the <see cref="T:System.ComponentModel.DataAnnotations.UIHintAttribute" /> class to associate a model with a data field. Dynamic Data uses the <see cref="T:System.ComponentModel.DataAnnotations.UIHintAttribute" /> class to associate a user control with a data field. Dynamic Data uses the <see cref="P:System.ComponentModel.DataAnnotations.UIHintAttribute.UIHint" /> property to determine which user control to use in order to display a data field.</para
       >
@@ -59,25 +59,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.ComponentModel.DataAnnotations.UIHintAttribute" /> object that is created with this constructor is initialized using the specified <paramref name="uiHint" />, which specifies the user control (field template) to use in order to display the data field. </para
-          >
+            >A <see cref="T:System.ComponentModel.DataAnnotations.UIHintAttribute" /> object that is created with this constructor is initialized using the specified <paramref name="uiHint" />, which specifies the user control (field template) to use in order to display the data field.
+          </para>
           <para
-            >ASP.NET Dynamic Data provides field templates, page templates, and data controls to render data fields in a data model. You can modify these templates and controls to customize them, or you can create a custom user control. If you create a custom user control, you use the <see cref="P:System.ComponentModel.DataAnnotations.UIHintAttribute.UIHint" /> property to specify the user control to use to display a data field. </para
-          >
+            >ASP.NET Dynamic Data provides field templates, page templates, and data controls to render data fields in a data model. You can modify these templates and controls to customize them, or you can create a custom user control. If you create a custom user control, you use the <see cref="P:System.ComponentModel.DataAnnotations.UIHintAttribute.UIHint" /> property to specify the user control to use to display a data field.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.UIHintAttribute" /> class by using a specified user control. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.UIHintAttribute" /> class by using a specified user control.
+          </para>
         </summary>
         <param name="uiHint">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The user control to use to display the data field. </param
-        >
+          />The user control to use to display the data field.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -102,8 +102,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.UIHintAttribute" /> class using the specified user control and specified presentation layer. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.UIHintAttribute" /> class using the specified user control and specified presentation layer.
+          </para>
         </summary>
         <param name="uiHint">
           <attribution
@@ -172,8 +172,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to use to retrieve values from any data sources. </param
-        >
+          />The object to use to retrieve values from any data sources.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ControlParameters">
@@ -290,8 +290,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the presentation layer that uses the <see cref="T:System.ComponentModel.DataAnnotations.UIHintAttribute" /> class. </para
-          >
+            >Gets or sets the presentation layer that uses the <see cref="T:System.ComponentModel.DataAnnotations.UIHintAttribute" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>

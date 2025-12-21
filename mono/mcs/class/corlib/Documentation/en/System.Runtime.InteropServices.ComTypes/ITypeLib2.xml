@@ -149,8 +149,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A pointer to CUSTDATA, which holds all custom data items. </param
-        >
+          />A pointer to CUSTDATA, which holds all custom data items.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetCustData">
@@ -496,15 +496,15 @@
           >
         </returns>
         <param name="szNameBuf">
-          <attribution license="cc4" from="Microsoft" modified="false" />The string to test. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The string to test.
+        </param>
         <param name="lHashVal">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The hash value of <paramref name="szNameBuf" />. </param
-        >
+          />The hash value of <paramref name="szNameBuf" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ReleaseTLibAttr">
@@ -540,8 +540,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The TLIBATTR structure to release. </param
-        >
+          />The TLIBATTR structure to release.
+        </param>
       </Docs>
     </Member>
   </Members>

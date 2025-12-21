@@ -35,8 +35,8 @@
         </item>
       </list>
       <para
-        >Use the <see cref="T:System.ComponentModel.Design.DesignerActionService" /> to manage the <see cref="T:System.ComponentModel.Design.DesignerActionList" /> collections associated with your component. </para
-      >
+        >Use the <see cref="T:System.ComponentModel.Design.DesignerActionService" /> to manage the <see cref="T:System.ComponentModel.Design.DesignerActionList" /> collections associated with your component.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -111,8 +111,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -138,8 +138,8 @@
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format> and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
           <block subset="none" type="note">
             <para
               >Always call <see cref="M:System.ComponentModel.Design.DesignerActionUIService.Dispose" /> before you release your last reference to the <see cref="T:System.ComponentModel.Design.DesignerActionUIService" />. Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.ComponentModel.Design.DesignerActionUIService" /> object's Finalize method.</para
@@ -173,8 +173,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the smart tag panel is currently being displayed, the <see cref="M:System.ComponentModel.Design.DesignerActionUIService.HideUI(System.ComponentModel.IComponent)" /> method will hide it. This method raises the <see cref="E:System.ComponentModel.Design.DesignerActionUIService.DesignerActionUIStateChange" /> event, stipulating <see cref="F:System.ComponentModel.Design.DesignerActionUIStateChangeType.Hide" /> as the event type. </para
-          >
+            >If the smart tag panel is currently being displayed, the <see cref="M:System.ComponentModel.Design.DesignerActionUIService.HideUI(System.ComponentModel.IComponent)" /> method will hide it. This method raises the <see cref="E:System.ComponentModel.Design.DesignerActionUIService.DesignerActionUIStateChange" /> event, stipulating <see cref="F:System.ComponentModel.Design.DesignerActionUIStateChangeType.Hide" /> as the event type.
+          </para>
           <block subset="none" type="note">
             <para
               >The <see cref="M:System.ComponentModel.Design.DesignerActionUIService.HideUI(System.ComponentModel.IComponent)" /> and <see cref="M:System.ComponentModel.Design.DesignerActionUIService.ShowUI(System.ComponentModel.IComponent)" /> methods are implemented only to raise their corresponding events. The actual functionality is found in the handlers for these events, which are part of the design-time environment.</para
@@ -282,8 +282,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the smart tag panel is currently hidden, the <see cref="M:System.ComponentModel.Design.DesignerActionUIService.ShowUI(System.ComponentModel.IComponent)" /> method will display the panel. This method raises the <see cref="E:System.ComponentModel.Design.DesignerActionUIService.DesignerActionUIStateChange" /> event, stipulating <see cref="F:System.ComponentModel.Design.DesignerActionUIStateChangeType.Show" /> as the event type. </para
-          >
+            >If the smart tag panel is currently hidden, the <see cref="M:System.ComponentModel.Design.DesignerActionUIService.ShowUI(System.ComponentModel.IComponent)" /> method will display the panel. This method raises the <see cref="E:System.ComponentModel.Design.DesignerActionUIService.DesignerActionUIStateChange" /> event, stipulating <see cref="F:System.ComponentModel.Design.DesignerActionUIStateChangeType.Show" /> as the event type.
+          </para>
           <block subset="none" type="note">
             <para
               >The <see cref="M:System.ComponentModel.Design.DesignerActionUIService.HideUI(System.ComponentModel.IComponent)" /> and <see cref="M:System.ComponentModel.Design.DesignerActionUIService.ShowUI(System.ComponentModel.IComponent)" /> methods are implemented only to raise their corresponding events. The actual functionality is found in the handlers for these events, which are part of the design-time environment.</para

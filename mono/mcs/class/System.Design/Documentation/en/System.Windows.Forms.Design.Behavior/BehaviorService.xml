@@ -17,8 +17,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" /> is created, it adds a transparent window over the designer frame. The <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" /> can then use this window to render user interface elements, called <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" /> objects, as well as catch all mouse messages. In this way, the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" /> can control designer behavior. </para
-      >
+        >When the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" /> is created, it adds a transparent window over the designer frame. The <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" /> can then use this window to render user interface elements, called <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" /> objects, as well as catch all mouse messages. In this way, the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" /> can control designer behavior.
+      </para>
       <para
         >The <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" /> class supports a behavior stack, onto which <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" /> objects can be pushed. When a message is intercepted through the transparent window, the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" /> can send the message to the <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" /> at the top of the stack. This enables different user interface modes depending on the currently pushed <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" />. The <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" /> is used to render all <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" /> objects, such as selection borders, sizing handles, and smart tags. The <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" /> also controls many design-time behaviors, such as using snaplines, dragging, and selecting.</para
       >
@@ -167,8 +167,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -300,8 +300,8 @@
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format> and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
           <block subset="none" type="note">
             <para
               >Always call <see cref="M:System.Windows.Forms.Design.Behavior.BehaviorService.Dispose" /> before you release your last reference to the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />. Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" /> object's Finalize method.</para
@@ -311,8 +311,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />. </para
-          >
+            >Releases all resources used by the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -337,8 +337,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -694,8 +694,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

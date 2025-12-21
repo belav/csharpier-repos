@@ -143,8 +143,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the remoting configuration file. Can be null. </param
-        >
+          />The name of the remoting configuration file. Can be null.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Configure">
@@ -403,8 +403,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to specify local callers; false to specify remote callers. </param
-        >
+          />true to specify local callers; false to specify remote callers.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CustomErrorsMode">
@@ -640,8 +640,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object <see cref="T:System.Type" /> to check. </param
-        >
+          />The object <see cref="T:System.Type" /> to check.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsRemotelyActivatedClientType">
@@ -680,12 +680,8 @@
           >
         </returns>
         <param name="svrType">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The object type to check. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The object type to check.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsRemotelyActivatedClientType">
@@ -727,15 +723,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type name of the object to check. </param
-        >
+          />The type name of the object to check.
+        </param>
         <param name="assemblyName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The assembly name of the object to check. </param
-        >
+          />The assembly name of the object to check.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsWellKnownClientType">
@@ -778,8 +774,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object <see cref="T:System.Type" /> to check. </param
-        >
+          />The object <see cref="T:System.Type" /> to check.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsWellKnownClientType">
@@ -821,15 +817,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type name of the object to check. </param
-        >
+          />The type name of the object to check.
+        </param>
         <param name="assemblyName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The assembly name of the object to check. </param
-        >
+          />The assembly name of the object to check.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ProcessId">
@@ -902,8 +898,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Configuration settings for the client-activated type. </param
-        >
+          />Configuration settings for the client-activated type.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RegisterActivatedClientType">
@@ -956,15 +952,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object <see cref="T:System.Type" />. </param
-        >
+          />The object <see cref="T:System.Type" />.
+        </param>
         <param name="appUrl">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />URL of the application where this type is activated. </param
-        >
+          />URL of the application where this type is activated.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RegisterActivatedServiceType">
@@ -1016,8 +1012,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Configuration settings for the client-activated type. </param
-        >
+          />Configuration settings for the client-activated type.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RegisterActivatedServiceType">
@@ -1067,8 +1063,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of object to register. </param
-        >
+          />The <see cref="T:System.Type" /> of object to register.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RegisterWellKnownClientType">
@@ -1117,8 +1113,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Configuration settings for the well-known type. </param
-        >
+          />Configuration settings for the well-known type.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RegisterWellKnownClientType">
@@ -1168,15 +1164,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object <see cref="T:System.Type" />. </param
-        >
+          />The object <see cref="T:System.Type" />.
+        </param>
         <param name="objectUrl">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />URL of a well-known client object. </param
-        >
+          />URL of a well-known client object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RegisterWellKnownServiceType">
@@ -1229,8 +1225,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Configuration settings for the well-known type. </param
-        >
+          />Configuration settings for the well-known type.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RegisterWellKnownServiceType">
@@ -1285,18 +1281,18 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object <see cref="T:System.Type" />. </param
-        >
+          />The object <see cref="T:System.Type" />.
+        </param>
         <param name="objectUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object URI. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The object URI.
+        </param>
         <param name="mode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The activation mode of the well-known object type being registered. (See <see cref="T:System.Runtime.Remoting.WellKnownObjectMode" />.) </param
-        >
+          />The activation mode of the well-known object type being registered. (See <see cref="T:System.Runtime.Remoting.WellKnownObjectMode" />.)
+        </param>
       </Docs>
     </Member>
   </Members>

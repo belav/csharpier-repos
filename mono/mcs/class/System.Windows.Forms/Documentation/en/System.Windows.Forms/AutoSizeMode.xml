@@ -13,11 +13,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Setting the <see cref="F:System.Windows.Forms.AutoSizeMode.GrowAndShrink" /> value produces the same behavior that you get for controls with the <see cref="P:System.Windows.Forms.Control.AutoSize" /> property enabled but which have no </para
-      >
+        >Setting the <see cref="F:System.Windows.Forms.AutoSizeMode.GrowAndShrink" /> value produces the same behavior that you get for controls with the <see cref="P:System.Windows.Forms.Control.AutoSize" /> property enabled but which have no
+      </para>
       <para
-        >AutoSizeMode property. The <see cref="P:System.Windows.Forms.Control.MinimumSize" /> and <see cref="P:System.Windows.Forms.Control.MaximumSize" /> properties are respected, but the current value of the <see cref="P:System.Windows.Forms.Control.Size" /> property is ignored. </para
-      >
+        >AutoSizeMode property. The <see cref="P:System.Windows.Forms.Control.MinimumSize" /> and <see cref="P:System.Windows.Forms.Control.MaximumSize" /> properties are respected, but the current value of the <see cref="P:System.Windows.Forms.Control.Size" /> property is ignored.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

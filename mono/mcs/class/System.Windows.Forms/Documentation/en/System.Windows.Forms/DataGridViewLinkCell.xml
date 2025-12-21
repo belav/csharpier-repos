@@ -129,14 +129,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new accessible object for the <see cref="T:System.Windows.Forms.DataGridViewLinkCell" />. </para
-          >
+            >Creates a new accessible object for the <see cref="T:System.Windows.Forms.DataGridViewLinkCell" />.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see cref="T:System.Windows.Forms.DataGridViewLinkCell.DataGridViewLinkCellAccessibleObject" /> for the <see cref="T:System.Windows.Forms.DataGridViewLinkCell" />. </para
-          >
+            >A new <see cref="T:System.Windows.Forms.DataGridViewLinkCell.DataGridViewLinkCellAccessibleObject" /> for the <see cref="T:System.Windows.Forms.DataGridViewLinkCell" />.
+          </para>
         </returns>
       </Docs>
     </Member>
@@ -782,8 +782,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When false, the <see cref="P:System.Windows.Forms.DataGridViewLinkCell.LinkVisited" /> property will not be automatically set to true when visited.  </para
-          >
+            >When false, the <see cref="P:System.Windows.Forms.DataGridViewLinkCell.LinkVisited" /> property will not be automatically set to true when visited.
+          </para>
           <para
             >Setting the <see cref="P:System.Windows.Forms.DataGridViewLinkColumn.TrackVisitedState" /> property of the owning column also sets the <see cref="P:System.Windows.Forms.DataGridViewLinkCell.TrackVisitedState" /> property of every cell in the column and refreshes the column display. To override the specified value for individual cells, set the cell values after you set the column value.</para
           >

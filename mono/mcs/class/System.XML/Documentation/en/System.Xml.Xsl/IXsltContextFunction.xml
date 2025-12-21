@@ -99,22 +99,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XSLT context for the function call. </param
-        >
+          />The XSLT context for the function call.
+        </param>
         <param name="args">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The arguments of the function call. Each argument is an element in the array. </param
-        >
+          />The arguments of the function call. Each argument is an element in the array.
+        </param>
         <param name="docContext">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The context node for the function call. </param
-        >
+          />The context node for the function call.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Maxargs">

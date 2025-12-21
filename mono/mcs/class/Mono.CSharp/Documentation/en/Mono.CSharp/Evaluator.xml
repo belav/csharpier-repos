@@ -171,8 +171,7 @@
 
       // We know the result is an IEnumerator, cast it.
       IEnumerator even = (IEnumerator) Evaluator.Evaluate ("from x in numbers where (x % 2) == 0 select x");
-	      </code
-              >
+	      </code>
             </example>
           </para>
         </remarks>
@@ -423,8 +422,7 @@
       Evaluator.Run ("using System;");
 
       Evaluator.Run ("Console.WriteLine (\"Hello, World\");
-	      </code
-              >
+	      </code>
             </example>
           </para>
         </remarks>

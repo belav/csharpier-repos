@@ -453,8 +453,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To resolve a metadata token that identifies a field whose parent TypeSpec has a signature containing element type var or mvar, use the <see cref="M:System.ModuleHandle.ResolveFieldHandle(System.Int32,System.RuntimeTypeHandle[],System.RuntimeTypeHandle[])" /> method overload, which allows you to supply the necessary context. </para
-          >
+            >To resolve a metadata token that identifies a field whose parent TypeSpec has a signature containing element type var or mvar, use the <see cref="M:System.ModuleHandle.ResolveFieldHandle(System.Int32,System.RuntimeTypeHandle[],System.RuntimeTypeHandle[])" /> method overload, which allows you to supply the necessary context.
+          </para>
           <block subset="none" type="note">
             <para
               >Information about metadata tokens can be found in the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics". The documentation is available online; see <see
@@ -543,8 +543,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.RuntimeTypeHandle" /> structures representing the generic type arguments of the type where the token is in scope, or null if that type is not generic. </param
-        >
+          />An array of <see cref="T:System.RuntimeTypeHandle" /> structures representing the generic type arguments of the type where the token is in scope, or null if that type is not generic.
+        </param>
         <param name="methodInstantiationContext">
           <attribution
             license="cc4"
@@ -579,8 +579,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To resolve a metadata token for a MethodSpec whose signature contains element type var or mvar, use the <see cref="M:System.ModuleHandle.ResolveMethodHandle(System.Int32,System.RuntimeTypeHandle[],System.RuntimeTypeHandle[])" /> method overload, which allows you to supply the necessary context. </para
-          >
+            >To resolve a metadata token for a MethodSpec whose signature contains element type var or mvar, use the <see cref="M:System.ModuleHandle.ResolveMethodHandle(System.Int32,System.RuntimeTypeHandle[],System.RuntimeTypeHandle[])" /> method overload, which allows you to supply the necessary context.
+          </para>
           <block subset="none" type="note">
             <para
               >Information about metadata tokens can be found in the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics". The documentation is available online; see <see
@@ -669,8 +669,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.RuntimeTypeHandle" /> structures representing the generic type arguments of the type where the token is in scope, or null if that type is not generic. </param
-        >
+          />An array of <see cref="T:System.RuntimeTypeHandle" /> structures representing the generic type arguments of the type where the token is in scope, or null if that type is not generic.
+        </param>
         <param name="methodInstantiationContext">
           <attribution
             license="cc4"
@@ -705,8 +705,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To resolve a metadata token for a TypeSpec whose signature contains element type var or mvar, use the <see cref="M:System.ModuleHandle.ResolveTypeHandle(System.Int32,System.RuntimeTypeHandle[],System.RuntimeTypeHandle[])" /> method overload, which allows you to supply the necessary context. </para
-          >
+            >To resolve a metadata token for a TypeSpec whose signature contains element type var or mvar, use the <see cref="M:System.ModuleHandle.ResolveTypeHandle(System.Int32,System.RuntimeTypeHandle[],System.RuntimeTypeHandle[])" /> method overload, which allows you to supply the necessary context.
+          </para>
           <block subset="none" type="note">
             <para
               >Information about metadata tokens can be found in the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics". The documentation is available online; see <see
@@ -795,8 +795,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.RuntimeTypeHandle" /> structures representing the generic type arguments of the type where the token is in scope, or null if that type is not generic. </param
-        >
+          />An array of <see cref="T:System.RuntimeTypeHandle" /> structures representing the generic type arguments of the type where the token is in scope, or null if that type is not generic.
+        </param>
         <param name="methodInstantiationContext">
           <attribution
             license="cc4"

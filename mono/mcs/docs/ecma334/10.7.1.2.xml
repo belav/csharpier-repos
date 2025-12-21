@@ -8,8 +8,8 @@
     </list>
   </paragraph>
   <paragraph
-    >The rules governing operator declarations (<hyperlink>17.9</hyperlink>) make it impossible for a derived class to declare an operator with the same signature as an operator in a base class. Thus, operators never hide one another. </paragraph
-  >
+    >The rules governing operator declarations (<hyperlink>17.9</hyperlink>) make it impossible for a derived class to declare an operator with the same signature as an operator in a base class. Thus, operators never hide one another.
+  </paragraph>
   <paragraph
     >Contrary to hiding a name from an outer scope, hiding an accessible name from an inherited scope causes a warning to be reported. <example
       >[Example: In the example <code_example>

@@ -81,12 +81,8 @@
           >
         </summary>
         <param name="description">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The description to use. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The description to use.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Description">

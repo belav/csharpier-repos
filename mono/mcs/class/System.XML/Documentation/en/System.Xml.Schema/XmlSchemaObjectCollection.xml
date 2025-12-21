@@ -83,8 +83,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.Schema.XmlSchemaObject" />. </param
-        >
+          />The <see cref="T:System.Xml.Schema.XmlSchemaObject" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Add">
@@ -148,8 +148,8 @@ schema.Includes.Add(include);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.Schema.XmlSchemaObject" />. </param
-        >
+          />The <see cref="T:System.Xml.Schema.XmlSchemaObject" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Contains">
@@ -190,8 +190,8 @@ schema.Includes.Add(include);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.Schema.XmlSchemaObject" />. </param
-        >
+          />The <see cref="T:System.Xml.Schema.XmlSchemaObject" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CopyTo">
@@ -235,15 +235,15 @@ schema.Includes.Add(include);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The one-dimensional array that is the destination of the elements copied from the XmlSchemaObjectCollection. The array must have zero-based indexing. </param
-        >
+          />The one-dimensional array that is the destination of the elements copied from the XmlSchemaObjectCollection. The array must have zero-based indexing.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index in the array at which copying begins. </param
-        >
+          />The zero-based index in the array at which copying begins.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetEnumerator">
@@ -319,8 +319,8 @@ schema.Includes.Add(include);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.Schema.XmlSchemaObject" /> whose index you want to return. </param
-        >
+          />The <see cref="T:System.Xml.Schema.XmlSchemaObject" /> whose index you want to return.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Insert">
@@ -365,15 +365,15 @@ schema.Includes.Add(include);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index at which an item should be inserted. </param
-        >
+          />The zero-based index at which an item should be inserted.
+        </param>
         <param name="item">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.Schema.XmlSchemaObject" /> to insert. </param
-        >
+          />The <see cref="T:System.Xml.Schema.XmlSchemaObject" /> to insert.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Item">
@@ -465,11 +465,11 @@ schema.Includes.Add(include);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of <see cref="T:System.Xml.Schema.XmlSchemaObject" />. </param
-        >
+          />The index of <see cref="T:System.Xml.Schema.XmlSchemaObject" />.
+        </param>
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />The item. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The item.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnRemove">
@@ -507,11 +507,11 @@ schema.Includes.Add(include);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of <see cref="T:System.Xml.Schema.XmlSchemaObject" />. </param
-        >
+          />The index of <see cref="T:System.Xml.Schema.XmlSchemaObject" />.
+        </param>
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />The item. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The item.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnSet">
@@ -550,14 +550,14 @@ schema.Includes.Add(include);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of <see cref="T:System.Xml.Schema.XmlSchemaObject" />. </param
-        >
+          />The index of <see cref="T:System.Xml.Schema.XmlSchemaObject" />.
+        </param>
         <param name="oldValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />The old value. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The old value.
+        </param>
         <param name="newValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />The new value. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The new value.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Remove">
@@ -603,8 +603,8 @@ schema.Includes.Add(include);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.Schema.XmlSchemaObject" /> to remove. </param
-        >
+          />The <see cref="T:System.Xml.Schema.XmlSchemaObject" /> to remove.
+        </param>
       </Docs>
     </Member>
   </Members>

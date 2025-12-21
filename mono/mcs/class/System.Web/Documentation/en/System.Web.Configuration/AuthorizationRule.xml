@@ -20,8 +20,8 @@
         >The <see cref="T:System.Web.Configuration.AuthorizationRule" /> class provides a way to programmatically access and modify the authorization section of a configuration file.</para
       >
       <para
-        >This type is part of a group that includes the <see cref="T:System.Web.Configuration.AuthorizationSection" />, the <see cref="T:System.Web.Configuration.AuthorizationRuleCollection" />, and the <see cref="T:System.Web.Configuration.AuthorizationRuleAction" /> types. </para
-      >
+        >This type is part of a group that includes the <see cref="T:System.Web.Configuration.AuthorizationSection" />, the <see cref="T:System.Web.Configuration.AuthorizationRuleCollection" />, and the <see cref="T:System.Web.Configuration.AuthorizationRuleAction" /> types.
+      </para>
       <block subset="none" type="note">
         <para
           >The <see cref="T:System.Web.Configuration.AuthorizationSection" /> can update the configuration information at any level in the configuration hierarchy.</para
@@ -50,14 +50,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.Configuration.AuthorizationRule.#ctor(System.Web.Configuration.AuthorizationRuleAction)" /> constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. </para
-          >
+            >The <see cref="M:System.Web.Configuration.AuthorizationRule.#ctor(System.Web.Configuration.AuthorizationRuleAction)" /> constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see cref="T:System.Web.Configuration.AuthorizationRule" /> class using the passed object. </para
-          >
+            >Creates a new instance of the <see cref="T:System.Web.Configuration.AuthorizationRule" /> class using the passed object.
+          </para>
         </summary>
         <param name="action">
           <attribution

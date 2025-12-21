@@ -109,8 +109,8 @@
       <para
         >For desktop apps, the <see cref="T:System.Resources.ResourceManager" /> class retrieves resources from binary resource (.resources) files. Typically, a language compiler or the <format type="text/html">
           <a href="b5382965-0053-47cf-b92f-862860275a01">Assembly Linker (AL.exe)</a>
-        </format> embeds these resource files in an assembly. You can also use a <see cref="T:System.Resources.ResourceManager" /> object to retrieve resources directly from a .resources file that is not embedded in an assembly, by using the <see cref="M:System.Resources.ResourceManager.CreateFileBasedResourceManager(System.String,System.String,System.Type)" /> method. </para
-      >
+        </format> embeds these resource files in an assembly. You can also use a <see cref="T:System.Resources.ResourceManager" /> object to retrieve resources directly from a .resources file that is not embedded in an assembly, by using the <see cref="M:System.Resources.ResourceManager.CreateFileBasedResourceManager(System.String,System.String,System.Type)" /> method.
+      </para>
       <block subset="none" type="note">
         <para
           >Using standalone .resources files in an ASP.NET app will break XCOPY deployment, because the resources remain locked until they are explicitly released by the <see cref="M:System.Resources.ResourceManager.ReleaseAllResources" /> method. If you want to deploy resources with your ASP.NET apps, you should compile your .resources files into satellite assemblies.</para
@@ -128,8 +128,8 @@
           <a href="8ef159de-b660-4bec-9213-c3fbc4d1c6f4">Resource File Generator (Resgen.exe)</a>
         </format> to create a binary .resources file. You can then embed the resulting .resources file in an executable or library by using a compiler option such as /resources for the C# and Visual Basic compilers, or you can embed it in a satellite assembly by using the <format type="text/html">
           <a href="b5382965-0053-47cf-b92f-862860275a01">Assembly Linker (Al.exe)</a>
-        </format>. If you include a .resx file in your Visual Studio project, Visual Studio handles the compilation and embedding of default and localized resources automatically as part of the build process. </para
-      >
+        </format>. If you include a .resx file in your Visual Studio project, Visual Studio handles the compilation and embedding of default and localized resources automatically as part of the build process.
+      </para>
       <para
         >Ideally, you should create resources for every language your app supports, or at least for a meaningful subset of each language. The binary .resources file names follow the naming convention basename.cultureName.resources, where basename is the name of the app or the name of a class, depending on the level of detail you want. The <see cref="P:System.Globalization.CultureInfo.Name" /> property is used to determine cultureName. A resource for the app's default culture should be named basename.resources.</para
       >
@@ -137,8 +137,8 @@
       <para
         >Note that <format type="text/html">
           <a href="b5382965-0053-47cf-b92f-862860275a01">Assembly Linker</a>
-        </format> allows resources to be marked as private, but you should always mark them as public so they can be accessed by other assemblies. (Because a satellite assembly contains no code, resources that are marked as private are unavailable to your app through any mechanism.) </para
-      >
+        </format> allows resources to be marked as private, but you should always mark them as public so they can be accessed by other assemblies. (Because a satellite assembly contains no code, resources that are marked as private are unavailable to your app through any mechanism.)
+      </para>
       <para
         >For more information about creating, packaging, and deploying resources, see the articles <format type="text/html">
           <a href="6c5ad891-66a0-4e7a-adcf-f41863ba6d8d">Creating Resource Files</a>
@@ -167,8 +167,8 @@
         </item>
         <item>
           <para>
-            <see cref="M:System.Resources.ResourceManager.#ctor(System.Type)" /> looks up resources in satellite assemblies based on information from a type object. The type's fully qualified name corresponds to the base name of the .resources file without its file name extension. In desktop apps that are created by using the Visual Studio Resource Designer, Visual Studio creates a wrapper class whose fully qualified name is the same as the root name of the .resources file. For example, if a resource file is named MyCompany.StringResources.resources and there is a wrapper class named MyCompany.StringResources, the following code instantiates a <see cref="T:System.Resources.ResourceManager" /> object that can retrieve resources from the .resources file: </para
-          >
+            <see cref="M:System.Resources.ResourceManager.#ctor(System.Type)" /> looks up resources in satellite assemblies based on information from a type object. The type's fully qualified name corresponds to the base name of the .resources file without its file name extension. In desktop apps that are created by using the Visual Studio Resource Designer, Visual Studio creates a wrapper class whose fully qualified name is the same as the root name of the .resources file. For example, if a resource file is named MyCompany.StringResources.resources and there is a wrapper class named MyCompany.StringResources, the following code instantiates a <see cref="T:System.Resources.ResourceManager" /> object that can retrieve resources from the .resources file:
+          </para>
           <para>code reference: Conceptual.Resources.Retrieving#2</para>
         </item>
       </list>
@@ -177,11 +177,11 @@
           <a href="#exception"
             >Handling MissingManifestResourceException and MissingSatelliteAssembly Exceptions</a
           >
-        </format> section later in this article. </para
-      >
+        </format> section later in this article.
+      </para>
       <para
-        >The following example shows how to instantiate a <see cref="T:System.Resources.ResourceManager" /> object. It contains the source code for an executable named ShowTime.exe. It also includes the following text file named Strings.txt that contains a single string resource, TimeHeader: </para
-      >
+        >The following example shows how to instantiate a <see cref="T:System.Resources.ResourceManager" /> object. It contains the source code for an executable named ShowTime.exe. It also includes the following text file named Strings.txt that contains a single string resource, TimeHeader:
+      </para>
       <code>TimeHeader=The current time is</code>
       <para>You can use a batch file to generate the resource file and embed it into the executable. Here's the batch file to generate an executable by using the C# compiler: </para>
       <code>
@@ -205,19 +205,19 @@ vbc ShowTime.vb /resource:strings.resources
           <a href="b224d7c0-35f8-4e82-a705-dd76795e8d16"
             >Packaging and Deploying Resources in Desktop Apps</a
           >
-        </format>. If the assemblies are properly configured, the resource manager determines which resources to retrieve based on the current thread's <see cref="P:System.Threading.Thread.CurrentUICulture" /> property. (That property also returns the current thread's UI culture.) For example, if an app is compiled with default English language resources in the main assembly and with French and Russian language resources in two satellite assemblies, and the <see cref="P:System.Threading.Thread.CurrentUICulture" /> property is set to fr-FR, the resource manager retrieves the French resources. </para
-      >
+        </format>. If the assemblies are properly configured, the resource manager determines which resources to retrieve based on the current thread's <see cref="P:System.Threading.Thread.CurrentUICulture" /> property. (That property also returns the current thread's UI culture.) For example, if an app is compiled with default English language resources in the main assembly and with French and Russian language resources in two satellite assemblies, and the <see cref="P:System.Threading.Thread.CurrentUICulture" /> property is set to fr-FR, the resource manager retrieves the French resources.
+      </para>
       <para
         >You can set the <see cref="P:System.Globalization.CultureInfo.CurrentUICulture" /> property explicitly or implicitly. The way you set it determines how the <see cref="T:System.Resources.ResourceManager" /> object retrieves resources based on culture:</para
       >
       <list type="bullet">
         <item>
           <para
-            >If you explicitly set the <see cref="P:System.Threading.Thread.CurrentUICulture" /> property to a specific culture, the resource manager always retrieves the resources for that culture, regardless of the user's browser or operating system language. Consider an app that is compiled with default English language resources and three satellite assemblies that contain resources for English (United States), French (France), and Russian (Russia). If the <see cref="P:System.Globalization.CultureInfo.CurrentUICulture" /> property is set to fr-FR, the <see cref="T:System.Resources.ResourceManager" /> object always retrieves the French (France) resources, even if the user's operating system language is not French. Make sure that this is the desired behavior before you set the property explicitly. </para
-          >
+            >If you explicitly set the <see cref="P:System.Threading.Thread.CurrentUICulture" /> property to a specific culture, the resource manager always retrieves the resources for that culture, regardless of the user's browser or operating system language. Consider an app that is compiled with default English language resources and three satellite assemblies that contain resources for English (United States), French (France), and Russian (Russia). If the <see cref="P:System.Globalization.CultureInfo.CurrentUICulture" /> property is set to fr-FR, the <see cref="T:System.Resources.ResourceManager" /> object always retrieves the French (France) resources, even if the user's operating system language is not French. Make sure that this is the desired behavior before you set the property explicitly.
+          </para>
           <para
-            >In ASP.NET apps, you must set the <see cref="P:System.Threading.Thread.CurrentUICulture" /> property explicitly, because it is unlikely that the setting on the server will match incoming client requests. An ASP.NET app can set the <see cref="P:System.Threading.Thread.CurrentUICulture" /> property explicitly to the user's browser accept language. </para
-          >
+            >In ASP.NET apps, you must set the <see cref="P:System.Threading.Thread.CurrentUICulture" /> property explicitly, because it is unlikely that the setting on the server will match incoming client requests. An ASP.NET app can set the <see cref="P:System.Threading.Thread.CurrentUICulture" /> property explicitly to the user's browser accept language.
+          </para>
           <para
             >Explicitly setting the <see cref="P:System.Threading.Thread.CurrentUICulture" /> property defines the current UI culture for that thread. It does not affect the current UI culture of any other threads in an app.</para
           >
@@ -229,8 +229,8 @@ vbc ShowTime.vb /resource:strings.resources
         </item>
         <item>
           <para
-            >If you do not explicitly set the current UI culture and you do not define a default culture for the current app domain, the <see cref="P:System.Globalization.CultureInfo.CurrentUICulture" /> property is set implicitly by the Windows GetUserDefaultUILanguage function. This function is provided by the Multilingual User Interface (MUI), which enables the user to set the default language. If the UI language is not set by the user, it defaults to the system-installed language, which is the language of operating system resources. </para
-          >
+            >If you do not explicitly set the current UI culture and you do not define a default culture for the current app domain, the <see cref="P:System.Globalization.CultureInfo.CurrentUICulture" /> property is set implicitly by the Windows GetUserDefaultUILanguage function. This function is provided by the Multilingual User Interface (MUI), which enables the user to set the default language. If the UI language is not set by the user, it defaults to the system-installed language, which is the language of operating system resources.
+          </para>
         </item>
       </list>
       <para>The following simple "Hello world" example sets the current UI culture explicitly. It contains resources for three cultures: English (United States) or en-US, French (France) or fr-FR, and Russian (Russia) or ru-RU. The en-US resources are contained in a text file named Greetings.txt:</para>
@@ -263,8 +263,8 @@ al /embed:Greetings.ru-RU.resources /culture:ru-RU /out:ru-RU\Example.resources.
           <a href="#CultureSpecific">ResourceManager and Culture-Specific Resources</a>
         </format>, for more information about how the current UI culture of a thread is defined. If the resource manager cannot find the resource for the current thread's UI culture, it uses a fallback process to retrieve the specified resource. If the resource manager cannot find any localized resources, it uses the resources of the default culture. For more information about resource fallback rules, see the "Resource Fallback Process" section of the article <format type="text/html">
           <a href="b224d7c0-35f8-4e82-a705-dd76795e8d16">Packaging and Deploying Resources</a>
-        </format>. </para
-      >
+        </format>.
+      </para>
       <block subset="none" type="note">
         <para
           >If the .resources file specified in the <see cref="T:System.Resources.ResourceManager" /> class constructor cannot be found, the attempt to retrieve a resource throws a <see cref="T:System.Resources.MissingManifestResourceException" /> or <see cref="T:System.Resources.MissingSatelliteAssemblyException" /> exception. For information about dealing with the exception, see the <format type="text/html">
@@ -373,30 +373,30 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
         <h2>Handling MissingManifestResourceException and MissingSatelliteAssemblyException Exceptions</h2>
       </format>
       <para
-        >If you try to retrieve a specific resource, but the resource manager cannot find that resource and either no default culture has been defined or the resources of the default culture cannot be located, the resource manager throws a <see cref="T:System.Resources.MissingManifestResourceException" /> exception if it expects to find the resources in the main assembly or a <see cref="T:System.Resources.MissingSatelliteAssemblyException" /> if it expects to find the resources in a satellite assembly. Note that the exception is thrown when you call a resource retrieval method such as <see cref="M:System.Resources.ResourceManager.GetString(System.String)" /> or <see cref="M:System.Resources.ResourceManager.GetObject(System.String,System.Globalization.CultureInfo)" />, and not when you instantiate a <see cref="T:System.Resources.ResourceManager" /> object. </para
-      >
+        >If you try to retrieve a specific resource, but the resource manager cannot find that resource and either no default culture has been defined or the resources of the default culture cannot be located, the resource manager throws a <see cref="T:System.Resources.MissingManifestResourceException" /> exception if it expects to find the resources in the main assembly or a <see cref="T:System.Resources.MissingSatelliteAssemblyException" /> if it expects to find the resources in a satellite assembly. Note that the exception is thrown when you call a resource retrieval method such as <see cref="M:System.Resources.ResourceManager.GetString(System.String)" /> or <see cref="M:System.Resources.ResourceManager.GetObject(System.String,System.Globalization.CultureInfo)" />, and not when you instantiate a <see cref="T:System.Resources.ResourceManager" /> object.
+      </para>
       <para>The exception is typically thrown under the following conditions:</para>
       <list type="bullet">
         <item>
           <para
-            >The appropriate resource file or satellite assembly does not exist. If the resource manager expects the app's default resources to be embedded in the main app assembly, they are absent. If the <see cref="T:System.Resources.NeutralResourcesLanguageAttribute" /> attribute indicates that the app's default resources reside in a satellite assembly, that assembly cannot be found. When you compile your app, make sure that resources are embedded in the main assembly or that the necessary satellite assembly is generated and is named appropriately. Its name should take the form appName.resources.dll, and it should be located in a directory named after the culture whose resources it contains. </para
-          >
+            >The appropriate resource file or satellite assembly does not exist. If the resource manager expects the app's default resources to be embedded in the main app assembly, they are absent. If the <see cref="T:System.Resources.NeutralResourcesLanguageAttribute" /> attribute indicates that the app's default resources reside in a satellite assembly, that assembly cannot be found. When you compile your app, make sure that resources are embedded in the main assembly or that the necessary satellite assembly is generated and is named appropriately. Its name should take the form appName.resources.dll, and it should be located in a directory named after the culture whose resources it contains.
+          </para>
         </item>
         <item>
           <para
-            >Your app doesn't have a default or neutral culture defined. Add the <see cref="T:System.Resources.NeutralResourcesLanguageAttribute" /> attribute to a source code file or to the project information file (AssemblyInfo.vb for a Visual Basic app or AssemblyInfo.cs for a C# app) file. </para
-          >
+            >Your app doesn't have a default or neutral culture defined. Add the <see cref="T:System.Resources.NeutralResourcesLanguageAttribute" /> attribute to a source code file or to the project information file (AssemblyInfo.vb for a Visual Basic app or AssemblyInfo.cs for a C# app) file.
+          </para>
         </item>
         <item>
           <para
-            >The <paramref name="baseName" /> parameter in the <see cref="M:System.Resources.ResourceManager.#ctor(System.String,System.Reflection.Assembly)" /> constructor does not specify the name of a .resources file. The name should include the resource file's fully qualified namespace but not its file name extension. Typically, resource files that are created in Visual Studio include namespace names, but resource files that are created and compiled at the command prompt do not. You can determine the names of embedded .resources files by compiling and running the following utility. This is a console app that accepts the name of a main assembly or satellite assembly as a command-line parameter. It displays the strings that should be provided as the <paramref name="baseName" /> parameter so that the resource manager can correctly identify the resource. </para
-          >
+            >The <paramref name="baseName" /> parameter in the <see cref="M:System.Resources.ResourceManager.#ctor(System.String,System.Reflection.Assembly)" /> constructor does not specify the name of a .resources file. The name should include the resource file's fully qualified namespace but not its file name extension. Typically, resource files that are created in Visual Studio include namespace names, but resource files that are created and compiled at the command prompt do not. You can determine the names of embedded .resources files by compiling and running the following utility. This is a console app that accepts the name of a main assembly or satellite assembly as a command-line parameter. It displays the strings that should be provided as the <paramref name="baseName" /> parameter so that the resource manager can correctly identify the resource.
+          </para>
           <para>code reference: System.Resources.ResourceManager.Class#4</para>
         </item>
       </list>
       <para
-        >If you are changing the current culture of your application explicitly, you should also remember that the resource manager retrieves a resource set based on the value of the <see cref="P:System.Globalization.CultureInfo.CurrentUICulture" /> property, and not the <see cref="P:System.Globalization.CultureInfo.CurrentCulture" /> property. Typically, if you change one value, you should also change the other. </para
-      >
+        >If you are changing the current culture of your application explicitly, you should also remember that the resource manager retrieves a resource set based on the value of the <see cref="P:System.Globalization.CultureInfo.CurrentUICulture" /> property, and not the <see cref="P:System.Globalization.CultureInfo.CurrentCulture" /> property. Typically, if you change one value, you should also change the other.
+      </para>
       <format type="text/html">
         <a href="#versioning" />
       </format>
@@ -409,8 +409,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
       <para
         >For more information about versioning support for satellite assemblies, see the article <format type="text/html">
           <a href="eca16922-1c46-4f68-aefe-e7a12283641f">Retrieving Resources</a>
-        </format>. </para
-      >
+        </format>.
+      </para>
       <format type="text/html">
         <a href="#config" />
       </format>
@@ -418,8 +418,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
         <h2>&lt;satelliteassemblies&gt; Configuration File Node</h2>
       </format>
       <para
-        >For executables that are deployed and run from a website (HREF .exe files), the <see cref="T:System.Resources.ResourceManager" /> object may probe for satellite assemblies over the web, which can hurt your app's performance. To eliminate the performance problem, you can limit this probing to the satellite assemblies that you have deployed with your app. To do this, you create a &lt;satelliteassemblies&gt; node in your app's configuration file to specify that you have deployed a specific set of cultures for your app, and that the <see cref="T:System.Resources.ResourceManager" /> object should not try to probe for any culture that is not listed in that node.  </para
-      >
+        >For executables that are deployed and run from a website (HREF .exe files), the <see cref="T:System.Resources.ResourceManager" /> object may probe for satellite assemblies over the web, which can hurt your app's performance. To eliminate the performance problem, you can limit this probing to the satellite assemblies that you have deployed with your app. To do this, you create a &lt;satelliteassemblies&gt; node in your app's configuration file to specify that you have deployed a specific set of cultures for your app, and that the <see cref="T:System.Resources.ResourceManager" /> object should not try to probe for any culture that is not listed in that node.
+      </para>
       <block subset="none" type="note">
         <para
           >The preferred alternative to creating a &lt;satelliteassemblies&gt; node is to use the <format type="text/html">
@@ -445,8 +445,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
           <para>For the Version attribute, specify the version number of your assembly. For example, the first release of your assembly might be version number 1.0.0.0.</para>
           <para>For the PublicKeyToken attribute, specify the keyword null if you have not signed your assembly with a strong name, or specify your public key token if you have signed your assembly.</para>
           <para
-            >For the Culture attribute, specify the keyword neutral to designate the main assembly and cause the <see cref="T:System.Resources.ResourceManager" /> class to probe only for the cultures listed in the &lt;culture&gt; nodes. </para
-          >
+            >For the Culture attribute, specify the keyword neutral to designate the main assembly and cause the <see cref="T:System.Resources.ResourceManager" /> class to probe only for the cultures listed in the &lt;culture&gt; nodes.
+          </para>
           <para
             >For more information about fully qualified assembly names, see the article <format type="text/html">
               <a href="8f8c2c90-f15d-400e-87e7-a757e4f04d0e">Assembly Names</a>
@@ -482,11 +482,11 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
         >For win8_appname_long apps, the <see cref="T:System.Resources.ResourceManager" /> class retrieves resources from package resource index (PRI) files. A single PRI file (the application package PRI file) contains the resources for both the default culture and any localized cultures. You use the MakePRI utility to create a PRI file from one or more resource files that are in XML resource (.resw) format. For resources that are included in a Visual Studio project, Visual Studio handles the process of creating and packaging the PRI file automatically. You can then use the .NET Framework <see cref="T:System.Resources.ResourceManager" /> class to access the app's or library's resources.</para
       >
       <para
-        >You can instantiate a <see cref="T:System.Resources.ResourceManager" /> object for a win8_appname_long app in the same way that you do for a desktop app. </para
-      >
+        >You can instantiate a <see cref="T:System.Resources.ResourceManager" /> object for a win8_appname_long app in the same way that you do for a desktop app.
+      </para>
       <para
-        >You can then access the resources for a particular culture by passing the name of the resource to be retrieved to the <see cref="M:System.Resources.ResourceManager.GetString(System.String)" /> method. By default, this method returns the resource for the culture determined by the current UI culture of the thread that made the call. You can also retrieve the resources for a specific culture by passing the name of the resource and a <see cref="T:System.Globalization.CultureInfo" /> object that represents the culture whose resource is to be retrieved to the <see cref="M:System.Resources.ResourceManager.GetString(System.String,System.Globalization.CultureInfo)" /> method. If the resource for the current UI culture or the specified culture cannot be found, the resource manager uses a UI language fallback list to locate a suitable resource. </para
-      >
+        >You can then access the resources for a particular culture by passing the name of the resource to be retrieved to the <see cref="M:System.Resources.ResourceManager.GetString(System.String)" /> method. By default, this method returns the resource for the culture determined by the current UI culture of the thread that made the call. You can also retrieve the resources for a specific culture by passing the name of the resource and a <see cref="T:System.Globalization.CultureInfo" /> object that represents the culture whose resource is to be retrieved to the <see cref="M:System.Resources.ResourceManager.GetString(System.String,System.Globalization.CultureInfo)" /> method. If the resource for the current UI culture or the specified culture cannot be found, the resource manager uses a UI language fallback list to locate a suitable resource.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -546,8 +546,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
             <h2>Desktop Apps</h2>
           </format>
           <para
-            >In desktop apps, the resource manager uses the <paramref name="resourceSource" /> parameter to load a particular resource file as follows: </para
-          >
+            >In desktop apps, the resource manager uses the <paramref name="resourceSource" /> parameter to load a particular resource file as follows:
+          </para>
           <list type="bullet">
             <item>
               <para
@@ -597,8 +597,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A type from which the resource manager derives all information for finding .resources files. </param
-        >
+          />A type from which the resource manager derives all information for finding .resources files.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -648,8 +648,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
             >
           </block>
           <para
-            >In win8_appname_long apps, the resource manager uses the simple name of the <paramref name="assembly" /> parameter to look up a matching resource set in the app's package resource index (PRI) file. The <paramref name="baseName" /> parameter is used to look up a resource item within the resource set. For example, the root name for PortableLibrary1.Resource1.de-DE.resources is PortableLibrary1.Resource1. </para
-          >
+            >In win8_appname_long apps, the resource manager uses the simple name of the <paramref name="assembly" /> parameter to look up a matching resource set in the app's package resource index (PRI) file. The <paramref name="baseName" /> parameter is used to look up a resource item within the resource set. For example, the root name for PortableLibrary1.Resource1.de-DE.resources is PortableLibrary1.Resource1.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -662,15 +662,15 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The root name of the resource file without its extension but including any fully qualified namespace name. For example, the root name for the resource file named MyApplication.MyResource.en-US.resources is MyApplication.MyResource. </param
-        >
+          />The root name of the resource file without its extension but including any fully qualified namespace name. For example, the root name for the resource file named MyApplication.MyResource.en-US.resources is MyApplication.MyResource.
+        </param>
         <param name="assembly">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The main assembly for the resources. </param
-        >
+          />The main assembly for the resources.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -723,22 +723,22 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The root name of the resource file without its extension but including any fully qualified namespace name. For example, the root name for the resource file named MyApplication.MyResource.en-US.resources is MyApplication.MyResource. </param
-        >
+          />The root name of the resource file without its extension but including any fully qualified namespace name. For example, the root name for the resource file named MyApplication.MyResource.en-US.resources is MyApplication.MyResource.
+        </param>
         <param name="assembly">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The main assembly for the resources. </param
-        >
+          />The main assembly for the resources.
+        </param>
         <param name="usingResourceSet">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the custom <see cref="T:System.Resources.ResourceSet" /> to use. If null, the default runtime <see cref="T:System.Resources.ResourceSet" /> object is used. </param
-        >
+          />The type of the custom <see cref="T:System.Resources.ResourceSet" /> to use. If null, the default runtime <see cref="T:System.Resources.ResourceSet" /> object is used.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="BaseName">
@@ -758,16 +758,16 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Resources.ResourceManager.BaseName" /> property reflects the fully qualified namespace name and the root resource name of a resource file, without its culture or file name extension. For example, if an app's default resource file is named SampleApps.StringResources.resources, the value of the <see cref="P:System.Resources.ResourceManager.BaseName" /> property  is "SampleApps.StringResources". If an app's default resource file is named SampleApps.StringResources.en-US.resources and is embedded in a satellite assembly, the value of the <see cref="P:System.Resources.ResourceManager.BaseName" /> property is still "SampleApps.StringResources". </para
-          >
+            >The <see cref="P:System.Resources.ResourceManager.BaseName" /> property reflects the fully qualified namespace name and the root resource name of a resource file, without its culture or file name extension. For example, if an app's default resource file is named SampleApps.StringResources.resources, the value of the <see cref="P:System.Resources.ResourceManager.BaseName" /> property  is "SampleApps.StringResources". If an app's default resource file is named SampleApps.StringResources.en-US.resources and is embedded in a satellite assembly, the value of the <see cref="P:System.Resources.ResourceManager.BaseName" /> property is still "SampleApps.StringResources".
+          </para>
           <block subset="none" type="note">
             <para
               >The <see cref="P:System.Resources.ResourceManager.BaseName" /> property value of a resource file that is compiled and embedded from the command line does not include a namespace name unless you explicitly include one when compiling the file. On the other hand, the <see cref="P:System.Resources.ResourceManager.BaseName" /> property value of a resource file that is compiled and embedded within the Visual Studio environment typically does include the default namespace name.</para
             >
           </block>
           <para
-            >The <see cref="P:System.Resources.ResourceManager.BaseName" /> property value is the same as the string passed to the <see cref="M:System.Resources.ResourceManager.#ctor(System.String,System.Reflection.Assembly)" /> or <see cref="M:System.Resources.ResourceManager.#ctor(System.String,System.Reflection.Assembly,System.Type)" /> constructor when instantiating a <see cref="T:System.Resources.ResourceManager" /> instance. </para
-          >
+            >The <see cref="P:System.Resources.ResourceManager.BaseName" /> property value is the same as the string passed to the <see cref="M:System.Resources.ResourceManager.#ctor(System.String,System.Reflection.Assembly)" /> or <see cref="M:System.Resources.ResourceManager.#ctor(System.String,System.Reflection.Assembly,System.Type)" /> constructor when instantiating a <see cref="T:System.Resources.ResourceManager" /> instance.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -862,22 +862,22 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The root name of the resources. For example, the root name for the resource file named "MyResource.en-US.resources" is "MyResource". </param
-        >
+          />The root name of the resources. For example, the root name for the resource file named "MyResource.en-US.resources" is "MyResource".
+        </param>
         <param name="resourceDir">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the directory to search for the resources. <paramref name="resourceDir" /> can be an absolute path or a relative path from the application directory. </param
-        >
+          />The name of the directory to search for the resources. <paramref name="resourceDir" /> can be an absolute path or a relative path from the application directory.
+        </param>
         <param name="usingResourceSet">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the custom <see cref="T:System.Resources.ResourceSet" /> to use. If null, the default runtime <see cref="T:System.Resources.ResourceSet" /> object is used. </param
-        >
+          />The type of the custom <see cref="T:System.Resources.ResourceSet" /> to use. If null, the default runtime <see cref="T:System.Resources.ResourceSet" /> object is used.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="FallbackLocation">
@@ -955,8 +955,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The assembly for which to return culture-specific information. </param
-        >
+          />The assembly for which to return culture-specific information.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetObject">
@@ -981,18 +981,18 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Resources.ResourceManager.GetObject(System.String)" /> method is used to retrieve non-string resources. These include values that belong to primitive data types such as <see cref="T:System.Int32" /> or <see cref="T:System.Double" />, bitmaps (such as a <see cref="T:System.Drawing.Bitmap" /> object), or custom serialized objects. Typically, the returned object must be cast (in C#) or converted (in Visual Basic) to an object of the appropriate type. </para
-          >
+            >The <see cref="M:System.Resources.ResourceManager.GetObject(System.String)" /> method is used to retrieve non-string resources. These include values that belong to primitive data types such as <see cref="T:System.Int32" /> or <see cref="T:System.Double" />, bitmaps (such as a <see cref="T:System.Drawing.Bitmap" /> object), or custom serialized objects. Typically, the returned object must be cast (in C#) or converted (in Visual Basic) to an object of the appropriate type.
+          </para>
           <para
             >The returned resource is localized for the UI culture of the current thread, which is defined by the <see cref="P:System.Globalization.CultureInfo.CurrentUICulture" /> property. If the resource is not localized for that culture, the resource manager uses fallback rules to load an appropriate resource. If no usable set of localized resources is found, the <see cref="T:System.Resources.ResourceManager" /> falls back on the default culture's resources. If a resource set for the default culture is not found, the method throws a <see cref="T:System.Resources.MissingManifestResourceException" /> exception or, if the resource set is expected to reside in a satellite assembly, a <see cref="T:System.Resources.MissingSatelliteAssemblyException" /> exception. If the resource manager can load an appropriate resource set but cannot find a resource named <paramref name="name" />, the method returns null.</para
           >
           <para
-            >The <see cref="P:System.Resources.ResourceManager.IgnoreCase" /> property determines whether the comparison of <paramref name="name" /> with the names of resources is case-insensitive (the default) or case-sensitive. </para
-          >
+            >The <see cref="P:System.Resources.ResourceManager.IgnoreCase" /> property determines whether the comparison of <paramref name="name" /> with the names of resources is case-insensitive (the default) or case-sensitive.
+          </para>
           <block subset="none" type="note">
             <para
-              >This method can throw more exceptions than are listed. One reason this might occur is if a method that this method calls throws an exception.  For example, a <see cref="T:System.IO.FileLoadException" /> exception might be thrown if an error was made deploying or installing a satellite assembly, or a <see cref="T:System.Runtime.Serialization.SerializationException" /> exception might be thrown if a user-defined type throws a user-defined exception when the type is deserialized. </para
-            >
+              >This method can throw more exceptions than are listed. One reason this might occur is if a method that this method calls throws an exception.  For example, a <see cref="T:System.IO.FileLoadException" /> exception might be thrown if an error was made deploying or installing a satellite assembly, or a <see cref="T:System.Runtime.Serialization.SerializationException" /> exception might be thrown if a user-defined type throws a user-defined exception when the type is deserialized.
+            </para>
           </block>
           <format type="text/html">
             <h2>Performance Considerations</h2>
@@ -1008,16 +1008,16 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the resource localized for the caller's current culture settings. If an appropriate resource set exists but <paramref name="name" /> cannot be found, the method returns null. </para
-          >
+            >The value of the resource localized for the caller's current culture settings. If an appropriate resource set exists but <paramref name="name" /> cannot be found, the method returns null.
+          </para>
         </returns>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the resource to get. </param
-        >
+          />The name of the resource to get.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetObject">
@@ -1046,18 +1046,18 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Resources.ResourceManager.GetObject(System.String,System.Globalization.CultureInfo)" /> method is used to retrieve non-string resources. These include values that belong to primitive data types such as <see cref="T:System.Int32" /> or <see cref="T:System.Double" />, bitmaps (such as a <see cref="T:System.Drawing.Bitmap" /> object), or custom serialized objects. Typically, the returned object must be cast (in C#) or converted (in Visual Basic) to an object of the appropriate type. </para
-          >
+            >The <see cref="M:System.Resources.ResourceManager.GetObject(System.String,System.Globalization.CultureInfo)" /> method is used to retrieve non-string resources. These include values that belong to primitive data types such as <see cref="T:System.Int32" /> or <see cref="T:System.Double" />, bitmaps (such as a <see cref="T:System.Drawing.Bitmap" /> object), or custom serialized objects. Typically, the returned object must be cast (in C#) or converted (in Visual Basic) to an object of the appropriate type.
+          </para>
           <para
             >The returned resource is localized for the culture that is specified by <paramref name="culture" />, or for the culture that is specified by the <see cref="P:System.Globalization.CultureInfo.CurrentUICulture" /> property if <paramref name="culture" /> is null. If the resource is not localized for that culture, the resource manager uses fallback rules to load an appropriate resource. If no usable set of localized resources is found, the resource manager falls back on the default culture's resources. If a resource set for the default culture is not found, the method throws a <see cref="T:System.Resources.MissingManifestResourceException" /> exception or, if the resource set is expected to reside in a satellite assembly, a <see cref="T:System.Resources.MissingSatelliteAssemblyException" /> exception. If the resource manager can load an appropriate resource set but cannot find a resource named <paramref name="name" />, the method returns null.</para
           >
           <para
-            >The <see cref="P:System.Resources.ResourceManager.IgnoreCase" /> property determines whether the comparison of <paramref name="name" /> with the names of resources is case-insensitive (the default) or case-sensitive. </para
-          >
+            >The <see cref="P:System.Resources.ResourceManager.IgnoreCase" /> property determines whether the comparison of <paramref name="name" /> with the names of resources is case-insensitive (the default) or case-sensitive.
+          </para>
           <block subset="none" type="note">
             <para
-              >This method can throw more exceptions than are listed. One reason this might occur is if a method that this method calls throws an exception.  For example, a <see cref="T:System.IO.FileLoadException" /> exception might be thrown if an error was made deploying or installing a satellite assembly, or a <see cref="T:System.Runtime.Serialization.SerializationException" /> exception might be thrown if a user-defined type throws a user-defined exception when the type is deserialized. </para
-            >
+              >This method can throw more exceptions than are listed. One reason this might occur is if a method that this method calls throws an exception.  For example, a <see cref="T:System.IO.FileLoadException" /> exception might be thrown if an error was made deploying or installing a satellite assembly, or a <see cref="T:System.Runtime.Serialization.SerializationException" /> exception might be thrown if a user-defined type throws a user-defined exception when the type is deserialized.
+            </para>
           </block>
           <format type="text/html">
             <h2>Performance Considerations</h2>
@@ -1081,8 +1081,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the resource to get. </param
-        >
+          />The name of the resource to get.
+        </param>
         <param name="culture">
           <attribution
             license="cc4"
@@ -1141,8 +1141,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The culture object for which a resource file name is constructed. </param
-        >
+          />The culture object for which a resource file name is constructed.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetResourceSet">
@@ -1190,15 +1190,15 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The culture whose resources are to be retrieved. </param
-        >
+          />The culture whose resources are to be retrieved.
+        </param>
         <param name="createIfNotExists">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to load the resource set, if it has not been loaded yet; otherwise, false. </param
-        >
+          />true to load the resource set, if it has not been loaded yet; otherwise, false.
+        </param>
         <param name="tryParents">
           <attribution
             license="cc4"
@@ -1251,8 +1251,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The assembly to check for the <see cref="T:System.Resources.SatelliteContractVersionAttribute" /> attribute. </param
-        >
+          />The assembly to check for the <see cref="T:System.Resources.SatelliteContractVersionAttribute" /> attribute.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetStream">
@@ -1285,14 +1285,14 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Resources.ResourceManager.GetStream(System.String)" /> method takes the name of a resource that is stored as a <see cref="T:System.IO.MemoryStream" /> object, gets the value of the <see cref="T:System.Object" /> resource, and returns an <see cref="T:System.IO.UnmanagedMemoryStream" /> object. It requires that you work directly with a stream of bytes, which you then convert to an object. This method is useful primarily for performance reasons: Retrieving a resource as a byte stream instead of an explicit object can improve performance. </para
-          >
+            >The <see cref="M:System.Resources.ResourceManager.GetStream(System.String)" /> method takes the name of a resource that is stored as a <see cref="T:System.IO.MemoryStream" /> object, gets the value of the <see cref="T:System.Object" /> resource, and returns an <see cref="T:System.IO.UnmanagedMemoryStream" /> object. It requires that you work directly with a stream of bytes, which you then convert to an object. This method is useful primarily for performance reasons: Retrieving a resource as a byte stream instead of an explicit object can improve performance.
+          </para>
           <para
             >The returned resource is localized for the UI culture of the current thread, which is defined by the <see cref="P:System.Globalization.CultureInfo.CurrentUICulture" /> property. If the resource is not localized for that culture, the resource manager uses fallback rules to load an appropriate resource. If no usable set of localized resources is found, the <see cref="T:System.Resources.ResourceManager" /> falls back on the default culture's resources. If a resource set for the default culture is not found, the method throws a <see cref="T:System.Resources.MissingManifestResourceException" /> exception or, if the resource set is expected to reside in a satellite assembly, a <see cref="T:System.Resources.MissingSatelliteAssemblyException" /> exception. If the resource manager can load an appropriate resource set but cannot find a resource named <paramref name="name" />, the method returns null.</para
           >
           <para
-            >The <see cref="P:System.Resources.ResourceManager.IgnoreCase" /> property determines whether the comparison of <paramref name="name" /> with the names of resources is case-insensitive (the default) or case-sensitive. </para
-          >
+            >The <see cref="P:System.Resources.ResourceManager.IgnoreCase" /> property determines whether the comparison of <paramref name="name" /> with the names of resources is case-insensitive (the default) or case-sensitive.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1342,14 +1342,14 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Resources.ResourceManager.GetStream(System.String,System.Globalization.CultureInfo)" /> method takes the name of a resource that is stored as a <see cref="T:System.IO.MemoryStream" /> object, gets the value of the <see cref="T:System.Object" /> resource, and returns an <see cref="T:System.IO.UnmanagedMemoryStream" /> object. It requires that you work directly with a stream of bytes, which you then convert to an object. This method is useful primarily for performance reasons: Retrieving a resource as a byte stream instead of an explicit object can improve performance. </para
-          >
+            >The <see cref="M:System.Resources.ResourceManager.GetStream(System.String,System.Globalization.CultureInfo)" /> method takes the name of a resource that is stored as a <see cref="T:System.IO.MemoryStream" /> object, gets the value of the <see cref="T:System.Object" /> resource, and returns an <see cref="T:System.IO.UnmanagedMemoryStream" /> object. It requires that you work directly with a stream of bytes, which you then convert to an object. This method is useful primarily for performance reasons: Retrieving a resource as a byte stream instead of an explicit object can improve performance.
+          </para>
           <para
             >The returned resource is localized for the culture that is specified by <paramref name="culture" />, or for the culture that is specified by the <see cref="P:System.Globalization.CultureInfo.CurrentUICulture" /> property if <paramref name="culture" /> is null. If the resource is not localized for that culture, the resource manager uses fallback rules to load an appropriate resource. If no usable set of localized resources is found, the <see cref="T:System.Resources.ResourceManager" /> falls back on the default culture's resources. If a resource set for the default culture is not found, the method throws a <see cref="T:System.Resources.MissingManifestResourceException" /> exception or, if the resource set is expected to reside in a satellite assembly, a <see cref="T:System.Resources.MissingSatelliteAssemblyException" /> exception. If the resource manager can load an appropriate resource set but cannot find a resource named <paramref name="name" />, the method returns null.</para
           >
           <para
-            >The <see cref="P:System.Resources.ResourceManager.IgnoreCase" /> property determines whether the comparison of <paramref name="name" /> with the names of resources is case-insensitive (the default) or case-sensitive. </para
-          >
+            >The <see cref="P:System.Resources.ResourceManager.IgnoreCase" /> property determines whether the comparison of <paramref name="name" /> with the names of resources is case-insensitive (the default) or case-sensitive.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1405,12 +1405,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
             </format> article. If no usable set of localized resources is found, the resource manager falls back on the default culture's resources. If the resource manager cannot load the default culture's resource set, the method throws a <see cref="T:System.Resources.MissingManifestResourceException" /> exception or, if the resource set is expected to reside in a satellite assembly, a <see cref="T:System.Resources.MissingSatelliteAssemblyException" /> exception. If the resource manager can load an appropriate resource set but cannot find a resource named <paramref name="name" />, the method returns null.</para
           >
           <para
-            >The <see cref="P:System.Resources.ResourceManager.IgnoreCase" /> property determines whether the comparison of <paramref name="name" /> with the names of resources is case-insensitive (the default) or case-sensitive. </para
-          >
+            >The <see cref="P:System.Resources.ResourceManager.IgnoreCase" /> property determines whether the comparison of <paramref name="name" /> with the names of resources is case-insensitive (the default) or case-sensitive.
+          </para>
           <block subset="none" type="note">
             <para
-              >This method can throw more exceptions than are listed. One reason this might occur is if a method that this method calls throws an exception.  For example, a <see cref="T:System.IO.FileLoadException" /> exception might be thrown if an error was made deploying or installing a satellite assembly, or a <see cref="T:System.Runtime.Serialization.SerializationException" /> exception might be thrown if a user-defined type throws a user-defined exception when the type is deserialized. </para
-            >
+              >This method can throw more exceptions than are listed. One reason this might occur is if a method that this method calls throws an exception.  For example, a <see cref="T:System.IO.FileLoadException" /> exception might be thrown if an error was made deploying or installing a satellite assembly, or a <see cref="T:System.Runtime.Serialization.SerializationException" /> exception might be thrown if a user-defined type throws a user-defined exception when the type is deserialized.
+            </para>
           </block>
           <format type="text/html">
             <h2>win8_appname_long Apps</h2>
@@ -1424,8 +1424,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
             >
           </block>
           <para
-            >In win8_appname_long apps, the <see cref="M:System.Resources.ResourceManager.GetString(System.String)" /> method returns the value of the <paramref name="name" /> string resource, localized for the caller's current UI culture settings. The list of cultures is derived from the operating system's preferred UI language list. If the resource manager cannot match <paramref name="name" />, the method returns null. </para
-          >
+            >In win8_appname_long apps, the <see cref="M:System.Resources.ResourceManager.GetString(System.String)" /> method returns the value of the <paramref name="name" /> string resource, localized for the caller's current UI culture settings. The list of cultures is derived from the operating system's preferred UI language list. If the resource manager cannot match <paramref name="name" />, the method returns null.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1442,8 +1442,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the resource to retrieve. </param
-        >
+          />The name of the resource to retrieve.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetString">
@@ -1475,20 +1475,20 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
             <h2>Desktop Apps</h2>
           </format>
           <para
-            >In desktop apps, if <paramref name="culture" /> is null, the <see cref="M:System.Resources.ResourceManager.GetString(System.String,System.Globalization.CultureInfo)" /> method uses the current UI culture obtained from the <see cref="P:System.Globalization.CultureInfo.CurrentUICulture" /> property. </para
-          >
+            >In desktop apps, if <paramref name="culture" /> is null, the <see cref="M:System.Resources.ResourceManager.GetString(System.String,System.Globalization.CultureInfo)" /> method uses the current UI culture obtained from the <see cref="P:System.Globalization.CultureInfo.CurrentUICulture" /> property.
+          </para>
           <para
             >The resource that is returned is localized for the culture specified by the <paramref name="culture" /> parameter. If the resource has not been localized for <paramref name="culture" />, the resource manager probes for a resource by following the steps outlined in the "Resource Fallback Process" section of the <format type="text/html">
               <a href="B224D7C0-35F8-4E82-A705-DD76795E8D16">Packaging and Deploying Resources</a>
             </format> topic. If no usable set of resources is found, the resource manager falls back on the default culture's resources. If the resource manager cannot load the default culture's resource set, the method throws a <see cref="T:System.Resources.MissingManifestResourceException" /> exception or, if the resource set is expected to reside in a satellite assembly, a <see cref="T:System.Resources.MissingSatelliteAssemblyException" /> exception. If the resource manager can load an appropriate resource set but cannot find a resource named <paramref name="name" />, the method returns null.</para
           >
           <para
-            >The <see cref="P:System.Resources.ResourceManager.IgnoreCase" /> property determines whether the comparison of <paramref name="name" /> with the names of resources is case-insensitive (the default) or case-sensitive. </para
-          >
+            >The <see cref="P:System.Resources.ResourceManager.IgnoreCase" /> property determines whether the comparison of <paramref name="name" /> with the names of resources is case-insensitive (the default) or case-sensitive.
+          </para>
           <block subset="none" type="note">
             <para
-              >This method can throw more exceptions than are listed. One reason this might occur is if a method that this method calls throws an exception.  For example, a <see cref="T:System.IO.FileLoadException" /> exception might be thrown if an error was made deploying or installing a satellite assembly, or a <see cref="T:System.Runtime.Serialization.SerializationException" /> exception might be thrown if a user-defined type throws a user-defined exception when the type is deserialized. </para
-            >
+              >This method can throw more exceptions than are listed. One reason this might occur is if a method that this method calls throws an exception.  For example, a <see cref="T:System.IO.FileLoadException" /> exception might be thrown if an error was made deploying or installing a satellite assembly, or a <see cref="T:System.Runtime.Serialization.SerializationException" /> exception might be thrown if a user-defined type throws a user-defined exception when the type is deserialized.
+            </para>
           </block>
           <format type="text/html">
             <h2>win8_appname_long Apps</h2>
@@ -1520,15 +1520,15 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the resource to retrieve. </param
-        >
+          />The name of the resource to retrieve.
+        </param>
         <param name="culture">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that represents the culture for which the resource is localized. </param
-        >
+          />An object that represents the culture for which the resource is localized.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="HeaderVersionNumber">
@@ -1583,8 +1583,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
           >
           <block subset="none" type="note">
             <para
-              >For performance reasons, it is best to always specify the correct case for your resource names. Setting <see cref="P:System.Resources.ResourceManager.IgnoreCase" /> to true can cause a significant increase in working set and a significant decline in performance. </para
-            >
+              >For performance reasons, it is best to always specify the correct case for your resource names. Setting <see cref="P:System.Resources.ResourceManager.IgnoreCase" /> to true can cause a significant increase in working set and a significant decline in performance.
+            </para>
           </block>
         </remarks>
         <summary>
@@ -1633,15 +1633,15 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The culture object to look for. </param
-        >
+          />The culture object to look for.
+        </param>
         <param name="createIfNotExists">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to load the resource set, if it has not been loaded yet; otherwise, false. </param
-        >
+          />true to load the resource set, if it has not been loaded yet; otherwise, false.
+        </param>
         <param name="tryParents">
           <attribution
             license="cc4"
@@ -1781,8 +1781,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Contains a <see cref="T:System.Collections.Hashtable" /> that returns a mapping from cultures to <see cref="T:System.Resources.ResourceSet" /> objects. </para
-          >
+            >Contains a <see cref="T:System.Collections.Hashtable" /> that returns a mapping from cultures to <see cref="T:System.Resources.ResourceSet" /> objects.
+          </para>
         </summary>
       </Docs>
     </Member>

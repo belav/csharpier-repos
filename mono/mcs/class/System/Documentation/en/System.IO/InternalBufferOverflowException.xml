@@ -101,8 +101,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The message to be given for the exception. </param
-        >
+          />The message to be given for the exception.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -187,15 +187,11 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The message to be given for the exception. </param
-        >
+          />The message to be given for the exception.
+        </param>
         <param name="inner">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The inner exception. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The inner exception.
+        </param>
       </Docs>
     </Member>
   </Members>

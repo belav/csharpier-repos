@@ -488,8 +488,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The owner for which to get the primary group. </param
-        >
+          />The owner for which to get the primary group.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetOwner">

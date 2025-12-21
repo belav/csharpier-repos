@@ -50,8 +50,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.ServiceDocumentFormatter" /> class. </para
-          >
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.ServiceDocumentFormatter" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -76,8 +76,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.ServiceDocumentFormatter" /> class. </para
-          >
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.ServiceDocumentFormatter" /> class.
+          </para>
         </summary>
         <param name="documentToWrite">
           <attribution
@@ -157,15 +157,15 @@ true, if the XML reader contains a valid service document, otherwise false.
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationCategory" /> class. </para
-          >
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationCategory" /> class.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
 Returns a new <see cref="T:System.ServiceModel.Syndication.SyndicationCategory" /> instance.
-</para
-          >
+
+          </para>
         </returns>
         <param name="inlineCategories">
           <attribution
@@ -207,8 +207,8 @@ Returns a new <see cref="T:System.ServiceModel.Syndication.SyndicationCategory" 
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
 Returns a new <see cref="T:System.ServiceModel.Syndication.ResourceCollectionInfo" /> instance.
-</para
-          >
+
+          </para>
         </returns>
         <param name="workspace">
           <attribution
@@ -248,8 +248,8 @@ Returns a new <see cref="T:System.ServiceModel.Syndication.ResourceCollectionInf
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
 Returns a new <see cref="T:System.ServiceModel.Syndication.ServiceDocument" /> instance. 
-</para
-          >
+
+          </para>
         </returns>
       </Docs>
     </Member>
@@ -287,8 +287,8 @@ Returns a new <see cref="T:System.ServiceModel.Syndication.ServiceDocument" /> i
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
 Returns a new <see cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" /> instance.
-</para
-          >
+
+          </para>
         </returns>
         <param name="collection">
           <attribution
@@ -333,8 +333,8 @@ Returns a new <see cref="T:System.ServiceModel.Syndication.InlineCategoriesDocum
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
 Returns a new <see cref="T:System.ServiceModel.Syndication.ReferencedCategoriesDocument" />.
-</para
-          >
+
+          </para>
         </returns>
         <param name="collection">
           <attribution
@@ -374,8 +374,8 @@ Returns a new <see cref="T:System.ServiceModel.Syndication.ReferencedCategoriesD
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
 Returns a new <see cref="T:System.ServiceModel.Syndication.Workspace" />.
-</para
-          >
+
+          </para>
         </returns>
         <param name="document">
           <attribution
@@ -721,8 +721,8 @@ Returns a new <see cref="T:System.ServiceModel.Syndication.Workspace" />.
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
 Returns a <see cref="T:System.Boolean" /> that indicates whether the attribute extension was successfully parsed.
-</para
-          >
+
+          </para>
         </returns>
         <param name="name">
           <attribution
@@ -797,8 +797,8 @@ Returns a <see cref="T:System.Boolean" /> that indicates whether the attribute e
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
 Returns a <see cref="T:System.Boolean" /> that indicates whether the attribute extension was parsed successfully.
-</para
-          >
+
+          </para>
         </returns>
         <param name="name">
           <attribution
@@ -870,8 +870,8 @@ Returns a <see cref="T:System.Boolean" /> that indicates whether the attribute e
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
 Returns a <see cref="T:System.Boolean" /> that indicates whether the attribute extension was parsed successfully.
-</para
-          >
+
+          </para>
         </returns>
         <param name="name">
           <attribution
@@ -943,8 +943,8 @@ Returns a <see cref="T:System.Boolean" /> that indicates whether the attribute e
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
 Returns a <see cref="T:System.Boolean" /> that indicates whether the attribute extension was parsed successfully.
-</para
-          >
+
+          </para>
         </returns>
         <param name="name">
           <attribution
@@ -1014,8 +1014,8 @@ Returns a <see cref="T:System.Boolean" /> that indicates whether the attribute e
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
 Returns a <see cref="T:System.Boolean" /> that indicates whether the element extension was parsed successfully.
-</para
-          >
+
+          </para>
         </returns>
         <param name="reader">
           <attribution
@@ -1074,8 +1074,8 @@ Returns a <see cref="T:System.Boolean" /> that indicates whether the element ext
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
 Returns a <see cref="T:System.Boolean" /> that indicates whether the element extension was parsed successfully.
-</para
-          >
+
+          </para>
         </returns>
         <param name="reader">
           <attribution
@@ -1131,8 +1131,8 @@ Returns a <see cref="T:System.Boolean" /> that indicates whether the element ext
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
 Returns a <see cref="T:System.Boolean" /> that indicates whether the element extension was successfully parsed.
-</para
-          >
+
+          </para>
         </returns>
         <param name="reader">
           <attribution
@@ -1188,8 +1188,8 @@ Returns a <see cref="T:System.Boolean" /> that indicates whether the element ext
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
 Returns a <see cref="T:System.Boolean" /> that indicates whether the element extension was parsed successfully.
-</para
-          >
+
+          </para>
         </returns>
         <param name="reader">
           <attribution

@@ -76,8 +76,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.UI.WebControls.TreeNodeStyle" /> to append. </param
-        >
+          />The <see cref="T:System.Web.UI.WebControls.TreeNodeStyle" /> to append.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -120,8 +120,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.UI.WebControls.TreeNodeStyle" /> to find. </param
-        >
+          />The <see cref="T:System.Web.UI.WebControls.TreeNodeStyle" /> to find.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -291,15 +291,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index location at which to insert the <see cref="T:System.Web.UI.WebControls.TreeNodeStyle" />. </param
-        >
+          />The zero-based index location at which to insert the <see cref="T:System.Web.UI.WebControls.TreeNodeStyle" />.
+        </param>
         <param name="style">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.UI.WebControls.TreeNodeStyle" /> to insert. </param
-        >
+          />The <see cref="T:System.Web.UI.WebControls.TreeNodeStyle" /> to insert.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -362,8 +362,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.UI.WebControls.TreeNodeStyle" /> to remove. </param
-        >
+          />The <see cref="T:System.Web.UI.WebControls.TreeNodeStyle" /> to remove.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -400,8 +400,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index location of the <see cref="T:System.Web.UI.WebControls.TreeNodeStyle" /> to remove. </param
-        >
+          />The zero-based index location of the <see cref="T:System.Web.UI.WebControls.TreeNodeStyle" /> to remove.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

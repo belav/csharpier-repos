@@ -113,8 +113,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The instance of <see cref="T:System.Security.Cryptography.RSA" /> that holds the public key. </param
-        >
+          />The instance of <see cref="T:System.Security.Cryptography.RSA" /> that holds the public key.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetHashAlgorithm">
@@ -154,8 +154,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the hash algorithm to use for verifying the signature. </param
-        >
+          />The name of the hash algorithm to use for verifying the signature.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetKey">
@@ -195,8 +195,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The instance of <see cref="T:System.Security.Cryptography.RSA" /> that holds the public key. </param
-        >
+          />The instance of <see cref="T:System.Security.Cryptography.RSA" /> that holds the public key.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="VerifySignature">
@@ -243,15 +243,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data signed with <paramref name="rgbSignature" />. </param
-        >
+          />The data signed with <paramref name="rgbSignature" />.
+        </param>
         <param name="rgbSignature">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The signature to be verified for <paramref name="rgbHash" />. </param
-        >
+          />The signature to be verified for <paramref name="rgbHash" />.
+        </param>
       </Docs>
     </Member>
   </Members>

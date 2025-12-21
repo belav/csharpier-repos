@@ -114,12 +114,8 @@
           >
         </summary>
         <param name="parentProvider">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />A parent service provider. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A parent service provider.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddService">
@@ -155,15 +151,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of service to add. </param
-        >
+          />The type of service to add.
+        </param>
         <param name="callback">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A callback object that can create the service. This allows a service to be declared as available, but delays creation of the object until the service is requested. </param
-        >
+          />A callback object that can create the service. This allows a service to be declared as available, but delays creation of the object until the service is requested.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddService">
@@ -199,15 +195,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of service to add. </param
-        >
+          />The type of service to add.
+        </param>
         <param name="serviceInstance">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An instance of the service to add. This object must implement or inherit from the type indicated by the <paramref name="serviceType" /> parameter. </param
-        >
+          />An instance of the service to add. This object must implement or inherit from the type indicated by the <paramref name="serviceType" /> parameter.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddService">
@@ -244,22 +240,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of service to add. </param
-        >
+          />The type of service to add.
+        </param>
         <param name="callback">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A callback object that can create the service. This allows a service to be declared as available, but delays creation of the object until the service is requested. </param
-        >
+          />A callback object that can create the service. This allows a service to be declared as available, but delays creation of the object until the service is requested.
+        </param>
         <param name="promote">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if this service should be added to any parent service containers; otherwise, false. </param
-        >
+          />true if this service should be added to any parent service containers; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddService">
@@ -296,22 +292,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of service to add. </param
-        >
+          />The type of service to add.
+        </param>
         <param name="serviceInstance">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An instance of the service type to add. This object must implement or inherit from the type indicated by the <paramref name="serviceType" /> parameter. </param
-        >
+          />An instance of the service type to add. This object must implement or inherit from the type indicated by the <paramref name="serviceType" /> parameter.
+        </param>
         <param name="promote">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if this service should be added to any parent service containers; otherwise, false. </param
-        >
+          />true if this service should be added to any parent service containers; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefaultServices">
@@ -370,8 +366,8 @@
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format> and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
           <block subset="none" type="note">
             <para
               >Always call <see cref="Overload:System.ComponentModel.Design.ServiceContainer.Dispose" /> before you release your last reference to the <see cref="T:System.ComponentModel.Design.ServiceContainer" />. Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.ComponentModel.Design.ServiceContainer" /> object's Finalize method.</para
@@ -460,8 +456,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of service to retrieve. </param
-        >
+          />The type of service to retrieve.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RemoveService">
@@ -493,8 +489,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of service to remove. </param
-        >
+          />The type of service to remove.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RemoveService">
@@ -530,15 +526,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of service to remove. </param
-        >
+          />The type of service to remove.
+        </param>
         <param name="promote">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if this service should be removed from any parent service containers; otherwise, false. </param
-        >
+          />true if this service should be removed from any parent service containers; otherwise, false.
+        </param>
       </Docs>
     </Member>
   </Members>

@@ -74,8 +74,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.StreamingContext" /> from which the current object is deserialized. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.StreamingContext" /> from which the current object is deserialized.
+        </param>
       </Docs>
     </Member>
   </Members>

@@ -103,8 +103,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see cref="P:System.ServiceModel.EnvelopeVersion.None" /> message version is used this means that a SOAP envelope is not written out and the message emits the contents of the body. This enables an indigo1 channel to communicate with an endpoint that is expecting XML with no SOAP formatting. The XML payload lives in the body of a message and is the only thing emitted when it hits the encoder. </para
-          >
+            >If the <see cref="P:System.ServiceModel.EnvelopeVersion.None" /> message version is used this means that a SOAP envelope is not written out and the message emits the contents of the body. This enables an indigo1 channel to communicate with an endpoint that is expecting XML with no SOAP formatting. The XML payload lives in the body of a message and is the only thing emitted when it hits the encoder.
+          </para>
           <para>Similarly, when the arbitrary chunk of XML is received it is wrapped up in a Message for propagation up the channel stack. The required headers are inserted and the message is processed as if it had been a SOAP message. </para>
         </remarks>
         <summary>

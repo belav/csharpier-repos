@@ -49,8 +49,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripDropDown" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripDropDown" /> class.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -179,8 +179,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <see cref="T:System.Windows.Forms.ToolStripDropDown" /> control should automatically close when it has lost activation.  </para
-          >
+            >Gets or sets a value indicating whether the <see cref="T:System.Windows.Forms.ToolStripDropDown" /> control should automatically close when it has lost activation.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -205,8 +205,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <see cref="T:System.Windows.Forms.ToolStripDropDown" /> automatically adjusts its size when the form is resized. </para
-          >
+            >Gets or sets a value indicating whether the <see cref="T:System.Windows.Forms.ToolStripDropDown" /> automatically adjusts its size when the form is resized.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -226,8 +226,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -359,8 +359,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -482,8 +482,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -637,8 +637,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new accessibility object for the <see cref="T:System.Windows.Forms.ToolStripDropDown" />. </para
-          >
+            >Creates a new accessibility object for the <see cref="T:System.Windows.Forms.ToolStripDropDown" />.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -830,16 +830,16 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see cref="T:System.Windows.Forms.ToolStripDropDown" /> and optionally releases the managed resources. </para
-          >
+            >Releases the unmanaged resources used by the <see cref="T:System.Windows.Forms.ToolStripDropDown" /> and optionally releases the managed resources.
+          </para>
         </summary>
         <param name="disposing">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -923,8 +923,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether a three-dimensional shadow effect appears when the <see cref="T:System.Windows.Forms.ToolStripDropDown" /> is displayed. </para
-          >
+            >Gets or sets a value indicating whether a three-dimensional shadow effect appears when the <see cref="T:System.Windows.Forms.ToolStripDropDown" /> is displayed.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -944,8 +944,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1006,8 +1006,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1041,8 +1041,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1249,8 +1249,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1317,8 +1317,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether this <see cref="T:System.Windows.Forms.ToolStripDropDown" /> was automatically generated. </para
-          >
+            >Gets a value indicating whether this <see cref="T:System.Windows.Forms.ToolStripDropDown" /> was automatically generated.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -1376,8 +1376,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1414,8 +1414,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1447,8 +1447,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2019,8 +2019,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2266,8 +2266,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2460,36 +2460,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new <see cref="P:System.Windows.Forms.Control.Left" /> property value of the control. </param
-        >
+          />The new <see cref="P:System.Windows.Forms.Control.Left" /> property value of the control.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new <see cref="P:System.Windows.Forms.Control.Top" /> property value of the control. </param
-        >
+          />The new <see cref="P:System.Windows.Forms.Control.Top" /> property value of the control.
+        </param>
         <param name="width">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new <see cref="P:System.Windows.Forms.Control.Width" /> property value of the control. </param
-        >
+          />The new <see cref="P:System.Windows.Forms.Control.Width" /> property value of the control.
+        </param>
         <param name="height">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new <see cref="P:System.Windows.Forms.Control.Height" /> property value of the control. </param
-        >
+          />The new <see cref="P:System.Windows.Forms.Control.Height" /> property value of the control.
+        </param>
         <param name="specified">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the <see cref="T:System.Windows.Forms.BoundsSpecified" /> values. </param
-        >
+          />A bitwise combination of the <see cref="T:System.Windows.Forms.BoundsSpecified" /> values.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2521,8 +2521,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if the owner <see cref="T:System.Windows.Forms.ToolStrip" /> is currently displayed; otherwise, false. </param
-        >
+          />true if the owner <see cref="T:System.Windows.Forms.ToolStrip" /> is currently displayed; otherwise, false.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2849,8 +2849,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3164,8 +3164,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <see cref="T:System.Windows.Forms.ToolStripDropDown" /> is visible or hidden. </para
-          >
+            >Gets or sets a value indicating whether the <see cref="T:System.Windows.Forms.ToolStripDropDown" /> is visible or hidden.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>

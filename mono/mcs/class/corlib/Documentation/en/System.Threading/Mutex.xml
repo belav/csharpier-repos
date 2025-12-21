@@ -33,8 +33,8 @@
         >When two or more threads need to access a shared resource at the same time, the system needs a synchronization mechanism to ensure that only one thread at a time uses the resource. <see cref="T:System.Threading.Mutex" /> is a synchronization primitive that grants exclusive access to the shared resource to only one thread. If a thread acquires a mutex, the second thread that wants to acquire that mutex is suspended until the first thread releases the mutex.</para
       >
       <para
-        >You can use the <see cref="M:System.Threading.WaitHandle.WaitOne(System.Int32,System.Boolean)" /> method to request ownership of a mutex. The thread that owns a mutex can request the same mutex in repeated calls to <see cref="Overload:System.Threading.WaitHandle.WaitOne" /> without blocking its execution. However, the thread must call the <see cref="M:System.Threading.Mutex.ReleaseMutex" /> method the same number of times to release ownership of the mutex. The <see cref="T:System.Threading.Mutex" /> class enforces thread identity, so a mutex can be released only by the thread that acquired it. By contrast, the <see cref="T:System.Threading.Semaphore" /> class does not enforce thread identity. </para
-      >
+        >You can use the <see cref="M:System.Threading.WaitHandle.WaitOne(System.Int32,System.Boolean)" /> method to request ownership of a mutex. The thread that owns a mutex can request the same mutex in repeated calls to <see cref="Overload:System.Threading.WaitHandle.WaitOne" /> without blocking its execution. However, the thread must call the <see cref="M:System.Threading.Mutex.ReleaseMutex" /> method the same number of times to release ownership of the mutex. The <see cref="T:System.Threading.Mutex" /> class enforces thread identity, so a mutex can be released only by the thread that acquired it. By contrast, the <see cref="T:System.Threading.Semaphore" /> class does not enforce thread identity.
+      </para>
       <para
         >If a thread terminates while owning a mutex, the mutex is said to be abandoned. The state of the mutex is set to signaled, and the next waiting thread gets ownership. Beginning in version 2.0 of the .NET Framework, an <see cref="T:System.Threading.AbandonedMutexException" /> is thrown in the next thread that acquires the abandoned mutex. Before version 2.0 of the .NET Framework, no exception was thrown.</para
       >
@@ -126,8 +126,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to give the calling thread initial ownership of the mutex; otherwise, false. </param
-        >
+          />true to give the calling thread initial ownership of the mutex; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -183,15 +183,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to give the calling thread initial ownership of the named system mutex if the named system mutex is created as a result of this call; otherwise, false. </param
-        >
+          />true to give the calling thread initial ownership of the named system mutex if the named system mutex is created as a result of this call; otherwise, false.
+        </param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the <see cref="T:System.Threading.Mutex" />. If the value is null, the <see cref="T:System.Threading.Mutex" /> is unnamed. </param
-        >
+          />The name of the <see cref="T:System.Threading.Mutex" />. If the value is null, the <see cref="T:System.Threading.Mutex" /> is unnamed.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -334,11 +334,11 @@
             >The <see cref="Overload:System.Threading.Mutex.OpenExisting" /> method tries to open the specified named system mutex. If the system mutex does not exist, this method throws an exception instead of creating the system object. To create the system mutex when it does not already exist, use one of the <see cref="M:System.Threading.Mutex.#ctor(System.Boolean,System.String)" /> constructors that has a <paramref name="name" /> parameter.</para
           >
           <para
-            >Multiple calls to this method that use the same value for <paramref name="name" /> do not necessarily return the same <see cref="T:System.Threading.Mutex" /> object, even though the objects that are returned represent the same named system mutex. </para
-          >
+            >Multiple calls to this method that use the same value for <paramref name="name" /> do not necessarily return the same <see cref="T:System.Threading.Mutex" /> object, even though the objects that are returned represent the same named system mutex.
+          </para>
           <para
-            >This method overload is equivalent to calling the <see cref="M:System.Threading.Mutex.OpenExisting(System.String,System.Security.AccessControl.MutexRights)" /> method overload and specifying <see cref="F:System.Security.AccessControl.MutexRights.Synchronize" /> and <see cref="F:System.Security.AccessControl.MutexRights.Modify" /> rights, combined by using the bitwise OR operation. </para
-          >
+            >This method overload is equivalent to calling the <see cref="M:System.Threading.Mutex.OpenExisting(System.String,System.Security.AccessControl.MutexRights)" /> method overload and specifying <see cref="F:System.Security.AccessControl.MutexRights.Synchronize" /> and <see cref="F:System.Security.AccessControl.MutexRights.Modify" /> rights, combined by using the bitwise OR operation.
+          </para>
           <para
             >Specifying the <see cref="F:System.Security.AccessControl.MutexRights.Synchronize" /> flag allows a thread to wait on the mutex, and specifying the <see cref="F:System.Security.AccessControl.MutexRights.Modify" /> flag allows a thread to call the <see cref="M:System.Threading.Mutex.ReleaseMutex" /> method.</para
           >
@@ -387,14 +387,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="rights" /> parameter must include the <see cref="F:System.Security.AccessControl.MutexRights.Synchronize" /> flag to allow threads to wait on the mutex, and the <see cref="F:System.Security.AccessControl.MutexRights.Modify" /> flag to allow threads to call the <see cref="M:System.Threading.Mutex.ReleaseMutex" /> method. </para
-          >
+            >The <paramref name="rights" /> parameter must include the <see cref="F:System.Security.AccessControl.MutexRights.Synchronize" /> flag to allow threads to wait on the mutex, and the <see cref="F:System.Security.AccessControl.MutexRights.Modify" /> flag to allow threads to call the <see cref="M:System.Threading.Mutex.ReleaseMutex" /> method.
+          </para>
           <para
             >The <see cref="Overload:System.Threading.Mutex.OpenExisting" /> method tries to open an existing named mutex. If the system mutex does not exist, this method throws an exception instead of creating the system object. To create the system mutex when it does not already exist, use one of the <see cref="M:System.Threading.Mutex.#ctor(System.Boolean,System.String)" /> constructors that has a <paramref name="name" /> parameter.</para
           >
           <para
-            >Multiple calls to this method that use the same value for <paramref name="name" /> do not necessarily return the same <see cref="T:System.Threading.Mutex" /> object, even though the objects that are returned represent the same named system mutex.  </para
-          >
+            >Multiple calls to this method that use the same value for <paramref name="name" /> do not necessarily return the same <see cref="T:System.Threading.Mutex" /> object, even though the objects that are returned represent the same named system mutex.
+          </para>
           <para>This method does not request ownership of the mutex. </para>
         </remarks>
         <summary>
@@ -446,8 +446,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A thread that owns a mutex can specify the same mutex in repeated wait function calls without blocking its execution. The number of calls is kept by the common language runtime. The thread must call <see cref="M:System.Threading.Mutex.ReleaseMutex" /> the same number of times to release ownership of the mutex. </para
-          >
+            >A thread that owns a mutex can specify the same mutex in repeated wait function calls without blocking its execution. The number of calls is kept by the common language runtime. The thread must call <see cref="M:System.Threading.Mutex.ReleaseMutex" /> the same number of times to release ownership of the mutex.
+          </para>
           <para
             >If a thread terminates while owning a mutex, the mutex is said to be abandoned. The state of the mutex is set to signaled and the next waiting thread gets ownership. If no one owns the mutex, the state of the mutex is signaled. Beginning in version 2.0 of the .NET Framework, an <see cref="T:System.Threading.AbandonedMutexException" /> is thrown in the next thread that acquires the mutex. Prior to version 2.0 of the .NET Framework, no exception was thrown.</para
           >

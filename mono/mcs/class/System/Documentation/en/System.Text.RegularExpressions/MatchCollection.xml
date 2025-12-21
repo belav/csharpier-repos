@@ -53,8 +53,8 @@
         </item>
       </list>
       <para
-        >To iterate through the members of the collection, you should use the collection iteration construct provided by your language (such as foreach in C# and For Each…Next in Visual Basic) instead of retrieving the enumerator that is returned by the <see cref="M:System.Text.RegularExpressions.MatchCollection.GetEnumerator" /> method. </para
-      >
+        >To iterate through the members of the collection, you should use the collection iteration construct provided by your language (such as foreach in C# and For Each…Next in Visual Basic) instead of retrieving the enumerator that is returned by the <see cref="M:System.Text.RegularExpressions.MatchCollection.GetEnumerator" /> method.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -103,15 +103,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array the collection is to be copied into. </param
-        >
+          />The array the collection is to be copied into.
+        </param>
         <param name="arrayIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position in the array where copying is to begin. </param
-        >
+          />The position in the array where copying is to begin.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Count">
@@ -169,8 +169,8 @@
             >Instead of  calling the <see cref="M:System.Text.RegularExpressions.MatchCollection.GetEnumerator" /> method to retrieve an enumerator that lets you iterate through the <see cref="T:System.Text.RegularExpressions.Match" /> objects in the collection, you should use the group iteration construct (such as foreach in C# and For Each…Next in Visual Basic) provided by your programming language.</para
           >
           <para
-            >Iterating the members of the <see cref="T:System.Text.RegularExpressions.MatchCollection" /> object using the <see cref="M:System.Text.RegularExpressions.MatchCollection.GetEnumerator" /> method (or the foreach statement in C# and the For Each...Next statement in Visual Basic) causes the regular expression engine to populate the collection on an as needed basis using lazy evaluation. This is analogous to repeatedly calling the <see cref="M:System.Text.RegularExpressions.Regex.Match(System.String)" /> method, and then adding the resulting match to the <see cref="T:System.Text.RegularExpressions.MatchCollection" /> object. In contrast, the regular expression engine uses direct evaluation to populate the collection all at once when the <see cref="P:System.Text.RegularExpressions.MatchCollection.Count" /> property is accessed. This can be a much more expensive method of building the collection than lazy evaluation. </para
-          >
+            >Iterating the members of the <see cref="T:System.Text.RegularExpressions.MatchCollection" /> object using the <see cref="M:System.Text.RegularExpressions.MatchCollection.GetEnumerator" /> method (or the foreach statement in C# and the For Each...Next statement in Visual Basic) causes the regular expression engine to populate the collection on an as needed basis using lazy evaluation. This is analogous to repeatedly calling the <see cref="M:System.Text.RegularExpressions.Regex.Match(System.String)" /> method, and then adding the resulting match to the <see cref="T:System.Text.RegularExpressions.MatchCollection" /> object. In contrast, the regular expression engine uses direct evaluation to populate the collection all at once when the <see cref="P:System.Text.RegularExpressions.MatchCollection.Count" /> property is accessed. This can be a much more expensive method of building the collection than lazy evaluation.
+          </para>
           <para
             >Because the <see cref="T:System.Text.RegularExpressions.MatchCollection" /> object is generally populated by using lazy evaluation, trying to navigate to the next member of the collection may throw a <see cref="T:System.Text.RegularExpressions.RegexMatchTimeoutException" /> exception. This exception can be thrown if a time-out value for matching operations is in effect, and the attempt to find the next match exceeds that time-out interval.</para
           >

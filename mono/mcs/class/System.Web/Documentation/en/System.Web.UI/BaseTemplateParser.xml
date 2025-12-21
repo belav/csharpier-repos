@@ -17,8 +17,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.UI.BaseTemplateParser" /> class provides parser functionality for the <see cref="T:System.Web.UI.TemplateControl" /> and <see cref="T:System.Web.UI.PageTheme" /> classes. Because the <see cref="T:System.Web.UI.BaseTemplateParser" /> class is abstract, an instance of this class is not created directly. </para
-      >
+        >The <see cref="T:System.Web.UI.BaseTemplateParser" /> class provides parser functionality for the <see cref="T:System.Web.UI.TemplateControl" /> and <see cref="T:System.Web.UI.PageTheme" /> classes. Because the <see cref="T:System.Web.UI.BaseTemplateParser" /> class is abstract, an instance of this class is not created directly.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -107,8 +107,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The virtual path of the <see cref="T:System.Web.UI.UserControl" />. </param
-        >
+          />The virtual path of the <see cref="T:System.Web.UI.UserControl" />.
+        </param>
       </Docs>
     </Member>
   </Members>

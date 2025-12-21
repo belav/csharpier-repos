@@ -95,15 +95,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The security action to be taken such as Demand, Assert, and so on. </param
-        >
+          />The security action to be taken such as Demand, Assert, and so on.
+        </param>
         <param name="pset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The set of permissions the action applies to. </param
-        >
+          />The set of permissions the action applies to.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddInterfaceImplementation">
@@ -143,8 +143,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The interface that this type implements. </param
-        >
+          />The interface that this type implements.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Assembly">
@@ -194,8 +194,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The format of the returned string is the concatenation of the full name of the type (<see cref="P:System.Reflection.Emit.TypeBuilder.FullName" />) and the display name of the assembly (<see cref="P:System.Reflection.AssemblyName.FullName" />), separated by a comma and a space. </para
-          >
+            >The format of the returned string is the concatenation of the full name of the type (<see cref="P:System.Reflection.Emit.TypeBuilder.FullName" />) and the display name of the assembly (<see cref="P:System.Reflection.AssemblyName.FullName" />), separated by a comma and a space.
+          </para>
           <para
             >See <see cref="T:System.Reflection.AssemblyName" /> for a description of the format of the display name of an assembly.</para
           >
@@ -281,8 +281,8 @@
             >If the enclosing type contains a field that is a value type defined as a nested type (for example, a field that is an enumeration defined as a nested type), calling the <see cref="M:System.Reflection.Emit.TypeBuilder.CreateType" /> method on the enclosing type will generate a <see cref="E:System.AppDomain.TypeResolve" /> event. This is because the loader cannot determine the size of the enclosing type until the nested type has been completed. The caller should define a handler for the <see cref="E:System.AppDomain.TypeResolve" /> event to complete the definition of the nested type by calling <see cref="M:System.Reflection.Emit.TypeBuilder.CreateType" /> on the <see cref="T:System.Reflection.Emit.TypeBuilder" /> object that represents the nested type. The code example for this topic shows how to define such an event handler.</para
           >
           <para
-            >A type is created only once, no matter how many times the <see cref="M:System.Reflection.Emit.TypeBuilder.CreateType" /> method is called. All calls return the same <see cref="T:System.Type" /> object. </para
-          >
+            >A type is created only once, no matter how many times the <see cref="M:System.Reflection.Emit.TypeBuilder.CreateType" /> method is called. All calls return the same <see cref="T:System.Type" /> object.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -390,13 +390,13 @@
           <list type="bullet">
             <item>
               <para
-                >If you want a default constructor that simply calls the default constructor of the base class, you can use the <see cref="M:System.Reflection.Emit.TypeBuilder.DefineDefaultConstructor(System.Reflection.MethodAttributes)" /> method to create one (and optionally restrict access to it). Do not provide an implementation for this default constructor. If you do, an exception is thrown when you try to use the constructor. No exception is thrown when the <see cref="M:System.Reflection.Emit.TypeBuilder.CreateType" /> method is called. </para
-              >
+                >If you want a default constructor that simply calls the default constructor of the base class, you can use the <see cref="M:System.Reflection.Emit.TypeBuilder.DefineDefaultConstructor(System.Reflection.MethodAttributes)" /> method to create one (and optionally restrict access to it). Do not provide an implementation for this default constructor. If you do, an exception is thrown when you try to use the constructor. No exception is thrown when the <see cref="M:System.Reflection.Emit.TypeBuilder.CreateType" /> method is called.
+              </para>
             </item>
             <item>
               <para
-                >If you want a default constructor that does something more than simply calling the default constructor of the base class, or that calls another constructor of the base class, or that does something else entirely, you must use the <see cref="M:System.Reflection.Emit.TypeBuilder.DefineConstructor(System.Reflection.MethodAttributes,System.Reflection.CallingConventions,System.Type[])" /> method to create one, and provide your own implementation. </para
-              >
+                >If you want a default constructor that does something more than simply calling the default constructor of the base class, or that calls another constructor of the base class, or that does something else entirely, you must use the <see cref="M:System.Reflection.Emit.TypeBuilder.DefineConstructor(System.Reflection.MethodAttributes,System.Reflection.CallingConventions,System.Type[])" /> method to create one, and provide your own implementation.
+              </para>
             </item>
           </list>
         </remarks>
@@ -413,22 +413,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The attributes of the constructor. </param
-        >
+          />The attributes of the constructor.
+        </param>
         <param name="callingConvention">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The calling convention of the constructor. </param
-        >
+          />The calling convention of the constructor.
+        </param>
         <param name="parameterTypes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The parameter types of the constructor. </param
-        >
+          />The parameter types of the constructor.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefineConstructor">
@@ -489,22 +489,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The attributes of the constructor. </param
-        >
+          />The attributes of the constructor.
+        </param>
         <param name="callingConvention">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The calling convention of the constructor. </param
-        >
+          />The calling convention of the constructor.
+        </param>
         <param name="parameterTypes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The parameter types of the constructor. </param
-        >
+          />The parameter types of the constructor.
+        </param>
         <param name="requiredCustomModifiers">
           <attribution
             license="cc4"
@@ -557,8 +557,8 @@
             </item>
             <item>
               <para
-                >You want to set the attributes on the default constructor to something other than <see cref="F:System.Reflection.MethodAttributes.PrivateScope" />, <see cref="F:System.Reflection.MethodAttributes.Public" />, <see cref="F:System.Reflection.MethodAttributes.HideBySig" />, <see cref="F:System.Reflection.MethodAttributes.SpecialName" />, and <see cref="F:System.Reflection.MethodAttributes.RTSpecialName" />. </para
-              >
+                >You want to set the attributes on the default constructor to something other than <see cref="F:System.Reflection.MethodAttributes.PrivateScope" />, <see cref="F:System.Reflection.MethodAttributes.Public" />, <see cref="F:System.Reflection.MethodAttributes.HideBySig" />, <see cref="F:System.Reflection.MethodAttributes.SpecialName" />, and <see cref="F:System.Reflection.MethodAttributes.RTSpecialName" />.
+              </para>
             </item>
           </list>
         </remarks>
@@ -575,8 +575,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A MethodAttributes object representing the attributes to be applied to the constructor. </param
-        >
+          />A MethodAttributes object representing the attributes to be applied to the constructor.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefineEvent">
@@ -617,22 +617,18 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the event. <paramref name="name" /> cannot contain embedded nulls. </param
-        >
+          />The name of the event. <paramref name="name" /> cannot contain embedded nulls.
+        </param>
         <param name="attributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The attributes of the event. </param
-        >
+          />The attributes of the event.
+        </param>
         <param name="eventtype">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The type of the event. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The type of the event.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefineField">
@@ -673,22 +669,18 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the field. <paramref name="fieldName" /> cannot contain embedded nulls. </param
-        >
+          />The name of the field. <paramref name="fieldName" /> cannot contain embedded nulls.
+        </param>
         <param name="type">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The type of the field </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The type of the field
+        </param>
         <param name="attributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The attributes of the field. </param
-        >
+          />The attributes of the field.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefineField">
@@ -734,15 +726,11 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the field. <paramref name="fieldName" /> cannot contain embedded nulls. </param
-        >
+          />The name of the field. <paramref name="fieldName" /> cannot contain embedded nulls.
+        </param>
         <param name="type">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The type of the field </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The type of the field
+        </param>
         <param name="requiredCustomModifiers">
           <attribution
             license="cc4"
@@ -762,8 +750,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The attributes of the field. </param
-        >
+          />The attributes of the field.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefineGenericParameters">
@@ -864,18 +852,18 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name used to refer to the data. <paramref name="name" /> cannot contain embedded nulls. </param
-        >
+          />The name used to refer to the data. <paramref name="name" /> cannot contain embedded nulls.
+        </param>
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />The blob of data. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The blob of data.
+        </param>
         <param name="attributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The attributes for the field. </param
-        >
+          />The attributes for the field.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefineMethod">
@@ -907,8 +895,8 @@
             >Use this method overload when you do not know the method signature at the time you define the method. For example, the parameter types and return type of a generic method might be specified by the method's generic type parameters, which must be defined after the method has been added to the type. The parameters and return type of the method can be set later using the <see cref="M:System.Reflection.Emit.MethodBuilder.SetSignature(System.Type,System.Type[],System.Type[],System.Type[],System.Type[][],System.Type[][])" /> method.</para
           >
           <para
-            >This method overload defines a method with <see cref="F:System.Reflection.CallingConventions.Standard" />. If you need to define a method without a signature, with a different calling convention, use the <see cref="M:System.Reflection.Emit.TypeBuilder.DefineMethod(System.String,System.Reflection.MethodAttributes,System.Reflection.CallingConventions)" /> method overload.  </para
-          >
+            >This method overload defines a method with <see cref="F:System.Reflection.CallingConventions.Standard" />. If you need to define a method without a signature, with a different calling convention, use the <see cref="M:System.Reflection.Emit.TypeBuilder.DefineMethod(System.String,System.Reflection.MethodAttributes,System.Reflection.CallingConventions)" /> method overload.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -925,15 +913,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the method. <paramref name="name" /> cannot contain embedded nulls. </param
-        >
+          />The name of the method. <paramref name="name" /> cannot contain embedded nulls.
+        </param>
         <param name="attributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The attributes of the method. </param
-        >
+          />The attributes of the method.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefineMethod">
@@ -981,22 +969,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the method. <paramref name="name" /> cannot contain embedded nulls. </param
-        >
+          />The name of the method. <paramref name="name" /> cannot contain embedded nulls.
+        </param>
         <param name="attributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The attributes of the method. </param
-        >
+          />The attributes of the method.
+        </param>
         <param name="callingConvention">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The calling convention of the method. </param
-        >
+          />The calling convention of the method.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefineMethod">
@@ -1038,29 +1026,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the method. <paramref name="name" /> cannot contain embedded nulls. </param
-        >
+          />The name of the method. <paramref name="name" /> cannot contain embedded nulls.
+        </param>
         <param name="attributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The attributes of the method. </param
-        >
+          />The attributes of the method.
+        </param>
         <param name="returnType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The return type of the method. </param
-        >
+          />The return type of the method.
+        </param>
         <param name="parameterTypes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The types of the parameters of the method. </param
-        >
+          />The types of the parameters of the method.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefineMethod">
@@ -1105,36 +1093,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the method. <paramref name="name" /> cannot contain embedded nulls. </param
-        >
+          />The name of the method. <paramref name="name" /> cannot contain embedded nulls.
+        </param>
         <param name="attributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The attributes of the method. </param
-        >
+          />The attributes of the method.
+        </param>
         <param name="callingConvention">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The calling convention of the method. </param
-        >
+          />The calling convention of the method.
+        </param>
         <param name="returnType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The return type of the method. </param
-        >
+          />The return type of the method.
+        </param>
         <param name="parameterTypes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The types of the parameters of the method. </param
-        >
+          />The types of the parameters of the method.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefineMethod">
@@ -1198,29 +1186,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the method. <paramref name="name" /> cannot contain embedded nulls. </param
-        >
+          />The name of the method. <paramref name="name" /> cannot contain embedded nulls.
+        </param>
         <param name="attributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The attributes of the method. </param
-        >
+          />The attributes of the method.
+        </param>
         <param name="callingConvention">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The calling convention of the method. </param
-        >
+          />The calling convention of the method.
+        </param>
         <param name="returnType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The return type of the method. </param
-        >
+          />The return type of the method.
+        </param>
         <param name="returnTypeRequiredCustomModifiers">
           <attribution
             license="cc4"
@@ -1285,8 +1273,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Do not use this method to emit method overrides or interface implementations. To override a method of a base class or to implement a method of an interface, simply emit a method with the same name and signature as the method to be overridden or implemented, as demonstrated in the code example.</para>
           <para
-            >The <see cref="M:System.Reflection.Emit.TypeBuilder.DefineMethodOverride(System.Reflection.MethodInfo,System.Reflection.MethodInfo)" /> method is used when a method body and a method declaration have different names. For example, a class might override a base class method and also provide a separate implementation for an interface member with the same name, as demonstrated in the code example. </para
-          >
+            >The <see cref="M:System.Reflection.Emit.TypeBuilder.DefineMethodOverride(System.Reflection.MethodInfo,System.Reflection.MethodInfo)" /> method is used when a method body and a method declaration have different names. For example, a class might override a base class method and also provide a separate implementation for an interface member with the same name, as demonstrated in the code example.
+          </para>
           <para>DefineMethodOverride defines a methodimpl, which consists of a pair of metadata tokens. One token points to an implementation, and the other token points to a declaration that the body implements. The body must be defined on the type the method impl is defined on, and the body must be virtual (Overridable in Visual Basic). The declaration can be made to a method defined on an interface implemented by the type, a method on a derived class, or a method defined in the type. If the declaration is on an interface only, the slot defined for the interface is altered. If the declaration is made to a method on a base type, the slot for the method is overridden and any duplicates for the overridden method are also replaced. The overridden method cannot be the actual method that is declared. If the method is on the same type, the slot is replaced and any duplicates for the replaced methods are overridden.</para>
           <block subset="none" type="note">
             <para
@@ -1313,15 +1301,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The method body to be used. This should be a MethodBuilder object. </param
-        >
+          />The method body to be used. This should be a MethodBuilder object.
+        </param>
         <param name="methodInfoDeclaration">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The method whose declaration is to be used. </param
-        >
+          />The method whose declaration is to be used.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefineNestedType">
@@ -1349,14 +1337,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method can be used to create nested types even after the <see cref="M:System.Reflection.Emit.TypeBuilder.CreateType" /> method has been called on the enclosing type. </para
-          >
+            >This method can be used to create nested types even after the <see cref="M:System.Reflection.Emit.TypeBuilder.CreateType" /> method has been called on the enclosing type.
+          </para>
           <para
             >The nested type needs to be complete before you can reflect on it using <see cref="M:System.Type.GetMembers" />, <see cref="M:System.Type.GetNestedType(System.String)" />, or <see cref="M:System.Type.GetNestedTypes" />.</para
           >
           <para
-            >See the description of <see cref="M:System.Reflection.Emit.TypeBuilder.CreateType" /> for the order in which nested types and nesting types should be completed. </para
-          >
+            >See the description of <see cref="M:System.Reflection.Emit.TypeBuilder.CreateType" /> for the order in which nested types and nesting types should be completed.
+          </para>
           <para
             >A duplicate name is not necessarily created if <paramref name="name" /> is identical to the name of a previously defined type or nested type. To be duplicates, the full names must be the same, including the namespace and all nesting types.</para
           >
@@ -1374,8 +1362,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The short name of the type. <paramref name="name" /> cannot contain embedded nulls. </param
-        >
+          />The short name of the type. <paramref name="name" /> cannot contain embedded nulls.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefineNestedType">
@@ -1404,8 +1392,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method can be used to create nested types even after the <see cref="M:System.Reflection.Emit.TypeBuilder.CreateType" /> method has been called on the enclosing type. </para
-          >
+            >This method can be used to create nested types even after the <see cref="M:System.Reflection.Emit.TypeBuilder.CreateType" /> method has been called on the enclosing type.
+          </para>
           <para
             >The nested type needs to be complete before you can reflect on it using <see cref="M:System.Type.GetMembers" />, <see cref="M:System.Type.GetNestedType(System.String)" />, or <see cref="M:System.Type.GetNestedTypes" />.</para
           >
@@ -1429,15 +1417,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The short name of the type. <paramref name="name" /> cannot contain embedded nulls. </param
-        >
+          />The short name of the type. <paramref name="name" /> cannot contain embedded nulls.
+        </param>
         <param name="attr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The attributes of the type. </param
-        >
+          />The attributes of the type.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefineNestedType">
@@ -1467,8 +1455,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method can be used to create nested types even after the <see cref="M:System.Reflection.Emit.TypeBuilder.CreateType" /> method has been called on the enclosing type. </para
-          >
+            >This method can be used to create nested types even after the <see cref="M:System.Reflection.Emit.TypeBuilder.CreateType" /> method has been called on the enclosing type.
+          </para>
           <para
             >The nested type needs to be complete before you can reflect on it using <see cref="M:System.Type.GetMembers" />, <see cref="M:System.Type.GetNestedType(System.String)" />, or <see cref="M:System.Type.GetNestedTypes" />.</para
           >
@@ -1492,22 +1480,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The short name of the type. <paramref name="name" /> cannot contain embedded nulls. </param
-        >
+          />The short name of the type. <paramref name="name" /> cannot contain embedded nulls.
+        </param>
         <param name="attr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The attributes of the type. </param
-        >
+          />The attributes of the type.
+        </param>
         <param name="parent">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type that the nested type extends. </param
-        >
+          />The type that the nested type extends.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefineNestedType">
@@ -1538,8 +1526,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method can be used to create nested types even after the <see cref="M:System.Reflection.Emit.TypeBuilder.CreateType" /> method has been called on the enclosing type. </para
-          >
+            >This method can be used to create nested types even after the <see cref="M:System.Reflection.Emit.TypeBuilder.CreateType" /> method has been called on the enclosing type.
+          </para>
           <para
             >The nested type needs to be complete before you can reflect on it using <see cref="M:System.Type.GetMembers" />, <see cref="M:System.Type.GetNestedType(System.String)" />, or <see cref="M:System.Type.GetNestedTypes" />.</para
           >
@@ -1563,29 +1551,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The short name of the type. <paramref name="name" /> cannot contain embedded nulls. </param
-        >
+          />The short name of the type. <paramref name="name" /> cannot contain embedded nulls.
+        </param>
         <param name="attr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The attributes of the type. </param
-        >
+          />The attributes of the type.
+        </param>
         <param name="parent">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type that the nested type extends. </param
-        >
+          />The type that the nested type extends.
+        </param>
         <param name="typeSize">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The total size of the type. </param
-        >
+          />The total size of the type.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefineNestedType">
@@ -1616,8 +1604,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method can be used to create nested types even after the <see cref="M:System.Reflection.Emit.TypeBuilder.CreateType" /> method has been called on the enclosing type. </para
-          >
+            >This method can be used to create nested types even after the <see cref="M:System.Reflection.Emit.TypeBuilder.CreateType" /> method has been called on the enclosing type.
+          </para>
           <para
             >The nested type needs to be complete before you can reflect on it using <see cref="M:System.Type.GetMembers" />, <see cref="M:System.Type.GetNestedType(System.String)" />, or <see cref="M:System.Type.GetNestedTypes" />.</para
           >
@@ -1641,29 +1629,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The short name of the type. <paramref name="name" /> cannot contain embedded nulls. </param
-        >
+          />The short name of the type. <paramref name="name" /> cannot contain embedded nulls.
+        </param>
         <param name="attr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The attributes of the type. </param
-        >
+          />The attributes of the type.
+        </param>
         <param name="parent">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type that the nested type extends. </param
-        >
+          />The type that the nested type extends.
+        </param>
         <param name="packSize">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The packing size of the type. </param
-        >
+          />The packing size of the type.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefineNestedType">
@@ -1699,8 +1687,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method can be used to create nested types even after the <see cref="M:System.Reflection.Emit.TypeBuilder.CreateType" /> method has been called on the enclosing type. </para
-          >
+            >This method can be used to create nested types even after the <see cref="M:System.Reflection.Emit.TypeBuilder.CreateType" /> method has been called on the enclosing type.
+          </para>
           <para
             >The nested type needs to be complete before you can reflect on it using <see cref="M:System.Type.GetMembers" />, <see cref="M:System.Type.GetNestedType(System.String)" />, or <see cref="M:System.Type.GetNestedTypes" />.</para
           >
@@ -1724,29 +1712,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The short name of the type. <paramref name="name" /> cannot contain embedded nulls. </param
-        >
+          />The short name of the type. <paramref name="name" /> cannot contain embedded nulls.
+        </param>
         <param name="attr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The attributes of the type. </param
-        >
+          />The attributes of the type.
+        </param>
         <param name="parent">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type that the nested type extends. </param
-        >
+          />The type that the nested type extends.
+        </param>
         <param name="interfaces">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The interfaces that the nested type implements. </param
-        >
+          />The interfaces that the nested type implements.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefinePInvokeMethod">
@@ -1797,57 +1785,53 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the PInvoke method. <paramref name="name" /> cannot contain embedded nulls. </param
-        >
+          />The name of the PInvoke method. <paramref name="name" /> cannot contain embedded nulls.
+        </param>
         <param name="dllName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the DLL in which the PInvoke method is defined. </param
-        >
+          />The name of the DLL in which the PInvoke method is defined.
+        </param>
         <param name="attributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The attributes of the method. </param
-        >
+          />The attributes of the method.
+        </param>
         <param name="callingConvention">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The method's calling convention. </param
-        >
+          />The method's calling convention.
+        </param>
         <param name="returnType">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The method's return type. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The method's return type.
+        </param>
         <param name="parameterTypes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The types of the method's parameters. </param
-        >
+          />The types of the method's parameters.
+        </param>
         <param name="nativeCallConv">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The native calling convention. </param
-        >
+          />The native calling convention.
+        </param>
         <param name="nativeCharSet">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The method's native character set. </param
-        >
+          />The method's native character set.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefinePInvokeMethod">
@@ -1899,64 +1883,60 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the PInvoke method. <paramref name="name" /> cannot contain embedded nulls. </param
-        >
+          />The name of the PInvoke method. <paramref name="name" /> cannot contain embedded nulls.
+        </param>
         <param name="dllName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the DLL in which the PInvoke method is defined. </param
-        >
+          />The name of the DLL in which the PInvoke method is defined.
+        </param>
         <param name="entryName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the entry point in the DLL. </param
-        >
+          />The name of the entry point in the DLL.
+        </param>
         <param name="attributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The attributes of the method. </param
-        >
+          />The attributes of the method.
+        </param>
         <param name="callingConvention">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The method's calling convention. </param
-        >
+          />The method's calling convention.
+        </param>
         <param name="returnType">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The method's return type. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The method's return type.
+        </param>
         <param name="parameterTypes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The types of the method's parameters. </param
-        >
+          />The types of the method's parameters.
+        </param>
         <param name="nativeCallConv">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The native calling convention. </param
-        >
+          />The native calling convention.
+        </param>
         <param name="nativeCharSet">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The method's native character set. </param
-        >
+          />The method's native character set.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefinePInvokeMethod">
@@ -2024,43 +2004,39 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the PInvoke method. <paramref name="name" /> cannot contain embedded nulls. </param
-        >
+          />The name of the PInvoke method. <paramref name="name" /> cannot contain embedded nulls.
+        </param>
         <param name="dllName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the DLL in which the PInvoke method is defined. </param
-        >
+          />The name of the DLL in which the PInvoke method is defined.
+        </param>
         <param name="entryName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the entry point in the DLL. </param
-        >
+          />The name of the entry point in the DLL.
+        </param>
         <param name="attributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The attributes of the method. </param
-        >
+          />The attributes of the method.
+        </param>
         <param name="callingConvention">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The method's calling convention. </param
-        >
+          />The method's calling convention.
+        </param>
         <param name="returnType">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The method's return type. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The method's return type.
+        </param>
         <param name="returnTypeRequiredCustomModifiers">
           <attribution
             license="cc4"
@@ -2080,8 +2056,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The types of the method's parameters. </param
-        >
+          />The types of the method's parameters.
+        </param>
         <param name="parameterTypeRequiredCustomModifiers">
           <attribution
             license="cc4"
@@ -2101,15 +2077,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The native calling convention. </param
-        >
+          />The native calling convention.
+        </param>
         <param name="nativeCharSet">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The method's native character set. </param
-        >
+          />The method's native character set.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefineProperty">
@@ -2151,29 +2127,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the property. <paramref name="name" /> cannot contain embedded nulls. </param
-        >
+          />The name of the property. <paramref name="name" /> cannot contain embedded nulls.
+        </param>
         <param name="attributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The attributes of the property. </param
-        >
+          />The attributes of the property.
+        </param>
         <param name="returnType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The return type of the property. </param
-        >
+          />The return type of the property.
+        </param>
         <param name="parameterTypes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The types of the parameters of the property. </param
-        >
+          />The types of the parameters of the property.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefineProperty">
@@ -2214,29 +2190,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the property. <paramref name="name" /> cannot contain embedded nulls. </param
-        >
+          />The name of the property. <paramref name="name" /> cannot contain embedded nulls.
+        </param>
         <param name="attributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The attributes of the property. </param
-        >
+          />The attributes of the property.
+        </param>
         <param name="callingConvention">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The calling convention of the property accessors. </param
-        >
+          />The calling convention of the property accessors.
+        </param>
         <param name="returnType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The return type of the property. </param
-        >
+          />The return type of the property.
+        </param>
         <param name="parameterTypes">
           <attribution
             license="cc4"
@@ -2302,22 +2278,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the property. <paramref name="name" /> cannot contain embedded nulls. </param
-        >
+          />The name of the property. <paramref name="name" /> cannot contain embedded nulls.
+        </param>
         <param name="attributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The attributes of the property. </param
-        >
+          />The attributes of the property.
+        </param>
         <param name="returnType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The return type of the property. </param
-        >
+          />The return type of the property.
+        </param>
         <param name="returnTypeRequiredCustomModifiers">
           <attribution
             license="cc4"
@@ -2337,8 +2313,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The types of the parameters of the property. </param
-        >
+          />The types of the parameters of the property.
+        </param>
         <param name="parameterTypeRequiredCustomModifiers">
           <attribution
             license="cc4"
@@ -2412,29 +2388,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the property. <paramref name="name" /> cannot contain embedded nulls. </param
-        >
+          />The name of the property. <paramref name="name" /> cannot contain embedded nulls.
+        </param>
         <param name="attributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The attributes of the property. </param
-        >
+          />The attributes of the property.
+        </param>
         <param name="callingConvention">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The calling convention of the property accessors. </param
-        >
+          />The calling convention of the property accessors.
+        </param>
         <param name="returnType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The return type of the property. </param
-        >
+          />The return type of the property.
+        </param>
         <param name="returnTypeRequiredCustomModifiers">
           <attribution
             license="cc4"
@@ -2454,8 +2430,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The types of the parameters of the property. </param
-        >
+          />The types of the parameters of the property.
+        </param>
         <param name="parameterTypeRequiredCustomModifiers">
           <attribution
             license="cc4"
@@ -2554,22 +2530,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name used to refer to the data. <paramref name="name" /> cannot contain embedded nulls. </param
-        >
+          />The name used to refer to the data. <paramref name="name" /> cannot contain embedded nulls.
+        </param>
         <param name="size">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The size of the data field. </param
-        >
+          />The size of the data field.
+        </param>
         <param name="attributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The attributes for the field. </param
-        >
+          />The attributes for the field.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="FullName">
@@ -2832,8 +2808,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />This must be a bit flag from <see cref="T:System.Reflection.BindingFlags" /> as in InvokeMethod, NonPublic, and so on. </param
-        >
+          />This must be a bit flag from <see cref="T:System.Reflection.BindingFlags" /> as in InvokeMethod, NonPublic, and so on.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttributes">
@@ -2872,8 +2848,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Specifies whether to search this member's inheritance chain to find the attributes. </param
-        >
+          />Specifies whether to search this member's inheritance chain to find the attributes.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttributes">
@@ -2920,8 +2896,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Specifies whether to search this member's inheritance chain to find the attributes. </param
-        >
+          />Specifies whether to search this member's inheritance chain to find the attributes.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetElementType">
@@ -3003,15 +2979,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the event to search for. </param
-        >
+          />The name of the event to search for.
+        </param>
         <param name="bindingAttr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of <see cref="T:System.Reflection.BindingFlags" /> values that limits the search. </param
-        >
+          />A bitwise combination of <see cref="T:System.Reflection.BindingFlags" /> values that limits the search.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetEvents">
@@ -3143,15 +3119,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the field to get. </param
-        >
+          />The name of the field to get.
+        </param>
         <param name="bindingAttr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />This must be a bit flag from <see cref="T:System.Reflection.BindingFlags" /> as in InvokeMethod, NonPublic, and so on. </param
-        >
+          />This must be a bit flag from <see cref="T:System.Reflection.BindingFlags" /> as in InvokeMethod, NonPublic, and so on.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetField">
@@ -3258,8 +3234,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />This must be a bit flag from <see cref="T:System.Reflection.BindingFlags" /> : InvokeMethod, NonPublic, and so on. </param
-        >
+          />This must be a bit flag from <see cref="T:System.Reflection.BindingFlags" /> : InvokeMethod, NonPublic, and so on.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetGenericArguments">
@@ -3286,8 +3262,8 @@
             >A <see cref="T:System.Reflection.Emit.TypeBuilder" /> object represents a generic type definition if the <see cref="M:System.Reflection.Emit.TypeBuilder.DefineGenericParameters(System.String[])" /> method has been used to give it generic type parameters. This method retrieves the <see cref="T:System.Reflection.Emit.GenericTypeParameterBuilder" /> objects that represent the generic type parameters.</para
           >
           <para
-            >For more information on generic types in reflection and a list of the invariant conditions for terms used in generic reflection, see the <see cref="P:System.Type.IsGenericType" /> property. </para
-          >
+            >For more information on generic types in reflection and a list of the invariant conditions for terms used in generic reflection, see the <see cref="P:System.Type.IsGenericType" /> property.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3383,19 +3359,15 @@
           >
         </returns>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the interface. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the interface.
+        </param>
         <param name="ignoreCase">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />If true, the search is case-insensitive. If false, the search is case-sensitive. </param
-        >
+          />If true, the search is case-insensitive. If false, the search is case-sensitive.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetInterfaceMap">
@@ -3444,8 +3416,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of the interface for which the mapping is to be retrieved. </param
-        >
+          />The <see cref="T:System.Type" /> of the interface for which the mapping is to be retrieved.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetInterfaces">
@@ -3519,26 +3491,22 @@
           >
         </returns>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the member. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the member.
+        </param>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the member to return. </param
-        >
+          />The type of the member to return.
+        </param>
         <param name="bindingAttr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />This must be a bit flag from <see cref="T:System.Reflection.BindingFlags" />, as in InvokeMethod, NonPublic, and so on. </param
-        >
+          />This must be a bit flag from <see cref="T:System.Reflection.BindingFlags" />, as in InvokeMethod, NonPublic, and so on.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetMembers">
@@ -3584,8 +3552,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />This must be a bit flag from <see cref="T:System.Reflection.BindingFlags" />, such as InvokeMethod, NonPublic, and so on. </param
-        >
+          />This must be a bit flag from <see cref="T:System.Reflection.BindingFlags" />, such as InvokeMethod, NonPublic, and so on.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetMethod">
@@ -3614,8 +3582,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Reflection.Emit.TypeBuilder.GetMethod(System.Type,System.Reflection.MethodInfo)" /> method provides a way to get a <see cref="T:System.Reflection.MethodInfo" /> object that represents a method of a constructed generic type whose generic type definition is represented by a <see cref="T:System.Reflection.Emit.TypeBuilder" /> object. </para
-          >
+            >The <see cref="M:System.Reflection.Emit.TypeBuilder.GetMethod(System.Type,System.Reflection.MethodInfo)" /> method provides a way to get a <see cref="T:System.Reflection.MethodInfo" /> object that represents a method of a constructed generic type whose generic type definition is represented by a <see cref="T:System.Reflection.Emit.TypeBuilder" /> object.
+          </para>
           <para
             >For example, suppose you have a <see cref="T:System.Reflection.Emit.TypeBuilder" /> object that represents the type G&lt;T&gt; in C# syntax (G(Of T) in Visual Basic, generic &lt;T&gt; ref class G in C++) and a <see cref="T:System.Reflection.Emit.MethodBuilder" /> object that represents a method T M() in C# syntax (Function M() As T in Visual Basic, T M() in C++) that is defined by G&lt;T&gt;. Suppose that G&lt;T&gt; has a generic method with type parameter U that creates an instance of the constructed type G&lt;U&gt; and calls method M on that instance. In order to emit the function call, you need a <see cref="T:System.Reflection.MethodInfo" /> object that represents M on the constructed type — in other words, that returns type U rather than type T. To do this, first call the <see cref="M:System.Reflection.Emit.TypeBuilder.MakeGenericType(System.Type[])" /> method on the <see cref="T:System.Reflection.Emit.TypeBuilder" /> object, specifying the <see cref="T:System.Reflection.Emit.GenericTypeParameterBuilder" /> object that represents U as the type argument. Then call the <see cref="M:System.Reflection.Emit.TypeBuilder.GetMethod(System.Type,System.Reflection.MethodInfo)" /> method with the return value of the <see cref="M:System.Reflection.Emit.TypeBuilder.MakeGenericType(System.Type[])" /> method as parameter <paramref name="type" /> and the <see cref="T:System.Reflection.Emit.MethodBuilder" /> object that represents T M() as parameter <paramref name="method" />. The return value is the <see cref="T:System.Reflection.MethodInfo" /> object you need to emit the function call. The code example demonstrates a scenario similar to this.</para
           >
@@ -3727,8 +3695,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />This must be a bit flag from <see cref="T:System.Reflection.BindingFlags" /> as in InvokeMethod, NonPublic, and so on. </param
-        >
+          />This must be a bit flag from <see cref="T:System.Reflection.BindingFlags" /> as in InvokeMethod, NonPublic, and so on.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetNestedType">
@@ -3776,8 +3744,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.String" /> containing the name of the nested type to get. </param
-        >
+          />The <see cref="T:System.String" /> containing the name of the nested type to get.
+        </param>
         <param name="bindingAttr">
           <attribution
             license="cc4"
@@ -3834,8 +3802,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />This must be a bit flag from <see cref="T:System.Reflection.BindingFlags" />, as in InvokeMethod, NonPublic, and so on. </param
-        >
+          />This must be a bit flag from <see cref="T:System.Reflection.BindingFlags" />, as in InvokeMethod, NonPublic, and so on.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetProperties">
@@ -3881,8 +3849,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />This invocation attribute. This must be a bit flag from <see cref="T:System.Reflection.BindingFlags" /> : InvokeMethod, NonPublic, and so on. </param
-        >
+          />This invocation attribute. This must be a bit flag from <see cref="T:System.Reflection.BindingFlags" /> : InvokeMethod, NonPublic, and so on.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetPropertyImpl">
@@ -4024,57 +3992,57 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the member to invoke. This can be a constructor, method, property, or field. A suitable invocation attribute must be specified. Note that it is possible to invoke the default member of a class by passing an empty string as the name of the member. </param
-        >
+          />The name of the member to invoke. This can be a constructor, method, property, or field. A suitable invocation attribute must be specified. Note that it is possible to invoke the default member of a class by passing an empty string as the name of the member.
+        </param>
         <param name="invokeAttr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The invocation attribute. This must be a bit flag from BindingFlags. </param
-        >
+          />The invocation attribute. This must be a bit flag from BindingFlags.
+        </param>
         <param name="binder">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that enables the binding, coercion of argument types, invocation of members, and retrieval of MemberInfo objects using reflection. If binder is null, the default binder is used. See <see cref="T:System.Reflection.Binder" />. </param
-        >
+          />An object that enables the binding, coercion of argument types, invocation of members, and retrieval of MemberInfo objects using reflection. If binder is null, the default binder is used. See <see cref="T:System.Reflection.Binder" />.
+        </param>
         <param name="target">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object on which to invoke the specified member. If the member is static, this parameter is ignored. </param
-        >
+          />The object on which to invoke the specified member. If the member is static, this parameter is ignored.
+        </param>
         <param name="args">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An argument list. This is an array of Objects that contains the number, order, and type of the parameters of the member to be invoked. If there are no parameters this should be null. </param
-        >
+          />An argument list. This is an array of Objects that contains the number, order, and type of the parameters of the member to be invoked. If there are no parameters this should be null.
+        </param>
         <param name="modifiers">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of the same length as <paramref name="args" /> with elements that represent the attributes associated with the arguments of the member to be invoked. A parameter has attributes associated with it in the metadata. They are used by various interoperability services. See the metadata specs for more details. </param
-        >
+          />An array of the same length as <paramref name="args" /> with elements that represent the attributes associated with the arguments of the member to be invoked. A parameter has attributes associated with it in the metadata. They are used by various interoperability services. See the metadata specs for more details.
+        </param>
         <param name="culture">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An instance of CultureInfo used to govern the coercion of types. If this is null, the CultureInfo for the current thread is used. (Note that this is necessary to, for example, convert a String that represents 1000 to a Double value, since 1000 is represented differently by different cultures.) </param
-        >
+          />An instance of CultureInfo used to govern the coercion of types. If this is null, the CultureInfo for the current thread is used. (Note that this is necessary to, for example, convert a String that represents 1000 to a Double value, since 1000 is represented differently by different cultures.)
+        </param>
         <param name="namedParameters">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Each parameter in the <paramref name="namedParameters" /> array gets the value in the corresponding element in the <paramref name="args" /> array. If the length of <paramref name="args" /> is greater than the length of <paramref name="namedParameters" />, the remaining argument values are passed in order. </param
-        >
+          />Each parameter in the <paramref name="namedParameters" /> array gets the value in the corresponding element in the <paramref name="args" /> array. If the length of <paramref name="args" /> is greater than the length of <paramref name="namedParameters" />, the remaining argument values are passed in order.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsArrayImpl">
@@ -4170,8 +4138,8 @@
           >
         </returns>
         <param name="c">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object to test. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The object to test.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsByRefImpl">
@@ -4270,8 +4238,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see cref="M:System.Reflection.Emit.TypeBuilder.CreateType" /> method has been called; otherwise, false. </para
-          >
+            >true if the <see cref="M:System.Reflection.Emit.TypeBuilder.CreateType" /> method has been called; otherwise, false.
+          </para>
         </returns>
       </Docs>
     </Member>
@@ -4319,15 +4287,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of attribute to search for. Only attributes that are assignable to this type are returned. </param
-        >
+          />The type of attribute to search for. Only attributes that are assignable to this type are returned.
+        </param>
         <param name="inherit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Specifies whether to search this member's inheritance chain to find the attributes. </param
-        >
+          />Specifies whether to search this member's inheritance chain to find the attributes.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsGenericParameter">
@@ -4378,8 +4346,8 @@
             >A <see cref="T:System.Reflection.Emit.TypeBuilder" /> object represents a generic type definition if the <see cref="M:System.Reflection.Emit.TypeBuilder.DefineGenericParameters(System.String[])" /> method has been used to give it generic type parameters. An instance of the <see cref="T:System.Reflection.Emit.TypeBuilder" /> class that is generic is always a generic type definition.</para
           >
           <para
-            >For more information on generic types in reflection and a list of the invariant conditions for terms used in generic reflection, see the <see cref="P:System.Type.IsGenericType" /> property. </para
-          >
+            >For more information on generic types in reflection and a list of the invariant conditions for terms used in generic reflection, see the <see cref="P:System.Type.IsGenericType" /> property.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -4413,8 +4381,8 @@
             >A <see cref="T:System.Reflection.Emit.TypeBuilder" /> can be used to build generic type definitions, but not constructed generic types. To get a constructed generic type, call the <see cref="M:System.Reflection.Emit.TypeBuilder.MakeGenericType(System.Type[])" /> method on a <see cref="T:System.Reflection.Emit.TypeBuilder" /> that represents a generic type definition.</para
           >
           <para
-            >For more information on generic types in reflection and a list of the invariant conditions for terms used in generic reflection, see the <see cref="P:System.Type.IsGenericType" /> property. </para
-          >
+            >For more information on generic types in reflection and a list of the invariant conditions for terms used in generic reflection, see the <see cref="P:System.Type.IsGenericType" /> property.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -4508,8 +4476,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> that is to be checked. </param
-        >
+          />A <see cref="T:System.Type" /> that is to be checked.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsValueTypeImpl">
@@ -4611,8 +4579,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of dimensions for the array. </param
-        >
+          />The number of dimensions for the array.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="MakeByRefType">
@@ -4711,8 +4679,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Type" /> representing the constructed type formed by substituting the elements of <paramref name="typeArguments" /> for the type parameters of the current generic type. </para
-          >
+            >A <see cref="T:System.Type" /> representing the constructed type formed by substituting the elements of <paramref name="typeArguments" /> for the type parameters of the current generic type.
+          </para>
         </returns>
         <param name="typeArguments">
           <attribution
@@ -4927,8 +4895,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An instance of a helper class to define the custom attribute. </param
-        >
+          />An instance of a helper class to define the custom attribute.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetCustomAttribute">
@@ -4988,15 +4956,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The constructor for the custom attribute. </param
-        >
+          />The constructor for the custom attribute.
+        </param>
         <param name="binaryAttribute">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A byte blob representing the attributes. </param
-        >
+          />A byte blob representing the attributes.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetParent">
@@ -5035,8 +5003,8 @@
           <para>Sets the base type of the type currently under construction.</para>
         </summary>
         <param name="parent">
-          <attribution license="cc4" from="Microsoft" modified="false" />The new base type. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The new base type.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Size">

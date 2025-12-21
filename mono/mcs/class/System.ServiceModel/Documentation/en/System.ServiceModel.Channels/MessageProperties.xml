@@ -63,8 +63,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.MessageProperties" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.MessageProperties" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -138,8 +138,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value of the element to add. </param
-        >
+          />The value of the element to add.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AllowOutputBatching">
@@ -299,8 +299,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call <see cref="M:System.ServiceModel.Channels.MessageProperties.Dispose" /> when you are finished using the <see cref="T:System.ServiceModel.Channels.MessageProperties" />. The <see cref="M:System.ServiceModel.Channels.MessageProperties.Dispose" /> method leaves the <see cref="T:System.ServiceModel.Channels.MessageProperties" /> in an unusable state. After calling <see cref="M:System.ServiceModel.Channels.MessageProperties.Dispose" />, you must release all references to the <see cref="T:System.ServiceModel.Channels.MessageProperties" /> so the garbage collector can reclaim the memory that the <see cref="T:System.ServiceModel.Channels.MessageProperties" /> occupied. </para
-          >
+            >Call <see cref="M:System.ServiceModel.Channels.MessageProperties.Dispose" /> when you are finished using the <see cref="T:System.ServiceModel.Channels.MessageProperties" />. The <see cref="M:System.ServiceModel.Channels.MessageProperties.Dispose" /> method leaves the <see cref="T:System.ServiceModel.Channels.MessageProperties" /> in an unusable state. After calling <see cref="M:System.ServiceModel.Channels.MessageProperties.Dispose" />, you must release all references to the <see cref="T:System.ServiceModel.Channels.MessageProperties" /> so the garbage collector can reclaim the memory that the <see cref="T:System.ServiceModel.Channels.MessageProperties" /> occupied.
+          </para>
           <block subset="none" type="note">
             <para
               >Always call <see cref="M:System.ServiceModel.Channels.MessageProperties.Dispose" /> before you release your last reference to the <see cref="T:System.ServiceModel.Channels.MessageProperties" />. Otherwise, the resources it is using are not freed until the garbage collector calls the <see cref="T:System.ServiceModel.Channels.MessageProperties" /> object's Finalize method.</para

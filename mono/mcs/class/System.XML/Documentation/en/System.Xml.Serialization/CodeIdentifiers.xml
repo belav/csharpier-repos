@@ -21,8 +21,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The following list identifies tools and classes that use the <see cref="T:System.Xml.Serialization.CodeIdentifiers" />: </para
-      >
+        >The following list identifies tools and classes that use the <see cref="T:System.Xml.Serialization.CodeIdentifiers" />:
+      </para>
       <list type="bullet">
         <item>
           <para
@@ -63,8 +63,8 @@
         </item>
         <item>
           <para
-            >Objects within a <see cref="T:System.Web.Services.Description.ServiceDescription" /> instance that can be serialized to a WSDL document. </para
-          >
+            >Objects within a <see cref="T:System.Web.Services.Description.ServiceDescription" /> instance that can be serialized to a WSDL document.
+          </para>
         </item>
       </list>
       <para>Typically, the class is used to avoid naming collisions between code entities within a particular scope, including collisions with the name of a containing entity.</para>
@@ -94,8 +94,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.CodeIdentifiers" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.CodeIdentifiers" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -126,8 +126,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if identifiers are case sensitive; otherwise, false. </param
-        >
+          />true if identifiers are case sensitive; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Add">
@@ -166,8 +166,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a named code entity or type mapping to the <see cref="T:System.Xml.Serialization.CodeIdentifiers" /> instance's scope. </para
-          >
+            >Adds a named code entity or type mapping to the <see cref="T:System.Xml.Serialization.CodeIdentifiers" /> instance's scope.
+          </para>
         </summary>
         <param name="identifier">
           <attribution
@@ -211,8 +211,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Prevents a specified name from being used within the <see cref="T:System.Xml.Serialization.CodeIdentifiers" /> instance's scope. </para
-          >
+            >Prevents a specified name from being used within the <see cref="T:System.Xml.Serialization.CodeIdentifiers" /> instance's scope.
+          </para>
         </summary>
         <param name="identifier">
           <attribution
@@ -263,8 +263,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a named code entity or type mapping to the <see cref="T:System.Xml.Serialization.CodeIdentifiers" /> instance's scope, ensuring that the name is unique within the scope. </para
-          >
+            >Adds a named code entity or type mapping to the <see cref="T:System.Xml.Serialization.CodeIdentifiers" /> instance's scope, ensuring that the name is unique within the scope.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -319,8 +319,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all code entities or type mappings, including their names, from the <see cref="T:System.Xml.Serialization.CodeIdentifiers" /> instance's scope. </para
-          >
+            >Removes all code entities or type mappings, including their names, from the <see cref="T:System.Xml.Serialization.CodeIdentifiers" /> instance's scope.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -359,8 +359,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether a specified name is already being used within the <see cref="T:System.Xml.Serialization.CodeIdentifiers" /> instance's scope. </para
-          >
+            >Determines whether a specified name is already being used within the <see cref="T:System.Xml.Serialization.CodeIdentifiers" /> instance's scope.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -403,8 +403,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Ensures that the input is of the correct case by modifying the name according to the value of the <see cref="P:System.Xml.Serialization.CodeIdentifiers.UseCamelCasing" /> property. </para
-          >
+            >Ensures that the input is of the correct case by modifying the name according to the value of the <see cref="P:System.Xml.Serialization.CodeIdentifiers.UseCamelCasing" /> property.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -454,8 +454,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the input name conflicts with another name within the <see cref="T:System.Xml.Serialization.CodeIdentifiers" /> instance's scope and, if it does, generates a modified string. </para
-          >
+            >Determines whether the input name conflicts with another name within the <see cref="T:System.Xml.Serialization.CodeIdentifiers" /> instance's scope and, if it does, generates a modified string.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -502,8 +502,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes from the <see cref="T:System.Xml.Serialization.CodeIdentifiers" /> instance's scope the code entity or type mapping identified by the input name. </para
-          >
+            >Removes from the <see cref="T:System.Xml.Serialization.CodeIdentifiers" /> instance's scope the code entity or type mapping identified by the input name.
+          </para>
         </summary>
         <param name="identifier">
           <attribution
@@ -542,8 +542,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the input name from the <see cref="T:System.Xml.Serialization.CodeIdentifiers" /> instance's reserved names. </para
-          >
+            >Removes the input name from the <see cref="T:System.Xml.Serialization.CodeIdentifiers" /> instance's reserved names.
+          </para>
         </summary>
         <param name="identifier">
           <attribution
@@ -586,8 +586,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an array of the code entities or type mappings within the <see cref="T:System.Xml.Serialization.CodeIdentifiers" /> instance's scope. </para
-          >
+            >Returns an array of the code entities or type mappings within the <see cref="T:System.Xml.Serialization.CodeIdentifiers" /> instance's scope.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />

@@ -47,8 +47,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlQualifiedName" /> specifying the application specific error code. Sets the <see cref="P:System.Web.Services.Protocols.SoapFaultSubcode.Code" /> property. </param
-        >
+          />An <see cref="T:System.Xml.XmlQualifiedName" /> specifying the application specific error code. Sets the <see cref="P:System.Web.Services.Protocols.SoapFaultSubcode.Code" /> property.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -79,8 +79,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlQualifiedName" /> specifying the application specific error code. Sets the <see cref="P:System.Web.Services.Protocols.SoapFaultSubcode.Code" /> property. </param
-        >
+          />An <see cref="T:System.Xml.XmlQualifiedName" /> specifying the application specific error code. Sets the <see cref="P:System.Web.Services.Protocols.SoapFaultSubcode.Code" /> property.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

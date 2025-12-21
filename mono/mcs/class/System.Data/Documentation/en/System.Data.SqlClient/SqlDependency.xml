@@ -33,8 +33,8 @@
       >
       <block subset="none" type="note">
         <para
-          >The <see cref="E:System.Data.SqlClient.SqlDependency.OnChange" /> event may be generated on a different thread from the thread that initiated command execution. </para
-        >
+          >The <see cref="E:System.Data.SqlClient.SqlDependency.OnChange" /> event may be generated on a different thread from the thread that initiated command execution.
+        </para>
       </block>
       <para>Query notifications are supported only for SELECT statements that meet a list of specific requirements. The following table provides links to the Service Broker and Query Notifications documentation in SQL Server Books Online. </para>
       <para>SQL Server Books Online</para>
@@ -298,8 +298,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Data.SqlClient.SqlCommand" /> object to associate with this <see cref="T:System.Data.SqlClient.SqlDependency" /> object. The constructor will set up a <see cref="T:System.Data.Sql.SqlNotificationRequest" /> object and bind it to the command. </param
-        >
+          />The <see cref="T:System.Data.SqlClient.SqlCommand" /> object to associate with this <see cref="T:System.Data.SqlClient.SqlDependency" /> object. The constructor will set up a <see cref="T:System.Data.Sql.SqlNotificationRequest" /> object and bind it to the command.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -405,8 +405,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The notification request options to be used by this dependency.  <paramref name="null" /> to use the default service. </param
-        >
+          />The notification request options to be used by this dependency.  <paramref name="null" /> to use the default service.
+        </param>
         <param name="timeout">
           <attribution
             license="cc4"
@@ -513,8 +513,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlClient.SqlCommand" /> object containing a statement that is valid for notifications. </param
-        >
+          />A <see cref="T:System.Data.SqlClient.SqlCommand" /> object containing a statement that is valid for notifications.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="HasChanges">

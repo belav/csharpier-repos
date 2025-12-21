@@ -76,8 +76,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the directory to be appended to the private path. </param
-        >
+          />The name of the directory to be appended to the private path.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AssemblyLoad">
@@ -275,8 +275,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The fully qualified name of the requested type, including the namespace but not the assembly, as returned by the <see cref="P:System.Type.FullName" /> property. </param
-        >
+          />The fully qualified name of the requested type, including the namespace but not the assembly, as returned by the <see cref="P:System.Type.FullName" /> property.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateInstance">
@@ -338,15 +338,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The fully qualified name of the requested type, including the namespace but not the assembly, as returned by the <see cref="P:System.Type.FullName" /> property. </param
-        >
+          />The fully qualified name of the requested type, including the namespace but not the assembly, as returned by the <see cref="P:System.Type.FullName" /> property.
+        </param>
         <param name="activationAttributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of one or more attributes that can participate in activation. Typically, an array that contains a single <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> object. The <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> specifies the URL that is required to activate a remote object.  </param
-        >
+          />An array of one or more attributes that can participate in activation. Typically, an array that contains a single <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> object. The <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> specifies the URL that is required to activate a remote object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateInstance">
@@ -382,13 +382,13 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see cref="M:System.AppDomain.CreateInstance(System.String,System.String,System.Boolean,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo,System.Object[],System.Security.Policy.Evidence)" /> method overload. </para
-          >
+            >See the <see cref="M:System.AppDomain.CreateInstance(System.String,System.String,System.Boolean,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo,System.Object[],System.Security.Policy.Evidence)" /> method overload.
+          </para>
           <para
             >The <paramref name="activationAttributes" /> parameter is related to client-activated objects; see <format type="text/html">
               <a href="4a791494-c18a-4711-a5c1-4ab0e49a8f1a">Client Activation</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -414,57 +414,57 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The fully qualified name of the requested type, including the namespace but not the assembly, as returned by the <see cref="P:System.Type.FullName" /> property. </param
-        >
+          />The fully qualified name of the requested type, including the namespace but not the assembly, as returned by the <see cref="P:System.Type.FullName" /> property.
+        </param>
         <param name="ignoreCase">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A Boolean value specifying whether to perform a case-sensitive search or not. </param
-        >
+          />A Boolean value specifying whether to perform a case-sensitive search or not.
+        </param>
         <param name="bindingAttr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A combination of zero or more bit flags that affect the search for the <paramref name="typeName" /> constructor. If <paramref name="bindingAttr" /> is zero, a case-sensitive search for public constructors is conducted. </param
-        >
+          />A combination of zero or more bit flags that affect the search for the <paramref name="typeName" /> constructor. If <paramref name="bindingAttr" /> is zero, a case-sensitive search for public constructors is conducted.
+        </param>
         <param name="binder">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that enables the binding, coercion of argument types, invocation of members, and retrieval of <see cref="T:System.Reflection.MemberInfo" /> objects using reflection. If <paramref name="binder" /> is null, the default binder is used. </param
-        >
+          />An object that enables the binding, coercion of argument types, invocation of members, and retrieval of <see cref="T:System.Reflection.MemberInfo" /> objects using reflection. If <paramref name="binder" /> is null, the default binder is used.
+        </param>
         <param name="args">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The arguments to pass to the constructor. This array of arguments must match in number, order, and type the parameters of the constructor to invoke. If the default constructor is preferred, <paramref name="args" /> must be an empty array or null. </param
-        >
+          />The arguments to pass to the constructor. This array of arguments must match in number, order, and type the parameters of the constructor to invoke. If the default constructor is preferred, <paramref name="args" /> must be an empty array or null.
+        </param>
         <param name="culture">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Culture-specific information that governs the coercion of <paramref name="args" /> to the formal types declared for the <paramref name="typeName" /> constructor. If <paramref name="culture" /> is null, the <see cref="T:System.Globalization.CultureInfo" /> for the current thread is used. </param
-        >
+          />Culture-specific information that governs the coercion of <paramref name="args" /> to the formal types declared for the <paramref name="typeName" /> constructor. If <paramref name="culture" /> is null, the <see cref="T:System.Globalization.CultureInfo" /> for the current thread is used.
+        </param>
         <param name="activationAttributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of one or more attributes that can participate in activation. Typically, an array that contains a single <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> object. The <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> specifies the URL that is required to activate a remote object.  </param
-        >
+          />An array of one or more attributes that can participate in activation. Typically, an array that contains a single <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> object. The <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> specifies the URL that is required to activate a remote object.
+        </param>
         <param name="securityAttributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Information used to authorize creation of <paramref name="typeName" />. </param
-        >
+          />Information used to authorize creation of <paramref name="typeName" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateInstanceFrom">
@@ -520,8 +520,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The fully qualified name of the requested type, including the namespace but not the assembly, as returned by the <see cref="P:System.Type.FullName" /> property. </param
-        >
+          />The fully qualified name of the requested type, including the namespace but not the assembly, as returned by the <see cref="P:System.Type.FullName" /> property.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateInstanceFrom">
@@ -576,22 +576,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name, including the path, of a file that contains an assembly that defines the requested type. The assembly is loaded using the <see cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />  method. </param
-        >
+          />The name, including the path, of a file that contains an assembly that defines the requested type. The assembly is loaded using the <see cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />  method.
+        </param>
         <param name="typeName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The fully qualified name of the requested type, including the namespace but not the assembly, as returned by the <see cref="P:System.Type.FullName" /> property. </param
-        >
+          />The fully qualified name of the requested type, including the namespace but not the assembly, as returned by the <see cref="P:System.Type.FullName" /> property.
+        </param>
         <param name="activationAttributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of one or more attributes that can participate in activation. Typically, an array that contains a single <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> object. The <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> specifies the URL that is required to activate a remote object.  </param
-        >
+          />An array of one or more attributes that can participate in activation. Typically, an array that contains a single <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> object. The <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> specifies the URL that is required to activate a remote object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateInstanceFrom">
@@ -659,57 +659,57 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The fully qualified name of the requested type, including the namespace but not the assembly, as returned by the <see cref="P:System.Type.FullName" /> property. </param
-        >
+          />The fully qualified name of the requested type, including the namespace but not the assembly, as returned by the <see cref="P:System.Type.FullName" /> property.
+        </param>
         <param name="ignoreCase">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A Boolean value specifying whether to perform a case-sensitive search or not. </param
-        >
+          />A Boolean value specifying whether to perform a case-sensitive search or not.
+        </param>
         <param name="bindingAttr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A combination of zero or more bit flags that affect the search for the <paramref name="typeName" /> constructor. If <paramref name="bindingAttr" /> is zero, a case-sensitive search for public constructors is conducted. </param
-        >
+          />A combination of zero or more bit flags that affect the search for the <paramref name="typeName" /> constructor. If <paramref name="bindingAttr" /> is zero, a case-sensitive search for public constructors is conducted.
+        </param>
         <param name="binder">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that enables the binding, coercion of argument types, invocation of members, and retrieval of <see cref="T:System.Reflection.MemberInfo" /> objects through reflection. If <paramref name="binder" /> is null, the default binder is used. </param
-        >
+          />An object that enables the binding, coercion of argument types, invocation of members, and retrieval of <see cref="T:System.Reflection.MemberInfo" /> objects through reflection. If <paramref name="binder" /> is null, the default binder is used.
+        </param>
         <param name="args">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The arguments to pass to the constructor. This array of arguments must match in number, order, and type the parameters of the constructor to invoke. If the default constructor is preferred, <paramref name="args" /> must be an empty array or null. </param
-        >
+          />The arguments to pass to the constructor. This array of arguments must match in number, order, and type the parameters of the constructor to invoke. If the default constructor is preferred, <paramref name="args" /> must be an empty array or null.
+        </param>
         <param name="culture">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Culture-specific information that governs the coercion of <paramref name="args" /> to the formal types declared for the <paramref name="typeName" /> constructor. If <paramref name="culture" /> is null, the <see cref="T:System.Globalization.CultureInfo" /> for the current thread is used. </param
-        >
+          />Culture-specific information that governs the coercion of <paramref name="args" /> to the formal types declared for the <paramref name="typeName" /> constructor. If <paramref name="culture" /> is null, the <see cref="T:System.Globalization.CultureInfo" /> for the current thread is used.
+        </param>
         <param name="activationAttributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of one or more attributes that can participate in activation. Typically, an array that contains a single <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> object. The <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> specifies the URL that is required to activate a remote object.  </param
-        >
+          />An array of one or more attributes that can participate in activation. Typically, an array that contains a single <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> object. The <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> specifies the URL that is required to activate a remote object.
+        </param>
         <param name="securityAttributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Information used to authorize creation of <paramref name="typeName" />. </param
-        >
+          />Information used to authorize creation of <paramref name="typeName" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefineDynamicAssembly">
@@ -756,15 +756,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The unique identity of the dynamic assembly. </param
-        >
+          />The unique identity of the dynamic assembly.
+        </param>
         <param name="access">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The access mode for the dynamic assembly. </param
-        >
+          />The access mode for the dynamic assembly.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefineDynamicAssembly">
@@ -812,22 +812,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The unique identity of the dynamic assembly. </param
-        >
+          />The unique identity of the dynamic assembly.
+        </param>
         <param name="access">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The mode in which the dynamic assembly will be accessed. </param
-        >
+          />The mode in which the dynamic assembly will be accessed.
+        </param>
         <param name="evidence">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The evidence supplied for the dynamic assembly. The evidence is used unaltered as the final set of evidence used for policy resolution. </param
-        >
+          />The evidence supplied for the dynamic assembly. The evidence is used unaltered as the final set of evidence used for policy resolution.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefineDynamicAssembly">
@@ -875,22 +875,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The unique identity of the dynamic assembly. </param
-        >
+          />The unique identity of the dynamic assembly.
+        </param>
         <param name="access">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The mode in which the dynamic assembly will be accessed. </param
-        >
+          />The mode in which the dynamic assembly will be accessed.
+        </param>
         <param name="dir">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the directory where the assembly will be saved. If <paramref name="dir" /> is null, the directory defaults to the current directory. </param
-        >
+          />The name of the directory where the assembly will be saved. If <paramref name="dir" /> is null, the directory defaults to the current directory.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefineDynamicAssembly">
@@ -939,29 +939,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The unique identity of the dynamic assembly. </param
-        >
+          />The unique identity of the dynamic assembly.
+        </param>
         <param name="access">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The mode in which the dynamic assembly will be accessed. </param
-        >
+          />The mode in which the dynamic assembly will be accessed.
+        </param>
         <param name="dir">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the directory where the assembly will be saved. If <paramref name="dir" /> is null, the directory defaults to the current directory. </param
-        >
+          />The name of the directory where the assembly will be saved. If <paramref name="dir" /> is null, the directory defaults to the current directory.
+        </param>
         <param name="evidence">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The evidence supplied for the dynamic assembly. The evidence is used unaltered as the final set of evidence used for policy resolution. </param
-        >
+          />The evidence supplied for the dynamic assembly. The evidence is used unaltered as the final set of evidence used for policy resolution.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefineDynamicAssembly">
@@ -1011,36 +1011,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The unique identity of the dynamic assembly. </param
-        >
+          />The unique identity of the dynamic assembly.
+        </param>
         <param name="access">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The mode in which the dynamic assembly will be accessed. </param
-        >
+          />The mode in which the dynamic assembly will be accessed.
+        </param>
         <param name="requiredPermissions">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The required permissions request. </param
-        >
+          />The required permissions request.
+        </param>
         <param name="optionalPermissions">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The optional permissions request. </param
-        >
+          />The optional permissions request.
+        </param>
         <param name="refusedPermissions">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The refused permissions request. </param
-        >
+          />The refused permissions request.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefineDynamicAssembly">
@@ -1091,43 +1091,43 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The unique identity of the dynamic assembly. </param
-        >
+          />The unique identity of the dynamic assembly.
+        </param>
         <param name="access">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The mode in which the dynamic assembly will be accessed. </param
-        >
+          />The mode in which the dynamic assembly will be accessed.
+        </param>
         <param name="evidence">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The evidence supplied for the dynamic assembly. The evidence is used unaltered as the final set of evidence used for policy resolution. </param
-        >
+          />The evidence supplied for the dynamic assembly. The evidence is used unaltered as the final set of evidence used for policy resolution.
+        </param>
         <param name="requiredPermissions">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The required permissions request. </param
-        >
+          />The required permissions request.
+        </param>
         <param name="optionalPermissions">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The optional permissions request. </param
-        >
+          />The optional permissions request.
+        </param>
         <param name="refusedPermissions">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The refused permissions request. </param
-        >
+          />The refused permissions request.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefineDynamicAssembly">
@@ -1178,43 +1178,43 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The unique identity of the dynamic assembly. </param
-        >
+          />The unique identity of the dynamic assembly.
+        </param>
         <param name="access">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The mode in which the dynamic assembly will be accessed. </param
-        >
+          />The mode in which the dynamic assembly will be accessed.
+        </param>
         <param name="dir">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the directory where the assembly will be saved. If <paramref name="dir" /> is null, the directory defaults to the current directory. </param
-        >
+          />The name of the directory where the assembly will be saved. If <paramref name="dir" /> is null, the directory defaults to the current directory.
+        </param>
         <param name="requiredPermissions">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The required permissions request. </param
-        >
+          />The required permissions request.
+        </param>
         <param name="optionalPermissions">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The optional permissions request. </param
-        >
+          />The optional permissions request.
+        </param>
         <param name="refusedPermissions">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The refused permissions request. </param
-        >
+          />The refused permissions request.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefineDynamicAssembly">
@@ -1266,50 +1266,50 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The unique identity of the dynamic assembly. </param
-        >
+          />The unique identity of the dynamic assembly.
+        </param>
         <param name="access">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The mode in which the dynamic assembly will be accessed. </param
-        >
+          />The mode in which the dynamic assembly will be accessed.
+        </param>
         <param name="dir">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the directory where the assembly will be saved. If <paramref name="dir" /> is null, the directory defaults to the current directory. </param
-        >
+          />The name of the directory where the assembly will be saved. If <paramref name="dir" /> is null, the directory defaults to the current directory.
+        </param>
         <param name="evidence">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The evidence supplied for the dynamic assembly. The evidence is used unaltered as the final set of evidence used for policy resolution. </param
-        >
+          />The evidence supplied for the dynamic assembly. The evidence is used unaltered as the final set of evidence used for policy resolution.
+        </param>
         <param name="requiredPermissions">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The required permissions request. </param
-        >
+          />The required permissions request.
+        </param>
         <param name="optionalPermissions">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The optional permissions request. </param
-        >
+          />The optional permissions request.
+        </param>
         <param name="refusedPermissions">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The refused permissions request. </param
-        >
+          />The refused permissions request.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DefineDynamicAssembly">
@@ -1362,57 +1362,57 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The unique identity of the dynamic assembly. </param
-        >
+          />The unique identity of the dynamic assembly.
+        </param>
         <param name="access">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The mode in which the dynamic assembly will be accessed. </param
-        >
+          />The mode in which the dynamic assembly will be accessed.
+        </param>
         <param name="dir">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the directory where the dynamic assembly will be saved. If <paramref name="dir" /> is null, the directory defaults to the current directory. </param
-        >
+          />The name of the directory where the dynamic assembly will be saved. If <paramref name="dir" /> is null, the directory defaults to the current directory.
+        </param>
         <param name="evidence">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The evidence supplied for the dynamic assembly. The evidence is used unaltered as the final set of evidence used for policy resolution. </param
-        >
+          />The evidence supplied for the dynamic assembly. The evidence is used unaltered as the final set of evidence used for policy resolution.
+        </param>
         <param name="requiredPermissions">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The required permissions request. </param
-        >
+          />The required permissions request.
+        </param>
         <param name="optionalPermissions">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The optional permissions request. </param
-        >
+          />The optional permissions request.
+        </param>
         <param name="refusedPermissions">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The refused permissions request. </param
-        >
+          />The refused permissions request.
+        </param>
         <param name="isSynchronized">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to synchronize the creation of modules, types, and members in the dynamic assembly; otherwise, false. </param
-        >
+          />true to synchronize the creation of modules, types, and members in the dynamic assembly; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DoCallBack">
@@ -1446,8 +1446,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see cref="M:System.AppDomain.DoCallBack(System.CrossAppDomainDelegate)" /> method. </para
-          >
+            >Provides COM objects with version-independent access to the <see cref="M:System.AppDomain.DoCallBack(System.CrossAppDomainDelegate)" /> method.
+          </para>
         </summary>
         <param name="theDelegate">
           <attribution
@@ -1550,8 +1550,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to compare to the current <see cref="T:System.Object" />. </param
-        >
+          />The <see cref="T:System.Object" /> to compare to the current <see cref="T:System.Object" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Evidence">
@@ -1626,8 +1626,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the file that contains the assembly to execute. </param
-        >
+          />The name of the file that contains the assembly to execute.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ExecuteAssembly">
@@ -1674,15 +1674,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the file that contains the assembly to execute. </param
-        >
+          />The name of the file that contains the assembly to execute.
+        </param>
         <param name="assemblySecurity">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Evidence for loading the assembly. </param
-        >
+          />Evidence for loading the assembly.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ExecuteAssembly">
@@ -1730,22 +1730,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the file that contains the assembly to execute. </param
-        >
+          />The name of the file that contains the assembly to execute.
+        </param>
         <param name="assemblySecurity">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The supplied evidence for the assembly. </param
-        >
+          />The supplied evidence for the assembly.
+        </param>
         <param name="args">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The arguments to the entry point of the assembly. </param
-        >
+          />The arguments to the entry point of the assembly.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="FriendlyName">
@@ -1848,8 +1848,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of a predefined application domain property, or the name of an application domain property you have defined. </param
-        >
+          />The name of a predefined application domain property, or the name of an application domain property you have defined.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -2186,8 +2186,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type byte that is a COFF-based image containing an emitted assembly. </param
-        >
+          />An array of type byte that is a COFF-based image containing an emitted assembly.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Load">
@@ -2233,8 +2233,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that describes the assembly to load. </param
-        >
+          />An object that describes the assembly to load.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Load">
@@ -2328,15 +2328,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type byte that is a COFF-based image containing an emitted assembly. </param
-        >
+          />An array of type byte that is a COFF-based image containing an emitted assembly.
+        </param>
         <param name="rawSymbolStore">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type byte containing the raw bytes representing the symbols for the assembly. </param
-        >
+          />An array of type byte containing the raw bytes representing the symbols for the assembly.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Load">
@@ -2383,15 +2383,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that describes the assembly to load. </param
-        >
+          />An object that describes the assembly to load.
+        </param>
         <param name="assemblySecurity">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Evidence for loading the assembly. </param
-        >
+          />Evidence for loading the assembly.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Load">
@@ -2445,8 +2445,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Evidence for loading the assembly. </param
-        >
+          />Evidence for loading the assembly.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Load">
@@ -2494,22 +2494,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type byte that is a COFF-based image containing an emitted assembly. </param
-        >
+          />An array of type byte that is a COFF-based image containing an emitted assembly.
+        </param>
         <param name="rawSymbolStore">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type byte containing the raw bytes representing the symbols for the assembly. </param
-        >
+          />An array of type byte containing the raw bytes representing the symbols for the assembly.
+        </param>
         <param name="securityEvidence">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Evidence for loading the assembly. </param
-        >
+          />Evidence for loading the assembly.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ProcessExit">
@@ -2628,12 +2628,8 @@
           >
         </summary>
         <param name="domainPolicy">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The security policy level. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The security policy level.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetCachePath">
@@ -2670,8 +2666,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The fully qualified path to the shadow copy location. </param
-        >
+          />The fully qualified path to the shadow copy location.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetData">
@@ -2711,15 +2707,11 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of a user-defined application domain property to create or change. </param
-        >
+          />The name of a user-defined application domain property to create or change.
+        </param>
         <param name="data">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The value of the property. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value of the property.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetPrincipalPolicy">
@@ -2761,8 +2753,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Security.Principal.PrincipalPolicy" /> values that specifies the type of the principal object to attach to threads. </param
-        >
+          />One of the <see cref="T:System.Security.Principal.PrincipalPolicy" /> values that specifies the type of the principal object to attach to threads.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetShadowCopyPath">
@@ -2801,8 +2793,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A list of directory names, where each name is separated by a semicolon. </param
-        >
+          />A list of directory names, where each name is separated by a semicolon.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetThreadPrincipal">
@@ -2844,8 +2836,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The principal object to attach to threads. </param
-        >
+          />The principal object to attach to threads.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ShadowCopyFiles">

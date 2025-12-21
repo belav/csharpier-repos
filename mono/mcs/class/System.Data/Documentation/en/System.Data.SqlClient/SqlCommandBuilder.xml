@@ -40,8 +40,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Automatically generates single-table commands that are used to reconcile changes made to a <see cref="T:System.Data.DataSet" /> with the associated SQL Server database. This class cannot be inherited. </para
-      >
+        >Automatically generates single-table commands that are used to reconcile changes made to a <see cref="T:System.Data.DataSet" /> with the associated SQL Server database. This class cannot be inherited.
+      </para>
     </summary>
   </Docs>
   <Members>
@@ -95,8 +95,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the <see cref="T:System.Data.SqlClient.SqlDataAdapter" />. </param
-        >
+          />The name of the <see cref="T:System.Data.SqlClient.SqlDataAdapter" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -275,8 +275,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Data.SqlClient.SqlCommand" /> referencing the stored procedure from which the parameter information is to be derived. The derived parameters are added to the <see cref="P:System.Data.SqlClient.SqlCommand.Parameters" /> collection of the <see cref="T:System.Data.SqlClient.SqlCommand" />. </param
-        >
+          />The <see cref="T:System.Data.SqlClient.SqlCommand" /> referencing the stored procedure from which the parameter information is to be derived. The derived parameters are added to the <see cref="P:System.Data.SqlClient.SqlCommand.Parameters" /> collection of the <see cref="T:System.Data.SqlClient.SqlCommand" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -326,8 +326,8 @@
           <para
             >For more information, see <format type="text/html">
               <a href="6e3fb8b5-373b-4f9e-ab03-a22693df8e91">Automatically Generating Commands</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -446,8 +446,8 @@
           <para
             >For more information, see <format type="text/html">
               <a href="6e3fb8b5-373b-4f9e-ab03-a22693df8e91">Automatically Generating Commands</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -654,8 +654,8 @@
           <para
             >For more information, see <format type="text/html">
               <a href="6e3fb8b5-373b-4f9e-ab03-a22693df8e91">Automatically Generating Commands</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

@@ -74,8 +74,8 @@
           </description>
           <description>
             <para>
-              <see cref="F:System.Xml.ConformanceLevel.Document" /> (document-level), <see cref="F:System.Xml.ConformanceLevel.Fragment" /> (fragment-level), or <see cref="F:System.Xml.ConformanceLevel.Auto" /> (auto-detection) </para
-            >
+              <see cref="F:System.Xml.ConformanceLevel.Document" /> (document-level), <see cref="F:System.Xml.ConformanceLevel.Fragment" /> (fragment-level), or <see cref="F:System.Xml.ConformanceLevel.Auto" /> (auto-detection)
+            </para>
           </description>
           <description>
             <para>
@@ -200,8 +200,8 @@
           </description>
           <description>
             <para>
-              <see cref="T:System.Xml.NewLineHandling" /> value: <see cref="F:System.Xml.NewLineHandling.Entitize" /> (normalize), <see cref="F:System.Xml.NewLineHandling.Replace" /> (replace), or <see cref="F:System.Xml.NewLineHandling.None" /> (leave unchanged) </para
-            >
+              <see cref="T:System.Xml.NewLineHandling" /> value: <see cref="F:System.Xml.NewLineHandling.Entitize" /> (normalize), <see cref="F:System.Xml.NewLineHandling.Replace" /> (replace), or <see cref="F:System.Xml.NewLineHandling.None" /> (leave unchanged)
+            </para>
           </description>
           <description>
             <para>
@@ -613,8 +613,8 @@
                   >Ensures that the XML output conforms to the <see
                     cref="http://www.w3.org/TR/REC-xml/#wf-entities"
                     >rules for a well-formed XML 1.0 document fragment</see
-                  >. </para
-                >
+                  >.
+                </para>
                 <para>This setting accepts XML data that has multiple root elements or text nodes at the top level. This level of checking ensures that any processor can consume the stream being read as an XML 1.0 external parsed entity.</para>
                 <para>DTD information isn't allowed in document fragments.</para>
               </description>
@@ -1510,8 +1510,8 @@
             >This property only applies to <see cref="T:System.Xml.XmlWriter" /> instances that output text content; otherwise, this setting is ignored.</para
           >
           <para
-            >If <see cref="P:System.Xml.XmlWriterSettings.OmitXmlDeclaration" /> is set to false, The XML declaration is written automatically </para
-          >
+            >If <see cref="P:System.Xml.XmlWriterSettings.OmitXmlDeclaration" /> is set to false, The XML declaration is written automatically
+          </para>
           <para
             >The XML declaration is always written if <see cref="P:System.Xml.XmlWriterSettings.ConformanceLevel" /> is set to <see cref="F:System.Xml.ConformanceLevel.Document" />, even if <see cref="P:System.Xml.XmlWriterSettings.OmitXmlDeclaration" /> is set to true.</para
           >

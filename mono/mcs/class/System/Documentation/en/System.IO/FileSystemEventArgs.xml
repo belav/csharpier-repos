@@ -26,8 +26,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.IO.FileSystemEventArgs" /> class is passed as a parameter to event handlers for these events: </para
-      >
+        >The <see cref="T:System.IO.FileSystemEventArgs" /> class is passed as a parameter to event handlers for these events:
+      </para>
       <para
         >The <see cref="E:System.IO.FileSystemWatcher.Changed" /> event occurs when changes are made to the size, system attributes, last write time, last access time, or security permissions in a file or directory in the specified <see cref="P:System.IO.FileSystemWatcher.Path" /> of a <see cref="T:System.IO.FileSystemWatcher" />.</para
       >
@@ -80,22 +80,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.IO.WatcherChangeTypes" /> values, which represents the kind of change detected in the file system. </param
-        >
+          />One of the <see cref="T:System.IO.WatcherChangeTypes" /> values, which represents the kind of change detected in the file system.
+        </param>
         <param name="directory">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The root directory of the affected file or directory. </param
-        >
+          />The root directory of the affected file or directory.
+        </param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the affected file or directory. </param
-        >
+          />The name of the affected file or directory.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ChangeType">

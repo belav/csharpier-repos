@@ -19,8 +19,8 @@
     >. No implicit boxing conversion (<hyperlink>13.1.5</hyperlink>) is ever performed for the expression of a lock statement, and thus it is a compile-time error for the expression to denote a value of a <non_terminal
       where="11.1"
       >value-type</non_terminal
-    >. </paragraph
-  >
+    >.
+  </paragraph>
   <paragraph
     >A lock statement of the form <code_example>
       <![CDATA[
@@ -38,8 +38,8 @@ finally {
    System.Threading.Monitor.Exit(x);  
 }  
 ]]>
-    </code_example>except that x is only evaluated once. </paragraph
-  >
+    </code_example>except that x is only evaluated once.
+  </paragraph>
   <paragraph>
     <example
       >[Example: The System.Type object of a class can conveniently be used as the mutual-exclusion lock for static methods of the class. For example: <code_example>

@@ -155,8 +155,7 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
     return from cipher in allCiphers where !cipher.Contains ("EXPORT")
     select cipher;
 };
-	  </code
-            >
+	  </code>
           </example>
           <example>
             <para>Example: Use AES128 (preference) or AES256 (allowed) but no other ciphers.</para>
@@ -165,8 +164,7 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
     string prefix = p == SecurityProtocolType.Tls ? "TLS_" : "SSL_";
     return new List&lt;string&gt; { prefix + "RSA_WITH_AES_128_CBC_SHA", prefix + "RSA_WITH_AES_256_CBC_SHA" };
 };
-    </code
-            >
+    </code>
           </example>
         </remarks>
       </Docs>
@@ -447,8 +445,8 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Uri" /> object of the Internet resource to contact. </param
-        >
+          />The <see cref="T:System.Uri" /> object of the Internet resource to contact.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -511,15 +509,15 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URI of the Internet resource to be contacted. </param
-        >
+          />The URI of the Internet resource to be contacted.
+        </param>
         <param name="proxy">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The proxy data for this request. </param
-        >
+          />The proxy data for this request.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -579,15 +577,15 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Uri" /> object that contains the address of the Internet resource to contact. </param
-        >
+          />A <see cref="T:System.Uri" /> object that contains the address of the Internet resource to contact.
+        </param>
         <param name="proxy">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The proxy data for this request. </param
-        >
+          />The proxy data for this request.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -741,8 +739,8 @@ ServicePointManager.ClientCipherSuitesCallback += (SecurityProtocolType p, IEnum
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An application can set the <see cref="P:System.Net.ServicePointManager.ServerCertificateValidationCallback" /> property to a method to use for custom validation by the client of the server certificate. When doing custom validation, the <paramref name="sender" /> parameter passed to the <see cref="T:System.Net.Security.RemoteCertificateValidationCallback" /> can be a host string name or an object derived from <see cref="T:System.Net.WebRequest" /> (<see cref="T:System.Net.HttpWebRequest" />, for example) depending on the <see cref="P:System.Net.ServicePointManager.CertificatePolicy" /> property. </para
-          >
+            >An application can set the <see cref="P:System.Net.ServicePointManager.ServerCertificateValidationCallback" /> property to a method to use for custom validation by the client of the server certificate. When doing custom validation, the <paramref name="sender" /> parameter passed to the <see cref="T:System.Net.Security.RemoteCertificateValidationCallback" /> can be a host string name or an object derived from <see cref="T:System.Net.WebRequest" /> (<see cref="T:System.Net.HttpWebRequest" />, for example) depending on the <see cref="P:System.Net.ServicePointManager.CertificatePolicy" /> property.
+          </para>
           <para
             >When custom validation is not used, the certificate name is compared with host name used to create the request. For example, if <see cref="M:System.Net.WebRequest.Create(System.String)" /> was passed a parameter of "https://www.contoso.com/default.hmtl", the default behavior is for the client to check the certificate against www.contoso.com.</para
           >
@@ -816,8 +814,8 @@ prefix + "RSA_WITH_AES_256_CBC_SHA" };
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>An application can request that a TCP/IP provider enable the use of keep-alive packets on a TCP connection. The default is that the use of keep-alive packets on a TCP connection is disabled. </para>
           <para
-            >The default settings when a TCP socket is initialized sets the keep-alive timeout to 2 hours and the keep-alive interval to 1 second. The <paramref name="keepAliveTime" /> parameter specifies the timeout, in milliseconds, with no activity until the first keep-alive packet is sent. The <paramref name="keepAliveInterval" /> parameter specifies the interval, in milliseconds, between when successive keep-alive packets are sent if no acknowledgement is received. The number of keep-alive probes cannot be changed and is set to 10. </para
-          >
+            >The default settings when a TCP socket is initialized sets the keep-alive timeout to 2 hours and the keep-alive interval to 1 second. The <paramref name="keepAliveTime" /> parameter specifies the timeout, in milliseconds, with no activity until the first keep-alive packet is sent. The <paramref name="keepAliveInterval" /> parameter specifies the interval, in milliseconds, between when successive keep-alive packets are sent if no acknowledgement is received. The number of keep-alive probes cannot be changed and is set to 10.
+          </para>
           <para
             >If a TCP connection is dropped as the result of keep-alives, a <see cref="T:System.Net.Sockets.SocketError" /> of <see cref="F:System.Net.Sockets.SocketError.NetworkReset" /> is returned to any calls in progress on the socket, and any subsequent calls will fail with a <see cref="T:System.Net.Sockets.SocketError" /> of <see cref="F:System.Net.Sockets.SocketError.NotConnected" />.</para
           >
@@ -831,8 +829,8 @@ prefix + "RSA_WITH_AES_256_CBC_SHA" };
             license="cc4"
             from="Microsoft"
             modified="false"
-          />If set to true, then the TCP keep-alive option on a TCP connection will be enabled using the specified <paramref name="keepAliveTime " />and <paramref name="keepAliveInterval" /> values. </param
-        >
+          />If set to true, then the TCP keep-alive option on a TCP connection will be enabled using the specified <paramref name="keepAliveTime " />and <paramref name="keepAliveInterval" /> values.
+        </param>
         <param name="keepAliveTime">
           <attribution
             license="cc4"

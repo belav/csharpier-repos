@@ -33,8 +33,8 @@
         >The <see cref="T:System.Runtime.Remoting.Contexts.IContributeServerContextSink" /> interface is implemented by context properties in a <see cref="T:System.Runtime.Remoting.Contexts.Context" /> class that want to contribute an interception sink at the context boundary on the server end of a remoting call.</para
       >
       <para
-        >The server context chain is composed from those properties in the server context that implement <see cref="T:System.Runtime.Remoting.Contexts.IContributeServerContextSink" /> and which contribute a sink by using the <see cref="M:System.Runtime.Remoting.Contexts.IContributeServerContextSink.GetServerContextSink(System.Runtime.Remoting.Messaging.IMessageSink)" /> method call. </para
-      >
+        >The server context chain is composed from those properties in the server context that implement <see cref="T:System.Runtime.Remoting.Contexts.IContributeServerContextSink" /> and which contribute a sink by using the <see cref="M:System.Runtime.Remoting.Contexts.IContributeServerContextSink.GetServerContextSink(System.Runtime.Remoting.Messaging.IMessageSink)" /> method call.
+      </para>
       <para>Serialization is an example of such a context property. In this case, the message sink would involve taking a synchronization primitive lock before processing a call any further.</para>
     </remarks>
     <summary>
@@ -79,8 +79,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The chain of sinks composed so far. </param
-        >
+          />The chain of sinks composed so far.
+        </param>
       </Docs>
     </Member>
   </Members>

@@ -18,8 +18,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see cref="E:System.Windows.Forms.ListView.ColumnWidthChanged" /> event. </para
-      >
+        >Provides data for the <see cref="E:System.Windows.Forms.ListView.ColumnWidthChanged" /> event.
+      </para>
     </summary>
   </Docs>
   <Members>
@@ -43,8 +43,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ColumnWidthChangedEventArgs" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ColumnWidthChangedEventArgs" /> class.
+          </para>
         </summary>
         <param name="columnIndex">
           <attribution

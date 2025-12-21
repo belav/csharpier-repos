@@ -91,15 +91,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The integer representation of the permission access level enumeration value. The <see cref="P:System.Security.Permissions.ResourcePermissionBaseEntry.PermissionAccess" /> property is set to this value. </param
-        >
+          />The integer representation of the permission access level enumeration value. The <see cref="P:System.Security.Permissions.ResourcePermissionBaseEntry.PermissionAccess" /> property is set to this value.
+        </param>
         <param name="permissionAccessPath">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array of strings that identify the resource you are protecting. The <see cref="P:System.Security.Permissions.ResourcePermissionBaseEntry.PermissionAccessPath" /> property is set to this value. </param
-        >
+          />The array of strings that identify the resource you are protecting. The <see cref="P:System.Security.Permissions.ResourcePermissionBaseEntry.PermissionAccessPath" /> property is set to this value.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="PermissionAccess">

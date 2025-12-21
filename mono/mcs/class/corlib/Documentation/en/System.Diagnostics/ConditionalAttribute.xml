@@ -67,8 +67,7 @@ public class TestCondition {
     Console.WriteLine("&lt;eop&gt;"); 
   }
 }
-      </code
-        >
+      </code>
       </c>
       <para> When this code is compiled with the
       compilation-variable DEBUG defined at the callsite, the
@@ -126,8 +125,8 @@ How was this compiled?</para>
         <para>In Visual Basic, the AddressOf operator is not affected by this attribute. For example, Call CType(AddressOf delegate, Action) always invokes delegate, although Call delegate() might not.</para>
       </block>
       <para>
-        <see cref="T:System.Diagnostics.ConditionalAttribute" /> is applied to the methods that are defined in the <see cref="T:System.Diagnostics.Debug" /> and <see cref="T:System.Diagnostics.Trace" /> classes. </para
-      >
+        <see cref="T:System.Diagnostics.ConditionalAttribute" /> is applied to the methods that are defined in the <see cref="T:System.Diagnostics.Debug" /> and <see cref="T:System.Diagnostics.Trace" /> classes.
+      </para>
       <para
         >For more information about how to use attributes, see <format type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
@@ -181,8 +180,8 @@ How was this compiled?</para>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string that specifies the case-sensitive conditional compilation symbol that is associated with the attribute. </param
-        >
+          />A string that specifies the case-sensitive conditional compilation symbol that is associated with the attribute.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

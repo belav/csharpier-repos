@@ -158,8 +158,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A membership condition that tests evidence to determine whether this code group applies code access security policy. </param
-        >
+          />A membership condition that tests evidence to determine whether this code group applies code access security policy.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AbsentOriginScheme">
@@ -184,8 +184,8 @@
             >When calling the <see cref="M:System.Security.Policy.NetCodeGroup.AddConnectAccess(System.String,System.Security.Policy.CodeConnectAccess)" /> method, you specify a scheme and an associated <see cref="T:System.Security.Policy.CodeConnectAccess" /> object. Any <see cref="T:System.Security.Policy.CodeConnectAccess" /> objects that you add to the <see cref="T:System.Security.Policy.NetCodeGroup" /> using <see cref="F:System.Security.Policy.NetCodeGroup.AbsentOriginScheme" /> as the origin scheme are applied when the code's origin scheme is not present in its evidence, or is not a scheme recognized by the <see cref="T:System.Security.Policy.NetCodeGroup" /> object.</para
           >
           <para
-            >To specify the <see cref="T:System.Security.Policy.CodeConnectAccess" /> objects to use when the code's origin scheme does not match any of the schemes contained in the set of origin schemes added to the current <see cref="T:System.Security.Policy.NetCodeGroup" /> object, use the <see cref="F:System.Security.Policy.NetCodeGroup.AnyOtherOriginScheme" /> value. </para
-          >
+            >To specify the <see cref="T:System.Security.Policy.CodeConnectAccess" /> objects to use when the code's origin scheme does not match any of the schemes contained in the set of origin schemes added to the current <see cref="T:System.Security.Policy.NetCodeGroup" /> object, use the <see cref="F:System.Security.Policy.NetCodeGroup.AnyOtherOriginScheme" /> value.
+          </para>
           <para
             >The value of the <see cref="F:System.Security.Policy.NetCodeGroup.AbsentOriginScheme" /> field is an empty string ("").</para
           >
@@ -264,8 +264,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When calling the <see cref="M:System.Security.Policy.NetCodeGroup.AddConnectAccess(System.String,System.Security.Policy.CodeConnectAccess)" /> method, you specify a scheme and an associated <see cref="T:System.Security.Policy.CodeConnectAccess" /> object. You can use the value of the <see cref="F:System.Security.Policy.NetCodeGroup.AnyOtherOriginScheme" /> field to specify the <see cref="T:System.Security.Policy.CodeConnectAccess" /> objects that should be used for any scheme that is not explicitly contained in the set of origin schemes added to the current <see cref="T:System.Security.Policy.NetCodeGroup" /> object. </para
-          >
+            >When calling the <see cref="M:System.Security.Policy.NetCodeGroup.AddConnectAccess(System.String,System.Security.Policy.CodeConnectAccess)" /> method, you specify a scheme and an associated <see cref="T:System.Security.Policy.CodeConnectAccess" /> object. You can use the value of the <see cref="F:System.Security.Policy.NetCodeGroup.AnyOtherOriginScheme" /> field to specify the <see cref="T:System.Security.Policy.CodeConnectAccess" /> objects that should be used for any scheme that is not explicitly contained in the set of origin schemes added to the current <see cref="T:System.Security.Policy.NetCodeGroup" /> object.
+          </para>
           <para
             >The <see cref="T:System.Security.Policy.CodeConnectAccess" /> objects specified with the <see cref="F:System.Security.Policy.NetCodeGroup.AnyOtherOriginScheme" /> field are only used if the code's origin scheme does not match any of the schemes contained in the set of origin schemes added to the current <see cref="T:System.Security.Policy.NetCodeGroup" /> object.</para
           >
@@ -403,8 +403,8 @@
             </item>
             <item>
               <para
-                >The set of origin schemes and the associated <see cref="T:System.Security.Policy.CodeConnectAccess" /> objects. </para
-              >
+                >The set of origin schemes and the associated <see cref="T:System.Security.Policy.CodeConnectAccess" /> objects.
+              </para>
             </item>
           </list>
         </remarks>
@@ -665,8 +665,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.Policy.Evidence" /> for the assembly. </param
-        >
+          />The <see cref="T:System.Security.Policy.Evidence" /> for the assembly.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ResolveMatchingCodeGroups">
@@ -708,8 +708,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The evidence for the assembly. </param
-        >
+          />The evidence for the assembly.
+        </param>
       </Docs>
     </Member>
   </Members>

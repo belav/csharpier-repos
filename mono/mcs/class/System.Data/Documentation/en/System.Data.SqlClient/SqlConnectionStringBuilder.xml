@@ -28,8 +28,8 @@
         >The connection string builder lets developers programmatically create syntactically correct connection strings, and parse and rebuild existing connection strings, using properties and methods of the class. The connection string builder provides strongly typed properties corresponding to the known key/value pairs allowed by SQL Server. Developers needing to create connection strings as part of applications can use the <see cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" /> class to build and modify connection strings. The class also makes it easy to manage connection strings stored in an application configuration file.</para
       >
       <para
-        >The <see cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" /> performs checks for valid key/value pairs. Therefore, you cannot use this class to create invalid connection strings; trying to add invalid pairs will throw an exception. The class maintains a fixed collection of synonyms and can translate from a synonym to the corresponding well-known key name. </para
-      >
+        >The <see cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" /> performs checks for valid key/value pairs. Therefore, you cannot use this class to create invalid connection strings; trying to add invalid pairs will throw an exception. The class maintains a fixed collection of synonyms and can translate from a synonym to the corresponding well-known key name.
+      </para>
       <para
         >For example, when you use the Item property to retrieve a value, you can specify a string that contains any synonym for the key you need. For example, you can specify "Network Address", "addr", or any other acceptable synonym for this key within a connection string when you use any member that requires a string that contains the key name, such as the Item property or the <see cref="M:System.Data.SqlClient.SqlConnectionStringBuilder.Remove(System.String)" /> method. See the <see cref="P:System.Data.SqlClient.SqlConnection.ConnectionString" /> property for a full list of acceptable synonyms.</para
       >
@@ -55,8 +55,8 @@ Integrated Security=True</code>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides a simple way to create and manage the contents of connection strings used by the <see cref="T:System.Data.SqlClient.SqlConnection" /> class. </para
-      >
+        >Provides a simple way to create and manage the contents of connection strings used by the <see cref="T:System.Data.SqlClient.SqlConnection" /> class.
+      </para>
     </summary>
   </Docs>
   <Members>

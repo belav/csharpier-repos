@@ -34,6 +34,6 @@
   </paragraph>
   <paragraph>It is a compile-time error for the same modifier to appear multiple times in a struct declaration. </paragraph>
   <paragraph
-    >The modifiers of a struct declaration have the same meaning as those of a class declaration (<hyperlink>17.1.1</hyperlink>). </paragraph
-  >
+    >The modifiers of a struct declaration have the same meaning as those of a class declaration (<hyperlink>17.1.1</hyperlink>).
+  </paragraph>
 </clause>

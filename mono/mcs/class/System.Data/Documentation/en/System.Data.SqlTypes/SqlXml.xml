@@ -168,8 +168,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string that indicates the XSD of the specified <see cref="T:System.Xml.Schema.XmlSchemaSet" />. </para
-          >
+            >A string that indicates the XSD of the specified <see cref="T:System.Xml.Schema.XmlSchemaSet" />.
+          </para>
         </returns>
         <param name="schemaSet">
           <attribution

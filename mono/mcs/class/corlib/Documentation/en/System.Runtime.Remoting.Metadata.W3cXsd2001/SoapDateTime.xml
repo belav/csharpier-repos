@@ -30,8 +30,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides static methods for the serialization and deserialization of <see cref="T:System.DateTime" /> to a string that is formatted as XSD dateTime. </para
-      >
+        >Provides static methods for the serialization and deserialization of <see cref="T:System.DateTime" /> to a string that is formatted as XSD dateTime.
+      </para>
     </summary>
   </Docs>
   <Members>
@@ -198,12 +198,8 @@
           >
         </returns>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The String to convert. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The String to convert.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ToString">
@@ -243,8 +239,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.DateTime" /> object to convert. </param
-        >
+          />The <see cref="T:System.DateTime" /> object to convert.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="XsdType">

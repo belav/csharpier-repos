@@ -393,8 +393,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="M:System.Web.Security.RolePrincipal.IsInRole(System.String)" /> first checks the <see cref="P:System.Web.Security.RolePrincipal.IsRoleListCached" /> property to determine whether a cached list of role names for the current user is available. If the <see cref="P:System.Web.Security.RolePrincipal.IsRoleListCached" /> property is true, the cached list is checked for the specified role. If the <see cref="M:System.Web.Security.RolePrincipal.IsInRole(System.String)" /> method finds the specified role in the cached list, it returns true. </para
-          >
+            <see cref="M:System.Web.Security.RolePrincipal.IsInRole(System.String)" /> first checks the <see cref="P:System.Web.Security.RolePrincipal.IsRoleListCached" /> property to determine whether a cached list of role names for the current user is available. If the <see cref="P:System.Web.Security.RolePrincipal.IsRoleListCached" /> property is true, the cached list is checked for the specified role. If the <see cref="M:System.Web.Security.RolePrincipal.IsInRole(System.String)" /> method finds the specified role in the cached list, it returns true.
+          </para>
           <para
             >If <see cref="M:System.Web.Security.RolePrincipal.IsInRole(System.String)" /> does not find the specified role, it calls the <see cref="M:System.Web.Security.RoleProvider.GetRolesForUser(System.String)" /> method of the default <see cref="P:System.Web.Security.Roles.Provider" /> instance to determine whether the user name is associated with a role from the data source for the configured <see cref="P:System.Web.Security.Roles.ApplicationName" /> value.</para
           >

@@ -83,8 +83,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> that contains the class identifier of the original coclass. </param
-        >
+          />A <see cref="T:System.Type" /> that contains the class identifier of the original coclass.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CoClass">

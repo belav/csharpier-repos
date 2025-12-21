@@ -98,8 +98,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Globalization.CultureInfo" /> to use for the new <see cref="T:System.Collections.Comparer" />. </param
-        >
+          />The <see cref="T:System.Globalization.CultureInfo" /> to use for the new <see cref="T:System.Collections.Comparer" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Compare">
@@ -140,8 +140,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first object to compare. </param
-        >
+          />The first object to compare.
+        </param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -207,15 +207,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first object to compare. </param
-        >
+          />The first object to compare.
+        </param>
         <param name="b">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second object to compare. </param
-        >
+          />The second object to compare.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -327,8 +327,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo" /> object with the data required for serialization.  </para
-          >
+            >Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo" /> object with the data required for serialization.
+          </para>
         </summary>
         <param name="info">
           <attribution

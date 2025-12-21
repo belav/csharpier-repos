@@ -24,23 +24,23 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Code that is being examined in the reflection-only context cannot be executed, so it is not always possible to examine custom attributes by creating instances of them and then examining their properties, using methods like <see cref="Overload:System.Attribute.GetCustomAttributes" />, <see cref="Overload:System.Reflection.MemberInfo.GetCustomAttributes" />, and so on. If the code for the attribute type itself is loaded into the reflection-only context, it cannot be executed. </para
-      >
+        >Code that is being examined in the reflection-only context cannot be executed, so it is not always possible to examine custom attributes by creating instances of them and then examining their properties, using methods like <see cref="Overload:System.Attribute.GetCustomAttributes" />, <see cref="Overload:System.Reflection.MemberInfo.GetCustomAttributes" />, and so on. If the code for the attribute type itself is loaded into the reflection-only context, it cannot be executed.
+      </para>
       <para
-        >The <see cref="T:System.Reflection.CustomAttributeData" /> class allows examination of custom attributes in the reflection-only context by providing an abstraction for attributes. The members of this class can be used to obtain the positional arguments and named arguments of the attribute. Use the <see cref="P:System.Reflection.CustomAttributeData.ConstructorArguments" /> property to get a list of <see cref="T:System.Reflection.CustomAttributeTypedArgument" /> structures that represent the positional arguments, and use the <see cref="P:System.Reflection.CustomAttributeData.NamedArguments" /> property to get a list of <see cref="T:System.Reflection.CustomAttributeNamedArgument" /> structures that represent the named arguments. </para
-      >
+        >The <see cref="T:System.Reflection.CustomAttributeData" /> class allows examination of custom attributes in the reflection-only context by providing an abstraction for attributes. The members of this class can be used to obtain the positional arguments and named arguments of the attribute. Use the <see cref="P:System.Reflection.CustomAttributeData.ConstructorArguments" /> property to get a list of <see cref="T:System.Reflection.CustomAttributeTypedArgument" /> structures that represent the positional arguments, and use the <see cref="P:System.Reflection.CustomAttributeData.NamedArguments" /> property to get a list of <see cref="T:System.Reflection.CustomAttributeNamedArgument" /> structures that represent the named arguments.
+      </para>
       <block subset="none" type="note">
         <para
           >The <see cref="T:System.Reflection.CustomAttributeNamedArgument" /> structure only provides information about the attribute property used to get and set the argument value. To obtain the type and value of the argument, use the <see cref="P:System.Reflection.CustomAttributeNamedArgument.TypedValue" /> property to obtain a <see cref="T:System.Reflection.CustomAttributeTypedArgument" /> structure.</para
         >
       </block>
       <para
-        >When you have a <see cref="T:System.Reflection.CustomAttributeTypedArgument" /> structure for an argument, whether named or positional, use the <see cref="P:System.Reflection.CustomAttributeTypedArgument.ArgumentType" /> property to get the type and the <see cref="P:System.Reflection.CustomAttributeTypedArgument.Value" /> property to get the value. </para
-      >
+        >When you have a <see cref="T:System.Reflection.CustomAttributeTypedArgument" /> structure for an argument, whether named or positional, use the <see cref="P:System.Reflection.CustomAttributeTypedArgument.ArgumentType" /> property to get the type and the <see cref="P:System.Reflection.CustomAttributeTypedArgument.Value" /> property to get the value.
+      </para>
       <block subset="none" type="note">
         <para
-          >For an array argument, the <see cref="P:System.Reflection.CustomAttributeTypedArgument.Value" /> property returns a generic <see cref="T:System.Collections.ObjectModel.ReadOnlyCollection`1" /> of <see cref="T:System.Reflection.CustomAttributeTypedArgument" /> objects. Each <see cref="T:System.Reflection.CustomAttributeTypedArgument" /> object in the collection represents the corresponding element of the array. </para
-        >
+          >For an array argument, the <see cref="P:System.Reflection.CustomAttributeTypedArgument.Value" /> property returns a generic <see cref="T:System.Collections.ObjectModel.ReadOnlyCollection`1" /> of <see cref="T:System.Reflection.CustomAttributeTypedArgument" /> objects. Each <see cref="T:System.Reflection.CustomAttributeTypedArgument" /> object in the collection represents the corresponding element of the array.
+        </para>
       </block>
       <para>
         <see cref="T:System.Reflection.CustomAttributeData" /> can be used in the execution context as well as in the reflection-only context. For example, you might want to avoid loading the assembly that contains the code for a custom attribute. Using the <see cref="T:System.Reflection.CustomAttributeData" /> class is different from using methods like <see cref="Overload:System.Attribute.GetCustomAttributes" />:</para
@@ -53,8 +53,8 @@
         </item>
         <item>
           <para
-            >The properties and methods of <see cref="T:System.Reflection.CustomAttributeData" /> do not allow you to retrieve the custom attributes inherited from base classes. </para
-          >
+            >The properties and methods of <see cref="T:System.Reflection.CustomAttributeData" /> do not allow you to retrieve the custom attributes inherited from base classes.
+          </para>
         </item>
       </list>
       <para
@@ -304,8 +304,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overload gets custom attribute data for types, nested types, and type members, because the <see cref="T:System.Type" /> class and the classes in the <see cref="N:System.Reflection" /> namespace that represent type members all derive from <see cref="T:System.Reflection.MemberInfo" />. </para
-          >
+            >This method overload gets custom attribute data for types, nested types, and type members, because the <see cref="T:System.Type" /> class and the classes in the <see cref="N:System.Reflection" /> namespace that represent type members all derive from <see cref="T:System.Reflection.MemberInfo" />.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -461,8 +461,8 @@
           <para>This method gets the named arguments that were specified for the custom attribute instance without executing any of the custom attribute code. Thus, it can be used in the Reflection-only context. </para>
           <para>The list that is returned contains only the named arguments that were specified for the attribute instance.</para>
           <para
-            >Use the <see cref="P:System.Reflection.CustomAttributeData.ConstructorArguments" /> method to get the positional arguments that were specified for the attribute instance. </para
-          >
+            >Use the <see cref="P:System.Reflection.CustomAttributeData.ConstructorArguments" /> method to get the positional arguments that were specified for the attribute instance.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

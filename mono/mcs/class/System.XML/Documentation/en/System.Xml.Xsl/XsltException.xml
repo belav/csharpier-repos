@@ -72,8 +72,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Xsl.XsltException" /> class with a specified error message. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Xsl.XsltException" /> class with a specified error message.
+          </para>
         </summary>
         <param name="message">
           <attribution
@@ -117,15 +117,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The SerializationInfo object containing all the properties of an XsltException. </param
-        >
+          />The SerializationInfo object containing all the properties of an XsltException.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The StreamingContext object. </param
-        >
+          />The StreamingContext object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -159,15 +159,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The description of the error condition. </param
-        >
+          />The description of the error condition.
+        </param>
         <param name="innerException">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Exception" /> which threw the XsltException, if any. This value can be null. </param
-        >
+          />The <see cref="T:System.Exception" /> which threw the XsltException, if any. This value can be null.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetObjectData">
@@ -205,15 +205,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The SerializationInfo object. </param
-        >
+          />The SerializationInfo object.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The StreamingContext object. </param
-        >
+          />The StreamingContext object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="LineNumber">

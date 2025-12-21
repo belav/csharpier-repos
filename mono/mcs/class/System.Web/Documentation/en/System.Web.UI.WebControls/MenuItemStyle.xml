@@ -150,8 +150,8 @@
         </item>
       </list>
       <para
-        >The <see cref="T:System.Web.UI.WebControls.MenuItemStyle" /> class inherits most of its members from the <see cref="T:System.Web.UI.WebControls.Style" /> class. It extends the <see cref="T:System.Web.UI.WebControls.Style" /> class by providing properties that control the amount of space around a menu item's text, as well as the space between adjacent menu items. Use the <see cref="P:System.Web.UI.WebControls.MenuItemStyle.HorizontalPadding" /> property to control the amount of space to the left and right of the menu item's text. Similarly, the <see cref="P:System.Web.UI.WebControls.MenuItemStyle.VerticalPadding" /> property controls the amount of space above and below the menu item's text. You can control the amount of spacing between the menu item that the <see cref="T:System.Web.UI.WebControls.MenuItemStyle" /> object is applied to and its adjacent menu items by setting the <see cref="P:System.Web.UI.WebControls.MenuItemStyle.ItemSpacing" /> property. </para
-      >
+        >The <see cref="T:System.Web.UI.WebControls.MenuItemStyle" /> class inherits most of its members from the <see cref="T:System.Web.UI.WebControls.Style" /> class. It extends the <see cref="T:System.Web.UI.WebControls.Style" /> class by providing properties that control the amount of space around a menu item's text, as well as the space between adjacent menu items. Use the <see cref="P:System.Web.UI.WebControls.MenuItemStyle.HorizontalPadding" /> property to control the amount of space to the left and right of the menu item's text. Similarly, the <see cref="P:System.Web.UI.WebControls.MenuItemStyle.VerticalPadding" /> property controls the amount of space above and below the menu item's text. You can control the amount of spacing between the menu item that the <see cref="T:System.Web.UI.WebControls.MenuItemStyle" /> object is applied to and its adjacent menu items by setting the <see cref="P:System.Web.UI.WebControls.MenuItemStyle.ItemSpacing" /> property.
+      </para>
       <para
         >For more information on the inherited style settings, see <see cref="T:System.Web.UI.WebControls.Style" />.</para
       >
@@ -173,8 +173,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create a new instance of the <see cref="T:System.Web.UI.WebControls.MenuItemStyle" /> class. </para
-          >
+            >Use this constructor to create a new instance of the <see cref="T:System.Web.UI.WebControls.MenuItemStyle" /> class.
+          </para>
           <block subset="none" type="note">
             <para
               >This constructor is commonly used when extending the <see cref="T:System.Web.UI.WebControls.Menu" /> class to initialize the menu item style properties, such as <see cref="P:System.Web.UI.WebControls.Menu.DynamicMenuItemStyle" />.</para

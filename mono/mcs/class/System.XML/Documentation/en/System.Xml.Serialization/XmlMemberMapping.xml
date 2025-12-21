@@ -21,8 +21,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Xml.Serialization.XmlMemberMapping" /> class is used with the <see cref="T:System.Xml.Serialization.XmlMembersMapping" /> class, which references an array of <see cref="T:System.Xml.Serialization.XmlMemberMapping" /> objects. </para
-      >
+        >The <see cref="T:System.Xml.Serialization.XmlMemberMapping" /> class is used with the <see cref="T:System.Xml.Serialization.XmlMembersMapping" /> class, which references an array of <see cref="T:System.Xml.Serialization.XmlMemberMapping" /> objects.
+      </para>
       <para
         >An <see cref="T:System.Xml.Serialization.XmlMemberMapping" /> object can represent any one of the following:</para
       >

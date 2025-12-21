@@ -21,26 +21,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Windows.Forms.DataGridViewLinkColumn" /> class is a specialized type of the <see cref="T:System.Windows.Forms.DataGridViewColumn" /> class used to logically host cells that respond to user clicks. The <see cref="T:System.Windows.Forms.DataGridViewLinkColumn" /> class is similar to the <see cref="T:System.Windows.Forms.DataGridViewButtonColumn" /> class but provides a different user experience that may be more appropriate in certain situations, such as displaying a URL stored in a database table. </para
-      >
+        >The <see cref="T:System.Windows.Forms.DataGridViewLinkColumn" /> class is a specialized type of the <see cref="T:System.Windows.Forms.DataGridViewColumn" /> class used to logically host cells that respond to user clicks. The <see cref="T:System.Windows.Forms.DataGridViewLinkColumn" /> class is similar to the <see cref="T:System.Windows.Forms.DataGridViewButtonColumn" /> class but provides a different user experience that may be more appropriate in certain situations, such as displaying a URL stored in a database table.
+      </para>
       <para
-        >To display the same link text for every cell, set the <see cref="P:System.Windows.Forms.DataGridViewLinkColumn.UseColumnTextForLinkValue" /> property to true and set the <see cref="P:System.Windows.Forms.DataGridViewLinkColumn.Text" /> property to the desired link text. </para
-      >
+        >To display the same link text for every cell, set the <see cref="P:System.Windows.Forms.DataGridViewLinkColumn.UseColumnTextForLinkValue" /> property to true and set the <see cref="P:System.Windows.Forms.DataGridViewLinkColumn.Text" /> property to the desired link text.
+      </para>
       <para
-        >A <see cref="T:System.Windows.Forms.DataGridViewLinkColumn" /> has an associated <see cref="T:System.Windows.Forms.DataGridViewLinkCell" /> in every <see cref="T:System.Windows.Forms.DataGridViewRow" /> that intersects it. </para
-      >
+        >A <see cref="T:System.Windows.Forms.DataGridViewLinkColumn" /> has an associated <see cref="T:System.Windows.Forms.DataGridViewLinkCell" /> in every <see cref="T:System.Windows.Forms.DataGridViewRow" /> that intersects it.
+      </para>
       <para
         >The default sort mode for this column type is <see cref="F:System.Windows.Forms.DataGridViewColumnSortMode.NotSortable" />.</para
       >
       <para
-        >To respond to user link clicks, handle the <see cref="E:System.Windows.Forms.DataGridView.CellContentClick" /> event. You can also use the <see cref="E:System.Windows.Forms.DataGridView.CellClick" /> event to respond to clicks anywhere in the cell. </para
-      >
+        >To respond to user link clicks, handle the <see cref="E:System.Windows.Forms.DataGridView.CellContentClick" /> event. You can also use the <see cref="E:System.Windows.Forms.DataGridView.CellClick" /> event to respond to clicks anywhere in the cell.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a column of cells that contain links in a <see cref="T:System.Windows.Forms.DataGridView" /> control. </para
-      >
+        >Represents a column of cells that contain links in a <see cref="T:System.Windows.Forms.DataGridView" /> control.
+      </para>
     </summary>
   </Docs>
   <Members>
@@ -61,8 +61,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridViewLinkColumn" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridViewLinkColumn" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -339,8 +339,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see cref="P:System.Windows.Forms.DataGridViewLinkColumn.TrackVisitedState" /> property is set to false, the <see cref="P:System.Windows.Forms.DataGridViewLinkColumn.VisitedLinkColor" /> property is ignored. </para
-          >
+            >If the <see cref="P:System.Windows.Forms.DataGridViewLinkColumn.TrackVisitedState" /> property is set to false, the <see cref="P:System.Windows.Forms.DataGridViewLinkColumn.VisitedLinkColor" /> property is ignored.
+          </para>
           <para
             >Getting or setting this property gets or sets the <see cref="P:System.Windows.Forms.DataGridViewLinkCell.VisitedLinkColor" /> property of the object returned by the <see cref="P:System.Windows.Forms.DataGridViewLinkColumn.CellTemplate" /> property. Setting this property also sets the <see cref="P:System.Windows.Forms.DataGridViewLinkCell.VisitedLinkColor" /> property of every cell in the column and refreshes the column display. To override the specified value for individual cells, set the cell values after you set the column value.</para
           >

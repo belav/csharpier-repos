@@ -128,8 +128,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.IO.UnmanagedMemoryStream" /> class in a safe buffer with a specified offset and length. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.IO.UnmanagedMemoryStream" /> class in a safe buffer with a specified offset and length.
+          </para>
         </summary>
         <param name="buffer">
           <attribution
@@ -184,11 +184,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="length" /> parameter defines the current amount of memory in use. If reading or appending data to the stream, the <paramref name="length" /> value should be equal to the amount of valid data in the stream to be read from or preserved. If writing to the stream, this value should be zero. </para
-          >
+            >The <paramref name="length" /> parameter defines the current amount of memory in use. If reading or appending data to the stream, the <paramref name="length" /> value should be equal to the amount of valid data in the stream to be read from or preserved. If writing to the stream, this value should be zero.
+          </para>
           <para
-            >The <paramref name="capacity" /> parameter indicates the amount of total memory available. This value can describe a region that is longer than the length specified, or indicate a region that can be appended to. Any attempt to write beyond this value will fail. </para
-          >
+            >The <paramref name="capacity" /> parameter indicates the amount of total memory available. This value can describe a region that is longer than the length specified, or indicate a region that can be appended to. Any attempt to write beyond this value will fail.
+          </para>
           <para
             >The <paramref name="access" /> parameter sets the <see cref="P:System.IO.UnmanagedMemoryStream.CanRead" />, and <see cref="P:System.IO.UnmanagedMemoryStream.CanWrite" /> properties. Note that specifying <see cref="F:System.IO.FileAccess.Write" /> does not guarantee that the stream will be writable. The access parameters allow the implementer to create an object whose implementation can match the actual stream that is exposed.</para
           >
@@ -253,8 +253,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.IO.UnmanagedMemoryStream" /> class in a safe buffer with a specified offset, length, and file access. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.IO.UnmanagedMemoryStream" /> class in a safe buffer with a specified offset, length, and file access.
+          </para>
         </summary>
         <param name="buffer">
           <attribution
@@ -282,8 +282,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The mode of file access to the unmanaged memory stream. </param
-        >
+          />The mode of file access to the unmanaged memory stream.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CanRead">
@@ -497,8 +497,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.IO.UnmanagedMemoryStream" /> class by using a pointer to an unmanaged memory location. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.IO.UnmanagedMemoryStream" /> class by using a pointer to an unmanaged memory location.
+          </para>
         </summary>
         <param name="pointer">
           <attribution
@@ -526,8 +526,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.IO.FileAccess" /> values. </param
-        >
+          />One of the <see cref="T:System.IO.FileAccess" /> values.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Initialize">
@@ -557,8 +557,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.IO.UnmanagedMemoryStream" /> class in a safe buffer with a specified offset, length, and file access. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.IO.UnmanagedMemoryStream" /> class in a safe buffer with a specified offset, length, and file access.
+          </para>
         </summary>
         <param name="buffer">
           <attribution
@@ -811,15 +811,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The point relative to <paramref name="origin" /> to begin seeking from. </param
-        >
+          />The point relative to <paramref name="origin" /> to begin seeking from.
+        </param>
         <param name="loc">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Specifies the beginning, the end, or the current position as a reference point for <paramref name="origin" />, using a value of type <see cref="T:System.IO.SeekOrigin" />. </param
-        >
+          />Specifies the beginning, the end, or the current position as a reference point for <paramref name="origin" />, using a value of type <see cref="T:System.IO.SeekOrigin" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetLength">

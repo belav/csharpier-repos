@@ -79,8 +79,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The encrypted authorization message expected by the server. </param
-        >
+          />The encrypted authorization message expected by the server.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -123,15 +123,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The encrypted authorization message expected by the server. </param
-        >
+          />The encrypted authorization message expected by the server.
+        </param>
         <param name="finished">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The completion status of the authorization attempt. true if the authorization attempt is complete; otherwise, false. </param
-        >
+          />The completion status of the authorization attempt. true if the authorization attempt is complete; otherwise, false.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -199,22 +199,22 @@ client and server.</para
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The encrypted authorization message expected by the server. </param
-        >
+          />The encrypted authorization message expected by the server.
+        </param>
         <param name="finished">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The completion status of the authorization attempt. true if the authorization attempt is complete; otherwise, false. </param
-        >
+          />The completion status of the authorization attempt. true if the authorization attempt is complete; otherwise, false.
+        </param>
         <param name="connectionGroupId">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A unique identifier that can be used to create private client-server connections that are bound only to this authentication scheme. </param
-        >
+          />A unique identifier that can be used to create private client-server connections that are bound only to this authentication scheme.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

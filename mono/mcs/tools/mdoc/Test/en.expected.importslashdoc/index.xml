@@ -178,8 +178,8 @@
           <summary>
             <see cref="T:System.Collections.Generic.IEnumerable{System.Int32}" /> 
               extension method.
-            </summary
-          >
+
+          </summary>
         </Docs>
         <Link
           Type="Mono.DocTest.Generic.Extensions"
@@ -219,8 +219,8 @@
           <param name="val">To be added.</param>
           <summary>
             <see cref="T:Mono.DocTest.Generic.IFoo`1" /> extension method.
-            </summary
-          >
+
+          </summary>
         </Docs>
         <Link
           Type="Mono.DocTest.Generic.Extensions"

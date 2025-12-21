@@ -79,8 +79,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A MethodBuilder object that represents the other method. </param
-        >
+          />A MethodBuilder object that represents the other method.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Attributes">
@@ -221,8 +221,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Indicates whether non-public methods should be returned in the MethodInfo array. true if non-public methods are to be included; otherwise, false. </param
-        >
+          />Indicates whether non-public methods should be returned in the MethodInfo array. true if non-public methods are to be included; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttributes">
@@ -264,8 +264,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />If true, walks up this property's inheritance chain to find the custom attributes </param
-        >
+          />If true, walks up this property's inheritance chain to find the custom attributes
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttributes">
@@ -310,15 +310,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of custom attributes identified by type. </param
-        >
+          />An array of custom attributes identified by type.
+        </param>
         <param name="inherit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />If true, walks up this property's inheritance chain to find the custom attributes. </param
-        >
+          />If true, walks up this property's inheritance chain to find the custom attributes.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetGetMethod">
@@ -362,8 +362,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Indicates whether non-public get accessors should be returned. true if non-public methods are to be included; otherwise, false. </param
-        >
+          />Indicates whether non-public get accessors should be returned. true if non-public methods are to be included; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetIndexParameters">
@@ -446,14 +446,14 @@
             <item>
               <term>
                 <para
-                  >A <see cref="T:System.Reflection.MethodInfo" /> object representing the Set method for this property. </para
-                >
+                  >A <see cref="T:System.Reflection.MethodInfo" /> object representing the Set method for this property.
+                </para>
               </term>
               <description>
                 <para>The set accessor is public.</para>
                 <para>
-                  <paramref name="nonPublic" /> is true and non-public methods can be returned. </para
-                >
+                  <paramref name="nonPublic" /> is true and non-public methods can be returned.
+                </para>
               </description>
             </item>
             <item>
@@ -463,8 +463,8 @@
               <description>
                 <para><paramref name="nonPublic" /> is true, but the property is read-only.</para>
                 <para>
-                  <paramref name="nonPublic" /> is false and the set accessor is non-public. </para
-                >
+                  <paramref name="nonPublic" /> is false and the set accessor is non-public.
+                </para>
               </description>
             </item>
           </list>
@@ -474,8 +474,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Indicates whether the accessor should be returned if it is non-public. true if non-public methods are to be included; otherwise, false. </param
-        >
+          />Indicates whether the accessor should be returned if it is non-public. true if non-public methods are to be included; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetValue">
@@ -518,15 +518,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object whose property value will be returned. </param
-        >
+          />The object whose property value will be returned.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Optional index values for indexed properties. This value should be null for non-indexed properties. </param
-        >
+          />Optional index values for indexed properties. This value should be null for non-indexed properties.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetValue">
@@ -572,36 +572,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object whose property value will be returned. </param
-        >
+          />The object whose property value will be returned.
+        </param>
         <param name="invokeAttr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The invocation attribute. This must be a bit flag from BindingFlags : InvokeMethod, CreateInstance, Static, GetField, SetField, GetProperty, or SetProperty. A suitable invocation attribute must be specified. If a static member is to be invoked, the Static flag of BindingFlags must be set. </param
-        >
+          />The invocation attribute. This must be a bit flag from BindingFlags : InvokeMethod, CreateInstance, Static, GetField, SetField, GetProperty, or SetProperty. A suitable invocation attribute must be specified. If a static member is to be invoked, the Static flag of BindingFlags must be set.
+        </param>
         <param name="binder">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that enables the binding, coercion of argument types, invocation of members, and retrieval of MemberInfo objects using reflection. If <paramref name="binder" /> is null, the default binder is used. </param
-        >
+          />An object that enables the binding, coercion of argument types, invocation of members, and retrieval of MemberInfo objects using reflection. If <paramref name="binder" /> is null, the default binder is used.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Optional index values for indexed properties. This value should be null for non-indexed properties. </param
-        >
+          />Optional index values for indexed properties. This value should be null for non-indexed properties.
+        </param>
         <param name="culture">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The CultureInfo object that represents the culture for which the resource is to be localized. Note that if the resource is not localized for this culture, the CultureInfo.Parent method will be called successively in search of a match. If this value is null, the CultureInfo is obtained from the CultureInfo.CurrentUICulture property. </param
-        >
+          />The CultureInfo object that represents the culture for which the resource is to be localized. Note that if the resource is not localized for this culture, the CultureInfo.Parent method will be called successively in search of a match. If this value is null, the CultureInfo is obtained from the CultureInfo.CurrentUICulture property.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsDefined">
@@ -648,15 +648,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The Type object to which the custom attributes are applied. </param
-        >
+          />The Type object to which the custom attributes are applied.
+        </param>
         <param name="inherit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Specifies whether to walk up this property's inheritance chain to find the custom attributes. </param
-        >
+          />Specifies whether to walk up this property's inheritance chain to find the custom attributes.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Module">
@@ -818,8 +818,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The default value of this property. </param
-        >
+          />The default value of this property.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetCustomAttribute">
@@ -854,8 +854,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An instance of a helper class to define the custom attribute. </param
-        >
+          />An instance of a helper class to define the custom attribute.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetCustomAttribute">
@@ -895,8 +895,8 @@
             > Web page) and on the ECMA Web site (<see
               cref="http://go.microsoft.com/fwlink/?linkid=65552"
               >Standard ECMA-335 Common Language Infrastructure</see
-            > document). </para
-          >
+            > document).
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -907,15 +907,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The constructor for the custom attribute. </param
-        >
+          />The constructor for the custom attribute.
+        </param>
         <param name="binaryAttribute">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A byte blob representing the attributes. </param
-        >
+          />A byte blob representing the attributes.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetGetMethod">
@@ -950,8 +950,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A MethodBuilder object that represents the method that gets the property value. </param
-        >
+          />A MethodBuilder object that represents the method that gets the property value.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetSetMethod">
@@ -986,8 +986,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A MethodBuilder object that represents the method that sets the property value. </param
-        >
+          />A MethodBuilder object that represents the method that sets the property value.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetValue">
@@ -1029,22 +1029,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object whose property value will be set. </param
-        >
+          />The object whose property value will be set.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new value for this property. </param
-        >
+          />The new value for this property.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Optional index values for indexed properties. This value should be null for non-indexed properties. </param
-        >
+          />Optional index values for indexed properties. This value should be null for non-indexed properties.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetValue">
@@ -1089,43 +1089,43 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object whose property value will be returned. </param
-        >
+          />The object whose property value will be returned.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new value for this property. </param
-        >
+          />The new value for this property.
+        </param>
         <param name="invokeAttr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The invocation attribute. This must be a bit flag from BindingFlags : InvokeMethod, CreateInstance, Static, GetField, SetField, GetProperty, or SetProperty. A suitable invocation attribute must be specified. If a static member is to be invoked, the Static flag of BindingFlags must be set. </param
-        >
+          />The invocation attribute. This must be a bit flag from BindingFlags : InvokeMethod, CreateInstance, Static, GetField, SetField, GetProperty, or SetProperty. A suitable invocation attribute must be specified. If a static member is to be invoked, the Static flag of BindingFlags must be set.
+        </param>
         <param name="binder">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that enables the binding, coercion of argument types, invocation of members, and retrieval of MemberInfo objects using reflection. If <paramref name="binder" /> is null, the default binder is used. </param
-        >
+          />An object that enables the binding, coercion of argument types, invocation of members, and retrieval of MemberInfo objects using reflection. If <paramref name="binder" /> is null, the default binder is used.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Optional index values for indexed properties. This value should be null for non-indexed properties. </param
-        >
+          />Optional index values for indexed properties. This value should be null for non-indexed properties.
+        </param>
         <param name="culture">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The CultureInfo object that represents the culture for which the resource is to be localized. Note that if the resource is not localized for this culture, the CultureInfo.Parent method will be called successively in search of a match. If this value is null, the CultureInfo is obtained from the CultureInfo.CurrentUICulture property. </param
-        >
+          />The CultureInfo object that represents the culture for which the resource is to be localized. Note that if the resource is not localized for this culture, the CultureInfo.Parent method will be called successively in search of a match. If this value is null, the CultureInfo is obtained from the CultureInfo.CurrentUICulture property.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.Runtime.InteropServices._PropertyBuilder.GetIDsOfNames">

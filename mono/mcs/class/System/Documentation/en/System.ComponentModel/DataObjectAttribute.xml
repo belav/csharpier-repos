@@ -55,14 +55,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.ComponentModel.DataObjectAttribute.IsDataObject" /> property is set to true when you use the <see cref="M:System.ComponentModel.DataObjectAttribute.#ctor" /> constructor. </para
-          >
+            >The <see cref="P:System.ComponentModel.DataObjectAttribute.IsDataObject" /> property is set to true when you use the <see cref="M:System.ComponentModel.DataObjectAttribute.#ctor" /> constructor.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataObjectAttribute" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataObjectAttribute" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -84,8 +84,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="M:System.ComponentModel.DataObjectAttribute.#ctor(System.Boolean)" /> constructor to indicate to a design-time class such as the <see cref="T:System.Web.UI.Design.WebControls.ObjectDataSourceDesigner" /> class that an object should be excluded from the list of suitable objects for binding to an <see cref="T:System.Web.UI.WebControls.ObjectDataSource" /> object. </para
-          >
+            >Use the <see cref="M:System.ComponentModel.DataObjectAttribute.#ctor(System.Boolean)" /> constructor to indicate to a design-time class such as the <see cref="T:System.Web.UI.Design.WebControls.ObjectDataSourceDesigner" /> class that an object should be excluded from the list of suitable objects for binding to an <see cref="T:System.Web.UI.WebControls.ObjectDataSource" /> object.
+          </para>
           <para
             >The <see cref="P:System.ComponentModel.DataObjectAttribute.IsDataObject" /> property is set to the value of the <paramref name="isDataObject" /> parameter.</para
           >
@@ -210,8 +210,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object to compare with this instance of <see cref="T:System.ComponentModel.DataObjectAttribute" />. </param
-        >
+          />An object to compare with this instance of <see cref="T:System.ComponentModel.DataObjectAttribute" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">

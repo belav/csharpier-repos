@@ -20,14 +20,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="E:System.Windows.Forms.DataGridView.RowPrePaint" /> event occurs before a row is painted on a <see cref="T:System.Windows.Forms.DataGridView" /> control. <see cref="E:System.Windows.Forms.DataGridView.RowPrePaint" /> enables you to manually adjust the appearance of the row before any of the cells in the row are painted. This is useful if you want to customize the row, such as to produce a row where the content of one column spans multiple columns. Use the properties in <see cref="T:System.Windows.Forms.DataGridViewRowPrePaintEventArgs" /> to get the settings of the row without directly accessing the row in the <see cref="T:System.Windows.Forms.DataGridView" />. </para
-      >
+        >The <see cref="E:System.Windows.Forms.DataGridView.RowPrePaint" /> event occurs before a row is painted on a <see cref="T:System.Windows.Forms.DataGridView" /> control. <see cref="E:System.Windows.Forms.DataGridView.RowPrePaint" /> enables you to manually adjust the appearance of the row before any of the cells in the row are painted. This is useful if you want to customize the row, such as to produce a row where the content of one column spans multiple columns. Use the properties in <see cref="T:System.Windows.Forms.DataGridViewRowPrePaintEventArgs" /> to get the settings of the row without directly accessing the row in the <see cref="T:System.Windows.Forms.DataGridView" />.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see cref="E:System.Windows.Forms.DataGridView.RowPrePaint" /> event. </para
-      >
+        >Provides data for the <see cref="E:System.Windows.Forms.DataGridView.RowPrePaint" /> event.
+      </para>
     </summary>
   </Docs>
   <Members>
@@ -55,8 +55,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridViewRowPrePaintEventArgs" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridViewRowPrePaintEventArgs" /> class.
+          </para>
         </summary>
         <param name="dataGridView">
           <attribution

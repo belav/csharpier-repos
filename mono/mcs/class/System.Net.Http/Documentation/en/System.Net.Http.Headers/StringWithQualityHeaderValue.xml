@@ -27,8 +27,8 @@
         >The <see cref="T:System.Net.Http.Headers.StringWithQualityHeaderValue" /> class provides support for strings with a quality factor used in some headers as defined in <see
           cref="http://go.microsoft.com/fwlink/?LinkID=241642"
           >RFC 2616</see
-        > by the IETF. </para
-      >
+        > by the IETF.
+      </para>
       <para>Quality factors allow the user agent to indicate the relative degree of preference for various options in various headers including the Accept, Accept-Charset, Accept-Encoding, and Accept-Language headers. Quality uses a scale from 0 to 1. The default value is q=1.</para>
     </remarks>
     <summary>

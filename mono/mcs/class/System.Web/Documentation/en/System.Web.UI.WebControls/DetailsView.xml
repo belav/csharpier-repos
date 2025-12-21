@@ -122,8 +122,8 @@
         <h2>Introduction</h2>
       </format>
       <para
-        >The <see cref="T:System.Web.UI.WebControls.DetailsView" /> control is used to display a single record from a data source in a table, where each field of the record is displayed in a row of the table. It can be used in combination with a <see cref="T:System.Web.UI.WebControls.GridView" /> control for master-detail scenarios. The <see cref="T:System.Web.UI.WebControls.DetailsView" /> control supports the following features: </para
-      >
+        >The <see cref="T:System.Web.UI.WebControls.DetailsView" /> control is used to display a single record from a data source in a table, where each field of the record is displayed in a row of the table. It can be used in combination with a <see cref="T:System.Web.UI.WebControls.GridView" /> control for master-detail scenarios. The <see cref="T:System.Web.UI.WebControls.DetailsView" /> control supports the following features:
+      </para>
       <list type="bullet">
         <item>
           <para
@@ -1020,8 +1020,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Web.UI.WebControls.DetailsView" /> control has built-in paging capabilities, which allow a user to navigate to a different record in the data source. </para
-          >
+            >The <see cref="T:System.Web.UI.WebControls.DetailsView" /> control has built-in paging capabilities, which allow a user to navigate to a different record in the data source.
+          </para>
           <para
             >The <see cref="T:System.Web.UI.WebControls.DetailsView" /> control can perform both user interface (UI) and data source paging. The UI paging feature can be used with any data source object that supports the <see cref="T:System.Collections.ICollection" /> interface. For each paging operation, the <see cref="T:System.Web.UI.WebControls.DetailsView" /> control queries the data source for the entire data collection and selects the row to display, essentially discarding the remaining data.</para
           >
@@ -1883,8 +1883,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Switches the <see cref="T:System.Web.UI.WebControls.DetailsView" /> control to the specified mode. </para
-          >
+            >Switches the <see cref="T:System.Web.UI.WebControls.DetailsView" /> control to the specified mode.
+          </para>
         </summary>
         <param name="newMode">
           <attribution
@@ -2307,14 +2307,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates the containing table for the <see cref="T:System.Web.UI.WebControls.DetailsView" /> control. </para
-          >
+            >Creates the containing table for the <see cref="T:System.Web.UI.WebControls.DetailsView" /> control.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Web.UI.WebControls.Table" /> that represents the containing table for the <see cref="T:System.Web.UI.WebControls.DetailsView" /> control. </para
-          >
+            >A <see cref="T:System.Web.UI.WebControls.Table" /> that represents the containing table for the <see cref="T:System.Web.UI.WebControls.DetailsView" /> control.
+          </para>
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -2460,8 +2460,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calls the <see cref="M:System.Web.UI.WebControls.BaseDataBoundControl.DataBind" /> method of the base class. </para
-          >
+            >Calls the <see cref="M:System.Web.UI.WebControls.BaseDataBoundControl.DataBind" /> method of the base class.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2527,8 +2527,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the paging feature is enabled (by setting the <see cref="P:System.Web.UI.WebControls.DetailsView.AllowPaging" /> property to true), use the <see cref="P:System.Web.UI.WebControls.DetailsView.DataItemCount" /> property to determine the total number of records in the underlying data source. </para
-          >
+            >When the paging feature is enabled (by setting the <see cref="P:System.Web.UI.WebControls.DetailsView.AllowPaging" /> property to true), use the <see cref="P:System.Web.UI.WebControls.DetailsView.DataItemCount" /> property to determine the total number of records in the underlying data source.
+          </para>
           <block subset="none" type="note">
             <para
               >Because the <see cref="T:System.Web.UI.WebControls.DetailsView" /> control displays only one record at a time, this value also corresponds to the total number of pages required to display every record in the data source.</para
@@ -2610,8 +2610,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see cref="P:System.Web.UI.WebControls.DetailsView.DataKeyNames" /> property is set, the <see cref="T:System.Web.UI.WebControls.DetailsView" /> control automatically creates a <see cref="T:System.Web.UI.WebControls.DataKey" /> object that represents the key field or fields for the current record. Use the <see cref="P:System.Web.UI.WebControls.DetailsView.DataKey" /> property to get this <see cref="T:System.Web.UI.WebControls.DataKey" /> object. This property is commonly used to obtain the keys and their corresponding values for the fields specified in the <see cref="P:System.Web.UI.WebControls.DetailsView.DataKeyNames" /> property. </para
-          >
+            >When the <see cref="P:System.Web.UI.WebControls.DetailsView.DataKeyNames" /> property is set, the <see cref="T:System.Web.UI.WebControls.DetailsView" /> control automatically creates a <see cref="T:System.Web.UI.WebControls.DataKey" /> object that represents the key field or fields for the current record. Use the <see cref="P:System.Web.UI.WebControls.DetailsView.DataKey" /> property to get this <see cref="T:System.Web.UI.WebControls.DataKey" /> object. This property is commonly used to obtain the keys and their corresponding values for the fields specified in the <see cref="P:System.Web.UI.WebControls.DetailsView.DataKeyNames" /> property.
+          </para>
           <block subset="none" type="note">
             <para
               >As a shortcut, you can also use the <see cref="P:System.Web.UI.WebControls.DetailsView.SelectedValue" /> property to determine the value of the first key field listed in the <see cref="P:System.Web.UI.WebControls.DetailsView.DataKeyNames" /> property.</para
@@ -2760,8 +2760,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The deletion does not occur if the <see cref="T:System.Web.UI.WebControls.DetailsView" /> control is in Insert mode. The <see cref="E:System.Web.UI.WebControls.DetailsView.ItemDeleting" /> event is raised immediately before the item is deleted. Set the <see cref="P:System.ComponentModel.CancelEventArgs.Cancel" /> property to true to cancel the deletion. </para
-          >
+            >The deletion does not occur if the <see cref="T:System.Web.UI.WebControls.DetailsView" /> control is in Insert mode. The <see cref="E:System.Web.UI.WebControls.DetailsView.ItemDeleting" /> event is raised immediately before the item is deleted. Set the <see cref="P:System.ComponentModel.CancelEventArgs.Cancel" /> property to true to cancel the deletion.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3013,8 +3013,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calls the <see cref="M:System.Web.UI.WebControls.BaseDataBoundControl.DataBind" /> method after verifying that the data listing control requires data binding and that a valid data source control is specified. </para
-          >
+            >Calls the <see cref="M:System.Web.UI.WebControls.BaseDataBoundControl.DataBind" /> method after verifying that the data listing control requires data binding and that a valid data source control is specified.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -3256,8 +3256,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a collection of <see cref="T:System.Web.UI.WebControls.DataControlField" /> objects that represent the explicitly declared row fields in a <see cref="T:System.Web.UI.WebControls.DetailsView" /> control. </para
-          >
+            >Gets a collection of <see cref="T:System.Web.UI.WebControls.DataControlField" /> objects that represent the explicitly declared row fields in a <see cref="T:System.Web.UI.WebControls.DetailsView" /> control.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -5069,8 +5069,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Web.UI.WebControls.DetailsViewModeEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Web.UI.WebControls.DetailsViewModeEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -5186,8 +5186,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.WebControls.DetailsView.OnPagePreLoad(System.Object,System.EventArgs)" /> method is used to control when data binding occurs within the life cycle of the page. It does this by setting the internal initialized state of the data-bound control. Because the control's initialized state is set during the <see cref="E:System.Web.UI.Page.PreLoad" /> phase of the page's life cycle, the <see cref="M:System.Web.UI.WebControls.DataBoundControl.OnDataPropertyChanged" /> event handler is called any time a data property of the control is changed after that phase, to signal that the control must re-bind to its data before rendering. </para
-          >
+            >The <see cref="M:System.Web.UI.WebControls.DetailsView.OnPagePreLoad(System.Object,System.EventArgs)" /> method is used to control when data binding occurs within the life cycle of the page. It does this by setting the internal initialized state of the data-bound control. Because the control's initialized state is set during the <see cref="E:System.Web.UI.Page.PreLoad" /> phase of the page's life cycle, the <see cref="M:System.Web.UI.WebControls.DataBoundControl.OnDataPropertyChanged" /> event handler is called any time a data property of the control is changed after that phase, to signal that the control must re-bind to its data before rendering.
+          </para>
           <para
             >The <see cref="M:System.Web.UI.WebControls.DetailsView.OnPagePreLoad(System.Object,System.EventArgs)" /> method is overridden by the <see cref="T:System.Web.UI.WebControls.DetailsView" /> class to set the <see cref="P:System.Web.UI.WebControls.BaseDataBoundControl.RequiresDataBinding" /> property to true in cases where the HTTP request is a postback and view state is enabled but the data-bound control has not yet been bound. This scenario is common with controls such as <see cref="T:System.Web.UI.WebControls.Wizard" /> and <see cref="T:System.Web.UI.WebControls.MultiView" />, where the visibility of the control is changed at run time.</para
           >
@@ -5733,8 +5733,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a collection of <see cref="T:System.Web.UI.WebControls.DetailsViewRow" /> objects that represent the data rows in a <see cref="T:System.Web.UI.WebControls.DetailsView" /> control. </para
-          >
+            >Gets a collection of <see cref="T:System.Web.UI.WebControls.DetailsViewRow" /> objects that represent the data rows in a <see cref="T:System.Web.UI.WebControls.DetailsView" /> control.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -6033,8 +6033,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string that represents an optional event argument to pass to the event handler. </param
-        >
+          />A string that represents an optional event argument to pass to the event handler.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.Web.UI.WebControls.ICallbackContainer.GetCallbackScript">
@@ -6114,8 +6114,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Web.UI.PostBackOptions" /> with the information required for <see cref="Overload:System.Web.UI.Page.GetPostBackEventReference" /> to construct a valid script that, when executed on the client, initiates a client postback. </para
-          >
+            >A <see cref="T:System.Web.UI.PostBackOptions" /> with the information required for <see cref="Overload:System.Web.UI.Page.GetPostBackEventReference" /> to construct a valid script that, when executed on the client, initiates a client postback.
+          </para>
         </returns>
       </Docs>
     </Member>
@@ -6140,8 +6140,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Web.UI.HtmlTextWriterTag" /> value for the <see cref="T:System.Web.UI.WebControls.DetailsView" /> control. </para
-          >
+            >Gets the <see cref="T:System.Web.UI.HtmlTextWriterTag" /> value for the <see cref="T:System.Web.UI.WebControls.DetailsView" /> control.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>

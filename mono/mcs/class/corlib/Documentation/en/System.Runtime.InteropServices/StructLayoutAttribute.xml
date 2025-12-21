@@ -109,8 +109,7 @@ public class StructLayoutTest {
 
  }
 }
-</code
-      >
+</code>
       <para>The output is</para>
       <c>
         <para>The first point is inside the rectangle.</para>
@@ -181,8 +180,8 @@ public class StructLayoutTest {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A 16-bit integer that represents one of the <see cref="T:System.Runtime.InteropServices.LayoutKind" /> values that specifes how the class or structure should be arranged. </param
-        >
+          />A 16-bit integer that represents one of the <see cref="T:System.Runtime.InteropServices.LayoutKind" /> values that specifes how the class or structure should be arranged.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -225,8 +224,8 @@ public class StructLayoutTest {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the enumeration values that specifes how the class or structure should be arranged. </param
-        >
+          />One of the enumeration values that specifes how the class or structure should be arranged.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

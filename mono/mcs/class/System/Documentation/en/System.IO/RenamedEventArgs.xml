@@ -75,29 +75,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.IO.WatcherChangeTypes" /> values. </param
-        >
+          />One of the <see cref="T:System.IO.WatcherChangeTypes" /> values.
+        </param>
         <param name="directory">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the affected file or directory. </param
-        >
+          />The name of the affected file or directory.
+        </param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the affected file or directory. </param
-        >
+          />The name of the affected file or directory.
+        </param>
         <param name="oldName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The old name of the affected file or directory. </param
-        >
+          />The old name of the affected file or directory.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OldFullPath">

@@ -23,8 +23,8 @@
       <para
         >For more information, see <format type="text/html">
           <a href="eea11fe5-d8b0-4314-bb5d-8a58166fb1c3">Cancellation</a>
-        </format>. </para
-      >
+        </format>.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -152,8 +152,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            > The associated <see cref="T:System.Threading.CancellationToken" /> will be notified of the cancellation and will transition to a state where <see cref="P:System.Threading.CancellationToken.IsCancellationRequested" /> returns true. </para
-          >
+            > The associated <see cref="T:System.Threading.CancellationToken" /> will be notified of the cancellation and will transition to a state where <see cref="P:System.Threading.CancellationToken.IsCancellationRequested" /> returns true.
+          </para>
           <para
             >Any callbacks or cancelable operations registered with the <see cref="T:System.Threading.CancellationToken" /> will be executed.</para
           >
@@ -192,8 +192,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            > The associated <see cref="T:System.Threading.CancellationToken" /> will be notified of the cancellation and will transition to a state where <see cref="P:System.Threading.CancellationToken.IsCancellationRequested" /> returns true. </para
-          >
+            > The associated <see cref="T:System.Threading.CancellationToken" /> will be notified of the cancellation and will transition to a state where <see cref="P:System.Threading.CancellationToken.IsCancellationRequested" /> returns true.
+          </para>
           <para
             >Any callbacks or cancelable operations registered with the <see cref="T:System.Threading.CancellationToken" /> will be executed.</para
           >

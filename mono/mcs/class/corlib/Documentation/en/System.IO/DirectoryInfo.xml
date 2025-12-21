@@ -109,8 +109,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string specifying the path on which to create the DirectoryInfo. </param
-        >
+          />A string specifying the path on which to create the DirectoryInfo.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -246,8 +246,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The specified path. This cannot be a different disk volume or Universal Naming Convention (UNC) name. </param
-        >
+          />The specified path. This cannot be a different disk volume or Universal Naming Convention (UNC) name.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateSubdirectory">
@@ -388,8 +388,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to delete this directory, its subdirectories, and all files; otherwise, false. </param
-        >
+          />true to delete this directory, its subdirectories, and all files; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="EnumerateDirectories">
@@ -413,18 +413,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.IO.DirectoryInfo.EnumerateDirectories" /> and <see cref="M:System.IO.DirectoryInfo.GetDirectories" /> methods differ as follows: </para
-          >
+            >The <see cref="M:System.IO.DirectoryInfo.EnumerateDirectories" /> and <see cref="M:System.IO.DirectoryInfo.GetDirectories" /> methods differ as follows:
+          </para>
           <list type="bullet">
             <item>
               <para
-                >When you use <see cref="M:System.IO.DirectoryInfo.EnumerateDirectories" />, you can start enumerating the collection of <see cref="T:System.IO.DirectoryInfo" /> objects before the whole collection is returned. </para
-              >
+                >When you use <see cref="M:System.IO.DirectoryInfo.EnumerateDirectories" />, you can start enumerating the collection of <see cref="T:System.IO.DirectoryInfo" /> objects before the whole collection is returned.
+              </para>
             </item>
             <item>
               <para
-                >When you use <see cref="M:System.IO.DirectoryInfo.GetDirectories" />, you must wait for the whole array of <see cref="T:System.IO.DirectoryInfo" /> objects to be returned before you can access the array. </para
-              >
+                >When you use <see cref="M:System.IO.DirectoryInfo.GetDirectories" />, you must wait for the whole array of <see cref="T:System.IO.DirectoryInfo" /> objects to be returned before you can access the array.
+              </para>
             </item>
           </list>
           <para
@@ -541,18 +541,18 @@
             >Characters other than the wildcard are literal characters. For example, the  string "*t" searches for all names in  ending with the letter "t". ". The <paramref name="searchPattern" /> string "s*" searches for all names in <paramref name="path" /> beginning with the letter "s".</para
           >
           <para
-            >The <see cref="M:System.IO.DirectoryInfo.EnumerateDirectories" /> and <see cref="M:System.IO.DirectoryInfo.GetDirectories" /> methods differ as follows: </para
-          >
+            >The <see cref="M:System.IO.DirectoryInfo.EnumerateDirectories" /> and <see cref="M:System.IO.DirectoryInfo.GetDirectories" /> methods differ as follows:
+          </para>
           <list type="bullet">
             <item>
               <para
-                >When you use <see cref="M:System.IO.DirectoryInfo.EnumerateDirectories" />, you can start enumerating the collection of <see cref="T:System.IO.DirectoryInfo" /> objects before the whole collection is returned. </para
-              >
+                >When you use <see cref="M:System.IO.DirectoryInfo.EnumerateDirectories" />, you can start enumerating the collection of <see cref="T:System.IO.DirectoryInfo" /> objects before the whole collection is returned.
+              </para>
             </item>
             <item>
               <para
-                >When you use <see cref="M:System.IO.DirectoryInfo.GetDirectories" />, you must wait for the whole array of <see cref="T:System.IO.DirectoryInfo" /> objects to be returned before you can access the array. </para
-              >
+                >When you use <see cref="M:System.IO.DirectoryInfo.GetDirectories" />, you must wait for the whole array of <see cref="T:System.IO.DirectoryInfo" /> objects to be returned before you can access the array.
+              </para>
             </item>
           </list>
           <para
@@ -679,18 +679,18 @@
             >Characters other than the wildcard are literal characters. For example, the  string "*t" searches for all names in  ending with the letter "t". ". The <paramref name="searchPattern" /> string "s*" searches for all names in <paramref name="path" /> beginning with the letter "s".</para
           >
           <para
-            >The <see cref="M:System.IO.DirectoryInfo.EnumerateDirectories" /> and <see cref="M:System.IO.DirectoryInfo.GetDirectories" /> methods differ as follows: </para
-          >
+            >The <see cref="M:System.IO.DirectoryInfo.EnumerateDirectories" /> and <see cref="M:System.IO.DirectoryInfo.GetDirectories" /> methods differ as follows:
+          </para>
           <list type="bullet">
             <item>
               <para
-                >When you use <see cref="M:System.IO.DirectoryInfo.EnumerateDirectories" />, you can start enumerating the collection of <see cref="T:System.IO.DirectoryInfo" /> objects before the whole collection is returned. </para
-              >
+                >When you use <see cref="M:System.IO.DirectoryInfo.EnumerateDirectories" />, you can start enumerating the collection of <see cref="T:System.IO.DirectoryInfo" /> objects before the whole collection is returned.
+              </para>
             </item>
             <item>
               <para
-                >When you use <see cref="M:System.IO.DirectoryInfo.GetDirectories" />, you must wait for the whole array of <see cref="T:System.IO.DirectoryInfo" /> objects to be returned before you can access the array. </para
-              >
+                >When you use <see cref="M:System.IO.DirectoryInfo.GetDirectories" />, you must wait for the whole array of <see cref="T:System.IO.DirectoryInfo" /> objects to be returned before you can access the array.
+              </para>
             </item>
           </list>
           <para
@@ -787,18 +787,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.IO.DirectoryInfo.EnumerateFiles" /> and <see cref="M:System.IO.DirectoryInfo.GetFiles" /> methods differ as follows: </para
-          >
+            >The <see cref="M:System.IO.DirectoryInfo.EnumerateFiles" /> and <see cref="M:System.IO.DirectoryInfo.GetFiles" /> methods differ as follows:
+          </para>
           <list type="bullet">
             <item>
               <para
-                >When you use <see cref="M:System.IO.DirectoryInfo.EnumerateFiles" />, you can start enumerating the collection of <see cref="T:System.IO.FileInfo" /> objects before the whole collection is returned. </para
-              >
+                >When you use <see cref="M:System.IO.DirectoryInfo.EnumerateFiles" />, you can start enumerating the collection of <see cref="T:System.IO.FileInfo" /> objects before the whole collection is returned.
+              </para>
             </item>
             <item>
               <para
-                >When you use <see cref="M:System.IO.DirectoryInfo.GetFiles" />, you must wait for the whole array of <see cref="T:System.IO.FileInfo" /> objects to be returned before you can access the array. </para
-              >
+                >When you use <see cref="M:System.IO.DirectoryInfo.GetFiles" />, you must wait for the whole array of <see cref="T:System.IO.FileInfo" /> objects to be returned before you can access the array.
+              </para>
             </item>
           </list>
           <para
@@ -920,18 +920,18 @@
             >Characters other than the wildcard are literal characters. For example, the  string "*t" searches for all names in  ending with the letter "t". ". The <paramref name="searchPattern" /> string "s*" searches for all names in <paramref name="path" /> beginning with the letter "s".</para
           >
           <para
-            >The <see cref="M:System.IO.DirectoryInfo.EnumerateFiles" /> and <see cref="M:System.IO.DirectoryInfo.GetFiles" /> methods differ as follows: </para
-          >
+            >The <see cref="M:System.IO.DirectoryInfo.EnumerateFiles" /> and <see cref="M:System.IO.DirectoryInfo.GetFiles" /> methods differ as follows:
+          </para>
           <list type="bullet">
             <item>
               <para
-                >When you use <see cref="M:System.IO.DirectoryInfo.EnumerateFiles" />, you can start enumerating the collection of <see cref="T:System.IO.FileInfo" /> objects before the whole collection is returned. </para
-              >
+                >When you use <see cref="M:System.IO.DirectoryInfo.EnumerateFiles" />, you can start enumerating the collection of <see cref="T:System.IO.FileInfo" /> objects before the whole collection is returned.
+              </para>
             </item>
             <item>
               <para
-                >When you use <see cref="M:System.IO.DirectoryInfo.GetFiles" />, you must wait for the whole array of <see cref="T:System.IO.FileInfo" /> objects to be returned before you can access the array. </para
-              >
+                >When you use <see cref="M:System.IO.DirectoryInfo.GetFiles" />, you must wait for the whole array of <see cref="T:System.IO.FileInfo" /> objects to be returned before you can access the array.
+              </para>
             </item>
           </list>
           <para
@@ -1063,18 +1063,18 @@
             >Characters other than the wildcard are literal characters. For example, the  string "*t" searches for all names in  ending with the letter "t". ". The <paramref name="searchPattern" /> string "s*" searches for all names in <paramref name="path" /> beginning with the letter "s".</para
           >
           <para
-            >The <see cref="M:System.IO.DirectoryInfo.EnumerateFiles" /> and <see cref="M:System.IO.DirectoryInfo.GetFiles" /> methods differ as follows: </para
-          >
+            >The <see cref="M:System.IO.DirectoryInfo.EnumerateFiles" /> and <see cref="M:System.IO.DirectoryInfo.GetFiles" /> methods differ as follows:
+          </para>
           <list type="bullet">
             <item>
               <para
-                >When you use <see cref="M:System.IO.DirectoryInfo.EnumerateFiles" />, you can start enumerating the collection of <see cref="T:System.IO.FileInfo" /> objects before the whole collection is returned. </para
-              >
+                >When you use <see cref="M:System.IO.DirectoryInfo.EnumerateFiles" />, you can start enumerating the collection of <see cref="T:System.IO.FileInfo" /> objects before the whole collection is returned.
+              </para>
             </item>
             <item>
               <para
-                >When you use <see cref="M:System.IO.DirectoryInfo.GetFiles" />, you must wait for the whole array of <see cref="T:System.IO.FileInfo" /> objects to be returned before you can access the array. </para
-              >
+                >When you use <see cref="M:System.IO.DirectoryInfo.GetFiles" />, you must wait for the whole array of <see cref="T:System.IO.FileInfo" /> objects to be returned before you can access the array.
+              </para>
             </item>
           </list>
           <para
@@ -1176,18 +1176,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.IO.DirectoryInfo.EnumerateFileSystemInfos" /> and <see cref="M:System.IO.DirectoryInfo.GetFileSystemInfos" /> methods differ as follows: </para
-          >
+            >The <see cref="M:System.IO.DirectoryInfo.EnumerateFileSystemInfos" /> and <see cref="M:System.IO.DirectoryInfo.GetFileSystemInfos" /> methods differ as follows:
+          </para>
           <list type="bullet">
             <item>
               <para
-                >When you use <see cref="M:System.IO.DirectoryInfo.EnumerateFileSystemInfos" />, you can start enumerating the collection of <see cref="T:System.IO.FileInfo" /> objects before the whole collection is returned. </para
-              >
+                >When you use <see cref="M:System.IO.DirectoryInfo.EnumerateFileSystemInfos" />, you can start enumerating the collection of <see cref="T:System.IO.FileInfo" /> objects before the whole collection is returned.
+              </para>
             </item>
             <item>
               <para
-                >When you use <see cref="M:System.IO.DirectoryInfo.GetFileSystemInfos" />, you must wait for the whole array of <see cref="T:System.IO.FileSystemInfo" /> objects to be returned before you can access the array. </para
-              >
+                >When you use <see cref="M:System.IO.DirectoryInfo.GetFileSystemInfos" />, you must wait for the whole array of <see cref="T:System.IO.FileSystemInfo" /> objects to be returned before you can access the array.
+              </para>
             </item>
           </list>
           <para
@@ -1304,18 +1304,18 @@
             >Characters other than the wildcard are literal characters. For example, the  string "*t" searches for all names in  ending with the letter "t". ". The <paramref name="searchPattern" /> string "s*" searches for all names in <paramref name="path" /> beginning with the letter "s".</para
           >
           <para
-            >The <see cref="M:System.IO.DirectoryInfo.EnumerateFileSystemInfos" /> and <see cref="M:System.IO.DirectoryInfo.GetFileSystemInfos" /> methods differ as follows: </para
-          >
+            >The <see cref="M:System.IO.DirectoryInfo.EnumerateFileSystemInfos" /> and <see cref="M:System.IO.DirectoryInfo.GetFileSystemInfos" /> methods differ as follows:
+          </para>
           <list type="bullet">
             <item>
               <para
-                >When you use <see cref="M:System.IO.DirectoryInfo.EnumerateFileSystemInfos" />, you can start enumerating the collection of <see cref="T:System.IO.FileInfo" /> objects before the whole collection is returned. </para
-              >
+                >When you use <see cref="M:System.IO.DirectoryInfo.EnumerateFileSystemInfos" />, you can start enumerating the collection of <see cref="T:System.IO.FileInfo" /> objects before the whole collection is returned.
+              </para>
             </item>
             <item>
               <para
-                >When you use <see cref="M:System.IO.DirectoryInfo.GetFileSystemInfos" />, you must wait for the whole array of <see cref="T:System.IO.FileSystemInfo" /> objects to be returned before you can access the array. </para
-              >
+                >When you use <see cref="M:System.IO.DirectoryInfo.GetFileSystemInfos" />, you must wait for the whole array of <see cref="T:System.IO.FileSystemInfo" /> objects to be returned before you can access the array.
+              </para>
             </item>
           </list>
           <para
@@ -1442,18 +1442,18 @@
             >Characters other than the wildcard are literal characters. For example, the  string "*t" searches for all names in  ending with the letter "t". ". The <paramref name="searchPattern" /> string "s*" searches for all names in <paramref name="path" /> beginning with the letter "s".</para
           >
           <para
-            >The <see cref="M:System.IO.DirectoryInfo.EnumerateFileSystemInfos" /> and <see cref="M:System.IO.DirectoryInfo.GetFileSystemInfos" /> methods differ as follows: </para
-          >
+            >The <see cref="M:System.IO.DirectoryInfo.EnumerateFileSystemInfos" /> and <see cref="M:System.IO.DirectoryInfo.GetFileSystemInfos" /> methods differ as follows:
+          </para>
           <list type="bullet">
             <item>
               <para
-                >When you use <see cref="M:System.IO.DirectoryInfo.EnumerateFileSystemInfos" />, you can start enumerating the collection of <see cref="T:System.IO.FileInfo" /> objects before the whole collection is returned. </para
-              >
+                >When you use <see cref="M:System.IO.DirectoryInfo.EnumerateFileSystemInfos" />, you can start enumerating the collection of <see cref="T:System.IO.FileInfo" /> objects before the whole collection is returned.
+              </para>
             </item>
             <item>
               <para
-                >When you use <see cref="M:System.IO.DirectoryInfo.GetFileSystemInfos" />, you must wait for the whole array of <see cref="T:System.IO.FileSystemInfo" /> objects to be returned before you can access the array. </para
-              >
+                >When you use <see cref="M:System.IO.DirectoryInfo.GetFileSystemInfos" />, you must wait for the whole array of <see cref="T:System.IO.FileSystemInfo" /> objects to be returned before you can access the array.
+              </para>
             </item>
           </list>
           <para
@@ -2073,18 +2073,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.IO.DirectoryInfo.EnumerateFiles" /> and <see cref="M:System.IO.DirectoryInfo.GetFiles" /> methods differ as follows: </para
-          >
+            >The <see cref="M:System.IO.DirectoryInfo.EnumerateFiles" /> and <see cref="M:System.IO.DirectoryInfo.GetFiles" /> methods differ as follows:
+          </para>
           <list type="bullet">
             <item>
               <para
-                >When you use <see cref="M:System.IO.DirectoryInfo.EnumerateFiles" />, you can start enumerating the collection of <see cref="T:System.IO.FileInfo" /> objects before the whole collection is returned. </para
-              >
+                >When you use <see cref="M:System.IO.DirectoryInfo.EnumerateFiles" />, you can start enumerating the collection of <see cref="T:System.IO.FileInfo" /> objects before the whole collection is returned.
+              </para>
             </item>
             <item>
               <para
-                >When you use <see cref="M:System.IO.DirectoryInfo.GetFiles" />, you must wait for the whole array of <see cref="T:System.IO.FileInfo" /> objects to be returned before you can access the array. </para
-              >
+                >When you use <see cref="M:System.IO.DirectoryInfo.GetFiles" />, you must wait for the whole array of <see cref="T:System.IO.FileInfo" /> objects to be returned before you can access the array.
+              </para>
             </item>
           </list>
           <para
@@ -2211,18 +2211,18 @@
             >Characters other than the wildcard are literal characters. For example, the  string "*t" searches for all names in  ending with the letter "t". The <paramref name="searchPattern" /> string "s*" searches for all names in <paramref name="path" /> beginning with the letter "s".</para
           >
           <para
-            >The <see cref="M:System.IO.DirectoryInfo.EnumerateFiles" /> and <see cref="M:System.IO.DirectoryInfo.GetFiles" /> methods differ as follows: </para
-          >
+            >The <see cref="M:System.IO.DirectoryInfo.EnumerateFiles" /> and <see cref="M:System.IO.DirectoryInfo.GetFiles" /> methods differ as follows:
+          </para>
           <list type="bullet">
             <item>
               <para
-                >When you use <see cref="M:System.IO.DirectoryInfo.EnumerateFiles" />, you can start enumerating the collection of <see cref="T:System.IO.FileInfo" /> objects before the whole collection is returned. </para
-              >
+                >When you use <see cref="M:System.IO.DirectoryInfo.EnumerateFiles" />, you can start enumerating the collection of <see cref="T:System.IO.FileInfo" /> objects before the whole collection is returned.
+              </para>
             </item>
             <item>
               <para
-                >When you use <see cref="M:System.IO.DirectoryInfo.GetFiles" />, you must wait for the whole array of <see cref="T:System.IO.FileInfo" /> objects to be returned before you can access the array. </para
-              >
+                >When you use <see cref="M:System.IO.DirectoryInfo.GetFiles" />, you must wait for the whole array of <see cref="T:System.IO.FileInfo" /> objects to be returned before you can access the array.
+              </para>
             </item>
           </list>
           <para
@@ -2365,8 +2365,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.IO.DirectoryInfo.EnumerateFiles" /> and <see cref="M:System.IO.DirectoryInfo.GetFiles" /> methods differ as follows: </para
-          >
+            >The <see cref="M:System.IO.DirectoryInfo.EnumerateFiles" /> and <see cref="M:System.IO.DirectoryInfo.GetFiles" /> methods differ as follows:
+          </para>
           <list type="bullet">
             <item>
               <para
@@ -2375,8 +2375,8 @@
             </item>
             <item>
               <para
-                >When you use <see cref="M:System.IO.DirectoryInfo.GetFiles" />, you must wait for the whole array of <see cref="T:System.IO.FileInfo" /> objects to be returned before you can access the array. </para
-              >
+                >When you use <see cref="M:System.IO.DirectoryInfo.GetFiles" />, you must wait for the whole array of <see cref="T:System.IO.FileInfo" /> objects to be returned before you can access the array.
+              </para>
             </item>
           </list>
           <para
@@ -2428,8 +2428,8 @@
             >
           </block>
           <para
-            >The following list shows the behavior of different lengths for the <paramref name="searchPattern" /> parameter: </para
-          >
+            >The following list shows the behavior of different lengths for the <paramref name="searchPattern" /> parameter:
+          </para>
           <list type="bullet">
             <item>
               <para>"*.abc" returns files having an extension of.abc,.abcd,.abcde,.abcdef, and so on.</para>
@@ -2895,8 +2895,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name and path to which to move this directory. The destination cannot be another disk volume or a directory with the identical name. It can be an existing directory to which you want to add this directory as a subdirectory. </param
-        >
+          />The name and path to which to move this directory. The destination cannot be another disk volume or a directory with the identical name. It can be an existing directory to which you want to add this directory as a subdirectory.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Name">
@@ -3059,8 +3059,8 @@
             </item>
             <item>
               <para
-                >Set the destination <see cref="T:System.Security.AccessControl.DirectorySecurity" /> object to the destination file using the <see cref="M:System.IO.DirectoryInfo.SetAccessControl(System.Security.AccessControl.DirectorySecurity)" /> method. </para
-              >
+                >Set the destination <see cref="T:System.Security.AccessControl.DirectorySecurity" /> object to the destination file using the <see cref="M:System.IO.DirectoryInfo.SetAccessControl(System.Security.AccessControl.DirectorySecurity)" /> method.
+              </para>
             </item>
           </list>
         </remarks>

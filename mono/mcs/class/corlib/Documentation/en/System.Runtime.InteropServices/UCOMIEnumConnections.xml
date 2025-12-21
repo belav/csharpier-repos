@@ -33,8 +33,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use <see cref="T:System.Runtime.InteropServices.ComTypes.IEnumConnections" /> instead. </para
-      >
+        >Use <see cref="T:System.Runtime.InteropServices.ComTypes.IEnumConnections" /> instead.
+      </para>
     </summary>
   </Docs>
   <Members>
@@ -170,8 +170,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of elements to skip in the enumeration. </param
-        >
+          />The number of elements to skip in the enumeration.
+        </param>
       </Docs>
     </Member>
   </Members>

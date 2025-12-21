@@ -132,8 +132,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The method returns an instance of <see cref="T:System.ServiceModel.Dispatcher.IMessageFilterTable`1" />. </para
-          >
+            >The method returns an instance of <see cref="T:System.ServiceModel.Dispatcher.IMessageFilterTable`1" />.
+          </para>
           <para
             >This method is not intended to be called directly. If you require an instance of <see cref="T:System.ServiceModel.Dispatcher.IMessageFilterTable`1" />, create one by calling a constructor on the desired type of filter table. In general, <see cref="T:System.ServiceModel.Dispatcher.ActionMessageFilter" />s should be added to instances of <see cref="T:System.ServiceModel.Dispatcher.MessageFilterTable`1" />.</para
           >

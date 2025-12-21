@@ -135,16 +135,16 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509EnhancedKeyUsageExtension" /> class using an <see cref="T:System.Security.Cryptography.OidCollection" /> and a value that identifies whether the extension is critical. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509EnhancedKeyUsageExtension" /> class using an <see cref="T:System.Security.Cryptography.OidCollection" /> and a value that identifies whether the extension is critical.
+          </para>
         </summary>
         <param name="enhancedKeyUsages">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Security.Cryptography.OidCollection" /> collection. </param
-        >
+          />An <see cref="T:System.Security.Cryptography.OidCollection" /> collection.
+        </param>
         <param name="critical">
           <attribution
             license="cc4"

@@ -81,8 +81,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The site name or wildcard expression. </param
-        >
+          />The site name or wildcard expression.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Check">
@@ -126,8 +126,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.Policy.Evidence" /> against which to make the test. </param
-        >
+          />The <see cref="T:System.Security.Policy.Evidence" /> against which to make the test.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Copy">
@@ -198,8 +198,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.Policy.SiteMembershipCondition" /> object to compare to the current <see cref="T:System.Security.Policy.SiteMembershipCondition" />. </param
-        >
+          />The <see cref="T:System.Security.Policy.SiteMembershipCondition" /> object to compare to the current <see cref="T:System.Security.Policy.SiteMembershipCondition" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="FromXml">
@@ -234,8 +234,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML encoding to use to reconstruct the security object. </param
-        >
+          />The XML encoding to use to reconstruct the security object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="FromXml">
@@ -271,15 +271,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML encoding to use to reconstruct the security object. </param
-        >
+          />The XML encoding to use to reconstruct the security object.
+        </param>
         <param name="level">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.Policy.PolicyLevel" /> context, used to resolve <see cref="T:System.Security.NamedPermissionSet" /> references. </param
-        >
+          />The <see cref="T:System.Security.Policy.PolicyLevel" /> context, used to resolve <see cref="T:System.Security.NamedPermissionSet" /> references.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -428,8 +428,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.Policy.PolicyLevel" /> context, used to resolve <see cref="T:System.Security.NamedPermissionSet" /> references. </param
-        >
+          />The <see cref="T:System.Security.Policy.PolicyLevel" /> context, used to resolve <see cref="T:System.Security.NamedPermissionSet" /> references.
+        </param>
       </Docs>
     </Member>
   </Members>

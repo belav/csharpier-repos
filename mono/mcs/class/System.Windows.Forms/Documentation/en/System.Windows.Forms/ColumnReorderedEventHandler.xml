@@ -36,8 +36,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the method that will handle the <see cref="E:System.Windows.Forms.ListView.ColumnReordered" /> event of the <see cref="T:System.Windows.Forms.ListView" /> control. </para
-      >
+        >Represents the method that will handle the <see cref="E:System.Windows.Forms.ListView.ColumnReordered" /> event of the <see cref="T:System.Windows.Forms.ListView" /> control.
+      </para>
     </summary>
   </Docs>
 </Type>

@@ -22,8 +22,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.Configuration.NamespaceCollection" /> contains <see cref="T:System.Web.Configuration.NamespaceInfo" /> objects. Each <see cref="T:System.Web.Configuration.NamespaceInfo" /> object is the same as an Import (&lt;%@ Import %&gt;) directive that applies to all pages and controls in the scope of the configuration file. The Import directive allows you to import a namespace into your ASP.NET page, making all its classes available for use on your page. </para
-      >
+        >The <see cref="T:System.Web.Configuration.NamespaceCollection" /> contains <see cref="T:System.Web.Configuration.NamespaceInfo" /> objects. Each <see cref="T:System.Web.Configuration.NamespaceInfo" /> object is the same as an Import (&lt;%@ Import %&gt;) directive that applies to all pages and controls in the scope of the configuration file. The Import directive allows you to import a namespace into your ASP.NET page, making all its classes available for use on your page.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

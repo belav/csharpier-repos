@@ -226,18 +226,18 @@
             </item>
             <item>
               <para
-                >Add the post-schema-validation infoset (PSVI) by calling the <see cref="Overload:System.Xml.Schema.Extensions.Validate" /> extension method. </para
-              >
+                >Add the post-schema-validation infoset (PSVI) by calling the <see cref="Overload:System.Xml.Schema.Extensions.Validate" /> extension method.
+              </para>
             </item>
             <item>
               <para
-                >Call the <see cref="Overload:System.Xml.Schema.Extensions.GetSchemaInfo" /> extension method to retrieve an object that implements <see cref="T:System.Xml.Schema.IXmlSchemaInfo" />. From the retrieved object, you can get an <see cref="T:System.Xml.Schema.XmlSchemaObject" />. </para
-              >
+                >Call the <see cref="Overload:System.Xml.Schema.Extensions.GetSchemaInfo" /> extension method to retrieve an object that implements <see cref="T:System.Xml.Schema.IXmlSchemaInfo" />. From the retrieved object, you can get an <see cref="T:System.Xml.Schema.XmlSchemaObject" />.
+              </para>
               <list type="bullet">
                 <item>
                   <para
-                    >If you get an <see cref="T:System.Xml.Schema.XmlSchemaObject" /> for an <see cref="T:System.Xml.Linq.XElement" />, the type will be <see cref="T:System.Xml.Schema.XmlSchemaElement" />. </para
-                  >
+                    >If you get an <see cref="T:System.Xml.Schema.XmlSchemaObject" /> for an <see cref="T:System.Xml.Linq.XElement" />, the type will be <see cref="T:System.Xml.Schema.XmlSchemaElement" />.
+                  </para>
                 </item>
                 <item>
                   <para
@@ -408,18 +408,18 @@
             </item>
             <item>
               <para
-                >Add the post-schema-validation infoset (PSVI) by calling the <see cref="Overload:System.Xml.Schema.Extensions.Validate" /> extension method. </para
-              >
+                >Add the post-schema-validation infoset (PSVI) by calling the <see cref="Overload:System.Xml.Schema.Extensions.Validate" /> extension method.
+              </para>
             </item>
             <item>
               <para
-                >Call the <see cref="Overload:System.Xml.Schema.Extensions.GetSchemaInfo" /> extension method to retrieve an object that implements <see cref="T:System.Xml.Schema.IXmlSchemaInfo" />. From the retrieved object, you can get an <see cref="T:System.Xml.Schema.XmlSchemaObject" />. </para
-              >
+                >Call the <see cref="Overload:System.Xml.Schema.Extensions.GetSchemaInfo" /> extension method to retrieve an object that implements <see cref="T:System.Xml.Schema.IXmlSchemaInfo" />. From the retrieved object, you can get an <see cref="T:System.Xml.Schema.XmlSchemaObject" />.
+              </para>
               <list type="bullet">
                 <item>
                   <para
-                    >If you get an <see cref="T:System.Xml.Schema.XmlSchemaObject" /> for an <see cref="T:System.Xml.Linq.XElement" />, the type will be <see cref="T:System.Xml.Schema.XmlSchemaElement" />. </para
-                  >
+                    >If you get an <see cref="T:System.Xml.Schema.XmlSchemaObject" /> for an <see cref="T:System.Xml.Linq.XElement" />, the type will be <see cref="T:System.Xml.Schema.XmlSchemaElement" />.
+                  </para>
                 </item>
                 <item>
                   <para
@@ -513,18 +513,18 @@
             </item>
             <item>
               <para
-                >Add the post-schema-validation infoset (PSVI) by calling the <see cref="Overload:System.Xml.Schema.Extensions.Validate" /> extension method. </para
-              >
+                >Add the post-schema-validation infoset (PSVI) by calling the <see cref="Overload:System.Xml.Schema.Extensions.Validate" /> extension method.
+              </para>
             </item>
             <item>
               <para
-                >Call the <see cref="Overload:System.Xml.Schema.Extensions.GetSchemaInfo" /> extension method to retrieve an object that implements <see cref="T:System.Xml.Schema.IXmlSchemaInfo" />. From the retrieved object, you can get an <see cref="T:System.Xml.Schema.XmlSchemaObject" />. </para
-              >
+                >Call the <see cref="Overload:System.Xml.Schema.Extensions.GetSchemaInfo" /> extension method to retrieve an object that implements <see cref="T:System.Xml.Schema.IXmlSchemaInfo" />. From the retrieved object, you can get an <see cref="T:System.Xml.Schema.XmlSchemaObject" />.
+              </para>
               <list type="bullet">
                 <item>
                   <para
-                    >If you get an <see cref="T:System.Xml.Schema.XmlSchemaObject" /> for an <see cref="T:System.Xml.Linq.XElement" />, the type will be <see cref="T:System.Xml.Schema.XmlSchemaElement" />. </para
-                  >
+                    >If you get an <see cref="T:System.Xml.Schema.XmlSchemaObject" /> for an <see cref="T:System.Xml.Linq.XElement" />, the type will be <see cref="T:System.Xml.Schema.XmlSchemaElement" />.
+                  </para>
                 </item>
                 <item>
                   <para
@@ -632,18 +632,18 @@
             </item>
             <item>
               <para
-                >Add the post-schema-validation infoset (PSVI) by calling the <see cref="Overload:System.Xml.Schema.Extensions.Validate" /> extension method. </para
-              >
+                >Add the post-schema-validation infoset (PSVI) by calling the <see cref="Overload:System.Xml.Schema.Extensions.Validate" /> extension method.
+              </para>
             </item>
             <item>
               <para
-                >Call the <see cref="Overload:System.Xml.Schema.Extensions.GetSchemaInfo" /> extension method to retrieve an object that implements <see cref="T:System.Xml.Schema.IXmlSchemaInfo" />. From the retrieved object, you can get an <see cref="T:System.Xml.Schema.XmlSchemaObject" />. </para
-              >
+                >Call the <see cref="Overload:System.Xml.Schema.Extensions.GetSchemaInfo" /> extension method to retrieve an object that implements <see cref="T:System.Xml.Schema.IXmlSchemaInfo" />. From the retrieved object, you can get an <see cref="T:System.Xml.Schema.XmlSchemaObject" />.
+              </para>
               <list type="bullet">
                 <item>
                   <para
-                    >If you get an <see cref="T:System.Xml.Schema.XmlSchemaObject" /> for an <see cref="T:System.Xml.Linq.XElement" />, the type will be <see cref="T:System.Xml.Schema.XmlSchemaElement" />. </para
-                  >
+                    >If you get an <see cref="T:System.Xml.Schema.XmlSchemaObject" /> for an <see cref="T:System.Xml.Linq.XElement" />, the type will be <see cref="T:System.Xml.Schema.XmlSchemaElement" />.
+                  </para>
                 </item>
                 <item>
                   <para

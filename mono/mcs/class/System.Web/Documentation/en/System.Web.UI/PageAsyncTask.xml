@@ -60,8 +60,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.PageAsyncTask" /> class using the default value for executing in parallel. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.PageAsyncTask" /> class using the default value for executing in parallel.
+          </para>
         </summary>
         <param name="beginHandler">
           <attribution
@@ -117,8 +117,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.PageAsyncTask" /> class using the specified value for executing in parallel. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.PageAsyncTask" /> class using the specified value for executing in parallel.
+          </para>
         </summary>
         <param name="beginHandler">
           <attribution
@@ -246,8 +246,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.UI.PageAsyncTask.State" /> property is set in the constructor and cannot be modified during execution of the asynchronous task. You can differentiate asynchronous tasks in a page by assigning unique string values to their respective <see cref="P:System.Web.UI.PageAsyncTask.State" /> properties.  </para
-          >
+            >The <see cref="P:System.Web.UI.PageAsyncTask.State" /> property is set in the constructor and cannot be modified during execution of the asynchronous task. You can differentiate asynchronous tasks in a page by assigning unique string values to their respective <see cref="P:System.Web.UI.PageAsyncTask.State" /> properties.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -272,8 +272,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.UI.PageAsyncTask.TimeoutHandler" /> delegate is set in the constructor. </para
-          >
+            >The <see cref="P:System.Web.UI.PageAsyncTask.TimeoutHandler" /> delegate is set in the constructor.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

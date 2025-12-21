@@ -57,8 +57,8 @@
           <list type="bullet">
             <item>
               <para>
-                <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.SecurityAuditLogLocation" /> indicates where audit events are written. </para
-              >
+                <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.SecurityAuditLogLocation" /> indicates where audit events are written.
+              </para>
             </item>
             <item>
               <para>
@@ -120,8 +120,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you set the <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.AutomaticInputSessionShutdown" /> property to false, the channel must be closed by some other mechanism. In this case, you must add a custom session shutdown handler to the <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.InputSessionShutdownHandlers" /> property. </para
-          >
+            >If you set the <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.AutomaticInputSessionShutdown" /> property to false, the channel must be closed by some other mechanism. In this case, you must add a custom session shutdown handler to the <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.InputSessionShutdownHandlers" /> property.
+          </para>
           <para
             >By default when a client closes an output session and the service has finished processing any remaining messages the server closes the session. Setting <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.AutomaticInputSessionShutdown" /> to false prevents the server from automatically closing the session and enables custom control of session lifetimes.</para
           >
@@ -302,8 +302,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.Channels.TransactionMessageProperty" /> allows third-party channel developers who use a proprietary transaction flow mechanism for their channel to introduce their transaction into indigo1. If this property is set to true, the transaction is ignored when executing the service method. </para
-          >
+            >The <see cref="T:System.ServiceModel.Channels.TransactionMessageProperty" /> allows third-party channel developers who use a proprietary transaction flow mechanism for their channel to introduce their transaction into indigo1. If this property is set to true, the transaction is ignored when executing the service method.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -337,8 +337,8 @@
             >Use the <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.ImpersonateCallerForAllOperations" /> property to control whether impersonation is performed when an operation's <see cref="P:System.ServiceModel.Dispatcher.DispatchOperation.Impersonation" /> property value is <see cref="F:System.ServiceModel.ImpersonationOption.Allowed" />. An exception is thrown if the property is true but an operation's <see cref="P:System.ServiceModel.Dispatcher.DispatchOperation.Impersonation" /> property value is <see cref="F:System.ServiceModel.ImpersonationOption.NotAllowed" />.</para
           >
           <para
-            >If an operation's <see cref="P:System.ServiceModel.Dispatcher.DispatchOperation.Impersonation" /> property value is <see cref="F:System.ServiceModel.ImpersonationOption.Required" /> impersonation is always attempted. </para
-          >
+            >If an operation's <see cref="P:System.ServiceModel.Dispatcher.DispatchOperation.Impersonation" /> property value is <see cref="F:System.ServiceModel.ImpersonationOption.Required" /> impersonation is always attempted.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -496,8 +496,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.MessageAuthenticationAuditLevel" /> property to specify whether successful message authentication events are written to the event log. </para
-          >
+            >Use the <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.MessageAuthenticationAuditLevel" /> property to specify whether successful message authentication events are written to the event log.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -624,8 +624,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.PrincipalPermissionMode" /> is <see cref="F:System.ServiceModel.Description.PrincipalPermissionMode.None" />, the <see cref="P:System.Threading.Thread.CurrentPrincipal" /> property is not set. </para
-          >
+            >When the <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.PrincipalPermissionMode" /> is <see cref="F:System.ServiceModel.Description.PrincipalPermissionMode.None" />, the <see cref="P:System.Threading.Thread.CurrentPrincipal" /> property is not set.
+          </para>
           <para
             >When the value is <see cref="F:System.ServiceModel.Description.PrincipalPermissionMode.UseWindowsGroups" /> the <see cref="P:System.Threading.Thread.CurrentPrincipal" /> property is populated with a <see cref="T:System.Security.Principal.WindowsPrincipal" /> based on the user credentials of the incoming message.</para
           >
@@ -665,8 +665,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.ReleaseServiceInstanceOnTransactionComplete" /> to specify that the <see cref="M:System.ServiceModel.InstanceContext.ReleaseServiceInstance" /> method is called when the transaction successfully completes. </para
-          >
+            >Use the <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.ReleaseServiceInstanceOnTransactionComplete" /> to specify that the <see cref="M:System.ServiceModel.InstanceContext.ReleaseServiceInstance" /> method is called when the transaction successfully completes.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -883,8 +883,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.TransactionAutoCompleteOnSessionClose" /> is true and there is an active transaction, the transaction is completed when the session closes. If <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.TransactionAutoCompleteOnSessionClose" /> is false, active transactions are not completed and are eventually aborted. </para
-          >
+            >If <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.TransactionAutoCompleteOnSessionClose" /> is true and there is an active transaction, the transaction is completed when the session closes. If <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.TransactionAutoCompleteOnSessionClose" /> is false, active transactions are not completed and are eventually aborted.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -932,8 +932,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The operation return by the <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.UnhandledDispatchOperation" /> is the operation indicated by the use of the "*" (asterisk) in the <see cref="P:System.ServiceModel.OperationContractAttribute.Action" /> property. </para
-          >
+            >The operation return by the <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.UnhandledDispatchOperation" /> is the operation indicated by the use of the "*" (asterisk) in the <see cref="P:System.ServiceModel.OperationContractAttribute.Action" /> property.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

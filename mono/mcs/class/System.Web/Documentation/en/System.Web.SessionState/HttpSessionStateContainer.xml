@@ -95,8 +95,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to indicate the session was created with the current request; otherwise, false. </param
-        >
+          />true to indicate the session was created with the current request; otherwise, false.
+        </param>
         <param name="cookieMode">
           <attribution
             license="cc4"
@@ -109,8 +109,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Web.SessionState.SessionStateMode" /> values that specifies the current session-state mode. </param
-        >
+          />One of the <see cref="T:System.Web.SessionState.SessionStateMode" /> values that specifies the current session-state mode.
+        </param>
         <param name="isReadonly">
           <attribution
             license="cc4"
@@ -172,15 +172,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the item to add to the session-state collection. </param
-        >
+          />The name of the item to add to the session-state collection.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value of the item to add to the session-state collection. </param
-        >
+          />The value of the item to add to the session-state collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Clear">
@@ -272,15 +272,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Array" /> that receives the session values. </param
-        >
+          />The <see cref="T:System.Array" /> that receives the session values.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index in <paramref name="array" /> from which copying starts. </param
-        >
+          />The zero-based index in <paramref name="array" /> from which copying starts.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Count">
@@ -508,8 +508,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the item to delete from the session-state collection. </param
-        >
+          />The name of the item to delete from the session-state collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RemoveAll">
@@ -558,8 +558,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the item to remove from the session-state collection. </param
-        >
+          />The index of the item to remove from the session-state collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SessionID">

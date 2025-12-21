@@ -95,8 +95,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlAttributes" /> class and customizes how the <see cref="T:System.Xml.Serialization.XmlSerializer" /> serializes and deserializes an object. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlAttributes" /> class and customizes how the <see cref="T:System.Xml.Serialization.XmlSerializer" /> serializes and deserializes an object.
+          </para>
         </summary>
         <param name="provider">
           <attribution
@@ -341,8 +341,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can specify the default value of an XML element or XML attribute by applying a <see cref="T:System.ComponentModel.DefaultValueAttribute" /> to a member. To examine the result of applying the value, compile the application into a DLL or executable, and pass the resulting file as an argument to the XML Schema Definition tool (XSD.exe). In the XML schema document, a default value is assigned to the default attribute. In the following example, the default for the &lt;Animal&gt; element is "Dogs." </para
-          >
+            >You can specify the default value of an XML element or XML attribute by applying a <see cref="T:System.ComponentModel.DefaultValueAttribute" /> to a member. To examine the result of applying the value, compile the application into a DLL or executable, and pass the resulting file as an argument to the XML Schema Definition tool (XSD.exe). In the XML schema document, a default value is assigned to the default attribute. In the following example, the default for the &lt;Animal&gt; element is "Dogs."
+          </para>
           <code>&lt;?xml version="1.0"?&gt;
  &lt;schema attributeFormDefault="qualified" 
  elementFormDefault="qualified" targetNamespace="" 

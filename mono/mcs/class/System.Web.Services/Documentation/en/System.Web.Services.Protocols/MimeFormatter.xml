@@ -41,8 +41,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.Services.Protocols.MimeFormatter" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Protocols.MimeFormatter" /> class.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -327,8 +327,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object of a type appropriate to the particular class that is implementing the method. </param
-        >
+          />An object of a type appropriate to the particular class that is implementing the method.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

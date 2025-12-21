@@ -520,8 +520,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.UI.HtmlTextWriter" /> object that receives the <see cref="T:System.Web.UI.WebControls.FileUpload" /> control content. </param
-        >
+          />The <see cref="T:System.Web.UI.HtmlTextWriter" /> object that receives the <see cref="T:System.Web.UI.WebControls.FileUpload" /> control content.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SaveAs">
@@ -570,8 +570,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string that specifies the full path of the location of the server on which to save the uploaded file. </param
-        >
+          />A string that specifies the full path of the location of the server on which to save the uploaded file.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

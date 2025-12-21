@@ -95,8 +95,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An X.509 certificate representing the software publisher's identity. </param
-        >
+          />An X.509 certificate representing the software publisher's identity.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -235,8 +235,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML encoding to use to reconstruct the permission. </param
-        >
+          />The XML encoding to use to reconstruct the permission.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Intersect">
@@ -281,8 +281,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission to intersect with the current permission. It must be of the same type as the current permission. </param
-        >
+          />A permission to intersect with the current permission. It must be of the same type as the current permission.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsSubsetOf">
@@ -327,8 +327,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission that is to be tested for the subset relationship. This permission must be of the same type as the current permission. </param
-        >
+          />A permission that is to be tested for the subset relationship. This permission must be of the same type as the current permission.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.Security.Permissions.IBuiltInPermission.GetTokenIndex">
@@ -428,8 +428,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission to combine with the current permission. It must be of the same type as the current permission. </param
-        >
+          />A permission to combine with the current permission. It must be of the same type as the current permission.
+        </param>
       </Docs>
     </Member>
   </Members>

@@ -40,8 +40,8 @@
         </item>
       </list>
       <para
-        >Most of the members of <see cref="T:System.Windows.Forms.TableLayoutStyleCollection" /> are implementations of <see cref="T:System.Collections.IList" />. </para
-      >
+        >Most of the members of <see cref="T:System.Windows.Forms.TableLayoutStyleCollection" /> are implementations of <see cref="T:System.Collections.IList" />.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -68,8 +68,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Windows.Forms.TableLayoutStyleCollection.Add(System.Windows.Forms.TableLayoutStyle)" /> method reapplies the table layout to all the controls in the current <see cref="T:System.Windows.Forms.TableLayoutPanel" /> container. </para
-          >
+            >The <see cref="M:System.Windows.Forms.TableLayoutStyleCollection.Add(System.Windows.Forms.TableLayoutStyle)" /> method reapplies the table layout to all the controls in the current <see cref="T:System.Windows.Forms.TableLayoutPanel" /> container.
+          </para>
           <para>The number of styles stored in a collection is limited only by available memory.</para>
         </remarks>
         <summary>

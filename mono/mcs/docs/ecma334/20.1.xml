@@ -33,6 +33,6 @@
       >interface-base</non_terminal
     > specification (<hyperlink>20.1.2</hyperlink>), followed by a  <non_terminal where="20.1.3"
       >interface-body</non_terminal
-    > (<hyperlink>20.1.3</hyperlink>), optionally followed by a semicolon. </paragraph
-  >
+    > (<hyperlink>20.1.3</hyperlink>), optionally followed by a semicolon.
+  </paragraph>
 </clause>

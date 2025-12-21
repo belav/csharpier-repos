@@ -60,8 +60,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.Binding" /> to add to the collection. </param
-        >
+          />The <see cref="T:System.Windows.Forms.Binding" /> to add to the collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddCore">
@@ -186,8 +186,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -296,8 +296,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.ComponentModel.CollectionChangeEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.ComponentModel.CollectionChangeEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -337,8 +337,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.Windows.Forms.BindingsCollection.CollectionChanging" /> event. </para
-          >
+            >Raises the <see cref="E:System.Windows.Forms.BindingsCollection.CollectionChanging" /> event.
+          </para>
         </summary>
         <param name="e">
           <attribution
@@ -376,8 +376,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The Binding to remove from the collection. </param
-        >
+          />The Binding to remove from the collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RemoveAt">
@@ -404,8 +404,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the <see cref="T:System.Windows.Forms.Binding" /> to remove. </param
-        >
+          />The index of the <see cref="T:System.Windows.Forms.Binding" /> to remove.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RemoveCore">
@@ -433,8 +433,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.Binding" /> to remove. </param
-        >
+          />The <see cref="T:System.Windows.Forms.Binding" /> to remove.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

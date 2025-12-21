@@ -90,6 +90,6 @@
   </paragraph>
   <paragraph>If the specified literal cannot be represented in the indicated type, a compile-time error occurs. </paragraph>
   <paragraph
-    >The value of a real literal having type <keyword>float</keyword> or <keyword>double</keyword> is determined by using the IEEE &quot;round to nearest&quot; mode. </paragraph
-  >
+    >The value of a real literal having type <keyword>float</keyword> or <keyword>double</keyword> is determined by using the IEEE &quot;round to nearest&quot; mode.
+  </paragraph>
 </clause>

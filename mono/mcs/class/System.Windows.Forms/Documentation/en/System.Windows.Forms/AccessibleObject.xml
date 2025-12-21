@@ -37,8 +37,8 @@
       <para>For more information about accessibility, including information about accessibility applications, see the documentation for Microsoft Accessibility in the MSDN library or at the Microsoft Web site.</para>
       <block subset="none" type="note">
         <para
-          >To use the <see cref="T:System.Windows.Forms.AccessibleObject" />, you must add a reference to the Accessibility assembly installed with the dnprdnshort. Windows Forms only supports Active Accessibility 2.0. </para
-        >
+          >To use the <see cref="T:System.Windows.Forms.AccessibleObject" />, you must add a reference to the Accessibility assembly installed with the dnprdnshort. Windows Forms only supports Active Accessibility 2.0.
+        </para>
       </block>
     </remarks>
     <summary>
@@ -265,8 +265,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The accessible object at the point specified by <paramref name="xLeft" /> and <paramref name="yTop" />. </para
-          >
+            >The accessible object at the point specified by <paramref name="xLeft" /> and <paramref name="yTop" />.
+          </para>
         </returns>
         <param name="xLeft">
           <attribution
@@ -390,16 +390,16 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The accessible object positioned at the value specified by <paramref name="navDir" />. </para
-          >
+            >The accessible object positioned at the value specified by <paramref name="navDir" />.
+          </para>
         </returns>
         <param name="navDir">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.AccessibleNavigation" /> enumerations that specifies the direction to navigate. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.AccessibleNavigation" /> enumerations that specifies the direction to navigate.
+        </param>
         <param name="childID">
           <attribution
             license="cc4"
@@ -515,8 +515,8 @@
               </term>
               <description>
                 <para
-                  >Specify <see cref="F:System.Windows.Forms.AccessibleSelection.TakeFocus" /> on the starting object to set the selection anchor. Then call Select again and specify <see cref="F:System.Windows.Forms.AccessibleSelection.TakeFocus" /> OR <see cref="F:System.Windows.Forms.AccessibleSelection.ExtendSelection" /> on the last object. </para
-                >
+                  >Specify <see cref="F:System.Windows.Forms.AccessibleSelection.TakeFocus" /> on the starting object to set the selection anchor. Then call Select again and specify <see cref="F:System.Windows.Forms.AccessibleSelection.TakeFocus" /> OR <see cref="F:System.Windows.Forms.AccessibleSelection.ExtendSelection" /> on the last object.
+                </para>
               </description>
             </item>
             <item>
@@ -1025,8 +1025,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index of the accessible child. </param
-        >
+          />The zero-based index of the accessible child.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1193,15 +1193,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The horizontal screen coordinate. </param
-        >
+          />The horizontal screen coordinate.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The vertical screen coordinate. </param
-        >
+          />The vertical screen coordinate.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1290,8 +1290,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.AccessibleNavigation" /> values. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.AccessibleNavigation" /> values.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1424,8 +1424,8 @@
               </term>
               <description>
                 <para
-                  >Specify <see cref="F:System.Windows.Forms.AccessibleSelection.TakeFocus" /> on the starting object to set the selection anchor. Then call <see cref="M:System.Windows.Forms.AccessibleObject.Select(System.Windows.Forms.AccessibleSelection)" /> again and specify <see cref="F:System.Windows.Forms.AccessibleSelection.TakeFocus" /> OR <see cref="F:System.Windows.Forms.AccessibleSelection.ExtendSelection" /> on the last object. </para
-                >
+                  >Specify <see cref="F:System.Windows.Forms.AccessibleSelection.TakeFocus" /> on the starting object to set the selection anchor. Then call <see cref="M:System.Windows.Forms.AccessibleObject.Select(System.Windows.Forms.AccessibleSelection)" /> again and specify <see cref="F:System.Windows.Forms.AccessibleSelection.TakeFocus" /> OR <see cref="F:System.Windows.Forms.AccessibleSelection.ExtendSelection" /> on the last object.
+                </para>
               </description>
             </item>
             <item>
@@ -1434,8 +1434,8 @@
               </term>
               <description>
                 <para
-                  >Specify <see cref="F:System.Windows.Forms.AccessibleSelection.TakeSelection" /> on any object. This flag deselects all selected objects except the one just selected. Then call <see cref="M:System.Windows.Forms.AccessibleObject.Select(System.Windows.Forms.AccessibleSelection)" /> again and specify <see cref="F:System.Windows.Forms.AccessibleSelection.RemoveSelection" /> on the same object. </para
-                >
+                  >Specify <see cref="F:System.Windows.Forms.AccessibleSelection.TakeSelection" /> on any object. This flag deselects all selected objects except the one just selected. Then call <see cref="M:System.Windows.Forms.AccessibleObject.Select(System.Windows.Forms.AccessibleSelection)" /> again and specify <see cref="F:System.Windows.Forms.AccessibleSelection.RemoveSelection" /> on the same object.
+                </para>
               </description>
             </item>
           </list>
@@ -1449,8 +1449,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.AccessibleSelection" /> values. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.AccessibleSelection" /> values.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1843,8 +1843,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The binding attributes used to control the search. </param
-        >
+          />The binding attributes used to control the search.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.Reflection.IReflect.GetProperties">
@@ -2057,8 +2057,8 @@
             >The <paramref name="invokeAttr" /> parameter may be a constructor, method, property, or field. A suitable invocation attribute must be specified. Invoke the default member of a class by passing the empty string ("") as the name of the member.</para
           >
           <para
-            >The <paramref name="modifiers" /> parameter has the same length as the <paramref name="args" /> parameter, representing the invoked member's argument attributes in the metadata. A parameter can have the following attributes: pdIn, pdOut, pdRetval, pdOptional, and pdHasDefault. These represent [In], [Out], [retval], [optional], and a default parameter, respectively. </para
-          >
+            >The <paramref name="modifiers" /> parameter has the same length as the <paramref name="args" /> parameter, representing the invoked member's argument attributes in the metadata. A parameter can have the following attributes: pdIn, pdOut, pdRetval, pdOptional, and pdHasDefault. These represent [In], [Out], [retval], [optional], and a default parameter, respectively.
+          </para>
           <para
             >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.AccessibleObject" /> instance is cast to an <see cref="T:System.Reflection.IReflect" /> interface.</para
           >
@@ -2085,8 +2085,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Reflection.BindingFlags" /> invocation attributes. </param
-        >
+          />One of the <see cref="T:System.Reflection.BindingFlags" /> invocation attributes.
+        </param>
         <param name="binder">
           <attribution
             license="cc4"
@@ -2113,15 +2113,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Reflection.ParameterModifier" /> objects. </param
-        >
+          />An array of <see cref="T:System.Reflection.ParameterModifier" /> objects.
+        </param>
         <param name="culture">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An instance of <see cref="T:System.Globalization.CultureInfo" /> used to govern the coercion of types. </param
-        >
+          />An instance of <see cref="T:System.Globalization.CultureInfo" /> used to govern the coercion of types.
+        </param>
         <param name="namedParameters">
           <attribution
             license="cc4"
@@ -2191,8 +2191,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.IntPtr" /> that contains the handle of the object. </param
-        >
+          />An <see cref="T:System.IntPtr" /> that contains the handle of the object.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2379,15 +2379,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.IntPtr" /> that contains the handle of the object. </param
-        >
+          />An <see cref="T:System.IntPtr" /> that contains the handle of the object.
+        </param>
         <param name="objid">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An Int that defines the type of object that the <paramref name="handle" /> parameter refers to. </param
-        >
+          />An Int that defines the type of object that the <paramref name="handle" /> parameter refers to.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

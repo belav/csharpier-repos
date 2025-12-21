@@ -129,8 +129,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.ComponentModel.BindableSupport" /> values. </param
-        >
+          />One of the <see cref="T:System.ComponentModel.BindableSupport" /> values.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -206,8 +206,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.ComponentModel.BindableSupport" /> values. </param
-        >
+          />One of the <see cref="T:System.ComponentModel.BindableSupport" /> values.
+        </param>
         <param name="direction">
           <attribution
             license="cc4"

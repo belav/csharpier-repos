@@ -24,8 +24,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Security-critical operations are actions that affect code access security, such as elevation of privilege through suppression of code access security checks by using the <see cref="M:System.Security.CodeAccessPermission.Assert" /> method, calling unsafe managed code, and so forth. Either the <see cref="T:System.Security.SecurityCriticalAttribute" /> attribute or the <see cref="T:System.Security.SecuritySafeCriticalAttribute" /> attribute must be applied to code for the code to perform security-critical operations. </para
-      >
+        >Security-critical operations are actions that affect code access security, such as elevation of privilege through suppression of code access security checks by using the <see cref="M:System.Security.CodeAccessPermission.Assert" /> method, calling unsafe managed code, and so forth. Either the <see cref="T:System.Security.SecurityCriticalAttribute" /> attribute or the <see cref="T:System.Security.SecuritySafeCriticalAttribute" /> attribute must be applied to code for the code to perform security-critical operations.
+      </para>
       <block subset="none" type="note">
         <para
           >The <see cref="T:System.Security.SecurityCriticalAttribute" /> is equivalent to a link demand for full trust. A type or member marked with the <see cref="T:System.Security.SecurityCriticalAttribute" /> can be called only by fully trusted code; it does not have to demand specific permissions. It cannot be called by partially trusted code.</para
@@ -59,8 +59,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.SecurityCriticalAttribute" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.SecurityCriticalAttribute" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -94,16 +94,16 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.SecurityCriticalAttribute" /> class with the specified scope. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.SecurityCriticalAttribute" /> class with the specified scope.
+          </para>
         </summary>
         <param name="scope">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the enumeration values that specifies the scope of the attribute. </param
-        >
+          />One of the enumeration values that specifies the scope of the attribute.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Scope">

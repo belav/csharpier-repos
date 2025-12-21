@@ -28,8 +28,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.IO.MemoryMappedFiles.MemoryMappedFileSecurity" /> class specifies the access rights for a memory-mapped file and how access attempts are audited.  This class represents access and audit rights as a set of rules. </para
-      >
+        >The <see cref="T:System.IO.MemoryMappedFiles.MemoryMappedFileSecurity" /> class specifies the access rights for a memory-mapped file and how access attempts are audited.  This class represents access and audit rights as a set of rules.
+      </para>
       <para
         >The <see cref="T:System.IO.MemoryMappedFiles.MemoryMappedFileSecurity" /> class is an abstraction of the underlying Microsoft Windows file security system. In this system. It hides many of the details of DACLs and SACLs.</para
       >
@@ -87,8 +87,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.IO.MemoryMappedFiles.MemoryMappedFileSecurity" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.IO.MemoryMappedFiles.MemoryMappedFileSecurity" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>

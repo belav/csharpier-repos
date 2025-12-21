@@ -21,8 +21,8 @@
       >
       <block subset="none" type="note">
         <para
-          >The <see cref="T:System.Web.Configuration.HttpHandlersSection" /> can read and write information from and to the related section of the configuration file according to the <see cref="P:System.Configuration.SectionInformation.AllowDefinition" /> section property whose value is <see cref="F:System.Configuration.ConfigurationAllowDefinition.Everywhere" />. </para
-        >
+          >The <see cref="T:System.Web.Configuration.HttpHandlersSection" /> can read and write information from and to the related section of the configuration file according to the <see cref="P:System.Configuration.SectionInformation.AllowDefinition" /> section property whose value is <see cref="F:System.Configuration.ConfigurationAllowDefinition.Everywhere" />.
+        </para>
       </block>
     </remarks>
     <summary>
@@ -46,8 +46,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.Configuration.HttpHandlersSection" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.HttpHandlersSection" /> class.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>

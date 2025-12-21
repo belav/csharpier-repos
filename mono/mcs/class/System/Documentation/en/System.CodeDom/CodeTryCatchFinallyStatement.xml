@@ -108,15 +108,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.CodeDom.CodeStatement" /> objects that indicate the statements to try. </param
-        >
+          />An array of <see cref="T:System.CodeDom.CodeStatement" /> objects that indicate the statements to try.
+        </param>
         <param name="catchClauses">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.CodeDom.CodeCatchClause" /> objects that indicate the clauses to catch. </param
-        >
+          />An array of <see cref="T:System.CodeDom.CodeCatchClause" /> objects that indicate the clauses to catch.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -153,22 +153,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.CodeDom.CodeStatement" /> objects that indicate the statements to try. </param
-        >
+          />An array of <see cref="T:System.CodeDom.CodeStatement" /> objects that indicate the statements to try.
+        </param>
         <param name="catchClauses">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.CodeDom.CodeCatchClause" /> objects that indicate the clauses to catch. </param
-        >
+          />An array of <see cref="T:System.CodeDom.CodeCatchClause" /> objects that indicate the clauses to catch.
+        </param>
         <param name="finallyStatements">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.CodeDom.CodeStatement" /> objects that indicate the finally statements to use. </param
-        >
+          />An array of <see cref="T:System.CodeDom.CodeStatement" /> objects that indicate the finally statements to use.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CatchClauses">

@@ -102,19 +102,15 @@
           />The <see cref="T:System.Type" /> for which the surrogate is required.</param
         >
         <param name="context">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The context-specific data. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The context-specific data.
+        </param>
         <param name="surrogate">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The surrogate to call for this type. </param
-        >
+          />The surrogate to call for this type.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ChainSelector">
@@ -154,8 +150,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The surrogate selector to add. </param
-        >
+          />The surrogate selector to add.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetNextSelector">
@@ -263,15 +259,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> for which to remove the surrogate. </param
-        >
+          />The <see cref="T:System.Type" /> for which to remove the surrogate.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.StreamingContext" /> for the current surrogate. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.StreamingContext" /> for the current surrogate.
+        </param>
       </Docs>
     </Member>
   </Members>

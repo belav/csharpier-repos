@@ -21,8 +21,8 @@
       >using-alias-directive</non_terminal
     >, the identifier introduced by the <non_terminal where="16.3.1"
       >using-alias-directive</non_terminal
-    > can be used to reference the given namespace or type. </paragraph
-  >
+    > can be used to reference the given namespace or type.
+  </paragraph>
   <paragraph>
     <example
       >[Example: For example: <code_example>
@@ -82,16 +82,16 @@ namespace N3
       > to use that identifier. end example]</example
     > Likewise, it is a compile-time error for two or more <non_terminal where="16.3.1"
       >using-alias-directive</non_terminal
-    >s in the same compilation unit or namespace body to declare aliases by the same name. </paragraph
-  >
+    >s in the same compilation unit or namespace body to declare aliases by the same name.
+  </paragraph>
   <paragraph
     >A <non_terminal where="16.3.1"
       >using-alias-directive</non_terminal
     > makes an alias available within a particular compilation unit or namespace body, but it does not contribute any new members to the underlying declaration space. In other words, a  <non_terminal
       where="16.3.1"
       >using-alias-directive</non_terminal
-    > is not transitive, but, rather, affects only the compilation unit or namespace body in which it occurs. </paragraph
-  >
+    > is not transitive, but, rather, affects only the compilation unit or namespace body in which it occurs.
+  </paragraph>
   <paragraph>
     <example
       >[Example: In the example <code_example>
@@ -182,8 +182,8 @@ namespace N3
   <paragraph
     >A <non_terminal where="16.3.1"
       >using-alias-directive</non_terminal
-    > can create an alias for any namespace or type, including the namespace within which it appears and any namespace or type nested within that namespace. </paragraph
-  >
+    > can create an alias for any namespace or type, including the namespace within which it appears and any namespace or type nested within that namespace.
+  </paragraph>
   <paragraph
     >Accessing a namespace or type through an alias yields exactly the same result as accessing that namespace or type through its declared name. <example
       >[Example: For example, given <code_example>

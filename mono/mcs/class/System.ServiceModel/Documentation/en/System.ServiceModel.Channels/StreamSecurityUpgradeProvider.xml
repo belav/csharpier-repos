@@ -23,14 +23,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >To add a security upgrade, you implement a class that derives from <see cref="T:System.ServiceModel.Channels.StreamSecurityUpgradeProvider" />. </para
-      >
+        >To add a security upgrade, you implement a class that derives from <see cref="T:System.ServiceModel.Channels.StreamSecurityUpgradeProvider" />.
+      </para>
       <para>The upgrade process has the following steps:</para>
       <list type="ordered">
         <item>
           <para
-            >Implement a class that derives from <see cref="T:System.ServiceModel.Channels.StreamSecurityUpgradeProvider" />. </para
-          >
+            >Implement a class that derives from <see cref="T:System.ServiceModel.Channels.StreamSecurityUpgradeProvider" />.
+          </para>
         </item>
         <item>
           <para>Register it. You do this by creating a binding element for it, and registering the provider in a custom binding.</para>

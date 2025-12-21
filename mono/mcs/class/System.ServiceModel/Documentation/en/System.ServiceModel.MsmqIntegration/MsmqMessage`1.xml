@@ -434,8 +434,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Messaging.MessageType" /> that is associated with this message. </para
-          >
+            >Gets the <see cref="T:System.Messaging.MessageType" /> that is associated with this message.
+          </para>
         </summary>
       </Docs>
     </Member>

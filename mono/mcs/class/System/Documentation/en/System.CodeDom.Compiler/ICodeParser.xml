@@ -65,8 +65,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.TextReader" /> that can be used to read the code to be compiled. </param
-        >
+          />A <see cref="T:System.IO.TextReader" /> that can be used to read the code to be compiled.
+        </param>
       </Docs>
     </Member>
   </Members>

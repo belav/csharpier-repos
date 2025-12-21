@@ -26,8 +26,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.Configuration.ApplicationSettingsBase" /> adds the following functionality to the <see cref="T:System.Configuration.SettingsBase" /> class, which is used by Web-based applications: </para
-      >
+        <see cref="T:System.Configuration.ApplicationSettingsBase" /> adds the following functionality to the <see cref="T:System.Configuration.SettingsBase" /> class, which is used by Web-based applications:
+      </para>
       <list type="bullet">
         <item>
           <para
@@ -57,8 +57,8 @@
         </item>
       </list>
       <para
-        >The <see cref="T:System.Configuration.ApplicationSettingsBase" /> class uses reflection to detect these attributes at run time. Most of this information gets passed to the settings provider layer, which is responsible for storage, persistence format, and so on. </para
-      >
+        >The <see cref="T:System.Configuration.ApplicationSettingsBase" /> class uses reflection to detect these attributes at run time. Most of this information gets passed to the settings provider layer, which is responsible for storage, persistence format, and so on.
+      </para>
       <para
         >When an application has multiple settings wrapper classes, each class defines a <newTerm>settings group</newTerm>. Each group has the following characteristics:</para
       >
@@ -166,8 +166,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor is exactly equivalent to the <see cref="M:System.Configuration.ApplicationSettingsBase.#ctor(System.ComponentModel.IComponent,System.String)" /> constructor using the invocation: </para
-          >
+            >This constructor is exactly equivalent to the <see cref="M:System.Configuration.ApplicationSettingsBase.#ctor(System.ComponentModel.IComponent,System.String)" /> constructor using the invocation:
+          </para>
           <para>ApplicationSettingsBase(owner, String.Empty)</para>
           <para
             >For information about how reflection is used during the instantiation of a wrapper class, see the default <see cref="M:System.Configuration.ApplicationSettingsBase.#ctor" /> constructor.</para
@@ -313,11 +313,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Each settings wrapper class derived from <see cref="T:System.Configuration.ApplicationSettingsBase" /> has a context associated with it. The context is passed to the settings provider for each property to identify how the property is used. Context therefore acts as a hint to help the settings provider determine how best to persist the associated application settings values. </para
-          >
+            >Each settings wrapper class derived from <see cref="T:System.Configuration.ApplicationSettingsBase" /> has a context associated with it. The context is passed to the settings provider for each property to identify how the property is used. Context therefore acts as a hint to help the settings provider determine how best to persist the associated application settings values.
+          </para>
           <para
-            >In contrast, the <see cref="P:System.Configuration.ApplicationSettingsBase.SettingsKey" /> property enables the settings provider to disambiguate multiple instances of the same wrapper class. </para
-          >
+            >In contrast, the <see cref="P:System.Configuration.ApplicationSettingsBase.SettingsKey" /> property enables the settings provider to disambiguate multiple instances of the same wrapper class.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -657,8 +657,8 @@
             >The get accessor of the <see cref="P:System.Configuration.ApplicationSettingsBase.Properties" /> property reflects over the metadata of the settings wrapper class, which is derived from <see cref="T:System.Configuration.ApplicationSettingsBase" />, to dynamically determine the set of available application settings properties.</para
           >
           <para
-            >The <see cref="T:System.Configuration.ApplicationSettingsBase" /> class natively recognizes certain characteristics of an application setting, such as its name, property type, settings provider, default value, read only status, and a serialization preference. These characteristics are mirrored as properties in the <see cref="T:System.Configuration.SettingsProperty" /> class. All other attributes of the settings property are just passed through to its associated settings provider. </para
-          >
+            >The <see cref="T:System.Configuration.ApplicationSettingsBase" /> class natively recognizes certain characteristics of an application setting, such as its name, property type, settings provider, default value, read only status, and a serialization preference. These characteristics are mirrored as properties in the <see cref="T:System.Configuration.SettingsProperty" /> class. All other attributes of the settings property are just passed through to its associated settings provider.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -688,8 +688,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="E:System.Configuration.ApplicationSettingsBase.PropertyChanged" /> event is raised when a settings property is changed through the set accessor of the <see cref="P:System.Configuration.ApplicationSettingsBase.Item(System.String)" /> method, or for every property that is restored when a call is made to the <see cref="M:System.Configuration.ApplicationSettingsBase.Reload" /> or <see cref="M:System.Configuration.ApplicationSettingsBase.Reset" /> methods. </para
-          >
+            >The <see cref="E:System.Configuration.ApplicationSettingsBase.PropertyChanged" /> event is raised when a settings property is changed through the set accessor of the <see cref="P:System.Configuration.ApplicationSettingsBase.Item(System.String)" /> method, or for every property that is restored when a call is made to the <see cref="M:System.Configuration.ApplicationSettingsBase.Reload" /> or <see cref="M:System.Configuration.ApplicationSettingsBase.Reset" /> methods.
+          </para>
           <para
             >There is no corresponding PropertyChanging event for this class; instead, see the <see cref="E:System.Configuration.ApplicationSettingsBase.SettingChanging" /> event.</para
           >
@@ -760,8 +760,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Configuration.SettingsProviderAttribute" /> determines what setting provider is used by a settings wrapper class or an individual setting property. If this attribute is not specified, a client application will use the <see cref="T:System.Configuration.LocalFileSettingsProvider" />. </para
-          >
+            >The <see cref="T:System.Configuration.SettingsProviderAttribute" /> determines what setting provider is used by a settings wrapper class or an individual setting property. If this attribute is not specified, a client application will use the <see cref="T:System.Configuration.LocalFileSettingsProvider" />.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -804,8 +804,8 @@
             </item>
           </list>
           <para>
-            <see cref="M:System.Configuration.ApplicationSettingsBase.Reload" /> contrasts with <see cref="M:System.Configuration.ApplicationSettingsBase.Reset" /> in that the former will load the last set of saved application settings values, whereas the latter will load the saved default values. </para
-          >
+            <see cref="M:System.Configuration.ApplicationSettingsBase.Reload" /> contrasts with <see cref="M:System.Configuration.ApplicationSettingsBase.Reset" /> in that the former will load the last set of saved application settings values, whereas the latter will load the saved default values.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -848,8 +848,8 @@
             </item>
           </list>
           <para>
-            <see cref="M:System.Configuration.ApplicationSettingsBase.Reload" /> contrasts with <see cref="M:System.Configuration.ApplicationSettingsBase.Reset" /> in that the former will load the last set of saved application settings values, whereas the latter will load the saved default values. </para
-          >
+            <see cref="M:System.Configuration.ApplicationSettingsBase.Reload" /> contrasts with <see cref="M:System.Configuration.ApplicationSettingsBase.Reset" /> in that the former will load the last set of saved application settings values, whereas the latter will load the saved default values.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1085,8 +1085,8 @@
             </item>
           </list>
           <para
-            >You can override the default behavior of <see cref="M:System.Configuration.ApplicationSettingsBase.Upgrade" /> to implement custom upgrading or merging behavior. Use the <see cref="M:System.Configuration.ApplicationSettingsBase.GetPreviousVersion(System.String)" /> method to retrieve individual values for a setting for the previous version of the application. Examples of custom upgrade behavior include: </para
-          >
+            >You can override the default behavior of <see cref="M:System.Configuration.ApplicationSettingsBase.Upgrade" /> to implement custom upgrading or merging behavior. Use the <see cref="M:System.Configuration.ApplicationSettingsBase.GetPreviousVersion(System.String)" /> method to retrieve individual values for a setting for the previous version of the application. Examples of custom upgrade behavior include:
+          </para>
           <list type="bullet">
             <item>
               <para>Using new policy defaults that override one or more of the previous user-specified values or previous defaults.</para>

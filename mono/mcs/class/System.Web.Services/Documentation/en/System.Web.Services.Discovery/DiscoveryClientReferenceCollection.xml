@@ -44,8 +44,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.Services.Discovery.DiscoveryClientReferenceCollection" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Discovery.DiscoveryClientReferenceCollection" /> class.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -78,8 +78,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.Services.Discovery.DiscoveryReference" /> to add to the <see cref="T:System.Web.Services.Discovery.DiscoveryClientReferenceCollection" />. </param
-        >
+          />The <see cref="T:System.Web.Services.Discovery.DiscoveryReference" /> to add to the <see cref="T:System.Web.Services.Discovery.DiscoveryClientReferenceCollection" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -112,15 +112,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URL for the reference to add to the <see cref="T:System.Web.Services.Discovery.DiscoveryClientReferenceCollection" />. </param
-        >
+          />The URL for the reference to add to the <see cref="T:System.Web.Services.Discovery.DiscoveryClientReferenceCollection" />.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.Services.Discovery.DiscoveryReference" /> to add to the <see cref="T:System.Web.Services.Discovery.DiscoveryClientReferenceCollection" />. </param
-        >
+          />The <see cref="T:System.Web.Services.Discovery.DiscoveryReference" /> to add to the <see cref="T:System.Web.Services.Discovery.DiscoveryClientReferenceCollection" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -155,8 +155,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URL for the <see cref="T:System.Web.Services.Discovery.DiscoveryReference" /> to locate within the <see cref="T:System.Web.Services.Discovery.DiscoveryClientReferenceCollection" />. </param
-        >
+          />The URL for the <see cref="T:System.Web.Services.Discovery.DiscoveryReference" /> to locate within the <see cref="T:System.Web.Services.Discovery.DiscoveryClientReferenceCollection" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -230,8 +230,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string that represents the URL for the object to remove from the <see cref="T:System.Web.Services.Discovery.DiscoveryClientReferenceCollection" />. </param
-        >
+          />A string that represents the URL for the object to remove from the <see cref="T:System.Web.Services.Discovery.DiscoveryClientReferenceCollection" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

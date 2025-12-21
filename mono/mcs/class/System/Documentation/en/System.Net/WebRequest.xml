@@ -58,8 +58,7 @@ public class WebRequestExample {
     Console.WriteLine(myRequest);
   }
 }
-</code
-      >
+</code>
       <para>The output is</para>
       <para>System.Net.HttpWebRequest</para>
     </example>
@@ -164,15 +163,15 @@ public class WebRequestExample {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that contains the information required to serialize the new <see cref="T:System.Net.WebRequest" /> instance. </param
-        >
+          />A <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that contains the information required to serialize the new <see cref="T:System.Net.WebRequest" /> instance.
+        </param>
         <param name="streamingContext">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Runtime.Serialization.StreamingContext" /> that indicates the source of the serialized stream associated with the new <see cref="T:System.Net.WebRequest" /> instance. </param
-        >
+          />A <see cref="T:System.Runtime.Serialization.StreamingContext" /> that indicates the source of the serialized stream associated with the new <see cref="T:System.Net.WebRequest" /> instance.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Abort">
@@ -298,15 +297,15 @@ public class WebRequestExample {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.AsyncCallback" /> delegate. </param
-        >
+          />The <see cref="T:System.AsyncCallback" /> delegate.
+        </param>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object containing state information for this asynchronous request. </param
-        >
+          />An object containing state information for this asynchronous request.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -371,15 +370,15 @@ public class WebRequestExample {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.AsyncCallback" /> delegate. </param
-        >
+          />The <see cref="T:System.AsyncCallback" /> delegate.
+        </param>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object containing state information for this asynchronous request. </param
-        >
+          />An object containing state information for this asynchronous request.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -492,14 +491,11 @@ public class WebRequestExample {
           >
         </value>
         <exception cref="T:System.NotSupportedException"
-          >This property is not implemented in the derived class. </exception
-        >
+          >This property is not implemented in the derived class. </exception>
         <exception cref="T:System.InvalidOperationException"
-          >Data has already been written to the request stream. </exception
-        >
+          >Data has already been written to the request stream. </exception>
         <exception cref="T:System.ArgumentOutOfRangeException"
-          >This property is being set to a value less than zero. </exception
-        >
+          >This property is being set to a value less than zero. </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -542,8 +538,7 @@ public class WebRequestExample {
           >
         </value>
         <exception cref="T:System.NotSupportedException"
-          >This property is not implemented in the derived class. </exception
-        >
+          >This property is not implemented in the derived class. </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -659,8 +654,8 @@ public class WebRequestExample {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URI that identifies the Internet resource. </param
-        >
+          />The URI that identifies the Internet resource.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -761,8 +756,8 @@ public class WebRequestExample {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Uri" /> containing the URI of the requested resource. </param
-        >
+          />A <see cref="T:System.Uri" /> containing the URI of the requested resource.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -835,8 +830,7 @@ public class CreateDefaultExample
       Console.WriteLine("Create --&gt; {0}", textContoso);
    }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>CreateDefault --&gt; System.Net.HttpWebRequest</para>
@@ -879,8 +873,8 @@ public class CreateDefaultExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Uri" /> containing the URI of the requested resource. </param
-        >
+          />A <see cref="T:System.Uri" /> containing the URI of the requested resource.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -915,8 +909,8 @@ public class CreateDefaultExample
             >The <see cref="M:System.Net.WebRequest.CreateHttp(System.String)" /> method returns an instance of the <see cref="T:System.Net.HttpWebRequest" /> class for the <paramref name="requestUriString" />.</para
           >
           <para
-            >When a URI that begins with http:// or http:// is passed in the <paramref name="requestUriString" /> parameter, a <see cref="T:System.Net.HttpWebRequest" /> is returned by <see cref="M:System.Net.WebRequest.CreateHttp(System.String)" />. Another other scheme will throw an <see cref="T:System.NotSupportedException" />. </para
-          >
+            >When a URI that begins with http:// or http:// is passed in the <paramref name="requestUriString" /> parameter, a <see cref="T:System.Net.HttpWebRequest" /> is returned by <see cref="M:System.Net.WebRequest.CreateHttp(System.String)" />. Another other scheme will throw an <see cref="T:System.NotSupportedException" />.
+          </para>
           <para
             >The <see cref="M:System.Net.WebRequest.CreateHttp(System.String)" /> method uses the <paramref name="requestUriString" /> parameter to create a <see cref="T:System.Uri" /> instance that it passes to the new <see cref="T:System.Net.HttpWebRequest" />. If the method is successful, the <see cref="P:System.Net.HttpWebRequest.AllowReadStreamBuffering" /> property on the returned <see cref="T:System.Net.HttpWebRequest" /> instance is set to false.</para
           >
@@ -942,8 +936,8 @@ public class CreateDefaultExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A URI string that identifies the Internet resource. </param
-        >
+          />A URI string that identifies the Internet resource.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateHttp">
@@ -977,8 +971,8 @@ public class CreateDefaultExample
             >The <see cref="M:System.Net.WebRequest.CreateHttp(System.Uri)" /> method returns an instance of the <see cref="T:System.Net.HttpWebRequest" /> class for the <paramref name="requestUri" />.</para
           >
           <para
-            >When a URI that begins with http:// or http:// is passed in the <paramref name="requestUri" /> parameter, an <see cref="T:System.Net.HttpWebRequest" /> is returned by <see cref="M:System.Net.WebRequest.CreateHttp(System.Uri)" />. Another other scheme will throw a <see cref="T:System.NotSupportedException" />. </para
-          >
+            >When a URI that begins with http:// or http:// is passed in the <paramref name="requestUri" /> parameter, an <see cref="T:System.Net.HttpWebRequest" /> is returned by <see cref="M:System.Net.WebRequest.CreateHttp(System.Uri)" />. Another other scheme will throw a <see cref="T:System.NotSupportedException" />.
+          </para>
           <para
             >The <see cref="M:System.Net.WebRequest.CreateHttp(System.Uri)" /> method uses the <paramref name="requestUri" /> parameter to create a new <see cref="T:System.Net.HttpWebRequest" /> instance. If the method is successful, the <see cref="P:System.Net.HttpWebRequest.AllowReadStreamBuffering" /> property on the returned <see cref="T:System.Net.HttpWebRequest" /> instance is set to false.</para
           >
@@ -1039,8 +1033,7 @@ public class CreateDefaultExample
           >
         </value>
         <exception cref="T:System.NotSupportedException"
-          >This property is not implemented in the derived class. </exception
-        >
+          >This property is not implemented in the derived class. </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -1170,8 +1163,8 @@ public class CreateDefaultExample
           <paramref name="asyncResult" /> was not returned by a call to <see cref="M:System.Net.WebRequest.BeginGetRequestStream(System.AsyncCallback,System.Object)" />.</exception
         >
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="asyncResult" /> is a null reference. </exception
-        >
+          <paramref name="asyncResult" /> is a null reference.
+        </exception>
         <exception cref="T:System.InvalidOperationException">
           <para> This method was called previously using <paramref name="asyncResult." /></para>
           <para>-or-</para>
@@ -1211,8 +1204,8 @@ public class CreateDefaultExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.IAsyncResult" /> that references a pending request for a stream. </param
-        >
+          />An <see cref="T:System.IAsyncResult" /> that references a pending request for a stream.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1289,8 +1282,8 @@ public class CreateDefaultExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.IAsyncResult" /> that references a pending request for a response. </param
-        >
+          />An <see cref="T:System.IAsyncResult" /> that references a pending request for a response.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1333,8 +1326,8 @@ public class CreateDefaultExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> to populate with data. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> to populate with data.
+        </param>
         <param name="streamingContext">
           <attribution
             license="cc4"
@@ -1612,8 +1605,7 @@ public class CreateDefaultExample
           >
         </value>
         <exception cref="T:System.NotSupportedException"
-          >This property is not implemented in the derived class. </exception
-        >
+          >This property is not implemented in the derived class. </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -1685,8 +1677,7 @@ public class CreateDefaultExample
           >
         </value>
         <exception cref="T:System.NotSupportedException"
-          >This property is not implemented in the derived class. </exception
-        >
+          >This property is not implemented in the derived class. </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -1734,8 +1725,7 @@ public class CreateDefaultExample
           >
         </value>
         <exception cref="T:System.NotSupportedException"
-          >This property is not implemented in the derived class. </exception
-        >
+          >This property is not implemented in the derived class. </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -1782,8 +1772,7 @@ public class CreateDefaultExample
           <para> A <see cref="T:System.Net.IWebProxy" /> to use to access resources.</para>
         </value>
         <exception cref="T:System.NotSupportedException"
-          >This property is not implemented in the derived class. </exception
-        >
+          >This property is not implemented in the derived class. </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -1866,8 +1855,7 @@ public class RegisterPrefixExample
       Console.WriteLine(wr);
    }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <para>ftpWebRequest</para>
         </example>
@@ -1918,15 +1906,15 @@ public class RegisterPrefixExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The complete URI or URI prefix that the <see cref="T:System.Net.WebRequest" /> descendant services. </param
-        >
+          />The complete URI or URI prefix that the <see cref="T:System.Net.WebRequest" /> descendant services.
+        </param>
         <param name="creator">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The create method that the <see cref="T:System.Net.WebRequest" /> calls to create the <see cref="T:System.Net.WebRequest" /> descendant. </param
-        >
+          />The create method that the <see cref="T:System.Net.WebRequest" /> calls to create the <see cref="T:System.Net.WebRequest" /> descendant.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1956,8 +1944,7 @@ public class RegisterPrefixExample
           >
         </value>
         <exception cref="T:System.NotSupportedException"
-          >This property is not implemented in the derived class. </exception
-        >
+          >This property is not implemented in the derived class. </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -2011,15 +1998,15 @@ public class RegisterPrefixExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Runtime.Serialization.SerializationInfo" />, which holds the serialized data for the <see cref="T:System.Net.WebRequest" />. </param
-        >
+          />A <see cref="T:System.Runtime.Serialization.SerializationInfo" />, which holds the serialized data for the <see cref="T:System.Net.WebRequest" />.
+        </param>
         <param name="streamingContext">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains the destination of the serialized stream associated with the new <see cref="T:System.Net.WebRequest" />. </param
-        >
+          />A <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains the destination of the serialized stream associated with the new <see cref="T:System.Net.WebRequest" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Timeout">
@@ -2050,8 +2037,7 @@ public class RegisterPrefixExample
           >
         </value>
         <exception cref="T:System.NotSupportedException"
-          >This property is not implemented in the derived class. </exception
-        >
+          >This property is not implemented in the derived class. </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para

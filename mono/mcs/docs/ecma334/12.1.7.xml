@@ -8,8 +8,8 @@
     >, a <non_terminal where="15.7.2">switch-statement</non_terminal>, or a <non_terminal
       where="15.13"
       >using-statement</non_terminal
-    >. </paragraph
-  >
+    >.
+  </paragraph>
   <paragraph
     >The lifetime of a local variable is the portion of program execution during which storage is guaranteed to be reserved for it. This lifetime extends from entry into the block, <non_terminal
       where="15.8.3"
@@ -32,8 +32,8 @@
     > is entered recursively, a new instance of the local variable is created each time, and its <non_terminal
       where="15.5.1"
       >local-variable-initializer</non_terminal
-    >, if any, is evaluated each time. </paragraph
-  >
+    >, if any, is evaluated each time.
+  </paragraph>
   <paragraph
     >A local variable is not automatically initialized and thus has no default value. For the purpose of definite assignment checking, a local variable is considered initially unassigned. A <non_terminal
       where="15.5.1"
@@ -43,14 +43,14 @@
     >, in which case the variable is considered definitely assigned in its entire scope, except within the expression provided in the <non_terminal
       where="15.5.1"
       >local-variable-initializer</non_terminal
-    >. </paragraph
-  >
+    >.
+  </paragraph>
   <paragraph
     >Within the scope of a local variable, it is a compile-time error to refer to that local variable in a textual position that precedes its <non_terminal
       where="15.5.1"
       >local-variable-declarator</non_terminal
-    >. </paragraph
-  >
+    >.
+  </paragraph>
   <paragraph>
     <note>[Note: The actual lifetime of a local variable is implementation-dependent. For example, a compiler might statically determine that a local variable in a block is only used for a small portion of that block. Using this analysis, the compiler could generate code that results in the variable's storage having a shorter lifetime than its containing block. </note>
   </paragraph>
@@ -75,6 +75,6 @@
       >foreach-statement</non_terminal
     > or  <non_terminal where="15.10"
       >specific-catch-clause</non_terminal
-    > is considered definitely assigned in its entire scope. </paragraph
-  >
+    > is considered definitely assigned in its entire scope.
+  </paragraph>
 </clause>

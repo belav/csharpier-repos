@@ -149,8 +149,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.Design.ResourceExpressionEditor.GetExpressionEditorSheet(System.String,System.IServiceProvider)" /> method returns an expression editor sheet implementation for resource expressions. The visual designer host uses the expression editor sheet in its expressions dialog box. </para
-          >
+            >The <see cref="M:System.Web.UI.Design.ResourceExpressionEditor.GetExpressionEditorSheet(System.String,System.IServiceProvider)" /> method returns an expression editor sheet implementation for resource expressions. The visual designer host uses the expression editor sheet in its expressions dialog box.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

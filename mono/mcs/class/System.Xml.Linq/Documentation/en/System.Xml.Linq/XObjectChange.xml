@@ -20,8 +20,8 @@
       >
       <para>All operations that modify the XML tree break down to a series of primitives. There are four types of primitives. Two of the primitives (Add and Remove) act on collections. Two of them (Name and Value) act on instances. There is a corresponding event for each of these primitives. </para>
       <para
-        >You should be careful when modifying an XML tree within one of these events, because doing this might lead to unexpected results. For example, if you receive a <see cref="E:System.Xml.Linq.XObject.Changing" /> event, and while the event is being processed you remove the node from the tree, you might not receive the <see cref="E:System.Xml.Linq.XObject.Changed" /> event. When an event is being processed, it is valid to modify an XML tree other than the one that contains the node that is receiving the event; it is even valid to modify the same tree provided the modifications do not affect the specific nodes on which the event was raised. However, if you modify the area of the tree that contains the node receiving the event, the events that you receive and the impact to the tree are undefined. </para
-      >
+        >You should be careful when modifying an XML tree within one of these events, because doing this might lead to unexpected results. For example, if you receive a <see cref="E:System.Xml.Linq.XObject.Changing" /> event, and while the event is being processed you remove the node from the tree, you might not receive the <see cref="E:System.Xml.Linq.XObject.Changed" /> event. When an event is being processed, it is valid to modify an XML tree other than the one that contains the node that is receiving the event; it is even valid to modify the same tree provided the modifications do not affect the specific nodes on which the event was raised. However, if you modify the area of the tree that contains the node receiving the event, the events that you receive and the impact to the tree are undefined.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

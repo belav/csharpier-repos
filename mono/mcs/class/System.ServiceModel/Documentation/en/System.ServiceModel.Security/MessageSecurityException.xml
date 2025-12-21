@@ -46,8 +46,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes an empty instance of the <see cref="T:System.ServiceModel.Security.MessageSecurityException" /> class. </para
-          >
+            >Initializes an empty instance of the <see cref="T:System.ServiceModel.Security.MessageSecurityException" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>

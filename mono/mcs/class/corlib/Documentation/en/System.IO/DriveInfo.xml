@@ -69,8 +69,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A valid drive path or drive letter. This can be either uppercase or lowercase, 'a' to 'z'. A null value is not valid. </param
-        >
+          />A valid drive path or drive letter. This can be either uppercase or lowercase, 'a' to 'z'. A null value is not valid.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AvailableFreeSpace">

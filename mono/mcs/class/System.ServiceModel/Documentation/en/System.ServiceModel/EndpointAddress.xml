@@ -23,8 +23,8 @@
       >
       <para>The endpoint address for a service can be specified either imperatively using code or declaratively through configuration. Defining endpoints in code is usually not practical because the bindings and addresses for a deployed service are typically different from those used while the service is being developed. It is more practical to define service endpoints using configuration . </para>
       <para>
-        <see cref="T:System.ServiceModel.EndpointAddress" /> does not implement the <see cref="T:System.Runtime.Serialization.ISerializable" /> interface and so is not serializable. For an endpoint to be exposed as part of a service contract it must be serializable and it must also be compliant with the Web Service Addressing (WS-Addressing) protocol. Serializable endpoints that are compliant with version 1.0 and the August 2004 version of WS-Addressing are provided, respectively, by the <see cref="T:System.ServiceModel.EndpointAddress10" /> and <see cref="T:System.ServiceModel.EndpointAddressAugust2004" /> classes. </para
-      >
+        <see cref="T:System.ServiceModel.EndpointAddress" /> does not implement the <see cref="T:System.Runtime.Serialization.ISerializable" /> interface and so is not serializable. For an endpoint to be exposed as part of a service contract it must be serializable and it must also be compliant with the Web Service Addressing (WS-Addressing) protocol. Serializable endpoints that are compliant with version 1.0 and the August 2004 version of WS-Addressing are provided, respectively, by the <see cref="T:System.ServiceModel.EndpointAddress10" /> and <see cref="T:System.ServiceModel.EndpointAddressAugust2004" /> classes.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -543,8 +543,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to check for the <see cref="P:System.ServiceModel.EndpointAddress.AnonymousUri" /> when manually copying the URI from an <see cref="T:System.ServiceModel.EndpointAddress" /> to the URI of either a <see cref="T:System.ServiceModel.EndpointAddress10" /> or a <see cref="T:System.ServiceModel.EndpointAddressAugust2004" />. This must be done because both <see cref="T:System.ServiceModel.EndpointAddress10" /> and <see cref="T:System.ServiceModel.EndpointAddressAugust2004" /> have special anonymous values. Users must use these values if the URI being copied is anonymous. </para
-          >
+            >Use this method to check for the <see cref="P:System.ServiceModel.EndpointAddress.AnonymousUri" /> when manually copying the URI from an <see cref="T:System.ServiceModel.EndpointAddress" /> to the URI of either a <see cref="T:System.ServiceModel.EndpointAddress10" /> or a <see cref="T:System.ServiceModel.EndpointAddressAugust2004" />. This must be done because both <see cref="T:System.ServiceModel.EndpointAddress10" /> and <see cref="T:System.ServiceModel.EndpointAddressAugust2004" /> have special anonymous values. Users must use these values if the URI being copied is anonymous.
+          </para>
           <para
             >Due to the range of network technologies currently in widespread use (for example, NAT, DHCP, and firewalls), many deployments cannot assign a meaningful global URI to a given endpoint. To allow these <newTerm>anonymous</newTerm> endpoints to initiate message exchange patterns and receive replies, the Web Services Addressing specification defines a <see
               cref="http://go.microsoft.com/fwlink/?LinkId=96169"
@@ -576,8 +576,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to check for the <see cref="P:System.ServiceModel.EndpointAddress.NoneUri" /> when manually copying the URI from an <see cref="T:System.ServiceModel.EndpointAddress" /> to the URI of either a <see cref="T:System.ServiceModel.EndpointAddress10" /> or a <see cref="T:System.ServiceModel.EndpointAddressAugust2004" />. This must be done because both <see cref="T:System.ServiceModel.EndpointAddress10" /> and <see cref="T:System.ServiceModel.EndpointAddressAugust2004" /> have special none URI values. Users must use these values if the URI being copied is none. </para
-          >
+            >Use this method to check for the <see cref="P:System.ServiceModel.EndpointAddress.NoneUri" /> when manually copying the URI from an <see cref="T:System.ServiceModel.EndpointAddress" /> to the URI of either a <see cref="T:System.ServiceModel.EndpointAddress10" /> or a <see cref="T:System.ServiceModel.EndpointAddressAugust2004" />. This must be done because both <see cref="T:System.ServiceModel.EndpointAddress10" /> and <see cref="T:System.ServiceModel.EndpointAddressAugust2004" /> have special none URI values. Users must use these values if the URI being copied is none.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

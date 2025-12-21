@@ -23,8 +23,8 @@
         >The <see cref="T:System.Web.UI.WebControls.DetailsView" /> control raises the <see cref="E:System.Web.UI.WebControls.DetailsView.ItemDeleting" /> event when a Delete button (a button with its CommandName property set to "Delete") within the control is clicked, but before the <see cref="T:System.Web.UI.WebControls.DetailsView" /> control deletes the record. This allows you to provide an event handler that performs a custom routine, such as verifying a record before deleting it, whenever this event occurs.</para
       >
       <para
-        >A <see cref="T:System.Web.UI.WebControls.DetailsViewDeletedEventArgs" /> object is passed to the event handler, which allows you to determine the index of the record being deleted and to indicate that the delete operation should be canceled. To determine the index of a record, use the <see cref="P:System.Web.UI.WebControls.DetailsViewDeleteEventArgs.RowIndex" /> property. To cancel the delete operation, set the <see cref="P:System.ComponentModel.CancelEventArgs.Cancel" /> property to true. You can also access the key fields and non-key fields by using the <see cref="P:System.Web.UI.WebControls.DetailsViewDeleteEventArgs.Keys" /> and <see cref="P:System.Web.UI.WebControls.DetailsViewDeleteEventArgs.Values" /> properties, respectively. These values are useful if you want to verify the record before deleting it. </para
-      >
+        >A <see cref="T:System.Web.UI.WebControls.DetailsViewDeletedEventArgs" /> object is passed to the event handler, which allows you to determine the index of the record being deleted and to indicate that the delete operation should be canceled. To determine the index of a record, use the <see cref="P:System.Web.UI.WebControls.DetailsViewDeleteEventArgs.RowIndex" /> property. To cancel the delete operation, set the <see cref="P:System.ComponentModel.CancelEventArgs.Cancel" /> property to true. You can also access the key fields and non-key fields by using the <see cref="P:System.Web.UI.WebControls.DetailsViewDeleteEventArgs.Keys" /> and <see cref="P:System.Web.UI.WebControls.DetailsViewDeleteEventArgs.Values" /> properties, respectively. These values are useful if you want to verify the record before deleting it.
+      </para>
       <block subset="none" type="note">
         <para
           >It is possible to modify the key field values in the <see cref="P:System.Web.UI.WebControls.DetailsViewDeleteEventArgs.Keys" /> property. If you change these values, the record that corresponds to the new key field values will be deleted.</para
@@ -42,8 +42,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see cref="E:System.Web.UI.WebControls.DetailsView.ItemDeleting" /> event. </para
-      >
+        >Provides data for the <see cref="E:System.Web.UI.WebControls.DetailsView.ItemDeleting" /> event.
+      </para>
     </summary>
   </Docs>
   <Members>
@@ -124,8 +124,8 @@
             >
           </block>
           <para
-            >The <see cref="P:System.Web.UI.WebControls.DetailsViewDeleteEventArgs.Keys" /> property returns an object that implements the <see cref="T:System.Collections.Specialized.IOrderedDictionary" /> interface. The object contains <see cref="T:System.Collections.DictionaryEntry" /> objects that represent the key fields. </para
-          >
+            >The <see cref="P:System.Web.UI.WebControls.DetailsViewDeleteEventArgs.Keys" /> property returns an object that implements the <see cref="T:System.Collections.Specialized.IOrderedDictionary" /> interface. The object contains <see cref="T:System.Collections.DictionaryEntry" /> objects that represent the key fields.
+          </para>
           <block subset="none" type="note">
             <para
               >As a shortcut, you can also use the indexer of the <see cref="T:System.Collections.Specialized.IOrderedDictionary" /> object to access the key field values. The advantage in using the indexer is that it returns key field values directly.</para

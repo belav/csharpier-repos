@@ -84,8 +84,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The channel for which to create the channel sink chain. </param
-        >
+          />The channel for which to create the channel sink chain.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetChannelData">
@@ -120,8 +120,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Runtime.Remoting.Channels.IChannelDataStore" /> object in which the channel data is to be returned. </param
-        >
+          />A <see cref="T:System.Runtime.Remoting.Channels.IChannelDataStore" /> object in which the channel data is to be returned.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Next">

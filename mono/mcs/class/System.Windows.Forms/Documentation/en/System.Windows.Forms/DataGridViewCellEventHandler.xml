@@ -28,8 +28,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.Windows.Forms.DataGridViewCellEventHandler" /> handles the following <see cref="T:System.Windows.Forms.DataGridView" /> events: </para
-      >
+        <see cref="T:System.Windows.Forms.DataGridViewCellEventHandler" /> handles the following <see cref="T:System.Windows.Forms.DataGridView" /> events:
+      </para>
       <list type="bullet">
         <item>
           <para>

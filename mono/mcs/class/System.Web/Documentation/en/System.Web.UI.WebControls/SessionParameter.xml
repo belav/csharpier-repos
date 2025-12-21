@@ -87,8 +87,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Web.UI.WebControls.SessionParameter" /> from which the current instance is initialized. </param
-        >
+          />A <see cref="T:System.Web.UI.WebControls.SessionParameter" /> from which the current instance is initialized.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -119,19 +119,15 @@
           >
         </summary>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the parameter. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the parameter.
+        </param>
         <param name="sessionField">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the <see cref="T:System.Web.SessionState.HttpSessionState" /> name/value pair that the parameter object is bound to. The default is <see cref="F:System.String.Empty" />. </param
-        >
+          />The name of the <see cref="T:System.Web.SessionState.HttpSessionState" /> name/value pair that the parameter object is bound to. The default is <see cref="F:System.String.Empty" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -163,26 +159,22 @@
           >
         </summary>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the parameter. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the parameter.
+        </param>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type that the parameter represents. The default is <see cref="F:System.TypeCode.Object" />. </param
-        >
+          />The type that the parameter represents. The default is <see cref="F:System.TypeCode.Object" />.
+        </param>
         <param name="sessionField">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the <see cref="T:System.Web.SessionState.HttpSessionState" /> name/value pair that the parameter object is bound to. The default is <see cref="F:System.String.Empty" />. </param
-        >
+          />The name of the <see cref="T:System.Web.SessionState.HttpSessionState" /> name/value pair that the parameter object is bound to. The default is <see cref="F:System.String.Empty" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -242,8 +234,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Web.UI.WebControls.SessionParameter" /> object attempts to bind to the value of the session variable every time the <see cref="M:System.Web.UI.WebControls.SessionParameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" /> method is called. </para
-          >
+            >The <see cref="T:System.Web.UI.WebControls.SessionParameter" /> object attempts to bind to the value of the session variable every time the <see cref="M:System.Web.UI.WebControls.SessionParameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" /> method is called.
+          </para>
           <para
             >The <paramref name="context" /> parameter is used by the <see cref="M:System.Web.UI.WebControls.SessionParameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" /> method to retrieve the name/value pair that the <see cref="T:System.Web.UI.WebControls.SessionParameter" /> object binds to. The <paramref name="control" /> parameter is ignored.</para
           >
@@ -265,8 +257,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Web.UI.Control" /> that is associated with the Web Forms page where the <see cref="T:System.Web.UI.WebControls.SessionParameter" /> is used. </param
-        >
+          />A <see cref="T:System.Web.UI.Control" /> that is associated with the Web Forms page where the <see cref="T:System.Web.UI.WebControls.SessionParameter" /> is used.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

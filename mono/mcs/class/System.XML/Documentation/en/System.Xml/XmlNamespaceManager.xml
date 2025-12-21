@@ -43,8 +43,8 @@
       <para
         >For general information about how namespaces are declared and used in XML documents, see <format type="text/html">
           <a href="682643fc-b848-4e42-8c0d-50deeaeb5f2a">Managing Namespaces in an XML Document</a>
-        </format>. </para
-      >
+        </format>.
+      </para>
       <para>
         <see cref="T:System.Xml.XmlNamespaceManager" /> stores prefixes and namespaces as strings. Here's a summary of management and lookup tasks you can perform with this class. For more information and examples, follow the links to the reference page for each method or property.</para
       >
@@ -152,8 +152,8 @@
         >To add namespaces to the namespace manager, you create a <see cref="T:System.Xml.XmlNamespaceManager" /> object and then use the <see cref="M:System.Xml.XmlNamespaceManager.AddNamespace(System.String,System.String)" /> method. Default prefix and namespace pairs are automatically added to the namespace manager on creation.</para
       >
       <para
-        >When you create the namespace manager, you can specify a name table from the <see cref="T:System.Xml.XmlReader" />, <see cref="T:System.Xml.Xsl.XsltContext" />, or <see cref="T:System.Xml.XmlDocument" /> class, and then use the <see cref="M:System.Xml.XmlNamespaceManager.AddNamespace(System.String,System.String)" /> method to add the namespaces. </para
-      >
+        >When you create the namespace manager, you can specify a name table from the <see cref="T:System.Xml.XmlReader" />, <see cref="T:System.Xml.Xsl.XsltContext" />, or <see cref="T:System.Xml.XmlDocument" /> class, and then use the <see cref="M:System.Xml.XmlNamespaceManager.AddNamespace(System.String,System.String)" /> method to add the namespaces.
+      </para>
       <para
         >You can supply the <see cref="T:System.Xml.XmlNamespaceManager" /> object as a parameter to the <see cref="Overload:System.Xml.XmlNode.SelectNodes" /> or <see cref="Overload:System.Xml.XmlNode.SelectSingleNode" /> method of the <see cref="T:System.Xml.XmlDocument" /> class to execute XPath query expressions that reference namespace-qualified element and attribute names.</para
       >
@@ -161,11 +161,11 @@
         >The namespace manager assumes that prefixes and namespaces have already been verified and conform to the <see
           cref="http://www.w3.org/TR/REC-xml-names/"
           >W3C Namespaces</see
-        > specification. The namespace manager does not perform any validation. </para
-      >
+        > specification. The namespace manager does not perform any validation.
+      </para>
       <para
-        >The namespace manager atomizes the strings when they are added by using the <see cref="M:System.Xml.XmlNamespaceManager.AddNamespace(System.String,System.String)" /> method and when a lookup is performed by using the <see cref="M:System.Xml.XmlNamespaceManager.LookupNamespace(System.String)" /> or <see cref="M:System.Xml.XmlNamespaceManager.LookupPrefix(System.String)" /> method. </para
-      >
+        >The namespace manager atomizes the strings when they are added by using the <see cref="M:System.Xml.XmlNamespaceManager.AddNamespace(System.String,System.String)" /> method and when a lookup is performed by using the <see cref="M:System.Xml.XmlNamespaceManager.LookupNamespace(System.String)" /> or <see cref="M:System.Xml.XmlNamespaceManager.LookupPrefix(System.String)" /> method.
+      </para>
       <para>The namespace manager implements enumeration support in addition to adding and retrieving namespaces. You can loop through the information saved in the namespace manager by using the foreach construct. For example, if you create a namespace manager with the name nsmanager, you can iterate through the table by using foreach (String prefix in nsmanager). </para>
       <para>Because the namespace manager provides a string comparison with the prefix and namespaces as objects, there is a performance improvement when using the namespace manager over the direct comparison of a string.</para>
       <para>The following code example shows how to bind the prefix xsd with the namespace URI of http://www.w3.org/2001/XMLSchema and add it to the namespace manager:</para>
@@ -237,8 +237,8 @@ while (reader.Read())
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The name table is used to look up prefixes and namespaces. An existing name table with pre-atomized strings can be specified in the constructor. There are several advantages in doing so. For example, if the name table of an <see cref="T:System.Xml.XmlReader" /> object is used, after each read, any namespace and prefix strings pushed into the name table can be re-used by <see cref="T:System.Xml.XmlNamespaceManager" />. </para
-          >
+            >The name table is used to look up prefixes and namespaces. An existing name table with pre-atomized strings can be specified in the constructor. There are several advantages in doing so. For example, if the name table of an <see cref="T:System.Xml.XmlReader" /> object is used, after each read, any namespace and prefix strings pushed into the name table can be re-used by <see cref="T:System.Xml.XmlNamespaceManager" />.
+          </para>
           <para
             >For more information on atomized strings, see <see cref="T:System.Xml.XmlNameTable" />.</para
           >
@@ -259,8 +259,8 @@ while (reader.Read())
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlNameTable" /> to use. </param
-        >
+          />The <see cref="T:System.Xml.XmlNameTable" /> to use.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -300,12 +300,8 @@ while (reader.Read())
           >
         </exception>
         <param name="uri">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The namespace to add. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The namespace to add.
+        </param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
@@ -370,12 +366,8 @@ while (reader.Read())
           />The prefix to associate with the namespace being added. Use String.Empty to add a default namespace.</param
         >
         <param name="uri">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The namespace to add. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The namespace to add.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -625,8 +617,8 @@ Loop</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The prefix of the namespace you want to find. </param
-        >
+          />The prefix of the namespace you want to find.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -666,8 +658,8 @@ Loop</code>
       method to customize the behavior of this method in types derived from
       the <see cref="T:System.Xml.XmlNamespaceManager" />
       class.
-      </block
-            >
+
+            </block>
           </para>
         </remarks>
         <summary>
@@ -688,8 +680,8 @@ Loop</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The prefix whose namespace URI you want to resolve. To match the default namespace, pass String.Empty. </param
-        >
+          />The prefix whose namespace URI you want to resolve. To match the default namespace, pass String.Empty.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -738,8 +730,8 @@ Loop</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace to resolve for the prefix. </param
-        >
+          />The namespace to resolve for the prefix.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -885,8 +877,8 @@ Loop</code>
               > The namespace
       removed is from the current namespace scope. Namespaces outside the current
       scope are ignored. If <paramref name="prefix" /> or <paramref name=" uri" /> does not exist
-      in the collection, this method simply returns. </block
-            >
+      in the collection, this method simply returns.
+            </block>
           </para>
           <para>
             <block subset="none" type="overrides"
@@ -894,8 +886,8 @@ Loop</code>
       method to customize the behavior of this method in types derived from
       the <see cref="T:System.Xml.XmlNamespaceManager" />
       class.
-      </block
-            >
+
+            </block>
           </para>
         </remarks>
         <exception cref="T:System.ArgumentNullException">
@@ -906,8 +898,8 @@ Loop</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace to remove for the given prefix. The namespace removed is from the current namespace scope. Namespaces outside the current scope are ignored. </param
-        >
+          />The namespace to remove for the given prefix. The namespace removed is from the current namespace scope. Namespaces outside the current scope are ignored.
+        </param>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Removes the given namespace for the given prefix.</para>
@@ -917,15 +909,15 @@ Loop</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The prefix for the namespace </param
-        >
+          />The prefix for the namespace
+        </param>
         <param name="uri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace to remove for the given prefix. The namespace removed is from the current namespace scope. Namespaces outside the current scope are ignored. </param
-        >
+          />The namespace to remove for the given prefix. The namespace removed is from the current namespace scope. Namespaces outside the current scope are ignored.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

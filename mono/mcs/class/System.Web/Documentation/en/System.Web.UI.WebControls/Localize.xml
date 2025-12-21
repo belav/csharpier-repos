@@ -37,8 +37,8 @@
         <h2>Introduction</h2>
       </format>
       <para
-        >Use the <see cref="T:System.Web.UI.WebControls.Localize" /> control to reserve a location on a Web page in which to display localized text. </para
-      >
+        >Use the <see cref="T:System.Web.UI.WebControls.Localize" /> control to reserve a location on a Web page in which to display localized text.
+      </para>
       <block subset="none" type="note">
         <para>Controls that are outside the body element are ignored.</para>
       </block>

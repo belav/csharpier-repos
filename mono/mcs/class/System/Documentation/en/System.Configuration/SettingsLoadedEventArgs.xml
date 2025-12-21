@@ -19,8 +19,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Configuration.SettingsLoadedEventArgs" /> class provides data for the <see cref="E:System.Configuration.ApplicationSettingsBase.SettingsLoaded" /> event, which occurs when settings are retrieved from a provider. </para
-      >
+        >The <see cref="T:System.Configuration.SettingsLoadedEventArgs" /> class provides data for the <see cref="E:System.Configuration.ApplicationSettingsBase.SettingsLoaded" /> event, which occurs when settings are retrieved from a provider.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -53,8 +53,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Configuration.SettingsLoadedEventArgs" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Configuration.SettingsLoadedEventArgs" /> class.
+          </para>
         </summary>
         <param name="provider">
           <attribution

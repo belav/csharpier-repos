@@ -86,19 +86,15 @@ OleDbDataReader reader = command.ExecuteReader();</code>
           >
         </summary>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the parameter. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the parameter.
+        </param>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Data.Odbc.OdbcType" /> values. </param
-        >
+          />One of the <see cref="T:System.Data.Odbc.OdbcType" /> values.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -130,19 +126,15 @@ OleDbDataReader reader = command.ExecuteReader();</code>
           >
         </summary>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the parameter. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the parameter.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Data.Odbc.OdbcParameter" /> object. </param
-        >
+          />An <see cref="T:System.Data.Odbc.OdbcParameter" /> object.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -169,26 +161,22 @@ OleDbDataReader reader = command.ExecuteReader();</code>
           >
         </summary>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the parameter. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the parameter.
+        </param>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Data.Odbc.OdbcType" /> values. </param
-        >
+          />One of the <see cref="T:System.Data.Odbc.OdbcType" /> values.
+        </param>
         <param name="size">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The length of the parameter. </param
-        >
+          />The length of the parameter.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -216,33 +204,29 @@ OleDbDataReader reader = command.ExecuteReader();</code>
           >
         </summary>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the parameter. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the parameter.
+        </param>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Data.Odbc.OdbcType" /> values. </param
-        >
+          />One of the <see cref="T:System.Data.Odbc.OdbcType" /> values.
+        </param>
         <param name="size">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The length of the parameter. </param
-        >
+          />The length of the parameter.
+        </param>
         <param name="sourcecolumn">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the source column. </param
-        >
+          />The name of the source column.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -281,75 +265,71 @@ OleDbDataReader reader = command.ExecuteReader();</code>
           >
         </summary>
         <param name="parameterName">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the parameter. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the parameter.
+        </param>
         <param name="odbcType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Data.Odbc.OdbcType" /> values. </param
-        >
+          />One of the <see cref="T:System.Data.Odbc.OdbcType" /> values.
+        </param>
         <param name="size">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The length of the parameter. </param
-        >
+          />The length of the parameter.
+        </param>
         <param name="parameterDirection">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Data.ParameterDirection" /> values. </param
-        >
+          />One of the <see cref="T:System.Data.ParameterDirection" /> values.
+        </param>
         <param name="isNullable">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if the value of the field can be null; otherwise false. </param
-        >
+          />true if the value of the field can be null; otherwise false.
+        </param>
         <param name="precision">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The total number of digits to the left and right of the decimal point to which <see cref="P:System.Data.Odbc.OdbcParameter.Value" /> is resolved. </param
-        >
+          />The total number of digits to the left and right of the decimal point to which <see cref="P:System.Data.Odbc.OdbcParameter.Value" /> is resolved.
+        </param>
         <param name="scale">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The total number of decimal places to which <see cref="P:System.Data.Odbc.OdbcParameter.Value" /> is resolved. </param
-        >
+          />The total number of decimal places to which <see cref="P:System.Data.Odbc.OdbcParameter.Value" /> is resolved.
+        </param>
         <param name="srcColumn">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the source column. </param
-        >
+          />The name of the source column.
+        </param>
         <param name="srcVersion">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Data.DataRowVersion" /> values. </param
-        >
+          />One of the <see cref="T:System.Data.DataRowVersion" /> values.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Object" /> that is the value of the <see cref="T:System.Data.Odbc.OdbcParameter" />. </param
-        >
+          />An <see cref="T:System.Object" /> that is the value of the <see cref="T:System.Data.Odbc.OdbcParameter" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -536,8 +516,8 @@ OleDbDataReader reader = command.ExecuteReader();</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Setting this property to a value other than the value in the database depends on the implementation of the data provider and may return an error code, truncate, or round data.</para>
           <para
-            >The <see cref="P:System.Data.Odbc.OdbcParameter.Precision" /> property only affects parameters whose <see cref="T:System.Data.Odbc.OdbcType" /> is Decimal or Numeric. For other data types, <see cref="P:System.Data.Odbc.OdbcParameter.Precision" /> is ignored. </para
-          >
+            >The <see cref="P:System.Data.Odbc.OdbcParameter.Precision" /> property only affects parameters whose <see cref="T:System.Data.Odbc.OdbcType" /> is Decimal or Numeric. For other data types, <see cref="P:System.Data.Odbc.OdbcParameter.Precision" /> is ignored.
+          </para>
           <block subset="none" type="note">
             <para
               >Use of this property to coerce data passed to the database is not supported. To round, truncate, or otherwise coerce data before passing it to the database, use the <see cref="T:System.Math" /> class that is part of the System namespace prior to assigning a value to the parameter's Value property.</para
@@ -631,8 +611,8 @@ OleDbDataReader reader = command.ExecuteReader();</code>
           >
           <para>The effect of setting this property to a value other than the value in the database depends on the implementation of the data provider and may return an error code, or truncate or round data.</para>
           <para
-            >The <see cref="P:System.Data.Odbc.OdbcParameter.Scale" /> property only affects parameters whose <see cref="T:System.Data.Odbc.OdbcType" /> is Decimal or Numeric. For other data types, <see cref="P:System.Data.Odbc.OdbcParameter.Scale" /> is ignored. </para
-          >
+            >The <see cref="P:System.Data.Odbc.OdbcParameter.Scale" /> property only affects parameters whose <see cref="T:System.Data.Odbc.OdbcType" /> is Decimal or Numeric. For other data types, <see cref="P:System.Data.Odbc.OdbcParameter.Scale" /> is ignored.
+          </para>
           <para>When using SQL Server Native Client 10 (or later) to bind a parameter whose type is Decimal, Numeric, VarNumeric, DBDate, or DBTimeStamp, you must manually specify an appropriate Scale value.</para>
           <block subset="none" type="note">
             <para

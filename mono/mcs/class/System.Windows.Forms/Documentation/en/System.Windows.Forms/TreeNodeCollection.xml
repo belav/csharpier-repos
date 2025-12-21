@@ -23,8 +23,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="M:System.Windows.Forms.TreeNodeCollection.Add(System.String)" />, <see cref="M:System.Windows.Forms.TreeNodeCollection.Remove(System.Windows.Forms.TreeNode)" />, and <see cref="M:System.Windows.Forms.TreeNodeCollection.RemoveAt(System.Int32)" /> methods enable you to add and remove individual tree nodes from the collection. </para
-      >
+        >The <see cref="M:System.Windows.Forms.TreeNodeCollection.Add(System.String)" />, <see cref="M:System.Windows.Forms.TreeNodeCollection.Remove(System.Windows.Forms.TreeNode)" />, and <see cref="M:System.Windows.Forms.TreeNodeCollection.RemoveAt(System.Int32)" /> methods enable you to add and remove individual tree nodes from the collection.
+      </para>
       <block subset="none" type="note">
         <para>Enumerating the collection and removing nodes is not supported. </para>
       </block>
@@ -80,8 +80,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The label text displayed by the <see cref="T:System.Windows.Forms.TreeNode" />. </param
-        >
+          />The label text displayed by the <see cref="T:System.Windows.Forms.TreeNode" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -133,8 +133,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.TreeNode" /> to add to the collection. </param
-        >
+          />The <see cref="T:System.Windows.Forms.TreeNode" /> to add to the collection.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -499,8 +499,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Windows.Forms.TreeNode" /> objects representing the tree nodes to add to the collection. </param
-        >
+          />An array of <see cref="T:System.Windows.Forms.TreeNode" /> objects representing the tree nodes to add to the collection.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -551,8 +551,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method enables you to determine whether a <see cref="T:System.Windows.Forms.TreeNode" /> is a member of the collection before attempting to perform operations on the <see cref="T:System.Windows.Forms.TreeNode" />. You can use this method to confirm that a <see cref="T:System.Windows.Forms.TreeNode" /> has been added to or is still a member of the collection. </para
-          >
+            >This method enables you to determine whether a <see cref="T:System.Windows.Forms.TreeNode" /> is a member of the collection before attempting to perform operations on the <see cref="T:System.Windows.Forms.TreeNode" />. You can use this method to confirm that a <see cref="T:System.Windows.Forms.TreeNode" /> has been added to or is still a member of the collection.
+          </para>
           <para>The amount of time this method takes is proportional to the size of the node collection, so you may want to avoid using it with large collections.</para>
           <para>This method checks for reference equality only. You cannot use it to determine whether an equivalent but different node is in the collection. </para>
           <block subset="none" type="note">
@@ -576,8 +576,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.TreeNode" /> to locate in the collection. </param
-        >
+          />The <see cref="T:System.Windows.Forms.TreeNode" /> to locate in the collection.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -613,8 +613,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true to indicate the collection contains a <see cref="T:System.Windows.Forms.TreeNode" /> with the specified key; otherwise, false. </para
-          >
+            >true to indicate the collection contains a <see cref="T:System.Windows.Forms.TreeNode" /> with the specified key; otherwise, false.
+          </para>
         </returns>
         <param name="key">
           <attribution
@@ -642,19 +642,15 @@
           <para>Copies the entire collection into an existing array at a specified location within the array.</para>
         </summary>
         <param name="dest">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The destination array. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The destination array.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index in the destination array at which storing begins. </param
-        >
+          />The index in the destination array at which storing begins.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -745,8 +741,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to search child nodes of tree nodes; otherwise, false. </param
-        >
+          />true to search child nodes of tree nodes; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetEnumerator">
@@ -813,8 +809,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.TreeNode" /> to locate in the collection. </param
-        >
+          />The <see cref="T:System.Windows.Forms.TreeNode" /> to locate in the collection.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -955,15 +951,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The indexed location within the collection to insert the tree node. </param
-        >
+          />The indexed location within the collection to insert the tree node.
+        </param>
         <param name="node">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.TreeNode" /> to insert into the collection. </param
-        >
+          />The <see cref="T:System.Windows.Forms.TreeNode" /> to insert into the collection.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1452,8 +1448,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.TreeNode" /> to remove. </param
-        >
+          />The <see cref="T:System.Windows.Forms.TreeNode" /> to remove.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1476,8 +1472,8 @@
             >When a <see cref="T:System.Windows.Forms.TreeNode" /> is removed from the tree node collection, all subsequent tree nodes are moved up one position in the collection.</para
           >
           <para
-            >You can also remove a <see cref="T:System.Windows.Forms.TreeNode" /> that you previously added by using the <see cref="M:System.Windows.Forms.TreeNodeCollection.Remove(System.Windows.Forms.TreeNode)" /> or <see cref="M:System.Windows.Forms.TreeNodeCollection.Clear" /> methods. </para
-          >
+            >You can also remove a <see cref="T:System.Windows.Forms.TreeNode" /> that you previously added by using the <see cref="M:System.Windows.Forms.TreeNodeCollection.Remove(System.Windows.Forms.TreeNode)" /> or <see cref="M:System.Windows.Forms.TreeNodeCollection.Clear" /> methods.
+          </para>
           <block subset="none" type="note">
             <para>Enumerating the collection and removing nodes is not supported.</para>
           </block>
@@ -1494,8 +1490,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the <see cref="T:System.Windows.Forms.TreeNode" /> to remove. </param
-        >
+          />The index of the <see cref="T:System.Windows.Forms.TreeNode" /> to remove.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1723,8 +1719,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The indexed location within the collection to insert the tree node. </param
-        >
+          />The indexed location within the collection to insert the tree node.
+        </param>
         <param name="node">
           <attribution
             license="cc4"

@@ -65,12 +65,8 @@
           >
         </summary>
         <param name="copyright">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The copyright information. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The copyright information.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Copyright">

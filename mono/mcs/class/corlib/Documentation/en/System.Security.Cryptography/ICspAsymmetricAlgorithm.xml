@@ -24,8 +24,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Classes that extend the <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" /> class should implement the <see cref="T:System.Security.Cryptography.ICspAsymmetricAlgorithm" /> interface to enumerate key container information using a <see cref="T:System.Security.Cryptography.CspKeyContainerInfo" /> object, and to import and export Microsoft Cryptographic API (CAPI)–compatible key blobs. </para
-      >
+        >Classes that extend the <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" /> class should implement the <see cref="T:System.Security.Cryptography.ICspAsymmetricAlgorithm" /> interface to enumerate key container information using a <see cref="T:System.Security.Cryptography.CspKeyContainerInfo" /> object, and to import and export Microsoft Cryptographic API (CAPI)–compatible key blobs.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -58,8 +58,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The returned <see cref="T:System.Security.Cryptography.CspKeyContainerInfo" /> object specifies whether the key is exportable, and provides the key container name, information about the provider, and other information.    </para
-          >
+            >The returned <see cref="T:System.Security.Cryptography.CspKeyContainerInfo" /> object specifies whether the key is exportable, and provides the key container name, information about the provider, and other information.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -100,8 +100,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Exports a blob that contains the key information associated with an <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" /> object.  </para
-          >
+            >Exports a blob that contains the key information associated with an <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" /> object.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />

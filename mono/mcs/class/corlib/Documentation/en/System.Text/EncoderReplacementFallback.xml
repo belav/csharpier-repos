@@ -22,8 +22,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A common reason for an encoding or decoding operation to fail is if the underlying encoding class does not provide a mapping between a character and an equivalent byte sequence. For example, an <see cref="T:System.Text.ASCIIEncoding" /> object cannot encode a character having a Unicode code point value that is outside the range U+0000 to U+007F. If the input character cannot be converted to an output byte sequence, a <see cref="T:System.Text.EncoderReplacementFallback" /> object substitutes a specified replacement string for the original input character. The conversion process encodes the replacement string and then continues to process the remainder of the original input. </para
-      >
+        >A common reason for an encoding or decoding operation to fail is if the underlying encoding class does not provide a mapping between a character and an equivalent byte sequence. For example, an <see cref="T:System.Text.ASCIIEncoding" /> object cannot encode a character having a Unicode code point value that is outside the range U+0000 to U+007F. If the input character cannot be converted to an output byte sequence, a <see cref="T:System.Text.EncoderReplacementFallback" /> object substitutes a specified replacement string for the original input character. The conversion process encodes the replacement string and then continues to process the remainder of the original input.
+      </para>
       <para
         >The value of a <see cref="T:System.Text.EncoderReplacementFallback" /> object is the replacement string used to initialize that object.</para
       >
@@ -31,8 +31,8 @@
         >This class is one of two .NET Framework classes that implement different fallback strategies for handling encoding conversion failures. The other class is the <see cref="T:System.Text.EncoderExceptionFallback" /> class, which throws an <see cref="T:System.Text.EncoderFallbackException" /> when an invalid character is encountered.</para
       >
       <para
-        >When you choose a fallback string to use with this class, make sure that the string is composed entirely of characters that can be encoded in the target encoding. Otherwise, a recursive fallback results, causing an <see cref="T:System.ArgumentException" />. </para
-      >
+        >When you choose a fallback string to use with this class, make sure that the string is composed entirely of characters that can be encoded in the target encoding. Otherwise, a recursive fallback results, causing an <see cref="T:System.ArgumentException" />.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -141,8 +141,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Text.EncoderFallbackBuffer" /> object equal to this <see cref="T:System.Text.EncoderReplacementFallback" /> object. </para
-          >
+            >A <see cref="T:System.Text.EncoderFallbackBuffer" /> object equal to this <see cref="T:System.Text.EncoderReplacementFallback" /> object.
+          </para>
         </returns>
       </Docs>
     </Member>
@@ -203,8 +203,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <paramref name="value" /> parameter specifies an <see cref="T:System.Text.EncoderReplacementFallback" /> object and the replacement string of that object is equal to the replacement string of this <see cref="T:System.Text.EncoderReplacementFallback" /> object; otherwise, false. </para
-          >
+            >true if the <paramref name="value" /> parameter specifies an <see cref="T:System.Text.EncoderReplacementFallback" /> object and the replacement string of that object is equal to the replacement string of this <see cref="T:System.Text.EncoderReplacementFallback" /> object; otherwise, false.
+          </para>
         </returns>
         <param name="value">
           <attribution

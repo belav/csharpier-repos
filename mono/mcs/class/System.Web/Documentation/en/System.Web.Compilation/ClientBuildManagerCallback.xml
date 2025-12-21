@@ -41,8 +41,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.Compilation.ClientBuildManagerCallback" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.Compilation.ClientBuildManagerCallback" /> class.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -73,8 +73,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The error or warning encountered during compilation. </param
-        >
+          />The error or warning encountered during compilation.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

@@ -68,8 +68,8 @@
       </Parameters>
       <Docs>
         <param name="filename"
-          >a <see cref="T:System.String" /> representing the filename under which the private key will be loaded. </param
-        >
+          >a <see cref="T:System.String" /> representing the filename under which the private key will be loaded.
+        </param>
         <summary>Create a PrivateKey object from the specified file.</summary>
         <returns
           >a <see cref="T:Mono.Security.Authenticode.PrivateKey" /> object containing the loaded private key.</returns
@@ -98,8 +98,8 @@
       </Parameters>
       <Docs>
         <param name="filename"
-          >a <see cref="T:System.String" /> representing the filename under which the private key will be loaded. </param
-        >
+          >a <see cref="T:System.String" /> representing the filename under which the private key will be loaded.
+        </param>
         <param name="password">the password to decrypt the private key file.</param>
         <summary>Create a PrivateKey object from the specified file and password.</summary>
         <returns

@@ -104,8 +104,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string that specifies the version of the satellite assemblies to load. </param
-        >
+          />A string that specifies the version of the satellite assemblies to load.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Version">

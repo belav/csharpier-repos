@@ -61,8 +61,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.ComponentDocumentDesigner" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.ComponentDocumentDesigner" /> class.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -119,8 +119,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -157,8 +157,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.Design.ToolboxItem" /> to test for toolbox support. </param
-        >
+          />The <see cref="T:System.Drawing.Design.ToolboxItem" /> to test for toolbox support.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -188,8 +188,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ComponentModel.IComponent" /> to associate with the designer. </param
-        >
+          />The <see cref="T:System.ComponentModel.IComponent" /> to associate with the designer.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -226,8 +226,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Collections.IDictionary" /> that contains the properties for the class of the component. </param
-        >
+          />An <see cref="T:System.Collections.IDictionary" /> that contains the properties for the class of the component.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

@@ -106,8 +106,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An interface to a container. </param
-        >
+          />An interface to a container.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -143,8 +143,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The port to use (for example, COM1). </param
-        >
+          />The port to use (for example, COM1).
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -181,11 +181,11 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The port to use (for example, COM1). </param
-        >
+          />The port to use (for example, COM1).
+        </param>
         <param name="baudRate">
-          <attribution license="cc4" from="Microsoft" modified="false" />The baud rate. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The baud rate.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -226,18 +226,18 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The port to use (for example, COM1). </param
-        >
+          />The port to use (for example, COM1).
+        </param>
         <param name="baudRate">
-          <attribution license="cc4" from="Microsoft" modified="false" />The baud rate. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The baud rate.
+        </param>
         <param name="parity">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="P:System.IO.Ports.SerialPort.Parity" /> values. </param
-        >
+          />One of the <see cref="P:System.IO.Ports.SerialPort.Parity" /> values.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -279,25 +279,21 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The port to use (for example, COM1). </param
-        >
+          />The port to use (for example, COM1).
+        </param>
         <param name="baudRate">
-          <attribution license="cc4" from="Microsoft" modified="false" />The baud rate. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The baud rate.
+        </param>
         <param name="parity">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="P:System.IO.Ports.SerialPort.Parity" /> values. </param
-        >
+          />One of the <see cref="P:System.IO.Ports.SerialPort.Parity" /> values.
+        </param>
         <param name="dataBits">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The data bits value. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The data bits value.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -340,32 +336,28 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The port to use (for example, COM1). </param
-        >
+          />The port to use (for example, COM1).
+        </param>
         <param name="baudRate">
-          <attribution license="cc4" from="Microsoft" modified="false" />The baud rate. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The baud rate.
+        </param>
         <param name="parity">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="P:System.IO.Ports.SerialPort.Parity" /> values. </param
-        >
+          />One of the <see cref="P:System.IO.Ports.SerialPort.Parity" /> values.
+        </param>
         <param name="dataBits">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The data bits value. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The data bits value.
+        </param>
         <param name="stopBits">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="P:System.IO.Ports.SerialPort.StopBits" /> values. </param
-        >
+          />One of the <see cref="P:System.IO.Ports.SerialPort.StopBits" /> values.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="BaseStream">
@@ -872,8 +864,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DsrHolding">
@@ -1005,8 +997,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Error events can be caused by any of the items in the <see cref="T:System.IO.Ports.SerialError" /> enumeration. Because the operating system determines whether to raise this event or not, not all parity errors may be reported. </para
-          >
+            >Error events can be caused by any of the items in the <see cref="T:System.IO.Ports.SerialError" /> enumeration. Because the operating system determines whether to raise this event or not, not all parity errors may be reported.
+          </para>
           <para>
             <see cref="E:System.IO.Ports.SerialPort.PinChanged" />, <see cref="E:System.IO.Ports.SerialPort.DataReceived" />, and <see cref="E:System.IO.Ports.SerialPort.ErrorReceived" /> events may be called out of order, and there may be a slight delay between when the underlying stream reports the error and when code can when the event handler is executed. Only one event handler can execute at a time.</para
           >
@@ -1204,8 +1196,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property defines the end of a line for the <see cref="M:System.IO.Ports.SerialPort.ReadLine" /> and <see cref="M:System.IO.Ports.SerialPort.WriteLine(System.String)" /> methods. </para
-          >
+            >This property defines the end of a line for the <see cref="M:System.IO.Ports.SerialPort.ReadLine" /> and <see cref="M:System.IO.Ports.SerialPort.WriteLine(System.String)" /> methods.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1441,11 +1433,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If it is necessary to switch between reading text and reading binary data from the stream, select a protocol that carefully defines the boundary between text and binary data, such as manually reading bytes and decoding the data.</para>
           <para
-            >Because the <see cref="T:System.IO.Ports.SerialPort" /> class buffers data, and the stream contained in the <see cref="P:System.IO.Ports.SerialPort.BaseStream" /> property does not, the two might conflict about how many bytes are available to read.  The <see cref="P:System.IO.Ports.SerialPort.BytesToRead" /> property can indicate that there are bytes to read, but these bytes might not be accessible to the stream contained in the <see cref="P:System.IO.Ports.SerialPort.BaseStream" /> property because they have been buffered to the <see cref="T:System.IO.Ports.SerialPort" /> class. </para
-          >
+            >Because the <see cref="T:System.IO.Ports.SerialPort" /> class buffers data, and the stream contained in the <see cref="P:System.IO.Ports.SerialPort.BaseStream" /> property does not, the two might conflict about how many bytes are available to read.  The <see cref="P:System.IO.Ports.SerialPort.BytesToRead" /> property can indicate that there are bytes to read, but these bytes might not be accessible to the stream contained in the <see cref="P:System.IO.Ports.SerialPort.BaseStream" /> property because they have been buffered to the <see cref="T:System.IO.Ports.SerialPort" /> class.
+          </para>
           <para
-            >The <see cref="M:System.IO.Ports.SerialPort.Read(System.Byte[],System.Int32,System.Int32)" /> method does not block other operations when the number of bytes read equals <paramref name="count" /> but there are still unread bytes available on the serial port.  </para
-          >
+            >The <see cref="M:System.IO.Ports.SerialPort.Read(System.Byte[],System.Int32,System.Int32)" /> method does not block other operations when the number of bytes read equals <paramref name="count" /> but there are still unread bytes available on the serial port.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1462,22 +1454,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte array to write the input to. </param
-        >
+          />The byte array to write the input to.
+        </param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The offset in the buffer array to begin reading from. </param
-        >
+          />The offset in the buffer array to begin reading from.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes to read. </param
-        >
+          />The number of bytes to read.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Read">
@@ -1509,8 +1501,8 @@
           <para>Use this method for reading characters from the serial port.</para>
           <para>If it is necessary to switch between reading text and reading binary data from the stream, select a protocol that carefully defines the boundary between text and binary data, such as manually reading bytes and decoding the data.</para>
           <para
-            >Because the <see cref="T:System.IO.Ports.SerialPort" /> class buffers data, and the stream contained in the <see cref="P:System.IO.Ports.SerialPort.BaseStream" /> property does not, the two might conflict about how many characters are available to read.  The <see cref="P:System.IO.Ports.SerialPort.BytesToRead" /> property can indicate that there are characters to read, but these characters might not be accessible to the stream contained in the <see cref="P:System.IO.Ports.SerialPort.BaseStream" /> property because they have been buffered to the <see cref="T:System.IO.Ports.SerialPort" /> class. </para
-          >
+            >Because the <see cref="T:System.IO.Ports.SerialPort" /> class buffers data, and the stream contained in the <see cref="P:System.IO.Ports.SerialPort.BaseStream" /> property does not, the two might conflict about how many characters are available to read.  The <see cref="P:System.IO.Ports.SerialPort.BytesToRead" /> property can indicate that there are characters to read, but these characters might not be accessible to the stream contained in the <see cref="P:System.IO.Ports.SerialPort.BaseStream" /> property because they have been buffered to the <see cref="T:System.IO.Ports.SerialPort" /> class.
+          </para>
           <para
             >The <see cref="M:System.IO.Ports.SerialPort.Read(System.Char[],System.Int32,System.Int32)" /> method does not block other operations when the number of bytes read equals <paramref name="count" /> but there are still unread bytes available on the serial port.</para
           >
@@ -1530,22 +1522,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character array to write the input to. </param
-        >
+          />The character array to write the input to.
+        </param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The offset in the buffer array to begin reading from. </param
-        >
+          />The offset in the buffer array to begin reading from.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters to read. </param
-        >
+          />The number of characters to read.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ReadBufferSize">
@@ -1615,8 +1607,8 @@
           >
           <block subset="none" type="note">
             <para
-              >Because the <see cref="T:System.IO.Ports.SerialPort" /> class buffers data, and the stream contained in the <see cref="P:System.IO.Ports.SerialPort.BaseStream" /> property does not, the two might conflict about how many bytes are available to read.  The <see cref="P:System.IO.Ports.SerialPort.BytesToRead" /> property can indicate that there are bytes to read, but these bytes might not be accessible to the stream contained in the <see cref="P:System.IO.Ports.SerialPort.BaseStream" /> property because they have been buffered to the <see cref="T:System.IO.Ports.SerialPort" /> class. </para
-            >
+              >Because the <see cref="T:System.IO.Ports.SerialPort" /> class buffers data, and the stream contained in the <see cref="P:System.IO.Ports.SerialPort.BaseStream" /> property does not, the two might conflict about how many bytes are available to read.  The <see cref="P:System.IO.Ports.SerialPort.BytesToRead" /> property can indicate that there are bytes to read, but these bytes might not be accessible to the stream contained in the <see cref="P:System.IO.Ports.SerialPort.BaseStream" /> property because they have been buffered to the <see cref="T:System.IO.Ports.SerialPort" /> class.
+            </para>
           </block>
         </remarks>
         <summary>
@@ -1658,8 +1650,8 @@
           >
           <block subset="none" type="note">
             <para
-              >Because the <see cref="T:System.IO.Ports.SerialPort" /> class buffers data, and the stream contained in the <see cref="P:System.IO.Ports.SerialPort.BaseStream" /> property does not, the two might conflict about how many bytes are available to read.  The <see cref="P:System.IO.Ports.SerialPort.BytesToRead" /> property can indicate that there are bytes to read, but these bytes might not be accessible to the stream contained in the <see cref="P:System.IO.Ports.SerialPort.BaseStream" /> property because they have been buffered to the <see cref="T:System.IO.Ports.SerialPort" /> class. </para
-            >
+              >Because the <see cref="T:System.IO.Ports.SerialPort" /> class buffers data, and the stream contained in the <see cref="P:System.IO.Ports.SerialPort.BaseStream" /> property does not, the two might conflict about how many bytes are available to read.  The <see cref="P:System.IO.Ports.SerialPort.BytesToRead" /> property can indicate that there are bytes to read, but these bytes might not be accessible to the stream contained in the <see cref="P:System.IO.Ports.SerialPort.BaseStream" /> property because they have been buffered to the <see cref="T:System.IO.Ports.SerialPort" /> class.
+            </para>
           </block>
         </remarks>
         <summary>
@@ -1699,8 +1691,8 @@
           <para>If it is necessary to switch between reading text and reading binary data from the stream, select a protocol that carefully defines the boundary between text and binary data, such as manually reading bytes and decoding the data.</para>
           <block subset="none" type="note">
             <para
-              >The <see cref="T:System.IO.Ports.SerialPort" /> class buffers data, but the stream object contained in the <see cref="P:System.IO.Ports.SerialPort.BaseStream" /> property does not. Therefore, the <see cref="T:System.IO.Ports.SerialPort" /> object and the stream object might differ on the number of bytes that are available to read. When bytes are buffered to the <see cref="T:System.IO.Ports.SerialPort" /> object, the <see cref="P:System.IO.Ports.SerialPort.BytesToRead" /> property includes these bytes in its value; however, these bytes might not be accessible to the stream contained in the <see cref="P:System.IO.Ports.SerialPort.BaseStream" /> property.   </para
-            >
+              >The <see cref="T:System.IO.Ports.SerialPort" /> class buffers data, but the stream object contained in the <see cref="P:System.IO.Ports.SerialPort.BaseStream" /> property does not. Therefore, the <see cref="T:System.IO.Ports.SerialPort" /> object and the stream object might differ on the number of bytes that are available to read. When bytes are buffered to the <see cref="T:System.IO.Ports.SerialPort" /> object, the <see cref="P:System.IO.Ports.SerialPort.BytesToRead" /> property includes these bytes in its value; however, these bytes might not be accessible to the stream contained in the <see cref="P:System.IO.Ports.SerialPort.BaseStream" /> property.
+            </para>
           </block>
         </remarks>
         <summary>
@@ -1745,8 +1737,8 @@
           <para>If it is necessary to switch between reading text and reading binary data from the stream, select a protocol that carefully defines the boundary between text and binary data, such as manually reading bytes and decoding the data.</para>
           <block subset="none" type="note">
             <para
-              >Because the <see cref="T:System.IO.Ports.SerialPort" /> class buffers data, and the stream contained in the <see cref="P:System.IO.Ports.SerialPort.BaseStream" /> property does not, the two might conflict about how many bytes are available to read.  The <see cref="P:System.IO.Ports.SerialPort.BytesToRead" /> property can indicate that there are bytes to read, but these bytes might not be accessible to the stream contained in the <see cref="P:System.IO.Ports.SerialPort.BaseStream" /> property because they have been buffered to the <see cref="T:System.IO.Ports.SerialPort" /> class. </para
-            >
+              >Because the <see cref="T:System.IO.Ports.SerialPort" /> class buffers data, and the stream contained in the <see cref="P:System.IO.Ports.SerialPort.BaseStream" /> property does not, the two might conflict about how many bytes are available to read.  The <see cref="P:System.IO.Ports.SerialPort.BytesToRead" /> property can indicate that there are bytes to read, but these bytes might not be accessible to the stream contained in the <see cref="P:System.IO.Ports.SerialPort.BaseStream" /> property because they have been buffered to the <see cref="T:System.IO.Ports.SerialPort" /> class.
+            </para>
           </block>
         </remarks>
         <summary>
@@ -1791,8 +1783,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The read time-out value was originally set at 500 milliseconds in the Win32 Communications API. This property allows you to set this value. The time-out can be set to any value greater than zero, or set to <see cref="F:System.IO.Ports.SerialPort.InfiniteTimeout" />, in which case no time-out occurs. <see cref="F:System.IO.Ports.SerialPort.InfiniteTimeout" /> is the default. </para
-          >
+            >The read time-out value was originally set at 500 milliseconds in the Win32 Communications API. This property allows you to set this value. The time-out can be set to any value greater than zero, or set to <see cref="F:System.IO.Ports.SerialPort.InfiniteTimeout" />, in which case no time-out occurs. <see cref="F:System.IO.Ports.SerialPort.InfiniteTimeout" /> is the default.
+          </para>
           <block subset="none" type="note">
             <para
               >Users of the unmanaged COMMTIMEOUTS structure might expect to set the time-out value to zero to suppress time-outs. To suppress time-outs with the <see cref="P:System.IO.Ports.SerialPort.ReadTimeout" /> property, however, you must specify <see cref="F:System.IO.Ports.SerialPort.InfiniteTimeout" />.</para
@@ -1835,8 +1827,8 @@
           <para>If it is necessary to switch between reading text and reading binary data from the stream, select a protocol that carefully defines the boundary between text and binary data, such as manually reading bytes and decoding the data.</para>
           <block subset="none" type="note">
             <para
-              >Because the <see cref="T:System.IO.Ports.SerialPort" /> class buffers data, and the stream contained in the <see cref="P:System.IO.Ports.SerialPort.BaseStream" /> property does not, the two might conflict about how many bytes are available to read.  The <see cref="P:System.IO.Ports.SerialPort.BytesToRead" /> property can indicate that there are bytes to read, but these bytes might not be accessible to the stream contained in the <see cref="P:System.IO.Ports.SerialPort.BaseStream" /> property because they have been buffered to the <see cref="T:System.IO.Ports.SerialPort" /> class. </para
-            >
+              >Because the <see cref="T:System.IO.Ports.SerialPort" /> class buffers data, and the stream contained in the <see cref="P:System.IO.Ports.SerialPort.BaseStream" /> property does not, the two might conflict about how many bytes are available to read.  The <see cref="P:System.IO.Ports.SerialPort.BytesToRead" /> property can indicate that there are bytes to read, but these bytes might not be accessible to the stream contained in the <see cref="P:System.IO.Ports.SerialPort.BaseStream" /> property because they have been buffered to the <see cref="T:System.IO.Ports.SerialPort" /> class.
+            </para>
           </block>
         </remarks>
         <summary>
@@ -1856,8 +1848,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A value that indicates where the read operation stops. </param
-        >
+          />A value that indicates where the read operation stops.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ReceivedBytesThreshold">
@@ -2060,22 +2052,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte array that contains the data to write to the port. </param
-        >
+          />The byte array that contains the data to write to the port.
+        </param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based byte offset in the <paramref name="buffer" /> parameter at which to begin copying bytes to the port. </param
-        >
+          />The zero-based byte offset in the <paramref name="buffer" /> parameter at which to begin copying bytes to the port.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes to write. </param
-        >
+          />The number of bytes to write.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -2121,22 +2113,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character array that contains the data to write to the port. </param
-        >
+          />The character array that contains the data to write to the port.
+        </param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based byte offset in the <paramref name="buffer" /> parameter at which to begin copying bytes to the port. </param
-        >
+          />The zero-based byte offset in the <paramref name="buffer" /> parameter at which to begin copying bytes to the port.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters to write. </param
-        >
+          />The number of characters to write.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteBufferSize">
@@ -2241,8 +2233,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The write time-out value was originally set at 500 milliseconds in the Win32 Communications API. This property allows you to set this value. The time-out can be set to any value greater than zero, or set to <see cref="F:System.IO.Ports.SerialPort.InfiniteTimeout" />, in which case no time-out occurs. <see cref="F:System.IO.Ports.SerialPort.InfiniteTimeout" /> is the default. </para
-          >
+            >The write time-out value was originally set at 500 milliseconds in the Win32 Communications API. This property allows you to set this value. The time-out can be set to any value greater than zero, or set to <see cref="F:System.IO.Ports.SerialPort.InfiniteTimeout" />, in which case no time-out occurs. <see cref="F:System.IO.Ports.SerialPort.InfiniteTimeout" /> is the default.
+          </para>
           <block subset="none" type="note">
             <para
               >Users of the unmanaged COMMTIMEOUTS structure might expect to set the time-out value to zero to suppress time-outs. To suppress time-outs with the <see cref="P:System.IO.Ports.SerialPort.WriteTimeout" /> property, however, you must specify <see cref="F:System.IO.Ports.SerialPort.InfiniteTimeout" />.</para

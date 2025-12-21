@@ -90,8 +90,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The next <see cref="T:System.Runtime.Remoting.Channels.IClientChannelSink" /> in the sink chain. </param
-        >
+          />The next <see cref="T:System.Runtime.Remoting.Channels.IClientChannelSink" /> in the sink chain.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -124,19 +124,15 @@
           >
         </returns>
         <param name="msg">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The message to process. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The message to process.
+        </param>
         <param name="replySink">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The sink that will receive the reply to the provided message. </param
-        >
+          />The sink that will receive the reply to the provided message.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -172,29 +168,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A stack of channel sinks that called the current sink. </param
-        >
+          />A stack of channel sinks that called the current sink.
+        </param>
         <param name="msg">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The message to process. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The message to process.
+        </param>
         <param name="headers">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The headers to add to the outgoing message that is heading to the server. </param
-        >
+          />The headers to add to the outgoing message that is heading to the server.
+        </param>
         <param name="stream">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream that is headed toward the transport sink. </param
-        >
+          />The stream that is headed toward the transport sink.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -230,29 +222,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A stack of sinks that called the current sink. </param
-        >
+          />A stack of sinks that called the current sink.
+        </param>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Information that is associated with the current sink, generated on the request side and needed on the response side. </param
-        >
+          />Information that is associated with the current sink, generated on the request side and needed on the response side.
+        </param>
         <param name="headers">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The headers that are retrieved from the server response stream. </param
-        >
+          />The headers that are retrieved from the server response stream.
+        </param>
         <param name="stream">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream that is coming back from the transport sink. </param
-        >
+          />The stream that is coming back from the transport sink.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -296,15 +288,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" /> that contains details about the method call. </param
-        >
+          />The <see cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" /> that contains details about the method call.
+        </param>
         <param name="headers">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The headers to add to the outgoing message that is heading to the server. </param
-        >
+          />The headers to add to the outgoing message that is heading to the server.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -456,12 +448,8 @@
           <para>The response to the processed message.</para>
         </returns>
         <param name="msg">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The message to process. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The message to process.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

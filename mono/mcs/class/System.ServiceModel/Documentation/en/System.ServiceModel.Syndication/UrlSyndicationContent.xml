@@ -95,8 +95,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Uri" />. </param
-        >
+          />The <see cref="T:System.Uri" />.
+        </param>
         <param name="mediaType">
           <attribution
             license="cc4"

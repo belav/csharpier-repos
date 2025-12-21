@@ -125,8 +125,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The next <see cref="T:System.Runtime.Serialization.ISurrogateSelector" /> to examine. </param
-        >
+          />The next <see cref="T:System.Runtime.Serialization.ISurrogateSelector" /> to examine.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Filter">
@@ -290,8 +290,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object at the root of the object graph. </param
-        >
+          />The object at the root of the object graph.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="UseSoapFormat">

@@ -260,8 +260,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the collection of predefined automatic formatting schemes to display in the <ui>Auto Format</ui> dialog box for the associated control at design time. </para
-          >
+            >Gets the collection of predefined automatic formatting schemes to display in the <ui>Auto Format</ui> dialog box for the associated control at design time.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -287,8 +287,8 @@
             >Use the <see cref="M:System.Web.UI.Design.ControlDesigner.CreateErrorDesignTimeHtml(System.String)" /> method to create HTML markup to display an error message for a control at design time. The value for <paramref name="errorMessage" /> specifies a localized string that is displayed to the user of the control at design time.</para
           >
           <para
-            >The <see cref="T:System.Web.UI.Design.ControlDesigner" /> class implementation of the <see cref="M:System.Web.UI.Design.ControlDesigner.CreateErrorDesignTimeHtml(System.String)" /> method returns a table with two rows, as follows: </para
-          >
+            >The <see cref="T:System.Web.UI.Design.ControlDesigner" /> class implementation of the <see cref="M:System.Web.UI.Design.ControlDesigner.CreateErrorDesignTimeHtml(System.String)" /> method returns a table with two rows, as follows:
+          </para>
           <list type="bullet">
             <item>
               <para
@@ -343,8 +343,8 @@
             >Use the <see cref="M:System.Web.UI.Design.ControlDesigner.CreateErrorDesignTimeHtml(System.String,System.Exception)" /> method to provide simple HTML markup that can be used to display error and exception details for a control at design time. The value for <paramref name="errorMessage" /> specifies a localized string that is displayed to the user of the control at design time.</para
           >
           <para
-            >The <see cref="T:System.Web.UI.Design.ControlDesigner" /> class implementation of the <see cref="M:System.Web.UI.Design.ControlDesigner.CreateErrorDesignTimeHtml(System.String,System.Exception)" /> method returns a table with two rows, as follows: </para
-          >
+            >The <see cref="T:System.Web.UI.Design.ControlDesigner" /> class implementation of the <see cref="M:System.Web.UI.Design.ControlDesigner.CreateErrorDesignTimeHtml(System.String,System.Exception)" /> method returns a table with two rows, as follows:
+          </para>
           <list type="bullet">
             <item>
               <para
@@ -437,8 +437,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string that contains text and markup to add to the HTML output. </param
-        >
+          />A string that contains text and markup to add to the HTML output.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -737,8 +737,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default implementation of the <see cref="M:System.Web.UI.Design.ControlDesigner.GetEditableDesignerRegionContent(System.Web.UI.Design.EditableDesignerRegion)" /> method returns an empty string (""). </para
-          >
+            >The default implementation of the <see cref="M:System.Web.UI.Design.ControlDesigner.GetEditableDesignerRegionContent(System.Web.UI.Design.EditableDesignerRegion)" /> method returns an empty string ("").
+          </para>
           <para
             >Classes deriving from the <see cref="T:System.Web.UI.Design.ControlDesigner" /> class can support region-based editing on the design surface and override the <see cref="M:System.Web.UI.Design.ControlDesigner.GetEditableDesignerRegionContent(System.Web.UI.Design.EditableDesignerRegion)" /> method to return the content for a specified region.</para
           >
@@ -820,8 +820,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The exception that occurred. </param
-        >
+          />The exception that occurred.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1044,8 +1044,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.Design.ControlDesigner.Initialize(System.ComponentModel.IComponent)" /> method is called by the design host to complete the following actions: </para
-          >
+            >The <see cref="M:System.Web.UI.Design.ControlDesigner.Initialize(System.ComponentModel.IComponent)" /> method is called by the design host to complete the following actions:
+          </para>
           <list type="bullet">
             <item>
               <para>Load the control designer with the component to design.</para>
@@ -1069,8 +1069,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The control being designed. </param
-        >
+          />The control being designed.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1163,8 +1163,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Drawing.Rectangle" /> object that represents the area to invalidate, relative to the upper-left corner of the control. </param
-        >
+          />A <see cref="T:System.Drawing.Rectangle" /> object that represents the area to invalidate, relative to the upper-left corner of the control.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="InvokeTransactedChange">
@@ -1439,8 +1439,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The property to test for data binding. </param
-        >
+          />The property to test for data binding.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1583,8 +1583,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The property to test for changes in its bindings collection. </param
-        >
+          />The property to test for changes in its bindings collection.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1676,19 +1676,15 @@
           <para>Called when the associated control changes.</para>
         </summary>
         <param name="sender">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The source of the event. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The source of the event.
+        </param>
         <param name="ce">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.ComponentModel.Design.ComponentChangedEventArgs" /> object that contains the event data. </param
-        >
+          />A <see cref="T:System.ComponentModel.Design.ComponentChangedEventArgs" /> object that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1721,8 +1717,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents the method that will handle the <see cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanging" /> event for the associated control. </para
-          >
+            >Represents the method that will handle the <see cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanging" /> event for the associated control.
+          </para>
         </summary>
         <param name="sender">
           <attribution
@@ -1862,8 +1858,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The properties for the class of the component. </param
-        >
+          />The properties for the class of the component.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1995,8 +1991,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.UI.Design.ControlDesigner.RootDesigner" /> property represents the control designer for the Web Forms page that contains the control. Use the <see cref="P:System.Web.UI.Design.ControlDesigner.RootDesigner" /> property to access and manipulate the containing Web Forms page at design time. </para
-          >
+            >The <see cref="P:System.Web.UI.Design.ControlDesigner.RootDesigner" /> property represents the control designer for the Web Forms page that contains the control. Use the <see cref="P:System.Web.UI.Design.ControlDesigner.RootDesigner" /> property to access and manipulate the containing Web Forms page at design time.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2265,8 +2261,8 @@
             >The <see cref="P:System.Web.UI.Design.ControlDesigner.ViewControl" /> property uses the <see cref="P:System.Web.UI.Design.ControlDesigner.UsePreviewControl" /> property to determine its return value.</para
           >
           <para
-            >If the <see cref="P:System.Web.UI.Design.ControlDesigner.UsePreviewControl" /> property is true, the <see cref="P:System.Web.UI.Design.ControlDesigner.ViewControl" /> property returns a temporary copy of the control. Changes to the temporary control are not persisted. </para
-          >
+            >If the <see cref="P:System.Web.UI.Design.ControlDesigner.UsePreviewControl" /> property is true, the <see cref="P:System.Web.UI.Design.ControlDesigner.ViewControl" /> property returns a temporary copy of the control. Changes to the temporary control are not persisted.
+          </para>
           <para
             >If the <see cref="P:System.Web.UI.Design.ControlDesigner.UsePreviewControl" /> property is false, the <see cref="P:System.Web.UI.Design.ControlDesigner.ViewControl" /> property returns an instance of the <see cref="P:System.ComponentModel.Design.ComponentDesigner.Component" /> property for the control. Changes to the instance of the control are persisted.</para
           >

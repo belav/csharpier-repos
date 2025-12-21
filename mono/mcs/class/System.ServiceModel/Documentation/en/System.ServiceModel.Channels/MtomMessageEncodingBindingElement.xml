@@ -34,14 +34,14 @@
         >The <see cref="T:System.ServiceModel.Channels.MTOMMessageEncodingBindingElement" /> represents the binding element that specifies the character encoding and message versioning and other settings used for messages using a Message Transmission Optimization Mechanism (MTOM) encoding. MTOM is an efficient technology for transmitting binary data in indigo2 messages. The MTOM encoder attempts to create a balance between efficiency and interoperability. The MTOM encoding transmits most XML in textual form, but optimizes large blocks of binary data by transmitting them as-is, without conversion to their base64 encoded format.</para
       >
       <para
-        >crabout the binding element that specifies that messages are encoded using a textual representation of XML, see <see cref="T:System.ServiceModel.Channels.TextMessageEncodingBindingElement" />. </para
-      >
+        >crabout the binding element that specifies that messages are encoded using a textual representation of XML, see <see cref="T:System.ServiceModel.Channels.TextMessageEncodingBindingElement" />.
+      </para>
       <para
-        >crabout the binding element that specifies messages are encoded using the .NET Binary Format for XML, see <see cref="T:System.ServiceModel.Channels.BinaryMessageEncodingBindingElement" />. </para
-      >
+        >crabout the binding element that specifies messages are encoded using the .NET Binary Format for XML, see <see cref="T:System.ServiceModel.Channels.BinaryMessageEncodingBindingElement" />.
+      </para>
       <para
-        >To implement a custom message encoder, use the <see cref="T:System.ServiceModel.Channels.MessageEncodingBindingElement" /> class. </para
-      >
+        >To implement a custom message encoder, use the <see cref="T:System.ServiceModel.Channels.MessageEncodingBindingElement" /> class.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -70,8 +70,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.MtomMessageEncodingBindingElement" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.MtomMessageEncodingBindingElement" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>

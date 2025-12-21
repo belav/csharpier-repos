@@ -19,8 +19,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class represents the Deflate algorithm, which is an industry-standard algorithm for lossless file compression and decompression. Starting with the net_v45, the <see cref="T:System.IO.Compression.DeflateStream" /> class uses the zlib library. As a result, it provides a better compression algorithm and, in most cases, a smaller compressed file than it provides in earlier versions of the .NET Framework.  </para
-      >
+        >This class represents the Deflate algorithm, which is an industry-standard algorithm for lossless file compression and decompression. Starting with the net_v45, the <see cref="T:System.IO.Compression.DeflateStream" /> class uses the zlib library. As a result, it provides a better compression algorithm and, in most cases, a smaller compressed file than it provides in earlier versions of the .NET Framework.
+      </para>
       <para
         >This class does not inherently provide functionality for adding files to or extracting files from zip archives. To work with zip archives, use the <see cref="T:System.IO.Compression.ZipArchive" /> and the <see cref="T:System.IO.Compression.ZipArchiveEntry" /> classes.</para
       >
@@ -118,8 +118,8 @@
             >By default, <see cref="T:System.IO.Compression.DeflateStream" /> owns the underlying stream, so closing the stream also closes the underlying stream. Note that the state of the underlying stream can affect the usability of the stream. Also, no explicit checks are performed, so no additional exceptions are thrown when the new instance is created.</para
           >
           <para
-            >If an instance of the <see cref="T:System.IO.Compression.DeflateStream" /> class is created with the <paramref name="mode" /> parameter equal to Compress, header information is inserted immediately. If no further action occurs, the stream appears as a valid, empty, compressed file. </para
-          >
+            >If an instance of the <see cref="T:System.IO.Compression.DeflateStream" /> class is created with the <paramref name="mode" /> parameter equal to Compress, header information is inserted immediately. If no further action occurs, the stream appears as a valid, empty, compressed file.
+          </para>
           <para
             >Using the <see cref="T:System.IO.Compression.DeflateStream" /> class to compress a file larger than 4 GB raises an exception.</para
           >
@@ -232,8 +232,8 @@
             >By default, <see cref="T:System.IO.Compression.DeflateStream" /> owns the underlying stream, so closing the stream also closes the underlying stream. Note that the state of the underlying stream can affect the usability of the stream. Also, no explicit checks are performed, so no additional exceptions are thrown when the new instance is created.</para
           >
           <para
-            >If an instance of the <see cref="T:System.IO.Compression.DeflateStream" /> class is created with the <paramref name="mode" /> parameter equal to Compress, header information is inserted immediately. If no further action occurs, the stream appears as a valid, empty, compressed file. </para
-          >
+            >If an instance of the <see cref="T:System.IO.Compression.DeflateStream" /> class is created with the <paramref name="mode" /> parameter equal to Compress, header information is inserted immediately. If no further action occurs, the stream appears as a valid, empty, compressed file.
+          </para>
           <para
             >Using the <see cref="T:System.IO.Compression.DeflateStream" /> class to compress a file larger than 4 GB raises an exception.</para
           >

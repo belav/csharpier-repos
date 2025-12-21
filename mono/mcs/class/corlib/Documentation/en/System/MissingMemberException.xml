@@ -199,8 +199,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The message that describes the error. </param
-        >
+          />The message that describes the error.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -243,15 +243,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that holds the serialized object data. </param
-        >
+          />The object that holds the serialized object data.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The contextual information about the source or destination. </param
-        >
+          />The contextual information about the source or destination.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -331,15 +331,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The error message that explains the reason for the exception. </param
-        >
+          />The error message that explains the reason for the exception.
+        </param>
         <param name="inner">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An instance of <see cref="T:System.Exception" /> that is the cause of the current Exception. If <paramref name="inner" /> is not a null reference (Nothing in Visual Basic), then the current Exception is raised in a catch block handling <paramref name="inner" />. </param
-        >
+          />An instance of <see cref="T:System.Exception" /> that is the cause of the current Exception. If <paramref name="inner" /> is not a null reference (Nothing in Visual Basic), then the current Exception is raised in a catch block handling <paramref name="inner" />.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -375,15 +375,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the class in which access to a nonexistent member was attempted. </param
-        >
+          />The name of the class in which access to a nonexistent member was attempted.
+        </param>
         <param name="memberName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the member that cannot be accessed. </param
-        >
+          />The name of the member that cannot be accessed.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ClassName">
@@ -449,15 +449,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that holds the serialized object data. </param
-        >
+          />The object that holds the serialized object data.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The contextual information about the source or destination. </param
-        >
+          />The contextual information about the source or destination.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="MemberName">

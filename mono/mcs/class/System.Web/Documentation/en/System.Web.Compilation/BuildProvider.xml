@@ -26,8 +26,8 @@
         >The ASP.NET build environment uses instances of the <see cref="T:System.Web.Compilation.BuildProvider" /> class to build files within an application. The <see cref="P:System.Web.Compilation.BuildProvider.VirtualPath" /> property of the <see cref="T:System.Web.Compilation.BuildProvider" /> class indicates the path of the file to be built. The file extension of each file within an application is mapped to a corresponding build provider. The ASP.NET build environment initializes a <see cref="T:System.Web.Compilation.BuildProvider" /> instance for each file based on the file extension, and uses the <see cref="T:System.Web.Compilation.BuildProvider" /> methods to generate source code for the file. The ASP.NET build environment passes an <see cref="T:System.Web.Compilation.AssemblyBuilder" /> object based on the preferred compiler language and the context of the file to the <see cref="T:System.Web.Compilation.BuildProvider" /> methods when building an assembly from one or more files, so that the <see cref="T:System.Web.Compilation.BuildProvider" /> instance can contribute source code for its file to the overall assembly.</para
       >
       <para
-        >To define custom build actions for a file type within an ASP.NET application, you must derive a class from <see cref="T:System.Web.Compilation.BuildProvider" />, implement members within the derived class for building the file type, and configure the build provider for the corresponding file extension within the application configuration file. </para
-      >
+        >To define custom build actions for a file type within an ASP.NET application, you must derive a class from <see cref="T:System.Web.Compilation.BuildProvider" />, implement members within the derived class for building the file type, and configure the build provider for the corresponding file extension within the application configuration file.
+      </para>
       <para
         >The <format type="text/html">
           <a href="35f1076f-7823-42ae-a585-2bf19cd60582">add element</a>
@@ -75,8 +75,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.Compilation.BuildProvider" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.Compilation.BuildProvider" /> class.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -133,8 +133,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To implement a build provider that generates source code for a custom file type, derive a class from the <see cref="T:System.Web.Compilation.BuildProvider" /> class, and override the <see cref="M:System.Web.Compilation.BuildProvider.GenerateCode(System.Web.Compilation.AssemblyBuilder)" /> method to generate source code for the supported file type. </para
-          >
+            >To implement a build provider that generates source code for a custom file type, derive a class from the <see cref="T:System.Web.Compilation.BuildProvider" /> class, and override the <see cref="M:System.Web.Compilation.BuildProvider.GenerateCode(System.Web.Compilation.AssemblyBuilder)" /> method to generate source code for the supported file type.
+          </para>
           <para
             >Typically, a build provider's <see cref="M:System.Web.Compilation.BuildProvider.GenerateCode(System.Web.Compilation.AssemblyBuilder)" /> implementation reads the <see cref="P:System.Web.Compilation.BuildProvider.VirtualPath" /> property, parses the contents, and adds the generated source code to the specified <see cref="T:System.Web.Compilation.AssemblyBuilder" /> object. You can contribute source code to the assembly in the form of a <see cref="T:System.IO.TextWriter" /> object or a CodeDOM graph. To add source code to the assembly through a <see cref="T:System.IO.TextWriter" /> object, use the <see cref="M:System.Web.Compilation.AssemblyBuilder.CreateCodeFile(System.Web.Compilation.BuildProvider)" /> method. To add source code in a CodeDOM graph to the assembly, use the <see cref="M:System.Web.Compilation.AssemblyBuilder.AddCodeCompileUnit(System.Web.Compilation.BuildProvider,System.CodeDom.CodeCompileUnit)" /> method.</para
           >
@@ -229,8 +229,8 @@
             </format> section of the application configuration file. If there is no default language setting in the compilation section, the default compiler type is set using the <see cref="T:Microsoft.VisualBasic.VBCodeProvider" /> language provider.</para
           >
           <para
-            >When deriving from the <see cref="T:System.Web.Compilation.BuildProvider" /> class, you can use <see cref="M:System.Web.Compilation.BuildProvider.GetDefaultCompilerType" /> to set the <see cref="P:System.Web.Compilation.BuildProvider.CodeCompilerType" /> property within your implementation. </para
-          >
+            >When deriving from the <see cref="T:System.Web.Compilation.BuildProvider" /> class, you can use <see cref="M:System.Web.Compilation.BuildProvider.GetDefaultCompilerType" /> to set the <see cref="P:System.Web.Compilation.BuildProvider.CodeCompilerType" /> property within your implementation.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -320,8 +320,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To implement a build provider that generates source code for Web content such as .aspx files, derive a class from the <see cref="T:System.Web.Compilation.BuildProvider" /> class and override the <see cref="M:System.Web.Compilation.BuildProvider.GetGeneratedType(System.CodeDom.Compiler.CompilerResults)" /> method to return the type generated by the build provider. </para
-          >
+            >To implement a build provider that generates source code for Web content such as .aspx files, derive a class from the <see cref="T:System.Web.Compilation.BuildProvider" /> class and override the <see cref="M:System.Web.Compilation.BuildProvider.GetGeneratedType(System.CodeDom.Compiler.CompilerResults)" /> method to return the type generated by the build provider.
+          </para>
           <para
             >The ASP.NET build system compiles files for each build provider, and generates a <see cref="T:System.CodeDom.Compiler.CompilerResults" /> object, which is passed to the <see cref="M:System.Web.Compilation.BuildProvider.GetGeneratedType(System.CodeDom.Compiler.CompilerResults)" /> method. Typically, a build provider's <see cref="M:System.Web.Compilation.BuildProvider.GetGeneratedType(System.CodeDom.Compiler.CompilerResults)" /> implementation uses the <see cref="Overload:System.Reflection.Assembly.GetType" /> method on the <see cref="P:System.CodeDom.Compiler.CompilerResults.CompiledAssembly" /> property of the input <paramref name="results" /> object to return the provided type.</para
           >
@@ -444,8 +444,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="Overload:System.IO.TextReader.Read" /> method on the returned <see cref="T:System.IO.TextReader" /> object to read the contents of the virtual path. </para
-          >
+            >Use the <see cref="Overload:System.IO.TextReader.Read" /> method on the returned <see cref="T:System.IO.TextReader" /> object to read the contents of the virtual path.
+          </para>
           <para
             >After calling the <see cref="M:System.Web.Compilation.BuildProvider.OpenReader" /> method, you must use the <see cref="M:System.IO.TextReader.Close" /> method to close the <see cref="T:System.IO.TextReader" /> object and free associated system resources.</para
           >
@@ -484,8 +484,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="M:System.IO.Stream.Read(System.Byte[],System.Int32,System.Int32)" /> method on the returned <see cref="T:System.IO.Stream" /> object to read the contents of the virtual path for the <see cref="T:System.Web.Compilation.BuildProvider" /> object. </para
-          >
+            >Use the <see cref="M:System.IO.Stream.Read(System.Byte[],System.Int32,System.Int32)" /> method on the returned <see cref="T:System.IO.Stream" /> object to read the contents of the virtual path for the <see cref="T:System.Web.Compilation.BuildProvider" /> object.
+          </para>
           <para
             >After calling the <see cref="M:System.Web.Compilation.BuildProvider.OpenStream" /> method, you must use the <see cref="M:System.IO.Stream.Close" /> method to close the <see cref="T:System.IO.Stream" /> object and free associated system resources.</para
           >
@@ -522,8 +522,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="M:System.IO.Stream.Read(System.Byte[],System.Int32,System.Int32)" /> method on the returned <see cref="T:System.IO.Stream" /> object to read the contents of the virtual path. </para
-          >
+            >Use the <see cref="M:System.IO.Stream.Read(System.Byte[],System.Int32,System.Int32)" /> method on the returned <see cref="T:System.IO.Stream" /> object to read the contents of the virtual path.
+          </para>
           <para
             >After calling the <see cref="M:System.Web.Compilation.BuildProvider.OpenStream" /> method, you must use the <see cref="M:System.IO.Stream.Close" /> method to close the <see cref="T:System.IO.Stream" /> object and free associated system resources.</para
           >
@@ -567,8 +567,8 @@
           <para
             >The ASP.NET build environment initializes the collection of assemblies that are available for reference by the build provider. The source code generated by a build provider can use public types in the referenced assemblies. The referenced assembly collection consists of other assemblies built in the ASP.NET application, and assemblies listed in the <format type="text/html">
               <a href="3811c448-af1c-498d-be2b-6ed2634c51e9">assemblies</a>
-            </format> element in the configuration file. </para
-          >
+            </format> element in the configuration file.
+          </para>
           <para
             >If the build provider generates source code that references additional assemblies, the build provider adds the additional assemblies using the <see cref="M:System.Web.Compilation.AssemblyBuilder.AddAssemblyReference(System.Reflection.Assembly)" /> method. The ASP.NET build environment resolves external types during assembly compilation using both the referenced assemblies added by build providers and the default collection of assemblies available for reference.</para
           >

@@ -97,8 +97,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A pointer or handle contained in a 32-bit signed integer. </param
-        >
+          />A pointer or handle contained in a 32-bit signed integer.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -148,8 +148,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A pointer or handle contained in a 64-bit signed integer. </param
-        >
+          />A pointer or handle contained in a 64-bit signed integer.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -189,8 +189,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A pointer to an unspecified type. </param
-        >
+          />A pointer to an unspecified type.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Add">
@@ -297,8 +297,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object to compare with this instance or null. </param
-        >
+          />An object to compare with this instance or null.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -697,15 +697,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first pointer or handle to compare. </param
-        >
+          />The first pointer or handle to compare.
+        </param>
         <param name="value2">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second pointer or handle to compare. </param
-        >
+          />The second pointer or handle to compare.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -802,8 +802,8 @@
    number of bytes of a pointer or handle for the current implementation. The value
    of this property is equal to the number of bytes contained by the <see langword="native int" /> type
    in
-   the current implementation. </para
-          >
+   the current implementation.
+          </para>
         </value>
         <remarks>
           <para>This property is read-only.</para>
@@ -919,8 +919,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> object to populate with data. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> object to populate with data.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
@@ -1120,8 +1120,8 @@
           <para
             >If the <paramref name="format" /> parameter is null or an empty string (""), the return value is formatted with the general format specifier ("G"). For more information about numeric format specifiers, see the <format type="text/html">
               <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">Standard Numeric Format Strings</a>
-            </format> topic. </para
-          >
+            </format> topic.
+          </para>
           <para>The return value is formatted using the invariant culture. </para>
         </remarks>
         <summary>
@@ -1141,8 +1141,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A format specification that governs how the current <see cref="T:System.IntPtr" /> object is converted. </param
-        >
+          />A format specification that governs how the current <see cref="T:System.IntPtr" /> object is converted.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Zero">
@@ -1173,17 +1173,17 @@
             >For example, assume the variable, ip, is an instance of <see cref="T:System.IntPtr" />. You can determine if it has been set by comparing it to the value returned by a constructor, for example: " if ip != new IntPtr(0)... ". However, invoking a constructor to get an unintialized pointer is inefficient. It is better to code either " if ip != IntPtr.Zero... ", or " if !IntPtr.Zero.Equals(ip)... ".</para
           >
           <para
-            >When calling the Windows API from managed code, you can pass <see cref="F:System.IntPtr.Zero" /> instead of null if an argument is expected to be either a pointer or a null. For example, the following call to the Windows CreateFile function supplies <see cref="F:System.IntPtr.Zero" /> for the <paramref name="pSecurityAttributes" /> and <paramref name="hTemplateFile" /> argument values. </para
-          >
+            >When calling the Windows API from managed code, you can pass <see cref="F:System.IntPtr.Zero" /> instead of null if an argument is expected to be either a pointer or a null. For example, the following call to the Windows CreateFile function supplies <see cref="F:System.IntPtr.Zero" /> for the <paramref name="pSecurityAttributes" /> and <paramref name="hTemplateFile" /> argument values.
+          </para>
           <para>code reference: System.IntPtr.Zero#2</para>
           <block subset="none" type="note">
             <para
-              >Although <see cref="F:System.IntPtr.Zero" /> is equivalent to null for Windows API functions with parameters or return values that can be either pointers or null, <see cref="F:System.IntPtr.Zero" /> is not equivalent to null. Passing null to the IntPtr.Zero.Equals method always returns false. </para
-            >
+              >Although <see cref="F:System.IntPtr.Zero" /> is equivalent to null for Windows API functions with parameters or return values that can be either pointers or null, <see cref="F:System.IntPtr.Zero" /> is not equivalent to null. Passing null to the IntPtr.Zero.Equals method always returns false.
+            </para>
           </block>
           <para
-            >You can also test for a null return value from Windows API function calls that return either a pointer or a null by comparing the returned value with <see cref="F:System.IntPtr.Zero" />. For example, the call to the GetWindow function in the following example tries to retrieve the handle of a non-existent window. If it were called from unmanaged code, the function would return null, but when it is called from managed code, it returns <see cref="F:System.IntPtr.Zero" />. </para
-          >
+            >You can also test for a null return value from Windows API function calls that return either a pointer or a null by comparing the returned value with <see cref="F:System.IntPtr.Zero" />. For example, the call to the GetWindow function in the following example tries to retrieve the handle of a non-existent window. If it were called from unmanaged code, the function would return null, but when it is called from managed code, it returns <see cref="F:System.IntPtr.Zero" />.
+          </para>
           <para>code reference: System.IntPtr.Zero#1</para>
         </remarks>
         <summary>

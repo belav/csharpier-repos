@@ -126,15 +126,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that the new <see cref="T:System.Runtime.Remoting.ObjRef" /> instance will reference. </param
-        >
+          />The object that the new <see cref="T:System.Runtime.Remoting.ObjRef" /> instance will reference.
+        </param>
         <param name="requestedType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of the object that the new <see cref="T:System.Runtime.Remoting.ObjRef" /> instance will reference. </param
-        >
+          />The <see cref="T:System.Type" /> of the object that the new <see cref="T:System.Runtime.Remoting.ObjRef" /> instance will reference.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -175,15 +175,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that holds the serialized object data. </param
-        >
+          />The object that holds the serialized object data.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The contextual information about the source or destination of the exception. </param
-        >
+          />The contextual information about the source or destination of the exception.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ChannelInfo">
@@ -304,15 +304,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> to populate with data. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> to populate with data.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The contextual information about the source or destination of the serialization. </param
-        >
+          />The contextual information about the source or destination of the serialization.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetRealObject">
@@ -358,8 +358,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The context where the current object resides. </param
-        >
+          />The context where the current object resides.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsFromThisAppDomain">

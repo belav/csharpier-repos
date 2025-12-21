@@ -35,8 +35,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.Services.Description.ProtocolImporter" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Description.ProtocolImporter" /> class.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -93,8 +93,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For each unhandled extension or XML element in the input extensions collection, turns on a <see cref="F:System.Web.Services.Description.ServiceDescriptionImportWarnings.RequiredExtensionsIgnored" /> or <see cref="F:System.Web.Services.Description.ServiceDescriptionImportWarnings.OptionalExtensionsIgnored" /> warning for each unhandled extension or XML element in the input extensions collection. </para
-          >
+            >For each unhandled extension or XML element in the input extensions collection, turns on a <see cref="F:System.Web.Services.Description.ServiceDescriptionImportWarnings.RequiredExtensionsIgnored" /> or <see cref="F:System.Web.Services.Description.ServiceDescriptionImportWarnings.OptionalExtensionsIgnored" /> warning for each unhandled extension or XML element in the input extensions collection.
+          </para>
         </summary>
         <param name="comments">
           <attribution

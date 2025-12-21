@@ -57,8 +57,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.WindowsRuntime.EventRegistrationTokenTable`1" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.WindowsRuntime.EventRegistrationTokenTable`1" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -134,8 +134,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a delegate of type <paramref name="T" /> whose invocation list includes all the event handler delegates that have been added, and that have not yet been removed. Invoking this delegate invokes all the event handlers. </para
-          >
+            >Gets or sets a delegate of type <paramref name="T" /> whose invocation list includes all the event handler delegates that have been added, and that have not yet been removed. Invoking this delegate invokes all the event handlers.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -175,8 +175,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The token that was returned when the event handler was added. </param
-        >
+          />The token that was returned when the event handler was added.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RemoveEventHandler">

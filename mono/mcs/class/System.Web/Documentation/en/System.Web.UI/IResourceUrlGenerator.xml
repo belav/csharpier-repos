@@ -11,15 +11,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >ASP.NET version 2.0 provides the ability to retrieve embedded resources from an assembly for controls, such as the <see cref="T:System.Web.UI.Page" /> control. At run time, the URL to the embedded resource can be retrieved using the <see cref="M:System.Web.UI.ClientScriptManager.GetWebResourceUrl(System.Type,System.String)" /> method of the <see cref="T:System.Web.UI.ClientScriptManager" /> class. To provide a design-time means for generating a resource URL from an assembly, designer hosts can offer a service that implements the <see cref="T:System.Web.UI.IResourceUrlGenerator" /> interface. For more information: </para
-      >
+        >ASP.NET version 2.0 provides the ability to retrieve embedded resources from an assembly for controls, such as the <see cref="T:System.Web.UI.Page" /> control. At run time, the URL to the embedded resource can be retrieved using the <see cref="M:System.Web.UI.ClientScriptManager.GetWebResourceUrl(System.Type,System.String)" /> method of the <see cref="T:System.Web.UI.ClientScriptManager" /> class. To provide a design-time means for generating a resource URL from an assembly, designer hosts can offer a service that implements the <see cref="T:System.Web.UI.IResourceUrlGenerator" /> interface. For more information:
+      </para>
       <list type="bullet">
         <item>
           <para
             >On using resources in localization, see <format type="text/html">
               <a href="0936b3b2-9e6e-4abe-9c06-364efef9dbbd">ASP.NET Web Page Resources Overview</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </item>
         <item>
           <para
@@ -31,8 +31,8 @@
               <a href="7a06d512-6fc3-40ca-9cb6-7f41d1a9fa28"
                 >How to: Read Resource Values Programmatically</a
               >
-            </format>. </para
-          >
+            </format>.
+          </para>
         </item>
         <item>
           <para
@@ -40,8 +40,8 @@
               <a href="1d5a99d7-0a72-403e-812e-2c1ab595c810"
                 >Introduction to ASP.NET Control Designers</a
               >
-            </format>. </para
-          >
+            </format>.
+          </para>
         </item>
       </list>
       <para

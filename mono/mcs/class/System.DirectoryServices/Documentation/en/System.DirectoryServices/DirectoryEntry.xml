@@ -1069,8 +1069,8 @@ DirectoryEntry domain = new DirectoryEntry("LDAP://" + str);</code>
               >Using Active Directory Service Interfaces</see
             > in the MSDN Library at <see cref="http://msdn.microsoft.com/library"
               >http://msdn.microsoft.com/library</see
-            >. </para
-          >
+            >.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1113,12 +1113,12 @@ DirectoryEntry domain = new DirectoryEntry("LDAP://" + str);</code>
               >IADs::Get</see
             > implicitly calls <see cref="http://msdn2.microsoft.com/en-us/library/aa746349.aspx"
               >IADs::GetInfo</see
-            >. This method loads the values of the supported properties that have not been set in the cache from the underlying directory store. Subsequent calls to <see cref="P:System.DirectoryServices.DirectoryEntry.Properties" /> retrieves the property values in the cache only. To control property cache loading, call <see cref="M:System.DirectoryServices.DirectoryEntry.RefreshCache" />. </para
-          >
+            >. This method loads the values of the supported properties that have not been set in the cache from the underlying directory store. Subsequent calls to <see cref="P:System.DirectoryServices.DirectoryEntry.Properties" /> retrieves the property values in the cache only. To control property cache loading, call <see cref="M:System.DirectoryServices.DirectoryEntry.RefreshCache" />.
+          </para>
           <para />
           <para
-            >Note   The <see cref="P:System.DirectoryServices.DirectoryEntry.Properties" /> property is not supported for use with the Active Directory Client Extension (DSClient) for WinNt4Family. </para
-          >
+            >Note   The <see cref="P:System.DirectoryServices.DirectoryEntry.Properties" /> property is not supported for use with the Active Directory Client Extension (DSClient) for WinNt4Family.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

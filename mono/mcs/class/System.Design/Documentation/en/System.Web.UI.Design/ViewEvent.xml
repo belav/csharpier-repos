@@ -30,8 +30,8 @@
         >The <see cref="T:System.Web.UI.Design.ControlDesigner" /> class supplies a default delegate to handle the <see cref="E:System.Web.UI.Design.IControlDesignerView.ViewEvent" /> event. Custom control designers override the <see cref="M:System.Web.UI.Design.ControlDesigner.OnClick(System.Web.UI.Design.DesignerRegionMouseEventArgs)" />, <see cref="M:System.Web.UI.Design.ControlDesigner.OnPaint(System.Windows.Forms.PaintEventArgs)" />, and <see cref="M:System.Web.UI.Design.TemplatedControlDesigner.OnTemplateModeChanged" /> methods to process those events for the control on the design surface.</para
       >
       <para
-        >The designer host initializes a <see cref="T:System.Web.UI.Design.ViewEventArgs" /> object for the type of action on the design surface, and then passes the object to the <see cref="T:System.Web.UI.Design.ViewEventHandler" /> delegate. The <see cref="P:System.Web.UI.Design.ViewEventArgs.EventType" /> property of the <see cref="T:System.Web.UI.Design.ViewEventArgs" /> object indicates which type of action: </para
-      >
+        >The designer host initializes a <see cref="T:System.Web.UI.Design.ViewEventArgs" /> object for the type of action on the design surface, and then passes the object to the <see cref="T:System.Web.UI.Design.ViewEventHandler" /> delegate. The <see cref="P:System.Web.UI.Design.ViewEventArgs.EventType" /> property of the <see cref="T:System.Web.UI.Design.ViewEventArgs" /> object indicates which type of action:
+      </para>
       <list type="bullet">
         <item>
           <para>A <see cref="F:System.Web.UI.Design.ViewEvent.Click" /> event.</para>
@@ -44,8 +44,8 @@
         </item>
       </list>
       <para
-        >The <see cref="P:System.Web.UI.Design.ViewEventArgs.EventArgs" /> property supplies the event arguments that are specific to the type of action. </para
-      >
+        >The <see cref="P:System.Web.UI.Design.ViewEventArgs.EventArgs" /> property supplies the event arguments that are specific to the type of action.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

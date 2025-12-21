@@ -94,8 +94,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type whose ProgID is being requested. </param
-        >
+          />The type whose ProgID is being requested.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetRegistrableTypesInAssembly">
@@ -138,8 +138,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The assembly to search for classes. </param
-        >
+          />The assembly to search for classes.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RegisterAssembly">
@@ -187,15 +187,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The assembly to be registered. </param
-        >
+          />The assembly to be registered.
+        </param>
         <param name="flags">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Runtime.InteropServices.AssemblyRegistrationFlags" /> value indicating any special settings needed when registering <paramref name="assembly" />. </param
-        >
+          />An <see cref="T:System.Runtime.InteropServices.AssemblyRegistrationFlags" /> value indicating any special settings needed when registering <paramref name="assembly" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RegisterTypeForComClients">
@@ -260,8 +260,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type to determine if it is a COM type. </param
-        >
+          />The type to determine if it is a COM type.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="TypeRequiresRegistration">
@@ -297,8 +297,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type to check for COM registration requirements. </param
-        >
+          />The type to check for COM registration requirements.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="UnregisterAssembly">
@@ -344,8 +344,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The assembly to be unregistered. </param
-        >
+          />The assembly to be unregistered.
+        </param>
       </Docs>
     </Member>
   </Members>

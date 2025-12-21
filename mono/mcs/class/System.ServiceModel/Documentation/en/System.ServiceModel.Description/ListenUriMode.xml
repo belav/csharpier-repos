@@ -22,8 +22,8 @@
         >The value of these properties may also be set using the <see cref="P:System.ServiceModel.Configuration.ServiceEndpointElement.ListenUri" /> property and the <see cref="P:System.ServiceModel.Configuration.ServiceEndpointElement.ListenUriMode" /> property.</para
       >
       <para
-        >When the value of the <see cref="T:System.ServiceModel.Description.ListenUriMode" /> is set to <see cref="F:System.ServiceModel.Description.ListenUriMode.Unique" /> the transport is responsible for creating a unique URI. Different transports used by indigo1 generate this unique URI differently </para
-      >
+        >When the value of the <see cref="T:System.ServiceModel.Description.ListenUriMode" /> is set to <see cref="F:System.ServiceModel.Description.ListenUriMode.Unique" /> the transport is responsible for creating a unique URI. Different transports used by indigo1 generate this unique URI differently
+      </para>
       <list type="bullet">
         <item>
           <para
@@ -37,8 +37,8 @@
         </item>
       </list>
       <para
-        >When the value of the <see cref="P:System.ServiceModel.Description.ServiceEndpoint.ListenUriMode" /> is set to <see cref="F:System.ServiceModel.Description.ListenUriMode.Explicit" /> mode, the transport uses the <see cref="P:System.ServiceModel.Description.ServiceEndpoint.ListenUri" /> exactly as it is provided, without modifying it to make it unique. </para
-      >
+        >When the value of the <see cref="P:System.ServiceModel.Description.ServiceEndpoint.ListenUriMode" /> is set to <see cref="F:System.ServiceModel.Description.ListenUriMode.Explicit" /> mode, the transport uses the <see cref="P:System.ServiceModel.Description.ServiceEndpoint.ListenUri" /> exactly as it is provided, without modifying it to make it unique.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

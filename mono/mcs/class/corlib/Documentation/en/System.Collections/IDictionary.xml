@@ -51,8 +51,8 @@
         <see cref="T:System.Collections.IDictionary" /> implementations fall into three categories: read-only, fixed-size, variable-size. A read-only <see cref="T:System.Collections.IDictionary" /> object cannot be modified. A fixed-size <see cref="T:System.Collections.IDictionary" /> object does not allow the addition or removal of elements, but does allow the modification of existing elements. A variable-size <see cref="T:System.Collections.IDictionary" /> object allows the addition, removal, and modification of elements.</para
       >
       <para
-        >The foreach statement of the C# language (For Each in Visual Basic) requires the type of each element in the collection. Since each element of the <see cref="T:System.Collections.IDictionary" /> object is a key/value pair, the element type is not the type of the key or the type of the value. Instead, the element type is <see cref="T:System.Collections.DictionaryEntry" />. For example: </para
-      >
+        >The foreach statement of the C# language (For Each in Visual Basic) requires the type of each element in the collection. Since each element of the <see cref="T:System.Collections.IDictionary" /> object is a key/value pair, the element type is not the type of the key or the type of the value. Instead, the element type is <see cref="T:System.Collections.DictionaryEntry" />. For example:
+      </para>
       <para>code reference: Dictionary#14</para>
       <para>The foreach statement is a wrapper around the enumerator, which allows only reading from but not writing to the collection.</para>
     </remarks>
@@ -113,15 +113,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to use as the key of the element to add. </param
-        >
+          />The <see cref="T:System.Object" /> to use as the key of the element to add.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to use as the value of the element to add. </param
-        >
+          />The <see cref="T:System.Object" /> to use as the value of the element to add.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -299,8 +299,8 @@
           <para>
             <see langword="true" /> if the
    current instance has a fixed size;
-   otherwise, <see langword="false" />. </para
-          >
+   otherwise, <see langword="false" />.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -494,8 +494,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key of the element to remove. </param
-        >
+          />The key of the element to remove.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

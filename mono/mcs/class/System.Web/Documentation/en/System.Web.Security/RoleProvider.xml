@@ -51,8 +51,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.Security.RoleProvider" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.Security.RoleProvider" /> class.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -99,8 +99,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string array of user names to be added to the specified roles. </param
-        >
+          />A string array of user names to be added to the specified roles.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -454,8 +454,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string array of user names to be removed from the specified roles. </param
-        >
+          />A string array of user names to be removed from the specified roles.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

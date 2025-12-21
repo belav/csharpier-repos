@@ -50,8 +50,8 @@
         >You can watch for renaming, deletion, or creation of files or directories. For example, to watch for renaming of text files, set the <see cref="P:System.IO.FileSystemWatcher.Filter" /> property to "*.txt" and call the <see cref="M:System.IO.FileSystemWatcher.WaitForChanged(System.IO.WatcherChangeTypes)" /> method with a <see cref="F:System.IO.WatcherChangeTypes.Renamed" /> specified for its parameter.</para
       >
       <para
-        >The Windows operating system notifies your component of file changes in a buffer created by the <see cref="T:System.IO.FileSystemWatcher" />. If there are many changes in a short time, the buffer can overflow. This causes the component to lose track of changes in the directory, and it will only provide blanket notification. Increasing the size of the buffer with the <see cref="P:System.IO.FileSystemWatcher.InternalBufferSize" />  property is expensive, as it comes from non-paged memory that cannot be swapped out to disk, so keep the buffer as small yet large enough to not miss any file change events. To avoid a buffer overflow, use the <see cref="P:System.IO.FileSystemWatcher.NotifyFilter" /> and <see cref="P:System.IO.FileSystemWatcher.IncludeSubdirectories" /> properties so you can filter out unwanted change notifications. </para
-      >
+        >The Windows operating system notifies your component of file changes in a buffer created by the <see cref="T:System.IO.FileSystemWatcher" />. If there are many changes in a short time, the buffer can overflow. This causes the component to lose track of changes in the directory, and it will only provide blanket notification. Increasing the size of the buffer with the <see cref="P:System.IO.FileSystemWatcher.InternalBufferSize" />  property is expensive, as it comes from non-paged memory that cannot be swapped out to disk, so keep the buffer as small yet large enough to not miss any file change events. To avoid a buffer overflow, use the <see cref="P:System.IO.FileSystemWatcher.NotifyFilter" /> and <see cref="P:System.IO.FileSystemWatcher.IncludeSubdirectories" /> properties so you can filter out unwanted change notifications.
+      </para>
       <para
         >For a list of initial property values for an instance of <see cref="T:System.IO.FileSystemWatcher" />, see the <see cref="M:System.IO.FileSystemWatcher.#ctor" /> constructor.</para
       >
@@ -89,8 +89,8 @@
         <h2>Copying and moving folders</h2>
       </format>
       <para
-        >The operating system and <see cref="T:System.IO.FileSystemWatcher" /> object interpret a cut-and-paste action or a move action as a rename action for a folder and its contents. If you cut and paste a folder with files into a folder being watched, the <see cref="T:System.IO.FileSystemWatcher" /> object reports only the folder as new, but not its contents because they are essentially only renamed. </para
-      >
+        >The operating system and <see cref="T:System.IO.FileSystemWatcher" /> object interpret a cut-and-paste action or a move action as a rename action for a folder and its contents. If you cut and paste a folder with files into a folder being watched, the <see cref="T:System.IO.FileSystemWatcher" /> object reports only the folder as new, but not its contents because they are essentially only renamed.
+      </para>
       <para
         >To be notified that the contents of folders have been moved or copied into a watched folder, provide <see cref="M:System.IO.FileSystemWatcher.OnChanged(System.IO.FileSystemEventArgs)" />  and <see cref="M:System.IO.FileSystemWatcher.OnRenamed(System.IO.RenamedEventArgs)" /> event handler methods as suggested in the following table.</para
       >
@@ -166,8 +166,8 @@
       <list type="bullet">
         <item>
           <para
-            >Increase the buffer size by setting the <see cref="P:System.IO.FileSystemWatcher.InternalBufferSize" /> property.  </para
-          >
+            >Increase the buffer size by setting the <see cref="P:System.IO.FileSystemWatcher.InternalBufferSize" /> property.
+          </para>
         </item>
         <item>
           <para>Avoid watching files with long file names, because a long file name contributes to filling up the buffer. Consider renaming these files using shorter names.</para>
@@ -330,8 +330,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The directory to monitor, in standard or Universal Naming Convention (UNC) notation. </param
-        >
+          />The directory to monitor, in standard or Universal Naming Convention (UNC) notation.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -376,15 +376,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The directory to monitor, in standard or Universal Naming Convention (UNC) notation. </param
-        >
+          />The directory to monitor, in standard or Universal Naming Convention (UNC) notation.
+        </param>
         <param name="filter">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of files to watch. For example, "*.txt" watches for changes to all text files. </param
-        >
+          />The type of files to watch. For example, "*.txt" watches for changes to all text files.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="BeginInit">
@@ -1041,8 +1041,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.FileSystemEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.IO.FileSystemEventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnCreated">
@@ -1095,8 +1095,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.FileSystemEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.IO.FileSystemEventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnDeleted">
@@ -1146,8 +1146,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.FileSystemEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.IO.FileSystemEventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnError">
@@ -1191,8 +1191,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.IO.ErrorEventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.IO.ErrorEventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnRenamed">
@@ -1239,8 +1239,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.RenamedEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.IO.RenamedEventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Path">
@@ -1471,8 +1471,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.WatcherChangeTypes" /> to watch for. </param
-        >
+          />The <see cref="T:System.IO.WatcherChangeTypes" /> to watch for.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WaitForChanged">
@@ -1527,15 +1527,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.WatcherChangeTypes" /> to watch for. </param
-        >
+          />The <see cref="T:System.IO.WatcherChangeTypes" /> to watch for.
+        </param>
         <param name="timeout">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The time (in milliseconds) to wait before timing out. </param
-        >
+          />The time (in milliseconds) to wait before timing out.
+        </param>
       </Docs>
     </Member>
   </Members>

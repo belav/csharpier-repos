@@ -37,8 +37,8 @@
         >The <see cref="T:System.Security.Cryptography.Xml.SignedInfo" /> class represents the &lt;SignedInfo&gt; element of an XML signature defined by the XML digital signature specification. The &lt;SignedInfo&gt; element, which is a subelement of the &lt;Signature&gt; element, contains the canonicalization method used for signing, the algorithm used for signing and validation, and references that describe a digital signature.</para
       >
       <para
-        >For most scenarios, you should use the <see cref="T:System.Security.Cryptography.Xml.SignedInfo" /> class available from the <see cref="P:System.Security.Cryptography.Xml.SignedXml.SignedInfo" /> property to sign and verify XML digital signatures. </para
-      >
+        >For most scenarios, you should use the <see cref="T:System.Security.Cryptography.Xml.SignedInfo" /> class available from the <see cref="P:System.Security.Cryptography.Xml.SignedXml.SignedInfo" /> property to sign and verify XML digital signatures.
+      </para>
       <para>For more information about the &lt;SignedInfo&gt; element, see the World Wide Web Consortium (W3C) specification at www.w3.org/TR/xmldsig-core/.</para>
     </remarks>
     <summary>
@@ -110,8 +110,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The reference to add to the list of references. </param
-        >
+          />The reference to add to the list of references.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CanonicalizationMethod">
@@ -242,11 +242,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Security.Cryptography.Xml.SignedInfo.CanonicalizationMethodObject" /> property contains the <see cref="T:System.Security.Cryptography.Xml.Transform" /> object used by the <see cref="T:System.Security.Cryptography.Xml.SignedXml" /> class to canonicalize an XML document before signing or verifying.  </para
-          >
+            >The <see cref="P:System.Security.Cryptography.Xml.SignedInfo.CanonicalizationMethodObject" /> property contains the <see cref="T:System.Security.Cryptography.Xml.Transform" /> object used by the <see cref="T:System.Security.Cryptography.Xml.SignedXml" /> class to canonicalize an XML document before signing or verifying.
+          </para>
           <para
-            >The <see cref="P:System.Security.Cryptography.Xml.SignedInfo.CanonicalizationMethodObject" /> property is read-only. You can modify the <see cref="T:System.Security.Cryptography.Xml.Transform" /> object within this property by passing the desired transform Uniform Resource Identifier (URI) to the <see cref="P:System.Security.Cryptography.Xml.SignedInfo.CanonicalizationMethod" /> property. </para
-          >
+            >The <see cref="P:System.Security.Cryptography.Xml.SignedInfo.CanonicalizationMethodObject" /> property is read-only. You can modify the <see cref="T:System.Security.Cryptography.Xml.Transform" /> object within this property by passing the desired transform Uniform Resource Identifier (URI) to the <see cref="P:System.Security.Cryptography.Xml.SignedInfo.CanonicalizationMethod" /> property.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -288,15 +288,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Array" /> object that holds the collection's elements. </param
-        >
+          />An <see cref="T:System.Array" /> object that holds the collection's elements.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The beginning index in the array where the elements are copied. </param
-        >
+          />The beginning index in the array where the elements are copied.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Count">
@@ -490,8 +490,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML element from which to load the <see cref="T:System.Security.Cryptography.Xml.SignedInfo" /> state. </param
-        >
+          />The XML element from which to load the <see cref="T:System.Security.Cryptography.Xml.SignedInfo" /> state.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="References">
@@ -518,11 +518,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Security.Cryptography.Xml.SignedInfo.References" /> property uses a list of <see cref="T:System.Security.Cryptography.Xml.Reference" /> objects to represent the &lt;Reference&gt; elements of an XML digital signature.  </para
-          >
+            >The <see cref="P:System.Security.Cryptography.Xml.SignedInfo.References" /> property uses a list of <see cref="T:System.Security.Cryptography.Xml.Reference" /> objects to represent the &lt;Reference&gt; elements of an XML digital signature.
+          </para>
           <para
-            >Use the <see cref="P:System.Security.Cryptography.Xml.SignedInfo.References" /> property to describe the transforms, digest algorithms, and digest values of an XML digital signature. </para
-          >
+            >Use the <see cref="P:System.Security.Cryptography.Xml.SignedInfo.References" /> property to describe the transforms, digest algorithms, and digest values of an XML digital signature.
+          </para>
           <para>For more information about XML digital signatures, see the World Wide Web Consortium (W3C) specification at www.w3.org/TR/xmldsig-core/.</para>
         </remarks>
         <summary>

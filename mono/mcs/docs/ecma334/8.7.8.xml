@@ -35,7 +35,7 @@ class Test
    }  
 }  
 ]]>
-    </code_example>shows a Point class that provides two public instance constructors, one of which takes no arguments, while the other takes two <keyword>double</keyword> arguments. </paragraph
-  >
+    </code_example>shows a Point class that provides two public instance constructors, one of which takes no arguments, while the other takes two <keyword>double</keyword> arguments.
+  </paragraph>
   <paragraph>If no instance constructor is supplied for a class, then an empty one with no parameters is automatically provided. </paragraph>
 </clause>

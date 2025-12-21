@@ -12,8 +12,8 @@ lock (expr) embedded-statement
         > The definite assignment state of v on the control flow transfer to <non_terminal
           where="15"
           >embedded-statement</non_terminal
-        > is the same as the state of v at the end of expr. </list_item
-      >
+        > is the same as the state of v at the end of expr.
+      </list_item>
     </list>
   </paragraph>
 </clause>

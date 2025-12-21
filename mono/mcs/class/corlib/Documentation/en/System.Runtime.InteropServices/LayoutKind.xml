@@ -38,8 +38,8 @@
       >
       <block subset="none" type="note">
         <para
-          >The <see cref="F:System.Runtime.InteropServices.StructLayoutAttribute.Pack" /> field controls the alignment of data fields, and thus affects the layout regardless of the <see cref="T:System.Runtime.InteropServices.LayoutKind" /> value you specify. By default, the value of <see cref="F:System.Runtime.InteropServices.StructLayoutAttribute.Pack" /> is 0, which indicates the default packing size for the current platform. For example, when you use the Explicit layout value and specify field alignments on byte boundaries, you must set <see cref="F:System.Runtime.InteropServices.StructLayoutAttribute.Pack" /> to 1 to get the desired result. </para
-        >
+          >The <see cref="F:System.Runtime.InteropServices.StructLayoutAttribute.Pack" /> field controls the alignment of data fields, and thus affects the layout regardless of the <see cref="T:System.Runtime.InteropServices.LayoutKind" /> value you specify. By default, the value of <see cref="F:System.Runtime.InteropServices.StructLayoutAttribute.Pack" /> is 0, which indicates the default packing size for the current platform. For example, when you use the Explicit layout value and specify field alignments on byte boundaries, you must set <see cref="F:System.Runtime.InteropServices.StructLayoutAttribute.Pack" /> to 1 to get the desired result.
+        </para>
       </block>
     </remarks>
     <summary>

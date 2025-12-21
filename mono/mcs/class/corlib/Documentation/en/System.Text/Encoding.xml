@@ -42,14 +42,14 @@
       <para
         >Encoding is the process of transforming a set of Unicode characters into a sequence of bytes. In contrast, decoding is the process of transforming a sequence of encoded bytes into a set of Unicode characters. For information about the Unicode Transformation Formats (UTFs) and other encodings supported by <see cref="T:System.Text.Encoding" />, see <format type="text/html">
           <a href="bf6d9823-4c2d-48af-b280-919c5af66ae9">Understanding Encodings</a>
-        </format>. </para
-      >
+        </format>.
+      </para>
       <para
         >Note that <see cref="T:System.Text.Encoding" /> is intended to operate on Unicode characters instead of arbitrary binary data, such as byte arrays. If your application must encode arbitrary binary data into text, it should use a protocol such as uuencode, which is implemented by methods such as <see cref="M:System.Convert.ToBase64CharArray(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" />.</para
       >
       <para
-        >The .NET Framework provides the following implementations of the <see cref="T:System.Text.Encoding" /> class to support current Unicode encodings and other encodings: </para
-      >
+        >The .NET Framework provides the following implementations of the <see cref="T:System.Text.Encoding" /> class to support current Unicode encodings and other encodings:
+      </para>
       <list type="bullet">
         <item>
           <para>
@@ -84,8 +84,8 @@
         >You use the <see cref="M:System.Text.Encoding.GetEncoding(System.Int32)" /> method to obtain other encodings. You can call the <see cref="M:System.Text.Encoding.GetEncodings" /> method to get a list of all encodings.</para
       >
       <para
-        >The following table lists the encodings supported by the .NET Framework. It lists each encoding's code page number, along with the values of the encoding's <see cref="P:System.Text.EncodingInfo.Name" /> and <see cref="P:System.Text.EncodingInfo.DisplayName" /> properties. . An asterisk in the last column indicates that the code page is natively supported by the .NET Framework, regardless of the underlying platform. Note that code pages whose <see cref="P:System.Text.EncodingInfo.Name" /> property corresponds to an international standard do not necessarily comply in full with that standard. </para
-      >
+        >The following table lists the encodings supported by the .NET Framework. It lists each encoding's code page number, along with the values of the encoding's <see cref="P:System.Text.EncodingInfo.Name" /> and <see cref="P:System.Text.EncodingInfo.DisplayName" /> properties. . An asterisk in the last column indicates that the code page is natively supported by the .NET Framework, regardless of the underlying platform. Note that code pages whose <see cref="P:System.Text.EncodingInfo.Name" /> property corresponds to an international standard do not necessarily comply in full with that standard.
+      </para>
       <list type="table">
         <listheader>
           <item>
@@ -2102,8 +2102,8 @@
         </item>
         <item>
           <para
-            >Change to an application-specific behavior through use of the <see cref="T:System.Text.EncoderFallback" /> and <see cref="T:System.Text.DecoderFallback" /> classes with the U+FFFD Unicode replacement character. </para
-          >
+            >Change to an application-specific behavior through use of the <see cref="T:System.Text.EncoderFallback" /> and <see cref="T:System.Text.DecoderFallback" /> classes with the U+FFFD Unicode replacement character.
+          </para>
         </item>
       </list>
       <para
@@ -2218,8 +2218,8 @@
             </item>
           </list>
           <para
-            >The <see cref="T:System.Text.ASCIIEncoding" /> object that is returned by this property might not have the appropriate behavior for your application. It uses replacement fallback to replace each string that it cannot encode and each byte that it cannot decode with a question mark ("?") character. Instead, you can call the <see cref="M:System.Text.Encoding.GetEncoding(System.String,System.Text.EncoderFallback,System.Text.DecoderFallback)" /> method to instantiate an <see cref="T:System.Text.ASCIIEncoding" /> object whose fallback is either an <see cref="T:System.Text.EncoderFallbackException" /> or a <see cref="T:System.Text.DecoderFallbackException" />, as the following example illustrates. </para
-          >
+            >The <see cref="T:System.Text.ASCIIEncoding" /> object that is returned by this property might not have the appropriate behavior for your application. It uses replacement fallback to replace each string that it cannot encode and each byte that it cannot decode with a question mark ("?") character. Instead, you can call the <see cref="M:System.Text.Encoding.GetEncoding(System.String,System.Text.EncoderFallback,System.Text.DecoderFallback)" /> method to instantiate an <see cref="T:System.Text.ASCIIEncoding" /> object whose fallback is either an <see cref="T:System.Text.EncoderFallbackException" /> or a <see cref="T:System.Text.DecoderFallbackException" />, as the following example illustrates.
+          </para>
           <para>code reference: System.Text.Encoding.ASCII#1</para>
         </remarks>
         <summary>
@@ -2255,8 +2255,8 @@
       <Docs>
         <value>
           <para
-            >A <see cref="T:System.Text.Encoding" /> for the Unicode format in big-endian byte order. </para
-          >
+            >A <see cref="T:System.Text.Encoding" /> for the Unicode format in big-endian byte order.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2295,8 +2295,8 @@
             >If your application needs an encoding for a body name, it should call <see cref="M:System.Text.Encoding.GetEncoding(System.String)" /> with the <see cref="P:System.Text.Encoding.BodyName" /> property. Often the method retrieves a different encoding from the test encoding furnished in the call. Generally only e-mail applications need to retrieve such an encoding; most other applications that need to describe an encoding should use its <see cref="P:System.Text.Encoding.WebName" />.</para
           >
           <para
-            >In some cases, the value of the <see cref="P:System.Text.Encoding.BodyName" /> property corresponds to the international standard that defines that encoding. This does not imply that the actual implementation complies in full with that standard. </para
-          >
+            >In some cases, the value of the <see cref="P:System.Text.Encoding.BodyName" /> property corresponds to the international standard that defines that encoding. This does not imply that the actual implementation complies in full with that standard.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2398,8 +2398,8 @@
       <Docs>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="srcEncoding" />, <paramref name="dstEncoding" /> or <paramref name="bytes" /> is <see langword="null" />. </exception
-        >
+          <paramref name="srcEncoding" />, <paramref name="dstEncoding" /> or <paramref name="bytes" /> is <see langword="null" />.
+        </exception>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Converts an entire byte array from one encoding to another.</para>
@@ -2415,22 +2415,18 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The encoding format of <paramref name="bytes" />. </param
-        >
+          />The encoding format of <paramref name="bytes" />.
+        </param>
         <param name="dstEncoding">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The target encoding format. </param
-        >
+          />The target encoding format.
+        </param>
         <param name="bytes">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The bytes to convert. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The bytes to convert.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2467,12 +2463,12 @@
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
           <para>
-            <paramref name="srcEncoding" />, <paramref name="dstEncoding " />, or <paramref name="bytes" /> is <see langword="null" />. </para
-          >
+            <paramref name="srcEncoding" />, <paramref name="dstEncoding " />, or <paramref name="bytes" /> is <see langword="null" />.
+          </para>
         </exception>
         <exception cref="T:System.ArgumentOutOfRangeException">
-          <paramref name="index" /> and <paramref name="count" /> do not denote a valid range in <paramref name="bytes" /> . </exception
-        >
+          <paramref name="index" /> and <paramref name="count" /> do not denote a valid range in <paramref name="bytes" /> .
+        </exception>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Converts a range of bytes in a byte array from one encoding to another.</para>
@@ -2488,36 +2484,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The encoding of the source array, <paramref name="bytes" />. </param
-        >
+          />The encoding of the source array, <paramref name="bytes" />.
+        </param>
         <param name="dstEncoding">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The encoding of the output array. </param
-        >
+          />The encoding of the output array.
+        </param>
         <param name="bytes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array of bytes to convert. </param
-        >
+          />The array of bytes to convert.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the first element of <paramref name="bytes" /> to convert. </param
-        >
+          />The index of the first element of <paramref name="bytes" /> to convert.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes to convert. </param
-        >
+          />The number of bytes to convert.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2562,8 +2558,8 @@
             </item>
             <item>
               <para
-                >An exception fallback handler, which throws an exception when bytes cannot be decoded. The .NET Framework includes one exception fallback handler, <see cref="T:System.Text.DecoderExceptionFallback" />, which throws a <see cref="T:System.Text.DecoderFallbackException" /> when bytes cannot be decoded. </para
-              >
+                >An exception fallback handler, which throws an exception when bytes cannot be decoded. The .NET Framework includes one exception fallback handler, <see cref="T:System.Text.DecoderExceptionFallback" />, which throws a <see cref="T:System.Text.DecoderFallbackException" /> when bytes cannot be decoded.
+              </para>
             </item>
           </list>
         </remarks>
@@ -2606,8 +2602,8 @@
             >
           </block>
           <para
-            >The system ANSI code page defined by <see cref="P:System.Text.Encoding.Default" /> covers the ASCII set of characters, but the encoding is different from the encoding for ASCII. Because all <see cref="P:System.Text.Encoding.Default" /> encodings lose data, your application might use <see cref="P:System.Text.Encoding.UTF8" /> instead. UTF-8 is often identical in the U+00 to U+7F range, but can encode other characters without loss. </para
-          >
+            >The system ANSI code page defined by <see cref="P:System.Text.Encoding.Default" /> covers the ASCII set of characters, but the encoding is different from the encoding for ASCII. Because all <see cref="P:System.Text.Encoding.Default" /> encodings lose data, your application might use <see cref="P:System.Text.Encoding.UTF8" /> instead. UTF-8 is often identical in the U+00 to U+7F range, but can encode other characters without loss.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2657,8 +2653,8 @@
             </item>
             <item>
               <para
-                >An exception fallback handler, which throws an exception when characters cannot be encoded. The .NET Framework includes one exception fallback handler, <see cref="T:System.Text.EncoderExceptionFallback" />, which throws an <see cref="T:System.Text.EncoderFallbackException" /> when characters cannot be decoded. </para
-              >
+                >An exception fallback handler, which throws an exception when characters cannot be encoded. The .NET Framework includes one exception fallback handler, <see cref="T:System.Text.EncoderExceptionFallback" />, which throws an <see cref="T:System.Text.EncoderFallbackException" /> when characters cannot be decoded.
+              </para>
             </item>
           </list>
         </remarks>
@@ -2734,16 +2730,16 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref name="value" /> is an instance of <see cref="T:System.Text.Encoding" /> and is equal to the current instance; otherwise, false. </para
-          >
+            >true if <paramref name="value" /> is an instance of <see cref="T:System.Text.Encoding" /> and is equal to the current instance; otherwise, false.
+          </para>
         </returns>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to compare with the current instance. </param
-        >
+          />The <see cref="T:System.Object" /> to compare with the current instance.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2771,16 +2767,16 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="chars " />is <see langword="null" />. </exception
-        >
+          <paramref name="chars " />is <see langword="null" />.
+        </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To calculate the exact array size required by <see cref="M:System.Text.Encoding.GetBytes(System.Char[])" /> to store the resulting bytes, the application should use <see cref="M:System.Text.Encoding.GetByteCount(System.Char[])" />. To calculate the maximum array size, the application should use <see cref="M:System.Text.Encoding.GetMaxByteCount(System.Int32)" />. The <see cref="M:System.Text.Encoding.GetByteCount(System.Char[])" /> method generally allows allocation of less memory, while the <see cref="M:System.Text.Encoding.GetMaxByteCount(System.Int32)" /> method generally executes faster.</para
           >
           <para
-            >The <see cref="M:System.Text.Encoding.GetByteCount(System.Char[])" /> method determines how many bytes result in encoding a set of Unicode characters, and the <see cref="M:System.Text.Encoding.GetBytes(System.Char[])" /> method performs the actual encoding. The <see cref="M:System.Text.Encoding.GetBytes(System.Char[])" /> method expects discrete conversions, in contrast to the <see cref="M:System.Text.Encoder.GetBytes(System.Char[],System.Int32,System.Int32,System.Byte[],System.Int32,System.Boolean)" /> method, which handles multiple conversions on a single input stream. </para
-          >
+            >The <see cref="M:System.Text.Encoding.GetByteCount(System.Char[])" /> method determines how many bytes result in encoding a set of Unicode characters, and the <see cref="M:System.Text.Encoding.GetBytes(System.Char[])" /> method performs the actual encoding. The <see cref="M:System.Text.Encoding.GetBytes(System.Char[])" /> method expects discrete conversions, in contrast to the <see cref="M:System.Text.Encoder.GetBytes(System.Char[],System.Int32,System.Int32,System.Byte[],System.Int32,System.Boolean)" /> method, which handles multiple conversions on a single input stream.
+          </para>
           <para
             >Several versions of <see cref="M:System.Text.Encoding.GetByteCount(System.Char[])" /> and <see cref="M:System.Text.Encoding.GetBytes(System.Char[])" /> are supported. The following are some programming considerations for use of these methods:</para
           >
@@ -2792,8 +2788,8 @@
             </item>
             <item>
               <para
-                >If the application handles string inputs, it is recommended to use the string version of <see cref="M:System.Text.Encoding.GetBytes(System.String)" />. </para
-              >
+                >If the application handles string inputs, it is recommended to use the string version of <see cref="M:System.Text.Encoding.GetBytes(System.String)" />.
+              </para>
             </item>
             <item>
               <para
@@ -2802,8 +2798,8 @@
             </item>
             <item>
               <para
-                >If your application must convert a large amount of data, it should reuse the output buffer. In this case, the <see cref="M:System.Text.Encoding.GetBytes(System.Char[],System.Int32,System.Int32,System.Byte[],System.Int32)" /> version that supports byte arrays is the best choice. </para
-              >
+                >If your application must convert a large amount of data, it should reuse the output buffer. In this case, the <see cref="M:System.Text.Encoding.GetBytes(System.Char[],System.Int32,System.Int32,System.Byte[],System.Int32)" /> version that supports byte arrays is the best choice.
+              </para>
             </item>
             <item>
               <para
@@ -2825,8 +2821,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character array containing the characters to encode. </param
-        >
+          />The character array containing the characters to encode.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2862,8 +2858,8 @@
             >To calculate the exact array size required by <see cref="M:System.Text.Encoding.GetBytes(System.Char[])" /> to store the resulting bytes, the application should use <see cref="M:System.Text.Encoding.GetByteCount(System.Char[])" />. To calculate the maximum array size, the application should use <see cref="M:System.Text.Encoding.GetMaxByteCount(System.Int32)" />. The <see cref="M:System.Text.Encoding.GetByteCount(System.Char[])" /> method generally allows allocation of less memory, while the <see cref="M:System.Text.Encoding.GetMaxByteCount(System.Int32)" /> method generally executes faster.</para
           >
           <para
-            >The <see cref="M:System.Text.Encoding.GetByteCount(System.String)" /> method determines how many bytes result in encoding a set of Unicode characters, and the <see cref="M:System.Text.Encoding.GetBytes(System.String)" /> method performs the actual encoding. The <see cref="M:System.Text.Encoding.GetBytes(System.String)" /> method expects discrete conversions, in contrast to the <see cref="M:System.Text.Encoder.GetBytes(System.Char[],System.Int32,System.Int32,System.Byte[],System.Int32,System.Boolean)" /> method, which handles multiple conversions on a single input stream. </para
-          >
+            >The <see cref="M:System.Text.Encoding.GetByteCount(System.String)" /> method determines how many bytes result in encoding a set of Unicode characters, and the <see cref="M:System.Text.Encoding.GetBytes(System.String)" /> method performs the actual encoding. The <see cref="M:System.Text.Encoding.GetBytes(System.String)" /> method expects discrete conversions, in contrast to the <see cref="M:System.Text.Encoder.GetBytes(System.Char[],System.Int32,System.Int32,System.Byte[],System.Int32,System.Boolean)" /> method, which handles multiple conversions on a single input stream.
+          </para>
           <para
             >Several versions of <see cref="M:System.Text.Encoding.GetByteCount(System.String)" /> and <see cref="M:System.Text.Encoding.GetBytes(System.String)" /> are supported. The following are some programming considerations for use of these methods:</para
           >
@@ -2875,8 +2871,8 @@
             </item>
             <item>
               <para
-                >If the application handles string inputs, the string version of <see cref="M:System.Text.Encoding.GetBytes(System.String)" /> is recommended. </para
-              >
+                >If the application handles string inputs, the string version of <see cref="M:System.Text.Encoding.GetBytes(System.String)" /> is recommended.
+              </para>
             </item>
             <item>
               <para
@@ -2885,8 +2881,8 @@
             </item>
             <item>
               <para
-                >If your application must convert a large amount of data, it should reuse the output buffer. In this case, the <see cref="M:System.Text.Encoding.GetBytes(System.Char[],System.Int32,System.Int32,System.Byte[],System.Int32)" /> version that supports byte arrays is the best choice. </para
-              >
+                >If your application must convert a large amount of data, it should reuse the output buffer. In this case, the <see cref="M:System.Text.Encoding.GetBytes(System.Char[],System.Int32,System.Int32,System.Byte[],System.Int32)" /> version that supports byte arrays is the best choice.
+              </para>
             </item>
             <item>
               <para
@@ -2908,8 +2904,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string containing the set of characters to encode. </param
-        >
+          />The string containing the set of characters to encode.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2973,8 +2969,8 @@
             </item>
             <item>
               <para
-                >If your application must convert a large amount of data, it should reuse the output buffer. In this case, the <see cref="M:System.Text.Encoding.GetBytes(System.Char[])" /> version that supports byte arrays is the best choice. </para
-              >
+                >If your application must convert a large amount of data, it should reuse the output buffer. In this case, the <see cref="M:System.Text.Encoding.GetBytes(System.Char[])" /> version that supports byte arrays is the best choice.
+              </para>
             </item>
             <item>
               <para
@@ -2996,15 +2992,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A pointer to the first character to encode. </param
-        >
+          />A pointer to the first character to encode.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters to encode. </param
-        >
+          />The number of characters to encode.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetByteCount">
@@ -3036,12 +3032,12 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="chars " />is <see langword="null" /> . </exception
-        >
+          <paramref name="chars " />is <see langword="null" /> .
+        </exception>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <para
-            >The number of bytes required to encode the specified elements in <paramref name="chars" /> is greater than <see cref="F:System.Int32.MaxValue" />. </para
-          >
+            >The number of bytes required to encode the specified elements in <paramref name="chars" /> is greater than <see cref="F:System.Int32.MaxValue" />.
+          </para>
           <para>-or- </para>
           <para><paramref name="index" /> or <paramref name="count" /> is less than zero. </para>
           <para> -or- </para>
@@ -3055,8 +3051,8 @@
             >To calculate the exact array size required by <see cref="M:System.Text.Encoding.GetBytes(System.Char[])" /> to store the resulting bytes, the application should use <see cref="M:System.Text.Encoding.GetByteCount(System.Char[])" />. To calculate the maximum array size, the application should use <see cref="M:System.Text.Encoding.GetMaxByteCount(System.Int32)" />. The <see cref="M:System.Text.Encoding.GetByteCount(System.Char[])" /> method generally allows allocation of less memory, while the <see cref="M:System.Text.Encoding.GetMaxByteCount(System.Int32)" /> method generally executes faster.</para
           >
           <para
-            >The <see cref="M:System.Text.Encoding.GetByteCount(System.Char[])" /> method determines how many bytes result in encoding a set of Unicode characters, and the <see cref="M:System.Text.Encoding.GetBytes(System.Char[])" /> method performs the actual encoding. The <see cref="M:System.Text.Encoding.GetBytes(System.Char[])" /> method expects discrete conversions, in contrast to the <see cref="M:System.Text.Encoder.GetBytes(System.Char[],System.Int32,System.Int32,System.Byte[],System.Int32,System.Boolean)" /> method, which handles multiple conversions on a single input stream. </para
-          >
+            >The <see cref="M:System.Text.Encoding.GetByteCount(System.Char[])" /> method determines how many bytes result in encoding a set of Unicode characters, and the <see cref="M:System.Text.Encoding.GetBytes(System.Char[])" /> method performs the actual encoding. The <see cref="M:System.Text.Encoding.GetBytes(System.Char[])" /> method expects discrete conversions, in contrast to the <see cref="M:System.Text.Encoder.GetBytes(System.Char[],System.Int32,System.Int32,System.Byte[],System.Int32,System.Boolean)" /> method, which handles multiple conversions on a single input stream.
+          </para>
           <para
             >Several versions of <see cref="M:System.Text.Encoding.GetByteCount(System.Char[])" /> and <see cref="M:System.Text.Encoding.GetBytes(System.Char[])" /> are supported. The following are some programming considerations for use of these methods:</para
           >
@@ -3078,8 +3074,8 @@
             </item>
             <item>
               <para
-                >If your application must convert a large amount of data, it should reuse the output buffer. In this case, the <see cref="M:System.Text.Encoding.GetBytes(System.Char[],System.Int32,System.Int32,System.Byte[],System.Int32)" /> version that supports byte arrays is the best choice. </para
-              >
+                >If your application must convert a large amount of data, it should reuse the output buffer. In this case, the <see cref="M:System.Text.Encoding.GetBytes(System.Char[],System.Int32,System.Int32,System.Byte[],System.Int32)" /> version that supports byte arrays is the best choice.
+              </para>
             </item>
             <item>
               <para
@@ -3101,22 +3097,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character array containing the set of characters to encode. </param
-        >
+          />The character array containing the set of characters to encode.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the first character to encode. </param
-        >
+          />The index of the first character to encode.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters to encode. </param
-        >
+          />The number of characters to encode.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -3144,16 +3140,16 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="chars" /> is <see langword="null" />. </exception
-        >
+          <paramref name="chars" /> is <see langword="null" />.
+        </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >If the data to be converted is available only in sequential blocks (such as data read from a stream) or if the amount of data is so large that it needs to be divided into smaller blocks, the application should use the <see cref="T:System.Text.Decoder" /> or the <see cref="T:System.Text.Encoder" /> provided by the <see cref="M:System.Text.Encoding.GetDecoder" /> method or the <see cref="M:System.Text.Encoding.GetEncoder" /> method, respectively, of a derived class.</para
           >
           <para
-            >The <see cref="M:System.Text.Encoding.GetByteCount(System.Char[])" /> method determines how many bytes result in encoding a set of Unicode characters, and the <see cref="M:System.Text.Encoding.GetBytes(System.Char[])" /> method performs the actual encoding. The <see cref="M:System.Text.Encoding.GetBytes(System.Char[])" /> method expects discrete conversions, in contrast to the <see cref="M:System.Text.Encoder.GetBytes(System.Char[],System.Int32,System.Int32,System.Byte[],System.Int32,System.Boolean)" /> method, which handles multiple conversions on a single input stream. </para
-          >
+            >The <see cref="M:System.Text.Encoding.GetByteCount(System.Char[])" /> method determines how many bytes result in encoding a set of Unicode characters, and the <see cref="M:System.Text.Encoding.GetBytes(System.Char[])" /> method performs the actual encoding. The <see cref="M:System.Text.Encoding.GetBytes(System.Char[])" /> method expects discrete conversions, in contrast to the <see cref="M:System.Text.Encoder.GetBytes(System.Char[],System.Int32,System.Int32,System.Byte[],System.Int32,System.Boolean)" /> method, which handles multiple conversions on a single input stream.
+          </para>
           <para
             >Several versions of <see cref="M:System.Text.Encoding.GetByteCount(System.Char[])" /> and <see cref="M:System.Text.Encoding.GetBytes(System.Char[])" /> are supported. The following are some programming considerations for use of these methods:</para
           >
@@ -3175,8 +3171,8 @@
             </item>
             <item>
               <para
-                >If your application must convert a large amount of data, it should reuse the output buffer. In this case, the <see cref="M:System.Text.Encoding.GetBytes(System.Char[],System.Int32,System.Int32,System.Byte[],System.Int32)" /> version that supports byte arrays is the best choice. </para
-              >
+                >If your application must convert a large amount of data, it should reuse the output buffer. In this case, the <see cref="M:System.Text.Encoding.GetBytes(System.Char[],System.Int32,System.Int32,System.Byte[],System.Int32)" /> version that supports byte arrays is the best choice.
+              </para>
             </item>
             <item>
               <para
@@ -3198,8 +3194,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character array containing the characters to encode. </param
-        >
+          />The character array containing the characters to encode.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -3227,16 +3223,16 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="s" /> is <see langword="null" />. </exception
-        >
+          <paramref name="s" /> is <see langword="null" />.
+        </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >If the data to be converted is available only in sequential blocks (such as data read from a stream) or if the amount of data is so large that it needs to be divided into smaller blocks, the application should use the <see cref="T:System.Text.Decoder" /> or the <see cref="T:System.Text.Encoder" /> provided by the <see cref="M:System.Text.Encoding.GetDecoder" /> method or the <see cref="M:System.Text.Encoding.GetEncoder" /> method, respectively, of a derived class.</para
           >
           <para
-            >The <see cref="M:System.Text.Encoding.GetByteCount(System.String)" /> method determines how many bytes result in encoding a set of Unicode characters, and the <see cref="M:System.Text.Encoding.GetBytes(System.String)" /> method performs the actual encoding. The <see cref="M:System.Text.Encoding.GetBytes(System.String)" /> method expects discrete conversions, in contrast to the <see cref="M:System.Text.Encoder.GetBytes(System.Char[],System.Int32,System.Int32,System.Byte[],System.Int32,System.Boolean)" /> method, which handles multiple conversions on a single input stream. </para
-          >
+            >The <see cref="M:System.Text.Encoding.GetByteCount(System.String)" /> method determines how many bytes result in encoding a set of Unicode characters, and the <see cref="M:System.Text.Encoding.GetBytes(System.String)" /> method performs the actual encoding. The <see cref="M:System.Text.Encoding.GetBytes(System.String)" /> method expects discrete conversions, in contrast to the <see cref="M:System.Text.Encoder.GetBytes(System.Char[],System.Int32,System.Int32,System.Byte[],System.Int32,System.Boolean)" /> method, which handles multiple conversions on a single input stream.
+          </para>
           <para
             >Several versions of <see cref="M:System.Text.Encoding.GetByteCount(System.String)" /> and <see cref="M:System.Text.Encoding.GetBytes(System.String)" /> are supported. The following are some programming considerations for use of these methods:</para
           >
@@ -3248,8 +3244,8 @@
             </item>
             <item>
               <para
-                >If the application handles string inputs, it is recommended to use the string version of <see cref="M:System.Text.Encoding.GetBytes(System.String)" />. </para
-              >
+                >If the application handles string inputs, it is recommended to use the string version of <see cref="M:System.Text.Encoding.GetBytes(System.String)" />.
+              </para>
             </item>
             <item>
               <para
@@ -3258,8 +3254,8 @@
             </item>
             <item>
               <para
-                >If your application must convert a large amount of data, it should reuse the output buffer. In this case, the <see cref="M:System.Text.Encoding.GetBytes(System.String)" /> version that supports byte arrays is the best choice. </para
-              >
+                >If your application must convert a large amount of data, it should reuse the output buffer. In this case, the <see cref="M:System.Text.Encoding.GetBytes(System.String)" /> version that supports byte arrays is the best choice.
+              </para>
             </item>
             <item>
               <para
@@ -3281,8 +3277,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string containing the characters to encode. </param
-        >
+          />The string containing the characters to encode.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -3315,19 +3311,19 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="chars" /> is <see langword="null" />. </exception
-        >
+          <paramref name="chars" /> is <see langword="null" />.
+        </exception>
         <exception cref="T:System.ArgumentOutOfRangeException">
-          <paramref name="index" /> and <paramref name="count" /> do not denote a valid range in <paramref name="chars" />. </exception
-        >
+          <paramref name="index" /> and <paramref name="count" /> do not denote a valid range in <paramref name="chars" />.
+        </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >If the data to be converted is available only in sequential blocks (such as data read from a stream) or if the amount of data is so large that it needs to be divided into smaller blocks, the application should use the <see cref="T:System.Text.Decoder" /> or the <see cref="T:System.Text.Encoder" /> provided by the <see cref="M:System.Text.Encoding.GetDecoder" /> method or the <see cref="M:System.Text.Encoding.GetEncoder" /> method, respectively, of a derived class.</para
           >
           <para
-            >The <see cref="M:System.Text.Encoding.GetByteCount(System.Char[])" /> method determines how many bytes result in encoding a set of Unicode characters, and the <see cref="M:System.Text.Encoding.GetBytes(System.Char[])" /> method performs the actual encoding. The <see cref="M:System.Text.Encoding.GetBytes(System.Char[])" /> method expects discrete conversions, in contrast to the <see cref="M:System.Text.Encoder.GetBytes(System.Char[],System.Int32,System.Int32,System.Byte[],System.Int32,System.Boolean)" /> method, which handles multiple conversions on a single input stream. </para
-          >
+            >The <see cref="M:System.Text.Encoding.GetByteCount(System.Char[])" /> method determines how many bytes result in encoding a set of Unicode characters, and the <see cref="M:System.Text.Encoding.GetBytes(System.Char[])" /> method performs the actual encoding. The <see cref="M:System.Text.Encoding.GetBytes(System.Char[])" /> method expects discrete conversions, in contrast to the <see cref="M:System.Text.Encoder.GetBytes(System.Char[],System.Int32,System.Int32,System.Byte[],System.Int32,System.Boolean)" /> method, which handles multiple conversions on a single input stream.
+          </para>
           <para
             >Several versions of <see cref="M:System.Text.Encoding.GetByteCount(System.Char[])" /> and <see cref="M:System.Text.Encoding.GetBytes(System.Char[])" /> are supported. The following are some programming considerations for use of these methods:</para
           >
@@ -3349,8 +3345,8 @@
             </item>
             <item>
               <para
-                >If your application must convert a large amount of data, it should reuse the output buffer. In this case, the <see cref="M:System.Text.Encoding.GetBytes(System.Char[])" /> version that supports byte arrays is the best choice. </para
-              >
+                >If your application must convert a large amount of data, it should reuse the output buffer. In this case, the <see cref="M:System.Text.Encoding.GetBytes(System.Char[])" /> version that supports byte arrays is the best choice.
+              </para>
             </item>
             <item>
               <para
@@ -3372,22 +3368,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character array containing the set of characters to encode. </param
-        >
+          />The character array containing the set of characters to encode.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the first character to encode. </param
-        >
+          />The index of the first character to encode.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters to encode. </param
-        >
+          />The number of characters to encode.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -3433,8 +3429,8 @@
             >If the data to be converted is available only in sequential blocks (such as data read from a stream) or if the amount of data is so large that it needs to be divided into smaller blocks, the application should use the <see cref="T:System.Text.Decoder" /> or the <see cref="T:System.Text.Encoder" /> object provided by the <see cref="M:System.Text.Encoding.GetDecoder" /> or the <see cref="M:System.Text.Encoding.GetEncoder" /> method, respectively, of a derived class.</para
           >
           <para
-            >The <see cref="M:System.Text.Encoding.GetByteCount(System.Char[])" /> method determines how many bytes result in encoding a set of Unicode characters, and the <see cref="M:System.Text.Encoding.GetBytes(System.Char*,System.Int32,System.Byte*,System.Int32)" /> method performs the actual encoding. The <see cref="M:System.Text.Encoding.GetBytes(System.Char*,System.Int32,System.Byte*,System.Int32)" /> method expects discrete conversions, in contrast to the <see cref="M:System.Text.Encoder.GetBytes(System.Char[],System.Int32,System.Int32,System.Byte[],System.Int32,System.Boolean)" /> method, which handles multiple conversions on a single input stream. </para
-          >
+            >The <see cref="M:System.Text.Encoding.GetByteCount(System.Char[])" /> method determines how many bytes result in encoding a set of Unicode characters, and the <see cref="M:System.Text.Encoding.GetBytes(System.Char*,System.Int32,System.Byte*,System.Int32)" /> method performs the actual encoding. The <see cref="M:System.Text.Encoding.GetBytes(System.Char*,System.Int32,System.Byte*,System.Int32)" /> method expects discrete conversions, in contrast to the <see cref="M:System.Text.Encoder.GetBytes(System.Char[],System.Int32,System.Int32,System.Byte[],System.Int32,System.Boolean)" /> method, which handles multiple conversions on a single input stream.
+          </para>
           <para
             >Several versions of <see cref="M:System.Text.Encoding.GetByteCount(System.Char[])" /> and <see cref="M:System.Text.Encoding.GetBytes(System.Char[])" /> are supported. The following are some programming considerations for use of these methods:</para
           >
@@ -3446,8 +3442,8 @@
             </item>
             <item>
               <para
-                >If the application handles string inputs, it is recommended to use the string version of <see cref="M:System.Text.Encoding.GetBytes(System.String)" />. </para
-              >
+                >If the application handles string inputs, it is recommended to use the string version of <see cref="M:System.Text.Encoding.GetBytes(System.String)" />.
+              </para>
             </item>
             <item>
               <para
@@ -3456,8 +3452,8 @@
             </item>
             <item>
               <para
-                >If your application must convert a large amount of data, it should reuse the output buffer. In this case, the <see cref="M:System.Text.Encoding.GetBytes(System.String)" /> version that supports byte arrays is the best choice. </para
-              >
+                >If your application must convert a large amount of data, it should reuse the output buffer. In this case, the <see cref="M:System.Text.Encoding.GetBytes(System.String)" /> version that supports byte arrays is the best choice.
+              </para>
             </item>
             <item>
               <para
@@ -3481,29 +3477,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A pointer to the first character to encode. </param
-        >
+          />A pointer to the first character to encode.
+        </param>
         <param name="charCount">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters to encode. </param
-        >
+          />The number of characters to encode.
+        </param>
         <param name="bytes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A pointer to the location at which to start writing the resulting sequence of bytes. </param
-        >
+          />A pointer to the location at which to start writing the resulting sequence of bytes.
+        </param>
         <param name="byteCount">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum number of bytes to write. </param
-        >
+          />The maximum number of bytes to write.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetBytes">
@@ -3568,8 +3564,8 @@
             >If the data to be converted is available only in sequential blocks (such as data read from a stream) or if the amount of data is so large that it needs to be divided into smaller blocks, the application should use the <see cref="T:System.Text.Decoder" /> or the <see cref="T:System.Text.Encoder" /> provided by the <see cref="M:System.Text.Encoding.GetDecoder" /> method or the <see cref="M:System.Text.Encoding.GetEncoder" /> method, respectively, of a derived class.</para
           >
           <para
-            >The <see cref="M:System.Text.Encoding.GetByteCount(System.Char[])" /> method determines how many bytes result in encoding a set of Unicode characters, and the <see cref="M:System.Text.Encoding.GetBytes(System.Char[])" /> method performs the actual encoding. The <see cref="M:System.Text.Encoding.GetBytes(System.Char[])" /> method expects discrete conversions, in contrast to the <see cref="M:System.Text.Encoder.GetBytes(System.Char[],System.Int32,System.Int32,System.Byte[],System.Int32,System.Boolean)" /> method, which handles multiple conversions on a single input stream. </para
-          >
+            >The <see cref="M:System.Text.Encoding.GetByteCount(System.Char[])" /> method determines how many bytes result in encoding a set of Unicode characters, and the <see cref="M:System.Text.Encoding.GetBytes(System.Char[])" /> method performs the actual encoding. The <see cref="M:System.Text.Encoding.GetBytes(System.Char[])" /> method expects discrete conversions, in contrast to the <see cref="M:System.Text.Encoder.GetBytes(System.Char[],System.Int32,System.Int32,System.Byte[],System.Int32,System.Boolean)" /> method, which handles multiple conversions on a single input stream.
+          </para>
           <para
             >Several versions of <see cref="M:System.Text.Encoding.GetByteCount(System.Char[])" /> and <see cref="M:System.Text.Encoding.GetBytes(System.Char[])" /> are supported. The following are some programming considerations for use of these methods:</para
           >
@@ -3581,8 +3577,8 @@
             </item>
             <item>
               <para
-                >If the application handles string inputs, it is recommended to use the string version of <see cref="M:System.Text.Encoding.GetBytes(System.Char[])" />. </para
-              >
+                >If the application handles string inputs, it is recommended to use the string version of <see cref="M:System.Text.Encoding.GetBytes(System.Char[])" />.
+              </para>
             </item>
             <item>
               <para
@@ -3591,8 +3587,8 @@
             </item>
             <item>
               <para
-                >If your application must convert a large amount of data, it should reuse the output buffer. In this case, the <see cref="M:System.Text.Encoding.GetBytes(System.Char[],System.Int32,System.Int32,System.Byte[],System.Int32)" /> version that supports byte arrays is the best choice. </para
-              >
+                >If your application must convert a large amount of data, it should reuse the output buffer. In this case, the <see cref="M:System.Text.Encoding.GetBytes(System.Char[],System.Int32,System.Int32,System.Byte[],System.Int32)" /> version that supports byte arrays is the best choice.
+              </para>
             </item>
             <item>
               <para
@@ -3614,36 +3610,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character array containing the set of characters to encode. </param
-        >
+          />The character array containing the set of characters to encode.
+        </param>
         <param name="charIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the first character to encode. </param
-        >
+          />The index of the first character to encode.
+        </param>
         <param name="charCount">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters to encode. </param
-        >
+          />The number of characters to encode.
+        </param>
         <param name="bytes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte array to contain the resulting sequence of bytes. </param
-        >
+          />The byte array to contain the resulting sequence of bytes.
+        </param>
         <param name="byteIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index at which to start writing the resulting sequence of bytes. </param
-        >
+          />The index at which to start writing the resulting sequence of bytes.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -3705,29 +3701,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string containing the set of characters to encode. </param
-        >
+          />The string containing the set of characters to encode.
+        </param>
         <param name="charIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the first character to encode. </param
-        >
+          />The index of the first character to encode.
+        </param>
         <param name="bytes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte array to contain the resulting sequence of bytes. </param
-        >
+          />The byte array to contain the resulting sequence of bytes.
+        </param>
         <param name="byteIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index at which to start writing the resulting sequence of bytes. </param
-        >
+          />The index at which to start writing the resulting sequence of bytes.
+        </param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -3737,8 +3733,8 @@
             >If the data to be converted is available only in sequential blocks (such as data read from a stream) or if the amount of data is so large that it needs to be divided into smaller blocks, the application should use the <see cref="T:System.Text.Decoder" /> or the <see cref="T:System.Text.Encoder" /> provided by the <see cref="M:System.Text.Encoding.GetDecoder" /> method or the <see cref="M:System.Text.Encoding.GetEncoder" /> method, respectively, of a derived class.</para
           >
           <para
-            >The <see cref="M:System.Text.Encoding.GetByteCount(System.String)" /> method determines how many bytes result in encoding a set of Unicode characters, and the <see cref="M:System.Text.Encoding.GetBytes(System.String)" /> method performs the actual encoding. The <see cref="M:System.Text.Encoding.GetBytes(System.String)" /> method expects discrete conversions, in contrast to the <see cref="M:System.Text.Encoder.GetBytes(System.Char[],System.Int32,System.Int32,System.Byte[],System.Int32,System.Boolean)" /> method, which handles multiple conversions on a single input stream. </para
-          >
+            >The <see cref="M:System.Text.Encoding.GetByteCount(System.String)" /> method determines how many bytes result in encoding a set of Unicode characters, and the <see cref="M:System.Text.Encoding.GetBytes(System.String)" /> method performs the actual encoding. The <see cref="M:System.Text.Encoding.GetBytes(System.String)" /> method expects discrete conversions, in contrast to the <see cref="M:System.Text.Encoder.GetBytes(System.Char[],System.Int32,System.Int32,System.Byte[],System.Int32,System.Boolean)" /> method, which handles multiple conversions on a single input stream.
+          </para>
           <para
             >Several versions of <see cref="M:System.Text.Encoding.GetByteCount(System.String)" /> and <see cref="M:System.Text.Encoding.GetBytes(System.String)" /> are supported. The following are some programming considerations for use of these methods:</para
           >
@@ -3750,8 +3746,8 @@
             </item>
             <item>
               <para
-                >If the application handles string inputs, it is recommended to use the string version of <see cref="M:System.Text.Encoding.GetBytes(System.String)" />. </para
-              >
+                >If the application handles string inputs, it is recommended to use the string version of <see cref="M:System.Text.Encoding.GetBytes(System.String)" />.
+              </para>
             </item>
             <item>
               <para
@@ -3760,8 +3756,8 @@
             </item>
             <item>
               <para
-                >If your application must convert a large amount of data, it should reuse the output buffer. In this case, the <see cref="M:System.Text.Encoding.GetBytes(System.String)" /> version that supports byte arrays is the best choice. </para
-              >
+                >If your application must convert a large amount of data, it should reuse the output buffer. In this case, the <see cref="M:System.Text.Encoding.GetBytes(System.String)" /> version that supports byte arrays is the best choice.
+              </para>
             </item>
             <item>
               <para
@@ -3783,36 +3779,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string containing the set of characters to encode. </param
-        >
+          />The string containing the set of characters to encode.
+        </param>
         <param name="charIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the first character to encode. </param
-        >
+          />The index of the first character to encode.
+        </param>
         <param name="charCount">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters to encode. </param
-        >
+          />The number of characters to encode.
+        </param>
         <param name="bytes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte array to contain the resulting sequence of bytes. </param
-        >
+          />The byte array to contain the resulting sequence of bytes.
+        </param>
         <param name="byteIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index at which to start writing the resulting sequence of bytes. </param
-        >
+          />The index at which to start writing the resulting sequence of bytes.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -3840,16 +3836,16 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="bytes" /> is <see langword="null" />. </exception
-        >
+          <paramref name="bytes" /> is <see langword="null" />.
+        </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To calculate the exact array size required by <see cref="M:System.Text.Encoding.GetChars(System.Byte[])" /> to store the resulting characters, the application should use <see cref="M:System.Text.Encoding.GetCharCount(System.Byte[])" />. To calculate the maximum array size, the application should use <see cref="M:System.Text.Encoding.GetMaxCharCount(System.Int32)" />. The <see cref="M:System.Text.Encoding.GetCharCount(System.Byte[])" /> method generally allows allocation of less memory, while the <see cref="M:System.Text.Encoding.GetMaxCharCount(System.Int32)" /> method generally executes faster.</para
           >
           <para
-            >The <see cref="M:System.Text.Encoding.GetCharCount(System.Byte[])" /> method determines how many characters result in decoding a sequence of bytes, and the  <see cref="M:System.Text.Encoding.GetChars(System.Byte[])" /> method performs the actual decoding. The <see cref="M:System.Text.Encoding.GetChars(System.Byte[])" /> method expects discrete conversions, in contrast to the <see cref="M:System.Text.Decoder.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" /> method, which handles multiple passes on a single input stream. </para
-          >
+            >The <see cref="M:System.Text.Encoding.GetCharCount(System.Byte[])" /> method determines how many characters result in decoding a sequence of bytes, and the  <see cref="M:System.Text.Encoding.GetChars(System.Byte[])" /> method performs the actual decoding. The <see cref="M:System.Text.Encoding.GetChars(System.Byte[])" /> method expects discrete conversions, in contrast to the <see cref="M:System.Text.Decoder.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" /> method, which handles multiple passes on a single input stream.
+          </para>
           <para
             >Several versions of <see cref="M:System.Text.Encoding.GetCharCount(System.Byte[])" /> and <see cref="M:System.Text.Encoding.GetChars(System.Byte[])" /> are supported. The following are some programming considerations for use of these methods:</para
           >
@@ -3869,8 +3865,8 @@
             </item>
             <item>
               <para
-                >If your application must convert a large amount of data, it should reuse the output buffer. In this case, the <see cref="M:System.Text.Encoding.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" /> version that supports output character buffers is the best choice. </para
-              >
+                >If your application must convert a large amount of data, it should reuse the output buffer. In this case, the <see cref="M:System.Text.Encoding.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" /> version that supports output character buffers is the best choice.
+              </para>
             </item>
             <item>
               <para
@@ -3892,8 +3888,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte array containing the sequence of bytes to decode. </param
-        >
+          />The byte array containing the sequence of bytes to decode.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -3934,8 +3930,8 @@
             >To calculate the exact array size that <see cref="M:System.Text.Encoding.GetChars(System.Byte[])" /> requires to store the resulting characters, the application should use <see cref="M:System.Text.Encoding.GetCharCount(System.Byte[])" />. To calculate the maximum array size, the application should use <see cref="M:System.Text.Encoding.GetMaxCharCount(System.Int32)" />. The <see cref="M:System.Text.Encoding.GetCharCount(System.Byte[])" /> method generally allows allocation of less memory, while the <see cref="M:System.Text.Encoding.GetMaxCharCount(System.Int32)" /> method generally executes faster.</para
           >
           <para
-            >The <see cref="M:System.Text.Encoding.GetCharCount(System.Byte[])" /> method determines how many characters result in decoding a sequence of bytes, and the <see cref="M:System.Text.Encoding.GetChars(System.Byte[])" /> method performs the actual decoding. The <see cref="M:System.Text.Encoding.GetChars(System.Byte[])" /> method expects discrete conversions, in contrast to the <see cref="M:System.Text.Decoder.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" /> method, which handles multiple passes on a single input stream. </para
-          >
+            >The <see cref="M:System.Text.Encoding.GetCharCount(System.Byte[])" /> method determines how many characters result in decoding a sequence of bytes, and the <see cref="M:System.Text.Encoding.GetChars(System.Byte[])" /> method performs the actual decoding. The <see cref="M:System.Text.Encoding.GetChars(System.Byte[])" /> method expects discrete conversions, in contrast to the <see cref="M:System.Text.Decoder.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" /> method, which handles multiple passes on a single input stream.
+          </para>
           <para
             >Several versions of <see cref="M:System.Text.Encoding.GetCharCount(System.Byte[])" /> and <see cref="M:System.Text.Encoding.GetChars(System.Byte[])" /> are supported. The following are some programming considerations for use of these methods:</para
           >
@@ -3955,8 +3951,8 @@
             </item>
             <item>
               <para
-                >If your application must convert a large amount of data, it should reuse the output buffer. In this case, the <see cref="M:System.Text.Encoding.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" /> version that supports output character buffers is the best choice. </para
-              >
+                >If your application must convert a large amount of data, it should reuse the output buffer. In this case, the <see cref="M:System.Text.Encoding.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" /> version that supports output character buffers is the best choice.
+              </para>
             </item>
             <item>
               <para
@@ -3978,15 +3974,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A pointer to the first byte to decode. </param
-        >
+          />A pointer to the first byte to decode.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes to decode. </param
-        >
+          />The number of bytes to decode.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetCharCount">
@@ -4018,8 +4014,8 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="bytes" /> is <see langword="null" />. </exception
-        >
+          <paramref name="bytes" /> is <see langword="null" />.
+        </exception>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="index " />and <paramref name="count " />do not specify a valid range in <paramref name="bytes" /> (i.e. (<paramref name="index" /> + <paramref name="count" />) &gt; <paramref name="bytes" />.Length).</exception
         >
@@ -4029,8 +4025,8 @@
             >To calculate the exact array size required by <see cref="M:System.Text.Encoding.GetChars(System.Byte[])" /> to store the resulting characters, the application should use <see cref="M:System.Text.Encoding.GetCharCount(System.Byte[])" />. To calculate the maximum array size, the application should use <see cref="M:System.Text.Encoding.GetMaxCharCount(System.Int32)" />. The <see cref="M:System.Text.Encoding.GetCharCount(System.Byte[])" /> method generally allows allocation of less memory, while the <see cref="M:System.Text.Encoding.GetMaxCharCount(System.Int32)" /> method generally executes faster.</para
           >
           <para
-            >The <see cref="M:System.Text.Encoding.GetCharCount(System.Byte[])" /> method determines how many characters result in decoding a sequence of bytes, and the <see cref="M:System.Text.Encoding.GetChars(System.Byte[])" /> method performs the actual decoding. The <see cref="M:System.Text.Encoding.GetChars(System.Byte[])" /> method expects discrete conversions, in contrast to the <see cref="M:System.Text.Decoder.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" /> method, which handles multiple passes on a single input stream. </para
-          >
+            >The <see cref="M:System.Text.Encoding.GetCharCount(System.Byte[])" /> method determines how many characters result in decoding a sequence of bytes, and the <see cref="M:System.Text.Encoding.GetChars(System.Byte[])" /> method performs the actual decoding. The <see cref="M:System.Text.Encoding.GetChars(System.Byte[])" /> method expects discrete conversions, in contrast to the <see cref="M:System.Text.Decoder.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" /> method, which handles multiple passes on a single input stream.
+          </para>
           <para
             >Several versions of <see cref="M:System.Text.Encoding.GetCharCount(System.Byte[])" /> and <see cref="M:System.Text.Encoding.GetChars(System.Byte[])" /> are supported. The following are some programming considerations for use of these methods:</para
           >
@@ -4050,8 +4046,8 @@
             </item>
             <item>
               <para
-                >If your application must convert a large amount of data, it should reuse the output buffer. In this case, the <see cref="M:System.Text.Encoding.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" /> version that supports output character buffers is the best choice. </para
-              >
+                >If your application must convert a large amount of data, it should reuse the output buffer. In this case, the <see cref="M:System.Text.Encoding.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" /> version that supports output character buffers is the best choice.
+              </para>
             </item>
             <item>
               <para
@@ -4073,22 +4069,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte array containing the sequence of bytes to decode. </param
-        >
+          />The byte array containing the sequence of bytes to decode.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the first byte to decode. </param
-        >
+          />The index of the first byte to decode.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes to decode. </param
-        >
+          />The number of bytes to decode.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -4116,8 +4112,8 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="bytes" /> is <see langword="null" />. </exception
-        >
+          <paramref name="bytes" /> is <see langword="null" />.
+        </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
@@ -4130,8 +4126,8 @@
             >Note   This method is intended to operate on Unicode characters, not on arbitrary binary data, such as byte arrays. If your application needs to encode arbitrary binary data into text, it should use a protocol such as uuencode, which is implemented by methods such as <see cref="M:System.Convert.ToBase64CharArray(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" />.</para
           >
           <para
-            >The <see cref="M:System.Text.Encoding.GetCharCount(System.Byte[])" /> method determines how many characters result in decoding a sequence of bytes, and the <see cref="M:System.Text.Encoding.GetChars(System.Byte[])" /> method performs the actual decoding. The <see cref="M:System.Text.Encoding.GetChars(System.Byte[])" /> method expects discrete conversions, in contrast to the <see cref="M:System.Text.Decoder.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" /> method, which handles multiple passes on a single input stream. </para
-          >
+            >The <see cref="M:System.Text.Encoding.GetCharCount(System.Byte[])" /> method determines how many characters result in decoding a sequence of bytes, and the <see cref="M:System.Text.Encoding.GetChars(System.Byte[])" /> method performs the actual decoding. The <see cref="M:System.Text.Encoding.GetChars(System.Byte[])" /> method expects discrete conversions, in contrast to the <see cref="M:System.Text.Decoder.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" /> method, which handles multiple passes on a single input stream.
+          </para>
           <para
             >Several versions of <see cref="M:System.Text.Encoding.GetCharCount(System.Byte[])" /> and <see cref="M:System.Text.Encoding.GetChars(System.Byte[])" /> are supported. The following are some programming considerations for use of these methods:</para
           >
@@ -4153,8 +4149,8 @@
             </item>
             <item>
               <para
-                >If your application must convert a large amount of data, it should reuse the output buffer. In this case, the <see cref="M:System.Text.Encoding.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" /> version that supports output character buffers is the best choice. </para
-              >
+                >If your application must convert a large amount of data, it should reuse the output buffer. In this case, the <see cref="M:System.Text.Encoding.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" /> version that supports output character buffers is the best choice.
+              </para>
             </item>
             <item>
               <para
@@ -4176,8 +4172,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte array containing the sequence of bytes to decode. </param
-        >
+          />The byte array containing the sequence of bytes to decode.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -4210,11 +4206,11 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="bytes " />is <see langword="null" /> . </exception
-        >
+          <paramref name="bytes " />is <see langword="null" /> .
+        </exception>
         <exception cref="T:System.ArgumentOutOfRangeException">
-          <paramref name="index " />and <paramref name="count " />do not denote a valid range in the byte array. </exception
-        >
+          <paramref name="index " />and <paramref name="count " />do not denote a valid range in the byte array.
+        </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
@@ -4227,8 +4223,8 @@
             >Note   This method is intended to operate on Unicode characters, not on arbitrary binary data, such as byte arrays. If your application needs to encode arbitrary binary data into text, it should use a protocol such as uuencode, which is implemented by methods such as <see cref="M:System.Convert.ToBase64CharArray(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" />.</para
           >
           <para
-            >The <see cref="M:System.Text.Encoding.GetCharCount(System.Byte[])" /> method determines how many characters result in decoding a sequence of bytes, and the <see cref="M:System.Text.Encoding.GetChars(System.Byte[])" /> method performs the actual decoding. The <see cref="M:System.Text.Encoding.GetChars(System.Byte[])" /> method expects discrete conversions, in contrast to the <see cref="M:System.Text.Decoder.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" /> method, which handles multiple passes on a single input stream. </para
-          >
+            >The <see cref="M:System.Text.Encoding.GetCharCount(System.Byte[])" /> method determines how many characters result in decoding a sequence of bytes, and the <see cref="M:System.Text.Encoding.GetChars(System.Byte[])" /> method performs the actual decoding. The <see cref="M:System.Text.Encoding.GetChars(System.Byte[])" /> method expects discrete conversions, in contrast to the <see cref="M:System.Text.Decoder.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" /> method, which handles multiple passes on a single input stream.
+          </para>
           <para
             >Several versions of <see cref="M:System.Text.Encoding.GetCharCount(System.Byte[])" /> and <see cref="M:System.Text.Encoding.GetChars(System.Byte[])" /> are supported. The following are some programming considerations for use of these methods:</para
           >
@@ -4250,8 +4246,8 @@
             </item>
             <item>
               <para
-                >If your application must convert a large amount of data, it should reuse the output buffer. In this case, the <see cref="M:System.Text.Encoding.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" /> version that supports output character buffers is the best choice. </para
-              >
+                >If your application must convert a large amount of data, it should reuse the output buffer. In this case, the <see cref="M:System.Text.Encoding.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" /> version that supports output character buffers is the best choice.
+              </para>
             </item>
             <item>
               <para
@@ -4273,22 +4269,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte array containing the sequence of bytes to decode. </param
-        >
+          />The byte array containing the sequence of bytes to decode.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the first byte to decode. </param
-        >
+          />The index of the first byte to decode.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes to decode. </param
-        >
+          />The number of bytes to decode.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -4340,8 +4336,8 @@
             >Note   This method is intended to operate on Unicode characters, not on arbitrary binary data, such as byte arrays. If your application needs to encode arbitrary binary data into text, it should use a protocol such as uuencode, which is implemented by methods such as <see cref="M:System.Convert.ToBase64CharArray(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" />.</para
           >
           <para
-            >The <see cref="M:System.Text.Encoding.GetCharCount(System.Byte[])" /> method determines how many characters result in decoding a sequence of bytes, and the <see cref="M:System.Text.Encoding.GetChars(System.Byte[])" /> method performs the actual decoding. The <see cref="M:System.Text.Encoding.GetChars(System.Byte[])" /> method expects discrete conversions, in contrast to the <see cref="M:System.Text.Decoder.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" /> method, which handles multiple passes on a single input stream. </para
-          >
+            >The <see cref="M:System.Text.Encoding.GetCharCount(System.Byte[])" /> method determines how many characters result in decoding a sequence of bytes, and the <see cref="M:System.Text.Encoding.GetChars(System.Byte[])" /> method performs the actual decoding. The <see cref="M:System.Text.Encoding.GetChars(System.Byte[])" /> method expects discrete conversions, in contrast to the <see cref="M:System.Text.Decoder.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" /> method, which handles multiple passes on a single input stream.
+          </para>
           <para
             >Several versions of <see cref="M:System.Text.Encoding.GetCharCount(System.Byte[])" /> and <see cref="M:System.Text.Encoding.GetChars(System.Byte[])" /> are supported. The following are some programming considerations for use of these methods:</para
           >
@@ -4363,8 +4359,8 @@
             </item>
             <item>
               <para
-                >If your application must convert a large amount of data, it should reuse the output buffer. In this case, the <see cref="M:System.Text.Encoding.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" /> version that supports output character buffers is the best choice. </para
-              >
+                >If your application must convert a large amount of data, it should reuse the output buffer. In this case, the <see cref="M:System.Text.Encoding.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" /> version that supports output character buffers is the best choice.
+              </para>
             </item>
             <item>
               <para
@@ -4388,29 +4384,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A pointer to the first byte to decode. </param
-        >
+          />A pointer to the first byte to decode.
+        </param>
         <param name="byteCount">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes to decode. </param
-        >
+          />The number of bytes to decode.
+        </param>
         <param name="chars">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A pointer to the location at which to start writing the resulting set of characters. </param
-        >
+          />A pointer to the location at which to start writing the resulting set of characters.
+        </param>
         <param name="charCount">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum number of characters to write. </param
-        >
+          />The maximum number of characters to write.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetChars">
@@ -4461,8 +4457,8 @@
           <para><paramref name="charIndex " /> &lt; 0. </para>
           <para> -or- </para>
           <para>
-            <paramref name="byteIndex" /> and <paramref name="byteCount" /> do not specify a valid range in <paramref name="bytes" /> (i.e. (<paramref name="byteIndex " />+ <paramref name="byteCount " /> ) &gt; <paramref name="bytes" />.Length). </para
-          >
+            <paramref name="byteIndex" /> and <paramref name="byteCount" /> do not specify a valid range in <paramref name="bytes" /> (i.e. (<paramref name="byteIndex " />+ <paramref name="byteCount " /> ) &gt; <paramref name="bytes" />.Length).
+          </para>
           <para>-or- </para>
           <para><paramref name="charIndex" /> &gt; <paramref name="chars" />.Length.</para>
         </exception>
@@ -4481,8 +4477,8 @@
             >Note    This method is intended to operate on Unicode characters, not on arbitrary binary data, such as byte arrays. If your application needs to encode arbitrary binary data into text, it should use a protocol such as uuencode, which is implemented by methods such as <see cref="M:System.Convert.ToBase64CharArray(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" />.</para
           >
           <para
-            >The <see cref="M:System.Text.Encoding.GetCharCount(System.Byte[])" /> method determines how many characters result in decoding a sequence of bytes, and the <see cref="M:System.Text.Encoding.GetChars(System.Byte[])" /> method performs the actual decoding. The <see cref="M:System.Text.Encoding.GetChars(System.Byte[])" /> method expects discrete conversions, in contrast to the <see cref="M:System.Text.Decoder.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" /> method, which handles multiple passes on a single input stream. </para
-          >
+            >The <see cref="M:System.Text.Encoding.GetCharCount(System.Byte[])" /> method determines how many characters result in decoding a sequence of bytes, and the <see cref="M:System.Text.Encoding.GetChars(System.Byte[])" /> method performs the actual decoding. The <see cref="M:System.Text.Encoding.GetChars(System.Byte[])" /> method expects discrete conversions, in contrast to the <see cref="M:System.Text.Decoder.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" /> method, which handles multiple passes on a single input stream.
+          </para>
           <para
             >Several versions of <see cref="M:System.Text.Encoding.GetCharCount(System.Byte[])" /> and <see cref="M:System.Text.Encoding.GetChars(System.Byte[])" /> are supported. The following are some programming considerations for use of these methods:</para
           >
@@ -4504,8 +4500,8 @@
             </item>
             <item>
               <para
-                >If your application must convert a large amount of data, it should reuse the output buffer. In this case, the <see cref="M:System.Text.Encoding.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" /> version that supports output character buffers is the best choice. </para
-              >
+                >If your application must convert a large amount of data, it should reuse the output buffer. In this case, the <see cref="M:System.Text.Encoding.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" /> version that supports output character buffers is the best choice.
+              </para>
             </item>
             <item>
               <para
@@ -4527,36 +4523,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte array containing the sequence of bytes to decode. </param
-        >
+          />The byte array containing the sequence of bytes to decode.
+        </param>
         <param name="byteIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the first byte to decode. </param
-        >
+          />The index of the first byte to decode.
+        </param>
         <param name="byteCount">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes to decode. </param
-        >
+          />The number of bytes to decode.
+        </param>
         <param name="chars">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character array to contain the resulting set of characters. </param
-        >
+          />The character array to contain the resulting set of characters.
+        </param>
         <param name="charIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index at which to start writing the resulting set of characters. </param
-        >
+          />The index at which to start writing the resulting set of characters.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -4824,15 +4820,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that provides an error-handling procedure when a character cannot be encoded with the current encoding. </param
-        >
+          />An object that provides an error-handling procedure when a character cannot be encoded with the current encoding.
+        </param>
         <param name="decoderFallback">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that provides an error-handling procedure when a byte sequence cannot be decoded with the current encoding. </param
-        >
+          />An object that provides an error-handling procedure when a byte sequence cannot be decoded with the current encoding.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetEncoding">
@@ -4892,15 +4888,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that provides an error-handling procedure when a character cannot be encoded with the current encoding. </param
-        >
+          />An object that provides an error-handling procedure when a character cannot be encoded with the current encoding.
+        </param>
         <param name="decoderFallback">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that provides an error-handling procedure when a byte sequence cannot be decoded with the current encoding. </param
-        >
+          />An object that provides an error-handling procedure when a byte sequence cannot be decoded with the current encoding.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetEncodings">
@@ -4926,16 +4922,16 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method returns a list of supported encodings, uniquely distinguished by code page. For a table that lists the supported encodings, see the <see cref="T:System.Text.Encoding" /> class topic. </para
-          >
+            >This method returns a list of supported encodings, uniquely distinguished by code page. For a table that lists the supported encodings, see the <see cref="T:System.Text.Encoding" /> class topic.
+          </para>
           <para>Encodings 50220 and 50222 are both associated with the name "iso-2022-jp", but they are not identical. Encoding 50220 converts half-width Katakana characters to full-width Katakana characters, whereas encoding 50222 uses a shift-in/shift-out sequence to encode half-width Katakana characters. The display name for encoding 50222 is "Japanese (JIS-Allow 1 byte Kana - SO/SI)" to distinguish it from encoding 50220, which has the display name "Japanese (JIS)".</para>
           <para>If your application requests the encoding name "iso-2022-jp", the .NET Framework returns encoding 50220. However, the encoding that is appropriate for your application will depend on the preferred treatment of the half-width Katakana characters.</para>
           <para
             >To get a specific encoding, your application should use the <see cref="M:System.Text.Encoding.GetEncoding(System.Int32)" /> method.</para
           >
           <para>
-            <see cref="M:System.Text.Encoding.GetEncodings" /> is sometimes used to present the user with a list of encodings in a File <ui>Save as</ui> dialog box. However, many non-Unicode encodings are either incomplete and translate many characters to "?", or have subtly different behavior on different platforms. Consider using UTF-8 or UTF-16 as the default. </para
-          >
+            <see cref="M:System.Text.Encoding.GetEncodings" /> is sometimes used to present the user with a list of encodings in a File <ui>Save as</ui> dialog box. However, many non-Unicode encodings are either incomplete and translate many characters to "?", or have subtly different behavior on different platforms. Consider using UTF-8 or UTF-16 as the default.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -5032,8 +5028,8 @@
             >In most cases, this method retrieves reasonable values for small strings. For large strings, you might have to choose between using very large buffers and catching errors in the rare case when a more reasonable buffer is too small. You might also want to consider a different approach using <see cref="Overload:System.Text.Encoding.GetByteCount" /> or <see cref="Overload:System.Text.Encoder.Convert" />.</para
           >
           <para
-            >When using <see cref="M:System.Text.Encoding.GetMaxByteCount(System.Int32)" />, your application should allocate the output buffer based on the maximum size of the input buffer. If the output buffer is constrained in size, the application might use the Convert method. </para
-          >
+            >When using <see cref="M:System.Text.Encoding.GetMaxByteCount(System.Int32)" />, your application should allocate the output buffer based on the maximum size of the input buffer. If the output buffer is constrained in size, the application might use the Convert method.
+          </para>
           <para
             >Note that <see cref="M:System.Text.Encoding.GetMaxByteCount(System.Int32)" /> considers potential leftover surrogates from a previous decoder operation. Because of the decoder, passing a value of 1 to the method retrieves 2 for a single-byte encoding, such as ASCII. Your application should use the <see cref="P:System.Text.ASCIIEncoding.IsSingleByte" /> property if this information is necessary.</para
           >
@@ -5054,8 +5050,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters to encode. </param
-        >
+          />The number of characters to encode.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -5097,8 +5093,8 @@
             <see cref="M:System.Text.Encoding.GetMaxCharCount(System.Int32)" /> has no relation to <see cref="M:System.Text.Encoding.GetBytes(System.String)" />. If your application needs a similar function to use with <see cref="M:System.Text.Encoding.GetBytes(System.Char[])" />, it should use <see cref="M:System.Text.Encoding.GetMaxByteCount(System.Int32)" />.</para
           >
           <para
-            >When using <see cref="M:System.Text.Encoding.GetMaxCharCount(System.Int32)" />, your application should allocate the output buffer based on the maximum size of the input buffer. If the output buffer is constrained in size, the application might use the Convert method. </para
-          >
+            >When using <see cref="M:System.Text.Encoding.GetMaxCharCount(System.Int32)" />, your application should allocate the output buffer based on the maximum size of the input buffer. If the output buffer is constrained in size, the application might use the Convert method.
+          </para>
           <para
             >Note that <see cref="M:System.Text.Encoding.GetMaxCharCount(System.Int32)" /> considers the worst case for leftover bytes from a previous encoder operation. For most code pages, passing a value of 0 to this method retrieves values greater than or equal to 1.</para
           >
@@ -5119,8 +5115,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes to decode. </param
-        >
+          />The number of bytes to decode.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -5148,8 +5144,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Optionally, the <see cref="T:System.Text.Encoding" /> object provides a preamble that is an array of bytes that can be prefixed to the sequence of bytes resulting from the encoding process. If the preamble contains a byte order mark (in Unicode, code point U+FEFF), it helps the decoder determine the byte order and the transformation format or UTF. </para
-          >
+            >Optionally, the <see cref="T:System.Text.Encoding" /> object provides a preamble that is an array of bytes that can be prefixed to the sequence of bytes resulting from the encoding process. If the preamble contains a byte order mark (in Unicode, code point U+FEFF), it helps the decoder determine the byte order and the transformation format or UTF.
+          </para>
           <para>The Unicode byte order mark (BOM) is serialized as follows (in hexadecimal): </para>
           <list type="bullet">
             <item>
@@ -5220,8 +5216,8 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="bytes" /> is <see langword="null" />. </exception
-        >
+          <paramref name="bytes" /> is <see langword="null" />.
+        </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -5235,8 +5231,8 @@
               <a href="bf6d9823-4c2d-48af-b280-919c5af66ae9"
                 >Character Encoding in the .NET Framework</a
               >
-            </format> topic. </para
-          >
+            </format> topic.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -5251,8 +5247,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte array containing the sequence of bytes to decode. </param
-        >
+          />The byte array containing the sequence of bytes to decode.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -5285,11 +5281,11 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="bytes " /> is <see langword="null" />. </exception
-        >
+          <paramref name="bytes " /> is <see langword="null" />.
+        </exception>
         <exception cref="T:System.ArgumentOutOfRangeException">
-          <paramref name="index " />and <paramref name="count " />do not denote a valid range in <paramref name="bytes" />. </exception
-        >
+          <paramref name="index " />and <paramref name="count " />do not denote a valid range in <paramref name="bytes" />.
+        </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -5312,22 +5308,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte array containing the sequence of bytes to decode. </param
-        >
+          />The byte array containing the sequence of bytes to decode.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the first byte to decode. </param
-        >
+          />The index of the first byte to decode.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes to decode. </param
-        >
+          />The number of bytes to decode.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -5351,8 +5347,8 @@
             >If your application needs an encoding for a header name, it should call <see cref="M:System.Text.Encoding.GetEncoding(System.String)" /> with the <see cref="P:System.Text.Encoding.HeaderName" /> property. Often the method retrieves a different encoding from the test encoding furnished in the call. Generally only e-mail applications need to retrieve such an encoding.</para
           >
           <para
-            >In some cases, the value of the <see cref="P:System.Text.Encoding.BodyName" /> property corresponds to the international standard that defines that encoding. This does not imply that the actual implementation complies in full with that standard. </para
-          >
+            >In some cases, the value of the <see cref="P:System.Text.Encoding.BodyName" /> property corresponds to the international standard that defines that encoding. This does not imply that the actual implementation complies in full with that standard.
+          </para>
           <para
             >Note that <see cref="P:System.Text.Encoding.WebName" /> returns the name to use to describe an encoding. The <see cref="P:System.Text.Encoding.HeaderName" /> property defines a different encoding that might work better for an e-mail application, for example. However, use of the property to define the encoding is not recommended.</para
           >
@@ -5451,8 +5447,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Text.NormalizationForm" /> values. </param
-        >
+          />One of the <see cref="T:System.Text.NormalizationForm" /> values.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsBrowserDisplay">
@@ -5622,8 +5618,8 @@
         <value>
           <para
             >A <see cref="T:System.Text.Encoding" /> for the Unicode format in little-endian byte
-   order. </para
-          >
+   order.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -5730,8 +5726,8 @@
           <para
             >This property returns a <see cref="T:System.Text.UTF8Encoding" /> object that encodes Unicode (UTF-16-encoded) characters into a sequence of one to four bytes per character, and that decodes a UTF-8-encoded byte array to Unicode (UTF-16-encoded) characters. For information about the character encodings supported by the .NET Framework and a discussion of which Unicode encoding to use, see <format type="text/html">
               <a href="bf6d9823-4c2d-48af-b280-919c5af66ae9">Understanding Encodings</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
           <para
             >The <see cref="T:System.Text.UTF8Encoding" /> object that is returned by this property may not have the appropriate behavior for your application. It uses replacement fallback to replace each string that it cannot encode and each byte that it cannot decode with a question mark ("?") character. Instead, you can call the <see cref="M:System.Text.UTF8Encoding.#ctor(System.Boolean,System.Boolean)" /> constructor to instantiate a <see cref="T:System.Text.UTF8Encoding" /> object whose fallback is either an <see cref="T:System.Text.EncoderFallbackException" /> or a <see cref="T:System.Text.DecoderFallbackException" />, as the following example illustrates.</para
           >

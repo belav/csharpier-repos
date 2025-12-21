@@ -298,8 +298,8 @@ return false;
         </item>
         <item>
           <para
-            >XML data can contain a large number of attributes, namespace declarations, nested elements and so on that require a substantial amount of time to process. To limit the size of the input that is sent to the <see cref="T:System.Xml.XmlReader" />, you can: </para
-          >
+            >XML data can contain a large number of attributes, namespace declarations, nested elements and so on that require a substantial amount of time to process. To limit the size of the input that is sent to the <see cref="T:System.Xml.XmlReader" />, you can:
+          </para>
           <list type="bullet">
             <item>
               <para
@@ -908,8 +908,8 @@ equal to <see langword="false" />.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default an <see cref="T:System.Xml.XmlUrlResolver" /> with no credentials is used to access any external resources such as a document type definition (DTD), entities, schemas, and so on. This means that the <see cref="T:System.Xml.XmlReader" /> can access any locations that does not require authentication. If the external resource is located on a network resource that requires authentication, use the <see cref="P:System.Xml.XmlReaderSettings.XmlResolver" /> property to specify an <see cref="T:System.Xml.XmlResolver" /> with the necessary credentials. </para
-          >
+            >By default an <see cref="T:System.Xml.XmlUrlResolver" /> with no credentials is used to access any external resources such as a document type definition (DTD), entities, schemas, and so on. This means that the <see cref="T:System.Xml.XmlReader" /> can access any locations that does not require authentication. If the external resource is located on a network resource that requires authentication, use the <see cref="P:System.Xml.XmlReaderSettings.XmlResolver" /> property to specify an <see cref="T:System.Xml.XmlResolver" /> with the necessary credentials.
+          </para>
           <block subset="none" type="note">
             <para
               >You can restrict the resources that the <see cref="T:System.Xml.XmlReader" /> can access by setting the <see cref="P:System.Xml.XmlReaderSettings.XmlResolver" /> property to an <see cref="T:System.Xml.XmlSecureResolver" /> object</para
@@ -1085,8 +1085,8 @@ equal to <see langword="false" />.</para
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream containing the XML data. </param
-        >
+          />The stream containing the XML data.
+        </param>
         <param name="settings">
           <attribution
             license="cc4"
@@ -1163,8 +1163,8 @@ equal to <see langword="false" />.</para
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream containing the XML data. </param
-        >
+          />The stream containing the XML data.
+        </param>
         <param name="settings">
           <attribution
             license="cc4"
@@ -1177,8 +1177,8 @@ equal to <see langword="false" />.</para
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlParserContext" /> object that provides the context information required to parse the XML fragment. The context information can include the <see cref="T:System.Xml.XmlNameTable" /> to use, encoding, namespace scope, the current xml:lang and xml:space scope, base URI, and document type definition. </param
-        >
+          />The <see cref="T:System.Xml.XmlParserContext" /> object that provides the context information required to parse the XML fragment. The context information can include the <see cref="T:System.Xml.XmlNameTable" /> to use, encoding, namespace scope, the current xml:lang and xml:space scope, base URI, and document type definition.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -1364,8 +1364,8 @@ equal to <see langword="false" />.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default an <see cref="T:System.Xml.XmlUrlResolver" /> with no credentials is used to access any external resources such as a document type definition (DTD), entities, schemas, and so on. This means that the <see cref="T:System.Xml.XmlReader" /> can access any locations that does not require authentication. If the external resource is located on a network resource that requires authentication, use the <see cref="P:System.Xml.XmlReaderSettings.XmlResolver" /> property to specify an <see cref="T:System.Xml.XmlResolver" /> with the necessary credentials. </para
-          >
+            >By default an <see cref="T:System.Xml.XmlUrlResolver" /> with no credentials is used to access any external resources such as a document type definition (DTD), entities, schemas, and so on. This means that the <see cref="T:System.Xml.XmlReader" /> can access any locations that does not require authentication. If the external resource is located on a network resource that requires authentication, use the <see cref="P:System.Xml.XmlReaderSettings.XmlResolver" /> property to specify an <see cref="T:System.Xml.XmlResolver" /> with the necessary credentials.
+          </para>
           <block subset="none" type="note">
             <para
               >You can restrict the resources that the <see cref="T:System.Xml.XmlReader" /> can access by setting the <see cref="P:System.Xml.XmlReaderSettings.XmlResolver" /> property to an <see cref="T:System.Xml.XmlSecureResolver" /> object.</para
@@ -1404,8 +1404,8 @@ equal to <see langword="false" />.</para
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlParserContext" /> object that provides the context information required to parse the XML fragment. The context information can include the <see cref="T:System.Xml.XmlNameTable" /> to use, encoding, namespace scope, the current xml:lang and xml:space scope, base URI, and document type definition. </param
-        >
+          />The <see cref="T:System.Xml.XmlParserContext" /> object that provides the context information required to parse the XML fragment. The context information can include the <see cref="T:System.Xml.XmlNameTable" /> to use, encoding, namespace scope, the current xml:lang and xml:space scope, base URI, and document type definition.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Depth">
@@ -1432,8 +1432,8 @@ equal to <see langword="false" />.</para
               cref="T:System.Int32"
               qualify="true"
             />
-containing the depth of the current node in the XML document. </para
-          >
+containing the depth of the current node in the XML document.
+          </para>
         </value>
         <remarks>
           <block subset="none" type="behaviors">
@@ -1446,8 +1446,7 @@ containing the depth of the current node in the XML document. </para
             <block subset="none" type="overrides"
               > This property must be overridden in order
    to provide the functionality described above, as there is no default implementation.
-</block
-            >
+</block>
           </para>
         </remarks>
         <summary>
@@ -1540,8 +1539,8 @@ containing the depth of the current node in the XML document. </para
               cref="T:System.Boolean"
               qualify="true"
             /> where <see langword="true" /> indicates the reader is positioned at the end
-   of the stream; otherwise, <see langword="false" />. </para
-          >
+   of the stream; otherwise, <see langword="false" />.
+          </para>
         </value>
         <remarks>
           <block subset="none" type="behaviors">
@@ -1554,8 +1553,7 @@ containing the depth of the current node in the XML document. </para
             <block subset="none" type="overrides"
               > This property must be overridden in order
    to provide the functionality described above, as there is no default implementation.
-</block
-            >
+</block>
           </para>
         </remarks>
         <summary>
@@ -1592,15 +1590,13 @@ containing the depth of the current node in the XML document. </para
           <para>
             <block subset="none" type="behaviors"
               > This method does not move the
-      reader. </block
-            >
+      reader. </block>
           </para>
           <para>
             <block subset="none" type="overrides"
               > This method must be overridden in order
    to provide the functionality described above, as there is no default implementation.
-</block
-            >
+</block>
           </para>
         </remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
@@ -1826,8 +1822,8 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <para>
             <block subset="none" type="default"
               > This property
-      returns <see langword="true" /> if the <see cref="P:System.Xml.XmlReader.AttributeCount" /> property of the current node is greater than zero. </block
-            >
+      returns <see langword="true" /> if the <see cref="P:System.Xml.XmlReader.AttributeCount" /> property of the current node is greater than zero.
+            </block>
           </para>
           <para>
             <block subset="none" type="overrides"
@@ -1835,14 +1831,13 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
       property to customize the behavior of this property in types derived from
       the <see cref="T:System.Xml.XmlReader" />
       class.
-   </block
-            >
+
+            </block>
           </para>
           <para>
             <block subset="none" type="usage"
               > Use this property to determine whether the current node has any attributes.
-   </block
-            >
+   </block>
           </para>
         </remarks>
         <summary>
@@ -2005,8 +2000,8 @@ positioned can have an associated text value; otherwise,
 where <see langword="true" /> indicates the
 current node is an attribute whose value was generated from the default value
 defined in the DTD or schema; <see langword="false" /> indicates the attribute value was
-explicitly set. </para
-          >
+explicitly set.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2359,8 +2354,7 @@ explicitly set. </para
             <block subset="none" type="overrides"
               > This property must be overridden in order
    to provide the functionality described above, as there is no default implementation.
-</block
-            >
+</block>
           </para>
         </remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
@@ -2418,6 +2412,8 @@ if the attribute is not found.</para
               
 
               
+
+              
          
          node, this method can be used to get the PUBLIC and
          SYSTEM literals.</para
@@ -2427,8 +2423,7 @@ if the attribute is not found.</para
             <block subset="none" type="overrides"
               > This property must be overridden in order
    to provide the functionality described above, as there is no default implementation.
-</block
-            >
+</block>
           </para>
         </remarks>
       </Docs>
@@ -2481,8 +2476,7 @@ attribute is not found.</para
             <block subset="none" type="overrides"
               > This property must be overridden in order
       to provide the functionality described above, as there is no default implementation.
-   </block
-            >
+   </block>
           </para>
         </remarks>
       </Docs>
@@ -2524,15 +2518,13 @@ have a name (like <see langword="Text" />, <see langword="Comment" /> , and so o
           <para>
             <block subset="none" type="behaviors"
               > As described
-      above. </block
-            >
+      above. </block>
           </para>
           <para>
             <block subset="none" type="overrides"
               > This property must be overridden in order
    to provide the functionality described above, as there is no default implementation.
-</block
-            >
+</block>
           </para>
         </remarks>
         <summary>
@@ -2590,8 +2582,8 @@ have a name (like <see langword="Text" />, <see langword="Comment" /> , and so o
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The prefix whose namespace URI you want to resolve. To match the default namespace, pass an empty string. </param
-        >
+          />The prefix whose namespace URI you want to resolve. To match the default namespace, pass an empty string.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2630,8 +2622,7 @@ have a name (like <see langword="Text" />, <see langword="Comment" /> , and so o
             <block subset="none" type="overrides"
               > This method must be overridden in order
    to provide the functionality described above, as there is no default implementation.
-</block
-            >
+</block>
           </para>
         </remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
@@ -2906,15 +2897,14 @@ have a name (like <see langword="Text" />, <see langword="Comment" /> , and so o
               > If <see cref="P:System.Xml.XmlReader.AttributeCount" /> is non-zero,
    the position of
    the reader
-   moves to the first attribute; otherwise, the position of the reader does not change. </block
-            >
+   moves to the first attribute; otherwise, the position of the reader does not change.
+            </block>
           </para>
           <para>
             <block subset="none" type="overrides"
               > This method must be overridden in order
    to provide the functionality described above, as there is no default implementation.
-</block
-            >
+</block>
           </para>
         </remarks>
         <summary>
@@ -3007,12 +2997,14 @@ have a name (like <see langword="Text" />, <see langword="Comment" /> , and so o
               
 
               
+
+              
          
          prefixed with <see cref="P:System.Xml.XmlReader.Prefix" /> and the
          ':' character. For example, <see cref="P:System.Xml.XmlReader.Name" /> is
          "bk:book" for the element <c>&lt;bk:book&gt;</c>.
-      </para
-            >
+
+            </para>
             <para
               > The name returned is dependent on the <see cref="P:System.Xml.XmlReader.NodeType" /> of the node. The following node types
    return the listed values. All other node types return an empty string.</para
@@ -3066,8 +3058,7 @@ have a name (like <see langword="Text" />, <see langword="Comment" /> , and so o
             <block subset="none" type="overrides"
               > This property must be overridden in order
    to provide the functionality described above, as there is no default implementation.
-</block
-            >
+</block>
           </para>
         </remarks>
         <summary>
@@ -3105,8 +3096,8 @@ have a name (like <see langword="Text" />, <see langword="Comment" /> , and so o
               cref="F:System.String.Empty"
               qualify="true"
             />.
-   </para
-          >
+
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3194,8 +3185,8 @@ have a name (like <see langword="Text" />, <see langword="Comment" /> , and so o
         <value>
           <para
             >One of the members of the <see cref="T:System.Xml.XmlNodeType" /> enumeration representing the type of the current
-   node. </para
-          >
+   node.
+          </para>
         </value>
         <remarks>
           <block subset="none" type="behaviors">
@@ -3212,8 +3203,7 @@ have a name (like <see langword="Text" />, <see langword="Comment" /> , and so o
             <block subset="none" type="overrides"
               > This property must be overridden in order
    to provide the functionality described above, as there is no default implementation.
-</block
-            >
+</block>
           </para>
         </remarks>
         <summary>
@@ -3247,8 +3237,8 @@ have a name (like <see langword="Text" />, <see langword="Comment" /> , and so o
               cref="T:System.String"
               qualify="true"
             />
-containing the namespace prefix associated with the current node. </para
-          >
+containing the namespace prefix associated with the current node.
+          </para>
         </value>
         <remarks>
           <para>
@@ -3257,8 +3247,8 @@ containing the namespace prefix associated with the current node. </para
       is used as a reference for a namespace URI and is defined in an element
       declaration. For example, <c>&lt;someElement xmlns:bk="someURL"&gt;</c>, defines a
    prefix name "bk".
-</block
-            >
+
+            </block>
           </para>
           <block subset="none" type="behaviors">
             <para>As described
@@ -3270,8 +3260,7 @@ containing the namespace prefix associated with the current node. </para
             <block subset="none" type="overrides"
               > This property must be overridden in order
    to provide the functionality described above, as there is no default implementation.
-</block
-            >
+</block>
           </para>
         </remarks>
         <summary>
@@ -3306,8 +3295,8 @@ containing the namespace prefix associated with the current node. </para
               qualify="true"
             /> specifying the quotation mark character (" or ') used to enclose the value of
    an attribute.
-   </para
-          >
+
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -5442,8 +5431,8 @@ containing the namespace prefix associated with the current node. </para
             >This method is very similar to the <see cref="M:System.Xml.XmlReader.ReadContentAsBase64(System.Byte[],System.Int32,System.Int32)" /> method except that it can only be called on element node types.</para
           >
           <para
-            >If the <paramref name="count" /> value is higher than the number of bytes in the document, or if it is equal to the number of bytes in the document, the <see cref="T:System.Xml.XmlReader" /> reads all the remaining bytes in the document and returns the number of bytes read. The next <see cref="T:System.Xml.XmlReader" /> method call returns a zero and moves the reader to the node following the EndElement. </para
-          >
+            >If the <paramref name="count" /> value is higher than the number of bytes in the document, or if it is equal to the number of bytes in the document, the <see cref="T:System.Xml.XmlReader" /> reads all the remaining bytes in the document and returns the number of bytes read. The next <see cref="T:System.Xml.XmlReader" /> method call returns a zero and moves the reader to the node following the EndElement.
+          </para>
           <para
             >If you call <see cref="M:System.Xml.XmlReader.Read" /> before all of the element content is consumed, the reader may behave as if the first content was consumed and then the <see cref="M:System.Xml.XmlReader.Read" /> method was called. This means that the reader will read all the text until the end element is encountered. It will then read the end tag node, read the next node, and then position itself on the next subsequent node.</para
           >
@@ -5573,8 +5562,8 @@ containing the namespace prefix associated with the current node. </para
             >This method is very similar to the <see cref="M:System.Xml.XmlReader.ReadContentAsBinHex(System.Byte[],System.Int32,System.Int32)" /> method except that it can only be called on element node types.</para
           >
           <para
-            >If the <paramref name="count" /> value is higher than the number of bytes in the document, or if it is equal to the number of bytes in the document, the <see cref="T:System.Xml.XmlReader" /> reads all the remaining bytes in the document and returns the number of bytes read. The next <see cref="T:System.Xml.XmlReader" /> method call returns a zero and moves the reader to the node following the EndElement. </para
-          >
+            >If the <paramref name="count" /> value is higher than the number of bytes in the document, or if it is equal to the number of bytes in the document, the <see cref="T:System.Xml.XmlReader" /> reads all the remaining bytes in the document and returns the number of bytes read. The next <see cref="T:System.Xml.XmlReader" /> method call returns a zero and moves the reader to the node following the EndElement.
+          </para>
           <para
             >If you call <see cref="M:System.Xml.XmlReader.Read" /> before all of the element content is consumed, the reader may behave as if the first content was consumed and then the <see cref="M:System.Xml.XmlReader.Read" /> method was called. This means that the reader will read all the text until the end element is encountered. It will then read the end tag node, read the next node, and then position itself on the next subsequent node.</para
           >
@@ -6918,15 +6907,15 @@ containing the namespace prefix associated with the current node. </para
       the <see cref="T:System.Xml.XmlReader" />
       class.
 
-      </block
-            >
+
+            </block>
           </para>
           <para>
             <block subset="none" type="usage"
               > Use this method to
       read an <see langword="EndElement" /> node and advance the reader to the next node.
-      </block
-            >
+
+            </block>
           </para>
         </remarks>
         <exception cref="T:System.Xml.XmlException"
@@ -7174,8 +7163,8 @@ containing the namespace prefix associated with the current node. </para
             >If the reader is positioned on a leaf node, calling ReadOuterXml is equivalent to calling <see cref="M:System.Xml.XmlReader.Read" />. The method returns String.Empty (except for attribute nodes, in which case the attribute markup is returned).</para
           >
           <para
-            >This method checks for well-formed XML. If ReadOuterXml is called from an <see cref="T:System.Xml.XmlValidatingReader" />, this method also validates the content returned </para
-          >
+            >This method checks for well-formed XML. If ReadOuterXml is called from an <see cref="T:System.Xml.XmlValidatingReader" />, this method also validates the content returned
+          </para>
           <para
             >As implemented in the <see cref="T:System.Xml.XmlNodeReader" />, <see cref="T:System.Xml.XmlTextReader" /> and XmlValidatingReader classes the ReadOuterXml method is namespace aware. Given the following XML text &lt;A xmlns:S="urn:1"&gt;&lt;S:B&gt;hello&lt;/S:B&gt;&lt;/A&gt;, if the reader were positioned on the S:B start tag, ReadOuterXml returns &lt;S:B xmlns:S="urn:1"&gt;hello&lt;S:B/&gt;.</para
           >
@@ -7399,8 +7388,8 @@ containing the namespace prefix associated with the current node. </para
         <value>
           <para
             > One of the members of the <see cref="T:System.Xml.ReadState" /> enumeration.
-   </para
-          >
+
+          </para>
         </value>
         <remarks>
           <block subset="none" type="behaviors">
@@ -7413,8 +7402,7 @@ containing the namespace prefix associated with the current node. </para
             <block subset="none" type="overrides"
               > This property must be overridden in order
    to provide the functionality described above, as there is no default implementation.
-</block
-            >
+</block>
           </para>
         </remarks>
         <summary>
@@ -7868,8 +7856,8 @@ reader.ReadToFollowing("item", "urn:1");
             >In between calls to <see cref="M:System.Xml.XmlReader.ReadValueChunk(System.Char[],System.Int32,System.Int32)" /> the <see cref="T:System.Xml.XmlReader" /> properties do no change except for the <see cref="P:System.Xml.XmlReader.Value" /> property. When the <see cref="P:System.Xml.XmlReader.Value" /> property is accessed it may either return a partial value (with characters not yet returned by <see cref="M:System.Xml.XmlReader.ReadValueChunk(System.Char[],System.Int32,System.Int32)" />) or a full value depending on the implementation. All the <see cref="T:System.Xml.XmlReader" /> implementations in the <see cref="N:System.Xml" /> namespace return a partial value for the <see cref="P:System.Xml.XmlReader.Value" /> property implementation.</para
           >
           <para
-            >Any Read method can be called in between calls to <see cref="M:System.Xml.XmlReader.ReadValueChunk(System.Char[],System.Int32,System.Int32)" />. If this occurs, the <see cref="T:System.Xml.XmlReader" /> moves to the next <see cref="T:System.Xml.XmlNodeType" /> in the stream and any characters not yet returned are skipped. </para
-          >
+            >Any Read method can be called in between calls to <see cref="M:System.Xml.XmlReader.ReadValueChunk(System.Char[],System.Int32,System.Int32)" />. If this occurs, the <see cref="T:System.Xml.XmlReader" /> moves to the next <see cref="T:System.Xml.XmlNodeType" /> in the stream and any characters not yet returned are skipped.
+          </para>
           <para
             >There may be a case when <see cref="M:System.Xml.XmlReader.ReadValueChunk(System.Char[],System.Int32,System.Int32)" /> returns less than the requested number of characters. For example, if you had a 200-character long value with a surrogate pair at positions 127 and 128 and you called <see cref="M:System.Xml.XmlReader.ReadValueChunk(System.Char[],System.Int32,System.Int32)" /> with a 128-character buffer, the method call would return 127 characters instead of the requested 128. The surrogate pair would then be returned in the next <see cref="M:System.Xml.XmlReader.ReadValueChunk(System.Char[],System.Int32,System.Int32)" /> call. In this case, <see cref="M:System.Xml.XmlReader.ReadValueChunk(System.Char[],System.Int32,System.Int32)" /> did not return the requested 128 characters because doing so would have resulted in an incomplete surrogate pair at the end of the buffer.</para
           >
@@ -8438,8 +8426,7 @@ enumeration. If no <c>xml:space</c> scope exists, this property defaults to
             <block subset="none" type="overrides"
               > This property must be overridden in order
    to provide the functionality described above, as there is no default implementation.
-</block
-            >
+</block>
           </para>
         </remarks>
         <summary>

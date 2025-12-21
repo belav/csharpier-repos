@@ -95,8 +95,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The finalizer for any types deriving from <see cref="T:System.Runtime.ConstrainedExecution.CriticalFinalizerObject" /> is given the opportunity to execute and will not be aborted, assuming the finalizer correctly follows the rules for a constrained execution region (CER). </para
-          >
+            >The finalizer for any types deriving from <see cref="T:System.Runtime.ConstrainedExecution.CriticalFinalizerObject" /> is given the opportunity to execute and will not be aborted, assuming the finalizer correctly follows the rules for a constrained execution region (CER).
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

@@ -28,8 +28,8 @@
         >The <see cref="T:System.Web.Configuration.OutputCacheProfileCollection" /> allows to centralize the management of the output cache settings used by pages or user controls.</para
       >
       <para
-        >It allows you to programmatically access and modify the <see cref="T:System.Web.Configuration.OutputCacheProfile" /> objects it contains. </para
-      >
+        >It allows you to programmatically access and modify the <see cref="T:System.Web.Configuration.OutputCacheProfile" /> objects it contains.
+      </para>
       <block subset="none" type="note">
         <para
           >The <see cref="T:System.Web.Configuration.OutputCacheProfile" /> can be applied to a page using the CacheProfile attribute of the <format type="text/html">
@@ -199,8 +199,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the <see cref="T:System.Web.Configuration.OutputCacheProfileCollection" /> element. </param
-        >
+          />The index of the <see cref="T:System.Web.Configuration.OutputCacheProfileCollection" /> element.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -297,8 +297,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.Configuration.OutputCacheProfileCollection" /> index of the key. </param
-        >
+          />The <see cref="T:System.Web.Configuration.OutputCacheProfileCollection" /> index of the key.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -397,8 +397,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the <see cref="T:System.Web.Configuration.OutputCacheProfile" /> element to remove from the collection. </param
-        >
+          />The name of the <see cref="T:System.Web.Configuration.OutputCacheProfile" /> element to remove from the collection.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -456,14 +456,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.Configuration.OutputCacheProfileCollection.Set(System.Web.Configuration.OutputCacheProfile)" /> method modifies an existing <see cref="T:System.Web.Configuration.OutputCacheProfileCollection" /> element. </para
-          >
+            >The <see cref="M:System.Web.Configuration.OutputCacheProfileCollection.Set(System.Web.Configuration.OutputCacheProfile)" /> method modifies an existing <see cref="T:System.Web.Configuration.OutputCacheProfileCollection" /> element.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the specified <see cref="T:System.Web.Configuration.OutputCacheProfile" /> object. </para
-          >
+            >Sets the specified <see cref="T:System.Web.Configuration.OutputCacheProfile" /> object.
+          </para>
         </summary>
         <param name="user">
           <attribution

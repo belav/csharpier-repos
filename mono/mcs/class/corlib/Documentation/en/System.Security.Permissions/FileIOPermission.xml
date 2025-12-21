@@ -46,8 +46,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This permission distinguishes between the following four types of file IO access provided by <see cref="T:System.Security.Permissions.FileIOPermissionAccess" />: </para
-      >
+        >This permission distinguishes between the following four types of file IO access provided by <see cref="T:System.Security.Permissions.FileIOPermissionAccess" />:
+      </para>
       <list type="bullet">
         <item>
           <para>Read: Read access to the contents of the file or access to information about the file, such as its length or last modification time.</para>
@@ -133,8 +133,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Security.Permissions.PermissionState" /> enumeration values. </param
-        >
+          />One of the <see cref="T:System.Security.Permissions.PermissionState" /> enumeration values.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -165,14 +165,14 @@
       <Docs>
         <exception cref="T:System.ArgumentException">
           <para>
-            <paramref name="access" /> specifies values not defined in <see cref="T:System.Security.Permissions.FileIOPermissionAccess" />. </para
-          >
+            <paramref name="access" /> specifies values not defined in <see cref="T:System.Security.Permissions.FileIOPermissionAccess" />.
+          </para>
           <para>
-            <paramref name="path" /> contains one or more characters that are invalid for use in files or directory names. </para
-          >
+            <paramref name="path" /> contains one or more characters that are invalid for use in files or directory names.
+          </para>
           <para>
-            <paramref name="path" /> did not specify the absolute path to the file or directory. </para
-          >
+            <paramref name="path" /> did not specify the absolute path to the file or directory.
+          </para>
         </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -191,15 +191,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the <see cref="T:System.Security.Permissions.FileIOPermissionAccess" /> enumeration values. </param
-        >
+          />A bitwise combination of the <see cref="T:System.Security.Permissions.FileIOPermissionAccess" /> enumeration values.
+        </param>
         <param name="path">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The absolute path of the file or directory. </param
-        >
+          />The absolute path of the file or directory.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -240,15 +240,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the <see cref="T:System.Security.Permissions.FileIOPermissionAccess" /> enumeration values. </param
-        >
+          />A bitwise combination of the <see cref="T:System.Security.Permissions.FileIOPermissionAccess" /> enumeration values.
+        </param>
         <param name="pathList">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array containing the absolute paths of the files and directories. </param
-        >
+          />An array containing the absolute paths of the files and directories.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -357,8 +357,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the <see cref="T:System.Security.Permissions.FileIOPermissionAccess" /> enumeration values. </param
-        >
+          />A bitwise combination of the <see cref="T:System.Security.Permissions.FileIOPermissionAccess" /> enumeration values.
+        </param>
         <param name="control">
           <attribution
             license="cc4"
@@ -411,15 +411,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the <see cref="T:System.Security.Permissions.FileIOPermissionAccess" /> values. </param
-        >
+          />A bitwise combination of the <see cref="T:System.Security.Permissions.FileIOPermissionAccess" /> values.
+        </param>
         <param name="path">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The absolute path of a file or directory. </param
-        >
+          />The absolute path of a file or directory.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddPathList">
@@ -458,15 +458,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the <see cref="T:System.Security.Permissions.FileIOPermissionAccess" /> values. </param
-        >
+          />A bitwise combination of the <see cref="T:System.Security.Permissions.FileIOPermissionAccess" /> values.
+        </param>
         <param name="pathList">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array containing the absolute paths of the files and directories. </param
-        >
+          />An array containing the absolute paths of the files and directories.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AllFiles">
@@ -618,8 +618,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.Permissions.FileIOPermission" /> object to compare with the current <see cref="T:System.Security.Permissions.FileIOPermission" />. </param
-        >
+          />The <see cref="T:System.Security.Permissions.FileIOPermission" /> object to compare with the current <see cref="T:System.Security.Permissions.FileIOPermission" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="FromXml">
@@ -681,8 +681,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML encoding used to reconstruct the permission. </param
-        >
+          />The XML encoding used to reconstruct the permission.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -776,8 +776,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Security.Permissions.FileIOPermissionAccess" /> values that represents a single type of file access. </param
-        >
+          />One of the <see cref="T:System.Security.Permissions.FileIOPermissionAccess" /> values that represents a single type of file access.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Intersect">
@@ -826,8 +826,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission to intersect with the current permission. It must be the same type as the current permission. </param
-        >
+          />A permission to intersect with the current permission. It must be the same type as the current permission.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -877,8 +877,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission that is to be tested for the subset relationship. This permission must be the same type as the current permission. </param
-        >
+          />A permission that is to be tested for the subset relationship. This permission must be the same type as the current permission.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -954,15 +954,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the <see cref="T:System.Security.Permissions.FileIOPermissionAccess" /> values. </param
-        >
+          />A bitwise combination of the <see cref="T:System.Security.Permissions.FileIOPermissionAccess" /> values.
+        </param>
         <param name="path">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The absolute path of the file or directory. </param
-        >
+          />The absolute path of the file or directory.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetPathList">
@@ -1005,15 +1005,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the <see cref="T:System.Security.Permissions.FileIOPermissionAccess" /> values. </param
-        >
+          />A bitwise combination of the <see cref="T:System.Security.Permissions.FileIOPermissionAccess" /> values.
+        </param>
         <param name="pathList">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array containing the absolute paths of the files and directories. </param
-        >
+          />An array containing the absolute paths of the files and directories.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.Security.Permissions.IBuiltInPermission.GetTokenIndex">
@@ -1132,8 +1132,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission to combine with the current permission. It must be the same type as the current permission. </param
-        >
+          />A permission to combine with the current permission. It must be the same type as the current permission.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

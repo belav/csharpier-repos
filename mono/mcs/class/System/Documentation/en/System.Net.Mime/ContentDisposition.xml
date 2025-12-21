@@ -19,8 +19,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The information in the <see cref="T:System.Net.Mime.ContentDisposition" /> class accompanies an e-mail message that contains attachments when the e-mail message is sent to its destination. The information in <see cref="T:System.Net.Mime.ContentDisposition" /> can be used by software that displays e-mail to present the e-mail attachments in the manner intended by the sender. </para
-      >
+        >The information in the <see cref="T:System.Net.Mime.ContentDisposition" /> class accompanies an e-mail message that contains attachments when the e-mail message is sent to its destination. The information in <see cref="T:System.Net.Mime.ContentDisposition" /> can be used by software that displays e-mail to present the e-mail attachments in the manner intended by the sender.
+      </para>
       <para
         >E-mail messages are created using instances of the <see cref="T:System.Net.Mail.MailMessage" /> class. Instances of the <see cref="T:System.Net.Mail.Attachment" /> class are used to add attachments to e-mail messages. To modify the <see cref="T:System.Net.Mime.ContentDisposition" /> for an attachment, get the instance from the <see cref="P:System.Net.Mail.Attachment.ContentDisposition" /> property.</para
       >
@@ -66,8 +66,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.Mime.ContentDisposition" /> class with a <see cref="P:System.Net.Mime.ContentDisposition.DispositionType" /> of <see cref="F:System.Net.Mime.DispositionTypeNames.Attachment" />. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.Mime.ContentDisposition" /> class with a <see cref="P:System.Net.Mime.ContentDisposition.DispositionType" /> of <see cref="F:System.Net.Mime.DispositionTypeNames.Attachment" />.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -123,8 +123,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Net.Mime.ContentDisposition.CreationDate" /> property is used to send time stamp information with a file being sent in an e-mail message. This value sets the Creation-Date parameter in the Content-Disposition header sent with the email. </para
-          >
+            >The <see cref="P:System.Net.Mime.ContentDisposition.CreationDate" /> property is used to send time stamp information with a file being sent in an e-mail message. This value sets the Creation-Date parameter in the Content-Disposition header sent with the email.
+          </para>
           <para
             >The <see cref="T:System.Net.Mail.MailMessage" /> class is used to compose an e-mail message. The <see cref="T:System.Net.Mail.Attachment" /> class is used to attach a file to an e-mail message. To set <see cref="P:System.Net.Mime.ContentDisposition.CreationDate" />, get the <see cref="T:System.Net.Mime.ContentDisposition" /> for the attachment from the <see cref="P:System.Net.Mail.Attachment.ContentDisposition" /> property.</para
           >
@@ -223,8 +223,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Net.Mime.ContentDisposition.FileName" /> property allows the sender to suggest the name to be used to store an e-mail attachment on the recipient's computer. This name is a suggestion only; the receiving system can ignore it. The name must not include path information; any such information is ignored by the receiving computer. </para
-          >
+            >The <see cref="P:System.Net.Mime.ContentDisposition.FileName" /> property allows the sender to suggest the name to be used to store an e-mail attachment on the recipient's computer. This name is a suggestion only; the receiving system can ignore it. The name must not include path information; any such information is ignored by the receiving computer.
+          </para>
           <para>To remove file name information, you can set this property to null or the empty string ("").</para>
           <para
             >The Content-Disposition header is described in RFC 2183 available at <see
@@ -323,8 +323,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Net.Mime.ContentDisposition.ModificationDate" /> property is used to send time stamp information with a file being sent in an e-mail message. This value sets the Modification-Date parameter in the Content-Disposition header sent with the e-mail message. </para
-          >
+            >The <see cref="P:System.Net.Mime.ContentDisposition.ModificationDate" /> property is used to send time stamp information with a file being sent in an e-mail message. This value sets the Modification-Date parameter in the Content-Disposition header sent with the e-mail message.
+          </para>
           <para
             >The <see cref="T:System.Net.Mail.MailMessage" /> class is used to compose an e-mail message. The <see cref="T:System.Net.Mail.Attachment" /> class is used to attach a file to an e-mail message. To set the <see cref="P:System.Net.Mime.ContentDisposition.ModificationDate" /> property, get the <see cref="T:System.Net.Mime.ContentDisposition" /> for the attachment using the <see cref="P:System.Net.Mail.Attachment.ContentDisposition" /> property.</para
           >
@@ -399,8 +399,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Net.Mime.ContentDisposition.ReadDate" /> property is used to send time stamp information with a file being sent in an e-mail message. This value sets the Read-Date parameter in the Content-Disposition header sent with the e-mail message. </para
-          >
+            >The <see cref="P:System.Net.Mime.ContentDisposition.ReadDate" /> property is used to send time stamp information with a file being sent in an e-mail message. This value sets the Read-Date parameter in the Content-Disposition header sent with the e-mail message.
+          </para>
           <para
             >The <see cref="T:System.Net.Mail.MailMessage" /> class is used to compose an e-mail message. The <see cref="T:System.Net.Mail.Attachment" /> class is used to attach a file to an e-mail message. To set <see cref="P:System.Net.Mime.ContentDisposition.ReadDate" />, get the <see cref="T:System.Net.Mime.ContentDisposition" /> for the attachment by using the <see cref="P:System.Net.Mail.Attachment.ContentDisposition" /> property.</para
           >

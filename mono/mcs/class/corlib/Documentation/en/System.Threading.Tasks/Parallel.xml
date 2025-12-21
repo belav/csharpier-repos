@@ -629,8 +629,8 @@
             >The <paramref name="localInit" /> delegate is invoked once for each task that participates in the loop's execution and returns the initial local state for each of those tasks. These initial states are passed to the first <paramref name="body" /> invocations on each task. Then, every subsequent body invocation returns a possibly modified state value that is passed to the next body invocation. Finally, the last body invocation on each task returns a state value that is passed to the <paramref name="localFinally" /> delegate. The <paramref name="localFinally" /> delegate is invoked once per task to perform a final action on each task's local state. This delegate might be invoked concurrently on multiple tasks; therefore, you must synchronize access to any shared variables.</para
           >
           <para
-            >The <see cref="M:System.Threading.Tasks.Parallel.For(System.Int64,System.Int64,System.Action{System.Int64,System.Threading.Tasks.ParallelLoopState})" /> method may use more tasks than threads over the lifetime of its execution, as existing tasks complete and are replaced by new tasks. This gives the underlying <see cref="T:System.Threading.Tasks.TaskScheduler" /> object the chance to add, change, or remove threads that service the loop. </para
-          >
+            >The <see cref="M:System.Threading.Tasks.Parallel.For(System.Int64,System.Int64,System.Action{System.Int64,System.Threading.Tasks.ParallelLoopState})" /> method may use more tasks than threads over the lifetime of its execution, as existing tasks complete and are replaced by new tasks. This gives the underlying <see cref="T:System.Threading.Tasks.TaskScheduler" /> object the chance to add, change, or remove threads that service the loop.
+          </para>
           <para
             >If <paramref name="fromInclusive" /> is greater than or equal to <paramref name="toExclusive" />, then the method returns immediately without performing any iterations.</para
           >
@@ -733,8 +733,8 @@
             >The <paramref name="localInit" /> delegate is invoked once for each task that participates in the loop's execution and returns the initial local state for each of those tasks. These initial states are passed to the first <paramref name="body" /> invocations on each task. Then, every subsequent body invocation returns a possibly modified state value that is passed to the next body invocation. Finally, the last body invocation on each task returns a state value that is passed to the <paramref name="localFinally" /> delegate. The <paramref name="localFinally" /> delegate is invoked once per task to perform a final action on each task's local state. This delegate might be invoked concurrently on multiple tasks; therefore, you must synchronize access to any shared variables.</para
           >
           <para
-            >The <see cref="M:System.Threading.Tasks.Parallel.For(System.Int64,System.Int64,System.Action{System.Int64,System.Threading.Tasks.ParallelLoopState})" /> method may use more tasks than threads over the lifetime of its execution, as existing tasks complete and are replaced by new tasks. This gives the underlying <see cref="T:System.Threading.Tasks.TaskScheduler" /> object the chance to add, change, or remove threads that service the loop. </para
-          >
+            >The <see cref="M:System.Threading.Tasks.Parallel.For(System.Int64,System.Int64,System.Action{System.Int64,System.Threading.Tasks.ParallelLoopState})" /> method may use more tasks than threads over the lifetime of its execution, as existing tasks complete and are replaced by new tasks. This gives the underlying <see cref="T:System.Threading.Tasks.TaskScheduler" /> object the chance to add, change, or remove threads that service the loop.
+          </para>
           <para
             >If <paramref name="fromInclusive" /> is greater than or equal to <paramref name="toExclusive" />, then the method returns immediately without performing any iterations.</para
           >
@@ -838,8 +838,8 @@
             >The <paramref name="localInit" /> delegate is invoked once for each task that participates in the loop's execution and returns the initial local state for each of those tasks. These initial states are passed to the first <paramref name="body" /> invocations on each task. Then, every subsequent body invocation returns a possibly modified state value that is passed to the next body invocation. Finally, the last body invocation on each task returns a state value that is passed to the <paramref name="localFinally" /> delegate. The <paramref name="localFinally" /> delegate is invoked once per task to perform a final action on each task's local state. This delegate might be invoked concurrently on multiple threads; therefore, you must synchronize access to any shared variables.</para
           >
           <para
-            >The <see cref="M:System.Threading.Tasks.Parallel.For(System.Int64,System.Int64,System.Action{System.Int64,System.Threading.Tasks.ParallelLoopState})" /> method may use more tasks than threads over the lifetime of its execution, as existing tasks complete and are replaced by new tasks. This gives the underlying <see cref="T:System.Threading.Tasks.TaskScheduler" /> object the chance to add, change, or remove threads that service the loop. </para
-          >
+            >The <see cref="M:System.Threading.Tasks.Parallel.For(System.Int64,System.Int64,System.Action{System.Int64,System.Threading.Tasks.ParallelLoopState})" /> method may use more tasks than threads over the lifetime of its execution, as existing tasks complete and are replaced by new tasks. This gives the underlying <see cref="T:System.Threading.Tasks.TaskScheduler" /> object the chance to add, change, or remove threads that service the loop.
+          </para>
           <para
             >If <paramref name="fromInclusive" /> is greater than or equal to <paramref name="toExclusive" />, then the method returns immediately without performing any iterations.</para
           >
@@ -943,8 +943,8 @@
             >The <paramref name="localInit" /> delegate is invoked once for each thread that participates in the loop's execution and returns the initial local state for each of those threads. These initial states are passed to the first <paramref name="body" /> invocations on each thread. Then, every subsequent body invocation returns a possibly modified state value that is passed to the next body invocation. Finally, the last body invocation on each thread returns a state value that is passed to the <paramref name="localFinally" /> delegate. The <paramref name="localFinally" /> delegate is invoked once per thread to perform a final action on each thread's local state. This delegate might be invoked concurrently on multiple threads; therefore, you must synchronize access to any shared variables.</para
           >
           <para
-            >The <see cref="M:System.Threading.Tasks.Parallel.For(System.Int64,System.Int64,System.Action{System.Int64,System.Threading.Tasks.ParallelLoopState})" /> method may use more tasks than threads over the lifetime of its execution, as existing tasks complete and are replaced by new tasks. This gives the underlying <see cref="T:System.Threading.Tasks.TaskScheduler" /> object the chance to add, change, or remove threads that service the loop. </para
-          >
+            >The <see cref="M:System.Threading.Tasks.Parallel.For(System.Int64,System.Int64,System.Action{System.Int64,System.Threading.Tasks.ParallelLoopState})" /> method may use more tasks than threads over the lifetime of its execution, as existing tasks complete and are replaced by new tasks. This gives the underlying <see cref="T:System.Threading.Tasks.TaskScheduler" /> object the chance to add, change, or remove threads that service the loop.
+          </para>
           <para
             >If <paramref name="fromInclusive" /> is greater than or equal to <paramref name="toExclusive" />, then the method returns immediately without performing any iterations.</para
           >
@@ -1940,8 +1940,8 @@
             >The <paramref name="localInit" /> delegate is invoked once for each task that participates in the loop's execution and returns the initial local state for each of those tasks. These initial states are passed to the first <paramref name="body" /> invocations on each task. Then, every subsequent body invocation returns a possibly modified state value that is passed to the next body invocation. Finally, the last body invocation on each task returns a state value that is passed to the <paramref name="localFinally" /> delegate. The <paramref name="localFinally" /> delegate is invoked once per task to perform a final action on each task's local state. This delegate might be invoked concurrently on multiple tasks; therefore, you must synchronize access to any shared variables.</para
           >
           <para
-            >The <see cref="M:System.Threading.Tasks.Parallel.ForEach``1(System.Collections.Concurrent.Partitioner{``0},System.Action{``0})" /> method may use more tasks than threads over the lifetime of its execution, as existing tasks complete and are replaced by new tasks. This gives the underlying <see cref="T:System.Threading.Tasks.TaskScheduler" /> object the chance to add, change, or remove threads that service the loop. </para
-          >
+            >The <see cref="M:System.Threading.Tasks.Parallel.ForEach``1(System.Collections.Concurrent.Partitioner{``0},System.Action{``0})" /> method may use more tasks than threads over the lifetime of its execution, as existing tasks complete and are replaced by new tasks. This gives the underlying <see cref="T:System.Threading.Tasks.TaskScheduler" /> object the chance to add, change, or remove threads that service the loop.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2044,8 +2044,8 @@
             >The <paramref name="localInit" /> delegate is invoked once for each thread that participates in the loop's execution and returns the initial local state for each of those tasks. These initial states are passed to the first <paramref name="body" /> invocations on each task. Then, every subsequent body invocation returns a possibly modified state value that is passed to the next body invocation. Finally, the last body invocation on each task returns a state value that is passed to the <paramref name="localFinally" /> delegate. The <paramref name="localFinally" /> delegate is invoked once per task to perform a final action on each task's local state. This delegate might be invoked concurrently on multiple tasks; therefore, you must synchronize access to any shared variables.</para
           >
           <para
-            >The <see cref="M:System.Threading.Tasks.Parallel.ForEach``1(System.Collections.Concurrent.Partitioner{``0},System.Action{``0})" /> method may use more tasks than threads over the lifetime of its execution, as existing tasks complete and are replaced by new tasks. This gives the underlying <see cref="T:System.Threading.Tasks.TaskScheduler" /> object the chance to add, change, or remove threads that service the loop. </para
-          >
+            >The <see cref="M:System.Threading.Tasks.Parallel.ForEach``1(System.Collections.Concurrent.Partitioner{``0},System.Action{``0})" /> method may use more tasks than threads over the lifetime of its execution, as existing tasks complete and are replaced by new tasks. This gives the underlying <see cref="T:System.Threading.Tasks.TaskScheduler" /> object the chance to add, change, or remove threads that service the loop.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2140,8 +2140,8 @@
             >The <paramref name="localInit" /> delegate is invoked once for each task that participates in the loop's execution and returns the initial local state for each of those tasks. These initial states are passed to the first <paramref name="body" /> invocations on each task. Then, every subsequent body invocation returns a possibly modified state value that is passed to the next body invocation. Finally, the last body invocation on each task returns a state value that is passed to the <paramref name="localFinally" /> delegate. The <paramref name="localFinally" /> delegate is invoked once per task to perform a final action on each task’s local state. This delegate might be invoked concurrently on multiple tasks; therefore, you must synchronize access to any shared variables.</para
           >
           <para
-            >The <see cref="M:System.Threading.Tasks.Parallel.ForEach``1(System.Collections.Concurrent.Partitioner{``0},System.Action{``0})" /> method may use more tasks than threads over the lifetime of its execution, as existing tasks complete and are replaced by new tasks. This gives the underlying <see cref="T:System.Threading.Tasks.TaskScheduler" /> object the chance to add, change, or remove threads that service the loop. </para
-          >
+            >The <see cref="M:System.Threading.Tasks.Parallel.ForEach``1(System.Collections.Concurrent.Partitioner{``0},System.Action{``0})" /> method may use more tasks than threads over the lifetime of its execution, as existing tasks complete and are replaced by new tasks. This gives the underlying <see cref="T:System.Threading.Tasks.TaskScheduler" /> object the chance to add, change, or remove threads that service the loop.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2236,8 +2236,8 @@
             >The <paramref name="localInit" /> delegate is invoked once for each task that participates in the loop's execution and returns the initial local state for each of those tasks. These initial states are passed to the first <paramref name="body" /> invocations on each task. Then, every subsequent body invocation returns a possibly modified state value that is passed to the next body invocation. Finally, the last body invocation on each task returns a state value that is passed to the <paramref name="localFinally" /> delegate. The <paramref name="localFinally" /> delegate is invoked once per thread to perform a final action on each task’s local state. This delegate might be invoked concurrently on multiple tasks; therefore, you must synchronize access to any shared variables.</para
           >
           <para
-            >The <see cref="M:System.Threading.Tasks.Parallel.ForEach``1(System.Collections.Concurrent.Partitioner{``0},System.Action{``0})" /> method may use more tasks than threads over the lifetime of its execution, as existing tasks complete and are replaced by new tasks. This gives the underlying <see cref="T:System.Threading.Tasks.TaskScheduler" /> object the chance to add, change, or remove threads that service the loop. </para
-          >
+            >The <see cref="M:System.Threading.Tasks.Parallel.ForEach``1(System.Collections.Concurrent.Partitioner{``0},System.Action{``0})" /> method may use more tasks than threads over the lifetime of its execution, as existing tasks complete and are replaced by new tasks. This gives the underlying <see cref="T:System.Threading.Tasks.TaskScheduler" /> object the chance to add, change, or remove threads that service the loop.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2344,8 +2344,8 @@
             >The <paramref name="localInit" /> delegate is invoked once for each task that participates in the loop's execution and returns the initial local state for each of those tasks. These initial states are passed to the first <paramref name="body" /> invocations on each task. Then, every subsequent body invocation returns a possibly modified state value that is passed to the next body invocation. Finally, the last body invocation on each thread returns a state value that is passed to the <paramref name="localFinally" /> delegate. The <paramref name="localFinally" /> delegate is invoked once per task to perform a final action on each task’s local state. This delegate might be invoked concurrently on multiple tasks; therefore, you must synchronize access to any shared variables.</para
           >
           <para
-            >The <see cref="M:System.Threading.Tasks.Parallel.ForEach``1(System.Collections.Concurrent.Partitioner{``0},System.Action{``0})" /> method may use more tasks than threads over the lifetime of its execution, as existing tasks complete and are replaced by new tasks. This gives the underlying <see cref="T:System.Threading.Tasks.TaskScheduler" /> object the chance to add, change, or remove threads that service the loop. </para
-          >
+            >The <see cref="M:System.Threading.Tasks.Parallel.ForEach``1(System.Collections.Concurrent.Partitioner{``0},System.Action{``0})" /> method may use more tasks than threads over the lifetime of its execution, as existing tasks complete and are replaced by new tasks. This gives the underlying <see cref="T:System.Threading.Tasks.TaskScheduler" /> object the chance to add, change, or remove threads that service the loop.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2456,8 +2456,8 @@
             >The <paramref name="localInit" /> delegate is invoked once for each task that participates in the loop's execution and returns the initial local state for each of those tasks. These initial states are passed to the first <paramref name="body" /> invocations on each task. Then, every subsequent body invocation returns a possibly modified state value that is passed to the next body invocation. Finally, the last body invocation on each task returns a state value that is passed to the <paramref name="localFinally" /> delegate. The <paramref name="localFinally" /> delegate is invoked once per task to perform a final action on each task's local state. This delegate might be invoked concurrently on multiple tasks; therefore, you must synchronize access to any shared variables.</para
           >
           <para
-            >The <see cref="M:System.Threading.Tasks.Parallel.ForEach``1(System.Collections.Concurrent.Partitioner{``0},System.Action{``0})" /> method may use more tasks than threads over the lifetime of its execution, as existing tasks complete and are replaced by new tasks. This gives the underlying <see cref="T:System.Threading.Tasks.TaskScheduler" /> object the chance to add, change, or remove threads that service the loop. </para
-          >
+            >The <see cref="M:System.Threading.Tasks.Parallel.ForEach``1(System.Collections.Concurrent.Partitioner{``0},System.Action{``0})" /> method may use more tasks than threads over the lifetime of its execution, as existing tasks complete and are replaced by new tasks. This gives the underlying <see cref="T:System.Threading.Tasks.TaskScheduler" /> object the chance to add, change, or remove threads that service the loop.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2560,8 +2560,8 @@
             >The <paramref name="localInit" /> delegate is invoked once for each task that participates in the loop's execution and returns the initial local state for each of those tasks. These initial states are passed to the first <paramref name="body" /> invocations on each task. Then, every subsequent body invocation returns a possibly modified state value that is passed to the next body invocation. Finally, the last body invocation on each task returns a state value that is passed to the <paramref name="localFinally" /> delegate. The <paramref name="localFinally" /> delegate is invoked once per thread to perform a final action on each task’s local state. This delegate might be invoked concurrently on multiple tasks; therefore, you must synchronize access to any shared variables.</para
           >
           <para
-            >The <see cref="M:System.Threading.Tasks.Parallel.ForEach``1(System.Collections.Concurrent.Partitioner{``0},System.Action{``0})" /> method may use more tasks than threads over the lifetime of its execution, as existing tasks complete and are replaced by new tasks. This gives the underlying <see cref="T:System.Threading.Tasks.TaskScheduler" /> object the chance to add, change, or remove threads that service the loop. </para
-          >
+            >The <see cref="M:System.Threading.Tasks.Parallel.ForEach``1(System.Collections.Concurrent.Partitioner{``0},System.Action{``0})" /> method may use more tasks than threads over the lifetime of its execution, as existing tasks complete and are replaced by new tasks. This gives the underlying <see cref="T:System.Threading.Tasks.TaskScheduler" /> object the chance to add, change, or remove threads that service the loop.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2664,8 +2664,8 @@
             >The <paramref name="localInit" /> delegate is invoked once for each task that participates in the loop's execution and returns the initial local state for each of those tasks. These initial states are passed to the first <paramref name="body" /> invocations on each task. Then, every subsequent body invocation returns a possibly modified state value that is passed to the next body invocation. Finally, the last body invocation on each task returns a state value that is passed to the <paramref name="localFinally" /> delegate. The <paramref name="localFinally" /> delegate is invoked once per thread to perform a final action on each task’s local state. This delegate might be invoked concurrently on multiple tasks; therefore, you must synchronize access to any shared variables.</para
           >
           <para
-            >The <see cref="M:System.Threading.Tasks.Parallel.ForEach``1(System.Collections.Concurrent.Partitioner{``0},System.Action{``0})" /> method may use more tasks than threads over the lifetime of its execution, as existing tasks complete and are replaced by new tasks. This gives the underlying <see cref="T:System.Threading.Tasks.TaskScheduler" /> object the chance to add, change, or remove threads that service the loop. </para
-          >
+            >The <see cref="M:System.Threading.Tasks.Parallel.ForEach``1(System.Collections.Concurrent.Partitioner{``0},System.Action{``0})" /> method may use more tasks than threads over the lifetime of its execution, as existing tasks complete and are replaced by new tasks. This gives the underlying <see cref="T:System.Threading.Tasks.TaskScheduler" /> object the chance to add, change, or remove threads that service the loop.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

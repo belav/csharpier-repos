@@ -94,8 +94,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.DateTime" /> object to initialize the current instance. </param
-        >
+          />A <see cref="T:System.DateTime" /> object to initialize the current instance.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -131,15 +131,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.DateTime" /> object to initialize the current instance. </param
-        >
+          />A <see cref="T:System.DateTime" /> object to initialize the current instance.
+        </param>
         <param name="sign">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that indicates whether <paramref name="value" /> is positive. </param
-        >
+          />An integer that indicates whether <paramref name="value" /> is positive.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetXsdType">
@@ -265,8 +265,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.String" /> to convert </param
-        >
+          />The <see cref="T:System.String" /> to convert
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Sign">

@@ -85,15 +85,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The constructor for the custom attribute. </param
-        >
+          />The constructor for the custom attribute.
+        </param>
         <param name="constructorArgs">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The arguments to the constructor of the custom attribute. </param
-        >
+          />The arguments to the constructor of the custom attribute.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -139,29 +139,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The constructor for the custom attribute. </param
-        >
+          />The constructor for the custom attribute.
+        </param>
         <param name="constructorArgs">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The arguments to the constructor of the custom attribute. </param
-        >
+          />The arguments to the constructor of the custom attribute.
+        </param>
         <param name="namedFields">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Named fields of the custom attribute. </param
-        >
+          />Named fields of the custom attribute.
+        </param>
         <param name="fieldValues">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Values for the named fields of the custom attribute. </param
-        >
+          />Values for the named fields of the custom attribute.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -207,29 +207,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The constructor for the custom attribute. </param
-        >
+          />The constructor for the custom attribute.
+        </param>
         <param name="constructorArgs">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The arguments to the constructor of the custom attribute. </param
-        >
+          />The arguments to the constructor of the custom attribute.
+        </param>
         <param name="namedProperties">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Named properties of the custom attribute. </param
-        >
+          />Named properties of the custom attribute.
+        </param>
         <param name="propertyValues">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Values for the named properties of the custom attribute. </param
-        >
+          />Values for the named properties of the custom attribute.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -277,43 +277,43 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The constructor for the custom attribute. </param
-        >
+          />The constructor for the custom attribute.
+        </param>
         <param name="constructorArgs">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The arguments to the constructor of the custom attribute. </param
-        >
+          />The arguments to the constructor of the custom attribute.
+        </param>
         <param name="namedProperties">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Named properties of the custom attribute. </param
-        >
+          />Named properties of the custom attribute.
+        </param>
         <param name="propertyValues">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Values for the named properties of the custom attribute. </param
-        >
+          />Values for the named properties of the custom attribute.
+        </param>
         <param name="namedFields">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Named fields of the custom attribute. </param
-        >
+          />Named fields of the custom attribute.
+        </param>
         <param name="fieldValues">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Values for the named fields of the custom attribute. </param
-        >
+          />Values for the named fields of the custom attribute.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.Runtime.InteropServices._CustomAttributeBuilder.GetIDsOfNames">

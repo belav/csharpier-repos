@@ -144,8 +144,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The component to associate with this designer. </param
-        >
+          />The component to associate with this designer.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Verbs">

@@ -64,8 +64,8 @@
         <remarks />
         <exception cref="T:System.ArgumentNullException">
           <paramref name="ep" /> is <see langword="null" />.
-        </exception
-        >
+
+        </exception>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -89,8 +89,8 @@
         <remarks />
         <exception cref="T:System.ArgumentNullException">
           <paramref name="path" /> is <see langword="null" />.
-        </exception
-        >
+
+        </exception>
       </Docs>
     </Member>
     <Member MemberName="Client">
@@ -140,8 +140,7 @@
         <remarks />
         <exception cref="T:System.ObjectDisposedException">
           Instance has been disposed.
-        </exception
-        >
+        </exception>
       </Docs>
     </Member>
     <Member MemberName="Connect">
@@ -173,8 +172,7 @@
         <remarks />
         <exception cref="T:System.ObjectDisposedException">
           Instance has been disposed.
-        </exception
-        >
+        </exception>
       </Docs>
     </Member>
     <Member MemberName="Connect">
@@ -201,8 +199,7 @@
         <remarks />
         <exception cref="T:System.ObjectDisposedException">
           Instance has been disposed.
-        </exception
-        >
+        </exception>
       </Docs>
     </Member>
     <Member MemberName="Dispose">
@@ -298,8 +295,7 @@
         <remarks />
         <exception cref="T:System.ObjectDisposedException">
           Instance has been disposed.
-        </exception
-        >
+        </exception>
       </Docs>
     </Member>
     <Member MemberName="LingerState">
@@ -328,8 +324,7 @@
         <remarks />
         <exception cref="T:System.ObjectDisposedException">
           Instance has been disposed.
-        </exception
-        >
+        </exception>
       </Docs>
     </Member>
     <Member MemberName="PeerCredential">
@@ -355,8 +350,7 @@
         <remarks>Not all operating systems support peer credentials on Unix domain sockets.  This might not be available on all systems.</remarks>
         <exception cref="T:System.ObjectDisposedException">
           Instance has been disposed.
-        </exception
-        >
+        </exception>
       </Docs>
     </Member>
     <Member MemberName="ReceiveBufferSize">
@@ -377,8 +371,7 @@
         <remarks />
         <exception cref="T:System.ObjectDisposedException">
           Instance has been disposed.
-        </exception
-        >
+        </exception>
       </Docs>
     </Member>
     <Member MemberName="ReceiveTimeout">
@@ -399,8 +392,7 @@
         <remarks />
         <exception cref="T:System.ObjectDisposedException">
           Instance has been disposed.
-        </exception
-        >
+        </exception>
       </Docs>
     </Member>
     <Member MemberName="SendBufferSize">
@@ -421,8 +413,7 @@
         <remarks />
         <exception cref="T:System.ObjectDisposedException">
           Instance has been disposed.
-        </exception
-        >
+        </exception>
       </Docs>
     </Member>
     <Member MemberName="SendTimeout">
@@ -443,8 +434,7 @@
         <remarks>To be added.</remarks>
         <exception cref="T:System.ObjectDisposedException">
           Instance has been disposed.
-        </exception
-        >
+        </exception>
       </Docs>
     </Member>
   </Members>

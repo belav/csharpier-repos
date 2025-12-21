@@ -55,8 +55,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Expands character entities and returns general entities as <see cref="F:System.Xml.XmlNodeType.EntityReference" /> nodes. </para
-          >
+            >Expands character entities and returns general entities as <see cref="F:System.Xml.XmlNodeType.EntityReference" /> nodes.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -80,8 +80,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Xml.XmlNodeType.EntityReference" /> nodes are not returned. The entity text is expanded in place of the entity references. </para
-          >
+            <see cref="F:System.Xml.XmlNodeType.EntityReference" /> nodes are not returned. The entity text is expanded in place of the entity references.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

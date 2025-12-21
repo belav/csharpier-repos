@@ -78,17 +78,17 @@
       >switch-label</non_terminal
     >s followed by a <non_terminal where="15.2.1"
       >statement-list</non_terminal
-    > (<hyperlink>15.2.1</hyperlink>). </paragraph
-  >
+    > (<hyperlink>15.2.1</hyperlink>).
+  </paragraph>
   <paragraph
     >The governing type of a switch statement is established by the switch expression. If the type of the switch expression is <keyword>sbyte</keyword>, <keyword>byte</keyword>, <keyword>short</keyword>, <keyword>ushort</keyword>, <keyword>int</keyword>, <keyword>uint</keyword>, <keyword>long</keyword>, <keyword>ulong</keyword>, <keyword>char</keyword>, string, or an <non_terminal
       where="11.1"
       >enum-type</non_terminal
-    >, then that is the governing type of the switch statement. Otherwise, exactly one user-defined implicit conversion (<hyperlink>13.4</hyperlink>) must exist from the type of the switch expression to one of the following possible governing types: <keyword>sbyte</keyword>, <keyword>byte</keyword>, <keyword>short</keyword>, <keyword>ushort</keyword>, <keyword>int</keyword>, <keyword>uint</keyword>, <keyword>long</keyword>, <keyword>ulong</keyword>, <keyword>char</keyword>, string. If no such implicit conversion exists, or if more than one such implicit conversion exists, a compile-time error occurs. </paragraph
-  >
+    >, then that is the governing type of the switch statement. Otherwise, exactly one user-defined implicit conversion (<hyperlink>13.4</hyperlink>) must exist from the type of the switch expression to one of the following possible governing types: <keyword>sbyte</keyword>, <keyword>byte</keyword>, <keyword>short</keyword>, <keyword>ushort</keyword>, <keyword>int</keyword>, <keyword>uint</keyword>, <keyword>long</keyword>, <keyword>ulong</keyword>, <keyword>char</keyword>, string. If no such implicit conversion exists, or if more than one such implicit conversion exists, a compile-time error occurs.
+  </paragraph>
   <paragraph
-    >The constant expression of each case label must denote a value of a type that is implicitly convertible (<hyperlink>13.1</hyperlink>) to the governing type of the switch statement. A compile-time error occurs if two or more case labels in the same switch statement specify the same constant value. </paragraph
-  >
+    >The constant expression of each case label must denote a value of a type that is implicitly convertible (<hyperlink>13.1</hyperlink>) to the governing type of the switch statement. A compile-time error occurs if two or more case labels in the same switch statement specify the same constant value.
+  </paragraph>
   <paragraph>There can be at most one default label in a switch statement. </paragraph>
   <paragraph
     >A switch statement is executed as follows: <list>
@@ -236,11 +236,11 @@ void DoCommand(string command) {
     >The <non_terminal where="15.2.1">statement-list</non_terminal>s of a <non_terminal
       where="15.7.2"
       >switch-block</non_terminal
-    > may contain declaration statements (<hyperlink>15.5</hyperlink>). The scope of a local variable or constant declared in a switch block is the switch block. </paragraph
-  >
+    > may contain declaration statements (<hyperlink>15.5</hyperlink>). The scope of a local variable or constant declared in a switch block is the switch block.
+  </paragraph>
   <paragraph
-    >Within a switch block, the meaning of a name used in an expression context must always be the same (<hyperlink>14.5.2.1</hyperlink>). </paragraph
-  >
+    >Within a switch block, the meaning of a name used in an expression context must always be the same (<hyperlink>14.5.2.1</hyperlink>).
+  </paragraph>
   <paragraph
     >The statement list of a given switch section is reachable if the switch statement is reachable and at least one of the following is true: <list>
       <list_item> The switch expression is a non-constant value. </list_item>

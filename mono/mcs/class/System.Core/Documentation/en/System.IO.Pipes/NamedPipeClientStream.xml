@@ -63,18 +63,18 @@
             </item>
             <item>
               <para
-                >A default <see cref="T:System.IO.Pipes.PipeDirection" /> value of <see cref="F:System.IO.Pipes.PipeDirection.InOut" />. </para
-              >
+                >A default <see cref="T:System.IO.Pipes.PipeDirection" /> value of <see cref="F:System.IO.Pipes.PipeDirection.InOut" />.
+              </para>
             </item>
             <item>
               <para
-                >A default <see cref="T:System.IO.Pipes.PipeOptions" /> value of <see cref="F:System.IO.Pipes.PipeOptions.None" />. </para
-              >
+                >A default <see cref="T:System.IO.Pipes.PipeOptions" /> value of <see cref="F:System.IO.Pipes.PipeOptions.None" />.
+              </para>
             </item>
             <item>
               <para
-                >A default <see cref="T:System.Security.Principal.TokenImpersonationLevel" /> value of <see cref="F:System.Security.Principal.TokenImpersonationLevel.None" />. </para
-              >
+                >A default <see cref="T:System.Security.Principal.TokenImpersonationLevel" /> value of <see cref="F:System.Security.Principal.TokenImpersonationLevel.None" />.
+              </para>
             </item>
             <item>
               <para
@@ -122,18 +122,18 @@
           <list type="bullet">
             <item>
               <para
-                >A default <see cref="T:System.IO.Pipes.PipeDirection" /> value of <see cref="F:System.IO.Pipes.PipeDirection.InOut" />. </para
-              >
+                >A default <see cref="T:System.IO.Pipes.PipeDirection" /> value of <see cref="F:System.IO.Pipes.PipeDirection.InOut" />.
+              </para>
             </item>
             <item>
               <para
-                >A default <see cref="T:System.IO.Pipes.PipeOptions" /> value of <see cref="F:System.IO.Pipes.PipeOptions.None" />. </para
-              >
+                >A default <see cref="T:System.IO.Pipes.PipeOptions" /> value of <see cref="F:System.IO.Pipes.PipeOptions.None" />.
+              </para>
             </item>
             <item>
               <para
-                >A default <see cref="T:System.Security.Principal.TokenImpersonationLevel" /> value of <see cref="F:System.Security.Principal.TokenImpersonationLevel.None" />. </para
-              >
+                >A default <see cref="T:System.Security.Principal.TokenImpersonationLevel" /> value of <see cref="F:System.Security.Principal.TokenImpersonationLevel.None" />.
+              </para>
             </item>
             <item>
               <para
@@ -189,13 +189,13 @@
           <list type="bullet">
             <item>
               <para
-                >A default <see cref="T:System.IO.Pipes.PipeOptions" /> value of <see cref="F:System.IO.Pipes.PipeOptions.None" />. </para
-              >
+                >A default <see cref="T:System.IO.Pipes.PipeOptions" /> value of <see cref="F:System.IO.Pipes.PipeOptions.None" />.
+              </para>
             </item>
             <item>
               <para
-                >A default <see cref="T:System.Security.Principal.TokenImpersonationLevel" /> value of <see cref="F:System.Security.Principal.TokenImpersonationLevel.None" />. </para
-              >
+                >A default <see cref="T:System.Security.Principal.TokenImpersonationLevel" /> value of <see cref="F:System.Security.Principal.TokenImpersonationLevel.None" />.
+              </para>
             </item>
             <item>
               <para
@@ -316,8 +316,8 @@
           <list type="bullet">
             <item>
               <para
-                >A default <see cref="T:System.Security.Principal.TokenImpersonationLevel" /> value of <see cref="F:System.Security.Principal.TokenImpersonationLevel.None" />. </para
-              >
+                >A default <see cref="T:System.Security.Principal.TokenImpersonationLevel" /> value of <see cref="F:System.Security.Principal.TokenImpersonationLevel.None" />.
+              </para>
             </item>
             <item>
               <para

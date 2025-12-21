@@ -52,8 +52,8 @@
       >
       <block subset="none" type="note">
         <para
-          >Return types of <see cref="F:System.Runtime.InteropServices.UnmanagedType.Currency" />, <see cref="T:System.Guid" />, and <see cref="T:System.Object" /> are not supported by the <see cref="T:System.Runtime.InteropServices.PreserveSigAttribute" /> class when interoperation occurs from COM to managed code and the managed code is marked with the <see cref="T:System.Runtime.InteropServices.PreserveSigAttribute" /> class.  When you attempt to use one of these return types with the <see cref="T:System.Runtime.InteropServices.PreserveSigAttribute" /> class during these conditions, a <see cref="T:System.TypeLoadException" /> is thrown.   </para
-        >
+          >Return types of <see cref="F:System.Runtime.InteropServices.UnmanagedType.Currency" />, <see cref="T:System.Guid" />, and <see cref="T:System.Object" /> are not supported by the <see cref="T:System.Runtime.InteropServices.PreserveSigAttribute" /> class when interoperation occurs from COM to managed code and the managed code is marked with the <see cref="T:System.Runtime.InteropServices.PreserveSigAttribute" /> class.  When you attempt to use one of these return types with the <see cref="T:System.Runtime.InteropServices.PreserveSigAttribute" /> class during these conditions, a <see cref="T:System.TypeLoadException" /> is thrown.
+        </para>
       </block>
     </remarks>
     <summary>

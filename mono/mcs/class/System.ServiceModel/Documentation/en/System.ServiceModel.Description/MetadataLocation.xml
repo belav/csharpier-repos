@@ -50,8 +50,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.MetadataLocation" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.MetadataLocation" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -78,8 +78,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.MetadataLocation" /> class that assigns the specified metadata location to the <see cref="P:System.ServiceModel.Description.MetadataLocation.Location" /> property. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.MetadataLocation" /> class that assigns the specified metadata location to the <see cref="P:System.ServiceModel.Description.MetadataLocation.Location" /> property.
+          </para>
         </summary>
         <param name="location">
           <attribution

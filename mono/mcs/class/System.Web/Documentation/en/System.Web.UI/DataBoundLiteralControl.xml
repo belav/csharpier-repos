@@ -54,8 +54,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.DataBoundLiteralControl" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.DataBoundLiteralControl" /> class.
+          </para>
         </summary>
         <param name="staticLiteralsCount">
           <attribution
@@ -182,8 +182,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position in an array at which to retain the <paramref name="s" /> parameter value. </param
-        >
+          />The position in an array at which to retain the <paramref name="s" /> parameter value.
+        </param>
         <param name="s">
           <attribution
             license="cc4"
@@ -250,8 +250,8 @@
             >This implementation of the <see cref="T:System.Web.UI.ITextControl" /> interface returns the value of the <see cref="P:System.Web.UI.DataBoundLiteralControl.Text" /> property. The value of the <see cref="P:System.Web.UI.DataBoundLiteralControl.Text" /> property is persisted in the view state.</para
           >
           <para
-            >The <see cref="T:System.Web.UI.DataBoundLiteralControl" /> object implements <see cref="T:System.Web.UI.ITextControl" /> but does not support the set method on the <see cref="P:System.Web.UI.ITextControl.Text" /> property. All attempts to use this method will return a <see cref="T:System.NotSupportedException" /> exception. </para
-          >
+            >The <see cref="T:System.Web.UI.DataBoundLiteralControl" /> object implements <see cref="T:System.Web.UI.ITextControl" /> but does not support the set method on the <see cref="P:System.Web.UI.ITextControl.Text" /> property. All attempts to use this method will return a <see cref="T:System.NotSupportedException" /> exception.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -278,8 +278,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the text content of the <see cref="T:System.Web.UI.DataBoundLiteralControl" /> object. </para
-          >
+            >Gets the text content of the <see cref="T:System.Web.UI.DataBoundLiteralControl" /> object.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>

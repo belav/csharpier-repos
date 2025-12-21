@@ -81,15 +81,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A membership condition that tests evidence to determine whether this code group applies policy. </param
-        >
+          />A membership condition that tests evidence to determine whether this code group applies policy.
+        </param>
         <param name="policy">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The policy statement for the code group in the form of a permission set and attributes to grant code that matches the membership condition. </param
-        >
+          />The policy statement for the code group in the form of a permission set and attributes to grant code that matches the membership condition.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Copy">
@@ -194,8 +194,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The evidence for the assembly. </param
-        >
+          />The evidence for the assembly.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ResolveMatchingCodeGroups">
@@ -242,8 +242,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The evidence for the assembly. </param
-        >
+          />The evidence for the assembly.
+        </param>
       </Docs>
     </Member>
   </Members>

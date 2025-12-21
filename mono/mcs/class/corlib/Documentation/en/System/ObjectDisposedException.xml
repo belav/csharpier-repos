@@ -65,8 +65,7 @@ public class ObjectDisposedExceptionTest {
       }
    }
 }
-</code
-      >
+</code>
       <para>The output is</para>
       <c>
         <para>Caught: Cannot access a closed Stream.</para>
@@ -152,8 +151,7 @@ public class ExampleDisposableObject : IDisposable {
  
  private bool isDisposed;
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>Caught: Cannot access a disposed object named "ExampleDisposableObject".</para>
@@ -181,8 +179,8 @@ public class ExampleDisposableObject : IDisposable {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string containing the name of the disposed object. </param
-        >
+          />A string containing the name of the disposed object.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -218,15 +216,15 @@ public class ExampleDisposableObject : IDisposable {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception being thrown. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception being thrown.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual information about the source or destination. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual information about the source or destination.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -357,8 +355,7 @@ public class ExampleDisposableObject : IDisposable {
  
  private bool isDisposed;
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>Caught: Oh-oh! This object has been disposed!</para>
@@ -370,8 +367,8 @@ public class ExampleDisposableObject : IDisposable {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The error message that explains the reason for the exception. </param
-        >
+          />The error message that explains the reason for the exception.
+        </param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The InnerException property of the new instance is initialized to null.</para>
@@ -390,15 +387,15 @@ public class ExampleDisposableObject : IDisposable {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the disposed object. </param
-        >
+          />The name of the disposed object.
+        </param>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The error message that explains the reason for the exception. </param
-        >
+          />The error message that explains the reason for the exception.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -437,15 +434,15 @@ public class ExampleDisposableObject : IDisposable {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception being thrown. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception being thrown.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual information about the source or destination. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual information about the source or destination.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Message">
@@ -469,8 +466,8 @@ public class ExampleDisposableObject : IDisposable {
         <value>
           <para
             >A <see cref="T:System.String" /> that describes
-   the error. </para
-          >
+   the error.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />

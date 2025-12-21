@@ -56,8 +56,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Diagnostics.SourceFilter" /> class, specifying the name of the trace source. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.SourceFilter" /> class, specifying the name of the trace source.
+          </para>
         </summary>
         <param name="source">
           <attribution
@@ -129,8 +129,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the enumeration values that identifies the event type. </param
-        >
+          />One of the enumeration values that identifies the event type.
+        </param>
         <param name="id">
           <attribution
             license="cc4"

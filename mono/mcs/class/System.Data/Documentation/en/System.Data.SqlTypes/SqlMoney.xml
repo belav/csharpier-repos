@@ -62,8 +62,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The monetary value to initialize. </param
-        >
+          />The monetary value to initialize.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -90,8 +90,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The monetary value to initialize. </param
-        >
+          />The monetary value to initialize.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -118,8 +118,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The monetary value to initialize. </param
-        >
+          />The monetary value to initialize.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -146,8 +146,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The monetary value to initialize. </param
-        >
+          />The monetary value to initialize.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -186,15 +186,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -339,8 +339,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to be compared. </param
-        >
+          />The <see cref="T:System.Object" /> to be compared.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -379,15 +379,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -418,12 +418,8 @@
           >
         </returns>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The object to be compared. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The object to be compared.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -460,15 +456,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -568,15 +564,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -615,15 +611,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -690,15 +686,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -737,15 +733,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -838,15 +834,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -885,15 +881,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -967,15 +963,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="op_Division">
@@ -1014,15 +1010,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="op_Equality">
@@ -1061,15 +1057,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="op_Explicit">
@@ -1268,15 +1264,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="op_GreaterThanOrEqual">
@@ -1315,15 +1311,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
@@ -1499,15 +1495,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="op_LessThan">
@@ -1546,15 +1542,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="op_LessThanOrEqual">
@@ -1593,15 +1589,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="op_Multiply">
@@ -1640,15 +1636,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="op_Subtraction">
@@ -1687,15 +1683,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="op_UnaryNegation">
@@ -1733,8 +1729,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure to be negated. </param
-        >
+          />The <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure to be negated.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Parse">
@@ -1764,12 +1760,8 @@
           >
         </returns>
         <param name="s">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The String to be parsed. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The String to be parsed.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1808,15 +1800,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlMoney" /> structure.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2056,8 +2048,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Data.SqlTypes.SqlByte" /> equal to the value of this <see cref="T:System.Data.SqlTypes.SqlMoney" />. </para
-          >
+            >A <see cref="T:System.Data.SqlTypes.SqlByte" /> equal to the value of this <see cref="T:System.Data.SqlTypes.SqlMoney" />.
+          </para>
         </returns>
       </Docs>
       <AssemblyInfo>

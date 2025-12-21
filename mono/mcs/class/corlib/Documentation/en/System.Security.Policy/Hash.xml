@@ -79,8 +79,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The assembly for which to compute the hash value. </param
-        >
+          />The assembly for which to compute the hash value.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateMD5">
@@ -222,8 +222,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The hash algorithm to use to compute the hash value for the assembly. </param
-        >
+          />The hash algorithm to use to compute the hash value for the assembly.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetObjectData">
@@ -266,15 +266,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that holds the serialized object data. </param
-        >
+          />The object that holds the serialized object data.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The contextual information about the source or destination. </param
-        >
+          />The contextual information about the source or destination.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="MD5">

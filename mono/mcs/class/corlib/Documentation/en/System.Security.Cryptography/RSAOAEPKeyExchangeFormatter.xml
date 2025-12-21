@@ -109,8 +109,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The instance of the <see cref="T:System.Security.Cryptography.RSA" /> algorithm that holds the public key. </param
-        >
+          />The instance of the <see cref="T:System.Security.Cryptography.RSA" /> algorithm that holds the public key.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateKeyExchange">
@@ -152,8 +152,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The secret information to be passed in the key exchange. </param
-        >
+          />The secret information to be passed in the key exchange.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateKeyExchange">
@@ -196,15 +196,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The secret information to be passed in the key exchange. </param
-        >
+          />The secret information to be passed in the key exchange.
+        </param>
         <param name="symAlgType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />This parameter is not used in the current version. </param
-        >
+          />This parameter is not used in the current version.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Parameter">
@@ -316,8 +316,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The instance of the <see cref="T:System.Security.Cryptography.RSA" /> algorithm that holds the public key. </param
-        >
+          />The instance of the <see cref="T:System.Security.Cryptography.RSA" /> algorithm that holds the public key.
+        </param>
       </Docs>
     </Member>
   </Members>

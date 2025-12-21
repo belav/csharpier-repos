@@ -190,15 +190,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that holds the serialized object data about the exception being thrown.. </param
-        >
+          />The object that holds the serialized object data about the exception being thrown..
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The contextual information about the source or destination. </param
-        >
+          />The contextual information about the source or destination.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">

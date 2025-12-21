@@ -145,8 +145,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.LoginStatus" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.LoginStatus" /> class.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -170,8 +170,8 @@
             >This member is used primarily by control developers when deriving a custom control from the <see cref="T:System.Web.UI.WebControls.LoginStatus" /> class.</para
           >
           <para
-            >This method is called by the ASP.NET infrastructure to notify any controls that use composition-based implementation, including controls that derive from <see cref="T:System.Web.UI.WebControls.CompositeDataBoundControl" /> and <see cref="T:System.Web.UI.WebControls.CompositeControl" />, to create any child controls they contain in preparation for postback or rendering. </para
-          >
+            >This method is called by the ASP.NET infrastructure to notify any controls that use composition-based implementation, including controls that derive from <see cref="T:System.Web.UI.WebControls.CompositeDataBoundControl" /> and <see cref="T:System.Web.UI.WebControls.CompositeControl" />, to create any child controls they contain in preparation for postback or rendering.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -352,8 +352,8 @@
               <item>
                 <term>
                   <para>
-                    <see cref="P:System.Web.UI.WebControls.LoginStatus.LogoutAction" /> value </para
-                  >
+                    <see cref="P:System.Web.UI.WebControls.LoginStatus.LogoutAction" /> value
+                  </para>
                 </term>
                 <description>
                   <para>Action taken </para>
@@ -368,8 +368,8 @@
               </term>
               <description>
                 <para
-                  >Redirects the user to the URL contained in the <see cref="P:System.Web.UI.WebControls.LoginStatus.LogoutPageUrl" /> property. If <see cref="P:System.Web.UI.WebControls.LoginStatus.LogoutPageUrl" /> is empty, the user is redirected to the login page defined in the application configuration settings. </para
-                >
+                  >Redirects the user to the URL contained in the <see cref="P:System.Web.UI.WebControls.LoginStatus.LogoutPageUrl" /> property. If <see cref="P:System.Web.UI.WebControls.LoginStatus.LogoutPageUrl" /> is empty, the user is redirected to the login page defined in the application configuration settings.
+                </para>
               </description>
             </item>
             <item>
@@ -571,8 +571,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -660,8 +660,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> containing the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> containing the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Render">
@@ -744,8 +744,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Overrides the base <see cref="M:System.Web.UI.Control.SetDesignModeState(System.Collections.IDictionary)" /> method. </para
-          >
+            >Overrides the base <see cref="M:System.Web.UI.Control.SetDesignModeState(System.Collections.IDictionary)" /> method.
+          </para>
         </summary>
         <param name="data">
           <attribution

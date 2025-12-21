@@ -43,8 +43,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.IO.TextReader" /> is the abstract base class of <see cref="T:System.IO.StreamReader" /> and <see cref="T:System.IO.StringReader" />, which read characters from streams and strings, respectively. Use these derived classes to open a text file for reading a specified range of characters, or to create a reader based on an existing stream. </para
-      >
+        <see cref="T:System.IO.TextReader" /> is the abstract base class of <see cref="T:System.IO.StreamReader" /> and <see cref="T:System.IO.StringReader" />, which read characters from streams and strings, respectively. Use these derived classes to open a text file for reading a specified range of characters, or to create a reader based on an existing stream.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -213,8 +213,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -243,8 +243,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reading from the <see cref="F:System.IO.TextReader.Null" /> text reader is similar to reading from the end of a stream: </para
-          >
+            >Reading from the <see cref="F:System.IO.TextReader.Null" /> text reader is similar to reading from the end of a stream:
+          </para>
           <list type="bullet">
             <item>
               <para
@@ -416,22 +416,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />When this method returns, contains the specified character array with the values between <paramref name="index" /> and (<paramref name="index" /> + <paramref name="count" /> - 1) replaced by the characters read from the current source. </param
-        >
+          />When this method returns, contains the specified character array with the values between <paramref name="index" /> and (<paramref name="index" /> + <paramref name="count" /> - 1) replaced by the characters read from the current source.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position in <paramref name="buffer" /> at which to begin writing. </param
-        >
+          />The position in <paramref name="buffer" /> at which to begin writing.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum number of characters to read. If the end of the reader is reached before the specified number of characters is read into the buffer, the method returns. </param
-        >
+          />The maximum number of characters to read. If the end of the reader is reached before the specified number of characters is read into the buffer, the method returns.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -460,8 +460,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The task completes after either the number of characters specified by the <paramref name="count" /> parameter are read or the end of the file is reached. </para
-          >
+            >The task completes after either the number of characters specified by the <paramref name="count" /> parameter are read or the end of the file is reached.
+          </para>
           <para
             >The <see cref="T:System.IO.TextReader" /> class is an abstract class. Therefore, you do not instantiate it in your code. For an example of using the <see cref="M:System.IO.TextReader.ReadAsync(System.Char[],System.Int32,System.Int32)" /> method, see the <see cref="M:System.IO.StreamReader.ReadAsync(System.Char[],System.Int32,System.Int32)" /> method.</para
           >
@@ -564,8 +564,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />When this method returns, this parameter contains the specified character array with the values between <paramref name="index" /> and (<paramref name="index" /> + <paramref name="count" /> -1) replaced by the characters read from the current source. </param
-        >
+          />When this method returns, this parameter contains the specified character array with the values between <paramref name="index" /> and (<paramref name="index" /> + <paramref name="count" /> -1) replaced by the characters read from the current source.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
@@ -578,8 +578,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum number of characters to read. </param
-        >
+          />The maximum number of characters to read.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -608,8 +608,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The task does not complete until either the number of characters specified by the <paramref name="count" /> parameter are read, or the end of the text has been reached. </para
-          >
+            >The task does not complete until either the number of characters specified by the <paramref name="count" /> parameter are read, or the end of the text has been reached.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -732,8 +732,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A task that represents the asynchronous read operation. The value of the <paramref name="TResult" /> parameter contains the next line from the text reader, or is null if all of the characters have been read. </para
-          >
+            >A task that represents the asynchronous read operation. The value of the <paramref name="TResult" /> parameter contains the next line from the text reader, or is null if all of the characters have been read.
+          </para>
         </returns>
       </Docs>
     </Member>
@@ -822,8 +822,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A task that represents the asynchronous read operation. The value of the <paramref name="TResult" /> parameter contains a string with the characters from the current position to the end of the text reader. </para
-          >
+            >A task that represents the asynchronous read operation. The value of the <paramref name="TResult" /> parameter contains a string with the characters from the current position to the end of the text reader.
+          </para>
         </returns>
       </Docs>
     </Member>
@@ -875,8 +875,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The TextReader to synchronize. </param
-        >
+          />The TextReader to synchronize.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

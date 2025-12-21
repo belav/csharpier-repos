@@ -97,12 +97,12 @@
           </term>
           <description>
             <para
-              >Sets the XML document using a <see cref="T:System.Xml.XmlDocument" /> object. </para
-            >
+              >Sets the XML document using a <see cref="T:System.Xml.XmlDocument" /> object.
+            </para>
             <block subset="none" type="note">
               <para
-                >This property is obsolete. Use one of the other properties listed in this section to set the XML content for the <see cref="T:System.Web.UI.WebControls.Xml" /> control. </para
-              >
+                >This property is obsolete. Use one of the other properties listed in this section to set the XML content for the <see cref="T:System.Web.UI.WebControls.Xml" /> control.
+              </para>
             </block>
           </description>
         </item>

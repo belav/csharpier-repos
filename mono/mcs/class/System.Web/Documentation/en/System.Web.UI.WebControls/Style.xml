@@ -87,8 +87,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Web.UI.StateBag" /> that represents the state bag in which to store style information. </param
-        >
+          />A <see cref="T:System.Web.UI.StateBag" /> that represents the state bag in which to store style information.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -125,8 +125,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Web.UI.HtmlTextWriter" /> that represents the output stream to render HTML content on the client. </param
-        >
+          />A <see cref="T:System.Web.UI.HtmlTextWriter" /> that represents the output stream to render HTML content on the client.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -164,15 +164,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Web.UI.HtmlTextWriter" /> that represents the output stream to render HTML content on the client. </param
-        >
+          />An <see cref="T:System.Web.UI.HtmlTextWriter" /> that represents the output stream to render HTML content on the client.
+        </param>
         <param name="owner">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Web.UI.WebControls.WebControl" /> or <see cref="T:System.Web.UI.WebControls.WebControl" /> derived object that represents the Web server control associated with the <see cref="T:System.Web.UI.WebControls.Style" />. </param
-        >
+          />A <see cref="T:System.Web.UI.WebControls.WebControl" /> or <see cref="T:System.Web.UI.WebControls.WebControl" /> derived object that represents the Web server control associated with the <see cref="T:System.Web.UI.WebControls.Style" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -465,8 +465,8 @@
             >Use the <see cref="M:System.Web.UI.WebControls.Style.CopyFrom(System.Web.UI.WebControls.Style)" /> method to duplicate the style properties of the specified <see cref="T:System.Web.UI.WebControls.Style" /> into the instance of the <see cref="T:System.Web.UI.WebControls.Style" /> class that this method is called from.</para
           >
           <para
-            >When a style is registered using <see cref="M:System.Web.UI.IStyleSheet.RegisterStyle(System.Web.UI.WebControls.Style,System.Web.UI.IUrlResolutionService)" />, and then copied using <see cref="M:System.Web.UI.WebControls.Style.CopyFrom(System.Web.UI.WebControls.Style)" />, only the <see cref="P:System.Web.UI.WebControls.Style.CssClass" /> property is copied to the destination, not all the individual properties. This could lead to unexpected results if you then copy or examine the properties of the destination style. For example, if you are using <see cref="M:System.Web.UI.WebControls.FontInfo.CopyFrom(System.Web.UI.WebControls.FontInfo)" /> to copy font information from the <see cref="P:System.Web.UI.WebControls.Style.Font" /> property of a <see cref="T:System.Web.UI.WebControls.Style" /> that is registered, you will not get the individual settings of the font from the style. </para
-          >
+            >When a style is registered using <see cref="M:System.Web.UI.IStyleSheet.RegisterStyle(System.Web.UI.WebControls.Style,System.Web.UI.IUrlResolutionService)" />, and then copied using <see cref="M:System.Web.UI.WebControls.Style.CopyFrom(System.Web.UI.WebControls.Style)" />, only the <see cref="P:System.Web.UI.WebControls.Style.CssClass" /> property is copied to the destination, not all the individual properties. This could lead to unexpected results if you then copy or examine the properties of the destination style. For example, if you are using <see cref="M:System.Web.UI.WebControls.FontInfo.CopyFrom(System.Web.UI.WebControls.FontInfo)" /> to copy font information from the <see cref="P:System.Web.UI.WebControls.Style.Font" /> property of a <see cref="T:System.Web.UI.WebControls.Style" /> that is registered, you will not get the individual settings of the font from the style.
+          </para>
           <block subset="none" type="note">
             <para
               >All properties, including those that have been set in the current instance of the <see cref="T:System.Web.UI.WebControls.Style" /> class, will be replaced by the associated property in the <see cref="T:System.Web.UI.WebControls.Style" /> specified by the <paramref name="s" /> parameter.</para
@@ -485,8 +485,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Web.UI.WebControls.Style" /> that represents the style to copy. </param
-        >
+          />A <see cref="T:System.Web.UI.WebControls.Style" /> that represents the style to copy.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -569,15 +569,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.UI.CssStyleCollection" /> object to which to add the style properties. </param
-        >
+          />The <see cref="T:System.Web.UI.CssStyleCollection" /> object to which to add the style properties.
+        </param>
         <param name="urlResolver">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Web.UI.IUrlResolutionService" /> -implemented object that contains the context information for the current location (URL). </param
-        >
+          />A <see cref="T:System.Web.UI.IUrlResolutionService" /> -implemented object that contains the context information for the current location (URL).
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Font">
@@ -809,8 +809,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The previously saved state. </param
-        >
+          />The previously saved state.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="MergeWith">
@@ -848,8 +848,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Web.UI.WebControls.Style" /> that represents the style to combine. </param
-        >
+          />A <see cref="T:System.Web.UI.WebControls.Style" /> that represents the style to combine.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

@@ -6,8 +6,8 @@
       <para
         >The <see cref="N:System.Runtime.InteropServices" /> namespace provides a wide variety of members that support COM interop and platform invoke services. If you are unfamiliar with these services, see <format type="text/html">
           <a href="ccb68ce7-b0e9-4ffb-839d-03b1cd2c1258">Interoperating with Unmanaged Code</a>
-        </format>. </para
-      >
+        </format>.
+      </para>
     </summary>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />

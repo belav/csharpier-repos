@@ -106,8 +106,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.IFormatProvider" /> interface implementation that supplies culture-specific formatting information. </param
-        >
+          />An <see cref="T:System.IFormatProvider" /> interface implementation that supplies culture-specific formatting information.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ToByte">
@@ -143,8 +143,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.IFormatProvider" /> interface implementation that supplies culture-specific formatting information. </param
-        >
+          />An <see cref="T:System.IFormatProvider" /> interface implementation that supplies culture-specific formatting information.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ToChar">
@@ -180,8 +180,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.IFormatProvider" /> interface implementation that supplies culture-specific formatting information. </param
-        >
+          />An <see cref="T:System.IFormatProvider" /> interface implementation that supplies culture-specific formatting information.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ToDateTime">
@@ -224,8 +224,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.IFormatProvider" /> interface implementation that supplies culture-specific formatting information. </param
-        >
+          />An <see cref="T:System.IFormatProvider" /> interface implementation that supplies culture-specific formatting information.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ToDecimal">
@@ -265,8 +265,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.IFormatProvider" /> interface implementation that supplies culture-specific formatting information. </param
-        >
+          />An <see cref="T:System.IFormatProvider" /> interface implementation that supplies culture-specific formatting information.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ToDouble">
@@ -302,8 +302,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.IFormatProvider" /> interface implementation that supplies culture-specific formatting information. </param
-        >
+          />An <see cref="T:System.IFormatProvider" /> interface implementation that supplies culture-specific formatting information.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ToInt16">
@@ -339,8 +339,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.IFormatProvider" /> interface implementation that supplies culture-specific formatting information. </param
-        >
+          />An <see cref="T:System.IFormatProvider" /> interface implementation that supplies culture-specific formatting information.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ToInt32">
@@ -376,8 +376,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.IFormatProvider" /> interface implementation that supplies culture-specific formatting information. </param
-        >
+          />An <see cref="T:System.IFormatProvider" /> interface implementation that supplies culture-specific formatting information.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ToInt64">
@@ -413,8 +413,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.IFormatProvider" /> interface implementation that supplies culture-specific formatting information. </param
-        >
+          />An <see cref="T:System.IFormatProvider" /> interface implementation that supplies culture-specific formatting information.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ToSByte">
@@ -450,8 +450,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.IFormatProvider" /> interface implementation that supplies culture-specific formatting information. </param
-        >
+          />An <see cref="T:System.IFormatProvider" /> interface implementation that supplies culture-specific formatting information.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ToSingle">
@@ -487,8 +487,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.IFormatProvider" /> interface implementation that supplies culture-specific formatting information. </param
-        >
+          />An <see cref="T:System.IFormatProvider" /> interface implementation that supplies culture-specific formatting information.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ToString">
@@ -528,8 +528,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.IFormatProvider" /> interface implementation that supplies culture-specific formatting information. </param
-        >
+          />An <see cref="T:System.IFormatProvider" /> interface implementation that supplies culture-specific formatting information.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ToType">
@@ -573,15 +573,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> to which the value of this instance is converted. </param
-        >
+          />The <see cref="T:System.Type" /> to which the value of this instance is converted.
+        </param>
         <param name="provider">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.IFormatProvider" /> interface implementation that supplies culture-specific formatting information. </param
-        >
+          />An <see cref="T:System.IFormatProvider" /> interface implementation that supplies culture-specific formatting information.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ToUInt16">
@@ -617,8 +617,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.IFormatProvider" /> interface implementation that supplies culture-specific formatting information. </param
-        >
+          />An <see cref="T:System.IFormatProvider" /> interface implementation that supplies culture-specific formatting information.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ToUInt32">
@@ -654,8 +654,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.IFormatProvider" /> interface implementation that supplies culture-specific formatting information. </param
-        >
+          />An <see cref="T:System.IFormatProvider" /> interface implementation that supplies culture-specific formatting information.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ToUInt64">
@@ -691,8 +691,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.IFormatProvider" /> interface implementation that supplies culture-specific formatting information. </param
-        >
+          />An <see cref="T:System.IFormatProvider" /> interface implementation that supplies culture-specific formatting information.
+        </param>
       </Docs>
     </Member>
   </Members>

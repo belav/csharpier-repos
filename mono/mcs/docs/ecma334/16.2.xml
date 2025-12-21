@@ -54,8 +54,8 @@
       >namespace-declaration</non_terminal
     > occurs within another <non_terminal where="16.2"
       >namespace-declaration</non_terminal
-    >, the inner namespace becomes a member of the outer namespace. In either case, the name of a namespace must be unique within the containing namespace. </paragraph
-  >
+    >, the inner namespace becomes a member of the outer namespace. In either case, the name of a namespace must be unique within the containing namespace.
+  </paragraph>
   <paragraph>Namespaces are implicitly public and the declaration of a namespace cannot include any access modifiers. </paragraph>
   <paragraph
     >Within a <non_terminal where="16.2">namespace-body</non_terminal>, the optional <non_terminal
@@ -67,8 +67,8 @@
     >s contribute members to the declaration space of the namespace. Note that all  <non_terminal
       where="16.3"
       >using-directive</non_terminal
-    >s must appear before any member declarations. </paragraph
-  >
+    >s must appear before any member declarations.
+  </paragraph>
   <paragraph
     >The <non_terminal where="16.2">qualified-identifier</non_terminal> of a <non_terminal
       where="16.2"

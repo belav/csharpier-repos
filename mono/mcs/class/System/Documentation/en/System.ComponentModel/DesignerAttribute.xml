@@ -82,8 +82,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The concatenation of the fully qualified name of the type that provides design-time services for the component this attribute is bound to, and the name of the assembly this type resides in. </param
-        >
+          />The concatenation of the fully qualified name of the type that provides design-time services for the component this attribute is bound to, and the name of the assembly this type resides in.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -120,8 +120,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> that represents the class that provides design-time services for the component this attribute is bound to. </param
-        >
+          />A <see cref="T:System.Type" /> that represents the class that provides design-time services for the component this attribute is bound to.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -165,15 +165,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The concatenation of the fully qualified name of the type that provides design-time services for the component this attribute is bound to, and the name of the assembly this type resides in. </param
-        >
+          />The concatenation of the fully qualified name of the type that provides design-time services for the component this attribute is bound to, and the name of the assembly this type resides in.
+        </param>
         <param name="designerBaseTypeName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The fully qualified name of the base class to associate with the designer class. </param
-        >
+          />The fully qualified name of the base class to associate with the designer class.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -217,15 +217,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The concatenation of the fully qualified name of the type that provides design-time services for the component this attribute is bound to, and the name of the assembly this type resides in. </param
-        >
+          />The concatenation of the fully qualified name of the type that provides design-time services for the component this attribute is bound to, and the name of the assembly this type resides in.
+        </param>
         <param name="designerBaseType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> that represents the base class to associate with the <paramref name="designerTypeName" />. </param
-        >
+          />A <see cref="T:System.Type" /> that represents the base class to associate with the <paramref name="designerTypeName" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -269,15 +269,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> that represents the class that provides design-time services for the component this attribute is bound to. </param
-        >
+          />A <see cref="T:System.Type" /> that represents the class that provides design-time services for the component this attribute is bound to.
+        </param>
         <param name="designerBaseType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> that represents the base class to associate with the <paramref name="designerType" />. </param
-        >
+          />A <see cref="T:System.Type" /> that represents the base class to associate with the <paramref name="designerType" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DesignerBaseTypeName">
@@ -357,8 +357,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to test the value equality of. </param
-        >
+          />The object to test the value equality of.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">

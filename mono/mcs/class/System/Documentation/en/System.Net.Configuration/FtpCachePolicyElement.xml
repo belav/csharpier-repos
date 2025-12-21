@@ -29,8 +29,8 @@
         </format> configuration element.</para
       >
       <para
-        >This class is used to specify the FTP caching configuration that applies to network resources that are obtained by using the <see cref="T:System.Net.WebRequest" /> and <see cref="T:System.Net.WebClient" /> classes. </para
-      >
+        >This class is used to specify the FTP caching configuration that applies to network resources that are obtained by using the <see cref="T:System.Net.WebRequest" /> and <see cref="T:System.Net.WebClient" /> classes.
+      </para>
       <para>This class provides programmatic access to information that can be stored in configuration files.</para>
     </remarks>
     <summary>

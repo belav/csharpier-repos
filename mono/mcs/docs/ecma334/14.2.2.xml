@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <clause number="14.2.2" title="Operator overloading">
   <paragraph
-    >All unary and binary operators have predefined implementations that are automatically available in any expression. In addition to the predefined implementations, user-defined implementations can be introduced by including operator declarations in classes and structs (<hyperlink>17.9</hyperlink>). User-defined operator implementations always take precedence over predefined operator implementations: Only when no applicable user-defined operator implementations exist will the predefined operator implementations be considered. </paragraph
-  >
+    >All unary and binary operators have predefined implementations that are automatically available in any expression. In addition to the predefined implementations, user-defined implementations can be introduced by including operator declarations in classes and structs (<hyperlink>17.9</hyperlink>). User-defined operator implementations always take precedence over predefined operator implementations: Only when no applicable user-defined operator implementations exist will the predefined operator implementations be considered.
+  </paragraph>
   <paragraph
     >The overloadable unary operators are: <code_example>
       <![CDATA[
@@ -24,14 +24,14 @@
   </paragraph>
   <paragraph>Only the operators listed above can be overloaded. In particular, it is not possible to overload member access, method invocation, or the =, &amp;&amp;, ||, ?:, checked, unchecked, new, typeof, as, and is operators. </paragraph>
   <paragraph
-    >When a binary operator is overloaded, the corresponding assignment operator, if any, is also implicitly overloaded. For example, an overload of operator * is also an overload of operator *=. This is described further in <hyperlink>14.13</hyperlink>. Note that the assignment operator itself (=) cannot be overloaded. An assignment always performs a simple bit-wise copy of a value into a variable. </paragraph
-  >
+    >When a binary operator is overloaded, the corresponding assignment operator, if any, is also implicitly overloaded. For example, an overload of operator * is also an overload of operator *=. This is described further in <hyperlink>14.13</hyperlink>. Note that the assignment operator itself (=) cannot be overloaded. An assignment always performs a simple bit-wise copy of a value into a variable.
+  </paragraph>
   <paragraph
-    >Cast operations, such as (T)x, are overloaded by providing user-defined conversions (<hyperlink>13.4</hyperlink>). </paragraph
-  >
+    >Cast operations, such as (T)x, are overloaded by providing user-defined conversions (<hyperlink>13.4</hyperlink>).
+  </paragraph>
   <paragraph
-    >Element access, such as a[x], is not considered an overloadable operator. Instead, user-defined indexing is supported through indexers (<hyperlink>17.8</hyperlink>). </paragraph
-  >
+    >Element access, such as a[x], is not considered an overloadable operator. Instead, user-defined indexing is supported through indexers (<hyperlink>17.8</hyperlink>).
+  </paragraph>
   <paragraph
     >In expressions, operators are referenced using operator notation, and in declarations, operators are referenced using functional notation. The following table shows the relationship between operator and functional notations for unary and binary operators. In the first entry, op denotes any overloadable unary prefix operator. In the second entry, op denotes the unary postfix ++ and  --operators. In the third entry, op denotes any overloadable binary operator. <note
       >[Note: For an example of overloading the ++ and  --operators see <hyperlink>17.9.1</hyperlink>. end note]</note
@@ -59,6 +59,6 @@
     >
   </paragraph>
   <paragraph
-    >The descriptions of individual operators in <hyperlink>14.5</hyperlink> through <hyperlink>14.13</hyperlink> specify the predefined implementations of the operators and any additional rules that apply to each operator. The descriptions make use of the terms unary operator overload resolution, binary operator overload resolution, and numeric promotion, definitions of which are found in the following sections. </paragraph
-  >
+    >The descriptions of individual operators in <hyperlink>14.5</hyperlink> through <hyperlink>14.13</hyperlink> specify the predefined implementations of the operators and any additional rules that apply to each operator. The descriptions make use of the terms unary operator overload resolution, binary operator overload resolution, and numeric promotion, definitions of which are found in the following sections.
+  </paragraph>
 </clause>

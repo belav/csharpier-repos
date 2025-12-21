@@ -42,8 +42,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.Services.Discovery.DiscoveryDocumentSearchPattern" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Discovery.DiscoveryDocumentSearchPattern" /> class.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -67,8 +67,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The concrete <see cref="T:System.Web.Services.Discovery.DiscoveryDocumentReference" /> class inherits from the abstract <see cref="T:System.Web.Services.Discovery.DiscoveryReference" /> class. </para
-          >
+            >The concrete <see cref="T:System.Web.Services.Discovery.DiscoveryDocumentReference" /> class inherits from the abstract <see cref="T:System.Web.Services.Discovery.DiscoveryReference" /> class.
+          </para>
           <para
             >A <see cref="T:System.Web.Services.Discovery.DiscoveryDocumentReference" /> instance contains the location of the .vsdisco file, which is also the file system directory corresponding to the HTTP request passed to the <see cref="M:System.Web.Services.Discovery.DiscoveryRequestHandler.ProcessRequest(System.Web.HttpContext)" /> method.</para
           >

@@ -103,15 +103,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeEventReferenceExpression" /> that indicates the event to detach the event handler from. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeEventReferenceExpression" /> that indicates the event to detach the event handler from.
+        </param>
         <param name="listener">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeExpression" /> that indicates the event handler to remove. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeExpression" /> that indicates the event handler to remove.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -148,22 +148,18 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeExpression" /> that indicates the object that contains the event. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeExpression" /> that indicates the object that contains the event.
+        </param>
         <param name="eventName">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the event. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the event.
+        </param>
         <param name="listener">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeExpression" /> that indicates the event handler to remove. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeExpression" /> that indicates the event handler to remove.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Event">

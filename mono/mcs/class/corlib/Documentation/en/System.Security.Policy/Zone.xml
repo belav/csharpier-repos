@@ -78,8 +78,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zone of origin for the associated code assembly. </param
-        >
+          />The zone of origin for the associated code assembly.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Copy">
@@ -149,8 +149,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URL from which to create the zone. </param
-        >
+          />The URL from which to create the zone.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateIdentityPermission">
@@ -193,8 +193,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The evidence set from which to construct the identity permission. </param
-        >
+          />The evidence set from which to construct the identity permission.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -239,8 +239,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.Policy.Zone" /> evidence object to test for equivalence with the current object. </param
-        >
+          />The <see cref="T:System.Security.Policy.Zone" /> evidence object to test for equivalence with the current object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">

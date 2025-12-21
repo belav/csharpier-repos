@@ -15,8 +15,8 @@
     </grammar_production>
   </paragraph>
   <paragraph
-    >Given an expression E which is of a type T and is classified as a fixed variable (<hyperlink>25.3</hyperlink>), the construct &amp;E computes the address of the variable given by E. The type of the result is T* and is classified as a value. A compile-time error occurs if E is not classified as a variable, if E is classified as a volatile field (<hyperlink>17.4.3</hyperlink>), or if E denotes a moveable variable. In the last case, a fixed statement (<hyperlink>25.6</hyperlink>) can be used to temporarily &quot;fix&quot; the variable before obtaining its address. </paragraph
-  >
+    >Given an expression E which is of a type T and is classified as a fixed variable (<hyperlink>25.3</hyperlink>), the construct &amp;E computes the address of the variable given by E. The type of the result is T* and is classified as a value. A compile-time error occurs if E is not classified as a variable, if E is classified as a volatile field (<hyperlink>17.4.3</hyperlink>), or if E denotes a moveable variable. In the last case, a fixed statement (<hyperlink>25.6</hyperlink>) can be used to temporarily &quot;fix&quot; the variable before obtaining its address.
+  </paragraph>
   <paragraph>The &amp; operator does not require its argument to be definitely assigned, but following an &amp; operation, the variable to which the operator is applied is considered definitely assigned in the execution path in which the operation occurs. It is the responsibility of the programmer to ensure that correct initialization of the variable actually does take place in this situation. </paragraph>
   <paragraph>
     <example
@@ -43,8 +43,8 @@ class Test
   </paragraph>
   <paragraph>
     <note
-      >[Note: As stated in <hyperlink>14.5.4</hyperlink>, outside an instance constructor or static constructor for a struct or class that defines a readonly field, that field is considered a value, not a variable. As such, its address cannot be taken. </note
-    >
+      >[Note: As stated in <hyperlink>14.5.4</hyperlink>, outside an instance constructor or static constructor for a struct or class that defines a readonly field, that field is considered a value, not a variable. As such, its address cannot be taken.
+    </note>
   </paragraph>
   <paragraph>
     <note>Similarly, the address of a constant cannot be taken. end note]</note>

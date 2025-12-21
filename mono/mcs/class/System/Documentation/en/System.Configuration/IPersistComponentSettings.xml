@@ -50,8 +50,8 @@
           <list type="bullet">
             <item>
               <para
-                >It causes each application settings instance contained by the control to refresh the values of its application settings properties, typically by calling their <see cref="M:System.Configuration.ApplicationSettingsBase.Reload" /> methods. </para
-              >
+                >It causes each application settings instance contained by the control to refresh the values of its application settings properties, typically by calling their <see cref="M:System.Configuration.ApplicationSettingsBase.Reload" /> methods.
+              </para>
             </item>
             <item>
               <para

@@ -21,16 +21,16 @@
         <see cref="T:Mono.Unix.Native.Syscall" /> methods.  
         The most recent error can be retrieved from 
         <see cref="M:Mono.Unix.Native.Stdlib.GetLastError" />.
-      </para
-      >
+
+      </para>
       <para>
         The value of these members may not match the actual <c>errno</c> value
         used by your operating system.  Use
         <see cref="T:Mono.Unix.Native.NativeConvert" /> to convert between the
         native <c>errno</c> value and an 
         <see cref="T:Mono.Unix.Native.Errno" /> value.
-      </para
-      >
+
+      </para>
     </remarks>
     <altmember cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
     <altmember cref="M:Mono.Unix.Native.NativeConvert.FromErrno" />

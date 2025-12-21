@@ -14,8 +14,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see cref="T:System.Windows.Forms.Layout.LayoutEngine" /> class when you want to create custom layout behavior at run time. Derive your own class from the <see cref="T:System.Windows.Forms.Layout.LayoutEngine" /> class and override the <see cref="M:System.Windows.Forms.Layout.LayoutEngine.Layout(System.Object,System.Windows.Forms.LayoutEventArgs)" /> method to define your custom layout behavior. </para
-      >
+        >Use the <see cref="T:System.Windows.Forms.Layout.LayoutEngine" /> class when you want to create custom layout behavior at run time. Derive your own class from the <see cref="T:System.Windows.Forms.Layout.LayoutEngine" /> class and override the <see cref="M:System.Windows.Forms.Layout.LayoutEngine.Layout(System.Object,System.Windows.Forms.LayoutEventArgs)" /> method to define your custom layout behavior.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -59,8 +59,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Optionally provide initialization logic in the <see cref="M:System.Windows.Forms.Layout.LayoutEngine.InitLayout(System.Object,System.Windows.Forms.BoundsSpecified)" /> method. </para
-          >
+            >Optionally provide initialization logic in the <see cref="M:System.Windows.Forms.Layout.LayoutEngine.InitLayout(System.Object,System.Windows.Forms.BoundsSpecified)" /> method.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

@@ -30,8 +30,8 @@
         >A complex number is a number that comprises a real number part and an imaginary number part. A complex number <math>z</math> is usually written in the form <math>z = x + yi</math>, where x and y are real numbers, and i is the imaginary unit that has the property i<superscript>2</superscript> = -1. The real part of the complex number is represented by x, and the imaginary part of the complex number is represented by y.</para
       >
       <para
-        >The <see cref="T:System.Numerics.Complex" /> type uses the Cartesian coordinate system (real, imaginary) when instantiating and manipulating complex numbers. A complex number can be represented as a point in a two-dimensional coordinate system, which is known as the complex plane. The real part of the complex number is positioned on the x-axis (the horizontal axis), and the imaginary part is positioned on the y-axis (the vertical axis). </para
-      >
+        >The <see cref="T:System.Numerics.Complex" /> type uses the Cartesian coordinate system (real, imaginary) when instantiating and manipulating complex numbers. A complex number can be represented as a point in a two-dimensional coordinate system, which is known as the complex plane. The real part of the complex number is positioned on the x-axis (the horizontal axis), and the imaginary part is positioned on the y-axis (the vertical axis).
+      </para>
       <para>Any point in the complex plane can also be expressed based on its absolute value, by using the polar coordinate system., In polar coordinates, a point is characterized by two numbers:</para>
       <list type="bullet">
         <item>
@@ -63,8 +63,8 @@
         </item>
         <item>
           <para
-            >By casting (in C#) or converting (in Visual Basic) a <see cref="T:System.Decimal" /> or <see cref="T:System.Numerics.BigInteger" /> value to a <see cref="T:System.Numerics.Complex" /> object. The value becomes the real part of the complex number, and its imaginary part equals 0. </para
-          >
+            >By casting (in C#) or converting (in Visual Basic) a <see cref="T:System.Decimal" /> or <see cref="T:System.Numerics.BigInteger" /> value to a <see cref="T:System.Numerics.Complex" /> object. The value becomes the real part of the complex number, and its imaginary part equals 0.
+          </para>
         </item>
         <item>
           <para
@@ -112,11 +112,11 @@
         <h2>Complex Numbers, Infinity, and NaN</h2>
       </format>
       <para
-        >The real and imaginary parts of a complex number are represented by <see cref="T:System.Double" /> values. In addition to ranging from <see cref="F:System.Double.MinValue" /> to <see cref="F:System.Double.MaxValue" />, the real or imaginary part of a complex number can have a value of <see cref="F:System.Double.PositiveInfinity" />, <see cref="F:System.Double.NegativeInfinity" />, or <see cref="F:System.Double.NaN" />. <see cref="F:System.Double.PositiveInfinity" />, <see cref="F:System.Double.NegativeInfinity" />, and <see cref="F:System.Double.NaN" /> all propagate in any arithmetic or trigonometric operation.  </para
-      >
+        >The real and imaginary parts of a complex number are represented by <see cref="T:System.Double" /> values. In addition to ranging from <see cref="F:System.Double.MinValue" /> to <see cref="F:System.Double.MaxValue" />, the real or imaginary part of a complex number can have a value of <see cref="F:System.Double.PositiveInfinity" />, <see cref="F:System.Double.NegativeInfinity" />, or <see cref="F:System.Double.NaN" />. <see cref="F:System.Double.PositiveInfinity" />, <see cref="F:System.Double.NegativeInfinity" />, and <see cref="F:System.Double.NaN" /> all propagate in any arithmetic or trigonometric operation.
+      </para>
       <para
-        >In the following example, division by <see cref="F:System.Numerics.Complex.Zero" /> produces a complex number whose real and imaginary parts are both <see cref="F:System.Double.NaN" />. As a result, performing multiplication with this value also produces a complex number whose real and imaginary parts are <see cref="F:System.Double.NaN" />. Similarly, performing a multiplication that overflows the range of the <see cref="T:System.Double" /> type produces a complex number whose real part is <see cref="F:System.Double.NaN" /> and whose imaginary part is <see cref="F:System.Double.PositiveInfinity" />. Subsequently performing division with this complex number returns a complex number whose real part is <see cref="F:System.Double.NaN" /> and whose imaginary part is <see cref="F:System.Double.PositiveInfinity" />. </para
-      >
+        >In the following example, division by <see cref="F:System.Numerics.Complex.Zero" /> produces a complex number whose real and imaginary parts are both <see cref="F:System.Double.NaN" />. As a result, performing multiplication with this value also produces a complex number whose real and imaginary parts are <see cref="F:System.Double.NaN" />. Similarly, performing a multiplication that overflows the range of the <see cref="T:System.Double" /> type produces a complex number whose real part is <see cref="F:System.Double.NaN" /> and whose imaginary part is <see cref="F:System.Double.PositiveInfinity" />. Subsequently performing division with this complex number returns a complex number whose real part is <see cref="F:System.Double.NaN" /> and whose imaginary part is <see cref="F:System.Double.PositiveInfinity" />.
+      </para>
       <para>code reference: System.Numerics.Complex.Class#3</para>
       <para
         >Mathematical operations with complex numbers that are invalid or that overflow the range of the <see cref="T:System.Double" /> data type do not throw an exception. Instead, they return a <see cref="F:System.Double.PositiveInfinity" />, <see cref="F:System.Double.NegativeInfinity" />, or <see cref="F:System.Double.NaN" /> under the following conditions:</para
@@ -147,8 +147,8 @@
         </item>
         <item>
           <para
-            >Any operation that is performed on operands whose values are <see cref="F:System.Double.PositiveInfinity" />, <see cref="F:System.Double.NegativeInfinity" />, or <see cref="F:System.Double.NaN" /> returns <see cref="F:System.Double.PositiveInfinity" />, <see cref="F:System.Double.NegativeInfinity" />, or <see cref="F:System.Double.NaN" />, depending on the specific operation. </para
-          >
+            >Any operation that is performed on operands whose values are <see cref="F:System.Double.PositiveInfinity" />, <see cref="F:System.Double.NegativeInfinity" />, or <see cref="F:System.Double.NaN" /> returns <see cref="F:System.Double.PositiveInfinity" />, <see cref="F:System.Double.NegativeInfinity" />, or <see cref="F:System.Double.NaN" />, depending on the specific operation.
+          </para>
         </item>
       </list>
       <para
@@ -165,11 +165,11 @@
         </format>.)</para
       >
       <para
-        >One of the more common ways of expressing the string representation of a complex number takes the form <math>a + bi</math>, where <math>a</math> is the complex number's real component, and <math>b</math> is the complex number's imaginary component. In electrical engineering, a complex number is most commonly expressed as <math>a + bj</math>. You can return the string representation of a complex number in either of these two forms. To do this, define a custom format provider by implementing the <see cref="T:System.ICustomFormatter" /> and <see cref="T:System.IFormatProvider" /> interfaces, and then call the <see cref="M:System.String.Format(System.IFormatProvider,System.String,System.Object[])" /> method. </para
-      >
+        >One of the more common ways of expressing the string representation of a complex number takes the form <math>a + bi</math>, where <math>a</math> is the complex number's real component, and <math>b</math> is the complex number's imaginary component. In electrical engineering, a complex number is most commonly expressed as <math>a + bj</math>. You can return the string representation of a complex number in either of these two forms. To do this, define a custom format provider by implementing the <see cref="T:System.ICustomFormatter" /> and <see cref="T:System.IFormatProvider" /> interfaces, and then call the <see cref="M:System.String.Format(System.IFormatProvider,System.String,System.Object[])" /> method.
+      </para>
       <para
-        >The following example defines a ComplexFormatter class that represents a complex number as a string in the form of either <math>a + bi</math> or <math>a + bj</math>. </para
-      >
+        >The following example defines a ComplexFormatter class that represents a complex number as a string in the form of either <math>a + bi</math> or <math>a + bj</math>.
+      </para>
       <para>code reference: System.Numerics.Complex.Class#1</para>
       <para>The following example then uses this custom formatter to display the string representation of a complex number.</para>
       <para>code reference: System.Numerics.Complex.Class#4</para>
@@ -383,8 +383,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The addition of a complex number, <math>a + bi</math>, and a second complex number, <math>c + di</math>, takes the following form: </para
-          >
+            >The addition of a complex number, <math>a + bi</math>, and a second complex number, <math>c + di</math>, takes the following form:
+          </para>
           <para>
             <math>(a + c) + (b + d)i. </math>
           </para>
@@ -898,8 +898,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Numerics.Complex.FromPolarCoordinates(System.Double,System.Double)" /> method instantiates a complex number based on its polar coordinates. </para
-          >
+            >The <see cref="M:System.Numerics.Complex.FromPolarCoordinates(System.Double,System.Double)" /> method instantiates a complex number based on its polar coordinates.
+          </para>
           <para
             >Because there are multiple representations of a point on a complex plane, the return value of the <see cref="M:System.Numerics.Complex.FromPolarCoordinates(System.Double,System.Double)" /> method is normalized. The magnitude is normalized to a positive number, and the phase is normalized to a value in the range of -<see cref="F:System.Math.PI" /> to <see cref="F:System.Math.PI" />. As a result, the values of the <see cref="P:System.Numerics.Complex.Phase" /> and <see cref="P:System.Numerics.Complex.Magnitude" /> properties of the resulting complex number may not equal the original values of the <paramref name="magnitude" /> and <paramref name="phase" /> parameters.</para
           >
@@ -1161,8 +1161,8 @@
             <math>(a2 + b2) </math>
           </para>
           <para
-            >If the calculation of the absolute value results in an overflow, this property returns either <see cref="F:System.Double.PositiveInfinity" /> or <see cref="F:System.Double.NegativeInfinity" />. </para
-          >
+            >If the calculation of the absolute value results in an overflow, this property returns either <see cref="F:System.Double.PositiveInfinity" /> or <see cref="F:System.Double.NegativeInfinity" />.
+          </para>
           <para
             >The <see cref="P:System.Numerics.Complex.Magnitude" /> and the <see cref="P:System.Numerics.Complex.Phase" /> properties define the position of a point that represents a complex number in the polar coordinate system.</para
           >
@@ -1200,8 +1200,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The multiplication of a complex number, <math>a + bi</math>, and a second complex number, <math>c + di</math>, takes the following form: </para
-          >
+            >The multiplication of a complex number, <math>a + bi</math>, and a second complex number, <math>c + di</math>, takes the following form:
+          </para>
           <para>
             <math>(ac - bd) + (ad + bc)i</math>
           </para>
@@ -1333,8 +1333,8 @@
           >
           <para>code reference: System.Numerics.Complex.Add#3</para>
           <para
-            >The addition of a complex number, <math>a + bi</math>, and a second complex number, <math>c + di</math>, takes the following form: </para
-          >
+            >The addition of a complex number, <math>a + bi</math>, and a second complex number, <math>c + di</math>, takes the following form:
+          </para>
           <para>
             <math>(a + c) + (b + d)i</math>
           </para>
@@ -1861,8 +1861,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Numerics.Complex.op_Equality(System.Numerics.Complex,System.Numerics.Complex)" /> method defines the operation of the inequality operator for complex numbers. It enables code such as the following: </para
-          >
+            >The <see cref="M:System.Numerics.Complex.op_Equality(System.Numerics.Complex,System.Numerics.Complex)" /> method defines the operation of the inequality operator for complex numbers. It enables code such as the following:
+          </para>
           <para>code reference: System.Numerics.Complex.Inequality#1</para>
           <para
             >Languages that do not support custom operators can test for inequality by calling the <see cref="M:System.Numerics.Complex.Equals(System.Numerics.Complex)" /> method and reversing its value.</para
@@ -1925,8 +1925,8 @@
           >
           <para>code reference: System.Numerics.Complex.Multiply#2</para>
           <para
-            >The multiplication of a complex number, <math>a + bi</math>, and a second complex number, <math>c + di</math>, takes the following form: </para
-          >
+            >The multiplication of a complex number, <math>a + bi</math>, and a second complex number, <math>c + di</math>, takes the following form:
+          </para>
           <para>
             <math>(ac - bd) + (ad + bc)i</math>
           </para>
@@ -1992,8 +1992,8 @@
             >If the method call results in an overflow in either the real or imaginary component, the value of that component is either <see cref="F:System.Double.PositiveInfinity" /> or <see cref="F:System.Double.NegativeInfinity" />.</para
           >
           <para
-            >The subtraction of a complex number, <math>c + di</math>, from another complex number, <math>a + bi</math>, takes the following form: </para
-          >
+            >The subtraction of a complex number, <math>c + di</math>, from another complex number, <math>a + bi</math>, takes the following form:
+          </para>
           <para>
             <math>(a - c) + (b - d)i</math>
           </para>
@@ -2050,8 +2050,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Numerics.Complex.op_UnaryNegation(System.Numerics.Complex)" /> method defines the operation of the unary negation (additive inverse) operator for complex numbers. It enables code such as the following: </para
-          >
+            >The <see cref="M:System.Numerics.Complex.op_UnaryNegation(System.Numerics.Complex)" /> method defines the operation of the unary negation (additive inverse) operator for complex numbers. It enables code such as the following:
+          </para>
           <para>code reference: System.Numerics.Complex.Negate#2</para>
           <para
             >The resulting complex number produces a value of <see cref="F:System.Numerics.Complex.Zero" /> 0 (zero) when it is added to the original complex number. Languages that do not support custom operators can call the <see cref="M:System.Numerics.Complex.Negate(System.Numerics.Complex)" /> method instead.</para
@@ -2091,8 +2091,8 @@
             <math>(b, a)</math>.</para
           >
           <para
-            >You can identify a complex number by its Cartesian coordinates on the complex plane or by its polar coordinates. The phase (argument) of a complex number is the angle to the real axis of a line drawn from the point of origin (the intersection of the x-axis and the y-axis) to the point represented by the complex number. The magnitude (represented by the <see cref="P:System.Numerics.Complex.Magnitude" /> property) is the distance from the point of origin to the point that is represented by the complex number. </para
-          >
+            >You can identify a complex number by its Cartesian coordinates on the complex plane or by its polar coordinates. The phase (argument) of a complex number is the angle to the real axis of a line drawn from the point of origin (the intersection of the x-axis and the y-axis) to the point represented by the complex number. The magnitude (represented by the <see cref="P:System.Numerics.Complex.Magnitude" /> property) is the distance from the point of origin to the point that is represented by the complex number.
+          </para>
           <para
             >You can instantiate a complex number based on its polar coordinates instead of its Cartesian coordinates by calling the <see cref="M:System.Numerics.Complex.FromPolarCoordinates(System.Double,System.Double)" /> method.</para
           >
@@ -2130,8 +2130,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref name="value" /> is <see cref="F:System.Numerics.Complex.Zero" />, the method returns <see cref="F:System.Numerics.Complex.Zero" />. For other values, if <paramref name="power" /> is 0, the method returns <see cref="F:System.Numerics.Complex.One" />, and if <paramref name="power" /> is 1, it returns <paramref name="value" />. </para
-          >
+            >If <paramref name="value" /> is <see cref="F:System.Numerics.Complex.Zero" />, the method returns <see cref="F:System.Numerics.Complex.Zero" />. For other values, if <paramref name="power" /> is 0, the method returns <see cref="F:System.Numerics.Complex.One" />, and if <paramref name="power" /> is 1, it returns <paramref name="value" />.
+          </para>
           <para
             >This method corresponds to the <see cref="M:System.Math.Pow(System.Double,System.Double)" /> method for primitive numeric types.</para
           >
@@ -2472,8 +2472,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The subtraction of a complex number, <math>c + di</math>, from another complex number, <math>a + bi</math>, takes the following form: </para
-          >
+            >The subtraction of a complex number, <math>c + di</math>, from another complex number, <math>a + bi</math>, takes the following form:
+          </para>
           <para>
             <math>(a - c) + (b - d)i</math>
           </para>
@@ -2663,17 +2663,17 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The string representation of the complex number returned by this method displays the number using its Cartesian coordinates in the form (a, b), where a is the real part of the complex number, and b is its imaginary part. Both a and b are formatted using the general format specifier ("G") and the conventions of the culture defined by <paramref name="provider" />. </para
-          >
+            >The string representation of the complex number returned by this method displays the number using its Cartesian coordinates in the form (a, b), where a is the real part of the complex number, and b is its imaginary part. Both a and b are formatted using the general format specifier ("G") and the conventions of the culture defined by <paramref name="provider" />.
+          </para>
           <para
-            >The <paramref name="provider" /> parameter is an <see cref="T:System.IFormatProvider" /> implementation. Its <see cref="M:System.IFormatProvider.GetFormat(System.Type)" /> method returns a <see cref="T:System.Globalization.NumberFormatInfo" /> object that provides culture-specific information about the format of the real and imaginary numbers in the returned string. If <paramref name="provider" /> is null, the returned string is formatted using the <see cref="T:System.Globalization.NumberFormatInfo" /> object of the current culture. </para
-          >
+            >The <paramref name="provider" /> parameter is an <see cref="T:System.IFormatProvider" /> implementation. Its <see cref="M:System.IFormatProvider.GetFormat(System.Type)" /> method returns a <see cref="T:System.Globalization.NumberFormatInfo" /> object that provides culture-specific information about the format of the real and imaginary numbers in the returned string. If <paramref name="provider" /> is null, the returned string is formatted using the <see cref="T:System.Globalization.NumberFormatInfo" /> object of the current culture.
+          </para>
           <para>The <paramref name="provider" /> parameter can be one of the following:</para>
           <list type="bullet">
             <item>
               <para
-                >A <see cref="T:System.Globalization.CultureInfo" /> object that represents the culture that supplies formatting information </para
-              >
+                >A <see cref="T:System.Globalization.CultureInfo" /> object that represents the culture that supplies formatting information
+              </para>
             </item>
             <item>
               <para
@@ -2736,8 +2736,8 @@
                   <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">Standard Numeric Format Strings</a>
                 </format> and <format type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
-                </format>. </para
-              >
+                </format>.
+              </para>
             </item>
             <item>
               <para
@@ -2802,8 +2802,8 @@
                   <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">Standard Numeric Format Strings</a>
                 </format> and <format type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
-                </format>. </para
-              >
+                </format>.
+              </para>
             </item>
             <item>
               <para
@@ -2820,8 +2820,8 @@
           <list type="bullet">
             <item>
               <para
-                >A <see cref="T:System.Globalization.CultureInfo" /> object that represents the culture that supplies formatting information </para
-              >
+                >A <see cref="T:System.Globalization.CultureInfo" /> object that represents the culture that supplies formatting information
+              </para>
             </item>
             <item>
               <para

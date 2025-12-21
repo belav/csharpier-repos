@@ -17,8 +17,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >An <see cref="T:System.ServiceModel.Channels.AddressHeader" /> is characterized by a name and namespace and has a value that contains optional information used to identify or interact with an endpoint. The name can be accessed by the <see cref="P:System.ServiceModel.Channels.AddressHeader.Name" /> property and the namespace by the <see cref="P:System.ServiceModel.Channels.AddressHeader.Namespace" /> property. </para
-      >
+        >An <see cref="T:System.ServiceModel.Channels.AddressHeader" /> is characterized by a name and namespace and has a value that contains optional information used to identify or interact with an endpoint. The name can be accessed by the <see cref="P:System.ServiceModel.Channels.AddressHeader.Name" /> property and the namespace by the <see cref="P:System.ServiceModel.Channels.AddressHeader.Namespace" /> property.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -47,8 +47,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.AddressHeader" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.AddressHeader" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -380,8 +380,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When using this overload, you must supply a type for the generic parameter <paramref name="T" />. The type of the return value is determined by the generic type parameter. </para
-          >
+            >When using this overload, you must supply a type for the generic parameter <paramref name="T" />. The type of the return value is determined by the generic type parameter.
+          </para>
           <para
             >Use the <see cref="M:System.ServiceModel.Channels.AddressHeader.GetValue``1(System.Runtime.Serialization.XmlObjectSerializer)" /> overload if you want to use a customized XML formatter.</para
           >
@@ -618,8 +618,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This overload calls the abstract </para>
           <para>
-            <see cref="M:System.ServiceModel.Channels.AddressHeader.OnWriteAddressHeaderContents(System.Xml.XmlDictionaryWriter)" /> method, so users must provide an implementation of that method to use this method. </para
-          >
+            <see cref="M:System.ServiceModel.Channels.AddressHeader.OnWriteAddressHeaderContents(System.Xml.XmlDictionaryWriter)" /> method, so users must provide an implementation of that method to use this method.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -659,8 +659,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This overload wraps <see cref="T:System.Xml.XmlWriter" /> as a <see cref="T:System.Xml.XmlDictionaryWriter" /> and then the calls the abstract </para
-          >
+            >This overload wraps <see cref="T:System.Xml.XmlWriter" /> as a <see cref="T:System.Xml.XmlDictionaryWriter" /> and then the calls the abstract
+          </para>
           <para>
             <see cref="M:System.ServiceModel.Channels.AddressHeader.OnWriteAddressHeaderContents(System.Xml.XmlDictionaryWriter)" /> method. Users must provide an implementation for that abstract method to use this overload.</para
           >

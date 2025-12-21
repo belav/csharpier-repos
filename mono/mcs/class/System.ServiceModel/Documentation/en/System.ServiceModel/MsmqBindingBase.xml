@@ -266,8 +266,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A single retry cycle attempts to deliver a message to an application a specified number of times. The number of attempts made is set by the <see cref="P:System.ServiceModel.MsmqBindingBase.ReceiveRetryCount" /> property. If the application fails to access the message after the specified number of immediate retries, the message is sent to a retry queue. Subsequent retry cycles consist of the message being returned from the retry queue to the application queue to attempt delivery to the application again, after a delay specified by the <see cref="P:System.ServiceModel.MsmqBindingBase.RetryCycleDelay" /> property. The <see cref="P:System.ServiceModel.MsmqBindingBase.MaxRetryCycles" /> property specifies the number of retry cycles that the application uses to attempt to deliver the message. </para
-          >
+            >A single retry cycle attempts to deliver a message to an application a specified number of times. The number of attempts made is set by the <see cref="P:System.ServiceModel.MsmqBindingBase.ReceiveRetryCount" /> property. If the application fails to access the message after the specified number of immediate retries, the message is sent to a retry queue. Subsequent retry cycles consist of the message being returned from the retry queue to the application queue to attempt delivery to the application again, after a delay specified by the <see cref="P:System.ServiceModel.MsmqBindingBase.RetryCycleDelay" /> property. The <see cref="P:System.ServiceModel.MsmqBindingBase.MaxRetryCycles" /> property specifies the number of retry cycles that the application uses to attempt to deliver the message.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -296,8 +296,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A message in the queue becomes poisoned if repeated attempts to deliver the message failed. This poison message is eventually handled based on the setting of this property. When this property is set to <see cref="F:System.ServiceModel.ReceiveErrorHandling.Fault" />, the listener is faulted and a <see cref="T:System.ServiceModel.MsmqPoisonMessageException" /> is traced and thrown. The poison message is left in the queue and must be removed before more messages can be accessed from the queue. The <see cref="T:System.ServiceModel.MsmqPoisonMessageException" /> contains a <see cref="P:System.ServiceModel.MsmqPoisonMessageException.MessageLookupId" /> that can be used to identify and manually remove the poison message from the queue. </para
-          >
+            >A message in the queue becomes poisoned if repeated attempts to deliver the message failed. This poison message is eventually handled based on the setting of this property. When this property is set to <see cref="F:System.ServiceModel.ReceiveErrorHandling.Fault" />, the listener is faulted and a <see cref="T:System.ServiceModel.MsmqPoisonMessageException" /> is traced and thrown. The poison message is left in the queue and must be removed before more messages can be accessed from the queue. The <see cref="T:System.ServiceModel.MsmqPoisonMessageException" /> contains a <see cref="P:System.ServiceModel.MsmqPoisonMessageException.MessageLookupId" /> that can be used to identify and manually remove the poison message from the queue.
+          </para>
           <para
             >When this property is set to <see cref="F:System.ServiceModel.ReceiveErrorHandling.Drop" />, the poison message is dropped.</para
           >

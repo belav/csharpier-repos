@@ -103,8 +103,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Security.Permissions.PermissionState" />  values. </param
-        >
+          />One of the <see cref="T:System.Security.Permissions.PermissionState" />  values.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -145,8 +145,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A URL or wildcard expression. </param
-        >
+          />A URL or wildcard expression.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Copy">
@@ -212,8 +212,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML encoding to use to reconstruct the permission. </param
-        >
+          />The XML encoding to use to reconstruct the permission.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Intersect">
@@ -258,8 +258,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission to intersect with the current permission. It must be of the same type as the current permission. </param
-        >
+          />A permission to intersect with the current permission. It must be of the same type as the current permission.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsSubsetOf">
@@ -288,8 +288,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The current permission is a subset of the specified permission if the current permission identifies access to a URL that is wholly contained by the specified permission. For example, a permission that represents access to http://www.fourthcoffee.com/process/grind.htm is a subset of a permission that represents access to http://www.fourthcoffee.com/*. If this method returns true, the current permission represents no more access to the protected resource than does the specified permission.</para>
           <para>
-            <see cref="T:System.Security.Permissions.UrlIdentityPermission" /> supports set operations (<see cref="M:System.Security.Permissions.UrlIdentityPermission.IsSubsetOf(System.Security.IPermission)" />, <see cref="M:System.Security.Permissions.UrlIdentityPermission.Intersect(System.Security.IPermission)" />, and <see cref="M:System.Security.Permissions.UrlIdentityPermission.Union(System.Security.IPermission)" />) only when the current permission is equal to the specified permission or when one of the permissions uses the wildcard operator ("*"). </para
-          >
+            <see cref="T:System.Security.Permissions.UrlIdentityPermission" /> supports set operations (<see cref="M:System.Security.Permissions.UrlIdentityPermission.IsSubsetOf(System.Security.IPermission)" />, <see cref="M:System.Security.Permissions.UrlIdentityPermission.Intersect(System.Security.IPermission)" />, and <see cref="M:System.Security.Permissions.UrlIdentityPermission.Union(System.Security.IPermission)" />) only when the current permission is equal to the specified permission or when one of the permissions uses the wildcard operator ("*").
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -304,8 +304,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission that is to be tested for the subset relationship. This permission must be of the same type as the current permission. </param
-        >
+          />A permission that is to be tested for the subset relationship. This permission must be of the same type as the current permission.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.Security.Permissions.IBuiltInPermission.GetTokenIndex">
@@ -389,8 +389,8 @@
             >The result of a call to the <see cref="M:System.Security.Permissions.UrlIdentityPermission.Union(System.Security.IPermission)" /> method is a permission that represents access to the URL as represented by the current permission, as well as access to the URL as represented by the specified permission.</para
           >
           <para
-            >The <see cref="T:System.Security.Permissions.UrlIdentityPermission" /> class supports set operations <see cref="M:System.Security.Permissions.UrlIdentityPermission.IsSubsetOf(System.Security.IPermission)" />, <see cref="M:System.Security.Permissions.UrlIdentityPermission.Intersect(System.Security.IPermission)" />, and <see cref="M:System.Security.Permissions.UrlIdentityPermission.Union(System.Security.IPermission)" />) only when the current permission is equal to the specified permission, or when one of the permissions uses the wildcard operator ("*") and one is a subset of the other. </para
-          >
+            >The <see cref="T:System.Security.Permissions.UrlIdentityPermission" /> class supports set operations <see cref="M:System.Security.Permissions.UrlIdentityPermission.IsSubsetOf(System.Security.IPermission)" />, <see cref="M:System.Security.Permissions.UrlIdentityPermission.Intersect(System.Security.IPermission)" />, and <see cref="M:System.Security.Permissions.UrlIdentityPermission.Union(System.Security.IPermission)" />) only when the current permission is equal to the specified permission, or when one of the permissions uses the wildcard operator ("*") and one is a subset of the other.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -405,8 +405,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission to combine with the current permission. It must be of the same type as the current permission. </param
-        >
+          />A permission to combine with the current permission. It must be of the same type as the current permission.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Url">

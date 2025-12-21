@@ -31,8 +31,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use a <see cref="T:System.Windows.Forms.ToolStripPanel" /> to hold one or more <see cref="T:System.Windows.Forms.ToolStrip" />, <see cref="T:System.Windows.Forms.MenuStrip" />, <see cref="T:System.Windows.Forms.StatusStrip" /> or user-defined controls. </para
-      >
+        >Use a <see cref="T:System.Windows.Forms.ToolStripPanel" /> to hold one or more <see cref="T:System.Windows.Forms.ToolStrip" />, <see cref="T:System.Windows.Forms.MenuStrip" />, <see cref="T:System.Windows.Forms.StatusStrip" /> or user-defined controls.
+      </para>
       <para
         >You might find that one or more <see cref="T:System.Windows.Forms.ToolStripPanel" /> controls meet the needs of your application better than a <see cref="T:System.Windows.Forms.ToolStripContainer" /> if you do not need the four panels and the central <see cref="T:System.Windows.Forms.ToolStripContentPanel" />.</para
       >
@@ -40,8 +40,8 @@
         >You can use only one panel if you so choose, and <see cref="T:System.Windows.Forms.ToolStripPanel" /> works well in Multiple Document Interface (MDI) scenarios.</para
       >
       <para
-        >Each <see cref="T:System.Windows.Forms.ToolStripPanel" /> is expandable and collapsible. </para
-      >
+        >Each <see cref="T:System.Windows.Forms.ToolStripPanel" /> is expandable and collapsible.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -59,8 +59,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripPanel" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripPanel" /> class.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -247,14 +247,14 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see cref="P:System.Windows.Forms.ToolStripPanel.AutoSize" /> property changes. </para
-          >
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.ToolStripPanel.AutoSize" /> property changes.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -379,16 +379,16 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see cref="T:System.Windows.Forms.ToolStripPanel" /> and optionally releases the managed resources. </para
-          >
+            >Releases the unmanaged resources used by the <see cref="T:System.Windows.Forms.ToolStripPanel" /> and optionally releases the managed resources.
+          </para>
         </summary>
         <param name="disposing">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -662,8 +662,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Windows.Forms.ToolStripPanel.OnControlAdded(System.Windows.Forms.ControlEventArgs)" /> method is called when a child control is added to the <see cref="T:System.Windows.Forms.ToolStrip" />. </para
-          >
+            >The <see cref="M:System.Windows.Forms.ToolStripPanel.OnControlAdded(System.Windows.Forms.ControlEventArgs)" /> method is called when a child control is added to the <see cref="T:System.Windows.Forms.ToolStrip" />.
+          </para>
           <para
             >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
@@ -708,8 +708,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Windows.Forms.ToolStripPanel.OnControlRemoved(System.Windows.Forms.ControlEventArgs)" /> is called when a child control is removed from the <see cref="T:System.Windows.Forms.ToolStrip" />. </para
-          >
+            >The <see cref="M:System.Windows.Forms.ToolStripPanel.OnControlRemoved(System.Windows.Forms.ControlEventArgs)" /> is called when a child control is removed from the <see cref="T:System.Windows.Forms.ToolStrip" />.
+          </para>
           <para
             >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
@@ -945,8 +945,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.Windows.Forms.Control.RightToLeftChanged" /> event. </para
-          >
+            >Raises the <see cref="E:System.Windows.Forms.Control.RightToLeftChanged" /> event.
+          </para>
         </summary>
         <param name="e">
           <attribution
@@ -1065,8 +1065,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

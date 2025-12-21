@@ -38,16 +38,16 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.Hosting.VirtualFile" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.Hosting.VirtualFile" /> class.
+          </para>
         </summary>
         <param name="virtualPath">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The virtual path to the resource represented by this instance. </param
-        >
+          />The virtual path to the resource represented by this instance.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

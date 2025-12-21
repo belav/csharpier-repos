@@ -137,8 +137,8 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="start " />is <see langword="null" /> . </exception
-        >
+          <paramref name="start " />is <see langword="null" /> .
+        </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -161,8 +161,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Threading.ThreadStart" /> delegate that represents the methods to be invoked when this thread begins executing. </param
-        >
+          />A <see cref="T:System.Threading.ThreadStart" /> delegate that represents the methods to be invoked when this thread begins executing.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -189,8 +189,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Avoid using this constructor overload. The default stack size used by the <see cref="M:System.Threading.Thread.#ctor(System.Threading.ParameterizedThreadStart)" /> constructor overload is the recommended stack size for threads. If a thread has memory problems, the most likely cause is programming error, such as infinite recursion. </para
-          >
+            >Avoid using this constructor overload. The default stack size used by the <see cref="M:System.Threading.Thread.#ctor(System.Threading.ParameterizedThreadStart)" /> constructor overload is the recommended stack size for threads. If a thread has memory problems, the most likely cause is programming error, such as infinite recursion.
+          </para>
           <block subset="none" type="note">
             <para
               >Beginning with the net_v40_long, only fully trusted code can set <paramref name="maxStackSize" /> to a value that is greater than the default stack size (1 megabyte). If a larger value is specified for <paramref name="maxStackSize" /> when code is running with partial trust, <paramref name="maxStackSize" /> is ignored and the default stack size is used. No exception is thrown. Code at any trust level can set <paramref name="maxStackSize" /> to a value that is less than the default stack size.</para
@@ -259,8 +259,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Avoid using this constructor overload. The default stack size used by the <see cref="M:System.Threading.Thread.#ctor(System.Threading.ThreadStart)" /> constructor overload is the recommended stack size for threads. If a thread has memory problems, the most likely cause is programming error, such as infinite recursion. </para
-          >
+            >Avoid using this constructor overload. The default stack size used by the <see cref="M:System.Threading.Thread.#ctor(System.Threading.ThreadStart)" /> constructor overload is the recommended stack size for threads. If a thread has memory problems, the most likely cause is programming error, such as infinite recursion.
+          </para>
           <block subset="none" type="note">
             <para
               >Beginning with the net_v40_long, only fully trusted code can set <paramref name="maxStackSize" /> to a value that is greater than the default stack size (1 megabyte). If a larger value is specified for <paramref name="maxStackSize" /> when code is running with partial trust, <paramref name="maxStackSize" /> is ignored and the default stack size is used. No exception is thrown. Code at any trust level can set <paramref name="maxStackSize" /> to a value that is less than the default stack size.</para
@@ -353,8 +353,8 @@
             >
           </block>
           <para
-            >If Abort is called on a thread that has not been started, the thread will abort when <see cref="M:System.Threading.Thread.Start" /> is called. If Abort is called on a thread that is blocked or is sleeping, the thread is interrupted and then aborted. </para
-          >
+            >If Abort is called on a thread that has not been started, the thread will abort when <see cref="M:System.Threading.Thread.Start" /> is called. If Abort is called on a thread that is blocked or is sleeping, the thread is interrupted and then aborted.
+          </para>
           <para
             >If Abort is called on a thread that has been suspended, a <see cref="T:System.Threading.ThreadStateException" /> is thrown in the thread that called <see cref="Overload:System.Threading.Thread.Abort" />, and <see cref="F:System.Threading.ThreadState.AbortRequested" /> is added to the <see cref="P:System.Threading.Thread.ThreadState" /> property of the thread being aborted. A <see cref="T:System.Threading.ThreadAbortException" /> is not thrown in the suspended thread until <see cref="M:System.Threading.Thread.Resume" /> is called.</para
           >
@@ -425,8 +425,8 @@
             >
           </block>
           <para
-            >If Abort is called on a thread that has not been started, the thread will abort when <see cref="M:System.Threading.Thread.Start" /> is called. If Abort is called on a thread that is blocked or is sleeping, the thread is interrupted and then aborted. </para
-          >
+            >If Abort is called on a thread that has not been started, the thread will abort when <see cref="M:System.Threading.Thread.Start" /> is called. If Abort is called on a thread that is blocked or is sleeping, the thread is interrupted and then aborted.
+          </para>
           <para
             >If Abort is called on a thread that has been suspended, a <see cref="T:System.Threading.ThreadStateException" /> is thrown in the thread that called <see cref="Overload:System.Threading.Thread.Abort" />, and <see cref="F:System.Threading.ThreadState.AbortRequested" /> is added to the <see cref="P:System.Threading.Thread.ThreadState" /> property of the thread being aborted. A <see cref="T:System.Threading.ThreadAbortException" /> is not thrown in the suspended thread until <see cref="M:System.Threading.Thread.Resume" /> is called.</para
           >
@@ -447,8 +447,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that contains application-specific information, such as state, which can be used by the thread being aborted. </param
-        >
+          />An object that contains application-specific information, such as state, which can be used by the thread being aborted.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -559,8 +559,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the data slot to be allocated. </param
-        >
+          />The name of the data slot to be allocated.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ApartmentState">
@@ -675,8 +675,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Some hosts of the common language runtime, such as Microsoft SQL Server 2005, provide their own thread management. A host that provides its own thread management can move an executing task from one physical operating system thread to another at any time. Most tasks are not affected by this switching. However, some tasks have thread affinity - that is, they depend on the identity of a physical operating system thread. These tasks must inform the host when they execute code that should not be switched.</para>
           <para
-            >For example, if your application calls a system API to acquire an operating system lock that has thread affinity, such as a Win32 CRITICAL_SECTION, you must call <see cref="M:System.Threading.Thread.BeginThreadAffinity" /> before acquiring the lock, and <see cref="M:System.Threading.Thread.EndThreadAffinity" /> after releasing the lock. </para
-          >
+            >For example, if your application calls a system API to acquire an operating system lock that has thread affinity, such as a Win32 CRITICAL_SECTION, you must call <see cref="M:System.Threading.Thread.BeginThreadAffinity" /> before acquiring the lock, and <see cref="M:System.Threading.Thread.EndThreadAffinity" /> after releasing the lock.
+          </para>
           <para>Using this method in code that runs under SQL Server 2005 requires the code to be run at the highest host protection level.</para>
         </remarks>
         <summary>
@@ -735,11 +735,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Globalization.CultureInfo" /> object that is returned by this property, together with its associated objects, determine the default format for dates, times, numbers, currency values, the sorting order of text, casing conventions, and string comparisons. See the <see cref="T:System.Globalization.CultureInfo" /> class to learn about culture names and identifiers, the differences between invariant, neutral, and specific cultures, and the way culture information affects threads and application domains. See the <see cref="P:System.Globalization.CultureInfo.CurrentCulture" /> property to learn how a thread's default culture is determined, and how users set culture information for their computers. </para
-          >
+            >The <see cref="T:System.Globalization.CultureInfo" /> object that is returned by this property, together with its associated objects, determine the default format for dates, times, numbers, currency values, the sorting order of text, casing conventions, and string comparisons. See the <see cref="T:System.Globalization.CultureInfo" /> class to learn about culture names and identifiers, the differences between invariant, neutral, and specific cultures, and the way culture information affects threads and application domains. See the <see cref="P:System.Globalization.CultureInfo.CurrentCulture" /> property to learn how a thread's default culture is determined, and how users set culture information for their computers.
+          </para>
           <para
-            >Beginning with the net_v40_long, you can set the <see cref="P:System.Threading.Thread.CurrentCulture" /> property to a neutral culture. This is because the behavior of the <see cref="T:System.Globalization.CultureInfo" /> class has changed: When it represents a neutral culture, its property values (in particular, the <see cref="P:System.Globalization.CultureInfo.Calendar" />, <see cref="P:System.Globalization.CultureInfo.CompareInfo" />, <see cref="P:System.Globalization.CultureInfo.DateTimeFormat" />, <see cref="P:System.Globalization.CultureInfo.NumberFormat" />, and <see cref="P:System.Globalization.CultureInfo.TextInfo" /> properties) now reflect the specific culture that is associated with the neutral culture. In earlier versions of the .NET Framework, the <see cref="P:System.Threading.Thread.CurrentCulture" /> property threw a <see cref="T:System.NotSupportedException" /> exception when a neutral culture was assigned. </para
-          >
+            >Beginning with the net_v40_long, you can set the <see cref="P:System.Threading.Thread.CurrentCulture" /> property to a neutral culture. This is because the behavior of the <see cref="T:System.Globalization.CultureInfo" /> class has changed: When it represents a neutral culture, its property values (in particular, the <see cref="P:System.Globalization.CultureInfo.Calendar" />, <see cref="P:System.Globalization.CultureInfo.CompareInfo" />, <see cref="P:System.Globalization.CultureInfo.DateTimeFormat" />, <see cref="P:System.Globalization.CultureInfo.NumberFormat" />, and <see cref="P:System.Globalization.CultureInfo.TextInfo" /> properties) now reflect the specific culture that is associated with the neutral culture. In earlier versions of the .NET Framework, the <see cref="P:System.Threading.Thread.CurrentCulture" /> property threw a <see cref="T:System.NotSupportedException" /> exception when a neutral culture was assigned.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -843,8 +843,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The UI culture specifies the resources an application needs to support user input and output, and by default is the same as the operating system culture. See the <see cref="T:System.Globalization.CultureInfo" /> class to learn about culture names and identifiers, the differences between invariant, neutral, and specific cultures, and the way culture information affects threads and application domains. See the <see cref="P:System.Globalization.CultureInfo.CurrentUICulture" /> property to learn how a thread's default UI culture is determined. </para
-          >
+            >The UI culture specifies the resources an application needs to support user input and output, and by default is the same as the operating system culture. See the <see cref="T:System.Globalization.CultureInfo" /> class to learn about culture names and identifiers, the differences between invariant, neutral, and specific cultures, and the way culture information affects threads and application domains. See the <see cref="P:System.Globalization.CultureInfo.CurrentUICulture" /> property to learn how a thread's default UI culture is determined.
+          </para>
           <para
             >The <see cref="T:System.Globalization.CultureInfo" /> returned by this property can be a neutral culture. Neutral cultures should not be used with formatting methods such as <see cref="M:System.String.Format(System.IFormatProvider,System.String,System.Object[])" />, <see cref="M:System.DateTime.ToString(System.String,System.IFormatProvider)" />, and <see cref="M:System.Convert.ToString(System.Char,System.IFormatProvider)" />. Use the <see cref="M:System.Globalization.CultureInfo.CreateSpecificCulture(System.String)" /> method to get a specific culture, or use the <see cref="P:System.Threading.Thread.CurrentCulture" /> property.</para
           >
@@ -969,8 +969,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see cref="T:System.Threading.ExecutionContext" /> object that contains information about the various contexts of the current thread. </para
-          >
+            >Gets an <see cref="T:System.Threading.ExecutionContext" /> object that contains information about the various contexts of the current thread.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -1059,8 +1059,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the data slot to be freed. </param
-        >
+          />The name of the data slot to be freed.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetApartmentState">
@@ -1135,8 +1135,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see cref="T:System.Threading.CompressedStack" /> object that can be used to capture the stack for the current thread. </para
-          >
+            >Returns a <see cref="T:System.Threading.CompressedStack" /> object that can be used to capture the stack for the current thread.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1199,8 +1199,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.LocalDataStoreSlot" /> from which to get the value. </param
-        >
+          />The <see cref="T:System.LocalDataStoreSlot" /> from which to get the value.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetDomain">
@@ -1356,8 +1356,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the local data slot. </param
-        >
+          />The name of the local data slot.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Interrupt">
@@ -1447,12 +1447,12 @@ if this thread has been started, and has not terminated; otherwise,
           <para>
             <see langword="true " />if the thread is or is to become
    a background thread; otherwise, <see langword="false" />.
-   </para
-          >
+
+          </para>
         </value>
         <exception cref="T:System.Threading.ThreadStateException"
-          > The thread has reached the <see cref="F:System.Threading.ThreadState.Stopped" /> state. </exception
-        >
+          > The thread has reached the <see cref="F:System.Threading.ThreadState.Stopped" /> state.
+        </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A thread is either a background thread or a foreground thread. Background threads are identical to foreground threads, except that background threads do not prevent a process from terminating. Once all foreground threads belonging to a process have terminated, the common language runtime ends the process. Any remaining background threads are stopped and do not complete.</para>
@@ -1511,8 +1511,8 @@ if this thread has been started, and has not terminated; otherwise,
       <Parameters />
       <Docs>
         <exception cref="T:System.Threading.ThreadStateException"
-          >The caller attempted to join a thread that is in the <see cref="F:System.Threading.ThreadState.Unstarted" /> state. </exception
-        >
+          >The caller attempted to join a thread that is in the <see cref="F:System.Threading.ThreadState.Unstarted" /> state.
+        </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -1556,8 +1556,8 @@ if this thread has been started, and has not terminated; otherwise,
           >The value of <paramref name="millisecondsTimeout" /> is negative and is not equal to <see cref="F:System.Threading.Timeout.Infinite" /> .</exception
         >
         <exception cref="T:System.Threading.ThreadStateException"
-          >The caller attempted to join a thread that is in the <see cref="F:System.Threading.ThreadState.Unstarted" /> state. </exception
-        >
+          >The caller attempted to join a thread that is in the <see cref="F:System.Threading.ThreadState.Unstarted" /> state.
+        </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -1585,8 +1585,8 @@ if this thread has been started, and has not terminated; otherwise,
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of milliseconds to wait for the thread to terminate. </param
-        >
+          />The number of milliseconds to wait for the thread to terminate.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1620,8 +1620,8 @@ if this thread has been started, and has not terminated; otherwise,
           /> milliseconds.</exception
         >
         <exception cref="T:System.Threading.ThreadStateException"
-          >The caller attempted to join a thread that is in the <see cref="F:System.Threading.ThreadState.Unstarted" /> state. </exception
-        >
+          >The caller attempted to join a thread that is in the <see cref="F:System.Threading.ThreadState.Unstarted" /> state.
+        </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -1649,8 +1649,8 @@ if this thread has been started, and has not terminated; otherwise,
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.TimeSpan" /> set to the amount of time to wait for the thread to terminate. </param
-        >
+          />A <see cref="T:System.TimeSpan" /> set to the amount of time to wait for the thread to terminate.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1785,15 +1785,15 @@ if this thread has been started, and has not terminated; otherwise,
         <value>
           <para
             > A <see cref="T:System.Threading.ThreadPriority" /> value.
-   </para
-          >
+
+          </para>
         </value>
         <exception cref="T:System.Threading.ThreadStateException"
           > The thread is in the <see cref="F:System.Threading.ThreadState.Stopped" /> state.</exception
         >
         <exception cref="T:System.ArgumentException"
-          >The value specified for a set operation is not a valid <see cref="T:System.Threading.ThreadPriority" /> value. </exception
-        >
+          >The value specified for a set operation is not a valid <see cref="T:System.Threading.ThreadPriority" /> value.
+        </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A thread can be assigned any one of the following priority values: </para>
@@ -2002,8 +2002,8 @@ if this thread has been started, and has not terminated; otherwise,
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Applies a captured <see cref="T:System.Threading.CompressedStack" /> to the current thread. </para
-          >
+            >Applies a captured <see cref="T:System.Threading.CompressedStack" /> to the current thread.
+          </para>
         </summary>
         <param name="stack">
           <attribution
@@ -2068,15 +2068,11 @@ if this thread has been started, and has not terminated; otherwise,
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.LocalDataStoreSlot" /> in which to set the value. </param
-        >
+          />The <see cref="T:System.LocalDataStoreSlot" /> in which to set the value.
+        </param>
         <param name="data">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The value to be set. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to be set.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Sleep">
@@ -2132,8 +2128,8 @@ if this thread has been started, and has not terminated; otherwise,
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of milliseconds for which the thread is suspended. A value of zero (0) has no effect. </param
-        >
+          />The number of milliseconds for which the thread is suspended. A value of zero (0) has no effect.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2228,8 +2224,8 @@ if this thread has been started, and has not terminated; otherwise,
             >The <see cref="M:System.Threading.Thread.SpinWait(System.Int32)" /> method is useful for implementing locks. Classes in the .NET Framework, such as <see cref="T:System.Threading.Monitor" /> and <see cref="T:System.Threading.ReaderWriterLock" />, use this method internally. <see cref="M:System.Threading.Thread.SpinWait(System.Int32)" /> essentially puts the processor into a very tight loop, with the loop count specified by the <paramref name="iterations" /> parameter. The duration of the wait therefore depends on the speed of the processor.</para
           >
           <para
-            >Contrast this with the <see cref="M:System.Threading.Thread.Sleep(System.Int32)" /> method. A thread that calls <see cref="M:System.Threading.Thread.Sleep(System.Int32)" /> yields the rest of its current slice of processor time, even if the specified interval is zero. Specifying a non-zero interval for <see cref="M:System.Threading.Thread.Sleep(System.Int32)" /> removes the thread from consideration by the thread scheduler until the time interval has elapsed. </para
-          >
+            >Contrast this with the <see cref="M:System.Threading.Thread.Sleep(System.Int32)" /> method. A thread that calls <see cref="M:System.Threading.Thread.Sleep(System.Int32)" /> yields the rest of its current slice of processor time, even if the specified interval is zero. Specifying a non-zero interval for <see cref="M:System.Threading.Thread.Sleep(System.Int32)" /> removes the thread from consideration by the thread scheduler until the time interval has elapsed.
+          </para>
           <para>
             <see cref="M:System.Threading.Thread.SpinWait(System.Int32)" /> is not generally useful for ordinary applications. In most cases, you should use the synchronization classes provided by the .NET Framework; for example, call <see cref="M:System.Threading.Monitor.Enter(System.Object)" /> or a statement that wraps <see cref="M:System.Threading.Monitor.Enter(System.Object)" /> (lock in C# or SyncLock in Visual Basic).</para
           >
@@ -2250,8 +2246,8 @@ if this thread has been started, and has not terminated; otherwise,
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A 32-bit signed integer that defines how long a thread is to wait. </param
-        >
+          />A 32-bit signed integer that defines how long a thread is to wait.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Start">
@@ -2279,8 +2275,7 @@ if this thread has been started, and has not terminated; otherwise,
           >This method was invoked on a <see langword="null" /> thread reference.</exception
         >
         <exception cref="T:System.Threading.ThreadStateException"
-          >The thread has already been started. </exception
-        >
+          >The thread has already been started. </exception>
         <example>
           <para>The following example demonstrates creating a thread and starting it.</para>
           <code lang="C#"
@@ -2305,8 +2300,7 @@ class ThreadTest{
     }
   }
 }
-   </code
-          >
+   </code>
           <para>One possible set of output is</para>
           <c>
             <para>In main. </para>

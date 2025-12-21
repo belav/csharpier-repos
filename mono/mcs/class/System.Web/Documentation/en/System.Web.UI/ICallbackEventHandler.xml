@@ -15,8 +15,8 @@
           <a href="dfaaa7d4-e1f2-4322-b2f5-796e0419f185"
             >Client Callbacks Without Postbacks in ASP.NET Pages</a
           >
-        </format>. </para
-      >
+        </format>.
+      </para>
       <para
         >Examples of controls that implement the <see cref="T:System.Web.UI.ICallbackEventHandler" /> interface include the <see cref="T:System.Web.UI.WebControls.GridView" />, <see cref="T:System.Web.UI.WebControls.DetailsView" />, and <see cref="T:System.Web.UI.WebControls.TreeView" /> controls. When a callback event targets a control that implements the <see cref="T:System.Web.UI.ICallbackEventHandler" /> interface, the <see cref="M:System.Web.UI.ICallbackEventHandler.RaiseCallbackEvent(System.String)" /> method is called to handle the event, passing the event argument as a parameter and the <see cref="M:System.Web.UI.ICallbackEventHandler.GetCallbackResult" /> method returns the result of the callback.</para
       >

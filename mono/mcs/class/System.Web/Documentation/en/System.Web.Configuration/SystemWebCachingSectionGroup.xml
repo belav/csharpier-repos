@@ -20,8 +20,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.Configuration.SystemWebCachingSectionGroup" /> class provides a way to programmatically access and modify the caching section of a configuration file. </para
-      >
+        >The <see cref="T:System.Web.Configuration.SystemWebCachingSectionGroup" /> class provides a way to programmatically access and modify the caching section of a configuration file.
+      </para>
       <para
         >The <see cref="T:System.Web.Configuration.SystemWebCachingSectionGroup" /> class and the caching section provide centralized control of the caching mechanism for a site or application. This makes it possible for caching to be deployed, modified, and disabled without modifying individual pages in the application.</para
       >
@@ -125,8 +125,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Web.Configuration.OutputCacheSection" /> object refers to the outputCache section of the configuration file. </para
-          >
+            >The <see cref="T:System.Web.Configuration.OutputCacheSection" /> object refers to the outputCache section of the configuration file.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -157,14 +157,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Web.Configuration.OutputCacheSettingsSection" /> object refers to the outputCacheSettings section of the configuration file. </para
-          >
+            >The <see cref="T:System.Web.Configuration.OutputCacheSettingsSection" /> object refers to the outputCacheSettings section of the configuration file.
+          </para>
           <para>The output cache settings enable or disable disk-based persistent output cache, define the location for persisting the data to be cached, and specify the maximum size of the cache per application.</para>
           <para
             >ASP.NET allows you to cache multiple versions of a page response declaratively by using attributes of the <format type="text/html">
               <a href="28a9e101-fb44-4198-9cb6-b8a52312fec2">@ OutputCache</a>
-            </format> directive and programmatically using the properties and methods of the <see cref="T:System.Web.HttpCachePolicy" /> class. </para
-          >
+            </format> directive and programmatically using the properties and methods of the <see cref="T:System.Web.HttpCachePolicy" /> class.
+          </para>
           <para
             >You can achieve the same results by configuring the application using the <see cref="T:System.Web.Configuration.OutputCacheSettingsSection" /> or the <see cref="T:System.Web.Configuration.OutputCacheProfile" /> type.</para
           >
@@ -198,11 +198,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Web.Configuration.SqlCacheDependencySection" /> object refers to the sqlCacheDependency section of the configuration file. </para
-          >
+            >The <see cref="T:System.Web.Configuration.SqlCacheDependencySection" /> object refers to the sqlCacheDependency section of the configuration file.
+          </para>
           <para
-            >The SQL cache dependency establishes a relationship between an item stored in an ASP.NET application's cache and a specific SQL Server database table. An instance of the <see cref="T:System.Web.Caching.SqlCacheDependency" /> class must monitor the table so that when the table changes the item will be automatically removed from the cache.  </para
-          >
+            >The SQL cache dependency establishes a relationship between an item stored in an ASP.NET application's cache and a specific SQL Server database table. An instance of the <see cref="T:System.Web.Caching.SqlCacheDependency" /> class must monitor the table so that when the table changes the item will be automatically removed from the cache.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

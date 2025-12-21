@@ -110,8 +110,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.Menu" /> to copy. </param
-        >
+          />The <see cref="T:System.Windows.Forms.Menu" /> to copy.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -213,8 +213,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To search for a <see cref="T:System.Windows.Forms.MenuItem" /> using a handle, pass in the <see cref="F:System.Windows.Forms.Menu.FindHandle" /> field as the type, and the handle of the <see cref="T:System.Windows.Forms.MenuItem" /> you want to find as the value. </para
-          >
+            >To search for a <see cref="T:System.Windows.Forms.MenuItem" /> using a handle, pass in the <see cref="F:System.Windows.Forms.Menu.FindHandle" /> field as the type, and the handle of the <see cref="T:System.Windows.Forms.MenuItem" /> you want to find as the value.
+          </para>
           <para
             >To search for a <see cref="T:System.Windows.Forms.MenuItem" /> using a shortcut, pass in the <see cref="F:System.Windows.Forms.Menu.FindShortcut" /> field as the type, and the Shortcut value for the <see cref="T:System.Windows.Forms.MenuItem" /> you want to find as the value.</para
           >
@@ -222,8 +222,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Windows.Forms.MenuItem" /> that contains the value specified. </para
-          >
+            >Gets the <see cref="T:System.Windows.Forms.MenuItem" /> that contains the value specified.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -553,8 +553,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.Menu" /> whose menu items are merged with the menu items of the current menu. </param
-        >
+          />The <see cref="T:System.Windows.Forms.Menu" /> whose menu items are merged with the menu items of the current menu.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

@@ -45,8 +45,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Runtime.Versioning.FrameworkName.#ctor(System.String)" /> constructor parses a string in the following format. </para
-          >
+            >The <see cref="M:System.Runtime.Versioning.FrameworkName.#ctor(System.String)" /> constructor parses a string in the following format.
+          </para>
           <para>identifier, Version=versionNumber[, Profile=profileName]</para>
           <para>Components in square brackets are optional. The following table describes each component. </para>
           <list type="table">
@@ -109,8 +109,8 @@
             </item>
           </list>
           <para
-            >The following are examples of valid strings that can be passed to the <see cref="M:System.Runtime.Versioning.FrameworkName.#ctor(System.String)" /> constructor: </para
-          >
+            >The following are examples of valid strings that can be passed to the <see cref="M:System.Runtime.Versioning.FrameworkName.#ctor(System.String)" /> constructor:
+          </para>
           <list type="bullet">
             <item>
               <para>.NET Framework, Version=4.0</para>
@@ -165,8 +165,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Runtime.Versioning.FrameworkName" /> class requires that a <see cref="P:System.Runtime.Versioning.FrameworkName.Version" /> object include at least a major and minor version number. </para
-          >
+            >The <see cref="T:System.Runtime.Versioning.FrameworkName" /> class requires that a <see cref="P:System.Runtime.Versioning.FrameworkName.Version" /> object include at least a major and minor version number.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -179,8 +179,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string that identifies a .NET Framework version. </param
-        >
+          />A string that identifies a .NET Framework version.
+        </param>
         <param name="version">
           <attribution
             license="cc4"
@@ -457,8 +457,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Runtime.Versioning.FrameworkName.op_Equality(System.Runtime.Versioning.FrameworkName,System.Runtime.Versioning.FrameworkName)" /> method defines the operation of the equality operator for <see cref="T:System.Runtime.Versioning.FrameworkName" /> objects. </para
-          >
+            >The <see cref="M:System.Runtime.Versioning.FrameworkName.op_Equality(System.Runtime.Versioning.FrameworkName,System.Runtime.Versioning.FrameworkName)" /> method defines the operation of the equality operator for <see cref="T:System.Runtime.Versioning.FrameworkName" /> objects.
+          </para>
           <para
             >Languages that do not support custom operators can call the <see cref="M:System.Runtime.Versioning.FrameworkName.Equals(System.Runtime.Versioning.FrameworkName)" /> method instead.</para
           >
@@ -515,8 +515,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Runtime.Versioning.FrameworkName.op_Inequality(System.Runtime.Versioning.FrameworkName,System.Runtime.Versioning.FrameworkName)" /> method defines the operation of the inequality operator for <see cref="T:System.Runtime.Versioning.FrameworkName" /> objects. </para
-          >
+            >The <see cref="M:System.Runtime.Versioning.FrameworkName.op_Inequality(System.Runtime.Versioning.FrameworkName,System.Runtime.Versioning.FrameworkName)" /> method defines the operation of the inequality operator for <see cref="T:System.Runtime.Versioning.FrameworkName" /> objects.
+          </para>
           <para
             >Languages that do not support custom operators can test for inequality by calling the <see cref="M:System.Runtime.Versioning.FrameworkName.Equals(System.Runtime.Versioning.FrameworkName)" /> method and reversing its value.</para
           >

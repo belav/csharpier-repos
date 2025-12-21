@@ -26,8 +26,8 @@
         >The abstract <see cref="T:System.Web.Services.Description.SoapExtensionReflector" /> class exposes an abstract method, <see cref="M:System.Web.Services.Description.SoapExtensionReflector.ReflectMethod" />. This abstract method allows a derived class to add descriptions of SOAP extensions when reflecting a Web method into objects that are placed in a <see cref="T:System.Web.Services.Description.ServiceDescription" /> object. The method itself is not an input. The descriptions get added for all Web methods belonging to a specified binding that produces a <see cref="T:System.Web.Services.Description.ServiceDescription" />.</para
       >
       <para
-        >You can use a <see cref="T:System.Web.Services.Description.ServiceDescription" /> to generate a Web Services Description Language (WSDL) document via the <see cref="Overload:System.Web.Services.Description.ServiceDescription.Write" /> method. The <see cref="T:System.Web.Services.Description.ServiceDescriptionImporter" /> class and related classes can also use a <see cref="T:System.Web.Services.Description.ServiceDescription" /> to generate client proxy code or abstract server code.    </para
-      >
+        >You can use a <see cref="T:System.Web.Services.Description.ServiceDescription" /> to generate a Web Services Description Language (WSDL) document via the <see cref="Overload:System.Web.Services.Description.ServiceDescription.Write" /> method. The <see cref="T:System.Web.Services.Description.ServiceDescriptionImporter" /> class and related classes can also use a <see cref="T:System.Web.Services.Description.ServiceDescription" /> to generate client proxy code or abstract server code.
+      </para>
       <para
         >Use a class derived from the <see cref="T:System.Web.Services.Description.SoapExtensionReflector" /> class in conjunction with a class derived from the abstract <see cref="T:System.Web.Services.Protocols.SoapExtension" /> class to extend run-time processing of SOAP messages on the client or service.</para
       >

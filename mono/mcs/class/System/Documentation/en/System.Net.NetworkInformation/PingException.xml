@@ -19,11 +19,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Net.NetworkInformation.Ping" /> class throws this exception to indicate that while sending an Internet Control Message Protocol (ICMP) Echo request, a method called by the <see cref="T:System.Net.NetworkInformation.Ping" /> class threw an unhandled exception. Applications should check the inner exception of a <see cref="T:System.Net.NetworkInformation.PingException" /> object to identify the problem. </para
-      >
+        >The <see cref="T:System.Net.NetworkInformation.Ping" /> class throws this exception to indicate that while sending an Internet Control Message Protocol (ICMP) Echo request, a method called by the <see cref="T:System.Net.NetworkInformation.Ping" /> class threw an unhandled exception. Applications should check the inner exception of a <see cref="T:System.Net.NetworkInformation.PingException" /> object to identify the problem.
+      </para>
       <para
-        >The <see cref="T:System.Net.NetworkInformation.Ping" /> class does not throw this exception if the ICMP Echo request fails because of network, ICMP, or destination errors. For such errors, the <see cref="T:System.Net.NetworkInformation.Ping" /> class returns a <see cref="T:System.Net.NetworkInformation.PingReply" /> object with the relevant <see cref="T:System.Net.NetworkInformation.IPStatus" /> value set in the <see cref="P:System.Net.NetworkInformation.PingReply.Status" /> property. </para
-      >
+        >The <see cref="T:System.Net.NetworkInformation.Ping" /> class does not throw this exception if the ICMP Echo request fails because of network, ICMP, or destination errors. For such errors, the <see cref="T:System.Net.NetworkInformation.Ping" /> class returns a <see cref="T:System.Net.NetworkInformation.PingReply" /> object with the relevant <see cref="T:System.Net.NetworkInformation.IPStatus" /> value set in the <see cref="P:System.Net.NetworkInformation.PingReply.Status" /> property.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -52,8 +52,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see cref="P:System.Exception.Message" /> property with the text in the <paramref name="message" /> parameter. The <see cref="P:System.Exception.InnerException" /> property is set to null. </para
-          >
+            >This constructor initializes the <see cref="P:System.Exception.Message" /> property with the text in the <paramref name="message" /> parameter. The <see cref="P:System.Exception.InnerException" /> property is set to null.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -93,22 +93,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor is called during deserialization to reconstitute a previously serialized <see cref="T:System.Net.NetworkInformation.PingException" /> object. </para
-          >
+            >This constructor is called during deserialization to reconstitute a previously serialized <see cref="T:System.Net.NetworkInformation.PingException" /> object.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.NetworkInformation.PingException" /> class with serialized data. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.NetworkInformation.PingException" /> class with serialized data.
+          </para>
         </summary>
         <param name="serializationInfo">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that holds the serialized object data. </param
-        >
+          />The object that holds the serialized object data.
+        </param>
         <param name="streamingContext">
           <attribution
             license="cc4"

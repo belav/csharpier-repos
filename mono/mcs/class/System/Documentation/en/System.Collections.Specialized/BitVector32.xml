@@ -75,8 +75,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Collections.Specialized.BitVector32" /> structure that contains the data to copy. </param
-        >
+          />A <see cref="T:System.Collections.Specialized.BitVector32" /> structure that contains the data to copy.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -111,8 +111,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer representing the data of the new <see cref="T:System.Collections.Specialized.BitVector32" />. </param
-        >
+          />An integer representing the data of the new <see cref="T:System.Collections.Specialized.BitVector32" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateMask">
@@ -206,8 +206,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The mask that indicates the previous bit flag. </param
-        >
+          />The mask that indicates the previous bit flag.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateSection">
@@ -259,8 +259,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A 16-bit signed integer that specifies the maximum value for the new <see cref="T:System.Collections.Specialized.BitVector32.Section" />. </param
-        >
+          />A 16-bit signed integer that specifies the maximum value for the new <see cref="T:System.Collections.Specialized.BitVector32.Section" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateSection">
@@ -365,8 +365,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to compare with the current <see cref="T:System.Collections.Specialized.BitVector32" />. </param
-        >
+          />The object to compare with the current <see cref="T:System.Collections.Specialized.BitVector32" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -536,8 +536,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Collections.Specialized.BitVector32" /> to represent. </param
-        >
+          />The <see cref="T:System.Collections.Specialized.BitVector32" /> to represent.
+        </param>
       </Docs>
     </Member>
   </Members>

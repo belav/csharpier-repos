@@ -40,8 +40,8 @@
       >
       <block subset="none" type="note">
         <para
-          >The speed of retrieval depends on the quality of the hashing algorithm of the type specified for <paramref name="TKey" />. </para
-        >
+          >The speed of retrieval depends on the quality of the hashing algorithm of the type specified for <paramref name="TKey" />.
+        </para>
       </block>
       <para
         >As long as an object is used as a key in the <see cref="T:System.Collections.Generic.Dictionary`2" />, it must not change in any way that affects its hash value. Every key in a <see cref="T:System.Collections.Generic.Dictionary`2" /> must be unique according to the dictionary's equality comparer. A key cannot be null, but a value can be, if the value type <paramref name="TValue" /> is a reference type.</para
@@ -72,8 +72,8 @@
       <para>The foreach statement is a wrapper around the enumerator, which allows only reading from the collection, not writing to it.</para>
       <block subset="none" type="note">
         <para
-          >Because keys can be inherited and their behavior changed, their absolute uniqueness cannot be guaranteed by comparisons using the <see cref="M:System.Type.Equals(System.Object)" /> method. </para
-        >
+          >Because keys can be inherited and their behavior changed, their absolute uniqueness cannot be guaranteed by comparisons using the <see cref="M:System.Type.Equals(System.Object)" /> method.
+        </para>
       </block>
     </remarks>
     <summary>

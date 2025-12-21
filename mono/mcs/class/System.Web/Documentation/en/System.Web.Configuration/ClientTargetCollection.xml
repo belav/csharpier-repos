@@ -143,8 +143,8 @@
           <list type="bullet">
             <item>
               <para
-                >If you pass the <see cref="F:System.Configuration.ConfigurationSaveMode.Full" /> or <see cref="F:System.Configuration.ConfigurationSaveMode.Modified" /> parameter value, then a clear element is inserted into the clientTarget section of the configuration file at the current hierarchy level. </para
-              >
+                >If you pass the <see cref="F:System.Configuration.ConfigurationSaveMode.Full" /> or <see cref="F:System.Configuration.ConfigurationSaveMode.Modified" /> parameter value, then a clear element is inserted into the clientTarget section of the configuration file at the current hierarchy level.
+              </para>
             </item>
             <item>
               <para
@@ -153,8 +153,8 @@
               <list type="bullet">
                 <item>
                   <para
-                    >When <see cref="P:System.Configuration.ConfigurationElementCollection.EmitClear" /> is set to true, a clear element is inserted into the clientTarget section of the configuration file at the current hierarchy level. This removes all references to the add elements defined in the parent configuration files at higher levels in the hierarchy. </para
-                  >
+                    >When <see cref="P:System.Configuration.ConfigurationElementCollection.EmitClear" /> is set to true, a clear element is inserted into the clientTarget section of the configuration file at the current hierarchy level. This removes all references to the add elements defined in the parent configuration files at higher levels in the hierarchy.
+                  </para>
                 </item>
                 <item>
                   <para
@@ -336,8 +336,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.Configuration.ClientTargetCollection.Remove(System.Web.Configuration.ClientTarget)" /> method deletes the add element in the clientTarget section at the current hierarchy level and inserts a remove element. The remove element effectively removes the reference to the add element defined in the parent configuration files at higher levels in the hierarchy but does not delete it. </para
-          >
+            >The <see cref="M:System.Web.Configuration.ClientTargetCollection.Remove(System.Web.Configuration.ClientTarget)" /> method deletes the add element in the clientTarget section at the current hierarchy level and inserts a remove element. The remove element effectively removes the reference to the add element defined in the parent configuration files at higher levels in the hierarchy but does not delete it.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -374,8 +374,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.Configuration.ClientTargetCollection.Remove(System.Web.Configuration.ClientTarget)" /> method deletes the add element in the clientTarget section at the current hierarchy level and inserts a remove element. The remove element effectively removes the reference to the add element defined in the parent configuration files at higher levels in the hierarchy but does not delete it. </para
-          >
+            >The <see cref="M:System.Web.Configuration.ClientTargetCollection.Remove(System.Web.Configuration.ClientTarget)" /> method deletes the add element in the clientTarget section at the current hierarchy level and inserts a remove element. The remove element effectively removes the reference to the add element defined in the parent configuration files at higher levels in the hierarchy but does not delete it.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -409,8 +409,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.Configuration.ClientTargetCollection.RemoveAt(System.Int32)" /> method deletes the add element in the clientTarget section at the current hierarchy level and inserts a remove element. The remove element effectively removes the reference to the add element defined in the parent configuration files at higher levels in the hierarchy but does not delete it. </para
-          >
+            >The <see cref="M:System.Web.Configuration.ClientTargetCollection.RemoveAt(System.Int32)" /> method deletes the add element in the clientTarget section at the current hierarchy level and inserts a remove element. The remove element effectively removes the reference to the add element defined in the parent configuration files at higher levels in the hierarchy but does not delete it.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

@@ -14,8 +14,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Windows.Forms.ScrollBarRenderer" /> class provides a set of static methods that can be used to render a scroll bar control with the current visual style of the operating system. Rendering a control refers to drawing the user interface of a control. This is useful if you are drawing a custom control that should have the appearance of the current visual style. To draw a scroll bar, use a combination of the methods in this class to render each part of the scroll bar. </para
-      >
+        >The <see cref="T:System.Windows.Forms.ScrollBarRenderer" /> class provides a set of static methods that can be used to render a scroll bar control with the current visual style of the operating system. Rendering a control refers to drawing the user interface of a control. This is useful if you are drawing a custom control that should have the appearance of the current visual style. To draw a scroll bar, use a combination of the methods in this class to render each part of the scroll bar.
+      </para>
       <para
         >If visual styles are enabled in the operating system and visual styles are applied to the client area of application windows, the methods of this class will draw the scroll bar with the current visual style. Otherwise, the methods of this class will throw an <see cref="T:System.InvalidOperationException" />. To determine whether the members of this class can be used, you can check the value of the <see cref="P:System.Windows.Forms.ScrollBarRenderer.IsSupported" /> property.</para
       >

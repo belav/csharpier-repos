@@ -50,15 +50,15 @@
       </list>
       <block subset="none" type="note">
         <para
-          >If you are creating a class library that is to be called by applications that may execute in a host protected environment, you should apply this attribute to members that expose <see cref="T:System.Security.Permissions.HostProtectionResource" /> resource categories. The .NET Framework class library members with this attribute cause only the immediate caller to be checked.  Your library member must also cause a check of its immediate caller in the same manner. </para
-        >
+          >If you are creating a class library that is to be called by applications that may execute in a host protected environment, you should apply this attribute to members that expose <see cref="T:System.Security.Permissions.HostProtectionResource" /> resource categories. The .NET Framework class library members with this attribute cause only the immediate caller to be checked.  Your library member must also cause a check of its immediate caller in the same manner.
+        </para>
       </block>
       <block subset="none" type="note">
         <para
           >Do not use the <format type="text/html">
             <a href="44bf97aa-a9a4-4eba-9a0d-cfaa6fc53a66">Native Image Generator (Ngen.exe)</a>
-          </format> to create a native image of assemblies that are protected by the <see cref="T:System.Security.Permissions.HostProtectionAttribute" />. In a full-trust environment, the image is always loaded, without regard to the <see cref="T:System.Security.Permissions.HostProtectionAttribute" />, and in a partial-trust environment the image is not loaded. </para
-        >
+          </format> to create a native image of assemblies that are protected by the <see cref="T:System.Security.Permissions.HostProtectionAttribute" />. In a full-trust environment, the image is always loaded, without regard to the <see cref="T:System.Security.Permissions.HostProtectionAttribute" />, and in a partial-trust environment the image is not loaded.
+        </para>
         <para />
       </block>
     </remarks>
@@ -130,8 +130,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Security.Permissions.SecurityAction" /> values. </param
-        >
+          />One of the <see cref="T:System.Security.Permissions.SecurityAction" /> values.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreatePermission">

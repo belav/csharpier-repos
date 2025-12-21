@@ -155,8 +155,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The time span returned by the <see cref="P:System.TimeZoneInfo.BaseUtcOffset" /> property can range from 14 hours (for a time zone that is 14 hours ahead of Coordinated Universal Time (UTC)) to -14 hours (for a time zone that is 14 hours behind UTC). Time zones that are ahead of UTC have a positive offset; time zones that are behind UTC have a negative offset. </para
-          >
+            >The time span returned by the <see cref="P:System.TimeZoneInfo.BaseUtcOffset" /> property can range from 14 hours (for a time zone that is 14 hours ahead of Coordinated Universal Time (UTC)) to -14 hours (for a time zone that is 14 hours behind UTC). Time zones that are ahead of UTC have a positive offset; time zones that are behind UTC have a negative offset.
+          </para>
           <para
             >The <see cref="P:System.TimeZoneInfo.BaseUtcOffset" /> value is represented as a whole number of minutes. It cannot include a fractional number of minutes.</para
           >
@@ -171,13 +171,13 @@
           <list type="bullet">
             <item>
               <para
-                >The <see cref="P:System.TimeZoneInfo.BaseUtcOffset" /> property returns the difference between UTC and the time zone's standard time; the <see cref="Overload:System.TimeZoneInfo.GetUtcOffset" /> method returns the difference between UTC and the time zone's time at a particular point in time. </para
-              >
+                >The <see cref="P:System.TimeZoneInfo.BaseUtcOffset" /> property returns the difference between UTC and the time zone's standard time; the <see cref="Overload:System.TimeZoneInfo.GetUtcOffset" /> method returns the difference between UTC and the time zone's time at a particular point in time.
+              </para>
             </item>
             <item>
               <para
-                >The <see cref="Overload:System.TimeZoneInfo.GetUtcOffset" /> method reflects the application of any adjustment rules to the time zone; the <see cref="P:System.TimeZoneInfo.BaseUtcOffset" /> property does not. </para
-              >
+                >The <see cref="Overload:System.TimeZoneInfo.GetUtcOffset" /> method reflects the application of any adjustment rules to the time zone; the <see cref="P:System.TimeZoneInfo.BaseUtcOffset" /> property does not.
+              </para>
             </item>
           </list>
         </remarks>
@@ -237,8 +237,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When performing the conversion, the <see cref="M:System.TimeZoneInfo.ConvertTime(System.DateTimeOffset,System.TimeZoneInfo)" /> method applies any adjustment rules in effect in the <paramref name="destinationTimeZone" /> time zone. </para
-          >
+            >When performing the conversion, the <see cref="M:System.TimeZoneInfo.ConvertTime(System.DateTimeOffset,System.TimeZoneInfo)" /> method applies any adjustment rules in effect in the <paramref name="destinationTimeZone" /> time zone.
+          </para>
           <para
             >This overload of the <see cref="M:System.TimeZoneInfo.ConvertTime(System.DateTime,System.TimeZoneInfo)" /> method determines the source time zone from the value of the <paramref name="dateTime" /> parameter's <see cref="P:System.DateTime.Kind" /> property, as the following table shows.</para
           >
@@ -378,8 +378,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The date and time to convert.   </param
-        >
+          />The date and time to convert.
+        </param>
         <param name="destinationTimeZone">
           <attribution
             license="cc4"
@@ -415,8 +415,8 @@
             >This overload differs from the other overloads of the <see cref="Overload:System.TimeZoneInfo.ConvertTime" /> method by accepting a <see cref="T:System.DateTimeOffset" /> value as its first parameter. This identifies the date and time as an offset from Coordinated Universal Time (UTC) rather than as the date and time in a particular time zone. As a result, the <paramref name="dateTimeOffset" /> parameter cannot represent either an ambiguous time or an invalid time.</para
           >
           <para
-            >In converting the <paramref name="dateTimeOffset" /> value to the time in the destination time zone, this method takes into account any adjustment rules in effect in the destination time zone.    </para
-          >
+            >In converting the <paramref name="dateTimeOffset" /> value to the time in the destination time zone, this method takes into account any adjustment rules in effect in the destination time zone.
+          </para>
           <para
             >If the conversion of <paramref name="dateTimeOffset" /> results in a date and time value that is earlier than <see cref="F:System.DateTimeOffset.MinValue" /> or later than <see cref="F:System.DateTimeOffset.MaxValue" />, this method returns <see cref="F:System.DateTimeOffset.MinValue" /> or <see cref="F:System.DateTimeOffset.MaxValue" />, respectively.</para
           >
@@ -434,8 +434,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The date and time to convert.   </param
-        >
+          />The date and time to convert.
+        </param>
         <param name="destinationTimeZone">
           <attribution
             license="cc4"
@@ -616,8 +616,8 @@
             >If the conversion of <paramref name="dateTime" /> results in a date and time value that is earlier than <see cref="F:System.DateTime.MinValue" /> or later than <see cref="F:System.DateTime.MaxValue" />, this method returns <see cref="F:System.DateTime.MinValue" /> or <see cref="F:System.DateTime.MaxValue" />, respectively.</para
           >
           <para
-            >The <see cref="M:System.TimeZoneInfo.ConvertTime(System.DateTime,System.TimeZoneInfo,System.TimeZoneInfo)" /> method throws an <see cref="T:System.ArgumentException" /> exception if the <see cref="P:System.DateTime.Kind" /> property of the <paramref name="dateTime" /> argument is <see cref="F:System.DateTimeKind.Local" /> but the <paramref name="sourceTimeZone" /> argument is not <see cref="P:System.TimeZoneInfo.Local" />. To determine whether the source time zone is the local time zone or the universal time zone, the method tests for reference equality instead of testing for value equality with the <see cref="M:System.TimeZoneInfo.Equals(System.TimeZoneInfo)" /> method. Note that <see cref="T:System.TimeZoneInfo" /> objects that represent the local time zone and that are retrieved by calling the <see cref="M:System.TimeZoneInfo.FindSystemTimeZoneById(System.String)" /> method do not have referential equality with <see cref="P:System.TimeZoneInfo.Local" />. Furthermore, <see cref="T:System.TimeZoneInfo" /> objects that represent the local or universal time zone and that are retrieved by iterating the collection returned by the <see cref="M:System.TimeZoneInfo.GetSystemTimeZones" /> method do not have referential equality with <see cref="P:System.TimeZoneInfo.Local" /> or <see cref="P:System.TimeZoneInfo.Utc" />. As an alternative, you can call the <see cref="M:System.TimeZoneInfo.ConvertTimeBySystemTimeZoneId(System.DateTime,System.String,System.String)" /> method. </para
-          >
+            >The <see cref="M:System.TimeZoneInfo.ConvertTime(System.DateTime,System.TimeZoneInfo,System.TimeZoneInfo)" /> method throws an <see cref="T:System.ArgumentException" /> exception if the <see cref="P:System.DateTime.Kind" /> property of the <paramref name="dateTime" /> argument is <see cref="F:System.DateTimeKind.Local" /> but the <paramref name="sourceTimeZone" /> argument is not <see cref="P:System.TimeZoneInfo.Local" />. To determine whether the source time zone is the local time zone or the universal time zone, the method tests for reference equality instead of testing for value equality with the <see cref="M:System.TimeZoneInfo.Equals(System.TimeZoneInfo)" /> method. Note that <see cref="T:System.TimeZoneInfo" /> objects that represent the local time zone and that are retrieved by calling the <see cref="M:System.TimeZoneInfo.FindSystemTimeZoneById(System.String)" /> method do not have referential equality with <see cref="P:System.TimeZoneInfo.Local" />. Furthermore, <see cref="T:System.TimeZoneInfo" /> objects that represent the local or universal time zone and that are retrieved by iterating the collection returned by the <see cref="M:System.TimeZoneInfo.GetSystemTimeZones" /> method do not have referential equality with <see cref="P:System.TimeZoneInfo.Local" /> or <see cref="P:System.TimeZoneInfo.Utc" />. As an alternative, you can call the <see cref="M:System.TimeZoneInfo.ConvertTimeBySystemTimeZoneId(System.DateTime,System.String,System.String)" /> method.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -675,8 +675,8 @@
             >When performing the conversion, the <see cref="Overload:System.TimeZoneInfo.ConvertTimeBySystemTimeZoneId" /> method applies any adjustment rules in effect in the <paramref name="destinationTimeZoneId" /> time zone.</para
           >
           <para
-            >This overload is largely identical to calling the <see cref="M:System.TimeZoneInfo.ConvertTime(System.DateTime,System.TimeZoneInfo)" /> method, except that it allows you to specify the destination time zone by its identifier rather than by an object reference. This method is most useful when you must convert a time without retrieving the time zone object that corresponds to it and you do not need to know whether the converted time is standard or daylight saving time. </para
-          >
+            >This overload is largely identical to calling the <see cref="M:System.TimeZoneInfo.ConvertTime(System.DateTime,System.TimeZoneInfo)" /> method, except that it allows you to specify the destination time zone by its identifier rather than by an object reference. This method is most useful when you must convert a time without retrieving the time zone object that corresponds to it and you do not need to know whether the converted time is standard or daylight saving time.
+          </para>
           <para
             >The <see cref="M:System.TimeZoneInfo.ConvertTimeBySystemTimeZoneId(System.DateTime,System.String)" /> method determines the source time zone from the value of the <paramref name="dateTime" /> parameter's <see cref="P:System.DateTime.Kind" /> property, as the following table shows.</para
           >
@@ -836,17 +836,17 @@
             >When performing the conversion, the <see cref="Overload:System.TimeZoneInfo.ConvertTimeBySystemTimeZoneId" /> method applies any adjustment rules in effect in the <paramref name="destinationTimeZoneId" /> time zone.</para
           >
           <para
-            >This overload is identical to calling the <see cref="M:System.TimeZoneInfo.ConvertTime(System.DateTime,System.TimeZoneInfo)" /> method, except that it allows you to specify the destination time zone by its identifier rather than by an object reference. This method is most useful when you must convert a time without retrieving the time zone object that corresponds to it and you do not need to know whether the converted time is standard or daylight saving time. </para
-          >
+            >This overload is identical to calling the <see cref="M:System.TimeZoneInfo.ConvertTime(System.DateTime,System.TimeZoneInfo)" /> method, except that it allows you to specify the destination time zone by its identifier rather than by an object reference. This method is most useful when you must convert a time without retrieving the time zone object that corresponds to it and you do not need to know whether the converted time is standard or daylight saving time.
+          </para>
           <para
-            >Because the <paramref name="dateTimeOffset" /> parameter represents a date and time together with that time's offset from Coordinated Universal Time (UTC), it cannot represent either an ambiguous time or an invalid time. </para
-          >
+            >Because the <paramref name="dateTimeOffset" /> parameter represents a date and time together with that time's offset from Coordinated Universal Time (UTC), it cannot represent either an ambiguous time or an invalid time.
+          </para>
           <para
             >This method retrieves the time zone whose identifier is specified by the <paramref name="destinationTimeZoneId" /> parameter from the registry. It cannot retrieve a time zone object that is created using the <see cref="Overload:System.TimeZoneInfo.CreateCustomTimeZone" /> method. The <paramref name="destinationTimeZoneId" /> parameter must correspond exactly to the time zone's registry key in length, but not in case, for a successful match to occur; that is, the comparison of <paramref name="destinationTimeZoneId" /> with time zone identifiers is case-insensitive.</para
           >
           <para
-            >In converting the <paramref name="dateTimeOffset" /> value to the time in the destination time zone, the method takes into account any adjustment rules in effect in the destination time zone.    </para
-          >
+            >In converting the <paramref name="dateTimeOffset" /> value to the time in the destination time zone, the method takes into account any adjustment rules in effect in the destination time zone.
+          </para>
           <para
             >If the conversion of <paramref name="dateTimeOffset" /> results in a date and time value that is earlier than <see cref="F:System.DateTimeOffset.MinValue" /> or later than <see cref="F:System.DateTimeOffset.MaxValue" />, this method returns <see cref="F:System.DateTimeOffset.MinValue" /> or <see cref="F:System.DateTimeOffset.MaxValue" />, respectively.</para
           >
@@ -994,8 +994,8 @@
             </item>
           </list>
           <para
-            >Because it relies on calls to the <see cref="M:System.TimeZoneInfo.FindSystemTimeZoneById(System.String)" /> method, the <see cref="M:System.TimeZoneInfo.ConvertTimeBySystemTimeZoneId(System.DateTime,System.String,System.String)" /> method performs a case-insensitive search to locate the time zones that correspond to <paramref name="sourceTimeZoneId" /> and <paramref name="destinationTimeZoneId" />. </para
-          >
+            >Because it relies on calls to the <see cref="M:System.TimeZoneInfo.FindSystemTimeZoneById(System.String)" /> method, the <see cref="M:System.TimeZoneInfo.ConvertTimeBySystemTimeZoneId(System.DateTime,System.String,System.String)" /> method performs a case-insensitive search to locate the time zones that correspond to <paramref name="sourceTimeZoneId" /> and <paramref name="destinationTimeZoneId" />.
+          </para>
           <para
             >If the value of the <paramref name="dateTime" /> parameter is an ambiguous time in the source time zone, it is interpreted as a standard time. If the <paramref name="dateTime" /> parameter is an invalid time in the source time zone, this method throws an <see cref="T:System.ArgumentException" />.</para
           >
@@ -1025,8 +1025,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The identifier of the source time zone. </param
-        >
+          />The identifier of the source time zone.
+        </param>
         <param name="destinationTimeZoneId">
           <attribution
             license="cc4"
@@ -1193,8 +1193,8 @@
           >
           <block subset="none" type="note">
             <para
-              >If the current computer's local time zone includes multiple adjustment rules, this overload of the <see cref="M:System.TimeZoneInfo.ConvertTimeToUtc(System.DateTime)" /> method can return results that differ from the <see cref="M:System.TimeZone.ToUniversalTime(System.DateTime)" /> and <see cref="M:System.DateTime.ToUniversalTime" /> methods. <see cref="M:System.TimeZone.ToUniversalTime(System.DateTime)" /> always applies the current adjustment rule to time zone conversion, whether or not <paramref name="dateTime" /> lies within its date range. And when executing on net_v35_long, <see cref="M:System.DateTime.ToUniversalTime" /> also applies the current adjustment rule to time zone conversion, whether or not <paramref name="dateTime" /> lies within its date range. </para
-            >
+              >If the current computer's local time zone includes multiple adjustment rules, this overload of the <see cref="M:System.TimeZoneInfo.ConvertTimeToUtc(System.DateTime)" /> method can return results that differ from the <see cref="M:System.TimeZone.ToUniversalTime(System.DateTime)" /> and <see cref="M:System.DateTime.ToUniversalTime" /> methods. <see cref="M:System.TimeZone.ToUniversalTime(System.DateTime)" /> always applies the current adjustment rule to time zone conversion, whether or not <paramref name="dateTime" /> lies within its date range. And when executing on net_v35_long, <see cref="M:System.DateTime.ToUniversalTime" /> also applies the current adjustment rule to time zone conversion, whether or not <paramref name="dateTime" /> lies within its date range.
+            </para>
           </block>
           <para
             >If the UTC equivalent of <paramref name="dateTime" /> is earlier than <see cref="F:System.DateTime.MinValue" /> or later that <see cref="F:System.DateTime.MaxValue" />, this method returns <see cref="F:System.DateTime.MinValue" /> or <see cref="F:System.DateTime.MaxValue" />, respectively.</para
@@ -1239,8 +1239,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see cref="P:System.DateTime.Kind" /> property of the <paramref name="dateTime" /> parameter equals <see cref="F:System.DateTimeKind.Utc" /> and the <paramref name="sourceTimeZone" /> parameter equals <see cref="P:System.TimeZoneInfo.Utc" />, this method returns <paramref name="dateTime" /> without performing any conversion. </para
-          >
+            >If the <see cref="P:System.DateTime.Kind" /> property of the <paramref name="dateTime" /> parameter equals <see cref="F:System.DateTimeKind.Utc" /> and the <paramref name="sourceTimeZone" /> parameter equals <see cref="P:System.TimeZoneInfo.Utc" />, this method returns <paramref name="dateTime" /> without performing any conversion.
+          </para>
           <para
             >If <paramref name="dateTime" /> corresponds to an ambiguous time, this method assumes that it is the standard time of the source time zone. If <paramref name="dateTime" /> corresponds to an invalid time, this method throws an <see cref="T:System.ArgumentException" />.</para
           >
@@ -1395,8 +1395,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The display name of the new time zone.   </param
-        >
+          />The display name of the new time zone.
+        </param>
         <param name="standardDisplayName">
           <attribution
             license="cc4"
@@ -1487,8 +1487,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The display name is localized based on the culture installed with the Windows operating system. </para>
           <para
-            >A <see cref="P:System.TimeZoneInfo.DaylightName" /> property whose value is not <see cref="F:System.String.Empty" /> or null does not necessarily indicate that the time zone supports daylight saving time. To determine whether the time zone supports daylight saving time, check the value of its <see cref="P:System.TimeZoneInfo.SupportsDaylightSavingTime" /> property. </para
-          >
+            >A <see cref="P:System.TimeZoneInfo.DaylightName" /> property whose value is not <see cref="F:System.String.Empty" /> or null does not necessarily indicate that the time zone supports daylight saving time. To determine whether the time zone supports daylight saving time, check the value of its <see cref="P:System.TimeZoneInfo.SupportsDaylightSavingTime" /> property.
+          </para>
           <para
             >In most cases, the <see cref="P:System.TimeZoneInfo.DaylightName" /> property of time zones defined in the registry is not <see cref="F:System.String.Empty" /> or null. However, the <see cref="P:System.TimeZoneInfo.DaylightName" /> property of custom time zones can be set to <see cref="F:System.String.Empty" />. This occurs when custom time zones are created by the <see cref="M:System.TimeZoneInfo.CreateCustomTimeZone(System.String,System.TimeSpan,System.String,System.String)" /> or the <see cref="M:System.TimeZoneInfo.CreateCustomTimeZone(System.String,System.TimeSpan,System.String,System.String,System.String,System.TimeZoneInfo.AdjustmentRule[],System.Boolean)" /> overload and the <paramref name="disableDaylightSavingTime" /> parameter is true. Therefore, your code should never assume that the value of the <see cref="P:System.TimeZoneInfo.DaylightName" /> property is not null or empty.</para
           >
@@ -1584,8 +1584,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A second object to compare with the current object.  </param
-        >
+          />A second object to compare with the current object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="FindSystemTimeZoneById">
@@ -1607,8 +1607,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="id" /> parameter must correspond exactly to the time zone's registry key in length, but not in case, for a successful match to occur; that is, the comparison of <paramref name="id" /> with time zone identifiers is case-insensitive. If you want to retrieve time zone objects based on partial matches, you can write custom procedures that work with the read-only collection of <see cref="T:System.TimeZoneInfo" /> objects returned by the <see cref="M:System.TimeZoneInfo.GetSystemTimeZones" /> method. </para
-          >
+            >The <paramref name="id" /> parameter must correspond exactly to the time zone's registry key in length, but not in case, for a successful match to occur; that is, the comparison of <paramref name="id" /> with time zone identifiers is case-insensitive. If you want to retrieve time zone objects based on partial matches, you can write custom procedures that work with the read-only collection of <see cref="T:System.TimeZoneInfo" /> objects returned by the <see cref="M:System.TimeZoneInfo.GetSystemTimeZones" /> method.
+          </para>
           <para>
             <see cref="M:System.TimeZoneInfo.FindSystemTimeZoneById(System.String)" /> tries to match <paramref name="id" /> to the subkey names of the HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Time Zones branch of the registry under Windows XP and Windows Vista. This branch does not necessarily contain a comprehensive list of time zone identifiers. If required by an application, you can create a particular time zone either by calling one of the overloads of the <see cref="Overload:System.TimeZoneInfo.CreateCustomTimeZone" /> method or by calling <see cref="M:System.TimeZoneInfo.FromSerializedString(System.String)" /> to deserialize a <see cref="T:System.TimeZoneInfo" /> object that represents the required time zone. However, time zones created by these method calls are not included in the registry and cannot be retrieved using the <see cref="M:System.TimeZoneInfo.FindSystemTimeZoneById(System.String)" /> method. These custom time zones can be accessed only through the object reference returned by the <see cref="Overload:System.TimeZoneInfo.CreateCustomTimeZone" /> or <see cref="M:System.TimeZoneInfo.FromSerializedString(System.String)" /> method call.</para
           >
@@ -1630,8 +1630,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The time zone identifier, which corresponds to the <see cref="P:System.TimeZoneInfo.Id" /> property.      </param
-        >
+          />The time zone identifier, which corresponds to the <see cref="P:System.TimeZoneInfo.Id" /> property.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="FromSerializedString">
@@ -1671,8 +1671,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string representation of the serialized <see cref="T:System.TimeZoneInfo" /> object.   </param
-        >
+          />The string representation of the serialized <see cref="T:System.TimeZoneInfo" /> object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetAdjustmentRules">
@@ -1692,8 +1692,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.TimeZoneInfo.GetAdjustmentRules" /> method retrieves an array of <see cref="T:System.TimeZoneInfo.AdjustmentRule" /> objects. Each object in the array defines the effective start and end date of that time zone adjustment, as well as its delta (the exact amount by which the adjustment causes the time to change). In addition, two properties return <see cref="T:System.TimeZoneInfo.TransitionTime" /> objects that define when each annual transition to and from standard time occurs. </para
-          >
+            >The <see cref="M:System.TimeZoneInfo.GetAdjustmentRules" /> method retrieves an array of <see cref="T:System.TimeZoneInfo.AdjustmentRule" /> objects. Each object in the array defines the effective start and end date of that time zone adjustment, as well as its delta (the exact amount by which the adjustment causes the time to change). In addition, two properties return <see cref="T:System.TimeZoneInfo.TransitionTime" /> objects that define when each annual transition to and from standard time occurs.
+          </para>
           <para
             >If a time zone has multiple adjustment rules, they are generally ordered from earliest (at index 0) to latest (at index <see cref="P:System.Array.Length" /> – 1).</para
           >
@@ -1779,8 +1779,8 @@
               </description>
               <description>
                 <para
-                  >Converts <paramref name="dateTime" /> to the local time, and then returns ambiguous time offsets for that time. </para
-                >
+                  >Converts <paramref name="dateTime" /> to the local time, and then returns ambiguous time offsets for that time.
+                </para>
               </description>
             </item>
             <item>
@@ -1807,8 +1807,8 @@
               </description>
               <description>
                 <para
-                  >Converts <paramref name="dateTime" /> to the specified time zone, and then determines whether that time is ambiguous. </para
-                >
+                  >Converts <paramref name="dateTime" /> to the specified time zone, and then determines whether that time is ambiguous.
+                </para>
               </description>
             </item>
             <item>
@@ -1865,8 +1865,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The precise behavior of this method depends on the relationship between the <see cref="P:System.DateTimeOffset.Offset" /> property of the <paramref name="dateTimeOffset" /> parameter and the <see cref="T:System.TimeZoneInfo" /> object. If the value of the <see cref="P:System.DateTimeOffset.Offset" /> property corresponds to the current time zone's possible offsets from Coordinated Universal Time (UTC) for that date and time, the method returns the possible offsets. Otherwise, it converts <paramref name="dateTime" /> to the time in the current time zone, and then returns the possible offsets of that date and time. </para
-          >
+            >The precise behavior of this method depends on the relationship between the <see cref="P:System.DateTimeOffset.Offset" /> property of the <paramref name="dateTimeOffset" /> parameter and the <see cref="T:System.TimeZoneInfo" /> object. If the value of the <see cref="P:System.DateTimeOffset.Offset" /> property corresponds to the current time zone's possible offsets from Coordinated Universal Time (UTC) for that date and time, the method returns the possible offsets. Otherwise, it converts <paramref name="dateTime" /> to the time in the current time zone, and then returns the possible offsets of that date and time.
+          </para>
           <para
             >The order of <see cref="T:System.TimeSpan" /> objects in the array returned by this method is undefined. However, you can determine which element represents an offset from the time zone's standard time by comparing its value with the time zone's <see cref="P:System.TimeZoneInfo.BaseUtcOffset" /> property. To map an ambiguous time to a time zone's standard time, see <format type="text/html">
               <a href="2cf5fb25-492c-4875-9245-98cac8348e97">How to: Resolve Ambiguous Times</a>
@@ -2012,8 +2012,8 @@
             >The returned time span includes any differences due to the application of adjustment rules to the current time zone. It differs from the <see cref="P:System.TimeZoneInfo.BaseUtcOffset" /> property, which returns the difference between Coordinated Universal Time (UTC) and the time zone's standard time and, therefore, does not take adjustment rules into account.</para
           >
           <para
-            >If the <paramref name="dateTime" /> parameter's <see cref="P:System.DateTime.Kind" /> property does not correspond to the time zone object, this method performs the necessary conversion before returning a result. For example, this can occur if the <see cref="P:System.DateTime.Kind" /> property is <see cref="F:System.DateTimeKind.Local" /> but the time zone object is not the local time zone. If <paramref name="dateTime" /> is ambiguous, or if the converted time is ambiguous, this method interprets the ambiguous time as a standard time. If <paramref name="dateTime" /> is invalid, this method returns a <see cref="T:System.TimeSpan" /> object that reflects the difference between UTC and the time zone's standard time. </para
-          >
+            >If the <paramref name="dateTime" /> parameter's <see cref="P:System.DateTime.Kind" /> property does not correspond to the time zone object, this method performs the necessary conversion before returning a result. For example, this can occur if the <see cref="P:System.DateTime.Kind" /> property is <see cref="F:System.DateTimeKind.Local" /> but the time zone object is not the local time zone. If <paramref name="dateTime" /> is ambiguous, or if the converted time is ambiguous, this method interprets the ambiguous time as a standard time. If <paramref name="dateTime" /> is invalid, this method returns a <see cref="T:System.TimeSpan" /> object that reflects the difference between UTC and the time zone's standard time.
+          </para>
           <para
             >The <see cref="M:System.TimeZoneInfo.GetUtcOffset(System.DateTime)" /> method is similar in operation to the <see cref="M:System.TimeZone.GetUtcOffset(System.DateTime)" /> method of the <see cref="T:System.TimeZone" /> class.</para
           >
@@ -2031,8 +2031,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The date and time to determine the offset for.   </param
-        >
+          />The date and time to determine the offset for.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetUtcOffset">
@@ -2108,8 +2108,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A second object to compare with the current <see cref="T:System.TimeZoneInfo" /> object.   </param
-        >
+          />A second object to compare with the current <see cref="T:System.TimeZoneInfo" /> object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Id">
@@ -2158,8 +2158,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>An ambiguous time falls within a range of times for the current time zone. This means it can be either a standard time or a time that results from the application of an adjustment rule. Typically, ambiguous times result when the clock is set to return to standard time from daylight saving time. See the Example section for an illustration. </para>
           <para
-            >Coordinated Universal Time (UTC) has no ambiguous times; neither do time zones that do not support daylight saving time. Therefore, these time zones have no adjustment rules and calls to the <see cref="M:System.TimeZoneInfo.IsAmbiguousTime(System.DateTime)" /> method always return false. </para
-          >
+            >Coordinated Universal Time (UTC) has no ambiguous times; neither do time zones that do not support daylight saving time. Therefore, these time zones have no adjustment rules and calls to the <see cref="M:System.TimeZoneInfo.IsAmbiguousTime(System.DateTime)" /> method always return false.
+          </para>
           <para
             >For time zones that do observe daylight saving time, the precise behavior of this method depends on the relationship between the <see cref="P:System.DateTime.Kind" /> property and the <see cref="T:System.TimeZoneInfo" /> object, as the following table shows.</para
           >
@@ -2254,8 +2254,8 @@
               </description>
               <description>
                 <para
-                  >Converts <paramref name="dateTime" /> to the time in the specified time zone and then determines whether that time is ambiguous. </para
-                >
+                  >Converts <paramref name="dateTime" /> to the time in the specified time zone and then determines whether that time is ambiguous.
+                </para>
               </description>
             </item>
             <item>
@@ -2284,12 +2284,8 @@
           >
         </returns>
         <param name="dateTime">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />A date and time value.   </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A date and time value.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsAmbiguousTime">
@@ -2312,8 +2308,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>An ambiguous time falls within a range of times for the current time zone. This means that it can be either a standard time or a time that results from the application of an adjustment rule. Typically, ambiguous times result when the clock is set to return to standard time from daylight saving time. Coordinated Universal Time (UTC) has no ambiguous times; neither do time zones that do not support daylight saving time. </para>
           <para
-            >The precise behavior of the method depends on the relationship between the <see cref="P:System.DateTimeOffset.Offset" /> property of the <paramref name="dateTimeOffset" /> parameter and the current time zone. If the value of the <see cref="P:System.DateTimeOffset.Offset" /> property is a possible offset from the UTC of the current time zone, the method determines whether that date and time is ambiguous. Otherwise, it converts <paramref name="dateTimeOffset" /> to the time in the current time zone, and then determines whether that date and time is ambiguous.  </para
-          >
+            >The precise behavior of the method depends on the relationship between the <see cref="P:System.DateTimeOffset.Offset" /> property of the <paramref name="dateTimeOffset" /> parameter and the current time zone. If the value of the <see cref="P:System.DateTimeOffset.Offset" /> property is a possible offset from the UTC of the current time zone, the method determines whether that date and time is ambiguous. Otherwise, it converts <paramref name="dateTimeOffset" /> to the time in the current time zone, and then determines whether that date and time is ambiguous.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2493,12 +2489,8 @@
           >
         </returns>
         <param name="dateTime">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />A date and time value.   </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A date and time value.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsDaylightSavingTime">
@@ -2649,12 +2641,8 @@
           <para>true if <paramref name="dateTime" /> is invalid; otherwise, false.</para>
         </returns>
         <param name="dateTime">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />A date and time value.   </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A date and time value.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Local">
@@ -2813,8 +2801,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Applications that rely on time zones that are not typically defined in the registry of Windows systems can use the <see cref="Overload:System.TimeZoneInfo.CreateCustomTimeZone" /> method to instantiate the necessary time zones as <see cref="T:System.TimeZoneInfo" /> objects. The application can then call the <see cref="M:System.TimeZoneInfo.ToSerializedString" /> method to convert the time zone object to a string. </para
-          >
+            >Applications that rely on time zones that are not typically defined in the registry of Windows systems can use the <see cref="Overload:System.TimeZoneInfo.CreateCustomTimeZone" /> method to instantiate the necessary time zones as <see cref="T:System.TimeZoneInfo" /> objects. The application can then call the <see cref="M:System.TimeZoneInfo.ToSerializedString" /> method to convert the time zone object to a string.
+          </para>
           <para
             >The <see cref="T:System.TimeZoneInfo" /> object should also be stored in a location where the application can retrieve it when needed. Possible locations include:</para
           >
@@ -2893,8 +2881,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This is a built-in object; information about this <see cref="T:System.TimeZoneInfo" /> object is not retrieved from the registry. </para
-          >
+            >This is a built-in object; information about this <see cref="T:System.TimeZoneInfo" /> object is not retrieved from the registry.
+          </para>
           <block subset="none" type="note">
             <para
               >You should always access the Coordinated Universal Time (UTC) zone through the <see cref="P:System.TimeZoneInfo.Utc" /> property rather than assigning the UTC time zone to a <see cref="T:System.TimeZoneInfo" /> object variable. This prevents the <see cref="T:System.TimeZoneInfo" /> object variable from being invalidated by a call to the <see cref="M:System.TimeZoneInfo.ClearCachedData" /> method.</para

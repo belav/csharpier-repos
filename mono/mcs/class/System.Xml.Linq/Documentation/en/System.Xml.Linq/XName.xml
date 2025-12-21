@@ -27,14 +27,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >XML names include a namespace and a local name. A <newTerm>fully qualified name</newTerm> is the combination of the namespace and local name. </para
-      >
+        >XML names include a namespace and a local name. A <newTerm>fully qualified name</newTerm> is the combination of the namespace and local name.
+      </para>
       <format type="text/html">
         <h2>Creating an XName Object</h2>
       </format>
       <para>
-        <see cref="T:System.Xml.Linq.XName" /> does not contain any public constructors. Instead, this class provides an implicit conversion from <see cref="T:System.String" /> that allows you to create an <see cref="T:System.Xml.Linq.XName" />. The most common place you use this conversion is when constructing an element or attribute: The first argument to the <see cref="T:System.Xml.Linq.XElement" /> constructor is an <see cref="T:System.Xml.Linq.XName" />. By passing a string, you take advantage of the implicit conversion. The following code creates an element with a name that is in no namespace: </para
-      >
+        <see cref="T:System.Xml.Linq.XName" /> does not contain any public constructors. Instead, this class provides an implicit conversion from <see cref="T:System.String" /> that allows you to create an <see cref="T:System.Xml.Linq.XName" />. The most common place you use this conversion is when constructing an element or attribute: The first argument to the <see cref="T:System.Xml.Linq.XElement" /> constructor is an <see cref="T:System.Xml.Linq.XName" />. By passing a string, you take advantage of the implicit conversion. The following code creates an element with a name that is in no namespace:
+      </para>
       <code>XElement root = new XElement("ElementName", "content");
 Console.WriteLine(root);</code>
       <para>In Visual Basic, it is more appropriate to use XML literals:</para>

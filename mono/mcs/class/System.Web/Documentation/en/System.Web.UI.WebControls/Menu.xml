@@ -153,15 +153,15 @@
         <h2>Menu Items</h2>
       </format>
       <para
-        >A <see cref="T:System.Web.UI.WebControls.Menu" /> control is made up of a tree of menu items represented by <see cref="T:System.Web.UI.WebControls.MenuItem" /> objects. Menu items at the top level (level 0) are called root menu items. A menu item that has a parent menu item is called a child menu item. All root menu items are stored in the <see cref="P:System.Web.UI.WebControls.Menu.Items" /> collection. Child menu items are stored in a parent menu item's <see cref="P:System.Web.UI.WebControls.MenuItem.ChildItems" /> collection. </para
-      >
+        >A <see cref="T:System.Web.UI.WebControls.Menu" /> control is made up of a tree of menu items represented by <see cref="T:System.Web.UI.WebControls.MenuItem" /> objects. Menu items at the top level (level 0) are called root menu items. A menu item that has a parent menu item is called a child menu item. All root menu items are stored in the <see cref="P:System.Web.UI.WebControls.Menu.Items" /> collection. Child menu items are stored in a parent menu item's <see cref="P:System.Web.UI.WebControls.MenuItem.ChildItems" /> collection.
+      </para>
       <para
-        >Each menu item has a <see cref="P:System.Web.UI.WebControls.MenuItem.Text" /> and a <see cref="P:System.Web.UI.WebControls.MenuItem.Value" /> property. The value of the <see cref="P:System.Web.UI.WebControls.MenuItem.Text" /> property is displayed in the <see cref="T:System.Web.UI.WebControls.Menu" /> control, while the <see cref="P:System.Web.UI.WebControls.MenuItem.Value" /> property is used to store any additional data about the menu item, such as data passed to the postback event associated with the menu item. When clicked, a menu item can navigate to another Web page indicated by the <see cref="P:System.Web.UI.WebControls.MenuItem.NavigateUrl" /> property. </para
-      >
+        >Each menu item has a <see cref="P:System.Web.UI.WebControls.MenuItem.Text" /> and a <see cref="P:System.Web.UI.WebControls.MenuItem.Value" /> property. The value of the <see cref="P:System.Web.UI.WebControls.MenuItem.Text" /> property is displayed in the <see cref="T:System.Web.UI.WebControls.Menu" /> control, while the <see cref="P:System.Web.UI.WebControls.MenuItem.Value" /> property is used to store any additional data about the menu item, such as data passed to the postback event associated with the menu item. When clicked, a menu item can navigate to another Web page indicated by the <see cref="P:System.Web.UI.WebControls.MenuItem.NavigateUrl" /> property.
+      </para>
       <block subset="none" type="note">
         <para
-          >If the <see cref="P:System.Web.UI.WebControls.MenuItem.NavigateUrl" /> property is not set for a menu item, the <see cref="T:System.Web.UI.WebControls.Menu" /> control simply submits the page to the server for processing when the menu item is clicked. </para
-        >
+          >If the <see cref="P:System.Web.UI.WebControls.MenuItem.NavigateUrl" /> property is not set for a menu item, the <see cref="T:System.Web.UI.WebControls.Menu" /> control simply submits the page to the server for processing when the menu item is clicked.
+        </para>
       </block>
       <para
         >You can also optionally display an image in a menu item by setting the <see cref="P:System.Web.UI.WebControls.MenuItem.ImageUrl" /> property.</para
@@ -202,8 +202,8 @@
         <h2>Customizing the User Interface</h2>
       </format>
       <para
-        >There are many ways to customize the appearance of the <see cref="T:System.Web.UI.WebControls.Menu" /> control. First, you can specify whether the <see cref="T:System.Web.UI.WebControls.Menu" /> control is rendered horizontally or vertically by setting the <see cref="P:System.Web.UI.WebControls.Menu.Orientation" /> property. You can also specify a different style (such as font size and color) for each of the menu item types. </para
-      >
+        >There are many ways to customize the appearance of the <see cref="T:System.Web.UI.WebControls.Menu" /> control. First, you can specify whether the <see cref="T:System.Web.UI.WebControls.Menu" /> control is rendered horizontally or vertically by setting the <see cref="P:System.Web.UI.WebControls.Menu.Orientation" /> property. You can also specify a different style (such as font size and color) for each of the menu item types.
+      </para>
       <para
         >If you use cascading style sheets (CSS) to customize the appearance of the control, use either inline styles or a separate CSS file, but not both. Using both inline styles and a separate CSS file could cause unexpected results. For more information on using style sheets with controls, see <format type="text/html">
           <a href="782c2db6-fc9b-4243-8df9-a8ffe2f4cc42"
@@ -989,8 +989,8 @@
             >This member is primarily used by control developers when deriving a custom control from the <see cref="T:System.Web.UI.WebControls.Menu" /> class.</para
           >
           <para
-            >This method is called by the ASP.NET infrastructure to notify any controls that use composition-based implementation, including controls that derive from <see cref="T:System.Web.UI.WebControls.CompositeDataBoundControl" /> and <see cref="T:System.Web.UI.WebControls.CompositeControl" />. to create any child controls they contain in preparation for postback or rendering. </para
-          >
+            >This method is called by the ASP.NET infrastructure to notify any controls that use composition-based implementation, including controls that derive from <see cref="T:System.Web.UI.WebControls.CompositeDataBoundControl" /> and <see cref="T:System.Web.UI.WebControls.CompositeControl" />. to create any child controls they contain in preparation for postback or rendering.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1062,8 +1062,8 @@
           >
           <para>When defining the relationship between a data item and a menu item, you must specify both the criteria for binding and the property of a data item to bind to. The criteria indicate when a data item should be bound to a menu item. The criteria can be specified with a depth, a data member, or both. The depth specifies the menu level that gets bound. For example, if you specify a depth of 0, all menu items in the tree structure at level 0 are bound using the menu item binding. A data member specifies the type of the data item in the underlying data source, but can represent different information depending on the data source. For example, the data member for an XML element specifies the name of the element.</para>
           <para
-            >If multiple <see cref="T:System.Web.UI.WebControls.MenuItemBinding" /> objects are defined that conflict with each other, the <see cref="T:System.Web.UI.WebControls.Menu" /> control applies the menu item bindings in the following order of precedence: </para
-          >
+            >If multiple <see cref="T:System.Web.UI.WebControls.MenuItemBinding" /> objects are defined that conflict with each other, the <see cref="T:System.Web.UI.WebControls.Menu" /> control applies the menu item bindings in the following order of precedence:
+          </para>
           <list type="ordered">
             <item>
               <para
@@ -1096,8 +1096,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a collection of <see cref="T:System.Web.UI.WebControls.MenuItemBinding" /> objects that define the relationship between a data item and the menu item it is binding to. </para
-          >
+            >Gets a collection of <see cref="T:System.Web.UI.WebControls.MenuItemBinding" /> objects that define the relationship between a data item and the menu item it is binding to.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1174,8 +1174,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.Web.UI.WebControls.Menu.DynamicBottomSeparatorImageUrl" /> property to specify an optional custom image to display at the bottom of each dynamic menu item. This image acts as a separator between menu items and is commonly an image of a line. </para
-          >
+            >Use the <see cref="P:System.Web.UI.WebControls.Menu.DynamicBottomSeparatorImageUrl" /> property to specify an optional custom image to display at the bottom of each dynamic menu item. This image acts as a separator between menu items and is commonly an image of a line.
+          </para>
           <block subset="none" type="note">
             <para
               >You can also display a separator image at the top of each dynamic menu item by setting the <see cref="P:System.Web.UI.WebControls.Menu.DynamicTopSeparatorImageUrl" /> property.</para
@@ -1754,8 +1754,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.Web.UI.WebControls.Menu.DynamicTopSeparatorImageUrl" /> property to specify an optional custom image to display at the top of each dynamic menu item. This image acts as a separator between menu items and is commonly an image of a line. </para
-          >
+            >Use the <see cref="P:System.Web.UI.WebControls.Menu.DynamicTopSeparatorImageUrl" /> property to specify an optional custom image to display at the top of each dynamic menu item. This image acts as a separator between menu items and is commonly an image of a line.
+          </para>
           <block subset="none" type="note">
             <para
               >You can also display a separator image at the bottom of each dynamic menu item by setting the <see cref="P:System.Web.UI.WebControls.Menu.DynamicBottomSeparatorImageUrl" /> property.</para
@@ -2358,8 +2358,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member overrides <see cref="M:System.Web.UI.Control.OnBubbleEvent(System.Object,System.EventArgs)" />. </para
-          >
+            >This member overrides <see cref="M:System.Web.UI.Control.OnBubbleEvent(System.Object,System.EventArgs)" />.
+          </para>
           <block subset="none" type="note">
             <para
               >This method is used primarily by control developers to extend the <see cref="T:System.Web.UI.WebControls.Menu" /> control.</para
@@ -2402,8 +2402,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="E:System.Web.UI.Control.DataBinding" /> event is raised when data is bound to the <see cref="T:System.Web.UI.WebControls.Menu" /> control. This method notifies the control to perform any data-binding logic that is associated with it. </para
-          >
+            >The <see cref="E:System.Web.UI.Control.DataBinding" /> event is raised when data is bound to the <see cref="T:System.Web.UI.WebControls.Menu" /> control. This method notifies the control to perform any data-binding logic that is associated with it.
+          </para>
           <para
             >The <see cref="M:System.Web.UI.WebControls.Menu.OnDataBinding(System.EventArgs)" /> method allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
           >
@@ -2807,8 +2807,8 @@
             >The <see cref="M:System.Web.UI.WebControls.Menu.RenderBeginTag(System.Web.UI.HtmlTextWriter)" /> method adds tag attributes and writes the markup for the opening tag of the control to the output stream emitted to the response stream for the client browser.</para
           >
           <para
-            >Override <see cref="M:System.Web.UI.WebControls.Menu.RenderBeginTag(System.Web.UI.HtmlTextWriter)" /> when you want to implement custom behavior, for example to write multiple tags to the response stream before any control content, such as &lt;table&gt;&lt;tr&gt;&lt;td&gt;. This method overrides the <see cref="M:System.Web.UI.WebControls.Menu.RenderBeginTag(System.Web.UI.HtmlTextWriter)" /> method to add the <see cref="P:System.Web.UI.WebControls.Menu.SkipLinkText" /> property. </para
-          >
+            >Override <see cref="M:System.Web.UI.WebControls.Menu.RenderBeginTag(System.Web.UI.HtmlTextWriter)" /> when you want to implement custom behavior, for example to write multiple tags to the response stream before any control content, such as &lt;table&gt;&lt;tr&gt;&lt;td&gt;. This method overrides the <see cref="M:System.Web.UI.WebControls.Menu.RenderBeginTag(System.Web.UI.HtmlTextWriter)" /> method to add the <see cref="P:System.Web.UI.WebControls.Menu.SkipLinkText" /> property.
+          </para>
           <block subset="none" type="note">
             <para
               >This method is used primarily by control developers to extend the <see cref="T:System.Web.UI.WebControls.Menu" /> control.</para
@@ -3078,8 +3078,8 @@
           <para>This property is not supported in the .NET 4.0 rendering mode. If this property is required, you can set the menu to the .NET 3.5 rendering mode by adding the following in the page's code:</para>
           <code>menuInstance.RenderingCompatibility = new Version(3, 5);</code>
           <para
-            >Use the <see cref="P:System.Web.UI.WebControls.Menu.ScrollUpImageUrl" /> property to specify a custom image to display at the top of each dynamic menu to indicate that the user can scroll up for additional menu items. </para
-          >
+            >Use the <see cref="P:System.Web.UI.WebControls.Menu.ScrollUpImageUrl" /> property to specify a custom image to display at the top of each dynamic menu to indicate that the user can scroll up for additional menu items.
+          </para>
           <block subset="none" type="note">
             <para>If this property is not set, the internal, default image is used.</para>
           </block>
@@ -3460,8 +3460,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.Web.UI.WebControls.Menu.StaticBottomSeparatorImageUrl" /> property to specify a custom image to display at the bottom of each static menu item that acts as a separator between menu items. </para
-          >
+            >Use the <see cref="P:System.Web.UI.WebControls.Menu.StaticBottomSeparatorImageUrl" /> property to specify a custom image to display at the bottom of each static menu item that acts as a separator between menu items.
+          </para>
           <block subset="none" type="note">
             <para
               >As an alternative, you can also display a separator image at the top of each static menu item by setting the <see cref="P:System.Web.UI.WebControls.Menu.StaticTopSeparatorImageUrl" /> property.</para
@@ -4047,8 +4047,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.Web.UI.WebControls.Menu.StaticTopSeparatorImageUrl" /> property to specify a custom image to display at the top of each static menu item that acts as a separator between menu items. </para
-          >
+            >Use the <see cref="P:System.Web.UI.WebControls.Menu.StaticTopSeparatorImageUrl" /> property to specify a custom image to display at the top of each static menu item that acts as a separator between menu items.
+          </para>
           <block subset="none" type="note">
             <para
               >As an alternative, you can also display a separator image at the bottom of each static menu item by setting the <see cref="P:System.Web.UI.WebControls.Menu.StaticBottomSeparatorImageUrl" /> property.</para
@@ -4208,8 +4208,8 @@
                 <a href="7e3ce9c4-6b7d-4fb1-94b5-72cf2a44fe13"
                   >Accessibility in Visual Studio 2010 and ASP.NET 4</a
                 >
-              </format>. </para
-            >
+              </format>.
+            </para>
           </block>
         </remarks>
         <summary>

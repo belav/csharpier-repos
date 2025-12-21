@@ -39,8 +39,8 @@
       >
       <block subset="none" type="note">
         <para
-          >In versions 1.0 and 1.1 of the .NET Framework, this class requires immediate callers to be fully trusted. Starting with the .NET Framework version 2.0, this class requires <see cref="T:System.Diagnostics.PerformanceCounterPermission" /> for specific actions. It is strongly recommended that <see cref="T:System.Diagnostics.PerformanceCounterPermission" /> not be granted to semi-trusted code.  The ability to read and write performance counters allows code to perform actions such as enumerating executing processes and obtaining information about them. </para
-        >
+          >In versions 1.0 and 1.1 of the .NET Framework, this class requires immediate callers to be fully trusted. Starting with the .NET Framework version 2.0, this class requires <see cref="T:System.Diagnostics.PerformanceCounterPermission" /> for specific actions. It is strongly recommended that <see cref="T:System.Diagnostics.PerformanceCounterPermission" /> not be granted to semi-trusted code.  The ability to read and write performance counters allows code to perform actions such as enumerating executing processes and obtaining information about them.
+        </para>
       </block>
       <block subset="none" type="note">
         <para
@@ -180,15 +180,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the performance counter category (performance object) with which this performance counter is associated. </param
-        >
+          />The name of the performance counter category (performance object) with which this performance counter is associated.
+        </param>
         <param name="counterName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the performance counter. </param
-        >
+          />The name of the performance counter.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -247,22 +247,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the performance counter category (performance object) with which this performance counter is associated. </param
-        >
+          />The name of the performance counter category (performance object) with which this performance counter is associated.
+        </param>
         <param name="counterName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the performance counter. </param
-        >
+          />The name of the performance counter.
+        </param>
         <param name="readOnly">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to access the counter in read-only mode (although the counter itself could be read/write); false to access the counter in read/write mode. </param
-        >
+          />true to access the counter in read-only mode (although the counter itself could be read/write); false to access the counter in read/write mode.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -320,22 +320,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the performance counter category (performance object) with which this performance counter is associated. </param
-        >
+          />The name of the performance counter category (performance object) with which this performance counter is associated.
+        </param>
         <param name="counterName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the performance counter. </param
-        >
+          />The name of the performance counter.
+        </param>
         <param name="instanceName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the performance counter category instance, or an empty string (""), if the category contains a single instance. </param
-        >
+          />The name of the performance counter category instance, or an empty string (""), if the category contains a single instance.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -396,29 +396,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the performance counter category (performance object) with which this performance counter is associated. </param
-        >
+          />The name of the performance counter category (performance object) with which this performance counter is associated.
+        </param>
         <param name="counterName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the performance counter. </param
-        >
+          />The name of the performance counter.
+        </param>
         <param name="instanceName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the performance counter category instance, or an empty string (""), if the category contains a single instance. </param
-        >
+          />The name of the performance counter category instance, or an empty string (""), if the category contains a single instance.
+        </param>
         <param name="readOnly">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to access a counter in read-only mode; false to access a counter in read/write mode. </param
-        >
+          />true to access a counter in read-only mode; false to access a counter in read/write mode.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -471,8 +471,8 @@
               >In Windows Vista, when the remote computer is a member of a workgroup, you may need to disable UAC so that the local user account is not filtered and can be elevated to an administrator account. For security reasons, disabling UAC should be a last resort. For information on disabling UAC, see <see
                 cref="http://go.microsoft.com/fwlink/?LinkId=91617"
                 >User Account Control and WMI</see
-              >. </para
-            >
+              >.
+            </para>
             <para />
           </block>
         </remarks>
@@ -487,29 +487,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the performance counter category (performance object) with which this performance counter is associated. </param
-        >
+          />The name of the performance counter category (performance object) with which this performance counter is associated.
+        </param>
         <param name="counterName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the performance counter. </param
-        >
+          />The name of the performance counter.
+        </param>
         <param name="instanceName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the performance counter category instance, or an empty string (""), if the category contains a single instance. </param
-        >
+          />The name of the performance counter category instance, or an empty string (""), if the category contains a single instance.
+        </param>
         <param name="machineName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The computer on which the performance counter and its associated category exist. </param
-        >
+          />The computer on which the performance counter and its associated category exist.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="BeginInit">
@@ -732,8 +732,8 @@
             >You can get a list of available pre-existing counters from the Windows Performance Manager’s <see
               cref="http://go.microsoft.com/fwlink/p/?LinkId=257854"
               >Add Counters dialog box</see
-            >. </para
-          >
+            >.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1081,8 +1081,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to increment by. (A negative value decrements the counter.) </param
-        >
+          />The value to increment by. (A negative value decrements the counter.)
+        </param>
       </Docs>
     </Member>
     <Member MemberName="InstanceLifetime">
@@ -1169,8 +1169,8 @@
             >If this <see cref="T:System.Diagnostics.PerformanceCounter" /> instance points to a noncustom category, you can choose from only the existing category instances. You can create new category instances only in custom categories, which allow you to define as many counters and category instances as you need.</para
           >
           <para
-            >To create a performance category instance, specify an <paramref name="instanceName" /> on the <see cref="M:System.Diagnostics.PerformanceCounter.#ctor" /> constructor. If the category instance specified by <paramref name="instanceName" /> already exists the new object will reference the existing category instance. </para
-          >
+            >To create a performance category instance, specify an <paramref name="instanceName" /> on the <see cref="M:System.Diagnostics.PerformanceCounter.#ctor" /> constructor. If the category instance specified by <paramref name="instanceName" /> already exists the new object will reference the existing category instance.
+          </para>
           <block subset="none" type="note">
             <para
               > Do not use the characters "(", ")", "#", "\", or "/" in the instance name. If any of these characters are used, the Performance Console (see <format type="text/html">

@@ -129,8 +129,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see cref="T:System.Collections.IDictionary" /> interface that represents a collection of the remoting message's properties. </para
-          >
+            >Gets an <see cref="T:System.Collections.IDictionary" /> interface that represents a collection of the remoting message's properties.
+          </para>
         </summary>
       </Docs>
     </Member>

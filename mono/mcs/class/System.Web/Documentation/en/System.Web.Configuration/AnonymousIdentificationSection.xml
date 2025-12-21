@@ -20,8 +20,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.Configuration.AnonymousIdentificationSection" /> class allows you to programmatically access and modify the anonymousIdentification element of a configuration file. </para
-      >
+        >The <see cref="T:System.Web.Configuration.AnonymousIdentificationSection" /> class allows you to programmatically access and modify the anonymousIdentification element of a configuration file.
+      </para>
       <para>The purpose of anonymous identification is to assign, at machine and application level, a unique identity to a non-authenticated user. This unique identity can then be used to track the user. Anonymous identification as used in this context does not have any relationship with the identity of the issuer of the Web request or with other security aspects related to the user; it simply assigns a unique identity for tracking purposes and user state management.</para>
       <para>Anonymous users are often tracked using the Session identifier. The main problems with this approach are the non-uniqueness of the identifier and the overhead involved in storing data to set a Session state value, which must be done in order to assign a session identifier to a user. Anonymous identification resolves these problems by providing a unique identifier for each non-authenticated user and not requiring the user to store any data to set the identifier. </para>
     </remarks>
@@ -74,11 +74,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.Configuration.AnonymousIdentificationSection.Cookieless" /> property defines when a cookie should be used to maintain information about the user. </para
-          >
+            >The <see cref="P:System.Web.Configuration.AnonymousIdentificationSection.Cookieless" /> property defines when a cookie should be used to maintain information about the user.
+          </para>
           <para
-            >When the <see cref="P:System.Web.Configuration.AnonymousIdentificationSection.Cookieless" /> property is set to <see cref="F:System.Web.HttpCookieMode.UseCookies" />, the user's identifier is stored in a cookie. For more information, refer to <see cref="T:System.Web.HttpCookieMode" />. </para
-          >
+            >When the <see cref="P:System.Web.Configuration.AnonymousIdentificationSection.Cookieless" /> property is set to <see cref="F:System.Web.HttpCookieMode.UseCookies" />, the user's identifier is stored in a cookie. For more information, refer to <see cref="T:System.Web.HttpCookieMode" />.
+          </para>
           <block subset="none" type="note">
             <para
               >ASP.NET stores the user's anonymous identifier within the URI path (that is, it runs in cookieless mode) if the <see cref="P:System.Web.Configuration.AnonymousIdentificationSection.Cookieless" /> property is set to one of the following values: <see cref="F:System.Web.HttpCookieMode.UseUri" />; <see cref="F:System.Web.HttpCookieMode.UseDeviceProfile" /> when the browser profile indicates that cookies are not supported; or <see cref="F:System.Web.HttpCookieMode.AutoDetect" /> when the auto-detection process determines that the browser does not support cookies. Finally, if the size of the URI and the anonymous identifier exceeds the allowed length, the anonymous identifier is not applied.</para
@@ -178,8 +178,8 @@
           <para
             >Be sure to use the default value for this property if you want both data validation and encryption to help protect the cookie. This option uses the configured data-validation algorithm, based on the <format type="text/html">
               <a href="4b5699a9-bc21-4c4a-85f1-8b3b8ebd2d46">&lt;machineKey&gt;</a>
-            </format> element. Triple-DES (3DES) is used for encryption, if available and if the key is long enough (48 bytes or more). </para
-          >
+            </format> element. Triple-DES (3DES) is used for encryption, if available and if the key is long enough (48 bytes or more).
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

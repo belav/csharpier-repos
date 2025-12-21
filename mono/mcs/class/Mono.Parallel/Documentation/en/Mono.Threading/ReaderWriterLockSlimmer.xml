@@ -44,8 +44,8 @@ Must be set to false prior calling this method.
 </para>
           <para>
 If value is <see langword="true" /> lock has been taken. This value is safe to trust even under exceptional situations.
-</para
-          >
+
+          </para>
         </param>
         <summary>Attempts to get the lock in Read mode and loops if it's not yet available.</summary>
         <remarks>To be added.</remarks>
@@ -74,8 +74,8 @@ Must be set to false prior calling this method.
 </para>
           <para>
 If value is <see langword="true" /> lock has been taken. This value is safe to trust even under exceptional situations.
-</para
-          >
+
+          </para>
         </param>
         <summary>Attempts to get the lock in Write mode and loops if it's not yet available.</summary>
         <remarks>To be added.</remarks>
@@ -146,8 +146,8 @@ Must be set to false prior calling this method.
 </para>
           <para>
 If value is <see langword="true" /> lock has been taken. This value is safe to trust even under exceptional situations.
-</para
-          >
+
+          </para>
         </param>
         <summary
           >Non-blocking equivalent of <see cref="m:Mono.Threading.EnterReadLock(System.Boolean@)" />.</summary
@@ -178,8 +178,8 @@ Must be set to false prior calling this method.
 </para>
           <para>
 If value is <see langword="true" /> lock has been taken. This value is safe to trust even under exceptional situations.
-</para
-          >
+
+          </para>
         </param>
         <summary
           >Non-blocking equivalent of <see cref="m:Mono.Threading.EnterWriteLock(System.Boolean@)" />.</summary

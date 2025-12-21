@@ -243,8 +243,8 @@
           <para>This value should be at least the maximum possible size of the SOAP headers, which are read in buffered mode.</para>
           <para>The value of this property must be less than or equal to MaxMessageSize and must be larger than the size of the headers of the message. Otherwise, the channel throws an exception. </para>
           <para
-            >If you receive more data than you can buffer, the channel throws a <see cref="T:System.ServiceModel.CommunicationException" />, which contains <see cref="T:System.ServiceModel.QuotaExceededException" /> as an inner exception. </para
-          >
+            >If you receive more data than you can buffer, the channel throws a <see cref="T:System.ServiceModel.CommunicationException" />, which contains <see cref="T:System.ServiceModel.QuotaExceededException" /> as an inner exception.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

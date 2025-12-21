@@ -119,15 +119,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The fully qualified type name of the editor. </param
-        >
+          />The fully qualified type name of the editor.
+        </param>
         <param name="baseTypeName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The fully qualified type name of the base class or interface to use as a lookup key for the editor. This class must be or derive from <see cref="T:System.Drawing.Design.UITypeEditor" />. </param
-        >
+          />The fully qualified type name of the base class or interface to use as a lookup key for the editor. This class must be or derive from <see cref="T:System.Drawing.Design.UITypeEditor" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -174,15 +174,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The fully qualified type name of the editor. </param
-        >
+          />The fully qualified type name of the editor.
+        </param>
         <param name="baseType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of the base class or interface to use as a lookup key for the editor. This class must be or derive from <see cref="T:System.Drawing.Design.UITypeEditor" />. </param
-        >
+          />The <see cref="T:System.Type" /> of the base class or interface to use as a lookup key for the editor. This class must be or derive from <see cref="T:System.Drawing.Design.UITypeEditor" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -223,15 +223,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> that represents the type of the editor. </param
-        >
+          />A <see cref="T:System.Type" /> that represents the type of the editor.
+        </param>
         <param name="baseType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of the base class or interface to use as a lookup key for the editor. This class must be or derive from <see cref="T:System.Drawing.Design.UITypeEditor" />. </param
-        >
+          />The <see cref="T:System.Type" /> of the base class or interface to use as a lookup key for the editor. This class must be or derive from <see cref="T:System.Drawing.Design.UITypeEditor" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="EditorBaseTypeName">
@@ -318,8 +318,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to test the value equality of. </param
-        >
+          />The object to test the value equality of.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">

@@ -38,18 +38,18 @@
         </item>
       </list>
       <para
-        >Additionally, you can use the <see cref="T:System.Web.ParserErrorCollection" /> class to do the following: </para
-      >
+        >Additionally, you can use the <see cref="T:System.Web.ParserErrorCollection" /> class to do the following:
+      </para>
       <list type="bullet">
         <item>
           <para
-            >Remove <see cref="T:System.Web.ParserError" /> objects with the <see cref="M:System.Web.ParserErrorCollection.Remove(System.Web.ParserError)" /> method. </para
-          >
+            >Remove <see cref="T:System.Web.ParserError" /> objects with the <see cref="M:System.Web.ParserErrorCollection.Remove(System.Web.ParserError)" /> method.
+          </para>
         </item>
         <item>
           <para
-            >Check whether a particular <see cref="T:System.Web.ParserError" /> is in the collection by using the <see cref="M:System.Web.ParserErrorCollection.Contains(System.Web.ParserError)" /> method. </para
-          >
+            >Check whether a particular <see cref="T:System.Web.ParserError" /> is in the collection by using the <see cref="M:System.Web.ParserErrorCollection.Contains(System.Web.ParserError)" /> method.
+          </para>
         </item>
         <item>
           <para
@@ -201,8 +201,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the objects in an existing <see cref="T:System.Web.ParserErrorCollection" /> to the collection. </para
-          >
+            >Adds the objects in an existing <see cref="T:System.Web.ParserErrorCollection" /> to the collection.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -224,8 +224,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You cannot add the same <see cref="T:System.Web.ParserError" /> object to the collection more than once. However, attempting to add a <see cref="T:System.Web.ParserError" /> object more than once will not throw an exception. Instead, the addition will fail. In this case, the <see cref="M:System.Web.ParserErrorCollection.Add(System.Web.ParserError)" /> method will return a value of –1. However, the <see cref="Overload:System.Web.ParserErrorCollection.AddRange" /> and <see cref="M:System.Web.ParserErrorCollection.Insert(System.Int32,System.Web.ParserError)" /> methods do not have return values. When adding <see cref="T:System.Web.ParserError" /> objects by using one of these methods, use the <see cref="M:System.Web.ParserErrorCollection.Contains(System.Web.ParserError)" /> method to determine whether a particular <see cref="T:System.Web.ParserError" /> object is already in the collection. </para
-          >
+            >You cannot add the same <see cref="T:System.Web.ParserError" /> object to the collection more than once. However, attempting to add a <see cref="T:System.Web.ParserError" /> object more than once will not throw an exception. Instead, the addition will fail. In this case, the <see cref="M:System.Web.ParserErrorCollection.Add(System.Web.ParserError)" /> method will return a value of –1. However, the <see cref="Overload:System.Web.ParserErrorCollection.AddRange" /> and <see cref="M:System.Web.ParserErrorCollection.Insert(System.Int32,System.Web.ParserError)" /> methods do not have return values. When adding <see cref="T:System.Web.ParserError" /> objects by using one of these methods, use the <see cref="M:System.Web.ParserErrorCollection.Contains(System.Web.ParserError)" /> method to determine whether a particular <see cref="T:System.Web.ParserError" /> object is already in the collection.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -263,13 +263,13 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="M:System.Web.ParserErrorCollection.CopyTo(System.Web.ParserError[],System.Int32)" /> method to copy the <see cref="T:System.Web.ParserError" /> objects in a collection (including the item references they contain) to a compatible array, starting at a specified index. This is useful when you want to sort the <see cref="T:System.Web.ParserError" /> objects in the collection by using the <see cref="Overload:System.Array.Sort" /> method. To do this: </para
-          >
+            >Use the <see cref="M:System.Web.ParserErrorCollection.CopyTo(System.Web.ParserError[],System.Int32)" /> method to copy the <see cref="T:System.Web.ParserError" /> objects in a collection (including the item references they contain) to a compatible array, starting at a specified index. This is useful when you want to sort the <see cref="T:System.Web.ParserError" /> objects in the collection by using the <see cref="Overload:System.Array.Sort" /> method. To do this:
+          </para>
           <list type="ordered">
             <item>
               <para
-                >Copy the <see cref="T:System.Web.ParserError" /> objects into a compatible array. </para
-              >
+                >Copy the <see cref="T:System.Web.ParserError" /> objects into a compatible array.
+              </para>
             </item>
             <item>
               <para>Sort the array. </para>

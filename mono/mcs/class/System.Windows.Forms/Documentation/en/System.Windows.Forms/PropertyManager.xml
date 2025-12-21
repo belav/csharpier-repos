@@ -205,8 +205,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />The <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnCurrentItemChanged">
@@ -230,8 +230,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

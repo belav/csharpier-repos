@@ -52,8 +52,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlSchemas" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlSchemas" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -90,8 +90,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.Schema.XmlSchema" /> object to be added to the collection of objects. </param
-        >
+          />The <see cref="T:System.Xml.Schema.XmlSchema" /> object to be added to the collection of objects.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Add">
@@ -128,8 +128,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.Serialization.XmlSchemas" /> object to be added to the end of the collection. </param
-        >
+          />The <see cref="T:System.Xml.Serialization.XmlSchemas" /> object to be added to the end of the collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Add">
@@ -364,8 +364,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.Schema.XmlSchema" /> object to locate. </param
-        >
+          />The <see cref="T:System.Xml.Schema.XmlSchema" /> object to locate.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CopyTo">
@@ -403,8 +403,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The one-dimensional <see cref="T:System.Array" /> that is the destination of the schemas copied from <see cref="T:System.Xml.Serialization.XmlSchemas" />. The <see cref="T:System.Array" /> must have zero-based indexing. </param
-        >
+          />The one-dimensional <see cref="T:System.Array" /> that is the destination of the schemas copied from <see cref="T:System.Xml.Serialization.XmlSchemas" />. The <see cref="T:System.Array" /> must have zero-based indexing.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
@@ -441,8 +441,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Locates in one of the XML schemas an <see cref="T:System.Xml.Schema.XmlSchemaObject" /> of the specified name and type. </para
-          >
+            >Locates in one of the XML schemas an <see cref="T:System.Xml.Schema.XmlSchemaObject" /> of the specified name and type.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -551,8 +551,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.Schema.XmlSchema" /> to locate. </param
-        >
+          />The <see cref="T:System.Xml.Schema.XmlSchema" /> to locate.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Insert">
@@ -590,15 +590,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index at which <paramref name="schema" /> should be inserted. </param
-        >
+          />The zero-based index at which <paramref name="schema" /> should be inserted.
+        </param>
         <param name="schema">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.Schema.XmlSchema" /> object to be inserted. </param
-        >
+          />The <see cref="T:System.Xml.Schema.XmlSchema" /> object to be inserted.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsCompiled">
@@ -790,15 +790,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index at which to insert <paramref name="value" />. </param
-        >
+          />The zero-based index at which to insert <paramref name="value" />.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new value of the element at <paramref name="index" />. </param
-        >
+          />The new value of the element at <paramref name="index" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnRemove">
@@ -836,15 +836,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index at which <paramref name="value" /> can be found. </param
-        >
+          />The zero-based index at which <paramref name="value" /> can be found.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value of the element to remove at <paramref name="index" />. </param
-        >
+          />The value of the element to remove at <paramref name="index" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnSet">
@@ -883,22 +883,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index at which <paramref name="oldValue" /> can be found. </param
-        >
+          />The zero-based index at which <paramref name="oldValue" /> can be found.
+        </param>
         <param name="oldValue">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to replace with <paramref name="newValue" />. </param
-        >
+          />The value to replace with <paramref name="newValue" />.
+        </param>
         <param name="newValue">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new value of the element at <paramref name="index" />. </param
-        >
+          />The new value of the element at <paramref name="index" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Remove">
@@ -935,8 +935,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.Schema.XmlSchema" /> to remove. </param
-        >
+          />The <see cref="T:System.Xml.Schema.XmlSchema" /> to remove.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.Generic.IEnumerable&lt;System.Xml.Schema.XmlSchema&gt;.GetEnumerator">

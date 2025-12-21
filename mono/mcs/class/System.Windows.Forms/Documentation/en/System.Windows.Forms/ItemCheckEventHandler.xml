@@ -33,8 +33,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the method that will handle the ItemCheck event of a <see cref="T:System.Windows.Forms.CheckedListBox" /> or <see cref="T:System.Windows.Forms.ListView" /> control. </para
-      >
+        >Represents the method that will handle the ItemCheck event of a <see cref="T:System.Windows.Forms.CheckedListBox" /> or <see cref="T:System.Windows.Forms.ListView" /> control.
+      </para>
     </summary>
   </Docs>
 </Type>

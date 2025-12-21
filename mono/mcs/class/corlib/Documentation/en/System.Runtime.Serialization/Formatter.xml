@@ -175,12 +175,8 @@
           <para>The top object of the deserialized graph of objects.</para>
         </returns>
         <param name="serializationStream">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The stream to deserialize. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The stream to deserialize.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetNext">
@@ -311,8 +307,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to schedule for serialization. </param
-        >
+          />The object to schedule for serialization.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Serialize">
@@ -348,15 +344,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream to which the objects are serialized. </param
-        >
+          />The stream to which the objects are serialized.
+        </param>
         <param name="graph">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object at the root of the graph to serialize. </param
-        >
+          />The object at the root of the graph to serialize.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SurrogateSelector">
@@ -426,22 +422,18 @@
           <para>When overridden in a derived class, writes an array to the stream already attached to the formatter.</para>
         </summary>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />The array to write. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The array to write.
+        </param>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the array. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the array.
+        </param>
         <param name="memberType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of elements that the array holds. </param
-        >
+          />The type of elements that the array holds.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteBoolean">
@@ -473,15 +465,11 @@
           <para>When overridden in a derived class, writes a Boolean value to the stream already attached to the formatter.</para>
         </summary>
         <param name="val">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to write. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to write.
+        </param>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the member. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the member.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteByte">
@@ -513,15 +501,11 @@
           <para>When overridden in a derived class, writes an 8-bit unsigned integer to the stream already attached to the formatter.</para>
         </summary>
         <param name="val">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to write. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to write.
+        </param>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the member. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the member.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteChar">
@@ -553,15 +537,11 @@
           <para>When overridden in a derived class, writes a Unicode character to the stream already attached to the formatter.</para>
         </summary>
         <param name="val">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to write. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to write.
+        </param>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the member. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the member.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteDateTime">
@@ -595,15 +575,11 @@
           >
         </summary>
         <param name="val">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to write. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to write.
+        </param>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the member. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the member.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteDecimal">
@@ -637,15 +613,11 @@
           >
         </summary>
         <param name="val">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to write. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to write.
+        </param>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the member. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the member.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteDouble">
@@ -677,15 +649,11 @@
           <para>When overridden in a derived class, writes a double-precision floating-point number to the stream already attached to the formatter.</para>
         </summary>
         <param name="val">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to write. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to write.
+        </param>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the member. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the member.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteInt16">
@@ -717,15 +685,11 @@
           <para>When overridden in a derived class, writes a 16-bit signed integer to the stream already attached to the formatter.</para>
         </summary>
         <param name="val">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to write. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to write.
+        </param>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the member. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the member.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteInt32">
@@ -757,15 +721,11 @@
           <para>When overridden in a derived class, writes a 32-bit signed integer to the stream.</para>
         </summary>
         <param name="val">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to write. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to write.
+        </param>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the member. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the member.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteInt64">
@@ -797,15 +757,11 @@
           <para>When overridden in a derived class, writes a 64-bit signed integer to the stream.</para>
         </summary>
         <param name="val">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to write. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to write.
+        </param>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the member. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the member.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteMember">
@@ -846,15 +802,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the member to serialize. </param
-        >
+          />The name of the member to serialize.
+        </param>
         <param name="data">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to write to the stream attached to the formatter. </param
-        >
+          />The object to write to the stream attached to the formatter.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteObjectRef">
@@ -894,22 +850,18 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object reference to write. </param
-        >
+          />The object reference to write.
+        </param>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the member. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the member.
+        </param>
         <param name="memberType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of object the reference points to. </param
-        >
+          />The type of object the reference points to.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteSByte">
@@ -946,15 +898,11 @@
           <para>When overridden in a derived class, writes an 8-bit signed integer to the stream already attached to the formatter.</para>
         </summary>
         <param name="val">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to write. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to write.
+        </param>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the member. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the member.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteSingle">
@@ -986,15 +934,11 @@
           <para>When overridden in a derived class, writes a single-precision floating-point number to the stream already attached to the formatter.</para>
         </summary>
         <param name="val">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to write. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to write.
+        </param>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the member. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the member.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteTimeSpan">
@@ -1028,15 +972,11 @@
           >
         </summary>
         <param name="val">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to write. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to write.
+        </param>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the member. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the member.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteUInt16">
@@ -1073,15 +1013,11 @@
           <para>When overridden in a derived class, writes a 16-bit unsigned integer to the stream already attached to the formatter.</para>
         </summary>
         <param name="val">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to write. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to write.
+        </param>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the member. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the member.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteUInt32">
@@ -1118,15 +1054,11 @@
           <para>When overridden in a derived class, writes a 32-bit unsigned integer to the stream already attached to the formatter.</para>
         </summary>
         <param name="val">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to write. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to write.
+        </param>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the member. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the member.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteUInt64">
@@ -1163,15 +1095,11 @@
           <para>When overridden in a derived class, writes a 64-bit unsigned integer to the stream already attached to the formatter.</para>
         </summary>
         <param name="val">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to write. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to write.
+        </param>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the member. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the member.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteValueType">
@@ -1208,22 +1136,18 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object representing the value type. </param
-        >
+          />The object representing the value type.
+        </param>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the member. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the member.
+        </param>
         <param name="memberType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of the value type. </param
-        >
+          />The <see cref="T:System.Type" /> of the value type.
+        </param>
       </Docs>
     </Member>
   </Members>

@@ -91,8 +91,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The hierarchical path of the view to retrieve. </param
-        >
+          />The hierarchical path of the view to retrieve.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

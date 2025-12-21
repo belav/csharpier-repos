@@ -237,15 +237,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the static field. </param
-        >
+          />The name of the static field.
+        </param>
         <param name="literalValue">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The constant value of the literal. </param
-        >
+          />The constant value of the literal.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="FullName">
@@ -383,8 +383,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />This must be a bit flag from <see cref="T:System.Reflection.BindingFlags" /> : InvokeMethod, NonPublic, and so on. </param
-        >
+          />This must be a bit flag from <see cref="T:System.Reflection.BindingFlags" /> : InvokeMethod, NonPublic, and so on.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttributes">
@@ -434,8 +434,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Specifies whether to search this member's inheritance chain to find the attributes. </param
-        >
+          />Specifies whether to search this member's inheritance chain to find the attributes.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttributes">
@@ -487,15 +487,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The Type object to which the custom attributes are applied. </param
-        >
+          />The Type object to which the custom attributes are applied.
+        </param>
         <param name="inherit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Specifies whether to search this member's inheritance chain to find the attributes. </param
-        >
+          />Specifies whether to search this member's inheritance chain to find the attributes.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetElementType">
@@ -598,15 +598,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the event to get. </param
-        >
+          />The name of the event to get.
+        </param>
         <param name="bindingAttr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />This invocation attribute. This must be a bit flag from <see cref="T:System.Reflection.BindingFlags" /> : InvokeMethod, NonPublic, and so on. </param
-        >
+          />This invocation attribute. This must be a bit flag from <see cref="T:System.Reflection.BindingFlags" /> : InvokeMethod, NonPublic, and so on.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetEvents">
@@ -690,8 +690,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />This must be a bit flag from <see cref="T:System.Reflection.BindingFlags" />, such as InvokeMethod, NonPublic, and so on. </param
-        >
+          />This must be a bit flag from <see cref="T:System.Reflection.BindingFlags" />, such as InvokeMethod, NonPublic, and so on.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetField">
@@ -738,15 +738,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the field to get. </param
-        >
+          />The name of the field to get.
+        </param>
         <param name="bindingAttr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />This must be a bit flag from <see cref="T:System.Reflection.BindingFlags" /> : InvokeMethod, NonPublic, and so on. </param
-        >
+          />This must be a bit flag from <see cref="T:System.Reflection.BindingFlags" /> : InvokeMethod, NonPublic, and so on.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetFields">
@@ -795,8 +795,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />This must be a bit flag from <see cref="T:System.Reflection.BindingFlags" />, such as InvokeMethod, NonPublic, and so on. </param
-        >
+          />This must be a bit flag from <see cref="T:System.Reflection.BindingFlags" />, such as InvokeMethod, NonPublic, and so on.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetInterface">
@@ -839,19 +839,15 @@
           >
         </returns>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the interface. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the interface.
+        </param>
         <param name="ignoreCase">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />If true, the search is case-insensitive. If false, the search is case-sensitive. </param
-        >
+          />If true, the search is case-insensitive. If false, the search is case-sensitive.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetInterfaceMap">
@@ -900,8 +896,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the interface for which the interface mapping is to be retrieved. </param
-        >
+          />The type of the interface for which the interface mapping is to be retrieved.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetInterfaces">
@@ -980,26 +976,22 @@
           >
         </returns>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the member. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the member.
+        </param>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of member that is to be returned. </param
-        >
+          />The type of member that is to be returned.
+        </param>
         <param name="bindingAttr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />This must be a bit flag from <see cref="T:System.Reflection.BindingFlags" /> : InvokeMethod, NonPublic, and so on. </param
-        >
+          />This must be a bit flag from <see cref="T:System.Reflection.BindingFlags" /> : InvokeMethod, NonPublic, and so on.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetMembers">
@@ -1045,8 +1037,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />This must be a bit flag from <see cref="T:System.Reflection.BindingFlags" /> : InvokeMethod, NonPublic, and so on. </param
-        >
+          />This must be a bit flag from <see cref="T:System.Reflection.BindingFlags" /> : InvokeMethod, NonPublic, and so on.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetMethodImpl">
@@ -1130,8 +1122,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />This must be a bit flag from <see cref="T:System.Reflection.BindingFlags" />, such as InvokeMethod, NonPublic, and so on. </param
-        >
+          />This must be a bit flag from <see cref="T:System.Reflection.BindingFlags" />, such as InvokeMethod, NonPublic, and so on.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetNestedType">
@@ -1178,8 +1170,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.String" /> containing the name of the nested type to get. </param
-        >
+          />The <see cref="T:System.String" /> containing the name of the nested type to get.
+        </param>
         <param name="bindingAttr">
           <attribution
             license="cc4"
@@ -1235,8 +1227,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />This must be a bit flag from <see cref="T:System.Reflection.BindingFlags" />, such as InvokeMethod, NonPublic, and so on. </param
-        >
+          />This must be a bit flag from <see cref="T:System.Reflection.BindingFlags" />, such as InvokeMethod, NonPublic, and so on.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetProperties">
@@ -1282,8 +1274,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />This invocation attribute. This must be a bit flag from <see cref="T:System.Reflection.BindingFlags" /> : InvokeMethod, NonPublic, and so on. </param
-        >
+          />This invocation attribute. This must be a bit flag from <see cref="T:System.Reflection.BindingFlags" /> : InvokeMethod, NonPublic, and so on.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetPropertyImpl">
@@ -1415,57 +1407,57 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the member to invoke. This can be a constructor, method, property, or field. A suitable invocation attribute must be specified. Note that it is possible to invoke the default member of a class by passing an empty string as the name of the member. </param
-        >
+          />The name of the member to invoke. This can be a constructor, method, property, or field. A suitable invocation attribute must be specified. Note that it is possible to invoke the default member of a class by passing an empty string as the name of the member.
+        </param>
         <param name="invokeAttr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The invocation attribute. This must be a bit flag from BindingFlags. </param
-        >
+          />The invocation attribute. This must be a bit flag from BindingFlags.
+        </param>
         <param name="binder">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that enables the binding, coercion of argument types, invocation of members, and retrieval of MemberInfo objects using reflection. If binder is null, the default binder is used. See <see cref="T:System.Reflection.Binder" />. </param
-        >
+          />An object that enables the binding, coercion of argument types, invocation of members, and retrieval of MemberInfo objects using reflection. If binder is null, the default binder is used. See <see cref="T:System.Reflection.Binder" />.
+        </param>
         <param name="target">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object on which to invoke the specified member. If the member is static, this parameter is ignored. </param
-        >
+          />The object on which to invoke the specified member. If the member is static, this parameter is ignored.
+        </param>
         <param name="args">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An argument list. This is an array of objects that contains the number, order, and type of the parameters of the member to be invoked. If there are no parameters this should be null. </param
-        >
+          />An argument list. This is an array of objects that contains the number, order, and type of the parameters of the member to be invoked. If there are no parameters this should be null.
+        </param>
         <param name="modifiers">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of the same length as <paramref name="args" /> with elements that represent the attributes associated with the arguments of the member to be invoked. A parameter has attributes associated with it in the metadata. They are used by various interoperability services. See the metadata specs for details such as this. </param
-        >
+          />An array of the same length as <paramref name="args" /> with elements that represent the attributes associated with the arguments of the member to be invoked. A parameter has attributes associated with it in the metadata. They are used by various interoperability services. See the metadata specs for details such as this.
+        </param>
         <param name="culture">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An instance of CultureInfo used to govern the coercion of types. If this is null, the CultureInfo for the current thread is used. (Note that this is necessary to, for example, convert a string that represents 1000 to a double value, since 1000 is represented differently by different cultures.) </param
-        >
+          />An instance of CultureInfo used to govern the coercion of types. If this is null, the CultureInfo for the current thread is used. (Note that this is necessary to, for example, convert a string that represents 1000 to a double value, since 1000 is represented differently by different cultures.)
+        </param>
         <param name="namedParameters">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Each parameter in the <paramref name="namedParameters" /> array gets the value in the corresponding element in the <paramref name="args" /> array. If the length of <paramref name="args" /> is greater than the length of <paramref name="namedParameters" />, the remaining argument values are passed in order. </param
-        >
+          />Each parameter in the <paramref name="namedParameters" /> array gets the value in the corresponding element in the <paramref name="args" /> array. If the length of <paramref name="args" /> is greater than the length of <paramref name="namedParameters" />, the remaining argument values are passed in order.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsArrayImpl">
@@ -1638,15 +1630,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The Type object to which the custom attributes are applied. </param
-        >
+          />The Type object to which the custom attributes are applied.
+        </param>
         <param name="inherit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Specifies whether to search this member's inheritance chain to find the attributes. </param
-        >
+          />Specifies whether to search this member's inheritance chain to find the attributes.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsPointerImpl">
@@ -1931,8 +1923,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An instance of a helper class to define the custom attribute. </param
-        >
+          />An instance of a helper class to define the custom attribute.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetCustomAttribute">
@@ -1983,15 +1975,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The constructor for the custom attribute. </param
-        >
+          />The constructor for the custom attribute.
+        </param>
         <param name="binaryAttribute">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A byte blob representing the attributes. </param
-        >
+          />A byte blob representing the attributes.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.Runtime.InteropServices._EnumBuilder.GetIDsOfNames">

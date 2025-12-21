@@ -75,8 +75,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of enumeration values that provides information about the location of the manifest resource. </param
-        >
+          />A bitwise combination of enumeration values that provides information about the location of the manifest resource.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="FileName">

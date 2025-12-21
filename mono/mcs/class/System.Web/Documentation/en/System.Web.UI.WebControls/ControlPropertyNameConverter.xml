@@ -76,8 +76,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.WebControls.ControlPropertyNameConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" /> method returns a <see cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" /> collection that contains a set of strings representing the names of the current control's properties. </para
-          >
+            >The <see cref="M:System.Web.UI.WebControls.ControlPropertyNameConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" /> method returns a <see cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" /> collection that contains a set of strings representing the names of the current control's properties.
+          </para>
           <para
             >Use the <paramref name="context" /> parameter to extract additional information about the design-time environment from which this converter is invoked. This parameter can be null, and properties on the context object can return null. If the <paramref name="context" /> parameter is null, this method returns null.</para
           >
@@ -166,8 +166,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.WebControls.ControlPropertyNameConverter.GetStandardValuesSupported(System.ComponentModel.ITypeDescriptorContext)" /> method returns a value that indicates whether this object supports a standard set of values. </para
-          >
+            >The <see cref="M:System.Web.UI.WebControls.ControlPropertyNameConverter.GetStandardValuesSupported(System.ComponentModel.ITypeDescriptorContext)" /> method returns a value that indicates whether this object supports a standard set of values.
+          </para>
           <para
             >The <paramref name="context" /> parameter extracts additional information about the design-time environment from which this converter is invoked. This parameter can be null, and properties on the context object can return null. If the <paramref name="context" /> parameter is null, this method returns false.</para
           >

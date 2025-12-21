@@ -92,8 +92,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the role for which to check membership. </param
-        >
+          />The name of the role for which to check membership.
+        </param>
       </Docs>
     </Member>
   </Members>

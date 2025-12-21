@@ -14,8 +14,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Windows.Forms.TrackBarRenderer" /> class provides a set of static methods that can be used to render each part of a track bar control with the current visual style of the operating system. Rendering a control refers to drawing the user interface of a control. This is useful if you are drawing a custom control that should have the appearance of the current visual style. </para
-      >
+        >The <see cref="T:System.Windows.Forms.TrackBarRenderer" /> class provides a set of static methods that can be used to render each part of a track bar control with the current visual style of the operating system. Rendering a control refers to drawing the user interface of a control. This is useful if you are drawing a custom control that should have the appearance of the current visual style.
+      </para>
       <para
         >If visual styles are enabled in the operating system and visual styles are applied to the client area of application windows, the methods in this class will draw the track bar with the current visual style. Otherwise, the methods in this class will throw an <see cref="T:System.InvalidOperationException" />. To determine whether the members of this class can be used, you can check the value of the <see cref="P:System.Windows.Forms.TrackBarRenderer.IsSupported" /> property.</para
       >

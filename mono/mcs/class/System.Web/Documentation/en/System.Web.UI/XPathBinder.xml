@@ -71,8 +71,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XPath.IXPathNavigable" /> object reference that the expression is evaluated against. This must be a valid object identifier in the page's specified language. </param
-        >
+          />The <see cref="T:System.Xml.XPath.IXPathNavigable" /> object reference that the expression is evaluated against. This must be a valid object identifier in the page's specified language.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -124,15 +124,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XPath.IXPathNavigable" /> object reference that the expression is evaluated against. This must be a valid object identifier in the page's specified language. </param
-        >
+          />The <see cref="T:System.Xml.XPath.IXPathNavigable" /> object reference that the expression is evaluated against. This must be a valid object identifier in the page's specified language.
+        </param>
         <param name="format">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A .NET Framework format string, similar to those used by <see cref="M:System.String.Format(System.String,System.Object)" />, that converts the <see cref="T:System.Xml.XPath.IXPathNavigable" /> object (which results from the evaluation of the data-binding expression) to a <see cref="T:System.String" /> that can be displayed by the requesting browser. </param
-        >
+          />A .NET Framework format string, similar to those used by <see cref="M:System.String.Format(System.String,System.Object)" />, that converts the <see cref="T:System.Xml.XPath.IXPathNavigable" /> object (which results from the evaluation of the data-binding expression) to a <see cref="T:System.String" /> that can be displayed by the requesting browser.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -296,8 +296,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XPath.IXPathNavigable" /> object reference that the expression is evaluated against. This must be a valid object identifier in the page's specified language. </param
-        >
+          />The <see cref="T:System.Xml.XPath.IXPathNavigable" /> object reference that the expression is evaluated against. This must be a valid object identifier in the page's specified language.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

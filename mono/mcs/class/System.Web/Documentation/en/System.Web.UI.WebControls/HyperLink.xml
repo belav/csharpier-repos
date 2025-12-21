@@ -230,8 +230,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Notifies the control that an element was parsed, and adds the element to the <see cref="T:System.Web.UI.WebControls.HyperLink" /> control. </para
-          >
+            >Notifies the control that an element was parsed, and adds the element to the <see cref="T:System.Web.UI.WebControls.HyperLink" /> control.
+          </para>
         </summary>
         <param name="obj">
           <attribution
@@ -334,8 +334,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.Web.UI.WebControls.HyperLink.NavigateUrl" /> property to specify the URL to navigate to when the <see cref="T:System.Web.UI.WebControls.HyperLink" /> control is clicked. </para
-          >
+            >Use the <see cref="P:System.Web.UI.WebControls.HyperLink.NavigateUrl" /> property to specify the URL to navigate to when the <see cref="T:System.Web.UI.WebControls.HyperLink" /> control is clicked.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -411,8 +411,8 @@
             <para
               > The <see cref="P:System.Web.UI.WebControls.HyperLink.Target" /> property renders as a target attribute. The target attribute on anchor elements is not allowed in the XHTML 1.1 document type definition. Do not set the <see cref="P:System.Web.UI.WebControls.HyperLink.Target" /> property if the rendered output for the <see cref="T:System.Web.UI.WebControls.HyperLink" /> must be XHTML 1.1 compliant. For more information, refer to the topic <format type="text/html">
                 <a href="1b78d416-66bb-43a5-ac77-c703aab55b97">ASP.NET and XHTML Compliance</a>
-              </format>. </para
-            >
+              </format>.
+            </para>
             <para
               >When creating accessible Web pages, it is strongly recommended you avoid using the <see cref="P:System.Web.UI.WebControls.HyperLink.Target" /> property to target another window. For more information, see <format type="text/html">
                 <a href="7e3ce9c4-6b7d-4fb1-94b5-72cf2a44fe13"

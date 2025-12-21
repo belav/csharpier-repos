@@ -32,8 +32,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.Threading.Tasks.Task" /> instances may be created in a variety of ways. The most common approach is by using the task’s <see cref="P:System.Threading.Tasks.Task.Factory" /> property to retrieve a <see cref="T:System.Threading.Tasks.TaskFactory" /> instance that can be used to create tasks for several purposes. For example, to create a <see cref="T:System.Threading.Tasks.Task" /> that runs an action, the factory's <see cref="M:System.Threading.Tasks.TaskFactory.StartNew(System.Action)" /> method may be used: </para
-      >
+        <see cref="T:System.Threading.Tasks.Task" /> instances may be created in a variety of ways. The most common approach is by using the task’s <see cref="P:System.Threading.Tasks.Task.Factory" /> property to retrieve a <see cref="T:System.Threading.Tasks.TaskFactory" /> instance that can be used to create tasks for several purposes. For example, to create a <see cref="T:System.Threading.Tasks.Task" /> that runs an action, the factory's <see cref="M:System.Threading.Tasks.TaskFactory.StartNew(System.Action)" /> method may be used:
+      </para>
       <code>// C#
 var t = Task.Factory.StartNew(() =&gt; DoAction());
 
@@ -47,17 +47,17 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
         </format>.</para
       >
       <para
-        >The <see cref="T:System.Threading.Tasks.Task" /> class also provides constructors that initialize the task but that do not schedule it for execution. For performance reasons, the task factory’s <see cref="M:System.Threading.Tasks.TaskFactory.StartNew(System.Action)" /> method should be the preferred mechanism for creating and scheduling computational tasks, but for scenarios where creation and scheduling must be separated, the constructors may be used, and the task's <see cref="M:System.Threading.Tasks.Task.Start" /> method may then be used to schedule the task for execution at a later time. </para
-      >
+        >The <see cref="T:System.Threading.Tasks.Task" /> class also provides constructors that initialize the task but that do not schedule it for execution. For performance reasons, the task factory’s <see cref="M:System.Threading.Tasks.TaskFactory.StartNew(System.Action)" /> method should be the preferred mechanism for creating and scheduling computational tasks, but for scenarios where creation and scheduling must be separated, the constructors may be used, and the task's <see cref="M:System.Threading.Tasks.Task.Start" /> method may then be used to schedule the task for execution at a later time.
+      </para>
       <para
-        >For operations that return values, the <see cref="T:System.Threading.Tasks.Task`1" /> class should be used. </para
-      >
+        >For operations that return values, the <see cref="T:System.Threading.Tasks.Task`1" /> class should be used.
+      </para>
       <format type="text/html">
         <h2>For Debugger Developers</h2>
       </format>
       <para
-        >For developers implementing custom debuggers, several internal and private members of task may be useful (these may change from release to release). The m_taskId field serves as the backing store for the <see cref="P:System.Threading.Tasks.Task.Id" /> property, however accessing this field directly from a debugger may be more efficient than accessing the same value through the property's getter method (the s_taskIdCounter counter is used to retrieve the next available ID for a task). Similarly, the m_stateFlags field stores information about the current lifecycle stage of the task, information also accessible through the <see cref="P:System.Threading.Tasks.Task.Status" /> property. The m_action field stores a reference to the task's delegate, and the m_stateObject field stores the async state passed to the task by the developer. Finally, for debuggers that parse stack frames, the InternalWait method serves a potential marker for when a task is entering a wait operation. </para
-      >
+        >For developers implementing custom debuggers, several internal and private members of task may be useful (these may change from release to release). The m_taskId field serves as the backing store for the <see cref="P:System.Threading.Tasks.Task.Id" /> property, however accessing this field directly from a debugger may be more efficient than accessing the same value through the property's getter method (the s_taskIdCounter counter is used to retrieve the next available ID for a task). Similarly, the m_stateFlags field stores information about the current lifecycle stage of the task, information also accessible through the <see cref="P:System.Threading.Tasks.Task.Status" /> property. The m_action field stores a reference to the task's delegate, and the m_stateObject field stores the async state passed to the task by the developer. Finally, for debuggers that parse stack frames, the InternalWait method serves a potential marker for when a task is entering a wait operation.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -82,8 +82,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Rather than calling this constructor, the most common way to instantiate a <see cref="T:System.Threading.Tasks.Task" /> object and launch a task is by calling the static <see cref="M:System.Threading.Tasks.Task.Run(System.Action)" /> and <see cref="M:System.Threading.Tasks.TaskFactory.StartNew(System.Action)" /> methods. </para
-          >
+            >Rather than calling this constructor, the most common way to instantiate a <see cref="T:System.Threading.Tasks.Task" /> object and launch a task is by calling the static <see cref="M:System.Threading.Tasks.Task.Run(System.Action)" /> and <see cref="M:System.Threading.Tasks.TaskFactory.StartNew(System.Action)" /> methods.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -121,8 +121,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Rather than calling this constructor, the most common way to instantiate a <see cref="T:System.Threading.Tasks.Task" /> object and launch a task is by calling the static <see cref="M:System.Threading.Tasks.Task.Run(System.Action,System.Threading.CancellationToken)" /> and <see cref="M:System.Threading.Tasks.TaskFactory.StartNew(System.Action,System.Threading.CancellationToken)" /> methods. </para
-          >
+            >Rather than calling this constructor, the most common way to instantiate a <see cref="T:System.Threading.Tasks.Task" /> object and launch a task is by calling the static <see cref="M:System.Threading.Tasks.Task.Run(System.Action,System.Threading.CancellationToken)" /> and <see cref="M:System.Threading.Tasks.TaskFactory.StartNew(System.Action,System.Threading.CancellationToken)" /> methods.
+          </para>
           <para
             >For more information, see <format type="text/html">
               <a href="458b5e69-5210-45e5-bc44-3888f86abd6f"
@@ -176,8 +176,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Rather than calling this constructor, the most common way to instantiate a <see cref="T:System.Threading.Tasks.Task" /> object and launch a task is by calling the static <see cref="M:System.Threading.Tasks.TaskFactory.StartNew(System.Action,System.Threading.Tasks.TaskCreationOptions)" /> method. </para
-          >
+            >Rather than calling this constructor, the most common way to instantiate a <see cref="T:System.Threading.Tasks.Task" /> object and launch a task is by calling the static <see cref="M:System.Threading.Tasks.TaskFactory.StartNew(System.Action,System.Threading.Tasks.TaskCreationOptions)" /> method.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -197,8 +197,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Threading.Tasks.TaskCreationOptions" /> used to customize the task's behavior. </param
-        >
+          />The <see cref="T:System.Threading.Tasks.TaskCreationOptions" /> used to customize the task's behavior.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -222,8 +222,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Rather than calling this constructor, the most common way to instantiate a <see cref="T:System.Threading.Tasks.Task" /> object and launch a task is by calling the static <see cref="M:System.Threading.Tasks.TaskFactory.StartNew(System.Action{System.Object},System.Object)" /> method. </para
-          >
+            >Rather than calling this constructor, the most common way to instantiate a <see cref="T:System.Threading.Tasks.Task" /> object and launch a task is by calling the static <see cref="M:System.Threading.Tasks.TaskFactory.StartNew(System.Action{System.Object},System.Object)" /> method.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -269,8 +269,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Rather than calling this constructor, the most common way to instantiate a <see cref="T:System.Threading.Tasks.Task" /> object and launch a task is by calling the static <see cref="M:System.Threading.Tasks.TaskFactory.StartNew(System.Action,System.Threading.CancellationToken,System.Threading.Tasks.TaskCreationOptions,System.Threading.Tasks.TaskScheduler)" /> method. </para
-          >
+            >Rather than calling this constructor, the most common way to instantiate a <see cref="T:System.Threading.Tasks.Task" /> object and launch a task is by calling the static <see cref="M:System.Threading.Tasks.TaskFactory.StartNew(System.Action,System.Threading.CancellationToken,System.Threading.Tasks.TaskCreationOptions,System.Threading.Tasks.TaskScheduler)" /> method.
+          </para>
           <para
             >For more information, see <format type="text/html">
               <a href="458b5e69-5210-45e5-bc44-3888f86abd6f"
@@ -332,8 +332,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Rather than calling this constructor, the most common way to instantiate a <see cref="T:System.Threading.Tasks.Task" /> object and launch a task is by calling the static <see cref="M:System.Threading.Tasks.TaskFactory.StartNew(System.Action{System.Object},System.Object,System.Threading.CancellationToken)" /> method. </para
-          >
+            >Rather than calling this constructor, the most common way to instantiate a <see cref="T:System.Threading.Tasks.Task" /> object and launch a task is by calling the static <see cref="M:System.Threading.Tasks.TaskFactory.StartNew(System.Action{System.Object},System.Object,System.Threading.CancellationToken)" /> method.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -386,8 +386,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Rather than calling this constructor, the most common way to instantiate a <see cref="T:System.Threading.Tasks.Task" /> object and launch a task is by calling the static <see cref="M:System.Threading.Tasks.TaskFactory.StartNew(System.Action{System.Object},System.Object,System.Threading.Tasks.TaskCreationOptions)" /> method. </para
-          >
+            >Rather than calling this constructor, the most common way to instantiate a <see cref="T:System.Threading.Tasks.Task" /> object and launch a task is by calling the static <see cref="M:System.Threading.Tasks.TaskFactory.StartNew(System.Action{System.Object},System.Object,System.Threading.Tasks.TaskCreationOptions)" /> method.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -441,8 +441,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Rather than calling this constructor, the most common way to instantiate a <see cref="T:System.Threading.Tasks.Task" /> object and launch a task is by calling the static <see cref="M:System.Threading.Tasks.TaskFactory.StartNew(System.Action{System.Object},System.Object,System.Threading.CancellationToken,System.Threading.Tasks.TaskCreationOptions,System.Threading.Tasks.TaskScheduler)" /> method. </para
-          >
+            >Rather than calling this constructor, the most common way to instantiate a <see cref="T:System.Threading.Tasks.Task" /> object and launch a task is by calling the static <see cref="M:System.Threading.Tasks.TaskFactory.StartNew(System.Action{System.Object},System.Object,System.Threading.CancellationToken,System.Threading.Tasks.TaskCreationOptions,System.Threading.Tasks.TaskScheduler)" /> method.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2451,18 +2451,18 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Threading.Tasks.Task.Run(System.Action)" /> method is a simpler alternative to the <see cref="M:System.Threading.Tasks.TaskFactory.StartNew(System.Action)" /> method. It creates a task with the following default values: </para
-          >
+            >The <see cref="M:System.Threading.Tasks.Task.Run(System.Action)" /> method is a simpler alternative to the <see cref="M:System.Threading.Tasks.TaskFactory.StartNew(System.Action)" /> method. It creates a task with the following default values:
+          </para>
           <list type="bullet">
             <item>
               <para
-                >Its cancellation token is <see cref="P:System.Threading.CancellationToken.None" />. </para
-              >
+                >Its cancellation token is <see cref="P:System.Threading.CancellationToken.None" />.
+              </para>
             </item>
             <item>
               <para
-                >Its <see cref="P:System.Threading.Tasks.Task.CreationOptions" /> property value is <see cref="F:System.Threading.Tasks.TaskCreationOptions.DenyChildAttach" />. </para
-              >
+                >Its <see cref="P:System.Threading.Tasks.Task.CreationOptions" /> property value is <see cref="F:System.Threading.Tasks.TaskCreationOptions.DenyChildAttach" />.
+              </para>
             </item>
             <item>
               <para>It uses the default task scheduler. </para>
@@ -2552,13 +2552,13 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Threading.Tasks.Task.Run(System.Action,System.Threading.CancellationToken)" /> method is a simpler alternative to the <see cref="M:System.Threading.Tasks.TaskFactory.StartNew(System.Action,System.Threading.CancellationToken)" />  method. It creates a task with the following default values: </para
-          >
+            >The <see cref="M:System.Threading.Tasks.Task.Run(System.Action,System.Threading.CancellationToken)" /> method is a simpler alternative to the <see cref="M:System.Threading.Tasks.TaskFactory.StartNew(System.Action,System.Threading.CancellationToken)" />  method. It creates a task with the following default values:
+          </para>
           <list type="bullet">
             <item>
               <para
-                >Its <see cref="P:System.Threading.Tasks.Task.CreationOptions" /> property value is <see cref="F:System.Threading.Tasks.TaskCreationOptions.DenyChildAttach" />. </para
-              >
+                >Its <see cref="P:System.Threading.Tasks.Task.CreationOptions" /> property value is <see cref="F:System.Threading.Tasks.TaskCreationOptions.DenyChildAttach" />.
+              </para>
             </item>
             <item>
               <para>It uses the default task scheduler. </para>
@@ -2720,18 +2720,18 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Threading.Tasks.Task.Run``1(System.Func{``0})" /> method is a simpler alternative to the <see cref="M:System.Threading.Tasks.TaskFactory.StartNew(System.Action)" /> method. It creates a task with the following default values: </para
-          >
+            >The <see cref="M:System.Threading.Tasks.Task.Run``1(System.Func{``0})" /> method is a simpler alternative to the <see cref="M:System.Threading.Tasks.TaskFactory.StartNew(System.Action)" /> method. It creates a task with the following default values:
+          </para>
           <list type="bullet">
             <item>
               <para
-                >Its cancellation token is <see cref="P:System.Threading.CancellationToken.None" />. </para
-              >
+                >Its cancellation token is <see cref="P:System.Threading.CancellationToken.None" />.
+              </para>
             </item>
             <item>
               <para
-                >Its <see cref="P:System.Threading.Tasks.Task.CreationOptions" /> property value is <see cref="F:System.Threading.Tasks.TaskCreationOptions.DenyChildAttach" />. </para
-              >
+                >Its <see cref="P:System.Threading.Tasks.Task.CreationOptions" /> property value is <see cref="F:System.Threading.Tasks.TaskCreationOptions.DenyChildAttach" />.
+              </para>
             </item>
             <item>
               <para>It uses the default task scheduler. </para>
@@ -2852,13 +2852,13 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Threading.Tasks.Task.Run``1(System.Func{``0},System.Threading.CancellationToken)" /> method is a simpler alternative to the <see cref="M:System.Threading.Tasks.TaskFactory.StartNew(System.Action)" /> method. It creates a task with the following default values: </para
-          >
+            >The <see cref="M:System.Threading.Tasks.Task.Run``1(System.Func{``0},System.Threading.CancellationToken)" /> method is a simpler alternative to the <see cref="M:System.Threading.Tasks.TaskFactory.StartNew(System.Action)" /> method. It creates a task with the following default values:
+          </para>
           <list type="bullet">
             <item>
               <para
-                >Its <see cref="P:System.Threading.Tasks.Task.CreationOptions" /> property value is <see cref="F:System.Threading.Tasks.TaskCreationOptions.DenyChildAttach" />. </para
-              >
+                >Its <see cref="P:System.Threading.Tasks.Task.CreationOptions" /> property value is <see cref="F:System.Threading.Tasks.TaskCreationOptions.DenyChildAttach" />.
+              </para>
             </item>
             <item>
               <para>It uses the default task scheduler. </para>
@@ -4300,8 +4300,8 @@ var t = Task.Factory.StartNew(() =&gt; DoAction());
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A context that, when awaited, will asynchronously transition back into the current context at the time of the await. If the current <see cref="T:System.Threading.SynchronizationContext" /> is non-null, it is treated as the current context. Otherwise, the task scheduler that is associated with the currently executing task is treated as the current context. </para
-          >
+            >A context that, when awaited, will asynchronously transition back into the current context at the time of the await. If the current <see cref="T:System.Threading.SynchronizationContext" /> is non-null, it is treated as the current context. Otherwise, the task scheduler that is associated with the currently executing task is treated as the current context.
+          </para>
         </returns>
       </Docs>
     </Member>

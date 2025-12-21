@@ -6,7 +6,7 @@
       >array-type</non_terminal
     >. Rather, it is a <non_terminal where="11.2"
       >class-type</non_terminal
-    > from which all <non_terminal where="19.1">array-type</non_terminal>s are derived. </paragraph
-  >
+    > from which all <non_terminal where="19.1">array-type</non_terminal>s are derived.
+  </paragraph>
   <paragraph>At run-time, a value of type System.Array can be null or a reference to an instance of any array type. </paragraph>
 </clause>

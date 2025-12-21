@@ -17,8 +17,8 @@
         >ASP.NET health monitoring allows production and operations staff to manage deployed Web applications. The <see cref="N:System.Web.Management" /> namespace contains the health-event types responsible for packaging application health-status data and the provider types responsible for processing this data. It also contains supporting types that help during the management of health events.</para
       >
       <para
-        >Instances of the <see cref="T:System.Web.Management.WebApplicationInformation" /> class contain information that is obtained using any of the types derived from the <see cref="T:System.Web.Management.WebManagementEvent" /> type. </para
-      >
+        >Instances of the <see cref="T:System.Web.Management.WebApplicationInformation" /> class contain information that is obtained using any of the types derived from the <see cref="T:System.Web.Management.WebManagementEvent" /> type.
+      </para>
       <para>Your application needs the appropriate permissions to access protected information provided by this type.</para>
       <para>The following is an excerpt of a configuration file you could use to enable ASP.NET to log error events that contain application information.  </para>
       <code>&lt;healthMonitoring 

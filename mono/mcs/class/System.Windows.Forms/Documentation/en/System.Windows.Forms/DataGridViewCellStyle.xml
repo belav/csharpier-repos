@@ -74,8 +74,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.DataGridViewCellStyle" /> used as a template to provide initial property values. </param
-        >
+          />The <see cref="T:System.Windows.Forms.DataGridViewCellStyle" /> used as a template to provide initial property values.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -210,12 +210,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The user can enter a null value into a cell by pressing CTRL+0 or by typing the value of the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" /> property. When the user commits the change, the underlying cell value is set to the value of the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.DataSourceNullValue" /> property or to null if <see cref="P:System.Windows.Forms.DataGridViewCellStyle.DataSourceNullValue" /> is <see cref="F:System.DBNull.Value" /> and the cell <see cref="P:System.Windows.Forms.DataGridViewCell.ValueType" /> is a reference type. This conversion does not occur when you set the <see cref="P:System.Windows.Forms.DataGridViewCell.Value" /> property programmatically. </para
-          >
+            >The user can enter a null value into a cell by pressing CTRL+0 or by typing the value of the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" /> property. When the user commits the change, the underlying cell value is set to the value of the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.DataSourceNullValue" /> property or to null if <see cref="P:System.Windows.Forms.DataGridViewCellStyle.DataSourceNullValue" /> is <see cref="F:System.DBNull.Value" /> and the cell <see cref="P:System.Windows.Forms.DataGridViewCell.ValueType" /> is a reference type. This conversion does not occur when you set the <see cref="P:System.Windows.Forms.DataGridViewCell.Value" /> property programmatically.
+          </para>
           <block subset="none" type="note">
             <para
-              >The control does not display the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" /> property value for cell values equal to the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.DataSourceNullValue" /> property value when <see cref="P:System.Windows.Forms.DataGridViewCellStyle.DataSourceNullValue" /> is set to a value other than <see cref="F:System.DBNull.Value" /> or null. In this case, you can handle the <see cref="E:System.Windows.Forms.DataGridView.CellFormatting" /> event to display the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" /> property value. For more information, see the code example in this topic. </para
-            >
+              >The control does not display the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" /> property value for cell values equal to the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.DataSourceNullValue" /> property value when <see cref="P:System.Windows.Forms.DataGridViewCellStyle.DataSourceNullValue" /> is set to a value other than <see cref="F:System.DBNull.Value" /> or null. In this case, you can handle the <see cref="E:System.Windows.Forms.DataGridView.CellFormatting" /> event to display the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" /> property value. For more information, see the code example in this topic.
+            </para>
           </block>
         </remarks>
         <summary>
@@ -265,8 +265,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object to compare with this instance, or null. </param
-        >
+          />An object to compare with this instance, or null.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -310,8 +310,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Windows.Forms.DataGridViewCellStyle.ForeColor" /> property typically should specify a color that contrasts with the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.BackColor" /> property. </para
-          >
+            >The <see cref="P:System.Windows.Forms.DataGridViewCellStyle.ForeColor" /> property typically should specify a color that contrasts with the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.BackColor" /> property.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -421,8 +421,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this property to determine whether the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.DataSourceNullValue" /> property has been explicitly set without having to store its default value for comparison. This is useful because the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.DataSourceNullValue" /> property has a non-empty default value, unlike most other <see cref="T:System.Windows.Forms.DataGridViewCellStyle" /> properties, which have default values such as null, <see cref="F:System.Drawing.Color.Empty" />, or <see cref="F:System.Windows.Forms.DataGridViewContentAlignment.NotSet" />. </para
-          >
+            >Use this property to determine whether the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.DataSourceNullValue" /> property has been explicitly set without having to store its default value for comparison. This is useful because the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.DataSourceNullValue" /> property has a non-empty default value, unlike most other <see cref="T:System.Windows.Forms.DataGridViewCellStyle" /> properties, which have default values such as null, <see cref="F:System.Drawing.Color.Empty" />, or <see cref="F:System.Windows.Forms.DataGridViewContentAlignment.NotSet" />.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -455,8 +455,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this property to determine whether the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.FormatProvider" /> property has been explicitly set without having to store its default value for comparison. This is useful because the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.FormatProvider" /> property has a non-empty default value, unlike most other <see cref="T:System.Windows.Forms.DataGridViewCellStyle" /> properties, which have default values such as null, <see cref="F:System.Drawing.Color.Empty" />, or <see cref="F:System.Windows.Forms.DataGridViewContentAlignment.NotSet" />. </para
-          >
+            >Use this property to determine whether the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.FormatProvider" /> property has been explicitly set without having to store its default value for comparison. This is useful because the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.FormatProvider" /> property has a non-empty default value, unlike most other <see cref="T:System.Windows.Forms.DataGridViewCellStyle" /> properties, which have default values such as null, <see cref="F:System.Drawing.Color.Empty" />, or <see cref="F:System.Windows.Forms.DataGridViewContentAlignment.NotSet" />.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -489,8 +489,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this property to determine whether the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" /> property has been explicitly set without having to store its default value for comparison. This is useful because the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" /> property has a non-empty default value, unlike most other <see cref="T:System.Windows.Forms.DataGridViewCellStyle" /> properties, which have default values such as null, <see cref="F:System.Drawing.Color.Empty" />, or <see cref="F:System.Windows.Forms.DataGridViewContentAlignment.NotSet" />. </para
-          >
+            >Use this property to determine whether the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" /> property has been explicitly set without having to store its default value for comparison. This is useful because the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" /> property has a non-empty default value, unlike most other <see cref="T:System.Windows.Forms.DataGridViewCellStyle" /> properties, which have default values such as null, <see cref="F:System.Drawing.Color.Empty" />, or <see cref="F:System.Windows.Forms.DataGridViewContentAlignment.NotSet" />.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -527,8 +527,8 @@
           >
           <block subset="none" type="note">
             <para
-              >The control does not display the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" /> property value for cell values equal to the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.DataSourceNullValue" /> property value when <see cref="P:System.Windows.Forms.DataGridViewCellStyle.DataSourceNullValue" /> is set to a value other than <see cref="F:System.DBNull.Value" /> or null. In this case, you can handle the <see cref="E:System.Windows.Forms.DataGridView.CellFormatting" /> event to display the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" /> property value. For more information, see the code example in this topic. </para
-            >
+              >The control does not display the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" /> property value for cell values equal to the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.DataSourceNullValue" /> property value when <see cref="P:System.Windows.Forms.DataGridViewCellStyle.DataSourceNullValue" /> is set to a value other than <see cref="F:System.DBNull.Value" /> or null. In this case, you can handle the <see cref="E:System.Windows.Forms.DataGridView.CellFormatting" /> event to display the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" /> property value. For more information, see the code example in this topic.
+            </para>
           </block>
           <para>This property takes any object, which enables you to specify a value with a type appropriate to the display type of the cell. For example, you can set this property to string values for use by text box cells or images for use by image cells. </para>
         </remarks>
@@ -566,8 +566,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Setting the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.Padding" /> property affects where the editing control of the <see cref="T:System.Windows.Forms.DataGridViewCell" /> is drawn. For example, if you set <see cref="P:System.Windows.Forms.DataGridViewCellStyle.Padding" /> on a <see cref="T:System.Windows.Forms.DataGridViewTextBoxCell" /> to a <see cref="T:System.Windows.Forms.Padding" /> that has a value of 10 for its <see cref="P:System.Windows.Forms.Padding.Left" />, <see cref="P:System.Windows.Forms.Padding.Top" />, <see cref="P:System.Windows.Forms.Padding.Right" />, and <see cref="P:System.Windows.Forms.Padding.Bottom" /> properties, the content of the cell is drawn in the middle of the cell with a space of 10 pixels between the edges of the text box and the edges of the cell. </para
-          >
+            >Setting the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.Padding" /> property affects where the editing control of the <see cref="T:System.Windows.Forms.DataGridViewCell" /> is drawn. For example, if you set <see cref="P:System.Windows.Forms.DataGridViewCellStyle.Padding" /> on a <see cref="T:System.Windows.Forms.DataGridViewTextBoxCell" /> to a <see cref="T:System.Windows.Forms.Padding" /> that has a value of 10 for its <see cref="P:System.Windows.Forms.Padding.Left" />, <see cref="P:System.Windows.Forms.Padding.Top" />, <see cref="P:System.Windows.Forms.Padding.Right" />, and <see cref="P:System.Windows.Forms.Padding.Bottom" /> properties, the content of the cell is drawn in the middle of the cell with a space of 10 pixels between the edges of the text box and the edges of the cell.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -735,8 +735,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <see cref="P:System.Windows.Forms.DataGridViewCellStyle.WrapMode" /> is <see cref="F:System.Windows.Forms.DataGridViewTriState.False" /> for a cell that contains text, the cell displays the text on a single line, and displays any embedded newline characters as box characters. If <see cref="P:System.Windows.Forms.DataGridViewCellStyle.WrapMode" /> is <see cref="F:System.Windows.Forms.DataGridViewTriState.True" /> for a cell that contains text, the cell displays newline characters as line breaks, but also wraps any lines that exceed the width of the cell. </para
-          >
+            >If <see cref="P:System.Windows.Forms.DataGridViewCellStyle.WrapMode" /> is <see cref="F:System.Windows.Forms.DataGridViewTriState.False" /> for a cell that contains text, the cell displays the text on a single line, and displays any embedded newline characters as box characters. If <see cref="P:System.Windows.Forms.DataGridViewCellStyle.WrapMode" /> is <see cref="F:System.Windows.Forms.DataGridViewTriState.True" /> for a cell that contains text, the cell displays newline characters as line breaks, but also wraps any lines that exceed the width of the cell.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

@@ -344,8 +344,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Generates a hash code for the current <see cref="T:System.Windows.Forms.Padding" />. </para
-          >
+            >Generates a hash code for the current <see cref="T:System.Windows.Forms.Padding" />.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />

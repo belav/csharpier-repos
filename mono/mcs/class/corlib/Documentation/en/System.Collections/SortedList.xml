@@ -70,8 +70,8 @@
       >
       <para>Elements in this collection can be accessed using an integer index.  Indexes in this collection are zero-based.</para>
       <para
-        >The foreach statement of the C# language (for each in Visual Basic) requires the type of each element in the collection. Since each element of the <see cref="T:System.Collections.SortedList" /> object is a key/value pair, the element type is not the type of the key or the type of the value. Rather, the element type is <see cref="T:System.Collections.DictionaryEntry" />. For example: </para
-      >
+        >The foreach statement of the C# language (for each in Visual Basic) requires the type of each element in the collection. Since each element of the <see cref="T:System.Collections.SortedList" /> object is a key/value pair, the element type is not the type of the key or the type of the value. Rather, the element type is <see cref="T:System.Collections.DictionaryEntry" />. For example:
+      </para>
       <para>code reference: Classic SortedList Example#2</para>
       <para>The foreach statement is a wrapper around the enumerator, which allows only reading from, not writing to, the collection.</para>
     </remarks>
@@ -261,8 +261,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The initial number of elements that the <see cref="T:System.Collections.SortedList" /> object can contain. </param
-        >
+          />The initial number of elements that the <see cref="T:System.Collections.SortedList" /> object can contain.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -319,8 +319,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The initial number of elements that the <see cref="T:System.Collections.SortedList" /> object can contain. </param
-        >
+          />The initial number of elements that the <see cref="T:System.Collections.SortedList" /> object can contain.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -434,15 +434,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key of the element to add. </param
-        >
+          />The key of the element to add.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value of the element to add. The value can be null. </param
-        >
+          />The value of the element to add. The value can be null.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Capacity">
@@ -608,8 +608,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key to locate in the <see cref="T:System.Collections.SortedList" /> object. </param
-        >
+          />The key to locate in the <see cref="T:System.Collections.SortedList" /> object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ContainsKey">
@@ -715,8 +715,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to locate in the <see cref="T:System.Collections.SortedList" /> object. The value can be null. </param
-        >
+          />The value to locate in the <see cref="T:System.Collections.SortedList" /> object. The value can be null.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CopyTo">
@@ -768,15 +768,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The one-dimensional <see cref="T:System.Array" /> object that is the destination of the <see cref="T:System.Collections.DictionaryEntry" /> objects copied from <see cref="T:System.Collections.SortedList" />. The <see cref="T:System.Array" /> must have zero-based indexing. </param
-        >
+          />The one-dimensional <see cref="T:System.Array" /> object that is the destination of the <see cref="T:System.Collections.DictionaryEntry" /> objects copied from <see cref="T:System.Collections.SortedList" />. The <see cref="T:System.Array" /> must have zero-based indexing.
+        </param>
         <param name="arrayIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index in <paramref name="array" /> at which copying begins. </param
-        >
+          />The zero-based index in <paramref name="array" /> at which copying begins.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Count">
@@ -857,8 +857,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index of the value to get. </param
-        >
+          />The zero-based index of the value to get.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetEnumerator">
@@ -955,8 +955,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index of the key to get. </param
-        >
+          />The zero-based index of the key to get.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetKeyList">
@@ -1100,8 +1100,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key to locate in the <see cref="T:System.Collections.SortedList" /> object. </param
-        >
+          />The key to locate in the <see cref="T:System.Collections.SortedList" /> object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IndexOfValue">
@@ -1155,8 +1155,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to locate in the <see cref="T:System.Collections.SortedList" /> object. The value can be null. </param
-        >
+          />The value to locate in the <see cref="T:System.Collections.SortedList" /> object. The value can be null.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsFixedSize">
@@ -1345,8 +1345,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key of the element to remove. </param
-        >
+          />The key of the element to remove.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RemoveAt">
@@ -1389,8 +1389,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index of the element to remove. </param
-        >
+          />The zero-based index of the element to remove.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetByIndex">
@@ -1434,15 +1434,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index at which to save <paramref name="value" />. </param
-        >
+          />The zero-based index at which to save <paramref name="value" />.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to save into the <see cref="T:System.Collections.SortedList" /> object. The value can be null. </param
-        >
+          />The <see cref="T:System.Object" /> to save into the <see cref="T:System.Collections.SortedList" /> object. The value can be null.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Synchronized">
@@ -1491,8 +1491,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Collections.SortedList" /> object to synchronize. </param
-        >
+          />The <see cref="T:System.Collections.SortedList" /> object to synchronize.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SyncRoot">

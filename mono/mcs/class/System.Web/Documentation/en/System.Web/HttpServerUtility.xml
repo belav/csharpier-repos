@@ -159,8 +159,8 @@
             >ASP.NET does not verify that the current user is authorized to view the resource delivered by the <see cref="M:System.Web.HttpServerUtility.Execute(System.String)" /> method. Although the ASP.NET authorization and authentication logic runs before the original resource handler is called, ASP.NET directly calls the handler indicated by the <see cref="M:System.Web.HttpServerUtility.Execute(System.String)" /> method and does not rerun authentication and authorization logic for the new resource. If your application's security policy requires clients to have appropriate authorization to access the resource, the application should force reauthorization or provide a custom access-control mechanism.</para
           >
           <para
-            >You can force reauthorization by using the <see cref="Overload:System.Web.HttpResponse.Redirect" /> method instead of the <see cref="M:System.Web.HttpServerUtility.Execute(System.String)" /> method. <see cref="Overload:System.Web.HttpResponse.Redirect" /> performs a client-side redirect in which the browser requests the new resource. Because this redirect is a new request entering the system, it is subjected to all the authentication and authorization logic of both Internet Information Services (IIS) and ASP.NET security policy. </para
-          >
+            >You can force reauthorization by using the <see cref="Overload:System.Web.HttpResponse.Redirect" /> method instead of the <see cref="M:System.Web.HttpServerUtility.Execute(System.String)" /> method. <see cref="Overload:System.Web.HttpResponse.Redirect" /> performs a client-side redirect in which the browser requests the new resource. Because this redirect is a new request entering the system, it is subjected to all the authentication and authorization logic of both Internet Information Services (IIS) and ASP.NET security policy.
+          </para>
           <para
             >You can verify that the user has permission to view the resource by incorporating a custom authorization method that uses the <see cref="Overload:System.Security.Principal.WindowsPrincipal.IsInRole" /> method before the application calls the <see cref="M:System.Web.HttpServerUtility.Execute(System.String)" /> method.</para
           >
@@ -207,12 +207,8 @@
           >
         </summary>
         <param name="path">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The URL path to execute. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The URL path to execute.
+        </param>
         <param name="preserveForm">
           <attribution
             license="cc4"
@@ -245,8 +241,8 @@
             >ASP.NET does not verify that the current user is authorized to view the resource delivered by the <see cref="M:System.Web.HttpServerUtility.Execute(System.String,System.IO.TextWriter)" /> method. Although the ASP.NET authorization and authentication logic runs before the original resource handler is called, ASP.NET directly calls the handler indicated by the <see cref="M:System.Web.HttpServerUtility.Execute(System.String,System.IO.TextWriter)" /> method and does not rerun authentication and authorization logic for the new resource. If your application's security policy requires clients to have appropriate authorization to access the resource, the application should force reauthorization or provide a custom access-control mechanism.</para
           >
           <para
-            >You can force reauthorization by using the <see cref="Overload:System.Web.HttpResponse.Redirect" /> method instead of the <see cref="M:System.Web.HttpServerUtility.Execute(System.String,System.IO.TextWriter)" /> method. <see cref="Overload:System.Web.HttpResponse.Redirect" /> performs a client-side redirect in which the browser requests the new resource. Because this redirect is a new request entering the system, it is subjected to all the authentication and authorization logic of both Internet Information Services (IIS) and ASP.NET security policy. </para
-          >
+            >You can force reauthorization by using the <see cref="Overload:System.Web.HttpResponse.Redirect" /> method instead of the <see cref="M:System.Web.HttpServerUtility.Execute(System.String,System.IO.TextWriter)" /> method. <see cref="Overload:System.Web.HttpResponse.Redirect" /> performs a client-side redirect in which the browser requests the new resource. Because this redirect is a new request entering the system, it is subjected to all the authentication and authorization logic of both Internet Information Services (IIS) and ASP.NET security policy.
+          </para>
           <para
             >You can verify that the user has permission to view the resource by incorporating a custom authorization method that uses the <see cref="Overload:System.Security.Principal.WindowsPrincipal.IsInRole" /> method before the application calls the <see cref="M:System.Web.HttpServerUtility.Execute(System.String,System.IO.TextWriter)" /> method.</para
           >
@@ -258,19 +254,15 @@
           >
         </summary>
         <param name="path">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The URL path to execute. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The URL path to execute.
+        </param>
         <param name="writer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.TextWriter" /> to capture the output. </param
-        >
+          />The <see cref="T:System.IO.TextWriter" /> to capture the output.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -364,8 +356,8 @@
             >ASP.NET does not verify that the current user is authorized to view the resource that is delivered by the <see cref="M:System.Web.HttpServerUtility.Execute(System.Web.IHttpHandler,System.IO.TextWriter,System.Boolean)" /> method. Although the ASP.NET authorization and authentication logic runs before the original resource handler is called, ASP.NET directly calls the handler that is indicated by the <see cref="M:System.Web.HttpServerUtility.Execute(System.Web.IHttpHandler,System.IO.TextWriter,System.Boolean)" /> method and does not rerun authentication and authorization logic for the new resource. If the security policy for your application requires clients to have appropriate authorization to gain access to the resource, the application should force reauthorization or provide a custom access-control mechanism.</para
           >
           <para
-            >You can force reauthorization by using the <see cref="Overload:System.Web.HttpResponse.Redirect" /> method instead of the <see cref="M:System.Web.HttpServerUtility.Execute(System.Web.IHttpHandler,System.IO.TextWriter,System.Boolean)" /> method. The <see cref="Overload:System.Web.HttpResponse.Redirect" /> performs a client-side redirect in which the browser requests the new resource. Because this redirect is a new request entering the system, it is subjected to all the authentication and authorization logic of both the IIS and ASP.NET security policy. </para
-          >
+            >You can force reauthorization by using the <see cref="Overload:System.Web.HttpResponse.Redirect" /> method instead of the <see cref="M:System.Web.HttpServerUtility.Execute(System.Web.IHttpHandler,System.IO.TextWriter,System.Boolean)" /> method. The <see cref="Overload:System.Web.HttpResponse.Redirect" /> performs a client-side redirect in which the browser requests the new resource. Because this redirect is a new request entering the system, it is subjected to all the authentication and authorization logic of both the IIS and ASP.NET security policy.
+          </para>
           <para
             >You can verify that the user has permission to view the resource by incorporating a custom authorization method that uses the <see cref="Overload:System.Security.Principal.WindowsPrincipal.IsInRole" /> method before the application calls the <see cref="M:System.Web.HttpServerUtility.Execute(System.Web.IHttpHandler,System.IO.TextWriter,System.Boolean)" /> method.</para
           >
@@ -596,12 +588,8 @@
           >
         </summary>
         <param name="s">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The string to encode. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The string to encode.
+        </param>
         <param name="output">
           <attribution
             license="cc4"
@@ -732,8 +720,8 @@
             >ASP.NET does not verify that the current user is authorized to view the resource delivered by the <see cref="M:System.Web.HttpServerUtility.Transfer(System.String)" /> method. Although the ASP.NET authorization and authentication logic runs before the original resource handler is called, ASP.NET directly calls the handler indicated by the <see cref="M:System.Web.HttpServerUtility.Transfer(System.String)" /> method and does not rerun authentication and authorization logic for the new resource. If your application's security policy requires clients to have appropriate authorization to access the resource, the application should force reauthorization or provide a custom access-control mechanism.</para
           >
           <para
-            >You can force reauthorization by using the <see cref="Overload:System.Web.HttpResponse.Redirect" /> method instead of the <see cref="M:System.Web.HttpServerUtility.Transfer(System.String)" /> method. The <see cref="Overload:System.Web.HttpResponse.Redirect" /> method performs a client-side redirect in which the browser requests the new resource. Because this redirect is a new request entering the system, it is subjected to all the authentication and authorization logic of both Internet Information Services (IIS) and ASP.NET security policy. </para
-          >
+            >You can force reauthorization by using the <see cref="Overload:System.Web.HttpResponse.Redirect" /> method instead of the <see cref="M:System.Web.HttpServerUtility.Transfer(System.String)" /> method. The <see cref="Overload:System.Web.HttpResponse.Redirect" /> method performs a client-side redirect in which the browser requests the new resource. Because this redirect is a new request entering the system, it is subjected to all the authentication and authorization logic of both Internet Information Services (IIS) and ASP.NET security policy.
+          </para>
           <para
             >You can verify that the user has permission to view the resource by incorporating a custom authorization method that uses the <see cref="Overload:System.Security.Principal.WindowsPrincipal.IsInRole" /> method before the application calls the <see cref="M:System.Web.HttpServerUtility.Transfer(System.String)" /> method.</para
           >
@@ -782,8 +770,8 @@
             >For security purposes, you should keep the enableViewStateMac attribute set to true. ASP.NET does not verify that the current user is authorized to view the resource delivered by the <see cref="M:System.Web.HttpServerUtility.Transfer(System.String,System.Boolean)" /> method. Although the ASP.NET authorization and authentication logic runs before the original resource handler is called, ASP.NET directly calls the handler indicated by the <see cref="M:System.Web.HttpServerUtility.Transfer(System.String,System.Boolean)" /> method and does not rerun authentication and authorization logic for the new resource. If your application's security policy requires clients to have appropriate authorization to access the resource, the application should force reauthorization or provide a custom access-control mechanism.</para
           >
           <para
-            >You can force reauthorization by using the <see cref="Overload:System.Web.HttpResponse.Redirect" /> method instead of the <see cref="M:System.Web.HttpServerUtility.Transfer(System.String,System.Boolean)" /> method. The <see cref="Overload:System.Web.HttpResponse.Redirect" /> method performs a client-side redirect in which the browser requests the new resource. Because this redirect is a new request entering the system, it is subjected to all the authentication and authorization logic of both Internet Information Services (IIS) and ASP.NET security policy. </para
-          >
+            >You can force reauthorization by using the <see cref="Overload:System.Web.HttpResponse.Redirect" /> method instead of the <see cref="M:System.Web.HttpServerUtility.Transfer(System.String,System.Boolean)" /> method. The <see cref="Overload:System.Web.HttpResponse.Redirect" /> method performs a client-side redirect in which the browser requests the new resource. Because this redirect is a new request entering the system, it is subjected to all the authentication and authorization logic of both Internet Information Services (IIS) and ASP.NET security policy.
+          </para>
           <para
             >You can verify that the user has permission to view the resource by incorporating a custom authorization method that uses the <see cref="Overload:System.Security.Principal.WindowsPrincipal.IsInRole" /> method before the application calls the <see cref="M:System.Web.HttpServerUtility.Transfer(System.String,System.Boolean)" /> method.</para
           >
@@ -841,8 +829,8 @@
             >For security purposes, you should keep the enableViewStateMac attribute set to true. ASP.NET does not verify that the current user is authorized to view the resource delivered by the <see cref="M:System.Web.HttpServerUtility.Transfer(System.String,System.Boolean)" /> method. Although the ASP.NET authorization and authentication logic runs before the original resource handler is called, ASP.NET directly calls the handler indicated by the <see cref="M:System.Web.HttpServerUtility.Transfer(System.Web.IHttpHandler,System.Boolean)" /> method, and does not rerun authentication and authorization logic for the new resource. If the security policy for your application requires clients to have appropriate authorization to access the resource, the application should force reauthorization or provide a custom access-control mechanism.</para
           >
           <para
-            >You can force reauthorization by using the <see cref="Overload:System.Web.HttpResponse.Redirect" /> method instead of the <see cref="M:System.Web.HttpServerUtility.Transfer(System.Web.IHttpHandler,System.Boolean)" /> method. The <see cref="Overload:System.Web.HttpResponse.Redirect" /> method performs a client-side redirect in which the browser requests the new resource. Because this redirect is a new request entering the system, it is subjected to all the authentication and authorization logic of both the IIS and ASP.NET security policy. </para
-          >
+            >You can force reauthorization by using the <see cref="Overload:System.Web.HttpResponse.Redirect" /> method instead of the <see cref="M:System.Web.HttpServerUtility.Transfer(System.Web.IHttpHandler,System.Boolean)" /> method. The <see cref="Overload:System.Web.HttpResponse.Redirect" /> method performs a client-side redirect in which the browser requests the new resource. Because this redirect is a new request entering the system, it is subjected to all the authentication and authorization logic of both the IIS and ASP.NET security policy.
+          </para>
           <para
             >You can verify that the user has permission to view the resource by incorporating a custom authorization method that uses the <see cref="Overload:System.Security.Principal.WindowsPrincipal.IsInRole" /> method before the application calls the <see cref="M:System.Web.HttpServerUtility.Transfer(System.Web.IHttpHandler,System.Boolean)" /> method.</para
           >

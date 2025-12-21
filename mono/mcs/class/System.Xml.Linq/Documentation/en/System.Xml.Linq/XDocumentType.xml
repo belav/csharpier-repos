@@ -31,8 +31,8 @@
       <para>This class represents the XML concept of a DTD.</para>
       <para>DTD support in sqltecxlinq is limited. </para>
       <para
-        >sqltecxlinq will expand internal entities by default, but it will not resolve external entity references unless an <see cref="T:System.Xml.XmlReader" /> with an associated <see cref="T:System.Xml.XmlResolver" /> is used to load the XML tree. </para
-      >
+        >sqltecxlinq will expand internal entities by default, but it will not resolve external entity references unless an <see cref="T:System.Xml.XmlReader" /> with an associated <see cref="T:System.Xml.XmlResolver" /> is used to load the XML tree.
+      </para>
       <para
         >sqltecxlinq will not validate a document against a DTD, but you can use a validating <see cref="T:System.Xml.XmlReader" /> to perform DTD validation if necessary.</para
       >
@@ -111,8 +111,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes an instance of the <see cref="T:System.Xml.Linq.XDocumentType" /> class. </para
-          >
+            >Initializes an instance of the <see cref="T:System.Xml.Linq.XDocumentType" /> class.
+          </para>
         </summary>
         <param name="name">
           <attribution

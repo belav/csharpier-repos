@@ -88,8 +88,8 @@ private bool PromptUser(string text)
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.SecurityState" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.SecurityState" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -146,8 +146,8 @@ private bool PromptUser(string text)
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="M:System.Security.SecurityState.IsStateAvailable" /> calls the <see cref="M:System.AppDomainManager.CheckSecuritySettings(System.Security.SecurityState)" /> method to determine whether the state that is represented by this class is available on the host. </para
-          >
+            <see cref="M:System.Security.SecurityState.IsStateAvailable" /> calls the <see cref="M:System.AppDomainManager.CheckSecuritySettings(System.Security.SecurityState)" /> method to determine whether the state that is represented by this class is available on the host.
+          </para>
           <para
             >See the <see cref="T:System.Security.SecurityState" /> class for an example implementation of the <see cref="M:System.AppDomainManager.CheckSecuritySettings(System.Security.SecurityState)" /> method.</para
           >
@@ -155,8 +155,8 @@ private bool PromptUser(string text)
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the state for this implementation of the <see cref="T:System.Security.SecurityState" /> class is available on the current host. </para
-          >
+            >Gets a value that indicates whether the state for this implementation of the <see cref="T:System.Security.SecurityState" /> class is available on the current host.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />

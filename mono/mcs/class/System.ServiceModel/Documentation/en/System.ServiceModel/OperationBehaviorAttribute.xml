@@ -29,16 +29,16 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see cref="T:System.ServiceModel.OperationBehaviorAttribute" /> attribute to indicate what operation-specific execution behavior the operation has when executed. (To specify execution behavior at the service level, use the <see cref="T:System.ServiceModel.ServiceBehaviorAttribute" /> attribute.) </para
-      >
+        >Use the <see cref="T:System.ServiceModel.OperationBehaviorAttribute" /> attribute to indicate what operation-specific execution behavior the operation has when executed. (To specify execution behavior at the service level, use the <see cref="T:System.ServiceModel.ServiceBehaviorAttribute" /> attribute.)
+      </para>
       <block subset="none" type="note">
         <para
           >You can also use <see cref="T:System.ServiceModel.OperationBehaviorAttribute" /> to configure a callback contract operation in a duplex client application. When used on a callback operation, the <see cref="P:System.ServiceModel.OperationBehaviorAttribute.ReleaseInstanceMode" /> property must be <see cref="F:System.ServiceModel.ReleaseInstanceMode.None" /> or an <see cref="T:System.InvalidOperationException" /> exception is thrown at runtime.</para
         >
       </block>
       <para
-        >The <see cref="T:System.ServiceModel.OperationBehaviorAttribute" /> attribute is a indigo1 programming model feature that enables common features that developers otherwise must implement themselves. </para
-      >
+        >The <see cref="T:System.ServiceModel.OperationBehaviorAttribute" /> attribute is a indigo1 programming model feature that enables common features that developers otherwise must implement themselves.
+      </para>
       <list type="bullet">
         <item>
           <para
@@ -114,8 +114,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.OperationBehaviorAttribute" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.OperationBehaviorAttribute" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -216,8 +216,8 @@
             >Use the <see cref="P:System.ServiceModel.OperationBehaviorAttribute.ReleaseInstanceMode" /> property to specify when indigo1 recycles a service object in the course of executing a method. The default behavior is to recycle a service object according to the <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.InstanceContextMode" /> value. Setting the <see cref="P:System.ServiceModel.OperationBehaviorAttribute.ReleaseInstanceMode" /> property changes that default behavior.</para
           >
           <para
-            >The <see cref="P:System.ServiceModel.OperationBehaviorAttribute.ReleaseInstanceMode" /> makes no threading guarantees. If you must have a new, unmodified object when your service runs, set the <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.InstanceContextMode" /> property to <see cref="F:System.ServiceModel.InstanceContextMode.PerCall" />. </para
-          >
+            >The <see cref="P:System.ServiceModel.OperationBehaviorAttribute.ReleaseInstanceMode" /> makes no threading guarantees. If you must have a new, unmodified object when your service runs, set the <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.InstanceContextMode" /> property to <see cref="F:System.ServiceModel.InstanceContextMode.PerCall" />.
+          </para>
           <para
             >In transaction scenarios, the <see cref="P:System.ServiceModel.OperationBehaviorAttribute.ReleaseInstanceMode" /> property is often used to ensure that old data associated with the service object is cleaned up prior to processing a method call. You can also ensure that service objects associated with transactions are recycled after the transaction successfully completes by setting the <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.ReleaseServiceInstanceOnTransactionComplete" /> property to true.</para
           >
@@ -240,8 +240,8 @@
             >You can also use <see cref="T:System.ServiceModel.OperationBehaviorAttribute" /> to configure a callback contract operation in a duplex client application. When used on a callback operation, the <see cref="P:System.ServiceModel.OperationBehaviorAttribute.ReleaseInstanceMode" /> property must be <see cref="F:System.ServiceModel.ReleaseInstanceMode.None" /> or an <see cref="T:System.InvalidOperationException" /> exception is thrown at runtime.</para
           >
           <para
-            >In addition, it is important to realize that if the service is created by passing a service object to the <see cref="M:System.ServiceModel.ServiceHost.#ctor(System.Object,System.Uri[])" /> constructor, the value of this property is treated as if it were <see cref="F:System.ServiceModel.ReleaseInstanceMode.None" />. </para
-          >
+            >In addition, it is important to realize that if the service is created by passing a service object to the <see cref="M:System.ServiceModel.ServiceHost.#ctor(System.Object,System.Uri[])" /> constructor, the value of this property is treated as if it were <see cref="F:System.ServiceModel.ReleaseInstanceMode.None" />.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -429,8 +429,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Set the <see cref="P:System.ServiceModel.OperationBehaviorAttribute.TransactionAutoComplete" /> property to false to complete or abort transactions directly in the code for the operation. </para
-          >
+            >Set the <see cref="P:System.ServiceModel.OperationBehaviorAttribute.TransactionAutoComplete" /> property to false to complete or abort transactions directly in the code for the operation.
+          </para>
           <para>Handled exceptions can be thrown in the course of the operation without automatically aborting the transaction. Only unhandled exceptions trigger an automatic abort.</para>
         </remarks>
         <summary>

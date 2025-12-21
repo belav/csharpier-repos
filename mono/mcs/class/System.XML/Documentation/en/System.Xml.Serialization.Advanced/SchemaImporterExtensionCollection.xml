@@ -54,8 +54,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtensionCollection" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtensionCollection" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -244,8 +244,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies all the elements of the current <see cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtensionCollection" /> to the specified array of <see cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtension" /> objects at the specified index. </para
-          >
+            >Copies all the elements of the current <see cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtensionCollection" /> to the specified array of <see cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtension" /> objects at the specified index.
+          </para>
         </summary>
         <param name="array">
           <attribution
@@ -455,8 +455,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtension" /> to remove. </param
-        >
+          />The <see cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtension" /> to remove.
+        </param>
       </Docs>
     </Member>
   </Members>

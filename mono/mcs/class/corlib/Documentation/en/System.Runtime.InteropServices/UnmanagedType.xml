@@ -34,8 +34,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see cref="T:System.Runtime.InteropServices.UnmanagedType" /> enumeration with the <see cref="T:System.Runtime.InteropServices.MarshalAsAttribute" /> attribute to specify how types are marshaled during interoperation with unmanaged code.  You can use this enumeration to marshal code using simple value types (I1, I2, I4, I8, R4, R8, U2, U4, and U8), unmanaged types that are unavailable in the .NET Framework, and various miscellaneous types. </para
-      >
+        >Use the <see cref="T:System.Runtime.InteropServices.UnmanagedType" /> enumeration with the <see cref="T:System.Runtime.InteropServices.MarshalAsAttribute" /> attribute to specify how types are marshaled during interoperation with unmanaged code.  You can use this enumeration to marshal code using simple value types (I1, I2, I4, I8, R4, R8, U2, U4, and U8), unmanaged types that are unavailable in the .NET Framework, and various miscellaneous types.
+      </para>
       <para
         >For more information, see <format type="text/html">
           <a href="ccb68ce7-b0e9-4ffb-839d-03b1cd2c1258">Interoperating with Unmanaged Code</a>
@@ -672,8 +672,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Note that you cannot use the <see cref="F:System.Runtime.InteropServices.UnmanagedType.LPWStr" /> value with an unmanaged string unless the string was created by using the unmanaged CoTaskMemAlloc function.  </para
-          >
+            >Note that you cannot use the <see cref="F:System.Runtime.InteropServices.UnmanagedType.LPWStr" /> value with an unmanaged string unless the string was created by using the unmanaged CoTaskMemAlloc function.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

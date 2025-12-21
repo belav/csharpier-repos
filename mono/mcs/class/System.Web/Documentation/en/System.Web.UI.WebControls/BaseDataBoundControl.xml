@@ -25,8 +25,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >ASP.NET supports a controls architecture that enables Web server controls to bind to data in a consistent fashion. Web server controls that bind to data are referred to as data-bound controls, and the classes that facilitate that binding are called data source controls. Data-bound controls that are designed to use ASP.NET data source controls derive from the <see cref="T:System.Web.UI.WebControls.BaseDataBoundControl" /> control class, which defines the base data-bound control functionality. </para
-      >
+        >ASP.NET supports a controls architecture that enables Web server controls to bind to data in a consistent fashion. Web server controls that bind to data are referred to as data-bound controls, and the classes that facilitate that binding are called data source controls. Data-bound controls that are designed to use ASP.NET data source controls derive from the <see cref="T:System.Web.UI.WebControls.BaseDataBoundControl" /> control class, which defines the base data-bound control functionality.
+      </para>
       <para
         >You can use the data-bound controls that are provided with ASP.NET, including <see cref="T:System.Web.UI.WebControls.GridView" />, <see cref="T:System.Web.UI.WebControls.DetailsView" />, and <see cref="T:System.Web.UI.WebControls.TreeView" />, to perform most Web development tasks that involve displaying data. In scenarios in which these controls do not provide the functionality you need, you can inherit from the base <see cref="T:System.Web.UI.WebControls.DataBoundControl" /> and <see cref="T:System.Web.UI.WebControls.HierarchicalDataBoundControl" /> classes to implement your own custom data source control.</para
       >
@@ -101,8 +101,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Web.UI.WebControls.BaseDataBoundControl" /> class overrides the <see cref="M:System.Web.UI.WebControls.BaseDataBoundControl.DataBind" /> method to identify the data source that the data-bound control binds to and builds the appropriate control trees. When resolving the data source, the data source identified by the <see cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSourceID" /> property takes precedence. If <see cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSourceID" /> is not set, the object identified by the <see cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSource" /> property is used. </para
-          >
+            >The <see cref="T:System.Web.UI.WebControls.BaseDataBoundControl" /> class overrides the <see cref="M:System.Web.UI.WebControls.BaseDataBoundControl.DataBind" /> method to identify the data source that the data-bound control binds to and builds the appropriate control trees. When resolving the data source, the data source identified by the <see cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSourceID" /> property takes precedence. If <see cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSourceID" /> is not set, the object identified by the <see cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSource" /> property is used.
+          </para>
           <para
             >The DataBind method is sealed on all ASP.NET data-bound controls derived from <see cref="T:System.Web.UI.WebControls.BaseDataBoundControl" />. Data-bound controls derived from the <see cref="T:System.Web.UI.WebControls.DataBoundControl" /> and <see cref="T:System.Web.UI.WebControls.HierarchicalDataBoundControl" /> classes should override the PerformDataBinding method instead of the <see cref="M:System.Web.UI.WebControls.BaseDataBoundControl.DataBind" /> method to bind data. If <see cref="M:System.Web.UI.WebControls.BaseDataBoundControl.DataBind" /> is overridden, the <see cref="M:System.Web.UI.Control.OnDataBinding(System.EventArgs)" /> and <see cref="M:System.Web.UI.WebControls.BaseDataBoundControl.OnDataBound(System.EventArgs)" /> events are raised out of order.</para
           >
@@ -387,8 +387,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.WebControls.BaseDataBoundControl.OnInit(System.EventArgs)" /> method first calls the base class <see cref="M:System.Web.UI.Control.OnInit(System.EventArgs)" /> method, and then calls the <see cref="M:System.Web.UI.WebControls.BaseDataBoundControl.OnPagePreLoad(System.Object,System.EventArgs)" /> method to handle the <see cref="E:System.Web.UI.Page.PreLoad" /> event. Additionally, if the HTTP request to the page is a post back and view state is enabled, the <see cref="M:System.Web.UI.WebControls.BaseDataBoundControl.OnInit(System.EventArgs)" /> method sets the <see cref="P:System.Web.UI.WebControls.BaseDataBoundControl.RequiresDataBinding" /> property to true. </para
-          >
+            >The <see cref="M:System.Web.UI.WebControls.BaseDataBoundControl.OnInit(System.EventArgs)" /> method first calls the base class <see cref="M:System.Web.UI.Control.OnInit(System.EventArgs)" /> method, and then calls the <see cref="M:System.Web.UI.WebControls.BaseDataBoundControl.OnPagePreLoad(System.Object,System.EventArgs)" /> method to handle the <see cref="E:System.Web.UI.Page.PreLoad" /> event. Additionally, if the HTTP request to the page is a post back and view state is enabled, the <see cref="M:System.Web.UI.WebControls.BaseDataBoundControl.OnInit(System.EventArgs)" /> method sets the <see cref="P:System.Web.UI.WebControls.BaseDataBoundControl.RequiresDataBinding" /> property to true.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -421,8 +421,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.WebControls.BaseDataBoundControl.OnPagePreLoad(System.Object,System.EventArgs)" /> event handler is used to control when data binding occurs within the life cycle of the page. It does this by setting the internal initialized state of the data-bound control. Because the control's initialized state is set during the <see cref="E:System.Web.UI.Page.PreLoad" /> phase of the page's lifecycle, the <see cref="M:System.Web.UI.WebControls.BaseDataBoundControl.OnDataPropertyChanged" /> event handler is called any time a data property of the control is changed after that phase, to signal that the control must re-bind to its data before rendering. </para
-          >
+            >The <see cref="M:System.Web.UI.WebControls.BaseDataBoundControl.OnPagePreLoad(System.Object,System.EventArgs)" /> event handler is used to control when data binding occurs within the life cycle of the page. It does this by setting the internal initialized state of the data-bound control. Because the control's initialized state is set during the <see cref="E:System.Web.UI.Page.PreLoad" /> phase of the page's lifecycle, the <see cref="M:System.Web.UI.WebControls.BaseDataBoundControl.OnDataPropertyChanged" /> event handler is called any time a data property of the control is changed after that phase, to signal that the control must re-bind to its data before rendering.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -519,8 +519,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <see cref="M:System.Web.UI.WebControls.BaseDataBoundControl.DataBind" /> method should be called. </para
-          >
+            >Gets or sets a value indicating whether the <see cref="M:System.Web.UI.WebControls.BaseDataBoundControl.DataBind" /> method should be called.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>

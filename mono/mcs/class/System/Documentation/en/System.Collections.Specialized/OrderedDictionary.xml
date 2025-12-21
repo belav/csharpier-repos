@@ -35,8 +35,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Each element is a key/value pair stored in a <see cref="T:System.Collections.DictionaryEntry" /> object. A key cannot be null, but a value can be. </para
-      >
+        >Each element is a key/value pair stored in a <see cref="T:System.Collections.DictionaryEntry" /> object. A key cannot be null, but a value can be.
+      </para>
       <para
         >The elements of an <see cref="T:System.Collections.Specialized.OrderedDictionary" /> are not sorted by the key, unlike the elements of a <see cref="T:System.Collections.Generic.SortedDictionary`2" /> class. You can access elements either by the key or by the index.</para
       >

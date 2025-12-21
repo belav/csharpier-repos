@@ -14,8 +14,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.UI.NonVisualControlAttribute" /> attribute is applied to controls that are not rendered to the client, such as data source controls and the <see cref="T:System.Web.UI.WebControls.WebParts.WebPartManager" /> control. During design time, a page developer might decide to hide all non-visual controls. The designer would mark as invisible all of the controls with the <see cref="T:System.Web.UI.NonVisualControlAttribute" /> attribute set to true. </para
-      >
+        >The <see cref="T:System.Web.UI.NonVisualControlAttribute" /> attribute is applied to controls that are not rendered to the client, such as data source controls and the <see cref="T:System.Web.UI.WebControls.WebParts.WebPartManager" /> control. During design time, a page developer might decide to hide all non-visual controls. The designer would mark as invisible all of the controls with the <see cref="T:System.Web.UI.NonVisualControlAttribute" /> attribute set to true.
+      </para>
       <para
         >Examples of controls that employ the <see cref="T:System.Web.UI.NonVisualControlAttribute" /> attribute are <see cref="T:System.Web.UI.DataSourceControl" />, <see cref="T:System.Web.UI.HierarchicalDataSourceControl" />, <see cref="T:System.Web.UI.WebControls.HiddenField" />, and <see cref="T:System.Web.UI.WebControls.WebParts.WebPartManager" />.</para
       >
@@ -66,8 +66,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.NonVisualControlAttribute" /> class, using the specified Boolean value to determine whether the attribute represents a visual or non-visual control. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.NonVisualControlAttribute" /> class, using the specified Boolean value to determine whether the attribute represents a visual or non-visual control.
+          </para>
         </summary>
         <param name="nonVisual">
           <attribution
@@ -240,8 +240,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Web.UI.NonVisualControlAttribute" /> instance that is applied to a Web control to be treated as a visual control during design time. </para
-          >
+            >Gets a <see cref="T:System.Web.UI.NonVisualControlAttribute" /> instance that is applied to a Web control to be treated as a visual control during design time.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>

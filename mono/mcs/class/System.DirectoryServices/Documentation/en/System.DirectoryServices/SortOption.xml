@@ -72,8 +72,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="M:System.DirectoryServices.SortOption.#ctor" /> class.          </para
-          >
+            >Initializes a new instance of the <see cref="M:System.DirectoryServices.SortOption.#ctor" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -92,8 +92,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.DirectoryServices.SortOption" /> class, which contains the specified property name and specified sort direction.          </para
-          >
+            >Initializes a new instance of the <see cref="T:System.DirectoryServices.SortOption" /> class, which contains the specified property name and specified sort direction.
+          </para>
         </summary>
         <param name="propertyName">
           <attribution

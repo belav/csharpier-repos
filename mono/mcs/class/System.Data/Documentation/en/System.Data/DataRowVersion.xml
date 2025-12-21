@@ -19,8 +19,8 @@
         >The <see cref="T:System.Data.DataRowVersion" /> values are used when retrieving the value found in a <see cref="T:System.Data.DataRow" /> using <see cref="P:System.Data.DataRow.Item(System.Int32)" /> or the <see cref="M:System.Data.DataRow.GetChildRows(System.String)" /> of the <see cref="T:System.Data.DataRow" /> object.</para
       >
       <para
-        >The <see cref="T:System.Data.DataRowVersion" /> informs you what version of a <see cref="T:System.Data.DataRow" /> exists. Versions change under the following circumstances: </para
-      >
+        >The <see cref="T:System.Data.DataRowVersion" /> informs you what version of a <see cref="T:System.Data.DataRow" /> exists. Versions change under the following circumstances:
+      </para>
       <list type="bullet">
         <item>
           <para

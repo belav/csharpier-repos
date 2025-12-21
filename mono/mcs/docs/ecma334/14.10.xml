@@ -39,7 +39,7 @@
     </grammar_production>
   </paragraph>
   <paragraph
-    >For an operation of the form x op y, where op is one of the logical operators, overload resolution (<hyperlink>14.2.4</hyperlink>) is applied to select a specific operator implementation. The operands are converted to the parameter types of the selected operator, and the type of the result is the return type of the operator. </paragraph
-  >
+    >For an operation of the form x op y, where op is one of the logical operators, overload resolution (<hyperlink>14.2.4</hyperlink>) is applied to select a specific operator implementation. The operands are converted to the parameter types of the selected operator, and the type of the result is the return type of the operator.
+  </paragraph>
   <paragraph>The predefined logical operators are described in the following sections. </paragraph>
 </clause>

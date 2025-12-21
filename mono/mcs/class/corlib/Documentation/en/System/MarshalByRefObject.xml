@@ -70,8 +70,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.MarshalByRefObject" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.MarshalByRefObject" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -116,8 +116,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of the object that the new <see cref="T:System.Runtime.Remoting.ObjRef" /> will reference. </param
-        >
+          />The <see cref="T:System.Type" /> of the object that the new <see cref="T:System.Runtime.Remoting.ObjRef" /> will reference.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetLifetimeService">
@@ -214,11 +214,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.MarshalByRefObject.MemberwiseClone(System.Boolean)" /> method creates a shallow copy by creating a new <see cref="T:System.MarshalByRefObject" /> object, and then copying the nonstatic fields of the current <see cref="T:System.MarshalByRefObject" /> object to the new object. If a field is a value type, a bit-by-bit copy of the field is performed. If a field is a reference type, the reference is copied but the referred object is not; therefore, the original object and its clone refer to the same object. </para
-          >
+            >The <see cref="M:System.MarshalByRefObject.MemberwiseClone(System.Boolean)" /> method creates a shallow copy by creating a new <see cref="T:System.MarshalByRefObject" /> object, and then copying the nonstatic fields of the current <see cref="T:System.MarshalByRefObject" /> object to the new object. If a field is a value type, a bit-by-bit copy of the field is performed. If a field is a reference type, the reference is copied but the referred object is not; therefore, the original object and its clone refer to the same object.
+          </para>
           <para
-            >For example, consider a <see cref="T:System.MarshalByRefObject" /> object called X that references objects A and B. Object B, in turn, references object C. A shallow copy of X creates new object X2 that also references objects A and B. In contrast, a deep copy of X creates a new object X2 that references the new objects A2 and B2, which are copies of A and B. B2, in turn, references the new object C2, which is a copy C. Use a class that implements the <see cref="T:System.ICloneable" /> interface to perform a deep or shallow copy of an object. </para
-          >
+            >For example, consider a <see cref="T:System.MarshalByRefObject" /> object called X that references objects A and B. Object B, in turn, references object C. A shallow copy of X creates new object X2 that also references objects A and B. In contrast, a deep copy of X creates a new object X2 that references the new objects A2 and B2, which are copies of A and B. B2, in turn, references the new object C2, which is a copy C. Use a class that implements the <see cref="T:System.ICloneable" /> interface to perform a deep or shallow copy of an object.
+          </para>
           <para
             >The identity of a <see cref="T:System.MarshalByRefObject" /> object is defined as the remote server object that is the target of a remoting client call. By default, the memberwise clone of a <see cref="T:System.MarshalByRefObject" /> object has the same identity as the original object, which is typically not the correct behavior for clones of server-side objects that are marshaled across a remoting boundary to the client side. Specify false, which is usually appropriate, to delete the identity of the clone and cause a new identity to be assigned when the clone is marshaled across a remoting boundary, or true to cause the clone to retain the identity of the original <see cref="T:System.MarshalByRefObject" /> object. The <see cref="M:System.MarshalByRefObject.MemberwiseClone(System.Boolean)" /> method is intended to be used by developers implementing remote server objects.</para
           >
@@ -240,8 +240,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />false to delete the current <see cref="T:System.MarshalByRefObject" /> object's identity, which will cause the object to be assigned a new identity when it is marshaled across a remoting boundary. A value of false is usually appropriate. true to copy the current <see cref="T:System.MarshalByRefObject" /> object's identity to its clone, which will cause remoting client calls to be routed to the remote server object. </param
-        >
+          />false to delete the current <see cref="T:System.MarshalByRefObject" /> object's identity, which will cause the object to be assigned a new identity when it is marshaled across a remoting boundary. A value of false is usually appropriate. true to copy the current <see cref="T:System.MarshalByRefObject" /> object's identity to its clone, which will cause remoting client calls to be routed to the remote server object.
+        </param>
       </Docs>
     </Member>
   </Members>

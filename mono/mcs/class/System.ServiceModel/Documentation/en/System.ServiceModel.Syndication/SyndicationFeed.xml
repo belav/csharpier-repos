@@ -336,8 +336,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -562,8 +562,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" /> class. </para
-          >
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" /> class.
+          </para>
         </summary>
         <param name="title">
           <attribution
@@ -631,8 +631,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" /> class. </para
-          >
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" /> class.
+          </para>
         </summary>
         <param name="title">
           <attribution
@@ -1042,8 +1042,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method does not add the <see cref="T:System.ServiceModel.Syndication.SyndicationPerson" /> object to the <see cref="P:System.ServiceModel.Syndication.SyndicationFeed.Authors" /> or <see cref="P:System.ServiceModel.Syndication.SyndicationFeed.Contributors" /> collections. </para
-          >
+            >This method does not add the <see cref="T:System.ServiceModel.Syndication.SyndicationPerson" /> object to the <see cref="P:System.ServiceModel.Syndication.SyndicationFeed.Authors" /> or <see cref="P:System.ServiceModel.Syndication.SyndicationFeed.Contributors" /> collections.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

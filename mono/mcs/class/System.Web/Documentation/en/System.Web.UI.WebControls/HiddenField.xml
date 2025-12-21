@@ -307,8 +307,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> object that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> object that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -373,8 +373,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.UI.HtmlTextWriter" /> object used to render the server control content on the client's browser. </param
-        >
+          />The <see cref="T:System.Web.UI.HtmlTextWriter" /> object used to render the server control content on the client's browser.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SkinID">

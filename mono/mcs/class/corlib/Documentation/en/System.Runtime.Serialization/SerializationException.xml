@@ -94,8 +94,8 @@
               </term>
               <description>
                 <para
-                  >Localized error message for <see cref="T:System.Runtime.Serialization.SerializationException" />. </para
-                >
+                  >Localized error message for <see cref="T:System.Runtime.Serialization.SerializationException" />.
+                </para>
               </description>
             </item>
           </list>
@@ -174,8 +174,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Indicates the reason why the exception occurred. </param
-        >
+          />Indicates the reason why the exception occurred.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -206,8 +206,8 @@
               <a href="832AC524-21BC-419A-A27B-CA8BFC45840F"
                 >[&lt;topic://cpconSerialization&gt;]</a
               >
-            </format>.) </para
-          >
+            </format>.)
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -220,15 +220,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The serialization information object holding the serialized object data in the name-value form. </param
-        >
+          />The serialization information object holding the serialized object data in the name-value form.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The contextual information about the source or destination of the exception. </param
-        >
+          />The contextual information about the source or destination of the exception.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -304,15 +304,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The error message that explains the reason for the exception. </param
-        >
+          />The error message that explains the reason for the exception.
+        </param>
         <param name="innerException">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The exception that is the cause of the current exception. If the <paramref name="innerException" /> parameter is not null, the current exception is raised in a catch block that handles the inner exception. </param
-        >
+          />The exception that is the cause of the current exception. If the <paramref name="innerException" /> parameter is not null, the current exception is raised in a catch block that handles the inner exception.
+        </param>
       </Docs>
     </Member>
   </Members>

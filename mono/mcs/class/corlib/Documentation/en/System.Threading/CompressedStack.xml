@@ -26,8 +26,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The compressed stack is a compact representation of all the code access security information on the call stack, such as <see cref="M:System.Security.CodeAccessPermission.Deny" /> and <see cref="M:System.Security.CodeAccessPermission.Assert" /> actions. For example, if a <see cref="M:System.Security.CodeAccessPermission.Deny" /> action is two stack frames up from the current frame and there are no other code access security annotations between there and the current frame, the compressed stack records only that information, without having to serialize the entire call stack. </para
-      >
+        >The compressed stack is a compact representation of all the code access security information on the call stack, such as <see cref="M:System.Security.CodeAccessPermission.Deny" /> and <see cref="M:System.Security.CodeAccessPermission.Assert" /> actions. For example, if a <see cref="M:System.Security.CodeAccessPermission.Deny" /> action is two stack frames up from the current frame and there are no other code access security annotations between there and the current frame, the compressed stack records only that information, without having to serialize the entire call stack.
+      </para>
       <para
         >The <see cref="T:System.Threading.CompressedStack" /> class is used internally by the <see cref="T:System.Security.SecurityContext" /> class. For example, the <see cref="M:System.Security.SecurityContext.Capture" /> method captures the compressed stack for the current call stack, along with impersonation and culture information. The <see cref="T:System.Security.SecurityContext" /> class is used in turn by the <see cref="T:System.Threading.ExecutionContext" /> class to flow context across threads, for example when scheduling thread pool tasks.</para
       >
@@ -62,8 +62,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Captures all the code access security information on the call stack, such as <see cref="M:System.Security.CodeAccessPermission.Deny" /> and <see cref="M:System.Security.CodeAccessPermission.Assert" /> actions, in a compressed format. For example, if a <see cref="M:System.Security.CodeAccessPermission.Deny" /> action is two stack frames up from the current frame and there are no other code access security annotations between there and the current frame, the compressed stack records only that information, without having to serialize the entire call stack. </para
-          >
+            >Captures all the code access security information on the call stack, such as <see cref="M:System.Security.CodeAccessPermission.Deny" /> and <see cref="M:System.Security.CodeAccessPermission.Assert" /> actions, in a compressed format. For example, if a <see cref="M:System.Security.CodeAccessPermission.Deny" /> action is two stack frames up from the current frame and there are no other code access security annotations between there and the current frame, the compressed stack records only that information, without having to serialize the entire call stack.
+          </para>
           <para>The captured compressed stack can be applied to another thread.  </para>
         </remarks>
         <summary>
@@ -217,15 +217,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> object to be populated with serialization information. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> object to be populated with serialization information.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.StreamingContext" /> structure representing the destination context of the serialization. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.StreamingContext" /> structure representing the destination context of the serialization.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Run">

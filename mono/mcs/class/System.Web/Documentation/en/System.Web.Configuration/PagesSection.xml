@@ -106,8 +106,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When <see cref="P:System.Web.Configuration.PagesSection.AutoEventWireup" /> is true, ASP.NET does not require that you explicitly bind event handlers to a page event such as <see cref="E:System.Web.UI.Control.Load" />. </para
-          >
+            >When <see cref="P:System.Web.Configuration.PagesSection.AutoEventWireup" /> is true, ASP.NET does not require that you explicitly bind event handlers to a page event such as <see cref="E:System.Web.UI.Control.Load" />.
+          </para>
           <para
             >When <see cref="P:System.Web.Configuration.PagesSection.AutoEventWireup" /> is false, you must explicitly bind the event to a method. For example, if you have a Page_Load method in the code for a page, the method will be called in response to the <see cref="E:System.Web.UI.Control.Load" /> event only if you write code like that in the following example (notice the Handles statement in Visual Basic and the event handler code in C#):</para
           >
@@ -133,8 +133,8 @@ End Class</code>
             >When <see cref="P:System.Web.Configuration.PagesSection.AutoEventWireup" /> is true, handlers are automatically bound to events at run time based on their name and signature. For each event, ASP.NET searches for a method that is named according to the pattern Page_eventname, such as Page_Load or Page_Init. ASP.NET checks first for an overload that has the typical event-handler signature (that is, it specifies <see cref="T:System.Object" /> and <see cref="T:System.EventArgs" /> parameters). If an event handler with this signature is not found, ASP.NET checks for an overload that has no parameters.</para
           >
           <para
-            >When <see cref="P:System.Web.Configuration.PagesSection.AutoEventWireup" /> is false, you must explicitly bind event handlers to events, as shown in the preceding example. In that case, the method names do not have to follow a pattern. </para
-          >
+            >When <see cref="P:System.Web.Configuration.PagesSection.AutoEventWireup" /> is false, you must explicitly bind event handlers to events, as shown in the preceding example. In that case, the method names do not have to follow a pattern.
+          </para>
           <para
             >The default value is true if <see cref="P:System.Web.Configuration.PagesSection.AutoEventWireup" /> is not specified in the @ Page directive. Visual Studio automatically includes the attribute when it creates code-behind files. For ASP.NET pages written in C#, Visual Studio sets the value to true. For Visual Basic, Visual Studio sets the value to false because handlers are bound to events by using the <format type="text/html">
               <a href="1b051c0e-f499-42f6-acb5-6f4f27824b40">Handles</a>
@@ -304,8 +304,8 @@ End Class</code>
             >The <see cref="P:System.Web.Configuration.PagesSection.EnableEventValidation" /> attribute indicates whether event validation should be performed. The default value is true. A Web application can optionally disable event validation to revert to .NET Framework version 1.0 behavior.</para
           >
           <para
-            >The base control checks this attribute to determine whether it should validate events. A derived control does not inherit this base control attribute, and so it is exempt from event validation by default. You still instruct ASP.NET to perform event validation on the derived control by adding the <see cref="P:System.Web.Configuration.PagesSection.EnableEventValidation" /> attribute to the derived control itself and setting it to true. </para
-          >
+            >The base control checks this attribute to determine whether it should validate events. A derived control does not inherit this base control attribute, and so it is exempt from event validation by default. You still instruct ASP.NET to perform event validation on the derived control by adding the <see cref="P:System.Web.Configuration.PagesSection.EnableEventValidation" /> attribute to the derived control itself and setting it to true.
+          </para>
           <block subset="none" type="note">
             <para>Event validation reduces the risk of unauthorized postback requests and callbacks. It instructs ASP.NET to validate only those events that can be raised in the control during a postback request or callback. With this model, a control registers its events during rendering and then validates the events during the post-back or callback handling. All event-driven controls in ASP.NET use this feature by default.</para>
           </block>
@@ -471,8 +471,8 @@ End Class</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Page and control view state is stored in hidden view-state fields when the page or control is rendered. If the length of the data stored exceeds the <see cref="P:System.Web.Configuration.PagesSection.MaxPageStateFieldLength" /> value, then the data is split between multiple view-state fields. </para
-          >
+            >Page and control view state is stored in hidden view-state fields when the page or control is rendered. If the length of the data stored exceeds the <see cref="P:System.Web.Configuration.PagesSection.MaxPageStateFieldLength" /> value, then the data is split between multiple view-state fields.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -558,8 +558,8 @@ End Class</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A parser filter, which is an instance of the <see cref="T:System.Web.UI.PageParserFilter" /> class, is called by the page compilation process before the parsing step to allow for changes to the source code at run time. </para
-          >
+            >A parser filter, which is an instance of the <see cref="T:System.Web.UI.PageParserFilter" /> class, is called by the page compilation process before the parsing step to allow for changes to the source code at run time.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

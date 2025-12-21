@@ -140,8 +140,8 @@
             >Use the <see cref="P:System.Web.UI.WebControls.DetailsViewInsertEventArgs.Values" /> property to access the values of the fields for the record to insert. For example, you can HTML-encode the values of the record before inserting it in the data source.</para
           >
           <para
-            >The <see cref="P:System.Web.UI.WebControls.DetailsViewInsertEventArgs.Values" /> property returns an object that implements the <see cref="T:System.Collections.Specialized.IOrderedDictionary" /> interface. The object contains <see cref="T:System.Collections.DictionaryEntry" /> objects that represent the fields of the record. </para
-          >
+            >The <see cref="P:System.Web.UI.WebControls.DetailsViewInsertEventArgs.Values" /> property returns an object that implements the <see cref="T:System.Collections.Specialized.IOrderedDictionary" /> interface. The object contains <see cref="T:System.Collections.DictionaryEntry" /> objects that represent the fields of the record.
+          </para>
           <block subset="none" type="note">
             <para
               >As a shortcut, you can also use the indexer of the <see cref="T:System.Collections.Specialized.IOrderedDictionary" /> object to access the field values directly.</para

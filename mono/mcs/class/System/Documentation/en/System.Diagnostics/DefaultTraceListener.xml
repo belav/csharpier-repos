@@ -159,8 +159,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The message to emit or display. </param
-        >
+          />The message to emit or display.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Fail">
@@ -201,15 +201,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The message to emit or display. </param
-        >
+          />The message to emit or display.
+        </param>
         <param name="detailMessage">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The detailed message to emit or display. </param
-        >
+          />The detailed message to emit or display.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="LogFileName">
@@ -273,8 +273,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The message to write to OutputDebugString and <see cref="M:System.Diagnostics.Debugger.Log(System.Int32,System.String,System.String)" />. </param
-        >
+          />The message to write to OutputDebugString and <see cref="M:System.Diagnostics.Debugger.Log(System.Int32,System.String,System.String)" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteLine">
@@ -315,8 +315,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The message to write to OutputDebugString and <see cref="M:System.Diagnostics.Debugger.Log(System.Int32,System.String,System.String)" />. </param
-        >
+          />The message to write to OutputDebugString and <see cref="M:System.Diagnostics.Debugger.Log(System.Int32,System.String,System.String)" />.
+        </param>
       </Docs>
     </Member>
   </Members>

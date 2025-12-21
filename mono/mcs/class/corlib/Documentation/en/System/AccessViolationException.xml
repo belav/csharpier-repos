@@ -34,8 +34,8 @@
           <a href="e0a55ddc-bfa8-4f3e-ac14-d1fc3330e4bb"
             >&lt;legacyCorruptedStateExceptionsPolicy&gt;</a
           >
-        </format> element to your app's configuration file. Note that you can also receive notification of the exceptions if you have defined a handler for the <see cref="E:System.AppDomain.FirstChanceException" /> or <see cref="E:System.AppDomain.UnhandledException" /> event. </para
-      >
+        </format> element to your app's configuration file. Note that you can also receive notification of the exceptions if you have defined a handler for the <see cref="E:System.AppDomain.FirstChanceException" /> or <see cref="E:System.AppDomain.UnhandledException" /> event.
+      </para>
       <format type="text/html">
         <h2>Version Information</h2>
       </format>
@@ -226,15 +226,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual information about the source or destination. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual information about the source or destination.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -309,15 +309,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The message that describes the exception. The caller of this constructor is required to ensure that this string has been localized for the current system culture. </param
-        >
+          />The message that describes the exception. The caller of this constructor is required to ensure that this string has been localized for the current system culture.
+        </param>
         <param name="innerException">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The exception that is the cause of the current exception. If the <paramref name="innerException" /> parameter is not null, the current exception is raised in a catch block that handles the inner exception. </param
-        >
+          />The exception that is the cause of the current exception. If the <paramref name="innerException" /> parameter is not null, the current exception is raised in a catch block that handles the inner exception.
+        </param>
       </Docs>
     </Member>
   </Members>

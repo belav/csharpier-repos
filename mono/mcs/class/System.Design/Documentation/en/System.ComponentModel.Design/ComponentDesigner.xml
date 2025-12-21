@@ -67,8 +67,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.ComponentDesigner" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.ComponentDesigner" /> class.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -171,8 +171,8 @@
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format> and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
           <block subset="none" type="note">
             <para
               >Always call <see cref="Overload:System.ComponentModel.Design.ComponentDesigner.Dispose" /> before you release your last reference to the <see cref="T:System.ComponentModel.Design.ComponentDesigner" />. Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.ComponentModel.Design.ComponentDesigner" /> object's Finalize method.</para
@@ -221,8 +221,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -383,8 +383,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The component for this designer. </param
-        >
+          />The component for this designer.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -410,11 +410,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.ComponentModel.Design.ComponentDesigner.InitializeExistingComponent(System.Collections.IDictionary)" /> method is called when an existing component is being reinitialized. For example, this may occur after the user drags a component to another container. </para
-          >
+            >The <see cref="M:System.ComponentModel.Design.ComponentDesigner.InitializeExistingComponent(System.Collections.IDictionary)" /> method is called when an existing component is being reinitialized. For example, this may occur after the user drags a component to another container.
+          </para>
           <para
-            >You may use the <paramref name="defaultValues" /> dictionary to apply recommended defaults to properties; however, you should not modify component properties aside from those stored in the dictionary, because this existing component may already have properties set on it. </para
-          >
+            >You may use the <paramref name="defaultValues" /> dictionary to apply recommended defaults to properties; however, you should not modify component properties aside from those stored in the dictionary, because this existing component may already have properties set on it.
+          </para>
           <para>The default implementation of this method does nothing.</para>
         </remarks>
         <summary>
@@ -449,8 +449,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.ComponentModel.Design.ComponentDesigner.InitializeNewComponent(System.Collections.IDictionary)" /> method is called when a component is first initialized, typically after being first added to a design surface. </para
-          >
+            >The <see cref="M:System.ComponentModel.Design.ComponentDesigner.InitializeNewComponent(System.Collections.IDictionary)" /> method is called when a component is first initialized, typically after being first added to a design surface.
+          </para>
           <para
             >You may perform any necessary initialization of this component, and you may ignore the <paramref name="defaultValues" /> dictionary altogether.</para
           >
@@ -527,8 +527,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ComponentModel.Design.ComponentDesigner" /> whose inheritance attribute to retrieve. </param
-        >
+          />The <see cref="T:System.ComponentModel.Design.ComponentDesigner" /> whose inheritance attribute to retrieve.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -625,8 +625,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The attributes for the class of the component. </param
-        >
+          />The attributes for the class of the component.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -666,8 +666,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The events for the class of the component. </param
-        >
+          />The events for the class of the component.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -707,8 +707,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The properties for the class of the component. </param
-        >
+          />The properties for the class of the component.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -748,8 +748,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The attributes for the class of the component. </param
-        >
+          />The attributes for the class of the component.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -789,8 +789,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The events for the class of the component. </param
-        >
+          />The events for the class of the component.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -830,8 +830,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The properties for the class of the component. </param
-        >
+          />The properties for the class of the component.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -870,22 +870,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.ComponentModel.MemberDescriptor" /> that indicates the member that has been changed. </param
-        >
+          />A <see cref="T:System.ComponentModel.MemberDescriptor" /> that indicates the member that has been changed.
+        </param>
         <param name="oldValue">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The old value of the member. </param
-        >
+          />The old value of the member.
+        </param>
         <param name="newValue">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new value of the member. </param
-        >
+          />The new value of the member.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -922,8 +922,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.ComponentModel.MemberDescriptor" /> that indicates the member that is about to be changed. </param
-        >
+          />A <see cref="T:System.ComponentModel.MemberDescriptor" /> that indicates the member that is about to be changed.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

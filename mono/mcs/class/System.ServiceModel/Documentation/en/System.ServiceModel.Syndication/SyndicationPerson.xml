@@ -24,8 +24,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.ServiceModel.Syndication.SyndicationPerson" /> objects can be added to the authors and contributors collections on <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" /> and <see cref="T:System.ServiceModel.Syndication.SyndicationItem" /> objects. </para
-      >
+        <see cref="T:System.ServiceModel.Syndication.SyndicationPerson" /> objects can be added to the authors and contributors collections on <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" /> and <see cref="T:System.ServiceModel.Syndication.SyndicationItem" /> objects.
+      </para>
       <para
         >When serialized to Atom 1.0, the <see cref="T:System.ServiceModel.Syndication.SyndicationPerson" /> is written out as an &lt;author&gt; or &lt;contributor&gt; element.</para
       >
@@ -193,8 +193,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The Syndication object model allows you to add custom attributes to a <see cref="T:System.ServiceModel.Syndication.SyndicationPerson" /> instance. You can add any valid XML attribute/value. </para
-          >
+            >The Syndication object model allows you to add custom attributes to a <see cref="T:System.ServiceModel.Syndication.SyndicationPerson" /> instance. You can add any valid XML attribute/value.
+          </para>
           <para>When serialized to Atom 1.0, any custom attribute/value is written as an attribute in the &lt;author&gt; or &lt;contributor&gt; elements. When serialized to RSS 2.0, any custom attribute/value is written as an attribute in the &lt;managingEditor&gt;, &lt;a10:contributor&gt;, or &lt;a10:author&gt; elements.</para>
         </remarks>
         <summary>

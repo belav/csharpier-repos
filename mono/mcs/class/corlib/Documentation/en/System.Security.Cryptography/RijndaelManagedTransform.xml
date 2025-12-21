@@ -39,8 +39,8 @@
         >
       </block>
       <para
-        >Both the <see cref="Overload:System.Security.Cryptography.RijndaelManaged.CreateEncryptor" />  and <see cref="Overload:System.Security.Cryptography.RijndaelManaged.CreateDecryptor" />  methods return an instance of the <see cref="T:System.Security.Cryptography.RijndaelManagedTransform" /> class that is initialized with the key information of the current <see cref="T:System.Security.Cryptography.RijndaelManaged" /> object.  To encrypt or decrypt data using the Rijndael algorithm, pass the <see cref="T:System.Security.Cryptography.RijndaelManagedTransform" /> object returned by these methods to a <see cref="T:System.Security.Cryptography.CryptoStream" /> object. </para
-      >
+        >Both the <see cref="Overload:System.Security.Cryptography.RijndaelManaged.CreateEncryptor" />  and <see cref="Overload:System.Security.Cryptography.RijndaelManaged.CreateDecryptor" />  methods return an instance of the <see cref="T:System.Security.Cryptography.RijndaelManagedTransform" /> class that is initialized with the key information of the current <see cref="T:System.Security.Cryptography.RijndaelManaged" /> object.  To encrypt or decrypt data using the Rijndael algorithm, pass the <see cref="T:System.Security.Cryptography.RijndaelManagedTransform" /> object returned by these methods to a <see cref="T:System.Security.Cryptography.CryptoStream" /> object.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -323,36 +323,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The input to perform the operation on. </param
-        >
+          />The input to perform the operation on.
+        </param>
         <param name="inputOffset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The offset into the input byte array to begin using data from. </param
-        >
+          />The offset into the input byte array to begin using data from.
+        </param>
         <param name="inputCount">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes in the input byte array to use as data. </param
-        >
+          />The number of bytes in the input byte array to use as data.
+        </param>
         <param name="outputBuffer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The output to write the data to. </param
-        >
+          />The output to write the data to.
+        </param>
         <param name="outputOffset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The offset into the output byte array to begin writing data from. </param
-        >
+          />The offset into the output byte array to begin writing data from.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="TransformFinalBlock">

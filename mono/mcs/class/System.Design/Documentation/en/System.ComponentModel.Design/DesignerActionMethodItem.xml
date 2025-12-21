@@ -520,8 +520,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.ComponentModel.Design.DesignerActionPropertyItem.RelatedComponent" /> property allows another component to lend its smart tag panel items to the current list. For example, a user control might aggregate the items from one of its constituent standard controls. </para
-          >
+            >The <see cref="P:System.ComponentModel.Design.DesignerActionPropertyItem.RelatedComponent" /> property allows another component to lend its smart tag panel items to the current list. For example, a user control might aggregate the items from one of its constituent standard controls.
+          </para>
           <para
             >This property works in conjunction with the <see cref="P:System.ComponentModel.Design.DesignerActionItem.AllowAssociate" /> property.</para
           >

@@ -62,8 +62,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Permissions.DataProtectionPermission" /> class with the specified permission flags. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.DataProtectionPermission" /> class with the specified permission flags.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -93,8 +93,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Permissions.DataProtectionPermission" /> class with the specified permission state. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.DataProtectionPermission" /> class with the specified permission state.
+          </para>
         </summary>
         <param name="state">
           <attribution
@@ -242,8 +242,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission to intersect with the current permission. It must be the same type as the current permission. </param
-        >
+          />A permission to intersect with the current permission. It must be the same type as the current permission.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsSubsetOf">
@@ -287,8 +287,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission to test for the subset relationship. This permission must be the same type as the current permission. </param
-        >
+          />A permission to test for the subset relationship. This permission must be the same type as the current permission.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsUnrestricted">
@@ -399,8 +399,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission to combine with the current permission. It must be of the same type as the current permission. </param
-        >
+          />A permission to combine with the current permission. It must be of the same type as the current permission.
+        </param>
       </Docs>
     </Member>
   </Members>

@@ -433,8 +433,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The fully qualified path and name of the file to retrieve the version information for. </param
-        >
+          />The fully qualified path and name of the file to retrieve the version information for.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="InternalName">

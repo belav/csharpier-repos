@@ -23,11 +23,11 @@
         >The <see cref="E:System.Windows.Forms.DataGridView.CellToolTipTextNeeded" /> event occurs only when the <see cref="T:System.Windows.Forms.DataGridView" /> control <see cref="P:System.Windows.Forms.DataGridView.DataSource" /> property is set or its <see cref="P:System.Windows.Forms.DataGridView.VirtualMode" /> property is true.</para
       >
       <para
-        >When you handle the <see cref="E:System.Windows.Forms.DataGridView.CellToolTipTextNeeded" /> event, the ToolTip text you specify in the handler is shown whenever the mouse pointer is over a cell and the control <see cref="P:System.Windows.Forms.DataGridView.ShowCellToolTips" /> property value is true. The <see cref="E:System.Windows.Forms.DataGridView.CellToolTipTextNeeded" /> event is useful when you want to display ToolTips determined by the current state or value of a cell. </para
-      >
+        >When you handle the <see cref="E:System.Windows.Forms.DataGridView.CellToolTipTextNeeded" /> event, the ToolTip text you specify in the handler is shown whenever the mouse pointer is over a cell and the control <see cref="P:System.Windows.Forms.DataGridView.ShowCellToolTips" /> property value is true. The <see cref="E:System.Windows.Forms.DataGridView.CellToolTipTextNeeded" /> event is useful when you want to display ToolTips determined by the current state or value of a cell.
+      </para>
       <para
-        >The <see cref="E:System.Windows.Forms.DataGridView.CellToolTipTextNeeded" /> event also occurs whenever the value of the <see cref="P:System.Windows.Forms.DataGridViewCell.ToolTipText" /> property is retrieved, either programmatically or when the mouse pointer enters a cell. </para
-      >
+        >The <see cref="E:System.Windows.Forms.DataGridView.CellToolTipTextNeeded" /> event also occurs whenever the value of the <see cref="P:System.Windows.Forms.DataGridViewCell.ToolTipText" /> property is retrieved, either programmatically or when the mouse pointer enters a cell.
+      </para>
       <para
         >You can use the <see cref="P:System.Windows.Forms.DataGridViewCellEventArgs.ColumnIndex" /> and <see cref="P:System.Windows.Forms.DataGridViewCellEventArgs.RowIndex" /> properties to determine the state or value of a cell, and use this information to set the <see cref="P:System.Windows.Forms.DataGridViewCellToolTipTextNeededEventArgs.ToolTipText" /> property. This property is initialized with the value of the cell <see cref="P:System.Windows.Forms.DataGridViewCell.ToolTipText" /> property, which the event value overrides.</para
       >
@@ -47,8 +47,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see cref="E:System.Windows.Forms.DataGridView.CellToolTipTextNeeded" /> event. </para
-      >
+        >Provides data for the <see cref="E:System.Windows.Forms.DataGridView.CellToolTipTextNeeded" /> event.
+      </para>
     </summary>
   </Docs>
   <Members>
@@ -64,8 +64,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property initially contains the value of the <see cref="P:System.Windows.Forms.DataGridViewCell.ToolTipText" /> property if it has been set for a cell. </para
-          >
+            >This property initially contains the value of the <see cref="P:System.Windows.Forms.DataGridViewCell.ToolTipText" /> property if it has been set for a cell.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

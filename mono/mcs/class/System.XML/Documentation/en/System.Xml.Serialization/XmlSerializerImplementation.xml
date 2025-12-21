@@ -26,8 +26,8 @@
           <a href="cc1d1f1c-fb26-4be9-885a-3fe84c81cec6"
             >XML Serializer Generator Tool (Sgen.exe)</a
           >
-        </format>. When such an assembly is loaded, the <see cref="T:System.Xml.Serialization.XmlSerializer" /> uses the properties of the <see cref="T:System.Xml.Serialization.XmlSerializerImplementation" /> interface to query the contained serializer or serializers. </para
-      >
+        </format>. When such an assembly is loaded, the <see cref="T:System.Xml.Serialization.XmlSerializer" /> uses the properties of the <see cref="T:System.Xml.Serialization.XmlSerializerImplementation" /> interface to query the contained serializer or serializers.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -53,8 +53,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlSerializerImplementation" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlSerializerImplementation" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -125,8 +125,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of a type derived from the <see cref="T:System.Xml.Serialization.XmlSerializer" /> class. </para
-          >
+            >An instance of a type derived from the <see cref="T:System.Xml.Serialization.XmlSerializer" /> class.
+          </para>
         </returns>
         <param name="type">
           <attribution

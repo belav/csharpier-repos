@@ -88,8 +88,8 @@
             </item>
             <item>
               <para
-                >UserName: This allows the service to require that the client be authenticated using a UserName credential. This credential must be specified using <see cref="T:System.ServiceModel.Description.ClientCredentials" /> class. </para
-              >
+                >UserName: This allows the service to require that the client be authenticated using a UserName credential. This credential must be specified using <see cref="T:System.ServiceModel.Description.ClientCredentials" /> class.
+              </para>
             </item>
           </list>
           <block subset="none" type="note">
@@ -98,8 +98,8 @@
           <list type="bullet">
             <item>
               <para
-                >Certificate: This allows the service to require that the client be authenticated using a certificate. The client credential in this case must be specified using <see cref="T:System.ServiceModel.Description.ClientCredentials" /> class or ClientCredentials behavior. The service credential in this case must be specified using <see cref="T:System.ServiceModel.Description.ClientCredentials" /> class or ClientCredentials behavior by specifying the serviceCertificate. </para
-              >
+                >Certificate: This allows the service to require that the client be authenticated using a certificate. The client credential in this case must be specified using <see cref="T:System.ServiceModel.Description.ClientCredentials" /> class or ClientCredentials behavior. The service credential in this case must be specified using <see cref="T:System.ServiceModel.Description.ClientCredentials" /> class or ClientCredentials behavior by specifying the serviceCertificate.
+              </para>
             </item>
             <item>
               <para>InfoCard: This allows the service to require that the client be authenticated using an InfoCard. The serviceCertificate must be provisioned in the ClientCredential behavior.</para>

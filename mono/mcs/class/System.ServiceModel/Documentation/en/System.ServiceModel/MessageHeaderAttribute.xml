@@ -25,8 +25,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.ServiceModel.MessageHeaderAttribute" /> attribute allows you to map fields and properties of a type marked with the <see cref="T:System.ServiceModel.MessageContractAttribute" /> attribute to SOAP message headers. The field or property can be of a simple type or a composite type that can be serialized. </para
-      >
+        >The <see cref="T:System.ServiceModel.MessageHeaderAttribute" /> attribute allows you to map fields and properties of a type marked with the <see cref="T:System.ServiceModel.MessageContractAttribute" /> attribute to SOAP message headers. The field or property can be of a simple type or a composite type that can be serialized.
+      </para>
       <para
         >For information on controlling the serialization of the contents of a SOAP body without modifying the default SOAP envelope itself, see <see cref="T:System.Runtime.Serialization.DataContractAttribute" />, <format type="text/html">
           <a href="7c5a26c8-89c9-4bcb-a4bc-7131e6d01f0c"
@@ -97,8 +97,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.MessageHeaderAttribute" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.MessageHeaderAttribute" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>

@@ -474,8 +474,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When this property is set to true, <see cref="P:System.Windows.Forms.PrintDialog.ShowHelp" /> and <see cref="P:System.Windows.Forms.PrintDialog.ShowNetwork" /> will be ignored as these properties were made obsolete for Windows 2000 and later versions of Windows. </para
-          >
+            >When this property is set to true, <see cref="P:System.Windows.Forms.PrintDialog.ShowHelp" /> and <see cref="P:System.Windows.Forms.PrintDialog.ShowNetwork" /> will be ignored as these properties were made obsolete for Windows 2000 and later versions of Windows.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

@@ -49,8 +49,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Collections.Specialized.CollectionsUtil" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Collections.Specialized.CollectionsUtil" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -139,8 +139,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Collections.IDictionary" /> to copy to a new case-insensitive <see cref="T:System.Collections.Hashtable" />. </param
-        >
+          />The <see cref="T:System.Collections.IDictionary" /> to copy to a new case-insensitive <see cref="T:System.Collections.Hashtable" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateCaseInsensitiveHashtable">
@@ -188,8 +188,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The approximate number of entries that the <see cref="T:System.Collections.Hashtable" /> can initially contain. </param
-        >
+          />The approximate number of entries that the <see cref="T:System.Collections.Hashtable" /> can initially contain.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateCaseInsensitiveSortedList">

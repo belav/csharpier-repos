@@ -73,8 +73,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This collection must have at least one member. If it has more than one member, the members are alternative MIME formats for the current <see cref="T:System.Web.Services.Description.MimePart" />. Members can be of the following types: </para
-          >
+            >This collection must have at least one member. If it has more than one member, the members are alternative MIME formats for the current <see cref="T:System.Web.Services.Description.MimePart" />. Members can be of the following types:
+          </para>
           <list type="bullet">
             <item>
               <para>

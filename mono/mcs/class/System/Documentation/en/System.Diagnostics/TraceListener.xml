@@ -158,8 +158,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the <see cref="T:System.Diagnostics.TraceListener" />. </param
-        >
+          />The name of the <see cref="T:System.Diagnostics.TraceListener" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Attributes">
@@ -307,8 +307,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Fail">
@@ -343,8 +343,8 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />A message to emit. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A message to emit.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Fail">
@@ -383,15 +383,15 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />A message to emit. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A message to emit.
+        </param>
         <param name="detailMessage">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A detailed message to emit. </param
-        >
+          />A detailed message to emit.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Filter">
@@ -617,8 +617,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Note   The <see cref="M:System.Diagnostics.TraceListener.WriteIndent" /> method, called by the <see cref="T:System.Diagnostics.DefaultTraceListener" /> and <see cref="T:System.Diagnostics.TextWriterTraceListener" /> classes, sets the <see cref="P:System.Diagnostics.TraceListener.NeedIndent" /> property value to false to prevent later, unnecessary indents. You must set the <see cref="P:System.Diagnostics.TraceListener.NeedIndent" /> property to true each time you wish to indent trace output. </para
-          >
+            >Note   The <see cref="M:System.Diagnostics.TraceListener.WriteIndent" /> method, called by the <see cref="T:System.Diagnostics.DefaultTraceListener" /> and <see cref="T:System.Diagnostics.TextWriterTraceListener" /> classes, sets the <see cref="P:System.Diagnostics.TraceListener.NeedIndent" /> property value to false to prevent later, unnecessary indents. You must set the <see cref="P:System.Diagnostics.TraceListener.NeedIndent" /> property to true each time you wish to indent trace output.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1071,16 +1071,16 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Diagnostics.TraceListener.TraceOutputOptions" /> property determines the optional content of trace output. The property can be set in the configuration file or programmatically during execution to include additional data specifically for a section of code. For example, you can set the <see cref="P:System.Diagnostics.TraceListener.TraceOutputOptions" /> property for the console trace listener to <see cref="F:System.Diagnostics.TraceOptions.Callstack" /> to add call stack information to the trace output. </para
-          >
+            >The <see cref="P:System.Diagnostics.TraceListener.TraceOutputOptions" /> property determines the optional content of trace output. The property can be set in the configuration file or programmatically during execution to include additional data specifically for a section of code. For example, you can set the <see cref="P:System.Diagnostics.TraceListener.TraceOutputOptions" /> property for the console trace listener to <see cref="F:System.Diagnostics.TraceOptions.Callstack" /> to add call stack information to the trace output.
+          </para>
           <para
             >The <see cref="T:System.Diagnostics.TraceOptions" /> enumeration is not used by the following classes and methods:</para
           >
           <list type="bullet">
             <item>
               <para
-                >The <see cref="T:System.Diagnostics.EventLogTraceListener" /> class, because it can cause a large volume of data to be written to the log. </para
-              >
+                >The <see cref="T:System.Diagnostics.EventLogTraceListener" /> class, because it can cause a large volume of data to be written to the log.
+              </para>
             </item>
             <item>
               <para
@@ -1210,8 +1210,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Object" /> whose fully qualified class name you want to write. </param
-        >
+          />An <see cref="T:System.Object" /> whose fully qualified class name you want to write.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -1239,8 +1239,8 @@
           <para>When overridden in a derived class, writes the specified message to the listener you create in the derived class.</para>
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />A message to write. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A message to write.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -1278,15 +1278,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Object" /> whose fully qualified class name you want to write. </param
-        >
+          />An <see cref="T:System.Object" /> whose fully qualified class name you want to write.
+        </param>
         <param name="category">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A category name used to organize the output. </param
-        >
+          />A category name used to organize the output.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -1320,15 +1320,15 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />A message to write. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A message to write.
+        </param>
         <param name="category">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A category name used to organize the output. </param
-        >
+          />A category name used to organize the output.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteIndent">
@@ -1396,8 +1396,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Object" /> whose fully qualified class name you want to write. </param
-        >
+          />An <see cref="T:System.Object" /> whose fully qualified class name you want to write.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteLine">
@@ -1428,8 +1428,8 @@
           <para>When overridden in a derived class, writes a message to the listener you create in the derived class, followed by a line terminator.</para>
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />A message to write. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A message to write.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteLine">
@@ -1470,15 +1470,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Object" /> whose fully qualified class name you want to write. </param
-        >
+          />An <see cref="T:System.Object" /> whose fully qualified class name you want to write.
+        </param>
         <param name="category">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A category name used to organize the output. </param
-        >
+          />A category name used to organize the output.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteLine">
@@ -1515,15 +1515,15 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />A message to write. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A message to write.
+        </param>
         <param name="category">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A category name used to organize the output. </param
-        >
+          />A category name used to organize the output.
+        </param>
       </Docs>
     </Member>
   </Members>

@@ -28,8 +28,8 @@
         >
       </block>
       <para
-        >Alternatively, you can bind the <see cref="T:System.Web.UI.WebControls.HyperLinkField" /> object to fields in a data source. This allows you to display a different caption for each hyperlink in the <see cref="T:System.Web.UI.WebControls.HyperLinkField" /> object and to have each hyperlink navigate to a different location. To bind a field to a caption, set the <see cref="P:System.Web.UI.WebControls.HyperLinkField.DataTextField" /> property. To create a URL for navigation, set the <see cref="P:System.Web.UI.WebControls.HyperLinkField.DataNavigateUrlFields" /> property to a comma-separated list of fields to use to create the URL. </para
-      >
+        >Alternatively, you can bind the <see cref="T:System.Web.UI.WebControls.HyperLinkField" /> object to fields in a data source. This allows you to display a different caption for each hyperlink in the <see cref="T:System.Web.UI.WebControls.HyperLinkField" /> object and to have each hyperlink navigate to a different location. To bind a field to a caption, set the <see cref="P:System.Web.UI.WebControls.HyperLinkField.DataTextField" /> property. To create a URL for navigation, set the <see cref="P:System.Web.UI.WebControls.HyperLinkField.DataNavigateUrlFields" /> property to a comma-separated list of fields to use to create the URL.
+      </para>
       <para
         >You can specify a custom format for the captions and navigation URLs by setting the <see cref="P:System.Web.UI.WebControls.HyperLinkField.DataTextFormatString" /> and <see cref="P:System.Web.UI.WebControls.HyperLinkField.DataNavigateUrlFormatString" /> properties, respectively.</para
       >
@@ -66,8 +66,8 @@
           </term>
           <description>
             <para
-              >The style settings for the child Web server controls of the <see cref="T:System.Web.UI.WebControls.HyperLinkField" /> object. </para
-            >
+              >The style settings for the child Web server controls of the <see cref="T:System.Web.UI.WebControls.HyperLinkField" /> object.
+            </para>
           </description>
         </item>
         <item>
@@ -78,8 +78,8 @@
           </term>
           <description>
             <para
-              >The style settings for the footer section of the <see cref="T:System.Web.UI.WebControls.HyperLinkField" /> object. </para
-            >
+              >The style settings for the footer section of the <see cref="T:System.Web.UI.WebControls.HyperLinkField" /> object.
+            </para>
           </description>
         </item>
         <item>
@@ -90,8 +90,8 @@
           </term>
           <description>
             <para
-              >The style settings for the header section of the <see cref="T:System.Web.UI.WebControls.HyperLinkField" /> object. </para
-            >
+              >The style settings for the header section of the <see cref="T:System.Web.UI.WebControls.HyperLinkField" /> object.
+            </para>
           </description>
         </item>
         <item>
@@ -102,8 +102,8 @@
           </term>
           <description>
             <para
-              >The style settings for the data items in the <see cref="T:System.Web.UI.WebControls.HyperLinkField" /> object. </para
-            >
+              >The style settings for the data items in the <see cref="T:System.Web.UI.WebControls.HyperLinkField" /> object.
+            </para>
           </description>
         </item>
       </list>
@@ -196,8 +196,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.WebControls.HyperLinkField.CreateField" /> method is called by the <see cref="M:System.Web.UI.WebControls.DataControlField.CloneField" /> method to create a new instance of the <see cref="T:System.Web.UI.WebControls.HyperLinkField" /> class. </para
-          >
+            >The <see cref="M:System.Web.UI.WebControls.HyperLinkField.CreateField" /> method is called by the <see cref="M:System.Web.UI.WebControls.DataControlField.CloneField" /> method to create a new instance of the <see cref="T:System.Web.UI.WebControls.HyperLinkField" /> class.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -240,8 +240,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.Web.UI.WebControls.HyperLinkField.DataNavigateUrlFields" /> property when the data source contains multiple fields that must be combined to create the hyperlinks for the <see cref="T:System.Web.UI.WebControls.HyperLinkField" /> object. The fields specified in the <see cref="P:System.Web.UI.WebControls.HyperLinkField.DataNavigateUrlFields" /> property are combined with the format string in the <see cref="P:System.Web.UI.WebControls.HyperLinkField.DataNavigateUrlFormatString" /> property to construct the hyperlinks in the <see cref="T:System.Web.UI.WebControls.HyperLinkField" /> object. </para
-          >
+            >Use the <see cref="P:System.Web.UI.WebControls.HyperLinkField.DataNavigateUrlFields" /> property when the data source contains multiple fields that must be combined to create the hyperlinks for the <see cref="T:System.Web.UI.WebControls.HyperLinkField" /> object. The fields specified in the <see cref="P:System.Web.UI.WebControls.HyperLinkField.DataNavigateUrlFields" /> property are combined with the format string in the <see cref="P:System.Web.UI.WebControls.HyperLinkField.DataNavigateUrlFormatString" /> property to construct the hyperlinks in the <see cref="T:System.Web.UI.WebControls.HyperLinkField" /> object.
+          </para>
           <block subset="none" type="note">
             <para
               >When you set the <see cref="P:System.Web.UI.WebControls.HyperLinkField.DataNavigateUrlFields" /> property with declarative code in an .aspx file, use a comma-separated list of field names.</para
@@ -651,12 +651,8 @@
           <para>The formatted text value.</para>
         </returns>
         <param name="dataTextValue">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The text value to format. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The text value to format.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -890,8 +886,8 @@
             <para
               >The <see cref="P:System.Web.UI.WebControls.HyperLinkField.Target" /> property is rendered as a target attribute. The target attribute on anchor elements is not allowed in the XHTML 1.1 document type definition. Do not set the <see cref="P:System.Web.UI.WebControls.HyperLinkField.Target" /> property if the rendered output for the <see cref="T:System.Web.UI.WebControls.HyperLinkField" /> object must be XHTML 1.1-compliant. For more information, refer to the topic <format type="text/html">
                 <a href="1b78d416-66bb-43a5-ac77-c703aab55b97">ASP.NET and XHTML Compliance</a>
-              </format>. </para
-            >
+              </format>.
+            </para>
             <para
               >When creating accessible Web pages, it is strongly recommended you avoid using the <see cref="P:System.Web.UI.WebControls.HyperLinkField.Target" /> property to target another window. For more information, see <format type="text/html">
                 <a href="9b5f3e05-e88d-4248-a5f4-9e64850fa0ae">ASP.NET Accessibility</a>

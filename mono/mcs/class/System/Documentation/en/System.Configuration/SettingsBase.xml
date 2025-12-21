@@ -48,8 +48,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Configuration.SettingsBase" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Configuration.SettingsBase" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -79,8 +79,8 @@
             >A <see cref="T:System.Configuration.SettingsContext" /> is used by the application to provide contextual information that the provider can use to persist settings.</para
           >
           <para
-            >Each settings class derived from <see cref="T:System.Configuration.SettingsBase" /> has a context associated with it. The context is passed to the settings provider to identity additional information about the settings information. Context therefore acts as a hint to help the settings provider determine how to persist the associated settings values. </para
-          >
+            >Each settings class derived from <see cref="T:System.Configuration.SettingsBase" /> has a context associated with it. The context is passed to the settings provider to identity additional information about the settings information. Context therefore acts as a hint to help the settings provider determine how to persist the associated settings values.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

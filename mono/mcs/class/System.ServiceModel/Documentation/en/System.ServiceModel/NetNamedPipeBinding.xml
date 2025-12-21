@@ -27,8 +27,8 @@
         >The <see cref="T:System.ServiceModel.NetNamedPipeBinding" /> generates a run-time communication stack by default, which uses transport security, named pipes for message delivery, and a binary message encoding. This binding is an appropriate indigo1 system-provided choice for on-machine communication. It also supports transactions.</para
       >
       <para
-        >The default configuration for the <see cref="T:System.ServiceModel.NetNamedPipeBinding" /> is similar to the configuration provided by the <see cref="T:System.ServiceModel.NetTcpBinding" />, but it is simpler because the indigo2 implementation is only meant for on-machine use and consequently there are fewer exposed features. The most notable difference is that the <see cref="T:System.ServiceModel.SecurityMode" /> setting only offers the <see cref="F:System.ServiceModel.SecurityMode.None" /> and <see cref="F:System.ServiceModel.SecurityMode.Transport" /> options. SOAP security support is not an included option. The security behavior is configurable using the optional <paramref name="securityMode" /> parameter in <see cref="M:System.ServiceModel.NetNamedPipeBinding.#ctor(System.ServiceModel.NetNamedPipeSecurityMode)" /> the constructor. </para
-      >
+        >The default configuration for the <see cref="T:System.ServiceModel.NetNamedPipeBinding" /> is similar to the configuration provided by the <see cref="T:System.ServiceModel.NetTcpBinding" />, but it is simpler because the indigo2 implementation is only meant for on-machine use and consequently there are fewer exposed features. The most notable difference is that the <see cref="T:System.ServiceModel.SecurityMode" /> setting only offers the <see cref="F:System.ServiceModel.SecurityMode.None" /> and <see cref="F:System.ServiceModel.SecurityMode.Transport" /> options. SOAP security support is not an included option. The security behavior is configurable using the optional <paramref name="securityMode" /> parameter in <see cref="M:System.ServiceModel.NetNamedPipeBinding.#ctor(System.ServiceModel.NetNamedPipeSecurityMode)" /> the constructor.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -57,8 +57,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.NetNamedPipeBinding" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.NetNamedPipeBinding" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -416,8 +416,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.NetNamedPipeSecurity" /> provides the types of security and settings available to the <see cref="T:System.ServiceModel.NetNamedPipeBinding" />. </para
-          >
+            >The <see cref="T:System.ServiceModel.NetNamedPipeSecurity" /> provides the types of security and settings available to the <see cref="T:System.ServiceModel.NetNamedPipeBinding" />.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -465,8 +465,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.ServiceModel.NetNamedPipeBinding.TransactionFlow" /> property enables you to specify whether this binding should support flowing transactions. </para
-          >
+            >The <see cref="P:System.ServiceModel.NetNamedPipeBinding.TransactionFlow" /> property enables you to specify whether this binding should support flowing transactions.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

@@ -6,11 +6,11 @@
       <list_item
         > The conditional method must be a method in a <non_terminal where="17.1"
           >class-declaration</non_terminal
-        >. A compile-time error occurs if the Conditional attribute is specified on an interface method. </list_item
-      >
+        >. A compile-time error occurs if the Conditional attribute is specified on an interface method.
+      </list_item>
       <list_item
-        > The conditional method must have a return type of <keyword>void</keyword>. </list_item
-      >
+        > The conditional method must have a return type of <keyword>void</keyword>.
+      </list_item>
       <list_item> The conditional method must not be marked with the override modifier. A conditional method may be marked with the virtual modifier, however. Overrides of such a method are implicitly conditional, and must not be explicitly marked with a Conditional attribute. </list_item>
       <list_item> The conditional method must not be an implementation of an interface method. Otherwise, a  compile-time error occurs. </list_item>
     </list>
@@ -19,8 +19,8 @@
     >In addition, a compile-time error occurs if a conditional method is used in a <non_terminal
       where="14.5.10.3"
       >delegate-creation-expression</non_terminal
-    >. </paragraph
-  >
+    >.
+  </paragraph>
   <paragraph>
     <example
       >[Example: The example <code_example>

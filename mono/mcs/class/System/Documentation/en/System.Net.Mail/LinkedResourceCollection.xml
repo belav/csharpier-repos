@@ -82,8 +82,8 @@
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format> and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
           <para
             >This method invokes <see cref="M:System.Net.Mail.AlternateView.Dispose(System.Boolean)" /> on all views in this collection. This method is called by the <see cref="M:System.Net.Mail.MailMessage.Dispose" /> method. You do not need to call it in your application.</para
           >

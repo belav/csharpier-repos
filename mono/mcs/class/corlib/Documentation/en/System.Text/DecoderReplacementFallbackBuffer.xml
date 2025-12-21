@@ -26,8 +26,8 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>It might not be possible to convert an encoded byte sequence to an equivalent character if no suitable decoding exists. A common reason for a decoding to fail is that the conversion operation uses a code page that cannot represent the character to decode. </para>
       <para
-        >If the input byte sequence cannot be converted to an output character, a <see cref="T:System.Text.DecoderReplacementFallback" /> object provides a replacement string that is substituted for the output character. The replacement string initializes the value of the <see cref="T:System.Text.DecoderReplacementFallback" /> object, and the value of the <see cref="T:System.Text.DecoderReplacementFallback" /> object initializes the value of a <see cref="T:System.Text.DecoderReplacementFallbackBuffer" /> object. The value of a <see cref="T:System.Text.DecoderReplacementFallbackBuffer" /> object is called the replacement fallback buffer. The conversion operation uses the replacement fallback buffer to emit a replacement string instead of a decoded character, then continues to process the remainder of the input. </para
-      >
+        >If the input byte sequence cannot be converted to an output character, a <see cref="T:System.Text.DecoderReplacementFallback" /> object provides a replacement string that is substituted for the output character. The replacement string initializes the value of the <see cref="T:System.Text.DecoderReplacementFallback" /> object, and the value of the <see cref="T:System.Text.DecoderReplacementFallback" /> object initializes the value of a <see cref="T:System.Text.DecoderReplacementFallbackBuffer" /> object. The value of a <see cref="T:System.Text.DecoderReplacementFallbackBuffer" /> object is called the replacement fallback buffer. The conversion operation uses the replacement fallback buffer to emit a replacement string instead of a decoded character, then continues to process the remainder of the input.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -66,8 +66,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Text.DecoderReplacementFallback" /> object that contains a replacement string. </param
-        >
+          />A <see cref="T:System.Text.DecoderReplacementFallback" /> object that contains a replacement string.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Fallback">
@@ -96,8 +96,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="Overload:System.Text.Encoding.GetBytes" /> and <see cref="Overload:System.Text.Encoder.Convert" /> methods call <see cref="M:System.Text.DecoderReplacementFallbackBuffer.Fallback(System.Byte[],System.Int32)" /> if they encounter an unknown input byte sequence that cannot be decoded. If the return value of <see cref="M:System.Text.DecoderReplacementFallbackBuffer.Fallback(System.Byte[],System.Int32)" /> is true, the calling method can invoke the <see cref="M:System.Text.DecoderReplacementFallbackBuffer.GetNextChar" /> method to obtain each character of the fallback buffer. </para
-          >
+            >The <see cref="Overload:System.Text.Encoding.GetBytes" /> and <see cref="Overload:System.Text.Encoder.Convert" /> methods call <see cref="M:System.Text.DecoderReplacementFallbackBuffer.Fallback(System.Byte[],System.Int32)" /> if they encounter an unknown input byte sequence that cannot be decoded. If the return value of <see cref="M:System.Text.DecoderReplacementFallbackBuffer.Fallback(System.Byte[],System.Int32)" /> is true, the calling method can invoke the <see cref="M:System.Text.DecoderReplacementFallbackBuffer.GetNextChar" /> method to obtain each character of the fallback buffer.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -143,8 +143,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Text.Encoding.GetBytes(System.Char[])" /> and <see cref="M:System.Text.Decoder.Convert(System.Byte*,System.Int32,System.Char*,System.Int32,System.Boolean,System.Int32@,System.Int32@,System.Boolean@)" /> methods call <see cref="M:System.Text.DecoderReplacementFallbackBuffer.Fallback(System.Byte[],System.Int32)" /> if they encounter an unknown surrogate pair or character in their input. If the return value of <see cref="M:System.Text.DecoderReplacementFallbackBuffer.Fallback(System.Byte[],System.Int32)" /> is true, the calling method can invoke <see cref="M:System.Text.DecoderReplacementFallbackBuffer.GetNextChar" /> to obtain each character of the replacement fallback buffer. </para
-          >
+            >The <see cref="M:System.Text.Encoding.GetBytes(System.Char[])" /> and <see cref="M:System.Text.Decoder.Convert(System.Byte*,System.Int32,System.Char*,System.Int32,System.Boolean,System.Int32@,System.Int32@,System.Boolean@)" /> methods call <see cref="M:System.Text.DecoderReplacementFallbackBuffer.Fallback(System.Byte[],System.Int32)" /> if they encounter an unknown surrogate pair or character in their input. If the return value of <see cref="M:System.Text.DecoderReplacementFallbackBuffer.Fallback(System.Byte[],System.Int32)" /> is true, the calling method can invoke <see cref="M:System.Text.DecoderReplacementFallbackBuffer.GetNextChar" /> to obtain each character of the replacement fallback buffer.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

@@ -95,15 +95,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The relative path of the file within isolated storage. </param
-        >
+          />The relative path of the file within isolated storage.
+        </param>
         <param name="mode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.IO.FileMode" /> values. </param
-        >
+          />One of the <see cref="T:System.IO.FileMode" /> values.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -151,22 +151,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The relative path of the file within isolated storage. </param
-        >
+          />The relative path of the file within isolated storage.
+        </param>
         <param name="mode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.IO.FileMode" /> values. </param
-        >
+          />One of the <see cref="T:System.IO.FileMode" /> values.
+        </param>
         <param name="access">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the <see cref="T:System.IO.FileAccess" /> values. </param
-        >
+          />A bitwise combination of the <see cref="T:System.IO.FileAccess" /> values.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -211,22 +211,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The relative path of the file within isolated storage. </param
-        >
+          />The relative path of the file within isolated storage.
+        </param>
         <param name="mode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.IO.FileMode" /> values. </param
-        >
+          />One of the <see cref="T:System.IO.FileMode" /> values.
+        </param>
         <param name="isf">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" /> in which to open the <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFileStream" />. </param
-        >
+          />The <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" /> in which to open the <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFileStream" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -272,29 +272,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The relative path of the file within isolated storage. </param
-        >
+          />The relative path of the file within isolated storage.
+        </param>
         <param name="mode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.IO.FileMode" /> values. </param
-        >
+          />One of the <see cref="T:System.IO.FileMode" /> values.
+        </param>
         <param name="access">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the <see cref="T:System.IO.FileAccess" /> values. </param
-        >
+          />A bitwise combination of the <see cref="T:System.IO.FileAccess" /> values.
+        </param>
         <param name="share">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the <see cref="T:System.IO.FileShare" /> values. </param
-        >
+          />A bitwise combination of the <see cref="T:System.IO.FileShare" /> values.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -340,29 +340,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The relative path of the file within isolated storage. </param
-        >
+          />The relative path of the file within isolated storage.
+        </param>
         <param name="mode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.IO.FileMode" /> values. </param
-        >
+          />One of the <see cref="T:System.IO.FileMode" /> values.
+        </param>
         <param name="access">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the <see cref="T:System.IO.FileAccess" /> values. </param
-        >
+          />A bitwise combination of the <see cref="T:System.IO.FileAccess" /> values.
+        </param>
         <param name="isf">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" /> in which to open the <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFileStream" />. </param
-        >
+          />The <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" /> in which to open the <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFileStream" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -412,36 +412,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The relative path of the file within isolated storage. </param
-        >
+          />The relative path of the file within isolated storage.
+        </param>
         <param name="mode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.IO.FileMode" /> values. </param
-        >
+          />One of the <see cref="T:System.IO.FileMode" /> values.
+        </param>
         <param name="access">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the <see cref="T:System.IO.FileAccess" /> values. </param
-        >
+          />A bitwise combination of the <see cref="T:System.IO.FileAccess" /> values.
+        </param>
         <param name="share">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the <see cref="T:System.IO.FileShare" /> values. </param
-        >
+          />A bitwise combination of the <see cref="T:System.IO.FileShare" /> values.
+        </param>
         <param name="bufferSize">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.FileStream" /> buffer size. </param
-        >
+          />The <see cref="T:System.IO.FileStream" /> buffer size.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -488,36 +488,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The relative path of the file within isolated storage. </param
-        >
+          />The relative path of the file within isolated storage.
+        </param>
         <param name="mode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.IO.FileMode" /> values. </param
-        >
+          />One of the <see cref="T:System.IO.FileMode" /> values.
+        </param>
         <param name="access">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the <see cref="T:System.IO.FileAccess" /> values. </param
-        >
+          />A bitwise combination of the <see cref="T:System.IO.FileAccess" /> values.
+        </param>
         <param name="share">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the <see cref="T:System.IO.FileShare" /> values. </param
-        >
+          />A bitwise combination of the <see cref="T:System.IO.FileShare" /> values.
+        </param>
         <param name="isf">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" /> in which to open the <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFileStream" />. </param
-        >
+          />The <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" /> in which to open the <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFileStream" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -565,43 +565,43 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The relative path of the file within isolated storage. </param
-        >
+          />The relative path of the file within isolated storage.
+        </param>
         <param name="mode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.IO.FileMode" /> values. </param
-        >
+          />One of the <see cref="T:System.IO.FileMode" /> values.
+        </param>
         <param name="access">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the <see cref="T:System.IO.FileAccess" /> values. </param
-        >
+          />A bitwise combination of the <see cref="T:System.IO.FileAccess" /> values.
+        </param>
         <param name="share">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the <see cref="T:System.IO.FileShare" /> values </param
-        >
+          />A bitwise combination of the <see cref="T:System.IO.FileShare" /> values
+        </param>
         <param name="bufferSize">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.FileStream" /> buffer size. </param
-        >
+          />The <see cref="T:System.IO.FileStream" /> buffer size.
+        </param>
         <param name="isf">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" /> in which to open the <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFileStream" />. </param
-        >
+          />The <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFile" /> in which to open the <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFileStream" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="BeginRead">
@@ -652,36 +652,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The buffer to read data into. </param
-        >
+          />The buffer to read data into.
+        </param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte offset in <paramref name="buffer" /> at which to begin reading. </param
-        >
+          />The byte offset in <paramref name="buffer" /> at which to begin reading.
+        </param>
         <param name="numBytes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum number of bytes to read. </param
-        >
+          />The maximum number of bytes to read.
+        </param>
         <param name="userCallback">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The method to call when the asynchronous read operation is completed. This parameter is optional. </param
-        >
+          />The method to call when the asynchronous read operation is completed. This parameter is optional.
+        </param>
         <param name="stateObject">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The status of the asynchronous read. </param
-        >
+          />The status of the asynchronous read.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="BeginWrite">
@@ -735,36 +735,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The buffer to write data to. </param
-        >
+          />The buffer to write data to.
+        </param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte offset in <paramref name="buffer" /> at which to begin writing. </param
-        >
+          />The byte offset in <paramref name="buffer" /> at which to begin writing.
+        </param>
         <param name="numBytes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum number of bytes to write. </param
-        >
+          />The maximum number of bytes to write.
+        </param>
         <param name="userCallback">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The method to call when the asynchronous write operation is completed. This parameter is optional. </param
-        >
+          />The method to call when the asynchronous write operation is completed. This parameter is optional.
+        </param>
         <param name="stateObject">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The status of the asynchronous write. </param
-        >
+          />The status of the asynchronous write.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CanRead">
@@ -900,8 +900,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources
+        </param>
       </Docs>
     </Member>
     <Member MemberName="EndRead">
@@ -946,8 +946,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The pending asynchronous request. </param
-        >
+          />The pending asynchronous request.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="EndWrite">
@@ -991,8 +991,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The pending asynchronous I/O request to end. </param
-        >
+          />The pending asynchronous I/O request to end.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Flush">
@@ -1231,22 +1231,22 @@
           >
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />The buffer to read. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The buffer to read.
+        </param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The offset in the buffer at which to begin writing. </param
-        >
+          />The offset in the buffer at which to begin writing.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum number of bytes to read. </param
-        >
+          />The maximum number of bytes to read.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ReadByte">
@@ -1361,15 +1361,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new position of the <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFileStream" /> object. </param
-        >
+          />The new position of the <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFileStream" /> object.
+        </param>
         <param name="origin">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.IO.SeekOrigin" /> values. </param
-        >
+          />One of the <see cref="T:System.IO.SeekOrigin" /> values.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetLength">
@@ -1409,8 +1409,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new length of the <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFileStream" /> object. </param
-        >
+          />The new length of the <see cref="T:System.IO.IsolatedStorage.IsolatedStorageFileStream" /> object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -1451,26 +1451,22 @@
           >
         </summary>
         <param name="buffer">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The buffer to write. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The buffer to write.
+        </param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte offset in buffer from which to begin. </param
-        >
+          />The byte offset in buffer from which to begin.
+        </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum number of bytes to write. </param
-        >
+          />The maximum number of bytes to write.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriteByte">
@@ -1505,8 +1501,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte value to write to the isolated storage file. </param
-        >
+          />The byte value to write to the isolated storage file.
+        </param>
       </Docs>
     </Member>
   </Members>

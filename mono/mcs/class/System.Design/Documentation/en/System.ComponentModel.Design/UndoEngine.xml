@@ -36,8 +36,8 @@
         </item>
       </list>
       <para
-        >With these features, <see cref="T:System.ComponentModel.Design.UndoEngine" /> can fabricate any undo units it needs automatically. </para
-      >
+        >With these features, <see cref="T:System.ComponentModel.Design.UndoEngine" /> can fabricate any undo units it needs automatically.
+      </para>
       <block subset="none" type="note">
         <para
           >Do not change property values directly. The <see cref="T:System.ComponentModel.Design.UndoEngine" /> class requires you to use the appropriate <see cref="T:System.ComponentModel.TypeDescriptor" /> to change property values.</para
@@ -173,11 +173,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default implementation of the <see cref="M:System.ComponentModel.Design.UndoEngine.CreateUndoUnit(System.String,System.Boolean)" /> method simply returns a new <see cref="T:System.ComponentModel.Design.UndoEngine.UndoUnit" />. </para
-          >
+            >The default implementation of the <see cref="M:System.ComponentModel.Design.UndoEngine.CreateUndoUnit(System.String,System.Boolean)" /> method simply returns a new <see cref="T:System.ComponentModel.Design.UndoEngine.UndoUnit" />.
+          </para>
           <para
-            >By default, <see cref="T:System.ComponentModel.Design.UndoEngine" /> does nothing with the <paramref name="primary" /> parameter, but some implementations of undo, such as those involving the COM Microsoft.VisualStudio.OLE.Interop.IOleParentUndoUnit design pattern, may need to identify the difference between a primary unit and its children. </para
-          >
+            >By default, <see cref="T:System.ComponentModel.Design.UndoEngine" /> does nothing with the <paramref name="primary" /> parameter, but some implementations of undo, such as those involving the COM Microsoft.VisualStudio.OLE.Interop.IOleParentUndoUnit design pattern, may need to identify the difference between a primary unit and its children.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -196,8 +196,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the unit to create. </param
-        >
+          />The name of the unit to create.
+        </param>
         <param name="primary">
           <attribution
             license="cc4"
@@ -265,16 +265,16 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see cref="T:System.ComponentModel.Design.UndoEngine" /> and optionally releases the managed resources. </para
-          >
+            >Releases the unmanaged resources used by the <see cref="T:System.ComponentModel.Design.UndoEngine" /> and optionally releases the managed resources.
+          </para>
         </summary>
         <param name="disposing">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Enabled">
@@ -379,16 +379,16 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.ComponentModel.Design.UndoEngine.Undoing" /> event. </para
-          >
+            >Raises the <see cref="E:System.ComponentModel.Design.UndoEngine.Undoing" /> event.
+          </para>
         </summary>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnUndone">
@@ -408,8 +408,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.ComponentModel.Design.UndoEngine.Undone" /> event. </para
-          >
+            >Raises the <see cref="E:System.ComponentModel.Design.UndoEngine.Undone" /> event.
+          </para>
         </summary>
         <param name="e">
           <attribution

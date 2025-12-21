@@ -31,8 +31,8 @@
         >To get a list of the rules currently applied to a registry key, use the <see cref="M:Microsoft.Win32.RegistryKey.GetAccessControl" /> method to get a <see cref="T:System.Security.AccessControl.RegistrySecurity" /> object, and then use its <see cref="M:System.Security.AccessControl.CommonObjectSecurity.GetAccessRules(System.Boolean,System.Boolean,System.Type)" /> method to obtain a collection of <see cref="T:System.Security.AccessControl.RegistryAccessRule" /> objects.</para
       >
       <para>
-        <see cref="T:System.Security.AccessControl.RegistryAccessRule" /> objects do not map one-to-one with access control entries in the underlying discretionary control access list (DACL). When you get the set of all access rules for a registry key, the set contains the minimum number of rules currently required to express all the access control entries. </para
-      >
+        <see cref="T:System.Security.AccessControl.RegistryAccessRule" /> objects do not map one-to-one with access control entries in the underlying discretionary control access list (DACL). When you get the set of all access rules for a registry key, the set contains the minimum number of rules currently required to express all the access control entries.
+      </para>
       <block subset="none" type="note">
         <para>The underlying access control entries change as you apply and remove rules. The information in rules is merged if possible, to maintain the smallest number of access control entries. Thus, when you read the current list of rules, it might not look exactly like the list of all the rules you have added.</para>
       </block>
@@ -48,8 +48,8 @@
         >
       </block>
       <para>
-        <see cref="T:System.Security.AccessControl.RegistryAccessRule" /> objects are immutable. Security for a registry key is modified using the methods of the <see cref="T:System.Security.AccessControl.RegistrySecurity" /> class to add or remove rules; as you do this, the underlying access control entries are modified. </para
-      >
+        <see cref="T:System.Security.AccessControl.RegistryAccessRule" /> objects are immutable. Security for a registry key is modified using the methods of the <see cref="T:System.Security.AccessControl.RegistrySecurity" /> class to add or remove rules; as you do this, the underlying access control entries are modified.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -284,8 +284,8 @@
           </list>
           <para>The pattern for the grandchild subkey governs all subkeys contained by the grandchild subkey. </para>
           <para
-            >For example, if the <see cref="F:System.Security.AccessControl.InheritanceFlags.ContainerInherit" /> flag is specified for <paramref name="inheritanceFlags" /> and the <see cref="F:System.Security.AccessControl.PropagationFlags.InheritOnly" /> propagation flag is specified for <paramref name="propagationFlags" />, this rule does not apply to the immediate subkey, but does apply to all its immediate child subkeys and to all subkeys they contain. </para
-          >
+            >For example, if the <see cref="F:System.Security.AccessControl.InheritanceFlags.ContainerInherit" /> flag is specified for <paramref name="inheritanceFlags" /> and the <see cref="F:System.Security.AccessControl.PropagationFlags.InheritOnly" /> propagation flag is specified for <paramref name="propagationFlags" />, this rule does not apply to the immediate subkey, but does apply to all its immediate child subkeys and to all subkeys they contain.
+          </para>
           <block subset="none" type="note">
             <para
               >Although you can specify the <see cref="F:System.Security.AccessControl.InheritanceFlags.ObjectInherit" /> flag for <paramref name="inheritanceFlags" />, there is no point in doing so. For the purposes of access control, the name/value pairs in a subkey are not separate objects. The access rights to name/value pairs are controlled by the rights of the subkey. Furthermore, since all subkeys are containers (that is, they can contain other subkeys), they are not affected by the <see cref="F:System.Security.AccessControl.InheritanceFlags.ObjectInherit" /> flag. Finally, specifying the <see cref="F:System.Security.AccessControl.InheritanceFlags.ObjectInherit" /> flag needlessly complicates the maintenance of rules, because it interferes with the combination of otherwise compatible rules.</para
@@ -447,8 +447,8 @@
           </list>
           <para>The pattern for the grandchild subkey governs all subkeys contained by the grandchild subkey. </para>
           <para
-            >For example, if the <see cref="F:System.Security.AccessControl.InheritanceFlags.ContainerInherit" /> flag is specified for <paramref name="inheritanceFlags" /> and the <see cref="F:System.Security.AccessControl.PropagationFlags.InheritOnly" /> propagation flag is specified for <paramref name="propagationFlags" />, this rule does not apply to the immediate subkey, but does apply to all its immediate child subkeys and to all subkeys they contain. </para
-          >
+            >For example, if the <see cref="F:System.Security.AccessControl.InheritanceFlags.ContainerInherit" /> flag is specified for <paramref name="inheritanceFlags" /> and the <see cref="F:System.Security.AccessControl.PropagationFlags.InheritOnly" /> propagation flag is specified for <paramref name="propagationFlags" />, this rule does not apply to the immediate subkey, but does apply to all its immediate child subkeys and to all subkeys they contain.
+          </para>
           <block subset="none" type="note">
             <para
               >Although you can specify the <see cref="F:System.Security.AccessControl.InheritanceFlags.ObjectInherit" /> flag for <paramref name="inheritanceFlags" />, there is no point in doing so. For the purposes of access control, the name/value pairs in a subkey are not separate objects. The access rights to name/value pairs are controlled by the rights of the subkey. Furthermore, since all subkeys are containers (that is, they can contain other subkeys), they are not affected by the <see cref="F:System.Security.AccessControl.InheritanceFlags.ObjectInherit" /> flag. Finally, specifying the <see cref="F:System.Security.AccessControl.InheritanceFlags.ObjectInherit" /> flag needlessly complicates the maintenance of rules, because it interferes with the combination of otherwise compatible rules.</para

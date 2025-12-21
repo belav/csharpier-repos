@@ -60,8 +60,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte array to be stored or retrieved. </param
-        >
+          />The byte array to be stored or retrieved.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -108,15 +108,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlBinary" />. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlBinary" />.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlBinary" />. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlBinary" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CompareTo">
@@ -164,8 +164,8 @@
               </term>
               <description>
                 <para
-                  >The value of this <see cref="T:System.Data.SqlTypes.SqlBinary" /> object is less than the object. </para
-                >
+                  >The value of this <see cref="T:System.Data.SqlTypes.SqlBinary" /> object is less than the object.
+                </para>
               </description>
             </item>
             <item>
@@ -174,8 +174,8 @@
               </term>
               <description>
                 <para
-                  >This <see cref="T:System.Data.SqlTypes.SqlBinary" /> object is the same as object. </para
-                >
+                  >This <see cref="T:System.Data.SqlTypes.SqlBinary" /> object is the same as object.
+                </para>
               </description>
             </item>
             <item>
@@ -197,8 +197,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Data.SqlTypes.SqlBinary" /> object to be compared to this <see cref="T:System.Data.SqlTypes.SqlBinary" /> structure. </param
-        >
+          />The <see cref="T:System.Data.SqlTypes.SqlBinary" /> object to be compared to this <see cref="T:System.Data.SqlTypes.SqlBinary" /> structure.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CompareTo">
@@ -240,8 +240,8 @@
               </term>
               <description>
                 <para
-                  >The value of this <see cref="T:System.Data.SqlTypes.SqlBinary" /> object is less than the object. </para
-                >
+                  >The value of this <see cref="T:System.Data.SqlTypes.SqlBinary" /> object is less than the object.
+                </para>
               </description>
             </item>
             <item>
@@ -250,8 +250,8 @@
               </term>
               <description>
                 <para
-                  >This <see cref="T:System.Data.SqlTypes.SqlBinary" /> object is the same as object. </para
-                >
+                  >This <see cref="T:System.Data.SqlTypes.SqlBinary" /> object is the same as object.
+                </para>
               </description>
             </item>
             <item>
@@ -273,8 +273,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to be compared to this <see cref="T:System.Data.SqlTypes.SqlBinary" /> structure. </param
-        >
+          />The object to be compared to this <see cref="T:System.Data.SqlTypes.SqlBinary" /> structure.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -313,15 +313,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> structure.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> structure.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -352,12 +352,8 @@
           >
         </returns>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The object to be compared. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The object to be compared.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -394,15 +390,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> structure.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> structure.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -454,8 +450,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the XML Schema definition language (XSD) of the specified <see cref="T:System.Xml.Schema.XmlSchemaSet" />. </para
-          >
+            >Returns the XML Schema definition language (XSD) of the specified <see cref="T:System.Xml.Schema.XmlSchemaSet" />.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -504,15 +500,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> structure.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> structure.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -551,15 +547,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> structure.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> structure.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -672,15 +668,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> structure.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> structure.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -719,15 +715,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> structure.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> structure.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -766,15 +762,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> structure.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> structure.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -853,15 +849,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> object. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> object.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> object. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="op_Equality">
@@ -900,15 +896,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> object. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> object.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> object. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="op_Explicit">
@@ -993,15 +989,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> object. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> object.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> object. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="op_GreaterThanOrEqual">
@@ -1040,15 +1036,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> object. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> object.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> object. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
@@ -1110,15 +1106,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> object. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> object.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> object. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="op_LessThan">
@@ -1157,15 +1153,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> object. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> object.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> object. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="op_LessThanOrEqual">
@@ -1204,15 +1200,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> object. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> object.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> object. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.Xml.Serialization.IXmlSerializable.GetSchema">

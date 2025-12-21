@@ -58,8 +58,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509ExtensionCollection" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509ExtensionCollection" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -109,8 +109,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Security.Cryptography.X509Certificates.X509Extension" />  object to add to the <see cref="T:System.Security.Cryptography.X509Certificates.X509ExtensionCollection" /> object. </param
-        >
+          />An <see cref="T:System.Security.Cryptography.X509Certificates.X509Extension" />  object to add to the <see cref="T:System.Security.Cryptography.X509Certificates.X509ExtensionCollection" /> object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CopyTo">
@@ -149,15 +149,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Security.Cryptography.X509Certificates.X509Extension" /> objects. </param
-        >
+          />An array of <see cref="T:System.Security.Cryptography.X509Certificates.X509Extension" /> objects.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The location in the array at which copying starts. </param
-        >
+          />The location in the array at which copying starts.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Count">
@@ -361,15 +361,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Security.Cryptography.X509Certificates.X509Extension" /> objects. </param
-        >
+          />An array of <see cref="T:System.Security.Cryptography.X509Certificates.X509Extension" /> objects.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The location in the array at which copying starts. </param
-        >
+          />The location in the array at which copying starts.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IEnumerable.GetEnumerator">

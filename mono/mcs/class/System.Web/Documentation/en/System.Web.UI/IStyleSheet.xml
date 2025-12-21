@@ -13,8 +13,8 @@
       <para>Classes that implement this interface can use it to support the creation of style rules.</para>
       <para>To customize the way cascading style sheets are created and registered, you must create a class that implements this interface.</para>
       <para
-        >The <see cref="T:System.Web.UI.HtmlControls.HtmlHead" /> class implements this interface for use by ASP.NET through the <see cref="P:System.Web.UI.Page.Header" /> property. </para
-      >
+        >The <see cref="T:System.Web.UI.HtmlControls.HtmlHead" /> class implements this interface for use by ASP.NET through the <see cref="P:System.Web.UI.Page.Header" /> property.
+      </para>
       <block subset="none" type="note">
         <para
           >Adding or modifying styles or style rules programmatically during asynchronous postbacks is not supported. When you add AJAX capabilities to an ASP.NET Web page, asynchronous postbacks update regions of the page without updating the whole page. For more information, see <format type="text/html">

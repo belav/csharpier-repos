@@ -78,8 +78,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index of the list item in a <see cref="T:System.Web.UI.WebControls.BulletedList" /> that raised the event. </param
-        >
+          />The zero-based index of the list item in a <see cref="T:System.Web.UI.WebControls.BulletedList" /> that raised the event.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

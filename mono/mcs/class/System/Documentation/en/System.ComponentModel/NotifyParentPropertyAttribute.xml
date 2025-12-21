@@ -80,8 +80,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if the parent should be notified of changes; otherwise, false. </param
-        >
+          />true if the parent should be notified of changes; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Default">
@@ -144,8 +144,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to test for equality. </param
-        >
+          />The object to test for equality.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">

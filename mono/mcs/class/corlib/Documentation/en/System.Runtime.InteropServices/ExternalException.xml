@@ -163,8 +163,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The error message that specifies the reason for the exception. </param
-        >
+          />The error message that specifies the reason for the exception.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -207,15 +207,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that holds the serialized object data. </param
-        >
+          />The object that holds the serialized object data.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The contextual information about the source or destination. </param
-        >
+          />The contextual information about the source or destination.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -291,15 +291,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The error message that explains the reason for the exception. </param
-        >
+          />The error message that explains the reason for the exception.
+        </param>
         <param name="inner">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The exception that is the cause of the current exception. If the <paramref name="inner" /> parameter is not null, the current exception is raised in a catch block that handles the inner exception. </param
-        >
+          />The exception that is the cause of the current exception. If the <paramref name="inner" /> parameter is not null, the current exception is raised in a catch block that handles the inner exception.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -378,15 +378,11 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The error message that specifies the reason for the exception. </param
-        >
+          />The error message that specifies the reason for the exception.
+        </param>
         <param name="errorCode">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The HRESULT of the error. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The HRESULT of the error.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ErrorCode">

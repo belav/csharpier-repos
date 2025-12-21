@@ -28,8 +28,8 @@
           >
         </format>. Schema importation also occurs when using the <format type="text/html">
           <a href="a6e6e65c-347f-4494-9457-653bf29baac2">XML Schema Definition Tool (Xsd.exe)</a>
-        </format> to generate code from a specific XSD document. </para
-      >
+        </format> to generate code from a specific XSD document.
+      </para>
       <para
         >The <see cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtension" /> class allows you to modify the code generated when using any of these tools. For example, you may have an existing class that processes book orders on a system and you have an existing XSD document that supplies your orders. Using the <see cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtension" /> class, you can enable one of the tools to generate code that uses your class.</para
       >
@@ -44,13 +44,13 @@
       <list type="ordered">
         <item>
           <para
-            >Create an implementation of the <see cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtension" /> class. </para
-          >
+            >Create an implementation of the <see cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtension" /> class.
+          </para>
         </item>
         <item>
           <para
-            >Use the <see cref="Overload:System.Xml.Serialization.Advanced.SchemaImporterExtension.ImportSchemaType" /> method to write code for the code generator. The method contains parameters that allow you to examine the intercepted XSD type and create CodeDOM objects that are used to generate the new CLR code. </para
-          >
+            >Use the <see cref="Overload:System.Xml.Serialization.Advanced.SchemaImporterExtension.ImportSchemaType" /> method to write code for the code generator. The method contains parameters that allow you to examine the intercepted XSD type and create CodeDOM objects that are used to generate the new CLR code.
+          </para>
         </item>
         <item>
           <para
@@ -59,8 +59,8 @@
         </item>
         <item>
           <para
-            >If required, use the <see cref="M:System.Xml.Serialization.Advanced.SchemaImporterExtension.ImportDefaultValue(System.String,System.String)" /> method to examine default values found in the XSD document and return a different default value. </para
-          >
+            >If required, use the <see cref="M:System.Xml.Serialization.Advanced.SchemaImporterExtension.ImportDefaultValue(System.String,System.String)" /> method to examine default values found in the XSD document and return a different default value.
+          </para>
         </item>
         <item>
           <para>Compile your extension into a library.</para>
@@ -101,8 +101,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtension" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtension" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -165,8 +165,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Boolean" /> that indicates whether the XSD complex attribute has been set to "mixed". true, if the attribute has been set to mixed, otherwise false. </param
-        >
+          />A <see cref="T:System.Boolean" /> that indicates whether the XSD complex attribute has been set to "mixed". true, if the attribute has been set to mixed, otherwise false.
+        </param>
         <param name="schemas">
           <attribution
             license="cc4"
@@ -186,8 +186,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeCompileUnit" /> to which you can add CodeDOM structures to generate alternative code for the XSD. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeCompileUnit" /> to which you can add CodeDOM structures to generate alternative code for the XSD.
+        </param>
         <param name="mainNamespace">
           <attribution
             license="cc4"
@@ -207,8 +207,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.Compiler.CodeDomProvider" /> that is the CodeDOM provider used to generate the new code. </param
-        >
+          />A <see cref="T:System.CodeDom.Compiler.CodeDomProvider" /> that is the CodeDOM provider used to generate the new code.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ImportDefaultValue">

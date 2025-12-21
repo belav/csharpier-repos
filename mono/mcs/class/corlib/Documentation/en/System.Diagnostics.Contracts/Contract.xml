@@ -275,8 +275,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The event information for this event is supplied by the <see cref="T:System.Diagnostics.Contracts.ContractFailedEventArgs" /> object that is passed to the event handler. This event notifies a managed application environment such as an interactive interpreter or a Web browser host that a contract has failed. Before doing so, it will raise an event that an application can handle as it sees fit. For example, if code is being run in a testing framework, you can log a test failure and then end the test. </para
-          >
+            >The event information for this event is supplied by the <see cref="T:System.Diagnostics.Contracts.ContractFailedEventArgs" /> object that is passed to the event handler. This event notifies a managed application environment such as an interactive interpreter or a Web browser host that a contract has failed. Before doing so, it will raise an event that an application can handle as it sees fit. For example, if code is being run in a testing framework, you can log a test failure and then end the test.
+          </para>
           <para
             >The default implementation of the <see cref="M:System.Diagnostics.Contracts.Internal.ContractHelper.RaiseContractFailedEvent(System.Diagnostics.Contracts.ContractFailureKind,System.String,System.String,System.Exception)" /> method in the .NET Framework class library is to call each handler that is registered with the <see cref="E:System.Diagnostics.Contracts.Contract.ContractFailed" /> event. Exceptions thrown by handlers are ignored, but each handler can indicate whether the failure is handled by calling the <see cref="M:System.Diagnostics.Contracts.ContractFailedEventArgs.SetHandled" /> method for the event arguments. If any handler sets the failure as handled, the method returns null and no further action is taken. Alternatively, handlers can call the <see cref="M:System.Diagnostics.Contracts.ContractFailedEventArgs.SetUnwind" /> method to instruct the code to unwind. In that case, an exception is thrown after all handlers have executed.</para
           >
@@ -364,8 +364,8 @@
                 >You must use the binary rewriter (available at <see
                   cref="http://go.microsoft.com/fwlink/?LinkId=152461"
                   >Code Contracts</see
-                > on the MSDN DevLabs Web site) for run-time enforcement of this postcondition. </para
-              >
+                > on the MSDN DevLabs Web site) for run-time enforcement of this postcondition.
+              </para>
             </item>
           </list>
         </remarks>
@@ -378,8 +378,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The conditional expression to test. The expression may include <see cref="M:System.Diagnostics.Contracts.Contract.OldValue``1(``0)" />, <see cref="M:System.Diagnostics.Contracts.Contract.ValueAtReturn``1(``0@)" />, and <see cref="M:System.Diagnostics.Contracts.Contract.Result``1" /> values. </param
-        >
+          />The conditional expression to test. The expression may include <see cref="M:System.Diagnostics.Contracts.Contract.OldValue``1(``0)" />, <see cref="M:System.Diagnostics.Contracts.Contract.ValueAtReturn``1(``0@)" />, and <see cref="M:System.Diagnostics.Contracts.Contract.Result``1" /> values.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Ensures">
@@ -414,8 +414,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="condition" /> parameter specifies a postcondition that is expected to be true when the enclosing method or property returns normally. </para
-          >
+            >The <paramref name="condition" /> parameter specifies a postcondition that is expected to be true when the enclosing method or property returns normally.
+          </para>
           <list type="bullet">
             <item>
               <para>This method call must be at the beginning of a method or property, before any other code.</para>
@@ -447,8 +447,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The conditional expression to test. The expression may include <see cref="M:System.Diagnostics.Contracts.Contract.OldValue``1(``0)" /> and <see cref="M:System.Diagnostics.Contracts.Contract.Result``1" /> values. </param
-        >
+          />The conditional expression to test. The expression may include <see cref="M:System.Diagnostics.Contracts.Contract.OldValue``1(``0)" /> and <see cref="M:System.Diagnostics.Contracts.Contract.Result``1" /> values.
+        </param>
         <param name="userMessage">
           <attribution
             license="cc4"
@@ -1193,8 +1193,8 @@
               >You must turn on run-time checking to use the <see cref="M:System.Diagnostics.Contracts.Contract.Requires``1(System.Boolean)" /> method. If run-time checking is turned off, the process will be terminated. To obtain the tools for runtime checking, see <see
                 cref="http://go.microsoft.com/fwlink/?LinkId=152461"
                 >Code Contracts</see
-              > on the MSDN DevLabs Web site. </para
-            >
+              > on the MSDN DevLabs Web site.
+            </para>
           </block>
           <list type="bullet">
             <item>
@@ -1205,8 +1205,8 @@
             </item>
             <item>
               <para
-                >Use this method instead of the <see cref="M:System.Diagnostics.Contracts.Contract.Requires(System.Boolean)" /> method when you want to throw an exception if the precondition fails. </para
-              >
+                >Use this method instead of the <see cref="M:System.Diagnostics.Contracts.Contract.Requires(System.Boolean)" /> method when you want to throw an exception if the precondition fails.
+              </para>
             </item>
           </list>
         </remarks>
@@ -1394,8 +1394,8 @@
             </item>
             <item>
               <para
-                >Use this method instead of the <see cref="M:System.Diagnostics.Contracts.Contract.Requires(System.Boolean,System.String)" /> method when you want to throw an exception if the precondition fails. </para
-              >
+                >Use this method instead of the <see cref="M:System.Diagnostics.Contracts.Contract.Requires(System.Boolean,System.String)" /> method when you want to throw an exception if the precondition fails.
+              </para>
             </item>
           </list>
         </remarks>

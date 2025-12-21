@@ -34,12 +34,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A type is said to be nullable if it can be assigned a value or can be assigned null, which means the type has no value whatsoever. By default, all reference types, such as <see cref="T:System.String" />, are nullable, but all value types, such as <see cref="T:System.Int32" />, are not. </para
-      >
+        >A type is said to be nullable if it can be assigned a value or can be assigned null, which means the type has no value whatsoever. By default, all reference types, such as <see cref="T:System.String" />, are nullable, but all value types, such as <see cref="T:System.Int32" />, are not.
+      </para>
       <para>In C# and Visual Basic, you mark a value type as nullable by using the ? notation after the value type. For example, int? in C# or Integer? in Visual Basic declares an integer value type that can be assigned null.</para>
       <para
-        >The <see cref="T:System.Nullable`1" /> structure supports using only a value type as a nullable type because reference types are nullable by design. </para
-      >
+        >The <see cref="T:System.Nullable`1" /> structure supports using only a value type as a nullable type because reference types are nullable by design.
+      </para>
       <para
         >The <see cref="T:System.Nullable" /> class provides complementary support for the <see cref="T:System.Nullable`1" /> structure. The <see cref="T:System.Nullable" /> class supports obtaining the underlying type of a nullable type, and comparison and equality operations on pairs of nullable types whose underlying value type does not support generic comparison and equality operations.</para
       >
@@ -47,8 +47,8 @@
         <h2>Fundamental Properties</h2>
       </format>
       <para
-        >The two fundamental members of the <see cref="T:System.Nullable`1" /> structure are the <see cref="P:System.Nullable`1.HasValue" /> and <see cref="P:System.Nullable`1.Value" /> properties. If the <see cref="P:System.Nullable`1.HasValue" /> property for a <see cref="T:System.Nullable`1" /> object is true, the value of the object can be accessed with the <see cref="P:System.Nullable`1.Value" /> property. If the <see cref="P:System.Nullable`1.HasValue" /> property is false, the value of the object is undefined and an attempt to access the <see cref="P:System.Nullable`1.Value" /> property throws an <see cref="T:System.InvalidOperationException" />. </para
-      >
+        >The two fundamental members of the <see cref="T:System.Nullable`1" /> structure are the <see cref="P:System.Nullable`1.HasValue" /> and <see cref="P:System.Nullable`1.Value" /> properties. If the <see cref="P:System.Nullable`1.HasValue" /> property for a <see cref="T:System.Nullable`1" /> object is true, the value of the object can be accessed with the <see cref="P:System.Nullable`1.Value" /> property. If the <see cref="P:System.Nullable`1.HasValue" /> property is false, the value of the object is undefined and an attempt to access the <see cref="P:System.Nullable`1.Value" /> property throws an <see cref="T:System.InvalidOperationException" />.
+      </para>
       <format type="text/html">
         <h2>Boxing and Unboxing</h2>
       </format>
@@ -62,8 +62,8 @@
         <h2>net_v451 and Windows Runtime Components</h2>
       </format>
       <para
-        >Starting with the net_v451, you can include a <see cref="T:System.Nullable`1" /> type as a member of a structure exported in a WinMD library. Previously, this was not supported.  </para
-      >
+        >Starting with the net_v451, you can include a <see cref="T:System.Nullable`1" /> type as a member of a structure exported in a WinMD library. Previously, this was not supported.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -136,8 +136,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <paramref name="other" /> parameter is equal to the current <see cref="T:System.Nullable`1" /> object; otherwise, false. </para
-          >
+            >true if the <paramref name="other" /> parameter is equal to the current <see cref="T:System.Nullable`1" /> object; otherwise, false.
+          </para>
           <para>This table describes how equality is defined for the compared values: </para>
           <list type="table">
             <listheader>
@@ -224,8 +224,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The hash code of the object returned by the <see cref="P:System.Nullable`1.Value" /> property if the <see cref="P:System.Nullable`1.HasValue" /> property is true, or zero if the <see cref="P:System.Nullable`1.HasValue" /> property is false. </para
-          >
+            >The hash code of the object returned by the <see cref="P:System.Nullable`1.Value" /> property if the <see cref="P:System.Nullable`1.HasValue" /> property is true, or zero if the <see cref="P:System.Nullable`1.HasValue" /> property is false.
+          </para>
         </returns>
       </Docs>
     </Member>
@@ -249,8 +249,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="Overload:System.Nullable`1.GetValueOrDefault" /> method returns a value even if the <see cref="P:System.Nullable`1.HasValue" /> property is false (unlike the <see cref="P:System.Nullable`1.Value" /> property, which throws an exception). </para
-          >
+            >The <see cref="Overload:System.Nullable`1.GetValueOrDefault" /> method returns a value even if the <see cref="P:System.Nullable`1.HasValue" /> property is false (unlike the <see cref="P:System.Nullable`1.Value" /> property, which throws an exception).
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -327,14 +327,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see cref="P:System.Nullable`1.HasValue" /> property is true, the value of the current <see cref="T:System.Nullable`1" /> object can be accessed with the <see cref="P:System.Nullable`1.Value" /> property. Otherwise, attempting to access its value throws an <see cref="T:System.InvalidOperationException" /> exception. </para
-          >
+            >If the <see cref="P:System.Nullable`1.HasValue" /> property is true, the value of the current <see cref="T:System.Nullable`1" /> object can be accessed with the <see cref="P:System.Nullable`1.Value" /> property. Otherwise, attempting to access its value throws an <see cref="T:System.InvalidOperationException" /> exception.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the current <see cref="T:System.Nullable`1" /> object has a valid value of its underlying type. </para
-          >
+            >Gets a value indicating whether the current <see cref="T:System.Nullable`1" /> object has a valid value of its underlying type.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -446,8 +446,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Nullable`1.ToString" /> property returns the string yielded by calling the ToString property of the object returned by the <see cref="P:System.Nullable`1.Value" /> property. </para
-          >
+            >The <see cref="M:System.Nullable`1.ToString" /> property returns the string yielded by calling the ToString property of the object returned by the <see cref="P:System.Nullable`1.Value" /> property.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -485,8 +485,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a value of type T has not been assigned to the <see cref="T:System.Nullable`1" /> object, you can compare it to null and retrieve its <see cref="P:System.Nullable`1.HasValue" /> property, but you cannot access its <see cref="P:System.Nullable`1.Value" /> property or call its other members. </para
-          >
+            >If a value of type T has not been assigned to the <see cref="T:System.Nullable`1" /> object, you can compare it to null and retrieve its <see cref="P:System.Nullable`1.HasValue" /> property, but you cannot access its <see cref="P:System.Nullable`1.Value" /> property or call its other members.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

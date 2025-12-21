@@ -34,8 +34,8 @@
         >Several Cryptography Next Generation (CNG) classes (such as <see cref="T:System.Security.Cryptography.CngKey" />) accept <see cref="T:System.Security.Cryptography.CngAlgorithm" /> objects through an <paramref name="algorithm" /> parameter. When the class receives the <see cref="T:System.Security.Cryptography.CngAlgorithm" /> object, it retrieves the embedded algorithm name by calling the object's <see cref="P:System.Security.Cryptography.CngAlgorithm.Algorithm" /> property.</para
       >
       <para
-        >Therefore, <see cref="T:System.Security.Cryptography.CngAlgorithm" /> serves as an enumeration of well-known algorithms. It lets you specify a well-known algorithm by using a strongly typed value instead of a string. </para
-      >
+        >Therefore, <see cref="T:System.Security.Cryptography.CngAlgorithm" /> serves as an enumeration of well-known algorithms. It lets you specify a well-known algorithm by using a strongly typed value instead of a string.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -327,8 +327,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares the specified <see cref="T:System.Security.Cryptography.CngAlgorithm" /> object to the current <see cref="T:System.Security.Cryptography.CngAlgorithm" /> object. </para
-          >
+            >Compares the specified <see cref="T:System.Security.Cryptography.CngAlgorithm" /> object to the current <see cref="T:System.Security.Cryptography.CngAlgorithm" /> object.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />

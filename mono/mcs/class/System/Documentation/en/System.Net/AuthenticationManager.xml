@@ -108,22 +108,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The challenge returned by the Internet resource. </param
-        >
+          />The challenge returned by the Internet resource.
+        </param>
         <param name="request">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Net.WebRequest" /> that initiated the authentication challenge. </param
-        >
+          />The <see cref="T:System.Net.WebRequest" /> that initiated the authentication challenge.
+        </param>
         <param name="credentials">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Net.ICredentials" /> associated with this request. </param
-        >
+          />The <see cref="T:System.Net.ICredentials" /> associated with this request.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -150,8 +150,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The credential policy determines whether to send credentials when sending a request for a network resource, such as the content of a Web page. If credentials are sent, servers that require client authentication can attempt to authenticate the client when the request is received instead of sending a response indicating that the client's credentials are required. While this saves a round trip to the server, this must be balanced against the security risk inherent in sending credentials across the network. When the destination server does not require client authentication it is best to not send credentials.</para>
           <para
-            >The credential policy will be called only for requests that specify credentials or use a <see cref="T:System.Net.WebProxy" /> object that specifies credentials. </para
-          >
+            >The credential policy will be called only for requests that specify credentials or use a <see cref="T:System.Net.WebProxy" /> object that specifies credentials.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -194,8 +194,8 @@
             >When a <see cref="T:System.Net.WebRequest" /> requires mutual authentication, the SPN for the destination must be supplied by the client. If you know the SPN, you can add it to the <see cref="P:System.Net.AuthenticationManager.CustomTargetNameDictionary" /> before sending the request. If you have not added SPN information to this dictionary, the <see cref="T:System.Net.AuthenticationManager" /> uses the <see cref="P:System.Net.WebRequest.RequestUri" /> method to compose the most likely SPN; however, this is a computed value and might be incorrect. If mutual authentication is attempted and fails, you can check the dictionary to determine the computed SPN. No SPN is entered into the dictionary if the authentication protocol does not support mutual authentication.</para
           >
           <para
-            >To add an SPN value to this dictionary, use the <see cref="P:System.Uri.AbsoluteUri" /> of the <see cref="P:System.Net.WebRequest.RequestUri" /> as the key. Internally, the key is truncated to include the <see cref="P:System.Uri.Scheme" />, <see cref="P:System.Uri.Host" />, and the <see cref="P:System.Uri.Port" /> if it is not the default port. </para
-          >
+            >To add an SPN value to this dictionary, use the <see cref="P:System.Uri.AbsoluteUri" /> of the <see cref="P:System.Net.WebRequest.RequestUri" /> as the key. Internally, the key is truncated to include the <see cref="P:System.Uri.Scheme" />, <see cref="P:System.Uri.Host" />, and the <see cref="P:System.Uri.Port" /> if it is not the default port.
+          </para>
           <block subset="none" type="note">
             <para
               >Accessing the methods and properties of the <see cref="P:System.Net.AuthenticationManager.CustomTargetNameDictionary" /> requires unrestricted <see cref="T:System.Net.WebPermission" />.</para
@@ -270,15 +270,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Net.WebRequest" /> to an Internet resource. </param
-        >
+          />A <see cref="T:System.Net.WebRequest" /> to an Internet resource.
+        </param>
         <param name="credentials">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Net.ICredentials" /> associated with the request. </param
-        >
+          />The <see cref="T:System.Net.ICredentials" /> associated with the request.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -326,8 +326,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Net.IAuthenticationModule" /> to register with the authentication manager. </param
-        >
+          />The <see cref="T:System.Net.IAuthenticationModule" /> to register with the authentication manager.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -422,8 +422,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Net.IAuthenticationModule" /> to remove from the list of registered modules. </param
-        >
+          />The <see cref="T:System.Net.IAuthenticationModule" /> to remove from the list of registered modules.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -474,8 +474,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The authentication scheme of the module to remove. </param
-        >
+          />The authentication scheme of the module to remove.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

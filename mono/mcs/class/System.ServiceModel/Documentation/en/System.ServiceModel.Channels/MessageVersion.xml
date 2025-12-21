@@ -26,8 +26,8 @@
         >There are currently two SOAP envelope versions available: SOAP 1.1 and SOAP 1.2. These versions of SOAP are represented by <see cref="T:System.ServiceModel.EnvelopeVersion" /> and are returned by the <see cref="P:System.ServiceModel.EnvelopeVersion.Soap11" /> and <see cref="P:System.ServiceModel.EnvelopeVersion.Soap12" /> properties. The version of SOAP associated with the <see cref="T:System.ServiceModel.Channels.MessageVersion" /> can be recovered by using the <see cref="P:System.ServiceModel.Channels.MessageVersion.Envelope" /> property. crdefault the schema for <see
           cref="http://go.microsoft.com/fwlink/?LinkId=96641"
           >SOAP 1.1</see
-        > and <see cref="http://go.microsoft.com/fwlink/?LinkId=96642">SOAP 1.2</see>. </para
-      >
+        > and <see cref="http://go.microsoft.com/fwlink/?LinkId=96642">SOAP 1.2</see>.
+      </para>
       <para
         >There are currently two versions of WS-Addressing available. The one submitted on 10 August 2004 and the one specified in the WS-Addressing 1.0 protocol. The address version used by the current message version can be recovered using the <see cref="P:System.ServiceModel.Channels.MessageVersion.Addressing" /> property. These versions of WS-Addressing are represented by <see cref="T:System.ServiceModel.Channels.AddressingVersion" /> and are returned by the <see cref="P:System.ServiceModel.Channels.AddressingVersion.WSAddressingAugust2004" /> and <see cref="P:System.ServiceModel.Channels.AddressingVersion.WSAddressing10" /> properties. The WS-Addressing August 2004 is retained as a legacy value. The 10 August 2004 W3C Member Submission for WS-Addressing is available at <see
           cref="http://go.microsoft.com/fwlink/?LinkId=96643"
@@ -110,8 +110,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The SOAP versions currently available are SOAP 1.1 and SOAP 1.2. There is an <see cref="T:System.ServiceModel.EnvelopeVersion" /> for each version of SOAP that contains the data relevant to its use. </para
-          >
+            >The SOAP versions currently available are SOAP 1.1 and SOAP 1.2. There is an <see cref="T:System.ServiceModel.EnvelopeVersion" /> for each version of SOAP that contains the data relevant to its use.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

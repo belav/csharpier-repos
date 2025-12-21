@@ -24,8 +24,8 @@
         >A <see cref="T:System.Web.UI.WebControls.Adapters.MenuAdapter" /> modifies the markup or behavior of a <see cref="T:System.Web.UI.WebControls.Menu" /> control for a specific browser or class of browsers, or acts as a filter on some capability.</para
       >
       <para
-        >By default, the <see cref="T:System.Web.UI.WebControls.MenuItem" /> objects in the <see cref="T:System.Web.UI.WebControls.Menu" /> control are rendered as hyperlinks to accommodate menu navigation. The <see cref="T:System.Web.UI.WebControls.Menu" /> class maintains state by implementing the <see cref="T:System.Web.UI.IPostBackEventHandler" /> interface so that it can respond to and raise specific events during postback. You can extend the <see cref="T:System.Web.UI.WebControls.Adapters.MenuAdapter" /> class to further customize rendering or behavior of the <see cref="T:System.Web.UI.WebControls.Menu" /> control. </para
-      >
+        >By default, the <see cref="T:System.Web.UI.WebControls.MenuItem" /> objects in the <see cref="T:System.Web.UI.WebControls.Menu" /> control are rendered as hyperlinks to accommodate menu navigation. The <see cref="T:System.Web.UI.WebControls.Menu" /> class maintains state by implementing the <see cref="T:System.Web.UI.IPostBackEventHandler" /> interface so that it can respond to and raise specific events during postback. You can extend the <see cref="T:System.Web.UI.WebControls.Adapters.MenuAdapter" /> class to further customize rendering or behavior of the <see cref="T:System.Web.UI.WebControls.Menu" /> control.
+      </para>
       <para
         >The initial request for an adapter causes the .NET Framework to search for a mapped adapter for the control, given the characteristics of the requesting browser. The <see cref="T:System.Web.HttpBrowserCapabilities" /> class uses browser definition files to identify the characteristics of the client browser and to map the adapter to the browser type.</para
       >
@@ -54,8 +54,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The initial request for an adapter causes the .NET Framework to search for a mapped adapter for the control, given the characteristics of the requesting browser. After the adapter is found, the control holds a reference to the mapped adapter instance in its <see cref="P:System.Web.UI.Control.Adapter" /> property. </para
-          >
+            >The initial request for an adapter causes the .NET Framework to search for a mapped adapter for the control, given the characteristics of the requesting browser. After the adapter is found, the control holds a reference to the mapped adapter instance in its <see cref="P:System.Web.UI.Control.Adapter" /> property.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -237,8 +237,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.RaisePostBackEvent(System.String)" /> method is called when the <see cref="M:System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(System.String)" /> event is raised, and is used to maintain the navigation path of the menu. The <paramref name="eventArgument" /> parameter contains a delimited string of menu items that identify the current location in the menu hierarchy. </para
-          >
+            >The <see cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.RaisePostBackEvent(System.String)" /> method is called when the <see cref="M:System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(System.String)" /> event is raised, and is used to maintain the navigation path of the menu. The <paramref name="eventArgument" /> parameter contains a delimited string of menu items that identify the current location in the menu hierarchy.
+          </para>
           <para
             >The page passes the value of <paramref name="eventArgument" /> to the associated control's <see cref="M:System.Web.UI.WebControls.Menu.RaisePostBackEvent(System.String)" /> method. The associated <see cref="T:System.Web.UI.WebControls.Menu" /> control also renders the markup element that causes the postback to occur. If the control renders client-side script for postback, the argument from the script is passed in the <paramref name="eventArgument" /> parameter. If the postback is caused by a simple submit, <paramref name="eventArgument" /> is null.</para
           >
@@ -428,8 +428,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.UI.WebControls.MenuItem" /> object containing the properties to write to the response stream. </param
-        >
+          />The <see cref="T:System.Web.UI.WebControls.MenuItem" /> object containing the properties to write to the response stream.
+        </param>
         <param name="position">
           <attribution
             license="cc4"
@@ -490,8 +490,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(System.String)" /> method enables the <see cref="T:System.Web.UI.WebControls.Adapters.MenuAdapter" /> class to process an event that is raised when a page is posted back to the server. The page passes <paramref name="eventArgument" /> to the <see cref="M:System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(System.String)" /> method. </para
-          >
+            >The <see cref="M:System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(System.String)" /> method enables the <see cref="T:System.Web.UI.WebControls.Adapters.MenuAdapter" /> class to process an event that is raised when a page is posted back to the server. The page passes <paramref name="eventArgument" /> to the <see cref="M:System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(System.String)" /> method.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

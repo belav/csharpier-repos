@@ -188,8 +188,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reduces the <see cref="T:System.Linq.Expressions.MemberInitExpression" /> to a simpler expression. </para
-          >
+            >Reduces the <see cref="T:System.Linq.Expressions.MemberInitExpression" /> to a simpler expression.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />

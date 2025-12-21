@@ -100,8 +100,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.Configuration.DefaultProxySection" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.Configuration.DefaultProxySection" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -133,8 +133,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Net.Configuration.BypassElementCollection" /> returned by this property contains one <see cref="T:System.Net.Configuration.BypassElement" /> for each resource that bypasses the Web Proxy server. </para
-          >
+            >The <see cref="T:System.Net.Configuration.BypassElementCollection" /> returned by this property contains one <see cref="T:System.Net.Configuration.BypassElement" /> for each resource that bypasses the Web Proxy server.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -196,8 +196,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Net.Configuration.ModuleElement" /> returned by this property identifies the type, assembly, and version of a custom <see cref="T:System.Net.IWebProxy" /> implementation. </para
-          >
+            >The <see cref="T:System.Net.Configuration.ModuleElement" /> returned by this property identifies the type, assembly, and version of a custom <see cref="T:System.Net.IWebProxy" /> implementation.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

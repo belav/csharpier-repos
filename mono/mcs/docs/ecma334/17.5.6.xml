@@ -5,11 +5,11 @@
     >An abstract method declaration introduces a new virtual method but does not provide an implementation of that method. Instead, non-abstract derived classes are required to provide their own implementation by overriding that method. Because an abstract method provides no actual implementation, the <non_terminal
       where="17.5"
       >method-body</non_terminal
-    > of an abstract method simply consists of a semicolon. </paragraph
-  >
+    > of an abstract method simply consists of a semicolon.
+  </paragraph>
   <paragraph
-    >Abstract method declarations are only permitted in abstract classes (<hyperlink>17.1.1.1</hyperlink>). </paragraph
-  >
+    >Abstract method declarations are only permitted in abstract classes (<hyperlink>17.1.1.1</hyperlink>).
+  </paragraph>
   <paragraph>
     <example
       >[Example: In the example <code_example>

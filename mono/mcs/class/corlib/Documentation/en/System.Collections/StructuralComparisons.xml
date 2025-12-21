@@ -22,8 +22,8 @@
       <list type="bullet">
         <item>
           <para
-            >An <see cref="T:System.Collections.IComparer" /> implementation that can be passed to a method such as <see cref="M:System.Array.System#Collections#IStructuralComparable#CompareTo(System.Object,System.Collections.IComparer)" /> or <see cref="M:System.Tuple`3.System#Collections#IStructuralComparable#CompareTo(System.Object,System.Collections.IComparer)" /> to perform a structural comparison of two objects. It is designed to indicate whether the first object precedes, follows, or occurs in the same position as the second object in the sort order. </para
-          >
+            >An <see cref="T:System.Collections.IComparer" /> implementation that can be passed to a method such as <see cref="M:System.Array.System#Collections#IStructuralComparable#CompareTo(System.Object,System.Collections.IComparer)" /> or <see cref="M:System.Tuple`3.System#Collections#IStructuralComparable#CompareTo(System.Object,System.Collections.IComparer)" /> to perform a structural comparison of two objects. It is designed to indicate whether the first object precedes, follows, or occurs in the same position as the second object in the sort order.
+          </para>
         </item>
         <item>
           <para

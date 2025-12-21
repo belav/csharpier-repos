@@ -39,8 +39,8 @@
       >
       <block subset="none" type="note">
         <para
-          >There is no guarantee that every call to the <see cref="M:System.Threading.EventWaitHandle.Set" /> method will release a thread. If two calls are too close together, so that the second call occurs before a thread has been released, only one thread is released. It is as if the second call did not happen. Also, if <see cref="M:System.Threading.EventWaitHandle.Set" /> is called when there are no threads waiting and the <see cref="T:System.Threading.AutoResetEvent" /> is already signaled, the call has no effect. </para
-        >
+          >There is no guarantee that every call to the <see cref="M:System.Threading.EventWaitHandle.Set" /> method will release a thread. If two calls are too close together, so that the second call occurs before a thread has been released, only one thread is released. It is as if the second call did not happen. Also, if <see cref="M:System.Threading.EventWaitHandle.Set" /> is called when there are no threads waiting and the <see cref="T:System.Threading.AutoResetEvent" /> is already signaled, the call has no effect.
+        </para>
       </block>
       <para>You can control the initial state of an AutoResetEvent by passing a Boolean value to the constructor: true if the initial state is signaled and false otherwise.</para>
       <para
@@ -52,8 +52,8 @@
         </format> in the conceptual documentation.</para
       >
       <para
-        >Beginning with the .NET Framework version 2.0, <see cref="T:System.Threading.AutoResetEvent" /> derives from the new <see cref="T:System.Threading.EventWaitHandle" /> class. An <see cref="T:System.Threading.AutoResetEvent" /> is functionally equivalent to an <see cref="T:System.Threading.EventWaitHandle" /> created with <see cref="F:System.Threading.EventResetMode.AutoReset" />. </para
-      >
+        >Beginning with the .NET Framework version 2.0, <see cref="T:System.Threading.AutoResetEvent" /> derives from the new <see cref="T:System.Threading.EventWaitHandle" /> class. An <see cref="T:System.Threading.AutoResetEvent" /> is functionally equivalent to an <see cref="T:System.Threading.EventWaitHandle" /> created with <see cref="F:System.Threading.EventResetMode.AutoReset" />.
+      </para>
       <block subset="none" type="note">
         <para
           >Unlike the <see cref="T:System.Threading.AutoResetEvent" /> class, the <see cref="T:System.Threading.EventWaitHandle" /> class provides access to named system synchronization events.</para
@@ -96,8 +96,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to set the initial state to signaled; false to set the initial state to non-signaled. </param
-        >
+          />true to set the initial state to signaled; false to set the initial state to non-signaled.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Reset">
@@ -149,8 +149,8 @@
           >
           <block subset="none" type="note">
             <para
-              >There is no guarantee that every call to the <see cref="M:System.Threading.AutoResetEvent.Set" /> method will release a thread. If two calls are too close together, so that the second call occurs before a thread has been released, only one thread is released — as if the second call did not happen. Also, if the <see cref="M:System.Threading.AutoResetEvent.Set" /> method is called when there are no threads waiting and the <see cref="T:System.Threading.AutoResetEvent" /> is already signaled, the call has no effect. </para
-            >
+              >There is no guarantee that every call to the <see cref="M:System.Threading.AutoResetEvent.Set" /> method will release a thread. If two calls are too close together, so that the second call occurs before a thread has been released, only one thread is released — as if the second call did not happen. Also, if the <see cref="M:System.Threading.AutoResetEvent.Set" /> method is called when there are no threads waiting and the <see cref="T:System.Threading.AutoResetEvent" /> is already signaled, the call has no effect.
+            </para>
           </block>
         </remarks>
         <summary>

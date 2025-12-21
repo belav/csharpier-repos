@@ -94,8 +94,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A pointer or handle contained in a 32-bit unsigned integer. </param
-        >
+          />A pointer or handle contained in a 32-bit unsigned integer.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -140,8 +140,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A pointer or handle contained in a 64-bit unsigned integer. </param
-        >
+          />A pointer or handle contained in a 64-bit unsigned integer.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -178,8 +178,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A pointer to an unspecified type. </param
-        >
+          />A pointer to an unspecified type.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Add">
@@ -270,8 +270,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object to compare with this instance or null. </param
-        >
+          />An object to compare with this instance or null.
+        </param>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Returns a value indicating whether this instance is equal to a specified object.</para>
@@ -287,8 +287,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object to compare with this instance or null. </param
-        >
+          />An object to compare with this instance or null.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -428,8 +428,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second pointer or handle to compare. </param
-        >
+          />The second pointer or handle to compare.
+        </param>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -447,15 +447,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first pointer or handle to compare. </param
-        >
+          />The first pointer or handle to compare.
+        </param>
         <param name="value2">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second pointer or handle to compare. </param
-        >
+          />The second pointer or handle to compare.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -653,8 +653,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second pointer or handle to compare. </param
-        >
+          />The second pointer or handle to compare.
+        </param>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -672,15 +672,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first pointer or handle to compare. </param
-        >
+          />The first pointer or handle to compare.
+        </param>
         <param name="value2">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second pointer or handle to compare. </param
-        >
+          />The second pointer or handle to compare.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -765,8 +765,8 @@
           <para
             >A <see cref="T:System.Int32" /> containing the 
    number of bytes of a pointer or handle for the current implementation. The value
-   of this property is equal to the number of bytes contained by the <see langword="native unsigned int" /> type in the current implementation. </para
-          >
+   of this property is equal to the number of bytes contained by the <see langword="native unsigned int" /> type in the current implementation.
+          </para>
         </value>
         <remarks>
           <para>This property is read-only.</para>
@@ -877,8 +877,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> object to populate with data. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> object to populate with data.
+        </param>
         <param name="context">
           <attribution
             license="cc4"

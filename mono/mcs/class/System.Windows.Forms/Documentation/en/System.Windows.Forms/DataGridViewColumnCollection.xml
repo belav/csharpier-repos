@@ -35,8 +35,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see cref="T:System.Windows.Forms.DataGridViewColumn" /> objects in a <see cref="T:System.Windows.Forms.DataGridView" /> control. </para
-      >
+        >Represents a collection of <see cref="T:System.Windows.Forms.DataGridViewColumn" /> objects in a <see cref="T:System.Windows.Forms.DataGridView" /> control.
+      </para>
     </summary>
   </Docs>
   <Members>
@@ -55,8 +55,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridViewColumnCollection" /> class for the given <see cref="T:System.Windows.Forms.DataGridView" />. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridViewColumnCollection" /> class for the given <see cref="T:System.Windows.Forms.DataGridView" />.
+          </para>
         </summary>
         <param name="dataGridView">
           <attribution
@@ -233,8 +233,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -467,8 +467,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The first column in display order is the column with the lowest <see cref="P:System.Windows.Forms.DataGridViewColumn.DisplayIndex" /> value, regardless of whether the column is actually visible on the screen. </para
-          >
+            >The first column in display order is the column with the lowest <see cref="P:System.Windows.Forms.DataGridViewColumn.DisplayIndex" /> value, regardless of whether the column is actually visible on the screen.
+          </para>
           <para>This method lets you determine the first column that fits the given criteria without having to compare index values directly.</para>
         </remarks>
         <summary>
@@ -509,8 +509,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The first column in display order is the column with the lowest <see cref="P:System.Windows.Forms.DataGridViewColumn.DisplayIndex" /> value, regardless of whether the column is actually visible on the screen. </para
-          >
+            >The first column in display order is the column with the lowest <see cref="P:System.Windows.Forms.DataGridViewColumn.DisplayIndex" /> value, regardless of whether the column is actually visible on the screen.
+          </para>
           <para>This method lets you determine the first column that fits the given criteria without having to compare index values directly. </para>
         </remarks>
         <summary>
@@ -558,8 +558,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The last column in display order is the column with the highest <see cref="P:System.Windows.Forms.DataGridViewColumn.DisplayIndex" /> value, regardless of whether the column is actually visible on the screen. </para
-          >
+            >The last column in display order is the column with the highest <see cref="P:System.Windows.Forms.DataGridViewColumn.DisplayIndex" /> value, regardless of whether the column is actually visible on the screen.
+          </para>
           <para>This method lets you determine the last column that fits the given criteria without having to compare index values directly. </para>
         </remarks>
         <summary>
@@ -608,8 +608,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The next column in display order is the column with the lowest <see cref="P:System.Windows.Forms.DataGridViewColumn.DisplayIndex" /> value higher than the <see cref="P:System.Windows.Forms.DataGridViewColumn.DisplayIndex" /> value of the specified column, regardless of whether the column is actually visible on the screen. </para
-          >
+            >The next column in display order is the column with the lowest <see cref="P:System.Windows.Forms.DataGridViewColumn.DisplayIndex" /> value higher than the <see cref="P:System.Windows.Forms.DataGridViewColumn.DisplayIndex" /> value of the specified column, regardless of whether the column is actually visible on the screen.
+          </para>
           <para>This method lets you determine the next column after the current column that fits the given criteria without having to compare index values directly.</para>
         </remarks>
         <summary>
@@ -665,8 +665,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The previous column in display order is the column with the highest <see cref="P:System.Windows.Forms.DataGridViewColumn.DisplayIndex" /> value lower than the <see cref="P:System.Windows.Forms.DataGridViewColumn.DisplayIndex" /> value of the specified column, regardless of whether the column is actually visible on the screen. </para
-          >
+            >The previous column in display order is the column with the highest <see cref="P:System.Windows.Forms.DataGridViewColumn.DisplayIndex" /> value lower than the <see cref="P:System.Windows.Forms.DataGridViewColumn.DisplayIndex" /> value of the specified column, regardless of whether the column is actually visible on the screen.
+          </para>
           <para>This method lets you determine the first column before the current column that fits the given criteria without having to compare index values directly.</para>
         </remarks>
         <summary>
@@ -906,8 +906,8 @@
             >The name of a column is indicated by the <see cref="P:System.Windows.Forms.DataGridViewColumn.Name" /> property.</para
           >
           <para
-            >To remove a column that is automatically generated when binding to a data source, call this method in a <see cref="E:System.Windows.Forms.DataGridView.DataBindingComplete" /> event handler. </para
-          >
+            >To remove a column that is automatically generated when binding to a data source, call this method in a <see cref="E:System.Windows.Forms.DataGridView.DataBindingComplete" /> event handler.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -942,8 +942,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To remove a column that is automatically generated when binding to a data source, call this method in a <see cref="E:System.Windows.Forms.DataGridView.DataBindingComplete" /> event handler. </para
-          >
+            >To remove a column that is automatically generated when binding to a data source, call this method in a <see cref="E:System.Windows.Forms.DataGridView.DataBindingComplete" /> event handler.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -975,8 +975,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To remove a column that is automatically generated when binding to a data source, call this method in a <see cref="E:System.Windows.Forms.DataGridView.DataBindingComplete" /> event handler. </para
-          >
+            >To remove a column that is automatically generated when binding to a data source, call this method in a <see cref="E:System.Windows.Forms.DataGridView.DataBindingComplete" /> event handler.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

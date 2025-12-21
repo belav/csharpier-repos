@@ -22,11 +22,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Apply the <see cref="T:System.ServiceModel.OperationContractAttribute" /> to a method to indicate that the method implements a service operation as part of a service contract (specified by a <see cref="T:System.ServiceModel.ServiceContractAttribute" /> attribute). </para
-      >
+        >Apply the <see cref="T:System.ServiceModel.OperationContractAttribute" /> to a method to indicate that the method implements a service operation as part of a service contract (specified by a <see cref="T:System.ServiceModel.ServiceContractAttribute" /> attribute).
+      </para>
       <para
-        >Use the <see cref="T:System.ServiceModel.OperationContractAttribute" /> properties to control the structure of the operation and the values expressed in metadata: </para
-      >
+        >Use the <see cref="T:System.ServiceModel.OperationContractAttribute" /> properties to control the structure of the operation and the values expressed in metadata:
+      </para>
       <list type="bullet">
         <item>
           <para
@@ -73,14 +73,14 @@
         >The <see cref="T:System.ServiceModel.OperationContractAttribute" /> attribute declares that a method is an operation in a service contract. Only methods attributed with the <see cref="T:System.ServiceModel.OperationContractAttribute" /> are exposed as service operations. A service contract without any methods marked with the <see cref="T:System.ServiceModel.OperationContractAttribute" /> exposes no operations.</para
       >
       <para
-        >The <see cref="P:System.ServiceModel.OperationContractAttribute.AsyncPattern" /> property indicates that a pair of Begin&lt;methodName&gt; and End&lt;methodName&gt; methods form a single operation implemented asynchronously (whether on the client or the service). The ability of a service to implement operations asynchronously is a service implementation detail and is not exposed in metadata (such as Web Services Description Language (WSDL)). </para
-      >
+        >The <see cref="P:System.ServiceModel.OperationContractAttribute.AsyncPattern" /> property indicates that a pair of Begin&lt;methodName&gt; and End&lt;methodName&gt; methods form a single operation implemented asynchronously (whether on the client or the service). The ability of a service to implement operations asynchronously is a service implementation detail and is not exposed in metadata (such as Web Services Description Language (WSDL)).
+      </para>
       <para
         >Similarly, clients can choose to invoke operations asynchronously independent of how the service method is implemented. Calling service operations asynchronously in the client is recommended when a service method takes some time but must return information directly to the client. For details, see <see cref="P:System.ServiceModel.OperationContractAttribute.AsyncPattern" />.</para
       >
       <para
-        >The <see cref="P:System.ServiceModel.OperationContractAttribute.IsOneWay" /> property indicates that a method does not return any value at all, including an empty underlying response message. This type of method is useful for notifications or event-style communication. Methods of this kind cannot return a reply message so the method's declaration must return void. </para
-      >
+        >The <see cref="P:System.ServiceModel.OperationContractAttribute.IsOneWay" /> property indicates that a method does not return any value at all, including an empty underlying response message. This type of method is useful for notifications or event-style communication. Methods of this kind cannot return a reply message so the method's declaration must return void.
+      </para>
       <block subset="none" type="note">
         <para
           >When programmatically retrieving the information store in this attribute, use the <see cref="T:System.ServiceModel.Description.ContractDescription" /> class instead of reflection.</para
@@ -126,8 +126,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.OperationContractAttribute" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.OperationContractAttribute" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -190,8 +190,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.ServiceModel.OperationContractAttribute.AsyncPattern" /> property to build service operations that can be called asynchronously on the server, the client, or both. The <see cref="P:System.ServiceModel.OperationContractAttribute.AsyncPattern" /> property informs the runtime that a Begin method has a matched End method that conforms to the .NET Framework asynchronous method design pattern. Building server asynchronous methods that implement a service operation increases server scalability and performance without affecting the clients of the service, and is recommended when a service operation must return something to the client after performing a lengthy operation that can be performed asynchronously. </para
-          >
+            >Use the <see cref="P:System.ServiceModel.OperationContractAttribute.AsyncPattern" /> property to build service operations that can be called asynchronously on the server, the client, or both. The <see cref="P:System.ServiceModel.OperationContractAttribute.AsyncPattern" /> property informs the runtime that a Begin method has a matched End method that conforms to the .NET Framework asynchronous method design pattern. Building server asynchronous methods that implement a service operation increases server scalability and performance without affecting the clients of the service, and is recommended when a service operation must return something to the client after performing a lengthy operation that can be performed asynchronously.
+          </para>
           <para>Clients remain unaffected because the asynchronous method pair on the server is an implementation detail that does not affect the underlying Web Services Description Language (WSDL) description of the operation. Such methods appear to clients as a single operation with &lt;input&gt; and correlated &lt;output&gt; messages. indigo2 automatically routes inbound messages to the Begin&lt;methodName&gt; method and routes the results of the End&lt;methodName&gt; call to the outbound message. Client channels, therefore, can represent the method pair as either a single synchronous operation or as an asynchronous operation pair. In no case does the client representation affect the asynchronous implementation on the server in any way.</para>
           <para
             >Client contracts can use the <see cref="P:System.ServiceModel.OperationContractAttribute.AsyncPattern" /> property to indicate an asynchronous method pair that the client can use to invoke the operation asynchronously. Typically, client applications use the <format type="text/html">
@@ -225,8 +225,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.ServiceModel.OperationContractAttribute.HasProtectionLevel" /> property to determine whether a specific protection level is required by the messages of this operation. </para
-          >
+            >Use the <see cref="P:System.ServiceModel.OperationContractAttribute.HasProtectionLevel" /> property to determine whether a specific protection level is required by the messages of this operation.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -249,16 +249,16 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.ServiceModel.OperationContractAttribute.IsInitiating" /> property controls whether an operation can be the first operation called when a session is created. </para
-          >
+            >The <see cref="P:System.ServiceModel.OperationContractAttribute.IsInitiating" /> property controls whether an operation can be the first operation called when a session is created.
+          </para>
           <block subset="none" type="note">
             <para
-              >The value of <see cref="P:System.ServiceModel.ServiceContractAttribute.SessionMode" /> must be either <see cref="F:System.ServiceModel.SessionMode.Allowed" /> or <see cref="F:System.ServiceModel.SessionMode.Required" /> and the binding used must require or allow sessions for the <see cref="P:System.ServiceModel.OperationContractAttribute.IsInitiating" /> property to work properly. </para
-            >
+              >The value of <see cref="P:System.ServiceModel.ServiceContractAttribute.SessionMode" /> must be either <see cref="F:System.ServiceModel.SessionMode.Allowed" /> or <see cref="F:System.ServiceModel.SessionMode.Required" /> and the binding used must require or allow sessions for the <see cref="P:System.ServiceModel.OperationContractAttribute.IsInitiating" /> property to work properly.
+            </para>
           </block>
           <para
-            >The default is true, which means that an operation can be the first one called on a channel. Subsequent calls to the initiating method have no effect, other than to call the method. No other sessions are created. If the contract does not make use of a session, setting <see cref="P:System.ServiceModel.OperationContractAttribute.IsInitiating" /> to false is ignored. </para
-          >
+            >The default is true, which means that an operation can be the first one called on a channel. Subsequent calls to the initiating method have no effect, other than to call the method. No other sessions are created. If the contract does not make use of a session, setting <see cref="P:System.ServiceModel.OperationContractAttribute.IsInitiating" /> to false is ignored.
+          </para>
           <para
             >Typically, you set <see cref="P:System.ServiceModel.OperationContractAttribute.IsInitiating" /> to false to force clients to call another method on the service before they can invoke this one. For example, if your service has a series of operations that depend on an order ID number, you can set <see cref="P:System.ServiceModel.OperationContractAttribute.IsInitiating" /> to true for a GetOrderId service operation and set all remaining service operations to false. This ensures that each new client obtains an order ID prior to using the other methods exposed by the service.</para
           >
@@ -308,8 +308,8 @@
             >If the <see cref="P:System.ServiceModel.OperationContractAttribute.IsOneWay" /> property is set to false (the default), even methods that return void result in a reply message. In this case, the infrastructure creates and sends an empty message to indicate to the caller that the method has returned. (Using this approach enables the infrastructure to send SOAP faults back to the client.) Setting <see cref="P:System.ServiceModel.OperationContractAttribute.IsOneWay" /> to true is the only way to cancel the creation and dispatch of a response message.</para
           >
           <para
-            >One-way methods must not return a value or have ref or out parameters; otherwise a <see cref="T:System.InvalidOperationException" /> exception is thrown. </para
-          >
+            >One-way methods must not return a value or have ref or out parameters; otherwise a <see cref="T:System.InvalidOperationException" /> exception is thrown.
+          </para>
           <para
             >Specifying that an operation is a one-way operation means only that there is no response message. It is possible to block if a connection cannot be made, or the outbound message is very large, or if the service cannot read inbound information fast enough. If a client requires a non-blocking call, generate <see cref="P:System.ServiceModel.OperationContractAttribute.AsyncPattern" /> operations. For more information, see <format type="text/html">
               <a href="19053a36-4492-45a3-bfe6-0365ee0205a3">One-Way Services</a>
@@ -339,11 +339,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.ServiceModel.OperationContractAttribute.IsTerminating" /> property to indicate that calling a service operation terminates the communication session. </para
-          >
+            >Use the <see cref="P:System.ServiceModel.OperationContractAttribute.IsTerminating" /> property to indicate that calling a service operation terminates the communication session.
+          </para>
           <para
-            >In a client application, a value of <see cref="P:System.ServiceModel.OperationContractAttribute.IsTerminating" /> set to true instructs indigo2 to close the channel after the reply arrives. </para
-          >
+            >In a client application, a value of <see cref="P:System.ServiceModel.OperationContractAttribute.IsTerminating" /> set to true instructs indigo2 to close the channel after the reply arrives.
+          </para>
           <para>In a service, a timer is set and the channel aborts if the client does not close the channel within that period. </para>
           <para
             >For more information about using this property with sessions, see <format type="text/html">

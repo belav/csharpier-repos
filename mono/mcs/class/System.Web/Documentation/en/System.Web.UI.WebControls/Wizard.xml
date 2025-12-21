@@ -512,8 +512,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -643,8 +643,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1259,8 +1259,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2099,8 +2099,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="F:System.Web.UI.WebControls.Wizard.MoveCompleteCommandName" /> field is used primarily by control developers. The value for the <see cref="F:System.Web.UI.WebControls.Wizard.MoveCompleteCommandName" /> is "MoveComplete". </para
-          >
+            >The <see cref="F:System.Web.UI.WebControls.Wizard.MoveCompleteCommandName" /> field is used primarily by control developers. The value for the <see cref="F:System.Web.UI.WebControls.Wizard.MoveCompleteCommandName" /> is "MoveComplete".
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2158,8 +2158,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves the command name that is associated with the <ui>Previous</ui> button. This field is static and read-only. </para
-          >
+            >Retrieves the command name that is associated with the <ui>Previous</ui> button. This field is static and read-only.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2262,8 +2262,8 @@
             >Common settings include custom background color, text color, and font properties. The style settings for the <see cref="P:System.Web.UI.WebControls.Wizard.NavigationButtonStyle" /> property are merged with the individual button styles. Any setting that is applied in the individual button style properties overrides the corresponding setting in the <see cref="P:System.Web.UI.WebControls.Wizard.NavigationButtonStyle" /> property. For example, if you set the FinishPreviousButtonStyle.ForeColor property to "red" and the NavigationButtonStyle.ForeColor property to "green", the color for the button will be red because the individual style settings of the <see cref="P:System.Web.UI.WebControls.Wizard.FinishPreviousButtonStyle" /> property override the settings of the <see cref="P:System.Web.UI.WebControls.Wizard.NavigationButtonStyle" /> property.</para
           >
           <para
-            >The following <see cref="P:System.Web.UI.WebControls.Wizard.NavigationButtonStyle" /> property styles are overridden by individual button style settings: </para
-          >
+            >The following <see cref="P:System.Web.UI.WebControls.Wizard.NavigationButtonStyle" /> property styles are overridden by individual button style settings:
+          </para>
           <list type="bullet">
             <item>
               <para>
@@ -2354,8 +2354,8 @@
             >The style settings for the <see cref="P:System.Web.UI.WebControls.Wizard.NavigationStyle" /> property are merged with the style settings for the <see cref="T:System.Web.UI.WebControls.Wizard" /> control. Any settings that are applied in the <see cref="P:System.Web.UI.WebControls.Wizard.NavigationStyle" /> property override the corresponding settings in the properties of the <see cref="T:System.Web.UI.WebControls.Wizard" /> control.</para
           >
           <para
-            >The following <see cref="T:System.Web.UI.WebControls.Wizard" /> style properties are overridden by the <see cref="P:System.Web.UI.WebControls.Wizard.NavigationStyle" /> settings: </para
-          >
+            >The following <see cref="T:System.Web.UI.WebControls.Wizard" /> style properties are overridden by the <see cref="P:System.Web.UI.WebControls.Wizard.NavigationStyle" /> settings:
+          </para>
           <list type="bullet">
             <item>
               <para>
@@ -2429,8 +2429,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2811,8 +2811,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2950,8 +2950,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3021,8 +3021,8 @@
             >The style settings for the <see cref="P:System.Web.UI.WebControls.Wizard.SideBarButtonStyle" /> property are merged with the style settings for the <see cref="T:System.Web.UI.WebControls.Wizard" /> control. Any settings that are applied in the <see cref="P:System.Web.UI.WebControls.Wizard.SideBarButtonStyle" /> property override the corresponding settings in the properties of the <see cref="T:System.Web.UI.WebControls.Wizard" /> control.</para
           >
           <para
-            >The following <see cref="T:System.Web.UI.WebControls.Wizard" /> style properties are overridden by <see cref="P:System.Web.UI.WebControls.Wizard.SideBarButtonStyle" /> settings: </para
-          >
+            >The following <see cref="T:System.Web.UI.WebControls.Wizard" /> style properties are overridden by <see cref="P:System.Web.UI.WebControls.Wizard.SideBarButtonStyle" /> settings:
+          </para>
           <list type="bullet">
             <item>
               <para>
@@ -3121,8 +3121,8 @@
             >
           </block>
           <para
-            >The following <see cref="T:System.Web.UI.WebControls.Wizard" /> style properties are overridden by <see cref="P:System.Web.UI.WebControls.Wizard.SideBarStyle" /> settings: </para
-          >
+            >The following <see cref="T:System.Web.UI.WebControls.Wizard" /> style properties are overridden by <see cref="P:System.Web.UI.WebControls.Wizard.SideBarStyle" /> settings:
+          </para>
           <list type="bullet">
             <item>
               <para>
@@ -3341,8 +3341,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves the identifier that is associated with the <ui>Next</ui> button on the <see cref="F:System.Web.UI.WebControls.WizardStepType.Start" /> step. This field is static and read-only. </para
-          >
+            >Retrieves the identifier that is associated with the <ui>Next</ui> button on the <see cref="F:System.Web.UI.WebControls.WizardStepType.Start" /> step. This field is static and read-only.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -3602,8 +3602,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves the identifier that is associated with the <ui>Next</ui> button. This field is static and read-only. </para
-          >
+            >Retrieves the identifier that is associated with the <ui>Next</ui> button. This field is static and read-only.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -3808,8 +3808,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves the identifier that is associated with the <ui>Previous</ui> button. This field is static and read-only. </para
-          >
+            >Retrieves the identifier that is associated with the <ui>Previous</ui> button. This field is static and read-only.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>

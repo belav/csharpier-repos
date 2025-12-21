@@ -168,8 +168,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The member name that returns the enumeration used to detect a choice. </param
-        >
+          />The member name that returns the enumeration used to detect a choice.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="MemberName">

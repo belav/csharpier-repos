@@ -34,8 +34,8 @@
         >An <see cref="T:System.ComponentModel.EventDescriptor" /> consists of a name, its attributes, the component that the event is bound to, the event delegate, the type of delegate, and whether the delegate is multicast.</para
       >
       <para>
-        <see cref="T:System.ComponentModel.EventDescriptor" /> provides the following abstract properties and methods: </para
-      >
+        <see cref="T:System.ComponentModel.EventDescriptor" /> provides the following abstract properties and methods:
+      </para>
       <list type="bullet">
         <item>
           <para>
@@ -146,8 +146,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Attribute" /> array with the attributes you want to add to this event description. </param
-        >
+          />An <see cref="T:System.Attribute" /> array with the attributes you want to add to this event description.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -184,8 +184,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type <see cref="T:System.Attribute" /> that contains the event attributes. </param
-        >
+          />An array of type <see cref="T:System.Attribute" /> that contains the event attributes.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddEventHandler">
@@ -233,15 +233,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A component that provides events to the delegate. </param
-        >
+          />A component that provides events to the delegate.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A delegate that represents the method that handles the event. </param
-        >
+          />A delegate that represents the method that handles the event.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ComponentType">
@@ -365,15 +365,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The component that the delegate is bound to. </param
-        >
+          />The component that the delegate is bound to.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The delegate to unbind from the component. </param
-        >
+          />The delegate to unbind from the component.
+        </param>
       </Docs>
     </Member>
   </Members>

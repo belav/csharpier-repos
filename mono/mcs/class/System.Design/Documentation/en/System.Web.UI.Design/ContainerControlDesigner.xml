@@ -19,13 +19,13 @@
         >The <see cref="T:System.Web.UI.Design.ContainerControlDesigner" /> class provides a base designer class for controls that can be modified on the design surface. This includes controls that contain child controls or editable inner properties. The <see cref="T:System.Web.UI.Design.ContainerControlDesigner" /> provides a single framed region to represent the control, and automatically handles rendering the control at design time.</para
       >
       <para
-        >Apply the <see cref="T:System.Web.UI.ParseChildrenAttribute" /> attribute on the associated control to determine the design-time behavior of the <see cref="T:System.Web.UI.Design.ContainerControlDesigner" />. Apply the <see cref="T:System.Web.UI.ParseChildrenAttribute" /> settings on the associated control as follows: </para
-      >
+        >Apply the <see cref="T:System.Web.UI.ParseChildrenAttribute" /> attribute on the associated control to determine the design-time behavior of the <see cref="T:System.Web.UI.Design.ContainerControlDesigner" />. Apply the <see cref="T:System.Web.UI.ParseChildrenAttribute" /> settings on the associated control as follows:
+      </para>
       <list type="bullet">
         <item>
           <para
-            >false to indicate that the <see cref="T:System.Web.UI.Design.ContainerControlDesigner" /> represents the contents of the editable design region as child controls. </para
-          >
+            >false to indicate that the <see cref="T:System.Web.UI.Design.ContainerControlDesigner" /> represents the contents of the editable design region as child controls.
+          </para>
         </item>
         <item>
           <para

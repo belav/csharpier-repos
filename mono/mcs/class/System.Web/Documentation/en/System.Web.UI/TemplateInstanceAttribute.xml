@@ -77,8 +77,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Defines the default value for the <see cref="T:System.Web.UI.TemplateInstanceAttribute" /> class. This field is read-only. </para
-          >
+            >Defines the default value for the <see cref="T:System.Web.UI.TemplateInstanceAttribute" /> class. This field is read-only.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>

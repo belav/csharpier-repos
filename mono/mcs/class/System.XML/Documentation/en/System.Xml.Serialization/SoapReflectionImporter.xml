@@ -49,8 +49,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.SoapReflectionImporter" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.SoapReflectionImporter" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -78,8 +78,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.SoapReflectionImporter" /> class, specifying a default XML namespace for imported type mappings. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.SoapReflectionImporter" /> class, specifying a default XML namespace for imported type mappings.
+          </para>
         </summary>
         <param name="defaultNamespace">
           <attribution
@@ -117,8 +117,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.SoapReflectionImporter" /> class, specifying overrides for XML serialization. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.SoapReflectionImporter" /> class, specifying overrides for XML serialization.
+          </para>
         </summary>
         <param name="attributeOverrides">
           <attribution
@@ -157,8 +157,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.SoapReflectionImporter" /> class, specifying XML serialization overrides and a default XML namespace. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.SoapReflectionImporter" /> class, specifying XML serialization overrides and a default XML namespace.
+          </para>
         </summary>
         <param name="attributeOverrides">
           <attribution
@@ -602,8 +602,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The .NET Framework type for which to generate a type mapping. </param
-        >
+          />The .NET Framework type for which to generate a type mapping.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ImportTypeMapping">
@@ -649,8 +649,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The .NET Framework type for which to generate a type mapping. </param
-        >
+          />The .NET Framework type for which to generate a type mapping.
+        </param>
         <param name="defaultNamespace">
           <attribution
             license="cc4"
@@ -688,8 +688,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Places mappings for a type in the <see cref="T:System.Xml.Serialization.SoapReflectionImporter" /> instance's context for later use when import methods are invoked. </para
-          >
+            >Places mappings for a type in the <see cref="T:System.Xml.Serialization.SoapReflectionImporter" /> instance's context for later use when import methods are invoked.
+          </para>
         </summary>
         <param name="type">
           <attribution
@@ -726,8 +726,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Places mappings for derived types in the <see cref="T:System.Xml.Serialization.SoapReflectionImporter" /> instance's context for later use when import methods are invoked. </para
-          >
+            >Places mappings for derived types in the <see cref="T:System.Xml.Serialization.SoapReflectionImporter" /> instance's context for later use when import methods are invoked.
+          </para>
         </summary>
         <param name="provider">
           <attribution

@@ -262,8 +262,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A delegate to invoke using the thread that listens for system events. </param
-        >
+          />A delegate to invoke using the thread that listens for system events.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="KillTimer">
@@ -295,8 +295,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The ID of the timer to terminate. </param
-        >
+          />The ID of the timer to terminate.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="LowMemory">
@@ -558,8 +558,8 @@ private void Form1_Closing(
 }</code>
           <block subset="none" type="note">
             <para
-              >Console applications do not raise the <see cref="E:Microsoft.Win32.SystemEvents.SessionEnding" /> event. </para
-            >
+              >Console applications do not raise the <see cref="E:Microsoft.Win32.SystemEvents.SessionEnding" /> event.
+            </para>
           </block>
           <block subset="none" type="note">
             <para

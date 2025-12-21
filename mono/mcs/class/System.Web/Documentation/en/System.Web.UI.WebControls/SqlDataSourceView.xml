@@ -27,13 +27,13 @@
         >ASP.NET data source controls contain one or more lists of data, represented by data source view objects. The <see cref="T:System.Web.UI.WebControls.SqlDataSourceView" /> class extends the <see cref="T:System.Web.UI.DataSourceView" /> class, defines the capabilities of the <see cref="T:System.Web.UI.WebControls.SqlDataSource" /> control with which it is associated, and implements the basic data functionality for the data source control. The <see cref="T:System.Web.UI.WebControls.SqlDataSourceView" /> class implements the data functionality for the <see cref="T:System.Web.UI.WebControls.SqlDataSource" /> control, including the <see cref="Overload:System.Web.UI.WebControls.SqlDataSourceView.Select" />, <see cref="Overload:System.Web.UI.WebControls.SqlDataSourceView.Update" />, <see cref="Overload:System.Web.UI.WebControls.SqlDataSourceView.Insert" />, and <see cref="Overload:System.Web.UI.WebControls.SqlDataSourceView.Delete" /> operations, sorting, filtering, and managing settings that are kept in view state.</para
       >
       <para
-        >Although the <see cref="T:System.Web.UI.WebControls.SqlDataSourceView" /> object is not directly exposed to page developers by the <see cref="T:System.Web.UI.WebControls.SqlDataSource" /> control, many of its properties are. The most basic operation that a data source view performs is data retrieval from the underlying database using the <see cref="Overload:System.Web.UI.WebControls.SqlDataSourceView.Select" /> method, which retrieves an <see cref="T:System.Collections.IEnumerable" /> collection of data items. The <see cref="T:System.Web.UI.WebControls.SqlDataSourceView" /> class implements data retrieval from relational databases using SQL queries. The SQL queries can be parameterized for greater flexibility and security. The following data retrieval methods, properties, and events are implemented by the <see cref="T:System.Web.UI.WebControls.SqlDataSourceView" /> and exposed directly by its <see cref="T:System.Web.UI.WebControls.SqlDataSource" /> control to page developers and other callers: </para
-      >
+        >Although the <see cref="T:System.Web.UI.WebControls.SqlDataSourceView" /> object is not directly exposed to page developers by the <see cref="T:System.Web.UI.WebControls.SqlDataSource" /> control, many of its properties are. The most basic operation that a data source view performs is data retrieval from the underlying database using the <see cref="Overload:System.Web.UI.WebControls.SqlDataSourceView.Select" /> method, which retrieves an <see cref="T:System.Collections.IEnumerable" /> collection of data items. The <see cref="T:System.Web.UI.WebControls.SqlDataSourceView" /> class implements data retrieval from relational databases using SQL queries. The SQL queries can be parameterized for greater flexibility and security. The following data retrieval methods, properties, and events are implemented by the <see cref="T:System.Web.UI.WebControls.SqlDataSourceView" /> and exposed directly by its <see cref="T:System.Web.UI.WebControls.SqlDataSource" /> control to page developers and other callers:
+      </para>
       <list type="bullet">
         <item>
           <para
-            >The <see cref="P:System.Web.UI.WebControls.SqlDataSource.SelectCommand" /> property </para
-          >
+            >The <see cref="P:System.Web.UI.WebControls.SqlDataSource.SelectCommand" /> property
+          </para>
         </item>
         <item>
           <para
@@ -48,8 +48,8 @@
         </item>
       </list>
       <para
-        >The <see cref="T:System.Web.UI.WebControls.SqlDataSourceView" /> object supports updating data in a relational database using SQL commands. The SQL commands can be parameterized for greater flexibility and security. Data-bound controls, such as the <see cref="T:System.Web.UI.WebControls.GridView" /> and <see cref="T:System.Web.UI.WebControls.DetailsView" />, can be configured to perform updates automatically using the <see cref="T:System.Web.UI.WebControls.SqlDataSourceView" />, while other controls cannot. The following update methods, properties, and events are implemented by the <see cref="T:System.Web.UI.WebControls.SqlDataSourceView" /> and exposed directly by its <see cref="T:System.Web.UI.WebControls.SqlDataSource" /> control to page developers and other callers: </para
-      >
+        >The <see cref="T:System.Web.UI.WebControls.SqlDataSourceView" /> object supports updating data in a relational database using SQL commands. The SQL commands can be parameterized for greater flexibility and security. Data-bound controls, such as the <see cref="T:System.Web.UI.WebControls.GridView" /> and <see cref="T:System.Web.UI.WebControls.DetailsView" />, can be configured to perform updates automatically using the <see cref="T:System.Web.UI.WebControls.SqlDataSourceView" />, while other controls cannot. The following update methods, properties, and events are implemented by the <see cref="T:System.Web.UI.WebControls.SqlDataSourceView" /> and exposed directly by its <see cref="T:System.Web.UI.WebControls.SqlDataSource" /> control to page developers and other callers:
+      </para>
       <list type="bullet">
         <item>
           <para
@@ -69,8 +69,8 @@
         </item>
       </list>
       <para
-        >The <see cref="T:System.Web.UI.WebControls.SqlDataSourceView" /> supports inserting new rows of data into a relational database. The SQL commands that are specified in the <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.InsertCommand" /> property can be parameterized for greater flexibility and security. Data-bound controls, such as the <see cref="T:System.Web.UI.WebControls.GridView" /> and <see cref="T:System.Web.UI.WebControls.DetailsView" />, can be configured to perform inserts automatically using the <see cref="T:System.Web.UI.WebControls.SqlDataSourceView" />, while other controls cannot. The following insert methods, properties, and events are implemented by the <see cref="T:System.Web.UI.WebControls.SqlDataSourceView" /> and exposed directly by its <see cref="T:System.Web.UI.WebControls.SqlDataSource" /> control to page developers and other callers: </para
-      >
+        >The <see cref="T:System.Web.UI.WebControls.SqlDataSourceView" /> supports inserting new rows of data into a relational database. The SQL commands that are specified in the <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.InsertCommand" /> property can be parameterized for greater flexibility and security. Data-bound controls, such as the <see cref="T:System.Web.UI.WebControls.GridView" /> and <see cref="T:System.Web.UI.WebControls.DetailsView" />, can be configured to perform inserts automatically using the <see cref="T:System.Web.UI.WebControls.SqlDataSourceView" />, while other controls cannot. The following insert methods, properties, and events are implemented by the <see cref="T:System.Web.UI.WebControls.SqlDataSourceView" /> and exposed directly by its <see cref="T:System.Web.UI.WebControls.SqlDataSource" /> control to page developers and other callers:
+      </para>
       <list type="bullet">
         <item>
           <para
@@ -90,8 +90,8 @@
         </item>
       </list>
       <para
-        >The <see cref="T:System.Web.UI.WebControls.SqlDataSourceView" /> object also supports deleting data from a relational database. As with other commands, the SQL commands that are specified in the <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.DeleteCommand" /> property can be parameterized for greater flexibility and security. Data-bound controls, such as the <see cref="T:System.Web.UI.WebControls.GridView" /> and <see cref="T:System.Web.UI.WebControls.DetailsView" />, can be configured to perform deletes automatically using the <see cref="T:System.Web.UI.WebControls.SqlDataSourceView" />, while other controls cannot. The following delete methods, properties, and events are implemented by the <see cref="T:System.Web.UI.WebControls.SqlDataSourceView" /> and exposed directly by its <see cref="T:System.Web.UI.WebControls.SqlDataSource" /> control to page developers and other callers: </para
-      >
+        >The <see cref="T:System.Web.UI.WebControls.SqlDataSourceView" /> object also supports deleting data from a relational database. As with other commands, the SQL commands that are specified in the <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.DeleteCommand" /> property can be parameterized for greater flexibility and security. Data-bound controls, such as the <see cref="T:System.Web.UI.WebControls.GridView" /> and <see cref="T:System.Web.UI.WebControls.DetailsView" />, can be configured to perform deletes automatically using the <see cref="T:System.Web.UI.WebControls.SqlDataSourceView" />, while other controls cannot. The following delete methods, properties, and events are implemented by the <see cref="T:System.Web.UI.WebControls.SqlDataSourceView" /> and exposed directly by its <see cref="T:System.Web.UI.WebControls.SqlDataSource" /> control to page developers and other callers:
+      </para>
       <list type="bullet">
         <item>
           <para
@@ -111,8 +111,8 @@
         </item>
       </list>
       <para
-        >Data retrieval is more powerful when the clause that is used to filter the data during data retrieval is dynamic. In other words, an SQL query with a static WHERE clause is not as flexible and powerful as an SQL query where the values in the WHERE clause are bound to values that can change, such as values that are displayed in controls on a Web Forms page. Instead of rebuilding an SQL query and setting the <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.SelectCommand" /> property on every page load, you can use the <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.FilterExpression" /> and <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.FilterParameters" /> properties to apply dynamic filtering to data retrieval. These properties are implemented by the <see cref="T:System.Web.UI.WebControls.SqlDataSourceView" /> and exposed directly by its <see cref="T:System.Web.UI.WebControls.SqlDataSource" /> control to data-bound controls and other callers. </para
-      >
+        >Data retrieval is more powerful when the clause that is used to filter the data during data retrieval is dynamic. In other words, an SQL query with a static WHERE clause is not as flexible and powerful as an SQL query where the values in the WHERE clause are bound to values that can change, such as values that are displayed in controls on a Web Forms page. Instead of rebuilding an SQL query and setting the <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.SelectCommand" /> property on every page load, you can use the <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.FilterExpression" /> and <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.FilterParameters" /> properties to apply dynamic filtering to data retrieval. These properties are implemented by the <see cref="T:System.Web.UI.WebControls.SqlDataSourceView" /> and exposed directly by its <see cref="T:System.Web.UI.WebControls.SqlDataSource" /> control to data-bound controls and other callers.
+      </para>
       <para
         >You can sort the data that you retrieve with the <see cref="T:System.Web.UI.WebControls.SqlDataSource" /> control by adding an ORDER BY clause, which causes the database to perform the ordering for you when you retrieve data or by ordering the data in memory after it is retrieved. You can supply a sorting expression to the <see cref="T:System.Web.UI.WebControls.SqlDataSourceView" /> by setting the <see cref="P:System.Web.UI.DataSourceSelectArguments.SortExpression" /> property of the <see cref="T:System.Web.UI.DataSourceSelectArguments" /> object that is passed to the <see cref="M:System.Web.UI.WebControls.SqlDataSourceView.Select(System.Web.UI.DataSourceSelectArguments)" /> method. The syntax for the <see cref="P:System.Web.UI.DataSourceSelectArguments.SortExpression" /> property is the same as the syntax for a <see cref="P:System.Data.DataView.Sort" /> property. If you use a stored procedure to retrieve data, you can also use the <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.SortParameterName" /> property to specify a parameter that is used specifically for sorting the results of a stored procedure call.</para
       >
@@ -149,8 +149,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.WebControls.SqlDataSourceView.#ctor(System.Web.UI.WebControls.SqlDataSource,System.String,System.Web.HttpContext)" /> constructor is called by the <see cref="M:System.Web.UI.WebControls.SqlDataSource.GetView(System.String)" /> method to return a new instance of a data source view with the specified <paramref name="name" /> parameter. The <see cref="T:System.Web.UI.WebControls.SqlDataSource" /> control is associated with only one <see cref="T:System.Web.UI.WebControls.SqlDataSourceView" /> object at any one time, and always names the view Table, although this naming restriction is imposed by the <see cref="T:System.Web.UI.WebControls.SqlDataSource" /> control, not the <see cref="T:System.Web.UI.WebControls.SqlDataSourceView" />. You can override the <see cref="M:System.Web.UI.WebControls.SqlDataSource.GetView(System.String)" /> method to support views with a different naming convention. </para
-          >
+            >The <see cref="M:System.Web.UI.WebControls.SqlDataSourceView.#ctor(System.Web.UI.WebControls.SqlDataSource,System.String,System.Web.HttpContext)" /> constructor is called by the <see cref="M:System.Web.UI.WebControls.SqlDataSource.GetView(System.String)" /> method to return a new instance of a data source view with the specified <paramref name="name" /> parameter. The <see cref="T:System.Web.UI.WebControls.SqlDataSource" /> control is associated with only one <see cref="T:System.Web.UI.WebControls.SqlDataSourceView" /> object at any one time, and always names the view Table, although this naming restriction is imposed by the <see cref="T:System.Web.UI.WebControls.SqlDataSource" /> control, not the <see cref="T:System.Web.UI.WebControls.SqlDataSourceView" />. You can override the <see cref="M:System.Web.UI.WebControls.SqlDataSource.GetView(System.String)" /> method to support views with a different naming convention.
+          </para>
           <para
             >The <see cref="T:System.Web.HttpContext" /> object that is passed by the <paramref name="context" /> parameter is used by the data source view to access parameter objects, such as the <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.FilterParameters" /> and <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.SelectParameters" /> properties.</para
           >
@@ -166,15 +166,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data source control with which the <see cref="T:System.Web.UI.WebControls.SqlDataSourceView" /> is associated. </param
-        >
+          />The data source control with which the <see cref="T:System.Web.UI.WebControls.SqlDataSourceView" /> is associated.
+        </param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A unique name for the data source view, within the scope of the data source control that owns it. </param
-        >
+          />A unique name for the data source view, within the scope of the data source control that owns it.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
@@ -335,8 +335,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.CanSort" /> property returns true, if the current <see cref="P:System.Web.UI.WebControls.SqlDataSource.DataSourceMode" /> property is set to the <see cref="F:System.Web.UI.WebControls.SqlDataSourceMode.DataSet" /> value and the <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.SortParameterName" /> property is set. </para
-          >
+            >The <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.CanSort" /> property returns true, if the current <see cref="P:System.Web.UI.WebControls.SqlDataSource.DataSourceMode" /> property is set to the <see cref="F:System.Web.UI.WebControls.SqlDataSourceMode.DataSet" /> value and the <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.SortParameterName" /> property is set.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -390,8 +390,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.ConflictDetection" /> property determines whether parameters for old and new values are applied to the Update method. For example, if the command that is specified by the <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.SelectCommand" /> property returns a <see cref="T:System.Data.DataSet" /> object with the columns Name and Number, and the <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.ConflictDetection" /> property is set to the <see cref="F:System.Web.UI.ConflictOptions.OverwriteChanges" /> value, parameters are created for Name and Number for the update operation. If the <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.ConflictDetection" /> property is set to the <see cref="F:System.Web.UI.ConflictOptions.CompareAllValues" /> value, parameters are created for Name, Number, original_Name, and original_Number. (The exact name of the parameters for the original values depends on the <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.OldValuesParameterFormatString" />.) Then, the <see cref="T:System.Web.UI.WebControls.SqlDataSourceView" /> object determines if the method that is specified in the <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.UpdateCommand" /> property has parameters that match. </para
-          >
+            >The <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.ConflictDetection" /> property determines whether parameters for old and new values are applied to the Update method. For example, if the command that is specified by the <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.SelectCommand" /> property returns a <see cref="T:System.Data.DataSet" /> object with the columns Name and Number, and the <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.ConflictDetection" /> property is set to the <see cref="F:System.Web.UI.ConflictOptions.OverwriteChanges" /> value, parameters are created for Name and Number for the update operation. If the <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.ConflictDetection" /> property is set to the <see cref="F:System.Web.UI.ConflictOptions.CompareAllValues" /> value, parameters are created for Name, Number, original_Name, and original_Number. (The exact name of the parameters for the original values depends on the <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.OldValuesParameterFormatString" />.) Then, the <see cref="T:System.Web.UI.WebControls.SqlDataSourceView" /> object determines if the method that is specified in the <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.UpdateCommand" /> property has parameters that match.
+          </para>
           <para
             >Concurrency control is a technique data stores use to control how data is read and changed in the store when multiple clients are accessing and manipulating the same data. For example, one client reads data and presents it to a user, while another client reads the same data, and presents it to a different user. If both users update the data and submit it to the data storage, some unexpected result might occur, because both clients might update different values for the same data. This is considered a conflict. By setting the <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.ConflictDetection" /> property to the <see cref="F:System.Web.UI.ConflictOptions.CompareAllValues" /> value, the update operation can then compare the old and new values to the original data source to detect conflicts and handle them as required.</para
           >
@@ -472,8 +472,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Because different database products use different varieties of SQL, the syntax of the SQL string depends on the current ADO.NET provider being used, which is identified by the <see cref="P:System.Web.UI.WebControls.SqlDataSource.ProviderName" /> property. </para
-          >
+            >Because different database products use different varieties of SQL, the syntax of the SQL string depends on the current ADO.NET provider being used, which is identified by the <see cref="P:System.Web.UI.WebControls.SqlDataSource.ProviderName" /> property.
+          </para>
           <para
             >If the SQL string is a parameterized query or command, the placeholder of the parameter also depends on the ADO.NET provider being used. For example, if the provider is the <see cref="N:System.Data.SqlClient" />, which is the default provider for the <see cref="T:System.Web.UI.WebControls.SqlDataSource" /> class, the placeholder of the parameter is '@parameterName'. However, if the provider is set to the  <see cref="N:System.Data.Odbc" /> or <see cref="N:System.Data.OleDb" />, the placeholder of the parameter is '?'. For more information on parameterized SQL queries and commands, see <format type="text/html">
               <a href="403ff44a-dd0b-484d-968e-dcd1dcd4c295"
@@ -623,8 +623,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Handle the <see cref="E:System.Web.UI.WebControls.SqlDataSourceView.Deleting" /> event to perform additional initialization operations that are specific to your application, to validate the values of parameters, or to change the parameter values before the <see cref="T:System.Web.UI.WebControls.SqlDataSource" /> control performs the delete operation. </para
-          >
+            >Handle the <see cref="E:System.Web.UI.WebControls.SqlDataSourceView.Deleting" /> event to perform additional initialization operations that are specific to your application, to validate the values of parameters, or to change the parameter values before the <see cref="T:System.Web.UI.WebControls.SqlDataSource" /> control performs the delete operation.
+          </para>
           <para
             >The connection to the underlying data source is not yet open when the event handler delegate is called. Therefore, you cannot cancel the <see cref="Overload:System.Web.UI.WebControls.SqlDataSourceView.Delete" /> operation directly by calling the <see cref="M:System.Data.Common.DbCommand.Cancel" /> method on the <see cref="T:System.Data.Common.DbCommand" /> object that is exposed by the <see cref="T:System.Web.UI.WebControls.SqlDataSourceCommandEventArgs" /> object. You can, however, cancel the operation by setting the <see cref="P:System.ComponentModel.CancelEventArgs.Cancel" /> property of the <see cref="T:System.Web.UI.WebControls.SqlDataSourceCommandEventArgs" /> to true.</para
           >
@@ -661,11 +661,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Web.UI.WebControls.SqlDataSourceView" /> class implements the inherited <see cref="M:System.Web.UI.DataSourceView.ExecuteDelete(System.Collections.IDictionary,System.Collections.IDictionary)" /> method to delete data from a database. Page developers and data-bound control authors do not call the <see cref="M:System.Web.UI.WebControls.SqlDataSourceView.ExecuteDelete(System.Collections.IDictionary,System.Collections.IDictionary)" /> method directly; instead, use the publicly exposed <see cref="M:System.Web.UI.WebControls.SqlDataSource.Delete" /> method. </para
-          >
+            >The <see cref="T:System.Web.UI.WebControls.SqlDataSourceView" /> class implements the inherited <see cref="M:System.Web.UI.DataSourceView.ExecuteDelete(System.Collections.IDictionary,System.Collections.IDictionary)" /> method to delete data from a database. Page developers and data-bound control authors do not call the <see cref="M:System.Web.UI.WebControls.SqlDataSourceView.ExecuteDelete(System.Collections.IDictionary,System.Collections.IDictionary)" /> method directly; instead, use the publicly exposed <see cref="M:System.Web.UI.WebControls.SqlDataSource.Delete" /> method.
+          </para>
           <para
-            >The values that are contained in the <paramref name="keys" /> collection are evaluated and merged with any values that are contained by the <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.DeleteParameters" /> collection. If the <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.ConflictDetection" /> property is set to the <see cref="F:System.Web.UI.ConflictOptions.CompareAllValues" /> value, the values that are contained in the <paramref name="oldValues" /> collection are formatted with the <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.OldValuesParameterFormatString" /> property and are also merged. </para
-          >
+            >The values that are contained in the <paramref name="keys" /> collection are evaluated and merged with any values that are contained by the <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.DeleteParameters" /> collection. If the <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.ConflictDetection" /> property is set to the <see cref="F:System.Web.UI.ConflictOptions.CompareAllValues" /> value, the values that are contained in the <paramref name="oldValues" /> collection are formatted with the <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.OldValuesParameterFormatString" /> property and are also merged.
+          </para>
           <para
             >Before the delete operation is performed, the <see cref="M:System.Web.UI.WebControls.SqlDataSourceView.OnDeleting(System.Web.UI.WebControls.SqlDataSourceCommandEventArgs)" /> method is called to raise the <see cref="E:System.Web.UI.WebControls.SqlDataSourceView.Deleting" /> event. You can handle this event to examine the values of the parameters and to perform any preprocessing before a delete.</para
           >
@@ -831,8 +831,8 @@
             >The <see cref="T:System.Web.UI.WebControls.SqlDataSourceView" /> class implements the inherited <see cref="M:System.Web.UI.WebControls.SqlDataSourceView.ExecuteUpdate(System.Collections.IDictionary,System.Collections.IDictionary,System.Collections.IDictionary)" /> method to update data in a database. Page developers and data-bound control authors do not call the <see cref="M:System.Web.UI.WebControls.SqlDataSourceView.ExecuteUpdate(System.Collections.IDictionary,System.Collections.IDictionary,System.Collections.IDictionary)" /> method directly; instead, use the publicly exposed <see cref="M:System.Web.UI.WebControls.SqlDataSource.Update" /> method.</para
           >
           <para
-            >The values contained in the <paramref name="keys" /> and <paramref name="values" /> collections are evaluated and merged with any values contained by the <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.UpdateParameters" /> collection. If the <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.ConflictDetection" /> property is set to  <see cref="F:System.Web.UI.ConflictOptions.CompareAllValues" />, the values contained in the <paramref name="oldValues" /> collection are formatted with the <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.OldValuesParameterFormatString" /> and also merged. </para
-          >
+            >The values contained in the <paramref name="keys" /> and <paramref name="values" /> collections are evaluated and merged with any values contained by the <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.UpdateParameters" /> collection. If the <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.ConflictDetection" /> property is set to  <see cref="F:System.Web.UI.ConflictOptions.CompareAllValues" />, the values contained in the <paramref name="oldValues" /> collection are formatted with the <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.OldValuesParameterFormatString" /> and also merged.
+          </para>
           <para
             >Before the update operation is performed, the <see cref="M:System.Web.UI.WebControls.SqlDataSourceView.OnUpdating(System.Web.UI.WebControls.SqlDataSourceCommandEventArgs)" /> method is called to raise the <see cref="E:System.Web.UI.WebControls.SqlDataSourceView.Updating" /> event. You can handle this event to examine the values of the parameters and perform any preprocessing before an update.</para
           >
@@ -862,8 +862,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Collections.IDictionary" /> of values to use with the <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.UpdateCommand" /> property to perform the update database operation. If there are no parameters associated with the query or if the <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.UpdateCommand" /> is not a parameterized SQL query, pass null. </param
-        >
+          />An <see cref="T:System.Collections.IDictionary" /> of values to use with the <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.UpdateCommand" /> property to perform the update database operation. If there are no parameters associated with the query or if the <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.UpdateCommand" /> is not a parameterized SQL query, pass null.
+        </param>
         <param name="oldValues">
           <attribution
             license="cc4"
@@ -1014,8 +1014,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.WebControls.SqlDataSourceView.Insert(System.Collections.IDictionary)" /> method calls the <see cref="M:System.Web.UI.WebControls.SqlDataSourceView.ExecuteInsert(System.Collections.IDictionary)" /> method, passing the <paramref name="values" /> parameter. </para
-          >
+            >The <see cref="M:System.Web.UI.WebControls.SqlDataSourceView.Insert(System.Collections.IDictionary)" /> method calls the <see cref="M:System.Web.UI.WebControls.SqlDataSourceView.ExecuteInsert(System.Collections.IDictionary)" /> method, passing the <paramref name="values" /> parameter.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1032,8 +1032,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Collections.IDictionary" /> of parameters for the <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.InsertCommand" /> property to use to perform the insert database operation. If there are no parameters associated with the query or if the <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.InsertCommand" /> is not a parameterized SQL query, pass null. </param
-        >
+          />An <see cref="T:System.Collections.IDictionary" /> of parameters for the <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.InsertCommand" /> property to use to perform the insert database operation. If there are no parameters associated with the query or if the <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.InsertCommand" /> is not a parameterized SQL query, pass null.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1149,8 +1149,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Handle the <see cref="E:System.Web.UI.WebControls.SqlDataSourceView.Inserting" /> event to perform additional initialization operations that are specific to your application, to validate the values of parameters, or to change the parameter values before the <see cref="T:System.Web.UI.WebControls.SqlDataSource" /> control performs the insert operation. </para
-          >
+            >Handle the <see cref="E:System.Web.UI.WebControls.SqlDataSourceView.Inserting" /> event to perform additional initialization operations that are specific to your application, to validate the values of parameters, or to change the parameter values before the <see cref="T:System.Web.UI.WebControls.SqlDataSource" /> control performs the insert operation.
+          </para>
           <para
             >The connection to the underlying data source is not yet open when the event handler delegate is called. Therefore, you cannot cancel the database operation directly by calling the <see cref="M:System.Data.Common.DbCommand.Cancel" /> method on the <see cref="T:System.Data.Common.DbCommand" /> object that is exposed by the <see cref="T:System.Web.UI.WebControls.SqlDataSourceCommandEventArgs" /> object. You can, however, cancel the database operation by setting the <see cref="P:System.ComponentModel.CancelEventArgs.Cancel" /> property of the <see cref="T:System.Web.UI.WebControls.SqlDataSourceCommandEventArgs" /> to true.</para
           >
@@ -1271,8 +1271,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that represents the <see cref="T:System.Web.UI.WebControls.SqlDataSourceView" /> state to restore. </param
-        >
+          />An object that represents the <see cref="T:System.Web.UI.WebControls.SqlDataSourceView" /> state to restore.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1307,8 +1307,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a format string to apply to the names of any parameters that are passed to the <see cref="Overload:System.Web.UI.WebControls.SqlDataSourceView.Delete" /> or <see cref="Overload:System.Web.UI.WebControls.SqlDataSourceView.Update" /> method. </para
-          >
+            >Gets or sets a format string to apply to the names of any parameters that are passed to the <see cref="Overload:System.Web.UI.WebControls.SqlDataSourceView.Delete" /> or <see cref="Overload:System.Web.UI.WebControls.SqlDataSourceView.Update" /> method.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1351,8 +1351,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Web.UI.WebControls.SqlDataSourceStatusEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Web.UI.WebControls.SqlDataSourceStatusEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1394,8 +1394,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Web.UI.WebControls.SqlDataSourceCommandEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Web.UI.WebControls.SqlDataSourceCommandEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1437,8 +1437,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Web.UI.WebControls.SqlDataSourceFilteringEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Web.UI.WebControls.SqlDataSourceFilteringEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1480,8 +1480,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Web.UI.WebControls.SqlDataSourceStatusEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Web.UI.WebControls.SqlDataSourceStatusEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1523,8 +1523,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Web.UI.WebControls.SqlDataSourceCommandEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Web.UI.WebControls.SqlDataSourceCommandEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1566,8 +1566,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Web.UI.WebControls.SqlDataSourceStatusEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Web.UI.WebControls.SqlDataSourceStatusEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1609,8 +1609,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Web.UI.WebControls.SqlDataSourceSelectingEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Web.UI.WebControls.SqlDataSourceSelectingEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1652,8 +1652,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Web.UI.WebControls.SqlDataSourceStatusEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Web.UI.WebControls.SqlDataSourceStatusEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1695,8 +1695,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Web.UI.WebControls.SqlDataSourceCommandEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Web.UI.WebControls.SqlDataSourceCommandEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1997,11 +1997,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.SortParameterName" /> property is evaluated only when the SQL command that is contained by the <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.SelectCommand" /> property is the name of a stored procedure. In this case, if the <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.SortParameterName" /> property is set, it contains the name of a parameter that is used to sort the results of the stored procedure. </para
-          >
+            >The <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.SortParameterName" /> property is evaluated only when the SQL command that is contained by the <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.SelectCommand" /> property is the name of a stored procedure. In this case, if the <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.SortParameterName" /> property is set, it contains the name of a parameter that is used to sort the results of the stored procedure.
+          </para>
           <para
-            >If the  <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.ParameterPrefix" /> property is set, it is prepended to the <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.SortParameterName" /> property. </para
-          >
+            >If the  <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.ParameterPrefix" /> property is set, it is prepended to the <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.SortParameterName" /> property.
+          </para>
           <para
             >The value of the <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.SortParameterName" /> property is stored in view state.</para
           >
@@ -2201,8 +2201,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Collections.IDictionary" /> of values to use with the <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.UpdateCommand" /> property to perform the update database operation. If there are no parameters associated with the query or if the <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.UpdateCommand" /> is not a parameterized SQL query, pass null. </param
-        >
+          />An <see cref="T:System.Collections.IDictionary" /> of values to use with the <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.UpdateCommand" /> property to perform the update database operation. If there are no parameters associated with the query or if the <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.UpdateCommand" /> is not a parameterized SQL query, pass null.
+        </param>
         <param name="oldValues">
           <attribution
             license="cc4"
@@ -2375,8 +2375,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Handle the <see cref="E:System.Web.UI.WebControls.SqlDataSourceView.Updating" /> event to perform additional initialization operations that are specific to your application, to validate the values of parameters, or to change the parameter values before the <see cref="T:System.Web.UI.WebControls.SqlDataSource" /> control performs the update operation. </para
-          >
+            >Handle the <see cref="E:System.Web.UI.WebControls.SqlDataSourceView.Updating" /> event to perform additional initialization operations that are specific to your application, to validate the values of parameters, or to change the parameter values before the <see cref="T:System.Web.UI.WebControls.SqlDataSource" /> control performs the update operation.
+          </para>
           <para
             >The connection to the underlying data source is not yet open when the event handler delegate is called. Therefore, you cannot cancel the operation directly by calling the <see cref="M:System.Data.Common.DbCommand.Cancel" /> method on the <see cref="T:System.Data.Common.DbCommand" /> object that is exposed by the <see cref="T:System.Web.UI.WebControls.SqlDataSourceCommandEventArgs" /> object. You can, however, cancel the database operation by setting the <see cref="P:System.ComponentModel.CancelEventArgs.Cancel" /> property of the <see cref="T:System.Web.UI.WebControls.SqlDataSourceCommandEventArgs" /> to true.</para
           >

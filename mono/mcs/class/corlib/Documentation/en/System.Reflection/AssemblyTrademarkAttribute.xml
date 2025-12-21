@@ -65,12 +65,8 @@
           >
         </summary>
         <param name="trademark">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The trademark information. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The trademark information.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Trademark">

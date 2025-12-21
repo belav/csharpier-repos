@@ -60,8 +60,8 @@
       <para
         >For information about creating user controls declaratively, see <format type="text/html">
           <a href="5e601b3d-bb16-4dbe-9e35-7e92a34565ca">Web Forms User Controls</a>
-        </format>. </para
-      >
+        </format>.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -173,8 +173,8 @@
           <para
             >The <see cref="P:System.Web.UI.UserControl.Cache" /> allows you to store data for later retrieval, and is shared across the application. The data that you store is independent of the current page or user session. Access data through this property to boost page or application performance if creating the data is slow. For more information about using the Cache, see <format type="text/html">
               <a href="206f977d-7860-4d20-bdd5-c3b3d8479f3d">Caching Application Data</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -221,11 +221,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.UI.UserControl.CachePolicy" /> property defines the cache parameters for the instance of the <see cref="T:System.Web.UI.UserControl" /> class. The <see cref="P:System.Web.UI.UserControl.CachePolicy" /> property is read-only; however, you can set the properties of the <see cref="T:System.Web.UI.ControlCachePolicy" /> object that it returns. </para
-          >
+            >The <see cref="P:System.Web.UI.UserControl.CachePolicy" /> property defines the cache parameters for the instance of the <see cref="T:System.Web.UI.UserControl" /> class. The <see cref="P:System.Web.UI.UserControl.CachePolicy" /> property is read-only; however, you can set the properties of the <see cref="T:System.Web.UI.ControlCachePolicy" /> object that it returns.
+          </para>
           <para
-            >The <see cref="P:System.Web.UI.UserControl.CachePolicy" /> property cannot be set declaratively. It must be set programmatically. </para
-          >
+            >The <see cref="P:System.Web.UI.UserControl.CachePolicy" /> property cannot be set declaratively. It must be set programmatically.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -282,8 +282,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.UI.Page" /> object that contains the user control. </param
-        >
+          />The <see cref="T:System.Web.UI.Page" /> object that contains the user control.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -357,8 +357,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Object" /> that represents the user control state to be restored. </param
-        >
+          />An <see cref="T:System.Object" /> that represents the user control state to be restored.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -394,8 +394,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The virtual file path to map. </param
-        >
+          />The virtual file path to map.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -428,8 +428,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> object that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> object that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -779,8 +779,8 @@
           <para
             >By default, page tracing is disabled. To enable tracing for a page, use the <format type="text/html">
               <a href="f06cf9e5-22bb-461d-8b8f-549e53ff40a4">@ Page</a>
-            </format> directive as follows: &lt;%@ Page trace="true" %&gt; </para
-          >
+            </format> directive as follows: &lt;%@ Page trace="true" %&gt;
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

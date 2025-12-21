@@ -38,8 +38,8 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>These BindingFlags control binding for a great many classes in the System, System.Reflection, and System.Runtime namespaces that invoke, create, get, set, and find members and types.</para>
       <para
-        >BindingFlags are used in the following <see cref="T:System.Type" /> methods and other places such as <see cref="M:System.Reflection.MethodBase.Invoke(System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" /> : </para
-      >
+        >BindingFlags are used in the following <see cref="T:System.Type" /> methods and other places such as <see cref="M:System.Reflection.MethodBase.Invoke(System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" /> :
+      </para>
       <list type="bullet">
         <item>
           <para>

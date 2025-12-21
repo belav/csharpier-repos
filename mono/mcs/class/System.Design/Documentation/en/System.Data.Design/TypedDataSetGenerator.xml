@@ -49,8 +49,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Generates a strongly typed <see cref="T:System.Data.DataSet" /> based on an existing <see cref="T:System.Data.DataSet" />. </para
-          >
+            >Generates a strongly typed <see cref="T:System.Data.DataSet" /> based on an existing <see cref="T:System.Data.DataSet" />.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />

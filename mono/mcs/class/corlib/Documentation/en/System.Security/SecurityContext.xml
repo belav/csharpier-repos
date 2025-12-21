@@ -23,8 +23,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see cref="T:System.Security.SecurityContext" /> object captures all security-related information for a logical thread, including the information contained in the <see cref="T:System.Security.Principal.WindowsIdentity" /> and <see cref="T:System.Threading.CompressedStack" /> objects.  This configuration allows the Windows identity and the security elements on the stack to be propagated automatically when the <see cref="T:System.Security.SecurityContext" /> is copied and transferred across asynchronous threads. </para
-      >
+        >A <see cref="T:System.Security.SecurityContext" /> object captures all security-related information for a logical thread, including the information contained in the <see cref="T:System.Security.Principal.WindowsIdentity" /> and <see cref="T:System.Threading.CompressedStack" /> objects.  This configuration allows the Windows identity and the security elements on the stack to be propagated automatically when the <see cref="T:System.Security.SecurityContext" /> is copied and transferred across asynchronous threads.
+      </para>
       <block subset="none" type="note">
         <para
           >The common language runtime (CLR) is aware of impersonation operations performed using only managed code, not of impersonation performed outside of managed code, such as through platform invoke to unmanaged code or through direct calls to Win32 functions. Only managed <see cref="T:System.Security.Principal.WindowsIdentity" /> objects can flow across asynchronous points, unless the alwaysFlowImpersonationPolicy element has been set to true (&lt;alwaysFlowImpersonationPolicy enabled="true"/&gt;). Setting the alwaysFlowImpersonationPolicy element to true specifies that the Windows identity always flows across asynchronous points, regardless of how impersonation was performed. For more information about flowing unmanaged impersonation across asynchronous points, see <format type="text/html">
@@ -103,8 +103,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current context must have been acquired through a capture or a copy operation. This method is useful for applying a captured <see cref="T:System.Security.SecurityContext" /> to multiple threads. </para
-          >
+            >The current context must have been acquired through a capture or a copy operation. This method is useful for applying a captured <see cref="T:System.Security.SecurityContext" /> to multiple threads.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -333,17 +333,17 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to suppress the flow of <see cref="T:System.Security.SecurityContext" /> information on the current thread for asynchronous operations. </para
-          >
+            >Use this method to suppress the flow of <see cref="T:System.Security.SecurityContext" /> information on the current thread for asynchronous operations.
+          </para>
           <para
-            >The common language runtime (CLR) is only aware of the impersonation operations performed using managed code. The CLR has no knowledge of impersonation performed outside of managed code, such as platform invokes to unmanaged code that does the impersonation, or through calls to Win32 functions. To flow identity across asynchronous points you must use the managed <see cref="T:System.Security.Principal.WindowsIdentity" /> and <see cref="T:System.Security.Principal.WindowsImpersonationContext" /> methods.  </para
-          >
+            >The common language runtime (CLR) is only aware of the impersonation operations performed using managed code. The CLR has no knowledge of impersonation performed outside of managed code, such as platform invokes to unmanaged code that does the impersonation, or through calls to Win32 functions. To flow identity across asynchronous points you must use the managed <see cref="T:System.Security.Principal.WindowsIdentity" /> and <see cref="T:System.Security.Principal.WindowsImpersonationContext" /> methods.
+          </para>
           <para
             >Use the <see cref="M:System.Threading.AsyncFlowControl.Undo" /> method on the returned <see cref="T:System.Threading.AsyncFlowControl" /> structure to return the <see cref="T:System.Security.SecurityContext" /> object to its previous state.</para
           >
           <para
-            >This method is protected with a <see cref="F:System.Security.Permissions.SecurityAction.LinkDemand" /> for <see cref="F:System.Security.Permissions.SecurityPermissionFlag.Infrastructure" /> permission. A fully trusted component can call this method to suppress the flow of the <see cref="T:System.Security.SecurityContext" /> information during asynchronous calls. When the flow is suppressed, the <see cref="M:System.Security.SecurityContext.Capture" /> method returns null. </para
-          >
+            >This method is protected with a <see cref="F:System.Security.Permissions.SecurityAction.LinkDemand" /> for <see cref="F:System.Security.Permissions.SecurityPermissionFlag.Infrastructure" /> permission. A fully trusted component can call this method to suppress the flow of the <see cref="T:System.Security.SecurityContext" /> information during asynchronous calls. When the flow is suppressed, the <see cref="M:System.Security.SecurityContext.Capture" /> method returns null.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

@@ -217,8 +217,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The minimum number of occurrences of the same type of event that can occur before the event is raised to the provider. </param
-        >
+          />The minimum number of occurrences of the same type of event that can occur before the event is raised to the provider.
+        </param>
         <param name="maxLimit">
           <attribution
             license="cc4"
@@ -299,8 +299,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The minimum number of occurrences of an event of the same type before the event is fired to the provider. </param
-        >
+          />The minimum number of occurrences of an event of the same type before the event is fired to the provider.
+        </param>
         <param name="maxLimit">
           <attribution
             license="cc4"

@@ -86,8 +86,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.SecurityElement" /> from which to get the algorithms for the signature description. </param
-        >
+          />The <see cref="T:System.Security.SecurityElement" /> from which to get the algorithms for the signature description.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateDeformatter">
@@ -130,8 +130,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key to use in the <see cref="T:System.Security.Cryptography.AsymmetricSignatureDeformatter" />. </param
-        >
+          />The key to use in the <see cref="T:System.Security.Cryptography.AsymmetricSignatureDeformatter" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateDigest">
@@ -209,8 +209,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key to use in the <see cref="T:System.Security.Cryptography.AsymmetricSignatureFormatter" />. </param
-        >
+          />The key to use in the <see cref="T:System.Security.Cryptography.AsymmetricSignatureFormatter" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DeformatterAlgorithm">

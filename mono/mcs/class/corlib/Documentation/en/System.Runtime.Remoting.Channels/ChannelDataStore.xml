@@ -78,8 +78,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of channel URIs that the current channel maps to. </param
-        >
+          />An array of channel URIs that the current channel maps to.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ChannelUris">

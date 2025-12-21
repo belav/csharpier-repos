@@ -26,8 +26,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Net.Sockets.UdpClient" /> class provides simple methods for sending and receiving connectionless UDP datagrams in blocking synchronous mode. Because UDP is a connectionless transport protocol, you do not need to establish a remote host connection prior to sending and receiving data. You do, however, have the option of establishing a default remote host in one of the following two ways: </para
-      >
+        >The <see cref="T:System.Net.Sockets.UdpClient" /> class provides simple methods for sending and receiving connectionless UDP datagrams in blocking synchronous mode. Because UDP is a connectionless transport protocol, you do not need to establish a remote host connection prior to sending and receiving data. You do, however, have the option of establishing a default remote host in one of the following two ways:
+      </para>
       <list type="bullet">
         <item>
           <para
@@ -133,8 +133,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local port number from which you intend to communicate. </param
-        >
+          />The local port number from which you intend to communicate.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -179,8 +179,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Net.IPEndPoint" /> that respresents the local endpoint to which you bind the UDP connection. </param
-        >
+          />An <see cref="T:System.Net.IPEndPoint" /> that respresents the local endpoint to which you bind the UDP connection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -230,8 +230,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Net.Sockets.AddressFamily" /> values that specifies the addressing scheme of the socket. </param
-        >
+          />One of the <see cref="T:System.Net.Sockets.AddressFamily" /> values that specifies the addressing scheme of the socket.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -282,15 +282,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The port on which to listen for incoming connection attempts. </param
-        >
+          />The port on which to listen for incoming connection attempts.
+        </param>
         <param name="family">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Net.Sockets.AddressFamily" /> values that specifies the addressing scheme of the socket. </param
-        >
+          />One of the <see cref="T:System.Net.Sockets.AddressFamily" /> values that specifies the addressing scheme of the socket.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -333,15 +333,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the remote DNS host to which you intend to connect. </param
-        >
+          />The name of the remote DNS host to which you intend to connect.
+        </param>
         <param name="port">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The remote port number to which you intend to connect. </param
-        >
+          />The remote port number to which you intend to connect.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Active">
@@ -389,8 +389,8 @@
             >The <see cref="P:System.Net.Sockets.UdpClient.Available" /> property is used to determine the amount of data queued in the network buffer for reading. If data is available, call <see cref="M:System.Net.Sockets.NetworkStream.Read(System.Byte[],System.Int32,System.Int32)" /> to get the data. If no data is available, the <see cref="P:System.Net.Sockets.UdpClient.Available" /> property returns 0.</para
           >
           <para
-            >If the remote host shuts down or closes the connection, the <see cref="P:System.Net.Sockets.UdpClient.Available" /> property throws a <see cref="T:System.Net.Sockets.SocketException" />. </para
-          >
+            >If the remote host shuts down or closes the connection, the <see cref="P:System.Net.Sockets.UdpClient.Available" /> property throws a <see cref="T:System.Net.Sockets.SocketException" />.
+          </para>
           <block subset="none" type="note">
             <para
               > If you receive a <see cref="T:System.Net.Sockets.SocketException" />, use <see cref="P:System.Net.Sockets.SocketException.ErrorCode" /> to obtain the specific error code and refer to the Windows Sockets version 2 API error code documentation in the MSDN library at <see
@@ -457,8 +457,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.AsyncCallback" /> delegate that references the method to invoke when the operation is complete. </param
-        >
+          />An <see cref="T:System.AsyncCallback" /> delegate that references the method to invoke when the operation is complete.
+        </param>
         <param name="state">
           <attribution
             license="cc4"
@@ -625,8 +625,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.AsyncCallback" /> delegate that references the method to invoke when the operation is complete. </param
-        >
+          />An <see cref="T:System.AsyncCallback" /> delegate that references the method to invoke when the operation is complete.
+        </param>
         <param name="state">
           <attribution
             license="cc4"
@@ -719,8 +719,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.AsyncCallback" /> delegate that references the method to invoke when the operation is complete. </param
-        >
+          />An <see cref="T:System.AsyncCallback" /> delegate that references the method to invoke when the operation is complete.
+        </param>
         <param name="state">
           <attribution
             license="cc4"
@@ -849,8 +849,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Net.IPEndPoint" /> that specifies the network endpoint to which you intend to send data. </param
-        >
+          />An <see cref="T:System.Net.IPEndPoint" /> that specifies the network endpoint to which you intend to send data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Connect">
@@ -905,15 +905,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Net.IPAddress" /> of the remote host to which you intend to send data. </param
-        >
+          />The <see cref="T:System.Net.IPAddress" /> of the remote host to which you intend to send data.
+        </param>
         <param name="port">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The port number to which you intend send data. </param
-        >
+          />The port number to which you intend send data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Connect">
@@ -968,15 +968,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The DNS name of the remote host to which you intend send data. </param
-        >
+          />The DNS name of the remote host to which you intend send data.
+        </param>
         <param name="port">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The port number on the remote host to which you intend to send data. </param
-        >
+          />The port number on the remote host to which you intend to send data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Dispose">
@@ -1009,16 +1009,16 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see cref="T:System.Net.Sockets.UdpClient" /> and optionally releases the managed resources. </para
-          >
+            >Releases the unmanaged resources used by the <see cref="T:System.Net.Sockets.UdpClient" /> and optionally releases the managed resources.
+          </para>
         </summary>
         <param name="disposing">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DontFragment">
@@ -1090,8 +1090,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Net.IPAddress" /> of the multicast group to leave. </param
-        >
+          />The <see cref="T:System.Net.IPAddress" /> of the multicast group to leave.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DropMulticastGroup">
@@ -1137,8 +1137,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Net.IPAddress" /> of the multicast group to leave. </param
-        >
+          />The <see cref="T:System.Net.IPAddress" /> of the multicast group to leave.
+        </param>
         <param name="ifindex">
           <attribution
             license="cc4"
@@ -1224,8 +1224,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method blocks until the operation is complete. </para>
           <para
-            >To perform this operation synchronously, use the <see cref="Overload:System.Net.Sockets.UdpClient.Send" /> method. </para
-          >
+            >To perform this operation synchronously, use the <see cref="Overload:System.Net.Sockets.UdpClient.Send" /> method.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1265,8 +1265,8 @@
             >By default, multiple clients can use a specific port; however, only one of the clients can perform operations on the network traffic sent to the port. You can use the <see cref="P:System.Net.Sockets.UdpClient.ExclusiveAddressUse" /> property to prevent multiple clients from using a specific port.</para
           >
           <para
-            >This property must be set before the underlying socket is bound to a client port. If you call <see cref="M:System.Net.Sockets.UdpClient.#ctor(System.Int32)" />, <see cref="M:System.Net.Sockets.UdpClient.#ctor(System.Int32,System.Net.Sockets.AddressFamily)" />, <see cref="M:System.Net.Sockets.UdpClient.#ctor(System.Net.IPEndPoint)" />, or <see cref="M:System.Net.Sockets.UdpClient.#ctor(System.String,System.Int32)" />, the client port is bound as a side effect of the constructor, and you cannot subsequently set the <see cref="P:System.Net.Sockets.UdpClient.ExclusiveAddressUse" /> property </para
-          >
+            >This property must be set before the underlying socket is bound to a client port. If you call <see cref="M:System.Net.Sockets.UdpClient.#ctor(System.Int32)" />, <see cref="M:System.Net.Sockets.UdpClient.#ctor(System.Int32,System.Net.Sockets.AddressFamily)" />, <see cref="M:System.Net.Sockets.UdpClient.#ctor(System.Net.IPEndPoint)" />, or <see cref="M:System.Net.Sockets.UdpClient.#ctor(System.String,System.Int32)" />, the client port is bound as a side effect of the constructor, and you cannot subsequently set the <see cref="P:System.Net.Sockets.UdpClient.ExclusiveAddressUse" /> property
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1351,8 +1351,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The multicast <see cref="T:System.Net.IPAddress" /> of the group you want to join. </param
-        >
+          />The multicast <see cref="T:System.Net.IPAddress" /> of the group you want to join.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="JoinMulticastGroup">
@@ -1409,8 +1409,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The multicast <see cref="T:System.Net.IPAddress" /> of the group you want to join. </param
-        >
+          />The multicast <see cref="T:System.Net.IPAddress" /> of the group you want to join.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="JoinMulticastGroup">
@@ -1467,15 +1467,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Net.IPAddress" /> of the multicast group to join. </param
-        >
+          />The <see cref="T:System.Net.IPAddress" /> of the multicast group to join.
+        </param>
         <param name="timeToLive">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The Time to Live (TTL), measured in router hops. </param
-        >
+          />The Time to Live (TTL), measured in router hops.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="JoinMulticastGroup">
@@ -1673,15 +1673,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type <see cref="T:System.Byte" /> that specifies the UDP datagram that you intend to send represented as an array of bytes. </param
-        >
+          />An array of type <see cref="T:System.Byte" /> that specifies the UDP datagram that you intend to send represented as an array of bytes.
+        </param>
         <param name="bytes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes in the datagram. </param
-        >
+          />The number of bytes in the datagram.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Send">
@@ -1735,22 +1735,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type <see cref="T:System.Byte" /> that specifies the UDP datagram that you intend to send, represented as an array of bytes. </param
-        >
+          />An array of type <see cref="T:System.Byte" /> that specifies the UDP datagram that you intend to send, represented as an array of bytes.
+        </param>
         <param name="bytes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes in the datagram. </param
-        >
+          />The number of bytes in the datagram.
+        </param>
         <param name="endPoint">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Net.IPEndPoint" /> that represents the host and port to which to send the datagram. </param
-        >
+          />An <see cref="T:System.Net.IPEndPoint" /> that represents the host and port to which to send the datagram.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Send">
@@ -1805,29 +1805,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type <see cref="T:System.Byte" /> that specifies the UDP datagram that you intend to send represented as an array of bytes. </param
-        >
+          />An array of type <see cref="T:System.Byte" /> that specifies the UDP datagram that you intend to send represented as an array of bytes.
+        </param>
         <param name="bytes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes in the datagram. </param
-        >
+          />The number of bytes in the datagram.
+        </param>
         <param name="hostname">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the remote host to which you intend to send the datagram. </param
-        >
+          />The name of the remote host to which you intend to send the datagram.
+        </param>
         <param name="port">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The remote port number with which you intend to communicate. </param
-        >
+          />The remote port number with which you intend to communicate.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SendAsync">
@@ -2050,8 +2050,8 @@
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format> and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
           <para
             >Note: Always call <see cref="M:System.Net.Sockets.UdpClient.System#IDisposable#Dispose" /> before you release your last reference to the <see cref="T:System.Net.Sockets.UdpClient" />. Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Net.Sockets.UdpClient" /> object's Finalize method.</para
           >

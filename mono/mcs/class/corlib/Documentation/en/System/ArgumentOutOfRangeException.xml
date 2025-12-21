@@ -56,8 +56,7 @@ class ArgOutOfRangeExample {
  }
  }
 }
-   </code
-      >
+   </code>
       <para>The output is</para>
       <c>
         <para>Error: System.ArgumentOutOfRangeException: Non-negative number required.</para>
@@ -255,8 +254,8 @@ class ArgOutOfRangeExample {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the parameter that causes this exception. </param
-        >
+          />The name of the parameter that causes this exception.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -299,15 +298,15 @@ class ArgOutOfRangeExample {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that holds the serialized object data. </param
-        >
+          />The object that holds the serialized object data.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that describes the source or destination of the serialized data. </param
-        >
+          />An object that describes the source or destination of the serialized data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -342,15 +341,15 @@ class ArgOutOfRangeExample {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The error message that explains the reason for this exception. </param
-        >
+          />The error message that explains the reason for this exception.
+        </param>
         <param name="innerException">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The exception that is the cause of the current exception, or a null reference (Nothing in Visual Basic) if no inner exception is specified. </param
-        >
+          />The exception that is the cause of the current exception, or a null reference (Nothing in Visual Basic) if no inner exception is specified.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -443,15 +442,15 @@ class ArgOutOfRangeExample {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the parameter that caused the exception. </param
-        >
+          />The name of the parameter that caused the exception.
+        </param>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The message that describes the error. </param
-        >
+          />The message that describes the error.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -559,22 +558,22 @@ class ArgOutOfRangeExample {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the parameter that caused the exception. </param
-        >
+          />The name of the parameter that caused the exception.
+        </param>
         <param name="actualValue">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value of the argument that causes this exception. </param
-        >
+          />The value of the argument that causes this exception.
+        </param>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The message that describes the error. </param
-        >
+          />The message that describes the error.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -665,15 +664,15 @@ class ArgOutOfRangeExample {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that holds the serialized object data. </param
-        >
+          />The object that holds the serialized object data.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that describes the source or destination of the serialized data. </param
-        >
+          />An object that describes the source or destination of the serialized data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Message">

@@ -222,8 +222,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A collection to hold each failed validation. </param
-        >
+          />A collection to hold each failed validation.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="TryValidateValue">
@@ -291,8 +291,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A collection to hold failed validations. </param
-        >
+          />A collection to hold failed validations.
+        </param>
         <param name="validationAttributes">
           <attribution
             license="cc4"
@@ -380,8 +380,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method evaluates each <see cref="T:System.ComponentModel.DataAnnotations.ValidationAttribute" /> instance that is attached to the object type. </para
-          >
+            >This method evaluates each <see cref="T:System.ComponentModel.DataAnnotations.ValidationAttribute" /> instance that is attached to the object type.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

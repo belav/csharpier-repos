@@ -79,8 +79,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A MethodBuilder object that represents the other method. </param
-        >
+          />A MethodBuilder object that represents the other method.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetEventToken">
@@ -146,8 +146,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A MethodBuilder object that represents the method used to subscribe to this event. </param
-        >
+          />A MethodBuilder object that represents the method used to subscribe to this event.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetCustomAttribute">
@@ -182,8 +182,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An instance of a helper class to describe the custom attribute. </param
-        >
+          />An instance of a helper class to describe the custom attribute.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetCustomAttribute">
@@ -234,15 +234,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The constructor for the custom attribute. </param
-        >
+          />The constructor for the custom attribute.
+        </param>
         <param name="binaryAttribute">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A byte blob representing the attributes. </param
-        >
+          />A byte blob representing the attributes.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetRaiseMethod">
@@ -277,8 +277,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A MethodBuilder object that represents the method used to raise this event. </param
-        >
+          />A MethodBuilder object that represents the method used to raise this event.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetRemoveOnMethod">
@@ -313,8 +313,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A MethodBuilder object that represents the method used to unsubscribe to this event. </param
-        >
+          />A MethodBuilder object that represents the method used to unsubscribe to this event.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.Runtime.InteropServices._EventBuilder.GetIDsOfNames">

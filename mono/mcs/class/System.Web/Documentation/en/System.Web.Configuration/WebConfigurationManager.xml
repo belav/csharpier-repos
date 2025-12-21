@@ -14,11 +14,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.Configuration.WebConfigurationManager" /> class allows you to access computer and application information. </para
-      >
+        >The <see cref="T:System.Web.Configuration.WebConfigurationManager" /> class allows you to access computer and application information.
+      </para>
       <para
-        >Using <see cref="T:System.Web.Configuration.WebConfigurationManager" /> is the preferred way to work with configuration files related to Web applications. For client applications, use the <see cref="T:System.Configuration.ConfigurationManager" /> class. </para
-      >
+        >Using <see cref="T:System.Web.Configuration.WebConfigurationManager" /> is the preferred way to work with configuration files related to Web applications. For client applications, use the <see cref="T:System.Configuration.ConfigurationManager" /> class.
+      </para>
       <para
         >Your application can extend the <see cref="N:System.Configuration" /> types or use them directly to handle configuration information, as explained in the following list:</para
       >
@@ -38,8 +38,8 @@
             </item>
             <item>
               <para
-                >Advanced configuration. More advanced configuration handling is provided by the types <see cref="T:System.Configuration.SectionInformation" />, <see cref="T:System.Configuration.PropertyInformation" />, <see cref="T:System.Configuration.PropertyInformationCollection" />, <see cref="T:System.Configuration.ElementInformation" />, <see cref="T:System.Configuration.ContextInformation" />, <see cref="T:System.Configuration.ConfigurationSectionGroup" />, and <see cref="T:System.Configuration.ConfigurationSectionGroupCollection" />. </para
-              >
+                >Advanced configuration. More advanced configuration handling is provided by the types <see cref="T:System.Configuration.SectionInformation" />, <see cref="T:System.Configuration.PropertyInformation" />, <see cref="T:System.Configuration.PropertyInformationCollection" />, <see cref="T:System.Configuration.ElementInformation" />, <see cref="T:System.Configuration.ContextInformation" />, <see cref="T:System.Configuration.ConfigurationSectionGroup" />, and <see cref="T:System.Configuration.ConfigurationSectionGroupCollection" />.
+              </para>
             </item>
           </list>
         </item>
@@ -122,8 +122,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <see cref="M:System.Web.Configuration.WebConfigurationManager.GetSection(System.String)" /> is called from within a Web application, it gets the section from the configuration file selected by the system according to the Web-application configuration hierarchy. </para
-          >
+            >If <see cref="M:System.Web.Configuration.WebConfigurationManager.GetSection(System.String)" /> is called from within a Web application, it gets the section from the configuration file selected by the system according to the Web-application configuration hierarchy.
+          </para>
           <block subset="none" type="note">
             <para
               >If your application uses a different protocol than HTTP, the <see cref="M:System.Web.Configuration.WebConfigurationManager.GetSection(System.String,System.String)" /> overload that takes both a section name and a path in its parameter list is the one to use. You must specify the configuration file path because the system cannot make any assumptions about the configuration hierarchy level. If you use the <see cref="M:System.Web.Configuration.WebConfigurationManager.GetSection(System.String)" /> overload that takes only a section name, the system will always attempt to return the configuration settings at the application level. Note, though, that if its specified path is outside of the current application, the overload that takes a path will also return the application-level configuration settings for the currently running application.</para
@@ -178,8 +178,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <see cref="M:System.Web.Configuration.WebConfigurationManager.GetSection(System.String,System.String)" /> is called from within a Web application, it gets the section from the configuration file defined by the specified path in the configuration hierarchy. </para
-          >
+            >If <see cref="M:System.Web.Configuration.WebConfigurationManager.GetSection(System.String,System.String)" /> is called from within a Web application, it gets the section from the configuration file defined by the specified path in the configuration hierarchy.
+          </para>
           <block subset="none" type="note">
             <para
               >If your application uses a different protocol than HTTP, the <see cref="M:System.Web.Configuration.WebConfigurationManager.GetSection(System.String,System.String)" /> overload that takes both a section name and a path in its parameter list is the one to use. You must specify the configuration file path because the system cannot make any assumptions about the configuration hierarchy level. If you use the <see cref="M:System.Web.Configuration.WebConfigurationManager.GetSection(System.String)" /> overload that takes only a section name, the system will always attempt to return the configuration settings at the application level. Note, though, that if its specified path is outside of the current application, the overload that takes a path will also return the application-level configuration settings for the currently running application.</para
@@ -187,8 +187,8 @@
           </block>
           <para>This method cannot be called from within a client application.</para>
           <para
-            >If you want to retrieve the configuration section from the configuration file located at the current Web application directory level, use the <see cref="M:System.Web.Configuration.WebConfigurationManager.GetSection(System.String)" /> method. </para
-          >
+            >If you want to retrieve the configuration section from the configuration file located at the current Web application directory level, use the <see cref="M:System.Web.Configuration.WebConfigurationManager.GetSection(System.String)" /> method.
+          </para>
           <block subset="none" type="note">
             <para
               >The <see cref="M:System.Web.Configuration.WebConfigurationManager.GetSection(System.String,System.String)" /> method is a run-time method operating on the section of a configuration file at the hierarchy level in which the application runs. For a non-run-time operation, use <see cref="M:System.Configuration.Configuration.GetSection(System.String)" /> instead. This method operates on the specified section of a configuration file that you obtain using one of the open configuration file methods.</para
@@ -241,8 +241,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <see cref="M:System.Web.Configuration.WebConfigurationManager.GetWebApplicationSection(System.String)" /> is called from within a Web application, it gets the section from the configuration file selected by the system according to the Web-application configuration hierarchy. </para
-          >
+            >If <see cref="M:System.Web.Configuration.WebConfigurationManager.GetWebApplicationSection(System.String)" /> is called from within a Web application, it gets the section from the configuration file selected by the system according to the Web-application configuration hierarchy.
+          </para>
           <para
             >You could call <see cref="M:System.Web.Configuration.WebConfigurationManager.GetWebApplicationSection(System.String)" /> from within a client application. In this case, it gets the default section from the configuration file selected by the system according to the client configuration hierarchy. Usually, this is the Machine.config file, unless you have a mapped configuration in place. For mapping configuration files, refer to the mapping methods described next.</para
           >
@@ -322,8 +322,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method opens the machine-configuration file that is applicable to the directory specified by the <paramref name="locationSubPath" /> parameter. </para
-          >
+            >This method opens the machine-configuration file that is applicable to the directory specified by the <paramref name="locationSubPath" /> parameter.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -496,8 +496,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The application path to which the configuration applies. </param
-        >
+          />The application path to which the configuration applies.
+        </param>
         <param name="server">
           <attribution
             license="cc4"
@@ -542,8 +542,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Opens the machine-configuration file as a <see cref="T:System.Configuration.Configuration" /> object, using the specified file mapping to allow read or write operations. </para
-          >
+            >Opens the machine-configuration file as a <see cref="T:System.Configuration.Configuration" /> object, using the specified file mapping to allow read or write operations.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -624,8 +624,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To obtain the <see cref="T:System.Configuration.Configuration" /> object for a resource, your code must have read privileges on all the configuration files from which it inherits settings. To update a configuration file, your code must additionally have write privileges for both the configuration file and the directory in which it exists. </para
-          >
+            >To obtain the <see cref="T:System.Configuration.Configuration" /> object for a resource, your code must have read privileges on all the configuration files from which it inherits settings. To update a configuration file, your code must additionally have write privileges for both the configuration file and the directory in which it exists.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -649,8 +649,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The virtual path to the configuration file. </param
-        >
+          />The virtual path to the configuration file.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -675,8 +675,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To obtain the <see cref="T:System.Configuration.Configuration" /> object for a resource, your code must have read privileges on all the configuration files from which it inherits settings. To update a configuration file, your code must additionally have write privileges for both the configuration file and the directory in which it exists. </para
-          >
+            >To obtain the <see cref="T:System.Configuration.Configuration" /> object for a resource, your code must have read privileges on all the configuration files from which it inherits settings. To update a configuration file, your code must additionally have write privileges for both the configuration file and the directory in which it exists.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -734,8 +734,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To obtain the <see cref="T:System.Configuration.Configuration" /> object for a resource, your code must have read privileges on all the configuration files from which it inherits settings. To update a configuration file, your code must additionally have write privileges for both the configuration file and the directory in which it exists. </para
-          >
+            >To obtain the <see cref="T:System.Configuration.Configuration" /> object for a resource, your code must have read privileges on all the configuration files from which it inherits settings. To update a configuration file, your code must additionally have write privileges for both the configuration file and the directory in which it exists.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -759,8 +759,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The virtual path to the configuration file. </param
-        >
+          />The virtual path to the configuration file.
+        </param>
         <param name="site">
           <attribution
             license="cc4"
@@ -797,8 +797,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To obtain the <see cref="T:System.Configuration.Configuration" /> object for a resource, your code must have read privileges on all the configuration files from which it inherits settings. To update a configuration file, your code must additionally have write privileges for both the configuration file and the directory in which it exists. </para
-          >
+            >To obtain the <see cref="T:System.Configuration.Configuration" /> object for a resource, your code must have read privileges on all the configuration files from which it inherits settings. To update a configuration file, your code must additionally have write privileges for both the configuration file and the directory in which it exists.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -840,8 +840,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To obtain the <see cref="T:System.Configuration.Configuration" /> object for a resource, your code must have read privileges on all the configuration files from which it inherits settings. To update a configuration file, your code must additionally have write privileges for both the configuration file and the directory in which it exists. </para
-          >
+            >To obtain the <see cref="T:System.Configuration.Configuration" /> object for a resource, your code must have read privileges on all the configuration files from which it inherits settings. To update a configuration file, your code must additionally have write privileges for both the configuration file and the directory in which it exists.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -858,8 +858,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The virtual path to the configuration file. </param
-        >
+          />The virtual path to the configuration file.
+        </param>
         <param name="site">
           <attribution
             license="cc4"
@@ -891,8 +891,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To obtain the <see cref="T:System.Configuration.Configuration" /> object for a resource, your code must have read privileges on all the configuration files from which it inherits settings. To update a configuration file, your code must additionally have write privileges for both the configuration file and the directory in which it exists. </para
-          >
+            >To obtain the <see cref="T:System.Configuration.Configuration" /> object for a resource, your code must have read privileges on all the configuration files from which it inherits settings. To update a configuration file, your code must additionally have write privileges for both the configuration file and the directory in which it exists.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -909,8 +909,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The virtual path to the configuration file. </param
-        >
+          />The virtual path to the configuration file.
+        </param>
         <param name="site">
           <attribution
             license="cc4"
@@ -968,8 +968,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The virtual path to the configuration file. </param
-        >
+          />The virtual path to the configuration file.
+        </param>
         <param name="site">
           <attribution
             license="cc4"
@@ -982,8 +982,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The specific resource to which the configuration applies. </param
-        >
+          />The specific resource to which the configuration applies.
+        </param>
         <param name="server">
           <attribution
             license="cc4"
@@ -1043,8 +1043,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The virtual path to the configuration file. </param
-        >
+          />The virtual path to the configuration file.
+        </param>
         <param name="site">
           <attribution
             license="cc4"
@@ -1126,8 +1126,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The virtual path to the configuration file. </param
-        >
+          />The virtual path to the configuration file.
+        </param>
         <param name="site">
           <attribution
             license="cc4"
@@ -1140,8 +1140,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The specific resource to which the configuration applies. </param
-        >
+          />The specific resource to which the configuration applies.
+        </param>
         <param name="server">
           <attribution
             license="cc4"

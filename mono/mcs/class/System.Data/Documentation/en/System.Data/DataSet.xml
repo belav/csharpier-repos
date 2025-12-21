@@ -197,8 +197,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data needed to serialize or deserialize an object. </param
-        >
+          />The data needed to serialize or deserialize an object.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
@@ -671,8 +671,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that a DataSet’s protected constructor <see cref="M:System.Data.DataSet.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" /> is invoked with during deserialization in remoting scenarios. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that a DataSet’s protected constructor <see cref="M:System.Data.DataSet.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" /> is invoked with during deserialization in remoting scenarios.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
@@ -850,8 +850,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Data.DataRowState" /> values. </param
-        >
+          />One of the <see cref="T:System.Data.DataRowState" /> values.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -886,12 +886,8 @@
           <para>A copy of <see cref="T:System.Xml.Schema.XmlSchemaSet" />.</para>
         </returns>
         <param name="schemaSet">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The specified schema set. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The specified schema set.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetObjectData">
@@ -984,15 +980,11 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> instance. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> instance.
+        </param>
         <param name="context">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The streaming context. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The streaming context.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1140,8 +1132,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Data.DataRowState" /> values. </param
-        >
+          />One of the <see cref="T:System.Data.DataRowState" /> values.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1207,15 +1199,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The Stream from which to read the schema. </param
-        >
+          />The Stream from which to read the schema.
+        </param>
         <param name="nsArray">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of namespace Uniform Resource Identifier (URI) strings to be excluded from schema inference. </param
-        >
+          />An array of namespace Uniform Resource Identifier (URI) strings to be excluded from schema inference.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1248,15 +1240,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The TextReader from which to read the schema. </param
-        >
+          />The TextReader from which to read the schema.
+        </param>
         <param name="nsArray">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of namespace Uniform Resource Identifier (URI) strings to be excluded from schema inference. </param
-        >
+          />An array of namespace Uniform Resource Identifier (URI) strings to be excluded from schema inference.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1289,15 +1281,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the file (including the path) from which to read the schema. </param
-        >
+          />The name of the file (including the path) from which to read the schema.
+        </param>
         <param name="nsArray">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of namespace Uniform Resource Identifier (URI) strings to be excluded from schema inference. </param
-        >
+          />An array of namespace Uniform Resource Identifier (URI) strings to be excluded from schema inference.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1322,23 +1314,23 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Applies the XML schema from the specified <see cref="T:System.Xml.XmlReader" /> to the <see cref="T:System.Data.DataSet" />. </para
-          >
+            >Applies the XML schema from the specified <see cref="T:System.Xml.XmlReader" /> to the <see cref="T:System.Data.DataSet" />.
+          </para>
         </summary>
         <param name="reader">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XMLReader from which to read the schema. </param
-        >
+          />The XMLReader from which to read the schema.
+        </param>
         <param name="nsArray">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of namespace Uniform Resource Identifier (URI) strings to be excluded from schema inference. </param
-        >
+          />An array of namespace Uniform Resource Identifier (URI) strings to be excluded from schema inference.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1516,15 +1508,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Data.IDataReader" /> that provides one or more result sets. </param
-        >
+          />An <see cref="T:System.Data.IDataReader" /> that provides one or more result sets.
+        </param>
         <param name="loadOption">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A value from the <see cref="T:System.Data.LoadOption" /> enumeration that indicates how rows already in the <see cref="T:System.Data.DataTable" /> instances within the <see cref="T:System.Data.DataSet" /> will be combined with incoming rows that share the same primary key. </param
-        >
+          />A value from the <see cref="T:System.Data.LoadOption" /> enumeration that indicates how rows already in the <see cref="T:System.Data.DataTable" /> instances within the <see cref="T:System.Data.DataSet" /> will be combined with incoming rows that share the same primary key.
+        </param>
         <param name="tables">
           <attribution
             license="cc4"
@@ -1596,8 +1588,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A value from the <see cref="T:System.Data.LoadOption" /> enumeration that indicates how rows already in the <see cref="T:System.Data.DataTable" /> instances within the DataSet will be combined with incoming rows that share the same primary key. </param
-        >
+          />A value from the <see cref="T:System.Data.LoadOption" /> enumeration that indicates how rows already in the <see cref="T:System.Data.DataTable" /> instances within the DataSet will be combined with incoming rows that share the same primary key.
+        </param>
         <param name="tables">
           <attribution
             license="cc4"
@@ -1674,8 +1666,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A value from the <see cref="T:System.Data.LoadOption" /> enumeration that indicates how rows already in the <see cref="T:System.Data.DataTable" /> instances within the <see cref="T:System.Data.DataSet" /> will be combined with incoming rows that share the same primary key. </param
-        >
+          />A value from the <see cref="T:System.Data.LoadOption" /> enumeration that indicates how rows already in the <see cref="T:System.Data.DataTable" /> instances within the <see cref="T:System.Data.DataSet" /> will be combined with incoming rows that share the same primary key.
+        </param>
         <param name="errorHandler">
           <attribution
             license="cc4"
@@ -1773,8 +1765,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array of DataRow objects to be merged into the DataSet. </param
-        >
+          />The array of DataRow objects to be merged into the DataSet.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1824,8 +1816,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The DataSet whose data and schema will be merged. </param
-        >
+          />The DataSet whose data and schema will be merged.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1875,8 +1867,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Data.DataTable" /> whose data and schema will be merged. </param
-        >
+          />The <see cref="T:System.Data.DataTable" /> whose data and schema will be merged.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1930,15 +1922,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The DataSet whose data and schema will be merged. </param
-        >
+          />The DataSet whose data and schema will be merged.
+        </param>
         <param name="preserveChanges">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to preserve changes in the current DataSet; otherwise false. </param
-        >
+          />true to preserve changes in the current DataSet; otherwise false.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1996,22 +1988,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array of <see cref="T:System.Data.DataRow" /> objects to be merged into the DataSet. </param
-        >
+          />The array of <see cref="T:System.Data.DataRow" /> objects to be merged into the DataSet.
+        </param>
         <param name="preserveChanges">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to preserve changes in the DataSet; otherwise false. </param
-        >
+          />true to preserve changes in the DataSet; otherwise false.
+        </param>
         <param name="missingSchemaAction">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Data.MissingSchemaAction" /> values. </param
-        >
+          />One of the <see cref="T:System.Data.MissingSchemaAction" /> values.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2069,22 +2061,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The DataSet whose data and schema will be merged. </param
-        >
+          />The DataSet whose data and schema will be merged.
+        </param>
         <param name="preserveChanges">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to preserve changes in the current DataSet; otherwise false. </param
-        >
+          />true to preserve changes in the current DataSet; otherwise false.
+        </param>
         <param name="missingSchemaAction">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Data.MissingSchemaAction" /> values. </param
-        >
+          />One of the <see cref="T:System.Data.MissingSchemaAction" /> values.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2139,22 +2131,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The DataTable whose data and schema will be merged. </param
-        >
+          />The DataTable whose data and schema will be merged.
+        </param>
         <param name="preserveChanges">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Data.MissingSchemaAction" /> values. </param
-        >
+          />One of the <see cref="T:System.Data.MissingSchemaAction" /> values.
+        </param>
         <param name="missingSchemaAction">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to preserve changes in the DataSet; otherwise false. </param
-        >
+          />true to preserve changes in the DataSet; otherwise false.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2263,8 +2255,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.ComponentModel.PropertyChangedEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.ComponentModel.PropertyChangedEventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnRemoveRelation">
@@ -2295,8 +2287,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Data.DataRelation" /> being removed. </param
-        >
+          />The <see cref="T:System.Data.DataRelation" /> being removed.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2331,8 +2323,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Data.DataTable" /> being removed. </param
-        >
+          />The <see cref="T:System.Data.DataTable" /> being removed.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2397,8 +2389,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the property that is about to change. </param
-        >
+          />The name of the property that is about to change.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ReadXml">
@@ -2463,8 +2455,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that derives from <see cref="T:System.IO.Stream" />. </param
-        >
+          />An object that derives from <see cref="T:System.IO.Stream" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2536,8 +2528,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The TextReader from which to read the schema and data. </param
-        >
+          />The TextReader from which to read the schema and data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2606,8 +2598,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The filename (including the path) from which to read. </param
-        >
+          />The filename (including the path) from which to read.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2679,8 +2671,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlReader" /> from which to read. </param
-        >
+          />The <see cref="T:System.Xml.XmlReader" /> from which to read.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2757,15 +2749,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.Stream" /> from which to read. </param
-        >
+          />The <see cref="T:System.IO.Stream" /> from which to read.
+        </param>
         <param name="mode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Data.XmlReadMode" /> values. </param
-        >
+          />One of the <see cref="T:System.Data.XmlReadMode" /> values.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2835,15 +2827,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.TextReader" /> from which to read. </param
-        >
+          />The <see cref="T:System.IO.TextReader" /> from which to read.
+        </param>
         <param name="mode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Data.XmlReadMode" /> values. </param
-        >
+          />One of the <see cref="T:System.Data.XmlReadMode" /> values.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2913,15 +2905,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The filename (including the path) from which to read. </param
-        >
+          />The filename (including the path) from which to read.
+        </param>
         <param name="mode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Data.XmlReadMode" /> values. </param
-        >
+          />One of the <see cref="T:System.Data.XmlReadMode" /> values.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2991,15 +2983,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlReader" /> from which to read. </param
-        >
+          />The <see cref="T:System.Xml.XmlReader" /> from which to read.
+        </param>
         <param name="mode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Data.XmlReadMode" /> values. </param
-        >
+          />One of the <see cref="T:System.Data.XmlReadMode" /> values.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -3048,8 +3040,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.Stream" /> from which to read. </param
-        >
+          />The <see cref="T:System.IO.Stream" /> from which to read.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -3101,8 +3093,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.TextReader" /> from which to read. </param
-        >
+          />The <see cref="T:System.IO.TextReader" /> from which to read.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -3148,8 +3140,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file name (including the path) from which to read. </param
-        >
+          />The file name (including the path) from which to read.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -3201,8 +3193,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlReader" /> from which to read. </param
-        >
+          />The <see cref="T:System.Xml.XmlReader" /> from which to read.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -3228,12 +3220,8 @@
           <para>Ignores attributes and returns an empty DataSet.</para>
         </summary>
         <param name="reader">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The specified XML reader. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The specified XML reader.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -3378,11 +3366,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Data.DataSet" /> serializes its schema and instance data by default in Web services and remoting scenarios. Setting the <see cref="P:System.Data.DataSet.SchemaSerializationMode" /> property of a typed DataSet to <see cref="F:System.Data.SchemaSerializationMode.ExcludeSchema" /> causes schema information to be excluded from the serialization payload. </para
-          >
+            >A <see cref="T:System.Data.DataSet" /> serializes its schema and instance data by default in Web services and remoting scenarios. Setting the <see cref="P:System.Data.DataSet.SchemaSerializationMode" /> property of a typed DataSet to <see cref="F:System.Data.SchemaSerializationMode.ExcludeSchema" /> causes schema information to be excluded from the serialization payload.
+          </para>
           <para>
-            <see cref="F:System.Data.SchemaSerializationMode.ExcludeSchema" /> is supported only for a typed DataSet. For an un-typed DataSet this property can only be set to <see cref="F:System.Data.SchemaSerializationMode.IncludeSchema" />. </para
-          >
+            <see cref="F:System.Data.SchemaSerializationMode.ExcludeSchema" /> is supported only for a typed DataSet. For an un-typed DataSet this property can only be set to <see cref="F:System.Data.SchemaSerializationMode.IncludeSchema" />.
+          </para>
           <para>
             <see cref="F:System.Data.SchemaSerializationMode.ExcludeSchema" /> should only be used in cases where the schema information of the underlying typed DataTables, DataRelations and Constraints has not been modified. If modifications have occurred, complete schema information should be serialized with <see cref="F:System.Data.SchemaSerializationMode.IncludeSchema" />.</para
           >
@@ -3589,15 +3577,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> to populate with data. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> to populate with data.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The destination (see <see cref="T:System.Runtime.Serialization.StreamingContext" />) for this serialization. </param
-        >
+          />The destination (see <see cref="T:System.Runtime.Serialization.StreamingContext" />) for this serialization.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.Xml.Serialization.IXmlSerializable.GetSchema">
@@ -3782,8 +3770,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.Stream" /> object used to write to a file. </param
-        >
+          />A <see cref="T:System.IO.Stream" /> object used to write to a file.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -3825,8 +3813,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.TextWriter" /> object with which to write. </param
-        >
+          />The <see cref="T:System.IO.TextWriter" /> object with which to write.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -3868,8 +3856,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file name (including the path) to which to write. </param
-        >
+          />The file name (including the path) to which to write.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -3911,8 +3899,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlWriter" /> with which to write. </param
-        >
+          />The <see cref="T:System.Xml.XmlWriter" /> with which to write.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -3958,15 +3946,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.Stream" /> object used to write to a file. </param
-        >
+          />A <see cref="T:System.IO.Stream" /> object used to write to a file.
+        </param>
         <param name="mode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Data.XmlWriteMode" /> values. </param
-        >
+          />One of the <see cref="T:System.Data.XmlWriteMode" /> values.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -4012,15 +4000,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.TextWriter" /> object used to write the document. </param
-        >
+          />A <see cref="T:System.IO.TextWriter" /> object used to write the document.
+        </param>
         <param name="mode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Data.XmlWriteMode" /> values. </param
-        >
+          />One of the <see cref="T:System.Data.XmlWriteMode" /> values.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -4066,15 +4054,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file name (including the path) to which to write. </param
-        >
+          />The file name (including the path) to which to write.
+        </param>
         <param name="mode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Data.XmlWriteMode" /> values. </param
-        >
+          />One of the <see cref="T:System.Data.XmlWriteMode" /> values.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -4120,15 +4108,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlWriter" /> with which to write. </param
-        >
+          />The <see cref="T:System.Xml.XmlWriter" /> with which to write.
+        </param>
         <param name="mode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Data.XmlWriteMode" /> values. </param
-        >
+          />One of the <see cref="T:System.Data.XmlWriteMode" /> values.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -4172,8 +4160,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.Stream" /> object used to write to a file. </param
-        >
+          />A <see cref="T:System.IO.Stream" /> object used to write to a file.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -4217,8 +4205,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.TextWriter" /> object with which to write. </param
-        >
+          />The <see cref="T:System.IO.TextWriter" /> object with which to write.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -4256,8 +4244,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file name (including the path) to which to write. </param
-        >
+          />The file name (including the path) to which to write.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -4301,8 +4289,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlWriter" /> to write to. </param
-        >
+          />The <see cref="T:System.Xml.XmlWriter" /> to write to.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

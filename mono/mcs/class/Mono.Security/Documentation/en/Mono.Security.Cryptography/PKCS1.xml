@@ -41,8 +41,8 @@
       </Parameters>
       <Docs>
         <param name="rsa"
-          >an <see cref="T:System.Security.Cryptography.RSA" />  instance that has a private key </param
-        >
+          >an <see cref="T:System.Security.Cryptography.RSA" />  instance that has a private key
+        </param>
         <param name="hash"
           >a <see cref="T:System.Security.Cryptography.HashAlgorithm" /> required for the MGF</param
         >
@@ -179,8 +179,8 @@
       <Docs>
         <param name="rsa">a <see cref="T:System.Security.Cryptography.RSA" /> instance</param>
         <param name="rng"
-          >a <see cref="T:System.Security.Cryptography.RandomNumberGenerator" /> to generate random data required for the padding </param
-        >
+          >a <see cref="T:System.Security.Cryptography.RandomNumberGenerator" /> to generate random data required for the padding
+        </param>
         <param name="M">the message to encrypt</param>
         <summary>RSA Encryption Scheme PKCS1 v1.5 Encryption.</summary>
         <returns>the encrypted message</returns>
@@ -285,8 +285,7 @@
       </Parameters>
       <Docs>
         <param name="x"
-          >a byte array (named an octet string in PKCS#1) containing the encoded integer. </param
-        >
+          >a byte array (named an octet string in PKCS#1) containing the encoded integer. </param>
         <summary>Octet String to Integer primitive.</summary>
         <returns>an array of bytes representing a large non-negative integer.</returns>
         <remarks>See section 4.2 of PKCS #1 v2.1 for more details.</remarks>

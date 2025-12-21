@@ -80,22 +80,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of the server-activated service type object. </param
-        >
+          />The <see cref="T:System.Type" /> of the server-activated service type object.
+        </param>
         <param name="objectUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URI of the server-activated type. </param
-        >
+          />The URI of the server-activated type.
+        </param>
         <param name="mode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Remoting.WellKnownObjectMode" /> of the type, which defines how the object is activated. </param
-        >
+          />The <see cref="T:System.Runtime.Remoting.WellKnownObjectMode" /> of the type, which defines how the object is activated.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -133,29 +133,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The full type name of the server-activated service type. </param
-        >
+          />The full type name of the server-activated service type.
+        </param>
         <param name="assemblyName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The assembly name of the server-activated service type. </param
-        >
+          />The assembly name of the server-activated service type.
+        </param>
         <param name="objectUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URI of the server-activated object. </param
-        >
+          />The URI of the server-activated object.
+        </param>
         <param name="mode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Remoting.WellKnownObjectMode" /> of the type, which defines how the object is activated. </param
-        >
+          />The <see cref="T:System.Runtime.Remoting.WellKnownObjectMode" /> of the type, which defines how the object is activated.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ContextAttributes">

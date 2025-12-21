@@ -22,8 +22,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Security.Cryptography.Xml.KeyReference" /> class represents the &lt;KeyReference&gt; element that contains information about the location of an encrypted key. </para
-      >
+        >The <see cref="T:System.Security.Cryptography.Xml.KeyReference" /> class represents the &lt;KeyReference&gt; element that contains information about the location of an encrypted key.
+      </para>
       <para>Use the &lt;KeyReference&gt; element to refer to &lt;EncryptedKey&gt; elements that were encrypted using the key defined in the enclosing &lt;EncryptedKey&gt; element. You can use multiple &lt;KeyReference&gt; elements when multiple &lt;EncryptedKey&gt; elements exist that are encrypted using the same key.</para>
       <para>You can include additional information such as XPath transforms, decompression transforms, or information about how to retrieve the elements from a document storage facility to aid the decrypting application.</para>
       <para>For more information about XML encryption standards, see the XML Encryption specification, which is available from the World Wide Web Consortium (W3C) at http://www.w3.org/TR/xmlenc-core/.</para>

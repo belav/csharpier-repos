@@ -352,8 +352,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.MenuItem" /> class using the specified menu text. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.MenuItem" /> class using the specified menu text.
+          </para>
         </summary>
         <param name="text">
           <attribution
@@ -423,8 +423,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.MenuItem" /> class using the specified menu text and value. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.MenuItem" /> class using the specified menu text and value.
+          </para>
         </summary>
         <param name="text">
           <attribution
@@ -515,8 +515,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.MenuItem" /> class using the specified menu text, value, and URL to an image. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.MenuItem" /> class using the specified menu text, value, and URL to an image.
+          </para>
         </summary>
         <param name="text">
           <attribution
@@ -625,8 +625,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.MenuItem" /> class using the specified menu text, value, image URL, and navigation URL. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.MenuItem" /> class using the specified menu text, value, image URL, and navigation URL.
+          </para>
         </summary>
         <param name="text">
           <attribution
@@ -753,44 +753,44 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.MenuItem" /> class using the specified menu text, value, image URL, navigation URL, and target. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.MenuItem" /> class using the specified menu text, value, image URL, navigation URL, and target.
+          </para>
         </summary>
         <param name="text">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text displayed for a menu item in a <see cref="T:System.Web.UI.WebControls.Menu" /> control. </param
-        >
+          />The text displayed for a menu item in a <see cref="T:System.Web.UI.WebControls.Menu" /> control.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The supplemental data associated with the menu item, such as data used for handling postback events. </param
-        >
+          />The supplemental data associated with the menu item, such as data used for handling postback events.
+        </param>
         <param name="imageUrl">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URL to an image displayed next to the text in a menu item. </param
-        >
+          />The URL to an image displayed next to the text in a menu item.
+        </param>
         <param name="navigateUrl">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URL to link to when the menu item is clicked. </param
-        >
+          />The URL to link to when the menu item is clicked.
+        </param>
         <param name="target">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The target window or frame in which to display the Web page content linked to a menu item when the menu item is clicked. </param
-        >
+          />The target window or frame in which to display the Web page content linked to a menu item when the menu item is clicked.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -997,8 +997,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>When this property is set to false, the menu item is disabled and no pop-out image indicating child items is displayed. Setting this property to false for a menu item essentially makes the menu item the end of that node, where no further levels are shown off of that node. The default value is true.</para>
           <para
-            >If you want the menu item to show any child items, but to not be "clickable" itself, use the <see cref="P:System.Web.UI.WebControls.MenuItem.Selectable" /> property and set it to false. </para
-          >
+            >If you want the menu item to show any child items, but to not be "clickable" itself, use the <see cref="P:System.Web.UI.WebControls.MenuItem.Selectable" /> property and set it to false.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1319,8 +1319,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a copy of the current <see cref="T:System.Web.UI.WebControls.MenuItem" /> object. </para
-          >
+            >Creates a copy of the current <see cref="T:System.Web.UI.WebControls.MenuItem" /> object.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1347,8 +1347,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Typically, you should use the <see cref="P:System.Web.UI.WebControls.MenuItem.System#Web#UI#IStateManager#IsTrackingViewState" /> member to determine whether a <see cref="T:System.Web.UI.WebControls.MenuItem" /> object is tracking view-state changes. </para
-          >
+            >Typically, you should use the <see cref="P:System.Web.UI.WebControls.MenuItem.System#Web#UI#IStateManager#IsTrackingViewState" /> member to determine whether a <see cref="T:System.Web.UI.WebControls.MenuItem" /> object is tracking view-state changes.
+          </para>
           <para
             >The <see cref="P:System.Web.UI.WebControls.MenuItem.System#Web#UI#IStateManager#IsTrackingViewState" /> member is an explicit interface member implementation. It can be used only when a <see cref="T:System.Web.UI.WebControls.MenuItem" /> instance is cast to an <see cref="T:System.Web.UI.IStateManager" /> interface.</para
           >

@@ -21,8 +21,8 @@
         </format> using an application configuration file.</para
       >
       <para
-        >The <see cref="M:System.ServiceModel.Description.IWsdlImportExtension.ImportContract(System.ServiceModel.Description.WsdlImporter,System.ServiceModel.Description.WsdlContractConversionContext)" /> method is called to import a contract. </para
-      >
+        >The <see cref="M:System.ServiceModel.Description.IWsdlImportExtension.ImportContract(System.ServiceModel.Description.WsdlImporter,System.ServiceModel.Description.WsdlContractConversionContext)" /> method is called to import a contract.
+      </para>
       <para
         >Use the <see cref="M:System.ServiceModel.Description.IWsdlImportExtension.BeforeImport(System.Web.Services.Description.ServiceDescriptionCollection,System.Xml.Schema.XmlSchemaSet,System.Collections.Generic.ICollection{System.Xml.XmlElement})" /> method to modify the metadata that is then imported into <see cref="T:System.ServiceModel.Description.ServiceEndpoint" /> and <see cref="T:System.ServiceModel.Description.ContractDescription" /> objects.</para
       >

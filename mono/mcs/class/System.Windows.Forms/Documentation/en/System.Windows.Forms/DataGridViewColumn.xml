@@ -74,8 +74,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor sets the <see cref="P:System.Windows.Forms.DataGridViewColumn.CellTemplate" /> property to the value of the <paramref name="cellTemplate" /> parameter. </para
-          >
+            >This constructor sets the <see cref="P:System.Windows.Forms.DataGridViewColumn.CellTemplate" /> property to the value of the <paramref name="cellTemplate" /> parameter.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -88,8 +88,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An existing <see cref="T:System.Windows.Forms.DataGridViewCell" /> to use as a template. </param
-        >
+          />An existing <see cref="T:System.Windows.Forms.DataGridViewCell" /> to use as a template.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -120,14 +120,14 @@
             </format>.</para
           >
           <para
-            >When the <see cref="P:System.Windows.Forms.DataGridViewColumn.InheritedAutoSizeMode" /> property is set to any other value except <see cref="F:System.Windows.Forms.DataGridViewAutoSizeColumnMode.None" />, the column will manage its width so that its cell values are fully displayed without clipping. In content-based sizing modes, size adjustments occur whenever cell contents change or, if <see cref="P:System.Windows.Forms.DataGridViewCellStyle.WrapMode" /> is enabled, whenever row heights change. Some content-based sizing modes let you limit the size adjustment to the currently displayed rows in order to increase performance. </para
-          >
+            >When the <see cref="P:System.Windows.Forms.DataGridViewColumn.InheritedAutoSizeMode" /> property is set to any other value except <see cref="F:System.Windows.Forms.DataGridViewAutoSizeColumnMode.None" />, the column will manage its width so that its cell values are fully displayed without clipping. In content-based sizing modes, size adjustments occur whenever cell contents change or, if <see cref="P:System.Windows.Forms.DataGridViewCellStyle.WrapMode" /> is enabled, whenever row heights change. Some content-based sizing modes let you limit the size adjustment to the currently displayed rows in order to increase performance.
+          </para>
           <para
             >Only columns with a <see cref="P:System.Windows.Forms.DataGridViewColumn.Visible" /> property value of true are resized, and changing the visibility of a column does not cause resizing to occur. Additionally, when columns are set to automatically resize, the user cannot adjust the column widths with the mouse.</para
           >
           <para
-            >To adjust column widths programmatically, use the <see cref="T:System.Windows.Forms.DataGridView" /> control's <see cref="Overload:System.Windows.Forms.DataGridView.AutoResizeColumn" /> or <see cref="Overload:System.Windows.Forms.DataGridView.AutoResizeColumns" /> methods or set the column <see cref="P:System.Windows.Forms.DataGridViewColumn.Width" /> property. </para
-          >
+            >To adjust column widths programmatically, use the <see cref="T:System.Windows.Forms.DataGridView" /> control's <see cref="Overload:System.Windows.Forms.DataGridView.AutoResizeColumn" /> or <see cref="Overload:System.Windows.Forms.DataGridView.AutoResizeColumns" /> methods or set the column <see cref="P:System.Windows.Forms.DataGridViewColumn.Width" /> property.
+          </para>
           <para
             >For more information about content-based automatic sizing, see <format type="text/html">
               <a href="a5620a9c-0d06-41e3-8934-c25ddb16c9e6"
@@ -329,8 +329,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Windows.Forms.DataGridView" /> control displays its cells using the styles indicated by the cell <see cref="P:System.Windows.Forms.DataGridViewCell.InheritedStyle" /> property, which inherits styles from other properties of type <see cref="T:System.Windows.Forms.DataGridViewCellStyle" />. For cells in this column, the styles specified through the <see cref="P:System.Windows.Forms.DataGridViewColumn.DefaultCellStyle" /> property override the styles specified through the <see cref="P:System.Windows.Forms.DataGridView.DefaultCellStyle" /> property, but are overridden by the styles specified through the <see cref="P:System.Windows.Forms.DataGridView.RowsDefaultCellStyle" />, <see cref="P:System.Windows.Forms.DataGridView.AlternatingRowsDefaultCellStyle" />, <see cref="P:System.Windows.Forms.DataGridViewRow.DefaultCellStyle" />, and <see cref="P:System.Windows.Forms.DataGridViewCell.Style" /> properties. </para
-          >
+            >The <see cref="T:System.Windows.Forms.DataGridView" /> control displays its cells using the styles indicated by the cell <see cref="P:System.Windows.Forms.DataGridViewCell.InheritedStyle" /> property, which inherits styles from other properties of type <see cref="T:System.Windows.Forms.DataGridViewCellStyle" />. For cells in this column, the styles specified through the <see cref="P:System.Windows.Forms.DataGridViewColumn.DefaultCellStyle" /> property override the styles specified through the <see cref="P:System.Windows.Forms.DataGridView.DefaultCellStyle" /> property, but are overridden by the styles specified through the <see cref="P:System.Windows.Forms.DataGridView.RowsDefaultCellStyle" />, <see cref="P:System.Windows.Forms.DataGridView.AlternatingRowsDefaultCellStyle" />, <see cref="P:System.Windows.Forms.DataGridViewRow.DefaultCellStyle" />, and <see cref="P:System.Windows.Forms.DataGridViewCell.Style" /> properties.
+          </para>
           <para
             >For more information, see <format type="text/html">
               <a href="dbb75ed6-8804-4232-8382-f9920c2e380c"
@@ -365,11 +365,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Unlike the <see cref="P:System.Windows.Forms.DataGridViewBand.Index" /> property, the <see cref="P:System.Windows.Forms.DataGridViewColumn.DisplayIndex" /> property corresponds to the current position of the column as displayed by the user interface (UI). By default, each column's <see cref="P:System.Windows.Forms.DataGridViewColumn.DisplayIndex" /> is set to numbers of increasing order, which reflects the order in which they were added. The <see cref="P:System.Windows.Forms.DataGridViewColumn.Visible" /> property value does not affect the <see cref="P:System.Windows.Forms.DataGridViewColumn.DisplayIndex" /> value. To determine the display position of a column based on its visibility or other state, use the <see cref="Overload:System.Windows.Forms.DataGridViewColumnCollection.GetFirstColumn" />, <see cref="M:System.Windows.Forms.DataGridViewColumnCollection.GetLastColumn(System.Windows.Forms.DataGridViewElementStates,System.Windows.Forms.DataGridViewElementStates)" />, or <see cref="M:System.Windows.Forms.DataGridViewColumnCollection.GetNextColumn(System.Windows.Forms.DataGridViewColumn,System.Windows.Forms.DataGridViewElementStates,System.Windows.Forms.DataGridViewElementStates)" /> method of the <see cref="T:System.Windows.Forms.DataGridViewColumnCollection" /> class. </para
-          >
+            >Unlike the <see cref="P:System.Windows.Forms.DataGridViewBand.Index" /> property, the <see cref="P:System.Windows.Forms.DataGridViewColumn.DisplayIndex" /> property corresponds to the current position of the column as displayed by the user interface (UI). By default, each column's <see cref="P:System.Windows.Forms.DataGridViewColumn.DisplayIndex" /> is set to numbers of increasing order, which reflects the order in which they were added. The <see cref="P:System.Windows.Forms.DataGridViewColumn.Visible" /> property value does not affect the <see cref="P:System.Windows.Forms.DataGridViewColumn.DisplayIndex" /> value. To determine the display position of a column based on its visibility or other state, use the <see cref="Overload:System.Windows.Forms.DataGridViewColumnCollection.GetFirstColumn" />, <see cref="M:System.Windows.Forms.DataGridViewColumnCollection.GetLastColumn(System.Windows.Forms.DataGridViewElementStates,System.Windows.Forms.DataGridViewElementStates)" />, or <see cref="M:System.Windows.Forms.DataGridViewColumnCollection.GetNextColumn(System.Windows.Forms.DataGridViewColumn,System.Windows.Forms.DataGridViewElementStates,System.Windows.Forms.DataGridViewElementStates)" /> method of the <see cref="T:System.Windows.Forms.DataGridViewColumnCollection" /> class.
+          </para>
           <para
-            >Every column in the control has a unique <see cref="P:System.Windows.Forms.DataGridViewColumn.DisplayIndex" /> value. The values start with 0 and proceed in numerical order without skipping any values. When you change the <see cref="P:System.Windows.Forms.DataGridViewColumn.DisplayIndex" /> value for a column, the <see cref="P:System.Windows.Forms.DataGridViewColumn.DisplayIndex" /> values for other columns are changed to reflect the new order. </para
-          >
+            >Every column in the control has a unique <see cref="P:System.Windows.Forms.DataGridViewColumn.DisplayIndex" /> value. The values start with 0 and proceed in numerical order without skipping any values. When you change the <see cref="P:System.Windows.Forms.DataGridViewColumn.DisplayIndex" /> value for a column, the <see cref="P:System.Windows.Forms.DataGridViewColumn.DisplayIndex" /> values for other columns are changed to reflect the new order.
+          </para>
           <para
             >If the column has an associated <see cref="T:System.Windows.Forms.DataGridView" /> control, setting this property will cause the control to redraw itself.</para
           >
@@ -423,8 +423,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -457,8 +457,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is useful to provide a visual boundary between frozen columns and columns that can scroll. The extra edge is part of the current column, although it will take on the foreground color of the associated <see cref="T:System.Windows.Forms.DataGridView" />. The extra edge does not extend the area in which users can double-click to automatically resize a column. To resize a column, the user must double-click on the boundary between the divider and the adjacent column. </para
-          >
+            >This property is useful to provide a visual boundary between frozen columns and columns that can scroll. The extra edge is part of the current column, although it will take on the foreground color of the associated <see cref="T:System.Windows.Forms.DataGridView" />. The extra edge does not extend the area in which users can double-click to automatically resize a column. To resize a column, the user must double-click on the boundary between the divider and the adjacent column.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -522,8 +522,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When a column is frozen, all the columns to its left (or to its right in right-to-left languages) are frozen as well. The frozen and unfrozen columns form two groups. If column repositioning is enabled by setting the <see cref="P:System.Windows.Forms.DataGridView.AllowUserToOrderColumns" /> property to true, the user cannot drag a column from one group to the other. </para
-          >
+            >When a column is frozen, all the columns to its left (or to its right in right-to-left languages) are frozen as well. The frozen and unfrozen columns form two groups. If column repositioning is enabled by setting the <see cref="P:System.Windows.Forms.DataGridView.AllowUserToOrderColumns" /> property to true, the user cannot drag a column from one group to the other.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -591,8 +591,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.DataGridViewAutoSizeColumnMode" /> value that specifies an automatic sizing mode. </param
-        >
+          />A <see cref="T:System.Windows.Forms.DataGridViewAutoSizeColumnMode" /> value that specifies an automatic sizing mode.
+        </param>
         <param name="fixedHeight">
           <attribution
             license="cc4"
@@ -658,8 +658,8 @@
           >
           <block subset="none" type="note">
             <para
-              >There is no corresponding header text property for rows. To display labels in row headers, you must handle the <see cref="E:System.Windows.Forms.DataGridView.CellPainting" /> event and paint your own labels when <see cref="P:System.Windows.Forms.DataGridViewCellPaintingEventArgs.ColumnIndex" /> is -1. </para
-            >
+              >There is no corresponding header text property for rows. To display labels in row headers, you must handle the <see cref="E:System.Windows.Forms.DataGridView.CellPainting" /> event and paint your own labels when <see cref="P:System.Windows.Forms.DataGridViewCellPaintingEventArgs.ColumnIndex" /> is -1.
+            </para>
           </block>
         </remarks>
         <summary>
@@ -701,14 +701,14 @@
             </format>.</para
           >
           <para
-            >When the <see cref="P:System.Windows.Forms.DataGridViewColumn.InheritedAutoSizeMode" /> property is set to any other value except <see cref="F:System.Windows.Forms.DataGridViewAutoSizeColumnMode.None" />, the column will manage its width so that its cell values are fully displayed without clipping. In content-based sizing modes, size adjustments occur whenever cell contents change or, if <see cref="P:System.Windows.Forms.DataGridViewCellStyle.WrapMode" /> is enabled, whenever row heights change. Some content-based sizing modes let you limit the size adjustment to the currently displayed rows in order to increase performance. </para
-          >
+            >When the <see cref="P:System.Windows.Forms.DataGridViewColumn.InheritedAutoSizeMode" /> property is set to any other value except <see cref="F:System.Windows.Forms.DataGridViewAutoSizeColumnMode.None" />, the column will manage its width so that its cell values are fully displayed without clipping. In content-based sizing modes, size adjustments occur whenever cell contents change or, if <see cref="P:System.Windows.Forms.DataGridViewCellStyle.WrapMode" /> is enabled, whenever row heights change. Some content-based sizing modes let you limit the size adjustment to the currently displayed rows in order to increase performance.
+          </para>
           <para
             >Only columns with a <see cref="P:System.Windows.Forms.DataGridViewColumn.Visible" /> property value of true are resized, and changing the visibility of a column does not cause resizing to occur. Additionally, when columns are set to automatically resize, the user cannot adjust the column widths with the mouse.</para
           >
           <para
-            >To adjust column widths programmatically, use the <see cref="T:System.Windows.Forms.DataGridView" /> control's <see cref="Overload:System.Windows.Forms.DataGridView.AutoResizeColumn" /> or <see cref="Overload:System.Windows.Forms.DataGridView.AutoResizeColumns" /> methods or set the column <see cref="P:System.Windows.Forms.DataGridViewColumn.Width" /> property. </para
-          >
+            >To adjust column widths programmatically, use the <see cref="T:System.Windows.Forms.DataGridView" /> control's <see cref="Overload:System.Windows.Forms.DataGridView.AutoResizeColumn" /> or <see cref="Overload:System.Windows.Forms.DataGridView.AutoResizeColumns" /> methods or set the column <see cref="P:System.Windows.Forms.DataGridViewColumn.Width" /> property.
+          </para>
           <para
             >For more information about content-based automatic sizing, see <format type="text/html">
               <a href="a5620a9c-0d06-41e3-8934-c25ddb16c9e6"
@@ -752,8 +752,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is useful to determine which cell styles are applied to all cells in a column regardless of any row styles that are also applied to the cells. The column <see cref="P:System.Windows.Forms.DataGridViewColumn.InheritedStyle" /> property inherits its values from the <see cref="P:System.Windows.Forms.DataGridViewColumn.DefaultCellStyle" /> and the <see cref="P:System.Windows.Forms.DataGridView.DefaultCellStyle" /> property. </para
-          >
+            >This property is useful to determine which cell styles are applied to all cells in a column regardless of any row styles that are also applied to the cells. The column <see cref="P:System.Windows.Forms.DataGridViewColumn.InheritedStyle" /> property inherits its values from the <see cref="P:System.Windows.Forms.DataGridViewColumn.DefaultCellStyle" /> and the <see cref="P:System.Windows.Forms.DataGridView.DefaultCellStyle" /> property.
+          </para>
           <para
             >For more information about cell style inheritance, see <format type="text/html">
               <a href="dbb75ed6-8804-4232-8382-f9920c2e380c"
@@ -788,8 +788,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A column becomes bound to a data source if it is part of a data-bound <see cref="T:System.Windows.Forms.DataGridView" />. A column can become part of a data-bound <see cref="T:System.Windows.Forms.DataGridView" /> if the column is automatically created when the <see cref="P:System.Windows.Forms.DataGridView.AutoGenerateColumns" /> property is set to true, or if the column's <see cref="P:System.Windows.Forms.DataGridViewColumn.DataPropertyName" /> property is set when the column is manually added to the <see cref="T:System.Windows.Forms.DataGridView" />. </para
-          >
+            >A column becomes bound to a data source if it is part of a data-bound <see cref="T:System.Windows.Forms.DataGridView" />. A column can become part of a data-bound <see cref="T:System.Windows.Forms.DataGridView" /> if the column is automatically created when the <see cref="P:System.Windows.Forms.DataGridView.AutoGenerateColumns" /> property is set to true, or if the column's <see cref="P:System.Windows.Forms.DataGridViewColumn.DataPropertyName" /> property is set when the column is manually added to the <see cref="T:System.Windows.Forms.DataGridView" />.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -914,11 +914,11 @@
             >If the <see cref="P:System.Windows.Forms.DataGridViewColumn.Resizable" /> property is <see cref="F:System.Windows.Forms.DataGridViewTriState.False" />, the user will not be able to manually adjust the column width.</para
           >
           <para
-            >By default, the <see cref="P:System.Windows.Forms.DataGridViewColumn.Resizable" /> property value is based on the <see cref="P:System.Windows.Forms.DataGridView.AllowUserToResizeColumns" /> property value. If you explicitly set <see cref="P:System.Windows.Forms.DataGridViewColumn.Resizable" /> to <see cref="F:System.Windows.Forms.DataGridViewTriState.True" /> or <see cref="F:System.Windows.Forms.DataGridViewTriState.False" />, however, the control value is ignored. Set <see cref="P:System.Windows.Forms.DataGridViewColumn.Resizable" /> to <see cref="F:System.Windows.Forms.DataGridViewTriState.NotSet" /> to restore the value-inheritance behavior. </para
-          >
+            >By default, the <see cref="P:System.Windows.Forms.DataGridViewColumn.Resizable" /> property value is based on the <see cref="P:System.Windows.Forms.DataGridView.AllowUserToResizeColumns" /> property value. If you explicitly set <see cref="P:System.Windows.Forms.DataGridViewColumn.Resizable" /> to <see cref="F:System.Windows.Forms.DataGridViewTriState.True" /> or <see cref="F:System.Windows.Forms.DataGridViewTriState.False" />, however, the control value is ignored. Set <see cref="P:System.Windows.Forms.DataGridViewColumn.Resizable" /> to <see cref="F:System.Windows.Forms.DataGridViewTriState.NotSet" /> to restore the value-inheritance behavior.
+          </para>
           <para
-            >Because <see cref="F:System.Windows.Forms.DataGridViewTriState.NotSet" /> restores the value inheritance, the <see cref="P:System.Windows.Forms.DataGridViewColumn.Resizable" /> property will never return a <see cref="F:System.Windows.Forms.DataGridViewTriState.NotSet" /> value unless the column has not been added to a <see cref="T:System.Windows.Forms.DataGridView" /> control. If you need to determine whether the <see cref="P:System.Windows.Forms.DataGridViewColumn.Resizable" /> property value of a column is inherited, check its <see cref="P:System.Windows.Forms.DataGridViewElement.State" /> property. If the <see cref="P:System.Windows.Forms.DataGridViewElement.State" /> property value includes the <see cref="F:System.Windows.Forms.DataGridViewElementStates.ResizableSet" /> flag, the <see cref="P:System.Windows.Forms.DataGridViewColumn.Resizable" /> property value is not inherited. </para
-          >
+            >Because <see cref="F:System.Windows.Forms.DataGridViewTriState.NotSet" /> restores the value inheritance, the <see cref="P:System.Windows.Forms.DataGridViewColumn.Resizable" /> property will never return a <see cref="F:System.Windows.Forms.DataGridViewTriState.NotSet" /> value unless the column has not been added to a <see cref="T:System.Windows.Forms.DataGridView" /> control. If you need to determine whether the <see cref="P:System.Windows.Forms.DataGridViewColumn.Resizable" /> property value of a column is inherited, check its <see cref="P:System.Windows.Forms.DataGridViewElement.State" /> property. If the <see cref="P:System.Windows.Forms.DataGridViewElement.State" /> property value includes the <see cref="F:System.Windows.Forms.DataGridViewElementStates.ResizableSet" /> flag, the <see cref="P:System.Windows.Forms.DataGridViewColumn.Resizable" /> property value is not inherited.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1109,8 +1109,8 @@
             >Use this property to hide a column from view while keeping the column in the <see cref="T:System.Windows.Forms.DataGridView" />. To completely remove a column, use the <see cref="Overload:System.Windows.Forms.DataGridViewColumnCollection.Remove" /> method.</para
           >
           <para
-            >To hide a column that is automatically generated when binding to a data source, set this property in a <see cref="E:System.Windows.Forms.DataGridView.DataBindingComplete" /> event handler. </para
-          >
+            >To hide a column that is automatically generated when binding to a data source, set this property in a <see cref="E:System.Windows.Forms.DataGridView.DataBindingComplete" /> event handler.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

@@ -23,8 +23,8 @@
         >Use the <see cref="T:System.Web.UI.Design.DataSetFieldSchema" /> class to get the properties of a data field using a <see cref="T:System.Data.DataColumn" />. You can discover the structure of a data field by using the following properties in this class: <see cref="P:System.Web.UI.Design.DataSetFieldSchema.DataType" />, <see cref="P:System.Web.UI.Design.DataSetFieldSchema.IsReadOnly" />, <see cref="P:System.Web.UI.Design.DataSetFieldSchema.Length" />, <see cref="P:System.Web.UI.Design.DataSetFieldSchema.Name" />, and <see cref="P:System.Web.UI.Design.DataSetFieldSchema.IsUnique" />. In addition, you can use the <see cref="P:System.Web.UI.Design.DataSetFieldSchema.Identity" /> property to determine if a data column is set for <see cref="P:System.Data.DataColumn.AutoIncrement" />, or the <see cref="P:System.Web.UI.Design.DataSetFieldSchema.PrimaryKey" /> property to determine if a data column is in the primary key.</para
       >
       <para
-        >The <see cref="T:System.Web.UI.Design.DataSetFieldSchema" /> class is used by custom control designer components to provide information about a data field at design time. </para
-      >
+        >The <see cref="T:System.Web.UI.Design.DataSetFieldSchema" /> class is used by custom control designer components to provide information about a data field at design time.
+      </para>
       <para
         >To examine the components of data using a <see cref="T:System.Data.DataSet" />, use the following classes.</para
       >

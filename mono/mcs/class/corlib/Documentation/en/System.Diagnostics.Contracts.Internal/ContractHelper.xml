@@ -132,8 +132,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default failure behavior is to raise an <see cref="M:System.Diagnostics.Debug.Assert(System.Boolean)" />, which causes the <ui>Assert</ui> dialog box to be displayed. You can change that behavior to throw an <see cref="T:System.Exception" /> instead of displaying the dialog box. </para
-          >
+            >The default failure behavior is to raise an <see cref="M:System.Diagnostics.Debug.Assert(System.Boolean)" />, which causes the <ui>Assert</ui> dialog box to be displayed. You can change that behavior to throw an <see cref="T:System.Exception" /> instead of displaying the dialog box.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

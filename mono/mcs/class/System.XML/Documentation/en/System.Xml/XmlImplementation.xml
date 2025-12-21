@@ -195,15 +195,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The package name of the feature to test. This name is not case-sensitive. </param
-        >
+          />The package name of the feature to test. This name is not case-sensitive.
+        </param>
         <param name="strVersion">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />This is the version number of the package name to test. If the version is not specified (null), supporting any version of the feature causes the method to return true. </param
-        >
+          />This is the version number of the package name to test. If the version is not specified (null), supporting any version of the feature causes the method to return true.
+        </param>
       </Docs>
     </Member>
   </Members>

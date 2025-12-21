@@ -20,19 +20,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="E:System.Windows.Forms.DataGridView.AutoSizeColumnModeChanged" /> event is raised when the value of the <see cref="P:System.Windows.Forms.DataGridViewColumn.AutoSizeMode" /> property of a column in a <see cref="T:System.Windows.Forms.DataGridView" /> control changes. </para
-      >
+        >The <see cref="E:System.Windows.Forms.DataGridView.AutoSizeColumnModeChanged" /> event is raised when the value of the <see cref="P:System.Windows.Forms.DataGridViewColumn.AutoSizeMode" /> property of a column in a <see cref="T:System.Windows.Forms.DataGridView" /> control changes.
+      </para>
       <para
         >For more information about handling events, see <format type="text/html">
           <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-        </format>. </para
-      >
+        </format>.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see cref="E:System.Windows.Forms.DataGridView.AutoSizeColumnModeChanged" /> event. </para
-      >
+        >Provides data for the <see cref="E:System.Windows.Forms.DataGridView.AutoSizeColumnModeChanged" /> event.
+      </para>
     </summary>
   </Docs>
   <Members>
@@ -52,8 +52,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridViewAutoSizeColumnModeEventArgs" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridViewAutoSizeColumnModeEventArgs" /> class.
+          </para>
         </summary>
         <param name="dataGridViewColumn">
           <attribution
@@ -67,8 +67,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The previous <see cref="T:System.Windows.Forms.DataGridViewAutoSizeColumnMode" /> value of the column's <see cref="P:System.Windows.Forms.DataGridViewColumn.AutoSizeMode" /> property. </param
-        >
+          />The previous <see cref="T:System.Windows.Forms.DataGridViewAutoSizeColumnMode" /> value of the column's <see cref="P:System.Windows.Forms.DataGridViewColumn.AutoSizeMode" /> property.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

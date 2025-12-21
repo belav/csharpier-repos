@@ -105,8 +105,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Security.Permissions.PermissionState" /> values. </param
-        >
+          />One of the <see cref="T:System.Security.Permissions.PermissionState" /> values.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -140,8 +140,8 @@
         </exception>
         <exception cref="T:System.ArgumentException">
           <para>
-            <paramref name="flag" /> specifies a value not defined in <see cref="T:System.Security.Permissions.EnvironmentPermissionAccess" />. </para
-          >
+            <paramref name="flag" /> specifies a value not defined in <see cref="T:System.Security.Permissions.EnvironmentPermissionAccess" />.
+          </para>
         </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -160,15 +160,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Security.Permissions.EnvironmentPermissionAccess" /> values. </param
-        >
+          />One of the <see cref="T:System.Security.Permissions.EnvironmentPermissionAccess" /> values.
+        </param>
         <param name="pathList">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A list of environment variables (semicolon-separated) to which access is granted. </param
-        >
+          />A list of environment variables (semicolon-separated) to which access is granted.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -208,15 +208,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Security.Permissions.EnvironmentPermissionAccess" /> values. </param
-        >
+          />One of the <see cref="T:System.Security.Permissions.EnvironmentPermissionAccess" /> values.
+        </param>
         <param name="pathList">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A list of environment variables (semicolon-separated). </param
-        >
+          />A list of environment variables (semicolon-separated).
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Copy">
@@ -314,8 +314,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML encoding to use to reconstruct the permission. </param
-        >
+          />The XML encoding to use to reconstruct the permission.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -365,8 +365,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Security.Permissions.EnvironmentPermissionAccess" /> values that represents a single type of environment variable access. </param
-        >
+          />One of the <see cref="T:System.Security.Permissions.EnvironmentPermissionAccess" /> values that represents a single type of environment variable access.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Intersect">
@@ -396,8 +396,8 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentException">
-          <paramref name="target" /> is not <see langword="null" /> and is not of type <see cref="T:System.Security.Permissions.EnvironmentPermission" />. </exception
-        >
+          <paramref name="target" /> is not <see langword="null" /> and is not of type <see cref="T:System.Security.Permissions.EnvironmentPermission" />.
+        </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The intersection of two permissions is a permission that describes the state they both describe in common. Only a demand that passes both original permissions will pass the intersection.</para>
@@ -415,8 +415,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission to intersect with the current permission. It must be of the same type as the current permission. </param
-        >
+          />A permission to intersect with the current permission. It must be of the same type as the current permission.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -466,8 +466,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission that is to be tested for the subset relationship. This permission must be of the same type as the current permission. </param
-        >
+          />A permission that is to be tested for the subset relationship. This permission must be of the same type as the current permission.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -538,15 +538,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Security.Permissions.EnvironmentPermissionAccess" /> values. </param
-        >
+          />One of the <see cref="T:System.Security.Permissions.EnvironmentPermissionAccess" /> values.
+        </param>
         <param name="pathList">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A list of environment variables (semicolon-separated). </param
-        >
+          />A list of environment variables (semicolon-separated).
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.Security.Permissions.IBuiltInPermission.GetTokenIndex">
@@ -665,8 +665,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission to combine with the current permission. It must be of the same type as the current permission. </param
-        >
+          />A permission to combine with the current permission. It must be of the same type as the current permission.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

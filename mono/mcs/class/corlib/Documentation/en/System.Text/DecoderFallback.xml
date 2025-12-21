@@ -19,14 +19,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >An encoding maps a Unicode character to an encoded sequence of bytes. A particular encoding is represented by a type that is derived from the <see cref="T:System.Text.Encoding" /> class. Specifically, a character is encoded to a byte sequence by calling the encoding type's <see cref="M:System.Text.Encoding.GetBytes(System.String)" /> method, and the byte sequence is decoded to a character array or a string by calling the <see cref="M:System.Text.Encoding.GetChars(System.Byte[])" /> or <see cref="M:System.Text.Encoding.GetString(System.Byte[])" /> method. </para
-      >
+        >An encoding maps a Unicode character to an encoded sequence of bytes. A particular encoding is represented by a type that is derived from the <see cref="T:System.Text.Encoding" /> class. Specifically, a character is encoded to a byte sequence by calling the encoding type's <see cref="M:System.Text.Encoding.GetBytes(System.String)" /> method, and the byte sequence is decoded to a character array or a string by calling the <see cref="M:System.Text.Encoding.GetChars(System.Byte[])" /> or <see cref="M:System.Text.Encoding.GetString(System.Byte[])" /> method.
+      </para>
       <para
-        >A decoding operation can fail if the input byte sequence cannot be mapped by the encoding. For example, an <see cref="T:System.Text.ASCIIEncoding" /> object cannot decode a byte sequence if that sequence represents a character that has a code point value that is outside the range U+0000 to U+007F. </para
-      >
+        >A decoding operation can fail if the input byte sequence cannot be mapped by the encoding. For example, an <see cref="T:System.Text.ASCIIEncoding" /> object cannot decode a byte sequence if that sequence represents a character that has a code point value that is outside the range U+0000 to U+007F.
+      </para>
       <para
-        >When a decoding conversion cannot be performed, the .NET Framework provides a failure-handling mechanism called a fallback. Your application can use predefined .NET Framework decoder fallbacks, or it can create a custom decoder fallback derived from the <see cref="T:System.Text.DecoderFallback" /> and <see cref="T:System.Text.DecoderFallbackBuffer" /> classes. </para
-      >
+        >When a decoding conversion cannot be performed, the .NET Framework provides a failure-handling mechanism called a fallback. Your application can use predefined .NET Framework decoder fallbacks, or it can create a custom decoder fallback derived from the <see cref="T:System.Text.DecoderFallback" /> and <see cref="T:System.Text.DecoderFallbackBuffer" /> classes.
+      </para>
       <para>
         <see cref="T:System.Text.DecoderFallback" /> and <see cref="T:System.Text.DecoderFallbackBuffer" /> are the base classes for all decoding fallback handlers in the .NET Framework. They support the following three kinds of fallback handling mechanisms:</para
       >
@@ -94,8 +94,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Text.DecoderFallback" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Text.DecoderFallback" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -125,14 +125,14 @@
             >This method returns an object derived from <see cref="T:System.Text.DecoderFallbackBuffer" /> that is responsible for performing the fallback operation. For example, of the predefined <see cref="T:System.Text.DecoderFallback" /> implementations in the .NET Framework, the <see cref="M:System.Text.DecoderReplacementFallback.CreateFallbackBuffer" /> method returns a <see cref="T:System.Text.DecoderReplacementFallbackBuffer" /> object, and the <see cref="M:System.Text.DecoderExceptionFallback.CreateFallbackBuffer" /> method returns a <see cref="T:System.Text.DecoderExceptionFallbackBuffer" /> object.</para
           >
           <para
-            >The <see cref="M:System.Text.DecoderFallback.CreateFallbackBuffer" /> method is called by a decoder when it encounters the first byte that it is unable to decode. The <see cref="T:System.Text.DecoderFallbackBuffer" /> object returned by this method provides the fallback implementation and is responsible for returning the string that replaces the byte or bytes that could not be decoded. </para
-          >
+            >The <see cref="M:System.Text.DecoderFallback.CreateFallbackBuffer" /> method is called by a decoder when it encounters the first byte that it is unable to decode. The <see cref="T:System.Text.DecoderFallbackBuffer" /> object returned by this method provides the fallback implementation and is responsible for returning the string that replaces the byte or bytes that could not be decoded.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, initializes a new instance of the <see cref="T:System.Text.DecoderFallbackBuffer" /> class. </para
-          >
+            >When overridden in a derived class, initializes a new instance of the <see cref="T:System.Text.DecoderFallbackBuffer" /> class.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />

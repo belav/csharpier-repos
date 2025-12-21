@@ -21,8 +21,8 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>A user account name (UPN) is the user name (sometimes referred to as the user logon name) and a domain name that identifies the domain in which the user account is located. This is one of the standard ways to log on to a Windows domain. The format is: someone@example.com (as for an e-mail address).</para>
       <para
-        >A Down-Level Logon Name can also be used for creating a <see cref="T:System.ServiceModel.UpnEndpointIdentity" />. </para
-      >
+        >A Down-Level Logon Name can also be used for creating a <see cref="T:System.ServiceModel.UpnEndpointIdentity" />.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -94,8 +94,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.UpnEndpointIdentity" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.UpnEndpointIdentity" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>

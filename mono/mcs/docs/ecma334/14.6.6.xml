@@ -19,8 +19,8 @@
       >cast-expression</non_terminal
     > of the form (T)E, where T is a type and E is a <non_terminal where="14.6"
       >unary-expression</non_terminal
-    >, performs an explicit conversion (<hyperlink>13.2</hyperlink>) of the value of E to type T. If no explicit conversion exists from the type of E to T, a compile-time error occurs. Otherwise, the result is the value produced by the explicit conversion. The result is always classified as a value, even if E denotes a variable. </paragraph
-  >
+    >, performs an explicit conversion (<hyperlink>13.2</hyperlink>) of the value of E to type T. If no explicit conversion exists from the type of E to T, a compile-time error occurs. Otherwise, the result is the value produced by the explicit conversion. The result is always classified as a value, even if E denotes a variable.
+  </paragraph>
   <paragraph
     >The grammar for a <non_terminal where="14.6.6"
       >cast-expression</non_terminal
@@ -31,8 +31,8 @@
       >additive-expression</non_terminal
     > combined with a <non_terminal where="14.5.3"
       >parenthesized-expression</non_terminal
-    > (which computes the value x  -y). </paragraph
-  >
+    > (which computes the value x  -y).
+  </paragraph>
   <paragraph
     >To resolve <non_terminal where="14.6.6"
       >cast-expression</non_terminal
@@ -42,8 +42,8 @@
     > only if at least one of the following are true: <list>
       <list_item> The sequence of tokens is correct grammar for a type, but not for an expression. </list_item>
       <list_item
-        > The sequence of tokens is correct grammar for a type, and the token immediately following the closing parentheses is the token &quot;~&quot;, the token &quot;!&quot;, the token &quot;(&quot;, an identifier (<hyperlink>9.4.1</hyperlink>), a literal (<hyperlink>9.4.4</hyperlink>), or any keyword (<hyperlink>9.4.3</hyperlink>) except as and is. </list_item
-      >
+        > The sequence of tokens is correct grammar for a type, and the token immediately following the closing parentheses is the token &quot;~&quot;, the token &quot;!&quot;, the token &quot;(&quot;, an identifier (<hyperlink>9.4.1</hyperlink>), a literal (<hyperlink>9.4.4</hyperlink>), or any keyword (<hyperlink>9.4.3</hyperlink>) except as and is.
+      </list_item>
     </list>
   </paragraph>
   <paragraph>

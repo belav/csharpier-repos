@@ -291,8 +291,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlNameTable" /> to use for atomization while parsing the string if this <see cref="T:System.Xml.Schema.XmlSchemaDatatype" /> object represents the xs:NCName type. </param
-        >
+          />The <see cref="T:System.Xml.XmlNameTable" /> to use for atomization while parsing the string if this <see cref="T:System.Xml.Schema.XmlSchemaDatatype" /> object represents the xs:NCName type.
+        </param>
         <param name="nsmgr">
           <attribution
             license="cc4"
@@ -362,8 +362,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlNameTable" /> to use for atomization while parsing the string if this <see cref="T:System.Xml.Schema.XmlSchemaDatatype" /> object represents the xs:NCName type. </param
-        >
+          />The <see cref="T:System.Xml.XmlNameTable" /> to use for atomization while parsing the string if this <see cref="T:System.Xml.Schema.XmlSchemaDatatype" /> object represents the xs:NCName type.
+        </param>
         <param name="nsmgr">
           <attribution
             license="cc4"
@@ -546,8 +546,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >W3C XML Schema list types such as xs:ENTITIES, xs:NMTOKENS and xs:IDREFS are not represented by the <see cref="T:System.Xml.Schema.XmlTypeCode" /> enumeration. Instead they are represented by the <see cref="T:System.Xml.Schema.XmlTypeCode" /> values for the xs:ENTITY, xs:NMTOKEN and xs:IDREF types with the <see cref="P:System.Xml.Schema.XmlSchemaDatatype.Variety" /> property of the <see cref="T:System.Xml.Schema.XmlSchemaDatatype" /> object set to <see cref="F:System.Xml.Schema.XmlSchemaDatatypeVariety.List" />. </para
-          >
+            >W3C XML Schema list types such as xs:ENTITIES, xs:NMTOKENS and xs:IDREFS are not represented by the <see cref="T:System.Xml.Schema.XmlTypeCode" /> enumeration. Instead they are represented by the <see cref="T:System.Xml.Schema.XmlTypeCode" /> values for the xs:ENTITY, xs:NMTOKEN and xs:IDREF types with the <see cref="P:System.Xml.Schema.XmlSchemaDatatype.Variety" /> property of the <see cref="T:System.Xml.Schema.XmlSchemaDatatype" /> object set to <see cref="F:System.Xml.Schema.XmlSchemaDatatypeVariety.List" />.
+          </para>
           <block subset="none" type="note">
             <para
               >Both the xs:anySimpleType and xs:anyType types are not represented by <see cref="T:System.Xml.Schema.XmlTypeCode" /> enumeration. These are represented in an <see cref="T:System.Xml.Schema.XmlSchemaDatatype" /> object with an <see cref="T:System.Xml.Schema.XmlTypeCode" /> whose value is <see cref="F:System.Xml.Schema.XmlTypeCode.UntypedAtomic" /> for xs:anySimpleType or <see cref="F:System.Xml.Schema.XmlTypeCode.Item" /> for xs:anyType.</para

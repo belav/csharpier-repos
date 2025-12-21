@@ -175,8 +175,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The password for the specified user. </param
-        >
+          />The password for the specified user.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -554,8 +554,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The password answer for the user. </param
-        >
+          />The password answer for the user.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -648,8 +648,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to update the last-activity date/time stamp for the user; false to return user information without updating the last-activity date/time stamp for the user. </param
-        >
+          />true to update the last-activity date/time stamp for the user; false to return user information without updating the last-activity date/time stamp for the user.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -692,8 +692,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The e-mail address to search for. </param
-        >
+          />The e-mail address to search for.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -750,8 +750,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.Security.MembershipProvider.MinRequiredNonAlphanumericCharacters" /> property returns the minimum number of special, non-alphabetic characters that must be entered to create a valid password for the <see cref="T:System.Web.Security.MembershipProvider" /> object. </para
-          >
+            >The <see cref="P:System.Web.Security.MembershipProvider.MinRequiredNonAlphanumericCharacters" /> property returns the minimum number of special, non-alphabetic characters that must be entered to create a valid password for the <see cref="T:System.Web.Security.MembershipProvider" /> object.
+          </para>
           <para
             >The <see cref="P:System.Web.Security.MembershipProvider.MinRequiredNonAlphanumericCharacters" /> property value is set in the application configuration using the minRequiredNonalphanumericCharacters attribute of the <format type="text/html">
               <a href="b9c1ee8f-33ca-4361-8666-b42a0fe86049">membership</a>
@@ -914,8 +914,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.Security.MembershipProvider.PasswordStrengthRegularExpression" /> property gets the regular expression used to evaluate password complexity for the <see cref="T:System.Web.Security.MembershipProvider" /> object. </para
-          >
+            >The <see cref="P:System.Web.Security.MembershipProvider.PasswordStrengthRegularExpression" /> property gets the regular expression used to evaluate password complexity for the <see cref="T:System.Web.Security.MembershipProvider" /> object.
+          </para>
           <para
             >The <see cref="P:System.Web.Security.MembershipProvider.PasswordStrengthRegularExpression" /> property is set in the application configuration using the passwordStrengthRegularExpression attribute of the <format type="text/html">
               <a href="b9c1ee8f-33ca-4361-8666-b42a0fe86049">membership</a>
@@ -1030,8 +1030,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The password answer for the specified user. </param
-        >
+          />The password answer for the specified user.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1103,8 +1103,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Web.Security.MembershipUser" /> object that represents the user to update and the updated information for the user. </param
-        >
+          />A <see cref="T:System.Web.Security.MembershipUser" /> object that represents the user to update and the updated information for the user.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1148,8 +1148,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The password for the specified user. </param
-        >
+          />The password for the specified user.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

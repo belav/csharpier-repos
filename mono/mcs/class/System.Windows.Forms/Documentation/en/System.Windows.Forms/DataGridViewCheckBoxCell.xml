@@ -31,8 +31,8 @@
         >When the current cell is a <see cref="T:System.Windows.Forms.DataGridViewCheckBoxCell" />, the <see cref="P:System.Windows.Forms.DataGridView.IsCurrentCellInEditMode" /> property is always true.</para
       >
       <para
-        >Typically, check box cell values are intended either for storage, like any other data, or for performing bulk operations. If you want to respond immediately when users click a check box cell, you can handle the <see cref="E:System.Windows.Forms.DataGridView.CellClick" /> event, but this event occurs before the cell value is updated. If you need the new value at the time of the click, one option is to calculate what the expected value will be based on the current value. Another approach is to commit the change immediately, and handle the <see cref="E:System.Windows.Forms.DataGridView.CellValueChanged" /> event to respond to it. To commit the change when the cell is clicked, you must handle the <see cref="E:System.Windows.Forms.DataGridView.CurrentCellDirtyStateChanged" /> event. In the handler, if the current cell is a check box cell, call the <see cref="M:System.Windows.Forms.DataGridView.CommitEdit(System.Windows.Forms.DataGridViewDataErrorContexts)" /> method and pass in the <see cref="F:System.Windows.Forms.DataGridViewDataErrorContexts.Commit" /> value. </para
-      >
+        >Typically, check box cell values are intended either for storage, like any other data, or for performing bulk operations. If you want to respond immediately when users click a check box cell, you can handle the <see cref="E:System.Windows.Forms.DataGridView.CellClick" /> event, but this event occurs before the cell value is updated. If you need the new value at the time of the click, one option is to calculate what the expected value will be based on the current value. Another approach is to commit the change immediately, and handle the <see cref="E:System.Windows.Forms.DataGridView.CellValueChanged" /> event to respond to it. To commit the change when the cell is clicked, you must handle the <see cref="E:System.Windows.Forms.DataGridView.CurrentCellDirtyStateChanged" /> event. In the handler, if the current cell is a check box cell, call the <see cref="M:System.Windows.Forms.DataGridView.CommitEdit(System.Windows.Forms.DataGridViewDataErrorContexts)" /> method and pass in the <see cref="F:System.Windows.Forms.DataGridViewDataErrorContexts.Commit" /> value.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -246,14 +246,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new accessible object for the <see cref="T:System.Windows.Forms.DataGridViewCheckBoxCell" />. </para
-          >
+            >Creates a new accessible object for the <see cref="T:System.Windows.Forms.DataGridViewCheckBoxCell" />.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see cref="T:System.Windows.Forms.DataGridViewCheckBoxCell.DataGridViewCheckBoxCellAccessibleObject" /> for the <see cref="T:System.Windows.Forms.DataGridViewCheckBoxCell" />. </para
-          >
+            >A new <see cref="T:System.Windows.Forms.DataGridViewCheckBoxCell.DataGridViewCheckBoxCellAccessibleObject" /> for the <see cref="T:System.Windows.Forms.DataGridViewCheckBoxCell" />.
+          </para>
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -474,16 +474,16 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Object" /> representing the formatted value of the editing cell. </para
-          >
+            >An <see cref="T:System.Object" /> representing the formatted value of the editing cell.
+          </para>
         </returns>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of <see cref="T:System.Windows.Forms.DataGridViewDataErrorContexts" /> values that describes the context in which any formatting error occurs. </param
-        >
+          />A bitwise combination of <see cref="T:System.Windows.Forms.DataGridViewDataErrorContexts" /> values that describes the context in which any formatting error occurs.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -654,15 +654,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.KeyEventArgs" /> that contains data about the key press. </param
-        >
+          />A <see cref="T:System.Windows.Forms.KeyEventArgs" /> that contains data about the key press.
+        </param>
         <param name="rowIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the row containing the cell. </param
-        >
+          />The index of the row containing the cell.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -709,15 +709,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.KeyEventArgs" /> that contains data about the key press. </param
-        >
+          />A <see cref="T:System.Windows.Forms.KeyEventArgs" /> that contains data about the key press.
+        </param>
         <param name="rowIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the row containing the cell. </param
-        >
+          />The index of the row containing the cell.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1376,8 +1376,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the user edits a cell value and commits the change, the <see cref="T:System.Windows.Forms.DataGridView" /> control calls this method to convert the displayed value from the <see cref="P:System.Windows.Forms.DataGridViewCell.FormattedValueType" /> to the <see cref="P:System.Windows.Forms.DataGridViewCell.ValueType" />. The control then sets the underlying cell value or data source value to the converted value. </para
-          >
+            >When the user edits a cell value and commits the change, the <see cref="T:System.Windows.Forms.DataGridView" /> control calls this method to convert the displayed value from the <see cref="P:System.Windows.Forms.DataGridViewCell.FormattedValueType" /> to the <see cref="P:System.Windows.Forms.DataGridViewCell.ValueType" />. The control then sets the underlying cell value or data source value to the converted value.
+          </para>
           <para
             >This method converts the display value of the cell to an actual cell value using the values of the <see cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.TrueValue" />, <see cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.FalseValue" />, and <see cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.IndeterminateValue" /> properties if they have been set.</para
           >
@@ -1473,8 +1473,8 @@
             >Setting the <see cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.ThreeState" /> property of the owning column also sets the <see cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.ThreeState" /> property of every cell in the column and refreshes the column display. To override the specified value for individual cells, set the cell values after you set the column value.</para
           >
           <para
-            >Unlike the column <see cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.ThreeState" /> property, the cell <see cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.ThreeState" /> property does not automatically update the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" /> property of the associated cell style when you change its value. When you change the cell <see cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.ThreeState" /> property value to true, be sure to set the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" /> property of the object returned by the <see cref="P:System.Windows.Forms.DataGridViewCell.Style" /> property to <see cref="F:System.Windows.Forms.CheckState.Indeterminate" />. When you change the <see cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.ThreeState" /> property value to false, be sure to set the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" /> property to false. </para
-          >
+            >Unlike the column <see cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.ThreeState" /> property, the cell <see cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.ThreeState" /> property does not automatically update the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" /> property of the associated cell style when you change its value. When you change the cell <see cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.ThreeState" /> property value to true, be sure to set the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" /> property of the object returned by the <see cref="P:System.Windows.Forms.DataGridViewCell.Style" /> property to <see cref="F:System.Windows.Forms.CheckState.Indeterminate" />. When you change the <see cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.ThreeState" /> property value to false, be sure to set the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" /> property to false.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

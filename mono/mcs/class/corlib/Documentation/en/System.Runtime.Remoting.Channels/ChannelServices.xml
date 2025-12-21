@@ -29,8 +29,8 @@
       <para
         >Channels must expose the <see cref="T:System.Runtime.Remoting.Channels.IChannel" /> interface, which provides informational properties such as the <see cref="P:System.Runtime.Remoting.Channels.IChannel.ChannelName" /> and <see cref="P:System.Runtime.Remoting.Channels.IChannel.ChannelPriority" />. Channels are registered using the <see cref="M:System.Runtime.Remoting.Channels.ChannelServices.RegisterChannel(System.Runtime.Remoting.Channels.IChannel)" /> method. Channels can also be loaded from the remoting configuration. (See <format type="text/html">
           <a href="73399D48-F0FD-46E9-828B-6CDAFDE5FFCE">[&lt;topic://gnconchanneltemplate&gt;]</a>
-        </format> for details.) </para
-      >
+        </format> for details.)
+      </para>
       <para
         >On the client side, messages are handed off to the client channel sink chain after they traverse the client <see cref="T:System.Runtime.Remoting.Contexts.Context" /> chain. The first channel sink is typically a <see cref="T:System.Runtime.Remoting.Channels.IClientFormatterSink" />, which serializes the message into a stream that is passed down the channel sink chain to the client transport sink. The client transport sink then writes this stream out to the wire.</para
       >
@@ -82,19 +82,15 @@
           >
         </returns>
         <param name="msg">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The message to dispatch. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The message to dispatch.
+        </param>
         <param name="replySink">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The sink that will process the return message if it is not null. </param
-        >
+          />The sink that will process the return message if it is not null.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateServerChannelSinkChain">
@@ -137,15 +133,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first provider in the chain of sink providers that will create the channel sink chain. </param
-        >
+          />The first provider in the chain of sink providers that will create the channel sink chain.
+        </param>
         <param name="channel">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Remoting.Channels.IChannelReceiver" /> for which to create the channel sink chain. </param
-        >
+          />The <see cref="T:System.Runtime.Remoting.Channels.IChannelReceiver" /> for which to create the channel sink chain.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DispatchMessage">
@@ -223,8 +219,8 @@
           <para>An interface to a registered channel, or null if the channel is not registered.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The channel name. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The channel name.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetChannelSinkProperties">
@@ -265,8 +261,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The proxy to retrieve properties for. </param
-        >
+          />The proxy to retrieve properties for.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetUrlsForObject">
@@ -305,8 +301,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to retrieve the URL array for. </param
-        >
+          />The object to retrieve the URL array for.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RegisterChannel">
@@ -364,12 +360,8 @@
           >
         </summary>
         <param name="chnl">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The channel to register. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The channel to register.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RegisterChannel">
@@ -415,12 +407,12 @@
             </format>.</para
           >
           <para
-            >If the <paramref name="ensureSecurity" /> parameter is set to true, the remoting system determines whether the channel implements <see cref="T:System.Runtime.Remoting.Channels.ISecurableChannel" />, and if so, enables encryption and digital signatures. An exception is thrown if the channel does not implement <see cref="T:System.Runtime.Remoting.Channels.ISecurableChannel" />. </para
-          >
+            >If the <paramref name="ensureSecurity" /> parameter is set to true, the remoting system determines whether the channel implements <see cref="T:System.Runtime.Remoting.Channels.ISecurableChannel" />, and if so, enables encryption and digital signatures. An exception is thrown if the channel does not implement <see cref="T:System.Runtime.Remoting.Channels.ISecurableChannel" />.
+          </para>
           <block subset="none" type="note">
             <para
-              > Setting <paramref name="ensureSecurity" /> to true throws a <see cref="T:System.Runtime.Remoting.RemotingException" /> for the <see cref="T:System.Runtime.Remoting.Channels.Tcp.TcpServerChannel" /> on Windows 98 (Since secure tcp channels are not supported on Windows 9x), and for the <see cref="T:System.Runtime.Remoting.Channels.Http.HttpServerChannel" /> on all platforms (You must host your service in IIS if you want to use a secure http channel). </para
-            >
+              > Setting <paramref name="ensureSecurity" /> to true throws a <see cref="T:System.Runtime.Remoting.RemotingException" /> for the <see cref="T:System.Runtime.Remoting.Channels.Tcp.TcpServerChannel" /> on Windows 98 (Since secure tcp channels are not supported on Windows 9x), and for the <see cref="T:System.Runtime.Remoting.Channels.Http.HttpServerChannel" /> on all platforms (You must host your service in IIS if you want to use a secure http channel).
+            </para>
           </block>
         </remarks>
         <summary>
@@ -439,8 +431,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true ensures that security is enabled; otherwise false. Setting the value to false does not effect the security setting on the TCP or IPC channel. </param
-        >
+          />true ensures that security is enabled; otherwise false. Setting the value to false does not effect the security setting on the TCP or IPC channel.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RegisteredChannels">
@@ -502,12 +494,8 @@
           <para>A reply message is returned by the call to the server-side chain.</para>
         </returns>
         <param name="msg">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The message to dispatch. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The message to dispatch.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="UnregisterChannel">
@@ -538,12 +526,8 @@
           <para>Unregisters a particular channel from the registered channels list.</para>
         </summary>
         <param name="chnl">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The channel to unregister. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The channel to unregister.
+        </param>
       </Docs>
     </Member>
   </Members>

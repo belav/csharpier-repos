@@ -103,15 +103,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The cache key used to reference the item. </param
-        >
+          />The cache key used to reference the item.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The item to be added to the cache. </param
-        >
+          />The item to be added to the cache.
+        </param>
         <param name="dependencies">
           <attribution
             license="cc4"
@@ -138,8 +138,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The relative cost of the object, as expressed by the <see cref="T:System.Web.Caching.CacheItemPriority" /> enumeration. The cache uses this value when it evicts objects; objects with a lower cost are removed from the cache before objects with a higher cost. </param
-        >
+          />The relative cost of the object, as expressed by the <see cref="T:System.Web.Caching.CacheItemPriority" /> enumeration. The cache uses this value when it evicts objects; objects with a lower cost are removed from the cache before objects with a higher cost.
+        </param>
         <param name="onRemoveCallback">
           <attribution
             license="cc4"
@@ -268,8 +268,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The cache key used to reference the item. </param
-        >
+          />The cache key used to reference the item.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
@@ -374,15 +374,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The cache key used to reference the object. </param
-        >
+          />The cache key used to reference the object.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to be inserted in the cache. </param
-        >
+          />The object to be inserted in the cache.
+        </param>
         <param name="dependencies">
           <attribution
             license="cc4"
@@ -432,8 +432,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method will overwrite an existing Cache item with the same <paramref name="key" /> parameter. </para
-          >
+            >This method will overwrite an existing Cache item with the same <paramref name="key" /> parameter.
+          </para>
           <para
             >You cannot set both the <paramref name="absoluteExpiration" /> and <paramref name="slidingExpiration" /> parameters. If you intend the cache item to expire at a specific time, you set the <paramref name="absoluteExpiration" /> parameter to the specific time, and the <paramref name="slidingExpiration" /> parameter to <see cref="F:System.Web.Caching.Cache.NoSlidingExpiration" />.</para
           >

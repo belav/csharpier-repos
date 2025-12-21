@@ -65,8 +65,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeRegionDirective" /> class with default values. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeRegionDirective" /> class with default values.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -94,8 +94,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeRegionDirective" /> class, specifying its mode and name. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeRegionDirective" /> class, specifying its mode and name.
+          </para>
         </summary>
         <param name="regionMode">
           <attribution

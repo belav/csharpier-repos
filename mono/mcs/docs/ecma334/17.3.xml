@@ -74,8 +74,8 @@
       >constant-declaration</non_terminal
     >. Even though constants are considered static members, a  <non_terminal where="17.3"
       >constant-declaration</non_terminal
-    > neither requires nor allows a static modifier. It is an error for the same modifier to appear multiple times in a constant declaration. </paragraph
-  >
+    > neither requires nor allows a static modifier. It is an error for the same modifier to appear multiple times in a constant declaration.
+  </paragraph>
   <paragraph
     >The type of a <non_terminal where="17.3"
       >constant-declaration</non_terminal
@@ -87,8 +87,8 @@
     > consists of an identifier that names themember, followed by an &quot;=&quot; token, followed by a  <non_terminal
       where="14.15"
       >constant-expression</non_terminal
-    > (<hyperlink>14.15</hyperlink>) that gives the value of the member. </paragraph
-  >
+    > (<hyperlink>14.15</hyperlink>) that gives the value of the member.
+  </paragraph>
   <paragraph
     >The type specified in a constant declaration must be <keyword>sbyte</keyword>, <keyword>byte</keyword>, <keyword>short</keyword>, <keyword>ushort</keyword>, <keyword>int</keyword>, <keyword>uint</keyword>, <keyword>long</keyword>, <keyword>ulong</keyword>, <keyword>char</keyword>, <keyword>float</keyword>, <keyword>double</keyword>, <keyword>decimal</keyword>, <keyword>bool</keyword>, string, an <non_terminal
       where="11.1"
@@ -96,18 +96,18 @@
     >, or a <non_terminal where="11.2">reference-type</non_terminal>. Each  <non_terminal
       where="14.15"
       >constant-expression</non_terminal
-    > must yield a value of the target type or of a type that can be converted to the target type by an implicit conversion (<hyperlink>13.1</hyperlink>). </paragraph
-  >
+    > must yield a value of the target type or of a type that can be converted to the target type by an implicit conversion (<hyperlink>13.1</hyperlink>).
+  </paragraph>
   <paragraph
-    >The type of a constant must be at least as accessible as the constant itself (<hyperlink>10.5.4</hyperlink>). </paragraph
-  >
+    >The type of a constant must be at least as accessible as the constant itself (<hyperlink>10.5.4</hyperlink>).
+  </paragraph>
   <paragraph
     >The value of a constant is obtained in an expression using a <non_terminal where="14.5.2"
       >simple-name</non_terminal
     > (<hyperlink>14.5.2</hyperlink>) or a <non_terminal where="14.5.4"
       >member-access</non_terminal
-    > (<hyperlink>14.5.4</hyperlink>). </paragraph
-  >
+    > (<hyperlink>14.5.4</hyperlink>).
+  </paragraph>
   <paragraph
     >A constant can itself participate in a <non_terminal where="14.15"
       >constant-expression</non_terminal

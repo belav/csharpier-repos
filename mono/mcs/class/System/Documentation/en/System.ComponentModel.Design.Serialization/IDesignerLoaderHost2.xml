@@ -27,8 +27,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see cref="T:System.ComponentModel.Design.Serialization.IDesignerLoaderHost2" /> interface to specify whether the designer loader can continue loading when errors occur during deserialization. </para
-      >
+        >Use the <see cref="T:System.ComponentModel.Design.Serialization.IDesignerLoaderHost2" /> interface to specify whether the designer loader can continue loading when errors occur during deserialization.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

@@ -17,13 +17,13 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A binding consists of an ordered set of binding elements that inherit from this abstract base class.  The <see cref="T:System.ServiceModel.Channels.TransportBindingElement" /> class inherits from the <see cref="T:System.ServiceModel.Channels.BindingElement" /> class. </para
-      >
+        >A binding consists of an ordered set of binding elements that inherit from this abstract base class.  The <see cref="T:System.ServiceModel.Channels.TransportBindingElement" /> class inherits from the <see cref="T:System.ServiceModel.Channels.BindingElement" /> class.
+      </para>
       <para>Creating a binding and binding element for your transport is optional if you are just using the channel model. It is possible to do everything you need through the channel factory and listener as long as they are made public. </para>
       <para>The indigo1 service model uses a factory pattern where the binding is used to create the channel stack. If you want to use the indigo2 service model, then using a transport binding element is required. Placing this binding element into a binding is a good practice because it removes the requirement for users to create their own custom binding for your transport. It is best to create both a binding and binding element, and hide the channel factory and listener inside the assembly.</para>
       <para
-        >On the sending side, a binding is used to build a <see cref="T:System.ServiceModel.Channels.IChannelFactory" />, which in turn builds a channel stack and returns a reference to the top channel in the stack. The application can then use this channel to send messages. </para
-      >
+        >On the sending side, a binding is used to build a <see cref="T:System.ServiceModel.Channels.IChannelFactory" />, which in turn builds a channel stack and returns a reference to the top channel in the stack. The application can then use this channel to send messages.
+      </para>
       <para
         >Similarly, on the receiving side a binding is used to build a <see cref="T:System.ServiceModel.Channels.IChannelListener" />, which listens for incoming messages. The <see cref="T:System.ServiceModel.Channels.IChannelListener" /> provides messages to the listening application by creating channel stacks and handing the application a reference to the top channel. The application then uses this channel to receive incoming messages.</para
       >
@@ -55,8 +55,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.BindingElement" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.BindingElement" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -126,8 +126,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Channels.BindingContext" /> that provides context for the binding element. </param
-        >
+          />The <see cref="T:System.ServiceModel.Channels.BindingContext" /> that provides context for the binding element.
+        </param>
         <typeparam name="TChannel">
           <attribution
             license="cc4"
@@ -236,8 +236,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Channels.BindingContext" /> that provides context for the binding element. </param
-        >
+          />The <see cref="T:System.ServiceModel.Channels.BindingContext" /> that provides context for the binding element.
+        </param>
         <typeparam name="TChannel">
           <attribution
             license="cc4"
@@ -296,8 +296,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Channels.BindingContext" /> that provides context for the binding element. </param
-        >
+          />The <see cref="T:System.ServiceModel.Channels.BindingContext" /> that provides context for the binding element.
+        </param>
         <typeparam name="TChannel">
           <attribution
             license="cc4"

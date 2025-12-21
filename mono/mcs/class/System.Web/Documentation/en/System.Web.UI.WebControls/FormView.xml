@@ -113,8 +113,8 @@
         <h2>Introduction</h2>
       </format>
       <para
-        >The <see cref="T:System.Web.UI.WebControls.FormView" /> control is used to display a single record from a data source. It is similar to the <see cref="T:System.Web.UI.WebControls.DetailsView" /> control, except it displays user-defined templates instead of row fields. Creating your own templates gives you greater flexibility in controlling how the data is displayed. The <see cref="T:System.Web.UI.WebControls.FormView" /> control supports the following features: </para
-      >
+        >The <see cref="T:System.Web.UI.WebControls.FormView" /> control is used to display a single record from a data source. It is similar to the <see cref="T:System.Web.UI.WebControls.DetailsView" /> control, except it displays user-defined templates instead of row fields. Creating your own templates gives you greater flexibility in controlling how the data is displayed. The <see cref="T:System.Web.UI.WebControls.FormView" /> control supports the following features:
+      </para>
       <list type="bullet">
         <item>
           <para
@@ -718,8 +718,8 @@
           >
         </format> and <format type="text/html">
           <a href="847a37e3-ce20-41da-b0d3-7dfb0fdae9a0">ASP.NET Controls and Accessibility</a>
-        </format>. </para
-      >
+        </format>.
+      </para>
       <format type="text/html">
         <a href="#applying_styles" />
       </format>
@@ -1048,8 +1048,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.Web.UI.WebControls.FormView.BackImageUrl" /> property to specify the URL to an image to display in the background of a <see cref="T:System.Web.UI.WebControls.FormView" /> control. </para
-          >
+            >Use the <see cref="P:System.Web.UI.WebControls.FormView.BackImageUrl" /> property to specify the URL to an image to display in the background of a <see cref="T:System.Web.UI.WebControls.FormView" /> control.
+          </para>
           <block subset="none" type="note">
             <para
               >If the specified image is smaller than the <see cref="T:System.Web.UI.WebControls.FormView" /> control, the image is tiled to fill in the background. If the image is larger than the control, the image is cropped.</para
@@ -1505,8 +1505,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.WebControls.FormView.CreateDataSourceSelectArguments" /> method is a helper method called by the <see cref="T:System.Web.UI.WebControls.FormView" /> control to create the <see cref="T:System.Web.UI.DataSourceSelectArguments" /> object that contains the arguments passed to the data source. In this implementation, the <see cref="T:System.Web.UI.DataSourceSelectArguments" /> object contains the arguments for paging operations. </para
-          >
+            >The <see cref="M:System.Web.UI.WebControls.FormView.CreateDataSourceSelectArguments" /> method is a helper method called by the <see cref="T:System.Web.UI.WebControls.FormView" /> control to create the <see cref="T:System.Web.UI.DataSourceSelectArguments" /> object that contains the arguments passed to the data source. In this implementation, the <see cref="T:System.Web.UI.DataSourceSelectArguments" /> object contains the arguments for paging operations.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

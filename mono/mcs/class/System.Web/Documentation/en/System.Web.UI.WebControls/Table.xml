@@ -631,8 +631,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The output stream that renders HTML content to the client. </param
-        >
+          />The output stream that renders HTML content to the client.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1025,8 +1025,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the grid line style to display in the <see cref="T:System.Web.UI.WebControls.Table" /> control. </para
-          >
+            >Gets or sets the grid line style to display in the <see cref="T:System.Web.UI.WebControls.Table" /> control.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1073,8 +1073,8 @@
               </term>
               <description>
                 <para
-                  >The horizontal alignment of the <see cref="T:System.Web.UI.WebControls.Table" /> control has not been set. </para
-                >
+                  >The horizontal alignment of the <see cref="T:System.Web.UI.WebControls.Table" /> control has not been set.
+                </para>
               </description>
             </item>
             <item>
@@ -1083,8 +1083,8 @@
               </term>
               <description>
                 <para
-                  >The <see cref="T:System.Web.UI.WebControls.Table" /> control is left justified on the page. </para
-                >
+                  >The <see cref="T:System.Web.UI.WebControls.Table" /> control is left justified on the page.
+                </para>
               </description>
             </item>
             <item>
@@ -1093,8 +1093,8 @@
               </term>
               <description>
                 <para
-                  >The <see cref="T:System.Web.UI.WebControls.Table" /> control is centered on the page. </para
-                >
+                  >The <see cref="T:System.Web.UI.WebControls.Table" /> control is centered on the page.
+                </para>
               </description>
             </item>
             <item>
@@ -1103,8 +1103,8 @@
               </term>
               <description>
                 <para
-                  >The <see cref="T:System.Web.UI.WebControls.Table" /> control is right justified on the page. </para
-                >
+                  >The <see cref="T:System.Web.UI.WebControls.Table" /> control is right justified on the page.
+                </para>
               </description>
             </item>
             <item>
@@ -1113,8 +1113,8 @@
               </term>
               <description>
                 <para
-                  >The <see cref="T:System.Web.UI.WebControls.Table" /> control is aligned with both the left and right margins of the page. </para
-                >
+                  >The <see cref="T:System.Web.UI.WebControls.Table" /> control is aligned with both the left and right margins of the page.
+                </para>
               </description>
             </item>
           </list>
@@ -1169,8 +1169,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.String" /> that represents the argument for the event. </param
-        >
+          />A <see cref="T:System.String" /> that represents the argument for the event.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RenderBeginTag">
@@ -1202,8 +1202,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Renders the HTML opening tag of the <see cref="T:System.Web.UI.WebControls.Table" /> control to the specified writer. </para
-          >
+            >Renders the HTML opening tag of the <see cref="T:System.Web.UI.WebControls.Table" /> control to the specified writer.
+          </para>
         </summary>
         <param name="writer">
           <attribution
@@ -1230,8 +1230,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is used primarily by control developers when deriving a custom class from a <see cref="T:System.Web.UI.WebControls.Table" /> control. </para
-          >
+            >This method is used primarily by control developers when deriving a custom class from a <see cref="T:System.Web.UI.WebControls.Table" /> control.
+          </para>
           <para
             >The <see cref="T:System.Web.UI.WebControls.Table" /> control implements the <see cref="M:System.Web.UI.WebControls.Table.RenderContents(System.Web.UI.HtmlTextWriter)" /> to render the <see cref="P:System.Web.UI.WebControls.Table.Rows" /> of the table.</para
           >
@@ -1245,8 +1245,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Web.UI.HtmlTextWriter" /> that represents the output stream to render HTML content on the client. </param
-        >
+          />An <see cref="T:System.Web.UI.HtmlTextWriter" /> that represents the output stream to render HTML content on the client.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1315,8 +1315,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Typically, you should use the <see cref="M:System.Web.UI.WebControls.Table.RaisePostBackEvent(System.String)" /> method to raise an event for the <see cref="T:System.Web.UI.WebControls.Table" /> control when a form is posted back to the server. </para
-          >
+            >Typically, you should use the <see cref="M:System.Web.UI.WebControls.Table.RaisePostBackEvent(System.String)" /> method to raise an event for the <see cref="T:System.Web.UI.WebControls.Table" /> control when a form is posted back to the server.
+          </para>
           <para
             >This method is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.Table" /> instance is cast to an <see cref="T:System.Web.UI.IPostBackEventHandler" /> interface.</para
           >

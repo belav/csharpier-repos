@@ -62,8 +62,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Net.Http.Headers.TransferCodingHeaderValue" /> object used to initialize the new instance. </param
-        >
+          />A <see cref="T:System.Net.Http.Headers.TransferCodingHeaderValue" /> object used to initialize the new instance.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">

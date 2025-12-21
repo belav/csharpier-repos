@@ -153,8 +153,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the specific implementation of <see cref="T:System.Security.Cryptography.RIPEMD160" /> to use. </param
-        >
+          />The name of the specific implementation of <see cref="T:System.Security.Cryptography.RIPEMD160" /> to use.
+        </param>
       </Docs>
     </Member>
   </Members>

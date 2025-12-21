@@ -25,8 +25,8 @@
         >This class defines the configuration settings for a new event source and its associated event log. The associated event log can be on the local computer or a remote computer. To create a new source for a new or existing event log on the local computer, set the <see cref="P:System.Diagnostics.EventSourceCreationData.LogName" /> and <see cref="P:System.Diagnostics.EventSourceCreationData.Source" /> properties of an <see cref="T:System.Diagnostics.EventSourceCreationData" /> and call the <see cref="M:System.Diagnostics.EventLog.CreateEventSource(System.Diagnostics.EventSourceCreationData)" /> method. This method creates the event source you specify in the <see cref="P:System.Diagnostics.EventSourceCreationData.Source" /> property and registers it for the event log specified in <see cref="P:System.Diagnostics.EventSourceCreationData.LogName" />. This behavior is similar to using the <see cref="T:System.Diagnostics.EventLogInstaller" /> class to register an event source for an event log.</para
       >
       <para
-        >Use the <see cref="Overload:System.Diagnostics.EventLog.WriteEvent" /> and <see cref="Overload:System.Diagnostics.EventLog.WriteEntry" /> methods to write events to an event log. You must specify an event source to write events; you must create and configure the event source before writing the first entry with the source. </para
-      >
+        >Use the <see cref="Overload:System.Diagnostics.EventLog.WriteEvent" /> and <see cref="Overload:System.Diagnostics.EventLog.WriteEntry" /> methods to write events to an event log. You must specify an event source to write events; you must create and configure the event source before writing the first entry with the source.
+      </para>
       <para
         >Create the new event source during the installation of your application. This allows time for the operating system to refresh its list of registered event sources and their configurations. If the operating system has not refreshed its list of event sources, and you attempt to write an event with the new source, the write operation will fail. You can configure a new source using an <see cref="T:System.Diagnostics.EventLogInstaller" />, or using the <see cref="Overload:System.Diagnostics.EventLog.CreateEventSource" /> method. You must have administrative rights on the computer to create a new event source.</para
       >
@@ -177,15 +177,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name to register with the event log as a source of entries. </param
-        >
+          />The name to register with the event log as a source of entries.
+        </param>
         <param name="logName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the log to which entries from the source are written. </param
-        >
+          />The name of the log to which entries from the source are written.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CategoryCount">

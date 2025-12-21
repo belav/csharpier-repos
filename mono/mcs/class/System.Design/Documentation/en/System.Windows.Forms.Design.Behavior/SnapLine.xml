@@ -50,8 +50,8 @@
         </item>
       </list>
       <para
-        >The <see cref="T:System.Windows.Forms.Design.Behavior.SnapLine" /> class and related types help support the Snapline mode. </para
-      >
+        >The <see cref="T:System.Windows.Forms.Design.Behavior.SnapLine" /> class and related types help support the Snapline mode.
+      </para>
       <para>Snaplines are generated dynamically and automatically as a control edge moves near another control or near the boundaries of its container. This can occur when a control is added from the toolbox, or moved or resized by mouse operations or keyboard commands. Controls typically have both horizontal and vertical snaplines defined; for rectangular controls, these typically extend from all four edges. </para>
       <para
         >The <see cref="T:System.Windows.Forms.Design.Behavior.SnapLine" /> class uses only a few properties to describe each snapline, as shown in the following table.</para
@@ -203,8 +203,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.Behavior.SnapLine" /> class using the specified snapline type, offset, and filter name. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.Behavior.SnapLine" /> class using the specified snapline type, offset, and filter name.
+          </para>
         </summary>
         <param name="type">
           <attribution
@@ -253,8 +253,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.Behavior.SnapLine" /> class using the specified snapline type, offset, and priority. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.Behavior.SnapLine" /> class using the specified snapline type, offset, and priority.
+          </para>
         </summary>
         <param name="type">
           <attribution
@@ -302,8 +302,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.Behavior.SnapLine" /> class using the specified snapline type, offset, filter name, and priority. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.Behavior.SnapLine" /> class using the specified snapline type, offset, filter name, and priority.
+          </para>
         </summary>
         <param name="type">
           <attribution
@@ -480,8 +480,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Windows.Forms.Design.Behavior.SnapLine.Priority" /> property establishes categories of importance for the snaplines associated with a control. </para
-          >
+            >The <see cref="P:System.Windows.Forms.Design.Behavior.SnapLine.Priority" /> property establishes categories of importance for the snaplines associated with a control.
+          </para>
           <para
             >The Windows Forms Designer uses this property to determine which snaplines to display during a control addition, resize, or move operation. For more information, see the <see cref="T:System.Windows.Forms.Design.Behavior.SnapLinePriority" /> enumeration.</para
           >

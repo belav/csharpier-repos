@@ -499,15 +499,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index within the posted collection that references the content to load. </param
-        >
+          />The index within the posted collection that references the content to load.
+        </param>
         <param name="postCollection">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The collection posted to the server. </param
-        >
+          />The collection posted to the server.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="MaxLength">
@@ -623,8 +623,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.EventArgs" /> that contains event information. </param
-        >
+          />A <see cref="T:System.EventArgs" /> that contains event information.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -721,11 +721,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.WebControls.TextBox.Render(System.Web.UI.HtmlTextWriter)" /> method renders the begin tag and end tag of the <see cref="T:System.Web.UI.WebControls.TextBox" /> control to the <see cref="T:System.Web.UI.HtmlTextWriter" /> object for output on the client. If the <see cref="P:System.Web.UI.WebControls.TextBox.TextMode" /> property is set to <see cref="F:System.Web.UI.WebControls.TextBoxMode.MultiLine" />, the content of the <see cref="T:System.Web.UI.WebControls.TextBox" /> control is rendered as an HTML &lt;textarea&gt; element. </para
-          >
+            >The <see cref="M:System.Web.UI.WebControls.TextBox.Render(System.Web.UI.HtmlTextWriter)" /> method renders the begin tag and end tag of the <see cref="T:System.Web.UI.WebControls.TextBox" /> control to the <see cref="T:System.Web.UI.HtmlTextWriter" /> object for output on the client. If the <see cref="P:System.Web.UI.WebControls.TextBox.TextMode" /> property is set to <see cref="F:System.Web.UI.WebControls.TextBoxMode.MultiLine" />, the content of the <see cref="T:System.Web.UI.WebControls.TextBox" /> control is rendered as an HTML &lt;textarea&gt; element.
+          </para>
           <para
-            >The <see cref="M:System.Web.UI.WebControls.TextBox.Render(System.Web.UI.HtmlTextWriter)" /> method is used primarily by control developers extending the functionality of the <see cref="T:System.Web.UI.WebControls.TextBox" /> control. </para
-          >
+            >The <see cref="M:System.Web.UI.WebControls.TextBox.Render(System.Web.UI.HtmlTextWriter)" /> method is used primarily by control developers extending the functionality of the <see cref="T:System.Web.UI.WebControls.TextBox" /> control.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -801,8 +801,8 @@
               <a href="de0d8a1c-b1bc-48e1-b246-26e32289a82f"
                 >ASP.NET Application Life Cycle Overview</a
               >
-            </format>. </para
-          >
+            </format>.
+          </para>
           <para
             >When view state is saved, this string object is returned to the client as a variable that is stored in a hidden HTML input element. When you author custom server controls, you can improve efficiency by overriding this method and modifying your server control's ViewState property. For more information, see <format type="text/html">
               <a href="0218d965-5d30-445b-b6a6-8870e70e63ce">ASP.NET State Management Overview</a>
@@ -861,15 +861,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index within the posted collection that references the content to load. </param
-        >
+          />The index within the posted collection that references the content to load.
+        </param>
         <param name="postCollection">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The collection posted to the server. </param
-        >
+          />The collection posted to the server.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.Web.UI.IPostBackDataHandler.RaisePostDataChangedEvent">
@@ -896,8 +896,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Invokes the <see cref="M:System.Web.UI.WebControls.TextBox.OnTextChanged(System.EventArgs)" /> method whenever posted data for the text box has changed. </para
-          >
+            >Invokes the <see cref="M:System.Web.UI.WebControls.TextBox.OnTextChanged(System.EventArgs)" /> method whenever posted data for the text box has changed.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -1095,8 +1095,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the group of controls for which the <see cref="T:System.Web.UI.WebControls.TextBox" /> control causes validation when it posts back to the server. </para
-          >
+            >Gets or sets the group of controls for which the <see cref="T:System.Web.UI.WebControls.TextBox" /> control causes validation when it posts back to the server.
+          </para>
         </summary>
       </Docs>
     </Member>

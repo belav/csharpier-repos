@@ -20,12 +20,12 @@
         >The <see cref="T:System.Web.Configuration.AuthorizationSection" /> class provides a way to programmatically access and modify the authorization section of a configuration file.</para
       >
       <para
-        >This type is part of a group that includes the <see cref="T:System.Web.Configuration.AuthorizationRule" />, the <see cref="T:System.Web.Configuration.AuthorizationRuleCollection" />, and the <see cref="T:System.Web.Configuration.AuthorizationRuleAction" /> types. </para
-      >
+        >This type is part of a group that includes the <see cref="T:System.Web.Configuration.AuthorizationRule" />, the <see cref="T:System.Web.Configuration.AuthorizationRuleCollection" />, and the <see cref="T:System.Web.Configuration.AuthorizationRuleAction" /> types.
+      </para>
       <block subset="none" type="note">
         <para
-          >The <see cref="T:System.Web.Configuration.AuthorizationSection" /> can read and write information from and to the related section of the configuration file according to the section property <see cref="P:System.Configuration.SectionInformation.AllowDefinition" /> whose value is <see cref="F:System.Configuration.ConfigurationAllowDefinition.Everywhere" />. </para
-        >
+          >The <see cref="T:System.Web.Configuration.AuthorizationSection" /> can read and write information from and to the related section of the configuration file according to the section property <see cref="P:System.Configuration.SectionInformation.AllowDefinition" /> whose value is <see cref="F:System.Configuration.ConfigurationAllowDefinition.Everywhere" />.
+        </para>
         <para />
       </block>
     </remarks>

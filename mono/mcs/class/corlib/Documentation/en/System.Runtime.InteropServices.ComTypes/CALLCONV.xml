@@ -40,8 +40,8 @@
         </item>
         <item>
           <para>
-            <see cref="F:System.Runtime.InteropServices.ComTypes.CALLCONV.CC_SYSCALL" /> is similar to CDECL in that arguments are pushed from right to left. The EAX, ECX, and EDX registers are not preserved. </para
-          >
+            <see cref="F:System.Runtime.InteropServices.ComTypes.CALLCONV.CC_SYSCALL" /> is similar to CDECL in that arguments are pushed from right to left. The EAX, ECX, and EDX registers are not preserved.
+          </para>
         </item>
       </list>
       <para>These calling convention identifiers are used by the dnprdnshort, the wince platform, and by Automation.</para>

@@ -71,15 +71,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The surrogate selector to use. The <see cref="T:System.Runtime.Serialization.ISurrogateSelector" /> determines the correct surrogate to use when deserializing objects of a given type. At deserialization time, the surrogate selector creates a new instance of the object from the information transmitted on the stream. </param
-        >
+          />The surrogate selector to use. The <see cref="T:System.Runtime.Serialization.ISurrogateSelector" /> determines the correct surrogate to use when deserializing objects of a given type. At deserialization time, the surrogate selector creates a new instance of the object from the information transmitted on the stream.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The streaming context. The <see cref="T:System.Runtime.Serialization.StreamingContext" /> is not used by ObjectManager, but is passed as a parameter to any objects implementing <see cref="T:System.Runtime.Serialization.ISerializable" /> or having a <see cref="T:System.Runtime.Serialization.ISerializationSurrogate" />. These objects can take specific actions depending on the source of the information to deserialize. </param
-        >
+          />The streaming context. The <see cref="T:System.Runtime.Serialization.StreamingContext" /> is not used by ObjectManager, but is passed as a parameter to any objects implementing <see cref="T:System.Runtime.Serialization.ISerializable" /> or having a <see cref="T:System.Runtime.Serialization.ISerializationSurrogate" />. These objects can take specific actions depending on the source of the information to deserialize.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DoFixups">
@@ -149,8 +149,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The ID of the requested object. </param
-        >
+          />The ID of the requested object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RaiseDeserializationEvent">
@@ -253,22 +253,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The ID of the array used to record a fixup. </param
-        >
+          />The ID of the array used to record a fixup.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index within <paramref name="arrayFixup" /> that a fixup is requested for. </param
-        >
+          />The index within <paramref name="arrayFixup" /> that a fixup is requested for.
+        </param>
         <param name="objectRequired">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The ID of the object that the current array element will point to after fixup is completed. </param
-        >
+          />The ID of the object that the current array element will point to after fixup is completed.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RecordArrayElementFixup">
@@ -310,22 +310,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The ID of the array used to record a fixup. </param
-        >
+          />The ID of the array used to record a fixup.
+        </param>
         <param name="indices">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The indexes within the multidimensional array that a fixup is requested for. </param
-        >
+          />The indexes within the multidimensional array that a fixup is requested for.
+        </param>
         <param name="objectRequired">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The ID of the object the array elements will point to after fixup is completed. </param
-        >
+          />The ID of the object the array elements will point to after fixup is completed.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RecordDelayedFixup">
@@ -367,22 +367,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The ID of the object that needs the reference to <paramref name="objectRequired" />. </param
-        >
+          />The ID of the object that needs the reference to <paramref name="objectRequired" />.
+        </param>
         <param name="memberName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The member name of <paramref name="objectToBeFixed" /> where the fixup will be performed. </param
-        >
+          />The member name of <paramref name="objectToBeFixed" /> where the fixup will be performed.
+        </param>
         <param name="objectRequired">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The ID of the object required by <paramref name="objectToBeFixed" />. </param
-        >
+          />The ID of the object required by <paramref name="objectToBeFixed" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RecordFixup">
@@ -424,22 +424,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The ID of the object that needs the reference to the <paramref name="objectRequired" /> object. </param
-        >
+          />The ID of the object that needs the reference to the <paramref name="objectRequired" /> object.
+        </param>
         <param name="member">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The member of <paramref name="objectToBeFixed" /> where the fixup will be performed. </param
-        >
+          />The member of <paramref name="objectToBeFixed" /> where the fixup will be performed.
+        </param>
         <param name="objectRequired">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The ID of the object required by <paramref name="objectToBeFixed" />. </param
-        >
+          />The ID of the object required by <paramref name="objectToBeFixed" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RegisterObject">
@@ -478,19 +478,15 @@
           >
         </summary>
         <param name="obj">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The object to register. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The object to register.
+        </param>
         <param name="objectID">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The ID of the object to register. </param
-        >
+          />The ID of the object to register.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RegisterObject">
@@ -530,26 +526,22 @@
           >
         </summary>
         <param name="obj">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The object to register. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The object to register.
+        </param>
         <param name="objectID">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The ID of the object to register. </param
-        >
+          />The ID of the object to register.
+        </param>
         <param name="info">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> used if <paramref name="obj" /> implements <see cref="T:System.Runtime.Serialization.ISerializable" /> or has a <see cref="T:System.Runtime.Serialization.ISerializationSurrogate" />. <paramref name="info" /> will be completed with any required fixup information and then passed to the required object when that object is completed. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> used if <paramref name="obj" /> implements <see cref="T:System.Runtime.Serialization.ISerializable" /> or has a <see cref="T:System.Runtime.Serialization.ISerializationSurrogate" />. <paramref name="info" /> will be completed with any required fixup information and then passed to the required object when that object is completed.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RegisterObject">
@@ -594,40 +586,36 @@
           >
         </summary>
         <param name="obj">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The object to register. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The object to register.
+        </param>
         <param name="objectID">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The ID of the object to register. </param
-        >
+          />The ID of the object to register.
+        </param>
         <param name="info">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> used if <paramref name="obj" /> implements <see cref="T:System.Runtime.Serialization.ISerializable" /> or has a <see cref="T:System.Runtime.Serialization.ISerializationSurrogate" />. <paramref name="info" /> will be completed with any required fixup information and then passed to the required object when that object is completed. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> used if <paramref name="obj" /> implements <see cref="T:System.Runtime.Serialization.ISerializable" /> or has a <see cref="T:System.Runtime.Serialization.ISerializationSurrogate" />. <paramref name="info" /> will be completed with any required fixup information and then passed to the required object when that object is completed.
+        </param>
         <param name="idOfContainingObj">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The ID of the object that contains <paramref name="obj" />. This parameter is required only if <paramref name="obj" /> is a value type. </param
-        >
+          />The ID of the object that contains <paramref name="obj" />. This parameter is required only if <paramref name="obj" /> is a value type.
+        </param>
         <param name="member">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The field in the containing object where <paramref name="obj" /> exists. This parameter has meaning only if <paramref name="obj" /> is a value type. </param
-        >
+          />The field in the containing object where <paramref name="obj" /> exists. This parameter has meaning only if <paramref name="obj" /> is a value type.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RegisterObject">
@@ -673,47 +661,43 @@
           >
         </summary>
         <param name="obj">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The object to register. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The object to register.
+        </param>
         <param name="objectID">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The ID of the object to register. </param
-        >
+          />The ID of the object to register.
+        </param>
         <param name="info">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> used if <paramref name="obj" /> implements <see cref="T:System.Runtime.Serialization.ISerializable" /> or has a <see cref="T:System.Runtime.Serialization.ISerializationSurrogate" />. <paramref name="info" /> will be completed with any required fixup information and then passed to the required object when that object is completed. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> used if <paramref name="obj" /> implements <see cref="T:System.Runtime.Serialization.ISerializable" /> or has a <see cref="T:System.Runtime.Serialization.ISerializationSurrogate" />. <paramref name="info" /> will be completed with any required fixup information and then passed to the required object when that object is completed.
+        </param>
         <param name="idOfContainingObj">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The ID of the object that contains <paramref name="obj" />. This parameter is required only if <paramref name="obj" /> is a value type. </param
-        >
+          />The ID of the object that contains <paramref name="obj" />. This parameter is required only if <paramref name="obj" /> is a value type.
+        </param>
         <param name="member">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The field in the containing object where <paramref name="obj" /> exists. This parameter has meaning only if <paramref name="obj" /> is a value type. </param
-        >
+          />The field in the containing object where <paramref name="obj" /> exists. This parameter has meaning only if <paramref name="obj" /> is a value type.
+        </param>
         <param name="arrayIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />If <paramref name="obj" /> is a <see cref="T:System.ValueType" /> and a member of an array, <paramref name="arrayIndex" /> contains the index within that array where <paramref name="obj" /> exists. <paramref name="arrayIndex" /> is ignored if <paramref name="obj" /> is not both a <see cref="T:System.ValueType" /> and a member of an array. </param
-        >
+          />If <paramref name="obj" /> is a <see cref="T:System.ValueType" /> and a member of an array, <paramref name="arrayIndex" /> contains the index within that array where <paramref name="obj" /> exists. <paramref name="arrayIndex" /> is ignored if <paramref name="obj" /> is not both a <see cref="T:System.ValueType" /> and a member of an array.
+        </param>
       </Docs>
     </Member>
   </Members>

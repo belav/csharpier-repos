@@ -37,8 +37,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.PoisonMessageException" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.PoisonMessageException" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -96,8 +96,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception.
+        </param>
         <param name="context">
           <attribution
             license="cc4"

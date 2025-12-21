@@ -208,8 +208,8 @@
           <list type="bullet">
             <item>
               <para
-                >By calling the GetType method on the value that is returned by the <see cref="P:System.Tuple`5.Item1" /> property. </para
-              >
+                >By calling the GetType method on the value that is returned by the <see cref="P:System.Tuple`5.Item1" /> property.
+              </para>
             </item>
             <item>
               <para
@@ -246,8 +246,8 @@
           <list type="bullet">
             <item>
               <para
-                >By calling the GetType method on the value that is returned by the <see cref="P:System.Tuple`4.Item2" /> property. </para
-              >
+                >By calling the GetType method on the value that is returned by the <see cref="P:System.Tuple`4.Item2" /> property.
+              </para>
             </item>
             <item>
               <para
@@ -284,8 +284,8 @@
           <list type="bullet">
             <item>
               <para
-                >By calling the GetType method on the value that is returned by the <see cref="P:System.Tuple`4.Item2" /> property. </para
-              >
+                >By calling the GetType method on the value that is returned by the <see cref="P:System.Tuple`4.Item2" /> property.
+              </para>
             </item>
             <item>
               <para
@@ -322,8 +322,8 @@
           <list type="bullet">
             <item>
               <para
-                >By calling the GetType method on the value that is returned by the <see cref="P:System.Tuple`4.Item2" /> property. </para
-              >
+                >By calling the GetType method on the value that is returned by the <see cref="P:System.Tuple`4.Item2" /> property.
+              </para>
             </item>
             <item>
               <para
@@ -360,8 +360,8 @@
           <list type="bullet">
             <item>
               <para
-                >By calling the GetType method on the value that is returned by the <see cref="P:System.Tuple`4.Item2" /> property. </para
-              >
+                >By calling the GetType method on the value that is returned by the <see cref="P:System.Tuple`4.Item2" /> property.
+              </para>
             </item>
             <item>
               <para
@@ -506,8 +506,8 @@
             >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Tuple`5" /> instance is cast to an <see cref="T:System.Collections.IStructuralEquatable" /> interface.</para
           >
           <para
-            >The <see cref="M:System.Collections.IEqualityComparer.Equals(System.Object,System.Object)" /> implementation is called only if <paramref name="other" /> is not null, and if it can be successfully cast (in C#) or converted (in Visual Basic) to a <see cref="T:System.Tuple`5" /> object whose components are of the same types as the current instance. The <see cref="M:System.Tuple`5.System#Collections#IStructuralEquatable#Equals(System.Object,System.Collections.IEqualityComparer)" /> method first passes the <see cref="P:System.Tuple`5.Item1" /> values of the <see cref="T:System.Tuple`5" /> objects to be compared to the <see cref="M:System.Collections.IEqualityComparer.Equals(System.Object,System.Object)" /> implementation. If this method call returns true, the method is called again and passed the <see cref="P:System.Tuple`5.Item2" /> values of the two <see cref="T:System.Tuple`5" /> objects. This continues until the method call returns false when it compares a specific pair of Item values, or the two <see cref="P:System.Tuple`5.Item5" /> values are passed to the method. </para
-          >
+            >The <see cref="M:System.Collections.IEqualityComparer.Equals(System.Object,System.Object)" /> implementation is called only if <paramref name="other" /> is not null, and if it can be successfully cast (in C#) or converted (in Visual Basic) to a <see cref="T:System.Tuple`5" /> object whose components are of the same types as the current instance. The <see cref="M:System.Tuple`5.System#Collections#IStructuralEquatable#Equals(System.Object,System.Collections.IEqualityComparer)" /> method first passes the <see cref="P:System.Tuple`5.Item1" /> values of the <see cref="T:System.Tuple`5" /> objects to be compared to the <see cref="M:System.Collections.IEqualityComparer.Equals(System.Object,System.Object)" /> implementation. If this method call returns true, the method is called again and passed the <see cref="P:System.Tuple`5.Item2" /> values of the two <see cref="T:System.Tuple`5" /> objects. This continues until the method call returns false when it compares a specific pair of Item values, or the two <see cref="P:System.Tuple`5.Item5" /> values are passed to the method.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

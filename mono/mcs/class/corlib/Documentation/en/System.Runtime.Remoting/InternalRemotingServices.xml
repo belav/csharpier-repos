@@ -127,8 +127,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You do not need to call the static methods of the <see cref="T:System.Runtime.Remoting.InternalRemotingServices" /> class. </para
-          >
+            >You do not need to call the static methods of the <see cref="T:System.Runtime.Remoting.InternalRemotingServices" /> class.
+          </para>
           <para
             >A "_LOGGING" preprocessing symbol is applied to the method by means of the <see cref="T:System.Diagnostics.ConditionalAttribute" /> attribute.</para
           >

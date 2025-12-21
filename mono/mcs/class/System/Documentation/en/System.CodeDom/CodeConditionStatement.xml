@@ -109,15 +109,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeExpression" /> that indicates the expression to evaluate. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeExpression" /> that indicates the expression to evaluate.
+        </param>
         <param name="trueStatements">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type <see cref="T:System.CodeDom.CodeStatement" /> containing the statements to execute if the condition is true. </param
-        >
+          />An array of type <see cref="T:System.CodeDom.CodeStatement" /> containing the statements to execute if the condition is true.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -154,22 +154,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeExpression" /> that indicates the condition to evaluate. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeExpression" /> that indicates the condition to evaluate.
+        </param>
         <param name="trueStatements">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type <see cref="T:System.CodeDom.CodeStatement" /> containing the statements to execute if the condition is true. </param
-        >
+          />An array of type <see cref="T:System.CodeDom.CodeStatement" /> containing the statements to execute if the condition is true.
+        </param>
         <param name="falseStatements">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type <see cref="T:System.CodeDom.CodeStatement" /> containing the statements to execute if the condition is false. </param
-        >
+          />An array of type <see cref="T:System.CodeDom.CodeStatement" /> containing the statements to execute if the condition is false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Condition">

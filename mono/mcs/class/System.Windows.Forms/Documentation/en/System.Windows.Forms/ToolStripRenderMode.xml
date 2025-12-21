@@ -13,8 +13,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You cannot explicitly set the <see cref="P:System.Windows.Forms.ToolStrip.RenderMode" /> to <see cref="F:System.Windows.Forms.ToolStripRenderMode.Custom" />. However, the <see cref="P:System.Windows.Forms.ToolStrip.RenderMode" /> returns <see cref="F:System.Windows.Forms.ToolStripRenderMode.Custom" /> when the <see cref="P:System.Windows.Forms.ToolStrip.Renderer" /> is set to an extension of the <see cref="T:System.Windows.Forms.ToolStripRenderer" /> class that is not <see cref="T:System.Windows.Forms.ToolStripProfessionalRenderer" /> or <see cref="T:System.Windows.Forms.ToolStripSystemRenderer" />. </para
-      >
+        >You cannot explicitly set the <see cref="P:System.Windows.Forms.ToolStrip.RenderMode" /> to <see cref="F:System.Windows.Forms.ToolStripRenderMode.Custom" />. However, the <see cref="P:System.Windows.Forms.ToolStrip.RenderMode" /> returns <see cref="F:System.Windows.Forms.ToolStripRenderMode.Custom" /> when the <see cref="P:System.Windows.Forms.ToolStrip.Renderer" /> is set to an extension of the <see cref="T:System.Windows.Forms.ToolStripRenderer" /> class that is not <see cref="T:System.Windows.Forms.ToolStripProfessionalRenderer" /> or <see cref="T:System.Windows.Forms.ToolStripSystemRenderer" />.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

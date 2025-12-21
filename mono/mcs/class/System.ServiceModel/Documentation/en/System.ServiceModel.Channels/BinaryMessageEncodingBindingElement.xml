@@ -31,14 +31,14 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>Encoding is the process of transforming a message into a sequence of bytes. Decoding is the reverse process. indigo1 includes three types of encoding for SOAP messages: Text, Binary and Message Transmission Optimization Mechanism (MTOM). </para>
       <para
-        >The <see cref="T:System.ServiceModel.Channels.BinaryMessageEncodingBindingElement" /> is the binding element that specified the .NET Binary Format for XML should be used for encoding messages, and has options to specify the character encoding and the SOAP and WS-Addressing version to be used. Binary encoding is most efficient but least interoperable of the encoding options. </para
-      >
+        >The <see cref="T:System.ServiceModel.Channels.BinaryMessageEncodingBindingElement" /> is the binding element that specified the .NET Binary Format for XML should be used for encoding messages, and has options to specify the character encoding and the SOAP and WS-Addressing version to be used. Binary encoding is most efficient but least interoperable of the encoding options.
+      </para>
       <para
-        >crabout the binding element that specifies messages are encoded using a textual representation of XML, see <see cref="T:System.ServiceModel.Channels.TextMessageEncodingBindingElement" />. </para
-      >
+        >crabout the binding element that specifies messages are encoded using a textual representation of XML, see <see cref="T:System.ServiceModel.Channels.TextMessageEncodingBindingElement" />.
+      </para>
       <para
-        >crabout the binding element that specifies messages are encoded using the MTOM message encoding, see <see cref="T:System.ServiceModel.Channels.MtomMessageEncodingBindingElement" />. </para
-      >
+        >crabout the binding element that specifies messages are encoded using the MTOM message encoding, see <see cref="T:System.ServiceModel.Channels.MtomMessageEncodingBindingElement" />.
+      </para>
       <para
         >To implement a custom message encoder, use the <see cref="T:System.ServiceModel.Channels.MessageEncodingBindingElement" /> class.</para
       >
@@ -65,8 +65,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.BinaryMessageEncodingBindingElement" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.BinaryMessageEncodingBindingElement" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>

@@ -9,8 +9,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="N:System.Web.Caching" /> namespace provides classes for caching frequently used data on the server. </para
-      >
+        >The <see cref="N:System.Web.Caching" /> namespace provides classes for caching frequently used data on the server.
+      </para>
     </summary>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />

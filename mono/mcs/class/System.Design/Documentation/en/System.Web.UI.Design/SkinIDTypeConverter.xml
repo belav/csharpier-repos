@@ -221,8 +221,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A T:System.Globalization.CultureInfo. If null, the current culture is assumed. </param
-        >
+          />A T:System.Globalization.CultureInfo. If null, the current culture is assumed.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
@@ -235,8 +235,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The T:System.Type to convert <paramref name="value" /> to (must be a <see cref="T:System.String" />). </param
-        >
+          />The T:System.Type to convert <paramref name="value" /> to (must be a <see cref="T:System.String" />).
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetStandardValues">

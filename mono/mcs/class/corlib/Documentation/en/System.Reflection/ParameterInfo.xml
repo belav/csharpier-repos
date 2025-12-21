@@ -311,8 +311,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method ignores the <paramref name="inherit" /> parameter. To search the inheritance chain for attributes on parameters, use the appropriate overloads of the <see cref="M:System.Attribute.GetCustomAttributes(System.Reflection.Assembly)" /> method. </para
-          >
+            >This method ignores the <paramref name="inherit" /> parameter. To search the inheritance chain for attributes on parameters, use the appropriate overloads of the <see cref="M:System.Attribute.GetCustomAttributes(System.Reflection.Assembly)" /> method.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -357,8 +357,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method ignores the <paramref name="inherit" /> parameter. To search the inheritance chain for attributes on parameters, use the appropriate overloads of the <see cref="M:System.Attribute.GetCustomAttributes(System.Reflection.Assembly)" /> method. </para
-          >
+            >This method ignores the <paramref name="inherit" /> parameter. To search the inheritance chain for attributes on parameters, use the appropriate overloads of the <see cref="M:System.Attribute.GetCustomAttributes(System.Reflection.Assembly)" /> method.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -373,8 +373,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The custom attributes identified by type. </param
-        >
+          />The custom attributes identified by type.
+        </param>
         <param name="inherit">
           <attribution
             license="cc4"
@@ -547,8 +547,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method ignores the <paramref name="inherit" /> parameter. To search the inheritance chain for attributes on parameters, use the appropriate overloads of the <see cref="M:System.Attribute.IsDefined(System.Reflection.MemberInfo,System.Type,System.Boolean)" /> method. </para
-          >
+            >This method ignores the <paramref name="inherit" /> parameter. To search the inheritance chain for attributes on parameters, use the appropriate overloads of the <see cref="M:System.Attribute.IsDefined(System.Reflection.MemberInfo,System.Type,System.Boolean)" /> method.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -565,8 +565,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The Type object to search for. </param
-        >
+          />The Type object to search for.
+        </param>
         <param name="inherit">
           <attribution
             license="cc4"

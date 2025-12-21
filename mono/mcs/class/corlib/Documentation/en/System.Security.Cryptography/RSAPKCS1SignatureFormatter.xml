@@ -113,8 +113,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The instance of the <see cref="T:System.Security.Cryptography.RSA" /> algorithm that holds the private key. </param
-        >
+          />The instance of the <see cref="T:System.Security.Cryptography.RSA" /> algorithm that holds the private key.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CreateSignature">
@@ -154,12 +154,8 @@
           <para>The digital signature for <paramref name="rgbHash" />.</para>
         </returns>
         <param name="rgbHash">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The data to be signed. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The data to be signed.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetHashAlgorithm">
@@ -199,8 +195,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the hash algorithm to use for creating the signature. </param
-        >
+          />The name of the hash algorithm to use for creating the signature.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetKey">
@@ -240,8 +236,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The instance of the <see cref="T:System.Security.Cryptography.RSA" /> algorithm that holds the private key. </param
-        >
+          />The instance of the <see cref="T:System.Security.Cryptography.RSA" /> algorithm that holds the private key.
+        </param>
       </Docs>
     </Member>
   </Members>

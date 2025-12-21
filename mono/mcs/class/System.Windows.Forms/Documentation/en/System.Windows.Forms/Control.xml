@@ -159,8 +159,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text displayed by the control. </param
-        >
+          />The text displayed by the control.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -198,15 +198,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.Control" /> to be the parent of the control. </param
-        >
+          />The <see cref="T:System.Windows.Forms.Control" /> to be the parent of the control.
+        </param>
         <param name="text">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text displayed by the control. </param
-        >
+          />The text displayed by the control.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -252,36 +252,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text displayed by the control. </param
-        >
+          />The text displayed by the control.
+        </param>
         <param name="left">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="P:System.Drawing.Point.X" /> position of the control, in pixels, from the left edge of the control's container. The value is assigned to the <see cref="P:System.Windows.Forms.Control.Left" /> property. </param
-        >
+          />The <see cref="P:System.Drawing.Point.X" /> position of the control, in pixels, from the left edge of the control's container. The value is assigned to the <see cref="P:System.Windows.Forms.Control.Left" /> property.
+        </param>
         <param name="top">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="P:System.Drawing.Point.Y" /> position of the control, in pixels, from the top edge of the control's container. The value is assigned to the <see cref="P:System.Windows.Forms.Control.Top" /> property. </param
-        >
+          />The <see cref="P:System.Drawing.Point.Y" /> position of the control, in pixels, from the top edge of the control's container. The value is assigned to the <see cref="P:System.Windows.Forms.Control.Top" /> property.
+        </param>
         <param name="width">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The width of the control, in pixels. The value is assigned to the <see cref="P:System.Windows.Forms.Control.Width" /> property. </param
-        >
+          />The width of the control, in pixels. The value is assigned to the <see cref="P:System.Windows.Forms.Control.Width" /> property.
+        </param>
         <param name="height">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The height of the control, in pixels. The value is assigned to the <see cref="P:System.Windows.Forms.Control.Height" /> property. </param
-        >
+          />The height of the control, in pixels. The value is assigned to the <see cref="P:System.Windows.Forms.Control.Height" /> property.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -328,43 +328,43 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.Control" /> to be the parent of the control. </param
-        >
+          />The <see cref="T:System.Windows.Forms.Control" /> to be the parent of the control.
+        </param>
         <param name="text">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text displayed by the control. </param
-        >
+          />The text displayed by the control.
+        </param>
         <param name="left">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="P:System.Drawing.Point.X" /> position of the control, in pixels, from the left edge of the control's container. The value is assigned to the <see cref="P:System.Windows.Forms.Control.Left" /> property. </param
-        >
+          />The <see cref="P:System.Drawing.Point.X" /> position of the control, in pixels, from the left edge of the control's container. The value is assigned to the <see cref="P:System.Windows.Forms.Control.Left" /> property.
+        </param>
         <param name="top">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="P:System.Drawing.Point.Y" /> position of the control, in pixels, from the top edge of the control's container. The value is assigned to the <see cref="P:System.Windows.Forms.Control.Top" /> property. </param
-        >
+          />The <see cref="P:System.Drawing.Point.Y" /> position of the control, in pixels, from the top edge of the control's container. The value is assigned to the <see cref="P:System.Windows.Forms.Control.Top" /> property.
+        </param>
         <param name="width">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The width of the control, in pixels. The value is assigned to the <see cref="P:System.Windows.Forms.Control.Width" /> property. </param
-        >
+          />The width of the control, in pixels. The value is assigned to the <see cref="P:System.Windows.Forms.Control.Width" /> property.
+        </param>
         <param name="height">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The height of the control, in pixels. The value is assigned to the <see cref="P:System.Windows.Forms.Control.Height" /> property. </param
-        >
+          />The height of the control, in pixels. The value is assigned to the <see cref="P:System.Windows.Forms.Control.Height" /> property.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -402,15 +402,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.AccessibleEvents" /> to notify the accessibility client applications of. </param
-        >
+          />The <see cref="T:System.Windows.Forms.AccessibleEvents" /> to notify the accessibility client applications of.
+        </param>
         <param name="childID">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The child <see cref="T:System.Windows.Forms.Control" /> to notify of the accessible event. </param
-        >
+          />The child <see cref="T:System.Windows.Forms.Control" /> to notify of the accessible event.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -553,8 +553,8 @@
           >
           <block subset="none" type="note">
             <para
-              >Not all objects have default actions, and some objects might have a default action that is related to its <see cref="P:System.Windows.Forms.AccessibleObject.Value" /> property, such as in the following examples: </para
-            >
+              >Not all objects have default actions, and some objects might have a default action that is related to its <see cref="P:System.Windows.Forms.AccessibleObject.Value" /> property, such as in the following examples:
+            </para>
           </block>
           <list type="bullet">
             <item>
@@ -604,8 +604,8 @@
             >An object's <see cref="P:System.Windows.Forms.Control.AccessibleDescription" /> property provides a textual description about an object's visual appearance. The description is primarily used to provide greater context for low-vision or blind users, but can also be used for context searching or other applications.</para
           >
           <para
-            >The <see cref="P:System.Windows.Forms.Control.AccessibleDescription" /> property is needed if the description is not obvious, or if it is redundant based on the object's <see cref="P:System.Windows.Forms.Control.AccessibleName" />, <see cref="P:System.Windows.Forms.Control.AccessibleRole" />, <see cref="P:System.Windows.Forms.AccessibleObject.State" />, and <see cref="P:System.Windows.Forms.AccessibleObject.Value" /> properties. For example, a button with "OK" would not need additional information, but a button that shows a picture of a cactus would. The <see cref="P:System.Windows.Forms.Control.AccessibleName" />, and <see cref="P:System.Windows.Forms.Control.AccessibleRole" /> (and perhaps <see cref="P:System.Windows.Forms.AccessibleObject.Help" />) properties for the cactus button would describe its purpose, but the <see cref="P:System.Windows.Forms.Control.AccessibleDescription" /> property would convey information that is less tangible, such as "A button that shows a picture of a cactus." </para
-          >
+            >The <see cref="P:System.Windows.Forms.Control.AccessibleDescription" /> property is needed if the description is not obvious, or if it is redundant based on the object's <see cref="P:System.Windows.Forms.Control.AccessibleName" />, <see cref="P:System.Windows.Forms.Control.AccessibleRole" />, <see cref="P:System.Windows.Forms.AccessibleObject.State" />, and <see cref="P:System.Windows.Forms.AccessibleObject.Value" /> properties. For example, a button with "OK" would not need additional information, but a button that shows a picture of a cactus would. The <see cref="P:System.Windows.Forms.Control.AccessibleName" />, and <see cref="P:System.Windows.Forms.Control.AccessibleRole" /> (and perhaps <see cref="P:System.Windows.Forms.AccessibleObject.Help" />) properties for the cactus button would describe its purpose, but the <see cref="P:System.Windows.Forms.Control.AccessibleDescription" /> property would convey information that is less tangible, such as "A button that shows a picture of a cactus."
+          </para>
           <para>For more information about properties of accessible objects, see the "Content of Descriptive Properties" topic in the MSDN library at http://msdn.microsoft.com/library.</para>
         </remarks>
         <summary>
@@ -947,8 +947,8 @@
           <list type="bullet">
             <item>
               <para
-                >Use the <see cref="P:System.Windows.Forms.Control.BackgroundImage" /> property to place a graphic image onto a control. </para
-              >
+                >Use the <see cref="P:System.Windows.Forms.Control.BackgroundImage" /> property to place a graphic image onto a control.
+              </para>
             </item>
           </list>
           <block subset="none" type="note">
@@ -1111,8 +1111,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A delegate to a method that takes no parameters. </param
-        >
+          />A delegate to a method that takes no parameters.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1176,15 +1176,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A delegate to a method that takes parameters of the same number and type that are contained in the <paramref name="args" /> parameter. </param
-        >
+          />A delegate to a method that takes parameters of the same number and type that are contained in the <paramref name="args" /> parameter.
+        </param>
         <param name="args">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of objects to pass as arguments to the given method. This can be null if no arguments are needed. </param
-        >
+          />An array of objects to pass as arguments to the given method. This can be null if no arguments are needed.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1508,8 +1508,8 @@
             </item>
             <item>
               <para>
-                <see cref="T:System.Windows.Forms.LinkLabel" /> (when there is no link present in the control) </para
-              >
+                <see cref="T:System.Windows.Forms.LinkLabel" /> (when there is no link present in the control)
+              </para>
             </item>
           </list>
         </remarks>
@@ -1674,8 +1674,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When a thread other than the creating thread of a control tries to access one of that control's methods or properties, it often leads to unpredictable results. A common invalid thread activity is a call on the wrong thread that accesses the control's <see cref="P:System.Windows.Forms.Control.Handle" /> property. Set <see cref="P:System.Windows.Forms.Control.CheckForIllegalCrossThreadCalls" /> to true to find and diagnose this thread activity more easily while debugging. </para
-          >
+            >When a thread other than the creating thread of a control tries to access one of that control's methods or properties, it often leads to unpredictable results. A common invalid thread activity is a call on the wrong thread that accesses the control's <see cref="P:System.Windows.Forms.Control.Handle" /> property. Set <see cref="P:System.Windows.Forms.Control.CheckForIllegalCrossThreadCalls" /> to true to find and diagnose this thread activity more easily while debugging.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1834,14 +1834,14 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see cref="P:System.Windows.Forms.Control.ClientSize" /> property changes. </para
-          >
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.Control.ClientSize" /> property changes.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -1916,8 +1916,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.Control" /> to evaluate. </param
-        >
+          />The <see cref="T:System.Windows.Forms.Control" /> to evaluate.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2075,14 +2075,14 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see cref="P:System.Windows.Forms.Control.ContextMenuStrip" /> property changes. </para
-          >
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.Control.ContextMenuStrip" /> property changes.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -2356,8 +2356,8 @@
             >The <see cref="T:System.Drawing.Graphics" /> object that you retrieve through the <see cref="M:System.Windows.Forms.Control.CreateGraphics" /> method should not normally be retained after the current Windows message has been processed, because anything painted with that object will be erased with the next WM_PAINT message. Therefore you cannot cache the <see cref="T:System.Drawing.Graphics" /> object for reuse, except to use non-visual methods like <see cref="M:System.Drawing.Graphics.MeasureString(System.String,System.Drawing.Font)" />. Instead, you must call <see cref="M:System.Windows.Forms.Control.CreateGraphics" /> every time that you want to use the <see cref="T:System.Drawing.Graphics" /> object, and then call <see cref="M:System.Drawing.Graphics.Dispose" /> when you are finished using it. For more information about Windows messages, see <see cref="M:System.Windows.Forms.Control.WndProc(System.Windows.Forms.Message@)" />.</para
           >
           <para
-            >By design, <see cref="M:System.Windows.Forms.Control.CreateGraphics" /> sets ownership to the calling thread, and fails if it is called on other threads. </para
-          >
+            >By design, <see cref="M:System.Windows.Forms.Control.CreateGraphics" /> sets ownership to the calling thread, and fails if it is called on other threads.
+          </para>
           <block subset="none" type="note">
             <para
               >In addition to the <see cref="P:System.Windows.Forms.Control.InvokeRequired" /> property, there are four methods on a control that are thread safe: <see cref="M:System.Windows.Forms.Control.Invoke(System.Delegate)" />, <see cref="M:System.Windows.Forms.Control.BeginInvoke(System.Delegate)" />, <see cref="M:System.Windows.Forms.Control.EndInvoke(System.IAsyncResult)" />, and <see cref="M:System.Windows.Forms.Control.CreateGraphics" /> if the handle for the control has already been created. Calling <see cref="M:System.Windows.Forms.Control.CreateGraphics" /> before the control's handle has been created on a background thread can cause illegal cross thread calls. For all other method calls, you should use one of the invoke methods to marshal the call to the control's thread.</para
@@ -2820,8 +2820,8 @@
           </block>
           <block subset="none" type="note">
             <para
-              >On Windows Server 2003 systems, the size of a <see cref="T:System.Windows.Forms.Form" /> is restricted by the maximum pixel width and height of the monitor. </para
-            >
+              >On Windows Server 2003 systems, the size of a <see cref="T:System.Windows.Forms.Form" /> is restricted by the maximum pixel width and height of the monitor.
+            </para>
           </block>
         </remarks>
         <summary>
@@ -2953,8 +2953,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -3187,15 +3187,15 @@
           >
         </returns>
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />The data to drag. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The data to drag.
+        </param>
         <param name="allowedEffects">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.DragDropEffects" /> values. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.DragDropEffects" /> values.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -3278,8 +3278,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Windows.Forms.DragEventArgs.X" /> and <see cref="P:System.Windows.Forms.DragEventArgs.Y" /> properties of the <see cref="T:System.Windows.Forms.DragEventArgs" /> are in screen coordinates, not client coordinates. The following line of csprcs code converts the properties to a client <see cref="T:System.Drawing.Point" />. </para
-          >
+            >The <see cref="P:System.Windows.Forms.DragEventArgs.X" /> and <see cref="P:System.Windows.Forms.DragEventArgs.Y" /> properties of the <see cref="T:System.Windows.Forms.DragEventArgs" /> are in screen coordinates, not client coordinates. The following line of csprcs code converts the properties to a client <see cref="T:System.Drawing.Point" />.
+          </para>
           <code>Point clientPoint = targetControl.PointToClient(new Point(de.X, de.Y));</code>
           <block subset="none" type="note">
             <para
@@ -3372,8 +3372,8 @@
               >
               <block subset="none" type="note">
                 <para
-                  >The <see cref="P:System.Windows.Forms.DragEventArgs.X" /> and <see cref="P:System.Windows.Forms.DragEventArgs.Y" /> properties of the <see cref="T:System.Windows.Forms.DragEventArgs" /> are in screen coordinates, not client coordinates. The following line of csprcs code converts the properties to a client <see cref="T:System.Drawing.Point" />. </para
-                >
+                  >The <see cref="P:System.Windows.Forms.DragEventArgs.X" /> and <see cref="P:System.Windows.Forms.DragEventArgs.Y" /> properties of the <see cref="T:System.Windows.Forms.DragEventArgs" /> are in screen coordinates, not client coordinates. The following line of csprcs code converts the properties to a client <see cref="T:System.Drawing.Point" />.
+                </para>
               </block>
               <code>Point clientPoint = targetControl.PointToClient(new Point(de.X, de.Y));</code>
             </item>
@@ -3437,8 +3437,8 @@
           <list type="bullet">
             <item>
               <para
-                >If the value of <see cref="T:System.Windows.Forms.DragAction" /> is Continue, the <see cref="E:System.Windows.Forms.Control.DragOver" /> event is raised to continue the operation and the <see cref="E:System.Windows.Forms.Control.GiveFeedback" /> event is raised with the new effect so appropriate visual feedback can be set. For a list of valid drop effects, see the <see cref="T:System.Windows.Forms.DragDropEffects" /> enumeration. </para
-              >
+                >If the value of <see cref="T:System.Windows.Forms.DragAction" /> is Continue, the <see cref="E:System.Windows.Forms.Control.DragOver" /> event is raised to continue the operation and the <see cref="E:System.Windows.Forms.Control.GiveFeedback" /> event is raised with the new effect so appropriate visual feedback can be set. For a list of valid drop effects, see the <see cref="T:System.Windows.Forms.DragDropEffects" /> enumeration.
+              </para>
               <block subset="none" type="note">
                 <para
                   >The <see cref="E:System.Windows.Forms.Control.DragOver" /> and <see cref="E:System.Windows.Forms.Control.GiveFeedback" /> events are paired so that as the mouse moves across the drop target, the user is given the most up-to-date feedback on the mouse's position.</para
@@ -3518,8 +3518,8 @@
           <list type="bullet">
             <item>
               <para
-                >If the value of <see cref="T:System.Windows.Forms.DragAction" /> value is Continue, the <see cref="E:System.Windows.Forms.Control.DragOver" /> event is raised to continue the operation and the <see cref="E:System.Windows.Forms.Control.GiveFeedback" /> event is raised with the new effect so appropriate visual feedback can be set. For a list of valid drop effects, see the <see cref="T:System.Windows.Forms.DragDropEffects" /> enumeration. </para
-              >
+                >If the value of <see cref="T:System.Windows.Forms.DragAction" /> value is Continue, the <see cref="E:System.Windows.Forms.Control.DragOver" /> event is raised to continue the operation and the <see cref="E:System.Windows.Forms.Control.GiveFeedback" /> event is raised with the new effect so appropriate visual feedback can be set. For a list of valid drop effects, see the <see cref="T:System.Windows.Forms.DragDropEffects" /> enumeration.
+              </para>
               <block subset="none" type="note">
                 <para
                   >The <see cref="E:System.Windows.Forms.Control.DragOver" /> and <see cref="E:System.Windows.Forms.Control.GiveFeedback" /> events are paired so that as the mouse moves across the drop target, the user is given the most up-to-date feedback on the mouse's position.</para
@@ -3737,8 +3737,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IAsyncResult" /> that represents a specific invoke asynchronous operation, returned when calling <see cref="M:System.Windows.Forms.Control.BeginInvoke(System.Delegate)" />. </param
-        >
+          />The <see cref="T:System.IAsyncResult" /> that represents a specific invoke asynchronous operation, returned when calling <see cref="M:System.Windows.Forms.Control.BeginInvoke(System.Delegate)" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -3760,8 +3760,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you change the focus by using the keyboard (TAB, SHIFT+TAB, and so on), by calling the <see cref="M:System.Windows.Forms.Control.Select" /> or <see cref="M:System.Windows.Forms.Control.SelectNextControl(System.Windows.Forms.Control,System.Boolean,System.Boolean,System.Boolean,System.Boolean)" /> methods, or by setting the <see cref="P:System.Windows.Forms.ContainerControl.ActiveControl" /> property to the current form, focus events occur in the following order: </para
-          >
+            >When you change the focus by using the keyboard (TAB, SHIFT+TAB, and so on), by calling the <see cref="M:System.Windows.Forms.Control.Select" /> or <see cref="M:System.Windows.Forms.Control.SelectNextControl(System.Windows.Forms.Control,System.Boolean,System.Boolean,System.Boolean,System.Boolean)" /> methods, or by setting the <see cref="P:System.Windows.Forms.ContainerControl.ActiveControl" /> property to the current form, focus events occur in the following order:
+          </para>
           <list type="ordered">
             <item>
               <para>
@@ -3795,8 +3795,8 @@
             </item>
           </list>
           <para
-            >When you change the focus by using the mouse or by calling the <see cref="M:System.Windows.Forms.Control.Focus" /> method, focus events occur in the following order: </para
-          >
+            >When you change the focus by using the mouse or by calling the <see cref="M:System.Windows.Forms.Control.Focus" /> method, focus events occur in the following order:
+          </para>
           <list type="ordered">
             <item>
               <para>
@@ -3936,8 +3936,8 @@
             </item>
             <item>
               <para>
-                <see cref="T:System.Windows.Forms.LinkLabel" /> (when there is no link present in the control) </para
-              >
+                <see cref="T:System.Windows.Forms.LinkLabel" /> (when there is no link present in the control)
+              </para>
             </item>
           </list>
           <block subset="none" type="note">
@@ -4194,8 +4194,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The window handle (HWND) to search for. </param
-        >
+          />The window handle (HWND) to search for.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -4241,8 +4241,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The window handle (HWND) to search for. </param
-        >
+          />The window handle (HWND) to search for.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -4351,8 +4351,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Drawing.Point" /> that contains the coordinates where you want to look for a control. Coordinates are expressed relative to the upper-left corner of the control's client area. </param
-        >
+          />A <see cref="T:System.Drawing.Point" /> that contains the coordinates where you want to look for a control. Coordinates are expressed relative to the upper-left corner of the control's client area.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -4466,15 +4466,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.Control" /> to start the search with. </param
-        >
+          />The <see cref="T:System.Windows.Forms.Control" /> to start the search with.
+        </param>
         <param name="forward">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to search forward in the tab order; false to search backward. </param
-        >
+          />true to search forward in the tab order; false to search backward.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -4516,8 +4516,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The custom-sized area for a control. </param
-        >
+          />The custom-sized area for a control.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -4554,8 +4554,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This is a helper method that is called by <see cref="M:System.Windows.Forms.Control.ScaleControl(System.Drawing.SizeF,System.Windows.Forms.BoundsSpecified)" /> to retrieve the bounds within which the control is scaled. You can override this method to reuse the <see cref="M:System.Windows.Forms.Control.ScaleControl(System.Drawing.SizeF,System.Windows.Forms.BoundsSpecified)" /> scaling logic, but you must supply your own bounds. The default implementation returns scaled bounds that take into account the <paramref name="specified" /> bounds, whether the control is top level, whether the control is fixed width or auto size, and any adornments the control might have. </para
-          >
+            >This is a helper method that is called by <see cref="M:System.Windows.Forms.Control.ScaleControl(System.Drawing.SizeF,System.Windows.Forms.BoundsSpecified)" /> to retrieve the bounds within which the control is scaled. You can override this method to reuse the <see cref="M:System.Windows.Forms.Control.ScaleControl(System.Drawing.SizeF,System.Windows.Forms.BoundsSpecified)" /> scaling logic, but you must supply your own bounds. The default implementation returns scaled bounds that take into account the <paramref name="specified" /> bounds, whether the control is top level, whether the control is fixed width or auto size, and any adornments the control might have.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -4626,8 +4626,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.ControlStyles" /> bit to return the value from. </param
-        >
+          />The <see cref="T:System.Windows.Forms.ControlStyles" /> bit to return the value from.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetTopLevel">
@@ -4752,8 +4752,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you change the focus by using the keyboard (TAB, SHIFT+TAB, and so on), by calling the <see cref="M:System.Windows.Forms.Control.Select" /> or <see cref="M:System.Windows.Forms.Control.SelectNextControl(System.Windows.Forms.Control,System.Boolean,System.Boolean,System.Boolean,System.Boolean)" /> methods, or by setting the <see cref="P:System.Windows.Forms.ContainerControl.ActiveControl" /> property to the current form, focus events occur in the following order: </para
-          >
+            >When you change the focus by using the keyboard (TAB, SHIFT+TAB, and so on), by calling the <see cref="M:System.Windows.Forms.Control.Select" /> or <see cref="M:System.Windows.Forms.Control.SelectNextControl(System.Windows.Forms.Control,System.Boolean,System.Boolean,System.Boolean,System.Boolean)" /> methods, or by setting the <see cref="P:System.Windows.Forms.ContainerControl.ActiveControl" /> property to the current form, focus events occur in the following order:
+          </para>
           <list type="ordered">
             <item>
               <para>
@@ -4787,8 +4787,8 @@
             </item>
           </list>
           <para
-            >When you change the focus by using the mouse or by calling the <see cref="M:System.Windows.Forms.Control.Focus" /> method, focus events occur in the following order: </para
-          >
+            >When you change the focus by using the mouse or by calling the <see cref="M:System.Windows.Forms.Control.Focus" /> method, focus events occur in the following order:
+          </para>
           <list type="ordered">
             <item>
               <para>
@@ -5243,8 +5243,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to invalidate the control's child controls; otherwise, false. </param
-        >
+          />true to invalidate the control's child controls; otherwise, false.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -5279,8 +5279,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Drawing.Rectangle" /> that represents the region to invalidate. </param
-        >
+          />A <see cref="T:System.Drawing.Rectangle" /> that represents the region to invalidate.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -5315,8 +5315,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.Region" /> to invalidate. </param
-        >
+          />The <see cref="T:System.Drawing.Region" /> to invalidate.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -5352,15 +5352,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Drawing.Rectangle" /> that represents the region to invalidate. </param
-        >
+          />A <see cref="T:System.Drawing.Rectangle" /> that represents the region to invalidate.
+        </param>
         <param name="invalidateChildren">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to invalidate the control's child controls; otherwise, false. </param
-        >
+          />true to invalidate the control's child controls; otherwise, false.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -5396,15 +5396,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.Region" /> to invalidate. </param
-        >
+          />The <see cref="T:System.Drawing.Region" /> to invalidate.
+        </param>
         <param name="invalidateChildren">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to invalidate the control's child controls; otherwise, false. </param
-        >
+          />true to invalidate the control's child controls; otherwise, false.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -5488,8 +5488,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A delegate that contains a method to be called in the control's thread context. </param
-        >
+          />A delegate that contains a method to be called in the control's thread context.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -5547,15 +5547,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A delegate to a method that takes parameters of the same number and type that are contained in the <paramref name="args" /> parameter. </param
-        >
+          />A delegate to a method that takes parameters of the same number and type that are contained in the <paramref name="args" /> parameter.
+        </param>
         <param name="args">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of objects to pass as arguments to the specified method. This parameter can be null if the method takes no arguments. </param
-        >
+          />An array of objects to pass as arguments to the specified method. This parameter can be null if the method takes no arguments.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -5588,15 +5588,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.Control" /> to assign the event to. </param
-        >
+          />The <see cref="T:System.Windows.Forms.Control" /> to assign the event to.
+        </param>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -5634,15 +5634,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.Control" /> to assign the event to. </param
-        >
+          />The <see cref="T:System.Windows.Forms.Control" /> to assign the event to.
+        </param>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -5680,15 +5680,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.Control" /> to assign the <see cref="E:System.Windows.Forms.Control.Click" /> event to. </param
-        >
+          />The <see cref="T:System.Windows.Forms.Control" /> to assign the <see cref="E:System.Windows.Forms.Control.Click" /> event to.
+        </param>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -5726,15 +5726,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.Control" /> to assign the <see cref="E:System.Windows.Forms.Control.Paint" /> event to. </param
-        >
+          />The <see cref="T:System.Windows.Forms.Control" /> to assign the <see cref="E:System.Windows.Forms.Control.Paint" /> event to.
+        </param>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Windows.Forms.PaintEventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.Windows.Forms.PaintEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -5765,15 +5765,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.Control" /> to assign the <see cref="E:System.Windows.Forms.Control.Paint" /> event to. </param
-        >
+          />The <see cref="T:System.Windows.Forms.Control" /> to assign the <see cref="E:System.Windows.Forms.Control.Paint" /> event to.
+        </param>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Windows.Forms.PaintEventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.Windows.Forms.PaintEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -5808,18 +5808,18 @@
             >
           </block>
           <para
-            >If the control's handle does not yet exist, <see cref="P:System.Windows.Forms.Control.InvokeRequired" /> searches up the control's parent chain until it finds a control or form that does have a window handle. If no appropriate handle can be found, the <see cref="P:System.Windows.Forms.Control.InvokeRequired" /> method returns false. </para
-          >
+            >If the control's handle does not yet exist, <see cref="P:System.Windows.Forms.Control.InvokeRequired" /> searches up the control's parent chain until it finds a control or form that does have a window handle. If no appropriate handle can be found, the <see cref="P:System.Windows.Forms.Control.InvokeRequired" /> method returns false.
+          </para>
           <para
-            >This means that <see cref="P:System.Windows.Forms.Control.InvokeRequired" /> can return false if <see cref="M:System.Windows.Forms.Control.Invoke(System.Delegate)" /> is not required (the call occurs on the same thread), or if the control was created on a different thread but the control's handle has not yet been created. </para
-          >
+            >This means that <see cref="P:System.Windows.Forms.Control.InvokeRequired" /> can return false if <see cref="M:System.Windows.Forms.Control.Invoke(System.Delegate)" /> is not required (the call occurs on the same thread), or if the control was created on a different thread but the control's handle has not yet been created.
+          </para>
           <para>In the case where the control's handle has not yet been created, you should not simply call properties, methods, or events on the control. This might cause the control's handle to be created on the background thread, isolating the control on a thread without a message pump and making the application unstable.</para>
           <para
-            >You can protect against this case by also checking the value of <see cref="P:System.Windows.Forms.Control.IsHandleCreated" /> when <see cref="P:System.Windows.Forms.Control.InvokeRequired" /> returns false on a background thread. If the control handle has not yet been created, you must wait until it has been created before calling <see cref="M:System.Windows.Forms.Control.Invoke(System.Delegate)" /> or <see cref="M:System.Windows.Forms.Control.BeginInvoke(System.Delegate)" />. Typically, this happens only if a background thread is created in the constructor of the primary form for the application (as in Application.Run(new MainForm()), before the form has been shown or Application.Run has been called. </para
-          >
+            >You can protect against this case by also checking the value of <see cref="P:System.Windows.Forms.Control.IsHandleCreated" /> when <see cref="P:System.Windows.Forms.Control.InvokeRequired" /> returns false on a background thread. If the control handle has not yet been created, you must wait until it has been created before calling <see cref="M:System.Windows.Forms.Control.Invoke(System.Delegate)" /> or <see cref="M:System.Windows.Forms.Control.BeginInvoke(System.Delegate)" />. Typically, this happens only if a background thread is created in the constructor of the primary form for the application (as in Application.Run(new MainForm()), before the form has been shown or Application.Run has been called.
+          </para>
           <para
-            >One solution is to wait until the form's handle has been created before starting the background thread. Either force handle creation by calling the <see cref="P:System.Windows.Forms.Control.Handle" /> property, or wait until the <see cref="E:System.Windows.Forms.Form.Load" /> event to start the background process. </para
-          >
+            >One solution is to wait until the form's handle has been created before starting the background thread. Either force handle creation by calling the <see cref="P:System.Windows.Forms.Control.Handle" /> property, or wait until the <see cref="E:System.Windows.Forms.Form.Load" /> event to start the background process.
+          </para>
           <para
             >An even better solution is to use the SynchronizationContext returned by <see cref="T:System.Threading.SynchronizationContext" /> rather than a control for cross-thread marshaling.</para
           >
@@ -5973,12 +5973,8 @@
           <para>true if the character should be sent directly to the control and not preprocessed; otherwise, false.</para>
         </returns>
         <param name="charCode">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The character to test. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The character to test.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -6017,8 +6013,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.Keys" /> values. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.Keys" /> values.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -6060,8 +6056,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The CAPS LOCK, NUM LOCK, or SCROLL LOCK member of the <see cref="T:System.Windows.Forms.Keys" /> enumeration. </param
-        >
+          />The CAPS LOCK, NUM LOCK, or SCROLL LOCK member of the <see cref="T:System.Windows.Forms.Keys" /> enumeration.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsMirrored">
@@ -6133,19 +6129,11 @@
           >
         </returns>
         <param name="charCode">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The character to test. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The character to test.
+        </param>
         <param name="text">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The string to search. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The string to search.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -6381,8 +6369,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you change the focus by using the keyboard (TAB, SHIFT+TAB, and so on), by calling the <see cref="M:System.Windows.Forms.Control.Select" /> or <see cref="M:System.Windows.Forms.Control.SelectNextControl(System.Windows.Forms.Control,System.Boolean,System.Boolean,System.Boolean,System.Boolean)" /> methods, or by setting the <see cref="P:System.Windows.Forms.ContainerControl.ActiveControl" /> property to the current form, focus events occur in the following order: </para
-          >
+            >When you change the focus by using the keyboard (TAB, SHIFT+TAB, and so on), by calling the <see cref="M:System.Windows.Forms.Control.Select" /> or <see cref="M:System.Windows.Forms.Control.SelectNextControl(System.Windows.Forms.Control,System.Boolean,System.Boolean,System.Boolean,System.Boolean)" /> methods, or by setting the <see cref="P:System.Windows.Forms.ContainerControl.ActiveControl" /> property to the current form, focus events occur in the following order:
+          </para>
           <list type="ordered">
             <item>
               <para>
@@ -6416,8 +6404,8 @@
             </item>
           </list>
           <para
-            >When you change the focus by using the mouse or by calling the <see cref="M:System.Windows.Forms.Control.Focus" /> method, focus events occur in the following order: </para
-          >
+            >When you change the focus by using the mouse or by calling the <see cref="M:System.Windows.Forms.Control.Focus" /> method, focus events occur in the following order:
+          </para>
           <list type="ordered">
             <item>
               <para>
@@ -6597,8 +6585,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you change the focus by using the keyboard (TAB, SHIFT+TAB, and so on), by calling the <see cref="M:System.Windows.Forms.Control.Select" /> or <see cref="M:System.Windows.Forms.Control.SelectNextControl(System.Windows.Forms.Control,System.Boolean,System.Boolean,System.Boolean,System.Boolean)" /> methods, or by setting the <see cref="P:System.Windows.Forms.ContainerControl.ActiveControl" /> property to the current form, focus events occur in the following order: </para
-          >
+            >When you change the focus by using the keyboard (TAB, SHIFT+TAB, and so on), by calling the <see cref="M:System.Windows.Forms.Control.Select" /> or <see cref="M:System.Windows.Forms.Control.SelectNextControl(System.Windows.Forms.Control,System.Boolean,System.Boolean,System.Boolean,System.Boolean)" /> methods, or by setting the <see cref="P:System.Windows.Forms.ContainerControl.ActiveControl" /> property to the current form, focus events occur in the following order:
+          </para>
           <list type="ordered">
             <item>
               <para>
@@ -6632,8 +6620,8 @@
             </item>
           </list>
           <para
-            >When you change the focus by using the mouse or by calling the <see cref="M:System.Windows.Forms.Control.Focus" /> method, focus events occur in the following order: </para
-          >
+            >When you change the focus by using the mouse or by calling the <see cref="M:System.Windows.Forms.Control.Focus" /> method, focus events occur in the following order:
+          </para>
           <list type="ordered">
             <item>
               <para>
@@ -6750,8 +6738,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -6932,8 +6920,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -6995,8 +6983,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -7547,8 +7535,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Drawing.Rectangle" /> representing the area to invalidate. </param
-        >
+          />A <see cref="T:System.Drawing.Rectangle" /> representing the area to invalidate.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -7590,8 +7578,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.Windows.Forms.Control.AutoSizeChanged" /> event. </para
-          >
+            >Raises the <see cref="E:System.Windows.Forms.Control.AutoSizeChanged" /> event.
+          </para>
         </summary>
         <param name="e">
           <attribution
@@ -7637,8 +7625,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -7685,8 +7673,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -7741,8 +7729,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnBindingContextChanged">
@@ -7780,8 +7768,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -7828,8 +7816,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -7874,8 +7862,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.UICuesEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.UICuesEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -7917,8 +7905,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -7965,16 +7953,16 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.Windows.Forms.Control.ClientSizeChanged" /> event. </para
-          >
+            >Raises the <see cref="E:System.Windows.Forms.Control.ClientSizeChanged" /> event.
+          </para>
         </summary>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnContextMenuChanged">
@@ -8012,8 +8000,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -8106,8 +8094,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.ControlEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.ControlEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -8155,8 +8143,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.ControlEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.ControlEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -8235,8 +8223,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -8278,8 +8266,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -8321,8 +8309,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -8367,8 +8355,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.DragEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.DragEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -8413,8 +8401,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.DragEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.DragEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -8456,8 +8444,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -8502,8 +8490,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.DragEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.DragEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -8550,8 +8538,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -8593,8 +8581,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -8636,8 +8624,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -8684,8 +8672,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -8730,8 +8718,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.GiveFeedbackEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.GiveFeedbackEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -8773,8 +8761,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -8819,8 +8807,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -8867,8 +8855,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -8913,8 +8901,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.HelpEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.HelpEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -8961,8 +8949,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -9002,8 +8990,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Windows.Forms.InvalidateEventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.Windows.Forms.InvalidateEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -9048,8 +9036,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.KeyEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.KeyEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -9094,8 +9082,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.KeyPressEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.KeyPressEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -9140,8 +9128,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.KeyEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.KeyEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -9186,8 +9174,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.LayoutEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.LayoutEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -9229,8 +9217,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -9277,8 +9265,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -9320,8 +9308,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -9363,8 +9351,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.Windows.Forms.Control.MarginChanged" /> event. </para
-          >
+            >Raises the <see cref="E:System.Windows.Forms.Control.MarginChanged" /> event.
+          </para>
         </summary>
         <param name="e">
           <attribution
@@ -9418,8 +9406,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnMouseClick">
@@ -9463,8 +9451,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Windows.Forms.MouseEventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.Windows.Forms.MouseEventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnMouseDoubleClick">
@@ -9510,8 +9498,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Windows.Forms.MouseEventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.Windows.Forms.MouseEventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnMouseDown">
@@ -9547,8 +9535,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.MouseEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.MouseEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -9590,8 +9578,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -9633,8 +9621,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -9676,8 +9664,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -9722,8 +9710,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.MouseEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.MouseEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -9768,8 +9756,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.MouseEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.MouseEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -9814,8 +9802,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.MouseEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.MouseEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -9857,8 +9845,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -9898,8 +9886,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.Message" /> that represents the Windows message. </param
-        >
+          />A <see cref="T:System.Windows.Forms.Message" /> that represents the Windows message.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -9986,8 +9974,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.PaintEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.PaintEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -10027,8 +10015,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.PaintEventArgs" /> that contains information about the control to paint. </param
-        >
+          />A <see cref="T:System.Windows.Forms.PaintEventArgs" /> that contains information about the control to paint.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -10075,8 +10063,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -10123,8 +10111,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -10171,8 +10159,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -10217,8 +10205,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -10310,8 +10298,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -10358,8 +10346,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -10406,8 +10394,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -10454,8 +10442,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -10502,8 +10490,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -10641,8 +10629,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.QueryContinueDragEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.QueryContinueDragEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -10689,8 +10677,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.Windows.Forms.Control.RegionChanged" /> event. </para
-          >
+            >Raises the <see cref="E:System.Windows.Forms.Control.RegionChanged" /> event.
+          </para>
         </summary>
         <param name="e">
           <attribution
@@ -10731,8 +10719,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -10779,8 +10767,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -10822,8 +10810,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -10865,8 +10853,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -10913,8 +10901,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -10961,8 +10949,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -11009,8 +10997,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -11052,8 +11040,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -11095,8 +11083,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -11141,8 +11129,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.ComponentModel.CancelEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.ComponentModel.CancelEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -11189,8 +11177,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -11533,15 +11521,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.Control" /> that represents the most recently changed control. </param
-        >
+          />A <see cref="T:System.Windows.Forms.Control" /> that represents the most recently changed control.
+        </param>
         <param name="affectedProperty">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the most recently changed property on the control. </param
-        >
+          />The name of the most recently changed property on the control.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -11582,8 +11570,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The screen coordinate <see cref="T:System.Drawing.Point" /> to convert. </param
-        >
+          />The screen coordinate <see cref="T:System.Drawing.Point" /> to convert.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -11619,8 +11607,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The client coordinate <see cref="T:System.Drawing.Point" /> to convert. </param
-        >
+          />The client coordinate <see cref="T:System.Drawing.Point" /> to convert.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -11721,8 +11709,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -11785,12 +11773,8 @@
           <para>true if the character was processed by the control; otherwise, false.</para>
         </returns>
         <param name="charCode">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The character to process. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The character to process.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -11829,8 +11813,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.Keys" /> values that represents the key to process. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.Keys" /> values that represents the key to process.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -11942,12 +11926,8 @@
           <para>true if the character was processed as a mnemonic by the control; otherwise, false.</para>
         </returns>
         <param name="charCode">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The character to process. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The character to process.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -12114,8 +12094,8 @@
           <list type="bullet">
             <item>
               <para
-                >If the value of <see cref="T:System.Windows.Forms.DragAction" /> is Continue, the <see cref="E:System.Windows.Forms.Control.DragOver" /> event is raised to continue the operation and the <see cref="E:System.Windows.Forms.Control.GiveFeedback" /> event is raised with the new effect so appropriate visual feedback can be set. For a list of valid drop effects, see the <see cref="T:System.Windows.Forms.DragDropEffects" /> enumeration. </para
-              >
+                >If the value of <see cref="T:System.Windows.Forms.DragAction" /> is Continue, the <see cref="E:System.Windows.Forms.Control.DragOver" /> event is raised to continue the operation and the <see cref="E:System.Windows.Forms.Control.GiveFeedback" /> event is raised with the new effect so appropriate visual feedback can be set. For a list of valid drop effects, see the <see cref="T:System.Windows.Forms.DragDropEffects" /> enumeration.
+              </para>
               <block subset="none" type="note">
                 <para
                   >The <see cref="E:System.Windows.Forms.Control.DragOver" /> and <see cref="E:System.Windows.Forms.Control.GiveFeedback" /> events are paired so that as the mouse moves across the drop target, the user is given the most up-to-date feedback on the mouse's position.</para
@@ -12172,15 +12152,15 @@
           <para>Raises the appropriate drag event.</para>
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />The event to raise. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The event to raise.
+        </param>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.DragEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.DragEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -12212,15 +12192,15 @@
           <para>Raises the appropriate key event.</para>
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />The event to raise. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The event to raise.
+        </param>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.KeyEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.KeyEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -12252,15 +12232,15 @@
           <para>Raises the appropriate mouse event.</para>
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />The event to raise. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The event to raise.
+        </param>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.MouseEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.MouseEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -12292,15 +12272,15 @@
           <para>Raises the appropriate paint event.</para>
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />The event to raise. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The event to raise.
+        </param>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.PaintEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.PaintEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -12405,8 +12385,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The screen coordinate <see cref="T:System.Drawing.Rectangle" /> to convert. </param
-        >
+          />The screen coordinate <see cref="T:System.Drawing.Rectangle" /> to convert.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -12442,8 +12422,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The client coordinate <see cref="T:System.Drawing.Rectangle" /> to convert. </param
-        >
+          />The client coordinate <see cref="T:System.Drawing.Rectangle" /> to convert.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -12550,8 +12530,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -12966,8 +12946,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to execute pending layout requests; otherwise, false. </param
-        >
+          />true to execute pending layout requests; otherwise, false.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -13045,8 +13025,8 @@
             >
           </block>
           <para
-            >The following are a few examples of how control elements are affected by the <see cref="P:System.Windows.Forms.Control.RightToLeft" /> property value of <see cref="F:System.Windows.Forms.RightToLeft.Yes" /> : </para
-          >
+            >The following are a few examples of how control elements are affected by the <see cref="P:System.Windows.Forms.Control.RightToLeft" /> property value of <see cref="F:System.Windows.Forms.RightToLeft.Yes" /> :
+          </para>
           <list type="bullet">
             <item>
               <para
@@ -13160,8 +13140,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Drawing.ContentAlignment" /> values. </param
-        >
+          />One of the <see cref="T:System.Drawing.ContentAlignment" /> values.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -13207,8 +13187,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.HorizontalAlignment" /> values. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.HorizontalAlignment" /> values.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -13254,8 +13234,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.LeftRightAlignment" /> values. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.LeftRightAlignment" /> values.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -13301,8 +13281,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Drawing.ContentAlignment" /> values. </param
-        >
+          />One of the <see cref="T:System.Drawing.ContentAlignment" /> values.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -13348,8 +13328,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.HorizontalAlignment" /> values. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.HorizontalAlignment" /> values.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -13395,8 +13375,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.LeftRightAlignment" /> values. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.LeftRightAlignment" /> values.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -13548,8 +13528,8 @@
             >If the <see cref="P:System.Windows.Forms.Control.ScaleChildren" /> property is true, then the <see cref="M:System.Windows.Forms.Control.Scale(System.Single)" /> method will recursively call the <see cref="M:System.Windows.Forms.Control.ScaleControl(System.Drawing.SizeF,System.Windows.Forms.BoundsSpecified)" /> method of each of its child controls.</para
           >
           <para
-            >The default implementation of <see cref="P:System.Windows.Forms.Control.ScaleChildren" /> always returns true. Derived classes can override <see cref="P:System.Windows.Forms.Control.ScaleChildren" /> to return false to indicate that scaling should not be performed on their children. </para
-          >
+            >The default implementation of <see cref="P:System.Windows.Forms.Control.ScaleChildren" /> always returns true. Derived classes can override <see cref="P:System.Windows.Forms.Control.ScaleChildren" /> to return false to indicate that scaling should not be performed on their children.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -13699,8 +13679,8 @@
             </item>
             <item>
               <para>
-                <see cref="T:System.Windows.Forms.LinkLabel" /> (when there is no link present in the control) </para
-              >
+                <see cref="T:System.Windows.Forms.LinkLabel" /> (when there is no link present in the control)
+              </para>
             </item>
           </list>
         </remarks>
@@ -13770,8 +13750,8 @@
             </item>
             <item>
               <para>
-                <see cref="T:System.Windows.Forms.LinkLabel" /> (when there is no link present in the control) </para
-              >
+                <see cref="T:System.Windows.Forms.LinkLabel" /> (when there is no link present in the control)
+              </para>
             </item>
           </list>
         </remarks>
@@ -13784,15 +13764,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to specify the direction of the control to select; otherwise, false. </param
-        >
+          />true to specify the direction of the control to select; otherwise, false.
+        </param>
         <param name="forward">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to move forward in the tab order; false to move backward in the tab order. </param
-        >
+          />true to move forward in the tab order; false to move backward in the tab order.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -13855,13 +13835,13 @@
             </item>
             <item>
               <para>
-                <see cref="T:System.Windows.Forms.LinkLabel" /> (when there is no link present in the control) </para
-              >
+                <see cref="T:System.Windows.Forms.LinkLabel" /> (when there is no link present in the control)
+              </para>
             </item>
           </list>
           <para
-            >When you change the focus by using the keyboard (TAB, SHIFT+TAB, and so on), by calling the <see cref="M:System.Windows.Forms.Control.Select" /> or <see cref="M:System.Windows.Forms.Control.SelectNextControl(System.Windows.Forms.Control,System.Boolean,System.Boolean,System.Boolean,System.Boolean)" /> methods, or by setting the <see cref="P:System.Windows.Forms.ContainerControl.ActiveControl" /> property to the current form, focus events occur in the following order: </para
-          >
+            >When you change the focus by using the keyboard (TAB, SHIFT+TAB, and so on), by calling the <see cref="M:System.Windows.Forms.Control.Select" /> or <see cref="M:System.Windows.Forms.Control.SelectNextControl(System.Windows.Forms.Control,System.Boolean,System.Boolean,System.Boolean,System.Boolean)" /> methods, or by setting the <see cref="P:System.Windows.Forms.ContainerControl.ActiveControl" /> property to the current form, focus events occur in the following order:
+          </para>
           <list type="ordered">
             <item>
               <para>
@@ -13911,36 +13891,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.Control" /> at which to start the search. </param
-        >
+          />The <see cref="T:System.Windows.Forms.Control" /> at which to start the search.
+        </param>
         <param name="forward">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to move forward in the tab order; false to move backward in the tab order. </param
-        >
+          />true to move forward in the tab order; false to move backward in the tab order.
+        </param>
         <param name="tabStopOnly">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to ignore the controls with the <see cref="P:System.Windows.Forms.Control.TabStop" /> property set to false; otherwise, false. </param
-        >
+          />true to ignore the controls with the <see cref="P:System.Windows.Forms.Control.TabStop" /> property set to false; otherwise, false.
+        </param>
         <param name="nested">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to include nested (children of child controls) child controls; otherwise, false. </param
-        >
+          />true to include nested (children of child controls) child controls; otherwise, false.
+        </param>
         <param name="wrap">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to continue searching from the first control in the tab order after the last control has been reached; otherwise, false. </param
-        >
+          />true to continue searching from the first control in the tab order after the last control has been reached; otherwise, false.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -13958,8 +13938,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The control is moved to the back of the z-order. If the control is a child of another control, the child control is moved to the back of the z-order. If the control is a top-level control, this method will not work correctly unless the control is active. A top-level control is a control, such as a <see cref="T:System.Windows.Forms.Form" />, that is not a child of another control. An active control is a visible control that has input focus. To use the <see cref="M:System.Windows.Forms.Control.SendToBack" /> method with an inactive, top-level control, first call the <see cref="M:System.Windows.Forms.Control.BringToFront" /> method on the control. </para
-          >
+            >The control is moved to the back of the z-order. If the control is a child of another control, the child control is moved to the back of the z-order. If the control is a top-level control, this method will not work correctly unless the control is active. A top-level control is a control, such as a <see cref="T:System.Windows.Forms.Form" />, that is not a child of another control. An active control is a visible control that has input focus. To use the <see cref="M:System.Windows.Forms.Control.SendToBack" /> method with an inactive, top-level control, first call the <see cref="M:System.Windows.Forms.Control.BringToFront" /> method on the control.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -14029,29 +14009,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new <see cref="P:System.Windows.Forms.Control.Left" /> property value of the control. </param
-        >
+          />The new <see cref="P:System.Windows.Forms.Control.Left" /> property value of the control.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new <see cref="P:System.Windows.Forms.Control.Top" /> property value of the control. </param
-        >
+          />The new <see cref="P:System.Windows.Forms.Control.Top" /> property value of the control.
+        </param>
         <param name="width">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new <see cref="P:System.Windows.Forms.Control.Width" /> property value of the control. </param
-        >
+          />The new <see cref="P:System.Windows.Forms.Control.Width" /> property value of the control.
+        </param>
         <param name="height">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new <see cref="P:System.Windows.Forms.Control.Height" /> property value of the control. </param
-        >
+          />The new <see cref="P:System.Windows.Forms.Control.Height" /> property value of the control.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -14085,36 +14065,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new <see cref="P:System.Windows.Forms.Control.Left" /> property value of the control. </param
-        >
+          />The new <see cref="P:System.Windows.Forms.Control.Left" /> property value of the control.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new <see cref="P:System.Windows.Forms.Control.Top" /> property value of the control. </param
-        >
+          />The new <see cref="P:System.Windows.Forms.Control.Top" /> property value of the control.
+        </param>
         <param name="width">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new <see cref="P:System.Windows.Forms.Control.Width" /> property value of the control. </param
-        >
+          />The new <see cref="P:System.Windows.Forms.Control.Width" /> property value of the control.
+        </param>
         <param name="height">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new <see cref="P:System.Windows.Forms.Control.Height" /> property value of the control. </param
-        >
+          />The new <see cref="P:System.Windows.Forms.Control.Height" /> property value of the control.
+        </param>
         <param name="specified">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the <see cref="T:System.Windows.Forms.BoundsSpecified" /> values. For any parameter not specified, the current value will be used. </param
-        >
+          />A bitwise combination of the <see cref="T:System.Windows.Forms.BoundsSpecified" /> values. For any parameter not specified, the current value will be used.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -14148,8 +14128,8 @@
           >
           <block subset="none" type="note">
             <para
-              >On Windows Server 2003 systems, the size of a <see cref="T:System.Windows.Forms.Form" /> is restricted by the maximum pixel width and height of the monitor. </para
-            >
+              >On Windows Server 2003 systems, the size of a <see cref="T:System.Windows.Forms.Form" /> is restricted by the maximum pixel width and height of the monitor.
+            </para>
           </block>
         </remarks>
         <summary>
@@ -14161,36 +14141,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new <see cref="P:System.Windows.Forms.Control.Left" /> property value of the control. </param
-        >
+          />The new <see cref="P:System.Windows.Forms.Control.Left" /> property value of the control.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new <see cref="P:System.Windows.Forms.Control.Top" /> property value of the control. </param
-        >
+          />The new <see cref="P:System.Windows.Forms.Control.Top" /> property value of the control.
+        </param>
         <param name="width">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new <see cref="P:System.Windows.Forms.Control.Width" /> property value of the control. </param
-        >
+          />The new <see cref="P:System.Windows.Forms.Control.Width" /> property value of the control.
+        </param>
         <param name="height">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new <see cref="P:System.Windows.Forms.Control.Height" /> property value of the control. </param
-        >
+          />The new <see cref="P:System.Windows.Forms.Control.Height" /> property value of the control.
+        </param>
         <param name="specified">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the <see cref="T:System.Windows.Forms.BoundsSpecified" /> values. </param
-        >
+          />A bitwise combination of the <see cref="T:System.Windows.Forms.BoundsSpecified" /> values.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -14234,15 +14214,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The client area width, in pixels. </param
-        >
+          />The client area width, in pixels.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The client area height, in pixels. </param
-        >
+          />The client area height, in pixels.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -14299,15 +14279,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.ControlStyles" /> bit to set. </param
-        >
+          />The <see cref="T:System.Windows.Forms.ControlStyles" /> bit to set.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to apply the specified style to the control; otherwise, false. </param
-        >
+          />true to apply the specified style to the control; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetTopLevel">
@@ -14335,8 +14315,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to set the control as the top-level control; otherwise, false. </param
-        >
+          />true to set the control as the top-level control; otherwise, false.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -14366,8 +14346,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to make the control visible; otherwise, false. </param
-        >
+          />true to make the control visible; otherwise, false.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -14517,8 +14497,8 @@
           </block>
           <block subset="none" type="note">
             <para
-              >On Windows Server 2003 systems, the size of a <see cref="T:System.Windows.Forms.Form" /> is restricted by the maximum pixel width and height of the monitor. </para
-            >
+              >On Windows Server 2003 systems, the size of a <see cref="T:System.Windows.Forms.Form" /> is restricted by the maximum pixel width and height of the monitor.
+            </para>
           </block>
         </remarks>
         <summary>
@@ -14695,8 +14675,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.DragEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.DragEventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.Windows.Forms.IDropTarget.OnDragEnter">
@@ -14725,8 +14705,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.DragEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.DragEventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.Windows.Forms.IDropTarget.OnDragLeave">
@@ -14752,8 +14732,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.Windows.Forms.IDropTarget.OnDragOver">
@@ -14782,8 +14762,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.DragEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.DragEventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SystemColorsChanged">
@@ -15142,8 +15122,8 @@
           <list type="bullet">
             <item>
               <para
-                >You can use one of the overloads of the <see cref="M:System.Windows.Forms.Control.Invalidate" /> method with the <see cref="M:System.Windows.Forms.Control.Update" /> method. </para
-              >
+                >You can use one of the overloads of the <see cref="M:System.Windows.Forms.Control.Invalidate" /> method with the <see cref="M:System.Windows.Forms.Control.Update" /> method.
+              </para>
             </item>
             <item>
               <para
@@ -15228,29 +15208,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="P:System.Drawing.Point.X" /> coordinate of the control. </param
-        >
+          />The <see cref="P:System.Drawing.Point.X" /> coordinate of the control.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="P:System.Drawing.Point.Y" /> coordinate of the control. </param
-        >
+          />The <see cref="P:System.Drawing.Point.Y" /> coordinate of the control.
+        </param>
         <param name="width">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="P:System.Drawing.Size.Width" /> of the control. </param
-        >
+          />The <see cref="P:System.Drawing.Size.Width" /> of the control.
+        </param>
         <param name="height">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="P:System.Drawing.Size.Height" /> of the control. </param
-        >
+          />The <see cref="P:System.Drawing.Size.Height" /> of the control.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -15295,43 +15275,43 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="P:System.Drawing.Point.X" /> coordinate of the control. </param
-        >
+          />The <see cref="P:System.Drawing.Point.X" /> coordinate of the control.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="P:System.Drawing.Point.Y" /> coordinate of the control. </param
-        >
+          />The <see cref="P:System.Drawing.Point.Y" /> coordinate of the control.
+        </param>
         <param name="width">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="P:System.Drawing.Size.Width" /> of the control. </param
-        >
+          />The <see cref="P:System.Drawing.Size.Width" /> of the control.
+        </param>
         <param name="height">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="P:System.Drawing.Size.Height" /> of the control. </param
-        >
+          />The <see cref="P:System.Drawing.Size.Height" /> of the control.
+        </param>
         <param name="clientWidth">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The client <see cref="P:System.Drawing.Size.Width" /> of the control. </param
-        >
+          />The client <see cref="P:System.Drawing.Size.Width" /> of the control.
+        </param>
         <param name="clientHeight">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The client <see cref="P:System.Drawing.Size.Height" /> of the control. </param
-        >
+          />The client <see cref="P:System.Drawing.Size.Height" /> of the control.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -15449,8 +15429,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you change the focus by using the keyboard (TAB, SHIFT+TAB, and so on), by calling the <see cref="M:System.Windows.Forms.Control.Select" /> or <see cref="M:System.Windows.Forms.Control.SelectNextControl(System.Windows.Forms.Control,System.Boolean,System.Boolean,System.Boolean,System.Boolean)" /> methods, or by setting the <see cref="P:System.Windows.Forms.ContainerControl.ActiveControl" /> property to the current form, focus events occur in the following order: </para
-          >
+            >When you change the focus by using the keyboard (TAB, SHIFT+TAB, and so on), by calling the <see cref="M:System.Windows.Forms.Control.Select" /> or <see cref="M:System.Windows.Forms.Control.SelectNextControl(System.Windows.Forms.Control,System.Boolean,System.Boolean,System.Boolean,System.Boolean)" /> methods, or by setting the <see cref="P:System.Windows.Forms.ContainerControl.ActiveControl" /> property to the current form, focus events occur in the following order:
+          </para>
           <list type="ordered">
             <item>
               <para>
@@ -15484,8 +15464,8 @@
             </item>
           </list>
           <para
-            >When you change the focus by using the mouse or by calling the <see cref="M:System.Windows.Forms.Control.Focus" /> method, focus events occur in the following order: </para
-          >
+            >When you change the focus by using the mouse or by calling the <see cref="M:System.Windows.Forms.Control.Focus" /> method, focus events occur in the following order:
+          </para>
           <list type="ordered">
             <item>
               <para>
@@ -15558,8 +15538,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you change the focus by using the keyboard (TAB, SHIFT+TAB, and so on), by calling the <see cref="M:System.Windows.Forms.Control.Select" /> or <see cref="M:System.Windows.Forms.Control.SelectNextControl(System.Windows.Forms.Control,System.Boolean,System.Boolean,System.Boolean,System.Boolean)" /> methods, or by setting the <see cref="P:System.Windows.Forms.ContainerControl.ActiveControl" /> property to the current form, focus events occur in the following order: </para
-          >
+            >When you change the focus by using the keyboard (TAB, SHIFT+TAB, and so on), by calling the <see cref="M:System.Windows.Forms.Control.Select" /> or <see cref="M:System.Windows.Forms.Control.SelectNextControl(System.Windows.Forms.Control,System.Boolean,System.Boolean,System.Boolean,System.Boolean)" /> methods, or by setting the <see cref="P:System.Windows.Forms.ContainerControl.ActiveControl" /> property to the current form, focus events occur in the following order:
+          </para>
           <list type="ordered">
             <item>
               <para>
@@ -15593,8 +15573,8 @@
             </item>
           </list>
           <para
-            >When you change the focus by using the mouse or by calling the <see cref="M:System.Windows.Forms.Control.Focus" /> method, focus events occur in the following order: </para
-          >
+            >When you change the focus by using the mouse or by calling the <see cref="M:System.Windows.Forms.Control.Focus" /> method, focus events occur in the following order:
+          </para>
           <list type="ordered">
             <item>
               <para>

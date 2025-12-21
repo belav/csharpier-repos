@@ -99,8 +99,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Diagnostics.CounterSample" /> that indicates the most recent sample the system has taken. </param
-        >
+          />A <see cref="T:System.Diagnostics.CounterSample" /> that indicates the most recent sample the system has taken.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ComputeCounterValue">
@@ -145,15 +145,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Diagnostics.CounterSample" /> that indicates a previous sample the system has taken. </param
-        >
+          />A <see cref="T:System.Diagnostics.CounterSample" /> that indicates a previous sample the system has taken.
+        </param>
         <param name="newSample">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Diagnostics.CounterSample" /> that indicates the most recent sample the system has taken. </param
-        >
+          />A <see cref="T:System.Diagnostics.CounterSample" /> that indicates the most recent sample the system has taken.
+        </param>
       </Docs>
     </Member>
   </Members>

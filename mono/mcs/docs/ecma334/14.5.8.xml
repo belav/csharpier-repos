@@ -28,13 +28,13 @@
     > is used to access base class members that are hidden by similarly named members in the current class or struct. A <non_terminal
       where="14.5.8"
       >base-access</non_terminal
-    > is permitted only in the block of an instance constructor, an instance method, or an instance accessor. When base.I occurs in a class or struct, I must denote a member of the base class of that class or struct. Likewise, when base[E] occurs in a class, an applicable indexer must exist in the base class. </paragraph
-  >
+    > is permitted only in the block of an instance constructor, an instance method, or an instance accessor. When base.I occurs in a class or struct, I must denote a member of the base class of that class or struct. Likewise, when base[E] occurs in a class, an applicable indexer must exist in the base class.
+  </paragraph>
   <paragraph
     >At compile-time, <non_terminal where="14.5.8"
       >base-access</non_terminal
-    > expressions of the form base.I and base[E] are evaluated exactly as if they were written ((B)this).I and ((B)this)[E], where B is the base class of the class or struct in which the construct occurs. Thus, base.I and base[E] correspond to this.I and this[E], except this is viewed as an instance of the base class. </paragraph
-  >
+    > expressions of the form base.I and base[E] are evaluated exactly as if they were written ((B)this).I and ((B)this)[E], where B is the base class of the class or struct in which the construct occurs. Thus, base.I and base[E] correspond to this.I and this[E], except this is viewed as an instance of the base class.
+  </paragraph>
   <paragraph
     >When a <non_terminal where="14.5.8"
       >base-access</non_terminal
@@ -44,6 +44,6 @@
     > can be used to invoke the inherited implementation of the function member. If the function member referenced by a <non_terminal
       where="14.5.8"
       >base-access</non_terminal
-    > is abstract, a compile-time error occurs. </paragraph
-  >
+    > is abstract, a compile-time error occurs.
+  </paragraph>
 </clause>

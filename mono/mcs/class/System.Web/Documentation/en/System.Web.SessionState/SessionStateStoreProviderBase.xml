@@ -164,8 +164,8 @@
             >The <see cref="M:System.Web.SessionState.SessionStateStoreProviderBase.CreateUninitializedItem(System.Web.HttpContext,System.String,System.Int32)" /> method is used with sessions when the cookieless and regenerateExpiredSessionId attributes are both true. Having the regenerateExpiredSessionId attribute set to true causes the <see cref="T:System.Web.SessionState.SessionStateModule" /> object to generate a new <see cref="P:System.Web.SessionState.HttpSessionState.SessionID" /> value when an expired <see cref="P:System.Web.SessionState.HttpSessionState.SessionID" /> value is encountered.</para
           >
           <para
-            >The process of generating a new <see cref="P:System.Web.SessionState.HttpSessionState.SessionID" /> value requires redirecting the browser to a URL that contains the newly generated <see cref="P:System.Web.SessionState.HttpSessionState.SessionID" /> value. The <see cref="M:System.Web.SessionState.SessionStateStoreProviderBase.CreateUninitializedItem(System.Web.HttpContext,System.String,System.Int32)" /> method is called during the initial request that contains an expired <see cref="P:System.Web.SessionState.HttpSessionState.SessionID" /> value. After the <see cref="T:System.Web.SessionState.SessionStateModule" /> object acquires a new <see cref="P:System.Web.SessionState.HttpSessionState.SessionID" /> value to replace the expired value, it calls the <see cref="M:System.Web.SessionState.SessionStateStoreProviderBase.CreateUninitializedItem(System.Web.HttpContext,System.String,System.Int32)" /> method to add an uninitialized entry to the session-state data store. The browser is then redirected to the URL containing the newly generated <see cref="P:System.Web.SessionState.HttpSessionState.SessionID" /> value. The existence of the uninitialized entry in the session data store ensures that the redirected request that includes the newly generated <see cref="P:System.Web.SessionState.HttpSessionState.SessionID" /> value is not mistaken for a request for an expired session and is, instead, treated as a new session. </para
-          >
+            >The process of generating a new <see cref="P:System.Web.SessionState.HttpSessionState.SessionID" /> value requires redirecting the browser to a URL that contains the newly generated <see cref="P:System.Web.SessionState.HttpSessionState.SessionID" /> value. The <see cref="M:System.Web.SessionState.SessionStateStoreProviderBase.CreateUninitializedItem(System.Web.HttpContext,System.String,System.Int32)" /> method is called during the initial request that contains an expired <see cref="P:System.Web.SessionState.HttpSessionState.SessionID" /> value. After the <see cref="T:System.Web.SessionState.SessionStateModule" /> object acquires a new <see cref="P:System.Web.SessionState.HttpSessionState.SessionID" /> value to replace the expired value, it calls the <see cref="M:System.Web.SessionState.SessionStateStoreProviderBase.CreateUninitializedItem(System.Web.HttpContext,System.String,System.Int32)" /> method to add an uninitialized entry to the session-state data store. The browser is then redirected to the URL containing the newly generated <see cref="P:System.Web.SessionState.HttpSessionState.SessionID" /> value. The existence of the uninitialized entry in the session data store ensures that the redirected request that includes the newly generated <see cref="P:System.Web.SessionState.HttpSessionState.SessionID" /> value is not mistaken for a request for an expired session and is, instead, treated as a new session.
+          </para>
           <para
             >The uninitialized entry in the session data store is associated with the newly generated <see cref="P:System.Web.SessionState.HttpSessionState.SessionID" /> value and contains only default values, including an expiration date and time and a value that corresponds to the <paramref name="actionFlags" /> parameter of the <see cref="M:System.Web.SessionState.SessionStateStoreProviderBase.GetItem(System.Web.HttpContext,System.String,System.Boolean@,System.TimeSpan@,System.Object@,System.Web.SessionState.SessionStateActions@)" /> and <see cref="M:System.Web.SessionState.SessionStateStoreProviderBase.GetItemExclusive(System.Web.HttpContext,System.String,System.Boolean@,System.TimeSpan@,System.Object@,System.Web.SessionState.SessionStateActions@)" /> methods. The uninitialized entry in the session-state store should include an <paramref name="actionFlags" /> value equal to the <see cref="F:System.Web.SessionState.SessionStateActions.InitializeItem" /> enumeration value. This value is passed to the <see cref="T:System.Web.SessionState.SessionStateModule" /> object by the <see cref="M:System.Web.SessionState.SessionStateStoreProviderBase.GetItem(System.Web.HttpContext,System.String,System.Boolean@,System.TimeSpan@,System.Object@,System.Web.SessionState.SessionStateActions@)" /> and <see cref="M:System.Web.SessionState.SessionStateStoreProviderBase.GetItemExclusive(System.Web.HttpContext,System.String,System.Boolean@,System.TimeSpan@,System.Object@,System.Web.SessionState.SessionStateActions@)" /> methods, and informs the <see cref="T:System.Web.SessionState.SessionStateModule" /> object that the current session is a new but uninitialized session. The <see cref="T:System.Web.SessionState.SessionStateModule" /> object will then initialize the new session and raise the Session_OnStart event.</para
           >
@@ -424,8 +424,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The lock identifier for the current request. </param
-        >
+          />The lock identifier for the current request.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RemoveItem">
@@ -607,8 +607,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The lock identifier for the current request. </param
-        >
+          />The lock identifier for the current request.
+        </param>
         <param name="newItem">
           <attribution
             license="cc4"

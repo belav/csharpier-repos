@@ -138,15 +138,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception being thrown. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception being thrown.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual information about the source or destination. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual information about the source or destination.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Attributes">
@@ -212,8 +212,8 @@
           >
           <para>The value of this property is a combination of the archive, compressed, directory, hidden, offline, read-only, system, and temporary file attribute flags. </para>
           <para
-            >When you set this value, use the bitwise OR operator (| in C# or Or in Visual Basic) to apply more than one value. To retain any existing values in the <see cref="P:System.IO.FileSystemInfo.Attributes" /> property, include the value of the <see cref="P:System.IO.FileSystemInfo.Attributes" /> property in your assignment. For example: </para
-          >
+            >When you set this value, use the bitwise OR operator (| in C# or Or in Visual Basic) to apply more than one value. To retain any existing values in the <see cref="P:System.IO.FileSystemInfo.Attributes" /> property, include the value of the <see cref="P:System.IO.FileSystemInfo.Attributes" /> property in your assignment. For example:
+          </para>
           <para>exampleFile.Attributes = exampleFile.Attributes | FileAttributes.ReadOnly;</para>
         </remarks>
         <summary>
@@ -642,15 +642,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception being thrown. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception being thrown.
+        </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual information about the source or destination. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual information about the source or destination.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="LastAccessTime">

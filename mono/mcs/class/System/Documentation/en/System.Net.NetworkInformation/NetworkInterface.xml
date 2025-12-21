@@ -328,8 +328,8 @@
             >The index of the loopback interface is usually 1, but you cannot rely on this. Use the <see cref="P:System.Net.NetworkInformation.NetworkInterface.LoopbackInterfaceIndex" /> property to get the correct value.</para
           >
           <para
-            >A network interface may have different interface indexes for the IPv4 and IPv6 loopback interface. The <see cref="P:System.Net.NetworkInformation.NetworkInterface.LoopbackInterfaceIndex" /> property only returns the IPv4 loopback interface. </para
-          >
+            >A network interface may have different interface indexes for the IPv4 and IPv6 loopback interface. The <see cref="P:System.Net.NetworkInformation.NetworkInterface.LoopbackInterfaceIndex" /> property only returns the IPv4 loopback interface.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -381,8 +381,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The interface types are described in detail in the <see cref="T:System.Net.NetworkInformation.NetworkInterfaceType" /> enumeration documentation. </para
-          >
+            >The interface types are described in detail in the <see cref="T:System.Net.NetworkInformation.NetworkInterfaceType" /> enumeration documentation.
+          </para>
           <para
             >This property only returns a subset of the possible values defined in the <see cref="T:System.Net.NetworkInformation.NetworkInterfaceType" /> enumeration. The possible values include the following:</para
           >

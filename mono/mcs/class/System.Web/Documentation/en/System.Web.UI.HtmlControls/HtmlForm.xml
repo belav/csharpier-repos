@@ -170,8 +170,8 @@
             </item>
             <item>
               <para
-                >Specifying a <see cref="T:System.Web.UI.WebControls.LinkButton" /> control as a default button. Only <see cref="T:System.Web.UI.WebControls.Button" /> and <see cref="T:System.Web.UI.WebControls.ImageButton" /> controls are supported. </para
-              >
+                >Specifying a <see cref="T:System.Web.UI.WebControls.LinkButton" /> control as a default button. Only <see cref="T:System.Web.UI.WebControls.Button" /> and <see cref="T:System.Web.UI.WebControls.ImageButton" /> controls are supported.
+              </para>
             </item>
             <item>
               <para
@@ -211,8 +211,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.Web.UI.HtmlControls.HtmlForm.DefaultFocus" /> property to access the control on the form to display as the control with input focus when the <see cref="T:System.Web.UI.HtmlControls.HtmlForm" /> control is loaded. Controls that can be selected are displayed with a visual cue indicating that they have the focus. For example, a <see cref="T:System.Web.UI.WebControls.TextBox" /> control with focus is displayed with the insertion point positioned inside of it. </para
-          >
+            >Use the <see cref="P:System.Web.UI.HtmlControls.HtmlForm.DefaultFocus" /> property to access the control on the form to display as the control with input focus when the <see cref="T:System.Web.UI.HtmlControls.HtmlForm" /> control is loaded. Controls that can be selected are displayed with a visual cue indicating that they have the focus. For example, a <see cref="T:System.Web.UI.WebControls.TextBox" /> control with focus is displayed with the insertion point positioned inside of it.
+          </para>
           <para
             >The control with focus can also be set using the <see cref="M:System.Web.UI.Control.Focus" /> or <see cref="M:System.Web.UI.Page.SetFocus(System.Web.UI.Control)" /> methods. These methods have precedence over the <see cref="P:System.Web.UI.HtmlControls.HtmlForm.DefaultFocus" /> property. If either of these methods are called to set the control with focus, the value of the <see cref="P:System.Web.UI.HtmlControls.HtmlForm.DefaultFocus" /> property is ignored.</para
           >
@@ -647,8 +647,8 @@
                 <a href="7e3ce9c4-6b7d-4fb1-94b5-72cf2a44fe13"
                   >Accessibility in Visual Studio 2010 and ASP.NET 4</a
                 >
-              </format>. </para
-            >
+              </format>.
+            </para>
           </block>
           <para
             >The <see cref="P:System.Web.UI.HtmlControls.HtmlForm.Target" /> value must begin with a letter in the range of A to Z (case-insensitive), except for the following special values, which begin with an underscore.</para

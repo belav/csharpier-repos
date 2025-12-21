@@ -66,8 +66,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The company name information. </param
-        >
+          />The company name information.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Company">

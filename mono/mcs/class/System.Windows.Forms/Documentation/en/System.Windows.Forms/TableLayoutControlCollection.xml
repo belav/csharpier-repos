@@ -27,8 +27,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Windows.Forms.TableLayoutControlCollection" /> class represents the collection of all the child controls in a <see cref="T:System.Windows.Forms.TableLayoutPanel" /> control. This collection is exposed by the <see cref="P:System.Windows.Forms.TableLayoutPanel.Controls" /> property of the <see cref="T:System.Windows.Forms.TableLayoutPanel" /> class. You can manage and individually manipulate members of the table layout panel through the <see cref="T:System.Windows.Forms.TableLayoutControlCollection" /> exposed by <see cref="P:System.Windows.Forms.TableLayoutPanel.Controls" />. </para
-      >
+        >The <see cref="T:System.Windows.Forms.TableLayoutControlCollection" /> class represents the collection of all the child controls in a <see cref="T:System.Windows.Forms.TableLayoutPanel" /> control. This collection is exposed by the <see cref="P:System.Windows.Forms.TableLayoutPanel.Controls" /> property of the <see cref="T:System.Windows.Forms.TableLayoutPanel" /> class. You can manage and individually manipulate members of the table layout panel through the <see cref="T:System.Windows.Forms.TableLayoutControlCollection" /> exposed by <see cref="P:System.Windows.Forms.TableLayoutPanel.Controls" />.
+      </para>
       <para
         >The <see cref="T:System.Windows.Forms.TableLayoutControlCollection" /> class is a minor specialization of the <see cref="T:System.Windows.Forms.Control.ControlCollection" /> base class.</para
       >
@@ -94,20 +94,20 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >With <see cref="M:System.Windows.Forms.TableLayoutControlCollection.Add(System.Windows.Forms.Control,System.Int32,System.Int32)" />, you can specify the cell position of <paramref name="control" />. You can assign <paramref name="control" /> to a specific cell by providing both the <paramref name="column" /> and <paramref name="row" /> parameters, or you can specify only the column or row value and let the <see cref="P:System.Windows.Forms.TableLayoutPanel.LayoutEngine" /> place <paramref name="control" /> at the next open cell. This is known as letting the control <newTerm>flow</newTerm> to its position in the <see cref="T:System.Windows.Forms.TableLayoutPanel" /> control. </para
-          >
+            >With <see cref="M:System.Windows.Forms.TableLayoutControlCollection.Add(System.Windows.Forms.Control,System.Int32,System.Int32)" />, you can specify the cell position of <paramref name="control" />. You can assign <paramref name="control" /> to a specific cell by providing both the <paramref name="column" /> and <paramref name="row" /> parameters, or you can specify only the column or row value and let the <see cref="P:System.Windows.Forms.TableLayoutPanel.LayoutEngine" /> place <paramref name="control" /> at the next open cell. This is known as letting the control <newTerm>flow</newTerm> to its position in the <see cref="T:System.Windows.Forms.TableLayoutPanel" /> control.
+          </para>
           <para
-            >Set <paramref name="column" /> to -1 if you want <paramref name="control" /> to occupy a fixed row position. </para
-          >
+            >Set <paramref name="column" /> to -1 if you want <paramref name="control" /> to occupy a fixed row position.
+          </para>
           <para
             >Set <paramref name="row" /> to -1 if you want <paramref name="control" /> to occupy a fixed column position.</para
           >
           <para
-            >If neither <paramref name="column" /> nor <paramref name="row" /> is -1, <paramref name="control" /> will be added at the absolute position given by (<paramref name="column" />, <paramref name="row" />). </para
-          >
+            >If neither <paramref name="column" /> nor <paramref name="row" /> is -1, <paramref name="control" /> will be added at the absolute position given by (<paramref name="column" />, <paramref name="row" />).
+          </para>
           <para
-            >If you set both <paramref name="column" /> and <paramref name="row" /> to -1, <paramref name="control" /> will flow to the first open position, with the specific flow behavior defined by the <see cref="P:System.Windows.Forms.TableLayoutPanel.GrowStyle" /> value. This is equivalent to using the <see cref="M:System.Windows.Forms.Control.ControlCollection.Add(System.Windows.Forms.Control)" /> method. </para
-          >
+            >If you set both <paramref name="column" /> and <paramref name="row" /> to -1, <paramref name="control" /> will flow to the first open position, with the specific flow behavior defined by the <see cref="P:System.Windows.Forms.TableLayoutPanel.GrowStyle" /> value. This is equivalent to using the <see cref="M:System.Windows.Forms.Control.ControlCollection.Add(System.Windows.Forms.Control)" /> method.
+          </para>
           <para
             >To get to the actual current position of a control, use the <see cref="M:System.Windows.Forms.TableLayoutPanel.GetPositionFromControl(System.Windows.Forms.Control)" /> method. This method takes into account the entire <see cref="T:System.Windows.Forms.TableLayoutPanel" /> control state, including column or row spanning and when the <see cref="P:System.Windows.Forms.TableLayoutPanel.LayoutEngine" /> has placed a control with its Column and Row properties set to -1.</para
           >

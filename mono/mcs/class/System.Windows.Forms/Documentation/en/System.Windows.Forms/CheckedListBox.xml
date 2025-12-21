@@ -23,16 +23,16 @@
         >The <see cref="T:System.Windows.Forms.CheckedListBox" /> object supports three states through the <see cref="T:System.Windows.Forms.CheckState" /> enumeration: <see cref="F:System.Windows.Forms.CheckState.Checked" />, <see cref="F:System.Windows.Forms.CheckState.Indeterminate" />, and <see cref="F:System.Windows.Forms.CheckState.Unchecked" />. You must set the state of <see cref="F:System.Windows.Forms.CheckState.Indeterminate" /> in the code because the user interface for a <see cref="T:System.Windows.Forms.CheckedListBox" /> does not provide a mechanism to do so.</para
       >
       <para
-        >If <see cref="P:System.Windows.Forms.ListBox.UseTabStops" /> is true, the <see cref="T:System.Windows.Forms.CheckedListBox" /> will recognize and expand tab characters in an item's text, creating columns. These tab stops are preset and cannot be changed. To use custom tab stops, set <see cref="P:System.Windows.Forms.ListBox.UseTabStops" /> to false, set <see cref="P:System.Windows.Forms.ListBox.UseCustomTabOffsets" /> to true, and add the custom values to the <see cref="P:System.Windows.Forms.ListBox.CustomTabOffsets" /> collection. </para
-      >
+        >If <see cref="P:System.Windows.Forms.ListBox.UseTabStops" /> is true, the <see cref="T:System.Windows.Forms.CheckedListBox" /> will recognize and expand tab characters in an item's text, creating columns. These tab stops are preset and cannot be changed. To use custom tab stops, set <see cref="P:System.Windows.Forms.ListBox.UseTabStops" /> to false, set <see cref="P:System.Windows.Forms.ListBox.UseCustomTabOffsets" /> to true, and add the custom values to the <see cref="P:System.Windows.Forms.ListBox.CustomTabOffsets" /> collection.
+      </para>
       <block subset="none" type="note">
         <para
           >If the <see cref="P:System.Windows.Forms.CheckedListBox.UseCompatibleTextRendering" /> property is false, the <see cref="P:System.Windows.Forms.ListBox.CustomTabOffsets" /> property will be ignored and replaced with standard tab offsets.</para
         >
       </block>
       <para
-        >The <see cref="T:System.Windows.Forms.CheckedListBox" /> class supports the following three indexed collections: </para
-      >
+        >The <see cref="T:System.Windows.Forms.CheckedListBox" /> class supports the following three indexed collections:
+      </para>
       <list type="table">
         <listheader>
           <item>
@@ -47,8 +47,8 @@
         <item>
           <term>
             <para
-              >All items contained in the <see cref="T:System.Windows.Forms.CheckedListBox" /> control. </para
-            >
+              >All items contained in the <see cref="T:System.Windows.Forms.CheckedListBox" /> control.
+            </para>
           </term>
           <description>
             <para>
@@ -59,8 +59,8 @@
         <item>
           <term>
             <para
-              >Checked items (including items in an indeterminate state), which is a subset of the items contained in the <see cref="T:System.Windows.Forms.CheckedListBox" /> control. </para
-            >
+              >Checked items (including items in an indeterminate state), which is a subset of the items contained in the <see cref="T:System.Windows.Forms.CheckedListBox" /> control.
+            </para>
           </term>
           <description>
             <para>
@@ -390,11 +390,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="E:System.Windows.Forms.CheckedListBox.Click" /> event passes an <see cref="T:System.EventArgs" /> to its event handler, so it only indicates that a click has occurred. If you need more specific mouse information (such as the button, number of clicks, wheel rotation, or location), use the <see cref="E:System.Windows.Forms.Control.MouseDown" /> and <see cref="E:System.Windows.Forms.Control.MouseUp" /> events, which pass a <see cref="T:System.Windows.Forms.MouseEventArgs" /> to the event handler. </para
-          >
+            >The <see cref="E:System.Windows.Forms.CheckedListBox.Click" /> event passes an <see cref="T:System.EventArgs" /> to its event handler, so it only indicates that a click has occurred. If you need more specific mouse information (such as the button, number of clicks, wheel rotation, or location), use the <see cref="E:System.Windows.Forms.Control.MouseDown" /> and <see cref="E:System.Windows.Forms.Control.MouseUp" /> events, which pass a <see cref="T:System.Windows.Forms.MouseEventArgs" /> to the event handler.
+          </para>
           <para
-            >A double-click is determined by the mouse settings of the user's operating system. The user can adjust the amount of time that can pass between clicks during a double-click of a mouse button. The <see cref="E:System.Windows.Forms.CheckedListBox.Click" /> event is raised every time the user double-clicks a control. For example, if you have event-handling methods for the <see cref="E:System.Windows.Forms.CheckedListBox.Click" /> and <see cref="E:System.Windows.Forms.Control.DoubleClick" /> events of a form, the events are raised when the form is double-clicked and both event-handling methods are called. If the user double-clicks a control that does not support the <see cref="E:System.Windows.Forms.Control.DoubleClick" /> event, the <see cref="E:System.Windows.Forms.CheckedListBox.Click" /> event might be raised twice. </para
-          >
+            >A double-click is determined by the mouse settings of the user's operating system. The user can adjust the amount of time that can pass between clicks during a double-click of a mouse button. The <see cref="E:System.Windows.Forms.CheckedListBox.Click" /> event is raised every time the user double-clicks a control. For example, if you have event-handling methods for the <see cref="E:System.Windows.Forms.CheckedListBox.Click" /> and <see cref="E:System.Windows.Forms.Control.DoubleClick" /> events of a form, the events are raised when the form is double-clicked and both event-handling methods are called. If the user double-clicks a control that does not support the <see cref="E:System.Windows.Forms.Control.DoubleClick" /> event, the <see cref="E:System.Windows.Forms.CheckedListBox.Click" /> event might be raised twice.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -602,8 +602,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see cref="P:System.Windows.Forms.CheckedListBox.DisplayMember" /> property changes. </para
-          >
+            >Occurs when the <see cref="P:System.Windows.Forms.CheckedListBox.DisplayMember" /> property changes.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -711,12 +711,8 @@
           <para>true if the item is checked; otherwise, false.</para>
         </returns>
         <param name="index">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The index of the item. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The index of the item.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -755,8 +751,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the item to get the checked value of. </param
-        >
+          />The index of the item to get the checked value of.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -931,8 +927,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1040,8 +1036,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.DrawItemEventArgs" /> object with the details </param
-        >
+          />The <see cref="T:System.Windows.Forms.DrawItemEventArgs" /> object with the details
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1078,8 +1074,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1119,8 +1115,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1206,8 +1202,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.KeyPressEventArgs" /> that was raised. </param
-        >
+          />The <see cref="T:System.Windows.Forms.KeyPressEventArgs" /> that was raised.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1249,8 +1245,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.MeasureItemEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.MeasureItemEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1292,8 +1288,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1328,8 +1324,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Controls receive default values for <see cref="P:System.Windows.Forms.Control.Padding" /> that are reasonably close to Windows user interface guidelines. Some adjustments might still be necessary for particular applications. </para
-          >
+            >Controls receive default values for <see cref="P:System.Windows.Forms.Control.Padding" /> that are reasonably close to Windows user interface guidelines. Some adjustments might still be necessary for particular applications.
+          </para>
           <para>This property is not relevant to this class.</para>
         </remarks>
         <summary>
@@ -1415,15 +1411,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the item to set the check state for. </param
-        >
+          />The index of the item to set the check state for.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to set the item as checked; otherwise, false. </param
-        >
+          />true to set the item as checked; otherwise, false.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1462,15 +1458,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the item to set the state for. </param
-        >
+          />The index of the item to set the state for.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.CheckState" /> values. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.CheckState" /> values.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

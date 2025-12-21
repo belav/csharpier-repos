@@ -106,8 +106,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.AsyncCallback" /> delegate that references the method to invoke when the operation is complete. </param
-        >
+          />An <see cref="T:System.AsyncCallback" /> delegate that references the method to invoke when the operation is complete.
+        </param>
         <param name="state">
           <attribution
             license="cc4"
@@ -199,12 +199,8 @@
           >
         </returns>
         <param name="hostName">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The DNS name of the host. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The DNS name of the host.
+        </param>
         <param name="requestCallback">
           <attribution
             license="cc4"
@@ -291,8 +287,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.AsyncCallback" /> delegate that references the method to invoke when the operation is complete. </param
-        >
+          />An <see cref="T:System.AsyncCallback" /> delegate that references the method to invoke when the operation is complete.
+        </param>
         <param name="stateObject">
           <attribution
             license="cc4"
@@ -371,8 +367,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.AsyncCallback" /> delegate that references the method to invoke when the operation is complete. </param
-        >
+          />An <see cref="T:System.AsyncCallback" /> delegate that references the method to invoke when the operation is complete.
+        </param>
         <param name="stateObject">
           <attribution
             license="cc4"
@@ -464,19 +460,15 @@
           >
         </returns>
         <param name="hostName">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The DNS name of the host. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The DNS name of the host.
+        </param>
         <param name="requestCallback">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.AsyncCallback" /> delegate that references the method to invoke when the operation is complete. </param
-        >
+          />An <see cref="T:System.AsyncCallback" /> delegate that references the method to invoke when the operation is complete.
+        </param>
         <param name="stateObject">
           <attribution
             license="cc4"
@@ -579,8 +571,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method blocks until the operation is complete. </para>
           <para
-            >To perform this operation synchronously, use the <see cref="M:System.Net.Dns.GetHostByName(System.String)" /> method. </para
-          >
+            >To perform this operation synchronously, use the <see cref="M:System.Net.Dns.GetHostByName(System.String)" /> method.
+          </para>
           <para
             >If the <see cref="P:System.Net.Configuration.Ipv6Element.Enabled" /> property is set to true, the <see cref="P:System.Net.IPHostEntry.Aliases" /> property of the <see cref="T:System.Net.IPHostEntry" /> instance returned is not populated by this method and will always be empty.</para
           >
@@ -640,8 +632,8 @@
             >The <see cref="P:System.Net.IPHostEntry.Aliases" /> property of the <see cref="T:System.Net.IPHostEntry" /> instance returned is not populated by this method and will always be empty.</para
           >
           <para
-            >To perform this operation synchronously, use a <see cref="Overload:System.Net.Dns.GetHostEntry" /> method. </para
-          >
+            >To perform this operation synchronously, use a <see cref="Overload:System.Net.Dns.GetHostEntry" /> method.
+          </para>
           <block subset="none" type="note">
             <para
               >This member emits trace information when you enable network tracing in your application. For more information, see <format type="text/html">
@@ -918,8 +910,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Net.IPAddress" />. </param
-        >
+          />An <see cref="T:System.Net.IPAddress" />.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -993,8 +985,8 @@
           <para>An <see cref="T:System.Net.IPHostEntry" /> instance.</para>
         </returns>
         <param name="address">
-          <attribution license="cc4" from="Microsoft" modified="false" />An IP address. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />An IP address.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1074,12 +1066,8 @@
           >
         </returns>
         <param name="hostName">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The DNS name of the host. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The DNS name of the host.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1168,8 +1156,8 @@
           >
           <para>When an empty string is passed as the host name, this method returns the IPv4 addresses of the local host.</para>
           <para
-            >If the host name could not be found, the <see cref="T:System.Net.Sockets.SocketException" /> exception is returned with a value of 11001 (Windows Sockets error WSAHOST_NOT_FOUND). This exception can be returned if the DNS server does not respond. This exception can also be returned if the name is not an official host name or alias, or it cannot be found in the database(s) being queried. </para
-          >
+            >If the host name could not be found, the <see cref="T:System.Net.Sockets.SocketException" /> exception is returned with a value of 11001 (Windows Sockets error WSAHOST_NOT_FOUND). This exception can be returned if the DNS server does not respond. This exception can also be returned if the name is not an official host name or alias, or it cannot be found in the database(s) being queried.
+          </para>
           <para
             >The <see cref="T:System.ArgumentException" /> exception is also returned if the <paramref name="hostNameOrAddress" /> parameter contains <see cref="F:System.Net.IPAddress.Any" /> or <see cref="F:System.Net.IPAddress.IPv6Any" />.</para
           >
@@ -1184,8 +1172,8 @@
             </item>
             <item>
               <para
-                >A reverse lookup using the IP address of the IP string literal is attempted to obtain the host name. This result is set as the <see cref="P:System.Net.IPHostEntry.HostName" /> property. </para
-              >
+                >A reverse lookup using the IP address of the IP string literal is attempted to obtain the host name. This result is set as the <see cref="P:System.Net.IPHostEntry.HostName" /> property.
+              </para>
             </item>
             <item>
               <para
@@ -1321,8 +1309,8 @@
           <para>This method queries a DNS server for the IP address that is associated with a host name or IP address.</para>
           <para>When an empty string is passed as the host name, this method returns the IPv4 addresses of the local host.</para>
           <para
-            >If the host name could not be found, the <see cref="T:System.Net.Sockets.SocketException" /> exception is returned with a value of 11001 (Windows Sockets error WSAHOST_NOT_FOUND). This exception can be returned if the DNS server does not respond. This exception can also be returned if the name is not an official host name or alias, or it cannot be found in the database(s) being queried. </para
-          >
+            >If the host name could not be found, the <see cref="T:System.Net.Sockets.SocketException" /> exception is returned with a value of 11001 (Windows Sockets error WSAHOST_NOT_FOUND). This exception can be returned if the DNS server does not respond. This exception can also be returned if the name is not an official host name or alias, or it cannot be found in the database(s) being queried.
+          </para>
           <para
             >The <see cref="T:System.ArgumentException" /> exception is also returned if the <paramref name="hostNameOrAddress" /> parameter contains <see cref="F:System.Net.IPAddress.Any" /> or <see cref="F:System.Net.IPAddress.IPv6Any" />.</para
           >
@@ -1337,8 +1325,8 @@
             </item>
             <item>
               <para
-                >A reverse lookup using the IP address of the IP string literal is attempted to obtain the host name. This result is set as the <see cref="P:System.Net.IPHostEntry.HostName" /> property. </para
-              >
+                >A reverse lookup using the IP address of the IP string literal is attempted to obtain the host name. This result is set as the <see cref="P:System.Net.IPHostEntry.HostName" /> property.
+              </para>
             </item>
             <item>
               <para
@@ -1504,8 +1492,7 @@ public class DnsTest {
      Console.WriteLine("Alias {0} == {1}", aliases[x], addresses[x]);
  }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para> The host name is: contoso.com</para>
@@ -1548,8 +1535,8 @@ public class DnsTest {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A DNS-style host name or IP address. </param
-        >
+          />A DNS-style host name or IP address.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

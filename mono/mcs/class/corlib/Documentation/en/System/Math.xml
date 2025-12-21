@@ -67,8 +67,7 @@ public class MathAbsExample
       Console.WriteLine("Math.Abs( (Decimal)(-1.23) ) returns {0}",d2);
    }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>Math.Abs( (Decimal)0.00 ) returns 0</para>
@@ -97,8 +96,8 @@ public class MathAbsExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A number that is greater than or equal to <see cref="F:System.Decimal.MinValue" />, but less than or equal to <see cref="F:System.Decimal.MaxValue" />. </param
-        >
+          />A number that is greater than or equal to <see cref="F:System.Decimal.MinValue" />, but less than or equal to <see cref="F:System.Decimal.MaxValue" />.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -474,8 +473,8 @@ public class MathAbsExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A number representing a cosine, where <paramref name="d" /> must be greater than or equal to -1, but less than or equal to 1. </param
-        >
+          />A number representing a cosine, where <paramref name="d" /> must be greater than or equal to -1, but less than or equal to 1.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -519,8 +518,8 @@ public class MathAbsExample
             >An angle, <math>θ</math>, measured in radians, such that -<math>π</math>/2 <math>≤</math>
             <math>θ</math>
             <math>≤</math>
-            <math>π</math>/2 </para
-          >
+            <math>π</math>/2
+          </para>
           <para>-or- </para>
           <para>
             <see cref="F:System.Double.NaN" /> if <paramref name="d" /> &lt; -1 or <paramref name="d" /> &gt; 1 or <paramref name="d" /> equals <see cref="F:System.Double.NaN" />.</para
@@ -531,8 +530,8 @@ public class MathAbsExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A number representing a sine, where <paramref name="d" /> must be greater than or equal to -1, but less than or equal to 1. </param
-        >
+          />A number representing a sine, where <paramref name="d" /> must be greater than or equal to -1, but less than or equal to 1.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -588,8 +587,8 @@ public class MathAbsExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A number representing a tangent. </param
-        >
+          />A number representing a tangent.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -638,8 +637,7 @@ public class MathAtan2Example
    }
 
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>Math.Atan2(2,0) returns 1.5707963267949</para>
@@ -661,8 +659,8 @@ public class MathAtan2Example
             <math>≤</math>
             <math>θ</math>
             <math>≤</math>
-            <math>π</math>, and tan(<math>θ</math>) = <paramref name="y" /> / <paramref name="x" />, where (<paramref name="x" />, <paramref name="y" />) is a point in the Cartesian plane. Observe the following: </para
-          >
+            <math>π</math>, and tan(<math>θ</math>) = <paramref name="y" /> / <paramref name="x" />, where (<paramref name="x" />, <paramref name="y" />) is a point in the Cartesian plane. Observe the following:
+          </para>
           <list type="bullet">
             <item>
               <para
@@ -714,15 +712,15 @@ public class MathAtan2Example
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The y coordinate of a point. </param
-        >
+          />The y coordinate of a point.
+        </param>
         <param name="x">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The x coordinate of a point. </param
-        >
+          />The x coordinate of a point.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -764,15 +762,15 @@ public class MathAtan2Example
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first number to multiply. </param
-        >
+          />The first number to multiply.
+        </param>
         <param name="b">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second number to multiply. </param
-        >
+          />The second number to multiply.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -798,8 +796,8 @@ public class MathAtan2Example
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The behavior of this method follows IEEE Standard 754, section 4. This kind of rounding is sometimes called rounding toward positive infinity. In other words, if <paramref name="d" /> is positive, the presence of any fractional component causes <paramref name="d" /> to be rounded to the next highest integer. If <paramref name="d" /> is negative, the rounding operation causes any fractional component of <paramref name="d" /> to be discarded. The operation of this method differs from the <see cref="M:System.Math.Floor(System.Decimal)" /> method, which supports rounding toward negative infinity. </para
-          >
+            >The behavior of this method follows IEEE Standard 754, section 4. This kind of rounding is sometimes called rounding toward positive infinity. In other words, if <paramref name="d" /> is positive, the presence of any fractional component causes <paramref name="d" /> to be rounded to the next highest integer. If <paramref name="d" /> is negative, the rounding operation causes any fractional component of <paramref name="d" /> to be discarded. The operation of this method differs from the <see cref="M:System.Math.Floor(System.Decimal)" /> method, which supports rounding toward negative infinity.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -812,8 +810,8 @@ public class MathAtan2Example
           >
         </returns>
         <param name="d">
-          <attribution license="cc4" from="Microsoft" modified="false" />A decimal number. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A decimal number.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Ceiling">
@@ -860,8 +858,7 @@ public class MathCeilingExample
    }
 
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>Math.Ceiling(3.4) returns 4</para>
@@ -889,8 +886,8 @@ public class MathCeilingExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A double-precision floating-point number. </param
-        >
+          />A double-precision floating-point number.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -923,8 +920,8 @@ public class MathCeilingExample
             >The angle, <paramref name="d" />, must be in radians. Multiply by <see cref="F:System.Math.PI" />/180 to convert degrees to radians.</para
           >
           <para
-            >Acceptable values of <paramref name="d" /> range from approximately -9223372036854775295 to approximately 9223372036854775295. For values outside this range, the <see cref="M:System.Math.Cos(System.Double)" /> method returns <paramref name="d" /> unchanged rather than throwing an exception. </para
-          >
+            >Acceptable values of <paramref name="d" /> range from approximately -9223372036854775295 to approximately 9223372036854775295. For values outside this range, the <see cref="M:System.Math.Cos(System.Double)" /> method returns <paramref name="d" /> unchanged rather than throwing an exception.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -941,8 +938,8 @@ public class MathCeilingExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An angle, measured in radians. </param
-        >
+          />An angle, measured in radians.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -990,8 +987,8 @@ public class MathCeilingExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An angle, measured in radians. </param
-        >
+          />An angle, measured in radians.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1034,8 +1031,8 @@ public class MathCeilingExample
         <returns>
           <para
             > A <see cref="T:System.Int32" /> containing the quotient of the specified numbers.
-      </para
-          >
+
+          </para>
         </returns>
         <remarks>To be added.</remarks>
       </Docs>
@@ -1080,8 +1077,8 @@ public class MathCeilingExample
         <returns>
           <para
             > A <see cref="T:System.Int64" /> containing the quotient of the specified numbers. 
-      </para
-          >
+
+          </para>
         </returns>
         <remarks>To be added.</remarks>
       </Docs>
@@ -1167,8 +1164,8 @@ public class MathCeilingExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A number specifying a power. </param
-        >
+          />A number specifying a power.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1204,12 +1201,12 @@ public class MathCeilingExample
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The largest integer less than or equal to <paramref name="d" />.  Note that the method returns an integral value of type <see cref="T:System.Math" />. </para
-          >
+            >The largest integer less than or equal to <paramref name="d" />.  Note that the method returns an integral value of type <see cref="T:System.Math" />.
+          </para>
         </returns>
         <param name="d">
-          <attribution license="cc4" from="Microsoft" modified="false" />A decimal number. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A decimal number.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Floor">
@@ -1256,8 +1253,7 @@ public class MathFloorExample
    }
 
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>Math.Floor(3.4) returns 3</para>
@@ -1285,8 +1281,8 @@ public class MathFloorExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A double-precision floating-point number. </param
-        >
+          />A double-precision floating-point number.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1343,8 +1339,7 @@ public class MathIEEERemainderExample
    }
 
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>Math.IEEERemainder(3.54,0) returns NaN</para>
@@ -1380,11 +1375,11 @@ public class MathIEEERemainderExample
           <para>If <paramref name="y" /> = 0, <see cref="F:System.Double.NaN" /> is returned.</para>
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />A dividend. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A dividend.
+        </param>
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />A divisor. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A divisor.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1491,8 +1486,8 @@ public class MathIEEERemainderExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number whose logarithm is to be found. </param
-        >
+          />The number whose logarithm is to be found.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1658,8 +1653,8 @@ public class MathIEEERemainderExample
                 <para
                   >0 <math>&lt;</math>
                   <paramref name="newBase" />
-                  <math>&lt;</math> 1 </para
-                >
+                  <math>&lt;</math> 1
+                </para>
               </description>
               <description>
                 <para>+Infinity</para>
@@ -1737,15 +1732,11 @@ public class MathIEEERemainderExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number whose logarithm is to be found. </param
-        >
+          />The number whose logarithm is to be found.
+        </param>
         <param name="newBase">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The base of the logarithm. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The base of the logarithm.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1801,8 +1792,8 @@ public class MathIEEERemainderExample
               <description>
                 <para
                   >The base 10 log of <paramref name="d" />; that is, log <subscript>10</subscript>
-                  <paramref name="d" />. </para
-                >
+                  <paramref name="d" />.
+                </para>
               </description>
             </item>
             <item>
@@ -1852,8 +1843,8 @@ public class MathIEEERemainderExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A number whose logarithm is to be found. </param
-        >
+          />A number whose logarithm is to be found.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1902,15 +1893,15 @@ public class MathIEEERemainderExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first of two 8-bit unsigned integers to compare. </param
-        >
+          />The first of two 8-bit unsigned integers to compare.
+        </param>
         <param name="val2">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second of two 8-bit unsigned integers to compare. </param
-        >
+          />The second of two 8-bit unsigned integers to compare.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1962,15 +1953,15 @@ public class MathIEEERemainderExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first of two decimal numbers to compare. </param
-        >
+          />The first of two decimal numbers to compare.
+        </param>
         <param name="val2">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second of two decimal numbers to compare. </param
-        >
+          />The second of two decimal numbers to compare.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2019,15 +2010,15 @@ public class MathIEEERemainderExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first of two double-precision floating-point numbers to compare. </param
-        >
+          />The first of two double-precision floating-point numbers to compare.
+        </param>
         <param name="val2">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second of two double-precision floating-point numbers to compare. </param
-        >
+          />The second of two double-precision floating-point numbers to compare.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2066,15 +2057,15 @@ public class MathIEEERemainderExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first of two 16-bit signed integers to compare. </param
-        >
+          />The first of two 16-bit signed integers to compare.
+        </param>
         <param name="val2">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second of two 16-bit signed integers to compare. </param
-        >
+          />The second of two 16-bit signed integers to compare.
+        </param>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Returns the larger of two 16-bit signed integers.</para>
@@ -2090,15 +2081,15 @@ public class MathIEEERemainderExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first of two 16-bit signed integers to compare. </param
-        >
+          />The first of two 16-bit signed integers to compare.
+        </param>
         <param name="val2">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second of two 16-bit signed integers to compare. </param
-        >
+          />The second of two 16-bit signed integers to compare.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2147,15 +2138,15 @@ public class MathIEEERemainderExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first of two 32-bit signed integers to compare. </param
-        >
+          />The first of two 32-bit signed integers to compare.
+        </param>
         <param name="val2">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second of two 32-bit signed integers to compare. </param
-        >
+          />The second of two 32-bit signed integers to compare.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2204,15 +2195,15 @@ public class MathIEEERemainderExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first of two 64-bit signed integers to compare. </param
-        >
+          />The first of two 64-bit signed integers to compare.
+        </param>
         <param name="val2">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second of two 64-bit signed integers to compare. </param
-        >
+          />The second of two 64-bit signed integers to compare.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2269,15 +2260,15 @@ public class MathIEEERemainderExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first of two 8-bit signed integers to compare. </param
-        >
+          />The first of two 8-bit signed integers to compare.
+        </param>
         <param name="val2">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second of two 8-bit signed integers to compare. </param
-        >
+          />The second of two 8-bit signed integers to compare.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2326,15 +2317,15 @@ public class MathIEEERemainderExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first of two single-precision floating-point numbers to compare. </param
-        >
+          />The first of two single-precision floating-point numbers to compare.
+        </param>
         <param name="val2">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second of two single-precision floating-point numbers to compare. </param
-        >
+          />The second of two single-precision floating-point numbers to compare.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2391,15 +2382,15 @@ public class MathIEEERemainderExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first of two 16-bit unsigned integers to compare. </param
-        >
+          />The first of two 16-bit unsigned integers to compare.
+        </param>
         <param name="val2">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second of two 16-bit unsigned integers to compare. </param
-        >
+          />The second of two 16-bit unsigned integers to compare.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2456,15 +2447,15 @@ public class MathIEEERemainderExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first of two 32-bit unsigned integers to compare. </param
-        >
+          />The first of two 32-bit unsigned integers to compare.
+        </param>
         <param name="val2">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second of two 32-bit unsigned integers to compare. </param
-        >
+          />The second of two 32-bit unsigned integers to compare.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2521,15 +2512,15 @@ public class MathIEEERemainderExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first of two 64-bit unsigned integers to compare. </param
-        >
+          />The first of two 64-bit unsigned integers to compare.
+        </param>
         <param name="val2">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second of two 64-bit unsigned integers to compare. </param
-        >
+          />The second of two 64-bit unsigned integers to compare.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2578,15 +2569,15 @@ public class MathIEEERemainderExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first of two 8-bit unsigned integers to compare. </param
-        >
+          />The first of two 8-bit unsigned integers to compare.
+        </param>
         <param name="val2">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second of two 8-bit unsigned integers to compare. </param
-        >
+          />The second of two 8-bit unsigned integers to compare.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2638,15 +2629,15 @@ public class MathIEEERemainderExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first of two decimal numbers to compare. </param
-        >
+          />The first of two decimal numbers to compare.
+        </param>
         <param name="val2">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second of two decimal numbers to compare. </param
-        >
+          />The second of two decimal numbers to compare.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2695,15 +2686,15 @@ public class MathIEEERemainderExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first of two double-precision floating-point numbers to compare. </param
-        >
+          />The first of two double-precision floating-point numbers to compare.
+        </param>
         <param name="val2">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second of two double-precision floating-point numbers to compare. </param
-        >
+          />The second of two double-precision floating-point numbers to compare.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2752,15 +2743,15 @@ public class MathIEEERemainderExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first of two 16-bit signed integers to compare. </param
-        >
+          />The first of two 16-bit signed integers to compare.
+        </param>
         <param name="val2">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second of two 16-bit signed integers to compare. </param
-        >
+          />The second of two 16-bit signed integers to compare.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2809,15 +2800,15 @@ public class MathIEEERemainderExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first of two 32-bit signed integers to compare. </param
-        >
+          />The first of two 32-bit signed integers to compare.
+        </param>
         <param name="val2">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second of two 32-bit signed integers to compare. </param
-        >
+          />The second of two 32-bit signed integers to compare.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2866,15 +2857,15 @@ public class MathIEEERemainderExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first of two 64-bit signed integers to compare. </param
-        >
+          />The first of two 64-bit signed integers to compare.
+        </param>
         <param name="val2">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second of two 64-bit signed integers to compare. </param
-        >
+          />The second of two 64-bit signed integers to compare.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2931,15 +2922,15 @@ public class MathIEEERemainderExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first of two 8-bit signed integers to compare. </param
-        >
+          />The first of two 8-bit signed integers to compare.
+        </param>
         <param name="val2">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second of two 8-bit signed integers to compare. </param
-        >
+          />The second of two 8-bit signed integers to compare.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2988,15 +2979,15 @@ public class MathIEEERemainderExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first of two single-precision floating-point numbers to compare. </param
-        >
+          />The first of two single-precision floating-point numbers to compare.
+        </param>
         <param name="val2">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second of two single-precision floating-point numbers to compare. </param
-        >
+          />The second of two single-precision floating-point numbers to compare.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -3053,15 +3044,15 @@ public class MathIEEERemainderExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first of two 16-bit unsigned integers to compare. </param
-        >
+          />The first of two 16-bit unsigned integers to compare.
+        </param>
         <param name="val2">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second of two 16-bit unsigned integers to compare. </param
-        >
+          />The second of two 16-bit unsigned integers to compare.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -3118,15 +3109,15 @@ public class MathIEEERemainderExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first of two 32-bit unsigned integers to compare. </param
-        >
+          />The first of two 32-bit unsigned integers to compare.
+        </param>
         <param name="val2">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second of two 32-bit unsigned integers to compare. </param
-        >
+          />The second of two 32-bit unsigned integers to compare.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -3183,15 +3174,15 @@ public class MathIEEERemainderExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first of two 64-bit unsigned integers to compare. </param
-        >
+          />The first of two 64-bit unsigned integers to compare.
+        </param>
         <param name="val2">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second of two 64-bit unsigned integers to compare. </param
-        >
+          />The second of two 64-bit unsigned integers to compare.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -3281,8 +3272,8 @@ public class MathIEEERemainderExample
             <item>
               <term>
                 <para>
-                  <paramref name="x" /> = Any value except NaN; <paramref name="y" /> = 0. </para
-                >
+                  <paramref name="x" /> = Any value except NaN; <paramref name="y" /> = 0.
+                </para>
               </term>
               <description>
                 <para>1 </para>
@@ -3291,8 +3282,8 @@ public class MathIEEERemainderExample
             <item>
               <term>
                 <para>
-                  <paramref name="x" /> = NegativeInfinity; <paramref name="y" /> &lt; 0. </para
-                >
+                  <paramref name="x" /> = NegativeInfinity; <paramref name="y" /> &lt; 0.
+                </para>
               </term>
               <description>
                 <para>0 </para>
@@ -3301,8 +3292,8 @@ public class MathIEEERemainderExample
             <item>
               <term>
                 <para>
-                  <paramref name="x" /> = NegativeInfinity; <paramref name="y" /> is a positive odd integer. </para
-                >
+                  <paramref name="x" /> = NegativeInfinity; <paramref name="y" /> is a positive odd integer.
+                </para>
               </term>
               <description>
                 <para>NegativeInfinity </para>
@@ -3311,8 +3302,8 @@ public class MathIEEERemainderExample
             <item>
               <term>
                 <para>
-                  <paramref name="x" /> = NegativeInfinity; <paramref name="y" /> is positive but not an odd integer. </para
-                >
+                  <paramref name="x" /> = NegativeInfinity; <paramref name="y" /> is positive but not an odd integer.
+                </para>
               </term>
               <description>
                 <para>PositiveInfinity </para>
@@ -3331,8 +3322,8 @@ public class MathIEEERemainderExample
             <item>
               <term>
                 <para>
-                  <paramref name="x" /> = -1; <paramref name="y" /> = NegativeInfinity or PositiveInfinity. </para
-                >
+                  <paramref name="x" /> = -1; <paramref name="y" /> = NegativeInfinity or PositiveInfinity.
+                </para>
               </term>
               <description>
                 <para>NaN </para>
@@ -3341,8 +3332,8 @@ public class MathIEEERemainderExample
             <item>
               <term>
                 <para
-                  >-1 &lt; <paramref name="x" /> &lt; 1; <paramref name="y" /> = NegativeInfinity. </para
-                >
+                  >-1 &lt; <paramref name="x" /> &lt; 1; <paramref name="y" /> = NegativeInfinity.
+                </para>
               </term>
               <description>
                 <para>PositiveInfinity </para>
@@ -3351,8 +3342,8 @@ public class MathIEEERemainderExample
             <item>
               <term>
                 <para
-                  >-1 &lt; <paramref name="x" /> &lt; 1; <paramref name="y" /> = PositiveInfinity. </para
-                >
+                  >-1 &lt; <paramref name="x" /> &lt; 1; <paramref name="y" /> = PositiveInfinity.
+                </para>
               </term>
               <description>
                 <para>0 </para>
@@ -3361,8 +3352,8 @@ public class MathIEEERemainderExample
             <item>
               <term>
                 <para>
-                  <paramref name="x" /> &lt; -1 or <paramref name="x" /> &gt; 1; <paramref name="y" /> = NegativeInfinity. </para
-                >
+                  <paramref name="x" /> &lt; -1 or <paramref name="x" /> &gt; 1; <paramref name="y" /> = NegativeInfinity.
+                </para>
               </term>
               <description>
                 <para>0 </para>
@@ -3371,8 +3362,8 @@ public class MathIEEERemainderExample
             <item>
               <term>
                 <para>
-                  <paramref name="x" /> &lt; -1 or <paramref name="x" /> &gt; 1; <paramref name="y" /> = PositiveInfinity. </para
-                >
+                  <paramref name="x" /> &lt; -1 or <paramref name="x" /> &gt; 1; <paramref name="y" /> = PositiveInfinity.
+                </para>
               </term>
               <description>
                 <para>PositiveInfinity </para>
@@ -3397,8 +3388,8 @@ public class MathIEEERemainderExample
             <item>
               <term>
                 <para>
-                  <paramref name="x" /> = 1; <paramref name="y" /> is any value except NaN. </para
-                >
+                  <paramref name="x" /> = 1; <paramref name="y" /> is any value except NaN.
+                </para>
               </term>
               <description>
                 <para>1 </para>
@@ -3407,8 +3398,8 @@ public class MathIEEERemainderExample
             <item>
               <term>
                 <para>
-                  <paramref name="x" /> = PositiveInfinity; <paramref name="y" /> &lt; 0. </para
-                >
+                  <paramref name="x" /> = PositiveInfinity; <paramref name="y" /> &lt; 0.
+                </para>
               </term>
               <description>
                 <para>0 </para>
@@ -3417,8 +3408,8 @@ public class MathIEEERemainderExample
             <item>
               <term>
                 <para>
-                  <paramref name="x" /> = PositiveInfinity; <paramref name="y" /> &gt; 0. </para
-                >
+                  <paramref name="x" /> = PositiveInfinity; <paramref name="y" /> &gt; 0.
+                </para>
               </term>
               <description>
                 <para>PositiveInfinity </para>
@@ -3439,15 +3430,15 @@ public class MathIEEERemainderExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A double-precision floating-point number to be raised to a power. </param
-        >
+          />A double-precision floating-point number to be raised to a power.
+        </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A double-precision floating-point number that specifies a power. </param
-        >
+          />A double-precision floating-point number that specifies a power.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -3497,8 +3488,7 @@ public class MathRoundExample
    }
 
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>Math.Round(4.4) returns 4</para>
@@ -3529,8 +3519,8 @@ public class MathRoundExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A decimal number to be rounded. </param
-        >
+          />A decimal number to be rounded.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -3580,8 +3570,7 @@ public class MathRoundExample
    }
 
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>Math.Round(4.4) returns 4</para>
@@ -3612,8 +3601,8 @@ public class MathRoundExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A double-precision floating-point number to be rounded. </param
-        >
+          />A double-precision floating-point number to be rounded.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -3655,23 +3644,23 @@ public class MathRoundExample
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The number nearest to <paramref name="d" /> that contains a number of fractional digits equal to <paramref name="decimals" />. </para
-          >
+            >The number nearest to <paramref name="d" /> that contains a number of fractional digits equal to <paramref name="decimals" />.
+          </para>
         </returns>
         <param name="d">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A decimal number to be rounded. </param
-        >
+          />A decimal number to be rounded.
+        </param>
         <param name="decimals">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of decimal places in the return value. </param
-        >
+          />The number of decimal places in the return value.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Round">
@@ -3712,16 +3701,16 @@ public class MathRoundExample
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The integer nearest <paramref name="d" />. If <paramref name="d" /> is halfway between two numbers, one of which is even and the other odd, then <paramref name="mode" /> determines which of the two is returned. </para
-          >
+            >The integer nearest <paramref name="d" />. If <paramref name="d" /> is halfway between two numbers, one of which is even and the other odd, then <paramref name="mode" /> determines which of the two is returned.
+          </para>
         </returns>
         <param name="d">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A decimal number to be rounded. </param
-        >
+          />A decimal number to be rounded.
+        </param>
         <param name="mode">
           <attribution
             license="cc4"
@@ -3786,8 +3775,7 @@ public class MathRoundExample
    }
 
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>Math.Round(3.44, 1) returns 3.4</para>
@@ -3800,8 +3788,8 @@ public class MathRoundExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of fractional digits in the return value. </param
-        >
+          />The number of fractional digits in the return value.
+        </param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
@@ -3825,15 +3813,15 @@ public class MathRoundExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A double-precision floating-point number to be rounded. </param
-        >
+          />A double-precision floating-point number to be rounded.
+        </param>
         <param name="digits">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of fractional digits in the return value. </param
-        >
+          />The number of fractional digits in the return value.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -3883,8 +3871,8 @@ public class MathRoundExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A double-precision floating-point number to be rounded. </param
-        >
+          />A double-precision floating-point number to be rounded.
+        </param>
         <param name="mode">
           <attribution
             license="cc4"
@@ -3941,15 +3929,15 @@ public class MathRoundExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A decimal number to be rounded. </param
-        >
+          />A decimal number to be rounded.
+        </param>
         <param name="decimals">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of decimal places in the return value. </param
-        >
+          />The number of decimal places in the return value.
+        </param>
         <param name="mode">
           <attribution
             license="cc4"
@@ -4006,15 +3994,15 @@ public class MathRoundExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A double-precision floating-point number to be rounded. </param
-        >
+          />A double-precision floating-point number to be rounded.
+        </param>
         <param name="digits">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of fractional digits in the return value. </param
-        >
+          />The number of fractional digits in the return value.
+        </param>
         <param name="mode">
           <attribution
             license="cc4"
@@ -4095,12 +4083,8 @@ public class MathRoundExample
           </list>
         </returns>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />A signed decimal number. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A signed decimal number.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -4154,8 +4138,7 @@ public class MathSignExample
    }
 
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>Math.Sign(4.4) returns 1 </para>
@@ -4210,8 +4193,8 @@ public class MathSignExample
           </list>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />A signed number. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A signed number.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -4286,8 +4269,8 @@ public class MathSignExample
           </list>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />A signed number. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A signed number.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -4362,8 +4345,8 @@ public class MathSignExample
           </list>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />A signed number. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A signed number.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -4438,8 +4421,8 @@ public class MathSignExample
           </list>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />A signed number. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A signed number.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -4524,8 +4507,8 @@ public class MathSignExample
           </list>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />A signed number. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A signed number.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -4603,8 +4586,8 @@ public class MathSignExample
           </list>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />A signed number. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A signed number.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -4652,8 +4635,7 @@ public class MathSinExample
    }
 
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>Math.Sin(0) returns 0</para>
@@ -4684,8 +4666,8 @@ public class MathSinExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An angle, measured in radians. </param
-        >
+          />An angle, measured in radians.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -4733,8 +4715,7 @@ public class MathSinhExample
    }
 
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>Math.Sinh(0) returns 0</para>
@@ -4762,8 +4743,8 @@ public class MathSinhExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An angle, measured in radians. </param
-        >
+          />An angle, measured in radians.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -4819,8 +4800,7 @@ public class MathSqrtExample
    }
 
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>Math.Sqrt(16.0) returns 4</para>
@@ -4891,8 +4871,8 @@ public class MathSqrtExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number whose square root is to be found. </param
-        >
+          />The number whose square root is to be found.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -4940,8 +4920,7 @@ public class MathTanExample
    }
 
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>Math.Tan(0) returns 0</para>
@@ -4969,8 +4948,8 @@ public class MathTanExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An angle, measured in radians. </param
-        >
+          />An angle, measured in radians.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -5018,8 +4997,7 @@ public class MathTanhExample
    }
 
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>Math.Tanh(0) returns 0 </para>
@@ -5047,8 +5025,8 @@ public class MathTanhExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An angle, measured in radians. </param
-        >
+          />An angle, measured in radians.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -5128,8 +5106,8 @@ public class MathTanhExample
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The integral part of <paramref name="d" />; that is, the number that remains after any fractional digits have been discarded, or one of the values listed in the following table. </para
-          >
+            >The integral part of <paramref name="d" />; that is, the number that remains after any fractional digits have been discarded, or one of the values listed in the following table.
+          </para>
           <list type="table">
             <listheader>
               <item>

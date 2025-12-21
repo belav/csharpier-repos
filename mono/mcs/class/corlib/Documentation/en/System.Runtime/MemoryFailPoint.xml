@@ -28,8 +28,8 @@
         <para>This class is intended for use in advanced development.</para>
       </block>
       <para
-        >Creating an instance of the <see cref="T:System.Runtime.MemoryFailPoint" /> class creates a memory gate. A memory gate checks for sufficient resources before initiating an activity that requires a large amount of memory. Failing the check results in an <see cref="T:System.InsufficientMemoryException" /> exception being thrown. This exception prevents an operation from being started and reduces the possibility of failure due to lack of resources. This enables you decrease performance in an effort to avoid an <see cref="T:System.OutOfMemoryException" /> exception and any state corruption that may result from improper handling of the exception in arbitrary locations in your code.  </para
-      >
+        >Creating an instance of the <see cref="T:System.Runtime.MemoryFailPoint" /> class creates a memory gate. A memory gate checks for sufficient resources before initiating an activity that requires a large amount of memory. Failing the check results in an <see cref="T:System.InsufficientMemoryException" /> exception being thrown. This exception prevents an operation from being started and reduces the possibility of failure due to lack of resources. This enables you decrease performance in an effort to avoid an <see cref="T:System.OutOfMemoryException" /> exception and any state corruption that may result from improper handling of the exception in arbitrary locations in your code.
+      </para>
       <para
         >By throwing an <see cref="T:System.InsufficientMemoryException" /> exception, an application can distinguish between an estimate that an operation will not be able to complete and  a partially completed operation that may have corrupted the application state. This allows an application to reduce the frequency of a pessimistic escalation policy, which may require unloading the current <see cref="T:System.AppDomain" /> or recycling the process.</para
       >
@@ -76,8 +76,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.MemoryFailPoint" /> class, specifying the amount of memory required for successful execution. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.MemoryFailPoint" /> class, specifying the amount of memory required for successful execution.
+          </para>
         </summary>
         <param name="sizeInMegabytes">
           <attribution
@@ -111,8 +111,8 @@
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format> and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
           <block subset="none" type="note">
             <para
               >Always call <see cref="M:System.Runtime.MemoryFailPoint.Dispose" /> before you release your last reference to the <see cref="T:System.Runtime.MemoryFailPoint" />. Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Runtime.MemoryFailPoint" /> object's Finalize method.</para
@@ -122,8 +122,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the <see cref="T:System.Runtime.MemoryFailPoint" />. </para
-          >
+            >Releases all resources used by the <see cref="T:System.Runtime.MemoryFailPoint" />.
+          </para>
         </summary>
       </Docs>
     </Member>

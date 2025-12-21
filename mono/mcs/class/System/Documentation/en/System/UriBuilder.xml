@@ -208,8 +208,8 @@
           >
         </summary>
         <param name="uri">
-          <attribution license="cc4" from="Microsoft" modified="false" />A URI string. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A URI string.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -254,8 +254,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An instance of the <see cref="T:System.Uri" /> class. </param
-        >
+          />An instance of the <see cref="T:System.Uri" /> class.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -301,15 +301,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An Internet access protocol. </param
-        >
+          />An Internet access protocol.
+        </param>
         <param name="hostName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A DNS-style domain name or IP address. </param
-        >
+          />A DNS-style domain name or IP address.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -362,22 +362,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An Internet access protocol. </param
-        >
+          />An Internet access protocol.
+        </param>
         <param name="host">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A DNS-style domain name or IP address. </param
-        >
+          />A DNS-style domain name or IP address.
+        </param>
         <param name="portNumber">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An IP port number for the service. </param
-        >
+          />An IP port number for the service.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -431,29 +431,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An Internet access protocol. </param
-        >
+          />An Internet access protocol.
+        </param>
         <param name="host">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A DNS-style domain name or IP address. </param
-        >
+          />A DNS-style domain name or IP address.
+        </param>
         <param name="port">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An IP port number for the service. </param
-        >
+          />An IP port number for the service.
+        </param>
         <param name="pathValue">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The path to the Internet resource. </param
-        >
+          />The path to the Internet resource.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -511,36 +511,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An Internet access protocol. </param
-        >
+          />An Internet access protocol.
+        </param>
         <param name="host">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A DNS-style domain name or IP address. </param
-        >
+          />A DNS-style domain name or IP address.
+        </param>
         <param name="port">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An IP port number for the service. </param
-        >
+          />An IP port number for the service.
+        </param>
         <param name="path">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The path to the Internet resource. </param
-        >
+          />The path to the Internet resource.
+        </param>
         <param name="extraValue">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A query string or fragment identifier. </param
-        >
+          />A query string or fragment identifier.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -590,8 +590,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to compare with the current instance. </param
-        >
+          />The object to compare with the current instance.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1001,8 +1001,8 @@
             >The display string contains the <see cref="P:System.UriBuilder.Port" /> property value if the <see cref="P:System.UriBuilder.Port" /> property was set or the port was specified when the <see cref="T:System.UriBuilder" /> was constructed using of the <see cref="M:System.UriBuilder.#ctor" /> methods that accept a port number parameter except for the case when the <see cref="P:System.UriBuilder.Port" />.property value was set to a value of -1 to indicate the default port.</para
           >
           <para
-            >The display string does not contain the <see cref="P:System.UriBuilder.Port" /> property value if the <see cref="P:System.UriBuilder.Port" /> property was not set and a port was not specified when the <see cref="T:System.UriBuilder" /> was constructed. The display string also does not contain the <see cref="P:System.UriBuilder.Port" /> property value if the <see cref="P:System.UriBuilder.Port" /> property or port number for the constructor was set to a value of -1. </para
-          >
+            >The display string does not contain the <see cref="P:System.UriBuilder.Port" /> property value if the <see cref="P:System.UriBuilder.Port" /> property was not set and a port was not specified when the <see cref="T:System.UriBuilder" /> was constructed. The display string also does not contain the <see cref="P:System.UriBuilder.Port" /> property value if the <see cref="P:System.UriBuilder.Port" /> property or port number for the constructor was set to a value of -1.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

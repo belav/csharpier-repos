@@ -77,8 +77,8 @@
               </term>
               <description>
                 <para
-                  >The <see cref="T:System.Web.UI.WebControls.GridViewRow" /> object contained in the <paramref name="row" /> parameter. </para
-                >
+                  >The <see cref="T:System.Web.UI.WebControls.GridViewRow" /> object contained in the <paramref name="row" /> parameter.
+                </para>
               </description>
             </item>
           </list>
@@ -97,8 +97,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Web.UI.WebControls.GridViewRow" /> object that represents the row being created or data-bound. </param
-        >
+          />A <see cref="T:System.Web.UI.WebControls.GridViewRow" /> object that represents the row being created or data-bound.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

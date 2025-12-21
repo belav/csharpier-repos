@@ -87,22 +87,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The strong name public key blob of the software publisher. </param
-        >
+          />The strong name public key blob of the software publisher.
+        </param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The simple name section of the strong name. </param
-        >
+          />The simple name section of the strong name.
+        </param>
         <param name="version">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The version number of the strong name. </param
-        >
+          />The version number of the strong name.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Check">
@@ -149,8 +149,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.Policy.Evidence" /> against which to make the test. </param
-        >
+          />The <see cref="T:System.Security.Policy.Evidence" /> against which to make the test.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Copy">
@@ -230,8 +230,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to compare to the current <see cref="T:System.Security.Policy.StrongNameMembershipCondition" />. </param
-        >
+          />The object to compare to the current <see cref="T:System.Security.Policy.StrongNameMembershipCondition" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="FromXml">
@@ -266,8 +266,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML encoding to use to reconstruct the security object. </param
-        >
+          />The XML encoding to use to reconstruct the security object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="FromXml">
@@ -303,15 +303,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML encoding to use to reconstruct the security object. </param
-        >
+          />The XML encoding to use to reconstruct the security object.
+        </param>
         <param name="level">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.Policy.PolicyLevel" /> context, used to resolve <see cref="T:System.Security.NamedPermissionSet" /> references. </param
-        >
+          />The <see cref="T:System.Security.Policy.PolicyLevel" /> context, used to resolve <see cref="T:System.Security.NamedPermissionSet" /> references.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -505,8 +505,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.Policy.PolicyLevel" /> context, which is used to resolve <see cref="T:System.Security.NamedPermissionSet" /> references. </param
-        >
+          />The <see cref="T:System.Security.Policy.PolicyLevel" /> context, which is used to resolve <see cref="T:System.Security.NamedPermissionSet" /> references.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Version">

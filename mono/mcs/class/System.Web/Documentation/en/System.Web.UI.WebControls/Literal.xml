@@ -120,8 +120,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.Literal" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.Literal" /> class.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -268,8 +268,8 @@
               </term>
               <description>
                 <para
-                  >Unsupported markup-language elements are removed from the contents of the control. If the <see cref="T:System.Web.UI.WebControls.Literal" /> control is rendered on a browser that supports HTML or XHTML, the control's contents are not modified. </para
-                >
+                  >Unsupported markup-language elements are removed from the contents of the control. If the <see cref="T:System.Web.UI.WebControls.Literal" /> control is rendered on a browser that supports HTML or XHTML, the control's contents are not modified.
+                </para>
               </description>
             </item>
           </list>

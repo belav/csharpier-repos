@@ -20,8 +20,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The XPath engine has full XPath context support and uses the .NET Framework's <see cref="T:System.Xml.Xsl.XsltContext" /> class in the same way that <see cref="T:System.Xml.XPath.XPathNavigator" /> does to implement this support. <see cref="T:System.Xml.Xsl.XsltContext" /> is an abstract class that allows developers to implement custom XPath function libraries and declare XPath variables. <see cref="T:System.Xml.Xsl.XsltContext" /> is an <see cref="T:System.Xml.XmlNamespaceManager" /> and thus also contains the namespace prefix mappings. </para
-      >
+        >The XPath engine has full XPath context support and uses the .NET Framework's <see cref="T:System.Xml.Xsl.XsltContext" /> class in the same way that <see cref="T:System.Xml.XPath.XPathNavigator" /> does to implement this support. <see cref="T:System.Xml.Xsl.XsltContext" /> is an abstract class that allows developers to implement custom XPath function libraries and declare XPath variables. <see cref="T:System.Xml.Xsl.XsltContext" /> is an <see cref="T:System.Xml.XmlNamespaceManager" /> and thus also contains the namespace prefix mappings.
+      </para>
       <para
         >The filter engine implements an <see cref="T:System.Xml.Xsl.XsltContext" /> named <see cref="T:System.ServiceModel.Dispatcher.XPathMessageContext" />. <see cref="T:System.ServiceModel.Dispatcher.XPathMessageContext" /> defines custom functions that can be used in XPath expressions and it declares several common namespace prefix mappings. The following table lists the custom functions defined by <see cref="T:System.ServiceModel.Dispatcher.XPathMessageContext" /> that can be used in XPath expressions.</para
       >

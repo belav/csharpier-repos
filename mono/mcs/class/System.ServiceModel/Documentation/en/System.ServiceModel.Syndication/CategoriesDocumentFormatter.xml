@@ -50,8 +50,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.CategoriesDocumentFormatter" /> class. </para
-          >
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.CategoriesDocumentFormatter" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -79,8 +79,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.CategoriesDocumentFormatter" /> class with the specified <see cref="T:System.ServiceModel.Syndication.CategoriesDocument" />.  </para
-          >
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.CategoriesDocumentFormatter" /> class with the specified <see cref="T:System.ServiceModel.Syndication.CategoriesDocument" />.
+          </para>
         </summary>
         <param name="documentToWrite">
           <attribution
@@ -122,8 +122,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >A value that specifies whether the <see cref="T:System.Xml.XmlReader" /> contains a valid Atom 1.0 categories document.
-</para
-          >
+
+          </para>
         </returns>
         <param name="reader">
           <attribution

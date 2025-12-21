@@ -215,15 +215,11 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.DateTime" /> to which to add days. </param
-        >
+          />The <see cref="T:System.DateTime" /> to which to add days.
+        </param>
         <param name="days">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The number of days to add. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The number of days to add.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddHours">
@@ -279,15 +275,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.DateTime" /> to which to add hours. </param
-        >
+          />The <see cref="T:System.DateTime" /> to which to add hours.
+        </param>
         <param name="hours">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of hours to add. </param
-        >
+          />The number of hours to add.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddMilliseconds">
@@ -343,8 +339,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.DateTime" /> to add milliseconds to. </param
-        >
+          />The <see cref="T:System.DateTime" /> to add milliseconds to.
+        </param>
         <param name="milliseconds">
           <attribution
             license="cc4"
@@ -407,15 +403,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.DateTime" /> to which to add minutes. </param
-        >
+          />The <see cref="T:System.DateTime" /> to which to add minutes.
+        </param>
         <param name="minutes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of minutes to add. </param
-        >
+          />The number of minutes to add.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddMonths">
@@ -477,15 +473,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.DateTime" /> to which to add months. </param
-        >
+          />The <see cref="T:System.DateTime" /> to which to add months.
+        </param>
         <param name="months">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of months to add. </param
-        >
+          />The number of months to add.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddSeconds">
@@ -541,15 +537,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.DateTime" /> to which to add seconds. </param
-        >
+          />The <see cref="T:System.DateTime" /> to which to add seconds.
+        </param>
         <param name="seconds">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of seconds to add. </param
-        >
+          />The number of seconds to add.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddWeeks">
@@ -608,15 +604,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.DateTime" /> to which to add weeks. </param
-        >
+          />The <see cref="T:System.DateTime" /> to which to add weeks.
+        </param>
         <param name="weeks">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of weeks to add. </param
-        >
+          />The number of weeks to add.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddYears">
@@ -678,15 +674,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.DateTime" /> to which to add years. </param
-        >
+          />The <see cref="T:System.DateTime" /> to which to add years.
+        </param>
         <param name="years">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of years to add. </param
-        >
+          />The number of years to add.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AlgorithmType">
@@ -886,8 +882,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.DateTime" /> to read. </param
-        >
+          />The <see cref="T:System.DateTime" /> to read.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetDayOfWeek">
@@ -935,8 +931,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.DateTime" /> to read. </param
-        >
+          />The <see cref="T:System.DateTime" /> to read.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetDayOfYear">
@@ -981,8 +977,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.DateTime" /> to read. </param
-        >
+          />The <see cref="T:System.DateTime" /> to read.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetDaysInMonth">
@@ -1027,15 +1023,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the year. </param
-        >
+          />An integer that represents the year.
+        </param>
         <param name="month">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A positive integer that represents the month. </param
-        >
+          />A positive integer that represents the month.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetDaysInMonth">
@@ -1081,22 +1077,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the year. </param
-        >
+          />An integer that represents the year.
+        </param>
         <param name="month">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A positive integer that represents the month. </param
-        >
+          />A positive integer that represents the month.
+        </param>
         <param name="era">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the era. </param
-        >
+          />An integer that represents the era.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetDaysInYear">
@@ -1137,8 +1133,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the year. </param
-        >
+          />An integer that represents the year.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetDaysInYear">
@@ -1183,15 +1179,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the year. </param
-        >
+          />An integer that represents the year.
+        </param>
         <param name="era">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the era. </param
-        >
+          />An integer that represents the era.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetEra">
@@ -1229,8 +1225,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.DateTime" /> to read. </param
-        >
+          />The <see cref="T:System.DateTime" /> to read.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetHour">
@@ -1266,8 +1262,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.DateTime" /> to read. </param
-        >
+          />The <see cref="T:System.DateTime" /> to read.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetLeapMonth">
@@ -1408,8 +1404,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.DateTime" /> to read. </param
-        >
+          />The <see cref="T:System.DateTime" /> to read.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetMinute">
@@ -1447,8 +1443,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.DateTime" /> to read. </param
-        >
+          />The <see cref="T:System.DateTime" /> to read.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetMonth">
@@ -1491,8 +1487,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.DateTime" /> to read. </param
-        >
+          />The <see cref="T:System.DateTime" /> to read.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetMonthsInYear">
@@ -1533,8 +1529,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the year. </param
-        >
+          />An integer that represents the year.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetMonthsInYear">
@@ -1579,15 +1575,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the year. </param
-        >
+          />An integer that represents the year.
+        </param>
         <param name="era">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the era. </param
-        >
+          />An integer that represents the era.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetSecond">
@@ -1625,8 +1621,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.DateTime" /> to read. </param
-        >
+          />The <see cref="T:System.DateTime" /> to read.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetWeekOfYear">
@@ -1664,8 +1660,8 @@
           <list type="bullet">
             <item>
               <para
-                >The <see cref="P:System.Globalization.DateTimeFormatInfo.FirstDayOfWeek" /> property contains the default first day of the week that can be used for the <paramref name="firstDayOfWeek" /> parameter. </para
-              >
+                >The <see cref="P:System.Globalization.DateTimeFormatInfo.FirstDayOfWeek" /> property contains the default first day of the week that can be used for the <paramref name="firstDayOfWeek" /> parameter.
+              </para>
             </item>
             <item>
               <para
@@ -2054,26 +2050,22 @@
           >
         </returns>
         <param name="time">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />A date and time value. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A date and time value.
+        </param>
         <param name="rule">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An enumeration value that defines a calendar week. </param
-        >
+          />An enumeration value that defines a calendar week.
+        </param>
         <param name="firstDayOfWeek">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An enumeration value that represents the first day of the week. </param
-        >
+          />An enumeration value that represents the first day of the week.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetYear">
@@ -2111,8 +2103,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.DateTime" /> to read. </param
-        >
+          />The <see cref="T:System.DateTime" /> to read.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsLeapDay">
@@ -2159,22 +2151,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the year. </param
-        >
+          />An integer that represents the year.
+        </param>
         <param name="month">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A positive integer that represents the month. </param
-        >
+          />A positive integer that represents the month.
+        </param>
         <param name="day">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A positive integer that represents the day. </param
-        >
+          />A positive integer that represents the day.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsLeapDay">
@@ -2222,29 +2214,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the year. </param
-        >
+          />An integer that represents the year.
+        </param>
         <param name="month">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A positive integer that represents the month. </param
-        >
+          />A positive integer that represents the month.
+        </param>
         <param name="day">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A positive integer that represents the day. </param
-        >
+          />A positive integer that represents the day.
+        </param>
         <param name="era">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the era. </param
-        >
+          />An integer that represents the era.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsLeapMonth">
@@ -2290,15 +2282,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the year. </param
-        >
+          />An integer that represents the year.
+        </param>
         <param name="month">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A positive integer that represents the month. </param
-        >
+          />A positive integer that represents the month.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsLeapMonth">
@@ -2345,22 +2337,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the year. </param
-        >
+          />An integer that represents the year.
+        </param>
         <param name="month">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A positive integer that represents the month. </param
-        >
+          />A positive integer that represents the month.
+        </param>
         <param name="era">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the era. </param
-        >
+          />An integer that represents the era.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsLeapYear">
@@ -2401,8 +2393,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the year. </param
-        >
+          />An integer that represents the year.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsLeapYear">
@@ -2444,15 +2436,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the year. </param
-        >
+          />An integer that represents the year.
+        </param>
         <param name="era">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the era. </param
-        >
+          />An integer that represents the era.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsReadOnly">
@@ -2650,50 +2642,50 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the year. </param
-        >
+          />An integer that represents the year.
+        </param>
         <param name="month">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A positive integer that represents the month. </param
-        >
+          />A positive integer that represents the month.
+        </param>
         <param name="day">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A positive integer that represents the day. </param
-        >
+          />A positive integer that represents the day.
+        </param>
         <param name="hour">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer from 0 to 23 that represents the hour. </param
-        >
+          />An integer from 0 to 23 that represents the hour.
+        </param>
         <param name="minute">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer from 0 to 59 that represents the minute. </param
-        >
+          />An integer from 0 to 59 that represents the minute.
+        </param>
         <param name="second">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer from 0 to 59 that represents the second. </param
-        >
+          />An integer from 0 to 59 that represents the second.
+        </param>
         <param name="millisecond">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer from 0 to 999 that represents the millisecond. </param
-        >
+          />An integer from 0 to 999 that represents the millisecond.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ToDateTime">
@@ -2748,57 +2740,57 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the year. </param
-        >
+          />An integer that represents the year.
+        </param>
         <param name="month">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A positive integer that represents the month. </param
-        >
+          />A positive integer that represents the month.
+        </param>
         <param name="day">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A positive integer that represents the day. </param
-        >
+          />A positive integer that represents the day.
+        </param>
         <param name="hour">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer from 0 to 23 that represents the hour. </param
-        >
+          />An integer from 0 to 23 that represents the hour.
+        </param>
         <param name="minute">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer from 0 to 59 that represents the minute. </param
-        >
+          />An integer from 0 to 59 that represents the minute.
+        </param>
         <param name="second">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer from 0 to 59 that represents the second. </param
-        >
+          />An integer from 0 to 59 that represents the second.
+        </param>
         <param name="millisecond">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer from 0 to 999 that represents the millisecond. </param
-        >
+          />An integer from 0 to 999 that represents the millisecond.
+        </param>
         <param name="era">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the era. </param
-        >
+          />An integer that represents the era.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ToFourDigitYear">
@@ -2849,8 +2841,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A two-digit or four-digit integer that represents the year to convert. </param
-        >
+          />A two-digit or four-digit integer that represents the year to convert.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="TwoDigitYearMax">

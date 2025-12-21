@@ -9,21 +9,21 @@
       <list>
         <list_item> x is evaluated to produce the variable. </list_item>
         <list_item
-          > y is evaluated and, if required, converted to the type of x through an implicit conversion (<hyperlink>13.1</hyperlink>). </list_item
-        >
+          > y is evaluated and, if required, converted to the type of x through an implicit conversion (<hyperlink>13.1</hyperlink>).
+        </list_item>
         <list_item
           > If the variable given by x is an array element of a <non_terminal where="11.2"
             >reference-type</non_terminal
-          >, a run-time check is performed to ensure that the value computed for y is compatible with the array instance of which x is an element. The check succeeds if y is null, or if an implicit reference conversion (<hyperlink>13.1.4</hyperlink>) exists from the actual type of the instance referenced by y to the actual element type of the array instance containing x. Otherwise, a System.ArrayTypeMismatchException is thrown. </list_item
-        >
+          >, a run-time check is performed to ensure that the value computed for y is compatible with the array instance of which x is an element. The check succeeds if y is null, or if an implicit reference conversion (<hyperlink>13.1.4</hyperlink>) exists from the actual type of the instance referenced by y to the actual element type of the array instance containing x. Otherwise, a System.ArrayTypeMismatchException is thrown.
+        </list_item>
         <list_item> The value resulting from the evaluation and conversion of y is stored into the location given by the evaluation of x. </list_item>
       </list>
       <list_item> If x is classified as a property or indexer access: </list_item>
       <list>
         <list_item> The instance expression (if x is not static) and the argument list (if x is an indexer access) associated with x are evaluated, and the results are used in the subsequent set accessor invocation. </list_item>
         <list_item
-          > y is evaluated and, if required, converted to the type of x through an implicit conversion (<hyperlink>13.1</hyperlink>). </list_item
-        >
+          > y is evaluated and, if required, converted to the type of x through an implicit conversion (<hyperlink>13.1</hyperlink>).
+        </list_item>
         <list_item> The set accessor of x is invoked with the value computed for y as its value argument. </list_item>
       </list>
     </list>

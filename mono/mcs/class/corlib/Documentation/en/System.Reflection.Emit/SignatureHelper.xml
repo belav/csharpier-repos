@@ -89,12 +89,8 @@
           <para>Adds an argument to the signature.</para>
         </summary>
         <param name="clsArgument">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The type of the argument. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The type of the argument.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddArgument">
@@ -309,8 +305,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object with which this instance should be compared. </param
-        >
+          />The object with which this instance should be compared.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetFieldSigHelper">
@@ -349,8 +345,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The dynamic module that contains the field for which the SignatureHelper is requested. </param
-        >
+          />The dynamic module that contains the field for which the SignatureHelper is requested.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -452,8 +448,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The dynamic module that contains the local variable for which the SignatureHelper is requested. </param
-        >
+          />The dynamic module that contains the local variable for which the SignatureHelper is requested.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetMethodSigHelper">
@@ -492,15 +488,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The calling convention of the method. </param
-        >
+          />The calling convention of the method.
+        </param>
         <param name="returnType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The return type of the method, or null for a void return type (Sub procedure in Visual Basic). </param
-        >
+          />The return type of the method, or null for a void return type (Sub procedure in Visual Basic).
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetMethodSigHelper">
@@ -542,15 +538,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The unmanaged calling convention of the method. </param
-        >
+          />The unmanaged calling convention of the method.
+        </param>
         <param name="returnType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The return type of the method, or null for a void return type (Sub procedure in Visual Basic). </param
-        >
+          />The return type of the method, or null for a void return type (Sub procedure in Visual Basic).
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetMethodSigHelper">
@@ -591,22 +587,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Reflection.Emit.ModuleBuilder" /> that contains the method for which the SignatureHelper is requested. </param
-        >
+          />The <see cref="T:System.Reflection.Emit.ModuleBuilder" /> that contains the method for which the SignatureHelper is requested.
+        </param>
         <param name="callingConvention">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The calling convention of the method. </param
-        >
+          />The calling convention of the method.
+        </param>
         <param name="returnType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The return type of the method, or null for a void return type (Sub procedure in Visual Basic). </param
-        >
+          />The return type of the method, or null for a void return type (Sub procedure in Visual Basic).
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetMethodSigHelper">
@@ -650,22 +646,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Reflection.Emit.ModuleBuilder" /> that contains the method for which the SignatureHelper is requested. </param
-        >
+          />The <see cref="T:System.Reflection.Emit.ModuleBuilder" /> that contains the method for which the SignatureHelper is requested.
+        </param>
         <param name="unmanagedCallConv">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The unmanaged calling convention of the method. </param
-        >
+          />The unmanaged calling convention of the method.
+        </param>
         <param name="returnType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The return type of the method, or null for a void return type (Sub procedure in Visual Basic). </param
-        >
+          />The return type of the method, or null for a void return type (Sub procedure in Visual Basic).
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetMethodSigHelper">
@@ -712,22 +708,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Reflection.Emit.ModuleBuilder" /> that contains the method for which the SignatureHelper is requested. </param
-        >
+          />The <see cref="T:System.Reflection.Emit.ModuleBuilder" /> that contains the method for which the SignatureHelper is requested.
+        </param>
         <param name="returnType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The return type of the method, or null for a void return type (Sub procedure in Visual Basic). </param
-        >
+          />The return type of the method, or null for a void return type (Sub procedure in Visual Basic).
+        </param>
         <param name="parameterTypes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The types of the arguments of the method, or null if the method has no arguments. </param
-        >
+          />The types of the arguments of the method, or null if the method has no arguments.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetPropertySigHelper">

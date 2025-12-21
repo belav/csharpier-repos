@@ -89,8 +89,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to show that the property this attribute is bound to is read-only; false to show that the property is read/write. </param
-        >
+          />true to show that the property this attribute is bound to is read-only; false to show that the property is read/write.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Default">

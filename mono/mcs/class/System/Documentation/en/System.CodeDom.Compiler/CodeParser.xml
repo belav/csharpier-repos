@@ -67,8 +67,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.Compiler.CodeParser" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.Compiler.CodeParser" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -112,8 +112,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.TextReader" /> that is used to read the code to be parsed. </param
-        >
+          />A <see cref="T:System.IO.TextReader" /> that is used to read the code to be parsed.
+        </param>
       </Docs>
     </Member>
   </Members>

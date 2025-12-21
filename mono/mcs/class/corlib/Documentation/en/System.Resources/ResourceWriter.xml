@@ -34,18 +34,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.Resources.ResourceWriter" /> provides a default implementation of the <see cref="T:System.Resources.IResourceWriter" /> interface. It enables you to programmatically create a binary resource (.resources) file. </para
-      >
+        <see cref="T:System.Resources.ResourceWriter" /> provides a default implementation of the <see cref="T:System.Resources.IResourceWriter" /> interface. It enables you to programmatically create a binary resource (.resources) file.
+      </para>
       <para
-        >Resources are specified as name and value pairs using the <see cref="M:System.Resources.ResourceWriter.AddResource(System.String,System.String)" /> method. Resource names are case-sensitive when used for lookups, but to more easily support authoring tools and help eliminate bugs, <see cref="T:System.Resources.ResourceWriter" /> will not allow a .resources file to have names that vary only by case. The <see cref="T:System.Resources.ResourceWriter" /> class enables you to create string, object, and binary resources. Binary resources can be written to the resource file as a byte array or a stream. </para
-      >
+        >Resources are specified as name and value pairs using the <see cref="M:System.Resources.ResourceWriter.AddResource(System.String,System.String)" /> method. Resource names are case-sensitive when used for lookups, but to more easily support authoring tools and help eliminate bugs, <see cref="T:System.Resources.ResourceWriter" /> will not allow a .resources file to have names that vary only by case. The <see cref="T:System.Resources.ResourceWriter" /> class enables you to create string, object, and binary resources. Binary resources can be written to the resource file as a byte array or a stream.
+      </para>
       <para
         >To create a resources file, create a <see cref="T:System.Resources.ResourceWriter" /> with a unique file name, call <see cref="M:System.Resources.ResourceWriter.AddResource(System.String,System.String)" /> at least once, call <see cref="M:System.Resources.ResourceWriter.Generate" /> to write the resources file to disk, and then call <see cref="M:System.Resources.ResourceWriter.Close" /> to close the file. Calling <see cref="M:System.Resources.ResourceWriter.Close" /> will implicitly call <see cref="M:System.Resources.ResourceWriter.Generate" /> if you do not explicitly call <see cref="M:System.Resources.ResourceWriter.Generate" />.</para
       >
       <para>The resources will not necessarily be written in the same order they were added.</para>
       <para
-        >To retrieve resources from a binary .resources file created by the <see cref="T:System.Resources.ResourceWriter" /> class, you can use the <see cref="T:System.Resources.ResourceManager" /> class, which lets you retrieve named resources, or the <see cref="T:System.Resources.ResourceReader" /> class, which lets you enumerate all the resources in the file. </para
-      >
+        >To retrieve resources from a binary .resources file created by the <see cref="T:System.Resources.ResourceWriter" /> class, you can use the <see cref="T:System.Resources.ResourceManager" /> class, which lets you retrieve named resources, or the <see cref="T:System.Resources.ResourceReader" /> class, which lets you enumerate all the resources in the file.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -78,8 +78,8 @@
           >
         </summary>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />The output stream. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The output stream.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -107,12 +107,8 @@
           >
         </summary>
         <param name="fileName">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The output file name. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The output file name.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddResource">
@@ -149,19 +145,15 @@
           <para>Adds a named resource specified as a byte array to the list of resources to be written.</para>
         </summary>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the resource. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the resource.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Value of the resource as an 8-bit unsigned integer array. </param
-        >
+          />Value of the resource as an 8-bit unsigned integer array.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddResource">
@@ -188,8 +180,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can specify any stream that supports the <see cref="P:System.IO.Stream.Length" /> property for <paramref name="value" />. </para
-          >
+            >You can specify any stream that supports the <see cref="P:System.IO.Stream.Length" /> property for <paramref name="value" />.
+          </para>
           <para
             >You can retrieve the resources written by the <see cref="M:System.Resources.ResourceWriter.AddResource(System.String,System.IO.Stream)" /> method by calling the <see cref="M:System.Resources.ResourceManager.GetStream(System.String)" /> method.</para
           >
@@ -203,15 +195,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the resource to add. </param
-        >
+          />The name of the resource to add.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value of the resource to add. The resource must support the <see cref="P:System.IO.Stream.Length" /> property. </param
-        >
+          />The value of the resource to add. The resource must support the <see cref="P:System.IO.Stream.Length" /> property.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddResource">
@@ -238,8 +230,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para><paramref name="value" /> must be serializable.</para>
           <para
-            >The resource is not written until the <see cref="M:System.Resources.ResourceWriter.Generate" /> method is called. </para
-          >
+            >The resource is not written until the <see cref="M:System.Resources.ResourceWriter.Generate" /> method is called.
+          </para>
           <para
             >You can retrieve the resources written by the <see cref="M:System.Resources.ResourceWriter.AddResource(System.String,System.Object)" /> method by calling the <see cref="M:System.Resources.ResourceManager.GetObject(System.String)" /> method.</para
           >
@@ -249,19 +241,11 @@
           <para>Adds a named resource specified as an object to the list of resources to be written.</para>
         </summary>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the resource. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the resource.
+        </param>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The value of the resource. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value of the resource.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddResource">
@@ -298,19 +282,11 @@
           <para>Adds a string resource to the list of resources to be written.</para>
         </summary>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the resource. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the resource.
+        </param>
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The value of the resource. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value of the resource.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddResource">
@@ -338,8 +314,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can specify any stream that supports the <see cref="P:System.IO.Stream.Length" /> property for <paramref name="value" />. </para
-          >
+            >You can specify any stream that supports the <see cref="P:System.IO.Stream.Length" /> property for <paramref name="value" />.
+          </para>
           <para
             >You can retrieve the resources written by the <see cref="M:System.Resources.ResourceWriter.AddResource(System.String,System.IO.Stream,System.Boolean)" /> method by calling the <see cref="M:System.Resources.ResourceManager.GetStream(System.String)" /> method.</para
           >
@@ -347,30 +323,30 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a named resource specified as a stream to the list of resources to be written, and specifies whether the stream should be closed after the <see cref="M:System.Resources.ResourceWriter.Generate" /> method is called. </para
-          >
+            >Adds a named resource specified as a stream to the list of resources to be written, and specifies whether the stream should be closed after the <see cref="M:System.Resources.ResourceWriter.Generate" /> method is called.
+          </para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the resource to add. </param
-        >
+          />The name of the resource to add.
+        </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value of the resource to add. The resource must support the <see cref="P:System.IO.Stream.Length" /> property. </param
-        >
+          />The value of the resource to add. The resource must support the <see cref="P:System.IO.Stream.Length" /> property.
+        </param>
         <param name="closeAfterWrite">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to close the stream after the <see cref="M:System.Resources.ResourceWriter.Generate" /> method is called; otherwise, false. </param
-        >
+          />true to close the stream after the <see cref="M:System.Resources.ResourceWriter.Generate" /> method is called; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddResourceData">

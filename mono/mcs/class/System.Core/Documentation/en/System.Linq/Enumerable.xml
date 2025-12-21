@@ -5378,8 +5378,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Linq.Enumerable.Max(System.Collections.Generic.IEnumerable{System.Nullable{System.Double}})" /> method uses the <see cref="T:System.Double" /> implementation of <see cref="T:System.IComparable`1" /> to compare values. </para
-          >
+            >The <see cref="M:System.Linq.Enumerable.Max(System.Collections.Generic.IEnumerable{System.Nullable{System.Double}})" /> method uses the <see cref="T:System.Double" /> implementation of <see cref="T:System.IComparable`1" /> to compare values.
+          </para>
           <para>If the source sequence is empty or contains only values that are null, this function returns null.</para>
           <para
             >In vbprvb query expression syntax, an Aggregate Into Max() clause translates to an invocation of <see cref="Overload:System.Linq.Enumerable.Max" />.</para
@@ -5434,8 +5434,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Linq.Enumerable.Max(System.Collections.Generic.IEnumerable{System.Nullable{System.Int32}})" /> method uses the <see cref="T:System.Int32" /> implementation of <see cref="T:System.IComparable`1" /> to compare values. </para
-          >
+            >The <see cref="M:System.Linq.Enumerable.Max(System.Collections.Generic.IEnumerable{System.Nullable{System.Int32}})" /> method uses the <see cref="T:System.Int32" /> implementation of <see cref="T:System.IComparable`1" /> to compare values.
+          </para>
           <para>If the source sequence is empty or contains only values that are null, this function returns null.</para>
           <para
             >In vbprvb query expression syntax, an Aggregate Into Max() clause translates to an invocation of <see cref="Overload:System.Linq.Enumerable.Max" />.</para
@@ -5490,8 +5490,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Linq.Enumerable.Max(System.Collections.Generic.IEnumerable{System.Nullable{System.Int64}})" /> method uses the <see cref="T:System.Int64" /> implementation of <see cref="T:System.IComparable`1" /> to compare values. </para
-          >
+            >The <see cref="M:System.Linq.Enumerable.Max(System.Collections.Generic.IEnumerable{System.Nullable{System.Int64}})" /> method uses the <see cref="T:System.Int64" /> implementation of <see cref="T:System.IComparable`1" /> to compare values.
+          </para>
           <para>If the source sequence is empty or contains only values that are null, this function returns null.</para>
           <para
             >In vbprvb query expression syntax, an Aggregate Into Max() clause translates to an invocation of <see cref="Overload:System.Linq.Enumerable.Max" />.</para
@@ -6773,8 +6773,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Linq.Enumerable.Min(System.Collections.Generic.IEnumerable{System.Nullable{System.Decimal}})" /> method uses the <see cref="T:System.Decimal" /> implementation of <see cref="T:System.IComparable`1" /> to compare values. </para
-          >
+            >The <see cref="M:System.Linq.Enumerable.Min(System.Collections.Generic.IEnumerable{System.Nullable{System.Decimal}})" /> method uses the <see cref="T:System.Decimal" /> implementation of <see cref="T:System.IComparable`1" /> to compare values.
+          </para>
           <para>If the source sequence is empty or contains only values that are null, this function returns null.</para>
           <para
             >In vbprvb query expression syntax, an Aggregate Into Min() clause translates to an invocation of <see cref="Overload:System.Linq.Enumerable.Min" />.</para
@@ -6829,8 +6829,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Linq.Enumerable.Min(System.Collections.Generic.IEnumerable{System.Nullable{System.Double}})" /> method uses the <see cref="T:System.Double" /> implementation of <see cref="T:System.IComparable`1" /> to compare values. </para
-          >
+            >The <see cref="M:System.Linq.Enumerable.Min(System.Collections.Generic.IEnumerable{System.Nullable{System.Double}})" /> method uses the <see cref="T:System.Double" /> implementation of <see cref="T:System.IComparable`1" /> to compare values.
+          </para>
           <para>If the source sequence is empty or contains only values that are null, this function returns null.</para>
           <para
             >In vbprvb query expression syntax, an Aggregate Into Min() clause translates to an invocation of <see cref="Overload:System.Linq.Enumerable.Min" />.</para
@@ -6885,8 +6885,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Linq.Enumerable.Min(System.Collections.Generic.IEnumerable{System.Nullable{System.Int32}})" /> method uses the <see cref="T:System.Int32" /> implementation of <see cref="T:System.IComparable`1" /> to compare values. </para
-          >
+            >The <see cref="M:System.Linq.Enumerable.Min(System.Collections.Generic.IEnumerable{System.Nullable{System.Int32}})" /> method uses the <see cref="T:System.Int32" /> implementation of <see cref="T:System.IComparable`1" /> to compare values.
+          </para>
           <para>If the source sequence is empty or contains only values that are null, this function returns null.</para>
           <para
             >In vbprvb query expression syntax, an Aggregate Into Min() clause translates to an invocation of <see cref="Overload:System.Linq.Enumerable.Min" />.</para
@@ -6941,8 +6941,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Linq.Enumerable.Min(System.Collections.Generic.IEnumerable{System.Nullable{System.Int64}})" /> method uses the <see cref="T:System.Int64" /> implementation of <see cref="T:System.IComparable`1" /> to compare values. </para
-          >
+            >The <see cref="M:System.Linq.Enumerable.Min(System.Collections.Generic.IEnumerable{System.Nullable{System.Int64}})" /> method uses the <see cref="T:System.Int64" /> implementation of <see cref="T:System.IComparable`1" /> to compare values.
+          </para>
           <para>If the source sequence is empty or contains only values that are null, this function returns null.</para>
           <para
             >In vbprvb query expression syntax, an Aggregate Into Min() clause translates to an invocation of <see cref="Overload:System.Linq.Enumerable.Min" />.</para
@@ -6997,8 +6997,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Linq.Enumerable.Min(System.Collections.Generic.IEnumerable{System.Nullable{System.Single}})" /> method uses the <see cref="T:System.Single" /> implementation of <see cref="T:System.IComparable`1" /> to compare values. </para
-          >
+            >The <see cref="M:System.Linq.Enumerable.Min(System.Collections.Generic.IEnumerable{System.Nullable{System.Single}})" /> method uses the <see cref="T:System.Single" /> implementation of <see cref="T:System.IComparable`1" /> to compare values.
+          </para>
           <para>If the source sequence is empty or contains only values that are null, this function returns null.</para>
           <para
             >In vbprvb query expression syntax, an Aggregate Into Min() clause translates to an invocation of <see cref="Overload:System.Linq.Enumerable.Min" />.</para
@@ -7109,8 +7109,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If type <paramref name="TSource" /> implements <see cref="T:System.IComparable`1" />, this method uses that implementation to compare values. Otherwise, if type <paramref name="TSource" /> implements <see cref="T:System.IComparable" />, that implementation is used to compare values. </para
-          >
+            >If type <paramref name="TSource" /> implements <see cref="T:System.IComparable`1" />, this method uses that implementation to compare values. Otherwise, if type <paramref name="TSource" /> implements <see cref="T:System.IComparable" />, that implementation is used to compare values.
+          </para>
           <para
             >If <paramref name="TSource" /> is a reference type and the source sequence is empty or contains only values that are null, this function returns null.</para
           >
@@ -7248,8 +7248,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Linq.Enumerable.Min``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Double})" /> method uses the <see cref="T:System.Double" /> implementation of <see cref="T:System.IComparable`1" /> to compare values. </para
-          >
+            >The <see cref="M:System.Linq.Enumerable.Min``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Double})" /> method uses the <see cref="T:System.Double" /> implementation of <see cref="T:System.IComparable`1" /> to compare values.
+          </para>
           <para
             >You can apply this method to a sequence of arbitrary values if you provide a function, <paramref name="selector" />, that projects the members of <paramref name="source" /> into a numeric type, specifically <see cref="T:System.Double" />.</para
           >
@@ -7322,8 +7322,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Linq.Enumerable.Min``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Int32})" /> method uses the <see cref="T:System.Int32" /> implementation of <see cref="T:System.IComparable`1" /> to compare values. </para
-          >
+            >The <see cref="M:System.Linq.Enumerable.Min``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Int32})" /> method uses the <see cref="T:System.Int32" /> implementation of <see cref="T:System.IComparable`1" /> to compare values.
+          </para>
           <para
             >You can apply this method to a sequence of arbitrary values if you provide a function, <paramref name="selector" />, that projects the members of <paramref name="source" /> into a numeric type, specifically <see cref="T:System.Int32" />.</para
           >
@@ -7396,8 +7396,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Linq.Enumerable.Min``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Int64})" /> method uses the <see cref="T:System.Int64" /> implementation of <see cref="T:System.IComparable`1" /> to compare values. </para
-          >
+            >The <see cref="M:System.Linq.Enumerable.Min``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Int64})" /> method uses the <see cref="T:System.Int64" /> implementation of <see cref="T:System.IComparable`1" /> to compare values.
+          </para>
           <para
             >You can apply this method to a sequence of arbitrary values if you provide a function, <paramref name="selector" />, that projects the members of <paramref name="source" /> into a numeric type, specifically <see cref="T:System.Int64" />.</para
           >
@@ -7473,8 +7473,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Linq.Enumerable.Min``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Nullable{System.Decimal}})" /> method uses the <see cref="T:System.Decimal" /> implementation of <see cref="T:System.IComparable`1" /> to compare values. </para
-          >
+            >The <see cref="M:System.Linq.Enumerable.Min``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Nullable{System.Decimal}})" /> method uses the <see cref="T:System.Decimal" /> implementation of <see cref="T:System.IComparable`1" /> to compare values.
+          </para>
           <para
             >You can apply this method to a sequence of arbitrary values if you provide a function, <paramref name="selector" />, that projects the members of <paramref name="source" /> into a numeric type, specifically <unmanagedCodeEntityReference>Nullable&lt;Decimal&gt;</unmanagedCodeEntityReference> in C# or <unmanagedCodeEntityReference>Nullable(Of Decimal)</unmanagedCodeEntityReference> in vbprvb.</para
           >
@@ -7552,8 +7552,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Linq.Enumerable.Min``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Nullable{System.Double}})" /> method uses the <see cref="T:System.Double" /> implementation of <see cref="T:System.IComparable`1" /> to compare values. </para
-          >
+            >The <see cref="M:System.Linq.Enumerable.Min``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Nullable{System.Double}})" /> method uses the <see cref="T:System.Double" /> implementation of <see cref="T:System.IComparable`1" /> to compare values.
+          </para>
           <para
             >You can apply this method to a sequence of arbitrary values if you provide a function, <paramref name="selector" />, that projects the members of <paramref name="source" /> into a numeric type, specifically <unmanagedCodeEntityReference>Nullable&lt;Double&gt;</unmanagedCodeEntityReference> in C# or <unmanagedCodeEntityReference>Nullable(Of Double)</unmanagedCodeEntityReference> in vbprvb.</para
           >
@@ -7631,8 +7631,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Linq.Enumerable.Min``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Nullable{System.Int32}})" /> method uses the <see cref="T:System.Int32" /> implementation of <see cref="T:System.IComparable`1" /> to compare values. </para
-          >
+            >The <see cref="M:System.Linq.Enumerable.Min``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Nullable{System.Int32}})" /> method uses the <see cref="T:System.Int32" /> implementation of <see cref="T:System.IComparable`1" /> to compare values.
+          </para>
           <para
             >You can apply this method to a sequence of arbitrary values if you provide a function, <paramref name="selector" />, that projects the members of source into a numeric type, specifically <unmanagedCodeEntityReference>Nullable&lt;Int32&gt;</unmanagedCodeEntityReference> in C# or <unmanagedCodeEntityReference>Nullable(Of Int32)</unmanagedCodeEntityReference> in vbprvb.</para
           >
@@ -7710,8 +7710,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Linq.Enumerable.Min``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Nullable{System.Int64}})" /> method uses the <see cref="T:System.Int64" /> implementation of <see cref="T:System.IComparable`1" /> to compare values. </para
-          >
+            >The <see cref="M:System.Linq.Enumerable.Min``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Nullable{System.Int64}})" /> method uses the <see cref="T:System.Int64" /> implementation of <see cref="T:System.IComparable`1" /> to compare values.
+          </para>
           <para
             >You can apply this method to a sequence of arbitrary values if you provide a function, <paramref name="selector" />, that projects the members of <paramref name="source" /> into a numeric type, specifically <unmanagedCodeEntityReference>Nullable&lt;Int64&gt;</unmanagedCodeEntityReference> in C# or <unmanagedCodeEntityReference>Nullable(Of Int64)</unmanagedCodeEntityReference> in vbprvb.</para
           >
@@ -7789,8 +7789,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Linq.Enumerable.Min``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Nullable{System.Single}})" /> method uses the <see cref="T:System.Single" /> implementation of <see cref="T:System.IComparable`1" /> to compare values. </para
-          >
+            >The <see cref="M:System.Linq.Enumerable.Min``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Nullable{System.Single}})" /> method uses the <see cref="T:System.Single" /> implementation of <see cref="T:System.IComparable`1" /> to compare values.
+          </para>
           <para
             >You can apply this method to a sequence of arbitrary values if you provide a function, <paramref name="selector" />, that projects the members of <paramref name="source" /> into a numeric type, specifically <unmanagedCodeEntityReference>Nullable&lt;Single&gt;</unmanagedCodeEntityReference> in C# or <unmanagedCodeEntityReference>Nullable(Of Single)</unmanagedCodeEntityReference> in vbprvb.</para
           >
@@ -7865,8 +7865,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Linq.Enumerable.Min``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Single})" /> method uses the <see cref="T:System.Single" /> implementation of <see cref="T:System.IComparable`1" /> to compare values. </para
-          >
+            >The <see cref="M:System.Linq.Enumerable.Min``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Single})" /> method uses the <see cref="T:System.Single" /> implementation of <see cref="T:System.IComparable`1" /> to compare values.
+          </para>
           <para
             >You can apply this method to a sequence of arbitrary values if you provide a function, <paramref name="selector" />, that projects the members of <paramref name="source" /> into a numeric type, specifically <see cref="T:System.Single" />.</para
           >
@@ -10974,8 +10974,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Linq.Enumerable.Sum``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Single})" /> method returns zero if <paramref name="source" /> contains no elements. </para
-          >
+            >The <see cref="M:System.Linq.Enumerable.Sum``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Single})" /> method returns zero if <paramref name="source" /> contains no elements.
+          </para>
           <para
             >You can apply this method to a sequence of arbitrary values if you provide a function, <paramref name="selector" />, that projects the members of <paramref name="source" /> into a numeric type, specifically <see cref="T:System.Single" />.</para
           >

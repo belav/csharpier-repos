@@ -78,8 +78,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Before using this method you must create an <see cref="T:System.Web.Configuration.HttpHandlerAction" /> object and initialize it with the proper name and type. After that, you can add the object just created to the collection. </para
-          >
+            >Before using this method you must create an <see cref="T:System.Web.Configuration.HttpHandlerAction" /> object and initialize it with the proper name and type. After that, you can add the object just created to the collection.
+          </para>
           <block subset="none" type="note">
             <para>ASP.NET searches for the handler assembly DLL in the application's private Bin directory first, and then it searches in the system assembly cache.</para>
           </block>
@@ -98,8 +98,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.Configuration.HttpHandlerAction" /> object to add to the collection. </param
-        >
+          />The <see cref="T:System.Web.Configuration.HttpHandlerAction" /> object to add to the collection.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -231,8 +231,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.Configuration.HttpHandlerAction" /> object for which to get the collection index. </param
-        >
+          />The <see cref="T:System.Web.Configuration.HttpHandlerAction" /> object for which to get the collection index.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -309,8 +309,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.Configuration.HttpHandlerAction" /> object to remove. </param
-        >
+          />The <see cref="T:System.Web.Configuration.HttpHandlerAction" /> object to remove.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

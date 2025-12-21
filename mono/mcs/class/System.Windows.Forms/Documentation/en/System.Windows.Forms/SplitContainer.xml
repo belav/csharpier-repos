@@ -332,8 +332,8 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>.
+          </para>
           <para>This event is not relevant to this class.</para>
         </remarks>
         <summary>
@@ -364,8 +364,8 @@
           <list type="bullet">
             <item>
               <para
-                >Use the <see cref="P:System.Windows.Forms.SplitContainer.BackgroundImage" /> property to place a graphic image onto a control. </para
-              >
+                >Use the <see cref="P:System.Windows.Forms.SplitContainer.BackgroundImage" /> property to place a graphic image onto a control.
+              </para>
             </item>
           </list>
           <block subset="none" type="note">
@@ -424,8 +424,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see cref="P:System.Windows.Forms.SplitContainer.BackgroundImage" /> property changes. </para
-          >
+            >Occurs when the <see cref="P:System.Windows.Forms.SplitContainer.BackgroundImage" /> property changes.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -856,8 +856,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnKeyDown">
@@ -899,8 +899,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.KeyEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.KeyEventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnKeyUp">
@@ -942,8 +942,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.KeyEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.KeyEventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnLayout">
@@ -982,8 +982,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.LayoutEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.LayoutEventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnLostFocus">
@@ -1019,8 +1019,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnMouseCaptureChanged">
@@ -1083,8 +1083,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.MouseEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.MouseEventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnMouseLeave">
@@ -1120,8 +1120,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnMouseMove">
@@ -1168,8 +1168,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.MouseEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.MouseEventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnMouseUp">
@@ -1211,8 +1211,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.MouseEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.MouseEventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnPaint">
@@ -1251,8 +1251,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.PaintEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.PaintEventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnRightToLeftChanged">
@@ -1288,8 +1288,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OnSplitterMoved">
@@ -1371,8 +1371,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.SplitterEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.SplitterEventArgs" /> that contains the event data.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1741,8 +1741,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.Keys" /> values that represents the key to process. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.Keys" /> values that represents the key to process.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ProcessTabKey">
@@ -1764,8 +1764,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="M:System.Windows.Forms.SplitContainer.ProcessTabKey(System.Boolean)" /> controls the tab focus order in the following manner: </para
-          >
+            <see cref="M:System.Windows.Forms.SplitContainer.ProcessTabKey(System.Boolean)" /> controls the tab focus order in the following manner:
+          </para>
           <list type="bullet">
             <item>
               <para
@@ -1805,8 +1805,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to cycle forward through the controls in the <see cref="T:System.Windows.Forms.ContainerControl" />; otherwise, false. </param
-        >
+          />true to cycle forward through the controls in the <see cref="T:System.Windows.Forms.ContainerControl" />; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ScaleControl">
@@ -1879,15 +1879,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to specify the direction of the control to select; otherwise, false. </param
-        >
+          />true to specify the direction of the control to select; otherwise, false.
+        </param>
         <param name="forward">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to move forward in the tab order; false to move backward in the tab order. </param
-        >
+          />true to move forward in the tab order; false to move backward in the tab order.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetBoundsCore">
@@ -2094,13 +2094,13 @@
               </term>
               <description>
                 <para
-                  >The distance in pixels of the splitter from the left edge of the <see cref="T:System.Windows.Forms.SplitContainer" />. </para
-                >
+                  >The distance in pixels of the splitter from the left edge of the <see cref="T:System.Windows.Forms.SplitContainer" />.
+                </para>
               </description>
               <description>
                 <para
-                  >This value is always 0 for a horizontal splitter, indicating that the splitter is flush with the left edge of the <see cref="T:System.Windows.Forms.SplitContainer" />. </para
-                >
+                  >This value is always 0 for a horizontal splitter, indicating that the splitter is flush with the left edge of the <see cref="T:System.Windows.Forms.SplitContainer" />.
+                </para>
               </description>
             </item>
             <item>
@@ -2109,13 +2109,13 @@
               </term>
               <description>
                 <para
-                  >This value is always 0 for a vertical splitter, indicating that the splitter is flush with the top edge of the <see cref="T:System.Windows.Forms.SplitContainer" />. </para
-                >
+                  >This value is always 0 for a vertical splitter, indicating that the splitter is flush with the top edge of the <see cref="T:System.Windows.Forms.SplitContainer" />.
+                </para>
               </description>
               <description>
                 <para
-                  >The distance in pixels of the splitter from the top edge of the <see cref="T:System.Windows.Forms.SplitContainer" />. </para
-                >
+                  >The distance in pixels of the splitter from the top edge of the <see cref="T:System.Windows.Forms.SplitContainer" />.
+                </para>
               </description>
             </item>
             <item>
@@ -2127,8 +2127,8 @@
               </description>
               <description>
                 <para
-                  >The height of the splitter, which is equivalent to the height of the <see cref="T:System.Windows.Forms.SplitContainer" /> control. </para
-                >
+                  >The height of the splitter, which is equivalent to the height of the <see cref="T:System.Windows.Forms.SplitContainer" /> control.
+                </para>
               </description>
             </item>
             <item>
@@ -2137,8 +2137,8 @@
               </term>
               <description>
                 <para
-                  >The height of the splitter, which is equivalent to the height of the <see cref="T:System.Windows.Forms.SplitContainer" /> control. </para
-                >
+                  >The height of the splitter, which is equivalent to the height of the <see cref="T:System.Windows.Forms.SplitContainer" /> control.
+                </para>
               </description>
               <description>
                 <para>The width of the splitter. </para>

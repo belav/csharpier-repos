@@ -13,8 +13,8 @@
         >Classes that implement the <see cref="T:System.ComponentModel.Design.Data.IDesignerDataSchema" /> interface retrieve schema information from a data store and return it to the user interface, typically to populate UI elements that enable the user to specify the data-store object that they  want to work with.</para
       >
       <para
-        >The <see cref="T:System.ComponentModel.Design.Data.IDesignerDataSchema" /> interface provides two methods: the <see cref="M:System.ComponentModel.Design.Data.IDesignerDataSchema.GetSchemaItems(System.ComponentModel.Design.Data.DesignerDataSchemaClass)" /> method, which returns the requested schema objects, and the <see cref="M:System.ComponentModel.Design.Data.IDesignerDataSchema.SupportsSchemaClass(System.ComponentModel.Design.Data.DesignerDataSchemaClass)" /> method, which indicates whether a specified data-schema object is supported by the data store. </para
-      >
+        >The <see cref="T:System.ComponentModel.Design.Data.IDesignerDataSchema" /> interface provides two methods: the <see cref="M:System.ComponentModel.Design.Data.IDesignerDataSchema.GetSchemaItems(System.ComponentModel.Design.Data.DesignerDataSchemaClass)" /> method, which returns the requested schema objects, and the <see cref="M:System.ComponentModel.Design.Data.IDesignerDataSchema.SupportsSchemaClass(System.ComponentModel.Design.Data.DesignerDataSchemaClass)" /> method, which indicates whether a specified data-schema object is supported by the data store.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -44,8 +44,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.ComponentModel.Design.Data.IDesignerDataSchema.GetSchemaItems(System.ComponentModel.Design.Data.DesignerDataSchemaClass)" /> method returns a collection of all the specified schema objects in the data store. </para
-          >
+            >The <see cref="M:System.ComponentModel.Design.Data.IDesignerDataSchema.GetSchemaItems(System.ComponentModel.Design.Data.DesignerDataSchemaClass)" /> method returns a collection of all the specified schema objects in the data store.
+          </para>
           <para
             >See the <see cref="T:System.ComponentModel.Design.Data.DesignerDataSchemaClass" /> class for the list of schema objects supported by the .NET Framework. Additional schema objects can be added to the <see cref="T:System.ComponentModel.Design.Data.DesignerDataSchemaClass" /> class by creating a derived type.</para
           >

@@ -7,8 +7,8 @@
       <list_item
         > An <non_terminal where="25.1"
           >unsafe-statement</non_terminal
-        > enables the use of an unsafe context within a block. The entire textual extent of the associated block is considered an unsafe context. </list_item
-      >
+        > enables the use of an unsafe context within a block. The entire textual extent of the associated block is considered an unsafe context.
+      </list_item>
     </list>
   </paragraph>
   <paragraph
@@ -246,8 +246,8 @@ public class B: A
    }  
 }  
 ]]>
-      </code_example>the unsafe modifier on the F method in A simply causes the textual extent of F to become an unsafe context in which the unsafe features of the language can be used. In the override of F in B, there is no need to re-specify the unsafe modifier-unless, of course, the F method in B itself needs access to unsafe features. </example
-    >
+      </code_example>the unsafe modifier on the F method in A simply causes the textual extent of F to become an unsafe context in which the unsafe features of the language can be used. In the override of F in B, there is no need to re-specify the unsafe modifier-unless, of course, the F method in B itself needs access to unsafe features.
+    </example>
   </paragraph>
   <paragraph>
     <example

@@ -20,8 +20,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This event is raised when the value of one of the following column properties changes for a <see cref="T:System.Windows.Forms.DataGridViewColumn" /> in a <see cref="T:System.Windows.Forms.DataGridView" /> control </para
-      >
+        >This event is raised when the value of one of the following column properties changes for a <see cref="T:System.Windows.Forms.DataGridViewColumn" /> in a <see cref="T:System.Windows.Forms.DataGridView" /> control
+      </para>
       <list type="bullet">
         <item>
           <para>
@@ -63,8 +63,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see cref="E:System.Windows.Forms.DataGridView.ColumnStateChanged" /> event. </para
-      >
+        >Provides data for the <see cref="E:System.Windows.Forms.DataGridView.ColumnStateChanged" /> event.
+      </para>
     </summary>
   </Docs>
   <Members>
@@ -84,8 +84,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridViewColumnStateChangedEventArgs" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridViewColumnStateChangedEventArgs" /> class.
+          </para>
         </summary>
         <param name="dataGridViewColumn">
           <attribution

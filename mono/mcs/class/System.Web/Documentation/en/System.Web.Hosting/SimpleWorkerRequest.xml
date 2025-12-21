@@ -61,22 +61,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The page to be requested (or the virtual path to the page, relative to the application directory). </param
-        >
+          />The page to be requested (or the virtual path to the page, relative to the application directory).
+        </param>
         <param name="query">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text of the query string. </param
-        >
+          />The text of the query string.
+        </param>
         <param name="output">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.TextWriter" /> that captures output from the response </param
-        >
+          />A <see cref="T:System.IO.TextWriter" /> that captures output from the response
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -110,36 +110,36 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The virtual path to the application directory; for example, "/app". </param
-        >
+          />The virtual path to the application directory; for example, "/app".
+        </param>
         <param name="appPhysicalDir">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The physical path to the application directory; for example, "c:\app". </param
-        >
+          />The physical path to the application directory; for example, "c:\app".
+        </param>
         <param name="page">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The virtual path for the request (relative to the application directory). </param
-        >
+          />The virtual path for the request (relative to the application directory).
+        </param>
         <param name="query">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text of the query string. </param
-        >
+          />The text of the query string.
+        </param>
         <param name="output">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.TextWriter" /> that captures the output from the response. </param
-        >
+          />A <see cref="T:System.IO.TextWriter" /> that captures the output from the response.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -190,8 +190,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if this is the last time response data will be flushed; otherwise, false. </param
-        >
+          />true if this is the last time response data will be flushed; otherwise, false.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -528,8 +528,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the requested server variable. </param
-        >
+          />The name of the requested server variable.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -649,8 +649,8 @@
           >
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />The virtual path. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The virtual path.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -699,11 +699,11 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The header index. For example, <see cref="F:System.Web.HttpWorkerRequest.HeaderContentLength" />. </param
-        >
+          />The header index. For example, <see cref="F:System.Web.HttpWorkerRequest.HeaderContentLength" />.
+        </param>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The header value. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The header value.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -735,22 +735,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The handle of the file to send. </param
-        >
+          />The handle of the file to send.
+        </param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting position in the file. </param
-        >
+          />The starting position in the file.
+        </param>
         <param name="length">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes to send. </param
-        >
+          />The number of bytes to send.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -782,22 +782,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the file to send. </param
-        >
+          />The name of the file to send.
+        </param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting position in the file. </param
-        >
+          />The starting position in the file.
+        </param>
         <param name="length">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes to send. </param
-        >
+          />The number of bytes to send.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -824,19 +824,15 @@
           <para>Adds the contents of a byte array to the response and specifies the number of bytes to send.</para>
         </summary>
         <param name="data">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The byte array to send. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The byte array to send.
+        </param>
         <param name="length">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes to send. </param
-        >
+          />The number of bytes to send.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -863,19 +859,15 @@
           <para>Specifies the HTTP status code and status description of the response; for example, SendStatus(200, "Ok").</para>
         </summary>
         <param name="statusCode">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The status code to send </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The status code to send
+        </param>
         <param name="statusDescription">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The status description to send. </param
-        >
+          />The status description to send.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

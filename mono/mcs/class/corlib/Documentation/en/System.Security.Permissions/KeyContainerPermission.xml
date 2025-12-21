@@ -72,8 +72,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the <see cref="T:System.Security.Permissions.KeyContainerPermissionFlags" /> values. </param
-        >
+          />A bitwise combination of the <see cref="T:System.Security.Permissions.KeyContainerPermissionFlags" /> values.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -110,8 +110,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Security.Permissions.PermissionState" /> values. </param
-        >
+          />One of the <see cref="T:System.Security.Permissions.PermissionState" /> values.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -149,15 +149,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the <see cref="T:System.Security.Permissions.KeyContainerPermissionFlags" /> values. </param
-        >
+          />A bitwise combination of the <see cref="T:System.Security.Permissions.KeyContainerPermissionFlags" /> values.
+        </param>
         <param name="accessList">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" /> objects identifying specific key container access rights. </param
-        >
+          />An array of <see cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" /> objects identifying specific key container access rights.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AccessEntries">
@@ -294,8 +294,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Security.SecurityElement" /> that contains the XML encoding used to reconstruct the permission. </param
-        >
+          />A <see cref="T:System.Security.SecurityElement" /> that contains the XML encoding used to reconstruct the permission.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Intersect">
@@ -337,8 +337,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission to intersect with the current permission. It must be the same type as the current permission. </param
-        >
+          />A permission to intersect with the current permission. It must be the same type as the current permission.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsSubsetOf">
@@ -382,8 +382,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission to test for the subset relationship. This permission must be the same type as the current permission. </param
-        >
+          />A permission to test for the subset relationship. This permission must be the same type as the current permission.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsUnrestricted">
@@ -518,8 +518,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission to combine with the current permission. It must be of the same type as the current permission. </param
-        >
+          />A permission to combine with the current permission. It must be of the same type as the current permission.
+        </param>
       </Docs>
     </Member>
   </Members>

@@ -61,14 +61,14 @@
     > for each accessor specified is simply a semicolon. For the accessors of any non-abstract, non-extern property, the <non_terminal
       where="17.6.2"
       >accessor-body</non_terminal
-    > is a block which specifies the statements to be executed when the corresponding accessor is invoked. </paragraph
-  >
+    > is a block which specifies the statements to be executed when the corresponding accessor is invoked.
+  </paragraph>
   <paragraph
-    >A get accessor corresponds to a parameterless method with a return value of the property type. Except as the target of an assignment, when a property is referenced in an expression, the get accessor of the property is invoked to compute the value of the property (<hyperlink>14.1.1</hyperlink>). The body of a get accessor must conform to the rules for value-returning methods described in <hyperlink>17.5.8</hyperlink>. In particular, all return statements in the body of a get accessor must specify an expression that is implicitly convertible to the property type. Furthermore, the endpoint of a get accessor must not be reachable. </paragraph
-  >
+    >A get accessor corresponds to a parameterless method with a return value of the property type. Except as the target of an assignment, when a property is referenced in an expression, the get accessor of the property is invoked to compute the value of the property (<hyperlink>14.1.1</hyperlink>). The body of a get accessor must conform to the rules for value-returning methods described in <hyperlink>17.5.8</hyperlink>. In particular, all return statements in the body of a get accessor must specify an expression that is implicitly convertible to the property type. Furthermore, the endpoint of a get accessor must not be reachable.
+  </paragraph>
   <paragraph
-    >A set accessor corresponds to a method with a single value parameter of the property type and a <keyword>void</keyword> return type. The implicit parameter of a set accessor is always named value. When a property is referenced as the target of an assignment (<hyperlink>14.13</hyperlink>), or as the operand of ++ or  (<hyperlink>14.5.9</hyperlink>, --14.6.5), the set accessor is invoked with an argument (whose value is that of the right-hand side of the assignment or the operand of the ++ or  --operator) that provides the new value (<hyperlink>14.13.1</hyperlink>). The body of a set accessor must conform to the rules for <keyword>void</keyword> methods described in <hyperlink>17.5.8</hyperlink>. In particular, return statements in the set accessor body are not permitted to specify an expression. Since a set accessor implicitly has a parameter named value, it is a compile-time error for a local variable declaration in a set accessor to have that name. </paragraph
-  >
+    >A set accessor corresponds to a method with a single value parameter of the property type and a <keyword>void</keyword> return type. The implicit parameter of a set accessor is always named value. When a property is referenced as the target of an assignment (<hyperlink>14.13</hyperlink>), or as the operand of ++ or  (<hyperlink>14.5.9</hyperlink>, --14.6.5), the set accessor is invoked with an argument (whose value is that of the right-hand side of the assignment or the operand of the ++ or  --operator) that provides the new value (<hyperlink>14.13.1</hyperlink>). The body of a set accessor must conform to the rules for <keyword>void</keyword> methods described in <hyperlink>17.5.8</hyperlink>. In particular, return statements in the set accessor body are not permitted to specify an expression. Since a set accessor implicitly has a parameter named value, it is a compile-time error for a local variable declaration in a set accessor to have that name.
+  </paragraph>
   <paragraph
     >Based on the presence or absence of the get and set accessors, a property is classified as follows: <list>
       <list_item> A property that includes both a get accessor and a set accessor is said to be a read-write property. </list_item>
@@ -101,8 +101,8 @@ public class Button: Control
    }  
 }  
 ]]>
-      </code_example>the Button control declares a public Caption property. The get accessor of the Caption property returns the string stored in the private caption field. The set accessor checks if the new value is different from the current value, and if so, it stores the new value and repaints the control. Properties often follow the pattern shown above: The get accessor simply returns a value stored in a private field, and the set accessor modifies that private field and then performs any additional actions required to fully update the state of the object. </example
-    >
+      </code_example>the Button control declares a public Caption property. The get accessor of the Caption property returns the string stored in the private caption field. The set accessor checks if the new value is different from the current value, and if so, it stores the new value and repaints the control. Properties often follow the pattern shown above: The get accessor simply returns a value stored in a private field, and the set accessor modifies that private field and then performs any additional actions required to fully update the state of the object.
+    </example>
   </paragraph>
   <paragraph>
     <example
@@ -240,8 +240,8 @@ class Counter
    }  
 }  
 ]]>
-      </code_example>the value of the Next property depends on the number of times the property has previously been accessed. </example
-    >
+      </code_example>the value of the Next property depends on the number of times the property has previously been accessed.
+    </example>
   </paragraph>
   <paragraph>
     <example>Thus, accessing the property produces an observable side effect, and the property should be implemented as a method instead. end example]</example>

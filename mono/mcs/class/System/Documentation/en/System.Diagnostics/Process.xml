@@ -245,8 +245,8 @@
             >In contrast, <see cref="M:System.Diagnostics.Process.BeginErrorReadLine" /> starts asynchronous read operations on the <see cref="P:System.Diagnostics.Process.StandardError" /> stream. This method enables the designated event handler for the stream output and immediately returns to the caller, which can perform other work while the stream output is directed to the event handler.</para
           >
           <para
-            >Follow these steps to perform asynchronous read operations on <see cref="P:System.Diagnostics.Process.StandardError" /> for a <see cref="T:System.Diagnostics.Process" /> : </para
-          >
+            >Follow these steps to perform asynchronous read operations on <see cref="P:System.Diagnostics.Process.StandardError" /> for a <see cref="T:System.Diagnostics.Process" /> :
+          </para>
           <list type="ordered">
             <item>
               <para
@@ -322,8 +322,8 @@
             >In contrast, <see cref="M:System.Diagnostics.Process.BeginOutputReadLine" /> starts asynchronous read operations on the <see cref="P:System.Diagnostics.Process.StandardOutput" /> stream. This method enables a designated event handler for the stream output and immediately returns to the caller, which can perform other work while the stream output is directed to the event handler.</para
           >
           <para
-            >Follow these steps to perform asynchronous read operations on <see cref="P:System.Diagnostics.Process.StandardOutput" /> for a <see cref="T:System.Diagnostics.Process" /> : </para
-          >
+            >Follow these steps to perform asynchronous read operations on <see cref="P:System.Diagnostics.Process.StandardOutput" /> for a <see cref="T:System.Diagnostics.Process" /> :
+          </para>
           <list type="ordered">
             <item>
               <para
@@ -399,8 +399,8 @@
             >After canceling, you can resume the asynchronous read operation by calling <see cref="M:System.Diagnostics.Process.BeginErrorReadLine" /> again.</para
           >
           <para
-            >When you call <see cref="M:System.Diagnostics.Process.CancelErrorRead" />, all in-progress read operations for <see cref="P:System.Diagnostics.Process.StandardError" /> are completed and then the event handler is disabled. All further redirected output to <see cref="P:System.Diagnostics.Process.StandardError" /> is saved in a buffer. If you re-enable the event handler with a call to <see cref="M:System.Diagnostics.Process.BeginErrorReadLine" />, the saved output is sent to the event handler and asynchronous read operations resume. If you want to change the event handler before resuming asynchronous read operations, you must remove the existing event handler before adding the new event handler: </para
-          >
+            >When you call <see cref="M:System.Diagnostics.Process.CancelErrorRead" />, all in-progress read operations for <see cref="P:System.Diagnostics.Process.StandardError" /> are completed and then the event handler is disabled. All further redirected output to <see cref="P:System.Diagnostics.Process.StandardError" /> is saved in a buffer. If you re-enable the event handler with a call to <see cref="M:System.Diagnostics.Process.BeginErrorReadLine" />, the saved output is sent to the event handler and asynchronous read operations resume. If you want to change the event handler before resuming asynchronous read operations, you must remove the existing event handler before adding the new event handler:
+          </para>
           <code>    // At this point the DataReceivedEventHandler(ErrorHandler1) 
     // has executed a CancelErrorRead.
 
@@ -458,8 +458,8 @@
             >After canceling, you can resume asynchronous read operations by calling <see cref="M:System.Diagnostics.Process.BeginOutputReadLine" /> again.</para
           >
           <para
-            >When you call <see cref="M:System.Diagnostics.Process.CancelOutputRead" />, all in-progress read operations for <see cref="P:System.Diagnostics.Process.StandardOutput" /> are completed and then the event handler is disabled. All further redirected output to <see cref="P:System.Diagnostics.Process.StandardOutput" /> is saved in a buffer. If you re-enable the event handler with a call to <see cref="M:System.Diagnostics.Process.BeginOutputReadLine" />, the saved output is sent to the event handler and asynchronous read operations resume. If you want to change the event handler before resuming asynchronous read operations, you must remove the existing event handler before adding the new event handler: </para
-          >
+            >When you call <see cref="M:System.Diagnostics.Process.CancelOutputRead" />, all in-progress read operations for <see cref="P:System.Diagnostics.Process.StandardOutput" /> are completed and then the event handler is disabled. All further redirected output to <see cref="P:System.Diagnostics.Process.StandardOutput" /> is saved in a buffer. If you re-enable the event handler with a call to <see cref="M:System.Diagnostics.Process.BeginOutputReadLine" />, the saved output is sent to the event handler and asynchronous read operations resume. If you want to change the event handler before resuming asynchronous read operations, you must remove the existing event handler before adding the new event handler:
+          </para>
           <code>    // At this point the DataReceivedEventHandler(OutputHandler1) 
     // has executed a CancelOutputRead.
 
@@ -511,8 +511,8 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see cref="M:System.Diagnostics.Process.Dispose(System.Boolean)" /> method calls <see cref="M:System.Diagnostics.Process.Close" />. Placing the <see cref="T:System.Diagnostics.Process" /> object in a using block disposes of resources without the need to call <see cref="M:System.Diagnostics.Process.Close" />. </para
-            >
+              >The <see cref="M:System.Diagnostics.Process.Dispose(System.Boolean)" /> method calls <see cref="M:System.Diagnostics.Process.Close" />. Placing the <see cref="T:System.Diagnostics.Process" /> object in a using block disposes of resources without the need to call <see cref="M:System.Diagnostics.Process.Close" />.
+            </para>
           </block>
         </remarks>
         <summary>
@@ -589,8 +589,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="EnableRaisingEvents">
@@ -762,8 +762,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use <see cref="P:System.Diagnostics.Process.ExitCode" /> to get the status that the system process returned when it exited. You can use the exit code much like an integer return value from a main() procedure. </para
-          >
+            >Use <see cref="P:System.Diagnostics.Process.ExitCode" /> to get the status that the system process returned when it exited. You can use the exit code much like an integer return value from a main() procedure.
+          </para>
           <para
             >The <see cref="P:System.Diagnostics.Process.ExitCode" /> value for a process reflects the specific convention implemented by the application developer for that process. If you use the exit code value to make decisions in your code, be sure that you know the exit code convention used by the application process.</para
           >
@@ -994,8 +994,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The system-unique identifier of a process resource. </param
-        >
+          />The system-unique identifier of a process resource.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetProcessById">
@@ -1055,15 +1055,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The system-unique identifier of a process resource. </param
-        >
+          />The system-unique identifier of a process resource.
+        </param>
         <param name="machineName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of a computer on the network. </param
-        >
+          />The name of a computer on the network.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetProcesses">
@@ -1165,8 +1165,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The computer from which to read the list of processes. </param
-        >
+          />The computer from which to read the list of processes.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetProcessesByName">
@@ -1220,8 +1220,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The friendly name of the process. </param
-        >
+          />The friendly name of the process.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetProcessesByName">
@@ -1285,15 +1285,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The friendly name of the process. </param
-        >
+          />The friendly name of the process.
+        </param>
         <param name="machineName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of a computer on the network. </param
-        >
+          />The name of a computer on the network.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Handle">
@@ -1578,8 +1578,8 @@
           >
           <block subset="none" type="note">
             <para
-              >When the associated process is executing on the local machine, this property returns a period (".") for the machine name. You should use the <see cref="P:System.Environment.MachineName" /> property to get the correct machine name. </para
-            >
+              >When the associated process is executing on the local machine, this property returns a period (".") for the machine name. You should use the <see cref="P:System.Environment.MachineName" /> property to get the correct machine name.
+            </para>
           </block>
         </remarks>
         <summary>
@@ -1665,8 +1665,8 @@
             >You can get the <see cref="P:System.Diagnostics.Process.MainWindowHandle" /> property only for processes that are running on the local computer. The <see cref="P:System.Diagnostics.Process.MainWindowHandle" /> property is a value that uniquely identifies the window that is associated with the process.</para
           >
           <para
-            >A process has a main window associated with it only if the process has a graphical interface. If the associated process does not have a main window, the <see cref="P:System.Diagnostics.Process.MainWindowHandle" /> value is zero. The value is also zero for processes that have been hidden, that is, processes that are not visible in the taskbar. This can be the case for processes that appear as icons in the notification area, at the far right of the taskbar. </para
-          >
+            >A process has a main window associated with it only if the process has a graphical interface. If the associated process does not have a main window, the <see cref="P:System.Diagnostics.Process.MainWindowHandle" /> value is zero. The value is also zero for processes that have been hidden, that is, processes that are not visible in the taskbar. This can be the case for processes that appear as icons in the notification area, at the far right of the taskbar.
+          </para>
           <para
             >If you have just started a process and want to use its main window handle, consider using the <see cref="M:System.Diagnostics.Process.WaitForInputIdle(System.Int32)" /> method to allow the process to finish starting, ensuring that the main window handle has been created. Otherwise, an exception will be thrown.</para
           >
@@ -1917,8 +1917,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The value returned by this property represents the current size of nonpaged system memory used by the process. System memory is the physical memory used by the operating system, and is divided into paged and nonpaged pools. Nonpaged memory allocations remain in system memory and are not paged out to the virtual memory paging file.</para>
           <para
-            >This property can be used to monitor memory usage on computers with 32-bit processors or 64-bit processors. The property value is equivalent to the <ui>Pool Nonpaged Bytes</ui> performance counter for the process. </para
-          >
+            >This property can be used to monitor memory usage on computers with 32-bit processors or 64-bit processors. The property value is equivalent to the <ui>Pool Nonpaged Bytes</ui> performance counter for the process.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2086,8 +2086,8 @@
             >The value returned by this property represents the current size of memory in the virtual memory paging file used by the process. The operating system uses the virtual memory paging file in conjunction with physical memory to manage the virtual address space for each process. When pageable memory is not in use, it can be transferred to the virtual memory paging file on disk. To obtain the size of memory used by the operating system for the process, use the <see cref="P:System.Diagnostics.Process.PagedSystemMemorySize64" /> property.</para
           >
           <para
-            >This property can be used to monitor memory usage on computers with 32-bit processors or 64-bit processors. The property value is equivalent to the <ui>Page File Bytes</ui> performance counter for the process. </para
-          >
+            >This property can be used to monitor memory usage on computers with 32-bit processors or 64-bit processors. The property value is equivalent to the <ui>Page File Bytes</ui> performance counter for the process.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2163,8 +2163,8 @@
             >The value returned by this property value represents the current size of pageable system memory used by the process. System memory is the physical memory used by the operating system, and is divided into paged and nonpaged pools. When pageable memory is not in use, it can be transferred to the virtual memory paging file on disk. To obtain the size of the application memory used by the process, use the <see cref="P:System.Diagnostics.Process.PagedMemorySize64" /> property.</para
           >
           <para
-            >This property can be used to monitor memory usage on computers with 32-bit processors or 64-bit processors. The property value is equivalent to the <ui>Pool Paged Bytes</ui> performance counter for the process. </para
-          >
+            >This property can be used to monitor memory usage on computers with 32-bit processors or 64-bit processors. The property value is equivalent to the <ui>Pool Paged Bytes</ui> performance counter for the process.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2238,8 +2238,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The value returned by this property value represents the maximum size of memory in the virtual memory paging file used by the process since it started. The operating system uses the virtual memory paging file in conjunction with physical memory to manage the virtual address space for each process. When pageable memory is not in use, it can be transferred to the virtual memory paging file on disk.</para>
           <para
-            >This property can be used to monitor memory usage on computers with 32-bit processors or 64-bit processors. The property value is equivalent to the <ui>Page File Bytes Peak</ui> performance counter for the process. </para
-          >
+            >This property can be used to monitor memory usage on computers with 32-bit processors or 64-bit processors. The property value is equivalent to the <ui>Page File Bytes Peak</ui> performance counter for the process.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2307,8 +2307,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The value returned by this property represents the maximum size of virtual memory used by the process since it started. The operating system maps the virtual address space for each process either to pages loaded in physical memory, or to pages stored in the virtual memory paging file on disk.</para>
           <para
-            >This property can be used to monitor memory usage on computers with 32-bit processors or 64-bit processors. The property value is equivalent to the <ui>Virtual Bytes Peak</ui> performance counter for the process. </para
-          >
+            >This property can be used to monitor memory usage on computers with 32-bit processors or 64-bit processors. The property value is equivalent to the <ui>Virtual Bytes Peak</ui> performance counter for the process.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2381,8 +2381,8 @@
           <para>The value returned by this property represents the maximum size of working set memory used by the process since it started. The working set of a process is the set of memory pages currently visible to the process in physical RAM memory. These pages are resident and available for an application to use without triggering a page fault.</para>
           <para>The working set includes both shared and private data. The shared data includes the pages that contain all the instructions that the process executes, including instructions from the process modules and the system libraries.</para>
           <para
-            >This property can be used to monitor memory usage on computers with 32-bit processors or 64-bit processors. The property value is equivalent to the <ui>Working Set Peak</ui> performance counter for the process. </para
-          >
+            >This property can be used to monitor memory usage on computers with 32-bit processors or 64-bit processors. The property value is equivalent to the <ui>Working Set Peak</ui> performance counter for the process.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2593,8 +2593,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The value returned by this property represents the current size of memory used by the process that cannot be shared with other processes.</para>
           <para
-            >This property can be used to monitor memory usage on computers with 32-bit processors or 64-bit processors. The property value is equivalent to the <ui>Private Bytes</ui> performance counter for the process. </para
-          >
+            >This property can be used to monitor memory usage on computers with 32-bit processors or 64-bit processors. The property value is equivalent to the <ui>Private Bytes</ui> performance counter for the process.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3223,8 +3223,8 @@
             >This overload lets you start a process without first creating a new <see cref="T:System.Diagnostics.Process" /> instance. Using this overload with a <see cref="T:System.Diagnostics.ProcessStartInfo" /> parameter is an alternative to the explicit steps of creating a new <see cref="T:System.Diagnostics.Process" /> instance, setting its <see cref="P:System.Diagnostics.Process.StartInfo" /> properties, and calling <see cref="M:System.Diagnostics.Process.Start" /> for the <see cref="T:System.Diagnostics.Process" /> instance.</para
           >
           <para
-            >Using a <see cref="T:System.Diagnostics.ProcessStartInfo" /> instance as the parameter lets you call <see cref="M:System.Diagnostics.Process.Start" /> with the most control over what is passed into the call to start the process. If you need to pass only a file name or a file name and arguments, it is not necessary to create a new <see cref="T:System.Diagnostics.ProcessStartInfo" /> instance, although that is an option. The only <see cref="P:System.Diagnostics.Process.StartInfo" /> property that must be set is the <see cref="P:System.Diagnostics.ProcessStartInfo.FileName" /> property. The <see cref="P:System.Diagnostics.ProcessStartInfo.FileName" /> property does not need to represent an executable file. It can be of any file type for which the extension has been associated with an application that is installed on the system. For example, the <see cref="P:System.Diagnostics.ProcessStartInfo.FileName" /> property can have a .txt extension if you have associated text files with an editor, such as Notepad, or it can have a .doc extension if you have associated.doc files with a word processing tool, such as Microsoft Word. </para
-          >
+            >Using a <see cref="T:System.Diagnostics.ProcessStartInfo" /> instance as the parameter lets you call <see cref="M:System.Diagnostics.Process.Start" /> with the most control over what is passed into the call to start the process. If you need to pass only a file name or a file name and arguments, it is not necessary to create a new <see cref="T:System.Diagnostics.ProcessStartInfo" /> instance, although that is an option. The only <see cref="P:System.Diagnostics.Process.StartInfo" /> property that must be set is the <see cref="P:System.Diagnostics.ProcessStartInfo.FileName" /> property. The <see cref="P:System.Diagnostics.ProcessStartInfo.FileName" /> property does not need to represent an executable file. It can be of any file type for which the extension has been associated with an application that is installed on the system. For example, the <see cref="P:System.Diagnostics.ProcessStartInfo.FileName" /> property can have a .txt extension if you have associated text files with an editor, such as Notepad, or it can have a .doc extension if you have associated.doc files with a word processing tool, such as Microsoft Word.
+          </para>
           <para>You can start a ClickOnce application by specifying the location (for example, a Web address) from which you originally installed the application. Do not start a ClickOnce application by specifying its installed location on your hard drive.</para>
           <para
             >If the <see cref="P:System.Diagnostics.ProcessStartInfo.UserName" /> and <see cref="P:System.Diagnostics.ProcessStartInfo.Password" /> properties of the <see cref="P:System.Diagnostics.Process.StartInfo" /> instance are set, the unmanaged <unmanagedCodeEntityReference>CreateProcessWithLogonW</unmanagedCodeEntityReference> function is called, which starts the process in a new window even if the <see cref="P:System.Diagnostics.ProcessStartInfo.CreateNoWindow" /> property value is true or the <see cref="P:System.Diagnostics.ProcessStartInfo.WindowStyle" /> property value is <see cref="F:System.Diagnostics.ProcessWindowStyle.Hidden" />.</para
@@ -3262,8 +3262,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Diagnostics.ProcessStartInfo" /> that contains the information that is used to start the process, including the file name and any command-line arguments. </param
-        >
+          />The <see cref="T:System.Diagnostics.ProcessStartInfo" /> that contains the information that is used to start the process, including the file name and any command-line arguments.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Start">
@@ -3297,8 +3297,8 @@
             <para>If the address of the executable file to start is a URL, the process is not started and null is returned.</para>
           </block>
           <para
-            >This overload lets you start a process without first creating a new <see cref="T:System.Diagnostics.Process" /> instance. The overload is an alternative to the explicit steps of creating a new <see cref="T:System.Diagnostics.Process" /> instance, setting the <see cref="P:System.Diagnostics.ProcessStartInfo.FileName" /> member of the <see cref="P:System.Diagnostics.Process.StartInfo" /> property, and calling <see cref="M:System.Diagnostics.Process.Start" /> for the <see cref="T:System.Diagnostics.Process" /> instance. </para
-          >
+            >This overload lets you start a process without first creating a new <see cref="T:System.Diagnostics.Process" /> instance. The overload is an alternative to the explicit steps of creating a new <see cref="T:System.Diagnostics.Process" /> instance, setting the <see cref="P:System.Diagnostics.ProcessStartInfo.FileName" /> member of the <see cref="P:System.Diagnostics.Process.StartInfo" /> property, and calling <see cref="M:System.Diagnostics.Process.Start" /> for the <see cref="T:System.Diagnostics.Process" /> instance.
+          </para>
           <para
             >You can start a ClickOnce application by setting the <paramref name="fileName" /> parameter to the location (for example, a Web address) from which you originally installed the application. Do not start a ClickOnce application by specifying its installed location on your hard drive.</para
           >
@@ -3341,8 +3341,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of a document or application file to run in the process. </param
-        >
+          />The name of a document or application file to run in the process.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Start">
@@ -3415,15 +3415,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of an application file to run in the process. </param
-        >
+          />The name of an application file to run in the process.
+        </param>
         <param name="arguments">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Command-line arguments to pass when starting the process. </param
-        >
+          />Command-line arguments to pass when starting the process.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Start">
@@ -3577,15 +3577,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of an application file to run in the process. </param
-        >
+          />The name of an application file to run in the process.
+        </param>
         <param name="arguments">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Command-line arguments to pass when starting the process. </param
-        >
+          />Command-line arguments to pass when starting the process.
+        </param>
         <param name="password">
           <attribution
             license="cc4"
@@ -3637,8 +3637,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="P:System.Diagnostics.Process.StartInfo" /> represents the set of parameters to use to start a process. When <see cref="M:System.Diagnostics.Process.Start" /> is called, the <see cref="P:System.Diagnostics.Process.StartInfo" /> is used to specify the process to start. The only necessary <see cref="P:System.Diagnostics.Process.StartInfo" /> member to set is the <see cref="P:System.Diagnostics.ProcessStartInfo.FileName" /> property. Starting a process by specifying the <see cref="P:System.Diagnostics.ProcessStartInfo.FileName" /> property is similar to typing the information in the <ui>Run</ui> dialog box of the Windows <ui>Start</ui> menu. Therefore, the <see cref="P:System.Diagnostics.ProcessStartInfo.FileName" /> property does not need to represent an executable file. It can be of any file type for which the extension has been associated with an application installed on the system. For example the <see cref="P:System.Diagnostics.ProcessStartInfo.FileName" /> can have a .txt extension if you have associated text files with an editor, such as Notepad, or it can have a .doc if you have associated.doc files with a word processing tool, such as Microsoft Word. Similarly, in the same way that the <ui>Run</ui> dialog box can accept an executable file name with or without the .exe extension, the .exe extension is optional in the <see cref="P:System.Diagnostics.ProcessStartInfo.FileName" /> member. For example, you can set the <see cref="P:System.Diagnostics.ProcessStartInfo.FileName" /> property to either "Notepad.exe" or "Notepad". </para
-          >
+            <see cref="P:System.Diagnostics.Process.StartInfo" /> represents the set of parameters to use to start a process. When <see cref="M:System.Diagnostics.Process.Start" /> is called, the <see cref="P:System.Diagnostics.Process.StartInfo" /> is used to specify the process to start. The only necessary <see cref="P:System.Diagnostics.Process.StartInfo" /> member to set is the <see cref="P:System.Diagnostics.ProcessStartInfo.FileName" /> property. Starting a process by specifying the <see cref="P:System.Diagnostics.ProcessStartInfo.FileName" /> property is similar to typing the information in the <ui>Run</ui> dialog box of the Windows <ui>Start</ui> menu. Therefore, the <see cref="P:System.Diagnostics.ProcessStartInfo.FileName" /> property does not need to represent an executable file. It can be of any file type for which the extension has been associated with an application installed on the system. For example the <see cref="P:System.Diagnostics.ProcessStartInfo.FileName" /> can have a .txt extension if you have associated text files with an editor, such as Notepad, or it can have a .doc if you have associated.doc files with a word processing tool, such as Microsoft Word. Similarly, in the same way that the <ui>Run</ui> dialog box can accept an executable file name with or without the .exe extension, the .exe extension is optional in the <see cref="P:System.Diagnostics.ProcessStartInfo.FileName" /> member. For example, you can set the <see cref="P:System.Diagnostics.ProcessStartInfo.FileName" /> property to either "Notepad.exe" or "Notepad".
+          </para>
           <para
             >You can start a ClickOnce application by setting the <see cref="P:System.Diagnostics.ProcessStartInfo.FileName" /> property to the location (for example, a Web address) from which you originally installed the application. Do not start a ClickOnce application by specifying its installed location on your hard drive.</para
           >
@@ -3945,8 +3945,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The value returned by this property represents the current size of virtual memory used by the process. The operating system maps the virtual address space for each process either to pages loaded in physical memory, or to pages stored in the virtual memory paging file on disk.</para>
           <para
-            >This property can be used to monitor memory usage on computers with 32-bit processors or 64-bit processors. The property value is equivalent to the <ui>Virtual Bytes</ui> performance counter for the process. </para
-          >
+            >This property can be used to monitor memory usage on computers with 32-bit processors or 64-bit processors. The property value is equivalent to the <ui>Virtual Bytes</ui> performance counter for the process.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -4025,8 +4025,8 @@
           >
           <block subset="none" type="note">
             <para
-              >In the net_v35_long and earlier versions, if <paramref name="milliseconds" /> was -1, the <see cref="M:System.Diagnostics.Process.WaitForExit(System.Int32)" /> overload waited for <see cref="F:System.Int32.MaxValue" /> milliseconds (approximately 24 days), not indefinitely. </para
-            >
+              >In the net_v35_long and earlier versions, if <paramref name="milliseconds" /> was -1, the <see cref="M:System.Diagnostics.Process.WaitForExit(System.Int32)" /> overload waited for <see cref="F:System.Int32.MaxValue" /> milliseconds (approximately 24 days), not indefinitely.
+            </para>
           </block>
           <para
             >When standard output has been redirected to asynchronous event handlers, it is possible that output processing will not have completed when this method returns. To ensure that asynchronous event handling has been completed, call the <see cref="M:System.Diagnostics.Process.WaitForExit" /> overload that takes no parameter after receiving a true from this overload. To help ensure that the <see cref="E:System.Diagnostics.Process.Exited" /> event is handled correctly in Windows Forms applications, set the <see cref="P:System.Diagnostics.Process.SynchronizingObject" /> property.</para
@@ -4053,8 +4053,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The amount of time, in milliseconds, to wait for the associated process to exit. The maximum is the largest possible value of a 32-bit integer, which represents infinity to the operating system. </param
-        >
+          />The amount of time, in milliseconds, to wait for the associated process to exit. The maximum is the largest possible value of a 32-bit integer, which represents infinity to the operating system.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WaitForInputIdle">
@@ -4161,8 +4161,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A value of 1 to <see cref="F:System.Int32.MaxValue" /> that specifies the amount of time, in milliseconds, to wait for the associated process to become idle. A value of 0 specifies an immediate return, and a value of -1 specifies an infinite wait. </param
-        >
+          />A value of 1 to <see cref="F:System.Int32.MaxValue" /> that specifies the amount of time, in milliseconds, to wait for the associated process to become idle. A value of 0 specifies an immediate return, and a value of -1 specifies an infinite wait.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WorkingSet">

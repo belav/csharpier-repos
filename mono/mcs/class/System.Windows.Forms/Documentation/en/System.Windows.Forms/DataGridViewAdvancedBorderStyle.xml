@@ -24,8 +24,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Windows.Forms.DataGridView" /> control allows you to fully customize its appearance, including the borders of the cells and headers. The <see cref="T:System.Windows.Forms.DataGridView" /> has <see cref="P:System.Windows.Forms.DataGridView.CellBorderStyle" />, <see cref="P:System.Windows.Forms.DataGridView.ColumnHeadersBorderStyle" />, and <see cref="P:System.Windows.Forms.DataGridView.RowHeadersBorderStyle" /> properties that allow you to set the appearance of the cell border. However, if you need to further customize the borders, the <see cref="T:System.Windows.Forms.DataGridViewAdvancedBorderStyle" /> class allows you to set the style of the border on the individual sides of the cells. The <see cref="P:System.Windows.Forms.DataGridViewAdvancedBorderStyle.Left" />, <see cref="P:System.Windows.Forms.DataGridViewAdvancedBorderStyle.Right" />, <see cref="P:System.Windows.Forms.DataGridViewAdvancedBorderStyle.Top" />, and <see cref="P:System.Windows.Forms.DataGridViewAdvancedBorderStyle.Bottom" /> properties of <see cref="T:System.Windows.Forms.DataGridViewAdvancedBorderStyle" /> represent the left, right, top, and bottom border of a cell, respectively. You can set these properties on the <see cref="P:System.Windows.Forms.DataGridView.AdvancedCellBorderStyle" />, <see cref="P:System.Windows.Forms.DataGridView.AdvancedColumnHeadersBorderStyle" />, <see cref="P:System.Windows.Forms.DataGridView.AdvancedRowHeadersBorderStyle" /> properties of the <see cref="T:System.Windows.Forms.DataGridView" /> to produce various appearances for the borders between the cells. </para
-      >
+        >The <see cref="T:System.Windows.Forms.DataGridView" /> control allows you to fully customize its appearance, including the borders of the cells and headers. The <see cref="T:System.Windows.Forms.DataGridView" /> has <see cref="P:System.Windows.Forms.DataGridView.CellBorderStyle" />, <see cref="P:System.Windows.Forms.DataGridView.ColumnHeadersBorderStyle" />, and <see cref="P:System.Windows.Forms.DataGridView.RowHeadersBorderStyle" /> properties that allow you to set the appearance of the cell border. However, if you need to further customize the borders, the <see cref="T:System.Windows.Forms.DataGridViewAdvancedBorderStyle" /> class allows you to set the style of the border on the individual sides of the cells. The <see cref="P:System.Windows.Forms.DataGridViewAdvancedBorderStyle.Left" />, <see cref="P:System.Windows.Forms.DataGridViewAdvancedBorderStyle.Right" />, <see cref="P:System.Windows.Forms.DataGridViewAdvancedBorderStyle.Top" />, and <see cref="P:System.Windows.Forms.DataGridViewAdvancedBorderStyle.Bottom" /> properties of <see cref="T:System.Windows.Forms.DataGridViewAdvancedBorderStyle" /> represent the left, right, top, and bottom border of a cell, respectively. You can set these properties on the <see cref="P:System.Windows.Forms.DataGridView.AdvancedCellBorderStyle" />, <see cref="P:System.Windows.Forms.DataGridView.AdvancedColumnHeadersBorderStyle" />, <see cref="P:System.Windows.Forms.DataGridView.AdvancedRowHeadersBorderStyle" /> properties of the <see cref="T:System.Windows.Forms.DataGridView" /> to produce various appearances for the borders between the cells.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -45,8 +45,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridViewAdvancedBorderStyle" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridViewAdvancedBorderStyle" /> class.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>

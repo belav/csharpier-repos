@@ -96,15 +96,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Runtime.Serialization.SerializationInfo" /> object that contains the information that is required to serialize the new <see cref="T:System.Net.FileWebRequest" /> object. </param
-        >
+          />A <see cref="T:System.Runtime.Serialization.SerializationInfo" /> object that contains the information that is required to serialize the new <see cref="T:System.Net.FileWebRequest" /> object.
+        </param>
         <param name="streamingContext">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Runtime.Serialization.StreamingContext" /> object that contains the source of the serialized stream that is associated with the new <see cref="T:System.Net.FileWebRequest" /> object. </param
-        >
+          />A <see cref="T:System.Runtime.Serialization.StreamingContext" /> object that contains the source of the serialized stream that is associated with the new <see cref="T:System.Net.FileWebRequest" /> object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Abort">
@@ -193,15 +193,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.AsyncCallback" /> delegate. </param
-        >
+          />The <see cref="T:System.AsyncCallback" /> delegate.
+        </param>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that contains state information for this request. </param
-        >
+          />An object that contains state information for this request.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="BeginGetResponse">
@@ -248,15 +248,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.AsyncCallback" /> delegate. </param
-        >
+          />The <see cref="T:System.AsyncCallback" /> delegate.
+        </param>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that contains state information for this request. </param
-        >
+          />An object that contains state information for this request.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ConnectionGroupName">
@@ -421,8 +421,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.IAsyncResult" /> that references the pending request for a stream. </param
-        >
+          />An <see cref="T:System.IAsyncResult" /> that references the pending request for a stream.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="EndGetResponse">
@@ -468,8 +468,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.IAsyncResult" /> that references the pending request for a response. </param
-        >
+          />An <see cref="T:System.IAsyncResult" /> that references the pending request for a response.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetObjectData">
@@ -511,15 +511,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> to populate with data. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> to populate with data.
+        </param>
         <param name="streamingContext">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Runtime.Serialization.StreamingContext" />  that specifies the destination for this serialization. </param
-        >
+          />A <see cref="T:System.Runtime.Serialization.StreamingContext" />  that specifies the destination for this serialization.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetRequestStream">
@@ -778,15 +778,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized data for the <see cref="T:System.Net.FileWebRequest" />. </param
-        >
+          />A <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized data for the <see cref="T:System.Net.FileWebRequest" />.
+        </param>
         <param name="streamingContext">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains the destination of the serialized stream that is associated with the new <see cref="T:System.Net.FileWebRequest" />. </param
-        >
+          />A <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains the destination of the serialized stream that is associated with the new <see cref="T:System.Net.FileWebRequest" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Timeout">

@@ -22,8 +22,8 @@
         >The <see cref="T:System.Web.UI.Design.ExpressionsCollectionConverter" /> class converts an <see cref="T:System.Web.UI.ExpressionBindingCollection" /> to a string for the property-editing grid at design time, which always appears as an empty string ("").</para
       >
       <para
-        >A designer host, such as vsprvslong, uses the <see cref="T:System.Web.Compilation.ExpressionBuilder" /> and <see cref="T:System.Web.UI.Design.ExpressionEditor" /> class implementations with the <see cref="T:System.Web.UI.Design.ExpressionsCollectionEditor" /> and <see cref="T:System.Web.UI.Design.ExpressionsCollectionConverter" /> classes to set the expression bindings for control properties at design time, and the <see cref="T:System.Web.UI.Design.ControlPersister" /> to persist the expressions for run time. Expression strings reference a localizable resource, an application setting, a connection string, or a custom expression type. The expression string is bound to the control property at design time, and then used at run time to determine the value for the property. </para
-      >
+        >A designer host, such as vsprvslong, uses the <see cref="T:System.Web.Compilation.ExpressionBuilder" /> and <see cref="T:System.Web.UI.Design.ExpressionEditor" /> class implementations with the <see cref="T:System.Web.UI.Design.ExpressionsCollectionEditor" /> and <see cref="T:System.Web.UI.Design.ExpressionsCollectionConverter" /> classes to set the expression bindings for control properties at design time, and the <see cref="T:System.Web.UI.Design.ControlPersister" /> to persist the expressions for run time. Expression strings reference a localizable resource, an application setting, a connection string, or a custom expression type. The expression string is bound to the control property at design time, and then used at run time to determine the value for the property.
+      </para>
       <block subset="none" type="note">
         <para
           >You should never access a type converter directly. This implementation of <see cref="T:System.ComponentModel.TypeConverter" /> is intended only for use by an <see cref="T:System.Web.UI.ExpressionBindingCollection" /> object at design time.</para
@@ -102,8 +102,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> object that indicates the component or control the expression binding collection belongs to. </param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> object that indicates the component or control the expression binding collection belongs to.
+        </param>
         <param name="culture">
           <attribution
             license="cc4"
@@ -112,12 +112,8 @@
           />A <see cref="T:System.Globalization.CultureInfo" /> object that can be used to provide additional culture information.</param
         >
         <param name="value">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The object to convert. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The object to convert.
+        </param>
         <param name="destinationType">
           <attribution
             license="cc4"

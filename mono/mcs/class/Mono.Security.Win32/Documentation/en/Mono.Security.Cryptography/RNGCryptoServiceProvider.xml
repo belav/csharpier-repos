@@ -71,8 +71,8 @@
       </Parameters>
       <Docs>
         <param name="cspParams"
-          >a <see cref="T:System.Security.Cryptography.CspParameters" /> containing the parameters to create the cryptographic context. </param
-        >
+          >a <see cref="T:System.Security.Cryptography.CspParameters" /> containing the parameters to create the cryptographic context.
+        </param>
         <summary>Creates a new CryptoAPI-based instance to get new random data. </summary>
         <remarks>To be added</remarks>
       </Docs>

@@ -69,8 +69,8 @@
             >This method uses the values assigned to the <see cref="P:System.Web.UI.WebControls.CircleHotSpot.X" /> and <see cref="P:System.Web.UI.WebControls.CircleHotSpot.Y" /> properties to return the center coordinates and the value assigned to the <see cref="P:System.Web.UI.WebControls.CircleHotSpot.Radius" /> property to return the radius.</para
           >
           <para
-            >The <see cref="M:System.Web.UI.WebControls.CircleHotSpot.GetCoordinates" /> method is used internally by ASP.NET to get the text to use for the coordinates of a <see cref="T:System.Web.UI.WebControls.CircleHotSpot" /> when it is rendered. </para
-          >
+            >The <see cref="M:System.Web.UI.WebControls.CircleHotSpot.GetCoordinates" /> method is used internally by ASP.NET to get the text to use for the coordinates of a <see cref="T:System.Web.UI.WebControls.CircleHotSpot" /> when it is rendered.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -109,8 +109,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the markup-language string representation for the shape of the <see cref="T:System.Web.UI.WebControls.CircleHotSpot" /> object. </para
-          >
+            >Gets the markup-language string representation for the shape of the <see cref="T:System.Web.UI.WebControls.CircleHotSpot" /> object.
+          </para>
         </summary>
       </Docs>
     </Member>

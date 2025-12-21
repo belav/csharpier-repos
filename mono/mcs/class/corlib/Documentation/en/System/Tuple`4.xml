@@ -55,8 +55,8 @@
         </item>
         <item>
           <para
-            >To provide easy access to, and manipulation of, a data set. The following example defines an array of <see cref="T:System.Tuple`4" /> objects that contain the names of baseball pitchers, the number of innings they pitched, and the number of earned runs (runs that scored without fielding errors), and hits that they gave up. The array is passed to the ComputeStatistics method, which calculates each pitcher's earned run average (the average number of runs given up in a nine-inning game), and the average number of hits given up per inning. The method also uses these two averages to compute a hypothetical effectiveness average. </para
-          >
+            >To provide easy access to, and manipulation of, a data set. The following example defines an array of <see cref="T:System.Tuple`4" /> objects that contain the names of baseball pitchers, the number of innings they pitched, and the number of earned runs (runs that scored without fielding errors), and hits that they gave up. The array is passed to the ComputeStatistics method, which calculates each pitcher's earned run average (the average number of runs given up in a nine-inning game), and the average number of hits given up per inning. The method also uses these two averages to compute a hypothetical effectiveness average.
+          </para>
           <para>code reference: System.Tuple`4.Class#1</para>
         </item>
         <item>
@@ -204,8 +204,8 @@
           <list type="bullet">
             <item>
               <para
-                >By calling the GetType method on the value that is returned by the <see cref="P:System.Tuple`4.Item1" /> property. </para
-              >
+                >By calling the GetType method on the value that is returned by the <see cref="P:System.Tuple`4.Item1" /> property.
+              </para>
             </item>
             <item>
               <para
@@ -242,8 +242,8 @@
           <list type="bullet">
             <item>
               <para
-                >By calling the GetType method on the value that is returned by the <see cref="P:System.Tuple`4.Item2" /> property. </para
-              >
+                >By calling the GetType method on the value that is returned by the <see cref="P:System.Tuple`4.Item2" /> property.
+              </para>
             </item>
             <item>
               <para
@@ -280,8 +280,8 @@
           <list type="bullet">
             <item>
               <para
-                >By calling the GetType method on the value that is returned by the <see cref="P:System.Tuple`4.Item3" /> property. </para
-              >
+                >By calling the GetType method on the value that is returned by the <see cref="P:System.Tuple`4.Item3" /> property.
+              </para>
             </item>
             <item>
               <para
@@ -318,8 +318,8 @@
           <list type="bullet">
             <item>
               <para
-                >By calling the GetType method on the value that is returned by the <see cref="P:System.Tuple`4.Item4" /> property. </para
-              >
+                >By calling the GetType method on the value that is returned by the <see cref="P:System.Tuple`4.Item4" /> property.
+              </para>
             </item>
             <item>
               <para
@@ -464,8 +464,8 @@
             >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Tuple`4" /> instance is cast to an <see cref="T:System.Collections.IStructuralEquatable" /> interface.</para
           >
           <para
-            >The <see cref="M:System.Collections.IEqualityComparer.Equals(System.Object,System.Object)" /> implementation is called only if <paramref name="other" /> is not null, and if it can be successfully cast (in C#) or converted (in Visual Basic) to a <see cref="T:System.Tuple`4" /> object whose components are of the same types as the current instance. The <see cref="M:System.Tuple`4.System#Collections#IStructuralEquatable#Equals(System.Object,System.Collections.IEqualityComparer)" /> method first passes the <see cref="P:System.Tuple`4.Item1" /> values of the <see cref="T:System.Tuple`4" /> objects to be compared to the <see cref="M:System.Collections.IEqualityComparer.Equals(System.Object,System.Object)" /> implementation. If this method call returns true, the method is called again and passed the <see cref="P:System.Tuple`4.Item2" /> values of the two <see cref="T:System.Tuple`4" /> objects. If this method call returns true again, the method is called a third time and passed the <see cref="P:System.Tuple`4.Item3" /> values of the two <see cref="T:System.Tuple`4" /> objects. If this method call returns true again, the method is called for the fourth and final time and passed the <see cref="P:System.Tuple`4.Item4" /> values of the two <see cref="T:System.Tuple`4" /> objects. </para
-          >
+            >The <see cref="M:System.Collections.IEqualityComparer.Equals(System.Object,System.Object)" /> implementation is called only if <paramref name="other" /> is not null, and if it can be successfully cast (in C#) or converted (in Visual Basic) to a <see cref="T:System.Tuple`4" /> object whose components are of the same types as the current instance. The <see cref="M:System.Tuple`4.System#Collections#IStructuralEquatable#Equals(System.Object,System.Collections.IEqualityComparer)" /> method first passes the <see cref="P:System.Tuple`4.Item1" /> values of the <see cref="T:System.Tuple`4" /> objects to be compared to the <see cref="M:System.Collections.IEqualityComparer.Equals(System.Object,System.Object)" /> implementation. If this method call returns true, the method is called again and passed the <see cref="P:System.Tuple`4.Item2" /> values of the two <see cref="T:System.Tuple`4" /> objects. If this method call returns true again, the method is called a third time and passed the <see cref="P:System.Tuple`4.Item3" /> values of the two <see cref="T:System.Tuple`4" /> objects. If this method call returns true again, the method is called for the fourth and final time and passed the <see cref="P:System.Tuple`4.Item4" /> values of the two <see cref="T:System.Tuple`4" /> objects.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

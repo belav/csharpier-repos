@@ -28,8 +28,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.Windows.Forms.ContextMenuStrip" /> replaces <see cref="T:System.Windows.Forms.ContextMenu" />. You can associate a <see cref="T:System.Windows.Forms.ContextMenuStrip" /> with any control, and a right mouse click automatically displays the shortcut menu. You can show a <see cref="T:System.Windows.Forms.ContextMenuStrip" /> programmatically by using the <see cref="M:System.Windows.Forms.ToolStripDropDown.Show" /> method. <see cref="T:System.Windows.Forms.ContextMenuStrip" /> supports cancelable <see cref="E:System.Windows.Forms.ToolStripDropDown.Opening" /> and <see cref="E:System.Windows.Forms.ToolStripDropDown.Closing" /> events to handle dynamic population and multiple-click scenarios. <see cref="T:System.Windows.Forms.ContextMenuStrip" /> supports images, menu-item check state, text, access keys, shortcuts, and cascading menus. </para
-      >
+        <see cref="T:System.Windows.Forms.ContextMenuStrip" /> replaces <see cref="T:System.Windows.Forms.ContextMenu" />. You can associate a <see cref="T:System.Windows.Forms.ContextMenuStrip" /> with any control, and a right mouse click automatically displays the shortcut menu. You can show a <see cref="T:System.Windows.Forms.ContextMenuStrip" /> programmatically by using the <see cref="M:System.Windows.Forms.ToolStripDropDown.Show" /> method. <see cref="T:System.Windows.Forms.ContextMenuStrip" /> supports cancelable <see cref="E:System.Windows.Forms.ToolStripDropDown.Opening" /> and <see cref="E:System.Windows.Forms.ToolStripDropDown.Closing" /> events to handle dynamic population and multiple-click scenarios. <see cref="T:System.Windows.Forms.ContextMenuStrip" /> supports images, menu-item check state, text, access keys, shortcuts, and cascading menus.
+      </para>
       <para
         >The following items are specifically designed to work seamlessly with both <see cref="T:System.Windows.Forms.ToolStripSystemRenderer" /> and <see cref="T:System.Windows.Forms.ToolStripProfessionalRenderer" /> in all orientations. They are available by default at design time for the <see cref="T:System.Windows.Forms.ContextMenuStrip" /> control:</para
       >
@@ -62,8 +62,8 @@
         >Typically, a shortcut menu is displayed when a user clicks the right mouse button over a control or the form itself. Many visible controls, as well as the <see cref="T:System.Windows.Forms.Form" /> itself, have a <see cref="P:System.Windows.Forms.Control.ContextMenuStrip" /> property that binds the <see cref="T:System.Windows.Forms.ContextMenuStrip" /> class to the control that displays the shortcut menu. More than one control can use a <see cref="T:System.Windows.Forms.ContextMenuStrip" />.</para
       >
       <para
-        >Set the <see cref="P:System.Windows.Forms.ToolStripDropDownMenu.ShowCheckMargin" /> property to true to add space to the left of a <see cref="T:System.Windows.Forms.ToolStripMenuItem" /> for a check mark that shows that the menu item is enabled or selected. The <see cref="P:System.Windows.Forms.ToolStripDropDownMenu.ShowImageMargin" /> property is set to true by default. Use this space to the left of the <see cref="T:System.Windows.Forms.ToolStripMenuItem" /> to display an image for that menu item. </para
-      >
+        >Set the <see cref="P:System.Windows.Forms.ToolStripDropDownMenu.ShowCheckMargin" /> property to true to add space to the left of a <see cref="T:System.Windows.Forms.ToolStripMenuItem" /> for a check mark that shows that the menu item is enabled or selected. The <see cref="P:System.Windows.Forms.ToolStripDropDownMenu.ShowImageMargin" /> property is set to true by default. Use this space to the left of the <see cref="T:System.Windows.Forms.ToolStripMenuItem" /> to display an image for that menu item.
+      </para>
       <para
         >Although <see cref="T:System.Windows.Forms.ContextMenuStrip" /> replaces and adds functionality to the <see cref="T:System.Windows.Forms.ContextMenu" /> control of previous versions, <see cref="T:System.Windows.Forms.ContextMenu" /> is retained for both backward compatibility and future use if so desired.</para
       >
@@ -84,8 +84,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ContextMenuStrip" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ContextMenuStrip" /> class.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -150,16 +150,16 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see cref="T:System.Windows.Forms.ContextMenuStrip" /> and optionally releases the managed resources. </para
-          >
+            >Releases the unmanaged resources used by the <see cref="T:System.Windows.Forms.ContextMenuStrip" /> and optionally releases the managed resources.
+          </para>
         </summary>
         <param name="disposing">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -208,8 +208,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Common uses of the <see cref="P:System.Windows.Forms.ContextMenuStrip.SourceControl" /> property include the following: </para
-          >
+            >Common uses of the <see cref="P:System.Windows.Forms.ContextMenuStrip.SourceControl" /> property include the following:
+          </para>
           <list type="bullet">
             <item>
               <para

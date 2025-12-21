@@ -71,8 +71,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Globalization.TaiwanLunisolarCalendar" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Globalization.TaiwanLunisolarCalendar" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -169,8 +169,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.DateTime" /> to read. </param
-        >
+          />The <see cref="T:System.DateTime" /> to read.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="MaxSupportedDateTime">

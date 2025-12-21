@@ -136,8 +136,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> objects. </param
-        >
+          />An array of <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> objects.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -174,8 +174,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" /> object. </param
-        >
+          />An <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" /> object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Add">
@@ -226,8 +226,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An X.509 certificate represented as an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> object. </param
-        >
+          />An X.509 certificate represented as an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddRange">
@@ -277,8 +277,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> objects. </param
-        >
+          />An array of <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> objects.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddRange">
@@ -328,8 +328,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" /> object. </param
-        >
+          />An <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" /> object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Contains">
@@ -383,8 +383,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> object to locate in the collection. </param
-        >
+          />The <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> object to locate in the collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Export">
@@ -434,8 +434,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A supported <see cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" /> object. </param
-        >
+          />A supported <see cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" /> object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Export">
@@ -472,8 +472,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method supports the following <see cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" /> types: </para
-          >
+            >This method supports the following <see cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" /> types:
+          </para>
           <list type="bullet">
             <item>
               <para>
@@ -515,15 +515,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A supported <see cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" /> object. </param
-        >
+          />A supported <see cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" /> object.
+        </param>
         <param name="password">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string used to protect the byte array. </param
-        >
+          />A string used to protect the byte array.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Find">
@@ -582,22 +582,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Security.Cryptography.X509Certificates.X509FindType" />  values. </param
-        >
+          />One of the <see cref="T:System.Security.Cryptography.X509Certificates.X509FindType" />  values.
+        </param>
         <param name="findValue">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The search criteria as an object. </param
-        >
+          />The search criteria as an object.
+        </param>
         <param name="validOnly">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to allow only valid certificates to be returned from the search; otherwise, false. </param
-        >
+          />true to allow only valid certificates to be returned from the search; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetEnumerator">
@@ -665,8 +665,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method imports a certificate in the form of a byte array into a <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" /> object. This method supports the following <see cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" /> types: </para
-          >
+            >This method imports a certificate in the form of a byte array into a <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" /> object. This method supports the following <see cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" /> types:
+          </para>
           <list type="bullet">
             <item>
               <para>
@@ -711,8 +711,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A byte array containing data from an X.509 certificate. </param
-        >
+          />A byte array containing data from an X.509 certificate.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Import">
@@ -742,8 +742,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method supports the following <see cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" /> types: </para
-          >
+            >This method supports the following <see cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" /> types:
+          </para>
           <list type="bullet">
             <item>
               <para>
@@ -788,8 +788,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the file containing the certificate information. </param
-        >
+          />The name of the file containing the certificate information.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Import">
@@ -830,8 +830,8 @@
             >This method can be used with a PFX/PKCS12 binary large object (BLOB) protected by a password. Key containers associated with certificates in the PFX/PKCS12 BLOB can be created and the <see cref="T:System.Security.Cryptography.X509Certificates.X509KeyStorageFlags" /> value can be used to control this process. Note that if you do not create a key container, the private key is not persisted.</para
           >
           <para
-            >This method imports a certificate byte array into a collection of certificates. This method supports the following <see cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" /> types: </para
-          >
+            >This method imports a certificate byte array into a collection of certificates. This method supports the following <see cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" /> types:
+          </para>
           <list type="bullet">
             <item>
               <para>
@@ -871,22 +871,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A byte array containing data from an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> object. </param
-        >
+          />A byte array containing data from an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> object.
+        </param>
         <param name="password">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The password required to access the certificate information. </param
-        >
+          />The password required to access the certificate information.
+        </param>
         <param name="keyStorageFlags">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the enumeration values that control how and where the certificate is imported. </param
-        >
+          />A bitwise combination of the enumeration values that control how and where the certificate is imported.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Import">
@@ -928,8 +928,8 @@
           >
           <para>Note that a PFX/PKCS12 file can contain more than one certificate. This method imports the first certificate associated with the private key or, if no private key is found, the first certificate found.</para>
           <para
-            >This method supports the following <see cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" /> types: </para
-          >
+            >This method supports the following <see cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" /> types:
+          </para>
           <list type="bullet">
             <item>
               <para>
@@ -974,22 +974,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the file containing the certificate information. </param
-        >
+          />The name of the file containing the certificate information.
+        </param>
         <param name="password">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The password required to access the certificate information. </param
-        >
+          />The password required to access the certificate information.
+        </param>
         <param name="keyStorageFlags">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the enumeration values that control how and where the certificate is imported. </param
-        >
+          />A bitwise combination of the enumeration values that control how and where the certificate is imported.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Insert">
@@ -1038,15 +1038,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index at which to insert <paramref name="certificate" />. </param
-        >
+          />The zero-based index at which to insert <paramref name="certificate" />.
+        </param>
         <param name="certificate">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> object to insert. </param
-        >
+          />The <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> object to insert.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Item">
@@ -1117,8 +1117,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> object to be removed from the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" /> object. </param
-        >
+          />The <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> object to be removed from the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" /> object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RemoveRange">
@@ -1168,8 +1168,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> objects. </param
-        >
+          />An array of <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> objects.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RemoveRange">
@@ -1219,8 +1219,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" /> object. </param
-        >
+          />An <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" /> object.
+        </param>
       </Docs>
     </Member>
   </Members>

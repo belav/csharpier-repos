@@ -55,8 +55,8 @@
         <see cref="T:System.ServiceModel.Description.IContractBehavior" /> types can be used on either the service or the client, or both. To perform a customization task on the service, the <see cref="T:System.ServiceModel.Description.IContractBehavior" /> object must be added to the <see cref="P:System.ServiceModel.Description.ContractDescription.Behaviors" /> property prior to the construction of the service runtime, which occurs when the <see cref="M:System.ServiceModel.ICommunicationObject.Open" /> method is called on the <see cref="T:System.ServiceModel.ServiceHost" /> object. There are two ways to do this.</para
       >
       <para
-        >The first method is to programmatically add the custom contract behavior to the <see cref="P:System.ServiceModel.Description.ContractDescription.Behaviors" /> property prior to the point when the <see cref="M:System.ServiceModel.ICommunicationObject.Open" /> method is called on the <see cref="T:System.ServiceModel.ServiceHost" /> object. When applied this way, the behavior is applied for all messages flowing through that contract on any endpoint. </para
-      >
+        >The first method is to programmatically add the custom contract behavior to the <see cref="P:System.ServiceModel.Description.ContractDescription.Behaviors" /> property prior to the point when the <see cref="M:System.ServiceModel.ICommunicationObject.Open" /> method is called on the <see cref="T:System.ServiceModel.ServiceHost" /> object. When applied this way, the behavior is applied for all messages flowing through that contract on any endpoint.
+      </para>
       <block subset="none" type="note">
         <para>The behavior is applied to all contracts of the same type. For example, if you programmatically add the same contract type to more than one endpoint, the behavior modifies all endpoints that refer to the same contract object.</para>
       </block>
@@ -75,13 +75,13 @@
         </item>
       </list>
       <para
-        >The behavior of the second approach varies slightly if the custom attribute also implements <see cref="T:System.ServiceModel.Description.IContractBehaviorAttribute" />. In this case, the behavior is as follows: </para
-      >
+        >The behavior of the second approach varies slightly if the custom attribute also implements <see cref="T:System.ServiceModel.Description.IContractBehaviorAttribute" />. In this case, the behavior is as follows:
+      </para>
       <list type="bullet">
         <item>
           <para
-            >A contract interface. In this case, the behavior is applied to all contracts of that type in any endpoint and indigo1 ignores the value of the <see cref="P:System.ServiceModel.Description.IContractBehaviorAttribute.TargetContract" /> property. </para
-          >
+            >A contract interface. In this case, the behavior is applied to all contracts of that type in any endpoint and indigo1 ignores the value of the <see cref="P:System.ServiceModel.Description.IContractBehaviorAttribute.TargetContract" /> property.
+          </para>
         </item>
         <item>
           <para
@@ -105,8 +105,8 @@
         </item>
         <item>
           <para
-            >Create a custom attribute that also implements <see cref="T:System.ServiceModel.Description.IContractBehavior" />. </para
-          >
+            >Create a custom attribute that also implements <see cref="T:System.ServiceModel.Description.IContractBehavior" />.
+          </para>
         </item>
       </list>
       <para

@@ -51,8 +51,8 @@
         >You can programmatically manage a <see cref="T:System.Web.UI.WebControls.MenuItemBindingCollection" /> object by adding and removing <see cref="T:System.Web.UI.WebControls.MenuItemBinding" /> objects. To add menu items to the collection, use the <see cref="M:System.Web.UI.WebControls.MenuItemBindingCollection.Add(System.Web.UI.WebControls.MenuItemBinding)" /> or the <see cref="M:System.Web.UI.WebControls.MenuItemBindingCollection.Insert(System.Int32,System.Web.UI.WebControls.MenuItemBinding)" /> method. To remove nodes from the collection, use the <see cref="M:System.Web.UI.WebControls.MenuItemBindingCollection.Remove(System.Web.UI.WebControls.MenuItemBinding)" />, the <see cref="M:System.Web.UI.WebControls.MenuItemBindingCollection.RemoveAt(System.Int32)" />, or the <see cref="M:System.Web.UI.StateManagedCollection.Clear" /> method.</para
       >
       <para
-        >The <see cref="T:System.Web.UI.WebControls.MenuItemBindingCollection" /> class contains properties and methods that allow you to retrieve information about the collection itself. To find out how many items are in the collection, use the <see cref="P:System.Web.UI.StateManagedCollection.Count" /> property. If you want to determine whether the collection contains a certain <see cref="T:System.Web.UI.WebControls.MenuItemBinding" /> object, use the <see cref="M:System.Web.UI.WebControls.MenuItemBindingCollection.Contains(System.Web.UI.WebControls.MenuItemBinding)" /> method. To get the index of a <see cref="T:System.Web.UI.WebControls.MenuItemBinding" /> object in the collection, use the <see cref="M:System.Web.UI.WebControls.MenuItemBindingCollection.IndexOf(System.Web.UI.WebControls.MenuItemBinding)" /> method. </para
-      >
+        >The <see cref="T:System.Web.UI.WebControls.MenuItemBindingCollection" /> class contains properties and methods that allow you to retrieve information about the collection itself. To find out how many items are in the collection, use the <see cref="P:System.Web.UI.StateManagedCollection.Count" /> property. If you want to determine whether the collection contains a certain <see cref="T:System.Web.UI.WebControls.MenuItemBinding" /> object, use the <see cref="M:System.Web.UI.WebControls.MenuItemBindingCollection.Contains(System.Web.UI.WebControls.MenuItemBinding)" /> method. To get the index of a <see cref="T:System.Web.UI.WebControls.MenuItemBinding" /> object in the collection, use the <see cref="M:System.Web.UI.WebControls.MenuItemBindingCollection.IndexOf(System.Web.UI.WebControls.MenuItemBinding)" /> method.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -443,8 +443,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="M:System.Web.UI.WebControls.MenuItemBindingCollection.Remove(System.Web.UI.WebControls.MenuItemBinding)" /> method to remove the specified menu item binding from the collection. All items that follow that menu item are then moved up to fill in the vacant position. The indexes of the moved items are also updated. </para
-          >
+            >Use the <see cref="M:System.Web.UI.WebControls.MenuItemBindingCollection.Remove(System.Web.UI.WebControls.MenuItemBinding)" /> method to remove the specified menu item binding from the collection. All items that follow that menu item are then moved up to fill in the vacant position. The indexes of the moved items are also updated.
+          </para>
           <block subset="none" type="note">
             <para
               >The collection can contain null values, as well as duplicate <see cref="T:System.Web.UI.WebControls.MenuItemBinding" /> objects.</para

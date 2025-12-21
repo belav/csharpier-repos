@@ -121,8 +121,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Do not use this property to get the value of the <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Description" /> property. Use the <see cref="M:System.ComponentModel.DataAnnotations.DisplayAttribute.GetDescription" /> method instead. </para
-          >
+            >Do not use this property to get the value of the <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Description" /> property. Use the <see cref="M:System.ComponentModel.DataAnnotations.DisplayAttribute.GetDescription" /> method instead.
+          </para>
           <para
             >The <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Description" /> property is typically used as a tooltip or description UI element that is bound to the member using this attribute. The Dynamic Data Edit.ascx template will display the description as a tooltip in text-entry fields. A null value or empty string is valid.</para
           >
@@ -436,8 +436,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Do not use this property to get the value of the <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Name" /> property. Use the <see cref="M:System.ComponentModel.DataAnnotations.DisplayAttribute.GetName" /> method instead. </para
-          >
+            >Do not use this property to get the value of the <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Name" /> property. Use the <see cref="M:System.ComponentModel.DataAnnotations.DisplayAttribute.GetName" /> method instead.
+          </para>
           <para
             >The name is typically used as the field label for a UI element that is bound to the property that is annotated with this attribute. The Dynamic Data List.aspx, ListDetails.aspx, and Details.aspx page templates use the <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Name" /> property for the field label. A null value or empty string is valid.</para
           >
@@ -509,8 +509,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If this value is null, the <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.ShortName" />, <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Name" />, <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Prompt" />, and <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Description" /> properties are assumed to be literal, non-localized strings. If this value is not null, the string properties are assumed to be the names of public static properties that return the actual string value. </para
-          >
+            >If this value is null, the <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.ShortName" />, <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Name" />, <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Prompt" />, and <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Description" /> properties are assumed to be literal, non-localized strings. If this value is not null, the string properties are assumed to be the names of public static properties that return the actual string value.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

@@ -435,8 +435,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The attributes used to filter events. </param
-        >
+          />The attributes used to filter events.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetName">

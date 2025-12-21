@@ -87,8 +87,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The port on which to listen for incoming connection attempts. </param
-        >
+          />The port on which to listen for incoming connection attempts.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -140,8 +140,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Net.IPEndPoint" /> that represents the local endpoint to which to bind the listener <see cref="T:System.Net.Sockets.Socket" />. </param
-        >
+          />An <see cref="T:System.Net.IPEndPoint" /> that represents the local endpoint to which to bind the listener <see cref="T:System.Net.Sockets.Socket" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -194,15 +194,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Net.IPAddress" /> that represents the local IP address. </param
-        >
+          />An <see cref="T:System.Net.IPAddress" /> that represents the local IP address.
+        </param>
         <param name="port">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The port on which to listen for incoming connection attempts. </param
-        >
+          />The port on which to listen for incoming connection attempts.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AcceptSocket">
@@ -956,8 +956,8 @@
             >The <see cref="M:System.Net.Sockets.TcpListener.Start" /> method initializes the underlying <see cref="T:System.Net.Sockets.Socket" />, binds it to a local endpoint, and listens for incoming connection attempts. If a connection request is received, <see cref="M:System.Net.Sockets.TcpListener.Start" /> will queue the request and continue listening for additional requests until you call the <see cref="M:System.Net.Sockets.TcpListener.Stop" /> method. If <see cref="T:System.Net.Sockets.TcpListener" /> receives a connection request after it has already queued the maximum number of connections it will throw a <see cref="T:System.Net.Sockets.SocketException" /> on the client.</para
           >
           <para
-            >To remove a connection from the incoming connection queue, use either the <see cref="M:System.Net.Sockets.TcpListener.AcceptTcpClient" /> method or the <see cref="M:System.Net.Sockets.TcpListener.AcceptSocket" /> method. The <see cref="M:System.Net.Sockets.TcpListener.AcceptTcpClient" /> method will remove a connection from the queue and return a <see cref="T:System.Net.Sockets.TcpClient" /> that you can use to send and receive data. The <see cref="M:System.Net.Sockets.TcpListener.AcceptSocket" /> method will return a <see cref="T:System.Net.Sockets.Socket" /> that you can use to do the same. If your application only requires synchronous I/O, use the <see cref="M:System.Net.Sockets.TcpListener.AcceptTcpClient" />. For more detailed behavioral control, use <see cref="M:System.Net.Sockets.TcpListener.AcceptSocket" /> method. Both of these methods block until a connection request is available in the queue. </para
-          >
+            >To remove a connection from the incoming connection queue, use either the <see cref="M:System.Net.Sockets.TcpListener.AcceptTcpClient" /> method or the <see cref="M:System.Net.Sockets.TcpListener.AcceptSocket" /> method. The <see cref="M:System.Net.Sockets.TcpListener.AcceptTcpClient" /> method will remove a connection from the queue and return a <see cref="T:System.Net.Sockets.TcpClient" /> that you can use to send and receive data. The <see cref="M:System.Net.Sockets.TcpListener.AcceptSocket" /> method will return a <see cref="T:System.Net.Sockets.Socket" /> that you can use to do the same. If your application only requires synchronous I/O, use the <see cref="M:System.Net.Sockets.TcpListener.AcceptTcpClient" />. For more detailed behavioral control, use <see cref="M:System.Net.Sockets.TcpListener.AcceptSocket" /> method. Both of these methods block until a connection request is available in the queue.
+          </para>
           <para
             >Use the <see cref="M:System.Net.Sockets.TcpListener.Stop" /> method to close the <see cref="T:System.Net.Sockets.TcpListener" /> and stop listening. You are responsible for closing your accepted connections separately.</para
           >

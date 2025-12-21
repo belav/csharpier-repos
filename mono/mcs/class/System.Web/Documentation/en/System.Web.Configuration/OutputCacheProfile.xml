@@ -88,8 +88,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.Configuration.OutputCacheProfile.Duration" /> represents the time in seconds that the page or user control is cached. Setting this property establishes an expiration policy for HTTP responses from the page or control to which it applies and will automatically cause the caching of their output. </para
-          >
+            >The <see cref="P:System.Web.Configuration.OutputCacheProfile.Duration" /> represents the time in seconds that the page or user control is cached. Setting this property establishes an expiration policy for HTTP responses from the page or control to which it applies and will automatically cause the caching of their output.
+          </para>
           <block subset="none" type="note">
             <para
               >The <see cref="P:System.Web.Configuration.OutputCacheProfile.Duration" /> must be defined in either the profile or the <format type="text/html">
@@ -124,8 +124,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.Configuration.OutputCacheProfile.Enabled" /> property allows enabling or disabling the caching mechanism in one place only. It affects all the pages or controls that use this <see cref="T:System.Web.Configuration.OutputCacheProfile" />. </para
-          >
+            >The <see cref="P:System.Web.Configuration.OutputCacheProfile.Enabled" /> property allows enabling or disabling the caching mechanism in one place only. It affects all the pages or controls that use this <see cref="T:System.Web.Configuration.OutputCacheProfile" />.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -279,15 +279,15 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see cref="T:System.Web.Caching.SqlCacheDependency" /> class monitors the table so that when the table changes, the item will be automatically removed from the Cache. This class cannot be inherited. </para
-            >
+              >The <see cref="T:System.Web.Caching.SqlCacheDependency" /> class monitors the table so that when the table changes, the item will be automatically removed from the Cache. This class cannot be inherited.
+            </para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see cref="P:System.Web.Configuration.OutputCacheProfile.SqlDependency" /> property. </para
-          >
+            >Gets or sets the <see cref="P:System.Web.Configuration.OutputCacheProfile.SqlDependency" /> property.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -346,8 +346,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.Configuration.OutputCacheProfile.VaryByControl" /> is a semicolon-delimited set of IDs of controls to be cached. </para
-          >
+            >The <see cref="P:System.Web.Configuration.OutputCacheProfile.VaryByControl" /> is a semicolon-delimited set of IDs of controls to be cached.
+          </para>
           <para
             >For more information, see <format type="text/html">
               <a href="7f7d839a-c060-4d2a-9c4e-7fd1080ec0ad"

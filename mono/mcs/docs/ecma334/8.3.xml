@@ -25,8 +25,8 @@ class Test
    }  
 }  
 ]]>
-    </code_example>results in a compile-time error because it attempts to use the variable a before it is assigned a value. The rules governing definite assignment are defined in <hyperlink>12.3</hyperlink>. </paragraph
-  >
+    </code_example>results in a compile-time error because it attempts to use the variable a before it is assigned a value. The rules governing definite assignment are defined in <hyperlink>12.3</hyperlink>.
+  </paragraph>
   <paragraph
     >A field (<hyperlink>17.4</hyperlink>) is a variable that is associated with a class or struct, or an instance of a class or struct. A field declared with the static modifier defines a static variable, and a field declared without this modifier defines an instance variable. A static field is associated with a type, whereas an instance variable is associated with an instance. The example <code_example>
       <![CDATA[
@@ -39,8 +39,8 @@ class Employee
    ...  
 }  
 ]]>
-    </code_example>shows an Employee class that has a private static variable and two public instance variables. </paragraph
-  >
+    </code_example>shows an Employee class that has a private static variable and two public instance variables.
+  </paragraph>
   <paragraph>Formal parameter declarations also define variables. There are four kinds of parameters: value parameters, reference parameters, output parameters, and parameter arrays. </paragraph>
   <paragraph
     >A value parameter is used for &quot;in&quot; parameter passing, in which the value of an argument is passed into a method, and modifications of the parameter do not impact the original argument. A value parameter refers to its own variable, one that is distinct from the corresponding argument. This variable is initialized by copying the value of the corresponding argument. The example <code_example>
@@ -65,8 +65,8 @@ pre:  a = 1
 p = 1  
 post: a = 1  
 ]]>
-    </code_example>even though the value parameter p is modified. </paragraph
-  >
+    </code_example>even though the value parameter p is modified.
+  </paragraph>
   <paragraph
     >A reference parameter is used for &quot;by reference&quot; parameter passing, in which the parameter acts as an alias for a caller-provided argument. A reference parameter does not itself define a variable, but rather refers to the variable of the corresponding argument. Modifications of a reference parameter impact the corresponding argument. A reference parameter is declared with a ref modifier. The example <code_example>
       <![CDATA[
@@ -114,8 +114,8 @@ class Test {
    }  
 }  
 ]]>
-    </code_example>shows a Divide method that includes two output parameters-one for the result of the division and another for the remainder. </paragraph
-  >
+    </code_example>shows a Divide method that includes two output parameters-one for the result of the division and another for the remainder.
+  </paragraph>
   <paragraph>For value, reference, and output parameters, there is a one-to-one correspondence between caller-provided arguments and the parameters used to represent them. A parameter array enables a many-to-one relationship: many arguments can be represented by a single parameter array. In other words, parameter arrays enable variable length argument lists. </paragraph>
   <paragraph
     >A parameter array is declared with a params modifier. There can be only one parameter array for a given method, and it must always be the last parameter specified. The type of a parameter array is always a single dimensional array type. A caller can either pass a single argument of this array type, or any number of arguments of the element type of this array type. For instance, the example <code_example>

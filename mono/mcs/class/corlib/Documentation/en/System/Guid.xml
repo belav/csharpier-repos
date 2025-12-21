@@ -79,8 +79,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A 16-element byte array containing values with which to initialize the GUID. </param
-        >
+          />A 16-element byte array containing values with which to initialize the GUID.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -122,8 +122,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string that contains a GUID in one of the following formats ("d" represents a hexadecimal digit whose case is ignored): </param
-        >
+          />A string that contains a GUID in one of the following formats ("d" represents a hexadecimal digit whose case is ignored):
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -158,29 +158,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first 4 bytes of the GUID. </param
-        >
+          />The first 4 bytes of the GUID.
+        </param>
         <param name="b">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The next 2 bytes of the GUID. </param
-        >
+          />The next 2 bytes of the GUID.
+        </param>
         <param name="c">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The next 2 bytes of the GUID. </param
-        >
+          />The next 2 bytes of the GUID.
+        </param>
         <param name="d">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The remaining 8 bytes of the GUID. </param
-        >
+          />The remaining 8 bytes of the GUID.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -228,78 +228,46 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first 4 bytes of the GUID. </param
-        >
+          />The first 4 bytes of the GUID.
+        </param>
         <param name="b">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The next 2 bytes of the GUID. </param
-        >
+          />The next 2 bytes of the GUID.
+        </param>
         <param name="c">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The next 2 bytes of the GUID. </param
-        >
+          />The next 2 bytes of the GUID.
+        </param>
         <param name="d">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The next byte of the GUID. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The next byte of the GUID.
+        </param>
         <param name="e">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The next byte of the GUID. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The next byte of the GUID.
+        </param>
         <param name="f">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The next byte of the GUID. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The next byte of the GUID.
+        </param>
         <param name="g">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The next byte of the GUID. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The next byte of the GUID.
+        </param>
         <param name="h">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The next byte of the GUID. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The next byte of the GUID.
+        </param>
         <param name="i">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The next byte of the GUID. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The next byte of the GUID.
+        </param>
         <param name="j">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The next byte of the GUID. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The next byte of the GUID.
+        </param>
         <param name="k">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The next byte of the GUID. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The next byte of the GUID.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -352,78 +320,46 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first 4 bytes of the GUID. </param
-        >
+          />The first 4 bytes of the GUID.
+        </param>
         <param name="b">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The next 2 bytes of the GUID. </param
-        >
+          />The next 2 bytes of the GUID.
+        </param>
         <param name="c">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The next 2 bytes of the GUID. </param
-        >
+          />The next 2 bytes of the GUID.
+        </param>
         <param name="d">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The next byte of the GUID. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The next byte of the GUID.
+        </param>
         <param name="e">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The next byte of the GUID. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The next byte of the GUID.
+        </param>
         <param name="f">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The next byte of the GUID. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The next byte of the GUID.
+        </param>
         <param name="g">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The next byte of the GUID. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The next byte of the GUID.
+        </param>
         <param name="h">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The next byte of the GUID. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The next byte of the GUID.
+        </param>
         <param name="i">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The next byte of the GUID. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The next byte of the GUID.
+        </param>
         <param name="j">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The next byte of the GUID. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The next byte of the GUID.
+        </param>
         <param name="k">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The next byte of the GUID. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The next byte of the GUID.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CompareTo">
@@ -578,8 +514,8 @@
               </term>
               <description>
                 <para
-                  >This instance is greater than <paramref name="value" />, or <paramref name="value" /> is null. </para
-                >
+                  >This instance is greater than <paramref name="value" />, or <paramref name="value" /> is null.
+                </para>
               </description>
             </item>
           </list>
@@ -589,8 +525,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object to compare, or null. </param
-        >
+          />An object to compare, or null.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Empty">
@@ -705,8 +641,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to compare with this instance. </param
-        >
+          />The object to compare with this instance.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -811,15 +747,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first object to compare. </param
-        >
+          />The first object to compare.
+        </param>
         <param name="b">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second object to compare. </param
-        >
+          />The second object to compare.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="op_Inequality">
@@ -860,15 +796,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first object to compare. </param
-        >
+          />The first object to compare.
+        </param>
         <param name="b">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second object to compare. </param
-        >
+          />The second object to compare.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Parse">
@@ -891,8 +827,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use <see cref="M:System.Guid.TryParse(System.String,System.Guid@)" /> method to catch any unsuccessful parse operations. </para
-          >
+            >Use <see cref="M:System.Guid.TryParse(System.String,System.Guid@)" /> method to catch any unsuccessful parse operations.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1035,11 +971,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the byte array returned by this method to round-trip a <see cref="T:System.Guid" /> value by calling the <see cref="M:System.Guid.#ctor(System.Byte[])" /> constructor. </para
-          >
+            >You can use the byte array returned by this method to round-trip a <see cref="T:System.Guid" /> value by calling the <see cref="M:System.Guid.#ctor(System.Byte[])" /> constructor.
+          </para>
           <para
-            >Note that the order of bytes in the returned byte array is different from the string representation of a <see cref="T:System.Guid" /> value. The order of the beginning four-byte group and the next two two-byte groups is reversed, whereas the order of the last two-byte group and the closing six-byte group is the same. The example provides an illustration. </para
-          >
+            >Note that the order of bytes in the returned byte array is different from the string representation of a <see cref="T:System.Guid" /> value. The order of the beginning four-byte group and the next two two-byte groups is reversed, whereas the order of the last two-byte group and the closing six-byte group is the same. The example provides an illustration.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1081,8 +1017,8 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of this <see cref="T:System.Guid" />, formatted by using the "D" format specifier as follows: </para
-          >
+            >The value of this <see cref="T:System.Guid" />, formatted by using the "D" format specifier as follows:
+          </para>
           <para>xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx </para>
           <para
             >where the value of the GUID is represented as a series of lowercase hexadecimal digits in groups of 8, 4, 4, 4, and 12 digits and separated by hyphens. An example of a return value is "382c74c3-721d-4f34-80e5-57657b6cbc27". To convert the hexadecimal digits from a through f to uppercase, call the <see cref="M:System.String.ToUpper" />  method on the returned string.</para
@@ -1172,8 +1108,8 @@
             </item>
           </list>
           <para
-            >The hexadecimal digits a through f are lowercase in the returned string. To convert them to uppercase, call the <see cref="M:System.String.ToUpper" /> method on the returned string. </para
-          >
+            >The hexadecimal digits a through f are lowercase in the returned string. To convert them to uppercase, call the <see cref="M:System.String.ToUpper" /> method on the returned string.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1184,16 +1120,16 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of this <see cref="T:System.Guid" />, represented as a series of lowercase hexadecimal digits in the specified format. </para
-          >
+            >The value of this <see cref="T:System.Guid" />, represented as a series of lowercase hexadecimal digits in the specified format.
+          </para>
         </returns>
         <param name="format">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A single format specifier that indicates how to format the value of this <see cref="T:System.Guid" />. The <paramref name="format" /> parameter can be "N", "D", "B", "P", or "X". If <paramref name="format" /> is null or an empty string (""), "D" is used. </param
-        >
+          />A single format specifier that indicates how to format the value of this <see cref="T:System.Guid" />. The <paramref name="format" /> parameter can be "N", "D", "B", "P", or "X". If <paramref name="format" /> is null or an empty string (""), "D" is used.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ToString">
@@ -1285,13 +1221,13 @@
             </item>
           </list>
           <para
-            >The hexadecimal digits a through f are lowercase in the returned string. To convert them to uppercase, call the <see cref="M:System.String.ToUpper" /> method on the returned string. </para
-          >
+            >The hexadecimal digits a through f are lowercase in the returned string. To convert them to uppercase, call the <see cref="M:System.String.ToUpper" /> method on the returned string.
+          </para>
           <para
             >Because the <paramref name="provider" /> parameter is ignored, you cannot use it to provide a custom formatting solution. To represent a <see cref="T:System.Guid" /> value as a string in a format that isn't supported by the standard GUID format strings, call the <see cref="M:System.String.Format(System.IFormatProvider,System.String,System.Object[])" /> method with a <paramref name="provider" /> object that implements both the <see cref="T:System.ICustomFormatter" /> and <see cref="T:System.IFormatProvider" /> interfaces. For more information, see the "Custom Formatting with ICustomFormatter" section in the <format type="text/html">
               <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Types</a>
-            </format> article. </para
-          >
+            </format> article.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1310,15 +1246,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A single format specifier that indicates how to format the value of this <see cref="T:System.Guid" />. The <paramref name="format" /> parameter can be "N", "D", "B", "P", or "X". If <paramref name="format" /> is null or an empty string (""), "D" is used. </param
-        >
+          />A single format specifier that indicates how to format the value of this <see cref="T:System.Guid" />. The <paramref name="format" /> parameter can be "N", "D", "B", "P", or "X". If <paramref name="format" /> is null or an empty string (""), "D" is used.
+        </param>
         <param name="provider">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />(Reserved) An object that supplies culture-specific formatting information. </param
-        >
+          />(Reserved) An object that supplies culture-specific formatting information.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="TryParse">

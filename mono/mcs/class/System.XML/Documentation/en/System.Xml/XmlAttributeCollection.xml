@@ -80,8 +80,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlAttribute" /> to insert. </param
-        >
+          />The <see cref="T:System.Xml.XmlAttribute" /> to insert.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CopyTo">
@@ -122,15 +122,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array that is the destination of the objects copied from this collection. </param
-        >
+          />The array that is the destination of the objects copied from this collection.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index in the array where copying begins. </param
-        >
+          />The index in the array where copying begins.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="InsertAfter">
@@ -176,15 +176,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlAttribute" /> to insert. </param
-        >
+          />The <see cref="T:System.Xml.XmlAttribute" /> to insert.
+        </param>
         <param name="refNode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlAttribute" /> that is the reference attribute. <paramref name="newNode" /> is placed after the <paramref name="refNode" />. </param
-        >
+          />The <see cref="T:System.Xml.XmlAttribute" /> that is the reference attribute. <paramref name="newNode" /> is placed after the <paramref name="refNode" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="InsertBefore">
@@ -230,15 +230,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlAttribute" /> to insert. </param
-        >
+          />The <see cref="T:System.Xml.XmlAttribute" /> to insert.
+        </param>
         <param name="refNode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlAttribute" /> that is the reference attribute. <paramref name="newNode" /> is placed before the <paramref name="refNode" />. </param
-        >
+          />The <see cref="T:System.Xml.XmlAttribute" /> that is the reference attribute. <paramref name="newNode" /> is placed before the <paramref name="refNode" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ItemOf">
@@ -366,8 +366,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlAttribute" /> to insert. </param
-        >
+          />The <see cref="T:System.Xml.XmlAttribute" /> to insert.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Remove">
@@ -409,8 +409,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlAttribute" /> to remove. </param
-        >
+          />The <see cref="T:System.Xml.XmlAttribute" /> to remove.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RemoveAll">
@@ -476,8 +476,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the node to remove. The first node has index 0. </param
-        >
+          />The index of the node to remove. The first node has index 0.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SetNamedItem">
@@ -506,8 +506,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see cref="T:System.Xml.XmlNode" /> using its <see cref="P:System.Xml.XmlNode.Name" /> property </para
-          >
+            >Adds a <see cref="T:System.Xml.XmlNode" /> using its <see cref="P:System.Xml.XmlNode.Name" /> property
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -520,8 +520,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An attribute node to store in this collection. The node will later be accessible using the name of the node. If a node with that name is already present in the collection, it is replaced by the new one; otherwise, the node is appended to the end of the collection. </param
-        >
+          />An attribute node to store in this collection. The node will later be accessible using the name of the node. If a node with that name is already present in the collection, it is replaced by the new one; otherwise, the node is appended to the end of the collection.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.ICollection.CopyTo">
@@ -561,15 +561,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array that is the destination of the objects copied from this collection. </param
-        >
+          />The array that is the destination of the objects copied from this collection.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index in the array where copying begins. </param
-        >
+          />The index in the array where copying begins.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.ICollection.IsSynchronized">

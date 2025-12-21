@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <clause number="9.1" title="Programs">
   <paragraph
-    >A C# program consists of one or more source files, known formally as compilation units (<hyperlink>16.1</hyperlink>). A source file is an ordered sequence of Unicode characters. Source files typically have a one-to-one correspondence with files in a file system, but this correspondence is not required. </paragraph
-  >
+    >A C# program consists of one or more source files, known formally as compilation units (<hyperlink>16.1</hyperlink>). A source file is an ordered sequence of Unicode characters. Source files typically have a one-to-one correspondence with files in a file system, but this correspondence is not required.
+  </paragraph>
   <paragraph>Conceptually speaking, a program is compiled using three steps: </paragraph>
   <paragraph>1 Transformation, which converts a file from a particular character repertoire and encoding scheme into a sequence of Unicode characters. </paragraph>
   <paragraph>2 Lexical analysis, which translates a stream of Unicode input characters into a stream of tokens. </paragraph>

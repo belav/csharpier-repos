@@ -179,8 +179,8 @@
         </item>
       </list>
       <para
-        >The following table describes <see cref="T:System.Net.WebClient" /> methods for downloading data from a resource. </para
-      >
+        >The following table describes <see cref="T:System.Net.WebClient" /> methods for downloading data from a resource.
+      </para>
       <list type="table">
         <listheader>
           <item>
@@ -353,8 +353,8 @@
           <para
             > A <see cref="T:System.String" /> containing the base URI for requests made by a
 <see cref="T:System.Net.WebClient" /> or, <see cref="F:System.String.Empty" />, if no value 
-   was set or <see langword="null" /> was specified for a set operation. </para
-          >
+   was set or <see langword="null" /> was specified for a set operation.
+          </para>
         </value>
         <exception cref="T:System.ArgumentException"
           >The value specified for a set operation is not <see langword="null" /> or <see cref="F:System.String.Empty" />, and is not a URI in a format recognized by the <see cref="T:System.Uri" /> class.</exception
@@ -430,8 +430,8 @@
             >If an operation is pending, this method calls <see cref="M:System.Net.WebRequest.Abort" /> on the underlying <see cref="T:System.Net.WebRequest" />.</para
           >
           <para
-            >When you call <see cref="M:System.Net.WebClient.CancelAsync" />, your application still receives the completion event associated with the operation. For example, when you call <see cref="M:System.Net.WebClient.CancelAsync" /> to cancel a <see cref="Overload:System.Net.WebClient.DownloadStringAsync" /> operation, if you have specified an event handler for the <see cref="E:System.Net.WebClient.DownloadStringCompleted" /> event, your event handler receives notification that the operation has ended. To learn whether the operation completed successfully, check the <see cref="P:System.ComponentModel.AsyncCompletedEventArgs.Cancelled" /> property on the base class of <see cref="T:System.Net.DownloadDataCompletedEventArgs" /> in the event data object passed to the event handler. </para
-          >
+            >When you call <see cref="M:System.Net.WebClient.CancelAsync" />, your application still receives the completion event associated with the operation. For example, when you call <see cref="M:System.Net.WebClient.CancelAsync" /> to cancel a <see cref="Overload:System.Net.WebClient.DownloadStringAsync" /> operation, if you have specified an event handler for the <see cref="E:System.Net.WebClient.DownloadStringCompleted" /> event, your event handler receives notification that the operation has ended. To learn whether the operation completed successfully, check the <see cref="P:System.ComponentModel.AsyncCompletedEventArgs.Cancelled" /> property on the base class of <see cref="T:System.Net.DownloadDataCompletedEventArgs" /> in the event data object passed to the event handler.
+          </para>
           <para>If no asynchronous operation is in progress, this method does nothing.</para>
         </remarks>
         <summary>
@@ -518,8 +518,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Net.WebClient.DownloadData(System.String)" /> method downloads the resource with the URI specified by the <paramref name="address" /> parameter. This method blocks while downloading the resource. To download a resource and continue executing while waiting for the server's response, use one of the <see cref="Overload:System.Net.WebClient.DownloadDataAsync" /> methods. </para
-          >
+            >The <see cref="M:System.Net.WebClient.DownloadData(System.String)" /> method downloads the resource with the URI specified by the <paramref name="address" /> parameter. This method blocks while downloading the resource. To download a resource and continue executing while waiting for the server's response, use one of the <see cref="Overload:System.Net.WebClient.DownloadDataAsync" /> methods.
+          </para>
           <para
             >If the <see cref="P:System.Net.WebClient.BaseAddress" /> property is not an empty string ("") and <paramref name="address" /> does not contain an absolute URI, <paramref name="address" /> must be a relative URI that is combined with <see cref="P:System.Net.WebClient.BaseAddress" /> to form the absolute URI of the requested data. If the <see cref="P:System.Net.WebClient.QueryString" /> property is not an empty string, it is appended to <paramref name="address" />.</para
           >
@@ -547,8 +547,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URI from which to download data. </param
-        >
+          />The URI from which to download data.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -573,8 +573,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Net.WebClient.DownloadData(System.String)" /> method downloads the resource with the URI specified by the <paramref name="address" /> parameter. This method blocks while downloading the resource. To download a resource and continue executing while waiting for the server's response, use one of the <see cref="Overload:System.Net.WebClient.DownloadDataAsync" /> methods. </para
-          >
+            >The <see cref="M:System.Net.WebClient.DownloadData(System.String)" /> method downloads the resource with the URI specified by the <paramref name="address" /> parameter. This method blocks while downloading the resource. To download a resource and continue executing while waiting for the server's response, use one of the <see cref="Overload:System.Net.WebClient.DownloadDataAsync" /> methods.
+          </para>
           <para
             >If the <see cref="P:System.Net.WebClient.BaseAddress" /> property is not an empty string ("") and <paramref name="address" /> does not contain an absolute URI, <paramref name="address" /> must be a relative URI that is combined with <see cref="P:System.Net.WebClient.BaseAddress" /> to form the absolute URI of the requested data. If the <see cref="P:System.Net.WebClient.QueryString" /> property is not an empty string, it is appended to <paramref name="address" />.</para
           >
@@ -625,11 +625,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method retrieves the specified resource using the default method for the protocol associated with the URI scheme specified in <paramref name="address" />. The data is downloaded asynchronously using thread resources that are automatically allocated from the thread pool. </para
-          >
+            >This method retrieves the specified resource using the default method for the protocol associated with the URI scheme specified in <paramref name="address" />. The data is downloaded asynchronously using thread resources that are automatically allocated from the thread pool.
+          </para>
           <para
-            >This method does not block the calling thread while downloading the resource. To download a resource and block while waiting for the server's response, use one of the <see cref="Overload:System.Net.WebClient.DownloadData" /> methods. When the download completes, the <see cref="E:System.Net.WebClient.DownloadDataCompleted" /> event is raised. Your application must handle this event to receive notification. The downloaded data is available in the <see cref="P:System.Net.DownloadDataCompletedEventArgs.Result" /> property. </para
-          >
+            >This method does not block the calling thread while downloading the resource. To download a resource and block while waiting for the server's response, use one of the <see cref="Overload:System.Net.WebClient.DownloadData" /> methods. When the download completes, the <see cref="E:System.Net.WebClient.DownloadDataCompleted" /> event is raised. Your application must handle this event to receive notification. The downloaded data is available in the <see cref="P:System.Net.DownloadDataCompletedEventArgs.Result" /> property.
+          </para>
           <para
             >You can use the <see cref="M:System.Net.WebClient.CancelAsync" /> method to cancel asynchronous operations that have not completed.</para
           >
@@ -648,8 +648,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Downloads the resource as a <see cref="T:System.Byte" /> array from the URI specified as an asynchronous operation. </para
-          >
+            >Downloads the resource as a <see cref="T:System.Byte" /> array from the URI specified as an asynchronous operation.
+          </para>
         </summary>
         <param name="address">
           <attribution
@@ -685,11 +685,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method retrieves the specified resource using the default method for the protocol associated with the URI scheme specified in <paramref name="address" />. The data is downloaded asynchronously using thread resources that are automatically allocated from the thread pool. </para
-          >
+            >This method retrieves the specified resource using the default method for the protocol associated with the URI scheme specified in <paramref name="address" />. The data is downloaded asynchronously using thread resources that are automatically allocated from the thread pool.
+          </para>
           <para
-            >This method does not block the calling thread while downloading the resource. To download a resource and block while waiting for the server's response, use one of the <see cref="Overload:System.Net.WebClient.DownloadData" /> methods. When the download completes, the <see cref="E:System.Net.WebClient.DownloadDataCompleted" /> event is raised. Your application must handle this event to receive notification. The downloaded data is available in the <see cref="P:System.Net.DownloadDataCompletedEventArgs.Result" /> property. </para
-          >
+            >This method does not block the calling thread while downloading the resource. To download a resource and block while waiting for the server's response, use one of the <see cref="Overload:System.Net.WebClient.DownloadData" /> methods. When the download completes, the <see cref="E:System.Net.WebClient.DownloadDataCompleted" /> event is raised. Your application must handle this event to receive notification. The downloaded data is available in the <see cref="P:System.Net.DownloadDataCompletedEventArgs.Result" /> property.
+          </para>
           <para
             >You can use the <see cref="M:System.Net.WebClient.CancelAsync" /> method to cancel asynchronous operations that have not completed.</para
           >
@@ -708,8 +708,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Downloads the resource as a <see cref="T:System.Byte" /> array from the URI specified as an asynchronous operation. </para
-          >
+            >Downloads the resource as a <see cref="T:System.Byte" /> array from the URI specified as an asynchronous operation.
+          </para>
         </summary>
         <param name="address">
           <attribution
@@ -751,8 +751,8 @@
             >This event is raised each time an asynchronous data download operation completes. Asynchronous data downloads are started by calling the <see cref="Overload:System.Net.WebClient.DownloadDataAsync" /> methods.</para
           >
           <para
-            >The <see cref="T:System.Net.DownloadDataCompletedEventHandler" /> is the delegate for this event. The <see cref="T:System.Net.DownloadDataCompletedEventArgs" /> class provides the event handler with event data. </para
-          >
+            >The <see cref="T:System.Net.DownloadDataCompletedEventHandler" /> is the delegate for this event. The <see cref="T:System.Net.DownloadDataCompletedEventArgs" /> class provides the event handler with event data.
+          </para>
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
@@ -824,8 +824,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URI of the resource to download. </param
-        >
+          />The URI of the resource to download.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DownloadDataTaskAsync">
@@ -968,15 +968,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URI from which to download data. </param
-        >
+          />The URI from which to download data.
+        </param>
         <param name="fileName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the local file that is to receive the data. </param
-        >
+          />The name of the local file that is to receive the data.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1029,15 +1029,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URI specified as a <see cref="T:System.String" />, from which to download data. </param
-        >
+          />The URI specified as a <see cref="T:System.String" />, from which to download data.
+        </param>
         <param name="fileName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the local file that is to receive the data. </param
-        >
+          />The name of the local file that is to receive the data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DownloadFileAsync">
@@ -1065,8 +1065,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method downloads the resource at the URI specified by in the <paramref name="address" /> parameter. When the download completes successfully, the downloaded file is named <paramref name="fileName" /> on the local computer. The file is downloaded asynchronously using thread resources that are automatically allocated from the thread pool. To receive notification when the file is available, add an event handler to the <see cref="E:System.Net.WebClient.DownloadFileCompleted" /> event. </para
-          >
+            >This method downloads the resource at the URI specified by in the <paramref name="address" /> parameter. When the download completes successfully, the downloaded file is named <paramref name="fileName" /> on the local computer. The file is downloaded asynchronously using thread resources that are automatically allocated from the thread pool. To receive notification when the file is available, add an event handler to the <see cref="E:System.Net.WebClient.DownloadFileCompleted" /> event.
+          </para>
           <para
             >This method does not block the calling thread while the resource is being downloaded. To block while waiting for the download to complete, use one of the <see cref="Overload:System.Net.WebClient.DownloadFile" /> methods.</para
           >
@@ -1095,15 +1095,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URI of the resource to download. </param
-        >
+          />The URI of the resource to download.
+        </param>
         <param name="fileName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the file to be placed on the local computer. </param
-        >
+          />The name of the file to be placed on the local computer.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DownloadFileAsync">
@@ -1132,8 +1132,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method downloads the resource at the URI specified by in the <paramref name="address" /> parameter. When the download completes successfully, the downloaded file is named <paramref name="fileName" /> on the local computer. The file is downloaded asynchronously using thread resources that are automatically allocated from the thread pool. To receive notification when the file is available, add an event handler to the <see cref="E:System.Net.WebClient.DownloadFileCompleted" /> event. </para
-          >
+            >This method downloads the resource at the URI specified by in the <paramref name="address" /> parameter. When the download completes successfully, the downloaded file is named <paramref name="fileName" /> on the local computer. The file is downloaded asynchronously using thread resources that are automatically allocated from the thread pool. To receive notification when the file is available, add an event handler to the <see cref="E:System.Net.WebClient.DownloadFileCompleted" /> event.
+          </para>
           <para
             >This method does not block the calling thread while the resource is being downloaded. To block while waiting for the download to complete, use one of the <see cref="Overload:System.Net.WebClient.DownloadFile" /> methods.</para
           >
@@ -1162,15 +1162,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URI of the resource to download. </param
-        >
+          />The URI of the resource to download.
+        </param>
         <param name="fileName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the file to be placed on the local computer. </param
-        >
+          />The name of the file to be placed on the local computer.
+        </param>
         <param name="userToken">
           <attribution
             license="cc4"
@@ -1204,8 +1204,8 @@
             >This event is raised each time an asynchronous file download operation completes. Asynchronous file downloads are started by calling the <see cref="Overload:System.Net.WebClient.DownloadFileAsync" /> methods.</para
           >
           <para
-            >The <see cref="T:System.ComponentModel.AsyncCompletedEventHandler" /> is the delegate for this event. The <see cref="T:System.ComponentModel.AsyncCompletedEventArgs" /> class provides the event handler with event data. </para
-          >
+            >The <see cref="T:System.ComponentModel.AsyncCompletedEventHandler" /> is the delegate for this event. The <see cref="T:System.ComponentModel.AsyncCompletedEventArgs" /> class provides the event handler with event data.
+          </para>
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
@@ -1245,8 +1245,8 @@
             >This operation will not block. The returned <see cref="T:System.Threading.Tasks.Task" />  object will complete after the data resource has been downloaded.</para
           >
           <para
-            >This method downloads the resource at the URI specified by in the <paramref name="address" /> parameter. When the download completes successfully, the downloaded file is named <paramref name="fileName" /> on the local computer. The file is downloaded asynchronously using thread resources that are automatically allocated from the thread pool. </para
-          >
+            >This method downloads the resource at the URI specified by in the <paramref name="address" /> parameter. When the download completes successfully, the downloaded file is named <paramref name="fileName" /> on the local computer. The file is downloaded asynchronously using thread resources that are automatically allocated from the thread pool.
+          </para>
           <para
             >You can use the <see cref="M:System.Net.WebClient.CancelAsync" /> method to cancel asynchronous operations that have not completed.</para
           >
@@ -1323,8 +1323,8 @@
             >This operation will not block. The returned <see cref="T:System.Threading.Tasks.Task" />  object will complete after the data resource has been downloaded.</para
           >
           <para
-            >This method downloads the resource at the URI specified by in the <paramref name="address" /> parameter. When the download completes successfully, the downloaded file is named <paramref name="fileName" /> on the local computer. The file is downloaded asynchronously using thread resources that are automatically allocated from the thread pool. </para
-          >
+            >This method downloads the resource at the URI specified by in the <paramref name="address" /> parameter. When the download completes successfully, the downloaded file is named <paramref name="fileName" /> on the local computer. The file is downloaded asynchronously using thread resources that are automatically allocated from the thread pool.
+          </para>
           <para
             >You can use the <see cref="M:System.Net.WebClient.CancelAsync" /> method to cancel asynchronous operations that have not completed.</para
           >
@@ -1432,8 +1432,8 @@
             </item>
           </list>
           <para
-            >The <see cref="T:System.Net.DownloadProgressChangedEventHandler" /> is the delegate for this event. The <see cref="T:System.Net.DownloadProgressChangedEventArgs" /> class provides the event handler with event data. </para
-          >
+            >The <see cref="T:System.Net.DownloadProgressChangedEventHandler" /> is the delegate for this event. The <see cref="T:System.Net.DownloadProgressChangedEventArgs" /> class provides the event handler with event data.
+          </para>
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
@@ -1479,8 +1479,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method retrieves the specified resource. After it downloads the resource, the method uses the encoding specified in the <see cref="P:System.Net.WebClient.Encoding" /> property to convert the resource to a <see cref="T:System.String" />. This method blocks while downloading the resource. To download a resource and continue executing while waiting for the server's response, use one of the <see cref="Overload:System.Net.WebClient.DownloadStringAsync" /> methods. </para
-          >
+            >This method retrieves the specified resource. After it downloads the resource, the method uses the encoding specified in the <see cref="P:System.Net.WebClient.Encoding" /> property to convert the resource to a <see cref="T:System.String" />. This method blocks while downloading the resource. To download a resource and continue executing while waiting for the server's response, use one of the <see cref="Overload:System.Net.WebClient.DownloadStringAsync" /> methods.
+          </para>
           <para
             >If the <see cref="P:System.Net.WebClient.BaseAddress" /> property is not an empty string ("") and <paramref name="address" /> does not contain an absolute URI, <paramref name="address" /> must be a relative URI that is combined with <see cref="P:System.Net.WebClient.BaseAddress" /> to form the absolute URI of the requested data. If the <see cref="P:System.Net.WebClient.QueryString" /> property is not an empty string, it is appended to <paramref name="address" />.</para
           >
@@ -1533,8 +1533,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method retrieves the specified resource. After it downloads the resource, the method uses the encoding specified in the <see cref="P:System.Net.WebClient.Encoding" /> property to convert the resource to a <see cref="T:System.String" />. This method blocks while downloading the resource. To download a resource and continue executing while waiting for the server's response, use one of the <see cref="Overload:System.Net.WebClient.DownloadStringAsync" /> methods. </para
-          >
+            >This method retrieves the specified resource. After it downloads the resource, the method uses the encoding specified in the <see cref="P:System.Net.WebClient.Encoding" /> property to convert the resource to a <see cref="T:System.String" />. This method blocks while downloading the resource. To download a resource and continue executing while waiting for the server's response, use one of the <see cref="Overload:System.Net.WebClient.DownloadStringAsync" /> methods.
+          </para>
           <para
             >If the <see cref="P:System.Net.WebClient.BaseAddress" /> property is not an empty string ("") and <paramref name="address" /> does not contain an absolute URI, <paramref name="address" /> must be a relative URI that is combined with <see cref="P:System.Net.WebClient.BaseAddress" /> to form the absolute URI of the requested data. If the <see cref="P:System.Net.WebClient.QueryString" /> property is not an empty string, it is appended to <paramref name="address" />.</para
           >
@@ -1707,8 +1707,8 @@
             >This event is raised each time an asynchronous operation to download a resource as a string completes. These operations are started by calling the <see cref="Overload:System.Net.WebClient.DownloadStringAsync" /> methods.</para
           >
           <para
-            >The <see cref="T:System.Net.DownloadStringCompletedEventHandler" /> is the delegate for this event. The <see cref="T:System.Net.DownloadStringCompletedEventArgs" /> class provides the event handler with event data. </para
-          >
+            >The <see cref="T:System.Net.DownloadStringCompletedEventHandler" /> is the delegate for this event. The <see cref="T:System.Net.DownloadStringCompletedEventArgs" /> class provides the event handler with event data.
+          </para>
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
@@ -1747,8 +1747,8 @@
             >This operation will not block. The returned <see cref="T:System.Threading.Tasks.Task`1" /> object will complete after the data resource has been downloaded.  The resource is downloaded asynchronously using thread resources that are automatically allocated from the thread pool.</para
           >
           <para
-            >After downloading the resource, this method uses the encoding specified in the <see cref="P:System.Net.WebClient.Encoding" /> property to convert the resource to a <see cref="T:System.String" />. This method does not block the calling thread while downloading the resource. </para
-          >
+            >After downloading the resource, this method uses the encoding specified in the <see cref="P:System.Net.WebClient.Encoding" /> property to convert the resource to a <see cref="T:System.String" />. This method does not block the calling thread while downloading the resource.
+          </para>
           <para
             >You can use the <see cref="M:System.Net.WebClient.CancelAsync" /> method to cancel asynchronous operations that have not completed.</para
           >
@@ -1818,8 +1818,8 @@
             >This operation will not block. The returned <see cref="T:System.Threading.Tasks.Task`1" /> object will complete after the data resource has been downloaded. The resource is downloaded asynchronously using thread resources that are automatically allocated from the thread pool.</para
           >
           <para
-            >After downloading the resource, this method uses the encoding specified in the <see cref="P:System.Net.WebClient.Encoding" /> property to convert the resource to a <see cref="T:System.String" />. This method does not block the calling thread while downloading the resource. </para
-          >
+            >After downloading the resource, this method uses the encoding specified in the <see cref="P:System.Net.WebClient.Encoding" /> property to convert the resource to a <see cref="T:System.String" />. This method does not block the calling thread while downloading the resource.
+          </para>
           <para
             >You can use the <see cref="M:System.Net.WebClient.CancelAsync" /> method to cancel asynchronous operations that have not completed.</para
           >
@@ -1963,8 +1963,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The object returned by this method is obtained by calling the <see cref="M:System.Net.WebRequest.GetResponse" /> method on the specified <see cref="T:System.Net.WebRequest" /> object. </para
-          >
+            >The object returned by this method is obtained by calling the <see cref="M:System.Net.WebRequest.GetResponse" /> method on the specified <see cref="T:System.Net.WebRequest" /> object.
+          </para>
           <para
             >This method can be called only by classes that inherit from <see cref="T:System.Net.WebClient" />. It is provided to give inheritors access to the underlying <see cref="T:System.Net.WebResponse" /> object.</para
           >
@@ -1986,8 +1986,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Net.WebRequest" /> that is used to obtain the response. </param
-        >
+          />A <see cref="T:System.Net.WebRequest" /> that is used to obtain the response.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetWebResponse">
@@ -2015,8 +2015,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The object returned by this method is obtained by calling the <see cref="M:System.Net.WebRequest.EndGetResponse(System.IAsyncResult)" /> method on the specified <see cref="T:System.Net.WebRequest" /> object. </para
-          >
+            >The object returned by this method is obtained by calling the <see cref="M:System.Net.WebRequest.EndGetResponse(System.IAsyncResult)" /> method on the specified <see cref="T:System.Net.WebRequest" /> object.
+          </para>
           <para
             >This method can be called only by classes that inherit from <see cref="T:System.Net.WebClient" />. It is provided to give inheritors access to the underlying <see cref="T:System.Net.WebResponse" /> object.</para
           >
@@ -2084,8 +2084,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Net.WebClient.Headers" /> property contains a <see cref="T:System.Net.WebHeaderCollection" /> instance containing protocol headers that the <see cref="T:System.Net.WebClient" /> sends with the request. </para
-          >
+            >The <see cref="P:System.Net.WebClient.Headers" /> property contains a <see cref="T:System.Net.WebHeaderCollection" /> instance containing protocol headers that the <see cref="T:System.Net.WebClient" /> sends with the request.
+          </para>
           <para
             >Some common headers are considered restricted and are protected by the system and cannot be set or changed in a <see cref="T:System.Net.WebHeaderCollection" /> object. Any attempt to set one of these restricted headers in the <see cref="T:System.Net.WebHeaderCollection" /> object associated with a <see cref="T:System.Net.WebClient" /> object will throw an exception later when attempting to send the <see cref="T:System.Net.WebClient" /> request.</para
           >
@@ -2099,8 +2099,8 @@
             </item>
           </list>
           <para
-            >In addition, some other headers are also restricted when using a <see cref="T:System.Net.WebClient" /> object. These restricted headers include, but are not limited to the following: </para
-          >
+            >In addition, some other headers are also restricted when using a <see cref="T:System.Net.WebClient" /> object. These restricted headers include, but are not limited to the following:
+          </para>
           <list type="bullet">
             <item>
               <para>Accept</para>
@@ -2125,8 +2125,8 @@
             </item>
           </list>
           <para
-            >The <see cref="T:System.Net.HttpWebRequest" /> class has properties for setting some of the above headers. If it is important for an application to set these headers, then the <see cref="T:System.Net.HttpWebRequest" /> class should be used instead of the <see cref="T:System.Net.WebRequest" /> class. </para
-          >
+            >The <see cref="T:System.Net.HttpWebRequest" /> class has properties for setting some of the above headers. If it is important for an application to set these headers, then the <see cref="T:System.Net.HttpWebRequest" /> class should be used instead of the <see cref="T:System.Net.WebRequest" /> class.
+          </para>
           <para>You should not assume that the header values will remain unchanged, because Web servers and caches may change or add headers to a Web request.</para>
         </remarks>
         <summary>
@@ -2753,8 +2753,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URI specified as a <see cref="T:System.String" /> from which to download data. </param
-        >
+          />The URI specified as a <see cref="T:System.String" /> from which to download data.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2811,8 +2811,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URI specified as a <see cref="T:System.Uri" /> from which to download data. </param
-        >
+          />The URI specified as a <see cref="T:System.Uri" /> from which to download data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OpenReadAsync">
@@ -2836,8 +2836,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method retrieves a <see cref="T:System.IO.Stream" /> instance used to access the resource specified by the <paramref name="address" /> parameter. The stream is obtained using thread resources that are automatically allocated from the thread pool. To receive notification when the stream is available, add an event handler to the <see cref="E:System.Net.WebClient.OpenReadCompleted" /> event. </para
-          >
+            >This method retrieves a <see cref="T:System.IO.Stream" /> instance used to access the resource specified by the <paramref name="address" /> parameter. The stream is obtained using thread resources that are automatically allocated from the thread pool. To receive notification when the stream is available, add an event handler to the <see cref="E:System.Net.WebClient.OpenReadCompleted" /> event.
+          </para>
           <block subset="none" type="note">
             <para
               > You must call <see cref="M:System.IO.Stream.Close" /> when you are finished with the <see cref="T:System.IO.Stream" /> to avoid running out of system resources.</para
@@ -2899,8 +2899,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method retrieves a <see cref="T:System.IO.Stream" /> instance used to access the resource specified by the <paramref name="address" /> parameter. The stream is obtained using thread resources that are automatically allocated from the thread pool. To receive notification when the stream is available, add an event handler to the <see cref="E:System.Net.WebClient.OpenReadCompleted" /> event. </para
-          >
+            >This method retrieves a <see cref="T:System.IO.Stream" /> instance used to access the resource specified by the <paramref name="address" /> parameter. The stream is obtained using thread resources that are automatically allocated from the thread pool. To receive notification when the stream is available, add an event handler to the <see cref="E:System.Net.WebClient.OpenReadCompleted" /> event.
+          </para>
           <block subset="none" type="note">
             <para
               > You must call <see cref="M:System.IO.Stream.Close" /> when you are finished with the <see cref="T:System.IO.Stream" /> to avoid running out of system resources.</para
@@ -2968,8 +2968,8 @@
             >This event is raised each time an asynchronous operation to open a stream containing a resource completes. These operations are started by calling the <see cref="Overload:System.Net.WebClient.OpenReadAsync" /> methods.</para
           >
           <para
-            >The <see cref="T:System.Net.OpenReadCompletedEventHandler" /> is the delegate for this event. The <see cref="T:System.Net.OpenReadCompletedEventArgs" /> class provides the event handler with event data. </para
-          >
+            >The <see cref="T:System.Net.OpenReadCompletedEventHandler" /> is the delegate for this event. The <see cref="T:System.Net.OpenReadCompletedEventArgs" /> class provides the event handler with event data.
+          </para>
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
@@ -3008,8 +3008,8 @@
             >This operation will not block. The returned <see cref="T:System.Threading.Tasks.Task`1" /> object will complete after the a readable stream to the data resource has been opened. This method does not block the calling thread while the stream is opening.</para
           >
           <para
-            >This method retrieves a <see cref="T:System.IO.Stream" /> instance used to access the resource specified by the <paramref name="address" /> parameter. The stream is obtained using thread resources that are automatically allocated from the thread pool. </para
-          >
+            >This method retrieves a <see cref="T:System.IO.Stream" /> instance used to access the resource specified by the <paramref name="address" /> parameter. The stream is obtained using thread resources that are automatically allocated from the thread pool.
+          </para>
           <block subset="none" type="note">
             <para
               > You must call <see cref="M:System.IO.Stream.Close" /> when you are finished with the <see cref="T:System.IO.Stream" /> to avoid running out of system resources.</para
@@ -3084,8 +3084,8 @@
             >This operation will not block. The returned <see cref="T:System.Threading.Tasks.Task`1" /> object will complete after the a readable stream to the data resource has been opened. This method does not block the calling thread while the stream is opening.</para
           >
           <para
-            >This method retrieves a <see cref="T:System.IO.Stream" /> instance used to access the resource specified by the <paramref name="address" /> parameter. The stream is obtained using thread resources that are automatically allocated from the thread pool. </para
-          >
+            >This method retrieves a <see cref="T:System.IO.Stream" /> instance used to access the resource specified by the <paramref name="address" /> parameter. The stream is obtained using thread resources that are automatically allocated from the thread pool.
+          </para>
           <block subset="none" type="note">
             <para
               > You must call <see cref="M:System.IO.Stream.Close" /> when you are finished with the <see cref="T:System.IO.Stream" /> to avoid running out of system resources.</para
@@ -3184,8 +3184,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URI of the resource to receive the data. </param
-        >
+          />The URI of the resource to receive the data.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -3305,8 +3305,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URI of the resource to receive the data. </param
-        >
+          />The URI of the resource to receive the data.
+        </param>
         <param name="method">
           <attribution
             license="cc4"
@@ -3426,8 +3426,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URI of the resource to receive the data. </param
-        >
+          />The URI of the resource to receive the data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="OpenWriteAsync">
@@ -3480,8 +3480,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URI of the resource to receive the data. </param
-        >
+          />The URI of the resource to receive the data.
+        </param>
         <param name="method">
           <attribution
             license="cc4"
@@ -3590,8 +3590,8 @@
             >This event is raised each time an asynchronous operation to open a stream that is used to send data to a resource completes. These operations are started by calling the <see cref="Overload:System.Net.WebClient.OpenWriteAsync" /> methods.</para
           >
           <para
-            >The <see cref="T:System.Net.OpenWriteCompletedEventHandler" /> is the delegate for this event. The <see cref="T:System.Net.OpenWriteCompletedEventArgs" /> class provides the event handler with event data. </para
-          >
+            >The <see cref="T:System.Net.OpenWriteCompletedEventHandler" /> is the delegate for this event. The <see cref="T:System.Net.OpenWriteCompletedEventArgs" /> class provides the event handler with event data.
+          </para>
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
@@ -3630,8 +3630,8 @@
             >This operation will not block. The returned <see cref="T:System.Threading.Tasks.Task`1" /> object will complete after the a writable stream to the data resource has been opened. This method does not block the calling thread while the stream is opening.</para
           >
           <para
-            >This method retrieves a <see cref="T:System.IO.Stream" /> instance used to write data to the resource specified by the <paramref name="address" /> parameter. The stream is obtained using thread resources that are automatically allocated from the thread pool. </para
-          >
+            >This method retrieves a <see cref="T:System.IO.Stream" /> instance used to write data to the resource specified by the <paramref name="address" /> parameter. The stream is obtained using thread resources that are automatically allocated from the thread pool.
+          </para>
           <block subset="none" type="note">
             <para
               > You must call <see cref="M:System.IO.Stream.Close" /> when you are finished with the <see cref="T:System.IO.Stream" /> to avoid running out of system resources.</para
@@ -3696,8 +3696,8 @@
             >This operation will not block. The returned <see cref="T:System.Threading.Tasks.Task`1" /> object will complete after the a writable stream to the data resource has been opened. This method does not block the calling thread while the stream is opening.</para
           >
           <para
-            >This method retrieves a <see cref="T:System.IO.Stream" /> instance used to write data to the resource specified by the <paramref name="address" /> parameter. The stream is obtained using thread resources that are automatically allocated from the thread pool. </para
-          >
+            >This method retrieves a <see cref="T:System.IO.Stream" /> instance used to write data to the resource specified by the <paramref name="address" /> parameter. The stream is obtained using thread resources that are automatically allocated from the thread pool.
+          </para>
           <block subset="none" type="note">
             <para
               > You must call <see cref="M:System.IO.Stream.Close" /> when you are finished with the <see cref="T:System.IO.Stream" /> to avoid running out of system resources.</para
@@ -3763,8 +3763,8 @@
             >This operation will not block. The returned <see cref="T:System.Threading.Tasks.Task`1" /> object will complete after the a writable stream to the data resource has been opened. This method does not block the calling thread while the stream is opening.</para
           >
           <para
-            >This method retrieves a <see cref="T:System.IO.Stream" /> instance used to write data to the resource specified by the <paramref name="address" /> parameter. The stream is obtained using thread resources that are automatically allocated from the thread pool. </para
-          >
+            >This method retrieves a <see cref="T:System.IO.Stream" /> instance used to write data to the resource specified by the <paramref name="address" /> parameter. The stream is obtained using thread resources that are automatically allocated from the thread pool.
+          </para>
           <block subset="none" type="note">
             <para
               > You must call <see cref="M:System.IO.Stream.Close" /> when you are finished with the <see cref="T:System.IO.Stream" /> to avoid running out of system resources.</para
@@ -3848,8 +3848,8 @@
             >This operation will not block. The returned <see cref="T:System.Threading.Tasks.Task`1" /> object will complete after the a writable stream to the data resource has been opened. This method does not block the calling thread while the stream is opening.</para
           >
           <para
-            >This method retrieves a <see cref="T:System.IO.Stream" /> instance used to write data to the resource specified by the <paramref name="address" /> parameter. The stream is obtained using thread resources that are automatically allocated from the thread pool. </para
-          >
+            >This method retrieves a <see cref="T:System.IO.Stream" /> instance used to write data to the resource specified by the <paramref name="address" /> parameter. The stream is obtained using thread resources that are automatically allocated from the thread pool.
+          </para>
           <block subset="none" type="note">
             <para
               > You must call <see cref="M:System.IO.Stream.Close" /> when you are finished with the <see cref="T:System.IO.Stream" /> to avoid running out of system resources.</para
@@ -3917,8 +3917,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Net.WebClient.Proxy" /> property identifies the <see cref="T:System.Net.IWebProxy" /> instance that communicates with remote servers on behalf of this <see cref="T:System.Net.WebClient" /> object. The proxy is set by the system using configuration files and the Internet Explorer Local Area Network settings. To specify that no proxy should be used, set the <see cref="P:System.Net.WebClient.Proxy" /> property to the proxy instance returned by the <see cref="M:System.Net.GlobalProxySelection.GetEmptyWebProxy" /> method. </para
-          >
+            >The <see cref="P:System.Net.WebClient.Proxy" /> property identifies the <see cref="T:System.Net.IWebProxy" /> instance that communicates with remote servers on behalf of this <see cref="T:System.Net.WebClient" /> object. The proxy is set by the system using configuration files and the Internet Explorer Local Area Network settings. To specify that no proxy should be used, set the <see cref="P:System.Net.WebClient.Proxy" /> property to the proxy instance returned by the <see cref="M:System.Net.GlobalProxySelection.GetEmptyWebProxy" /> method.
+          </para>
           <para
             >For information on automatic proxy detection, see <format type="text/html">
               <a href="fcd9c3bd-93de-4c92-8ff3-837327ad18de">Automatic Proxy Detection</a>
@@ -4060,8 +4060,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Net.WebClient.UploadData(System.String,System.Byte[])" /> method sends a data buffer to a resource. </para
-          >
+            >The <see cref="M:System.Net.WebClient.UploadData(System.String,System.Byte[])" /> method sends a data buffer to a resource.
+          </para>
           <para
             >This method uses the STOR command to upload an FTP resource. For an HTTP resource, the POST method is used. If the underlying request is not understood by the server, the underlying protocol classes determine what occurs. Typically, a <see cref="T:System.Net.WebException" /> is thrown with the <see cref="P:System.Net.WebException.Status" /> property set to indicate the error.</para
           >
@@ -4094,15 +4094,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URI of the resource to receive the data. </param
-        >
+          />The URI of the resource to receive the data.
+        </param>
         <param name="data">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data buffer to send to the resource. </param
-        >
+          />The data buffer to send to the resource.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -4128,8 +4128,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Net.WebClient.UploadData(System.String,System.Byte[])" /> method sends a data buffer to a resource. </para
-          >
+            >The <see cref="M:System.Net.WebClient.UploadData(System.String,System.Byte[])" /> method sends a data buffer to a resource.
+          </para>
           <para
             >This method uses the STOR command to upload an FTP resource. For an HTTP resource, the POST method is used. If the underlying request is not understood by the server, the underlying protocol classes determine what occurs. Typically, a <see cref="T:System.Net.WebException" /> is thrown with the <see cref="P:System.Net.WebException.Status" /> property set to indicate the error.</para
           >
@@ -4162,15 +4162,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URI of the resource to receive the data. </param
-        >
+          />The URI of the resource to receive the data.
+        </param>
         <param name="data">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data buffer to send to the resource. </param
-        >
+          />The data buffer to send to the resource.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="UploadData">
@@ -4247,8 +4247,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URI of the resource to receive the data. </param
-        >
+          />The URI of the resource to receive the data.
+        </param>
         <param name="method">
           <attribution
             license="cc4"
@@ -4261,8 +4261,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data buffer to send to the resource. </param
-        >
+          />The data buffer to send to the resource.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -4326,8 +4326,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URI of the resource to receive the data. </param
-        >
+          />The URI of the resource to receive the data.
+        </param>
         <param name="method">
           <attribution
             license="cc4"
@@ -4369,11 +4369,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method sends a data buffer to a resource. The data buffer is sent asynchronously using thread resources that are automatically allocated from the thread pool. The data is not encoded. To receive notification when the data upload completes, add an event handler to the <see cref="E:System.Net.WebClient.UploadDataCompleted" /> event. </para
-          >
+            >This method sends a data buffer to a resource. The data buffer is sent asynchronously using thread resources that are automatically allocated from the thread pool. The data is not encoded. To receive notification when the data upload completes, add an event handler to the <see cref="E:System.Net.WebClient.UploadDataCompleted" /> event.
+          </para>
           <para
-            >This method does not block the calling thread while the data is being sent. To send data and block while waiting for the server's response, use one of the <see cref="Overload:System.Net.WebClient.UploadData" /> methods. </para
-          >
+            >This method does not block the calling thread while the data is being sent. To send data and block while waiting for the server's response, use one of the <see cref="Overload:System.Net.WebClient.UploadData" /> methods.
+          </para>
           <para
             >Asynchronous operations that have not completed can be canceled using the <see cref="M:System.Net.WebClient.CancelAsync" /> method.</para
           >
@@ -4398,15 +4398,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URI of the resource to receive the data. </param
-        >
+          />The URI of the resource to receive the data.
+        </param>
         <param name="data">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data buffer to send to the resource. </param
-        >
+          />The data buffer to send to the resource.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="UploadDataAsync">
@@ -4435,11 +4435,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method sends a data buffer to a resource. The data buffer is sent asynchronously using thread resources that are automatically allocated from the thread pool. The data is not encoded. To receive notification when the data upload completes, add an event handler to the <see cref="E:System.Net.WebClient.UploadDataCompleted" /> event. </para
-          >
+            >This method sends a data buffer to a resource. The data buffer is sent asynchronously using thread resources that are automatically allocated from the thread pool. The data is not encoded. To receive notification when the data upload completes, add an event handler to the <see cref="E:System.Net.WebClient.UploadDataCompleted" /> event.
+          </para>
           <para
-            >This method does not block the calling thread while the data is being sent. To send data and block while waiting for the server's response, use one of the <see cref="Overload:System.Net.WebClient.UploadData" /> methods. </para
-          >
+            >This method does not block the calling thread while the data is being sent. To send data and block while waiting for the server's response, use one of the <see cref="Overload:System.Net.WebClient.UploadData" /> methods.
+          </para>
           <para
             >Asynchronous operations that have not completed can be canceled using the <see cref="M:System.Net.WebClient.CancelAsync" /> method.</para
           >
@@ -4508,11 +4508,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method sends a data buffer to a resource. The data buffer is sent asynchronously using thread resources that are automatically allocated from the thread pool. The data is not encoded. To receive notification when the data upload completes, add an event handler to the <see cref="E:System.Net.WebClient.UploadDataCompleted" /> event. </para
-          >
+            >This method sends a data buffer to a resource. The data buffer is sent asynchronously using thread resources that are automatically allocated from the thread pool. The data is not encoded. To receive notification when the data upload completes, add an event handler to the <see cref="E:System.Net.WebClient.UploadDataCompleted" /> event.
+          </para>
           <para
-            >This method does not block the calling thread while the data is being sent. To send data and block while waiting for the server's response, use one of the <see cref="Overload:System.Net.WebClient.UploadData" /> methods. </para
-          >
+            >This method does not block the calling thread while the data is being sent. To send data and block while waiting for the server's response, use one of the <see cref="Overload:System.Net.WebClient.UploadData" /> methods.
+          </para>
           <para
             >Asynchronous operations that have not completed can be canceled using the <see cref="M:System.Net.WebClient.CancelAsync" /> method.</para
           >
@@ -4585,8 +4585,8 @@
             >This event is raised each time an asynchronous data upload operation completes. Asynchronous data uploads are started by calling the <see cref="Overload:System.Net.WebClient.UploadDataAsync" /> methods.</para
           >
           <para
-            >The <see cref="T:System.Net.UploadDataCompletedEventHandler" /> is the delegate for this event. The <see cref="T:System.Net.UploadDataCompletedEventArgs" /> class provides the event handler with event data. </para
-          >
+            >The <see cref="T:System.Net.UploadDataCompletedEventHandler" /> is the delegate for this event. The <see cref="T:System.Net.UploadDataCompletedEventArgs" /> class provides the event handler with event data.
+          </para>
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
@@ -4623,8 +4623,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This operation will not block. The returned <see cref="T:System.Threading.Tasks.Task`1" /> object will complete after the a data buffer has been uploaded to the resource. </para
-          >
+            >This operation will not block. The returned <see cref="T:System.Threading.Tasks.Task`1" /> object will complete after the a data buffer has been uploaded to the resource.
+          </para>
           <para>This method sends a data buffer to a resource. The data buffer is sent asynchronously using thread resources that are automatically allocated from the thread pool. The data is not encoded. </para>
           <para
             >Asynchronous operations that have not completed can be canceled using the <see cref="M:System.Net.WebClient.CancelAsync" /> method.</para
@@ -4694,8 +4694,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This operation will not block. The returned <see cref="T:System.Threading.Tasks.Task`1" /> object will complete after the a data buffer has been uploaded to the resource. </para
-          >
+            >This operation will not block. The returned <see cref="T:System.Threading.Tasks.Task`1" /> object will complete after the a data buffer has been uploaded to the resource.
+          </para>
           <para>This method sends a data buffer to a resource. The data buffer is sent asynchronously using thread resources that are automatically allocated from the thread pool. The data is not encoded. </para>
           <para
             >Asynchronous operations that have not completed can be canceled using the <see cref="M:System.Net.WebClient.CancelAsync" /> method.</para
@@ -4715,8 +4715,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Uploads a data buffer that contains a <see cref="T:System.Byte" /> array to the URI specified as an asynchronous operation using a task object.  </para
-          >
+            >Uploads a data buffer that contains a <see cref="T:System.Byte" /> array to the URI specified as an asynchronous operation using a task object.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -4766,8 +4766,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This operation will not block. The returned <see cref="T:System.Threading.Tasks.Task`1" /> object will complete after the a data buffer has been uploaded to the resource. </para
-          >
+            >This operation will not block. The returned <see cref="T:System.Threading.Tasks.Task`1" /> object will complete after the a data buffer has been uploaded to the resource.
+          </para>
           <para>This method sends a data buffer to a resource. The data buffer is sent asynchronously using thread resources that are automatically allocated from the thread pool. The data is not encoded. </para>
           <para
             >Asynchronous operations that have not completed can be canceled using the <see cref="M:System.Net.WebClient.CancelAsync" /> method.</para
@@ -4786,8 +4786,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Uploads a data buffer that contains a <see cref="T:System.Byte" /> array to the URI specified as an asynchronous operation using a task object.  </para
-          >
+            >Uploads a data buffer that contains a <see cref="T:System.Byte" /> array to the URI specified as an asynchronous operation using a task object.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -4852,8 +4852,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This operation will not block. The returned <see cref="T:System.Threading.Tasks.Task`1" /> object will complete after the a data buffer has been uploaded to the resource. </para
-          >
+            >This operation will not block. The returned <see cref="T:System.Threading.Tasks.Task`1" /> object will complete after the a data buffer has been uploaded to the resource.
+          </para>
           <para>This method sends a data buffer to a resource. The data buffer is sent asynchronously using thread resources that are automatically allocated from the thread pool. The data is not encoded. </para>
           <para
             >Asynchronous operations that have not completed can be canceled using the <see cref="M:System.Net.WebClient.CancelAsync" /> method.</para
@@ -4872,8 +4872,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Uploads a data buffer that contains a <see cref="T:System.Byte" /> array to the URI specified as an asynchronous operation using a task object.  </para
-          >
+            >Uploads a data buffer that contains a <see cref="T:System.Byte" /> array to the URI specified as an asynchronous operation using a task object.
+          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -5165,8 +5165,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file to send to the resource. </param
-        >
+          />The file to send to the resource.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -5241,8 +5241,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file to send to the resource. </param
-        >
+          />The file to send to the resource.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="UploadFileAsync">
@@ -5273,8 +5273,8 @@
             >The file is sent asynchronously using thread resources that are automatically allocated from the thread pool. To receive notification when the file upload completes, add an event handler to the <see cref="E:System.Net.WebClient.UploadFileCompleted" /> event.</para
           >
           <para
-            >This method does not block the calling thread while the file is being sent. To send a file and block while waiting for the server's response, use one of the <see cref="Overload:System.Net.WebClient.UploadFile" /> methods. </para
-          >
+            >This method does not block the calling thread while the file is being sent. To send a file and block while waiting for the server's response, use one of the <see cref="Overload:System.Net.WebClient.UploadFile" /> methods.
+          </para>
           <para
             >Asynchronous operations that have not completed can be canceled using the <see cref="M:System.Net.WebClient.CancelAsync" /> method.</para
           >
@@ -5299,15 +5299,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URI of the resource to receive the file. For HTTP resources, this URI must identify a resource that can accept a request sent with the POST method, such as a script or ASP page. </param
-        >
+          />The URI of the resource to receive the file. For HTTP resources, this URI must identify a resource that can accept a request sent with the POST method, such as a script or ASP page.
+        </param>
         <param name="fileName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file to send to the resource. </param
-        >
+          />The file to send to the resource.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="UploadFileAsync">
@@ -5339,8 +5339,8 @@
             >The file is sent asynchronously using thread resources that are automatically allocated from the thread pool. To receive notification when the file upload completes, add an event handler to the <see cref="E:System.Net.WebClient.UploadFileCompleted" /> event.</para
           >
           <para
-            >This method does not block the calling thread while the file is being sent. To send a file and block while waiting for the server's response, use one of the <see cref="Overload:System.Net.WebClient.UploadFile" /> methods. </para
-          >
+            >This method does not block the calling thread while the file is being sent. To send a file and block while waiting for the server's response, use one of the <see cref="Overload:System.Net.WebClient.UploadFile" /> methods.
+          </para>
           <para
             >Asynchronous operations that have not completed can be canceled using the <see cref="M:System.Net.WebClient.CancelAsync" /> method.</para
           >
@@ -5365,8 +5365,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URI of the resource to receive the file. For HTTP resources, this URI must identify a resource that can accept a request sent with the POST method, such as a script or ASP page. </param
-        >
+          />The URI of the resource to receive the file. For HTTP resources, this URI must identify a resource that can accept a request sent with the POST method, such as a script or ASP page.
+        </param>
         <param name="method">
           <attribution
             license="cc4"
@@ -5379,8 +5379,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file to send to the resource. </param
-        >
+          />The file to send to the resource.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="UploadFileAsync">
@@ -5413,8 +5413,8 @@
             >The file is sent asynchronously using thread resources that are automatically allocated from the thread pool. To receive notification when the file upload completes, add an event handler to the <see cref="E:System.Net.WebClient.UploadFileCompleted" /> event.</para
           >
           <para
-            >This method does not block the calling thread while the file is being sent. To send a file and block while waiting for the server's response, use one of the <see cref="Overload:System.Net.WebClient.UploadFile" /> methods. </para
-          >
+            >This method does not block the calling thread while the file is being sent. To send a file and block while waiting for the server's response, use one of the <see cref="Overload:System.Net.WebClient.UploadFile" /> methods.
+          </para>
           <para
             >Asynchronous operations that have not completed can be canceled using the <see cref="M:System.Net.WebClient.CancelAsync" /> method.</para
           >
@@ -5488,8 +5488,8 @@
             >This event is raised each time an asynchronous file upload operation completes. Asynchronous file uploads are started by calling the <see cref="Overload:System.Net.WebClient.UploadFileAsync" /> methods.</para
           >
           <para
-            >The <see cref="T:System.Net.UploadFileCompletedEventHandler" /> is the delegate for this event. The <see cref="T:System.Net.UploadFileCompletedEventArgs" /> class provides the event handler with event data. </para
-          >
+            >The <see cref="T:System.Net.UploadFileCompletedEventHandler" /> is the delegate for this event. The <see cref="T:System.Net.UploadFileCompletedEventArgs" /> class provides the event handler with event data.
+          </para>
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
@@ -5866,8 +5866,8 @@
             </item>
           </list>
           <para
-            >The <see cref="T:System.Net.UploadProgressChangedEventHandler" /> is the delegate for this event. The <see cref="T:System.Net.UploadProgressChangedEventArgs" /> class provides the event handler with event data. </para
-          >
+            >The <see cref="T:System.Net.UploadProgressChangedEventHandler" /> is the delegate for this event. The <see cref="T:System.Net.UploadProgressChangedEventArgs" /> class provides the event handler with event data.
+          </para>
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
@@ -5932,8 +5932,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URI of the resource to receive the string. For Http resources, this URI must identify a resource that can accept a request sent with the POST method, such as a script or ASP page. </param
-        >
+          />The URI of the resource to receive the string. For Http resources, this URI must identify a resource that can accept a request sent with the POST method, such as a script or ASP page.
+        </param>
         <param name="data">
           <attribution
             license="cc4"
@@ -5995,8 +5995,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URI of the resource to receive the string. For Http resources, this URI must identify a resource that can accept a request sent with the POST method, such as a script or ASP page. </param
-        >
+          />The URI of the resource to receive the string. For Http resources, this URI must identify a resource that can accept a request sent with the POST method, such as a script or ASP page.
+        </param>
         <param name="data">
           <attribution
             license="cc4"
@@ -6032,8 +6032,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Before uploading the string, this method converts it to a <see cref="T:System.Byte" /> array using the encoding specified in the <see cref="P:System.Net.WebClient.Encoding" /> property. This method blocks while the string is transmitted. To send a string and continue executing while waiting for the server's response, use one of the <see cref="Overload:System.Net.WebClient.UploadStringAsync" /> methods. </para
-          >
+            >Before uploading the string, this method converts it to a <see cref="T:System.Byte" /> array using the encoding specified in the <see cref="P:System.Net.WebClient.Encoding" /> property. This method blocks while the string is transmitted. To send a string and continue executing while waiting for the server's response, use one of the <see cref="Overload:System.Net.WebClient.UploadStringAsync" /> methods.
+          </para>
           <para
             >If the <see cref="P:System.Net.WebClient.BaseAddress" /> property is not an empty string ("") and <paramref name="address" /> does not contain an absolute URI, <paramref name="address" /> must be a relative URI that is combined with <see cref="P:System.Net.WebClient.BaseAddress" /> to form the absolute URI of the requested data. If the <see cref="P:System.Net.WebClient.QueryString" /> property is not an empty string, it is appended to <paramref name="address" />.</para
           >
@@ -6058,8 +6058,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URI of the resource to receive the string. This URI must identify a resource that can accept a request sent with the <paramref name="method" /> method. </param
-        >
+          />The URI of the resource to receive the string. This URI must identify a resource that can accept a request sent with the <paramref name="method" /> method.
+        </param>
         <param name="method">
           <attribution
             license="cc4"
@@ -6102,8 +6102,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Before uploading the string, this method converts it to a <see cref="T:System.Byte" /> array using the encoding specified in the <see cref="P:System.Net.WebClient.Encoding" /> property. This method blocks while the string is transmitted. To send a string and continue executing while waiting for the server's response, use one of the <see cref="Overload:System.Net.WebClient.UploadStringAsync" /> methods. </para
-          >
+            >Before uploading the string, this method converts it to a <see cref="T:System.Byte" /> array using the encoding specified in the <see cref="P:System.Net.WebClient.Encoding" /> property. This method blocks while the string is transmitted. To send a string and continue executing while waiting for the server's response, use one of the <see cref="Overload:System.Net.WebClient.UploadStringAsync" /> methods.
+          </para>
           <para
             >If the <see cref="P:System.Net.WebClient.BaseAddress" /> property is not an empty string ("") and <paramref name="address" /> does not contain an absolute URI, <paramref name="address" /> must be a relative URI that is combined with <see cref="P:System.Net.WebClient.BaseAddress" /> to form the absolute URI of the requested data. If the <see cref="P:System.Net.WebClient.QueryString" /> property is not an empty string, it is appended to <paramref name="address" />.</para
           >
@@ -6128,8 +6128,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URI of the resource to receive the string. This URI must identify a resource that can accept a request sent with the <paramref name="method" /> method. </param
-        >
+          />The URI of the resource to receive the string. This URI must identify a resource that can accept a request sent with the <paramref name="method" /> method.
+        </param>
         <param name="method">
           <attribution
             license="cc4"
@@ -6200,8 +6200,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URI of the resource to receive the string. For HTTP resources, this URI must identify a resource that can accept a request sent with the POST method, such as a script or ASP page. </param
-        >
+          />The URI of the resource to receive the string. For HTTP resources, this URI must identify a resource that can accept a request sent with the POST method, such as a script or ASP page.
+        </param>
         <param name="data">
           <attribution
             license="cc4"
@@ -6387,8 +6387,8 @@
             >This event is raised each time an asynchronous string upload operation completes. Asynchronous string uploads are started by calling the <see cref="Overload:System.Net.WebClient.UploadStringAsync" /> methods.</para
           >
           <para
-            >The <see cref="T:System.Net.UploadStringCompletedEventHandler" /> is the delegate for this event. The <see cref="T:System.Net.UploadStringCompletedEventArgs" /> class provides the event handler with event data. </para
-          >
+            >The <see cref="T:System.Net.UploadStringCompletedEventHandler" /> is the delegate for this event. The <see cref="T:System.Net.UploadStringCompletedEventArgs" /> class provides the event handler with event data.
+          </para>
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67"></a>
@@ -6431,8 +6431,8 @@
             >Asynchronous operations that have not completed can be canceled using the <see cref="M:System.Net.WebClient.CancelAsync" /> method.</para
           >
           <para
-            >Before uploading the string, this method converts it to a <see cref="T:System.Byte" /> array using the encoding specified in the <see cref="P:System.Net.WebClient.Encoding" /> property. This method blocks while the string is transmitted. </para
-          >
+            >Before uploading the string, this method converts it to a <see cref="T:System.Byte" /> array using the encoding specified in the <see cref="P:System.Net.WebClient.Encoding" /> property. This method blocks while the string is transmitted.
+          </para>
           <para
             >If the <see cref="P:System.Net.WebClient.BaseAddress" /> property is not an empty string ("") and <paramref name="address" /> does not contain an absolute URI, <paramref name="address" /> must be a relative URI that is combined with <see cref="P:System.Net.WebClient.BaseAddress" /> to form the absolute URI of the requested data. If the <see cref="P:System.Net.WebClient.QueryString" /> property is not an empty string, it is appended to <paramref name="address" />.</para
           >
@@ -6501,8 +6501,8 @@
             >Asynchronous operations that have not completed can be canceled using the <see cref="M:System.Net.WebClient.CancelAsync" /> method.</para
           >
           <para
-            >Before uploading the string, this method converts it to a <see cref="T:System.Byte" /> array using the encoding specified in the <see cref="P:System.Net.WebClient.Encoding" /> property. This method blocks while the string is transmitted. </para
-          >
+            >Before uploading the string, this method converts it to a <see cref="T:System.Byte" /> array using the encoding specified in the <see cref="P:System.Net.WebClient.Encoding" /> property. This method blocks while the string is transmitted.
+          </para>
           <para
             >If the <see cref="P:System.Net.WebClient.BaseAddress" /> property is not an empty string ("") and <paramref name="address" /> does not contain an absolute URI, <paramref name="address" /> must be a relative URI that is combined with <see cref="P:System.Net.WebClient.BaseAddress" /> to form the absolute URI of the requested data. If the <see cref="P:System.Net.WebClient.QueryString" /> property is not an empty string, it is appended to <paramref name="address" />.</para
           >
@@ -6572,8 +6572,8 @@
             >Asynchronous operations that have not completed can be canceled using the <see cref="M:System.Net.WebClient.CancelAsync" /> method.</para
           >
           <para
-            >Before uploading the string, this method converts it to a <see cref="T:System.Byte" /> array using the encoding specified in the <see cref="P:System.Net.WebClient.Encoding" /> property. This method blocks while the string is transmitted. </para
-          >
+            >Before uploading the string, this method converts it to a <see cref="T:System.Byte" /> array using the encoding specified in the <see cref="P:System.Net.WebClient.Encoding" /> property. This method blocks while the string is transmitted.
+          </para>
           <para
             >If the <see cref="P:System.Net.WebClient.BaseAddress" /> property is not an empty string ("") and <paramref name="address" /> does not contain an absolute URI, <paramref name="address" /> must be a relative URI that is combined with <see cref="P:System.Net.WebClient.BaseAddress" /> to form the absolute URI of the requested data. If the <see cref="P:System.Net.WebClient.QueryString" /> property is not an empty string, it is appended to <paramref name="address" />.</para
           >
@@ -6658,8 +6658,8 @@
             >Asynchronous operations that have not completed can be canceled using the <see cref="M:System.Net.WebClient.CancelAsync" /> method.</para
           >
           <para
-            >Before uploading the string, this method converts it to a <see cref="T:System.Byte" /> array using the encoding specified in the <see cref="P:System.Net.WebClient.Encoding" /> property. This method blocks while the string is transmitted. </para
-          >
+            >Before uploading the string, this method converts it to a <see cref="T:System.Byte" /> array using the encoding specified in the <see cref="P:System.Net.WebClient.Encoding" /> property. This method blocks while the string is transmitted.
+          </para>
           <para
             >If the <see cref="P:System.Net.WebClient.BaseAddress" /> property is not an empty string ("") and <paramref name="address" /> does not contain an absolute URI, <paramref name="address" /> must be a relative URI that is combined with <see cref="P:System.Net.WebClient.BaseAddress" /> to form the absolute URI of the requested data. If the <see cref="P:System.Net.WebClient.QueryString" /> property is not an empty string, it is appended to <paramref name="address" />.</para
           >
@@ -6783,15 +6783,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URI of the resource to receive the collection. </param
-        >
+          />The URI of the resource to receive the collection.
+        </param>
         <param name="data">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Collections.Specialized.NameValueCollection" /> to send to the resource. </param
-        >
+          />The <see cref="T:System.Collections.Specialized.NameValueCollection" /> to send to the resource.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -6855,15 +6855,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URI of the resource to receive the collection. </param
-        >
+          />The URI of the resource to receive the collection.
+        </param>
         <param name="data">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Collections.Specialized.NameValueCollection" /> to send to the resource. </param
-        >
+          />The <see cref="T:System.Collections.Specialized.NameValueCollection" /> to send to the resource.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="UploadValues">
@@ -6944,8 +6944,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URI of the resource to receive the collection. </param
-        >
+          />The URI of the resource to receive the collection.
+        </param>
         <param name="method">
           <attribution
             license="cc4"
@@ -6958,8 +6958,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Collections.Specialized.NameValueCollection" /> to send to the resource. </param
-        >
+          />The <see cref="T:System.Collections.Specialized.NameValueCollection" /> to send to the resource.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -7023,8 +7023,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URI of the resource to receive the collection. </param
-        >
+          />The URI of the resource to receive the collection.
+        </param>
         <param name="method">
           <attribution
             license="cc4"
@@ -7037,8 +7037,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Collections.Specialized.NameValueCollection" /> to send to the resource. </param
-        >
+          />The <see cref="T:System.Collections.Specialized.NameValueCollection" /> to send to the resource.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="UploadValuesAsync">
@@ -7141,8 +7141,8 @@
             >The <see cref="T:System.Collections.Specialized.NameValueCollection" /> is sent asynchronously using thread resources that are automatically allocated from the thread pool. To receive notification when the upload operation completes, add an event handler to the <see cref="E:System.Net.WebClient.UploadValuesCompleted" /> event.</para
           >
           <para
-            >This method does not block the calling thread while the string is being sent. To send a string and block while waiting for the server's response, use one of the <see cref="Overload:System.Net.WebClient.UploadValues" /> methods. </para
-          >
+            >This method does not block the calling thread while the string is being sent. To send a string and block while waiting for the server's response, use one of the <see cref="Overload:System.Net.WebClient.UploadValues" /> methods.
+          </para>
           <para
             >Asynchronous operations that have not completed can be canceled using the <see cref="M:System.Net.WebClient.CancelAsync" /> method.</para
           >
@@ -7220,8 +7220,8 @@
             >The <see cref="T:System.Collections.Specialized.NameValueCollection" /> is sent asynchronously using thread resources that are automatically allocated from the thread pool. To receive notification when the upload operation completes, add an event handler to the <see cref="E:System.Net.WebClient.UploadValuesCompleted" /> event.</para
           >
           <para
-            >This method does not block the calling thread while the string is being sent. To send a string and block while waiting for the server's response, use one of the <see cref="Overload:System.Net.WebClient.UploadValues" /> methods. </para
-          >
+            >This method does not block the calling thread while the string is being sent. To send a string and block while waiting for the server's response, use one of the <see cref="Overload:System.Net.WebClient.UploadValues" /> methods.
+          </para>
           <para
             >Asynchronous operations that have not completed can be canceled using the <see cref="M:System.Net.WebClient.CancelAsync" /> method.</para
           >
@@ -7295,8 +7295,8 @@
             >This event is raised each time an asynchronous upload of a <see cref="T:System.Collections.Specialized.NameValueCollection" /> object's data completes. These uploads are started by calling the <see cref="Overload:System.Net.WebClient.UploadValuesAsync" /> methods.</para
           >
           <para
-            >The <see cref="T:System.Net.UploadValuesCompletedEventHandler" /> is the delegate for this event. The <see cref="T:System.Net.UploadValuesCompletedEventArgs" /> class provides the event handler with event data. </para
-          >
+            >The <see cref="T:System.Net.UploadValuesCompletedEventHandler" /> is the delegate for this event. The <see cref="T:System.Net.UploadValuesCompletedEventArgs" /> class provides the event handler with event data.
+          </para>
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>

@@ -65,15 +65,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the <see cref="T:System.Runtime.Remoting.Messaging.Header" />. </param
-        >
+          />The name of the <see cref="T:System.Runtime.Remoting.Messaging.Header" />.
+        </param>
         <param name="_Value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that contains the value for the <see cref="T:System.Runtime.Remoting.Messaging.Header" />. </param
-        >
+          />The object that contains the value for the <see cref="T:System.Runtime.Remoting.Messaging.Header" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -110,22 +110,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the <see cref="T:System.Runtime.Remoting.Messaging.Header" />. </param
-        >
+          />The name of the <see cref="T:System.Runtime.Remoting.Messaging.Header" />.
+        </param>
         <param name="_Value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that contains the value for the <see cref="T:System.Runtime.Remoting.Messaging.Header" />. </param
-        >
+          />The object that contains the value for the <see cref="T:System.Runtime.Remoting.Messaging.Header" />.
+        </param>
         <param name="_MustUnderstand">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Indicates whether the receiving end must understand the out-of-band data. </param
-        >
+          />Indicates whether the receiving end must understand the out-of-band data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -163,29 +163,29 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the <see cref="T:System.Runtime.Remoting.Messaging.Header" />. </param
-        >
+          />The name of the <see cref="T:System.Runtime.Remoting.Messaging.Header" />.
+        </param>
         <param name="_Value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that contains the value of the <see cref="T:System.Runtime.Remoting.Messaging.Header" />. </param
-        >
+          />The object that contains the value of the <see cref="T:System.Runtime.Remoting.Messaging.Header" />.
+        </param>
         <param name="_MustUnderstand">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Indicates whether the receiving end must understand out-of-band data. </param
-        >
+          />Indicates whether the receiving end must understand out-of-band data.
+        </param>
         <param name="_HeaderNamespace">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Remoting.Messaging.Header" /> XML namespace. </param
-        >
+          />The <see cref="T:System.Runtime.Remoting.Messaging.Header" /> XML namespace.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="HeaderNamespace">

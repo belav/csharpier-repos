@@ -162,8 +162,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The objects returned by this method include listeners in all TCP states except the <see cref="F:System.Net.NetworkInformation.TcpState.Listen" /> state. </para
-          >
+            >The objects returned by this method include listeners in all TCP states except the <see cref="F:System.Net.NetworkInformation.TcpState.Listen" /> state.
+          </para>
           <para>The TCP protocol is defined in IETF RFC 793. Note that the objects returned by this method reflect the connections as of the time the array is created. This information is not updated dynamically.</para>
         </remarks>
         <summary>

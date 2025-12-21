@@ -71,8 +71,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeTypeReference" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeTypeReference" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -98,8 +98,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeTypeReference" /> class using the specified code type parameter. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeTypeReference" /> class using the specified code type parameter.
+          </para>
         </summary>
         <param name="typeParameter">
           <attribution
@@ -343,8 +343,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the type of the elements of the array. </param
-        >
+          />The name of the type of the elements of the array.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -465,11 +465,11 @@
             <h2>Representation of Generic Types</h2>
           </format>
           <para
-            >The information in this section is intended for CodeDom provider developers and only applies to CLS-compliant languages. The return value can contain generic types. Generic types are formatted with the name of the type followed by a grave accent ("`") followed by a count of the generic type arguments. The generic type arguments can be found in the <see cref="T:System.CodeDom.CodeTypeReferenceCollection" /> returned by the <see cref="P:System.CodeDom.CodeTypeReference.TypeArguments" /> property. The values returned by <see cref="P:System.CodeDom.CodeTypeReference.BaseType" /> and the associated <see cref="P:System.CodeDom.CodeTypeReference.TypeArguments" /> contain the same content as the value of the type returned by reflection. </para
-          >
+            >The information in this section is intended for CodeDom provider developers and only applies to CLS-compliant languages. The return value can contain generic types. Generic types are formatted with the name of the type followed by a grave accent ("`") followed by a count of the generic type arguments. The generic type arguments can be found in the <see cref="T:System.CodeDom.CodeTypeReferenceCollection" /> returned by the <see cref="P:System.CodeDom.CodeTypeReference.TypeArguments" /> property. The values returned by <see cref="P:System.CodeDom.CodeTypeReference.BaseType" /> and the associated <see cref="P:System.CodeDom.CodeTypeReference.TypeArguments" /> contain the same content as the value of the type returned by reflection.
+          </para>
           <para
-            >For example, a constructed <see cref="T:System.Collections.Generic.Dictionary`2" /> where <paramref name="K" /> is a string and <paramref name="V" /> is a constructed <see cref="T:System.Collections.Generic.List`1" /> of integers is represented by reflection as the following (with the assembly information removed): </para
-          >
+            >For example, a constructed <see cref="T:System.Collections.Generic.Dictionary`2" /> where <paramref name="K" /> is a string and <paramref name="V" /> is a constructed <see cref="T:System.Collections.Generic.List`1" /> of integers is represented by reflection as the following (with the assembly information removed):
+          </para>
           <code>System.Collections.Generic.Dictionary`2[[System.String], [System.Collections.Generic.List`1[[System.Int32]]]]</code>
           <para
             >Recursively parsing the <see cref="P:System.CodeDom.CodeTypeReference.BaseType" /> property from the <see cref="T:System.CodeDom.CodeTypeReference" /> for <see cref="T:System.Collections.Generic.Dictionary`2" /> yields the same strings as the reflection representation above:</para
@@ -501,8 +501,8 @@
             </item>
           </list>
           <para
-            >The type argument count should be used when parsing the associated <see cref="P:System.CodeDom.CodeTypeReference.TypeArguments" /> values. The common practice is to remove the type argument count from the generated code, but the practice is compiler specific.  It is important to note that the type argument count can be found within a nested type name, in which case it is followed by a plus sign ("+"). </para
-          >
+            >The type argument count should be used when parsing the associated <see cref="P:System.CodeDom.CodeTypeReference.TypeArguments" /> values. The common practice is to remove the type argument count from the generated code, but the practice is compiler specific.  It is important to note that the type argument count can be found within a nested type name, in which case it is followed by a plus sign ("+").
+          </para>
           <block subset="none" type="note">
             <para
               >When creating a generic <see cref="T:System.CodeDom.CodeTypeReference" />, the recommended practice is to specify the type arguments as <see cref="T:System.CodeDom.CodeTypeReference" /> objects or use the constructor that takes a <see cref="T:System.Type" />. Use of the constructor that creates a <see cref="T:System.CodeDom.CodeTypeReference" /> from a string can lead to undiscoverable type-argument errors.</para

@@ -19,8 +19,8 @@
         >For background information about HTTP headers and controlling caching, see RFC 2616: Hypertext Transfer Protocol -- HTTP/1.1, available on the <see
           cref="http://go.microsoft.com/fwlink/?linkid=37125"
           >World Wide Web Consortium (W3C) Web site</see
-        >. </para
-      >
+        >.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -64,15 +64,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.HttpCacheValidateHandler" /> value. </param
-        >
+          />The <see cref="T:System.Web.HttpCacheValidateHandler" /> value.
+        </param>
         <param name="data">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The arbitrary user-supplied data that is passed back to the <see cref="M:System.Web.HttpCachePolicy.AddValidationCallback(System.Web.HttpCacheValidateHandler,System.Object)" /> delegate. </param
-        >
+          />The arbitrary user-supplied data that is passed back to the <see cref="M:System.Web.HttpCachePolicy.AddValidationCallback(System.Web.HttpCacheValidateHandler,System.Object)" /> delegate.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -95,8 +95,8 @@
             >If the browser does not recognize cache control directives or extensions, the browser must ignore the unrecognized terms. For more information, see RFC 2616: Hypertext Transfer Protocol -- HTTP/1.1, available on the <see
               cref="http://go.microsoft.com/fwlink/?linkid=37125"
               >World Wide Web Consortium (W3C) Web site</see
-            >. </para
-          >
+            >.
+          </para>
           <para>
             <see cref="M:System.Web.HttpCachePolicy.AppendCacheExtension(System.String)" /> is introduced in the .NET Framework version 3.5.  For more information, see <format type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
@@ -112,8 +112,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text to append to the Cache-Control header. </param
-        >
+          />The text to append to the Cache-Control header.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -158,8 +158,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to direct the client browser to store responses in the History folder; otherwise false. The default is false. </param
-        >
+          />true to direct the client browser to store responses in the History folder; otherwise false. The default is false.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -198,8 +198,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Web.HttpCacheability" /> enumeration value. </param
-        >
+          />An <see cref="T:System.Web.HttpCacheability" /> enumeration value.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -226,8 +226,8 @@
             >The field name extension is valid only when used with the private or no-cache directives. For more information, see RFC 2616: Hypertext Transfer Protocol -- HTTP/1.1, available on the <see
               cref="http://go.microsoft.com/fwlink/?linkid=37125"
               >World Wide Web Consortium (W3C) Web site</see
-            >. </para
-          >
+            >.
+          </para>
           <para>This method will throw an invalid argument exception if incompatible directives and extensions are combined.</para>
           <para>
             <see cref="M:System.Web.HttpCachePolicy.SetCacheability(System.Web.HttpCacheability,System.String)" /> is introduced in the .NET Framework version 3.5.  For more information, see <format type="text/html">
@@ -246,15 +246,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.HttpCacheability" /> enumeration value to set the header to. </param
-        >
+          />The <see cref="T:System.Web.HttpCacheability" /> enumeration value to set the header to.
+        </param>
         <param name="field">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The cache control extension to add to the header. </param
-        >
+          />The cache control extension to add to the header.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -289,8 +289,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text to use for the ETag header. </param
-        >
+          />The text to use for the ETag header.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -349,8 +349,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The absolute <see cref="T:System.DateTime" /> value to set the Expires header to. </param
-        >
+          />The absolute <see cref="T:System.DateTime" /> value to set the Expires header to.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -388,8 +388,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new <see cref="T:System.DateTime" /> value for the Last-Modified header. </param
-        >
+          />The new <see cref="T:System.DateTime" /> value for the Last-Modified header.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -608,8 +608,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The time span used to set the Cache-Control: s-maxage header. </param
-        >
+          />The time span used to set the Cache-Control: s-maxage header.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -649,8 +649,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.HttpCacheRevalidation" /> enumeration value to set the Cache-Control header to. </param
-        >
+          />The <see cref="T:System.Web.HttpCacheRevalidation" /> enumeration value to set the Cache-Control header to.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -682,8 +682,8 @@
           <para>Sets cache expiration to from absolute to sliding.</para>
         </summary>
         <param name="slide">
-          <attribution license="cc4" from="Microsoft" modified="false" />true or false. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />true or false.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -726,8 +726,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if the cache ignores Cache-Control invalidation headers; otherwise, false. </param
-        >
+          />true if the cache ignores Cache-Control invalidation headers; otherwise, false.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -761,8 +761,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text string to vary cached output by. </param
-        >
+          />The text string to vary cached output by.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -789,8 +789,8 @@
             >The <see cref="P:System.Web.HttpCachePolicy.VaryByContentEncodings" /> property returns a list of Content-Encoding headers that represent compression schemes to vary the output cache by. Caching dynamically compressed responses means that the cost of compression is incurred only one time, during the first request for the resource.</para
           >
           <para
-            >The <see cref="P:System.Web.HttpCachePolicy.VaryByContentEncodings" /> property is used with the Accept-Encoding header of a request to determine how to serve cached responses for different content encodings that are dynamically compressed. The Accept-Encoding header lists the encodings that the client can decompress. </para
-          >
+            >The <see cref="P:System.Web.HttpCachePolicy.VaryByContentEncodings" /> property is used with the Accept-Encoding header of a request to determine how to serve cached responses for different content encodings that are dynamically compressed. The Accept-Encoding header lists the encodings that the client can decompress.
+          </para>
           <para>When you set the cache to vary by content encoding, it lets the response vary indirectly by the value in the Accept-Encoding header. When a request is processed, the Accept-Encoding header is checked and the first acceptable encoding is identified and used to take one of the following actions:</para>
           <list type="bullet">
             <item>

@@ -25,11 +25,11 @@
       <para
         >The base class for <see cref="T:System.ServiceModel.Description.WsdlImporter" />, the <see cref="T:System.ServiceModel.Description.MetadataImporter" /> class, defines methods that selectively import contract and endpoint information and properties that expose any import errors and accept type information relevant to the import and conversion process. The <see cref="T:System.ServiceModel.Description.WsdlImporter" /> type uses the custom policy importers (<see cref="T:System.ServiceModel.Description.IPolicyImportExtension" /> implementations) from its parent type to handle custom policy statements and its own custom WSDL importers (<see cref="T:System.ServiceModel.Description.IWsdlImportExtension" /> implementations) to handle custom WSDL elements. For details, see <format type="text/html">
           <a href="8c6b3b00-61b8-4589-8fa5-546cc33719bf">Extending the Metadata System</a>
-        </format>. </para
-      >
+        </format>.
+      </para>
       <para
-        >When importing policy from WSDL documents, the <see cref="T:System.ServiceModel.Description.WsdlImporter" /> type will try up to 32 combinations of policy alternatives attached to the different WSDL policy subjects.  If no combination imports cleanly, the first combination is used to construct a partial custom binding. </para
-      >
+        >When importing policy from WSDL documents, the <see cref="T:System.ServiceModel.Description.WsdlImporter" /> type will try up to 32 combinations of policy alternatives attached to the different WSDL policy subjects.  If no combination imports cleanly, the first combination is used to construct a partial custom binding.
+      </para>
       <para
         >In addition to these methods and properties, <see cref="T:System.ServiceModel.Description.WsdlImporter" /> also implements methods that support importing binding information and properties that provide access to any policy documents, WSDL documents, WSDL extensions, and XML schema documents. For information about extending <see cref="T:System.ServiceModel.Description.WsdlImporter" /> to support custom WSDL elements, see <see cref="T:System.ServiceModel.Description.IWsdlImportExtension" />.</para
       >
@@ -62,8 +62,8 @@
         </format> element.</para
       >
       <para
-        >Metadata that has been imported as service endpoints cannot be used to create a runtime or export metadata because the imported endpoints contain no managed type information. To use the metadata to create a client or service runtime or to generate metadata, you must first generate and compile code from the metadata and use that type information to create a new <see cref="T:System.ServiceModel.Description.ContractDescription" /> object using <see cref="Overload:System.ServiceModel.Description.ContractDescription.GetContract" />. </para
-      >
+        >Metadata that has been imported as service endpoints cannot be used to create a runtime or export metadata because the imported endpoints contain no managed type information. To use the metadata to create a client or service runtime or to generate metadata, you must first generate and compile code from the metadata and use that type information to create a new <see cref="T:System.ServiceModel.Description.ContractDescription" /> object using <see cref="Overload:System.ServiceModel.Description.ContractDescription.GetContract" />.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

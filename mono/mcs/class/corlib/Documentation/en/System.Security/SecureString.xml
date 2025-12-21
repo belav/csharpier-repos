@@ -23,14 +23,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >An instance of the <see cref="T:System.String" /> class is both immutable and, when no longer needed, cannot be programmatically scheduled for garbage collection; that is, the instance is read-only after it is created and it is not possible to predict when the instance will be deleted from computer memory. Consequently, if a <see cref="T:System.String" /> object contains sensitive information such as a password, credit card number, or personal data, there is a risk the information could be revealed after it is used because your application cannot delete the data from computer memory. </para
-      >
+        >An instance of the <see cref="T:System.String" /> class is both immutable and, when no longer needed, cannot be programmatically scheduled for garbage collection; that is, the instance is read-only after it is created and it is not possible to predict when the instance will be deleted from computer memory. Consequently, if a <see cref="T:System.String" /> object contains sensitive information such as a password, credit card number, or personal data, there is a risk the information could be revealed after it is used because your application cannot delete the data from computer memory.
+      </para>
       <para
-        >A <see cref="T:System.Security.SecureString" /> object is similar to a <see cref="T:System.String" /> object in that it has a text value. However, the value of a <see cref="T:System.Security.SecureString" /> object is automatically encrypted, can be modified until your application marks it as read-only, and can be deleted from computer memory by either your application or the .NET Framework garbage collector. </para
-      >
+        >A <see cref="T:System.Security.SecureString" /> object is similar to a <see cref="T:System.String" /> object in that it has a text value. However, the value of a <see cref="T:System.Security.SecureString" /> object is automatically encrypted, can be modified until your application marks it as read-only, and can be deleted from computer memory by either your application or the .NET Framework garbage collector.
+      </para>
       <para
-        >The value of an instance of <see cref="T:System.Security.SecureString" /> is automatically encrypted when the instance is initialized or when the value is modified. Your application can render the instance immutable and prevent further modification by invoking the <see cref="M:System.Security.SecureString.MakeReadOnly" /> method. </para
-      >
+        >The value of an instance of <see cref="T:System.Security.SecureString" /> is automatically encrypted when the instance is initialized or when the value is modified. Your application can render the instance immutable and prevent further modification by invoking the <see cref="M:System.Security.SecureString.MakeReadOnly" /> method.
+      </para>
       <para
         >Note that <see cref="T:System.Security.SecureString" /> has no members that inspect, compare, or convert the value of a <see cref="T:System.Security.SecureString" />. The absence of such members helps protect the value of the instance from accidental or malicious exposure. Use appropriate members of the <see cref="T:System.Runtime.InteropServices.Marshal" /> class, such as the <see cref="M:System.Runtime.InteropServices.Marshal.SecureStringToBSTR(System.Security.SecureString)" /> method, to manipulate the value of a <see cref="T:System.Security.SecureString" /> object.</para
       >
@@ -241,8 +241,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Security.SecureString.Dispose" /> method writes binary zeroes to the allocated memory that contains the value of this <see cref="T:System.Security.SecureString" /> object, then frees the allocated memory. </para
-          >
+            >The <see cref="M:System.Security.SecureString.Dispose" /> method writes binary zeroes to the allocated memory that contains the value of this <see cref="T:System.Security.SecureString" /> object, then frees the allocated memory.
+          </para>
           <para
             >For more information, see <format type="text/html">
               <a href="fd376774-1643-499b-869e-9546a3aeea70">Finalize Methods and Destructors</a>
@@ -288,8 +288,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The index is zero-based and the first character in this secure string is at index position zero. </para>
           <para
-            >The value of the secure string, if any, is decrypted; <paramref name="c" /> is inserted at the specified location; then the new value is encrypted. The <see cref="M:System.Security.SecureString.InsertAt(System.Int32,System.Char)" /> method yields the same results as the <see cref="M:System.Security.SecureString.AppendChar(System.Char)" /> method, which inserts a character at the end of a secure string, if the <paramref name="index" /> parameter of <see cref="M:System.Security.SecureString.InsertAt(System.Int32,System.Char)" /> is set to the length of this instance. </para
-          >
+            >The value of the secure string, if any, is decrypted; <paramref name="c" /> is inserted at the specified location; then the new value is encrypted. The <see cref="M:System.Security.SecureString.InsertAt(System.Int32,System.Char)" /> method yields the same results as the <see cref="M:System.Security.SecureString.AppendChar(System.Char)" /> method, which inserts a character at the end of a secure string, if the <paramref name="index" /> parameter of <see cref="M:System.Security.SecureString.InsertAt(System.Int32,System.Char)" /> is set to the length of this instance.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -390,11 +390,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initialize the text value of an instance of the <see cref="T:System.Security.SecureString" /> class with the <see cref="Overload:System.Security.SecureString.#ctor" /> constructors, and modify the value with the <see cref="M:System.Security.SecureString.Clear" />, <see cref="M:System.Security.SecureString.RemoveAt(System.Int32)" />, <see cref="M:System.Security.SecureString.SetAt(System.Int32,System.Char)" />, <see cref="M:System.Security.SecureString.InsertAt(System.Int32,System.Char)" />, and <see cref="M:System.Security.SecureString.AppendChar(System.Char)" /> methods. </para
-          >
+            >Initialize the text value of an instance of the <see cref="T:System.Security.SecureString" /> class with the <see cref="Overload:System.Security.SecureString.#ctor" /> constructors, and modify the value with the <see cref="M:System.Security.SecureString.Clear" />, <see cref="M:System.Security.SecureString.RemoveAt(System.Int32)" />, <see cref="M:System.Security.SecureString.SetAt(System.Int32,System.Char)" />, <see cref="M:System.Security.SecureString.InsertAt(System.Int32,System.Char)" />, and <see cref="M:System.Security.SecureString.AppendChar(System.Char)" /> methods.
+          </para>
           <para
-            >After you have made your final modifications, use the <see cref="M:System.Security.SecureString.MakeReadOnly" /> method to make the value of the instance immutable (read-only). After the value is marked as read-only, any further attempt to modify it throws an <see cref="T:System.InvalidOperationException" />. </para
-          >
+            >After you have made your final modifications, use the <see cref="M:System.Security.SecureString.MakeReadOnly" /> method to make the value of the instance immutable (read-only). After the value is marked as read-only, any further attempt to modify it throws an <see cref="T:System.InvalidOperationException" />.
+          </para>
           <para
             >The effect of invoking <see cref="M:System.Security.SecureString.MakeReadOnly" /> is permanent because no means is provided to make the secure string modifiable again. Use the <see cref="M:System.Security.SecureString.IsReadOnly" /> method to test whether an instance of <see cref="T:System.Security.SecureString" /> is read-only.</para
           >

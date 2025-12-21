@@ -108,8 +108,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="Overload:System.Diagnostics.Contracts.Contract.Ensures" /> contract failed. </para
-          >
+            >An <see cref="Overload:System.Diagnostics.Contracts.Contract.Ensures" /> contract failed.
+          </para>
         </summary>
       </Docs>
     </Member>

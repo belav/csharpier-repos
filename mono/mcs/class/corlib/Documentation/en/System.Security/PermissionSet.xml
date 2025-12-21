@@ -108,8 +108,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the enumeration values that specifies the permission set's access to resources. </param
-        >
+          />One of the enumeration values that specifies the permission set's access to resources.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -162,8 +162,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The set from which to take the value of the new <see cref="T:System.Security.PermissionSet" />, or null to create an empty <see cref="T:System.Security.PermissionSet" />. </param
-        >
+          />The set from which to take the value of the new <see cref="T:System.Security.PermissionSet" />, or null to create an empty <see cref="T:System.Security.PermissionSet" />.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -216,12 +216,8 @@
           >
         </returns>
         <param name="perm">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The permission to add. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The permission to add.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -449,8 +445,8 @@
             <block subset="none" type="overrides"
               >Override this 
       method to customize the manner in which elements are added to <paramref name=" array" />
-      . </block
-            >
+      .
+            </block>
           </para>
         </remarks>
         <exception cref="T:System.ArgumentException">
@@ -473,15 +469,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The target array to which to copy. </param
-        >
+          />The target array to which to copy.
+        </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting position in the array to begin copying (zero based). </param
-        >
+          />The starting position in the array to begin copying (zero based).
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -649,8 +645,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to compare with the current <see cref="T:System.Security.PermissionSet" />. </param
-        >
+          />The object to compare with the current <see cref="T:System.Security.PermissionSet" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="FromXml">
@@ -727,8 +723,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML encoding to use to reconstruct the security object. </param
-        >
+          />The XML encoding to use to reconstruct the security object.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -856,8 +852,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the desired permission object. </param
-        >
+          />The type of the desired permission object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Intersect">
@@ -906,8 +902,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission set to intersect with the current <see cref="T:System.Security.PermissionSet" />. </param
-        >
+          />A permission set to intersect with the current <see cref="T:System.Security.PermissionSet" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="IsEmpty">
@@ -1022,8 +1018,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The permission set to test for the subset relationship. This must be either a <see cref="T:System.Security.PermissionSet" /> or a <see cref="T:System.Security.NamedPermissionSet" />. </param
-        >
+          />The permission set to test for the subset relationship. This must be either a <see cref="T:System.Security.PermissionSet" /> or a <see cref="T:System.Security.NamedPermissionSet" />.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1190,8 +1186,8 @@ myPermSet.RemovePermission(typeof(FileIOPermission));</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of permission to delete. </param
-        >
+          />The type of permission to delete.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="RevertAssert">
@@ -1250,8 +1246,8 @@ myPermSet.RemovePermission(typeof(FileIOPermission));</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method removes any existing permission object of the same type from the <see cref="T:System.Security.PermissionSet" /> and replaces it with the <paramref name="perm" /> parameter. If a permission that implements <see cref="T:System.Security.Permissions.IUnrestrictedPermission" /> is set on a <see cref="T:System.Security.PermissionSet" /> that is <see cref="F:System.Security.Permissions.PermissionState.Unrestricted" />, the resulting <see cref="T:System.Security.PermissionSet" /> is no longer Unrestricted. </para
-          >
+            >This method removes any existing permission object of the same type from the <see cref="T:System.Security.PermissionSet" /> and replaces it with the <paramref name="perm" /> parameter. If a permission that implements <see cref="T:System.Security.Permissions.IUnrestrictedPermission" /> is set on a <see cref="T:System.Security.PermissionSet" /> that is <see cref="F:System.Security.Permissions.PermissionState.Unrestricted" />, the resulting <see cref="T:System.Security.PermissionSet" /> is no longer Unrestricted.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1264,12 +1260,8 @@ myPermSet.RemovePermission(typeof(FileIOPermission));</code>
           <para>The set permission.</para>
         </returns>
         <param name="perm">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The permission to set. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The permission to set.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SyncRoot">
@@ -1506,8 +1498,8 @@ public class PermissionSetToStringExample {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The permission set to form the union with the current <see cref="T:System.Security.PermissionSet" />. </param
-        >
+          />The permission set to form the union with the current <see cref="T:System.Security.PermissionSet" />.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

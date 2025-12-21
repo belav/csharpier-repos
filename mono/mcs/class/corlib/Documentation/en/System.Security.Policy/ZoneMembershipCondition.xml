@@ -73,8 +73,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.SecurityZone" /> for which to test. </param
-        >
+          />The <see cref="T:System.Security.SecurityZone" /> for which to test.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Check">
@@ -118,8 +118,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The evidence set against which to make the test. </param
-        >
+          />The evidence set against which to make the test.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Copy">
@@ -190,8 +190,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to compare to the current <see cref="T:System.Security.Policy.ZoneMembershipCondition" />. </param
-        >
+          />The object to compare to the current <see cref="T:System.Security.Policy.ZoneMembershipCondition" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="FromXml">
@@ -226,8 +226,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML encoding to use to reconstruct the security object. </param
-        >
+          />The XML encoding to use to reconstruct the security object.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="FromXml">
@@ -263,15 +263,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML encoding to use to reconstruct the security object. </param
-        >
+          />The XML encoding to use to reconstruct the security object.
+        </param>
         <param name="level">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The policy level context used to resolve named permission set references. </param
-        >
+          />The policy level context used to resolve named permission set references.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -428,8 +428,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The policy level context for resolving named permission set references. </param
-        >
+          />The policy level context for resolving named permission set references.
+        </param>
       </Docs>
     </Member>
   </Members>

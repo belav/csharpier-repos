@@ -130,8 +130,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the XML attribute that the <see cref="T:System.Xml.Serialization.XmlSerializer" /> generates. </param
-        >
+          />The name of the XML attribute that the <see cref="T:System.Xml.Serialization.XmlSerializer" /> generates.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -163,8 +163,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> used to store the attribute. </param
-        >
+          />The <see cref="T:System.Type" /> used to store the attribute.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -200,15 +200,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the XML attribute that is generated. </param
-        >
+          />The name of the XML attribute that is generated.
+        </param>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> used to store the attribute. </param
-        >
+          />The <see cref="T:System.Type" /> used to store the attribute.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AttributeName">
@@ -756,8 +756,8 @@
             >If the <see cref="P:System.Xml.Serialization.XmlAttributeAttribute.Namespace" /> property is set to any value, attempting to set the <see cref="P:System.Xml.Serialization.XmlElementAttribute.Form" /> property to XmlSchemaForm.Unqualified throws an exception.</para
           >
           <para
-            >The default setting, XmlSchemaForm.None, instructs the <see cref="T:System.Xml.Serialization.XmlSerializer" /> to check the schema for the XML document to determine whether the namespace is qualified. If the schema does not specify a value for an individual element or attribute, the <see cref="T:System.Xml.Serialization.XmlSerializer" /> uses the elementFormDefault and attributeFormDefault values to determine whether an element or attribute is qualified. The following XML code shows a schema: </para
-          >
+            >The default setting, XmlSchemaForm.None, instructs the <see cref="T:System.Xml.Serialization.XmlSerializer" /> to check the schema for the XML document to determine whether the namespace is qualified. If the schema does not specify a value for an individual element or attribute, the <see cref="T:System.Xml.Serialization.XmlSerializer" /> uses the elementFormDefault and attributeFormDefault values to determine whether an element or attribute is qualified. The following XML code shows a schema:
+          </para>
           <code> &lt;schema elementFormDefault="qualified" 
  attributeFormDefault="unqualified"... &gt;
     &lt;element name="Name"/&gt;

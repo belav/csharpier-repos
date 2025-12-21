@@ -102,8 +102,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to capture the file name, line number, and column number; otherwise, false. </param
-        >
+          />true to capture the file name, line number, and column number; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -141,8 +141,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The frame that the <see cref="T:System.Diagnostics.StackTrace" /> object should contain. </param
-        >
+          />The frame that the <see cref="T:System.Diagnostics.StackTrace" /> object should contain.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -180,8 +180,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The exception object from which to construct the stack trace. </param
-        >
+          />The exception object from which to construct the stack trace.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -221,8 +221,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of frames up the stack from which to start the trace. </param
-        >
+          />The number of frames up the stack from which to start the trace.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -258,15 +258,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The exception object from which to construct the stack trace. </param
-        >
+          />The exception object from which to construct the stack trace.
+        </param>
         <param name="fNeedFileInfo">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to capture the file name, line number, and column number; otherwise, false. </param
-        >
+          />true to capture the file name, line number, and column number; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -308,15 +308,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The exception object from which to construct the stack trace. </param
-        >
+          />The exception object from which to construct the stack trace.
+        </param>
         <param name="skipFrames">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of frames up the stack from which to start the trace. </param
-        >
+          />The number of frames up the stack from which to start the trace.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -357,15 +357,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of frames up the stack from which to start the trace. </param
-        >
+          />The number of frames up the stack from which to start the trace.
+        </param>
         <param name="fNeedFileInfo">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to capture the file name, line number, and column number; otherwise, false. </param
-        >
+          />true to capture the file name, line number, and column number; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -405,8 +405,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Diagnostics.StackTrace" /> class for a specific thread, optionally capturing source information. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.StackTrace" /> class for a specific thread, optionally capturing source information.
+          </para>
           <para>Do not use this constructor overload.</para>
         </summary>
         <param name="targetThread">
@@ -414,15 +414,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The thread whose stack trace is requested. </param
-        >
+          />The thread whose stack trace is requested.
+        </param>
         <param name="needFileInfo">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to capture the file name, line number, and column number; otherwise, false. </param
-        >
+          />true to capture the file name, line number, and column number; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -465,22 +465,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The exception object from which to construct the stack trace. </param
-        >
+          />The exception object from which to construct the stack trace.
+        </param>
         <param name="skipFrames">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of frames up the stack from which to start the trace. </param
-        >
+          />The number of frames up the stack from which to start the trace.
+        </param>
         <param name="fNeedFileInfo">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to capture the file name, line number, and column number; otherwise, false. </param
-        >
+          />true to capture the file name, line number, and column number; otherwise, false.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="FrameCount">
@@ -543,8 +543,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the stack frame requested. </param
-        >
+          />The index of the stack frame requested.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetFrames">
@@ -575,8 +575,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the returned <see cref="T:System.Diagnostics.StackFrame" /> array to enumerate and examine function calls in the <see cref="T:System.Diagnostics.StackTrace" />. The length of the returned array is equal to the <see cref="P:System.Diagnostics.StackTrace.FrameCount" /> property value. </para
-          >
+            >Use the returned <see cref="T:System.Diagnostics.StackFrame" /> array to enumerate and examine function calls in the <see cref="T:System.Diagnostics.StackTrace" />. The length of the returned array is equal to the <see cref="P:System.Diagnostics.StackTrace.FrameCount" /> property value.
+          </para>
           <para
             >The <see cref="T:System.Diagnostics.StackFrame" /> array elements are in reverse chronological order. The <see cref="T:System.Diagnostics.StackFrame" /> at array index 0 represents the most recent function call in the stack trace and the last frame pushed onto the call stack. The <see cref="T:System.Diagnostics.StackFrame" /> at array index <see cref="P:System.Diagnostics.StackTrace.FrameCount" /> minus 1 represents the oldest function call in the stack trace and the first frame pushed onto the call stack.</para
           >

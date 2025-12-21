@@ -108,8 +108,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the <see cref="P:System.Web.Configuration.ProfilePropertySettingsCollection.AllowClear" /> property is set when the object is created. </para
-          >
+            >The value of the <see cref="P:System.Web.Configuration.ProfilePropertySettingsCollection.AllowClear" /> property is set when the object is created.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -215,8 +215,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.Configuration.RootProfilePropertySettingsCollection.GroupSettings" /> property allows you to create groups of <see cref="T:System.Web.Configuration.ProfilePropertySettingsCollection" /> collections. </para
-          >
+            >The <see cref="P:System.Web.Configuration.RootProfilePropertySettingsCollection.GroupSettings" /> property allows you to create groups of <see cref="T:System.Web.Configuration.ProfilePropertySettingsCollection" /> collections.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

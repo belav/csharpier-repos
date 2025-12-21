@@ -24,8 +24,8 @@
         >If your service supports sessions, you can then use the <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.InstanceContextMode" /> property to specify the relationship between instances of your service contract implementation and the channel session.</para
       >
       <para
-        >For example, if the <see cref="P:System.ServiceModel.ServiceContractAttribute.SessionMode" /> property is set to <see cref="F:System.ServiceModel.SessionMode.Allowed" /> and the <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.InstanceContextMode" /> property is set to <see cref="F:System.ServiceModel.InstanceContextMode.PerSession" />, a client can use a binding that supports reliable sessions to make repeated calls to the same service object. </para
-      >
+        >For example, if the <see cref="P:System.ServiceModel.ServiceContractAttribute.SessionMode" /> property is set to <see cref="F:System.ServiceModel.SessionMode.Allowed" /> and the <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.InstanceContextMode" /> property is set to <see cref="F:System.ServiceModel.InstanceContextMode.PerSession" />, a client can use a binding that supports reliable sessions to make repeated calls to the same service object.
+      </para>
       <para
         >Because a session is a channel-level concept that the application model uses, there is an interaction between the <see cref="T:System.ServiceModel.SessionMode" /> enumeration in a contract and the <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.InstanceContextMode" /> property, which controls the association between channels and specific service objects.</para
       >

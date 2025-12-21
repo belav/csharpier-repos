@@ -53,8 +53,8 @@
         >The <see cref="T:System.Diagnostics.TraceSource" /> class is identified by the name of a source, typically the name of the application.  The trace messages coming from a particular component can be initiated by a particular trace source, allowing all messages coming from that component to be easily identified.</para
       >
       <para>
-        <see cref="T:System.Diagnostics.TraceSource" /> defines tracing methods but does not actually provide any specific mechanism for generating and storing tracing data. The tracing data is produced by trace listeners, which are plug-ins that can be loaded by trace sources. </para
-      >
+        <see cref="T:System.Diagnostics.TraceSource" /> defines tracing methods but does not actually provide any specific mechanism for generating and storing tracing data. The tracing data is produced by trace listeners, which are plug-ins that can be loaded by trace sources.
+      </para>
       <block subset="none" type="note">
         <para
           >You should not call the tracing methods during finalization. Doing so can result in an <see cref="T:System.ObjectDisposedException" /> being thrown.</para
@@ -91,8 +91,8 @@
         >The trace listeners can optionally have an additional layer of filtering through a trace filter.  If a trace listener has an associated filter, the listener calls the <see cref="M:System.Diagnostics.TraceFilter.ShouldTrace(System.Diagnostics.TraceEventCache,System.String,System.Diagnostics.TraceEventType,System.Int32,System.String,System.Object[],System.Object,System.Object[])" /> method on that filter to determine whether or not to produce the trace information.</para
       >
       <para
-        >The trace listeners use the values of the <see cref="T:System.Diagnostics.Trace" /> class properties <see cref="M:System.Diagnostics.Trace.Indent" />, <see cref="P:System.Diagnostics.Trace.IndentSize" />, and <see cref="P:System.Diagnostics.Trace.AutoFlush" /> to format trace output. You can use configuration file attributes to set the <see cref="M:System.Diagnostics.Trace.Indent" />, <see cref="P:System.Diagnostics.Trace.IndentSize" />, and <see cref="P:System.Diagnostics.Trace.AutoFlush" /> properties. The following example sets the <see cref="P:System.Diagnostics.Trace.AutoFlush" /> property to false and the <see cref="P:System.Diagnostics.Trace.IndentSize" /> property to 3. </para
-      >
+        >The trace listeners use the values of the <see cref="T:System.Diagnostics.Trace" /> class properties <see cref="M:System.Diagnostics.Trace.Indent" />, <see cref="P:System.Diagnostics.Trace.IndentSize" />, and <see cref="P:System.Diagnostics.Trace.AutoFlush" /> to format trace output. You can use configuration file attributes to set the <see cref="M:System.Diagnostics.Trace.Indent" />, <see cref="P:System.Diagnostics.Trace.IndentSize" />, and <see cref="P:System.Diagnostics.Trace.AutoFlush" /> properties. The following example sets the <see cref="P:System.Diagnostics.Trace.AutoFlush" /> property to false and the <see cref="P:System.Diagnostics.Trace.IndentSize" /> property to 3.
+      </para>
       <code>&lt;configuration&gt;
   &lt;system.diagnostics&gt;
     &lt;trace autoflush="false" indentsize="3" /&gt;
@@ -134,8 +134,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Diagnostics.TraceSource" /> class, using the specified name for the source. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.TraceSource" /> class, using the specified name for the source.
+          </para>
         </summary>
         <param name="name">
           <attribution
@@ -179,8 +179,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Diagnostics.TraceSource" /> class, using the specified name for the source and the default source level at which tracing is to occur.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.TraceSource" /> class, using the specified name for the source and the default source level at which tracing is to occur.
+          </para>
         </summary>
         <param name="name">
           <attribution
@@ -757,8 +757,8 @@
             >The <see cref="M:System.Diagnostics.TraceSource.TraceEvent(System.Diagnostics.TraceEventType,System.Int32,System.String,System.Object[])" /> method calls the <see cref="M:System.Diagnostics.SourceSwitch.ShouldTrace(System.Diagnostics.TraceEventType)" /> method of the <see cref="T:System.Diagnostics.SourceSwitch" /> object returned by the <see cref="P:System.Diagnostics.TraceSource.Switch" /> property. If <see cref="M:System.Diagnostics.SourceSwitch.ShouldTrace(System.Diagnostics.TraceEventType)" /> returns true, <see cref="M:System.Diagnostics.TraceSource.TraceEvent(System.Diagnostics.TraceEventType,System.Int32,System.String,System.Object[])" /> calls the corresponding <see cref="Overload:System.Diagnostics.TraceListener.TraceEvent" /> method of each listener. Otherwise, <see cref="M:System.Diagnostics.TraceSource.TraceEvent(System.Diagnostics.TraceEventType,System.Int32,System.String,System.Object[])" /> returns without calling the listeners' methods.</para
           >
           <para
-            >The trace content is listener specific. The default <see cref="M:System.Diagnostics.TraceListener.TraceEvent(System.Diagnostics.TraceEventCache,System.String,System.Diagnostics.TraceEventType,System.Int32,System.String,System.Object[])" /> method writes the source name, event type, and numeric identity in the trace header, then calls the <see cref="M:System.String.Format(System.IFormatProvider,System.String,System.Object[])" /> method, passing the <paramref name="format" /> string and <paramref name="args" /> array and using the <see cref="P:System.Globalization.CultureInfo.InvariantCulture" /> property to format the string as the message output. </para
-          >
+            >The trace content is listener specific. The default <see cref="M:System.Diagnostics.TraceListener.TraceEvent(System.Diagnostics.TraceEventCache,System.String,System.Diagnostics.TraceEventType,System.Int32,System.String,System.Object[])" /> method writes the source name, event type, and numeric identity in the trace header, then calls the <see cref="M:System.String.Format(System.IFormatProvider,System.String,System.Object[])" /> method, passing the <paramref name="format" /> string and <paramref name="args" /> array and using the <see cref="P:System.Globalization.CultureInfo.InvariantCulture" /> property to format the string as the message output.
+          </para>
           <block subset="none" type="note">
             <para
               >The <see cref="T:System.Diagnostics.EventLogTraceListener" /> object is limited to a maximum <paramref name="id" /> value of 65,535. If the <paramref name="id" /> value specified is greater than 65,535, the <see cref="T:System.Diagnostics.EventLogTraceListener" /> object uses 65,535.</para

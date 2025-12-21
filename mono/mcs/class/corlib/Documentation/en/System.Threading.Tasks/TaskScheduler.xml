@@ -25,8 +25,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.Threading.Tasks.TaskScheduler" /> acts as the extension point for all pluggable scheduling logic. This includes mechanisms such as how to schedule a task for execution, and how scheduled tasks should be exposed to debuggers. </para
-      >
+        <see cref="T:System.Threading.Tasks.TaskScheduler" /> acts as the extension point for all pluggable scheduling logic. This includes mechanisms such as how to schedule a task for execution, and how scheduled tasks should be exposed to debuggers.
+      </para>
       <para
         >For more information and code examples, see <format type="text/html">
           <a href="638f8ea5-21db-47a2-a934-86e1e961bf65">Task Schedulers</a>
@@ -221,8 +221,8 @@
           <para>Additionally, this method and the enumerable returned must not modify any globally visible state.</para>
           <para>The returned enumerable should never be null. If there are currently no queued tasks, an empty enumerable should be returned instead.</para>
           <para
-            >Developers who are implementing custom debuggers shouldn't call this method directly, but should use the internal wrapper method GetScheduledTasksForDebugger instead: internal Task[] GetScheduledTasksForDebugger(). This wrapper method returns an array of tasks instead of an enumerable. To retrieve a list of active schedulers, use the internal method internal static TaskScheduler[] GetTaskSchedulersForDebugger(). This static method returns an array of all active <see cref="T:System.Threading.Tasks.TaskScheduler" /> instances. You can then use GetScheduledTasksForDebugger on each scheduler instance to retrieve its list of scheduled tasks. </para
-          >
+            >Developers who are implementing custom debuggers shouldn't call this method directly, but should use the internal wrapper method GetScheduledTasksForDebugger instead: internal Task[] GetScheduledTasksForDebugger(). This wrapper method returns an array of tasks instead of an enumerable. To retrieve a list of active schedulers, use the internal method internal static TaskScheduler[] GetTaskSchedulersForDebugger(). This static method returns an array of all active <see cref="T:System.Threading.Tasks.TaskScheduler" /> instances. You can then use GetScheduledTasksForDebugger on each scheduler instance to retrieve its list of scheduled tasks.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

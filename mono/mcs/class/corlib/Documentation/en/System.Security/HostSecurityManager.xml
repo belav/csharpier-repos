@@ -105,11 +105,11 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Optionally, the evidence for the activating application domain. </param
-        >
+          />Optionally, the evidence for the activating application domain.
+        </param>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />The trust context. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The trust context.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DomainPolicy">
@@ -184,11 +184,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property can be overridden in a derived class. The base implementation always returns <see cref="F:System.Security.HostSecurityManagerOptions.AllFlags" />.  </para
-          >
+            >This property can be overridden in a derived class. The base implementation always returns <see cref="F:System.Security.HostSecurityManagerOptions.AllFlags" />.
+          </para>
           <para
-            >The derived host can change the value of this property when only a subset of the <see cref="T:System.Security.HostSecurityManagerOptions" /> is of interest.  The possible subsets include none, the refused set, the policy level, and assembly evidence.  </para
-          >
+            >The derived host can change the value of this property when only a subset of the <see cref="T:System.Security.HostSecurityManagerOptions" /> is of interest.  The possible subsets include none, the refused set, the policy level, and assembly evidence.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -222,8 +222,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method can be overridden in a derived class. </para>
           <para
-            >This method is called whenever an <see cref="T:System.AppDomain" /> object is created. The <paramref name="inputEvidence" /> parameter is the computed evidence from the common language runtime. The host implementation can choose to extend or reduce the evidence. The return value is the evidence to be used for the application domain.  The base implementation always returns the evidence object passed in as the <paramref name="inputEvidence" /> parameter.  </para
-          >
+            >This method is called whenever an <see cref="T:System.AppDomain" /> object is created. The <paramref name="inputEvidence" /> parameter is the computed evidence from the common language runtime. The host implementation can choose to extend or reduce the evidence. The return value is the evidence to be used for the application domain.  The base implementation always returns the evidence object passed in as the <paramref name="inputEvidence" /> parameter.
+          </para>
           <block subset="none" type="note">
             <para
               >See the Notes to Inheritors for the <see cref="T:System.Security.HostSecurityManager" /> class for critical implementation information.</para
@@ -274,8 +274,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method can be overridden in a derived class. </para>
           <para
-            >This method is called whenever an assembly is loaded, either implicitly or explicitly. The passed in parameters are the assembly being loaded, and the computed evidence from the common language runtime. The host implementation can choose to extend or reduce the evidence. The return value is the evidence to be used for the assembly.  The base implementation always returns the evidence object passed in as the <paramref name="inputEvidence" /> parameter.  </para
-          >
+            >This method is called whenever an assembly is loaded, either implicitly or explicitly. The passed in parameters are the assembly being loaded, and the computed evidence from the common language runtime. The host implementation can choose to extend or reduce the evidence. The return value is the evidence to be used for the assembly.  The base implementation always returns the evidence object passed in as the <paramref name="inputEvidence" /> parameter.
+          </para>
           <block subset="none" type="note">
             <para
               >See the Notes to Inheritors for the <see cref="T:System.Security.HostSecurityManager" /> class for critical implementation information.</para
@@ -291,12 +291,8 @@
           <para>The evidence to be used for the assembly.</para>
         </returns>
         <param name="loadedAssembly">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The loaded assembly. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The loaded assembly.
+        </param>
         <param name="inputEvidence">
           <attribution
             license="cc4"

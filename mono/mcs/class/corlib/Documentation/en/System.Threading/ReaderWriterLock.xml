@@ -31,8 +31,8 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <block subset="none" type="note">
         <para
-          >The dnprdnshort has two reader-writer locks, <see cref="T:System.Threading.ReaderWriterLockSlim" /> and <see cref="T:System.Threading.ReaderWriterLock" />. <see cref="T:System.Threading.ReaderWriterLockSlim" /> is recommended for all new development. <see cref="T:System.Threading.ReaderWriterLockSlim" /> is similar to <see cref="T:System.Threading.ReaderWriterLock" />, but it has simplified rules for recursion and for upgrading and downgrading lock state. <see cref="T:System.Threading.ReaderWriterLockSlim" /> avoids many cases of potential deadlock. In addition, the performance of <see cref="T:System.Threading.ReaderWriterLockSlim" /> is significantly better than <see cref="T:System.Threading.ReaderWriterLock" />. </para
-        >
+          >The dnprdnshort has two reader-writer locks, <see cref="T:System.Threading.ReaderWriterLockSlim" /> and <see cref="T:System.Threading.ReaderWriterLock" />. <see cref="T:System.Threading.ReaderWriterLockSlim" /> is recommended for all new development. <see cref="T:System.Threading.ReaderWriterLockSlim" /> is similar to <see cref="T:System.Threading.ReaderWriterLock" />, but it has simplified rules for recursion and for upgrading and downgrading lock state. <see cref="T:System.Threading.ReaderWriterLockSlim" /> avoids many cases of potential deadlock. In addition, the performance of <see cref="T:System.Threading.ReaderWriterLockSlim" /> is significantly better than <see cref="T:System.Threading.ReaderWriterLock" />.
+        </para>
       </block>
       <para>
         <see cref="T:System.Threading.ReaderWriterLock" /> is used to synchronize access to a resource. At any given time, it allows either concurrent read access for multiple threads, or write access for a single thread. In a situation where a resource is changed infrequently, a ReaderWriterLock provides better throughput than a simple one-at-a-time lock, such as <see cref="T:System.Threading.Monitor" />.</para
@@ -71,8 +71,8 @@
           </term>
           <description>
             <para
-              >The thread waits until the lock is acquired, regardless of how long it takes. For methods that specify integer time-outs, the constant <see cref="F:System.Threading.Timeout.Infinite" /> can be used. </para
-            >
+              >The thread waits until the lock is acquired, regardless of how long it takes. For methods that specify integer time-outs, the constant <see cref="F:System.Threading.Timeout.Infinite" /> can be used.
+            </para>
           </description>
         </item>
         <item>
@@ -177,8 +177,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The time-out in milliseconds. </param
-        >
+          />The time-out in milliseconds.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AcquireReaderLock">
@@ -229,8 +229,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A TimeSpan specifying the time-out period. </param
-        >
+          />A TimeSpan specifying the time-out period.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AcquireWriterLock">
@@ -287,8 +287,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The time-out in milliseconds. </param
-        >
+          />The time-out in milliseconds.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AcquireWriterLock">
@@ -342,8 +342,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The TimeSpan specifying the time-out period. </param
-        >
+          />The TimeSpan specifying the time-out period.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AnyWritersSince">
@@ -381,12 +381,8 @@
           <para>true if the writer lock has been granted to any thread since the sequence number was obtained; otherwise, false.</para>
         </returns>
         <param name="seqNum">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The sequence number. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The sequence number.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="DowngradeFromWriterLock">
@@ -681,8 +677,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The time-out in milliseconds. </param
-        >
+          />The time-out in milliseconds.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="UpgradeToWriterLock">
@@ -738,8 +734,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The TimeSpan specifying the time-out period. </param
-        >
+          />The TimeSpan specifying the time-out period.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="WriterSeqNum">

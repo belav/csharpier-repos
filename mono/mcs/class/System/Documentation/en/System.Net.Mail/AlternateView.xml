@@ -56,8 +56,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new instance of the <see cref="T:System.Net.Mail.AlternateView" /> class call also be initialized by calling one of the <see cref="Overload:System.Net.Mail.AlternateView.CreateAlternateViewFromString" /> methods. </para
-          >
+            >A new instance of the <see cref="T:System.Net.Mail.AlternateView" /> class call also be initialized by calling one of the <see cref="Overload:System.Net.Mail.AlternateView.CreateAlternateViewFromString" /> methods.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -93,8 +93,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new instance of the <see cref="T:System.Net.Mail.AlternateView" /> class call also be initialized by calling one of the <see cref="Overload:System.Net.Mail.AlternateView.CreateAlternateViewFromString" /> methods. </para
-          >
+            >A new instance of the <see cref="T:System.Net.Mail.AlternateView" /> class call also be initialized by calling one of the <see cref="Overload:System.Net.Mail.AlternateView.CreateAlternateViewFromString" /> methods.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -134,8 +134,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new instance of the <see cref="T:System.Net.Mail.AlternateView" /> class call also be initialized by calling one of the <see cref="Overload:System.Net.Mail.AlternateView.CreateAlternateViewFromString" /> methods. </para
-          >
+            >A new instance of the <see cref="T:System.Net.Mail.AlternateView" /> class call also be initialized by calling one of the <see cref="Overload:System.Net.Mail.AlternateView.CreateAlternateViewFromString" /> methods.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -182,8 +182,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new instance of the <see cref="T:System.Net.Mail.AlternateView" /> class call also be initialized by calling one of the <see cref="Overload:System.Net.Mail.AlternateView.CreateAlternateViewFromString" /> methods. </para
-          >
+            >A new instance of the <see cref="T:System.Net.Mail.AlternateView" /> class call also be initialized by calling one of the <see cref="Overload:System.Net.Mail.AlternateView.CreateAlternateViewFromString" /> methods.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -230,8 +230,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new instance of the <see cref="T:System.Net.Mail.AlternateView" /> class call also be initialized by calling one of the <see cref="Overload:System.Net.Mail.AlternateView.CreateAlternateViewFromString" /> methods. </para
-          >
+            >A new instance of the <see cref="T:System.Net.Mail.AlternateView" /> class call also be initialized by calling one of the <see cref="Overload:System.Net.Mail.AlternateView.CreateAlternateViewFromString" /> methods.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -278,8 +278,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new instance of the <see cref="T:System.Net.Mail.AlternateView" /> class call also be initialized by calling one of the <see cref="Overload:System.Net.Mail.AlternateView.CreateAlternateViewFromString" /> methods. </para
-          >
+            >A new instance of the <see cref="T:System.Net.Mail.AlternateView" /> class call also be initialized by calling one of the <see cref="Overload:System.Net.Mail.AlternateView.CreateAlternateViewFromString" /> methods.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -510,16 +510,16 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see cref="T:System.Net.Mail.AlternateView" /> and optionally releases the managed resources. </para
-          >
+            >Releases the unmanaged resources used by the <see cref="T:System.Net.Mail.AlternateView" /> and optionally releases the managed resources.
+          </para>
         </summary>
         <param name="disposing">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="LinkedResources">

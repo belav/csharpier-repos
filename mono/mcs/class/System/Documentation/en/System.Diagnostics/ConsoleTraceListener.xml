@@ -60,8 +60,8 @@
         >To write trace and debug messages to the console for a specific section of code, initialize a <see cref="T:System.Diagnostics.ConsoleTraceListener" /> object and add it to the <see cref="P:System.Diagnostics.Trace.Listeners" /> collection. Instrument the section of code that contains messages using the <see cref="T:System.Diagnostics.Trace" /> or <see cref="T:System.Diagnostics.Debug" /> classes. At the end of the code section, remove the <see cref="T:System.Diagnostics.ConsoleTraceListener" /> object from the <see cref="P:System.Diagnostics.Trace.Listeners" /> collection, and call the <see cref="M:System.Diagnostics.TextWriterTraceListener.Close" /> method on the <see cref="T:System.Diagnostics.ConsoleTraceListener" />.</para
       >
       <para
-        >To direct all trace and debug messages to the console while the application executes, add a <see cref="T:System.Diagnostics.ConsoleTraceListener" /> object to the application configuration file. Edit the configuration file that corresponds to the name of your application, or the app.config file in a vsprvslong project. In this file, insert an element for a <see cref="T:System.Diagnostics.ConsoleTraceListener" />. </para
-      >
+        >To direct all trace and debug messages to the console while the application executes, add a <see cref="T:System.Diagnostics.ConsoleTraceListener" /> object to the application configuration file. Edit the configuration file that corresponds to the name of your application, or the app.config file in a vsprvslong project. In this file, insert an element for a <see cref="T:System.Diagnostics.ConsoleTraceListener" />.
+      </para>
       <para
         >The following example adds a <see cref="T:System.Diagnostics.ConsoleTraceListener" /> object named configConsoleListener to the <see cref="P:System.Diagnostics.Trace.Listeners" /> collection.</para
       >

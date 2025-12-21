@@ -108,8 +108,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.ComponentModel.Design.Data.IDataEnvironment.BuildQuery(System.Windows.Forms.IWin32Window,System.ComponentModel.Design.Data.DesignerDataConnection,System.ComponentModel.Design.Data.QueryBuilderMode,System.String)" /> method launches the design environment's UI for editing or creating SQL query strings. If the <paramref name="initialQueryText" /> parameter is <see cref="F:System.String.Empty" />, it indicates the user wants to create a new query. If the <paramref name="initialQueryText" /> parameter contains a string, it indicates the user wants to edit the existing query. </para
-          >
+            >The <see cref="M:System.ComponentModel.Design.Data.IDataEnvironment.BuildQuery(System.Windows.Forms.IWin32Window,System.ComponentModel.Design.Data.DesignerDataConnection,System.ComponentModel.Design.Data.QueryBuilderMode,System.String)" /> method launches the design environment's UI for editing or creating SQL query strings. If the <paramref name="initialQueryText" /> parameter is <see cref="F:System.String.Empty" />, it indicates the user wants to create a new query. If the <paramref name="initialQueryText" /> parameter contains a string, it indicates the user wants to edit the existing query.
+          </para>
           <para
             >The <paramref name="mode" /> parameter indicates the type of query the user wants to build; either select, update, insert, or delete. Your user interface can use the <paramref name="mode" /> parameter to configure itself for the type of query desired, limit the user to using SQL statements valid only for the type of query desired, and/or validate the query against the desired type.</para
           >
@@ -178,8 +178,8 @@
           <para
             >The <see cref="M:System.ComponentModel.Design.Data.IDataEnvironment.ConfigureConnection(System.Windows.Forms.IWin32Window,System.ComponentModel.Design.Data.DesignerDataConnection,System.String)" /> method writes a connection to the application's configuration file. The connection string and provider name are written to the <format type="text/html">
               <a href="b6ffbb2e-a4d1-410e-8f7e-9755e92c65de">connectionStrings</a>
-            </format> configuration element named according to the <paramref name="name" /> parameter. The <see cref="P:System.ComponentModel.Design.Data.DesignerDataConnection.Name" /> property of the <paramref name="connection" /> parameter is ignored. </para
-          >
+            </format> configuration element named according to the <paramref name="name" /> parameter. The <see cref="P:System.ComponentModel.Design.Data.DesignerDataConnection.Name" /> property of the <paramref name="connection" /> parameter is ignored.
+          </para>
           <para
             >Implementations of the <see cref="M:System.ComponentModel.Design.Data.IDataEnvironment.ConfigureConnection(System.Windows.Forms.IWin32Window,System.ComponentModel.Design.Data.DesignerDataConnection,System.String)" /> method should throw the following exceptions.</para
           >
@@ -398,8 +398,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.ComponentModel.Design.Data.IDataEnvironment.GetDesignTimeConnection(System.ComponentModel.Design.Data.DesignerDataConnection)" /> method returns a valid, open connection to the data store that can be used by the control designer. </para
-          >
+            >The <see cref="M:System.ComponentModel.Design.Data.IDataEnvironment.GetDesignTimeConnection(System.ComponentModel.Design.Data.DesignerDataConnection)" /> method returns a valid, open connection to the data store that can be used by the control designer.
+          </para>
           <para
             >Control designers should use the <see cref="M:System.ComponentModel.Design.Data.IDataEnvironment.GetDesignTimeConnection(System.ComponentModel.Design.Data.DesignerDataConnection)" /> to obtain a data connection and should not attempt to open a connection using the <see cref="P:System.ComponentModel.Design.Data.DesignerDataConnection.ConnectionString" /> property.</para
           >

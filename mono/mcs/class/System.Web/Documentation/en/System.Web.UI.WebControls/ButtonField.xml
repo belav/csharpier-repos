@@ -80,8 +80,8 @@
           </term>
           <description>
             <para
-              >The child Web server controls of the <see cref="T:System.Web.UI.WebControls.ButtonField" />. </para
-            >
+              >The child Web server controls of the <see cref="T:System.Web.UI.WebControls.ButtonField" />.
+            </para>
           </description>
         </item>
         <item>
@@ -92,8 +92,8 @@
           </term>
           <description>
             <para
-              >The footer section of the <see cref="T:System.Web.UI.WebControls.ButtonField" />. </para
-            >
+              >The footer section of the <see cref="T:System.Web.UI.WebControls.ButtonField" />.
+            </para>
           </description>
         </item>
         <item>
@@ -104,8 +104,8 @@
           </term>
           <description>
             <para
-              >The header section of the <see cref="T:System.Web.UI.WebControls.ButtonField" />. </para
-            >
+              >The header section of the <see cref="T:System.Web.UI.WebControls.ButtonField" />.
+            </para>
           </description>
         </item>
         <item>
@@ -116,8 +116,8 @@
           </term>
           <description>
             <para
-              >The data items in the <see cref="T:System.Web.UI.WebControls.ButtonField" />. </para
-            >
+              >The data items in the <see cref="T:System.Web.UI.WebControls.ButtonField" />.
+            </para>
           </description>
         </item>
       </list>
@@ -579,8 +579,8 @@
             >The <see cref="M:System.Web.UI.WebControls.ButtonField.Initialize(System.Boolean,System.Web.UI.Control)" /> method is called by the data control with which the <see cref="T:System.Web.UI.WebControls.ButtonField" /> object is associated to perform basic object initialization for instances of the field, before the field is ever added to a rows collection. Data controls, such as <see cref="T:System.Web.UI.WebControls.DetailsView" /> and <see cref="T:System.Web.UI.WebControls.GridView" />, call the <see cref="M:System.Web.UI.WebControls.DataControlField.Initialize(System.Boolean,System.Web.UI.Control)" /> method in their CreateChildControls methods before other methods, such as CreateRow, are called to create specific rows with data.</para
           >
           <para
-            >Call The <see cref="M:System.Web.UI.WebControls.ButtonField.Initialize(System.Boolean,System.Web.UI.Control)" /> method when you are writing a custom data-bound control that uses <see cref="T:System.Web.UI.WebControls.TableCell" /> objects to perform basic initialization for a <see cref="T:System.Web.UI.WebControls.ButtonField" /> object. Implement this method if your <see cref="T:System.Web.UI.WebControls.ButtonField" />-derived type requires any object initialization before it populates <see cref="T:System.Web.UI.WebControls.TableCell" /> objects with data or controls in the <see cref="M:System.Web.UI.WebControls.ButtonField.InitializeCell(System.Web.UI.WebControls.DataControlFieldCell,System.Web.UI.WebControls.DataControlCellType,System.Web.UI.WebControls.DataControlRowState,System.Int32)" /> method. </para
-          >
+            >Call The <see cref="M:System.Web.UI.WebControls.ButtonField.Initialize(System.Boolean,System.Web.UI.Control)" /> method when you are writing a custom data-bound control that uses <see cref="T:System.Web.UI.WebControls.TableCell" /> objects to perform basic initialization for a <see cref="T:System.Web.UI.WebControls.ButtonField" /> object. Implement this method if your <see cref="T:System.Web.UI.WebControls.ButtonField" />-derived type requires any object initialization before it populates <see cref="T:System.Web.UI.WebControls.TableCell" /> objects with data or controls in the <see cref="M:System.Web.UI.WebControls.ButtonField.InitializeCell(System.Web.UI.WebControls.DataControlFieldCell,System.Web.UI.WebControls.DataControlCellType,System.Web.UI.WebControls.DataControlRowState,System.Int32)" /> method.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -597,15 +597,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to enable sorting; otherwise, false. </param
-        >
+          />true to enable sorting; otherwise, false.
+        </param>
         <param name="control">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data control that owns the <see cref="T:System.Web.UI.WebControls.ButtonField" />. </param
-        >
+          />The data control that owns the <see cref="T:System.Web.UI.WebControls.ButtonField" />.
+        </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -631,8 +631,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.WebControls.ButtonField.InitializeCell(System.Web.UI.WebControls.DataControlFieldCell,System.Web.UI.WebControls.DataControlCellType,System.Web.UI.WebControls.DataControlRowState,System.Int32)" /> method creates the button type that is specified by the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" /> property and adds it to the <see cref="P:System.Web.UI.Control.Controls" /> collection of the <see cref="T:System.Web.UI.WebControls.DataControlFieldCell" /> object. The <see cref="P:System.Web.UI.WebControls.Button.CommandArgument" /> property of the <see cref="T:System.Web.UI.WebControls.Button" /> control is set to <paramref name="rowIndex" />.  </para
-          >
+            >The <see cref="M:System.Web.UI.WebControls.ButtonField.InitializeCell(System.Web.UI.WebControls.DataControlFieldCell,System.Web.UI.WebControls.DataControlCellType,System.Web.UI.WebControls.DataControlRowState,System.Int32)" /> method creates the button type that is specified by the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" /> property and adds it to the <see cref="P:System.Web.UI.Control.Controls" /> collection of the <see cref="T:System.Web.UI.WebControls.DataControlFieldCell" /> object. The <see cref="P:System.Web.UI.WebControls.Button.CommandArgument" /> property of the <see cref="T:System.Web.UI.WebControls.Button" /> control is set to <paramref name="rowIndex" />.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

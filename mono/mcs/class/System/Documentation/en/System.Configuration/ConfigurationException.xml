@@ -64,8 +64,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Configuration.ConfigurationException" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Configuration.ConfigurationException" /> class.
+          </para>
         </summary>
       </Docs>
     </Member>
@@ -95,8 +95,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Configuration.ConfigurationException" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Configuration.ConfigurationException" /> class.
+          </para>
         </summary>
         <param name="message">
           <attribution
@@ -132,8 +132,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Configuration.ConfigurationException" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Configuration.ConfigurationException" /> class.
+          </para>
         </summary>
         <param name="info">
           <attribution
@@ -181,8 +181,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Configuration.ConfigurationException" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Configuration.ConfigurationException" /> class.
+          </para>
         </summary>
         <param name="message">
           <attribution
@@ -230,8 +230,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Configuration.ConfigurationException" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Configuration.ConfigurationException" /> class.
+          </para>
         </summary>
         <param name="message">
           <attribution
@@ -280,8 +280,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Configuration.ConfigurationException" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Configuration.ConfigurationException" /> class.
+          </para>
         </summary>
         <param name="message">
           <attribution
@@ -337,8 +337,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Configuration.ConfigurationException" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Configuration.ConfigurationException" /> class.
+          </para>
         </summary>
         <param name="message">
           <attribution
@@ -395,8 +395,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Configuration.ConfigurationException" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Configuration.ConfigurationException" /> class.
+          </para>
         </summary>
         <param name="message">
           <attribution

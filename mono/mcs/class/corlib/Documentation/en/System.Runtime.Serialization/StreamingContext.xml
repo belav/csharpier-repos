@@ -26,8 +26,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Indicates the source or destination of the bits that the formatter uses. Classes with surrogates or that implement <see cref="T:System.Runtime.Serialization.ISerializable" /> can serialize or ignore fields and values based on the information stored in the streaming context. For example, a window handle is still valid if the <see cref="P:System.Runtime.Serialization.StreamingContext.State" /> property is set to System.Runtime.Serialization.StreamingContextStates.CrossProcess. </para
-      >
+        >Indicates the source or destination of the bits that the formatter uses. Classes with surrogates or that implement <see cref="T:System.Runtime.Serialization.ISerializable" /> can serialize or ignore fields and values based on the information stored in the streaming context. For example, a window handle is still valid if the <see cref="P:System.Runtime.Serialization.StreamingContext.State" /> property is set to System.Runtime.Serialization.StreamingContextStates.CrossProcess.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -67,8 +67,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the <see cref="T:System.Runtime.Serialization.StreamingContextStates" /> values that specify the source or destination context for this <see cref="T:System.Runtime.Serialization.StreamingContext" />. </param
-        >
+          />A bitwise combination of the <see cref="T:System.Runtime.Serialization.StreamingContextStates" /> values that specify the source or destination context for this <see cref="T:System.Runtime.Serialization.StreamingContext" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -104,15 +104,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the <see cref="T:System.Runtime.Serialization.StreamingContextStates" /> values that specify the source or destination context for this <see cref="T:System.Runtime.Serialization.StreamingContext" />. </param
-        >
+          />A bitwise combination of the <see cref="T:System.Runtime.Serialization.StreamingContextStates" /> values that specify the source or destination context for this <see cref="T:System.Runtime.Serialization.StreamingContext" />.
+        </param>
         <param name="additional">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Any additional information to be associated with the <see cref="T:System.Runtime.Serialization.StreamingContext" />. This information is available to any object that implements <see cref="T:System.Runtime.Serialization.ISerializable" /> or any serialization surrogate. Most users do not need to set this parameter. </param
-        >
+          />Any additional information to be associated with the <see cref="T:System.Runtime.Serialization.StreamingContext" />. This information is available to any object that implements <see cref="T:System.Runtime.Serialization.ISerializable" /> or any serialization surrogate. Most users do not need to set this parameter.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Context">
@@ -181,8 +181,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object to compare with the current instance. </param
-        >
+          />An object to compare with the current instance.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">

@@ -88,8 +88,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Diagnostics.EventLogEntry" /> that represents the entry that was written. </param
-        >
+          />An <see cref="T:System.Diagnostics.EventLogEntry" /> that represents the entry that was written.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Entry">

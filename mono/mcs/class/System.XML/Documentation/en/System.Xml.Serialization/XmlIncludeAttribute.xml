@@ -77,8 +77,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of the object to include. </param
-        >
+          />The <see cref="T:System.Type" /> of the object to include.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Type">

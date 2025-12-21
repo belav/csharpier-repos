@@ -32,8 +32,8 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>A description of a property consists of a name, its attributes, the component class that the property is associated with, and the type of the property.</para>
       <para>
-        <see cref="T:System.ComponentModel.PropertyDescriptor" /> provides the following properties and methods: </para
-      >
+        <see cref="T:System.ComponentModel.PropertyDescriptor" /> provides the following properties and methods:
+      </para>
       <list type="bullet">
         <item>
           <para>
@@ -52,8 +52,8 @@
         </item>
       </list>
       <para>
-        <see cref="T:System.ComponentModel.PropertyDescriptor" /> also provides the following abstract properties and methods: </para
-      >
+        <see cref="T:System.ComponentModel.PropertyDescriptor" /> also provides the following abstract properties and methods:
+      </para>
       <list type="bullet">
         <item>
           <para>
@@ -177,8 +177,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Attribute" /> array containing the attributes you want to associate with the property. </param
-        >
+          />An <see cref="T:System.Attribute" /> array containing the attributes you want to associate with the property.
+        </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -210,19 +210,15 @@
           >
         </summary>
         <param name="name">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The name of the property. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name of the property.
+        </param>
         <param name="attrs">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type <see cref="T:System.Attribute" /> that contains the property attributes. </param
-        >
+          />An array of type <see cref="T:System.Attribute" /> that contains the property attributes.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="AddValueChanged">
@@ -258,15 +254,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The component to add the handler for. </param
-        >
+          />The component to add the handler for.
+        </param>
         <param name="handler">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The delegate to add as a listener. </param
-        >
+          />The delegate to add as a listener.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="CanResetValue">
@@ -308,8 +304,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The component to test for reset capability. </param
-        >
+          />The component to test for reset capability.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ComponentType">
@@ -405,8 +401,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> that represents the type to create. </param
-        >
+          />A <see cref="T:System.Type" /> that represents the type to create.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -442,8 +438,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to compare to this <see cref="T:System.ComponentModel.PropertyDescriptor" />. </param
-        >
+          />The object to compare to this <see cref="T:System.ComponentModel.PropertyDescriptor" />.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="FillAttributes">
@@ -515,8 +511,8 @@
             >The properties for the <paramref name="instance" /> parameter can differ from the properties of a class, because the container can add or remove properties if the <paramref name="instance" /> parameter is sited.</para
           >
           <para
-            >The <paramref name="filter" /> parameter can mix <see cref="T:System.Type" /> and <see cref="T:System.Attribute" /> objects. Filtering is defined by the following rules: </para
-          >
+            >The <paramref name="filter" /> parameter can mix <see cref="T:System.Type" /> and <see cref="T:System.Attribute" /> objects. Filtering is defined by the following rules:
+          </para>
           <list type="bullet">
             <item>
               <para
@@ -581,8 +577,8 @@
             >The properties for the <paramref name="instance" /> parameter can differ from the properties of a class, because the site can add or remove properties if the <paramref name="instance" /> parameter is sited.</para
           >
           <para
-            >The <paramref name="filter" /> parameter can mix <see cref="T:System.Type" /> and <see cref="T:System.Attribute" /> objects. Filtering is defined by the following rules: </para
-          >
+            >The <paramref name="filter" /> parameter can mix <see cref="T:System.Type" /> and <see cref="T:System.Attribute" /> objects. Filtering is defined by the following rules:
+          </para>
           <list type="bullet">
             <item>
               <para
@@ -623,8 +619,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type <see cref="T:System.Attribute" /> to use as a filter. </param
-        >
+          />An array of type <see cref="T:System.Attribute" /> to use as a filter.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetChildProperties">
@@ -656,8 +652,8 @@
             >The properties for the <paramref name="instance" /> parameter can differ from the properties of a class, because the site can add or remove properties if the <paramref name="instance" /> parameter is sited.</para
           >
           <para
-            >The <paramref name="filter" /> parameter can mix <see cref="T:System.Type" /> and <see cref="T:System.Attribute" /> objects. Filtering is defined by the following rules: </para
-          >
+            >The <paramref name="filter" /> parameter can mix <see cref="T:System.Type" /> and <see cref="T:System.Attribute" /> objects. Filtering is defined by the following rules:
+          </para>
           <list type="bullet">
             <item>
               <para
@@ -698,8 +694,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A component to get the properties for. </param
-        >
+          />A component to get the properties for.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetChildProperties">
@@ -731,8 +727,8 @@
             >The properties for the <paramref name="instance" /> parameter can differ from the properties of a class, because the site can add or remove properties if the <paramref name="instance" /> parameter is sited.</para
           >
           <para
-            >The <paramref name="filter" /> parameter can mix <see cref="T:System.Type" /> and <see cref="T:System.Attribute" /> objects. Filtering is defined by the following rules: </para
-          >
+            >The <paramref name="filter" /> parameter can mix <see cref="T:System.Type" /> and <see cref="T:System.Attribute" /> objects. Filtering is defined by the following rules:
+          </para>
           <list type="bullet">
             <item>
               <para
@@ -776,15 +772,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A component to get the properties for. </param
-        >
+          />A component to get the properties for.
+        </param>
         <param name="filter">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type <see cref="T:System.Attribute" /> to use as a filter. </param
-        >
+          />An array of type <see cref="T:System.Attribute" /> to use as a filter.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetEditor">
@@ -823,8 +819,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The base type of editor, which is used to differentiate between multiple editors that a property supports. </param
-        >
+          />The base type of editor, which is used to differentiate between multiple editors that a property supports.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -949,8 +945,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The assembly-qualified name of the type to retrieve. </param
-        >
+          />The assembly-qualified name of the type to retrieve.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetValue">
@@ -992,8 +988,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The component with the property for which to retrieve the value. </param
-        >
+          />The component with the property for which to retrieve the value.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="GetValueChangedHandler">
@@ -1122,15 +1118,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that raises the event. </param
-        >
+          />The object that raises the event.
+        </param>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="PropertyType">
@@ -1190,15 +1186,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The component to remove the handler for. </param
-        >
+          />The component to remove the handler for.
+        </param>
         <param name="handler">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The delegate to remove as a listener. </param
-        >
+          />The delegate to remove as a listener.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ResetValue">
@@ -1238,8 +1234,8 @@
             </item>
           </list>
           <para
-            >This method creates a <see cref="T:System.ComponentModel.Design.DesignerTransaction" /> automatically in the following order: </para
-          >
+            >This method creates a <see cref="T:System.ComponentModel.Design.DesignerTransaction" /> automatically in the following order:
+          </para>
           <list type="ordered">
             <item>
               <para
@@ -1276,8 +1272,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The component with the property value that is to be reset to the default value. </param
-        >
+          />The component with the property value that is to be reset to the default value.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SerializationVisibility">
@@ -1336,8 +1332,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Typically, this method is implemented through reflection.</para>
           <para
-            >This method creates a <see cref="T:System.ComponentModel.Design.DesignerTransaction" /> automatically in the following order: </para
-          >
+            >This method creates a <see cref="T:System.ComponentModel.Design.DesignerTransaction" /> automatically in the following order:
+          </para>
           <list type="ordered">
             <item>
               <para
@@ -1374,11 +1370,11 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The component with the property value that is to be set. </param
-        >
+          />The component with the property value that is to be set.
+        </param>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The new value. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The new value.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="ShouldSerializeValue">
@@ -1420,8 +1416,8 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The component with the property to be examined for persistence. </param
-        >
+          />The component with the property to be examined for persistence.
+        </param>
       </Docs>
     </Member>
     <Member MemberName="SupportsChangeEvents">

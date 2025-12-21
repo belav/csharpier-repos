@@ -187,8 +187,8 @@
       </list>
       <block subset="none" type="note">
         <para
-          >For the .NET Framework 2.0, a member <see cref="F:System.Windows.Forms.Keys.IMEAccept" /> was added that supersedes the previous entry, <see cref="F:System.Windows.Forms.Keys.IMEAceept" />, which was spelled incorrectly. The older version has been retained for backward compatibility, but it may be deleted in future versions of the .NET Framework </para
-        >
+          >For the .NET Framework 2.0, a member <see cref="F:System.Windows.Forms.Keys.IMEAccept" /> was added that supersedes the previous entry, <see cref="F:System.Windows.Forms.Keys.IMEAceept" />, which was spelled incorrectly. The older version has been retained for backward compatibility, but it may be deleted in future versions of the .NET Framework
+        </para>
       </block>
     </remarks>
     <summary>

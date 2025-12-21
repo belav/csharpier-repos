@@ -51,8 +51,7 @@ public class IPHostEntryTest {
  Console.WriteLine("Alias {0} == {1}", aliases[x], addresses[x]);
  }
 }
-   </code
-      >
+   </code>
       <para>The output is</para>
       <c>
         <para>The host name is: contoso.com</para>
@@ -128,8 +127,8 @@ public class IPHostEntryTest {
           <para
             > A <see cref="T:System.Net.IPAddress" /> array containing IP addresses that resolve
  to the host names contained in the <see cref="P:System.Net.IPHostEntry.Aliases" />
- property. </para
-          >
+ property.
+          </para>
         </value>
         <remarks>To be added.</remarks>
         <summary>

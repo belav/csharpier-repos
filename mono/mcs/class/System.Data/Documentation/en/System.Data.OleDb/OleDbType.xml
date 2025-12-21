@@ -795,8 +795,8 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A null-terminated stream of Unicode characters (DBTYPE_WSTR). This maps to <see cref="T:System.String" />. </para
-          >
+            >A null-terminated stream of Unicode characters (DBTYPE_WSTR). This maps to <see cref="T:System.String" />.
+          </para>
         </summary>
       </Docs>
       <AssemblyInfo>

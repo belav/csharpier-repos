@@ -45,8 +45,8 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see cref="T:System.ServiceModel.Dispatcher.MessageFilterTable`1" /> accepts filters of any type. It groups them internally into tables that contain all the filters of a given type. When a filter is added, it is put into an internal filter table, if one already exists, which contains filters of its type. If no such table exists, <see cref="M:System.ServiceModel.Dispatcher.MessageFilterTable`1.CreateFilterTable(System.ServiceModel.Dispatcher.MessageFilter)" /> is called to allocate a new filter table of the appropriate type. Its default operation is to call <see cref="M:System.ServiceModel.Dispatcher.MessageFilter.CreateFilterTable``1" />. </para
-      >
+        >A <see cref="T:System.ServiceModel.Dispatcher.MessageFilterTable`1" /> accepts filters of any type. It groups them internally into tables that contain all the filters of a given type. When a filter is added, it is put into an internal filter table, if one already exists, which contains filters of its type. If no such table exists, <see cref="M:System.ServiceModel.Dispatcher.MessageFilterTable`1.CreateFilterTable(System.ServiceModel.Dispatcher.MessageFilter)" /> is called to allocate a new filter table of the appropriate type. Its default operation is to call <see cref="M:System.ServiceModel.Dispatcher.MessageFilter.CreateFilterTable``1" />.
+      </para>
       <para>This default behavior can be overridden to explicitly specify the type of filter table associated with a type of filter. The first time a filter type is added to the table, the filter table type created is permanently associated with the filter type. </para>
       <para>The priority is an integer value used to group filters into priority buckets and order their processing. The larger the integer assigned to a filter type, the higher its priority for processing. All the filter tables in a priority bucket are evaluated together. Lower priority buckets are only evaluated if higher priority buckets do not provide any matches. A filter table assigns a default priority that can be set to filters being added.</para>
     </remarks>
@@ -213,8 +213,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method implements <see cref="M:System.Collections.Generic.ICollection`1.Clear" />.  </para
-          >
+            >This method implements <see cref="M:System.Collections.Generic.ICollection`1.Clear" />.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -874,8 +874,8 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property implements <see cref="P:System.Collections.Generic.IDictionary`2.Keys" />. The <see cref="T:System.Collections.Generic.IDictionary`2" />&lt;Filter, <paramref name="FilterData" />&gt; that the filter table implements uses the <see cref="T:System.ServiceModel.Dispatcher.MessageFilter" /> as the key and the <paramref name="FilterData" /> as the value of the pair. </para
-          >
+            >This property implements <see cref="P:System.Collections.Generic.IDictionary`2.Keys" />. The <see cref="T:System.Collections.Generic.IDictionary`2" />&lt;Filter, <paramref name="FilterData" />&gt; that the filter table implements uses the <see cref="T:System.ServiceModel.Dispatcher.MessageFilter" /> as the key and the <paramref name="FilterData" /> as the value of the pair.
+          </para>
           <para
             >The order of the filters returned in the collection is unspecified, but it is guaranteed to be the same order as the corresponding <paramref name="FilterData" /> in the collection returned by the <see cref="P:System.ServiceModel.Dispatcher.MessageFilterTable`1.Values" /> property.</para
           >

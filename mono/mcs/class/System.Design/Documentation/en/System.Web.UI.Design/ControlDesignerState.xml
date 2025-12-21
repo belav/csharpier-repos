@@ -19,8 +19,8 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides access to the state of the control designer in the design host through the <see cref="T:System.ComponentModel.Design.IComponentDesignerStateService" /> interface. This class cannot be inherited. </para
-      >
+        >Provides access to the state of the control designer in the design host through the <see cref="T:System.ComponentModel.Design.IComponentDesignerStateService" /> interface. This class cannot be inherited.
+      </para>
     </summary>
   </Docs>
   <Members>
