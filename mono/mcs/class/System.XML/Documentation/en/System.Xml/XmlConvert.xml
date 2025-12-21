@@ -215,8 +215,7 @@ public class App {
       XmlConvert.DecodeName("Order #1_x69_") ); 
   }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <para>Order #1i : Order #1x0069_ : Order #1_x69_</para>
         </example>
@@ -303,8 +302,7 @@ public class App {
       XmlConvert.EncodeNmToken("7:+") );
   }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <para>LocalName _x0037__x003A__x002B_</para>
           <para>Name _x0037_:_x002B_</para>
@@ -1046,8 +1044,8 @@ public class App {
         <example>
           <para
             >The following example converts a <see cref="T:System.String" /> to a <see cref="T:System.DateTime" /> and writes the
-   result to the console.</para
-          >
+   result to the console.
+          </para>
           <code lang="C#"
             >using System;
 using System.Xml;
@@ -1064,8 +1062,7 @@ public class App {
     Console.WriteLine( "{0}", dateTime.ToString() );
   }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <para>9/18/1966 8:45:11 PM</para>
         </example>
@@ -2416,8 +2413,8 @@ public class App {
         <example>
           <para
             > The following example converts a <see cref="T:System.TimeSpan" /> to a <see cref="T:System.String" /> and writes the result
-   to the console.</para
-          >
+   to the console.
+          </para>
           <code lang="C#"
             >using System;
 using System.Xml;
@@ -2431,8 +2428,7 @@ public class App {
       XmlConvert.ToString(timeSpan) );
   }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <para>P3DT11H59M6.128S</para>
         </example>
@@ -3123,8 +3119,8 @@ public class App {
         <remarks>
           <para
             >If <paramref name="name" /> contains a colon, <see cref="T:System.Xml.XmlException" /> is
-   thrown.</para
-          >
+   thrown.
+          </para>
         </remarks>
         <exception cref="T:System.ArgumentNullException">
           <paramref name="name" /> is <see langword="null" /> or <see cref="F:System.String.Empty" />.</exception

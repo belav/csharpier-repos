@@ -37,8 +37,8 @@
       <para
         >The following example demonstrates an error that causes 
       a <see cref="T:System.RankException" />
-      exception.</para
-      >
+      exception.
+      </para>
       <code lang="C#"
         >using System;
 public class RankExample {
@@ -56,8 +56,7 @@ public class RankExample {
       }
    }
 }
-   </code
-      >
+   </code>
       <para>The output is</para>
       <code>
 Error caught: System.RankException: The specified arrays must have the same number of dimensions.

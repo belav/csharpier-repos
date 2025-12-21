@@ -53,8 +53,7 @@ public class ArgExceptionExample {
     }
   }
 }
-   </code
-      >
+   </code>
       <para>The output is</para>
       <c>
         <para>Error: System.ArgumentException: Object must be of type String.</para>
@@ -694,8 +693,8 @@ public class ArgExceptionExample {
    name of the parameter that caused the current Exception, or
 <see langword="null" /> if no value was specified to the constructor
    for
-   the current instance.</para
-          >
+   the current instance.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />

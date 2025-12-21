@@ -168,8 +168,7 @@
      freeState();
   }
 }
-   </code
-          >
+   </code>
         </example>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />

@@ -34,8 +34,8 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
         >A class that serializes a <see cref="T:System.ServiceModel.Syndication.CategoriesDocument" /> instance to and from Atom 1.0 format.
-</para
-      >
+
+      </para>
     </summary>
   </Docs>
   <Members>
@@ -208,8 +208,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
 Returns an <see cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" /> that can be serialized into a &lt;atom:categories&gt; element within a service document.
-</para
-          >
+
+          </para>
         </returns>
       </Docs>
     </Member>
@@ -242,8 +242,8 @@ Returns an <see cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
 Returns a <see cref="T:System.ServiceModel.Syndication.ReferencedCategoriesDocument" /> that can be serialized into a &lt;atom:categories&gt; element within a service document.
-</para
-          >
+
+          </para>
         </returns>
       </Docs>
     </Member>

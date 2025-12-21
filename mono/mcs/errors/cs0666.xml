@@ -11,7 +11,7 @@
 			As structs are implicitly declared as <b>sealed</b> they
 			can not have protected members. Usually you can fix this
 			error by changing the scope of the variable.
-		</p
-    >
+
+    </p>
   </Details>
 </ErrorDetails>

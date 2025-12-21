@@ -513,8 +513,7 @@
 <example>
             <code lang="C#">
     string value = worker_request.GetKnownRequestHeader (HttpWorkerRequest.HeaderContentLength);
-  </code
-            >
+  </code>
           </example>
         </remarks>
         <summary>
@@ -767,8 +766,8 @@
           >This method should be invoked prior to calling <see cref="M:System.Web.HttpWorkerRequest.ReadEntityBody(byte[], int)" /> as the web server implementing this class might have loaded some data in advance.
 <para>
 See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see cref="M:System.Web.HttpWorkerRequest.IsEntireEntityBodyIsPreloaded()" />.
-</para
-          >
+
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3363,8 +3362,8 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
           <para>
 This methods sends the HTTP status response to the client.  
 </para>
-You should call this method before writing any other headers.</remarks
-        >
+You should call this method before writing any other headers.
+        </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Specifies the HTTP status code and status description of the response, such as SendStatus(200, "Ok").</para>

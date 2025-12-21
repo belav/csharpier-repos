@@ -63,8 +63,7 @@ class ThreadStateTest{
  
  }
 }
- </code
-      >
+ </code>
       <para>The output is </para>
       <c>
         <para>Working thread... </para>

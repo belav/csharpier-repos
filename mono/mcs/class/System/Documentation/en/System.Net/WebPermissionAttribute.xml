@@ -135,8 +135,8 @@
         <value>
           <para
             >A <see cref="T:System.String" /> that represents the URI accepted by the
-   current instance.</para
-          >
+   current instance.
+          </para>
         </value>
         <exception cref="T:System.ArgumentException">
           <see cref="P:System.Net.WebPermissionAttribute.Accept" />is being set and is not <see langword="null" />.</exception
@@ -205,8 +205,8 @@
         <value>
           <para
             >A <see cref="T:System.String" /> that represents the connection controlled by the
-   current instance.</para
-          >
+   current instance.
+          </para>
         </value>
         <exception cref="T:System.ArgumentException">
           <see cref="P:System.Net.WebPermissionAttribute.Connect" /> is being set and is not <see langword="null" />.</exception

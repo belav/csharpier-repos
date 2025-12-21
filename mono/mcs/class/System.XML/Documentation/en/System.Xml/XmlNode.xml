@@ -2170,8 +2170,8 @@
         <remarks>
           <para
             >This method currently returns true only when <paramref name="feature" /> is "xml" and <paramref name="version" /> is "1.0" or "2.0". This is the equivalent behavior that W3C Document Object Model Level 2 expects. However, it does not mean that this document object model really conforms to the W3C standard. Actually it does not conform to the standard.
-	</para
-          >
+
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

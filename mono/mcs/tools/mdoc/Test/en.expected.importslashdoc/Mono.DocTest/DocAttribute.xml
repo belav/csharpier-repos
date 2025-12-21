@@ -22,8 +22,8 @@
     <remarks>
       <para>
               cref=<c>T:Mono.DocTest.DocAttribute</c>.
-             </para
-      >
+
+      </para>
       <format type="text/html">
         <table width="100%">
           <tr>
@@ -38,8 +38,7 @@
 class Example {
 	[Doc ("documented field")] public string field;
 }
-</code
-      >
+</code>
     </remarks>
   </Docs>
   <Members>

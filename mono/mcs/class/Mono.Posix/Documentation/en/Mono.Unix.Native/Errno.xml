@@ -21,16 +21,16 @@
         <see cref="T:Mono.Unix.Native.Syscall" /> methods.  
         The most recent error can be retrieved from 
         <see cref="M:Mono.Unix.Native.Stdlib.GetLastError" />.
-      </para
-      >
+
+      </para>
       <para>
         The value of these members may not match the actual <c>errno</c> value
         used by your operating system.  Use
         <see cref="T:Mono.Unix.Native.NativeConvert" /> to convert between the
         native <c>errno</c> value and an 
         <see cref="T:Mono.Unix.Native.Errno" /> value.
-      </para
-      >
+
+      </para>
     </remarks>
     <altmember cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
     <altmember cref="M:Mono.Unix.Native.NativeConvert.FromErrno" />
@@ -400,8 +400,8 @@
           <i>No child processes</i>.  A 
 				<see cref="M:Mono.Unix.Native.Syscall.wait" />(2) or 
 				<see cref="M:Mono.Unix.Native.Syscall.waitpid" />(2)
-				function was executed by a process that had no existing or unwaited-for child processes.</summary
-        >
+				function was executed by a process that had no existing or unwaited-for child processes.
+        </summary>
       </Docs>
     </Member>
     <Member MemberName="ECHRNG">
@@ -625,8 +625,8 @@
         <summary>
           <i>Disc quota exceeded</i>.  A 
 				<see cref="M:Mono.Unix.Native.Syscall.write" />(2) 
-				to an ordinary file, the creation of a directory or symbolic link, or the creation of a directory entry failed because the user’s quota of disk blocks was exhausted, or the allocation of an inode for a newly created file failed because the user’s quota of inodes was exhausted.</summary
-        >
+				to an ordinary file, the creation of a directory or symbolic link, or the creation of a directory entry failed because the user’s quota of disk blocks was exhausted, or the allocation of an inode for a newly created file failed because the user’s quota of inodes was exhausted.
+        </summary>
       </Docs>
     </Member>
     <Member MemberName="EEXIST">
@@ -821,8 +821,8 @@
 				was caught by the process during the 
 				execution of an interruptible function.  If the signal handler 
 				performs a normal return, the interrupted system call will seem to 
-				have returned the error condition.</summary
-        >
+				have returned the error condition.
+        </summary>
       </Docs>
     </Member>
     <Member MemberName="EINVAL">
@@ -892,8 +892,8 @@
              connected socket; or, a 
 						 <see cref="M:Mono.Unix.Native.Syscall.sendto" />(2) or 
 						 <see cref="M:Mono.Unix.Native.Syscall.sendmsg" />(2) request on a connected socket
-             specified a destination when already connected.</summary
-        >
+             specified a destination when already connected.
+        </summary>
       </Docs>
     </Member>
     <Member MemberName="EISDIR">
@@ -1144,8 +1144,8 @@
       <Docs>
         <summary>
           <i>Too many levels of symbolic links</i>.  
-				A path name lookup involved more than 32 (MAXSYMLINKS) symbolic links</summary
-        >
+				A path name lookup involved more than 32 (MAXSYMLINKS) symbolic links
+        </summary>
       </Docs>
     </Member>
     <Member MemberName="EMEDIUMTYPE">
@@ -1695,8 +1695,8 @@
         <summary>
           <i>No space left on device</i>.  A 
 				<see cref="M:Mono.Unix.Native.Syscall.write" />(2) to an ordinary file, 
-				the creation of a directory or symbolic link, or the creation of a directory entry failed because no more disk blocks were available on the file system, or the allocation of an inode for a newly created file failed because no more inodes were available on the file system.</summary
-        >
+				the creation of a directory or symbolic link, or the creation of a directory entry failed because no more disk blocks were available on the file system, or the allocation of an inode for a newly created file failed because no more inodes were available on the file system.
+        </summary>
       </Docs>
     </Member>
     <Member MemberName="ENOSR">
@@ -1899,8 +1899,8 @@
         <summary>
           <i>Inappropriate ioctl for device</i>.  A control function 
 				(see <see cref="M:Mono.Unix.Native.Syscall.ioctl" />(2)) 
-				was attempted for a file or special device for which the operation was inappropriate.</summary
-        >
+				was attempted for a file or special device for which the operation was inappropriate.
+        </summary>
       </Docs>
     </Member>
     <Member MemberName="ENOTUNIQ">
@@ -2289,8 +2289,8 @@
         <summary>
           <i>Illegal seek</i>.  An 
 				<see cref="M:Mono.Unix.Native.Syscall.lseek" />(2) system call 
-				was issued on a socket, pipe or FIFO.</summary
-        >
+				was issued on a socket, pipe or FIFO.
+        </summary>
       </Docs>
     </Member>
     <Member MemberName="ESRCH">
@@ -2412,8 +2412,8 @@
           <i>Operation timed out</i>.  A 
 				<see cref="M:Mono.Unix.Native.Syscall.connect" />(2) or 
 				<see cref="M:Mono.Unix.Native.Syscall.send" />(2) request failed because the
-        connected party did not properly respond after a period of time.  (The timeout period is dependent on the communication protocol.)</summary
-        >
+        connected party did not properly respond after a period of time.  (The timeout period is dependent on the communication protocol.)
+        </summary>
       </Docs>
     </Member>
     <Member MemberName="ETOOMANYREFS">

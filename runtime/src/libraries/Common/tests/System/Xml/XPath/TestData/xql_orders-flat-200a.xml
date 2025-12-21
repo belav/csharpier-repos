@@ -862,8 +862,8 @@
             >8/24/94</OrderDate
           >
 								                                        Bad Order
-                                </Testing:OrderDates
-        >
+
+        </Testing:OrderDates>
       </EmployeeIDs>
     </Fred:CustomerIDs>
   </cool:OrderIDs>
@@ -2059,8 +2059,7 @@
           >
           <ShipAddress ColumnWidth="2475"
             >89 Jefferson Way
-Suite 2</ShipAddress
-          >
+Suite 2</ShipAddress>
           <ShipCity DisplayControl="109" FilterLookup="1" Value="Portland">Portland</ShipCity>
           <ShipRegion>OR</ShipRegion>
           <ShipPostalCode>97201</ShipPostalCode>
@@ -2183,8 +2182,7 @@ Suite 2</ShipAddress
           <ShipName>Island Trading</ShipName>
           <ShipAddress ColumnWidth="2475" Caption="Ship Address"
             >Garden House
-Crowther Way</ShipAddress
-          >
+Crowther Way</ShipAddress>
           <ShipCity FilterLookup="1" Value="Cowes">Cowes</ShipCity>
           <ShipRegion Attributes="2">Isle of Wight</ShipRegion>
           <ShipPostalCode CollatingOrder="1033" Type="10">PO31 7PJ</ShipPostalCode>
@@ -2258,8 +2256,7 @@ Crowther Way</ShipAddress
           >
           <ShipAddress Description="Street address only -- no post-office box allowed."
             >Garden House
-Crowther Way</ShipAddress
-          >
+Crowther Way</ShipAddress>
           <ShipCity>Cowes</ShipCity>
           <ShipRegion>Isle of Wight</ShipRegion>
           <ShipPostalCode ColumnHidden="False" ColumnWidth="1785">PO31 7PJ</ShipPostalCode>
@@ -2340,8 +2337,7 @@ Crowther Way</ShipAddress
           <ShipName>Island Trading</ShipName>
           <ShipAddress ColumnWidth="2475" Caption="Ship Address"
             >Garden House
-Crowther Way</ShipAddress
-          >
+Crowther Way</ShipAddress>
           <ShipCity FilterLookup="1" Value="Cowes" Attributes="2">Cowes</ShipCity>
           <ShipRegion CollatingOrder="1033">Isle of Wight</ShipRegion>
           <ShipPostalCode>PO31 7PJ</ShipPostalCode>
@@ -2731,8 +2727,7 @@ Crowther Way</ShipAddress
           >
           <ShipAddress DefaultValue="" ValidationRule=""
             >Brook Farm
-Stratford St. Mary</ShipAddress
-          >
+Stratford St. Mary</ShipAddress>
           <ShipCity>Colchester</ShipCity>
           <ShipRegion ValidationText="" Required="False" AllowZeroLength="False">Essex</ShipRegion>
           <ShipPostalCode FieldSize="Error" OriginalValue="Error" VisibleValue="Error"
@@ -3196,8 +3191,7 @@ Stratford St. Mary</ShipAddress
           <ShipName>Hungry Coyote Import Store</ShipName>
           <ShipAddress ValidationText="" Required="False"
             >City Center Plaza
-516 Main St.</ShipAddress
-          >
+516 Main St.</ShipAddress>
           <ShipCity AllowZeroLength="False" FieldSize="Error">Elgin</ShipCity>
           <ShipRegion>OR</ShipRegion>
           <ShipPostalCode OriginalValue="Error" VisibleValue="Error">97827</ShipPostalCode>
@@ -3653,8 +3647,7 @@ Stratford St. Mary</ShipAddress>
           <ShipName>Hungry Coyote Import Store</ShipName>
           <ShipAddress ValidateOnSet="False"
             >City Center Plaza
-516 Main St.</ShipAddress
-          >
+516 Main St.</ShipAddress>
           <ShipCity DataUpdatable="False" ForeignName="Error">Elgin</ShipCity>
           <ShipRegion>OR</ShipRegion>
           <ShipPostalCode DefaultValue="" ValidationRule="">97827</ShipPostalCode>
@@ -4009,8 +4002,7 @@ Stratford St. Mary</ShipAddress>
           <ShipName>Oc�ano Atl�ntico Ltda.</ShipName>
           <ShipAddress Caption="Ship Address" DisplayControl="109"
             >Ing. Gustavo Moncada 8585
-Piso 20-A</ShipAddress
-          >
+Piso 20-A</ShipAddress>
           <ShipCity Value="Buenos Aires" Attributes="2">Buenos Aires</ShipCity>
           <ShipRegion CollatingOrder="1033"></ShipRegion>
           <ShipPostalCode Type="10" Name="ShipPostalCode" OrdinalPosition="12">1010</ShipPostalCode>
@@ -4152,8 +4144,7 @@ Piso 20-A</ShipAddress
             VisibleValue="Error"
             Description="Street address only -- no post-office box allowed."
             >City Center Plaza
-516 Main St.</ShipAddress
-          >
+516 Main St.</ShipAddress>
           <ShipCity ColumnHidden="False">Elgin</ShipCity>
           <ShipRegion ColumnHidden="False" ColumnWidth="1410">OR</ShipRegion>
           <ShipPostalCode DisplayControl="109" FilterLookup="1">97827</ShipPostalCode>

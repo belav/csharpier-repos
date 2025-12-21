@@ -56,8 +56,8 @@
     runat="server"&gt;
     Visible="<codeFeaturedElement>True</codeFeaturedElement>|False"
         &lt;!-- child controls --&gt;
-&lt;/asp:Content&gt;</code
-      >
+&lt;/asp:Content&gt;
+      </code>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

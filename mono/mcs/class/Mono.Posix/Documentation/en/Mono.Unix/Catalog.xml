@@ -24,8 +24,8 @@
         <para
           >The following example demonstrates the use of the 
       <see cref="T:Mono.Unix.Catalog" /> type.  See also: 
-      http://www.mono-project.com/Internationalization.</para
-        >
+      http://www.mono-project.com/Internationalization.
+        </para>
         <code lang="C#"
           >// File: i18n.cs
 using System;
@@ -42,19 +42,17 @@ public class i18n
 				    "I'm {0} years old.", i), i);
     }
 }
-      </code
-        >
+      </code>
         <para>To generate the translations, use:</para>
         <code lang="sh">xgettext --from-code=UTF-8 i18n.cs -o es.po</code>
         <para
           >Edit the translations in <c>es.po</c>, then compile the
       translations and copy the file so that <c>libintl</c> can find
-      it:</para
-        >
+      it:
+        </para>
         <code lang="sh"
           >mkdir -p locale/es/LC_MESSAGES/
-msgfmt es.po -o locale/es/LC_MESSAGES/i18n.mo</code
-        >
+msgfmt es.po -o locale/es/LC_MESSAGES/i18n.mo</code>
         <para>To run your example with the new translations:</para>
         <code lang="sh">LANGUAGE=es mono i18n.exe</code>
       </example>
@@ -97,8 +95,8 @@ msgfmt es.po -o locale/es/LC_MESSAGES/i18n.mo</code
 	  If <paramref name="n" /> is one, the translation for 
 	  <paramref name="s" /> is returned; otherwise, the translation for
 	  <paramref name="p" /> is returned.
-	</param
-        >
+
+        </param>
         <summary>Returns a native language translation of a text whose form depends on the number passed to the method.</summary>
         <returns
           >The translated string. If no message catalog can be found, the method returns the singular form if <paramref name="n" /> == 1, the plural form otherwise.</returns
@@ -108,8 +106,8 @@ msgfmt es.po -o locale/es/LC_MESSAGES/i18n.mo</code
             <para
               >The following example demonstrates the use of the 
               <see cref="T:Mono.Unix.Catalog" /> type.  See also: 
-              http://www.mono-project.com/Internationalization.</para
-            >
+              http://www.mono-project.com/Internationalization.
+            </para>
             <code lang="C#"
               >// File: i18n.cs
 using System;
@@ -126,8 +124,7 @@ public class i18n
 				    "I'm {0} years old.", i), i);
     }
 }
-            </code
-            >
+            </code>
           </example>
         </remarks>
       </Docs>
@@ -163,8 +160,8 @@ public class i18n
             <para
               >The following example demonstrates the use of the 
               <see cref="T:Mono.Unix.Catalog" /> type.  See also: 
-              http://www.mono-project.com/Internationalization.</para
-            >
+              http://www.mono-project.com/Internationalization.
+            </para>
             <code lang="C#"
               >// File: i18n.cs
 using System;
@@ -181,8 +178,7 @@ public class i18n
 				    "I'm {0} years old.", i), i);
     }
 }
-            </code
-            >
+            </code>
           </example>
         </remarks>
       </Docs>
@@ -219,8 +215,8 @@ public class i18n
         <summary>Initialize the object instance by providing information required to build the base directory where the message catalog is stored.</summary>
         <remarks
           >The path to the message catalogs is constructed as follows <c>localedir/locale/category/package</c>. In this notation <c>locale</c> and <c>category</c> are, respectively, the locale name and the message category name, such as <c>LC_MESSAGES</c>. The object is initialized so that it translates the strings retrieved from the on-disk catalog into the UTF-8 encoding.
-</remarks
-        >
+
+        </remarks>
       </Docs>
     </Member>
   </Members>

@@ -186,8 +186,8 @@
    of the new instance using <paramref name="message" /> and the <see cref="!:System.Xml.XmlException.InnerException" /> property using
 <paramref name="innerException" />. If the <paramref name="message" /> parameter is 
 <see langword="null" />, the <see cref="P:System.Xml.XmlException.Message" /> property is set to the system-supplied 
-   message provided by the constructor that takes no arguments. </para
-          >
+   message provided by the constructor that takes no arguments.
+          </para>
           <para
             >The <see cref="P:System.Xml.XmlException.LineNumber" /> and <see cref="P:System.Xml.XmlException.LinePosition" /> properties are initialized to zero. </para
           >
@@ -365,8 +365,8 @@
         <value>
           <para
             >A <see cref="T:System.Int32" /> containing the line number where the
-   error occurred.</para
-          >
+   error occurred.
+          </para>
         </value>
         <remarks>
           <para>This property is read-only.</para>
@@ -399,8 +399,8 @@
         <value>
           <para
             >A <see cref="T:System.Int32" /> containing the character position where
-   the error occurred.</para
-          >
+   the error occurred.
+          </para>
         </value>
         <remarks>
           <para>This property is read-only.</para>

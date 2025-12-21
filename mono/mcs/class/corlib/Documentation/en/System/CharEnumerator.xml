@@ -143,8 +143,8 @@
         <value>
           <para
             >The <see cref="T:System.Char" /> in the <see cref="T:System.String" /> over which the current instance is
-   positioned.</para
-          >
+   positioned.
+          </para>
         </value>
         <exception cref="T:System.InvalidOperationException">
           <para

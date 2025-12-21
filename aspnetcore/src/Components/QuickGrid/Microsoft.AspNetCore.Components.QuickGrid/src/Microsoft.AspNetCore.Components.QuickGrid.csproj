@@ -7,8 +7,8 @@
         href="https://www.nuget.org/packages/Microsoft.AspNetCore.Components.QuickGrid.EntityFrameworkAdapter"
         >Microsoft.AspNetCore.Components.QuickGrid.EntityFrameworkAdapter</a
       > package.
-    </Description
-    >
+
+    </Description>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <IsTrimmable>true</IsTrimmable>
   </PropertyGroup>

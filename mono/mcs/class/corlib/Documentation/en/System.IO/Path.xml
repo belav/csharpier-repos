@@ -308,8 +308,7 @@ path2));
 path2));
  }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>Dir char is \ Alt dir char is /</para>
@@ -597,8 +596,7 @@ class GetDirectoryTest {
    }
  }
 }
-</code
-          >
+</code>
           <para>The output is </para>
           <c>
             <para>Path: \ecmatest\examples\pathtests.txt directory is \ecmatest\examples</para>
@@ -671,8 +669,8 @@ class GetDirectoryTest {
         <example>
           <para
             >The following example demonstrates using the <see cref="M:System.IO.Path.GetExtension(System.String)" /> method on a Windows
-   system.</para
-          >
+   system.
+          </para>
           <code lang="C#"
             >using System;
 using System.IO;
@@ -694,8 +692,7 @@ class GetDirectoryTest {
    }
  }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>.txt is the extension of \ecmatest\examples\pathtests.txt</para>
@@ -767,8 +764,8 @@ class GetDirectoryTest {
           <para
             >The following example demonstrates the behavior of the
       <see cref="M:System.IO.Path.GetFileName(System.String)" /> method on a
-      Windows system.</para
-          >
+      Windows system.
+          </para>
           <code lang="C#"
             >using System;
 using System.IO;
@@ -785,8 +782,7 @@ class FileNameTest {
    }
  }
 }
-      </code
-          >
+      </code>
           <para>The output is </para>
           <c>
             <para>Path: pathtests.txt filename = pathtests.txt </para>
@@ -931,8 +927,8 @@ class FileNameTest {
         <example>
           <para
             > The following example demonstrates the <see cref="M:System.IO.Path.GetFullPath(System.String)" /> method on a Windows system. In
-   this example, the absolute path for the current directory is c:\ecmatest\examples.</para
-          >
+   this example, the absolute path for the current directory is c:\ecmatest\examples.
+          </para>
           <code lang="C#"
             >using System; 
 using System.IO; 
@@ -950,8 +946,7 @@ class GetDirectoryTest {
 Path.GetFullPath(pathString));
  } 
 }
-</code
-          >
+</code>
           <para>The output is </para>
           <c>
             <para>Path: \ecmatest\examples\pathtests.txt full path is
@@ -1094,8 +1089,8 @@ Path.GetFullPath(pathString));
         <example>
           <para
             >The following example demonstrates the <see cref="M:System.IO.Path.GetPathRoot(System.String)" /> 
-method.</para
-          >
+method.
+          </para>
           <code lang="C#"
             >using System;
 using System.IO;
@@ -1117,8 +1112,7 @@ class GetPathRootTest
     }
   }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>Path: \ecmatest\examples\pathtests.txt Path root is \</para>

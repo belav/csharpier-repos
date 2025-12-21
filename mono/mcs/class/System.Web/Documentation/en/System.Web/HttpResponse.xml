@@ -808,8 +808,8 @@ This property is the same as <see cref="P:System.Web.HttpResponse.Buffer" />
 
 <para>
    This throws an <see cref="T:System.Web.HttpException" /> if the headers have already been sent to the client (for example, if the user has called the <see cref="M:System.Web.HttpResponse.Flush" /> method.
-</para
-          >
+
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1370,12 +1370,12 @@ This property is the same as <see cref="P:System.Web.HttpResponse.Buffer" />
         <remarks>
           <para>
 This is a low-level request, for the Location header to be complete you must also update the StatusCode to one of the valid redirection codes (3xx).  See the <see cref="M:System.Web.HttpResponse.Redirect(string)" /> and <see cref="M:System.Web.HttpResponse.Redirect(string,bool)" /> methods for a high-level interface to redirection.
-</para
-          >
+
+          </para>
           <para>
 If set this property controls whether the header "Location" in the HTTP headers is set.  If the value is <see langword="null" /> the header is not sent, any other values will cause the "Location" header to be sent.
-</para
-          >
+
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1493,8 +1493,8 @@ If set this property controls whether the header "Location" in the HTTP headers 
 
 <para>
 If the setter method is called after the headers have been set, an <see cref="T:System.Web.HttpException" /> will be thrown.
-</para
-          >
+
+          </para>
           <para>
    The following is a list of the RFC defined status codes:
 </para>

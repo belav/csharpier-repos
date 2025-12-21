@@ -1569,8 +1569,8 @@ End Using
         <remarks>
           <para>
 Disposes the current <see cref="T:System.Data.SqlClient.SqlConnection" /> instance.
-</para
-          >
+
+          </para>
           <para>
 Disposing this class will close the current connection, if one is active.
 </para>

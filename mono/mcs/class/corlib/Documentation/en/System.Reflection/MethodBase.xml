@@ -114,8 +114,8 @@
         <value>
           <para
             >A <see cref="T:System.Reflection.MethodAttributes" /> value that signifies the attributes of
-   the method reflected by the current instance.</para
-          >
+   the method reflected by the current instance.
+          </para>
         </value>
         <example>
           <para> The following example demonstrates using this property to
@@ -179,8 +179,7 @@ class MethodAttributesExample
    }
 
 }
-      </code
-          >
+      </code>
           <para>The output is</para>
           <c>
             <para>Method MyPublicInstanceMethod is:</para>

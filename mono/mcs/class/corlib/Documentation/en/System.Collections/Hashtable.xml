@@ -1636,8 +1636,8 @@
         <value>
           <para
             >A <see cref="T:System.Int32" /> that specifies the number of key-and-value pairs contained in the
-   current instance.</para
-          >
+   current instance.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2044,9 +2044,11 @@
             
 
             
+
+            
       
-      .</para
-          >
+      .
+          </para>
         </value>
         <remarks>
           <para>
@@ -2054,21 +2056,20 @@
               >This property provides the ability to
       access a specific element in the current instance using the following notation:
       <c>myCollection[key]</c>
-      .</block
-            >
+      .
+            </block>
           </para>
           <para>
             <block subset="none" type="behaviors"
               >As described
-      above.</block
-            >
+      above.</block>
           </para>
           <para>
             <block subset="none" type="default"
               >If this property is being set and <paramref name="key" /> is already contained
    in the current instance, the value associated with the old key is
-   replaced.</block
-            >
+   replaced.
+            </block>
           </para>
         </remarks>
         <exception cref="T:System.ArgumentNullException">
@@ -2386,8 +2387,8 @@
         <value>
           <para
             >A <see cref="T:System.Object" /> that can be used to synchronize access to the
-   current instance.</para
-          >
+   current instance.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2488,8 +2489,8 @@
         <value>
           <para
             >A <see cref="T:System.Collections.ICollection" /> containing the values of the current
-   instance.</para
-          >
+   instance.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />

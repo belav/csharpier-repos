@@ -151,8 +151,8 @@
                 Title="string"
                 Visible="<codeFeaturedElement>True</codeFeaturedElement>|False"
             /&gt;
-&lt;/asp:MultiView&gt;</code
-      >
+&lt;/asp:MultiView&gt;
+      </code>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

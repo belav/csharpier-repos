@@ -116,8 +116,8 @@
         <value>
           <para
             >A <see cref="T:System.Reflection.FieldAttributes" /> value that indicates the attributes of
-   the field reflected by the current instance.</para
-          >
+   the field reflected by the current instance.
+          </para>
         </value>
         <example>
           <para> The following example
@@ -163,8 +163,7 @@ class FieldAttributesExample
    }
 
 }
-      </code
-          >
+      </code>
           <para>The output is</para>
           <c>
             <para>Field MyPublicInstanceField is: </para>
@@ -274,8 +273,8 @@ class FieldAttributesExample
           <para
             > The <see cref="T:System.Type" /> of the field
    reflected by the current instance.
-   </para
-          >
+
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />

@@ -37,8 +37,8 @@
       <para
         >The following example demonstrates a scenario under
       which <see cref="T:System.MethodAccessException" />
-      is thrown.</para
-      >
+      is thrown.
+      </para>
       <para>The following code contains a class with a public method (MyMethod). This
       class is compiled into a class library.</para>
       <code lang="C#"
@@ -57,8 +57,7 @@ namespace TestNameSpace
    }
  }
 }
-      </code
-      >
+      </code>
       <para>The following code references the class library above, and accesses
       TestNameSpace.Class1.MyMethod. This code is compiled into an application.</para>
       <code lang="C#"
@@ -72,8 +71,7 @@ class AppTest
    test.MyMethod();
  }
 }
-      </code
-      >
+      </code>
       <para>The output of the application is</para>
       <c>
         <para>Constructing with public method.</para>
@@ -97,8 +95,7 @@ namespace TestNameSpace
    }
  }
 }
-      </code
-      >
+      </code>
       <para>When the application is executed again without being recompiled, the output
       is</para>
       <c>

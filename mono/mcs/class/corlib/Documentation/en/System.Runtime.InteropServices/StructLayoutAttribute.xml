@@ -50,8 +50,8 @@ located inside the specified rectangle. In this example, the layout setting on t
 structure can be
 set to <see cref="F:System.Runtime.InteropServices.LayoutKind.Sequential" />
 with no bearing on the end
-result.</block
-        >
+result.
+        </block>
       </para>
       <code lang="C#"
         >using System;
@@ -109,8 +109,7 @@ public class StructLayoutTest {
 
  }
 }
-</code
-      >
+</code>
       <para>The output is</para>
       <c>
         <para>The first point is inside the rectangle.</para>
@@ -423,8 +422,8 @@ byte B2;
         <value>
           <para
             >A <see cref="T:System.Runtime.InteropServices.LayoutKind" /> value that specifies how
-   the target object is arranged.</para
-          >
+   the target object is arranged.
+          </para>
         </value>
         <remarks>
           <para>This property is read-only.</para>

@@ -8,8 +8,8 @@
         which are accessible from the <see cref="T:Mono.Unix.Native.Syscall" /> 
         and <see cref="T:Mono.Unix.Native.Stdlib" /> classes, which are
         a low-level wrappers over ANSI C, POSIX and Unix system calls and library
-        functions.</para
-      >
+        functions.
+      </para>
       <block subset="none" type="note">
         <para>Thread-safety wasn't handled in the original Unix API.  While
         some degree of thread-safety is provided from managed code, it is
@@ -51,8 +51,7 @@ are met:
 4. Neither the name of the University nor the names of its contributors
    may be used to endorse or promote products derived from this software
    without specific prior written permission.
-      </code
-        >
+      </code>
       </example>
     </remarks>
   </Docs>

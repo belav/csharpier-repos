@@ -129,8 +129,8 @@
         <value>
           <para
             >A <see cref="T:System.String" /> indicating the
-   authentication type of the current authentication module.</para
-          >
+   authentication type of the current authentication module.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />

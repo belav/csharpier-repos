@@ -78,8 +78,7 @@ public class DllImportAttributeTest {
  Console.WriteLine( "{0:00}:{1:00}:{2:00}", st.hour, st.minute, st.second ); 
  }
 }
-</code
-      >
+</code>
       <para>When run at the given time on the given date, the output produced was</para>
       <c>
         <para>The Date and Time is: 05/16/2001 at 11:39:17</para>
@@ -523,8 +522,8 @@ public class DllImportAttributeTest {
         <value>
           <para
             >A <see cref="T:System.String" /> containing the name of the shared library file from which a function implementation
-   is imported.</para
-          >
+   is imported.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />

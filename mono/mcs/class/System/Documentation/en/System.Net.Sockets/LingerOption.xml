@@ -288,8 +288,8 @@
               cref="M:System.Net.Sockets.Socket.Close"
               qualify="true"
             />
-   method.</para
-          >
+   method.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />

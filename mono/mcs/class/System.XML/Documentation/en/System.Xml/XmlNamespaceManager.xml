@@ -404,8 +404,8 @@ while (reader.Read())
               qualify="true"
             /> containing the
    namespace URI for the default namespace, or <see cref="F:System.String.Empty" />
-   if there is no default namespace.</para
-          >
+   if there is no default namespace.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -666,8 +666,8 @@ Loop</code>
       method to customize the behavior of this method in types derived from
       the <see cref="T:System.Xml.XmlNamespaceManager" />
       class.
-      </block
-            >
+
+            </block>
           </para>
         </remarks>
         <summary>
@@ -885,8 +885,8 @@ Loop</code>
               > The namespace
       removed is from the current namespace scope. Namespaces outside the current
       scope are ignored. If <paramref name="prefix" /> or <paramref name=" uri" /> does not exist
-      in the collection, this method simply returns. </block
-            >
+      in the collection, this method simply returns.
+            </block>
           </para>
           <para>
             <block subset="none" type="overrides"
@@ -894,8 +894,8 @@ Loop</code>
       method to customize the behavior of this method in types derived from
       the <see cref="T:System.Xml.XmlNamespaceManager" />
       class.
-      </block
-            >
+
+            </block>
           </para>
         </remarks>
         <exception cref="T:System.ArgumentNullException">

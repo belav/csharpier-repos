@@ -17,8 +17,8 @@
 	</para>
       <para
         >A <c>Mirror</c> object represents an entity in the debuggee. There is usually one mirror subclass for each type of entity, i.e. <c>TypeMirror</c> for types, <c>AppDomainMirror</c> for application domains etc. These classes usually have a similar set of properties/methods as their non-mirror counterparts, the difference is that calling these properties/methods might result in a remote call to the debuggee to request information. The results of these remote calls are usually cached in the mirror object, so when multiple calls are made to <c>TypeMirror.Name</c>, for example, only the first call involves a remote operation. The <c>ToString()/Equals()/GetHashCode ()</c> methods are an exception, these are guaranteed to only access local state.
-	</para
-      >
+
+      </para>
       <para
         >Differences between this API and JDI:
 	<list type="bullet">

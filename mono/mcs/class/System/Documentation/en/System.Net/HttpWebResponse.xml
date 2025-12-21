@@ -206,8 +206,8 @@
         <value>
           <para
             >A <see cref="T:System.String" /> that
-   represents the character set used for the current instance.</para
-          >
+   represents the character set used for the current instance.
+          </para>
         </value>
         <exception cref="T:System.ObjectDisposedException"
           >The current instance has been disposed.</exception
@@ -329,8 +329,8 @@
           <para
             >A <see cref="T:System.Int64" />
 containing the number of bytes returned from the Internet resource. This
-value does not include header information.</para
-          >
+value does not include header information.
+          </para>
         </value>
         <exception cref="T:System.ObjectDisposedException"
           >The current instance has been disposed.</exception
@@ -369,8 +369,8 @@ value does not include header information.</para
         <value>
           <para
             >A <see cref="T:System.String" /> that
-   represents the content type of the response data.</para
-          >
+   represents the content type of the response data.
+          </para>
         </value>
         <exception cref="T:System.ObjectDisposedException"
           >The current instance has been disposed.</exception
@@ -701,8 +701,8 @@ value does not include header information.</para
         <value>
           <para
             >A <see cref="T:System.Net.WebHeaderCollection" /> containing the header information returned with the
-   response.</para
-          >
+   response.
+          </para>
         </value>
         <exception cref="T:System.ObjectDisposedException"
           >The current instance has been disposed.</exception
@@ -842,8 +842,8 @@ value does not include header information.</para
           <para
             >A <see cref="T:System.DateTime" />
 value containing the date and time the contents of the response were
-modified.</para
-          >
+modified.
+          </para>
         </value>
         <exception cref="T:System.ObjectDisposedException"
           >The current instance has been disposed.</exception
@@ -924,8 +924,8 @@ modified.</para
         <value>
           <para
             >A <see cref="T:System.Version" />
-that contains the HTTP protocol version of the response.</para
-          >
+that contains the HTTP protocol version of the response.
+          </para>
         </value>
         <exception cref="T:System.ObjectDisposedException"
           >The current instance has been disposed.</exception
@@ -964,8 +964,8 @@ that contains the HTTP protocol version of the response.</para
         <value>
           <para
             >A <see cref="T:System.Uri" />
-representing the resource that actually responded to the request.</para
-          >
+representing the resource that actually responded to the request.
+          </para>
         </value>
         <exception cref="T:System.ObjectDisposedException"
           >The current instance has been disposed.</exception

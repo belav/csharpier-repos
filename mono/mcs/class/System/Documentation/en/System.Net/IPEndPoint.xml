@@ -174,8 +174,8 @@
         <value>
           <para
             >A <see cref="T:System.Net.IPAddress" /> instance containing the IP address of the end
- point.</para
-          >
+ point.
+          </para>
         </value>
         <remarks>To be added.</remarks>
         <summary>
@@ -464,8 +464,8 @@ and <see cref="P:System.Net.IPEndPoint.Port" /> properties contain the same valu
         <value>
           <para
             >A <see cref="T:System.Int32" /> value that is between <see cref="F:System.Net.IPEndPoint.MinPort" /> and <see cref="F:System.Net.IPEndPoint.MaxPort" />
-inclusive.</para
-          >
+inclusive.
+          </para>
         </value>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentOutOfRangeException"

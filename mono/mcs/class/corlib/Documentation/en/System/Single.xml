@@ -877,8 +877,8 @@
             <block subset="none" type="note"
               > 
 This method overrides <see cref="M:System.Object.GetHashCode" />.
-</block
-            >
+
+            </block>
           </para>
         </remarks>
         <summary>
@@ -3811,8 +3811,8 @@ This method overrides <see cref="M:System.Object.GetHashCode" />.
           <para
             >The following example shows the effects of various
       formats on the string returned by <see cref="M:System.Single.ToString" />
-      .</para
-          >
+      .
+          </para>
           <code lang="C#"
             >using System;
 class test {
@@ -3825,8 +3825,7 @@ class test {
        fmts[i],f.ToString(fmts[i]));
  }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>1234.567</para>

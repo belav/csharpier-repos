@@ -37,8 +37,8 @@
       <para
         >The following example demonstrates an error that causes
       the <see cref="T:System.IO.FileNotFoundException" />
-      exception to be thrown.</para
-      >
+      exception to be thrown.
+      </para>
       <code lang="C#"
         >using System;
 using System.IO;
@@ -54,8 +54,7 @@ class FileNotFoundExample {
     }
     }
 }
-   </code
-      >
+   </code>
       <para>The output is</para>
       <c>
         <para>Caught: Could not find file "/Eccma/examples/FileTest.cs".</para>
@@ -476,8 +475,8 @@ class FileNotFoundExample {
           <para
             >A <see cref="T:System.String" /> containing the name of the file, or
 <see langword="null" /> if no file
-   name was passed to the constructor for the current instance.</para
-          >
+   name was passed to the constructor for the current instance.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -579,8 +578,8 @@ class FileNotFoundExample {
           <para
             >A <see cref="T:System.String" /> containing the
    error message. This string includes the <see cref="P:System.IO.FileNotFoundException.FileName" /> if a value for that property was supplied to the
-   constructor for the current instance.</para
-          >
+   constructor for the current instance.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -637,8 +636,7 @@ class FileNotFoundExample {
     }
   }
 }
-</code
-          >
+</code>
           <para>The output is </para>
           <code>
 Caught: System.IO.FileNotFoundException: Could not find file "/Eccma/examples/FileTest.cs".

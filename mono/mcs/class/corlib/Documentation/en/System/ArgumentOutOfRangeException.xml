@@ -56,8 +56,7 @@ class ArgOutOfRangeExample {
  }
  }
 }
-   </code
-      >
+   </code>
       <para>The output is</para>
       <c>
         <para>Error: System.ArgumentOutOfRangeException: Non-negative number required.</para>

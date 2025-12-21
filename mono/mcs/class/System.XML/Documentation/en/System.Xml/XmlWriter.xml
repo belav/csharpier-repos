@@ -2000,8 +2000,7 @@
             <block subset="none" type="overrides"
               > This method must be overridden in order
       to provide the functionality described above, as there is no default implementation.
-   </block
-            >
+   </block>
           </para>
         </remarks>
         <exception cref="T:System.ArgumentException">
@@ -4364,8 +4363,8 @@
           <para
             > The following example uses a <see cref="T:System.Xml.XmlTextReader" /> and
    a <see cref="T:System.Xml.XmlTextWriter" /> to copy an XML file, specified in the command line, to the
-   console.</para
-          >
+   console.
+          </para>
           <code lang="C#"
             >using System;
 using System.Xml;
@@ -4382,8 +4381,7 @@ public class Copier {
     xtReader.Close();
   }
 }
-</code
-          >
+</code>
         </example>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -6040,8 +6038,8 @@ writer.Close();</code>
         <value>
           <para
             > One of the members of the <see cref="T:System.Xml.WriteState" /> enumeration.
-   </para
-          >
+
+          </para>
         </value>
         <remarks>
           <block subset="none" type="behaviors">
@@ -6051,15 +6049,13 @@ writer.Close();</code>
           <para>
             <block subset="none" type="overrides">
       This property must be overridden in order to provide the functionality as described herein, as there is no default implementation.
-      </block
-            >
+      </block>
           </para>
           <para>
             <block subset="none" type="usage"
               >Use this property to query the current state, for
       example, whether the writer is newly initialized, writing specific XML structures, or
-      closed. </block
-            >
+      closed. </block>
           </para>
         </remarks>
         <summary>
@@ -6891,8 +6887,8 @@ writer.Close();</code>
               qualify="true"
             />
 containing the language attribute, or <see langword="null" /> if the language
-attribute is not specified for the element.</para
-          >
+attribute is not specified for the element.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -6932,8 +6928,8 @@ attribute is not specified for the element.</para
               cref="T:System.Xml.XmlSpace"
               qualify="true"
             /> enumeration, or <see cref="F:System.Xml.XmlSpace.None" /> if the white space
-   attribute is not specified for the element. </para
-          >
+   attribute is not specified for the element.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />

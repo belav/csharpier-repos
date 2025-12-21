@@ -122,8 +122,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >A value that specifies whether the <see cref="T:System.Xml.XmlReader" /> contains a valid Atom 1.0 categories document.
-</para
-          >
+
+          </para>
         </returns>
         <param name="reader">
           <attribution

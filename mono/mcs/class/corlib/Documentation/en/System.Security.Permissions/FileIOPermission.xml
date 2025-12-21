@@ -656,8 +656,8 @@
           <block subset="none" type="note">
             <para
               > For the XML encoding for this class, see the <see cref="T:System.Security.Permissions.FileIOPermission" /> class
- page.</para
-            >
+ page.
+            </para>
             <para
               >This method overrides <see cref="M:System.Security.CodeAccessPermission.FromXml(System.Security.SecurityElement)" />.</para
             >
@@ -1066,8 +1066,8 @@
           <block subset="none" type="note">
             <para
               >For the XML encoding for this class, see the <see cref="T:System.Security.Permissions.FileIOPermission" /> class
- page.</para
-            >
+ page.
+            </para>
             <para
               >This method overrides <see cref="M:System.Security.CodeAccessPermission.ToXml" /> .</para
             >

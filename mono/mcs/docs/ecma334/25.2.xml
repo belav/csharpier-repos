@@ -78,8 +78,8 @@
       <table_line>int** Pointer to pointer to <keyword>int</keyword></table_line>
       <table_line>int*[] Single-dimensional array of pointers to <keyword>int</keyword></table_line>
       <table_line>void* Pointer to unknown type </table_line>
-end example]</example
-    >
+end example]
+    </example>
   </paragraph>
   <paragraph>For a given implementation, all pointer types must have the same size and representation. </paragraph>
   <paragraph>

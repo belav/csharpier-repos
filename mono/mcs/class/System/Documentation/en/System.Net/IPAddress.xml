@@ -207,8 +207,8 @@
         <value>
           <para
             >A <see cref="T:System.Int64" /> containing
-   the IP address in host-byte-order.</para
-          >
+   the IP address in host-byte-order.
+          </para>
         </value>
         <exception cref="T:System.ArgumentOutOfRangeException"
           >The value specified in a set operation is less than 0.</exception
@@ -256,8 +256,8 @@
         <value>
           <para>
             <see cref="F:System.Net.Sockets.AddressFamily.InterNetwork" /> 
-.</para
-          >
+.
+          </para>
         </value>
         <remarks>
           <para>This property is read-only.</para>

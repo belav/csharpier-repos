@@ -67,8 +67,7 @@ Creating the code for the following statement throws an Exception because the va
 ...
 demoNs.Comments.Add(new CodeCommentStatement());
 ...
-  </code
-            >
+  </code>
           </example>
         </remarks>
         <summary>
@@ -108,13 +107,13 @@ demoNs.Comments.Add(new CodeCommentStatement());
 		com.DocComment=true;
 		demoNs.Comments.Add(new CodeCommentStatement(com));
 ...
-  </code
-            >
+  </code>
 emits
-  <code lang="C#">
-/// foo!
-  </code
+  <code
+              lang="C#"
             >
+/// foo!
+  </code>
           </example>
         </remarks>
         <summary>
@@ -153,13 +152,13 @@ emits
           <example>
             <code lang="C#">
 		demoNs.Comments.Add(new CodeCommentStatement("This is a test"));
-  </code
-            >
+  </code>
 generates the code
-  <code lang="C#">
-// This is a test
-  </code
+  <code
+              lang="C#"
             >
+// This is a test
+  </code>
           </example>
         </remarks>
         <summary>

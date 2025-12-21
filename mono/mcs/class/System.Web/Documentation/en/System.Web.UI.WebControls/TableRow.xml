@@ -210,8 +210,8 @@
             Width="size"
             Wrap="<codeFeaturedElement>True</codeFeaturedElement>|False"
         /&gt;
-&lt;/asp:TableRow&gt;</code
-      >
+&lt;/asp:TableRow&gt;
+      </code>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

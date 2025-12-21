@@ -397,8 +397,8 @@
           <para
             > One or more <see cref="T:System.Security.Permissions.SecurityPermissionFlag" /> values.
  To specify multiple values in a set operation,
- use the bitwise OR operator.</para
-          >
+ use the bitwise OR operator.
+          </para>
         </value>
         <remarks>To be added.</remarks>
         <summary>

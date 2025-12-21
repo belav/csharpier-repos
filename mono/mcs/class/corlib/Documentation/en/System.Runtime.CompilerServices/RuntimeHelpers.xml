@@ -35,8 +35,8 @@
    <see langword="System.Runtime.CompilerServices" />
    are intended primarily for use by compilers, not application
    programmers. They allow compilers to easily implement certain language
-   features that are not directly visible to programmers.</block
-        >
+   features that are not directly visible to programmers.
+        </block>
       </para>
     </remarks>
     <summary>
@@ -391,8 +391,8 @@
         <value>
           <para
             > A <see cref="T:System.Int32" /> containing the number of bytes between the start of a <see cref="T:System.String" /> and the first <see cref="T:System.Char" />
-in the string.</para
-          >
+in the string.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />

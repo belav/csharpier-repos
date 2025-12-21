@@ -773,8 +773,8 @@
                         Single|Double|Decimal|DateTime|String"
                 /&gt;
         &lt;/UpdateParameters&gt;
-&lt;/asp:ObjectDataSource&gt;</code
-      >
+&lt;/asp:ObjectDataSource&gt;
+      </code>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

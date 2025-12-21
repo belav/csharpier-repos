@@ -186,8 +186,8 @@
     StartingNodeOffset="integer"
     StartingNodeUrl="uri"
     Visible="True|<codeFeaturedElement>False</codeFeaturedElement>"
-/&gt;</code
-      >
+/&gt;
+      </code>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

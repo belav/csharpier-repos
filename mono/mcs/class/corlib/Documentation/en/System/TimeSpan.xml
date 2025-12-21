@@ -416,8 +416,7 @@ public class TimeSpanAddExample {
       Console.WriteLine("ts.Add(ts) = {0}", ts.Add(ts));
    }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>The value of the timespan 'ts' is 00:03:34.7483647</para>
@@ -745,8 +744,8 @@ public class TimeSpanAddExample {
               subset="none"
               type="note"
               >See <see cref="M:System.TimeSpan.ToString" /> for a more detailed description of the days
-   component.</block
-            >
+   component.
+            </block>
           </para>
         </value>
         <example>
@@ -762,8 +761,7 @@ public class TimeSpanPropertiesExampleOne {
       Console.WriteLine("Days: {0}", ts.Days );
    }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>11.13:46:40.3456789</para>
@@ -826,8 +824,7 @@ public class TimeSpanDurationExample {
       Console.WriteLine("is {0}", ts.Duration());
    }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <para>
             <c>The absolute
@@ -1407,8 +1404,8 @@ public class TimeSpanDurationExample {
               subset="none"
               type="note"
               >See <see cref="M:System.TimeSpan.ToString" /> for a
-   more detailed description of the hours component.</block
-            >
+   more detailed description of the hours component.
+            </block>
           </para>
         </value>
         <example>
@@ -1424,8 +1421,7 @@ public class TimeSpanPropertiesExampleOne {
       Console.WriteLine("Hours: {0}", ts.Hours );
    }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>11.13:46:40.3456789</para>
@@ -1512,8 +1508,8 @@ public class TimeSpanPropertiesExampleOne {
               subset="none"
               type="note"
               >See <see cref="M:System.TimeSpan.ToString" /> for a more
-   detailed description of the fractional seconds component.</block
-            >
+   detailed description of the fractional seconds component.
+            </block>
           </para>
         </value>
         <example>
@@ -1529,8 +1525,7 @@ public class TimeSpanPropertiesExampleOne {
       Console.WriteLine("Milliseconds: {0}", ts.Milliseconds );
    }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>11.13:46:40.3456789</para>
@@ -1580,8 +1575,8 @@ public class TimeSpanPropertiesExampleOne {
               subset="none"
               type="note"
               >See <see cref="M:System.TimeSpan.ToString" /> for
-   a more detailed description of the minutes component.</block
-            >
+   a more detailed description of the minutes component.
+            </block>
           </para>
         </value>
         <example>
@@ -1597,8 +1592,7 @@ public class TimeSpanPropertiesExampleOne {
       Console.WriteLine("Minutes: {0}", ts.Minutes );
    }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>11.13:46:40.3456789</para>
@@ -2318,8 +2312,7 @@ public class TimeSpanParseExample {
       Console.WriteLine("parses to TimeSpan {0}", ts);
    }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <code>
 The string "    -5.12:34:56.789     "
@@ -3073,8 +3066,8 @@ parses to TimeSpan -5.12:34:56.7890000
               subset="none"
               type="note"
               >See <see cref="M:System.TimeSpan.ToString" /> for
-   a more detailed description of the seconds component.</block
-            >
+   a more detailed description of the seconds component.
+            </block>
           </para>
         </value>
         <example>
@@ -3090,8 +3083,7 @@ public class TimeSpanPropertiesExampleOne {
       Console.WriteLine("Seconds: {0}", ts.Seconds );
    }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>11.13:46:40.3456789</para>
@@ -3194,8 +3186,8 @@ public class TimeSpanPropertiesExampleOne {
         <value>
           <para
             >A <see cref="T:System.Int64" /> specifying the 
-   number of ticks represented by the current instance.</para
-          >
+   number of ticks represented by the current instance.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3414,8 +3406,7 @@ public class TimeSpanToStringExample {
       Console.WriteLine("{0}", tsTwo.ToString());
    }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>TimeSpan one, with d. and .ff: 1.23:45:54.3210000</para>
@@ -3730,8 +3721,7 @@ public class TimeSpanTotalUnitsProperties{
       Console.WriteLine("TotalDays: {0}", ts.TotalDays);
    }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>11.13:46:40</para>
@@ -3791,8 +3781,7 @@ public class TimeSpanTotalUnitsProperties{
       Console.WriteLine("TotalHours: {0}", ts.TotalHours);
    }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>11.13:46:40</para>
@@ -3852,8 +3841,7 @@ public class TimeSpanTotalUnitsProperties{
       Console.WriteLine("TotalMilliseconds: {0}", ts.TotalMilliseconds);
    }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>11.13:46:40</para>
@@ -3913,8 +3901,7 @@ public class TimeSpanTotalUnitsProperties{
       Console.WriteLine("TotalMinutes: {0}", ts.TotalMinutes);
    }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>11.13:46:40</para>
@@ -3974,8 +3961,7 @@ public class TimeSpanTotalUnitsProperties{
       Console.WriteLine("TotalSeconds: {0}", ts.TotalSeconds);
    }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>11.13:46:40</para>

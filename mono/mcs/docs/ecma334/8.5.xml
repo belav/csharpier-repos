@@ -19,8 +19,8 @@
     <table_line>14.11 Conditional OR || </table_line>
     <table_line>14.12 Conditional ?: </table_line>
     <table_line>14.13 Assignment = *= /= %= += -= &lt;&lt;= &gt;&gt;= &amp;= ^= |= </table_line>
-When an expression contains multiple operators, the precedence of the operators controls the order in which the individual operators are evaluated. For example, the expression x + y * z is evaluated as x + (y * z) because the * operator has higher precedence than the + operator. </paragraph
-  >
+When an expression contains multiple operators, the precedence of the operators controls the order in which the individual operators are evaluated. For example, the expression x + y * z is evaluated as x + (y * z) because the * operator has higher precedence than the + operator.
+  </paragraph>
   <paragraph
     >When an operand occurs between two operators with the same precedence, the associativity of the operators controls the order in which the operations are performed: <list>
       <list_item> Except for the assignment operators, all binary operators are left-associative, meaning that operations are performed from left to right. For example, x + y + z is evaluated as (x + y) + z. </list_item>

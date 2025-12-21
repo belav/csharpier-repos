@@ -527,8 +527,8 @@
             >If error-checking is turned off and an invalid surrogate
       sequence is detected, the invalid characters are ignored and are not encoded
       into the returned <see cref="T:System.Byte" /> array, and no exception is
-      thrown.</para
-          >
+      thrown.
+          </para>
           <para>
             <block subset="none" type="note"
               >This method overrides <see cref="M:System.Text.Encoding.GetBytes(System.Char[])" />.</block

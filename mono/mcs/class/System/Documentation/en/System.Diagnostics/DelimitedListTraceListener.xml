@@ -404,8 +404,8 @@
       &lt;/listeners&gt;
     &lt;/trace&gt;
   &lt;/system.diagnostics&gt;
-&lt;/configuration&gt;</code
-          >
+&lt;/configuration&gt;
+          </code>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

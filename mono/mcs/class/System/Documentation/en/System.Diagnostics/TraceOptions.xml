@@ -38,8 +38,8 @@
       &lt;/listeners&gt;
     &lt;/trace&gt;
   &lt;/system.diagnostics&gt;
-&lt;/configuration&gt;</code
-      >
+&lt;/configuration&gt;
+      </code>
       <para
         >For details about adding trace listeners to the application configuration file, see <format type="text/html">
           <a href="1394c2c3-6304-46db-87c1-8e8b16f5ad5b">&lt;listeners&gt; Element</a>

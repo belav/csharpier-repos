@@ -1089,8 +1089,8 @@
         &lt;/PagerTemplate&gt;
         &lt;RowStyle /&gt;
         &lt;SelectedRowStyle /&gt;
-&lt;/asp:GridView&gt;</code
-      >
+&lt;/asp:GridView&gt;
+      </code>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

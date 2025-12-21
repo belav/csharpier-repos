@@ -47,8 +47,8 @@
       <para>
         <block subset="none" type="note"
           >For more information on <see langword="ldtoken" />, see Partition III of the CLI
-   Specification.</block
-        >
+   Specification.
+        </block>
       </para>
     </remarks>
     <summary>
@@ -384,8 +384,8 @@
         <value>
           <para
             > A <see cref="T:System.IntPtr" /> containing the value of the handle.
-   </para
-          >
+
+          </para>
         </value>
         <remarks>
           <para>This property is read-only.</para>

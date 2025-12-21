@@ -1078,8 +1078,8 @@
       <Docs>
         <value>
    The current <see cref="T:System.Text.Encoding" /> used by the current reader.
-</value
-        >
+
+        </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para

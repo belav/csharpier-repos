@@ -13,8 +13,8 @@
   <ThreadingSafetyStatement
     >Public static members of this type <i>may</i> be
   thread safe; check your operating system documentation.
-  No instance members are guaranteed to be thread safe.</ThreadingSafetyStatement
-  >
+  No instance members are guaranteed to be thread safe.
+  </ThreadingSafetyStatement>
   <ThreadingSafetyStatement
     >All public static members of this type are
   probably safe for multithreaded operations within managed code.  (Methods
@@ -25,8 +25,8 @@
   <see cref="M:Mono.Unix.Native.Syscall.read" /> are not protected.)
   No multithreading guarantee is made between managed and unmanaged code.  
   Check your operating system documentation for more information.
-	</ThreadingSafetyStatement
-  >
+
+  </ThreadingSafetyStatement>
   <Base>
     <BaseTypeName>Mono.Unix.Native.Stdlib</BaseTypeName>
   </Base>
@@ -165,8 +165,8 @@
             On error, -1 is returned and 
             <see cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
             returns the translated error.
-          </para
-          >
+
+          </para>
           <block subset="none" type="usage">
             <para>
               Access to the file is denied if:
@@ -264,8 +264,8 @@
                     <paramref name="path" /> 
                     argument
                     points outside the process's allocated address space.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -309,15 +309,15 @@
             for execute/search permission),
             or the existence test
              <see cref="F:Mono.Unix.Native.AccessModes.F_OK" />  .
-          </para
-          >
+
+          </para>
           <para>
             For additional information, see the
             "<c>File Access Permission</c>"
             section of
             <see cref="M:Mono.Unix.Native.Syscall.intro" />(2) .
-          </para
-          >
+
+          </para>
           <para>
             The
             <c>eaccess</c>()
@@ -330,8 +330,8 @@
             the real user ID in place of the effective user ID,
             the real group ID in place of the effective group ID,
             and the rest of the group access list.
-          </para
-          >
+
+          </para>
           <para>
             Even if a process's real or effective user has appropriate privileges
             and indicates success for
@@ -341,8 +341,8 @@
              <see cref="F:Mono.Unix.Native.AccessModes.R_OK" /> 
             and
              <see cref="F:Mono.Unix.Native.AccessModes.W_OK" />  .
-          </para
-          >
+
+          </para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.chmod" />
         <altmember cref="M:Mono.Unix.Native.Syscall.intro" />
@@ -483,16 +483,16 @@
             On error, -1 is returned and 
             <see cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
             returns the translated error.
-          </para
-          >
+
+          </para>
           <block subset="none" type="usage">
             <para>
               The
               <c>chmod</c>()
               system call
               will fail and the file mode will be unchanged if:
-            </para
-            >
+
+            </para>
             <list type="table">
               <listheader>
                 <term>
@@ -584,8 +584,8 @@
                     <paramref name="path" /> 
                     argument
                     points outside the process's allocated address space.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -614,8 +614,8 @@
               The
               <c>fchmod</c>()
               system call will fail if:
-            </para
-            >
+
+            </para>
             <list type="table">
               <listheader>
                 <term>
@@ -645,8 +645,8 @@
                     <paramref name="fd" /> 
                     argument
                     refers to a socket, not to a file.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -694,24 +694,24 @@
             <c>chmod</c>()
             system call follows symbolic links to operate on the target of the link
             rather than the link itself.
-          </para
-          >
+
+          </para>
           <para>
             The
             <c>lchmod</c>()
             system call is similar to
             <c>chmod</c>()
             but does not follow symbolic links.
-          </para
-          >
+
+          </para>
           <para>
             A mode is created from
             <i>or'd</i>
             permission bit masks
             defined in
             <c>sys/stat.h</c> :
-          </para
-          >
+
+          </para>
           <para></para>
           <block subset="none" type="usage">
             <para>#define S_IRWXU 0000700    /* RWX mask for owner */</para>
@@ -743,8 +743,8 @@
             for executables.
             On UFS-based file systems (FFS, LFS) the sticky
             bit may only be set upon directories.
-          </para
-          >
+
+          </para>
           <para>
             If mode
              <see cref="F:Mono.Unix.Native.TODO.ISTXT" /> 
@@ -756,8 +756,8 @@
             permissions.
             For more details of the properties of the sticky bit, see
             <c>sticky</c>(8) .
-          </para
-          >
+
+          </para>
           <para>
             If mode ISUID (set UID) is set on a directory,
             and the MNT_SUIDDIR option was used in the mount of the file system,
@@ -783,8 +783,8 @@
             Only UFS file systems support this option.
             For more details of the suiddir mount option, see
             <c>mount</c>(8) .
-          </para
-          >
+
+          </para>
           <para>
             Writing or changing the owner of a file
             turns off the set-user-id and set-group-id bits
@@ -834,8 +834,8 @@
             On error, -1 is returned and 
             <see cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
             returns the translated error.
-          </para
-          >
+
+          </para>
           <block subset="none" type="usage">
             <para>
               The
@@ -843,8 +843,8 @@
               and
               <c>lchown</c>()
               will fail and the file will be unchanged if:
-            </para
-            >
+
+            </para>
             <list type="table">
               <listheader>
                 <term>
@@ -935,8 +935,8 @@
                     <paramref name="path" /> 
                     argument
                     points outside the process's allocated address space.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -955,8 +955,8 @@
               The
               <c>fchown</c>()
               system call will fail if:
-            </para
-            >
+
+            </para>
             <list type="table">
               <listheader>
                 <term>
@@ -976,8 +976,8 @@
                     <paramref name="fd" /> 
                     argument
                     does not refer to a valid descriptor.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -990,8 +990,8 @@
                     <paramref name="fd" /> 
                     argument
                     refers to a socket, not a file.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -1046,8 +1046,8 @@
             but the change
             <paramref name="owner" /> 
             capability is restricted to the super-user.
-          </para
-          >
+
+          </para>
           <para>
             The
             <c>chown</c>()
@@ -1062,8 +1062,8 @@
             system call
             follows symbolic links to operate on the target of the link
             rather than the link itself.
-          </para
-          >
+
+          </para>
           <para>
             The
             <c>fchown</c>()
@@ -1071,16 +1071,16 @@
             is particularly useful when used in conjunction
             with the file locking primitives (see
             <see cref="M:Mono.Unix.Native.Syscall.flock" />(2) ) .
-          </para
-          >
+
+          </para>
           <para>
             The
             <c>lchown</c>()
             system call is similar to
             <c>chown</c>()
             but does not follow symbolic links.
-          </para
-          >
+
+          </para>
           <para>
             One of the owner or group id's
             may be left unchanged by specifying it as -1.
@@ -1142,15 +1142,15 @@
             On error, -1 is returned and 
             <see cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
             returns the translated error.
-          </para
-          >
+
+          </para>
           <block subset="none" type="usage">
             <para>
               The
               <c>close</c>()
               system call will fail if:
-            </para
-            >
+
+            </para>
             <list type="table">
               <listheader>
                 <term>
@@ -1170,8 +1170,8 @@
                     <paramref name="d" /> 
                     argument
                     is not an active descriptor.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -1223,8 +1223,8 @@
             are removed when
             <i>any</i>
             file descriptor for that file is closed by that process.
-          </para
-          >
+
+          </para>
           <para>
             When a process exits,
             all associated file descriptors are freed, but since there is
@@ -1232,8 +1232,8 @@
             <c>close</c>()
             system call
             is useful when a large quantity of file descriptors are being handled.
-          </para
-          >
+
+          </para>
           <para>
             When a process forks (see
             <see cref="M:Mono.Unix.Native.Syscall.fork" />(2) ) ,
@@ -1260,8 +1260,8 @@
             <c>Li fcntl(d, F_SETFD, 0)</c>
             restores the default,
             which is to not close the descriptor.
-          </para
-          >
+
+          </para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.accept" />
         <altmember cref="M:Mono.Unix.Native.Syscall.execve" />
@@ -1318,8 +1318,8 @@
             cannot be accessed, or if it cannot
             <see cref="M:Mono.Unix.Native.Syscall.malloc" />(3)
             enough memory to hold the whole thing.
-          </para
-          >
+
+          </para>
           <para>
             The
             <c>readdir</c>()
@@ -1330,8 +1330,8 @@
             upon reaching the end of the directory or detecting an invalid
             <c>seekdir</c>()
             operation.
-          </para
-          >
+
+          </para>
           <para>
             The
             <c>readdir_r</c>()
@@ -1353,8 +1353,8 @@
             <c>readdir_r</c>()
             function
             returns 0 on success or an error number to indicate failure.
-          </para
-          >
+
+          </para>
           <para>
             The
             <c>telldir</c>()
@@ -1372,8 +1372,8 @@
             reopened, prior values returned by
             <c>telldir</c>()
             will no longer be valid.
-          </para
-          >
+
+          </para>
           <para>
             The
             <c>seekdir</c>()
@@ -1387,8 +1387,8 @@
             when the
             <c>telldir</c>()
             operation was performed.
-          </para
-          >
+
+          </para>
           <para>
             The
             <c>rewinddir</c>()
@@ -1396,8 +1396,8 @@
             resets the position of the named
             <i>directory stream</i>
             to the beginning of the directory.
-          </para
-          >
+
+          </para>
           <para>
             The
             <c>closedir</c>()
@@ -1411,8 +1411,8 @@
             On failure, -1 is returned and the global variable
             <see cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
             is set to indicate the error.
-          </para
-          >
+
+          </para>
           <para>
             The
             <c>dirfd</c>()
@@ -1421,8 +1421,8 @@
             <i>directory stream ,</i>
             see
             <see cref="M:Mono.Unix.Native.Syscall.open" />(2) .
-          </para
-          >
+
+          </para>
           <para>
             Sample code which searches a directory for entry ``name'' is:
           </para>
@@ -1530,15 +1530,15 @@
           <para>
             This interface is made obsolete by:
             <see cref="M:Mono.Unix.Native.Syscall.open" />(2) .
-          </para
-          >
+
+          </para>
           <para>
             The
             <c>creat</c>()
             function
             is the same as:
-          </para
-          >
+
+          </para>
           <block subset="none" type="usage">
             <para>open(path, O_CREAT | O_TRUNC | O_WRONLY, mode);</para>
           </block>
@@ -2261,15 +2261,15 @@
             On error, -1 is returned and 
             <see cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
             returns the translated error.
-          </para
-          >
+
+          </para>
           <block subset="none" type="usage">
             <para>
               The
               <c>fsync</c>()
               fails if:
-            </para
-            >
+
+            </para>
             <list type="table">
               <listheader>
                 <term>
@@ -2289,8 +2289,8 @@
                     <paramref name="fd" /> 
                     argument
                     is not a valid descriptor.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -2303,8 +2303,8 @@
                     <paramref name="fd" /> 
                     argument
                     refers to a socket, not to a file.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -2331,8 +2331,8 @@
             to be moved to a permanent storage device.
             This normally results in all in-core modified copies
             of buffers for the associated file to be written to a disk.
-          </para
-          >
+
+          </para>
           <para>
             The
             <c>fsync</c>()
@@ -2340,8 +2340,8 @@
             should be used by programs that require a file to be
             in a known state, for example, in building a simple transaction
             facility.
-          </para
-          >
+
+          </para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.sync" />
       </Docs>
@@ -2886,8 +2886,8 @@
             On error, -1 is returned and 
             <see cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
             returns the translated error.
-          </para
-          >
+
+          </para>
           <block subset="none" type="usage">
             <para>
               The
@@ -2895,8 +2895,8 @@
               and
               <c>lstat</c>()
               system calls will fail if:
-            </para
-            >
+
+            </para>
             <list type="table">
               <listheader>
                 <term>
@@ -2928,8 +2928,8 @@
                     <paramref name="path" /> 
                     argument
                     points to an invalid address.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -2992,8 +2992,8 @@
                     The file size in bytes cannot be
                     represented correctly in the structure pointed to by
                     <paramref name="sb" /> .
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
             </list>
@@ -3021,8 +3021,8 @@
                     <paramref name="fd" /> 
                     argument
                     is not a valid open file descriptor.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -3035,8 +3035,8 @@
                     <paramref name="sb" /> 
                     argument
                     points to an invalid address.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -3058,8 +3058,8 @@
                     The file size in bytes cannot be
                     represented correctly in the structure pointed to by
                     <paramref name="sb" /> .
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
             </list>
@@ -3075,8 +3075,8 @@
             Read, write or execute
             permission of the named file is not required, but all directories
             listed in the path name leading to the file must be searchable.
-          </para
-          >
+
+          </para>
           <para>
             The
             <c>lstat</c>()
@@ -3089,16 +3089,16 @@
             while
             <c>stat</c>()
             returns information about the file the link references.
-          </para
-          >
+
+          </para>
           <para>
             The
             <c>fstat</c>()
             system call obtains the same information about an open file
             known by the file descriptor
             <paramref name="fd" /> .
-          </para
-          >
+
+          </para>
           <para>
             The
             <paramref name="sb" /> 
@@ -3107,8 +3107,8 @@
             as defined by
             <c>sys/stat.h</c>
             and into which information is placed concerning the file.
-          </para
-          >
+
+          </para>
           <para>
             The fields of
             Vt "struct stat"            related to the file system are as follows:
@@ -3152,8 +3152,8 @@
             and
             <c>st_ino</c>
             fields together identify the file uniquely within the system.
-          </para
-          >
+
+          </para>
           <para>
             The time-related fields of
             Vt "struct stat"            are as follows:
@@ -3173,8 +3173,8 @@
                   and
                   <see cref="M:Mono.Unix.Native.Syscall.readv" />(2)
                   system calls.
-                </para
-                >
+
+                </para>
               </description>
             </item>
             <item>
@@ -3193,8 +3193,8 @@
                   and
                   <see cref="M:Mono.Unix.Native.Syscall.writev" />(2)
                   system calls.
-                </para
-                >
+
+                </para>
               </description>
             </item>
             <item>
@@ -3223,8 +3223,8 @@
                   and
                   <see cref="M:Mono.Unix.Native.Syscall.writev" />(2)
                   system calls.
-                </para
-                >
+
+                </para>
               </description>
             </item>
             <item>
@@ -3243,8 +3243,8 @@
             If
              <see cref="F:Mono.Unix.Native.TODO._POSIX_SOURCE" /> 
             is not defined, the time-related fields are defined as:
-          </para
-          >
+
+          </para>
           <block subset="none" type="usage">
             <para>#ifndef _POSIX_SOURCE</para>
             <para>#define st_atime st_atimespec.tv_sec</para>
@@ -3333,8 +3333,8 @@
             The status information word
             <paramref name="st_mode" /> 
             has the following bits:
-          </para
-          >
+
+          </para>
           <block subset="none" type="usage">
             <para>#define S_IFMT   0170000  /* type of file */</para>
             <para>#define S_IFIFO  0010000  /* named pipe (fifo) */</para>
@@ -3364,14 +3364,14 @@
             value passed in the
             <paramref name="m" /> 
             argument corresponds to a file of the specified type:
-          </para
-          >
+
+          </para>
           <list type="table">
             <item>
               <term>
                 <c>S_ISBLK</c>()m
-              </term
-              >
+
+              </term>
               <description>
                 <para>
                   Test for a block special file.
@@ -3381,8 +3381,8 @@
             <item>
               <term>
                 <c>S_ISCHR</c>()m
-              </term
-              >
+
+              </term>
               <description>
                 <para>
                   Test for a character special file.
@@ -3392,8 +3392,8 @@
             <item>
               <term>
                 <c>S_ISDIR</c>()m
-              </term
-              >
+
+              </term>
               <description>
                 <para>
                   Test for a directory.
@@ -3403,8 +3403,8 @@
             <item>
               <term>
                 <c>S_ISFIFO</c>()m
-              </term
-              >
+
+              </term>
               <description>
                 <para>
                   Test for a pipe or FIFO special file.
@@ -3414,8 +3414,8 @@
             <item>
               <term>
                 <c>S_ISLNK</c>()m
-              </term
-              >
+
+              </term>
               <description>
                 <para>
                   Test for a symbolic link.
@@ -3425,8 +3425,8 @@
             <item>
               <term>
                 <c>S_ISREG</c>()m
-              </term
-              >
+
+              </term>
               <description>
                 <para>
                   Test for a regular file.
@@ -3436,8 +3436,8 @@
             <item>
               <term>
                 <c>S_ISSOCK</c>()m
-              </term
-              >
+
+              </term>
               <description>
                 <para>
                   Test for a socket.
@@ -3447,8 +3447,8 @@
             <item>
               <term>
                 <c>S_ISWHT</c>()m
-              </term
-              >
+
+              </term>
               <description>
                 <para>
                   Test for a whiteout.
@@ -3552,16 +3552,16 @@
             On error, -1 is returned and 
             <see cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
             returns the translated error.
-          </para
-          >
+
+          </para>
           <block subset="none" type="usage">
             <para>
               The
               <c>ftruncate</c>()
               system call
               succeeds unless:
-            </para
-            >
+
+            </para>
             <list type="table">
               <listheader>
                 <term>
@@ -3581,8 +3581,8 @@
                     <paramref name="fd" /> 
                     argument
                     is not a valid descriptor.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -3595,8 +3595,8 @@
                     <paramref name="fd" /> 
                     argument
                     references a socket, not a file.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -3609,8 +3609,8 @@
                     <paramref name="fd" /> 
                     descriptor
                     is not open for writing.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
             </list>
@@ -3638,8 +3638,8 @@
             With
             <c>ftruncate</c>(),
             the file must be open for writing.
-          </para
-          >
+
+          </para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.open" />
       </Docs>
@@ -4128,8 +4128,8 @@
         <remarks>
           <para>
            Determines the group access list for <paramref name="user" /> by using the <c>getgrouplist(3)</c> system call.
-          </para
-          >
+
+          </para>
         </remarks>
         <exception cref="T:System.ArgumentNullException">
           <paramref name="user" />
@@ -4171,8 +4171,8 @@
           </exception>
           <exception cref="T:System.ArgumentException">
             Throws when the <paramref name="username" /> is empty or not exists.
-          </exception
-          >
+
+          </exception>
         </remarks>
       </Docs>
     </Member>
@@ -5222,16 +5222,16 @@
             On error, -1 is returned and 
             <see cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
             returns the translated error.
-          </para
-          >
+
+          </para>
           <block subset="none" type="usage">
             <para>
               The
               <c>link</c>()
               system call
               will fail and no link will be created if:
-            </para
-            >
+
+            </para>
             <list type="table">
               <listheader>
                 <term>
@@ -5281,8 +5281,8 @@
                     The file system containing the file named by
                     <paramref name="name1" /> 
                     does not support links.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -5294,8 +5294,8 @@
                     The link count of the file named by
                     <paramref name="name1" /> 
                     would exceed 32767.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -5338,8 +5338,8 @@
                     The file named by
                     <paramref name="name1" /> 
                     does not exist.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -5351,8 +5351,8 @@
                     The link named by
                     <paramref name="name2" /> 
                     does exist.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -5366,8 +5366,8 @@
                     is a directory or is flagged immutable or append-only
                     (see
                     <see cref="M:Mono.Unix.Native.Syscall.chflags" />(2) ) .
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -5381,8 +5381,8 @@
                     and the file named by
                     <paramref name="name1" /> 
                     are on different file systems.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -5464,8 +5464,8 @@
             share equal access and rights
             to the
             underlying object.
-          </para
-          >
+
+          </para>
           <para>
             If
             <paramref name="name1" /> 
@@ -5474,8 +5474,8 @@
             is not deleted and the link count of the
             underlying object is
             decremented.
-          </para
-          >
+
+          </para>
           <para>
             The object pointed at by the
             <paramref name="name1" /> 
@@ -5491,8 +5491,8 @@
             <paramref name="name1" /> 
             argument
             may not be a directory.
-          </para
-          >
+
+          </para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.readlink" />
         <altmember cref="M:Mono.Unix.Native.Syscall.symlink" />
@@ -5798,8 +5798,8 @@
               <description>the new file offset will be the end of the file plus offset. </description>
             </item>
           </list>
-If we seek past the end of a file, the new file region contains 0. </remarks
-        >
+If we seek past the end of a file, the new file region contains 0.
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="lsetxattr">
@@ -6082,16 +6082,16 @@ If we seek past the end of a file, the new file region contains 0. </remarks
             On error, -1 is returned and 
             <see cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
             returns the translated error.
-          </para
-          >
+
+          </para>
           <block subset="none" type="usage">
             <para>
               The
               <c>mkdir</c>()
               system call
               will fail and no directory will be created if:
-            </para
-            >
+
+            </para>
             <list type="table">
               <listheader>
                 <term>
@@ -6249,8 +6249,8 @@ If we seek past the end of a file, the new file region contains 0. </remarks
                     <paramref name="path" /> 
                     argument
                     points outside the process's allocated address space.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
             </list>
@@ -6266,8 +6266,8 @@ If we seek past the end of a file, the new file region contains 0. </remarks
             and restricted by the
             <see cref="M:Mono.Unix.Native.Syscall.umask" />(2)
             of the calling process.
-          </para
-          >
+
+          </para>
           <para>
             The directory's owner ID is set to the process's effective user ID.
             The directory's group ID is set to that of the parent directory in
@@ -6343,16 +6343,16 @@ If we seek past the end of a file, the new file region contains 0. </remarks
             On error, -1 is returned and 
             <see cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
             returns the translated error.
-          </para
-          >
+
+          </para>
           <block subset="none" type="usage">
             <para>
               The
               <c>mknod</c>()
               system call
               will fail and the file will be not created if:
-            </para
-            >
+
+            </para>
             <list type="table">
               <listheader>
                 <term>
@@ -6510,8 +6510,8 @@ If we seek past the end of a file, the new file region contains 0. </remarks
                     <paramref name="path" /> 
                     argument
                     points outside the process's allocated address space.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -6524,8 +6524,8 @@ If we seek past the end of a file, the new file region contains 0. </remarks
                     file (or a
                     <i>whiteout )</i>
                     is not supported.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
             </list>
@@ -6539,8 +6539,8 @@ If we seek past the end of a file, the new file region contains 0. </remarks
             is created with the file type and access permissions specified in
             <paramref name="mode" /> .
             The access permissions are modified by the process's umask value.
-          </para
-          >
+
+          </para>
           <para>
             If
             <paramref name="mode" /> 
@@ -6551,15 +6551,15 @@ If we seek past the end of a file, the new file region contains 0. </remarks
             Otherwise,
             <paramref name="dev" /> 
             is ignored.
-          </para
-          >
+
+          </para>
           <para>
             The
             <c>mknod</c>()
             system call
             requires super-user privileges.
-          </para
-          >
+
+          </para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.chmod" />
         <altmember cref="M:Mono.Unix.Native.Syscall.mkfifo" />
@@ -6953,8 +6953,8 @@ If we seek past the end of a file, the new file region contains 0. </remarks
             It returns -1 on failure, and sets
             <see cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
             to indicate the error.
-          </para
-          >
+
+          </para>
           <block subset="none" type="usage">
             <para>
               The named file is opened unless:
@@ -6997,8 +6997,8 @@ If we seek past the end of a file, the new file region contains 0. </remarks
                   <para>
                     <see cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" /> 
                     is not set and the named file does not exist.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -7043,8 +7043,8 @@ If we seek past the end of a file, the new file region contains 0. </remarks
                     the file does not exist,
                     and the directory in which it is to be created
                     does not permit writing.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -7107,8 +7107,8 @@ If we seek past the end of a file, the new file region contains 0. </remarks
                   <para>
                     <see cref="F:Mono.Unix.Native.OpenFlags.O_NOFOLLOW" /> 
                     was specified and the target is a symbolic link.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -7144,8 +7144,8 @@ If we seek past the end of a file, the new file region contains 0. </remarks
                     The
                     <c>open</c>()
                     operation was interrupted by a signal.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -7158,8 +7158,8 @@ If we seek past the end of a file, the new file region contains 0. </remarks
                     or
                      <see cref="F:Mono.Unix.Native.OpenFlags.O_EXLOCK" /> 
                     is specified but the underlying file system does not support locking.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -7185,8 +7185,8 @@ If we seek past the end of a file, the new file region contains 0. </remarks
                     or
                      <see cref="F:Mono.Unix.Native.OpenFlags.O_EXLOCK" /> 
                     is specified and the file is locked.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -7201,8 +7201,8 @@ If we seek past the end of a file, the new file region contains 0. </remarks
                     and the directory in which the entry for the new file is being placed
                     cannot be extended because there is no space left on the file
                     system containing the directory.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -7216,8 +7216,8 @@ If we seek past the end of a file, the new file region contains 0. </remarks
                     the file does not exist,
                     and there are no free inodes on the file system on which the
                     file is being created.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -7233,8 +7233,8 @@ If we seek past the end of a file, the new file region contains 0. </remarks
                     is being placed cannot be extended because the
                     user's quota of disk blocks on the file system
                     containing the directory has been exhausted.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -7248,8 +7248,8 @@ If we seek past the end of a file, the new file region contains 0. </remarks
                     the file does not exist,
                     and the user's quota of inodes on the file system on
                     which the file is being created has been exhausted.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -7261,8 +7261,8 @@ If we seek past the end of a file, the new file region contains 0. </remarks
                     An I/O error occurred while making the directory entry or
                     allocating the inode for
                      <see cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" />  .
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -7275,8 +7275,8 @@ If we seek past the end of a file, the new file region contains 0. </remarks
                     executed and the
                     <c>open</c>()
                     system call requests write access.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -7289,8 +7289,8 @@ If we seek past the end of a file, the new file region contains 0. </remarks
                     <paramref name="path" /> 
                     argument
                     points outside the process's allocated address space.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -7303,8 +7303,8 @@ If we seek past the end of a file, the new file region contains 0. </remarks
                     and
                      <see cref="F:Mono.Unix.Native.OpenFlags.O_EXCL" /> 
                     were specified and the file exists.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -7329,8 +7329,8 @@ If we seek past the end of a file, the new file region contains 0. </remarks
                      <see cref="F:Mono.Unix.Native.OpenFlags.O_WRONLY" />  ,
                     and
                      <see cref="F:Mono.Unix.Native.OpenFlags.O_RDWR" />  .
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
             </list>
@@ -7362,14 +7362,14 @@ If we seek past the end of a file, the new file region contains 0. </remarks
             <see cref="M:Mono.Unix.Native.Syscall.chmod" />(2)
             and modified by the process' umask value (see
             <see cref="M:Mono.Unix.Native.Syscall.umask" />(2) ) .
-          </para
-          >
+
+          </para>
           <para>
             The flags specified are formed by
             <i>or Ns 'ing</i>
             the following values
-          </para
-          >
+
+          </para>
           <para></para>
           <list type="table">
             <listheader>
@@ -7466,8 +7466,8 @@ If we seek past the end of a file, the new file region contains 0. </remarks
             <c>open</c>()
             returns immediately.
             The descriptor remains in non-blocking mode for subsequent operations.
-          </para
-          >
+
+          </para>
           <para>
             If
              <see cref="F:Mono.Unix.Native.OpenFlags.O_FSYNC" /> 
@@ -7476,8 +7476,8 @@ If we seek past the end of a file, the new file region contains 0. </remarks
             the kernel will not cache written data
             and all writes on the descriptor will not return until
             the data to be written completes.
-          </para
-          >
+
+          </para>
           <para>
             If
              <see cref="F:Mono.Unix.Native.OpenFlags.O_NOFOLLOW" /> 
@@ -7486,8 +7486,8 @@ If we seek past the end of a file, the new file region contains 0. </remarks
             is a symbolic link then the
             <c>open</c>()
             will fail.
-          </para
-          >
+
+          </para>
           <para>
             When opening a file, a lock with
             <see cref="M:Mono.Unix.Native.Syscall.flock" />(2)
@@ -7500,8 +7500,8 @@ If we seek past the end of a file, the new file region contains 0. </remarks
              <see cref="F:Mono.Unix.Native.OpenFlags.O_CREAT" />  ,
             the request for the lock will never fail
             (provided that the underlying file system supports locking).
-          </para
-          >
+
+          </para>
           <para>
             <see cref="F:Mono.Unix.Native.OpenFlags.O_DIRECT" /> 
             may be used to minimize or eliminate the cache effects of reading and writing.
@@ -7509,8 +7509,8 @@ If we seek past the end of a file, the new file region contains 0. </remarks
             If it cannot avoid caching the data,
             it will minimize the impact the data has on the cache.
             Use of this flag can drastically reduce performance if not used with care.
-          </para
-          >
+
+          </para>
           <para>
             If successful,
             <c>open</c>()
@@ -7518,8 +7518,8 @@ If we seek past the end of a file, the new file region contains 0. </remarks
             It returns -1 on failure.
             The file pointer used to mark the current position within the
             file is set to the beginning of the file.
-          </para
-          >
+
+          </para>
           <para>
             When a new file is created it is given the group of the directory
             which contains it.
@@ -7531,16 +7531,16 @@ If we seek past the end of a file, the new file region contains 0. </remarks
             <see cref="M:Mono.Unix.Native.Syscall.close" />(2)
             and
             <see cref="M:Mono.Unix.Native.Syscall.fcntl" />(2) .
-          </para
-          >
+
+          </para>
           <para>
             The system imposes a limit on the number of file descriptors
             open simultaneously by one process.
             The
             <see cref="M:Mono.Unix.Native.Syscall.getdtablesize" />(2)
             system call returns the current system limit.
-          </para
-          >
+
+          </para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.chmod" />
         <altmember cref="M:Mono.Unix.Native.Syscall.close" />
@@ -7623,8 +7623,7 @@ class OpendirDemo {
 
 		Syscall.closedir (dir);
 	}
-}</code
-            >
+}</code>
           </example>
         </remarks>
       </Docs>
@@ -8163,8 +8162,8 @@ class OpendirDemo {
             Otherwise, a -1 is returned and the global variable
             <see cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
             is set to indicate the error.
-          </para
-          >
+
+          </para>
           <block subset="none" type="usage">
             <para>
               The
@@ -8174,8 +8173,8 @@ class OpendirDemo {
               <c>pread</c>()
               system calls
               will succeed unless:
-            </para
-            >
+
+            </para>
             <list type="table">
               <listheader>
                 <term>
@@ -8195,8 +8194,8 @@ class OpendirDemo {
                     <paramref name="d" /> 
                     argument
                     is not a valid file or socket descriptor open for reading.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -8209,8 +8208,8 @@ class OpendirDemo {
                     <paramref name="buf" /> 
                     argument
                     points outside the allocated address space.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -8243,8 +8242,8 @@ class OpendirDemo {
                     The pointer associated with
                     <paramref name="d" /> 
                     was negative.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -8295,8 +8294,8 @@ class OpendirDemo {
                     <paramref name="offset" /> 
                     is greater than or equal to the offset maximum established
                     for this file system.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
             </list>
@@ -8305,8 +8304,8 @@ class OpendirDemo {
               In addition,
               <c>readv</c>()
               may return one of the following errors:
-            </para
-            >
+
+            </para>
             <list type="table">
               <listheader>
                 <term>
@@ -8327,8 +8326,8 @@ class OpendirDemo {
                     argument
                     was less than or equal to 0, or greater than
                      <see cref="F:Mono.Unix.Native.TODO.IOV_MAX" />  .
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -8342,8 +8341,8 @@ class OpendirDemo {
                     values in the
                     <paramref name="iov" /> 
                     array was negative.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -8357,8 +8356,8 @@ class OpendirDemo {
                     values in the
                     <paramref name="iov" /> 
                     array overflowed a 32-bit integer.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -8370,8 +8369,8 @@ class OpendirDemo {
                     Part of the
                     <paramref name="iov" /> 
                     points outside the process's allocated address space.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
             </list>
@@ -8380,8 +8379,8 @@ class OpendirDemo {
               The
               <c>pread</c>()
               system call may also return the following errors:
-            </para
-            >
+
+            </para>
             <list type="table">
               <listheader>
                 <term>
@@ -8400,8 +8399,8 @@ class OpendirDemo {
                     The
                     <paramref name="offset" /> 
                     value was negative.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -8443,16 +8442,16 @@ class OpendirDemo {
             system call
             performs the same function, but reads from the specified position in
             the file without modifying the file pointer.
-          </para
-          >
+
+          </para>
           <para>
             For
             <c>readv</c>(),
             the
             <paramref name="iovec" /> 
             structure is defined as:
-          </para
-          >
+
+          </para>
           <para></para>
           <block subset="none" type="usage">
             <para>struct iovec {</para>
@@ -8471,8 +8470,8 @@ class OpendirDemo {
             system call
             will always fill an area completely before proceeding
             to the next.
-          </para
-          >
+
+          </para>
           <para>
             On objects capable of seeking, the
             <c>read</c>()
@@ -8484,8 +8483,8 @@ class OpendirDemo {
             Upon return from
             <c>read</c>(),
             the pointer is incremented by the number of bytes actually read.
-          </para
-          >
+
+          </para>
           <para>
             Objects that are not capable of seeking always read from the current
             position.
@@ -8502,8 +8501,8 @@ class OpendirDemo {
             The system guarantees to read the number of bytes requested if
             the descriptor references a normal file that has that many bytes left
             before the end-of-file, but in no other case.
-          </para
-          >
+
+          </para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.dup" />
         <altmember cref="M:Mono.Unix.Native.Syscall.fcntl" />
@@ -8590,8 +8589,7 @@ class ReaddirDemo {
 
 		Syscall.closedir (dir);
 	}
-}</code
-            >
+}</code>
           </example>
         </remarks>
       </Docs>
@@ -8660,16 +8658,16 @@ class ReaddirDemo {
             if it succeeds, or a -1 if an error occurs, placing the error
             code in the global variable
             <see cref="M:Mono.Unix.Native.Stdlib.GetLastError" /> .
-          </para
-          >
+
+          </para>
           <block subset="none" type="usage">
             <para>
               The
               <c>readlink</c>()
               system call
               will fail if:
-            </para
-            >
+
+            </para>
             <list type="table">
               <listheader>
                 <term>
@@ -8760,8 +8758,8 @@ class ReaddirDemo {
                     <paramref name="buf" /> 
                     argument
                     extends outside the process's allocated address space.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
             </list>
@@ -8784,8 +8782,8 @@ class ReaddirDemo {
             system call does not append a null
             character to
             <paramref name="buf" /> .
-          </para
-          >
+
+          </para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.lstat" />
         <altmember cref="M:Mono.Unix.Native.Syscall.stat" />
@@ -8826,16 +8824,16 @@ class ReaddirDemo {
             if it succeeds, or a -1 if an error occurs, placing the error
             code in the global variable
             <see cref="M:Mono.Unix.Native.Stdlib.GetLastError" /> .
-          </para
-          >
+
+          </para>
           <block subset="none" type="usage">
             <para>
               The
               <c>readlink</c>()
               system call
               will fail if:
-            </para
-            >
+
+            </para>
             <list type="table">
               <listheader>
                 <term>
@@ -8926,8 +8924,8 @@ class ReaddirDemo {
                     <paramref name="buf" /> 
                     argument
                     extends outside the process's allocated address space.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
             </list>
@@ -8950,8 +8948,8 @@ class ReaddirDemo {
             system call does not append a null
             character to
             <paramref name="buf" /> .
-          </para
-          >
+
+          </para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.lstat" />
         <altmember cref="M:Mono.Unix.Native.Syscall.stat" />
@@ -9095,8 +9093,8 @@ class ReaddirDemo {
       <Docs>
         <param name="pathname">
           A <see cref="T:System.String" /> containing the directory to remove.
-        </param
-        >
+
+        </param>
         <summary>Removes the directory at 'path'.</summary>
         <returns>
           <para>
@@ -9104,8 +9102,8 @@ class ReaddirDemo {
             On error, -1 is returned and 
             <see cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
             returns the translated error.
-          </para
-          >
+
+          </para>
           <block subset="none" type="usage">
             <para>
               The named file is removed unless:
@@ -9171,8 +9169,8 @@ class ReaddirDemo {
                     and
                     "<c></c>"
                     in it.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -9250,8 +9248,8 @@ class ReaddirDemo {
                     <paramref name="path" /> 
                     argument
                     points outside the process's allocated address space.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
             </list>
@@ -9271,8 +9269,8 @@ class ReaddirDemo {
             "<c>.</c>"
             and
             "<c>..</c>"
-          </para
-          >
+
+          </para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.mkdir" />
         <altmember cref="M:Mono.Unix.Native.Syscall.unlink" />
@@ -10265,8 +10263,8 @@ class ReaddirDemo {
             On error, <c>-1</c> is returned and
             <see cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
             returns the translated error.
-          </para
-          >
+
+          </para>
           <block subset="none" type="usage">
             <para>
               The
@@ -10274,8 +10272,8 @@ class ReaddirDemo {
               and
               <c>lstat</c>()
               system calls will fail if:
-            </para
-            >
+
+            </para>
             <list type="table">
               <listheader>
                 <term>
@@ -10307,8 +10305,8 @@ class ReaddirDemo {
                     <paramref name="path" />
                     argument
                     points to an invalid address.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -10372,8 +10370,8 @@ pathname.
                     The file size in bytes cannot be
                     represented correctly in the structure pointed to by
                     <paramref name="sb" /> .
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
             </list>
@@ -10388,8 +10386,8 @@ pathname.
             Read, write or execute
             permission of the named file is not required, but all directories
             listed in the path name leading to the file must be searchable.
-          </para
-          >
+
+          </para>
           <para>
             The
             <paramref name="sb" />
@@ -10398,8 +10396,8 @@ pathname.
             as defined by
             <c>sys/stat.h</c>
             and into which information is placed concerning the file.
-          </para
-          >
+
+          </para>
           <para>
             The fields of
             Vt "struct stat"            related to the file system are as follows:
@@ -10443,8 +10441,8 @@ pathname.
             and
             <c>st_ino</c>
             fields together identify the file uniquely within the system.
-          </para
-          >
+
+          </para>
           <para>
             The time-related fields of
             Vt "struct stat"            are as follows:
@@ -10464,8 +10462,8 @@ pathname.
                   and
                   <see cref="M:Mono.Unix.Native.Syscall.readv" />(2)
                   system calls.
-                </para
-                >
+
+                </para>
               </description>
             </item>
             <item>
@@ -10484,8 +10482,8 @@ pathname.
                   and
                   <see cref="M:Mono.Unix.Native.Syscall.writev" />(2)
                   system calls.
-                </para
-                >
+
+                </para>
               </description>
             </item>
             <item>
@@ -10514,8 +10512,8 @@ pathname.
                   and
                   <see cref="M:Mono.Unix.Native.Syscall.writev" />(2)
                   system calls.
-                </para
-                >
+
+                </para>
               </description>
             </item>
             <item>
@@ -10533,8 +10531,8 @@ pathname.
           <para>
             If <c>_POSIX_SOURCE</c>
             is not defined, the time-related fields are defined as:
-          </para
-          >
+
+          </para>
           <block subset="none" type="usage">
             <para>#ifndef _POSIX_SOURCE</para>
             <para>#define st_atime st_atimespec.tv_sec</para>
@@ -10623,8 +10621,8 @@ pathname.
             The status information word
             <paramref name="st_mode" />
             has the following bits:
-          </para
-          >
+
+          </para>
           <block subset="none" type="usage">
             <para>#define S_IFMT   0170000  /* type of file */</para>
             <para>#define S_IFIFO  0010000  /* named pipe (fifo) */</para>
@@ -10656,14 +10654,14 @@ pathname.
             value passed in the
             <paramref name="m" />
             argument corresponds to a file of the specified type:
-          </para
-          >
+
+          </para>
           <list type="table">
             <item>
               <term>
                 <c>S_ISBLK</c>()m
-              </term
-              >
+
+              </term>
               <description>
                 <para>
                   Test for a block special file.
@@ -10673,8 +10671,8 @@ pathname.
             <item>
               <term>
                 <c>S_ISCHR</c>()m
-              </term
-              >
+
+              </term>
               <description>
                 <para>
                   Test for a character special file.
@@ -10684,8 +10682,8 @@ pathname.
             <item>
               <term>
                 <c>S_ISDIR</c>()m
-              </term
-              >
+
+              </term>
               <description>
                 <para>
                   Test for a directory.
@@ -10695,8 +10693,8 @@ pathname.
             <item>
               <term>
                 <c>S_ISFIFO</c>()m
-              </term
-              >
+
+              </term>
               <description>
                 <para>
                   Test for a pipe or FIFO special file.
@@ -10706,8 +10704,8 @@ pathname.
             <item>
               <term>
                 <c>S_ISLNK</c>()m
-              </term
-              >
+
+              </term>
               <description>
                 <para>
                   Test for a symbolic link.
@@ -10717,8 +10715,8 @@ pathname.
             <item>
               <term>
                 <c>S_ISREG</c>()m
-              </term
-              >
+
+              </term>
               <description>
                 <para>
                   Test for a regular file.
@@ -10728,8 +10726,8 @@ pathname.
             <item>
               <term>
                 <c>S_ISSOCK</c>()m
-              </term
-              >
+
+              </term>
               <description>
                 <para>
                   Test for a socket.
@@ -10739,8 +10737,8 @@ pathname.
             <item>
               <term>
                 <c>S_ISWHT</c>()m
-              </term
-              >
+
+              </term>
               <description>
                 <para>
                   Test for a whiteout.
@@ -11000,8 +10998,8 @@ pathname.
             On error, -1 is returned and 
             <see cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
             returns the translated error.
-          </para
-          >
+
+          </para>
           <block subset="none" type="usage">
             <para>
               The symbolic link succeeds unless:
@@ -11024,8 +11022,8 @@ pathname.
                     A component of the
                     <paramref name="name2" /> 
                     prefix is not a directory.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -11058,8 +11056,8 @@ pathname.
                     A component of the
                     <paramref name="name2" /> 
                     path prefix denies search permission.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -11082,8 +11080,8 @@ pathname.
                     <paramref name="name2" /> 
                     argument
                     already exists.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -11098,8 +11096,8 @@ pathname.
                     <paramref name="name2" /> ,
                     or writing out the link contents of
                     <paramref name="name2" /> .
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -11111,8 +11109,8 @@ pathname.
                     The file
                     <paramref name="name2" /> 
                     would reside on a read-only file system.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -11208,8 +11206,8 @@ pathname.
                     <paramref name="name2" /> 
                     argument
                     points outside the process's allocated address space.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
             </list>
@@ -11230,8 +11228,8 @@ pathname.
             used in creating the symbolic link).
             Either name may be an arbitrary path name; the files need not
             be on the same file system.
-          </para
-          >
+
+          </para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.lstat" />
         <altmember cref="M:Mono.Unix.Native.Syscall.stat" />
@@ -11606,16 +11604,16 @@ Use syslog(SyslogFacility, SyslogLevel, string) instead.")</AttributeName>
             On error, -1 is returned and 
             <see cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
             returns the translated error.
-          </para
-          >
+
+          </para>
           <block subset="none" type="usage">
             <para>
               The
               <c>truncate</c>()
               system call
               succeeds unless:
-            </para
-            >
+
+            </para>
             <list type="table">
               <listheader>
                 <term>
@@ -11736,8 +11734,8 @@ Use syslog(SyslogFacility, SyslogLevel, string) instead.")</AttributeName>
                     <paramref name="path" /> 
                     argument
                     points outside the process's allocated address space.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
             </list>
@@ -11747,8 +11745,8 @@ Use syslog(SyslogFacility, SyslogLevel, string) instead.")</AttributeName>
               <c>ftruncate</c>()
               system call
               succeeds unless:
-            </para
-            >
+
+            </para>
             <list type="table">
               <listheader>
                 <term>
@@ -11768,8 +11766,8 @@ Use syslog(SyslogFacility, SyslogLevel, string) instead.")</AttributeName>
                     <paramref name="fd" /> 
                     argument
                     is not a valid descriptor.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -11782,8 +11780,8 @@ Use syslog(SyslogFacility, SyslogLevel, string) instead.")</AttributeName>
                     <paramref name="fd" /> 
                     argument
                     references a socket, not a file.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -11796,8 +11794,8 @@ Use syslog(SyslogFacility, SyslogLevel, string) instead.")</AttributeName>
                     <paramref name="fd" /> 
                     descriptor
                     is not open for writing.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
             </list>
@@ -11825,8 +11823,8 @@ Use syslog(SyslogFacility, SyslogLevel, string) instead.")</AttributeName>
             With
             <c>ftruncate</c>(),
             the file must be open for writing.
-          </para
-          >
+
+          </para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.open" />
       </Docs>
@@ -12048,8 +12046,8 @@ Use syslog(SyslogFacility, SyslogLevel, string) instead.")</AttributeName>
         <param name="pathname">
           A <see cref="T:System.String" /> containing the directory entry to
           delete.
-        </param
-        >
+
+        </param>
         <summary>Deletes a link to a file.</summary>
         <returns>
           <para>
@@ -12057,15 +12055,15 @@ Use syslog(SyslogFacility, SyslogLevel, string) instead.")</AttributeName>
             On error, -1 is returned and 
             <see cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
             returns the translated error.
-          </para
-          >
+
+          </para>
           <block subset="none" type="usage">
             <para>
               The
               <c>unlink</c>()
               succeeds unless:
-            </para
-            >
+
+            </para>
             <list type="table">
               <listheader>
                 <term>
@@ -12157,8 +12155,8 @@ Use syslog(SyslogFacility, SyslogLevel, string) instead.")</AttributeName>
                     flag set, see the
                     <see cref="M:Mono.Unix.Native.Syscall.chflags" />(2)
                     manual page for more information.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -12215,8 +12213,8 @@ Use syslog(SyslogFacility, SyslogLevel, string) instead.")</AttributeName>
                     <paramref name="path" /> 
                     argument
                     points outside the process's allocated address space.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
             </list>
@@ -12246,8 +12244,8 @@ Use syslog(SyslogFacility, SyslogLevel, string) instead.")</AttributeName>
             <paramref name="path" /> 
             argument
             may not be a directory.
-          </para
-          >
+
+          </para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.chflags" />
         <altmember cref="M:Mono.Unix.Native.Syscall.close" />
@@ -12558,8 +12556,8 @@ Use syslog(SyslogFacility, SyslogLevel, string) instead.")</AttributeName>
             Otherwise a -1 is returned and the global variable
             <see cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
             is set to indicate the error.
-          </para
-          >
+
+          </para>
           <block subset="none" type="usage">
             <para>
               The
@@ -12569,8 +12567,8 @@ Use syslog(SyslogFacility, SyslogLevel, string) instead.")</AttributeName>
               <c>pwrite</c>()
               system calls
               will fail and the file pointer will remain unchanged if:
-            </para
-            >
+
+            </para>
             <list type="table">
               <listheader>
                 <term>
@@ -12590,8 +12588,8 @@ Use syslog(SyslogFacility, SyslogLevel, string) instead.")</AttributeName>
                     <paramref name="d" /> 
                     argument
                     is not a valid descriptor open for writing.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -12614,8 +12612,8 @@ Use syslog(SyslogFacility, SyslogLevel, string) instead.")</AttributeName>
                     An attempt is made to write to a socket of type
                      <see cref="F:Mono.Unix.Native.Errno.SOCK_STREAM" /> 
                     that is not connected to a peer socket.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -12639,8 +12637,8 @@ Use syslog(SyslogFacility, SyslogLevel, string) instead.")</AttributeName>
                     <paramref name="iov" /> 
                     or data to be written to the file
                     points outside the process's allocated address space.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -12652,8 +12650,8 @@ Use syslog(SyslogFacility, SyslogLevel, string) instead.")</AttributeName>
                     The pointer associated with
                     <paramref name="d" /> 
                     was negative.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -12720,8 +12718,8 @@ Use syslog(SyslogFacility, SyslogLevel, string) instead.")</AttributeName>
                     Use
                     <c>disklabel</c>(8)
                     Fl W                    to enable writing on the disk label area.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
             </list>
@@ -12730,8 +12728,8 @@ Use syslog(SyslogFacility, SyslogLevel, string) instead.")</AttributeName>
               In addition,
               <c>writev</c>()
               may return one of the following errors:
-            </para
-            >
+
+            </para>
             <list type="table">
               <listheader>
                 <term>
@@ -12751,8 +12749,8 @@ Use syslog(SyslogFacility, SyslogLevel, string) instead.")</AttributeName>
                     Ux                    domain datagram socket on which
                     <see cref="M:Mono.Unix.Native.Syscall.connect" />(2)
                     had been used to set a destination address.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -12766,8 +12764,8 @@ Use syslog(SyslogFacility, SyslogLevel, string) instead.")</AttributeName>
                     argument
                     was less than or equal to 0, or greater than
                      <see cref="F:Mono.Unix.Native.TODO.IOV_MAX" />  .
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -12781,8 +12779,8 @@ Use syslog(SyslogFacility, SyslogLevel, string) instead.")</AttributeName>
                     values in the
                     <paramref name="iov" /> 
                     array was negative.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -12796,8 +12794,8 @@ Use syslog(SyslogFacility, SyslogLevel, string) instead.")</AttributeName>
                     values in the
                     <paramref name="iov" /> 
                     array overflowed a 32-bit integer.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -12816,8 +12814,8 @@ Use syslog(SyslogFacility, SyslogLevel, string) instead.")</AttributeName>
               The
               <c>pwrite</c>()
               system call may also return the following errors:
-            </para
-            >
+
+            </para>
             <list type="table">
               <listheader>
                 <term>
@@ -12836,8 +12834,8 @@ Use syslog(SyslogFacility, SyslogLevel, string) instead.")</AttributeName>
                     The
                     <paramref name="offset" /> 
                     value was negative.
-                  </para
-                  >
+
+                  </para>
                 </description>
               </item>
               <item>
@@ -12879,16 +12877,16 @@ Use syslog(SyslogFacility, SyslogLevel, string) instead.")</AttributeName>
             system call
             performs the same function, but writes to the specified position in
             the file without modifying the file pointer.
-          </para
-          >
+
+          </para>
           <para>
             For
             <c>writev</c>(),
             the
             <paramref name="iovec" /> 
             structure is defined as:
-          </para
-          >
+
+          </para>
           <para></para>
           <block subset="none" type="usage">
             <para>struct iovec {</para>
@@ -12907,8 +12905,8 @@ Use syslog(SyslogFacility, SyslogLevel, string) instead.")</AttributeName>
             system call
             will always write a complete area before proceeding
             to the next.
-          </para
-          >
+
+          </para>
           <para>
             On objects capable of seeking, the
             <c>write</c>()
@@ -12920,8 +12918,8 @@ Use syslog(SyslogFacility, SyslogLevel, string) instead.")</AttributeName>
             Upon return from
             <c>write</c>(),
             the pointer is incremented by the number of bytes which were written.
-          </para
-          >
+
+          </para>
           <para>
             Objects that are not capable of seeking always write from the current
             position.
@@ -12937,8 +12935,8 @@ Use syslog(SyslogFacility, SyslogLevel, string) instead.")</AttributeName>
             <c>captures</c>
             a writable set-user-id file
             owned by the super-user.
-          </para
-          >
+
+          </para>
           <para>
             When using non-blocking I/O on objects such as sockets that are subject
             to flow control,
@@ -12948,8 +12946,8 @@ Use syslog(SyslogFacility, SyslogLevel, string) instead.")</AttributeName>
             may write fewer bytes than requested;
             the return value must be noted,
             and the remainder of the operation should be retried when possible.
-          </para
-          >
+
+          </para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.fcntl" />
         <altmember cref="M:Mono.Unix.Native.Syscall.lseek" />

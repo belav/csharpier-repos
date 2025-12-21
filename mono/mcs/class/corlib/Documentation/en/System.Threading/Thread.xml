@@ -1005,8 +1005,7 @@
             <block subset="none" type="note"
               >Application code
  does not call this method; it is automatically invoked during garbage
- collection.</block
-            >
+ collection.</block>
           </para>
         </remarks>
       </Docs>
@@ -1447,8 +1446,8 @@ if this thread has been started, and has not terminated; otherwise,
           <para>
             <see langword="true " />if the thread is or is to become
    a background thread; otherwise, <see langword="false" />.
-   </para
-          >
+
+          </para>
         </value>
         <exception cref="T:System.Threading.ThreadStateException"
           > The thread has reached the <see cref="F:System.Threading.ThreadState.Stopped" /> state. </exception
@@ -1741,8 +1740,8 @@ if this thread has been started, and has not terminated; otherwise,
           <para
             >A <see cref="T:System.String" /> containing the
    name of the thread, or <see langword="null" /> if no name
-   was set.</para
-          >
+   was set.
+          </para>
         </value>
         <exception cref="T:System.InvalidOperationException"
           >A set operation was requested, and the <see langword="Name" /> property has already been set.</exception
@@ -1785,8 +1784,8 @@ if this thread has been started, and has not terminated; otherwise,
         <value>
           <para
             > A <see cref="T:System.Threading.ThreadPriority" /> value.
-   </para
-          >
+
+          </para>
         </value>
         <exception cref="T:System.Threading.ThreadStateException"
           > The thread is in the <see cref="F:System.Threading.ThreadState.Stopped" /> state.</exception
@@ -2305,8 +2304,7 @@ class ThreadTest{
     }
   }
 }
-   </code
-          >
+   </code>
           <para>One possible set of output is</para>
           <c>
             <para>In main. </para>
@@ -2606,8 +2604,8 @@ class ThreadTest{
         <value>
           <para
             > A combination of one or more <see cref="T:System.Threading.ThreadState" /> values, which indicate
-   the state of the current thread.</para
-          >
+   the state of the current thread.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />

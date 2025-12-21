@@ -44,8 +44,8 @@
         >The following example shows a declarative request for access to non-public
       members of loaded assemblies. The <see cref="F:System.Security.Permissions.SecurityAction.RequestMinimum" />
       security action indicates that this is the minimum permission required for the
-      target assembly to be able to execute.</para
-      >
+      target assembly to be able to execute.
+      </para>
       <para>
         <c>[assembly:ReflectionPermissionAttribute(SecurityAction.RequestMinimum,
       MemberAccess=true)]
@@ -196,8 +196,8 @@
             <block subset="none" type="note"
               >To specify multiple
    <see cref="T:System.Security.Permissions.ReflectionPermissionFlag" /> values for a set operation,
-      use the bitwise OR operator.</block
-            >
+      use the bitwise OR operator.
+            </block>
           </para>
         </remarks>
         <summary>

@@ -2124,8 +2124,8 @@
         <value>
           <para
             >A new <see cref="T:System.DateTime" /> instance with the same date as the current instance,
- and the time value set to midnight (00:00:00).</para
-          >
+ and the time value set to midnight (00:00:00).
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3017,8 +3017,8 @@
         <value>
           <para
             > A <see cref="T:System.Int32" /> between 0 and 23 set to the hour component
-   of the current instance.</para
-          >
+   of the current instance.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3214,8 +3214,8 @@
         <value>
           <para
             > A <see cref="T:System.Int32" /> between 0 and 999 set to the milliseconds component of
-   the current instance.</para
-          >
+   the current instance.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3258,8 +3258,8 @@
         <value>
           <para
             >A <see cref="T:System.Int32" /> between 0 and 59 set to the minute component of the
-   current instance.</para
-          >
+   current instance.
+          </para>
         </value>
         <remarks>
           <para>This property is read-only.</para>
@@ -3334,8 +3334,8 @@
         <value>
           <para
             >A <see cref="T:System.Int32" /> between 1 and 12 set to the month component of the
-   current instance.</para
-          >
+   current instance.
+          </para>
         </value>
         <remarks>
           <para>This property is read-only.</para>
@@ -4257,8 +4257,7 @@ public class DateTimeTest {
      Console.WriteLine(dt);
  }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <para>
             <c>1/22/2001
@@ -4400,8 +4399,7 @@ public class DateTimeTest {
      Console.WriteLine(dt);
  }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>1/22/2001
@@ -4692,8 +4690,7 @@ public class DateTimeTest {
      Console.WriteLine(dt);
  }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <para>
             <c>1/1/0001
@@ -5872,8 +5869,8 @@ public class DateTimeTest {
         <value>
           <para
             >A <see cref="T:System.Int64" /> set to the number of ticks that represent the date and
-   time of the current instance.</para
-          >
+   time of the current instance.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -5913,8 +5910,8 @@ public class DateTimeTest {
         <value>
           <para
             >A <see cref="T:System.TimeSpan" /> instance set to the
-   time component of the current instance.</para
-          >
+   time component of the current instance.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -6031,8 +6028,8 @@ public class DateTimeTest {
         <value>
           <para
             >A <see cref="T:System.DateTime" /> instance set to the date of the current instance, with the time set to
- 00:00:00.</para
-          >
+ 00:00:00.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />

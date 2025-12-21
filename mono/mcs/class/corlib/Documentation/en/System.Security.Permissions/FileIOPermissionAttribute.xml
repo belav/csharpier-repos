@@ -44,8 +44,8 @@
         >The following example shows a declarative request for full access to the
       specified file. The <see cref="F:System.Security.Permissions.SecurityAction.RequestMinimum" /> security action
       indicates that this is the minimum permission required for the target assembly
-      to be able to execute.</para
-      >
+      to be able to execute.
+      </para>
       <para>
         <c>[assembly:FileIOPermissionAttribute(SecurityAction.RequestMinimum, All="\\example\\sample.txt")]
    </c>
@@ -238,8 +238,8 @@
         <value>
           <para
             > A <see cref="T:System.String" /> containing
-   the absolute path of the file or directory for which append access is secured.</para
-          >
+   the absolute path of the file or directory for which append access is secured.
+          </para>
         </value>
         <exception cref="T:System.ArgumentException"
           >The path information specified for a set operation contains invalid characters or wild card specifiers.</exception
@@ -350,8 +350,8 @@
           <para
             >A <see cref="T:System.String" /> containing
    the absolute path of the file or directory for which access to the
-   contents of the path is secured.</para
-          >
+   contents of the path is secured.
+          </para>
         </value>
         <exception cref="T:System.ArgumentException"
           >The path information specified for a set operation contains invalid characters or wild card specifiers.</exception
@@ -394,8 +394,8 @@
         <value>
           <para
             > A <see cref="T:System.String" /> containing
-   the absolute path of the file or directory for which read access is secured.</para
-          >
+   the absolute path of the file or directory for which read access is secured.
+          </para>
         </value>
         <exception cref="T:System.ArgumentException"
           >The path information specified for a set operation contains invalid characters or wild card specifiers.</exception
@@ -490,8 +490,8 @@
         <value>
           <para
             > A <see cref="T:System.String" /> containing
-   the absolute path of the file or directory for which write access is secured.</para
-          >
+   the absolute path of the file or directory for which write access is secured.
+          </para>
         </value>
         <exception cref="T:System.ArgumentException"
           >The path information specified for a set operation contains invalid characters or wild card specifiers.</exception

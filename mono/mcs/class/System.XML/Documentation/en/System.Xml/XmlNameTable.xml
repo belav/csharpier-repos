@@ -31,8 +31,8 @@
     <example>
       <para
         >See the <see cref="T:System.Xml.NameTable" /> class for an example using this 
-   class.</para
-      >
+   class.
+      </para>
     </example>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />

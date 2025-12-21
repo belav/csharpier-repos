@@ -442,8 +442,8 @@
         <value>
           <para
             > A <see cref="T:System.Int32" /> that specifies the number of elements contained in the current
-   instance.</para
-          >
+   instance.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -569,8 +569,8 @@
         <value>
           <para>
 The value of this property is always <c>false</c>.
-</para
-          >
+
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -605,8 +605,8 @@ The value of this property is always <c>false</c>.
         <value>
           <para>
 The value of this property is always <c>false</c>.
-</para
-          >
+
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -668,8 +668,8 @@ The value of this property is always <c>false</c>.
         <value>
           <para
             > A <see cref="T:System.Int32" /> that specifies the number of elements contained in the current
-   instance.</para
-          >
+   instance.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -881,8 +881,8 @@ The value of this property is always <c>false</c>.
         <value>
           <para
             >A <see cref="T:System.Object" /> that can be used to synchronize access to the
-   current instance.</para
-          >
+   current instance.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />

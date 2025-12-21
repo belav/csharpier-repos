@@ -703,8 +703,8 @@ A <see cref="T:System.Security.Cryptography.CryptographicUnexpectedOperationExce
           </para>
           <para>
 A <see cref="T:System.OverflowException" /> will be thrown if a part of the OID is bigger than <see cref="T:System.Int32" />.<see cref="M:System.Int32.MaxValue" />.
-</para
-          >
+
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

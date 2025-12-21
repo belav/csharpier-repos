@@ -325,8 +325,8 @@
 &gt;
     &lt;Data&gt;string&lt;/Data&gt;
     &lt;Transform&gt;string&lt;/Transform&gt;
-&lt;/asp:XmlDataSource&gt;</code
-      >
+&lt;/asp:XmlDataSource&gt;
+      </code>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

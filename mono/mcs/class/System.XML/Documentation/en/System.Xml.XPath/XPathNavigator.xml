@@ -4465,8 +4465,8 @@ nav.Evaluate(expr);</code>
         >
         <remarks
           >The initial value of this property depends on the each XPathNavigator implementation (that is, it depends on <see cref="T:System.Xml.XPath.IXPathNavigable" />).
-		</remarks
-        >
+
+        </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -6398,12 +6398,12 @@ XPathNodeIterator ni = nav.Select(expr);</code>
         <remarks>
           <para
             >The definition of the "value" of a node is 1) concatenation of the values of each descendant nodes for <see cref="F:System.Xml.XPath.XPathNodeType.Root" /> and <see cref="F:System.Xml.XPath.XPathNodeType.Element" /> nodes, 2) namespace URI for <see cref="F:System.Xml.XPath.XPathNodeType.Namespace" />, and 3) value string (as is) for all other kind of node types.
-		</para
-          >
+
+          </para>
           <para
             >Note: When the instance of this class is created from <see cref="T:System.Xml.XmlDocument" />, the sequential <see cref="T:System.Xml.XmlCharacterData" /> nodes (except for <see cref="T:System.Xml.XmlComment" /> nodes) are regarded as one text or node (strictly to say, <see cref="F:System.Xml.XPath.XPathNodeType.Text" />, <see cref="F:System.Xml.XPath.XPathNodeType.SignificantWhitespace" /> or <see cref="F:System.Xml.XPath.XPathNodeType.Whitespace" />).
-		</para
-          >
+
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -6696,8 +6696,8 @@ XPathNodeIterator ni = nav.Select(expr);</code>
         &lt;last-name&gt;Franklin&lt;/last-name&gt;
     &lt;/author&gt;
     &lt;price&gt;8.99&lt;/price&gt;
-&lt;/book&gt;</code
-          >
+&lt;/book&gt;
+          </code>
           <block subset="none" type="note">
             <para
               >The <see cref="M:System.Xml.XPath.XPathNavigator.WriteSubtree(System.Xml.XmlWriter)" /> method does not affect the position of the <see cref="T:System.Xml.XPath.XPathNavigator" />.</para

@@ -31,8 +31,8 @@
       <para
         > The following example compares the status returned by a
    <see cref="T:System.Net.HttpWebResponse" /> with a <see cref="T:System.Net.HttpStatusCode" />
-   value to determine the status of the response.</para
-      >
+   value to determine the status of the response.
+      </para>
       <code lang="C#"
         >using System;
 using System.Net;
@@ -49,8 +49,7 @@ public class HttpStatusCodeExample {
       }
    }
 }
-</code
-      >
+</code>
       <para>The output is</para>
       <c>
         <para>Request for http://www.contoso.com was

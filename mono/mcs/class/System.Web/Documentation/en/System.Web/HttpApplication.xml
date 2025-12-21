@@ -1823,8 +1823,8 @@
 
 <para>
    If this method is invoked at any stage in the pipeline processing (described in more detail in <see cref="T:System.Web.HttpApplication" />) the remaining steps of the pipeline are not executed.  The only step executed is the EndRequest step.
-</para
-          >
+
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

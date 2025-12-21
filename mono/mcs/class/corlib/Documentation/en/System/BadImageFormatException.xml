@@ -40,8 +40,7 @@
           subset="none"
           type="note"
           >The name of the unmanaged executable
-      is "calc".</block
-        >
+      is "calc".</block>
       </para>
       <code lang="C#"
         >using System;
@@ -57,8 +56,7 @@ public class BadImageExample {
     }
   } 
 }
-   </code
-      >
+   </code>
       <para>The output is</para>
       <c>
         <para>Caught: The format of the file 'calc' is invalid.</para>
@@ -616,8 +614,8 @@ public class BadImageExample {
           <para
             >A <see cref="T:System.String" /> containing the
    name of the file with the invalid image, or <see langword="null" /> if no file
-   name was passed to the constructor for the current instance.</para
-          >
+   name was passed to the constructor for the current instance.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -719,8 +717,8 @@ public class BadImageExample {
         <value>
           <para
             >A <see cref="T:System.String" /> containing the
-   error description.</para
-          >
+   error description.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />

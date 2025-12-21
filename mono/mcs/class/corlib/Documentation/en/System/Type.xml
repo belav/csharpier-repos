@@ -445,8 +445,8 @@ if the current <see cref="T:System.Type" /> represents the <see cref="T:System.O
         <example>
           <para
             >The following example demonstrates using the <see cref="P:System.Type.BaseType" />
-property.</para
-          >
+property.
+          </para>
           <code lang="C#"
             >using System;
 class TestType {
@@ -455,8 +455,7 @@ class TestType {
  Console.WriteLine("{0} inherits from {1}", t,t.BaseType);
  }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <para>
             <c>System.Int32
@@ -632,8 +631,8 @@ class TestType {
             >The <see cref="T:System.Type" /> object for
    the class that declares the type represented by the current
    instance. If the type is a nested type, this property returns the enclosing type; otherwise, returns
-   the current instance.</para
-          >
+   the current instance.
+          </para>
         </value>
         <example>
           <para
@@ -655,8 +654,7 @@ public abstract class DeclaringTypeTest{
          typeof(MyClassB).GetMethod("m").DeclaringType);
    }
 }
-   </code
-          >
+   </code>
           <para> The output is </para>
           <c>
             <para>Declaring type of m is DeclaringTypeTest+MyClassA </para>
@@ -1339,8 +1337,8 @@ public abstract class DeclaringTypeTest{
         <example>
           <para
             >The following example demonstrates using the <see cref="P:System.Type.FullName" />
-property.</para
-          >
+property.
+          </para>
           <code lang="C#"
             >using System;
 class TestType {
@@ -1349,8 +1347,7 @@ class TestType {
  Console.WriteLine("Full name of Array type is {0}",t.FullName);
  }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <para>
             <c>Full name of
@@ -1543,8 +1540,7 @@ Base[System.Int32, V]
         List type arguments (2):
                 System.Int32
                 V  (unbound - parameter position 0)
- */</code
-          >
+ */</code>
         </example>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1683,16 +1679,15 @@ Base[System.Int32, V]
             <para
               >This method returns a <see cref="T:System.Reflection.TypeAttributes" /> value that indicates the attributes set in
       the metadata of the type represented by the current
-      instance.</para
-            >
+      instance.
+            </para>
           </block>
           <para>
             <block subset="none" type="usage"
               >Use this property to determine the
    visibility, semantics, and layout format of the type represented by the
    current instance. Also use this property to determine if the type represented by
-   the current instance has a special name.</block
-            >
+   the current instance has a special name.</block>
           </para>
         </remarks>
         <summary>
@@ -2625,8 +2620,8 @@ Base[System.Int32, V]
         <example>
           <para
             >The following example demonstrates the <see cref="M:System.Type.GetElementType" />
-method.</para
-          >
+method.
+          </para>
           <code lang="C#"
             >using System;
 class TestType {
@@ -2642,8 +2637,7 @@ class TestType {
  Console.WriteLine("{0} element type is {1}", newMe, t2==null? "null" : t2.ToString());
  }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>System.Int32[] element type is System.Int32</para>
@@ -10782,8 +10776,8 @@ class TestType {
    <see cref="M:System.Type.InvokeMember(System.String,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object,System.Object[],System.Reflection.ParameterModifier[],System.Globalization.CultureInfo,System.String[])" /> , see <see cref="M:System.Type.InvokeMember(System.String,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object,System.Object[],System.Reflection.ParameterModifier[],System.Globalization.CultureInfo,System.String[])" />(
    <see cref="T:System.String" />, <see cref="T:System.Reflection.BindingFlags" />,
    <see cref="T:System.Reflection.Binder" />, <see cref="T:System.Object" />, <see cref="T:System.Object" />[], <see cref="T:System.Reflection.ParameterModifier" />[], <see cref="T:System.Globalization.CultureInfo" />, <see cref="T:System.String" />[]).
-      </para
-          >
+
+          </para>
         </example>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -11113,8 +11107,7 @@ class InvokeMemberExample
   
    }
 }
-</code
-          >
+</code>
           <para>The output is </para>
           <c>
             <para>The string is "A string". </para>
@@ -11410,8 +11403,8 @@ class InvokeMemberExample
         <example>
           <para
             >The following example demonstrates using the <see cref="P:System.Type.IsArray" />
-property.</para
-          >
+property.
+          </para>
           <code lang="C#"
             >using System;
 class TestType {
@@ -11423,8 +11416,7 @@ class TestType {
  Console.WriteLine("Type is {0}. IsArray? {1}", t, t.IsArray);
  }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>Type is System.Array. IsArray? False</para>
@@ -11516,8 +11508,8 @@ class TestType {
         <example>
           <para
             >The following example demonstrates the <see cref="M:System.Type.IsAssignableFrom(System.Type)" />
-method using arrays.</para
-          >
+method using arrays.
+          </para>
           <code lang="C#"
             >using System;
 class ArrayTypeTest {
@@ -11547,8 +11539,7 @@ class ArrayTypeTest {
  Console.WriteLine("int[3,3,3] is assignable from int[2,2]? {0}",  array333Type.IsAssignableFrom(array22Type));
  }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>int[2] is assignable from int? False</para>
@@ -12017,8 +12008,8 @@ typeof(A).IsAssignableFrom(b1))</code>
         <example>
           <para
             >The following example demonstrates using the <see cref="P:System.Type.IsEnum" />
-property.</para
-          >
+property.
+          </para>
           <code lang="C#"
             >using System;
 public enum Color {
@@ -12034,8 +12025,7 @@ class TestType {
  Console.WriteLine("Enum is value? {0}", enumType.IsValueType);
  }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>Color is enum ? True</para>
@@ -12598,8 +12588,8 @@ class TestType {
         <example>
           <para
             >The following example demonstrates the <see cref="M:System.Type.IsInstanceOfType(System.Object)" />
-method.</para
-          >
+method.
+          </para>
           <code lang="C#"
             >using System;
 public interface IFoo { }
@@ -12621,8 +12611,7 @@ class IsInstanceTest {
  Console.WriteLine("myderivedclass instance is instance of IFoo? {0}",  ifooType.IsInstanceOfType(mdc));
  }
 }
-</code
-          >
+</code>
           <para>The output is </para>
           <c>
             <para>int[] is instance of Array? True</para>
@@ -13779,8 +13768,8 @@ class IsInstanceTest {
         <example>
           <para
             >The following example demonstrates the <see cref="M:System.Type.IsSubclassOf(System.Type)" />
-method.</para
-          >
+method.
+          </para>
           <code lang="C#"
             >using System;
 public interface IFoo { }
@@ -13807,8 +13796,7 @@ class IsSubclassTest {
  Console.WriteLine("IBar is subclass of IFoo? {0}", ibarType.IsSubclassOf(ifooType)); 
   }
 }
-</code
-          >
+</code>
           <para>The output is </para>
           <c>
             <para>Array is subclass of int[]? False</para>
@@ -14252,8 +14240,7 @@ System.Collections.Generic.Dictionary[System.String, Test]
         Are the constructed types equal? True
         Are the generic types equal? True
  */
-</code
-          >
+</code>
         </example>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -14663,8 +14650,8 @@ System.Collections.Generic.Dictionary[System.String, Test]
         <value>
           <para
             >The <see langword="Type" /> object
-   through which the current instance was obtained.</para
-          >
+   through which the current instance was obtained.
+          </para>
         </value>
         <example>
           <para
@@ -14686,8 +14673,7 @@ public abstract class ReflectedTypeTest {
             typeof(MyClassB).GetMethod("m").ReflectedType);
     }
 }
-</code
-          >
+</code>
           <para>The output is </para>
           <c>
             <para>Reflected type of m is ReflectedTypeTest+MyClassB</para>
@@ -15085,8 +15071,8 @@ public abstract class ReflectedTypeTest {
         <value>
           <para
             >A <see cref="T:System.Reflection.ConstructorInfo" /> containing the name of the static
-   constructor for the type represented by the current instance</para
-          >
+   constructor for the type represented by the current instance
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -15134,8 +15120,7 @@ public abstract class ReflectedTypeTest {
           <para>
             <block subset="none" type="behaviors"
               >As described 
-      above.</block
-            >
+      above.</block>
           </para>
         </remarks>
         <summary>

@@ -31,8 +31,8 @@
     <example>
       <para
         >In the following example, the number 3 is boxed as a <see cref="T:System.Int32" />, and <see cref="M:System.Int32.ToString" /> () is
-   called.</para
-      >
+   called.
+      </para>
       <code lang="C#"
         >using System;
 class Boxer {
@@ -40,8 +40,7 @@ class Boxer {
    Console.WriteLine("Value is {0}.", 3.ToString());
   }
 }
-</code
-      >
+</code>
       <para>The output is</para>
       <c>
         <para>Value is 3.</para>

@@ -107,8 +107,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
 Returns <see cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" />.
-</para
-          >
+
+          </para>
         </returns>
         <param name="categories">
           <attribution
@@ -150,8 +150,8 @@ Returns <see cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" /
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
 Returns <see cref="T:System.ServiceModel.Syndication.ReferencedCategoriesDocument" />.
-</para
-          >
+
+          </para>
         </returns>
         <param name="linkToCategoriesDocument">
           <attribution
@@ -203,8 +203,8 @@ Returns <see cref="T:System.ServiceModel.Syndication.ReferencedCategoriesDocumen
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
 Returns <see cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" />.
-</para
-          >
+
+          </para>
         </returns>
         <param name="categories">
           <attribution
@@ -285,8 +285,8 @@ Returns <see cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" /
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
 Returns <see cref="T:System.ServiceModel.Syndication.CategoriesDocumentFormatter" />.
-</para
-          >
+
+          </para>
         </returns>
       </Docs>
     </Member>
@@ -342,8 +342,8 @@ Returns <see cref="T:System.ServiceModel.Syndication.CategoriesDocumentFormatter
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
 Returns <see cref="T:System.ServiceModel.Syndication.CategoriesDocument" />.
-</para
-          >
+
+          </para>
         </returns>
         <param name="reader">
           <attribution
@@ -419,8 +419,8 @@ Returns <see cref="T:System.ServiceModel.Syndication.CategoriesDocument" />.
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
 Returns <see cref="T:System.Boolean" />.
-</para
-          >
+
+          </para>
         </returns>
         <param name="name">
           <attribution
@@ -482,8 +482,8 @@ Returns <see cref="T:System.Boolean" />.
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
 Returns <see cref="T:System.Boolean" />.
-</para
-          >
+
+          </para>
         </returns>
         <param name="reader">
           <attribution

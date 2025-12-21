@@ -530,8 +530,8 @@
           <para>
             <see langword="true " />if the current 
    stream is open and supports reading; otherwise <see langword="false" />
-   .</para
-          >
+   .
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -569,8 +569,8 @@
           <para>
             <see langword="true" /> if the stream is open and 
    supports seeking; otherwise <see langword="false" />
-   .</para
-          >
+   .
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -645,8 +645,8 @@
         <value>
           <para
             > A <see cref="T:System.Int32" /> containing the
-   number of bytes allocated for the current stream.</para
-          >
+   number of bytes allocated for the current stream.
+          </para>
         </value>
         <exception cref="T:System.ArgumentOutOfRangeException"
           >The value specified for a set operation is negative or less than the current length of the stream.</exception
@@ -683,17 +683,17 @@
             > The stream will not support reading or writing after
       this method is invoked. Following a call to <see cref="M:System.IO.MemoryStream.Close" />
       , operations on the
-      stream can raise an exception. </para
-          >
+      stream can raise an exception.
+          </para>
           <para
             > The buffer of a closed <see cref="T:System.IO.MemoryStream" /> is still available, and the <see cref="M:System.IO.MemoryStream.ToArray" />
 and <see cref="M:System.IO.MemoryStream.GetBuffer" /> methods can
-be called successfully. </para
-          >
+be called successfully.
+          </para>
           <block subset="none" type="note"
             > This method overrides <see cref="M:System.IO.Stream.Close" />
-.</block
-          >
+.
+          </block>
         </remarks>
       </Docs>
       <Excluded>0</Excluded>
@@ -908,8 +908,8 @@ be called successfully. </para
           <para
             >The following example demonstrates that two calls to the <see cref="M:System.IO.MemoryStream.GetBuffer" />
 method on a resizable stream do not return the same array if the underlying byte array is
-reallocated.</para
-          >
+reallocated.
+          </para>
           <code lang="C#"
             >using System;
 using System.IO;
@@ -939,8 +939,7 @@ public class MemoryStreamTest {
 
    }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>a and b represent the same instance.</para>
@@ -1095,8 +1094,8 @@ public class MemoryStreamTest {
         <example>
           <para
             >The following example demonstrates the result of reading from a <see cref="T:System.IO.MemoryStream" /> into its
-   underlying byte array.</para
-          >
+   underlying byte array.
+          </para>
           <code lang="C#"
             >using System;
 using System.IO;
@@ -1121,8 +1120,7 @@ public class MemoryStreamTest {
       }
    }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>0123456789 </para>

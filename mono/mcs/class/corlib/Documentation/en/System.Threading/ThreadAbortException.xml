@@ -37,8 +37,8 @@
       <para
         >The following example demonstrates aborting a thread.
       The thread that receives the <see cref="T:System.Threading.ThreadAbortException" /> uses the <see cref="M:System.Threading.Thread.ResetAbort" /> method to cancel the abort request and
-      continue executing.</para
-      >
+      continue executing.
+      </para>
       <code lang="C#"
         >using System;
 using System.Threading;
@@ -74,8 +74,7 @@ class ThreadAbortTest{
     Console.WriteLine("Main ending."); 
   }
 }
-   </code
-      >
+   </code>
       <para>The output is </para>
       <c>
         <para>Thread - working.</para>

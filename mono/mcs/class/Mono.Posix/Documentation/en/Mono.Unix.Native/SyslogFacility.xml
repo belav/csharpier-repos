@@ -68,8 +68,8 @@
         <summary
           >The same as 
         <see cref="F:Mono.Unix.Native.SyslogFacility.LOG_AUTH" />,
-        but logged to a file readable only by selected individuals.</summary
-        >
+        but logged to a file readable only by selected individuals.
+        </summary>
       </Docs>
     </Member>
     <Member MemberName="LOG_CRON">
@@ -109,8 +109,8 @@
       <Docs>
         <summary
           >System daemons, such as <c>routed</c>(8), that are not
-        provided for explicitly by other facilities.</summary
-        >
+        provided for explicitly by other facilities.
+        </summary>
       </Docs>
     </Member>
     <Member MemberName="LOG_FTP">

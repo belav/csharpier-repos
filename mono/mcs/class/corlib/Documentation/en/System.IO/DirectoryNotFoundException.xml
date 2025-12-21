@@ -43,8 +43,8 @@
  thrown. <SPAN>
           <SPAN />In this case, the /Mistake/examples/
  directory does not exist and therefore cannot be
- located.</SPAN
-        >
+ located.
+        </SPAN>
       </para>
       <code lang="C#"
         >using System;
@@ -60,8 +60,7 @@ class DirectoryNotFoundExample {
  }
  }
 }
-</code
-      >
+</code>
       <para>The output is </para>
       <c>
         <para> Caught: Could not find a

@@ -1000,8 +1000,8 @@
         <value>
           <para
             >A one-dimensional array of type <see cref="T:System.String" />
-containing the culture-specific abbreviated names of the days of the week.</para
-          >
+containing the culture-specific abbreviated names of the days of the week.
+          </para>
         </value>
         <exception cref="T:System.ArgumentNullException"
           >The value specified for a set operation is a null reference.</exception
@@ -1098,8 +1098,8 @@ containing the culture-specific abbreviated names of the days of the week.</para
           <para
             >A one-dimensional array of type <see cref="T:System.String" />
 containing the abbreviated names of the months. For
-cultures with 12-month calendars the 13th element of the array is an empty string.</para
-          >
+cultures with 12-month calendars the 13th element of the array is an empty string.
+          </para>
         </value>
         <exception cref="T:System.ArgumentNullException"
           >The value specified for a set operation is a null reference.</exception
@@ -1324,8 +1324,8 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
         <value>
           <para
             >A read-only <see cref="T:System.Globalization.DateTimeFormatInfo" /> instance based on the
-   culture of the current thread.</para
-          >
+   culture of the current thread.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2866,8 +2866,8 @@ cultures with 12-month calendars the 13th element of the array is an empty strin
           <para
             >A one-dimensional array of type <see cref="T:System.String" />
 containing the full names of the months. For
-cultures with 12-month calendars the 13th element of the array is an empty string.</para
-          >
+cultures with 12-month calendars the 13th element of the array is an empty string.
+          </para>
         </value>
         <exception cref="T:System.ArgumentNullException"
           >The value specified for a set operation is a null reference.</exception

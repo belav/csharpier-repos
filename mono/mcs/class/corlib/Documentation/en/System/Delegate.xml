@@ -68,8 +68,7 @@ class TestClass {
  Console.WriteLine (delInstance ("Call 2"));
  }
 }
-</code
-      >
+</code>
       <para> The output is</para>
       <c>
         <para>Static method Arg=Call 1</para>
@@ -107,8 +106,7 @@ class TestClass {
    Console.WriteLine("After Invoking delegate i = {0} return value is {1}",i, retvalue);
   }
 }
-</code
-      >
+</code>
       <para> The output is</para>
       <c>
         <para>Invoking delegate using ref value 1</para>
@@ -1926,8 +1924,8 @@ class TestClass {
         <value>
           <para
             >A <see cref="T:System.Reflection.MethodInfo" />
-.</para
-          >
+.
+          </para>
         </value>
         <remarks>
           <para>This property is read-only.</para>
@@ -2218,8 +2216,7 @@ class TestClass {
     }
 }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>Invocation list targets for source:</para>
@@ -2433,8 +2430,8 @@ class TestClass {
           <para
             >The following example gets the <see cref="P:System.Delegate.Target" /> property values
    for two delegates. The first delegate invokes a static method, and the second
-   invokes an instance method.</para
-          >
+   invokes an instance method.
+          </para>
           <code lang="C#"
             >using System;
 public delegate string DelegatedMethod(string s);
@@ -2458,8 +2455,7 @@ class TestClass {
     Console.WriteLine ("Instance target is {0}", t==null ? "null":t);
     }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>Static target is null</para>
@@ -2468,8 +2464,8 @@ class TestClass {
           <para>Example 2: </para>
           <para
             >The following example gets the <see cref="P:System.Delegate.Target" /> property value for three delegates
-created using instance methods, static methods, and a combination of the two. </para
-          >
+created using instance methods, static methods, and a combination of the two.
+          </para>
           <code lang="C#"
             >using System;
 class MyClass {
@@ -2528,8 +2524,7 @@ class TestClass {
 
     }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>Combined 1 static, 1 instance, same class:</para>

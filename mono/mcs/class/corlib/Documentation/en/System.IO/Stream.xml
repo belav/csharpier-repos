@@ -1130,22 +1130,21 @@
         <value>
           <para
             >A <see cref="T:System.Int64" /> value representing the length of the stream in
-   bytes.</para
-          >
+   bytes.
+          </para>
         </value>
         <remarks>
           <para>
             <block subset="none" type="note"
               >Use the <see cref="P:System.IO.Stream.CanSeek" />
 property to determine whether the current instance supports
-seeking.</block
-            >
+seeking.
+            </block>
           </para>
           <para>
             <block subset="none" type="behaviors"
               >This property is
-   read-only.</block
-            >
+   read-only.</block>
           </para>
         </remarks>
         <exception cref="T:System.NotSupportedException"

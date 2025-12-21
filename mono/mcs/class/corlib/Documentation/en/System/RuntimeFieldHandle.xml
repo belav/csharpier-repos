@@ -344,8 +344,8 @@
           <para
             > A <see cref="T:System.IntPtr" /> that contains the
    value of the current <see cref="T:System.RuntimeFieldHandle" /> .
-   </para
-          >
+
+          </para>
         </value>
         <remarks>
           <para>This property is read-only.</para>

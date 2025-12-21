@@ -344,8 +344,8 @@
             >A <see cref="T:System.String" /> containing the 
    value of the <see cref="P:System.Net.WebRequest.ConnectionGroupName" /> property of the <see cref="T:System.Net.WebRequest" /> that
    initiated the connection provided
-   by the current instance.</para
-          >
+   by the current instance.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -384,8 +384,8 @@
         <value>
  A <see cref="T:System.Int32" /> containing the number of connections held by
  the current instance.
-</value
-        >
+
+        </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -492,8 +492,8 @@
           <para
             >A <see cref="T:System.DateTime" /> instance
    containing the date and time at which the <see cref="T:System.Net.ServicePoint" /> was last
-   connected.</para
-          >
+   connected.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -531,8 +531,8 @@
         <value>
           <para
             >A <see cref="T:System.Int32" /> containing the number of milliseconds that a <see cref="T:System.Net.ServicePoint" /> can remain idle before it is released by the <see cref="T:System.Net.ServicePointManager" /> 
-and subsequently freed.</para
-          >
+and subsequently freed.
+          </para>
         </value>
         <exception cref="T:System.ArgumentOutOfRangeException"
           >The value specified for a set operation is less than <see cref="F:System.Threading.Timeout.Infinite" /> or greater than <see cref="F:System.Int32.MaxValue" />.</exception

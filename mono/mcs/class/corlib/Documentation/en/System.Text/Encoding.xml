@@ -5622,8 +5622,8 @@
         <value>
           <para
             >A <see cref="T:System.Text.Encoding" /> for the Unicode format in little-endian byte
-   order. </para
-          >
+   order.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />

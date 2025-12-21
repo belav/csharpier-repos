@@ -359,8 +359,8 @@
           <para
             >A <see cref="T:System.Collections.IEnumerator" /> that
    provides access to the list of registered
-   authentication modules.</para
-          >
+   authentication modules.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />

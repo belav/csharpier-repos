@@ -32,8 +32,8 @@
     strings, and the <see cref="T:System.String" /> type is a UTF-16 encoded
     string.  This consequently requires that all filesystem byte sequences be
     converted into some UTF-16 encoded string so that files can be used
-    sensibly.</para
-      >
+    sensibly.
+      </para>
       <para
         >All filenames strings provided to/from the 
     <see cref="N:Mono.Unix" /> and <see cref="N:Mono.Unix.Native" /> types are 
@@ -47,14 +47,14 @@
               >When unmarshaling a filename from unmanaged to managed code
       (such as with <see cref="M:Mono.Unix.Native.Syscall.readdir" />),
       <c>UnixEncoding</c> will first try to decode the string as a UTF-8
-      string.</para
-            >
+      string.
+            </para>
             <para
               >If the UTF-8 decode fails, any "invalid" characters will be
       represented as the <see cref="T:System.Char" /> sequence of 
       <see cref="F:Mono.Unix.UnixEncoding.EscapeByte" /> followed by the
-      "offending" byte cast to a char.</para
-            >
+      "offending" byte cast to a char.
+            </para>
           </term>
         </item>
         <item>
@@ -66,20 +66,20 @@
       <see cref="F:Mono.Unix.UnixEncoding.EscapeByte" /> is encountered, 
       in which case the <c>EscapeByte</c> character will be skipped
       and the following character will be marshaled as a byte.
-      </term
-          >
+
+          </term>
         </item>
       </list>
       <para
         >The upshot to all this is that <c>Mono.Unix</c> and
     <c>Mono.Unix.Native</c> can list, access, and open all files on your 
-    filesystem, regardless of encoding.</para
-      >
+    filesystem, regardless of encoding.
+      </para>
       <para
         >The downside is that all such support is only within the
     <c>Mono.Unix</c> and <c>Mono.Unix.Native</c> namespaces.  You won't be
-    able to pass non-Unicode filenames as command-line arguments.</para
-      >
+    able to pass non-Unicode filenames as command-line arguments.
+      </para>
       <para>In short, it's a Glorious Hack.  Rejoice.  Or something.</para>
       <para>What this means:</para>
       <list type="bullet">
@@ -88,8 +88,8 @@
       Any filename on disk, in any encoding (or lack thereof), can be
       found and used with the <c>Mono.Unix</c> and <c>Mono.Unix.Native</c> 
       types.
-      </term
-          >
+
+          </term>
         </item>
         <item>
           <term>
@@ -105,8 +105,8 @@
       the <c>Mono.Unix</c> and <c>Mono.Unix.Native</c> classes.  I'm not 
       losing any sleep over this, because if the encoding is unknown the 
       strings couldn't be displayed correctly anyway...
-      </term
-          >
+
+          </term>
         </item>
         <item>
           <term>
@@ -119,8 +119,8 @@
       I don't consider this to be a problem, as the <c>System.IO</c> classes 
       couldn't open these files anyway -- they weren't returned by
       <see cref="M:System.IO.Directory.GetFiles" />, and they were effectively 
-      invisible to normal Mono programs.  They still are.</para
-            >
+      invisible to normal Mono programs.  They still are.
+            </para>
             <para
               >If the filename contains <c>Mono.Unix.UnixEncoding.EscapeByte</c>, 
       then you won't be able to use <c>System.IO</c> with that file.  If the 
@@ -135,8 +135,8 @@
       mono command line.  Mono will still try to decode these as either
       UTF-8 strings or as an encoding listed in the 
       <c>MONO_EXTERNAL_ENCODINGS</c> environment variable.
-      </term
-          >
+
+          </term>
         </item>
       </list>
       <para>Questions &amp; Answers</para>
@@ -192,8 +192,8 @@
         <see cref="System.String" />s for filenames in 
         <see cref="M:Mono.Unix.Native.Syscall.open" />, 
         <see cref="M:Mono.Unix.Native.Syscall.stat" />, etc.?
-        </description
-          >
+
+          </description>
         </item>
         <item>
           <term>A</term>
@@ -202,14 +202,13 @@
               >Because <c>byte[]</c> is fugly to work with, so it would need to 
         be offered in addition to the string versions, which would double all 
         the file-related APIs.  Do you really want to explain the difference
-        between these APIs?</para
-            >
+        between these APIs?
+            </para>
             <example>
               <code lang="C#">
 public static int open (string pathname, OpenFlags flags);
 public static int open (byte[] pathname, OpenFlags flags);
-        </code
-              >
+        </code>
             </example>
             <para>(Hint: if you do want to explain the difference between these
         you're masochistic.)</para>
@@ -222,8 +221,8 @@ public static int open (byte[] pathname, OpenFlags flags);
         display to the user, but the developer can't know what encoding to use 
         (it could be anything), so this becomes an impossible problem.  
         <c>UnixEncoding</c> may be a Glorious Hack, but at least it leaves the 
-        API usage unambiguous.</para
-            >
+        API usage unambiguous.
+            </para>
           </description>
         </item>
         <item>

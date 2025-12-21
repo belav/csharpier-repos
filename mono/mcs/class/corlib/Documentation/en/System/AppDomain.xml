@@ -6792,8 +6792,8 @@
             <block subset="none" type="note"
               >This method
  overrides <see cref="M:System.Object.ToString" />
- .</block
-            >
+ .
+            </block>
           </para>
         </remarks>
         <summary>

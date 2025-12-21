@@ -942,8 +942,8 @@
         <value>
           <para
             >A <see cref="T:System.Int32" />
-containing the number of decimal places in currency values.</para
-          >
+containing the number of decimal places in currency values.
+          </para>
         </value>
         <exception cref="T:System.ArgumentOutOfRangeException"
           >The value specified for a set operation is less than 0 or greater than 99.</exception
@@ -1037,8 +1037,8 @@ containing the number of decimal places in currency values.</para
         <value>
           <para
             >A <see cref="T:System.String" />
-containing the group separator used in currency values.</para
-          >
+containing the group separator used in currency values.
+          </para>
         </value>
         <exception cref="T:System.ArgumentNullException"
           >The value specified for a set operation is a null reference.</exception
@@ -1085,8 +1085,8 @@ containing the group separator used in currency values.</para
         <value>
           <para
             >A <see cref="T:System.Int32" /> array containing elements that define the number of digits in
-   each group in currency values.</para
-          >
+   each group in currency values.
+          </para>
         </value>
         <exception cref="T:System.ArgumentNullException">
           <para>The array specified for a set operation is a null reference.</para>
@@ -1101,8 +1101,8 @@ containing the group separator used in currency values.</para
           <para
             >The following example demonstrates the effects of
       different <see cref="P:System.Globalization.NumberFormatInfo.CurrencyGroupSizes" />
-      property values.</para
-          >
+      property values.
+          </para>
           <code lang="C#"
             >using System;
 using System.Globalization;
@@ -1123,8 +1123,7 @@ class Test {
 
     }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>$999999999,4444,333,22,1.00</para>
@@ -1178,8 +1177,8 @@ class Test {
           <para
             >A <see cref="T:System.Int32" />
 between 0 and 15 inclusive, which specifies the format of negative currency
-values.</para
-          >
+values.
+          </para>
         </value>
         <exception cref="T:System.ArgumentOutOfRangeException"
           >The value specified for a set operation is less than 0 or greater than 15.</exception
@@ -1191,8 +1190,8 @@ values.</para
           <para
             >The following example demonstrates the effects of
       different <see cref="P:System.Globalization.NumberFormatInfo.CurrencyNegativePattern" />
-      property values.</para
-          >
+      property values.
+          </para>
           <code lang="C#"
             >using System;
 using System.Globalization;
@@ -1206,8 +1205,7 @@ class Test {
  }
  }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>pattern # 0: ($9,999,999,999,999.00)</para>
@@ -1405,8 +1403,8 @@ class Test {
           <para
             >A <see cref="T:System.Int32" />
 between 0 and 3 inclusive, containing the format of positive currency
-values.</para
-          >
+values.
+          </para>
         </value>
         <exception cref="T:System.ArgumentOutOfRangeException"
           >The value specified for a set operation is less than 0 or greater than 3.</exception
@@ -1432,8 +1430,7 @@ class Test {
  }
  }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>pattern # 0: $9,999,999,999,999.00</para>
@@ -1523,8 +1520,8 @@ class Test {
         <value>
           <para
             >A <see cref="T:System.String" />
-containing the currency symbol.</para
-          >
+containing the currency symbol.
+          </para>
         </value>
         <exception cref="T:System.ArgumentNullException"
           >The value specified for a set operation is a null reference.</exception
@@ -1574,8 +1571,8 @@ containing the currency symbol.</para
         <value>
           <para
             >A read-only <see cref="T:System.Globalization.NumberFormatInfo" /> containing the settings for the current
- system culture.</para
-          >
+ system culture.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1774,8 +1771,8 @@ containing the currency symbol.</para
           <para
             >A read-only <see cref="T:System.Globalization.NumberFormatInfo" /> with property values which are
    universally supported. The property values of the returned <see cref="T:System.Globalization.NumberFormatInfo" /> are not
-   impacted by changes to the current culture.</para
-          >
+   impacted by changes to the current culture.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1856,8 +1853,8 @@ containing the currency symbol.</para
         <value>
           <para
             >A <see cref="T:System.String" />
-containing the symbol for NaN values. </para
-          >
+containing the symbol for NaN values.
+          </para>
         </value>
         <exception cref="T:System.ArgumentNullException"
           >The value specified for a set operation is a null reference.</exception
@@ -1931,8 +1928,8 @@ containing the symbol for NaN values. </para
         <value>
           <para
             >A <see cref="T:System.String" />
-containing the symbol for negative infinity. </para
-          >
+containing the symbol for negative infinity.
+          </para>
         </value>
         <exception cref="T:System.ArgumentNullException"
           >The value specified for a set operation is a null reference.</exception
@@ -1974,8 +1971,8 @@ containing the symbol for negative infinity. </para
         <value>
           <para
             >A <see cref="T:System.String" />
-containing the symbol that indicates a value is negative. </para
-          >
+containing the symbol that indicates a value is negative.
+          </para>
         </value>
         <remarks>
           <para>The culture-invariant value for this property is
@@ -2015,8 +2012,8 @@ containing the symbol that indicates a value is negative. </para
         <value>
           <para
             >A <see cref="T:System.Int32" />
-containing the number of decimal places for numeric values.</para
-          >
+containing the number of decimal places for numeric values.
+          </para>
         </value>
         <exception cref="T:System.ArgumentOutOfRangeException"
           >The value specified for a set operation is less than 0 or greater than 99.</exception
@@ -2060,8 +2057,8 @@ containing the number of decimal places for numeric values.</para
         <value>
           <para
             >A <see cref="T:System.String" />
-containing the decimal separator.</para
-          >
+containing the decimal separator.
+          </para>
         </value>
         <exception cref="T:System.ArgumentNullException"
           >The value specified for a set operation is a null reference.</exception
@@ -2108,8 +2105,8 @@ containing the decimal separator.</para
         <value>
           <para
             >A <see cref="T:System.String" />
-containing the group separator.</para
-          >
+containing the group separator.
+          </para>
         </value>
         <exception cref="T:System.ArgumentNullException"
           >The value specified for a set operation is a null reference.</exception
@@ -2156,8 +2153,8 @@ containing the group separator.</para
         <value>
           <para
             >A <see cref="T:System.Int32" /> array containing elements that define the number of digits in
-   each group in numeric values.</para
-          >
+   each group in numeric values.
+          </para>
         </value>
         <exception cref="T:System.ArgumentNullException"
           >The array specified for a set operation is a null reference.</exception
@@ -2172,8 +2169,8 @@ containing the group separator.</para
           <para
             >The following example demonstrates the effects of
       different <see cref="P:System.Globalization.NumberFormatInfo.NumberGroupSizes" />
-      property values.</para
-          >
+      property values.
+          </para>
           <code lang="C#"
             >using System;
 using System.Globalization;
@@ -2193,8 +2190,7 @@ class Test {
  Console.WriteLine("{0}",data.ToString("N",nfi));
  }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>999999999,4444,333,22,1.00</para>
@@ -2243,8 +2239,8 @@ class Test {
         <value>
           <para
             >A <see cref="T:System.Int32" />
-between 0 and 4 inclusive that specifies the format of negative values.</para
-          >
+between 0 and 4 inclusive that specifies the format of negative values.
+          </para>
         </value>
         <exception cref="T:System.ArgumentOutOfRangeException"
           >The value specified for a set operation is less than 0 or greater than 4.</exception
@@ -2256,8 +2252,8 @@ between 0 and 4 inclusive that specifies the format of negative values.</para
           <para
             >The following example demonstrates the effects of
       different <see cref="P:System.Globalization.NumberFormatInfo.NumberNegativePattern" />
-      property values.</para
-          >
+      property values.
+          </para>
           <code lang="C#"
             >using System;
 using System.Globalization;
@@ -2271,8 +2267,7 @@ class Test {
  }
  }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>pattern # 0: (9,999,999,999,999.00)</para>
@@ -2368,8 +2363,8 @@ class Test {
         <value>
           <para
             >A <see cref="T:System.Int32" />
-containing the number of decimal places in percent values.</para
-          >
+containing the number of decimal places in percent values.
+          </para>
         </value>
         <exception cref="T:System.ArgumentOutOfRangeException"
           >The value specified for a set operation is less than 0 or greater than 99.</exception
@@ -2457,8 +2452,8 @@ containing the number of decimal places in percent values.</para
         <value>
           <para
             >A <see cref="T:System.String" />
-containing the group separator symbol used in percent values.</para
-          >
+containing the group separator symbol used in percent values.
+          </para>
         </value>
         <exception cref="T:System.ArgumentNullException"
           >The value specified for a set operation is a null reference.</exception
@@ -2502,8 +2497,8 @@ containing the group separator symbol used in percent values.</para
         <value>
           <para
             > A <see cref="T:System.Int32" /> array containing elements that define the number of digits in
-   each group in percent values.</para
-          >
+   each group in percent values.
+          </para>
         </value>
         <exception cref="T:System.ArgumentNullException">
           <para>The array specified for a set operation is a null reference.</para>
@@ -2518,8 +2513,8 @@ containing the group separator symbol used in percent values.</para
           <para
             >The following example demonstrates the effects of
       different <see cref="P:System.Globalization.NumberFormatInfo.PercentGroupSizes" />
-      property values.</para
-          >
+      property values.
+          </para>
           <code lang="C#"
             >using System;
 using System.Globalization;
@@ -2539,8 +2534,7 @@ class Test {
  Console.WriteLine("{0}",data.ToString("P",nfi));
  }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>99999999944,4433,322,10,0.00 %</para>
@@ -2594,8 +2588,8 @@ class Test {
           <para
             >A <see cref="T:System.Int32" />
 between 0 and 2 inclusive that specifies the format of negative percent
-values.</para
-          >
+values.
+          </para>
         </value>
         <exception cref="T:System.ArgumentOutOfRangeException"
           >The value specified for a set operation is less than 0 or greater than 2.</exception
@@ -2621,8 +2615,7 @@ class Test {
  }
  }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>pattern # 0: -99.00 %</para>
@@ -2774,8 +2767,8 @@ class Test {
         <value>
           <para
             >A <see cref="T:System.Int32" /> between 0 and 2 inclusive that specifies
-   the format of positive percent values.</para
-          >
+   the format of positive percent values.
+          </para>
         </value>
         <exception cref="T:System.ArgumentOutOfRangeException"
           >The value specified for a set operation is less than 0 or greater than 2.</exception
@@ -2787,8 +2780,8 @@ class Test {
           <para
             >The following example demonstrates the effects of
       different <see cref="P:System.Globalization.NumberFormatInfo.PercentPositivePattern" />
-      property values.</para
-          >
+      property values.
+          </para>
           <code lang="C#"
             >using System;
 using System.Globalization;
@@ -2802,8 +2795,7 @@ class Test {
  }
  }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>pattern # 0: 99.00 %</para>
@@ -2977,8 +2969,8 @@ class Test {
         <value>
           <para
             >A <see cref="T:System.String" /> containing the symbol for positive
-   infinity. </para
-          >
+   infinity.
+          </para>
         </value>
         <exception cref="T:System.ArgumentNullException"
           >The value specified for a set operation is a null reference.</exception
@@ -3020,8 +3012,8 @@ class Test {
         <value>
           <para
             >A <see cref="T:System.String" /> containing the symbol that indicates the
-   value is positive. </para
-          >
+   value is positive.
+          </para>
         </value>
         <exception cref="T:System.ArgumentNullException"
           >The value specified for a set operation is a null reference</exception

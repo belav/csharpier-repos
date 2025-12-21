@@ -380,8 +380,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
 Returns <see cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" />.
-</para
-          >
+
+          </para>
         </returns>
       </Docs>
     </Member>
@@ -414,8 +414,8 @@ Returns <see cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" /
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
 Returns <see cref="T:System.ServiceModel.Syndication.ReferencedCategoriesDocument" />.
-</para
-          >
+
+          </para>
         </returns>
       </Docs>
     </Member>
@@ -525,8 +525,8 @@ Returns <see cref="T:System.ServiceModel.Syndication.ReferencedCategoriesDocumen
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
 Returns <see cref="T:System.Boolean" />.
-</para
-          >
+
+          </para>
         </returns>
         <param name="name">
           <attribution
@@ -588,8 +588,8 @@ Returns <see cref="T:System.Boolean" />.
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
 Returns <see cref="T:System.Boolean" />.
-</para
-          >
+
+          </para>
         </returns>
         <param name="reader">
           <attribution

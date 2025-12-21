@@ -199,8 +199,8 @@ X is a random 160 bits number (20 bytes). It's size doesn't vary with the length
 </para>
           <para>
 While this structure has the <see cref="T:System.SerializableAttribute" /> attribute the private key, X, is marked as <see cref="T:System.NonSerializesAttribute" /> so it's content cannot be divulged using serialization.
-</para
-          >
+
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

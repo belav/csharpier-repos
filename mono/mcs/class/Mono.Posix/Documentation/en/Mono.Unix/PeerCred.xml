@@ -17,8 +17,8 @@
   <Docs>
     <summary
       >When using Unix domain sockets (via <see cref="T:Mono.Unix.UnixEndPoint" /> or <see cref="T:Mono.Unix.UnixClient" />, for example) most operating systems support the passing of credentials through the socket.  Generally, the process id (PID) of the application on the other side of the connection as well as the group ID (GID) and user ID (UID) of the executing user are available.  This is done via the kernel and cannot be spoofed, so this can be used to reliably authenticate a Unix socket connection.
-</summary
-    >
+
+    </summary>
     <remarks
       >Not all operating systems support this and the values of <see cref="P:Mono.Unix.PeerCred.GroupID" />, <see cref="P:Mono.Unix.PeerCred.ProcessID" />, and <see cref="P:Mono.Unix.PeerCred.UserID" /> may all be zero.</remarks
     >

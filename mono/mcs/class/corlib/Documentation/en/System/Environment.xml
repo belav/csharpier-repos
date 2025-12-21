@@ -63,8 +63,8 @@
         <value>
           <para
             >A <see cref="T:System.String" /> containing
-   the command line arguments.</para
-          >
+   the command line arguments.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -96,8 +96,8 @@
       <Docs>
         <value
           >A <see cref="T:System.String" /> containing
-   the full current working directory path.</value
-        >
+   the full current working directory path.
+        </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>By definition, if this process starts in the root directory of a local or network drive, the value of this property is the drive name followed by a trailing slash (for example, "C:\"). If this process starts in a subdirectory, the value of this property is the drive and subdirectory path, without a trailing slash (for example, "C:\mySubDirectory").</para>
@@ -229,8 +229,8 @@
         <value>
           <para
             >A <see cref="T:System.Int32" />
-value returned by a process. The default value is zero.</para
-          >
+value returned by a process. The default value is zero.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -676,8 +676,7 @@ class EnvTest:Object {
     }
   }
 }
-   </code
-          >
+   </code>
           <para>The output will vary depending on your system.</para>
         </example>
         <remarks>
@@ -966,8 +965,8 @@ class EnvTest:Object {
           <para
             >The following example demonstrates using the <see cref="P:System.Environment.NewLine" />
 property. The string returned by <see cref="P:System.Environment.NewLine" /> is inserted between "Hello" and
-"World", causing a line break between the words in the output.</para
-          >
+"World", causing a line break between the words in the output.
+          </para>
           <code lang="C#"
             >using System;
 class TestClass {
@@ -976,8 +975,7 @@ class TestClass {
                         Environment.NewLine);
     }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>Hello,</para>
@@ -1236,8 +1234,8 @@ class TestClass {
         <example>
           <para
             >The following example gets the <see cref="P:System.Environment.StackTrace" />
-property from within a series of nested calls.</para
-          >
+property from within a series of nested calls.
+          </para>
           <code lang="C#"
             >using System;
 public class TestCallStack {
@@ -1256,8 +1254,7 @@ public class TestCallStack {
         t.MyMethod1();
     }
 }
-</code
-          >
+</code>
           <para>Without debug symbols the output is</para>
           <c>
             <para>TestCallStack: at System.Environment.GetStackTrace(Exception e)</para>
@@ -1423,8 +1420,8 @@ public class TestCallStack {
         <value>
           <para
             >A <see cref="T:System.Int32" /> value containing the amount of time in milliseconds that
-   has passed since the last time the computer was started.</para
-          >
+   has passed since the last time the computer was started.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1550,8 +1547,8 @@ public class TestCallStack {
         <value>
           <para
             >A <see cref="T:System.Version" /> object that contains the major, minor, build, and 
- revision numbers of the execution engine.</para
-          >
+ revision numbers of the execution engine.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />

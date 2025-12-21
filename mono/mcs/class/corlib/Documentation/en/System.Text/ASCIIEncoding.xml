@@ -1224,8 +1224,8 @@
         <returns>
           <para
             >A <see cref="T:System.String" /> containing the decoded representation of <paramref name="bytes" /> as ASCII-encoded
-   characters.</para
-          >
+   characters.
+          </para>
         </returns>
         <remarks>
           <para>

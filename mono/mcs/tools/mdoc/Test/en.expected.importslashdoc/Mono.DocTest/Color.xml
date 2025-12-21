@@ -16,8 +16,8 @@
     <remarks>
       <see cref="T:Mono.DocTest.Color" />.
               Namespace Test: [<see cref="N:Mono.DocTest" />]
-            </remarks
-    >
+
+    </remarks>
   </Docs>
   <Members>
     <Member MemberName="AnotherGreen">

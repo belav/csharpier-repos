@@ -34,8 +34,8 @@
         /> objects using
       the <see cref="T:System.Xml.NameTable" />
       class.
-      </para
-      >
+
+      </para>
       <code lang="C#"
         >using System;
 using System.Text;
@@ -66,8 +66,7 @@ class Ntable {
                        (Object)str3==(Object)str4 );
   }
 }
-   </code
-      >
+   </code>
       <para>The output is</para>
       <para>sunny : sunny</para>
       <para>True : False</para>

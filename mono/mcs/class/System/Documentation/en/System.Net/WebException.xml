@@ -409,8 +409,8 @@
           <para
             > A <see cref="T:System.Net.WebResponse" /> instance containing the
    error response if one is available; otherwise, <see langword="null" />
-   .</para
-          >
+   .
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -449,8 +449,8 @@
         <value>
           <para
             > A <see cref="T:System.Net.WebExceptionStatus" /> value that indicates the status of the
-   response.</para
-          >
+   response.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />

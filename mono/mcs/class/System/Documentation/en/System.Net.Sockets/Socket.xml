@@ -184,14 +184,13 @@ public class Server
     return true;
   }
 }
-   </code
-      >
+   </code>
       <para
         >The following code is for the client application. When
       starting the application, supply the hostname of the console running the server
       application as an input parameter (for example, ProgramName <paramref name="hostname" />
-      ). </para
-      >
+      ).
+      </para>
       <code lang="C#"
         >using System;
 using System.Threading;
@@ -328,8 +327,7 @@ public class Client {
     return true;
   }
 }
-   </code
-      >
+   </code>
       <para>The output of the server application is</para>
       <c>
         <para>Connection in progress...........server is connected.</para>
@@ -760,8 +758,8 @@ public class Client {
               cref="T:System.Int32"
               qualify="true"
             /> containing the number of bytes of data that are
-   available to be read.</para
-          >
+   available to be read.
+          </para>
         </value>
         <exception cref="T:System.Net.Sockets.SocketException"
           >An error occurred while accessing the socket. <para>
@@ -844,8 +842,8 @@ public class Client {
         <example>
           <para
             > The following excerpt from the <see cref="T:System.Net.Sockets.Socket" /> class overview
-   example outlines an asynchronous accept operation. </para
-          >
+   example outlines an asynchronous accept operation.
+          </para>
           <code lang="C#"
             >public class Server
 {
@@ -881,8 +879,7 @@ public class Client {
     .
   }
 }
-</code
-          >
+</code>
         </example>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2146,14 +2143,14 @@ public class Client {
       the <see cref="M:System.Net.Sockets.Socket.EndReceiveFrom(System.IAsyncResult,System.Net.EndPoint@)" /> method, and specify the
    <see cref="T:System.IAsyncResult" /> object returned by this
       
-      method.</para
-          >
+      method.
+          </para>
           <para>
             <block subset="none" type="note"
               >The <see cref="M:System.Net.Sockets.Socket.EndReceiveFrom(System.IAsyncResult,System.Net.EndPoint@)" /> method should be
    called exactly once for each call to the <see cref="M:System.Net.Sockets.Socket.BeginReceiveFrom(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint@,System.AsyncCallback,System.Object)" />
-   method.</block
-            >
+   method.
+            </block>
           </para>
           <para
             >If the <paramref name="callback" /> parameter is not
@@ -2162,21 +2159,21 @@ when the asynchronous operation completes. The <see cref="T:System.IAsyncResult"
 passed as the argument to the method referenced by <paramref name="callback" />. The method
 referenced by <paramref name="callback" /> can retrieve the results of the operation by calling
 the <see cref="M:System.Net.Sockets.Socket.EndReceiveFrom(System.IAsyncResult,System.Net.EndPoint@)" />
-method.</para
-          >
+method.
+          </para>
           <para
             > The <paramref name="state" /> parameter
 can be any object that the caller wishes to have available for the duration of
 the asynchronous operation. This object is available via the
 <see cref="P:System.IAsyncResult.AsyncState" /> 
 property of the object returned by this
-method.</para
-          >
+method.
+          </para>
           <block subset="none" type="note">
             <para
               >For more information, see <see cref="M:System.Net.Sockets.Socket.ReceiveFrom(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint@)" />, the
-   synchronous version of this method.</para
-            >
+   synchronous version of this method.
+            </para>
           </block>
         </remarks>
         <exception cref="T:System.ArgumentNullException">
@@ -3186,8 +3183,8 @@ method.</para
             <see langword="true" /> indicates that
    the current instance is in blocking mode;
 <see langword="false" /> indicates that the current instance is in 
-   non-blocking mode. </para
-          >
+   non-blocking mode.
+          </para>
         </value>
         <exception cref="T:System.ObjectDisposedException"
           >The current instance has been disposed.</exception
@@ -3773,8 +3770,8 @@ method.</para
    the time of the
    last I/O operation;
 <see langword="false" /> indicates that the 
-   current instance is not connected.</para
-          >
+   current instance is not connected.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -4598,15 +4595,15 @@ method completes an asynchronous request that was started with a call to the
 <paramref name="asyncResult" /> parameter is required to be the same object as was returned 
 by the <see cref="M:System.Net.Sockets.Socket.BeginReceiveFrom(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint@,System.AsyncCallback,System.Object)" />
 method call that began the
-request.</para
-          >
+request.
+          </para>
           <para
             >If the <see cref="M:System.Net.Sockets.Socket.EndReceiveFrom(System.IAsyncResult,System.Net.EndPoint@)" />
 method is invoked via the <see cref="T:System.AsyncCallback" /> delegate specified to the <see cref="M:System.Net.Sockets.Socket.BeginReceiveFrom(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint@,System.AsyncCallback,System.Object)" /> method, the
 <paramref name="asyncResult" /> parameter is the <see cref="T:System.IAsyncResult" /> 
 argument passed to the
-delegate's method.</para
-          >
+delegate's method.
+          </para>
         </remarks>
         <exception cref="T:System.ArgumentNullException">
           <paramref name="asyncResult " />is <see langword="null" />.</exception
@@ -5189,8 +5186,7 @@ class OptionTest{
       receiveBuffer.ToString());
   }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para> Linger option is False and set to 0 seconds.</para>
@@ -5582,8 +5578,7 @@ class App {
       bytesAvail.ToString() );
   }
 }
-      </code
-          >
+      </code>
           <para>The output is</para>
           <c>
             <para>There are 0 bytes available to be read.</para>
@@ -5932,8 +5927,8 @@ class App {
               qualify="true"
             />
 associated with the current
-instance.</para
-          >
+instance.
+          </para>
         </value>
         <exception cref="T:System.Net.Sockets.SocketException"
           >An error occurred while accessing the socket. <para>
@@ -7124,8 +7119,8 @@ instance.</para
               cref="T:System.Int32"
               qualify="true"
             />
-containing the number of bytes received.</para
-          >
+containing the number of bytes received.
+          </para>
         </returns>
         <remarks>
           <para
@@ -7207,8 +7202,8 @@ containing the number of bytes received.</para
               cref="T:System.Int32"
               qualify="true"
             />
-containing the number of bytes received.</para
-          >
+containing the number of bytes received.
+          </para>
         </returns>
         <remarks>
           <para
@@ -7299,8 +7294,8 @@ containing the number of bytes received.</para
               cref="T:System.Int32"
               qualify="true"
             />
-containing the number of bytes received.</para
-          >
+containing the number of bytes received.
+          </para>
         </returns>
         <remarks>
           <para
@@ -7404,56 +7399,56 @@ containing the number of bytes received.</para
               cref="T:System.Int32"
               qualify="true"
             />
-containing the number of bytes received.</para
-          >
+containing the number of bytes received.
+          </para>
         </returns>
         <remarks>
           <para
             >For connectionless protocols, when this method successfully completes, <paramref name="remoteEP" /> contains the
-   endpoint associated with the socket that sent the data.</para
-          >
+   endpoint associated with the socket that sent the data.
+          </para>
           <para
             >For connection-oriented protocols, <paramref name="remoteEP" /> is left unchanged.</para
           >
           <para
             >The <see cref="P:System.Net.Sockets.Socket.LocalEndPoint" /> property is required to be set before
 this method is called or a <see cref="T:System.Net.Sockets.SocketException" />
-is thrown.</para
-          >
+is thrown.
+          </para>
           <para
             >The <see cref="P:System.Net.Sockets.Socket.Blocking" /> property of the socket determines
 the behavior of this method when no incoming data is available. When
 <see langword="false" />, the <see cref="T:System.Net.Sockets.SocketException" /> exception is thrown. When 
 <see langword="true" />, this method blocks and 
-waits for data to arrive.</para
-          >
+waits for data to arrive.
+          </para>
           <para
             >For <see
               cref="F:System.Net.Sockets.SocketType.Stream"
               qualify="true"
             /> socket types, if the
 remote socket was shut down gracefully, and all data was received, this method
-immediately returns zero, regardless of the blocking state.</para
-          >
+immediately returns zero, regardless of the blocking state.
+          </para>
           <para
             >For message-oriented sockets, if the message is larger than the size of
 <paramref name="buffer" />, the buffer is filled with the first part of the message, and the 
 <see cref="T:System.Net.Sockets.SocketException" /> 
 exception is thrown. For unreliable protocols, the excess data is lost; for
-reliable protocols, the data is retained by the service provider.</para
-          >
+reliable protocols, the data is retained by the service provider.
+          </para>
           <para
             >When the <see cref="F:System.Net.Sockets.SocketFlags.OutOfBand" /> flag is specified as part of the<paramref name="socketFlags " />parameter and the socket is configured for
 in-line reception of out-of-band (OOB) data (using the <see cref="F:System.Net.Sockets.SocketOptionName.OutOfBandInline" /> socket option) and OOB
-data is available, only OOB data is returned.</para
-          >
+data is available, only OOB data is returned.
+          </para>
           <para
             >When the <see cref="F:System.Net.Sockets.SocketFlags.Peek" /> flag is specified as part of the
 <paramref name="socketFlags" /> parameter, available data is copied into 
 <paramref name="buffer" /> 
 but is not removed from the system
-buffer.</para
-          >
+buffer.
+          </para>
         </remarks>
         <exception cref="T:System.ArgumentNullException">
           <para>
@@ -7812,8 +7807,8 @@ buffer.</para
               cref="T:System.Net.EndPoint"
               qualify="true"
             />
-associated with the current instance.</para
-          >
+associated with the current instance.
+          </para>
         </value>
         <exception cref="T:System.Net.Sockets.SocketException"
           >An error occurred while accessing the socket. <para>
@@ -7957,8 +7952,7 @@ class SelectTest {
       errorList.Contains(socket3) ? "" : "not " );
   }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>socket3 is placed in readList and errorList.</para>

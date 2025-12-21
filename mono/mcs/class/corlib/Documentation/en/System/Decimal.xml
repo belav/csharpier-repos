@@ -231,8 +231,8 @@
         <example>
           <para
             >The following example demonstrates using the <see cref="T:System.Decimal" /> (Int32 [])
-   constructor.</para
-          >
+   constructor.
+          </para>
           <code lang="C#"
             >using System;
 class ConstructDecimal {
@@ -265,8 +265,7 @@ class ConstructDecimal {
  Console.WriteLine("{{-1,-1,-1,{0}}} = {1}",partsMinValue [3],d);
  }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>{0,0,0,0} = 0</para>
@@ -581,8 +580,8 @@ class ConstructDecimal {
             from="Microsoft"
             modified="false"
           />
-                true to indicate a negative number; false to indicate a positive number. </param
-        >
+                true to indicate a negative number; false to indicate a positive number.
+        </param>
         <param name="scale">
           <attribution
             license="cc4"
@@ -1211,8 +1210,7 @@ class DecimalTest {
    Console.WriteLine("floor {0} is {1}", 3.0m, Decimal.Floor(3.0m));
  }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>floor 3.14159 is 3</para>
@@ -1338,8 +1336,7 @@ public static void Main () {
     Console.WriteLine ("d1 == d {0}", d1 == d);
 }
 }
-   </code
-          >
+   </code>
         </example>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2000,8 +1997,8 @@ public static void Main () {
           <para
             > A <see cref="T:System.Char" /> containing
 <paramref name="value" /> rounded towards zero to the nearest
-   integer. </para
-          >
+   integer.
+          </para>
         </returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.OverflowException"
@@ -2091,8 +2088,8 @@ public static void Main () {
           <para
             >A <see cref="T:System.Int16" /> containing
 <paramref name="value" /> rounded towards zero to the nearest
-   integer. </para
-          >
+   integer.
+          </para>
         </returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.OverflowException"
@@ -2136,8 +2133,8 @@ public static void Main () {
           <para
             >A <see cref="T:System.Int32" /> containing
 <paramref name="value" /> rounded towards zero to the nearest
-   integer. </para
-          >
+   integer.
+          </para>
         </returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.OverflowException"
@@ -2181,8 +2178,8 @@ public static void Main () {
           <para
             >A <see cref="T:System.Int64" /> containing
 <paramref name="value" /> rounded towards zero to the nearest
-   integer. </para
-          >
+   integer.
+          </para>
         </returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.OverflowException"
@@ -2231,8 +2228,8 @@ public static void Main () {
           <para
             >A <see cref="T:System.SByte" /> containing
 <paramref name="value" /> rounded towards zero to the nearest
-   integer. </para
-          >
+   integer.
+          </para>
         </returns>
         <remarks>
           <para
@@ -2281,8 +2278,8 @@ public static void Main () {
           <para
             >A <see cref="T:System.Int16" /> containing
 <paramref name="value" /> rounded towards zero to the nearest
-   integer. </para
-          >
+   integer.
+          </para>
         </returns>
         <remarks>
           <para
@@ -2336,8 +2333,8 @@ public static void Main () {
           <para
             >A <see cref="T:System.UInt16" /> containing
 <paramref name="value" /> rounded towards zero to the nearest
-   integer. </para
-          >
+   integer.
+          </para>
         </returns>
         <remarks>
           <para
@@ -2390,8 +2387,8 @@ public static void Main () {
         <returns>
           <para
             >A <see cref="T:System.UInt32" /> containing <paramref name="value" /> rounded towards zero to the
-   nearest integer. </para
-          >
+   nearest integer.
+          </para>
         </returns>
         <remarks>
           <para
@@ -2445,8 +2442,8 @@ public static void Main () {
           <para
             >A <see cref="T:System.UInt64" /> containing
 <paramref name="value" /> rounded towards zero to the nearest
-   integer. </para
-          >
+   integer.
+          </para>
         </returns>
         <remarks>
           <para
@@ -2495,8 +2492,8 @@ public static void Main () {
           <para
             >A <see cref="T:System.Decimal" />
 with the
-specified value.</para
-          >
+specified value.
+          </para>
         </returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.OverflowException">
@@ -2551,8 +2548,8 @@ specified value.</para
           <para
             >A <see cref="T:System.Decimal" />
 with the
-specified value.</para
-          >
+specified value.
+          </para>
         </returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.OverflowException">
@@ -2741,8 +2738,8 @@ specified value.</para
           <para
             >A <see cref="T:System.Decimal" />
 with the
-specified value.</para
-          >
+specified value.
+          </para>
         </returns>
         <remarks>To be added.</remarks>
       </Docs>
@@ -2783,8 +2780,8 @@ specified value.</para
           <para
             >A <see cref="T:System.Decimal" />
 with the
-specified value.</para
-          >
+specified value.
+          </para>
         </returns>
         <remarks>To be added.</remarks>
       </Docs>
@@ -2825,8 +2822,8 @@ specified value.</para
           <para
             >A <see cref="T:System.Decimal" />
 with the
-specified value.</para
-          >
+specified value.
+          </para>
         </returns>
         <remarks>To be added.</remarks>
       </Docs>
@@ -2867,8 +2864,8 @@ specified value.</para
           <para
             >A <see cref="T:System.Decimal" />
 with the
-specified value.</para
-          >
+specified value.
+          </para>
         </returns>
         <remarks>To be added.</remarks>
       </Docs>
@@ -2909,8 +2906,8 @@ specified value.</para
           <para
             >A <see cref="T:System.Decimal" />
 with the
-specified value.</para
-          >
+specified value.
+          </para>
         </returns>
         <remarks>To be added.</remarks>
       </Docs>
@@ -2956,8 +2953,8 @@ specified value.</para
           <para
             >A <see cref="T:System.Decimal" />
 with the
-specified value.</para
-          >
+specified value.
+          </para>
         </returns>
         <remarks>
           <para>
@@ -3006,8 +3003,8 @@ specified value.</para
           <para
             >A <see cref="T:System.Decimal" />
 with the
-specified value.</para
-          >
+specified value.
+          </para>
         </returns>
         <remarks>
           <para> This member is not CLS-compliant.</para>
@@ -3055,8 +3052,8 @@ specified value.</para
           <para
             >A <see cref="T:System.Decimal" />
 with the
-specified value.</para
-          >
+specified value.
+          </para>
         </returns>
         <remarks>
           <para>
@@ -3105,8 +3102,8 @@ specified value.</para
           <para
             >A <see cref="T:System.Decimal" />
 with the
-specified value.</para
-          >
+specified value.
+          </para>
         </returns>
         <remarks>
           <para>This member is not CLS-compliant.</para>
@@ -3715,8 +3712,7 @@ class DecimalParseClass {
     Console.WriteLine("String: {0} (decimal) {1}",s3,Decimal.Parse(s3));
   }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>String: -1.001 (decimal) -1.001</para>
@@ -3878,8 +3874,8 @@ class DecimalParseClass {
             >The following example demonstrates supplying <see cref="T:System.Globalization.NumberStyles" /> values to the <see cref="M:System.Decimal.Parse(System.String)" />
 method to allow for a symbol separating groups
 of digits, and a decimal separator. This example uses the symbols from the U.S.
-English culture, namely a comma and a decimal point.</para
-          >
+English culture, namely a comma and a decimal point.
+          </para>
           <code lang="C#"
             >using System;
 using System.Globalization;
@@ -3891,8 +3887,7 @@ public static void Main() {
  Console.WriteLine("{0} parsed to decimal {1}",s,d);
 }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>1,000,111.99 parsed to decimal 1000111.99</para>
@@ -4270,8 +4265,8 @@ public static void Main() {
           <para
             >The following example demonstrates supplying a <see cref="T:System.IFormatProvider" /> to the
 <see cref="M:System.Decimal.Parse(System.String)" /> 
-method to allow a decimal point, and commas separating groups of digits.</para
-          >
+method to allow a decimal point, and commas separating groups of digits.
+          </para>
           <code lang="C#"
             >using System;
 using System.Globalization;
@@ -4286,8 +4281,7 @@ public static void Main() {
  Console.WriteLine("{0} parsed to decimal {1}",s,d);
 }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <para>
             <c>1,000,111.99
@@ -4458,8 +4452,8 @@ public static void Main() {
             >The following example demonstrates supplying <see cref="T:System.Globalization.NumberStyles" /> values and a <see cref="T:System.IFormatProvider" /> to the
 <see cref="M:System.Decimal.Parse(System.String)" /> 
 method to allow colons separating
-groups of digits, and a decimal point.</para
-          >
+groups of digits, and a decimal point.
+          </para>
           <code lang="C#"
             >using System;
 using System.Globalization;
@@ -4474,8 +4468,7 @@ public static void Main() {
  Console.WriteLine("{0} parsed to decimal {1}",s,d);
 }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>1:000:111.99 parsed to decimal 1000111.99</para>
@@ -4976,8 +4969,7 @@ public static void Main() {
  Console.WriteLine("round {0} = {1}",d4, Decimal.Round(d4,2));
 }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>Rounding to 0 places...</para>
@@ -6578,8 +6570,7 @@ class test {
  fmts[i],d.ToString(fmts[i]));
  }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>1234.56789</para>
@@ -7023,8 +7014,7 @@ public static void Main() {
  Console.WriteLine("{0} truncated is {1}", d2, Decimal.Truncate(d2));
 }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>1234.56789 truncated is 1234</para>

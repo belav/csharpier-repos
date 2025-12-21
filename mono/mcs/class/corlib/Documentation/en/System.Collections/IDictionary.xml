@@ -150,8 +150,7 @@
           <para>
             <block subset="none" type="behaviors"
               >As described
-      above.</block
-            >
+      above.</block>
           </para>
         </remarks>
         <exception cref="T:System.NotSupportedException">
@@ -430,8 +429,8 @@
         <value>
           <para
             >A <see cref="T:System.Collections.ICollection" /> containing the keys of the current
-   instance.</para
-          >
+   instance.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -526,8 +525,8 @@
         <value>
           <para
             >A <see cref="T:System.Collections.ICollection" /> containing the values in the current
-   instance.</para
-          >
+   instance.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />

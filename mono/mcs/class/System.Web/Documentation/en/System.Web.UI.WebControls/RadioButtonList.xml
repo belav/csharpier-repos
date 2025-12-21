@@ -189,8 +189,8 @@
                 Text="string"
                 Value="string"
             /&gt;
-&lt;/asp:RadioButtonList&gt;</code
-      >
+&lt;/asp:RadioButtonList&gt;
+      </code>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

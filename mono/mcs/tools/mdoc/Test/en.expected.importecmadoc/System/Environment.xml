@@ -74,23 +74,23 @@
         <returns>
           <para
             > Returns a <see cref="T:System.String" /> array. Each <see cref="T:System.String" /> in the array
-   contains a single command line argument.</para
-          >
+   contains a single command line argument.
+          </para>
         </returns>
         <remarks>
           <para
             >The first element in the array contains the filename of
       the executing program. If the filename is not available, the first element is
       equal to <see cref="F:System.String.Empty" />. The remaining elements contain any additional tokens
-      entered on the command line.</para
-          >
+      entered on the command line.
+          </para>
           <block subset="none" type="note">
             <para>The program filename can, but is not required to,
          include path information.</para>
             <para
               >To obtain the command line as a single <see cref="T:System.String" />, use the <see cref="P:System.Environment.CommandLine" />
-   property.</para
-            >
+   property.
+            </para>
           </block>
         </remarks>
         <exception cref="T:System.ArgumentException">foo</exception>

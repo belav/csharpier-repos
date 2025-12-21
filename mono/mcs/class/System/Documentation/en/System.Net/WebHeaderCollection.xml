@@ -828,8 +828,7 @@ class GetValuesExample
          Console.WriteLine("{0}", s);
    }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <para>
 Transfer-Encoding:</para>

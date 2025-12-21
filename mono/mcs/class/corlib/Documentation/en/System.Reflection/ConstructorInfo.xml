@@ -126,8 +126,8 @@
           <para>This field is read-only.</para>
           <para
             >This field is a <see cref="T:System.String" /> that contains the value ".ctor". An object
-   constructor will be named with this field if and only if it is not a type initializer.</para
-          >
+   constructor will be named with this field if and only if it is not a type initializer.
+          </para>
           <block subset="none" type="note">
             <para
               >For more information on type

@@ -375,8 +375,8 @@ instance; otherwise <see langword="false" />.</para
               cref="T:System.Byte"
               qualify="true"
             /> array storing the socket 
-   address.</para
-          >
+   address.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -430,8 +430,7 @@ public class SocketAddressToString{
     Console.WriteLine("{0}", socketAddress.ToString());
   }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>This is a minimal SocketAddress.</para>

@@ -48,8 +48,8 @@
 	    This method sends an e-mail to the recipients specified in the <see cref="T:System.Web.Mail.MailMessage" />  parameter
 	    <paramref name="message" />. The e-mail is sent over the SMTP protocol through the server
 	    specified in <see cref="P:System.Web.Mail.SmtpMail.SmtpServer" />.
-	  </para
-          >
+
+          </para>
           <para>
 	    This example shows the typical usage of the <c>SmtpMail.Send</c> method. To run this sample you have to change the
 	    e-mail addresses and the SMTP server to real ones.
@@ -72,8 +72,7 @@ public class SmtpTest {
 	SmtpMail.Send (message);
     }
 }
-              </code
-              >
+              </code>
             </example>
           </para>
         </remarks>
@@ -119,8 +118,8 @@ public class SmtpTest {
 	    sends the e-mail to <paramref name="to" />. This method is a simplified version of 
 	    <see cref="M:System.Web.Mail.SmtpMail.Send(MailMessage)" /> which is actually used by this
 	    method for sending e-mails.
-	  </para
-          >
+
+          </para>
           <para>
 	    Here is a simple example to show how to send an e-mail.
 	    <example>
@@ -136,8 +135,7 @@ public class SmtpTest {
 	SmtpMail.Send ("per@foo.bar","ola@foo.bar","Hello, E-Mail world!","This is a test mail.");
     }
 }
-              </code
-              >
+              </code>
             </example>
           </para>
         </remarks>

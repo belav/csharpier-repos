@@ -101,8 +101,8 @@
     SkinID="string"
     Text="string"
     Visible="<codeFeaturedElement>True</codeFeaturedElement>|False"
-/&gt;</code
-      >
+/&gt;
+      </code>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

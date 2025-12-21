@@ -258,8 +258,8 @@
               qualify="true"
             />
 containing the IP address of a multicast
-group.</para
-          >
+group.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -322,8 +322,8 @@ group.</para
               cref="T:System.Net.IPAddress"
               qualify="true"
             /> containing the local IP
-   address.</para
-          >
+   address.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />

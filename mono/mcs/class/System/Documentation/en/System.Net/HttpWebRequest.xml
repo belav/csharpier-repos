@@ -952,8 +952,8 @@ The default is the URI used by the <see
             />
 method to initialize
 the current
-instance. </para
-          >
+instance.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1471,8 +1471,8 @@ instance. </para
         <value>
           <para
             >A <see cref="T:System.Int64" /> value that specifies the number of bytes of data to send to the Internet resource. The default is -1,
-   which indicates that this value has not been set.</para
-          >
+   which indicates that this value has not been set.
+          </para>
         </value>
         <exception cref="T:System.InvalidOperationException"
           >Data has already been written to the request stream.</exception
@@ -1526,8 +1526,8 @@ instance. </para
           <para
             >The value of the Content-type HTTP header of the current instance. The default
       value is <see langword="null" />
-      . </para
-          >
+      .
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1579,8 +1579,8 @@ instance. </para
             > A <see cref="T:System.Net.HttpContinueDelegate" /> 
 that references the methods that are invoked when an HTTP Continue response is
 received. The default value is <see langword="null" />
-.</para
-          >
+.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2445,8 +2445,8 @@ received. The default value is <see langword="null" />
         <value>
           <para
             >A <see cref="T:System.Net.WebHeaderCollection" /> containing the name/value pairs of the headers for
-   the current instance.</para
-          >
+   the current instance.
+          </para>
         </value>
         <exception cref="T:System.InvalidOperationException"
           >A set operation was requested but data has already been written to the request data stream.</exception
@@ -2655,8 +2655,8 @@ received. The default value is <see langword="null" />
             >A <see cref="T:System.DateTime" /> that contains the 
    contents of the HTTP If-Modified-Since
    header. The default value is the current
-   date and time of the system.</para
-          >
+   date and time of the system.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2758,8 +2758,8 @@ received. The default value is <see langword="null" />
           <para
             >A <see cref="T:System.Int32" /> value that
    indicates the maximum number of redirection responses that the current instance will follow. The
-   default value is implementation-specific.</para
-          >
+   default value is implementation-specific.
+          </para>
         </value>
         <exception cref="T:System.ArgumentException"
           >The value specified for a set operation is less than or equal to zero.</exception
@@ -2876,8 +2876,8 @@ received. The default value is <see langword="null" />
         <value>
           <para
             >A <see cref="T:System.String" /> containing an HTTP method. The default value
-   is "GET".</para
-          >
+   is "GET".
+          </para>
         </value>
         <exception cref="T:System.ArgumentException">
           <see langword="null" />, <see cref="F:System.String.Empty" />, or an invalid value was specified for a set operation.</exception
@@ -3255,8 +3255,8 @@ WWW-authenticate header with the current
         <value>
           <para
             >The <see cref="T:System.Uri" /> of the resource that receives requests sent by the
-   current instance.</para
-          >
+   current instance.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3459,8 +3459,8 @@ to send data in segments; otherwise,
               cref="F:System.Threading.Timeout.Infinite"
               qualify="true"
             /> to indicate that the request does not
-   time out.</para
-          >
+   time out.
+          </para>
         </value>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <para
@@ -3671,8 +3671,7 @@ to send data in segments; otherwise,
           <para>
             <block subset="none" type="note"
               >For additional 
-      information see section 14.43 of IETF RFC 2616 - HTTP/1.1.</block
-            >
+      information see section 14.43 of IETF RFC 2616 - HTTP/1.1.</block>
           </para>
         </remarks>
         <summary>

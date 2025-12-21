@@ -647,8 +647,8 @@ method. For the complete example, see the <see
           <para>
             <see langword="true" /> indicates that the current stream supports reading; 
 <see langword="false" />. indicates that the current stream does not 
-   support reading.</para
-          >
+   support reading.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -753,8 +753,8 @@ method. For the complete example, see the <see
           <para>
             <see langword="true" /> indicates that the current stream supports writing; 
 <see langword="false" /> 
-indicates that the current stream does not support writing.</para
-          >
+indicates that the current stream does not support writing.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -863,8 +863,8 @@ indicates that the current stream does not support writing.</para
           <para>
             <see langword="true" /> indicates that data is available to be
    read; <see langword="false" />
-   indicates that there is no data available to be read.</para
-          >
+   indicates that there is no data available to be read.
+          </para>
         </value>
         <exception cref="T:System.ObjectDisposedException"
           >The current instance has been disposed.</exception
@@ -1074,8 +1074,8 @@ indicates that the current stream does not support writing.</para
               cref="T:System.Net.Sockets.Socket"
               qualify="true"
             /> class
-   overview.</para
-          >
+   overview.
+          </para>
         </example>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1247,8 +1247,8 @@ indicates that the current stream does not support writing.</para
             <para
               > The <see cref="T:System.IO.Stream" /> base class implements this property to return or set the
       current position in the stream. This functionality is not supported in the <see cref="T:System.Net.Sockets.NetworkStream" />
-      class.</para
-            >
+      class.
+            </para>
             <para
               >This property overrides <see
                 cref="P:System.IO.Stream.Position"
@@ -1467,8 +1467,8 @@ indicates that the current stream does not support writing.</para
             <para
               > The <see cref="T:System.IO.Stream" /> base class uses this method to set the current
       position in the stream. This functionality is not supported in the <see cref="T:System.Net.Sockets.NetworkStream" />
-      class.</para
-            >
+      class.
+            </para>
             <para
               >This method overrides <see
                 cref="M:System.IO.Stream.Seek(System.Int64,System.IO.SeekOrigin)"

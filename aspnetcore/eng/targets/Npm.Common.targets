@@ -124,8 +124,7 @@
       $(PackDependsOn);
       Build;
       _Pack
-    </PackDependsOn
-    >
+    </PackDependsOn>
   </PropertyGroup>
 
   <Target

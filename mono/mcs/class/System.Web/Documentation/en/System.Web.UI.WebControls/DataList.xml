@@ -476,8 +476,8 @@
         &lt;SeparatorTemplate&gt;
             &lt;!-- child controls --&gt;
         &lt;/SeparatorTemplate&gt;
-&lt;/asp:DataList&gt;</code
-      >
+&lt;/asp:DataList&gt;
+      </code>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

@@ -367,8 +367,7 @@ if (mi.IsGenericMethod)
         {
             Console.WriteLine("\tThis is not a generic method.");
         }
-}</code
-          >
+}</code>
         </example>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -473,8 +472,7 @@ DisplayGenericMethodInfo(miBound);
 MethodInfo miDef = miBound.GetGenericMethodDefinition();
 Console.WriteLine("\nThe definition is the same: {0}",
        miDef == mi);
-</code
-          >
+</code>
         </example>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -977,8 +975,7 @@ Here it is: 42
 The definition is the same: True
 
  */
-</code
-          >
+</code>
         </example>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1240,8 +1237,8 @@ public:
    object representing
 <see cref="T:System.Void" /> if the 
    return value of the method is <see langword="void" />
-   .</para
-          >
+   .
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />

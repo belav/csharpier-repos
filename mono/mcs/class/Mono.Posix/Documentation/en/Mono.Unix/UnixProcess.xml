@@ -23,8 +23,8 @@
       <para>
         The <see cref="T:Mono.Unix.UnixProcess" /> class provides the means 
         for inspecting and interacting with an operating system process.
-      </para
-      >
+
+      </para>
       <para>
         No mechanism is currently provided to enumerate all processes on the
         system.  This limitation exists for two reasons:
@@ -36,8 +36,8 @@
           processes, so such functionality wouldn't be portable.  Common
           workarounds include the <c>/proc</c> filesystem, but not all
           operating systems provide that.
-        </term
-          >
+
+          </term>
         </item>
         <item>
           <term
@@ -46,8 +46,8 @@
           target process be a child of the current process.  Enumerating all
           processes on the system would return processes that are not children
           of the current process, and thus these methods would error.
-        </term
-          >
+
+          </term>
         </item>
       </list>
     </remarks>
@@ -70,14 +70,14 @@
         <value>
           A <see cref="T:System.In32" /> containing the value the process
           exited with.
-        </value
-        >
+
+        </value>
         <remarks></remarks>
         <exception cref="T:System.InvalidOperationException">
           <see cref="P:Mono.Unix.UnixProcess.HasExited" /> returns 
           <see langword="false" />.
-        </exception
-        >
+
+        </exception>
         <altmember cref="M:Mono.Unix.Native.Syscall.WEXITSTATUS" />
       </Docs>
     </Member>
@@ -105,8 +105,8 @@
         <returns>
           A <see cref="T:Mono.Unix.UnixProcess" /> instance providing
           information about the current process.
-        </returns
-        >
+
+        </returns>
         <remarks></remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.getpid" />
       </Docs>
@@ -132,8 +132,8 @@
         <returns>
           A <see cref="T:System.Int32" /> containing the process ID of the
           current process.
-        </returns
-        >
+
+        </returns>
         <remarks></remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.getpid" />
       </Docs>
@@ -155,23 +155,23 @@
         <value>
           <see langword="true" /> if the process has exited; otherwise, 
           <see langword="false" />.
-        </value
-        >
+
+        </value>
         <remarks>
           <para>
             If the process has exited, 
             <see cref="M:Mono.Unix.UnixProcess.ExitCode" /> contains the
             process' exit code.
-          </para
-          >
+
+          </para>
         </remarks>
         <exception cref="Mono.Unix.UnixIOException">
           <para>
             The calling process has no existing unwaited-for
             child processes.
             [<see cref="F:Mono.Unix.Native.Errno.ECHILD" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             No status from the terminated child process is available
@@ -182,8 +182,8 @@
             <see cref="F:Mono.Unix.Native.TODO.SA_NOCLDWAIT" />
             for that signal.
             [<see cref="F:Mono.Unix.Native.Errno.ECHILD" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             The call was interrupted by a caught signal,
@@ -191,8 +191,8 @@
             <see cref="F:Mono.Unix.Native.TODO.SA_RESTART" />
             flag set.
             [<see cref="F:Mono.Unix.Native.Errno.EINTR" />]
-          </para
-          >
+
+          </para>
         </exception>
         <altmember cref="M:Mono.Unix.Native.Syscall.WIFEXITED" />
       </Docs>
@@ -214,16 +214,16 @@
         <value>
           <see langword="true" /> if the process terminated due to an unhandled 
           signal; otherwise, <see langword="false" />.
-        </value
-        >
+
+        </value>
         <remarks></remarks>
         <exception cref="Mono.Unix.UnixIOException">
           <para>
             The calling process has no existing unwaited-for
             child processes.
             [<see cref="F:Mono.Unix.Native.Errno.ECHILD" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             No status from the terminated child process is available
@@ -234,8 +234,8 @@
             <see cref="F:Mono.Unix.Native.TODO.SA_NOCLDWAIT" />
             for that signal.
             [<see cref="F:Mono.Unix.Native.Errno.ECHILD" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             The call was interrupted by a caught signal,
@@ -243,8 +243,8 @@
             <see cref="F:Mono.Unix.Native.TODO.SA_RESTART" />
             flag set.
             [<see cref="F:Mono.Unix.Native.Errno.EINTR" />]
-          </para
-          >
+
+          </para>
         </exception>
         <altmember cref="M:Mono.Unix.Native.Syscall.WIFSIGNALED" />
       </Docs>
@@ -266,16 +266,16 @@
         <value>
           <see langword="true" /> if the process has been stopped; otherwise, 
           <see langword="false" />.
-        </value
-        >
+
+        </value>
         <remarks></remarks>
         <exception cref="Mono.Unix.UnixIOException">
           <para>
             The calling process has no existing unwaited-for
             child processes.
             [<see cref="F:Mono.Unix.Native.Errno.ECHILD" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             No status from the terminated child process is available
@@ -286,8 +286,8 @@
             <see cref="F:Mono.Unix.Native.TODO.SA_NOCLDWAIT" />
             for that signal.
             [<see cref="F:Mono.Unix.Native.Errno.ECHILD" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             The call was interrupted by a caught signal,
@@ -295,8 +295,8 @@
             <see cref="F:Mono.Unix.Native.TODO.SA_RESTART" />
             flag set.
             [<see cref="F:Mono.Unix.Native.Errno.EINTR" />]
-          </para
-          >
+
+          </para>
         </exception>
         <altmember cref="M:Mono.Unix.Native.Syscall.WIFSTOPPED" />
       </Docs>
@@ -318,8 +318,8 @@
         <value>
           A <see cref="T:System.Int32" /> containing the operating system
           process ID.
-        </value
-        >
+
+        </value>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -343,8 +343,8 @@
         <summary>
           Send the <see cref="F:Mono.Unix.Native.Signum.SIGKILL" /> signal to
           the process.
-        </summary
-        >
+
+        </summary>
         <remarks></remarks>
         <exception cref="System.InvalidOperationException">
           <para>
@@ -353,8 +353,8 @@
             When signaling a process group, this error is returned if any members
             of the group could not be signaled.
             [<see cref="F:Mono.Unix.Native.Errno.EPERM" />]
-          </para
-          >
+
+          </para>
         </exception>
         <altmember cref="M:Mono.Unix.Native.Syscall.kill" />
       </Docs>
@@ -376,8 +376,8 @@
         <value>
           A <see cref="T:System.Int32" /> containing the process group that
           the process should belong to.
-        </value
-        >
+
+        </value>
         <remarks>
           <para>
             Process groups are used for distribution of signals, and by 
@@ -408,8 +408,8 @@
         <value>
           A <see cref="T:System.Int32" /> containing the session ID of the
           process.
-        </value
-        >
+
+        </value>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -440,8 +440,8 @@
         <param name="signal">
           A <see cref="T:Mono.Unix.Native.Signum" /> containing the signal to
           send to the process.
-        </param
-        >
+
+        </param>
         <summary>Send the <paramref name="signal" /> signal to the process.</summary>
         <remarks></remarks>
         <exception cref="System.InvalidOperationException">
@@ -451,8 +451,8 @@
             process.  When signaling a process group, this error is returned 
             if any members of the group could not be signaled.
             [<see cref="F:Mono.Unix.Native.Errno.EPERM" />]
-          </para
-          >
+
+          </para>
         </exception>
       </Docs>
     </Member>
@@ -476,14 +476,14 @@
         <value>
           A <see cref="T:Mono.Unix.Native.Signum" /> containing the signal
           which caused the process to stop.
-        </value
-        >
+
+        </value>
         <remarks></remarks>
         <exception cref="T:System.InvalidOperationException">
           <see cref="P:Mono.Unix.UnixProcess.HasStopped" /> returns 
           <see langword="false" />.
-        </exception
-        >
+
+        </exception>
         <altmember cref="M:Mono.Unix.Native.Syscall.WSTOPSIG" />
       </Docs>
     </Member>
@@ -510,14 +510,14 @@
         <value>
           A <see cref="T:Mono.Unix.Native.Signum" /> containing the signal
           which terminated the process.
-        </value
-        >
+
+        </value>
         <remarks></remarks>
         <exception cref="T:System.InvalidOperationException">
           <see cref="P:Mono.Unix.UnixProcess.HasSignaled" /> returns 
           <see langword="false" />.
-        </exception
-        >
+
+        </exception>
         <altmember cref="M:Mono.Unix.Native.Syscall.WTERMSIG" />
       </Docs>
     </Member>
@@ -547,16 +547,16 @@
             will generate a 
             <see cref="T:Mono.Unix.UnixIOException" /> 
             [<see cref="F:Mono.Unix.Native.Errno.ECHILD" />].
-          </para
-          >
+
+          </para>
         </remarks>
         <exception cref="Mono.Unix.UnixIOException">
           <para>
             The calling process has no existing unwaited-for
             child processes.
             [<see cref="F:Mono.Unix.Native.Errno.ECHILD" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             No status from the terminated child process is available
@@ -567,8 +567,8 @@
             <see cref="F:Mono.Unix.Native.TODO.SA_NOCLDWAIT" />
             for that signal.
             [<see cref="F:Mono.Unix.Native.Errno.ECHILD" />]
-          </para
-          >
+
+          </para>
           <para>-or-</para>
           <para>
             The call was interrupted by a caught signal,
@@ -576,8 +576,8 @@
             <see cref="F:Mono.Unix.Native.TODO.SA_RESTART" />
             flag set.
             [<see cref="F:Mono.Unix.Native.Errno.EINTR" />]
-          </para
-          >
+
+          </para>
         </exception>
         <altmember cref="M:Mono.Unix.Native.Syscall.waitpid" />
       </Docs>

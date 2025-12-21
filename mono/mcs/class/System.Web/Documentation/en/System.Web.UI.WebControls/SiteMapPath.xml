@@ -298,8 +298,8 @@
         &lt;RootNodeTemplate&gt;
             &lt;!-- child controls --&gt;
         &lt;/RootNodeTemplate&gt;
-&lt;/asp:SiteMapPath&gt;</code
-      >
+&lt;/asp:SiteMapPath&gt;
+      </code>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

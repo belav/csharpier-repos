@@ -106,7 +106,7 @@
       <table_line>new T(x, y) Overload resolution is applied to select the best instance </table_line>
       <table_line>constructor in the class or struct T. The instance constructor is </table_line>
       <table_line>invoked with the argument list (x, y). </table_line>
-end note]</note
-    >
+end note]
+    </note>
   </paragraph>
 </clause>

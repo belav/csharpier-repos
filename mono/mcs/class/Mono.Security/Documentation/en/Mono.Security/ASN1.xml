@@ -301,8 +301,8 @@
 </para>
           <para>
 	The <see cref="T:System.Byte" /> array returned is encoded with ASN.1 standard-specific formatting.
-</para
-          >
+
+          </para>
         </remarks>
       </Docs>
       <AssemblyInfo>

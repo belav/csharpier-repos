@@ -169,8 +169,8 @@
                 Text="string"
                 Value="string"
             /&gt;
-&lt;/asp:ListBox&gt;</code
-      >
+&lt;/asp:ListBox&gt;
+      </code>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

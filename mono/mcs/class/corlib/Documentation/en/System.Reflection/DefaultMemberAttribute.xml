@@ -74,8 +74,8 @@
         <remarks>
           <para
             >This constructor initializes the <see cref="P:System.Reflection.DefaultMemberAttribute.MemberName" /> property using <paramref name="memberName" />
-.</para
-          >
+.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -114,8 +114,8 @@
         <value>
           <para
             > A <see cref="T:System.String" /> representing the member name contained by the current instance.
-   </para
-          >
+
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />

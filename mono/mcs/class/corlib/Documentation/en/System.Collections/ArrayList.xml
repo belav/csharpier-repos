@@ -83,8 +83,7 @@ public static void PrintValues( IEnumerable myList ) {
     Console.WriteLine(); 
   } 
 }
-</code
-      >
+</code>
       <para>The output is </para>
       <para>
         <c>
@@ -766,8 +765,8 @@ public static void PrintValues( IEnumerable myList ) {
         <value>
           <para
             > A <see cref="T:System.Int32" /> that specifies the number of elements that the current instance
-   is capable of storing.</para
-          >
+   is capable of storing.
+          </para>
         </value>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <see cref="P:System.Collections.ArrayList.Capacity" /> is set to a value that is less than the <see cref="P:System.Collections.ArrayList.Count" /> of the current instance.</exception
@@ -1204,8 +1203,8 @@ public static void PrintValues( IEnumerable myList ) {
         <value>
           <para
             > A <see cref="T:System.Int32" /> that specifies the number of elements contained in the current
-   instance.</para
-          >
+   instance.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2096,8 +2095,7 @@ public static void PrintValues( IEnumerable myList ) {
           <para>
             <block subset="none" type="behaviors"
               >As described
-   above.</block
-            >
+   above.</block>
           </para>
         </remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
@@ -3196,8 +3194,8 @@ public static void PrintValues( IEnumerable myList ) {
         <value>
           <para
             >A <see cref="T:System.Object" /> that can be used to synchronize access to the
-   current instance.</para
-          >
+   current instance.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />

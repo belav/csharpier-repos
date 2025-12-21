@@ -667,8 +667,7 @@ public class BoolParse {
       Console.WriteLine("\"  true  \" parses to \"{0}\".", b);
    }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <para>
             <c>" true " 

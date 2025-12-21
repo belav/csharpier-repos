@@ -530,8 +530,8 @@
               cref="T:System.Text.Encoding"
               qualify="true"
             /> indicating the encoding
-   type.</para
-          >
+   type.
+          </para>
         </value>
         <remarks>To be added.</remarks>
         <summary>
@@ -561,13 +561,10 @@
       <Docs>
         <value>
           <para
-            >A <see
-              cref="T:System.String"
-              qualify="true"
-            /> 
+            >A <see cref="T:System.String" qualify="true" /> 
 specifying
-the internal subset. </para
-          >
+the internal subset.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -610,8 +607,8 @@ the internal subset. </para
         <value>
           <para
             > The <see cref="T:System.Xml.XmlNamespaceManager" /> used by the current
-   instance.</para
-          >
+   instance.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -681,12 +678,9 @@ the internal subset. </para
       <Docs>
         <value>
           <para
-            >A <see
-              cref="T:System.String"
-              qualify="true"
-            /> 
-specifying the public identifier.</para
-          >
+            >A <see cref="T:System.String" qualify="true" /> 
+specifying the public identifier.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -721,12 +715,9 @@ specifying the public identifier.</para
       <Docs>
         <value>
           <para
-            >A <see
-              cref="T:System.String"
-              qualify="true"
-            /> 
-specifying the system identifier.</para
-          >
+            >A <see cref="T:System.String" qualify="true" /> 
+specifying the system identifier.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -811,8 +802,8 @@ scope. If there is no <c>xml:lang</c> in scope, <see cref="F:System.String.Empty
           <block subset="none" type="note">
             <para
               >The white space attribute, <c>xml:space</c>, specifies how white space is handled in
-      the current element.</para
-            >
+      the current element.
+            </para>
           </block>
         </remarks>
         <summary>

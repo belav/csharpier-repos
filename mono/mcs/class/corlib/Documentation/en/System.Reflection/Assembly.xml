@@ -656,8 +656,8 @@
           <para
             > The following example demonstrates using
       the <see cref="P:System.Reflection.Assembly.FullName" /> property to get the full name of an assembly compiled into a file named
-      "HelloWorld". </para
-          >
+      "HelloWorld".
+          </para>
           <code lang="C#"
             >using System;
 using System.Reflection;
@@ -669,8 +669,7 @@ public class AssemblyExample {
  Console.WriteLine(a.FullName);
  } 
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>HelloWorld, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</para>
@@ -4730,8 +4729,8 @@ public class AssemblyExample {
         <remarks>
           <para
             > This method returns the <see cref="P:System.Reflection.Assembly.FullName" /> of the
-   current assembly.</para
-          >
+   current assembly.
+          </para>
           <para>
             <block subset="none" type="note"
               >This method
@@ -4739,8 +4738,8 @@ public class AssemblyExample {
                 cref="M:System.Object.ToString"
                 qualify="true"
               />
-   .</block
-            >
+   .
+            </block>
           </para>
         </remarks>
         <example>
@@ -4749,8 +4748,8 @@ public class AssemblyExample {
               cref="M:System.Reflection.Assembly.ToString"
               qualify="true"
             /> method in an assembly compiled into
-   a file named "HelloWorld".</para
-          >
+   a file named "HelloWorld".
+          </para>
           <code lang="C#"
             >using System;
 using System.Reflection;
@@ -4762,8 +4761,7 @@ public class AssemblyExample {
  Console.WriteLine(a.ToString());
  } 
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>HelloWorld, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</para>

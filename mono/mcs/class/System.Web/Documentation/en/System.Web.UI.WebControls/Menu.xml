@@ -873,8 +873,8 @@
             VerticalPadding="size"
             Width="size"
         /&gt;
-&lt;/asp:Menu&gt;</code
-      >
+&lt;/asp:Menu&gt;
+      </code>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

@@ -758,8 +758,8 @@
         <value>
           <para
             > A <see cref="T:System.String" /> array containing all the keys of the current instance.
-   If the current instance is empty, the value of this property is an empty array.</para
-          >
+   If the current instance is empty, the value of this property is an empty array.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -913,8 +913,8 @@
         <value>
           <para
             >A <see cref="T:System.Int32" /> that indicates the number of elements contained in the current
-   instance.</para
-          >
+   instance.
+          </para>
         </value>
         <remarks>
           <para>This property is read-only.</para>
@@ -1322,8 +1322,8 @@
         <value>
           <para
             >A <see cref="T:System.String" /> that contains the comma-separated list of values at the specified
-   index of the current instance.</para
-          >
+   index of the current instance.
+          </para>
         </value>
         <remarks>
           <para>This property is read-only.</para>
@@ -1381,8 +1381,8 @@
 <paramref name="name" /> is not contained in the current instance, attempting to get it 
    returns <see langword="null" />, and attempting to set it creates a new entry
    using <paramref name="name" />
-   .</para
-          >
+   .
+          </para>
         </value>
         <remarks>
           <para>If the specified key already exists in the collection,

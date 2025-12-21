@@ -354,8 +354,8 @@
           objects should be 
           <see cref="M:System.Diagnostics.TraceListener.Flush" />ed after each
           write.
-        </value
-        >
+
+        </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The default is false.</para>
@@ -635,8 +635,8 @@
           <para>
             This is equivalent to incrementing 
             <see cref="P:System.Diagnostics.Trace.IndentLevel" /> by one.
-          </para
-          >
+
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -733,8 +733,8 @@
         <value>
           The list of <see cref="T:System.Diagnostics.TraceListener" /> objects
           to forward messages to.
-        </value
-        >
+
+        </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -1111,8 +1111,8 @@
           <para>
             This is equivalent to decrementing 
             <see cref="P:System.Diagnostics.Trace.IndentLevel" /> by one.
-          </para
-          >
+
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

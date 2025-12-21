@@ -18,8 +18,8 @@
     <summary>
       Specifies whether or not a <see cref="T:Mono.Options.Option" />
       takes a value, and if it does, whether it's optional or required.
-		</summary
-    >
+
+    </summary>
     <remarks></remarks>
     <altmember cref="P:Mono.Options.Option.OptionValueType" />
   </Docs>
@@ -88,8 +88,8 @@
             must be part of the current argument, e.g. <c>-opt:foo</c> will 
             pass <c>"foo"</c> as the value to <c>-opt</c>, but <c>-opt foo</c> 
             will pass <see langword="null" /> as the value to <c>-opt</c>.
-            </para
-          >
+
+          </para>
         </summary>
       </Docs>
     </Member>

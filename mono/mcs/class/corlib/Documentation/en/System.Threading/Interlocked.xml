@@ -202,14 +202,14 @@
         <summary>
           <para
             >Compares two <see cref="T:System.Int32" /> values for equality and stores a
-   specified value if they are equal.</para
-          >
+   specified value if they are equal.
+          </para>
         </summary>
         <returns>
           <para
             > The original value of <paramref name="location1" />.
-   </para
-          >
+
+          </para>
         </returns>
         <remarks>
           <para> The compare and store operations are performed as
@@ -332,14 +332,14 @@
         <summary>
           <para
             > Compares two <see cref="T:System.Object" /> variables for equality and stores a specified object
-   if they are equal.</para
-          >
+   if they are equal.
+          </para>
         </summary>
         <returns>
           <para
             > A <see cref="T:System.Object" /> containing the original value of <paramref name="location1" />.
-   </para
-          >
+
+          </para>
         </returns>
         <remarks>
           <para> The compare and store operations are performed as an
@@ -391,14 +391,14 @@
         <summary>
           <para
             >Compares two <see cref="T:System.Single" /> values for equality and stores a
-   specified value if they are equal.</para
-          >
+   specified value if they are equal.
+          </para>
         </summary>
         <returns>
           <para
             > A <see cref="T:System.Single" /> containing the original value of <paramref name="location1" />.
-   </para
-          >
+
+          </para>
         </returns>
         <remarks>
           <para> The compare and store operations are performed as
@@ -498,16 +498,16 @@
           <para
             > A <see cref="T:System.Int32" /> containing the
    decremented value.
-   </para
-          >
+
+          </para>
         </returns>
         <remarks>
           <para
             >This method handles an overflow condition by wrapping:
       if <paramref name="location" /> = <see cref="F:System.Int32.MinValue" /> , <paramref name="location" /> - 1 =
    <see cref="F:System.Int32.MaxValue" /> . No exception is
-      thrown. </para
-          >
+      thrown.
+          </para>
         </remarks>
       </Docs>
       <Excluded>0</Excluded>
@@ -545,8 +545,8 @@
         <returns>
           <para
             >A <see cref="T:System.Int64" />
-containing the decremented value. </para
-          >
+containing the decremented value.
+          </para>
         </returns>
         <remarks>
           <para
@@ -559,8 +559,8 @@ containing the decremented value. </para
    of <see cref="M:System.Threading.Interlocked.Increment(System.Int32@)" /> and <see cref="M:System.Threading.Interlocked.Decrement(System.Int32@)" /> are truly atomic only on systems where
    a <see cref="T:System.IntPtr" /> is
    64-bits long. On other systems, these methods are atomic with respect to
-   each other, but not with respect to other means of accessing the data.</para
-          >
+   each other, but not with respect to other means of accessing the data.
+          </para>
         </remarks>
       </Docs>
       <Excluded>0</Excluded>
@@ -637,14 +637,14 @@ containing the decremented value. </para
           <para
             > Sets a <see cref="T:System.Int32" /> variable to a specified value as an atomic
    operation and returns the original value.
-   </para
-          >
+
+          </para>
         </summary>
         <returns>
           <para
             > A <see cref="T:System.Int32" /> containing the value of <paramref name="location1" />
-before the exchange.</para
-          >
+before the exchange.
+          </para>
         </returns>
         <remarks>To be added.</remarks>
       </Docs>
@@ -753,14 +753,14 @@ before the exchange.</para
           <para
             > Sets a <see cref="T:System.Object" /> reference to refer to a specified object as an
    atomic operation and returns a reference to the original object.
-   </para
-          >
+
+          </para>
         </summary>
         <returns>
           <para
             > The original value of <paramref name="location1" /> .
-   </para
-          >
+
+          </para>
         </returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException"
@@ -806,14 +806,14 @@ before the exchange.</para
           <para
             > Sets a <see cref="T:System.Single" /> variable to a specified value as an atomic
    operation and returns the original value.
-   </para
-          >
+
+          </para>
         </summary>
         <returns>
           <para
             > A <see cref="T:System.Single" /> containing the value of <paramref name="location1" />
-before the exchange.</para
-          >
+before the exchange.
+          </para>
         </returns>
         <remarks>To be added.</remarks>
       </Docs>
@@ -904,8 +904,8 @@ before the exchange.</para
         <returns>
           <para
             > A <see cref="T:System.Int32" /> containing the incremented value.
-   </para
-          >
+
+          </para>
         </returns>
         <remarks>
           <para
@@ -955,8 +955,8 @@ before the exchange.</para
         <returns>
           <para
             >A <see cref="T:System.Int64" />
-containing the incremented value. </para
-          >
+containing the incremented value.
+          </para>
         </returns>
         <remarks>
           <para
@@ -968,8 +968,8 @@ containing the incremented value. </para
             > The 64-bit versions of <see cref="M:System.Threading.Interlocked.Increment(System.Int32@)" />
 and <see cref="M:System.Threading.Interlocked.Decrement(System.Int32@)" /> are truly atomic only on systems where a <see cref="T:System.IntPtr" /> is 64-bits
 long. On other systems, these methods are atomic with respect to each
-other, but not with respect to other means of accessing the data.</para
-          >
+other, but not with respect to other means of accessing the data.
+          </para>
         </remarks>
       </Docs>
       <Excluded>0</Excluded>

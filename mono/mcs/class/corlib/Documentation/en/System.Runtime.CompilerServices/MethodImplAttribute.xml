@@ -219,8 +219,8 @@
           <para
             >The <see cref="T:System.Runtime.CompilerServices.MethodImplOptions" /> value
    describing the method attributed
-   by the current instance.</para
-          >
+   by the current instance.
+          </para>
         </value>
         <remarks>
           <para>This property is read-only.</para>

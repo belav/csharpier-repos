@@ -50,8 +50,7 @@ public class WriteFragment
     xWriter.Close();           
   }
 }
-   </code
-      >
+   </code>
       <para>The output is</para>
       <para>
         <c>&lt;prefix:Element1 n1:Attr1="value1" n2:Attr2="value2" xmlns:n2="namespace2"
@@ -412,8 +411,8 @@ public class WriteFragment
               cref="T:System.IO.Stream"
               qualify="true"
             />, or <see langword="null" /> if the current
-   instance does not use an underlying stream.</para
-          >
+   instance does not use an underlying stream.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -540,8 +539,8 @@ public class WriteFragment
               cref="T:System.Xml.Formatting"
               qualify="true"
             /> enumeration. The default is <see cref="F:System.Xml.Formatting.None" /> (no
-   special formatting).</para
-          >
+   special formatting).
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -668,8 +667,8 @@ public class WriteFragment
               qualify="true"
             /> specifying the 
    character to use for indenting. The default is space
-   (character code 0x20).</para
-          >
+   (character code 0x20).
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -820,8 +819,8 @@ public class WriteFragment
               qualify="true"
             /> specifying the 
    quotation mark character (" or ') used to enclose the value of an attribute. The
-   default is the double quote. </para
-          >
+   default is the double quote.
+          </para>
         </value>
         <exception cref="T:System.ArgumentException"
           >The value to be set is not the single quote or double quote character.</exception
@@ -2320,8 +2319,8 @@ public class WriteFragment
           <para
             >This example demonstrates the <see cref="M:System.Xml.XmlTextWriter.WriteStartElement(System.String,System.String,System.String)" /> 
 method, writing the XML to the
-console.</para
-          >
+console.
+          </para>
           <code lang="C#"
             >using System;
 using System.Xml;
@@ -2337,8 +2336,7 @@ public class WriteXml
     xWriter.WriteEndDocument();
   }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <para>
             <c>&lt;?xml version="1.0" encoding=
@@ -2425,8 +2423,8 @@ public class WriteXml
         <value>
           <para
             > One of the members of the <see cref="T:System.Xml.WriteState" /> enumeration.
-   </para
-          >
+
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2492,8 +2490,7 @@ public class WriteFrag {
     xtWriter.WriteString("&lt;1 &amp; 2 = 3&gt;");
   }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <para>&amp;lt;1 &amp;amp; 2 = 3&amp;gt;</para>
         </example>
@@ -2694,8 +2691,8 @@ public class WriteFrag {
               qualify="true"
             />
 containing the language attribute, or <see langword="null" /> if the
-language attribute is not specified for the element.</para
-          >
+language attribute is not specified for the element.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2745,8 +2742,8 @@ language attribute is not specified for the element.</para
               cref="T:System.Xml.XmlSpace"
               qualify="true"
             /> enumeration, or <see cref="F:System.Xml.XmlSpace.None" /> if the white space attribute is not
-   specified for the element. </para
-          >
+   specified for the element.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />

@@ -18,8 +18,8 @@
 </para>
       <para>
    Developers typically hook up to one or more events in the HttpApplication in their implementation of the <see cref="M:System.Web.IHttpModule.Init(HttpContext)" /> method.
-</para
-      >
+
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

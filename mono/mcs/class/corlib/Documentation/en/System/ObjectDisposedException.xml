@@ -47,8 +47,8 @@
     <example>
       <para
         >The following example demonstrates an error that causes the <see cref="T:System.ObjectDisposedException" />
-exception to be thrown.</para
-      >
+exception to be thrown.
+      </para>
       <code lang="C#"
         >using System;
 using System.IO;
@@ -65,8 +65,7 @@ public class ObjectDisposedExceptionTest {
       }
    }
 }
-</code
-      >
+</code>
       <para>The output is</para>
       <c>
         <para>Caught: Cannot access a closed Stream.</para>
@@ -103,8 +102,8 @@ public class ObjectDisposedExceptionTest {
           <para
             >The following example displays the error message of a
    <see cref="T:System.ObjectDisposedException" /> instance created
-      using this constructor.</para
-          >
+      using this constructor.
+          </para>
           <code lang="C#"
             >using System;
 
@@ -152,8 +151,7 @@ public class ExampleDisposableObject : IDisposable {
  
  private bool isDisposed;
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>Caught: Cannot access a disposed object named "ExampleDisposableObject".</para>
@@ -305,8 +303,8 @@ public class ExampleDisposableObject : IDisposable {
         <example>
           <para
             >The following example throws a <see cref="T:System.ObjectDisposedException" /> instance created using this
-   constructor.</para
-          >
+   constructor.
+          </para>
           <code lang="C#"
             >using System;
 
@@ -357,8 +355,7 @@ public class ExampleDisposableObject : IDisposable {
  
  private bool isDisposed;
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>Caught: Oh-oh! This object has been disposed!</para>
@@ -469,8 +466,8 @@ public class ExampleDisposableObject : IDisposable {
         <value>
           <para
             >A <see cref="T:System.String" /> that describes
-   the error. </para
-          >
+   the error.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />

@@ -77,8 +77,8 @@
     Visible="<codeFeaturedElement>True</codeFeaturedElement>|False"
 &gt;
         &lt;!-- child controls --&gt;
-&lt;/asp:ContentPlaceHolder&gt;</code
-      >
+&lt;/asp:ContentPlaceHolder&gt;
+      </code>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

@@ -28,8 +28,8 @@
         <param name="machineStore">Whether to use global (machine) key store.</param>
         <exception cref="T:System.ArgumentNullException">
           <paramref name="file" /> was <see langword="null" /> or empty.
-	</exception
-        >
+
+        </exception>
         <summary>Reads key from an existing file.</summary>
         <remarks
           >Given a path to an XML file with embedded key, it parses the file to retrieve all the information about the key. 
@@ -98,8 +98,8 @@ be modified with the specified key value. The key value must follow the format u
         <param name="machineStore">Whether to use global (machine) key store.</param>
         <exception cref="T:System.ArgumentNullException">
           <paramref name="containerName" /> was <see langword="null" /> or empty.
-	</exception
-        >
+
+        </exception>
         <summary>Generates a new key to be placed in a container.</summary>
         <remarks
           >Generates an RSA keypair with the key of size <paramref name="keySize" />. When the <see cref="M:Save" /> method is called, the keypair will be placed in the container named by
@@ -124,8 +124,8 @@ be modified with the specified key value. The key value must follow the format u
 the container name as-is in the persisted file, but rather it generates an MD5 hash out of it. So, in order to always refer to the same container you
 must set this property to the human-readable container name in cases when key was read from a persisted file or otherwise when saving such a key back
 to disk it will end up in a different container.
-</remarks
-        >
+
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="IsValid">

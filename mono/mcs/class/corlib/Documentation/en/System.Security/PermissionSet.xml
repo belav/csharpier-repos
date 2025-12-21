@@ -449,8 +449,8 @@
             <block subset="none" type="overrides"
               >Override this 
       method to customize the manner in which elements are added to <paramref name=" array" />
-      . </block
-            >
+      .
+            </block>
           </para>
         </remarks>
         <exception cref="T:System.ArgumentException">
@@ -704,8 +704,7 @@
           <para>
             <block subset="none" type="usage"
               >Applications do
-      not typically call this method; it is called by the system.</block
-            >
+      not typically call this method; it is called by the system.</block>
           </para>
         </remarks>
         <exception cref="T:System.ArgumentNullException">
@@ -1365,8 +1364,8 @@ myPermSet.RemovePermission(typeof(FileIOPermission));</code>
           <para
             >The following example displays the XML that encodes the 
       state of a <see cref="T:System.Security.PermissionSet" />
-      .</para
-          >
+      .
+          </para>
           <code lang="C#">
 using System;
 using System.Security;
@@ -1380,8 +1379,7 @@ public class PermissionSetToStringExample {
   }
 }
 
-			</code
-          >
+			</code>
           <para>The output is</para>
           <para>&lt;PermissionSet class="System.Security.PermissionSet" version="1"
          Unrestricted="true"/&gt;</para>
@@ -1442,8 +1440,7 @@ public class PermissionSetToStringExample {
           <para>
             <block subset="none" type="usage"
               >This method is called by the
-      system.</block
-            >
+      system.</block>
           </para>
         </remarks>
         <summary>

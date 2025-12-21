@@ -159,16 +159,16 @@
         <value>
           <para
             >A <see cref="T:System.Int32" /> that indicates the number of elements contained in the current
-   instance.</para
-          >
+   instance.
+          </para>
         </value>
         <remarks>
           <para>This property is read-only.</para>
           <block subset="none" type="behaviors">
             <para
               >The <see cref="P:System.Collections.ICollection.Count" /> property
-      is required to return the total number of elements contained in the current instance.</para
-            >
+      is required to return the total number of elements contained in the current instance.
+            </para>
           </block>
         </remarks>
         <summary>
@@ -248,8 +248,8 @@
         <value>
           <para
             >A <see cref="T:System.Object" /> that can be
-   used for thread-safe synchronized access to the current instance.</para
-          >
+   used for thread-safe synchronized access to the current instance.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />

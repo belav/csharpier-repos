@@ -180,8 +180,8 @@
                 Target="string|_blank|_parent|_search|_self|<codeFeaturedElement>_top</codeFeaturedElement>"
                 Top="integer"
             /&gt;
-&lt;/asp:ImageMap&gt;</code
-      >
+&lt;/asp:ImageMap&gt;
+      </code>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

@@ -427,8 +427,8 @@
                     Visible="<codeFeaturedElement>True</codeFeaturedElement>|False"
                 /&gt;
         &lt;/WizardSteps&gt;
-&lt;/asp:Wizard&gt;</code
-      >
+&lt;/asp:Wizard&gt;
+      </code>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

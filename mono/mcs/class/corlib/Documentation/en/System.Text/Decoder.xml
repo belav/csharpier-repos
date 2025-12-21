@@ -39,8 +39,8 @@
 implementation of the <see cref="T:System.Text.Decoder" /> class to convert two byte arrays to a character
 array, where one character's bytes span multiple byte arrays. This demonstrates
 how to use a <see cref="T:System.Text.Decoder" />
-in streaming-like situations.</para
-      >
+in streaming-like situations.
+      </para>
       <code lang="C#">
 using System;
 using System.Text;
@@ -74,8 +74,7 @@ public class DecoderExample
          Console.Write("U+{0:x} ", (ushort)c);
    }
 }
-</code
-      >
+</code>
       <para>The output is </para>
       <c>
         <para>U+41 U+23 U+2623</para>

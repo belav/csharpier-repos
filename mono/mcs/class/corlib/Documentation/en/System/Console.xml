@@ -23,8 +23,8 @@
     <example>
       <para
         >The following example demonstrates the use of basic <see cref="T:System.Console" /> input and output
-   functions. The program waits for the user to enter a name.</para
-      >
+   functions. The program waits for the user to enter a name.
+      </para>
       <code lang="C#">
 using System;
 
@@ -39,8 +39,7 @@ public class ConsoleTest {
       Console.WriteLine("!");
    }
 }
-</code
-      >
+</code>
       <para>The output for a user who entered the name "Fred" is</para>
       <c>
         <para>Hello World!</para>
@@ -655,8 +654,8 @@ public class ConsoleTest {
         <value>
           <para
             >A synchronized <see cref="T:System.IO.TextWriter" /> object where error
-   output is sent.</para
-          >
+   output is sent.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2288,8 +2287,8 @@ public class ConsoleTest {
         <remarks>
           <para
             >This version of <see cref="M:System.Console.Write(System.String,System.Object)" /> is equivalent to <see cref="P:System.Console.Out" />.<see langword="Write" />( <paramref name="buffer" />
-).</para
-          >
+).
+          </para>
         </remarks>
         <exception cref="T:System.IO.IOException">An I/O error occurred. </exception>
         <summary>

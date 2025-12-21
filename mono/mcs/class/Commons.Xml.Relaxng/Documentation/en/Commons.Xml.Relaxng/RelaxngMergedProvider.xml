@@ -111,8 +111,8 @@
         >
         <remarks
           >Note that returned <see cref="T:Commons.Xml.Relaxng.RelaxngDatatypeProvider" /> does not always support the datatypes indicated by the datatype library URI. <see cref="M:Commons.Xml.Relaxng.RelaxngDatatypeProvider.GetDatatype" /> is not always bound to certain datatype library.
-		</remarks
-        >
+
+        </remarks>
       </Docs>
     </Member>
   </Members>

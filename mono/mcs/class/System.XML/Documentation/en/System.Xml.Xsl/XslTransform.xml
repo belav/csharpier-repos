@@ -3104,20 +3104,20 @@ xslt.Load(xslNav,resolver,evidence);</code>
       <remarks>
         <para
           >This method compiles the stylesheet from <see cref="System.Xml.XPath.XPathNavigator" /> instance.
-</para
-        >
+
+        </para>
         <para
           >If the input was not valid stylesheet, an <see cref="T:System.Xml.Xsl.XslCompileException" /> will be thrown. Note that XSLT allows simplified syntax; the input does not always have XSLT "transform" (or "stylesheet") document element.
-</para
-        >
+
+        </para>
         <para
           >If there were XSLT "include" or "import" elements, then parameter "resolver" is used to resolve external resources. If it was not explicitly provided, then the value of <see cref="P:System.Xml.Xsl.XslTransform.XmlResolver" /> (that is set in advance) is used. If is was not set explicitly, then a <see cref="T:System.Xml.XmlUrlResolver" /> instance is used.
-</para
-        >
+
+        </para>
         <para
           >See also <see cref="M:System.Xml.Xsl.XslTransform.Transform" /> for the transformation details.
-</para
-        >
+
+        </para>
         <para>Note: Evidence is not used as yet.</para>
       </remarks>
     </Docs>

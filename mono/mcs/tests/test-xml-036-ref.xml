@@ -28,7 +28,6 @@
     </member>
     <member name="M:Foo.Main">
             main.
-        </member
-    >
+        </member>
   </members>
 </doc>

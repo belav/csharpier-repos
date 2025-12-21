@@ -136,8 +136,8 @@
           <para
             >A <see cref="T:System.String" /> containing a
    network access method allowed by the current instance. Valid values are
-   "Accept" and "Connect".</para
-          >
+   "Accept" and "Connect".
+          </para>
         </value>
         <exception cref="T:System.ArgumentException">
           <see cref="P:System.Net.SocketPermissionAttribute.Access" /> is being set and is not <see langword="null" /> .</exception
@@ -226,8 +226,8 @@
         <value>
           <para
             >A <see cref="T:System.String" /> containing a DNS host name or
-   IP address.</para
-          >
+   IP address.
+          </para>
         </value>
         <exception cref="T:System.ArgumentException">
           <see cref="P:System.Net.SocketPermissionAttribute.Host" /> is being set and is not <see langword="null" />.</exception
@@ -267,8 +267,8 @@
           <para
             >A <see cref="T:System.String" /> containing a port number, or "All" or
    -1 to indicate all
-   ports.</para
-          >
+   ports.
+          </para>
         </value>
         <exception cref="T:System.ArgumentException">
           <see cref="P:System.Net.SocketPermissionAttribute.Port" /> is being set and is not <see langword="null" />.</exception
@@ -309,8 +309,8 @@
             >A <see cref="T:System.String" /> containing the
    transport type associated with the current
    instance. Valid values are "All", "Connectionless", "ConnectionOriented", "Tcp", and
-   "Udp".</para
-          >
+   "Udp".
+          </para>
         </value>
         <exception cref="T:System.ArgumentException">
           <see cref="P:System.Net.SocketPermissionAttribute.Transport" /> is being set and is not <see langword="null" />.</exception

@@ -288,8 +288,8 @@
                         &lt;/ContentTemplate&gt;
                 &lt;/asp:RoleGroup&gt;
         &lt;/RoleGroups&gt;
-&lt;/asp:LoginView&gt;</code
-      >
+&lt;/asp:LoginView&gt;
+      </code>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

@@ -1207,8 +1207,7 @@
           <para>
             <block subset="none" type="note"
               > This method is provided for
-      completeness.</block
-            >
+      completeness.</block>
           </para>
         </remarks>
         <summary>
@@ -1269,8 +1268,7 @@ class ConvertBoolTest {
         Console.WriteLine("(byte) {0} as bool = {1}",byte1,bool1);
     }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>(byte) 0 as bool = False</para>
@@ -1417,8 +1415,7 @@ class ConvertBoolTest {
         Console.WriteLine("(decimal) {0} as bool = {1}",decimal2,bool2);
     }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>(decimal) 0 as bool = False</para>
@@ -1489,8 +1486,7 @@ class ConvertBoolTest {
         Console.WriteLine("(double) {0} as bool = {1}",double2,bool2);
     }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>(double) 0 as bool = False</para>
@@ -1560,8 +1556,7 @@ class ConvertBoolTest {
         Console.WriteLine("(short) {0} as bool = {1}",short2,bool2);
     }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>(short) 0 as bool = False</para>
@@ -1631,8 +1626,7 @@ class ConvertBoolTest {
         Console.WriteLine("(int) {0} as bool = {1}",int2,bool2);
     }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>(int) 0 as bool = False</para>
@@ -1702,8 +1696,7 @@ class ConvertBoolTest {
         Console.WriteLine("(long) {0} as bool = {1}",long2,bool2);
     }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>(long) 0 as bool = False</para>
@@ -1821,8 +1814,7 @@ class ConvertBoolTest {
         Console.WriteLine("(sbyte) {0} as bool = {1}",sbyte2,bool2);
     }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>(sbyte) 0 as bool = False</para>
@@ -1892,8 +1884,7 @@ class ConvertBoolTest {
         Console.WriteLine("(float) {0} as bool = {1}",float2,bool2);
     }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>(float) 0 as bool = False</para>
@@ -1969,8 +1960,7 @@ class ConvertBoolTest {
         Console.WriteLine("(string) {0} as bool = {1}",string2,bool2);
     }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <code>
 (string) True as bool = True
@@ -2061,8 +2051,7 @@ class ConvertBoolTest {
         Console.WriteLine("(ushort) {0} as bool = {1}",ushort1,bool1);
     }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>(ushort) 0 as bool = False</para>
@@ -2138,8 +2127,7 @@ class ConvertBoolTest {
         Console.WriteLine("(uint) {0} as bool = {1}",uint1,bool1);
     }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>(uint) 0 as bool = False</para>
@@ -2215,8 +2203,7 @@ class ConvertBoolTest {
         Console.WriteLine("(ulong) {0} as bool = {1}",ulong1,bool1);
     }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>(ulong) 0 as bool = False</para>
@@ -2420,8 +2407,7 @@ class ConvertBoolTest {
           <para>
             <block subset="none" type="note"
               > This method is
-      provided for completeness.</block
-            >
+      provided for completeness.</block>
           </para>
         </remarks>
         <summary>
@@ -2488,8 +2474,7 @@ class ConvertByteTest {
         Console.WriteLine("(char) {0} as byte = {1}",char2,byte2);
     }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>(char) 0 as byte = 48</para>
@@ -2610,8 +2595,7 @@ class ConvertByteTest {
         Console.WriteLine("(decimal) {0} as byte = {1}",decimal3,byte3);
     }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>(decimal) 0 as byte = 0</para>
@@ -2681,8 +2665,8 @@ class ConvertByteTest {
             >Prior to the conversion, if <paramref name="value" /> is halfway
    between two numbers, it is rounded to the number that has an even digit in the
    rightmost decimal position. For example, when rounded to two decimals, the value
-   2.345 becomes 2.34 and the value 2.355 becomes 2.36</para
-          >
+   2.345 becomes 2.34 and the value 2.355 becomes 2.36
+          </para>
         </remarks>
         <exception cref="T:System.OverflowException">
           <paramref name="value" /> is greater than <see cref="F:System.Byte.MaxValue" /> or less than <see cref="F:System.Byte.MinValue" />, or <paramref name="value" /> is equal to one of <see cref="F:System.Double.NaN" />, <see cref="F:System.Double.PositiveInfinity" />, or <see cref="F:System.Double.NegativeInfinity" />. </exception
@@ -2711,8 +2695,7 @@ class ConvertByteTest {
         Console.WriteLine("(double) {0} as byte = {1}",double3,byte3);
     }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>(double) 0 as byte = 0</para>
@@ -3008,8 +2991,8 @@ class ConvertByteTest {
           <para
             >Prior to the conversion, if <paramref name="value" /> is halfway between two whole
    numbers, it is rounded to the nearest even integer. For example, 4.5 is rounded
-   to 4, and 5.5 is rounded to 6.</para
-          >
+   to 4, and 5.5 is rounded to 6.
+          </para>
         </remarks>
         <exception cref="T:System.OverflowException">
           <paramref name="value" /> is greater than <see cref="F:System.Byte.MaxValue" /> or less than <see cref="F:System.Byte.MinValue" />, or <paramref name="value" /> is equal to one of <see cref="F:System.Single.NaN" />, <see cref="F:System.Single.PositiveInfinity" />, or <see cref="F:System.Single.NegativeInfinity" />.</exception
@@ -3038,8 +3021,7 @@ class ConvertByteTest {
         Console.WriteLine("(float) {0} as byte = {1}",float3,byte3);
     }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>(float) 0 as byte = 0</para>
@@ -3126,8 +3108,7 @@ class ConvertByteTest {
         Console.WriteLine("(string) {0} as byte = {1}",string2,byte2);
     }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>(string) +22 as byte = 22</para>
@@ -3225,8 +3206,7 @@ class ConvertByteTest {
         Console.WriteLine("(ushort) {0} as byte = {1}",ushort1,byte1);
     }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>(ushort) 0 as byte = 0</para>
@@ -3364,8 +3344,7 @@ class ConvertByteTest {
         Console.WriteLine("(ulong) {0} as byte = {1}",ulong1,byte1);
     }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>(ulong) 0 as byte = 0</para>
@@ -3692,8 +3671,7 @@ class ConvertByteTest {
           <para>
             <block subset="none" type="note"
               > This method is 
- provided for completeness.</block
-            >
+ provided for completeness.</block>
           </para>
         </remarks>
         <summary>
@@ -4572,8 +4550,7 @@ class ConvertByteTest {
           <para>
             <block subset="none" type="note"
               > This method is 
- provided for completeness.</block
-            >
+ provided for completeness.</block>
           </para>
         </remarks>
         <summary>
@@ -5439,8 +5416,7 @@ class ConvertByteTest {
           <para>
             <block subset="none" type="note"
               > This method is 
- provided for completeness.</block
-            >
+ provided for completeness.</block>
           </para>
         </remarks>
         <summary>
@@ -6381,8 +6357,7 @@ class ConvertByteTest {
           <para>
             <block subset="none" type="note"
               > This method is
-      provided for completeness.</block
-            >
+      provided for completeness.</block>
           </para>
         </remarks>
         <summary>
@@ -7240,8 +7215,8 @@ class ConvertByteTest {
           <para
             >Prior to the conversion, if <paramref name="value" /> is halfway
    between two whole numbers, it is rounded to the nearest even integer. For
-   example, 4.5 is rounded to 4, and 5.5 is rounded to 6.</para
-          >
+   example, 4.5 is rounded to 4, and 5.5 is rounded to 6.
+          </para>
         </remarks>
         <exception cref="T:System.OverflowException">
           <paramref name="value" /> is greater than <see cref="F:System.Int16.MaxValue" /> or less than <see cref="F:System.Int16.MinValue" />.</exception
@@ -7294,8 +7269,8 @@ class ConvertByteTest {
           <para
             >Prior to the conversion, if <paramref name="value" /> is halfway
    between two whole numbers, it is rounded to the nearest even integer. For
-   example, 4.5 is rounded to 4, and 5.5 is rounded to 6.</para
-          >
+   example, 4.5 is rounded to 4, and 5.5 is rounded to 6.
+          </para>
         </remarks>
         <exception cref="T:System.OverflowException">
           <paramref name="value" /> is greater than <see cref="F:System.Int16.MaxValue" /> or less than <see cref="F:System.Int16.MinValue" />. </exception
@@ -7348,8 +7323,7 @@ class ConvertByteTest {
           <para>
             <block subset="none" type="note"
               > This method is
-      provided for completeness.</block
-            >
+      provided for completeness.</block>
           </para>
         </remarks>
         <summary>
@@ -7583,8 +7557,8 @@ class ConvertByteTest {
           <para
             >Prior to the conversion, if <paramref name="value" /> is halfway
    between two whole numbers, it is rounded to the nearest even integer. For
-   example, 4.5 is rounded to 4, and 5.5 is rounded to 6.</para
-          >
+   example, 4.5 is rounded to 4, and 5.5 is rounded to 6.
+          </para>
         </remarks>
         <exception cref="T:System.OverflowException">
           <paramref name="value" /> is greater than <see cref="F:System.Int16.MaxValue" /> or less than <see cref="F:System.Int16.MinValue" />. </exception
@@ -8227,8 +8201,8 @@ class ConvertByteTest {
           <para
             >Prior to the conversion, if <paramref name="value" /> is halfway
    between two whole numbers, it is rounded to the nearest even integer. For
-   example, 4.5 is rounded to 4, and 5.5 is rounded to 6.</para
-          >
+   example, 4.5 is rounded to 4, and 5.5 is rounded to 6.
+          </para>
         </remarks>
         <exception cref="T:System.OverflowException">
           <paramref name="value" /> is greater than <see cref="F:System.Int32.MaxValue" /> or less than <see cref="F:System.Int32.MinValue" />. </exception
@@ -8281,8 +8255,8 @@ class ConvertByteTest {
           <para
             >Prior to the conversion, if <paramref name="value" /> is halfway
    between two whole numbers, it is rounded to the nearest even integer. For
-   example, 4.5 is rounded to 4, and 5.5 is rounded to 6.</para
-          >
+   example, 4.5 is rounded to 4, and 5.5 is rounded to 6.
+          </para>
         </remarks>
         <exception cref="T:System.OverflowException">
           <paramref name="value" /> is greater than <see cref="F:System.Int32.MaxValue" /> or less than <see cref="F:System.Int32.MinValue" />. </exception
@@ -8377,8 +8351,7 @@ class ConvertByteTest {
           <para>
             <block subset="none" type="note"
               > This method is
-      provided for completeness.</block
-            >
+      provided for completeness.</block>
           </para>
         </remarks>
         <summary>
@@ -8567,8 +8540,8 @@ class ConvertByteTest {
           <para
             >Prior to the conversion, if <paramref name="value" /> is halfway
    between two whole numbers, it is rounded to the nearest even integer. For
-   example, 4.5 is rounded to 4, and 5.5 is rounded to 6.</para
-          >
+   example, 4.5 is rounded to 4, and 5.5 is rounded to 6.
+          </para>
         </remarks>
         <exception cref="T:System.OverflowException">
           <paramref name="value" /> is greater than <see cref="F:System.Int32.MaxValue" /> or less than <see cref="F:System.Int32.MinValue" />. </exception
@@ -9207,8 +9180,8 @@ class ConvertByteTest {
           <para
             >Prior to the conversion, if <paramref name="value" /> is halfway
    between two whole numbers, it is rounded to the nearest even integer. For
-   example, 4.5 is rounded to 4, and 5.5 is rounded to 6.</para
-          >
+   example, 4.5 is rounded to 4, and 5.5 is rounded to 6.
+          </para>
         </remarks>
         <exception cref="T:System.OverflowException">
           <paramref name="value" /> is greater than <see cref="F:System.Int64.MaxValue" /> or less than <see cref="F:System.Int64.MinValue" />. </exception
@@ -9261,8 +9234,8 @@ class ConvertByteTest {
           <para
             >Prior to the conversion, if <paramref name="value" /> is halfway
    between two whole numbers, it is rounded to the nearest even integer. For
-   example, 4.5 is rounded to 4, and 5.5 is rounded to 6.</para
-          >
+   example, 4.5 is rounded to 4, and 5.5 is rounded to 6.
+          </para>
         </remarks>
         <exception cref="T:System.OverflowException">
           <paramref name="value" /> is greater than <see cref="F:System.Int64.MaxValue" /> or less than <see cref="F:System.Int64.MinValue" />. </exception
@@ -9399,8 +9372,7 @@ class ConvertByteTest {
           <para>
             <block subset="none" type="note"
               > This method is
-      provided for completeness.</block
-            >
+      provided for completeness.</block>
           </para>
         </remarks>
         <summary>
@@ -9544,8 +9516,8 @@ class ConvertByteTest {
           <para
             >Prior to the conversion, if <paramref name="value" /> is halfway
    between two whole numbers, it is rounded to the nearest even integer. For
-   example, 4.5 is rounded to 4, and 5.5 is rounded to 6.</para
-          >
+   example, 4.5 is rounded to 4, and 5.5 is rounded to 6.
+          </para>
         </remarks>
         <exception cref="T:System.OverflowException">
           <paramref name="value" /> is greater than <see cref="F:System.Int64.MaxValue" /> or less than <see cref="F:System.Int64.MinValue" />. </exception
@@ -10229,8 +10201,8 @@ class ConvertByteTest {
           <para
             >Prior to the conversion, if <paramref name="value" /> is halfway
    between two whole numbers, it is rounded to the nearest even integer. For
-   example, 4.5 is rounded to 4, and 5.5 is rounded to 6.</para
-          >
+   example, 4.5 is rounded to 4, and 5.5 is rounded to 6.
+          </para>
           <para
             >This member is not CLS-compliant. For a CLS-compliant alternative, use 
 <see cref="M:System.Convert.ToInt16(System.Object)" />(<see cref="T:System.Decimal" />).</para
@@ -10292,8 +10264,8 @@ class ConvertByteTest {
           <para
             >Prior to the conversion, if <paramref name="value" /> is halfway
    between two whole numbers, it is rounded to the nearest even integer. For
-   example, 4.5 is rounded to 4, and 5.5 is rounded to 6.</para
-          >
+   example, 4.5 is rounded to 4, and 5.5 is rounded to 6.
+          </para>
           <para
             >This member is not CLS-compliant. For a CLS-compliant alternative, use 
 <see cref="M:System.Convert.ToInt16(System.Object)" />(<see cref="T:System.Double" />).</para
@@ -10573,8 +10545,7 @@ class ConvertByteTest {
           <para>
             <block subset="none" type="note"
               > This method is
-      provided for completeness.</block
-            >
+      provided for completeness.</block>
           </para>
         </remarks>
         <summary>
@@ -10627,8 +10598,8 @@ class ConvertByteTest {
           <para
             >Prior to the conversion, if <paramref name="value" /> is halfway
    between two whole numbers, it is rounded to the nearest even integer. For
-   example, 4.5 is rounded to 4, and 5.5 is rounded to 6.</para
-          >
+   example, 4.5 is rounded to 4, and 5.5 is rounded to 6.
+          </para>
           <para
             >This member is not CLS-compliant. For a CLS-compliant alternative, use 
 <see cref="M:System.Convert.ToInt16(System.Object)" />(<see cref="T:System.Single" />).</para
@@ -11608,8 +11579,7 @@ class ConvertByteTest {
           <para>
             <block subset="none" type="note"
               > This method is
-      provided for completeness.</block
-            >
+      provided for completeness.</block>
           </para>
         </remarks>
         <summary>
@@ -12575,8 +12545,7 @@ class ConvertByteTest {
           <para>
             <block subset="none" type="note"
               > This method is 
- provided for completeness.</block
-            >
+ provided for completeness.</block>
           </para>
         </remarks>
         <summary>
@@ -14128,8 +14097,8 @@ class ConvertByteTest {
           <para
             >Prior to the conversion, if <paramref name="value" /> is halfway
    between two whole numbers, it is rounded to the nearest even integer. For
-   example, 4.5 is rounded to 4, and 5.5 is rounded to 6.</para
-          >
+   example, 4.5 is rounded to 4, and 5.5 is rounded to 6.
+          </para>
           <para
             >This member is not CLS-compliant. For a CLS-compliant 
    alternative, use <see cref="M:System.Convert.ToInt32(System.Object)" />(<see cref="T:System.Decimal" />). </para
@@ -14191,8 +14160,8 @@ class ConvertByteTest {
           <para
             >Prior to the conversion, if <paramref name="value " />is halfway
    between two whole numbers, it is rounded to the nearest even integer. For
-   example, 4.5 is rounded to 4, and 5.5 is rounded to 6.</para
-          >
+   example, 4.5 is rounded to 4, and 5.5 is rounded to 6.
+          </para>
           <para
             >This member is not CLS-compliant. For a CLS-compliant alternative, use 
 <see cref="M:System.Convert.ToInt32(System.Object)" />(<see cref="T:System.Double" />). </para
@@ -14523,8 +14492,8 @@ class ConvertByteTest {
           <para
             >Prior to the conversion, if <paramref name="value" /> is halfway
    between two whole numbers, it is rounded to the nearest even integer. For
-   example, 4.5 is rounded to 4, and 5.5 is rounded to 6.</para
-          >
+   example, 4.5 is rounded to 4, and 5.5 is rounded to 6.
+          </para>
           <para
             >This member is not CLS-compliant. For a CLS-compliant alternative, use 
 <see cref="M:System.Convert.ToInt32(System.Object)" />(<see cref="T:System.Single" />). </para
@@ -14652,8 +14621,7 @@ class ConvertByteTest {
           <para>
             <block subset="none" type="note"
               > This method is
-      provided for completeness.</block
-            >
+      provided for completeness.</block>
           </para>
           <para
             >This member is not CLS-compliant. For a CLS-compliant alternative, use 
@@ -15234,8 +15202,8 @@ class ConvertByteTest {
           <para
             >Prior to the conversion, if <paramref name="value" /> is halfway
    between two whole numbers, it is rounded to the nearest even integer. For
-   example, 4.5 is rounded to 4, and 5.5 is rounded to 6.</para
-          >
+   example, 4.5 is rounded to 4, and 5.5 is rounded to 6.
+          </para>
           <para
             >This member is not CLS-compliant. For a CLS-compliant alternative, use 
 <see cref="M:System.Convert.ToInt64(System.Object)" />(<see cref="T:System.Decimal" />).</para
@@ -15297,8 +15265,8 @@ class ConvertByteTest {
           <para
             >Prior to the conversion, if <paramref name="value" /> is halfway
    between two whole numbers, it is rounded to the nearest even integer. For
-   example, 4.5 is rounded to 4, and 5.5 is rounded to 6.</para
-          >
+   example, 4.5 is rounded to 4, and 5.5 is rounded to 6.
+          </para>
           <para
             >This member is not CLS-compliant. For a CLS-compliant alternative, use 
 <see cref="M:System.Convert.ToInt64(System.Object)" />(<see cref="T:System.Double" />).</para
@@ -15629,8 +15597,8 @@ class ConvertByteTest {
           <para
             >Prior to the conversion, if <paramref name="value" /> is halfway
    between two whole numbers, it is rounded to the nearest even integer. For
-   example, 4.5 is rounded to 4, and 5.5 is rounded to 6.</para
-          >
+   example, 4.5 is rounded to 4, and 5.5 is rounded to 6.
+          </para>
           <para
             >This member is not CLS-compliant. For a CLS-compliant alternative, use 
 <see cref="M:System.Convert.ToInt64(System.Object)" />(<see cref="T:System.Single" />).</para
@@ -15810,8 +15778,7 @@ class ConvertByteTest {
           <para>
             <block subset="none" type="note"
               > This method is
-      provided for completeness.</block
-            >
+      provided for completeness.</block>
           </para>
           <para
             >This member is not CLS-compliant. For a CLS-compliant alternative, use 
@@ -16337,8 +16304,8 @@ class ConvertByteTest {
           <para
             >Prior to the conversion, if <paramref name="value" /> is halfway
    between two whole numbers, it is rounded to the nearest even integer. For
-   example, 4.5 is rounded to 4, and 5.5 is rounded to 6.</para
-          >
+   example, 4.5 is rounded to 4, and 5.5 is rounded to 6.
+          </para>
           <para
             >This member is not CLS-compliant. For a CLS-compliant alternative, use 
 <see cref="M:System.Convert.ToDecimal(System.Object)" />(<see cref="T:System.Decimal" />).</para
@@ -16400,8 +16367,8 @@ class ConvertByteTest {
           <para
             >Prior to the conversion, if <paramref name="value" /> is halfway
    between two whole numbers, it is rounded to the nearest even integer. For
-   example, 4.5 is rounded to 4, and 5.5 is rounded to 6.</para
-          >
+   example, 4.5 is rounded to 4, and 5.5 is rounded to 6.
+          </para>
           <para
             >This member is not CLS-compliant. For a CLS-compliant alternative, use 
 <see cref="M:System.Convert.ToDecimal(System.Object)" />(<see cref="T:System.Double" />).</para
@@ -16732,8 +16699,8 @@ class ConvertByteTest {
           <para
             >Prior to the conversion, if <paramref name="value" /> is halfway
    between two whole numbers, it is rounded to the nearest even integer. For
-   example, 4.5 is rounded to 4, and 5.5 is rounded to 6.</para
-          >
+   example, 4.5 is rounded to 4, and 5.5 is rounded to 6.
+          </para>
           <para
             >This member is not CLS-compliant. For a CLS-compliant alternative, use 
 <see cref="M:System.Convert.ToDecimal(System.Object)" />(<see cref="T:System.Single" />).</para
@@ -16965,8 +16932,7 @@ class ConvertByteTest {
           <para>
             <block subset="none" type="note"
               > This method is
-      provided for completeness.</block
-            >
+      provided for completeness.</block>
           </para>
           <para
             >This member is not CLS-compliant. For a CLS-compliant alternative, use 

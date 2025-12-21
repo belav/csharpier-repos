@@ -61,8 +61,8 @@
             type="note"
           >
 			If <paramref name="drawable" /> is a Window, then the function <see cref="M:Cairo.XlibSurface.SetSize()" /> must be called whenever the size of the window changes.
-		  </block
-          >
+
+          </block>
         </remarks>
       </Docs>
       <AssemblyInfo>

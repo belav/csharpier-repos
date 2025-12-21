@@ -42,8 +42,8 @@
    <see cref="T:System.Diagnostics.ConditionalAttribute" /> with a
       particular compiler that supports the use of this
       attribute. The <see cref="P:System.Diagnostics.ConditionalAttribute.ConditionString" /> property of the current
-      attribute is initialized as "DEBUG".</para
-      >
+      attribute is initialized as "DEBUG".
+      </para>
       <c>
         <code lang="C#"
           >using System;
@@ -67,8 +67,7 @@ public class TestCondition {
     Console.WriteLine("&lt;eop&gt;"); 
   }
 }
-      </code
-        >
+      </code>
       </c>
       <para> When this code is compiled with the
       compilation-variable DEBUG defined at the callsite, the
@@ -208,8 +207,8 @@ How was this compiled?</para>
           <para
             >A <see cref="T:System.String" />
 that contains the pre-processing identifier that makes callable the target
-method of the current instance.</para
-          >
+method of the current instance.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />

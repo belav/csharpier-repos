@@ -37,8 +37,8 @@
       <para>
         <block subset="none" type="note"
           >This class provides the loaded assembly via the <see cref="P:System.AssemblyLoadEventArgs.LoadedAssembly" />
-property.</block
-        >
+property.
+        </block>
       </para>
     </remarks>
     <summary>
@@ -120,8 +120,8 @@ property.</block
         <value>
           <para
             > A <see cref="T:System.Reflection.Assembly" />
-representing the assembly that has been loaded.</para
-          >
+representing the assembly that has been loaded.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />

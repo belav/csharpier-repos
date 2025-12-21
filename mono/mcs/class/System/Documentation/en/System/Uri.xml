@@ -182,8 +182,7 @@ FieldInfo iriParsingField = typeof (Uri).GetField ("s_IriParsing",
     BindingFlags.Static | BindingFlags.GetField | BindingFlags.NonPublic);
 if (iriParsingField != null)
     iriParsingField.SetValue (null, false);
-	</code
-        >
+	</code>
       </example>
     </remarks>
     <summary>
@@ -354,8 +353,7 @@ public class UriTest {
  Console.WriteLine(myUri.ToString());
  }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>http://www.contoso.com/Hello World.htm</para>
@@ -585,8 +583,8 @@ public class UriTest {
    <see cref="T:System.Uri" /> class by
       combining a <see cref="T:System.Uri" /> instance representing the
       base URI and a string containing a relative URI.
-      </para
-          >
+
+          </para>
           <code lang="C#"
             >using System;
 
@@ -624,8 +622,7 @@ public class UriTest {
 
  }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>Typical usage: http://www.contoso.com/index.htm
@@ -695,8 +692,8 @@ public class UriTest {
         <value>
           <para
             >A <see cref="T:System.String" /> containing the
-   absolute path to the resource.</para
-          >
+   absolute path to the resource.
+          </para>
         </value>
         <example>
           <para> The following example outputs the absolute
@@ -710,8 +707,7 @@ public class UriTest {
    Console.WriteLine(myUri.AbsolutePath);
  }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>/URI/Hello%20World.htm</para>
@@ -752,8 +748,8 @@ public class UriTest {
         <value>
           <para
             >A <see cref="T:System.String" /> containing the URI
-   used to construct the current instance, in canonical format.</para
-          >
+   used to construct the current instance, in canonical format.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -872,8 +868,8 @@ public class UriTest {
         <example>
           <para
             > The following example demonstrates using the <see cref="M:System.Uri.CheckHostName(System.String)" /> method.
-   </para
-          >
+
+          </para>
           <code lang="C#"
             >using System;
 
@@ -883,8 +879,7 @@ public class UriTest {
  Console.WriteLine(Uri.CheckHostName("www.contoso.com"));
  }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>Dns</para>
@@ -1005,14 +1000,12 @@ public class UriTest {
       or dangerous character sequences in the components of the current instance, and
       removes them. The semantics that determine whether a character sequence presents
       a security risk are determined by the scheme of the current
-      instance.</block
-            >
+      instance.</block>
           </para>
           <para>
             <block subset="none" type="default"
               >The default implementation does
-      nothing.</block
-            >
+      nothing.</block>
           </para>
           <para>
             <block subset="none" type="overrides"
@@ -1024,8 +1017,8 @@ public class UriTest {
             <block subset="none" type="usage"
               >Invoke this method on instances of
       types derived from <see cref="T:System.Uri" /> to remove any URI content that allows unauthorized
-      access to resources.</block
-            >
+      access to resources.
+            </block>
           </para>
         </remarks>
         <summary>
@@ -1310,8 +1303,8 @@ public class UriTest {
               >Converts any unsafe or reserved characters in the <see cref="P:System.Uri.AbsolutePath" /> component to a character 
       sequence
       consisting of a "%" followed by the hexadecimal value of the character
-      as described by IETF 2396. </para
-            >
+      as described by IETF 2396.
+            </para>
             <para
               >If the path component of the current instance is <see langword="null" />, the
    escaped path is <see cref="F:System.String.Empty" />.</para
@@ -1320,28 +1313,25 @@ public class UriTest {
           <para>
             <block subset="none" type="default"
               >As described
-   above.</block
-            >
+   above.</block>
           </para>
           <para>
             <block subset="none" type="overrides"
               >Override this
    method to customize the escaping behavior provided by the <see cref="T:System.Uri" />
-   type.</block
-            >
+   type.
+            </block>
           </para>
           <para>
             <block subset="none" type="usage"
               >Applications
    typically do not call this method; it is intended for use by the
-   constructors.</block
-            >
+   constructors.</block>
           </para>
           <para>
             <block subset="none" type="note"
               >For additional
-   information on escaping URI, see section 2 of RFC 2396.</block
-            >
+   information on escaping URI, see section 2 of RFC 2396.</block>
           </para>
         </remarks>
         <summary>
@@ -1537,15 +1527,15 @@ public class UriTest {
         <value>
           <para
             >A <see cref="T:System.String" /> containing any
-   fragment information contained in the URI used to construct the current instance.</para
-          >
+   fragment information contained in the URI used to construct the current instance.
+          </para>
         </value>
         <example>
           <para
             >The following example demonstrates the use of the
    <see cref="P:System.Uri.Fragment" />
-   property.</para
-          >
+   property.
+          </para>
           <code lang="C#"
             >using System;
 
@@ -1558,8 +1548,7 @@ public class UriTest {
  Console.WriteLine(myUri.Fragment);
  }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>#main</para>
@@ -1795,8 +1784,7 @@ public class UriTest {
     }  
   }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>URI: http://www.contoso.com/index.htm</para>
@@ -2128,12 +2116,12 @@ public class UriTest {
    digits are converted to <see cref="T:System.Char" />. Otherwise, the character at <paramref name="index" /> is returned. Valid hexadecimal digits are:
    0-9,
    a-f, A-F.
-   </para
-          >
+
+          </para>
           <para
             >On return, the value of <paramref name="index " />
-contains the index of the character following the one returned.</para
-          >
+contains the index of the character following the one returned.
+          </para>
         </returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
@@ -2170,8 +2158,8 @@ contains the index of the character following the one returned.</para
         <example>
           <para
             >The following example demonstrates using the <see cref="P:System.Uri.Host" /> 
-property.</para
-          >
+property.
+          </para>
           <code lang="C#"
             >using System;
 
@@ -2184,8 +2172,7 @@ public class UriTest {
  Console.WriteLine(myUri.Host);
  }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>www.contoso.com</para>
@@ -2228,8 +2215,8 @@ public class UriTest {
         <value>
           <para
             > A <see cref="T:System.UriHostNameType" /> that indicates the format of the host address 
-   information in the current instance.</para
-          >
+   information in the current instance.
+          </para>
         </value>
         <remarks>
           <para>This property is read-only.</para>
@@ -2553,8 +2540,8 @@ public class UriTest {
         <remarks>
           <para
             >This method returns <see langword="true" /> for the following characters:
-   </para
-          >
+
+          </para>
           <list type="table">
             <listheader>
               <term>Character(s)</term>
@@ -2836,8 +2823,7 @@ public class UriTest {
 
  }
 }
-</code
-          >
+</code>
           <para>The output is </para>
           <para> 
  http://127.0.0.1/index.htm is loopback?
@@ -2938,15 +2924,14 @@ public class UriTest {
           <para>
             <block subset="none" type="behaviors"
               > As described above. 
-   </block
-            >
+   </block>
           </para>
           <para>
             <block subset="none" type="overrides"
               >Override this 
    method to customize the escaping behavior provided by the <see cref="T:System.Uri" />
-   type.</block
-            >
+   type.
+            </block>
           </para>
           <para>
             <block subset="none" type="usage"
@@ -3264,8 +3249,8 @@ public class UriTest {
           <para
             > A <see cref="T:System.String" /> containing the
    local representation of the resource identified by the current
-   instance.</para
-          >
+   instance.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3310,8 +3295,8 @@ public class UriTest {
         <example>
           <para
             >The following example demonstrates the <see cref="M:System.Uri.MakeRelative(System.Uri)" />
-method.</para
-          >
+method.
+          </para>
           <code lang="C#"
             >using System;
 public class UriTest {
@@ -3321,8 +3306,7 @@ public class UriTest {
     Console.WriteLine(myUri.MakeRelative(new Uri ("http://www.contoso.com/index.htm")));
   }
 }
-</code
-          >
+</code>
           <para>The output is </para>
           <c>
             <para>http://www.contoso.com/Hello World.htm</para>
@@ -3704,27 +3688,24 @@ public class UriTest {
 property, separates it into various URI components, and stores the
 components in the appropriate <see cref="T:System.Uri" />
 properties.
-</block
-            >
+
+            </block>
           </para>
           <para>
             <block subset="none" type="default"
               > This method parses path components as defined in IETF RFC 2396. 
-</block
-            >
+</block>
           </para>
           <para>
             <block subset="none" type="overrides">
    Override this method to provide parsing for URIs in
    formats that are not defined in IETF RFC 2396.
-</block
-            >
+</block>
           </para>
           <para>
             <block subset="none" type="usage"
               >Applications typically do not call this 
-   method; it is intended for use by the constructors.</block
-            >
+   method; it is intended for use by the constructors.</block>
           </para>
         </remarks>
         <exception cref="T:System.UriFormatException">
@@ -3767,8 +3748,8 @@ properties.
           <para
             > The following example uses the <see cref="P:System.Uri.PathAndQuery" /> property to extract the path and query information 
    from a <see cref="T:System.Uri" />
-   instance.</para
-          >
+   instance.
+          </para>
           <code lang="C#"
             >using System;
 
@@ -3781,8 +3762,7 @@ public class UriTest {
  Console.WriteLine(myUri.PathAndQuery);
  }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>/catalog/shownew.htm?date=today</para>
@@ -3875,8 +3855,8 @@ public class UriTest {
           <para
             > The following example uses the <see cref="P:System.Uri.Query" />
 property to extract the
-query from a URI.</para
-          >
+query from a URI.
+          </para>
           <code lang="C#"
             >using System;
 
@@ -3889,8 +3869,7 @@ public class UriTest {
  Console.WriteLine(myUri.Query);
  }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>?date=today</para>
@@ -4797,8 +4776,8 @@ public class UriTest {
             >A <see cref="T:System.String" /> containing any 
  user information included in the URI used to construct the current instance, or
 <see cref="F:System.String.Empty" /> if no user 
- information was included.</para
-          >
+ information was included.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />

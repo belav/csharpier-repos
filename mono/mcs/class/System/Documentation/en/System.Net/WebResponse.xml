@@ -43,8 +43,8 @@
       <para
         >The following example creates a <see cref="T:System.Net.WebResponse" />
 instance from a <see cref="T:System.Net.WebRequest" />
-.</para
-      >
+.
+      </para>
       <code lang="C#"
         >using System;
 using System.Net;
@@ -66,8 +66,7 @@ public class WebResponseExample {
     myResponse.Close();
   }
 }
-</code
-      >
+</code>
     </example>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -231,8 +230,8 @@ public class WebResponseExample {
         <value>
           <para
             >A <see cref="T:System.Int64" />
-containing the number of bytes returned from the resource.</para
-          >
+containing the number of bytes returned from the resource.
+          </para>
         </value>
         <exception cref="T:System.NotSupportedException"
           >This property is not implemented in the derived class. </exception
@@ -276,8 +275,8 @@ containing the number of bytes returned from the resource.</para
         <value>
           <para
             >A <see cref="T:System.String" /> that
-   contains the media type of the response data.</para
-          >
+   contains the media type of the response data.
+          </para>
         </value>
         <exception cref="T:System.NotSupportedException"
           >This property is not implemented in the derived class. </exception
@@ -507,8 +506,8 @@ containing the number of bytes returned from the resource.</para
         <value>
           <para
             >A <see cref="T:System.Net.WebHeaderCollection" /> containing the header name/value pairs associated
-   with the current instance.</para
-          >
+   with the current instance.
+          </para>
         </value>
         <exception cref="T:System.NotSupportedException"
           >This property is not implemented in the derived class. </exception
@@ -616,8 +615,8 @@ containing the number of bytes returned from the resource.</para
         <value>
           <para
             >A <see cref="T:System.Uri" /> containing the URI 
-   of the resource associated with the current response.</para
-          >
+   of the resource associated with the current response.
+          </para>
         </value>
         <exception cref="T:System.NotSupportedException"
           >This property is not implemented in the derived class. </exception

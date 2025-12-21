@@ -213,8 +213,7 @@
     >
 			.exe;
 			.dll
-		</AllowedReferenceAssemblyFileExtensions
-    >
+		</AllowedReferenceAssemblyFileExtensions>
 
     <AllowedReferenceRelatedFileExtensions
       Condition=" '$(AllowedReferenceRelatedFileExtensions)' == '' "
@@ -223,8 +222,7 @@
 			.dll.mdb;
 			.pdb;
 			.xml
-		</AllowedReferenceRelatedFileExtensions
-    >
+		</AllowedReferenceRelatedFileExtensions>
 
     <AssemblySearchPaths Condition="'$(AssemblySearchPaths)' == ''">
 			{CandidateAssemblyFiles};
@@ -236,8 +234,7 @@
 			{GAC};
 			{RawFileName};
 			$(OutDir)
-		</AssemblySearchPaths
-    >
+		</AssemblySearchPaths>
 
     <ResolveReferencesDependsOn>
 			BeforeResolveReferences;
@@ -842,8 +839,7 @@
 			Clean;
 			Build;
 			AfterRebuild;
-		</RebuildDependsOn
-    >
+		</RebuildDependsOn>
   </PropertyGroup>
 
   <Target Name="BeforeRebuild" />

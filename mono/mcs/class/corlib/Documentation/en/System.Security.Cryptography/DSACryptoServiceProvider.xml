@@ -416,8 +416,7 @@ bool IsPrivateKeyAvailable (DSA dsa)
 		return false;
 	}
 }
-  </code
-            >
+  </code>
           </example>
           <para
             >You are responsable to zeroize the private key (<see cref="T:System.Security.Cryptography.DSAParameters" />.<see cref="M:System.Security.Cryptography.DSAParameters.X" />) if you export it from the instance.</para

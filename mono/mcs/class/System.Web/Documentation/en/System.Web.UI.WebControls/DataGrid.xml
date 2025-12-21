@@ -521,8 +521,8 @@
             Wrap="<codeFeaturedElement>True</codeFeaturedElement>|False"
         /&gt;
         &lt;SelectedItemStyle /&gt;
-&lt;/asp:DataGrid&gt;</code
-      >
+&lt;/asp:DataGrid&gt;
+      </code>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

@@ -34,8 +34,8 @@
 <see cref="M:System.Xml.XmlWriter.Close" /> method is called, the write state is set to 
 <see langword="Closed" />. The <see cref="M:System.Xml.XmlWriter.WriteEndDocument" /> method resets the write state back to 
 <see langword="Start" />, allowing 
-   the writer to write a new XML document.</para
-      >
+   the writer to write a new XML document.
+      </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

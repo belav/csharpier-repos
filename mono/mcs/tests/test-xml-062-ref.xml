@@ -22,8 +22,8 @@
              Test
              <typeparamref name="TResult" />.
              <typeparamref name="T2" />.
-            </summary
-      >
+
+      </summary>
     </member>
   </members>
 </doc>

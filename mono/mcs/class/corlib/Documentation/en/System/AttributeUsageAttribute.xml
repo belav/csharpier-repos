@@ -169,8 +169,8 @@
           <para
             > The following example demonstrates the use of <see cref="P:System.AttributeUsageAttribute.AllowMultiple" />. If
 <see langword="AllowMultiple" /> for an attribute is set to <see langword="true" />, more
-than one of those attributes can be assigned to any given program element.</para
-          >
+than one of those attributes can be assigned to any given program element.
+          </para>
           <code lang="C#"
             >using System;
 
@@ -189,8 +189,7 @@ class JohnsClass {
 
   public static void Main() {}
 }
-</code
-          >
+</code>
           <para>
             <see langword="Example #2:" />
           </para>
@@ -218,8 +217,7 @@ class JohnsClass {
 
   public static void Main() {}
 }
-</code
-          >
+</code>
           <para>This should throw an error similar to:</para>
           <para>error CS0579: Duplicate 'Author' attribute</para>
         </example>
@@ -266,8 +264,8 @@ class JohnsClass {
       required therefore to traverse up the inheritance chain of a class if that
       consumer is interested in <see cref="T:System.Attribute" /> data that is marked inherited, but applied to an
       ancestor class. There is nothing for the compiler to validate at compile
-      time.</para
-          >
+      time.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -300,8 +298,8 @@ class JohnsClass {
         <value>
           <para
             > One or more of the <see cref="T:System.AttributeTargets" /> 
-values sent to the constructor, combined by a bitwise OR operation.</para
-          >
+values sent to the constructor, combined by a bitwise OR operation.
+          </para>
         </value>
         <remarks>
           <para>This property is read-only.</para>

@@ -130,8 +130,8 @@
         <value>
           <para
             >A <see cref="T:System.Reflection.PropertyAttributes" /> value that specifies the attributes of
-   the property reflected by the current instance.</para
-          >
+   the property reflected by the current instance.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -169,8 +169,8 @@
    property reflected by the current instance has a <see langword="Get" />
    accessor;
    otherwise, <see langword="false" />
-   .</para
-          >
+   .
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -208,8 +208,8 @@
    property reflected by the current instance has a <see langword="Set" />
    accessor;
    otherwise, <see langword="false" />
-   .</para
-          >
+   .
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1359,8 +1359,8 @@ Console.WriteLine("CurrCult: " +
           <para
             > A <see cref="T:System.Type" /> that represents the
    type of the
-   property reflected by the current instance.</para
-          >
+   property reflected by the current instance.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />

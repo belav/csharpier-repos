@@ -469,8 +469,8 @@
         <value>
           <para
             >A <see cref="T:System.String" /> containing the name of the file that caused the
-   current exception.</para
-          >
+   current exception.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -572,8 +572,8 @@
         <value>
           <para
             >A <see cref="T:System.String" /> containing a
-   message that describes the error that caused the current exception.</para
-          >
+   message that describes the error that caused the current exception.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />

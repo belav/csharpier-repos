@@ -45,8 +45,8 @@
       the ability to read the specified environment variables. The <see cref="F:System.Security.Permissions.SecurityAction.RequestMinimum" />
       security action indicates
       that this is the minimum permission required for the target assembly to be able
-      to execute.</para
-      >
+      to execute.
+      </para>
       <para>
         <c>[assembly:EnvironmentPermissionAttribute(SecurityAction.RequestMinimum, Read="COMPUTERNAME;USERNAME;USERDOMAIN")]
    </c>
@@ -213,8 +213,8 @@
         <value>
           <para
             > A <see cref="T:System.String" />
-containing one or more environment variables for which read access is secured.</para
-          >
+containing one or more environment variables for which read access is secured.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />

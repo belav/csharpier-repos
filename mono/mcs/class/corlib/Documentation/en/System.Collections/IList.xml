@@ -80,8 +80,8 @@
               >Use
       the <see cref="M:System.Collections.IList.Add(System.Object)" /> method to add another element to the
       current instance. The index into which that element is
-      added is implementation-dependent. </block
-            >
+      added is implementation-dependent.
+            </block>
           </para>
         </remarks>
         <exception cref="T:System.NotSupportedException">
@@ -416,8 +416,8 @@
             <block subset="none" type="usage"
               >Use this property
       for subscript indexing for the current instance in the following form: <c> myCollection[index]</c>.
-</block
-            >
+
+            </block>
           </para>
         </remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">

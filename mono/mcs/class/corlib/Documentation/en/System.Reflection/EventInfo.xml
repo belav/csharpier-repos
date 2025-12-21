@@ -218,8 +218,8 @@
           <para
             >A <see cref="T:System.Reflection.EventAttributes" /> value that specifies the attributes in the metadata of the
    event reflected by the current
-   instance.</para
-          >
+   instance.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -296,8 +296,8 @@
    the type of the
    event-handler <see cref="T:System.Delegate" /> associated with the event reflected by the current
    instance. Returns <see langword="null" /> if the method used to add a delegate to
-   the event is not public and is in a loaded assembly, and the caller does not have the required permission.</para
-          >
+   the event is not public and is in a loaded assembly, and the caller does not have the required permission.
+          </para>
         </value>
         <remarks>
           <para>This property is read-only.</para>

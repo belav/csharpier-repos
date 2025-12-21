@@ -67,8 +67,7 @@ public class MathAbsExample
       Console.WriteLine("Math.Abs( (Decimal)(-1.23) ) returns {0}",d2);
    }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>Math.Abs( (Decimal)0.00 ) returns 0</para>
@@ -638,8 +637,7 @@ public class MathAtan2Example
    }
 
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>Math.Atan2(2,0) returns 1.5707963267949</para>
@@ -860,8 +858,7 @@ public class MathCeilingExample
    }
 
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>Math.Ceiling(3.4) returns 4</para>
@@ -1034,8 +1031,8 @@ public class MathCeilingExample
         <returns>
           <para
             > A <see cref="T:System.Int32" /> containing the quotient of the specified numbers.
-      </para
-          >
+
+          </para>
         </returns>
         <remarks>To be added.</remarks>
       </Docs>
@@ -1080,8 +1077,8 @@ public class MathCeilingExample
         <returns>
           <para
             > A <see cref="T:System.Int64" /> containing the quotient of the specified numbers. 
-      </para
-          >
+
+          </para>
         </returns>
         <remarks>To be added.</remarks>
       </Docs>
@@ -1256,8 +1253,7 @@ public class MathFloorExample
    }
 
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>Math.Floor(3.4) returns 3</para>
@@ -1320,8 +1316,8 @@ public class MathFloorExample
         <example>
           <para
             >The following example demonstrates using the <see cref="M:System.Math.IEEERemainder(System.Double,System.Double)" /> 
-method.</para
-          >
+method.
+          </para>
           <code lang="C#"
             >using System;
 
@@ -1343,8 +1339,7 @@ public class MathIEEERemainderExample
    }
 
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>Math.IEEERemainder(3.54,0) returns NaN</para>
@@ -3497,8 +3492,7 @@ public class MathRoundExample
    }
 
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>Math.Round(4.4) returns 4</para>
@@ -3580,8 +3574,7 @@ public class MathRoundExample
    }
 
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>Math.Round(4.4) returns 4</para>
@@ -3786,8 +3779,7 @@ public class MathRoundExample
    }
 
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>Math.Round(3.44, 1) returns 3.4</para>
@@ -4154,8 +4146,7 @@ public class MathSignExample
    }
 
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>Math.Sign(4.4) returns 1 </para>
@@ -4652,8 +4643,7 @@ public class MathSinExample
    }
 
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>Math.Sin(0) returns 0</para>
@@ -4733,8 +4723,7 @@ public class MathSinhExample
    }
 
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>Math.Sinh(0) returns 0</para>
@@ -4819,8 +4808,7 @@ public class MathSqrtExample
    }
 
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>Math.Sqrt(16.0) returns 4</para>
@@ -4940,8 +4928,7 @@ public class MathTanExample
    }
 
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>Math.Tan(0) returns 0</para>
@@ -5018,8 +5005,7 @@ public class MathTanhExample
    }
 
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>Math.Tanh(0) returns 0 </para>

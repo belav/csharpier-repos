@@ -616,8 +616,8 @@
         <value>
           <para
             >A <see cref="T:System.String" /> containing the fragment component of the URI represented by the
- current instance.</para
-          >
+ current instance.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -733,8 +733,8 @@
         <value>
           <para
             >A <see cref="T:System.String" /> containing the
-   password used to access the resource represented by the current instance.</para
-          >
+   password used to access the resource represented by the current instance.
+          </para>
         </value>
         <remarks>
           <para
@@ -770,8 +770,8 @@
         <value>
           <para
             >A <see cref="T:System.String" /> containing the
-   path to the resource represented by the current instance.</para
-          >
+   path to the resource represented by the current instance.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -890,8 +890,8 @@
         <value>
           <para
             >A <see cref="T:System.String" /> containing the
-   scheme component of the current instance.</para
-          >
+   scheme component of the current instance.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1041,8 +1041,8 @@
         <value>
           <para
             >A <see cref="T:System.Uri" /> containing the URI
-   components of the current instance.</para
-          >
+   components of the current instance.
+          </para>
         </value>
         <exception cref="T:System.UriFormatException"
           >The URI constructed using the string representation of the current instance is in an invalid form.</exception
@@ -1084,15 +1084,15 @@
           <para
             >A <see cref="T:System.String" /> containing the
    user name used to access
-   the resource identified by the current instance.</para
-          >
+   the resource identified by the current instance.
+          </para>
         </value>
         <remarks>
           <para
             >Specifying <see langword="null" /> for a set operation sets this property to 
 <see cref="F:System.String.Empty" /> 
-.</para
-          >
+.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

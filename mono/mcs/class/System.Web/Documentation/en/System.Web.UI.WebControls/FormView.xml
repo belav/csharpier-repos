@@ -860,8 +860,8 @@
             &lt;!-- child controls --&gt;
         &lt;/PagerTemplate&gt;
         &lt;RowStyle /&gt;
-&lt;/asp:FormView&gt;</code
-      >
+&lt;/asp:FormView&gt;
+      </code>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

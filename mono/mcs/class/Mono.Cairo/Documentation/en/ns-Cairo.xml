@@ -19,8 +19,8 @@
 	 making any 1.2 calls or make it a requirement that the system
 	 must have a 1.2 Cairo installed.    Cairo 1.2 APIs have been
 	 flagged in the documentation.
-      </para
-      >
+
+      </para>
       <para>
 	Cairo draws into surfaces, there are many to choose from
 	(in-memory image buffers, PDF surfaces, Postscript surfaces,
@@ -68,8 +68,7 @@ class X {
 		}
 	}
 }
-	</code
-        >
+	</code>
       </example>
       <para>
 	To compile code that uses Mono.Cairo all you have to do is

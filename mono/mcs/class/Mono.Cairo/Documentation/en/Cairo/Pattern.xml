@@ -56,8 +56,7 @@
                 pattern.Destroy ();
                 image.Destroy();
         }
-  </code
-        >
+  </code>
       </example>
     </remarks>
   </Docs>

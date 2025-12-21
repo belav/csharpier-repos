@@ -215,8 +215,7 @@ public class Vers {
     Console.WriteLine( "Version is {0}", vers.ToString() );
   }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <para>
 Version is 6.1.2.4</para>
@@ -286,8 +285,7 @@ public class Vers {
     Console.WriteLine( "Version is {0}", vers.ToString() );
   }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <para>
 Version is 6.1</para>
@@ -368,8 +366,7 @@ public class Vers {
     Console.WriteLine( "Version is {0}", vers.ToString() );
   }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <para>
 Version is 6.1.2</para>
@@ -460,8 +457,7 @@ public class Vers {
     Console.WriteLine( "Version is {0}", vers.ToString() );
   }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <para>
 Version is 6.1.2.4</para>
@@ -559,8 +555,7 @@ class VersionBuildExample {
       Console.WriteLine("version vers = {0}.", vers.Build);
    }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <para>
             <c>The build
@@ -620,8 +615,7 @@ class VersionCloneExample {
                   clone.ToString());
   }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para> The string representation of the version is 6.1.2.4.</para>
@@ -707,8 +701,7 @@ class VersionTest {
       Console.WriteLine("version {0}", vers1);
    }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>Version 6.1.2.4 is newer than version 6.1</para>
@@ -957,8 +950,7 @@ class VersionEqualsExample {
       testEquals( vers1, vers2 );
    }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>It is True that version 6.1.2.4 is equal to 6.1.2.4.</para>
@@ -1103,8 +1095,8 @@ class VersionEqualsExample {
         <value>
           <para
             >A <see cref="T:System.Int32" qualify="true" />
-specifying the major component. </para
-          >
+specifying the major component.
+          </para>
         </value>
         <example>
           <code lang="C#"
@@ -1117,8 +1109,7 @@ class VersionMajorExample {
                         vers.Major);
    }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>The major component of version vers = 6.</para>
@@ -1187,8 +1178,8 @@ class VersionMajorExample {
         <value>
           <para
             >A <see cref="T:System.Int32" qualify="true" />
-specifying the minor component. </para
-          >
+specifying the minor component.
+          </para>
         </value>
         <example>
           <code lang="C#"
@@ -1201,8 +1192,7 @@ class VersionMinorExample {
                         vers.Minor);
    }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <para>
             <c>The minor
@@ -1279,8 +1269,8 @@ class VersionMinorExample {
           <para
             >The parts of the version number are compared 
       independently starting with the <see cref="P:System.Version.Major" /> property and then the <see cref="P:System.Version.Minor" />, <see cref="P:System.Version.Build" />, and <see cref="P:System.Version.Revision" /> properties, in order. This method returns
-      as soon as one of the properties is determined not to be equal.</para
-          >
+      as soon as one of the properties is determined not to be equal.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1344,8 +1334,8 @@ class VersionMinorExample {
    <see cref="P:System.Version.Major" /> 
    property and then the <see cref="P:System.Version.Minor" />, <see cref="P:System.Version.Build" />, and <see cref="P:System.Version.Revision" /> properties, in order. This
    method returns as soon as one of the properties is determined not to be
-   equal.</para
-          >
+   equal.
+          </para>
         </remarks>
         <exception cref="T:System.ArgumentNullException">
           <paramref name="v2" /> is a <see langword="null" /> reference.</exception
@@ -1412,8 +1402,8 @@ class VersionMinorExample {
    <see cref="P:System.Version.Major" /> 
    property and then the <see cref="P:System.Version.Minor" />, <see cref="P:System.Version.Build" />, and <see cref="P:System.Version.Revision" /> properties, in order. This
    method returns as soon as one of the properties is determined not to be
-   equal.</para
-          >
+   equal.
+          </para>
         </remarks>
         <exception cref="T:System.ArgumentNullException">
           <paramref name="v2" /> is a <see langword="null" /> reference.</exception
@@ -1480,8 +1470,8 @@ class VersionMinorExample {
    <see cref="P:System.Version.Major" /> 
    property and then the <see cref="P:System.Version.Minor" />, <see cref="P:System.Version.Build" />, and <see cref="P:System.Version.Revision" /> properties, in order. This
    method returns as soon as one of the properties is determined not to be
-   equal.</para
-          >
+   equal.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1545,8 +1535,8 @@ class VersionMinorExample {
    <see cref="P:System.Version.Major" /> 
    property and then the <see cref="P:System.Version.Minor" />, <see cref="P:System.Version.Build" />, and <see cref="P:System.Version.Revision" /> properties, in order. This
    method returns as soon as one of the properties is determined not to be
-   equal.</para
-          >
+   equal.
+          </para>
         </remarks>
         <exception cref="T:System.ArgumentNullException">
           <paramref name="v1" /> is a <see langword="null" /> reference.</exception
@@ -1613,8 +1603,8 @@ class VersionMinorExample {
    <see cref="P:System.Version.Major" /> 
    property and then the <see cref="P:System.Version.Minor" />, <see cref="P:System.Version.Build" />, and <see cref="P:System.Version.Revision" /> properties, in order. This
    method returns as soon as one of the properties is determined not to be
-   equal.</para
-          >
+   equal.
+          </para>
         </remarks>
         <exception cref="T:System.ArgumentNullException">
           <paramref name="v1" /> is a <see langword="null" /> reference.</exception
@@ -1725,8 +1715,8 @@ class VersionMinorExample {
               qualify="true"
             />
 specifying the revision component, or -1 if the revision component is
-undefined.</para
-          >
+undefined.
+          </para>
         </value>
         <example>
           <code lang="C#"
@@ -1739,8 +1729,7 @@ class VersionRevisionExample {
                         vers.Revision);
    }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>The revision component of version vers = 4.</para>

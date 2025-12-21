@@ -71,8 +71,8 @@
         <remarks>
           <para>
 	Creates a new document object. It is equivalent to <see cref="M:System.Xml.XmlDocument.ctor(System.Xml.XmlNameTable)" /> with a new <see cref="T:NameTable" /> object as its argument.
-	</para
-          >
+
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -137,8 +137,8 @@
         <remarks>
           <para>
 	Creates a new document object, using argument <see cref="T:System.Xml.XmlNameTable" /> as its <see cref="P:System.Xml.XmlDocument.NameTable" /> property.
-	</para
-          >
+
+          </para>
           <para>
 	The XmlNameTable is added some name strings used in the document object model, such as "#element" (node names), "xml", "lang" and "space" (predefined xml attributes).
 	</para>

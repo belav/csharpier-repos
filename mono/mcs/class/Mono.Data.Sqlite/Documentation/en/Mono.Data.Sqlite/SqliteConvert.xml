@@ -67,8 +67,8 @@
             [3] Five<br />
           <br />
             Note that the leading and trailing spaces were removed from each item during the split.
-            </remarks
-        >
+
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="ToBoolean">

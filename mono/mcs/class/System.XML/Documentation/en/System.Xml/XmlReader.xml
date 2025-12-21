@@ -397,8 +397,8 @@ return false;
               cref="T:System.Int32"
               qualify="true"
             /> containing the
-   number of attributes on the current node, or zero if the current node does not support attributes.</para
-          >
+   number of attributes on the current node, or zero if the current node does not support attributes.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1432,8 +1432,8 @@ equal to <see langword="false" />.</para
               cref="T:System.Int32"
               qualify="true"
             />
-containing the depth of the current node in the XML document. </para
-          >
+containing the depth of the current node in the XML document.
+          </para>
         </value>
         <remarks>
           <block subset="none" type="behaviors">
@@ -1446,8 +1446,7 @@ containing the depth of the current node in the XML document. </para
             <block subset="none" type="overrides"
               > This property must be overridden in order
    to provide the functionality described above, as there is no default implementation.
-</block
-            >
+</block>
           </para>
         </remarks>
         <summary>
@@ -1554,8 +1553,7 @@ containing the depth of the current node in the XML document. </para
             <block subset="none" type="overrides"
               > This property must be overridden in order
    to provide the functionality described above, as there is no default implementation.
-</block
-            >
+</block>
           </para>
         </remarks>
         <summary>
@@ -1592,15 +1590,13 @@ containing the depth of the current node in the XML document. </para
           <para>
             <block subset="none" type="behaviors"
               > This method does not move the
-      reader. </block
-            >
+      reader. </block>
           </para>
           <para>
             <block subset="none" type="overrides"
               > This method must be overridden in order
    to provide the functionality described above, as there is no default implementation.
-</block
-            >
+</block>
           </para>
         </remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
@@ -1835,14 +1831,13 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
       property to customize the behavior of this property in types derived from
       the <see cref="T:System.Xml.XmlReader" />
       class.
-   </block
-            >
+
+            </block>
           </para>
           <para>
             <block subset="none" type="usage"
               > Use this property to determine whether the current node has any attributes.
-   </block
-            >
+   </block>
           </para>
         </remarks>
         <summary>
@@ -2005,8 +2000,8 @@ positioned can have an associated text value; otherwise,
 where <see langword="true" /> indicates the
 current node is an attribute whose value was generated from the default value
 defined in the DTD or schema; <see langword="false" /> indicates the attribute value was
-explicitly set. </para
-          >
+explicitly set.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2359,8 +2354,7 @@ explicitly set. </para
             <block subset="none" type="overrides"
               > This property must be overridden in order
    to provide the functionality described above, as there is no default implementation.
-</block
-            >
+</block>
           </para>
         </remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
@@ -2405,8 +2399,8 @@ explicitly set. </para
               qualify="true"
             /> containing the value of the specified attribute, or
 <see langword="null" /> 
-if the attribute is not found.</para
-          >
+if the attribute is not found.
+          </para>
         </value>
         <remarks>
           <block subset="none" type="behaviors">
@@ -2418,17 +2412,18 @@ if the attribute is not found.</para
               
 
               
+
+              
          
          node, this method can be used to get the PUBLIC and
-         SYSTEM literals.</para
-            >
+         SYSTEM literals.
+            </para>
           </block>
           <para>
             <block subset="none" type="overrides"
               > This property must be overridden in order
    to provide the functionality described above, as there is no default implementation.
-</block
-            >
+</block>
           </para>
         </remarks>
       </Docs>
@@ -2470,8 +2465,8 @@ if the attribute is not found.</para
               qualify="true"
             />
 containing the value of the specified attribute, or <see langword="null" /> if the
-attribute is not found.</para
-          >
+attribute is not found.
+          </para>
         </value>
         <remarks>
           <para>
@@ -2481,8 +2476,7 @@ attribute is not found.</para
             <block subset="none" type="overrides"
               > This property must be overridden in order
       to provide the functionality described above, as there is no default implementation.
-   </block
-            >
+   </block>
           </para>
         </remarks>
       </Docs>
@@ -2524,15 +2518,13 @@ have a name (like <see langword="Text" />, <see langword="Comment" /> , and so o
           <para>
             <block subset="none" type="behaviors"
               > As described
-      above. </block
-            >
+      above. </block>
           </para>
           <para>
             <block subset="none" type="overrides"
               > This property must be overridden in order
    to provide the functionality described above, as there is no default implementation.
-</block
-            >
+</block>
           </para>
         </remarks>
         <summary>
@@ -2630,8 +2622,7 @@ have a name (like <see langword="Text" />, <see langword="Comment" /> , and so o
             <block subset="none" type="overrides"
               > This method must be overridden in order
    to provide the functionality described above, as there is no default implementation.
-</block
-            >
+</block>
           </para>
         </remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
@@ -2906,15 +2897,14 @@ have a name (like <see langword="Text" />, <see langword="Comment" /> , and so o
               > If <see cref="P:System.Xml.XmlReader.AttributeCount" /> is non-zero,
    the position of
    the reader
-   moves to the first attribute; otherwise, the position of the reader does not change. </block
-            >
+   moves to the first attribute; otherwise, the position of the reader does not change.
+            </block>
           </para>
           <para>
             <block subset="none" type="overrides"
               > This method must be overridden in order
    to provide the functionality described above, as there is no default implementation.
-</block
-            >
+</block>
           </para>
         </remarks>
         <summary>
@@ -3007,16 +2997,18 @@ have a name (like <see langword="Text" />, <see langword="Comment" /> , and so o
               
 
               
+
+              
          
          prefixed with <see cref="P:System.Xml.XmlReader.Prefix" /> and the
          ':' character. For example, <see cref="P:System.Xml.XmlReader.Name" /> is
          "bk:book" for the element <c>&lt;bk:book&gt;</c>.
-      </para
-            >
+
+            </para>
             <para
               > The name returned is dependent on the <see cref="P:System.Xml.XmlReader.NodeType" /> of the node. The following node types
-   return the listed values. All other node types return an empty string.</para
-            >
+   return the listed values. All other node types return an empty string.
+            </para>
             <list type="table">
               <listheader>
                 <term>Node Type</term>
@@ -3066,8 +3058,7 @@ have a name (like <see langword="Text" />, <see langword="Comment" /> , and so o
             <block subset="none" type="overrides"
               > This property must be overridden in order
    to provide the functionality described above, as there is no default implementation.
-</block
-            >
+</block>
           </para>
         </remarks>
         <summary>
@@ -3105,8 +3096,8 @@ have a name (like <see langword="Text" />, <see langword="Comment" /> , and so o
               cref="F:System.String.Empty"
               qualify="true"
             />.
-   </para
-          >
+
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3149,8 +3140,8 @@ have a name (like <see langword="Text" />, <see langword="Comment" /> , and so o
               cref="T:System.Xml.XmlNameTable"
               qualify="true"
             /> used by the current
-   instance.</para
-          >
+   instance.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3194,8 +3185,8 @@ have a name (like <see langword="Text" />, <see langword="Comment" /> , and so o
         <value>
           <para
             >One of the members of the <see cref="T:System.Xml.XmlNodeType" /> enumeration representing the type of the current
-   node. </para
-          >
+   node.
+          </para>
         </value>
         <remarks>
           <block subset="none" type="behaviors">
@@ -3212,8 +3203,7 @@ have a name (like <see langword="Text" />, <see langword="Comment" /> , and so o
             <block subset="none" type="overrides"
               > This property must be overridden in order
    to provide the functionality described above, as there is no default implementation.
-</block
-            >
+</block>
           </para>
         </remarks>
         <summary>
@@ -3247,8 +3237,8 @@ have a name (like <see langword="Text" />, <see langword="Comment" /> , and so o
               cref="T:System.String"
               qualify="true"
             />
-containing the namespace prefix associated with the current node. </para
-          >
+containing the namespace prefix associated with the current node.
+          </para>
         </value>
         <remarks>
           <para>
@@ -3257,8 +3247,8 @@ containing the namespace prefix associated with the current node. </para
       is used as a reference for a namespace URI and is defined in an element
       declaration. For example, <c>&lt;someElement xmlns:bk="someURL"&gt;</c>, defines a
    prefix name "bk".
-</block
-            >
+
+            </block>
           </para>
           <block subset="none" type="behaviors">
             <para>As described
@@ -3270,8 +3260,7 @@ containing the namespace prefix associated with the current node. </para
             <block subset="none" type="overrides"
               > This property must be overridden in order
    to provide the functionality described above, as there is no default implementation.
-</block
-            >
+</block>
           </para>
         </remarks>
         <summary>
@@ -3306,8 +3295,8 @@ containing the namespace prefix associated with the current node. </para
               qualify="true"
             /> specifying the quotation mark character (" or ') used to enclose the value of
    an attribute.
-   </para
-          >
+
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -6908,8 +6897,8 @@ containing the namespace prefix associated with the current node. </para
       current node can contain content and, if not, moves the reader to the next
       content node or the end of the input stream. The node the reader ends up
       positioned on is checked to determine if it is an <see langword="EndElement" />
-      node. If so, the node is read and the reader is moved to the next node.</block
-            >
+      node. If so, the node is read and the reader is moved to the next node.
+            </block>
           </para>
           <para>
             <block subset="none" type="overrides"
@@ -6918,15 +6907,15 @@ containing the namespace prefix associated with the current node. </para
       the <see cref="T:System.Xml.XmlReader" />
       class.
 
-      </block
-            >
+
+            </block>
           </para>
           <para>
             <block subset="none" type="usage"
               > Use this method to
       read an <see langword="EndElement" /> node and advance the reader to the next node.
-      </block
-            >
+
+            </block>
           </para>
         </remarks>
         <exception cref="T:System.Xml.XmlException"
@@ -7399,8 +7388,8 @@ containing the namespace prefix associated with the current node. </para
         <value>
           <para
             > One of the members of the <see cref="T:System.Xml.ReadState" /> enumeration.
-   </para
-          >
+
+          </para>
         </value>
         <remarks>
           <block subset="none" type="behaviors">
@@ -7413,8 +7402,7 @@ containing the namespace prefix associated with the current node. </para
             <block subset="none" type="overrides"
               > This property must be overridden in order
    to provide the functionality described above, as there is no default implementation.
-</block
-            >
+</block>
           </para>
         </remarks>
         <summary>
@@ -8438,8 +8426,7 @@ enumeration. If no <c>xml:space</c> scope exists, this property defaults to
             <block subset="none" type="overrides"
               > This property must be overridden in order
    to provide the functionality described above, as there is no default implementation.
-</block
-            >
+</block>
           </para>
         </remarks>
         <summary>

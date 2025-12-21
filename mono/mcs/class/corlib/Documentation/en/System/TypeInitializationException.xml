@@ -61,8 +61,7 @@ class TestTypeInit {
         }
     }
 }
-   </code
-      >
+   </code>
       <para>The output is</para>
       <code>
 Error: System.TypeInitializationException: The type initializer for "TypeInit" threw an exception. ---&gt; System.ApplicationException: Error in Class TypeInit
@@ -256,8 +255,8 @@ Error: System.TypeInitializationException: The type initializer for "TypeInit" t
           <para>This property is read-only.</para>
           <para
             >The <see cref="P:System.TypeInitializationException.TypeName" /> property returns the same value as was
-   passed into the constructor.</para
-          >
+   passed into the constructor.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

@@ -67,8 +67,8 @@
             >This constructor initializes the <see cref="!:System.IO.EndOfStreamException.Message" /> property of the new instance to
    a system-supplied message that describes the error, such as "Attempted to read
    past the end of the stream." This message takes into account the current system
-   culture.</para
-          >
+   culture.
+          </para>
           <para
             >The <see cref="!:System.IO.EndOfStreamException.InnerException" /> property of the new instance is 
 initialized to <see langword="null" /> .</para
@@ -110,8 +110,8 @@ initialized to <see langword="null" /> .</para
    new instance using <paramref name="message" />. If <paramref name="message" /> is
 <see langword="null" />, the <see cref="!:System.IO.EndOfStreamException.Message" /> property is initialized to the 
    system-supplied message provided by the constructor that takes no
-   arguments. </para
-          >
+   arguments.
+          </para>
           <para
             > The <see cref="!:System.IO.EndOfStreamException.InnerException" /> property of the new instance is
 initialized to <see langword="null" />.</para

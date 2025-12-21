@@ -223,8 +223,8 @@ instance that reflects the method that matches to the specified
 criteria. It is not required that this instance be contained in
 <paramref name="match" /> . If a suitable method is not found, 
 returns <see langword="null" />
-.</para
-          >
+.
+          </para>
         </returns>
         <remarks>
           <para
@@ -236,8 +236,8 @@ returns <see langword="null" />
    original order on return from this method. When arguments are passed by name
    (i.e., using named arguments), the binder reorders the argument array and that
    is what the caller sees. This method insures that the original order of the
-   arguments is restored.</block
-            >
+   arguments is restored.
+            </block>
           </para>
           <block subset="none" type="behaviors">
             <para
@@ -248,8 +248,8 @@ returns <see langword="null" />
             >
             <para
               > The <see cref="M:System.Reflection.Binder.BindToMethod(System.Reflection.BindingFlags,System.Reflection.MethodBase[],System.Object[]@,System.Reflection.ParameterModifier[],System.Globalization.CultureInfo,System.String[],System.Object@)" /> method is permitted to change the order of the argument array of a method call only if the binder returns, via the <paramref name="state" /> parameter, a non-null opaque object that records the original order of the argument array. If, on return from <see cref="M:System.Reflection.Binder.BindToMethod(System.Reflection.BindingFlags,System.Reflection.MethodBase[],System.Object[]@,System.Reflection.ParameterModifier[],System.Globalization.CultureInfo,System.String[],System.Object@)" />, <paramref name="state" /> is not <see langword="null" />, the system calls <see cref="M:System.Reflection.Binder.ReorderArgumentArray(System.Object[]@,System.Object)" /> 
-.</para
-            >
+.
+            </para>
           </block>
         </remarks>
       </Docs>
@@ -479,8 +479,8 @@ returns <see langword="null" />
           <para
             > Restores the specified set of parameters
       to their original order after a call to <see cref="M:System.Reflection.Binder.BindToMethod(System.Reflection.BindingFlags,System.Reflection.MethodBase[],System.Object[]@,System.Reflection.ParameterModifier[],System.Globalization.CultureInfo,System.String[],System.Object@)" />
-      .</para
-          >
+      .
+          </para>
         </summary>
         <remarks>
           <para>
@@ -497,8 +497,8 @@ returns <see langword="null" />
       can retrieve those arguments in their original order on return from this method.
       When arguments are passed by name (i.e., using named arguments), the binder
       reorders the argument array and that is what the caller sees. This method
-      insures that the original order of the arguments is restored.</block
-            >
+      insures that the original order of the arguments is restored.
+            </block>
           </para>
           <para>
             <block subset="none" type="behaviors">
@@ -514,16 +514,16 @@ returns <see langword="null" />
               >Implement this method to insure that the
    parameters contained in <paramref name="args" />
    are returned to their original order, <see cref="T:System.Type" /> and value, after being used by a bound
-   method.</block
-            >
+   method.
+            </block>
           </para>
           <para>
             <block subset="none" type="usage"
               >Use this method to
    insure that the parameters contained in <paramref name="args" /> are returned
    to their original order, <see cref="T:System.Type" /> and value, after being used by a bound method.
-</block
-            >
+
+            </block>
           </para>
         </remarks>
       </Docs>

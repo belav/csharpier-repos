@@ -317,8 +317,7 @@
           <para>
             <block subset="none" type="note"
               >The algorithm used to generate the
- hash code is unspecified.</block
-            >
+ hash code is unspecified.</block>
           </para>
           <para>
             <block subset="none" type="note"
@@ -773,8 +772,8 @@
           <para
             >For more information on the 
    <see langword="native unsigned int" /> type, see Partition II of the CLI
-      Specification.</para
-          >
+      Specification.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -918,8 +917,8 @@
           <para>
             <block subset="none" type="note"
               >A pointer to <see langword="void" />
-points to memory containing data of an unspecified type.</block
-            >
+points to memory containing data of an unspecified type.
+            </block>
           </para>
           <para
             >This method is not CLS-compliant. For a CLS-compliant

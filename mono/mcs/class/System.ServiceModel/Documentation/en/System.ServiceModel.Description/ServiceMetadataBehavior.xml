@@ -189,12 +189,12 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >In previous versions of WCF, metadata retrieval was accomplished using HTTP GET to access the service help page through a web browser. Only the <see cref="T:System.ServiceModel.Channels.HttpTransportBindingElement" /> was  supported.  For metadata retrieval using HTTPS GET, only the <see cref="T:System.ServiceModel.Channels.HttpsTransportBindingElement" /> was supported.  
-The HttpGetBinding and HttpsGetBinding properties enable the usage of bindings for metadata retrieval using HTTP GET (or HTTPS GET) and the bindings used to access service web pages to be configurable, either programmatically or through configuration files. </para
-          >
+The HttpGetBinding and HttpsGetBinding properties enable the usage of bindings for metadata retrieval using HTTP GET (or HTTPS GET) and the bindings used to access service web pages to be configurable, either programmatically or through configuration files.
+          </para>
           <para
             >For more information about retrieving help pages, use the <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpHelpPageBinding" />and <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpsHelpPageBinding" />properties.
-</para
-          >
+
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -287,12 +287,12 @@ The HttpGetBinding and HttpsGetBinding properties enable the usage of bindings f
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >In previous versions of WCF, metadata retrieval was accomplished using HTTP GET to access the service help page through a web browser. Only the <see cref="T:System.ServiceModel.Channels.HttpTransportBindingElement" /> was  supported.  For metadata retrieval using HTTPS GET, only the <see cref="T:System.ServiceModel.Channels.HttpsTransportBindingElement" /> was supported.  
-The HttpGetBinding and HttpsGetBinding properties enable the usage of bindings for metadata retrieval using HTTP GET (or HTTPS GET) and the bindings used to access service web pages to be configurable, either programmatically or through configuration files. </para
-          >
+The HttpGetBinding and HttpsGetBinding properties enable the usage of bindings for metadata retrieval using HTTP GET (or HTTPS GET) and the bindings used to access service web pages to be configurable, either programmatically or through configuration files.
+          </para>
           <para
             >For more information about retrieving help pages, use the <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpHelpPageBinding" />and <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpsHelpPageBinding" />properties.
-</para
-          >
+
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

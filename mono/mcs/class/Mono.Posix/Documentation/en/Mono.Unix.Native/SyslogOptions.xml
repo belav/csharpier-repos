@@ -49,8 +49,8 @@
         <summary
           >If <see cref="M:Mono.Unix.Native.Syscall.syslog" />
         cannot pass the message to <c>syslogd</c>(8) it will attempt to write
-        the message to the console ("/dev/console").</summary
-        >
+        the message to the console ("/dev/console").
+        </summary>
       </Docs>
     </Member>
     <Member MemberName="LOG_NDELAY">
@@ -73,8 +73,8 @@
           >Open the connection to <c>syslogd</c>(8) immediately.
         Normally the open is delayed until the first message is logged.
         Useful for programs that need to manage the order in which file
-        descriptors are allocated.</summary
-        >
+        descriptors are allocated.
+        </summary>
       </Docs>
     </Member>
     <Member MemberName="LOG_NOWAIT">
@@ -114,8 +114,8 @@
       <Docs>
         <summary
           >Open the connection to <c>syslogd</c>(8) when the first
-        message is logged.  This is the default, and need not be specified.</summary
-        >
+        message is logged.  This is the default, and need not be specified.
+        </summary>
       </Docs>
     </Member>
     <Member MemberName="LOG_PERROR">

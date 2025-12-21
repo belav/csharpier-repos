@@ -160,8 +160,7 @@ class MyClass {
       Console.WriteLine(obj1.Equals(obj2)); 
    }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>False</para>
@@ -183,8 +182,8 @@ the base class (which is inherited from <see cref="T:System.Object" /> and check
 equality) is not invoked. However, <see langword="Point3D.Equals" /> invokes
 <see langword="Point.Equals" /> because <see langword="Point" /> implements
 <see langword="Equals" /> 
-in a manner that provides value equality.</para
-          >
+in a manner that provides value equality.
+          </para>
           <code lang="C#"
             >using System;
 public class Point: object {
@@ -209,8 +208,7 @@ class Point3D: Point {
  return base.GetHashCode() ^ z;
  }
 }
-</code
-          >
+</code>
           <para
             > The <see langword="Point.Equals" /> method checks that the <paramref name="obj" />
 argument is non-null and that it references an instance of the same type as this
@@ -228,8 +226,8 @@ even though <paramref name="obj" /> and the current instance are not of the same
 type. Having verified that both objects are of the same type, the method casts
 <paramref name="obj" /> 
 to type <see langword="Point" />
-and returns the result of comparing the instance variables of the two objects.</para
-          >
+and returns the result of comparing the instance variables of the two objects.
+          </para>
           <para
             > In <see langword="Point3D.Equals" /> , the inherited
 <see langword="Equals" /> method is 
@@ -241,8 +239,8 @@ instance variables introduced in the subclass. Specifically, the cast to
 is not executed unless <paramref name="obj" />
 has been determined to be of type <see langword="Point3D" /> or a subclass of
 <see langword="Point3D" />
-.</para
-          >
+.
+          </para>
           <para>
             <see langword="Example 3:" />
           </para>
@@ -251,8 +249,8 @@ has been determined to be of type <see langword="Point3D" /> or a subclass of
    operator) is used to compare the individual instance variables. In some cases,
    it is appropriate to use the <see cref="M:System.Object.Equals(System.Object)" /> method to
    compare instance variables in an <see langword="Equals" />
-   implementation, as shown in the following example:</para
-          >
+   implementation, as shown in the following example:
+          </para>
           <code lang="C#"
             >using System;
 class Rectangle {
@@ -267,8 +265,7 @@ class Rectangle {
  return a.GetHashCode() ^ b.GetHashCode();
  }
 }
-</code
-          >
+</code>
           <para>
             <see langword="Example 4:" />
           </para>
@@ -279,8 +276,8 @@ class Rectangle {
    provide the same functionality. This is typically accomplished by writing the
 <see langword="Equals" /> 
 method
-in terms of the overloaded operator ==. For example:</para
-          >
+in terms of the overloaded operator ==. For example:
+          </para>
           <code lang="C#"
             >using System;
 public struct Complex {
@@ -298,8 +295,7 @@ public struct Complex {
  return !(x == y);
  }
 }
-</code
-          >
+</code>
           <para
             >Because Complex is a C# struct (a value type), it is
    known that there will be no subclasses of <see langword="Complex" />
@@ -307,8 +303,8 @@ public struct Complex {
 <see cref="M:System.Object.Equals(System.Object)" /> method need 
    not compare the GetType() results for each object, but can instead use the
 <see langword="is" /> operator to check the type of the <paramref name="obj" /> 
-parameter.</para
-          >
+parameter.
+          </para>
         </example>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -648,8 +644,7 @@ public class MyClass {
        s1, s2, Object.Equals(s1, s2));
    }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>Object.Equals("Tom", "Carol") =&gt; False</para>
@@ -953,8 +948,8 @@ public class MyClass {
             >In some cases, <see cref="M:System.Object.GetHashCode" /> is implemented to simply return an integer value.
 The following example illustrates an implementation of <see cref="M:System.Int32.GetHashCode" />
 , which
-returns an integer value:</para
-          >
+returns an integer value:
+          </para>
           <code lang="C#"
             >using System;
 public struct Int32 {
@@ -965,8 +960,7 @@ public struct Int32 {
  return value;
  }
 }
-</code
-          >
+</code>
           <para>
             <see langword="Example 2" />
           </para>
@@ -985,8 +979,7 @@ public struct Point {
  return x ^ y;
  }
 }
-</code
-          >
+</code>
           <para>
             <see langword="Example 3" />
           </para>
@@ -1024,13 +1017,12 @@ public class MyClass {
  return a.GetHashCode() ^ b.GetHashCode() ^ c.GetHashCode();
  }
 }
-</code
-          >
+</code>
           <para
             >Avoid implementing <see cref="M:System.Object.GetHashCode" /> in a manner that results in circular references. In
 other words, if AClass.GetHashCode calls BClass.GetHashCode, it should not be
-the case that BClass.GetHashCode calls AClass.GetHashCode. </para
-          >
+the case that BClass.GetHashCode calls AClass.GetHashCode.
+          </para>
           <para>
             <see langword="Example 4" />
           </para>
@@ -1038,8 +1030,8 @@ the case that BClass.GetHashCode calls AClass.GetHashCode. </para
             >In some cases, the data member of the class in which you are implementing
 <see cref="M:System.Object.GetHashCode" /> is bigger than a <see cref="T:System.Int32" />. In such cases, you could combine the 
    high order bits of the value with the low order bits using an XOR operation, as
-   shown in the following example:</para
-          >
+   shown in the following example:
+          </para>
           <code lang="C#"
             >using System;
 public struct Int64 {
@@ -1050,8 +1042,7 @@ public struct Int64 {
  return ((int)value ^ (int)(value &gt;&gt; 32));
  }
 }
-</code
-          >
+</code>
         </example>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1163,8 +1154,8 @@ public struct Int64 {
         <example>
           <para
             >The following example demonstrates the fact that <see cref="M:System.Object.GetType" />
-returns the run-time type of the current instance:</para
-          >
+returns the run-time type of the current instance:
+          </para>
           <code lang="C#"
             >using System;
 public class MyBaseClass: Object {
@@ -1185,8 +1176,7 @@ public class Test {
    Console.WriteLine("MyBaseClass b = myDerived: Type is {0}", b.GetType());
    }
 }
-</code
-          >
+</code>
           <para> The output is</para>
           <c>
             <para>mybase: Type is MyBaseClass</para>
@@ -1246,8 +1236,8 @@ public class Test {
    <see langword="MyClass" /> as well as a representation of the instance of
    <see langword="MyClass" />
    returned by <see cref="M:System.Object.MemberwiseClone" />
-   .</para
-          >
+   .
+          </para>
           <code lang="C#"
             >using System;
 class MyBaseClass {
@@ -1271,8 +1261,7 @@ class MyDerivedClass: MyBaseClass {
    MyDerivedClass m2 = (MyDerivedClass) m1.MemberwiseClone();
    }
 }
-</code
-          >
+</code>
           <para>A graphical representation of m1 and m2 might look like this</para>
           <code>
 +---------------+
@@ -1381,8 +1370,7 @@ class MyClass {
    Console.WriteLine(Object.ReferenceEquals(o, p));
    }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>True</para>
@@ -1477,8 +1465,7 @@ class MyClass {
       Console.WriteLine (o.ToString());
    }
 }
-      </code
-          >
+      </code>
           <para>The output is</para>
           <para>
             <c>System.Object</c>

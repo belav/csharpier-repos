@@ -338,8 +338,8 @@
         <value>
           <para
             >The <see cref="T:System.Text.Encoding" /> in which the output
-   is written.</para
-          >
+   is written.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -445,8 +445,8 @@
         <value>
           <para
             >A <see cref="T:System.IFormatProvider" /> object for a specific culture, or the formatting of the
-   current culture if no other culture is specified.</para
-          >
+   current culture if no other culture is specified.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />

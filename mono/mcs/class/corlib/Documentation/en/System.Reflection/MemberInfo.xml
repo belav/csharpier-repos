@@ -145,8 +145,8 @@
             >The <see cref="T:System.Type" />
             <see langword=" " />object of the class that declares the member
 reflected by the current instance; or, <see langword="null" /> if the
-member reflected by the current instance is a global member.</para
-          >
+member reflected by the current instance is a global member.
+          </para>
         </value>
         <example>
           <para
@@ -173,8 +173,7 @@ public class DeclaringTypeExample {
     Console.WriteLine("Declaring type is {0}.", memInfo[0].DeclaringType);    
    }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>Reflected type is DerivedClass.</para>
@@ -646,8 +645,8 @@ public class DeclaringTypeExample {
           <para
             >A <see cref="T:System.String" /> containing the
    name of the
-   member reflected by the current instance.</para
-          >
+   member reflected by the current instance.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -788,8 +787,8 @@ public class DeclaringTypeExample {
           <para
             >The <see cref="T:System.Type" />
             <see langword="" />object for the class through which the current instance was
-obtained.</para
-          >
+obtained.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />

@@ -745,8 +745,7 @@
 WindowsIdentity wi = WindowsIdentity.GetCurrent ();
 Console.WriteLine ("\tUserName:\t{0}", wi.Name);
 Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
-  </code
-            >
+  </code>
           </example>
         </remarks>
         <summary>

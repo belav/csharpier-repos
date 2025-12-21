@@ -826,8 +826,8 @@
         <value>
           <para
             >The <see cref="T:System.IO.Stream" /> the current <see cref="T:System.IO.StreamWriter" /> instance
-   is writing to.</para
-          >
+   is writing to.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -956,8 +956,8 @@
             >The <see cref="T:System.Text.Encoding" /> specified in
    the constructor for the current instance, or <see cref="T:System.Text.UTF8Encoding" />
    if an encoding was not
-   specified.</para
-          >
+   specified.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />

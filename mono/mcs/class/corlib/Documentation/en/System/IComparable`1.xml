@@ -145,8 +145,8 @@
       to zero, and B.CompareTo(C) returns a value <paramref name="y" /> of the same sign as
    <paramref name="other" />, then A.CompareTo(C) is required to a value of the same sign as 
    <paramref name="other" /> and <paramref name="y" /> 
-   .</para
-            >
+   .
+            </para>
             <para>The exact behavior of this method is unspecified. The intent of this method is
    to provide a mechanism that orders instances of a class in a manner that is
    consistent with the mathematical definitions of the relational operators (&lt;,

@@ -547,8 +547,8 @@ The runtime puts a cap on the size of the maximum upload to avoid possible denia
 </para>
           <para>
    The stream is created on the first access to this property.   Module authors and IHttpHandler developers can work around this by using the <see cref="I:System.ServiceProvider.GetService(Type)" /> method from the <see cref="T:System.Web.HttpContext" /> passing a <see cref="T:System.Web.HttpWorkerRequest" /> to get direct access to the input data.
-</para
-          >
+
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

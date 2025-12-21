@@ -197,8 +197,8 @@
               type="note"
               >The target of 
    the handle can be changed via the <see cref="P:System.Runtime.InteropServices.GCHandle.Target" />
-   property.</block
-            >
+   property.
+            </block>
           </para>
         </remarks>
         <permission cref="T:System.Security.Permissions.SecurityPermission">
@@ -531,8 +531,8 @@
         <summary>
           <para
             > Convert a <see cref="T:System.IntPtr" /> to a <see cref="T:System.Runtime.InteropServices.GCHandle" />
-instance.</para
-          >
+instance.
+          </para>
         </summary>
         <returns>
           <para> A <see cref="T:System.Runtime.InteropServices.GCHandle" /> .</para>
@@ -542,8 +542,8 @@ instance.</para
             <see cref="T:System.Runtime.InteropServices.GCHandle" />
 instances are stored using an internal integer
 representation. This method allows you to retrieve a <see cref="T:System.Runtime.InteropServices.GCHandle" />
-from its integer representation.</para
-          >
+from its integer representation.
+          </para>
         </remarks>
       </Docs>
       <Excluded>0</Excluded>
@@ -592,8 +592,8 @@ from its integer representation.</para
           <para>
             <see cref="T:System.Runtime.InteropServices.GCHandle" /> instances are stored using
    an internal integer representation. This method allows you to retrieve that
-   representation.</para
-          >
+   representation.
+          </para>
         </remarks>
       </Docs>
       <Excluded>0</Excluded>

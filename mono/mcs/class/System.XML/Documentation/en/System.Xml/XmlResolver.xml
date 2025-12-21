@@ -126,8 +126,8 @@
           <para
             >A <see cref="T:System.Net.ICredentials" /> instance
    containing the
-   credentials.</para
-          >
+   credentials.
+          </para>
         </value>
         <example>
           <para

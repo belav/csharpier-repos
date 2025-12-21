@@ -39,8 +39,8 @@
     <example>
       <para
         >The following example demonstrates the usage of <see cref="T:System.ObsoleteAttribute" /> to
-   generate a compile-time warning.</para
-      >
+   generate a compile-time warning.
+      </para>
       <code lang="C#">
    
 using System;
@@ -58,8 +58,7 @@ public class ObsoleteAttributeExample {
     OldMethod();
   }
 }
-</code
-      >
+</code>
       <para>An example compile-time result is</para>
       <para>
         <c>ObsoleteAttributeExample.cs(8,4):
@@ -428,8 +427,8 @@ public class ObsoleteAttributeExample {
           <para
             >A <see cref="T:System.String" /> that contains
    suggested workarounds
-   for the target of the current instance.</para
-          >
+   for the target of the current instance.
+          </para>
         </value>
         <remarks>
           <para>This property is read-only.</para>

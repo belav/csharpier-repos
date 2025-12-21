@@ -2099,8 +2099,7 @@ public class StringBuilderTest {
       Console.WriteLine( sb.AppendFormat("temperature today was {0, 6}.", 88) ); 
   }
 }
-      </code
-          >
+      </code>
           <para>The output is</para>
           <code>The high temperature today was     88.
  </code>
@@ -2262,8 +2261,7 @@ public class StringBuilderTest {
      Console.WriteLine( sb.AppendFormat("temperature today was {0}, {1} {2}{3}.", strings) ); 
   }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <para>
             <c>The high
@@ -2430,8 +2428,7 @@ public class StringBuilderTest {
      Console.WriteLine(sb.AppendFormat(null, "temperature today was {0}, {1} {2}.", a, b, c) ); 
   }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <para>
             <c>The high
@@ -2620,8 +2617,7 @@ public class StringBuilderTest {
      Console.WriteLine( sb.AppendFormat("temperature today was {0} {1}.", "very", "high") ); 
   }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>The high temperature today was very high.</para>
@@ -2785,8 +2781,7 @@ public class StringBuilderTest {
      Console.WriteLine( sb.AppendFormat("temperature today was {0} {1} {2}.", "very", "very", "high") ); 
   }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <para>
             <c>The high
@@ -3026,8 +3021,8 @@ public class StringBuilderTest {
         <value>
           <para
             >A <see cref="T:System.Int32" /> containing the maximum number of characters that can be contained in the memory
-   allocated by the current instance.</para
-          >
+   allocated by the current instance.
+          </para>
         </value>
         <exception cref="T:System.ArgumentException"
           >The value specified for a set operation is less than <see cref="P:System.Text.StringBuilder.Length" />.</exception
@@ -3084,8 +3079,8 @@ public class StringBuilderTest {
 <see cref="T:System.Text.StringBuilder" />. The first character in the string is at index 0. 
    The length of a string is the number of characters it contains. The last
    accessible character of a <see cref="T:System.Text.StringBuilder" /> instance is at the index <see cref="P:System.Text.StringBuilder.Length" />
-   - 1.</para
-          >
+   - 1.
+          </para>
         </remarks>
         <exception cref="T:System.IndexOutOfRangeException">
           <para>
@@ -4622,8 +4617,7 @@ public class StringBuilderTest  {
       Console.WriteLine(sb);
    }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>0123456789</para>

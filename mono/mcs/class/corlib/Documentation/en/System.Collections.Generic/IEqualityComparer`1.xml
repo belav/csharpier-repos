@@ -118,9 +118,11 @@ y.Equals(z) implies x.Equals(z); for any values x, y and z for  which these expr
               
 
               
+
+              
    
-   , Vol. 3, by Donald E. Knuth.</block
-            >
+   , Vol. 3, by Donald E. Knuth.
+            </block>
           </para>
           <block subset="none" type="behaviors">
             <para>All implementations are required to ensure that if x.Equals(y) ==  true, then x.GetHashCode() equals y.GetHashCode(), for any x and y values for which these expressions are defined.</para>

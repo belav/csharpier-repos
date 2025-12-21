@@ -2078,8 +2078,8 @@
             > A <see cref="T:System.Net.WebHeaderCollection" /> containing header 
    name/value pairs associated with the request or, if this property has not been
    set or was set to <see langword="null" />, a new instance of the <see cref="T:System.Net.WebHeaderCollection" />
-   class.</para
-          >
+   class.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3962,8 +3962,8 @@
             > A <see cref="T:System.Collections.Specialized.NameValueCollection" /> that contains query name/value
    pairs associated with the request or, if this property has not been
    set or was set to <see langword="null" />, a new instance of the <see cref="T:System.Collections.Specialized.NameValueCollection" />
-   class.</para
-          >
+   class.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -4005,8 +4005,8 @@
         <value>
           <para
             > A <see cref="T:System.Net.WebHeaderCollection" /> containing header name/value
-   pairs associated with the response.</para
-          >
+   pairs associated with the response.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />

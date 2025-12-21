@@ -118,8 +118,8 @@
         <value>
           <para
             >A <see cref="T:System.Reflection.Assembly" /> instance that reflects the 
-   assembly that contains the module reflected by the current instance.</para
-          >
+   assembly that contains the module reflected by the current instance.
+          </para>
         </value>
         <remarks>
           <para>This property is read-only.</para>
@@ -339,10 +339,12 @@
             
 
             
+
+            
    
    
-   array, the value of this string is "&lt;Unknown&gt;".</para
-          >
+   array, the value of this string is "&lt;Unknown&gt;".
+          </para>
         </value>
         <permission cref="T:System.Security.Permissions.FileIOPermission">
           <para
@@ -525,8 +527,7 @@
           <para>
             <block subset="none" type="note"
               >A global public field is a static field
-      with a module-level scope.</block
-            >
+      with a module-level scope.</block>
           </para>
         </remarks>
         <exception cref="T:System.ArgumentNullException">
@@ -577,8 +578,7 @@
           <para>
             <block subset="none" type="note"
               >A global field is a field with a
-      module-level scope.</block
-            >
+      module-level scope.</block>
           </para>
         </remarks>
         <exception cref="T:System.ArgumentNullException">
@@ -748,8 +748,7 @@
           <para>
             <block subset="none" type="note"
               >A global public method
-      is a static method with a module-level scope.</block
-            >
+      is a static method with a module-level scope.</block>
           </para>
         </remarks>
         <exception cref="T:System.ArgumentNullException">
@@ -800,8 +799,7 @@
           <para>
             <block subset="none" type="note"
               >A global public method
-      is a static method with a module-level scope.</block
-            >
+      is a static method with a module-level scope.</block>
           </para>
         </remarks>
         <exception cref="T:System.ArgumentNullException">
@@ -1011,8 +1009,7 @@
           <para>
             <block subset="none" type="note"
               >A global public method
-      is a static method with a module-level scope.</block
-            >
+      is a static method with a module-level scope.</block>
           </para>
         </remarks>
         <summary>
@@ -1670,9 +1667,11 @@
             
 
             
+
+            
    
-   array, the value of this string is "&lt;Unknown&gt;".</para
-          >
+   array, the value of this string is "&lt;Unknown&gt;".
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />

@@ -71,8 +71,8 @@
             >A <see cref="T:System.Int32" /> containing a value that reflects the sort order of
 <paramref name="x" /> as compared to <paramref name="y" />. The following table defines the conditions
    under which the returned value is a negative number, zero, or a positive
-   number.</para
-          >
+   number.
+          </para>
           <list type="table">
             <listheader>
               <term>Value</term>
@@ -106,8 +106,8 @@
       to zero, and Compare(B,C) returns a value <paramref name="y" /> of the same sign as
    <paramref name="x" />, then Compare(A,C) is required to a value of the same sign as 
    <paramref name="x" /> and <paramref name="y" /> 
-   .</para
-            >
+   .
+            </para>
             <para>The exact behavior of this method is unspecified. The intent of this method is
    to provide a mechanism that orders instances of a class in a manner that is
    consistent with the mathematical definitions of the relational operators (&lt;,

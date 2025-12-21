@@ -568,8 +568,8 @@
                             Wrap="True|False"
                         /&gt;
             &lt;/asp:TableRow&gt;
-&lt;/asp:Table&gt;</code
-      >
+&lt;/asp:Table&gt;
+      </code>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

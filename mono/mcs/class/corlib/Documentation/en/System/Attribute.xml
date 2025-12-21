@@ -116,8 +116,7 @@ class AuthorInfo
       Console.WriteLine();
    }
 }
-      </code
-      >
+      </code>
       <para>The output is</para>
       <c>
         <para>Author information for FirstClass</para>
@@ -1857,8 +1856,8 @@ class AuthorInfo
           <para>
             <block subset="none" type="note">
       This method overrides <see cref="M:System.Object.GetHashCode" />.
-   </block
-            >
+
+            </block>
           </para>
         </remarks>
         <summary>

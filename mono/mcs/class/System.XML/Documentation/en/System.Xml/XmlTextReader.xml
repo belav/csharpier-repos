@@ -1195,8 +1195,8 @@
               cref="T:System.Int32"
               qualify="true"
             /> containing the 
-   number of attributes on the current node, or zero if the current node does not support attributes.</para
-          >
+   number of attributes on the current node, or zero if the current node does not support attributes.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1419,8 +1419,8 @@
               cref="T:System.Int32"
               qualify="true"
             /> containing the depth of the current node in the XML document.
-   </para
-          >
+
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1766,8 +1766,8 @@ otherwise, <see langword="false" />. </para
         <example>
           <para
             >See the <see cref="M:System.Xml.XmlTextReader.GetAttribute(System.Int32)" />(<see langword="String" />, <see langword="String" />) method for an example
-   using all three overloads of this method.</para
-          >
+   using all three overloads of this method.
+          </para>
         </example>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1867,8 +1867,7 @@ public class Reader {
                       str1, str2, str3);
   }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <para> urn:datatypes</para>
           <para> int - int - int</para>
@@ -2284,8 +2283,8 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
               cref="T:System.Boolean"
               qualify="true"
             /> value <see langword="false" />. 
-   </para
-          >
+
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2438,8 +2437,8 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
               qualify="true"
             />
 containing the value of the specified attribute, or <see langword="null" /> if the
-attribute is not found.</para
-          >
+attribute is not found.
+          </para>
         </value>
         <remarks>
           <para>This property is read-only.</para>
@@ -2447,8 +2446,8 @@ attribute is not found.</para
           <block subset="none" type="note">
             <para
               >If the reader is positioned on a <see langword="DocumentType" /> node, this
-      method can be used to get the PUBLIC and SYSTEM literals.</para
-            >
+      method can be used to get the PUBLIC and SYSTEM literals.
+            </para>
             <para>This property overrides the <see cref="T:System.Xml.XmlReader" /> indexer.</para>
           </block>
         </remarks>
@@ -2489,8 +2488,8 @@ attribute is not found.</para
               qualify="true"
             />
 containing the value of the specified attribute, or <see langword="null" /> if the
-attribute is not found.</para
-          >
+attribute is not found.
+          </para>
         </value>
         <remarks>
           <para>This property is read-only.</para>
@@ -3119,8 +3118,8 @@ have a name (like <see langword="Text" />, <see langword="Comment" /> , and so o
               qualify="true"
             /> where <see langword="true" /> indicates the reader supports namespaces; otherwise,
 <see langword="false" />. The default is <see langword="true" />.
-   </para
-          >
+
+          </para>
         </value>
         <exception cref="T:System.InvalidOperationException"
           >When attempting to set the property, the <see cref="P:System.Xml.XmlTextReader.ReadState" /> was not <see
@@ -3176,8 +3175,8 @@ have a name (like <see langword="Text" />, <see langword="Comment" /> , and so o
               cref="F:System.String.Empty"
               qualify="true"
             />.
-   </para
-          >
+
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3279,8 +3278,8 @@ have a name (like <see langword="Text" />, <see langword="Comment" /> , and so o
           <para
             > One of the members of the <see cref="T:System.Xml.XmlNodeType" /> enumeration representing the type of
    the current node.
-   </para
-          >
+
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3398,8 +3397,8 @@ have a name (like <see langword="Text" />, <see langword="Comment" /> , and so o
               cref="T:System.String"
               qualify="true"
             /> containing the namespace prefix associated with the current node.
-   </para
-          >
+
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3489,8 +3488,8 @@ have a name (like <see langword="Text" />, <see langword="Comment" /> , and so o
               qualify="true"
             /> specifying the quotation mark character (" or ') used to enclose the value of
    an attribute.
-   </para
-          >
+
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -4256,8 +4255,8 @@ have a name (like <see langword="Text" />, <see langword="Comment" /> , and so o
         <value>
           <para
             > One of the members of the <see cref="T:System.Xml.ReadState" /> enumeration.
-   </para
-          >
+
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -4706,8 +4705,8 @@ have a name (like <see langword="Text" />, <see langword="Comment" /> , and so o
               qualify="true"
             /> enumeration. The default is <see cref="F:System.Xml.WhitespaceHandling.All" />
 (returns both significant and insignificant white
-space).</para
-          >
+space).
+          </para>
         </value>
         <exception cref="T:System.ArgumentOutOfRangeException"
           >The value to be set is not one of the members of the <see cref="T:System.Xml.WhitespaceHandling" /> enumeration.</exception
@@ -4815,8 +4814,8 @@ space).</para
             > If this property is not set, the current instance uses a 
    new instance of the <see cref="T:System.Xml.XmlUrlResolver" /> class with
    default credentials. If this property is set to <see langword="null" />, any external DTD or entities encountered by
-   the reader are not resolved.</para
-          >
+   the reader are not resolved.
+          </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />

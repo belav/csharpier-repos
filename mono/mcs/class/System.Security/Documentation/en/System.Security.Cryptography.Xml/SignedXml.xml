@@ -408,8 +408,7 @@ if (s.CheckSignature (mac)) {
 else {
 	Console.WriteLine ("Invalid signature");
 }
-  </code
-            >
+  </code>
           </example>
         </remarks>
         <summary>

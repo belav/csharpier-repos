@@ -72,8 +72,7 @@ class StringFormatTest {
         Console.WriteLine(embeddedNull);
     }
 }
-   </code
-      >
+   </code>
       <para>The output is</para>
       <code>
 Some formatted numbers: dec=  1.999990E+000 doub=        1.0000000001
@@ -121,8 +120,7 @@ class StringFormatTest {
         Console.WriteLine(form11string);
     }
 }
-</code
-      >
+</code>
       <para>The output is</para>
       <code>
 11 string
@@ -143,8 +141,7 @@ class EmptyStringSearch {
 		Console.WriteLine("ABCDEF".LastIndexOf("", 1));
 		Console.WriteLine("ABCDEF".LastIndexOf("", 4, 2));
 	}
-}</code
-      >
+}</code>
       <para>The output is</para>
       <code>0
 2
@@ -1080,8 +1077,7 @@ public class StringExample {
  Console.WriteLine(s);            
  }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <para>
             <c>aaaaaaaaaa</c>
@@ -1471,8 +1467,8 @@ public class StringExample {
    string. The first character in the string is at index 0. The length of a string
    is the number of characters it is made up of. The last accessible <paramref name="index" />
    of a string instance is its length
-   - 1.</para
-          >
+   - 1.
+          </para>
         </remarks>
         <exception cref="T:System.IndexOutOfRangeException">
           <paramref name="index" /> is greater than or equal to the length of the current instance or less than zero.</exception
@@ -1676,8 +1672,7 @@ public class StringCompareExample {
  Console.WriteLine( "When 'A STRING' is compared to 'a string' in a case-sensitive manner, the return value is {0}.", second );
  }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>When 'A STRING' is compared to 'a string' in a case-insensitive manner, the
@@ -1774,8 +1769,8 @@ public class StringCompareExample {
             from="Microsoft"
             modified="false"
           />
-                                                                                                                                                                                                                                                                                        true to ignore case during the comparison; otherwise, false.</param
-        >
+                                                                                                                                                                                                                                                                                        true to ignore case during the comparison; otherwise, false.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1990,8 +1985,8 @@ public class StringCompareExample {
             from="Microsoft"
             modified="false"
           />
-                                                                                                                                                                                                                                                                                                    true to ignore case during the comparison; otherwise, false. </param
-        >
+                                                                                                                                                                                                                                                                                                    true to ignore case during the comparison; otherwise, false.
+        </param>
         <param name="culture">
           <attribution
             license="cc4"
@@ -2178,8 +2173,7 @@ public class StringCompareExample {
  Console.WriteLine( "When the substring 'tri' of 'A string' is compared to the substring 'ing' of 'B ring', the return value is {0}.", second );
  }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>When the substring 'rin' of 'A string' is compared to the substring 'rin' of
@@ -2361,8 +2355,7 @@ public class StringCompareExample {
  Console.WriteLine( "When the substring 'STRI' of 'STRING A' is compared to the substring 'stri' of 'string b' in a case-sensitive manner, the return value is {0}.", third );
  }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>When the string 'STRING A' is compared to the string 'string b' in a
@@ -2379,8 +2372,8 @@ public class StringCompareExample {
             from="Microsoft"
             modified="false"
           />
-                                                                                                                                                                                                                                        true to ignore case during the comparison; otherwise, false.</param
-        >
+                                                                                                                                                                                                                                        true to ignore case during the comparison; otherwise, false.
+        </param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -2500,8 +2493,8 @@ public class StringCompareExample {
             from="Microsoft"
             modified="false"
           />
-                                                                                                                                                                                                                                        true to ignore case during the comparison; otherwise, false.</param
-        >
+                                                                                                                                                                                                                                        true to ignore case during the comparison; otherwise, false.
+        </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2786,8 +2779,8 @@ public class StringCompareExample {
             from="Microsoft"
             modified="false"
           />
-                                                                                                                                                                                                                                                    true to ignore case during the comparison; otherwise, false. </param
-        >
+                                                                                                                                                                                                                                                    true to ignore case during the comparison; otherwise, false.
+        </param>
         <param name="culture">
           <attribution
             license="cc4"
@@ -3536,8 +3529,7 @@ public class StringConcatExample {
  Console.WriteLine( "The concatenated Object array is: {0}", str );
  }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <para>
             <c>The
@@ -3617,8 +3609,7 @@ public class StringConcatExample {
  Console.WriteLine( "The concatenated String array is: {0}", str );
  }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <para>
             <c>The
@@ -3691,8 +3682,7 @@ public class StringConcatExample {
  Console.WriteLine( "The concatenated Objects are: {0}", str );
  }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <para>
             <c>The
@@ -3771,8 +3761,7 @@ public class StringConcatExample {
  Console.WriteLine( "The concatenated strings are: {0}", str );
  }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <para>
             <c>The
@@ -3851,8 +3840,7 @@ public class StringConcatExample {
  Console.WriteLine( "The concatenated Objects are: {0}", str );
  }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <para>
             <c>The
@@ -3938,8 +3926,7 @@ public class StringConcatExample {
  Console.WriteLine( "The concatenated strings are: {0}", str );
  }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <para>
             <c>The
@@ -4286,8 +4273,7 @@ public class StringCopyExample {
  Console.WriteLine( "The copied string, strB, after strA.ToUpper, is '{0}'.", strB );
  }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>The initial string, strA, is 'string'.</para>
@@ -4384,8 +4370,7 @@ public class StringCopyToExample {
  Console.WriteLine("'");
  }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>The initial string is 'this is the new string'</para>
@@ -4507,8 +4492,7 @@ public class StringEndsWithExample {
  Console.WriteLine( str.EndsWith( "Compare" ) );
  }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>The given string is 'One string to compare'</para>
@@ -4657,8 +4641,8 @@ public class StringEndsWithExample {
             from="Microsoft"
             modified="false"
           />
-                                                                                                                                                                                                                                                                                                                                                                        true to ignore case during the comparison; otherwise, false.</param
-        >
+                                                                                                                                                                                                                                                                                                                                                                        true to ignore case during the comparison; otherwise, false.
+        </param>
         <param name="culture">
           <attribution
             license="cc4"
@@ -4714,8 +4698,7 @@ public class StringEqualsExample {
  Console.WriteLine( str.Equals( "A String" ) );
  }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>The given string is 'A string'</para>
@@ -4838,8 +4821,7 @@ public class StringEqualsExample {
  Console.WriteLine( String.Equals( strC, strB ) );
  }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>The string 'A string' is equal to the string 'a string'? False</para>
@@ -5048,8 +5030,7 @@ public class StringFormat {
  Console.WriteLine("The museum had {0,-6} visitors today.", 88);
  }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <code>
 The high temperature today was 88 degrees.
@@ -5144,8 +5125,7 @@ public class StringFormat {
       Console.WriteLine( "The winning numbers were {0, -6}{1, -6}{2, -6}{3, -6}{4, -6} today.", 5, 10, 11, 37, 42 );
  }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <code>
 The winning numbers were 005 010 011 037 042 today.
@@ -5318,8 +5298,7 @@ public class StringFormat {
   Console.WriteLine( "The temperature today oscillated between {0, -4} and {1, -4} degrees.", 78, 100 );
    }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <code>
 The temperature today oscillated between 78 and 100 degrees.
@@ -5416,8 +5395,7 @@ public class StringFormat {
       Console.WriteLine("The temperature today oscillated between {0, 4} and {1, 4} degrees. The average temperature was {2, 4}  degrees.", 78, 100, 91);
    }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <code>
 The temperature today oscillated between 78 and 100 degrees. The average temperature was 091 degrees.
@@ -5710,8 +5688,8 @@ The temperature today oscillated between   78 and  100 degrees. The average temp
         <example>
           <para
             >The following example demonstrates the <see cref="M:System.String.IndexOf(System.Char)" /> 
-method.</para
-          >
+method.
+          </para>
           <code lang="C#"
             >using System;
 public class StringIndexOf {
@@ -5722,8 +5700,7 @@ public class StringIndexOf {
  Console.WriteLine( "Searching for the index of \"\" yields {0,2}.", str.IndexOf( "" ) );
  }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>Searching for the index of "is" yields 2.</para>
@@ -5786,8 +5763,8 @@ public class StringIndexOf {
         <example>
           <para
             >The following example demonstrates the <see cref="M:System.String.IndexOf(System.Char)" /> 
-method.</para
-          >
+method.
+          </para>
           <code lang="C#"
             >using System;
 public class StringIndexOf {
@@ -5797,8 +5774,7 @@ public class StringIndexOf {
  Console.WriteLine( "Searching for the index of 'h' starting from index 10 yields {0}.", str.IndexOf( 'h', 10 ) );
  }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>Searching for the index of 'h' starting from index 0 yields 1.</para>
@@ -6594,8 +6570,7 @@ public class StringExample {
         Console.WriteLine(Object.ReferenceEquals(s1, s3));    //the same
     }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>False</para>
@@ -6687,8 +6662,8 @@ public class StringExample {
         <example>
           <para
             >The following example demonstrates the <see cref="M:System.String.IsInterned(System.String)" />
-method.</para
-          >
+method.
+          </para>
           <code lang="C#"
             >using System;
 using System.Text;
@@ -6701,8 +6676,7 @@ public class StringExample {
         Console.WriteLine(String.IsInterned(s1) != null);
     }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <para>
             <c>True</c>
@@ -7110,8 +7084,7 @@ public class StringJoin {
  Console.WriteLine( String.Join( " :: ", strAry ) );
  }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <para>
             <c>Red :: Green
@@ -7198,8 +7171,7 @@ public class StringJoin {
  Console.WriteLine( String.Join( " :: ", strAry, 1, 2 ) );
  }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <para>
             <c>Green ::
@@ -7479,8 +7451,8 @@ public class StringJoin {
         <example>
           <para
             >The following example demonstrates the <see cref="M:System.String.LastIndexOf(System.Char)" /> 
-method.</para
-          >
+method.
+          </para>
           <code lang="C#"
             >using System;
 public class StringLastIndexOfTest {
@@ -7491,8 +7463,7 @@ public class StringLastIndexOfTest {
       Console.WriteLine( str.LastIndexOf('b', 8) );
    }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>-1</para>
@@ -8220,8 +8191,7 @@ public class StringLengthExample {
  Console.WriteLine( "The length of string {0} is {1}", str, str.Length );
  }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <para>
             <c>The length
@@ -9923,8 +9893,8 @@ public class StringLengthExample {
             from="Microsoft"
             modified="false"
           />
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                true to ignore case during the comparison; otherwise, false.</param
-        >
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                true to ignore case during the comparison; otherwise, false.
+        </param>
         <param name="culture">
           <attribution
             license="cc4"

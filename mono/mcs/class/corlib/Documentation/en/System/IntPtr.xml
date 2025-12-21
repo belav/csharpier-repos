@@ -327,8 +327,7 @@
           <para>
             <block subset="none" type="note"
               >The algorithm
- used to generate the hash code is unspecified.</block
-            >
+ used to generate the hash code is unspecified.</block>
           </para>
           <para>
             <block subset="none" type="note"
@@ -802,16 +801,16 @@
    number of bytes of a pointer or handle for the current implementation. The value
    of this property is equal to the number of bytes contained by the <see langword="native int" /> type
    in
-   the current implementation. </para
-          >
+   the current implementation.
+          </para>
         </value>
         <remarks>
           <para>This property is read-only.</para>
           <para
             >For more information on the 
    <see langword="native int" /> type, see
-      Partition II of the CLI Specification.</para
-          >
+      Partition II of the CLI Specification.
+          </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1040,8 +1039,8 @@
           <para>
             <block subset="none" type="note"
               >A pointer to <see langword="void" /> points to memory
-   containing data of an unspecified type.</block
-            >
+   containing data of an unspecified type.
+            </block>
           </para>
         </remarks>
         <summary>
