@@ -18,12 +18,17 @@
        In CoreCLR tests, these assemblies get copied to CORE_ROOT, which NativeAOT doesn't use
   -->
   <!-- Get all the *.dll files that has IsNative != "true"-->
-  <Target Name="GetRequiredNativeAOTAssemblies"
-      DependsOnTargets="ResolveLibrariesRuntimeFilesFromLocalBuild"
-      BeforeTargets="ComputeIlcCompileInputs"
-      Condition="'$(TestBuildMode)' == 'nativeaot'">
+  <Target
+    Name="GetRequiredNativeAOTAssemblies"
+    DependsOnTargets="ResolveLibrariesRuntimeFilesFromLocalBuild"
+    BeforeTargets="ComputeIlcCompileInputs"
+    Condition="'$(TestBuildMode)' == 'nativeaot'"
+  >
     <ItemGroup>
-      <IlcReference Include="@(LibrariesRuntimeFiles)" Condition="'%(Extension)' == '.dll' and '%(LibrariesRuntimeFiles.IsNative)' != 'true'"/>
+      <IlcReference
+        Include="@(LibrariesRuntimeFiles)"
+        Condition="'%(Extension)' == '.dll' and '%(LibrariesRuntimeFiles.IsNative)' != 'true'"
+      />
     </ItemGroup>
-  </Target>  
+  </Target>
 </Project>

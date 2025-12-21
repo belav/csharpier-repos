@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFrameworks>$(DefaultNetCoreTargetFramework);net462</TargetFrameworks>
     <DefineConstants>$(DefineConstants);SQLITE3</DefineConstants>
@@ -13,5 +12,4 @@
   <ItemGroup>
     <PackageReference Include="SQLitePCLRaw.bundle_sqlite3" Version="2.1.6" />
   </ItemGroup>
-
 </Project>

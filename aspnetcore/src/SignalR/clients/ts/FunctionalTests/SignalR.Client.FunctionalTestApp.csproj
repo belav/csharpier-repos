@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
-
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <TypeScriptCompileBlocked>True</TypeScriptCompileBlocked>
@@ -39,7 +38,11 @@
   <ItemGroup>
     <Compile Include="$(SignalRSharedSourceRoot)EphemeralDataProtectionProvider.cs" />
     <Compile Include="$(SignalRSharedSourceRoot)TestCertificates.cs" Link="TestCertificates.cs" />
-    <Content Include="$(SignalRSharedSourceRoot)*.pfx" LinkBase="TestCertificates" CopyToOutputDirectory="PreserveNewest" />
+    <Content
+      Include="$(SignalRSharedSourceRoot)*.pfx"
+      LinkBase="TestCertificates"
+      CopyToOutputDirectory="PreserveNewest"
+    />
   </ItemGroup>
 
   <ItemGroup>
@@ -56,5 +59,4 @@
     <TypeScriptCompile Include="ts\WebSocketTests.ts" />
     <TypeScriptCompile Include="ts\WebWorkerTests.ts" />
   </ItemGroup>
-
 </Project>

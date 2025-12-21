@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
     <StrongNameKeyId>Microsoft</StrongNameKeyId>
@@ -13,7 +12,9 @@
     <ProjectReference Include="$(LibrariesProjectRoot)System.Net.WebClient\src\System.Net.WebClient.csproj" />
     <ProjectReference Include="$(LibrariesProjectRoot)System.Net.WebHeaderCollection\src\System.Net.WebHeaderCollection.csproj" />
     <ProjectReference Include="$(LibrariesProjectRoot)System.Runtime\src\System.Runtime.csproj" />
-    <ProjectReference Include="$(LibrariesProjectRoot)shims\stubs\System.Security.Permissions.csproj" PrivateAssets="all" />
+    <ProjectReference
+      Include="$(LibrariesProjectRoot)shims\stubs\System.Security.Permissions.csproj"
+      PrivateAssets="all"
+    />
   </ItemGroup>
-
 </Project>

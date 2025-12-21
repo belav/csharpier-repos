@@ -1,5 +1,8 @@
 <Type Name="AxHost+AxComponentEditor" FullName="System.Windows.Forms.AxHost+AxComponentEditor">
-  <TypeSignature Language="C#" Value="public class AxHost.AxComponentEditor : System.Windows.Forms.Design.WindowsFormsComponentEditor" />
+  <TypeSignature
+    Language="C#"
+    Value="public class AxHost.AxComponentEditor : System.Windows.Forms.Design.WindowsFormsComponentEditor"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -28,7 +31,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="EditComponent">
-      <MemberSignature Language="C#" Value="public override bool EditComponent (System.ComponentModel.ITypeDescriptorContext context, object obj, System.Windows.Forms.IWin32Window parent);" />
+      <MemberSignature
+        Language="C#"
+        Value="public override bool EditComponent (System.ComponentModel.ITypeDescriptorContext context, object obj, System.Windows.Forms.IWin32Window parent);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>

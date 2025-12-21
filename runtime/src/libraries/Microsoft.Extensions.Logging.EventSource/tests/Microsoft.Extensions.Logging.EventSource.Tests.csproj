@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFrameworks>$(NetCoreAppCurrent);$(NetFrameworkMinimum)</TargetFrameworks>
     <EnableDefaultItems>true</EnableDefaultItems>
@@ -8,7 +7,9 @@
 
   <ItemGroup>
     <ProjectReference Include="$(LibrariesProjectRoot)Microsoft.Extensions.DependencyInjection\src\Microsoft.Extensions.DependencyInjection.csproj" />
-    <ProjectReference Include="..\src\Microsoft.Extensions.Logging.EventSource.csproj" SkipUseReferenceAssembly="true" />
+    <ProjectReference
+      Include="..\src\Microsoft.Extensions.Logging.EventSource.csproj"
+      SkipUseReferenceAssembly="true"
+    />
   </ItemGroup>
-
 </Project>

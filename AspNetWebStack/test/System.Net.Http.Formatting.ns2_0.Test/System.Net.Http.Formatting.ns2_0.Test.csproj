@@ -28,8 +28,10 @@
     </PackageReference>
     <PackageReference Include="XunitXml.TestLogger" Version="3.0.70" />
 
-    <Compile Include="..\System.Net.Http.Formatting.Test\**\*.cs"
-        Exclude="..\System.Net.Http.Formatting.Test\obj\**\*.cs">
+    <Compile
+      Include="..\System.Net.Http.Formatting.Test\**\*.cs"
+      Exclude="..\System.Net.Http.Formatting.Test\obj\**\*.cs"
+    >
       <Link>%(RecursiveDir)\%(Filename).cs</Link>
     </Compile>
 

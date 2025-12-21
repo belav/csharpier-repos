@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <Description>Helpers for building single-page applications on ASP.NET MVC Core.</Description>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
@@ -11,9 +10,8 @@
     <Reference Include="Microsoft.AspNetCore.WebSockets" />
     <Reference Include="Microsoft.Extensions.FileProviders.Physical" />
   </ItemGroup>
-  
+
   <ItemGroup>
     <InternalsVisibleTo Include="Microsoft.AspNetCore.SpaServices.Extensions.Tests" />
   </ItemGroup>
-
 </Project>

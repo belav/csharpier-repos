@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <StrongNameKeyId>Microsoft</StrongNameKeyId>
   </PropertyGroup>
@@ -8,5 +7,4 @@
     <ForwardedType Include="System.Security.Cryptography.DataProtectionScope" />
     <ForwardedType Include="System.Security.Cryptography.ProtectedData" />
   </ItemGroup>
-
 </Project>

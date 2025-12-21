@@ -1,5 +1,4 @@
 <Project>
-
   <PropertyGroup>
     <InstallerName Condition="'$(PgoInstrument)' != ''">$(InstallerName)-pgo</InstallerName>
     <ArchiveName Condition="'$(PgoInstrument)' != ''">$(ArchiveName)-pgo</ArchiveName>
@@ -10,7 +9,10 @@
     listing this before the ../Directory.Build.targets import would be sufficient, but the packaging
     tools targets are already imported before this file.
   -->
-  <Import Project="packaging.stubs.targets" Condition="'$(MSBuildProjectExtension)' != '.pkgproj'" />
+  <Import
+    Project="packaging.stubs.targets"
+    Condition="'$(MSBuildProjectExtension)' != '.pkgproj'"
+  />
 
   <Import Project="..\..\Directory.Build.targets" />
 

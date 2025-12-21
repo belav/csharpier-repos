@@ -13,9 +13,15 @@
     <PreReleaseVersionLabel>alpha</PreReleaseVersionLabel>
     <PreReleaseVersionIteration>1</PreReleaseVersionIteration>
     <!-- Enable to remove prerelease label. -->
-    <StabilizePackageVersion Condition="'$(StabilizePackageVersion)' == ''">false</StabilizePackageVersion>
-    <DotNetFinalVersionKind Condition="'$(StabilizePackageVersion)' == 'true'">release</DotNetFinalVersionKind>
-    <WorkloadVersionSuffix Condition="'$(DotNetFinalVersionKind)' != 'release'">-$(PreReleaseVersionLabel).$(PreReleaseVersionIteration)</WorkloadVersionSuffix>
+    <StabilizePackageVersion Condition="'$(StabilizePackageVersion)' == ''"
+      >false</StabilizePackageVersion
+    >
+    <DotNetFinalVersionKind Condition="'$(StabilizePackageVersion)' == 'true'"
+      >release</DotNetFinalVersionKind
+    >
+    <WorkloadVersionSuffix Condition="'$(DotNetFinalVersionKind)' != 'release'"
+      >-$(PreReleaseVersionLabel).$(PreReleaseVersionIteration)</WorkloadVersionSuffix
+    >
     <SdkBandVersionForWorkload_FromRuntimeVersions>$(SdkBandVersion)$(WorkloadVersionSuffix)</SdkBandVersionForWorkload_FromRuntimeVersions>
     <!-- Set assembly version to align with major and minor version,
          as for the patches and revisions should be manually updated per assembly if it is serviced. -->
@@ -24,7 +30,9 @@
     <UsingToolIbcOptimization>false</UsingToolIbcOptimization>
     <UsingToolXliff>false</UsingToolXliff>
     <!-- Use SDK compilers in full source-build. -->
-    <UsingToolMicrosoftNetCompilers Condition="'$(DotNetBuildFromSourceFlavor)' != 'Product'">true</UsingToolMicrosoftNetCompilers>
+    <UsingToolMicrosoftNetCompilers Condition="'$(DotNetBuildFromSourceFlavor)' != 'Product'"
+      >true</UsingToolMicrosoftNetCompilers
+    >
   </PropertyGroup>
   <ItemGroup>
     <WorkloadSdkBandVersions Include="$(SdkBandVersion)" SupportsMachineArch="true" />

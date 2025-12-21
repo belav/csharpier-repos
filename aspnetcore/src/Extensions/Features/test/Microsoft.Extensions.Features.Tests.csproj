@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFrameworks>$(DefaultNetFxTargetFramework);$(DefaultNetCoreTargetFramework)</TargetFrameworks>
     <Nullable>enable</Nullable>
@@ -8,5 +7,4 @@
   <ItemGroup>
     <Reference Include="Microsoft.Extensions.Features" />
   </ItemGroup>
-
 </Project>

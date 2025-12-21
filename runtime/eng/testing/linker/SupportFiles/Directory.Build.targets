@@ -1,5 +1,8 @@
 <Project>
-  <Import Project="$(RepositoryEngineeringDir)testing\tests.mobile.targets" Condition="'$(RuntimeIdentifier)' == 'browser-wasm'" />
+  <Import
+    Project="$(RepositoryEngineeringDir)testing\tests.mobile.targets"
+    Condition="'$(RuntimeIdentifier)' == 'browser-wasm'"
+  />
   <Import Project="$(RepositoryEngineeringDir)targetingpacks.targets" />
 
   <PropertyGroup>
@@ -7,10 +10,12 @@
     <WasmMainAssemblyFileName>project.dll</WasmMainAssemblyFileName>
   </PropertyGroup>
 
-  <Target Name="CreateTestWasmAppBundle"
-          AfterTargets="Publish"
-          DependsOnTargets="BundleTestWasmApp"
-          Condition="'$(TargetArchitecture)' == 'wasm' And '$(TargetOS)' == 'browser'" />
+  <Target
+    Name="CreateTestWasmAppBundle"
+    AfterTargets="Publish"
+    DependsOnTargets="BundleTestWasmApp"
+    Condition="'$(TargetArchitecture)' == 'wasm' And '$(TargetOS)' == 'browser'"
+  />
 
   <PropertyGroup Condition="'$(PublishAot)' == 'true'">
     <_IlcReferencedAsPackage>false</_IlcReferencedAsPackage>
@@ -19,5 +24,4 @@
 
   <!-- Overriding these targets as these projects won't need to binplace -->
   <Target Name="PublishTestAsSelfContained" />
-
 </Project>

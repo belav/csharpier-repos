@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(NetCoreAppCurrent)</TargetFramework>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -12,14 +11,19 @@
     <Compile Include="System\Net\HttpRequestHeader.cs" />
     <Compile Include="System\Net\HeaderInfo.cs" />
     <Compile Include="System\Net\HeaderInfoTable.cs" />
-    <Compile Include="$(CommonPath)System\Net\CaseInsensitiveAscii.cs"
-             Link="Common\System\Net\CaseInsensitiveAscii.cs" />
-    <Compile Include="$(CommonPath)System\Net\HttpKnownHeaderNames.cs"
-             Link="Common\System\Net\HttpKnownHeaderNames.cs" />
-    <Compile Include="$(CommonPath)System\Net\HttpValidationHelpers.cs"
-             Link="Common\System\Net\HttpValidationHelpers.cs" />
-    <Compile Include="$(CommonPath)System\Obsoletions.cs"
-             Link="Common\System\Obsoletions.cs" />
+    <Compile
+      Include="$(CommonPath)System\Net\CaseInsensitiveAscii.cs"
+      Link="Common\System\Net\CaseInsensitiveAscii.cs"
+    />
+    <Compile
+      Include="$(CommonPath)System\Net\HttpKnownHeaderNames.cs"
+      Link="Common\System\Net\HttpKnownHeaderNames.cs"
+    />
+    <Compile
+      Include="$(CommonPath)System\Net\HttpValidationHelpers.cs"
+      Link="Common\System\Net\HttpValidationHelpers.cs"
+    />
+    <Compile Include="$(CommonPath)System\Obsoletions.cs" Link="Common\System\Obsoletions.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,5 +33,4 @@
     <Reference Include="System.Memory" />
     <Reference Include="System.Runtime" />
   </ItemGroup>
-
 </Project>

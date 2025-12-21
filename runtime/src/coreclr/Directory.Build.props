@@ -14,11 +14,21 @@
   <Import Project="..\..\Directory.Build.props" />
 
   <PropertyGroup>
-    <IsNativeAotProject Condition="$(MSBuildProjectDirectory.Contains('nativeaot'))">true</IsNativeAotProject>
-    <BaseIntermediateOutputPath Condition="'$(IsNativeAotProject)' != 'true'">$([MSBuild]::NormalizeDirectory('$(ArtifactsObjDir)', 'coreclr', '$(MSBuildProjectName)'))</BaseIntermediateOutputPath>
-    <BaseIntermediateOutputPath Condition="'$(IsNativeAotProject)' == 'true'">$([MSBuild]::NormalizeDirectory('$(ArtifactsObjDir)', 'coreclr', 'nativeaot', '$(MSBuildProjectName)'))</BaseIntermediateOutputPath>
-    <IntermediateOutputPath Condition="'$(PlatformName)' == 'AnyCPU'">$(BaseIntermediateOutputPath)$(Configuration)\</IntermediateOutputPath>
-    <IntermediateOutputPath Condition="'$(PlatformName)' != 'AnyCPU'">$(BaseIntermediateOutputPath)$(PlatformName)\$(Configuration)\</IntermediateOutputPath>
+    <IsNativeAotProject Condition="$(MSBuildProjectDirectory.Contains('nativeaot'))"
+      >true</IsNativeAotProject
+    >
+    <BaseIntermediateOutputPath Condition="'$(IsNativeAotProject)' != 'true'"
+      >$([MSBuild]::NormalizeDirectory('$(ArtifactsObjDir)', 'coreclr', '$(MSBuildProjectName)'))</BaseIntermediateOutputPath
+    >
+    <BaseIntermediateOutputPath Condition="'$(IsNativeAotProject)' == 'true'"
+      >$([MSBuild]::NormalizeDirectory('$(ArtifactsObjDir)', 'coreclr', 'nativeaot', '$(MSBuildProjectName)'))</BaseIntermediateOutputPath
+    >
+    <IntermediateOutputPath Condition="'$(PlatformName)' == 'AnyCPU'"
+      >$(BaseIntermediateOutputPath)$(Configuration)\</IntermediateOutputPath
+    >
+    <IntermediateOutputPath Condition="'$(PlatformName)' != 'AnyCPU'"
+      >$(BaseIntermediateOutputPath)$(PlatformName)\$(Configuration)\</IntermediateOutputPath
+    >
     <ProjectDir>$(MSBuildThisFileDirectory)</ProjectDir>
     <RuntimeBinDir>$([MSBuild]::NormalizeDirectory('$(ArtifactsBinDir)', 'coreclr', '$(TargetOS).$(TargetArchitecture).$(Configuration)'))</RuntimeBinDir>
 

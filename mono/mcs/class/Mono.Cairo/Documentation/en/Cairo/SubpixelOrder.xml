@@ -10,8 +10,7 @@
   </Base>
   <Docs>
     <summary>The subpixel order specifies the order of color elements within each pixel on the display device when rendering with an antialiasing mode of Cairo.Antialias.Subpixel.</summary>
-    <remarks>
-    </remarks>
+    <remarks></remarks>
   </Docs>
   <Members>
     <Member MemberName="Bgr">

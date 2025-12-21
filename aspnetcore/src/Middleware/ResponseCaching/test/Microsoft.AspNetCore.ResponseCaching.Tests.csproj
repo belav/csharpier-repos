@@ -15,5 +15,4 @@
     <Reference Include="Microsoft.AspNetCore.TestHost" />
     <Reference Include="Microsoft.Extensions.TimeProvider.Testing" />
   </ItemGroup>
-
 </Project>

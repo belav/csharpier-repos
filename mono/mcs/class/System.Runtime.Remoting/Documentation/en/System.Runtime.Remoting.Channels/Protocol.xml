@@ -1,4 +1,7 @@
-<Type Name="Protocol" FullName="System.Runtime.Remoting.Channels.BinaryServerFormatterSink+Protocol">
+<Type
+  Name="Protocol"
+  FullName="System.Runtime.Remoting.Channels.BinaryServerFormatterSink+Protocol"
+>
   <TypeSignature Language="C#" Value="public sealed struct Protocol;" Maintainer="auto" />
   <AssemblyInfo>
     <AssemblyName>System.Runtime.Remoting</AssemblyName>
@@ -36,7 +39,10 @@
   <Attributes />
   <Members>
     <Member MemberName="Http">
-      <MemberSignature Language="C#" Value="public static BinaryServerFormatterSink+Protocol Http;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static BinaryServerFormatterSink+Protocol Http;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Runtime.Remoting.Channels.BinaryServerFormatterSink+Protocol</ReturnType>
@@ -48,7 +54,10 @@
       </Docs>
     </Member>
     <Member MemberName="Other">
-      <MemberSignature Language="C#" Value="public static BinaryServerFormatterSink+Protocol Other;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static BinaryServerFormatterSink+Protocol Other;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Runtime.Remoting.Channels.BinaryServerFormatterSink+Protocol</ReturnType>

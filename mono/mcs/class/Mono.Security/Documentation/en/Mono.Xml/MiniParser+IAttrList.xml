@@ -12,7 +12,10 @@
   </Docs>
   <Members>
     <Member MemberName="ChangeValue">
-      <MemberSignature Language="C#" Value="public void ChangeValue (string name, string newValue);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void ChangeValue (string name, string newValue);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>

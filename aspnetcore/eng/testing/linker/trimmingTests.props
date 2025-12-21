@@ -11,10 +11,11 @@
 
   <PropertyGroup>
     <!-- Microsoft.NET.Sdk needs a TFM set. Set a default one. -->
-    <TargetFramework Condition="'$(TargetFramework)' == '' and '$(TargetFrameworks)' == ''">$(DefaultNetCoreTargetFramework)</TargetFramework>
+    <TargetFramework Condition="'$(TargetFramework)' == '' and '$(TargetFrameworks)' == ''"
+      >$(DefaultNetCoreTargetFramework)</TargetFramework
+    >
 
     <!-- Enforce build order. Ensure the Shared Fx is built before generating and publishing the test apps. -->
     <RequiresDelayedBuild>true</RequiresDelayedBuild>
   </PropertyGroup>
-
 </Project>

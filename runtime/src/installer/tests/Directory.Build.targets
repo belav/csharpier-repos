@@ -1,46 +1,56 @@
 <Project>
-
-  <Target Name="SetUpSharedFrameworkPublish"
-          DependsOnTargets="DetermineTestOutputDirectory"
-          BeforeTargets="RunTests">
+  <Target
+    Name="SetUpSharedFrameworkPublish"
+    DependsOnTargets="DetermineTestOutputDirectory"
+    BeforeTargets="RunTests"
+  >
     <!--
       Set up the shared framework copy this set of tests should use. There's no known reason to have
       one per test project, but RepoDirectoriesProvider may need some tweaking to share.
     -->
-    <MSBuild Projects="$(InstallerProjectRoot)pkg\sfx\bundle\Microsoft.NETCore.App.Bundle.bundleproj"
-             Targets="PublishToDisk"
-             Properties="OutputPath=$(TestsOutputDir)sharedFrameworkPublish/" />
+    <MSBuild
+      Projects="$(InstallerProjectRoot)pkg\sfx\bundle\Microsoft.NETCore.App.Bundle.bundleproj"
+      Targets="PublishToDisk"
+      Properties="OutputPath=$(TestsOutputDir)sharedFrameworkPublish/"
+    />
   </Target>
 
-  <Target Name="RefreshProjectTestAssets"
-          Condition="'$(UsesTestAssets)' == 'true' and '$(SkipTests)' != 'true'"
-          DependsOnTargets="DetermineTestOutputDirectory;SetUpSharedFrameworkPublish"
-          BeforeTargets="RunTests">
+  <Target
+    Name="RefreshProjectTestAssets"
+    Condition="'$(UsesTestAssets)' == 'true' and '$(SkipTests)' != 'true'"
+    DependsOnTargets="DetermineTestOutputDirectory;SetUpSharedFrameworkPublish"
+    BeforeTargets="RunTests"
+  >
     <!-- Build PrepareTestAssets once for all tests. -->
     <MSBuild
       Projects="$(TestDir)PrepareTestAssets\PrepareTestAssets.proj"
-      Targets="PrepareTestAssets" />
+      Targets="PrepareTestAssets"
+    />
 
     <!-- Create files with a name that describes what a test dir is. Useful if path abbreviated. -->
     <WriteLinesToFile
       File="$(TestArtifactsOutputRoot)$(TestsOutputName)-is-$(MSBuildProjectName).txt"
       Overwrite="true"
       Lines="$(MSBuildProjectName) intermediates are located in '$(TestsOutputName)'. Abbreviated to work around path limits on Windows."
-      Condition="'$(TestsOutputName)' != '$(MSBuildProjectName)'" />
+      Condition="'$(TestsOutputName)' != '$(MSBuildProjectName)'"
+    />
     <WriteLinesToFile
       File="$(TestsOutputDir)$(MSBuildProjectName).txt"
       Overwrite="true"
       Lines="$(MSBuildProjectName) intermediates are located in '$(TestsOutputName)'. Abbreviated to work around path limits on Windows."
-      Condition="'$(TestsOutputName)' != '$(MSBuildProjectName)'" />
+      Condition="'$(TestsOutputName)' != '$(MSBuildProjectName)'"
+    />
   </Target>
 
-  <Target Name="SetupTestContextVariables"
-          Condition="'$(IsTestProject)' == 'true'"
-          DependsOnTargets="
+  <Target
+    Name="SetupTestContextVariables"
+    Condition="'$(IsTestProject)' == 'true'"
+    DependsOnTargets="
             GetProductVersions;
             GetNETCoreAppRuntimePackVersion;
             DetermineTestOutputDirectory"
-          BeforeTargets="Build">
+    BeforeTargets="Build"
+  >
     <PropertyGroup>
       <!--
         The tests use the TEST_ARTIFACTS variable to determine the artifacts folder and then later
@@ -65,7 +75,8 @@
     -->
     <MSBuild
       Projects="$(InstallerProjectRoot)pkg\sfx\Microsoft.NETCore.App\Microsoft.NETCore.App.Ref.sfxproj"
-      Targets="ReturnProductVersion">
+      Targets="ReturnProductVersion"
+    >
       <Output TaskParameter="TargetOutputs" PropertyName="NETCoreAppRuntimePackageVersion" />
     </MSBuild>
 
@@ -91,7 +102,8 @@
     <WriteLinesToFile
       File="$(OutDir)TestContextVariables.txt"
       Overwrite="true"
-      Lines="@(TestContextVariable)" />
+      Lines="@(TestContextVariable)"
+    />
   </Target>
 
   <!--
@@ -105,7 +117,8 @@
   <Target Name="GetNETCoreAppRuntimePackVersion">
     <MSBuild
       Projects="$(InstallerProjectRoot)pkg\sfx\Microsoft.NETCore.App\Microsoft.NETCore.App.Runtime.sfxproj"
-      Targets="ReturnProductVersion">
+      Targets="ReturnProductVersion"
+    >
       <Output TaskParameter="TargetOutputs" PropertyName="NETCoreAppRuntimePackVersion" />
     </MSBuild>
   </Target>
@@ -113,19 +126,24 @@
   <Target Name="DetermineTestOutputDirectory">
     <PropertyGroup>
       <TestTargetRid Condition="'$(TestTargetRid)' == ''">$(PackageRID)</TestTargetRid>
-      <TestsOutputName Condition="'$(TestsOutputName)' == ''">$(MSBuildProjectName)</TestsOutputName>
-      <TestsOutputDir Condition="'$(TestsOutputDir)' == ''">$(TestArtifactsOutputRoot)$(TestsOutputName)/</TestsOutputDir>
+      <TestsOutputName Condition="'$(TestsOutputName)' == ''"
+        >$(MSBuildProjectName)</TestsOutputName
+      >
+      <TestsOutputDir Condition="'$(TestsOutputDir)' == ''"
+        >$(TestArtifactsOutputRoot)$(TestsOutputName)/</TestsOutputDir
+      >
     </PropertyGroup>
   </Target>
 
   <Target Name="RemoveOOBPackageReference" AfterTargets="ResolvePackageAssets">
-
     <!-- Tests have some dependencies that use the System.Text.Json package (HostModel, DependencyModel),
          but the tests should just use the framework on which they are run if possible Explicitly remove
          the item if the target framework version for the test matches the referenced package version. -->
     <ItemGroup>
-      <RuntimeCopyLocalItems Remove="@(RuntimeCopyLocalItems)"
-                             Condition="'%(NuGetPackageId)' == 'System.Text.Json' and $(SystemTextJsonVersion.StartsWith('$(_TargetFrameworkVersionWithoutV)'))" />
+      <RuntimeCopyLocalItems
+        Remove="@(RuntimeCopyLocalItems)"
+        Condition="'%(NuGetPackageId)' == 'System.Text.Json' and $(SystemTextJsonVersion.StartsWith('$(_TargetFrameworkVersionWithoutV)'))"
+      />
     </ItemGroup>
   </Target>
 
@@ -135,8 +153,10 @@
     <RunSettingsTestCaseFilter>$(TestCaseFilter)</RunSettingsTestCaseFilter>
   </PropertyGroup>
 
-  <Import Project="$(RepositoryEngineeringDir)testing\runsettings.targets"
-          Condition="'$(IsTestProject)' == 'true'" />
+  <Import
+    Project="$(RepositoryEngineeringDir)testing\runsettings.targets"
+    Condition="'$(IsTestProject)' == 'true'"
+  />
 
   <Import Project="$([MSBuild]::GetPathOfFileAbove(Directory.Build.targets, $(MSBuildThisFileDirectory)..))" />
 </Project>

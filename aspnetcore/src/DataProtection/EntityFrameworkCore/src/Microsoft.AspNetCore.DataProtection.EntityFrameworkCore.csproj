@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <Description>Support for storing keys using Entity Framework Core.</Description>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
@@ -13,5 +12,4 @@
     <Reference Include="Microsoft.AspNetCore.DataProtection" />
     <Reference Include="Microsoft.EntityFrameworkCore" />
   </ItemGroup>
-
 </Project>

@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFrameworks>$(NetCoreAppCurrent);$(NetCoreAppPrevious);$(NetCoreAppMinimum);netstandard2.0;$(NetFrameworkMinimum)</TargetFrameworks>
     <EnableDefaultItems>true</EnableDefaultItems>
@@ -20,7 +19,10 @@ Microsoft.Extensions.Diagnostics.Metrics.MetricsOptions</PackageDescription>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="$(CommonPath)Extensions\TypeNameHelper\TypeNameHelper.cs" Link="Common\src\Extensions\TypeNameHelper\TypeNameHelper.cs" />
+    <Compile
+      Include="$(CommonPath)Extensions\TypeNameHelper\TypeNameHelper.cs"
+      Link="Common\src\Extensions\TypeNameHelper\TypeNameHelper.cs"
+    />
     <Compile Include="$(CommonPath)System\ThrowHelper.cs" Link="Common\System\ThrowHelper.cs" />
   </ItemGroup>
 
@@ -36,5 +38,4 @@ Microsoft.Extensions.Diagnostics.Metrics.MetricsOptions</PackageDescription>
     <ProjectReference Include="$(LibrariesProjectRoot)Microsoft.Extensions.DependencyInjection.Abstractions\src\Microsoft.Extensions.DependencyInjection.Abstractions.csproj" />
     <ProjectReference Include="$(LibrariesProjectRoot)Microsoft.Extensions.Options\src\Microsoft.Extensions.Options.csproj" />
   </ItemGroup>
-
 </Project>

@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFrameworks>net7.0</TargetFrameworks>
     <PreserveCompilationContext>true</PreserveCompilationContext>
@@ -22,5 +21,4 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="xunit" Version="2.4.2" />
   </ItemGroup>
-
 </Project>

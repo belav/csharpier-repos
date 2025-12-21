@@ -10,6 +10,6 @@
           <GenericArgument Name="System.Net.Security.TlsCipherSuite,System.Net.Security" />
         </Method>
       </Type>
-    </Assembly>    
+    </Assembly>
   </Application>
 </Directives>

@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFrameworks>$(NetCoreAppCurrent);$(NetCoreAppCurrent)-browser;$(NetCoreAppCurrent)-ios;$(NetCoreAppCurrent)-tvos;$(NetCoreAppCurrent)-android</TargetFrameworks>
     <UseCompilerGeneratedDocXmlFile>false</UseCompilerGeneratedDocXmlFile>
@@ -7,14 +6,19 @@
 
   <!-- DesignTimeBuild requires all the TargetFramework Derived Properties to not be present in the first property group. -->
   <PropertyGroup>
-    <TargetPlatformIdentifier Condition="$(TargetFramework.Contains('-'))">$(TargetFramework.SubString($([MSBuild]::Add($(TargetFramework.IndexOf('-')), 1))))</TargetPlatformIdentifier>
+    <TargetPlatformIdentifier Condition="$(TargetFramework.Contains('-'))"
+      >$(TargetFramework.SubString($([MSBuild]::Add($(TargetFramework.IndexOf('-')), 1))))</TargetPlatformIdentifier
+    >
     <!-- TargetsMobile: When we replace implementations with PNSE, need to suppress some "field is never assigned to" warnings. -->
     <NoWarn Condition="'$(TargetPlatformIdentifier)' != ''">$(NoWarn);CS0649</NoWarn>
     <NoWarn>$(NoWarn);CA1822;IDE0060</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
-    <ILLinkSubstitutionsXmls Condition="'$(TargetPlatformIdentifier)' == ''" Include="$(ILLinkDirectory)ILLink.Substitutions.NonMobile.xml" />
+    <ILLinkSubstitutionsXmls
+      Condition="'$(TargetPlatformIdentifier)' == ''"
+      Include="$(ILLinkDirectory)ILLink.Substitutions.NonMobile.xml"
+    />
   </ItemGroup>
 
   <ItemGroup>
@@ -67,10 +71,11 @@
     <Compile Include="System\Runtime\Serialization\Formatters\Binary\BinaryObjectWriter.cs" />
     <Compile Include="System\Runtime\Serialization\Formatters\Binary\BinaryParser.cs" />
     <Compile Include="System\Runtime\Serialization\Formatters\Binary\BinaryUtilClasses.cs" />
-    <Compile Include="$(CommonPath)System\Obsoletions.cs"
-             Link="Common\System\Obsoletions.cs" />
-    <Compile Include="$(CoreLibSharedDir)System\Collections\HashHelpers.cs"
-             Link="Common\System\Collections\HashHelpers.cs" />
+    <Compile Include="$(CommonPath)System\Obsoletions.cs" Link="Common\System\Obsoletions.cs" />
+    <Compile
+      Include="$(CoreLibSharedDir)System\Collections\HashHelpers.cs"
+      Link="Common\System\Collections\HashHelpers.cs"
+    />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' == ''">
@@ -92,5 +97,4 @@
     <ProjectReference Include="$(LibrariesProjectRoot)System.Collections.Concurrent\src\System.Collections.Concurrent.csproj" />
     <ProjectReference Include="$(LibrariesProjectRoot)System.Collections.NonGeneric\src\System.Collections.NonGeneric.csproj" />
   </ItemGroup>
-
 </Project>

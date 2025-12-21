@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(NetCoreAppCurrent)</TargetFramework>
     <UseCompilerGeneratedDocXmlFile>false</UseCompilerGeneratedDocXmlFile>
@@ -15,15 +14,15 @@
     <Compile Include="System\Collections\Specialized\OrderedDictionary.cs" />
     <Compile Include="System\Collections\Specialized\StringCollection.cs" />
     <Compile Include="System\Collections\Specialized\StringDictionary.cs" />
-    <Compile Include="$(CoreLibSharedDir)System\Collections\CompatibleComparer.cs"
-             Link="Common\System\Collections\CompatibleComparer.cs" />
-    <Compile Include="$(CommonPath)System\Obsoletions.cs"
-             Link="Common\System\Obsoletions.cs" />
+    <Compile
+      Include="$(CoreLibSharedDir)System\Collections\CompatibleComparer.cs"
+      Link="Common\System\Collections\CompatibleComparer.cs"
+    />
+    <Compile Include="$(CommonPath)System\Obsoletions.cs" Link="Common\System\Obsoletions.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <Reference Include="System.ComponentModel.Primitives" />
     <Reference Include="System.Runtime" />
   </ItemGroup>
-
 </Project>

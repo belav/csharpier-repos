@@ -1,10 +1,15 @@
-<Type Name="LdapVirtualListResponse" FullName="Novell.Directory.Ldap.Controls.LdapVirtualListResponse">
-  <TypeSignature Language="C#" Value="public class LdapVirtualListResponse : Novell.Directory.Ldap.LdapControl, System.ICloneable" />
+<Type
+  Name="LdapVirtualListResponse"
+  FullName="Novell.Directory.Ldap.Controls.LdapVirtualListResponse"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class LdapVirtualListResponse : Novell.Directory.Ldap.LdapControl, System.ICloneable"
+  />
   <AssemblyInfo>
     <AssemblyName>Novell.Directory.Ldap</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
-    <AssemblyCulture>
-    </AssemblyCulture>
+    <AssemblyCulture></AssemblyCulture>
     <Attributes>
       <Attribute>
         <AttributeName>System.Reflection.AssemblyKeyFile(KeyFile="../mono.pub")</AttributeName>
@@ -51,7 +56,10 @@
   </Interfaces>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public LdapVirtualListResponse(string oid, bool critical, sbyte[] values)" />
+      <MemberSignature
+        Language="C#"
+        Value="public LdapVirtualListResponse(string oid, bool critical, sbyte[] values)"
+      />
       <MemberType>Constructor</MemberType>
       <Attributes>
         <Attribute>

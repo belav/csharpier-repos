@@ -265,7 +265,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ProviderSpecificDataType">
-      <MemberSignature Language="C#" Value="public static readonly string ProviderSpecificDataType;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly string ProviderSpecificDataType;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>

@@ -4,10 +4,10 @@
 -->
 
 <rss version="2.0">
-<channel>
-<title>Validity test</title>
-<link>http://contoso.com/rss/2.0/</link>
-<description>valid pubDate (August)</description>
-<pubDate>10 Aug 2002 14:20:20 GMT</pubDate>
-</channel>
+  <channel>
+    <title>Validity test</title>
+    <link>http://contoso.com/rss/2.0/</link>
+    <description>valid pubDate (August)</description>
+    <pubDate>10 Aug 2002 14:20:20 GMT</pubDate>
+  </channel>
 </rss>

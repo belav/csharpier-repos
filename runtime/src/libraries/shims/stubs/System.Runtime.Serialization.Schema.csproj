@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <StrongNameKeyId>Microsoft</StrongNameKeyId>
   </PropertyGroup>
@@ -8,5 +7,4 @@
     <ForwardedType Include="System.Runtime.Serialization.ImportOptions" />
     <ForwardedType Include="System.Runtime.Serialization.XsdDataContractImporter" />
   </ItemGroup>
-
 </Project>

@@ -4,9 +4,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="System.ServiceProcess.ServiceController.cs" Condition="'$(TargetFrameworkIdentifier)' != '.NETFramework'" />
-    <Compile Include="System.ServiceProcess.ServiceController.netframework.cs" Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'" />
-    <Compile Include="System.ServiceProcess.ServiceController.netcoreapp.cs" Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'" />
+    <Compile
+      Include="System.ServiceProcess.ServiceController.cs"
+      Condition="'$(TargetFrameworkIdentifier)' != '.NETFramework'"
+    />
+    <Compile
+      Include="System.ServiceProcess.ServiceController.netframework.cs"
+      Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'"
+    />
+    <Compile
+      Include="System.ServiceProcess.ServiceController.netcoreapp.cs"
+      Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'"
+    />
   </ItemGroup>
 
   <ItemGroup>

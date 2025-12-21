@@ -1,10 +1,12 @@
 <Type Name="Asn1Sequence" FullName="Novell.Directory.Ldap.Asn1.Asn1Sequence">
-  <TypeSignature Language="C#" Value="public class Asn1Sequence : Novell.Directory.Ldap.Asn1.Asn1Structured, System.Runtime.Serialization.ISerializable" />
+  <TypeSignature
+    Language="C#"
+    Value="public class Asn1Sequence : Novell.Directory.Ldap.Asn1.Asn1Structured, System.Runtime.Serialization.ISerializable"
+  />
   <AssemblyInfo>
     <AssemblyName>Novell.Directory.Ldap</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
-    <AssemblyCulture>
-    </AssemblyCulture>
+    <AssemblyCulture></AssemblyCulture>
     <Attributes>
       <Attribute>
         <AttributeName>System.Reflection.AssemblyKeyFile(KeyFile="../mono.pub")</AttributeName>
@@ -77,7 +79,10 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public Asn1Sequence(Novell.Directory.Ldap.Asn1.Asn1Object[] newContent, int size)" />
+      <MemberSignature
+        Language="C#"
+        Value="public Asn1Sequence(Novell.Directory.Ldap.Asn1.Asn1Object[] newContent, int size)"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="newContent" Type="Novell.Directory.Ldap.Asn1.Asn1Object[]" />
@@ -91,7 +96,10 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public Asn1Sequence(Novell.Directory.Ldap.Asn1.Asn1Decoder dec, System.IO.Stream in_Renamed, int len)" />
+      <MemberSignature
+        Language="C#"
+        Value="public Asn1Sequence(Novell.Directory.Ldap.Asn1.Asn1Decoder dec, System.IO.Stream in_Renamed, int len)"
+      />
       <MemberType>Constructor</MemberType>
       <Attributes>
         <Attribute>

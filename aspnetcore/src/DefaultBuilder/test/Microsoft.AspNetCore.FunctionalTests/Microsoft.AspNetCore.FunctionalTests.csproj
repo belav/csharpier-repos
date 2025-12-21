@@ -7,7 +7,6 @@
     <BuildHelixPayload>false</BuildHelixPayload>
     <BaseOutputPath />
     <OutputPath />
-
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,30 +16,42 @@
   <ItemGroup>
     <ProjectReference Include="$(RepoRoot)src\Hosting\Server.IntegrationTesting\src\Microsoft.AspNetCore.Server.IntegrationTesting.csproj" />
     <ProjectReference Include="$(RepoRoot)src\Servers\IIS\IntegrationTesting.IIS\src\Microsoft.AspNetCore.Server.IntegrationTesting.IIS.csproj" />
-    <ProjectReference Include="$(RepoRoot)src\DefaultBuilder\testassets\CreateDefaultBuilderApp\CreateDefaultBuilderApp.csproj"
+    <ProjectReference
+      Include="$(RepoRoot)src\DefaultBuilder\testassets\CreateDefaultBuilderApp\CreateDefaultBuilderApp.csproj"
       Private="false"
       ReferenceOutputAssembly="false"
-      SkipGetTargetFrameworkProperties="true" />
-    <ProjectReference Include="$(RepoRoot)src\DefaultBuilder\testassets\CreateDefaultBuilderOfTApp\CreateDefaultBuilderOfTApp.csproj"
+      SkipGetTargetFrameworkProperties="true"
+    />
+    <ProjectReference
+      Include="$(RepoRoot)src\DefaultBuilder\testassets\CreateDefaultBuilderOfTApp\CreateDefaultBuilderOfTApp.csproj"
       Private="false"
       ReferenceOutputAssembly="false"
-      SkipGetTargetFrameworkProperties="true" />
-    <ProjectReference Include="$(RepoRoot)src\DefaultBuilder\testassets\DependencyInjectionApp\DependencyInjectionApp.csproj"
+      SkipGetTargetFrameworkProperties="true"
+    />
+    <ProjectReference
+      Include="$(RepoRoot)src\DefaultBuilder\testassets\DependencyInjectionApp\DependencyInjectionApp.csproj"
       Private="false"
       ReferenceOutputAssembly="false"
-      SkipGetTargetFrameworkProperties="true" />
-    <ProjectReference Include="$(RepoRoot)src\DefaultBuilder\testassets\StartRequestDelegateUrlApp\StartRequestDelegateUrlApp.csproj"
+      SkipGetTargetFrameworkProperties="true"
+    />
+    <ProjectReference
+      Include="$(RepoRoot)src\DefaultBuilder\testassets\StartRequestDelegateUrlApp\StartRequestDelegateUrlApp.csproj"
       Private="false"
       ReferenceOutputAssembly="false"
-      SkipGetTargetFrameworkProperties="true" />
-    <ProjectReference Include="$(RepoRoot)src\DefaultBuilder\testassets\StartRouteBuilderUrlApp\StartRouteBuilderUrlApp.csproj"
+      SkipGetTargetFrameworkProperties="true"
+    />
+    <ProjectReference
+      Include="$(RepoRoot)src\DefaultBuilder\testassets\StartRouteBuilderUrlApp\StartRouteBuilderUrlApp.csproj"
       Private="false"
       ReferenceOutputAssembly="false"
-      SkipGetTargetFrameworkProperties="true" />
-    <ProjectReference Include="$(RepoRoot)src\DefaultBuilder\testassets\StartWithIApplicationBuilderUrlApp\StartWithIApplicationBuilderUrlApp.csproj"
+      SkipGetTargetFrameworkProperties="true"
+    />
+    <ProjectReference
+      Include="$(RepoRoot)src\DefaultBuilder\testassets\StartWithIApplicationBuilderUrlApp\StartWithIApplicationBuilderUrlApp.csproj"
       Private="false"
       ReferenceOutputAssembly="false"
-      SkipGetTargetFrameworkProperties="true" />
+      SkipGetTargetFrameworkProperties="true"
+    />
 
     <Reference Include="Microsoft.AspNetCore" />
   </ItemGroup>

@@ -3,7 +3,9 @@
     <!-- Needed for CLRTestTargetUnsupported, GCStressIncompatible, NativeAotIncompatible, CMakeProjectReference -->
     <RequiresProcessIsolation>true</RequiresProcessIsolation>
     <!-- Test unsupported outside of windows -->
-    <CLRTestTargetUnsupported Condition="'$(TargetsWindows)' != 'true'">true</CLRTestTargetUnsupported>
+    <CLRTestTargetUnsupported Condition="'$(TargetsWindows)' != 'true'"
+      >true</CLRTestTargetUnsupported
+    >
     <NativeAotIncompatible>true</NativeAotIncompatible>
     <!-- Fails with HeapVerify=1. Tracking: https://github.com/dotnet/runtime/issues/85234 -->
     <GCStressIncompatible>true</GCStressIncompatible>

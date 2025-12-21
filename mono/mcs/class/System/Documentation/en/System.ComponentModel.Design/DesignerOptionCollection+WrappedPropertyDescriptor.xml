@@ -1,5 +1,11 @@
-<Type Name="DesignerOptionCollection+WrappedPropertyDescriptor" FullName="System.ComponentModel.Design.DesignerOptionCollection+WrappedPropertyDescriptor">
-  <TypeSignature Language="C#" Value="public sealed class DesignerOptionCollection.WrappedPropertyDescriptor : System.ComponentModel.PropertyDescriptor" />
+<Type
+  Name="DesignerOptionCollection+WrappedPropertyDescriptor"
+  FullName="System.ComponentModel.Design.DesignerOptionCollection+WrappedPropertyDescriptor"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class DesignerOptionCollection.WrappedPropertyDescriptor : System.ComponentModel.PropertyDescriptor"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -14,7 +20,10 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public WrappedPropertyDescriptor (System.ComponentModel.PropertyDescriptor property, object component);" />
+      <MemberSignature
+        Language="C#"
+        Value="public WrappedPropertyDescriptor (System.ComponentModel.PropertyDescriptor property, object component);"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -31,7 +40,10 @@
       </Docs>
     </Member>
     <Member MemberName="Attributes">
-      <MemberSignature Language="C#" Value="public override System.ComponentModel.AttributeCollection Attributes { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.ComponentModel.AttributeCollection Attributes { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -147,7 +159,10 @@
       </Docs>
     </Member>
     <Member MemberName="SetValue">
-      <MemberSignature Language="C#" Value="public override void SetValue (object ignored, object value);" />
+      <MemberSignature
+        Language="C#"
+        Value="public override void SetValue (object ignored, object value);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -167,7 +182,10 @@
       </Docs>
     </Member>
     <Member MemberName="ShouldSerializeValue">
-      <MemberSignature Language="C#" Value="public override bool ShouldSerializeValue (object ignored);" />
+      <MemberSignature
+        Language="C#"
+        Value="public override bool ShouldSerializeValue (object ignored);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

@@ -1,15 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project
+  ToolsVersion="12.0"
+  DefaultTargets="Build"
+  xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
+>
   <PropertyGroup>
     <LibrariesConfiguration>Release</LibrariesConfiguration>
     <InstallV8ForTests>false</InstallV8ForTests>
   </PropertyGroup>
 
-  <Import Project="$(MSBuildThisFileDirectory)\Common\dir.sdkbuild.props" Condition="'$(UsingMicrosoftNETSdk)' == 'true'"  />
-  <Import Project="$(MSBuildThisFileDirectory)\Common\dir.common.props" Condition="'$(UsingMicrosoftNETSdk)' != 'true'"  />
+  <Import
+    Project="$(MSBuildThisFileDirectory)\Common\dir.sdkbuild.props"
+    Condition="'$(UsingMicrosoftNETSdk)' == 'true'"
+  />
+  <Import
+    Project="$(MSBuildThisFileDirectory)\Common\dir.common.props"
+    Condition="'$(UsingMicrosoftNETSdk)' != 'true'"
+  />
 
   <PropertyGroup>
-    <RunningOnUnix Condition="('$(RunningOnUnix)' == '') And ('$(MSBuildRuntimeType)' == 'Core') And ('$(OS)'!='Windows_NT')">true</RunningOnUnix>
+    <RunningOnUnix
+      Condition="('$(RunningOnUnix)' == '') And ('$(MSBuildRuntimeType)' == 'Core') And ('$(OS)'!='Windows_NT')"
+      >true</RunningOnUnix
+    >
   </PropertyGroup>
 
   <!-- Common repo directories -->
@@ -20,21 +33,32 @@
 
   <PropertyGroup>
     <AltJitArch>$(__AltJitArch)</AltJitArch>
-    <EnableNativeSanitizers Condition="'$(__EnableNativeSanitizers)' != ''">$(__EnableNativeSanitizers)</EnableNativeSanitizers>
+    <EnableNativeSanitizers Condition="'$(__EnableNativeSanitizers)' != ''"
+      >$(__EnableNativeSanitizers)</EnableNativeSanitizers
+    >
   </PropertyGroup>
 
   <!-- Output paths -->
   <PropertyGroup>
     <!-- When not using the SDK, we want to set this property here so
          that BuildVersionFile gets the correct value. -->
-    <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)' == '' Or '$(UsingMicrosoftNETSdk)' != 'true'">$(ArtifactsDir)obj\</BaseIntermediateOutputPath>
-    <IntermediateOutputPath Condition="'$(IntermediateOutputPath)' == ''">$(BaseIntermediateOutputPath)\$(TargetOS).$(TargetArchitecture).$(Configuration)</IntermediateOutputPath>
-    <OutputPath Condition="'$(OutputPath)' == ''">$(BaseIntermediateOutputPath)\coreclr\$(TargetOS).$(TargetArchitecture).$(Configuration)</OutputPath>
+    <BaseIntermediateOutputPath
+      Condition="'$(BaseIntermediateOutputPath)' == '' Or '$(UsingMicrosoftNETSdk)' != 'true'"
+      >$(ArtifactsDir)obj\</BaseIntermediateOutputPath
+    >
+    <IntermediateOutputPath Condition="'$(IntermediateOutputPath)' == ''"
+      >$(BaseIntermediateOutputPath)\$(TargetOS).$(TargetArchitecture).$(Configuration)</IntermediateOutputPath
+    >
+    <OutputPath Condition="'$(OutputPath)' == ''"
+      >$(BaseIntermediateOutputPath)\coreclr\$(TargetOS).$(TargetArchitecture).$(Configuration)</OutputPath
+    >
   </PropertyGroup>
 
-    <!-- Targeting Package paths -->
+  <!-- Targeting Package paths -->
   <PropertyGroup>
-    <TargetingPackPath Condition="'$(BaseTargetingPackPath)' == ''">$(ArtifactsDir)TargetingPack\</TargetingPackPath>
+    <TargetingPackPath Condition="'$(BaseTargetingPackPath)' == ''"
+      >$(ArtifactsDir)TargetingPack\</TargetingPackPath
+    >
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(BuildAllProjects)'=='true'">
@@ -75,15 +99,23 @@
     <RuntimeFlavor Condition="'$(__RuntimeFlavor)' != ''">$(__RuntimeFlavor)</RuntimeFlavor>
     <RuntimeFlavor Condition="'$(RuntimeFlavor)' == ''">coreclr</RuntimeFlavor>
 
-    <RestoreDefaultOptimizationDataPackage Condition="'$(RestoreDefaultOptimizationDataPackage)' == ''">false</RestoreDefaultOptimizationDataPackage>
+    <RestoreDefaultOptimizationDataPackage
+      Condition="'$(RestoreDefaultOptimizationDataPackage)' == ''"
+      >false</RestoreDefaultOptimizationDataPackage
+    >
 
-    <UsePartialNGENOptimization Condition="'$(UsePartialNGENOptimization)' == ''">false</UsePartialNGENOptimization>
+    <UsePartialNGENOptimization Condition="'$(UsePartialNGENOptimization)' == ''"
+      >false</UsePartialNGENOptimization
+    >
 
     <RunWithAndroid>false</RunWithAndroid>
     <RunWithAndroid Condition="'$(TargetOS)' == 'android'">true</RunWithAndroid>
 
     <RunWithiOS>false</RunWithiOS>
-    <RunWithiOS Condition="'$(TargetOS)' == 'ios' or '$(TargetOS)' == 'iossimulator' or '$(TargetOS)' == 'tvos' or '$(TargetOS)' == 'tvossimulator' or '$(TargetOS)' == 'maccatalyst'">true</RunWithiOS>
+    <RunWithiOS
+      Condition="'$(TargetOS)' == 'ios' or '$(TargetOS)' == 'iossimulator' or '$(TargetOS)' == 'tvos' or '$(TargetOS)' == 'tvossimulator' or '$(TargetOS)' == 'maccatalyst'"
+      >true</RunWithiOS
+    >
 
     <MonoAot>false</MonoAot>
     <MonoAot Condition="'$(__MonoAot)' == '1'">true</MonoAot>
@@ -153,9 +185,15 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Language Condition="'$(Language)' == '' and  '$(MSBuildProjectExtension)' == '.csproj'">C#</Language>
-    <Language Condition="'$(Language)' == '' and  '$(MSBuildProjectExtension)' == '.fsproj'">F#</Language>
-    <Language Condition="'$(Language)' == '' and  '$(MSBuildProjectExtension)' == '.ilproj'">IL</Language>
+    <Language Condition="'$(Language)' == '' and  '$(MSBuildProjectExtension)' == '.csproj'"
+      >C#</Language
+    >
+    <Language Condition="'$(Language)' == '' and  '$(MSBuildProjectExtension)' == '.fsproj'"
+      >F#</Language
+    >
+    <Language Condition="'$(Language)' == '' and  '$(MSBuildProjectExtension)' == '.ilproj'"
+      >IL</Language
+    >
   </PropertyGroup>
 
   <!-- Don't reference the mscorlib facade -->
@@ -183,9 +221,16 @@
   <!-- Set Test Wrapper running host OS -->
   <PropertyGroup>
     <TestWrapperTargetsWindows>false</TestWrapperTargetsWindows>
-    <TestWrapperTargetsWindows Condition=" ('$(TargetsWindows)' != '' And '$(TargetsWindows)' ) OR ('$(TargetOS)' == 'android' And '$(TargetArchitecture)' == 'arm64' )">true</TestWrapperTargetsWindows>
-    <TestScriptExtension Condition="'$(TestWrapperTargetsWindows)' != 'true' ">sh</TestScriptExtension>
-    <TestScriptExtension Condition="'$(TestWrapperTargetsWindows)' == 'true' ">cmd</TestScriptExtension>
+    <TestWrapperTargetsWindows
+      Condition=" ('$(TargetsWindows)' != '' And '$(TargetsWindows)' ) OR ('$(TargetOS)' == 'android' And '$(TargetArchitecture)' == 'arm64' )"
+      >true</TestWrapperTargetsWindows
+    >
+    <TestScriptExtension Condition="'$(TestWrapperTargetsWindows)' != 'true' "
+      >sh</TestScriptExtension
+    >
+    <TestScriptExtension Condition="'$(TestWrapperTargetsWindows)' == 'true' "
+      >cmd</TestScriptExtension
+    >
   </PropertyGroup>
 
   <PropertyGroup>
@@ -225,6 +270,12 @@
     <_SymbolPrefix Condition="'$(_IsApplePlatform)' == 'true'">_</_SymbolPrefix>
   </PropertyGroup>
 
-  <Import Project="$(RepositoryEngineeringDir)testing\tests.props"  Condition="'$(IsTestsCommonProject)' != 'true'" />
-  <Import Project="$(BaseOutputPath)\packages\Common\test_dependencies\test_dependencies\test_dependencies.*.props" Condition="'$(IsTestsCommonProject)' != 'true'" />
+  <Import
+    Project="$(RepositoryEngineeringDir)testing\tests.props"
+    Condition="'$(IsTestsCommonProject)' != 'true'"
+  />
+  <Import
+    Project="$(BaseOutputPath)\packages\Common\test_dependencies\test_dependencies\test_dependencies.*.props"
+    Condition="'$(IsTestsCommonProject)' != 'true'"
+  />
 </Project>

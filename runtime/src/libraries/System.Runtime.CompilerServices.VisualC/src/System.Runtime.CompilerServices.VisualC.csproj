@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(NetCoreAppCurrent)</TargetFramework>
     <IsPartialFacadeAssembly>true</IsPartialFacadeAssembly>
@@ -14,5 +13,4 @@
   <ItemGroup>
     <Reference Include="System.Runtime" />
   </ItemGroup>
-
 </Project>

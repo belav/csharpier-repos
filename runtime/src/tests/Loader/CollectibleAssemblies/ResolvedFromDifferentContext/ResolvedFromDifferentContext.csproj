@@ -22,8 +22,13 @@
 
   <Target Name="CopySupportAssembliesToOutputSubfolders" AfterTargets="Build">
     <MakeDir Directories="$(TestClassOutputPath);$(TestInterfaceOutputPath)" />
-    <Copy SourceFiles="$(TestClassOutputPath)/TestClass.dll" DestinationFolder="$(OutputPath)/TestClass" />
-    <Copy SourceFiles="$(TestInterfaceOutputPath)/TestInterface.dll" DestinationFolder="$(OutputPath)/TestInterface" />
+    <Copy
+      SourceFiles="$(TestClassOutputPath)/TestClass.dll"
+      DestinationFolder="$(OutputPath)/TestClass"
+    />
+    <Copy
+      SourceFiles="$(TestInterfaceOutputPath)/TestInterface.dll"
+      DestinationFolder="$(OutputPath)/TestInterface"
+    />
   </Target>
-
 </Project>

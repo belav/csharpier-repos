@@ -1,6 +1,5 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-
-<!--
+  <!--
   LinkIncremental (/INCREMENTAL:NO)    build does not contain padding or thunks
 -->
 
@@ -10,7 +9,7 @@
     <WholeProgramOptimization>false</WholeProgramOptimization>
   </PropertyGroup>
 
-<!--
+  <!--
   Optimization - Full (/Ox)    Uses maximum optimization
   FavorSizeOrSpeed - Size (/Ot)    Favors fast code
   RuntimeTypeInfo (GR-)    Disables run-time type information (RTTI)
@@ -38,5 +37,4 @@
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
     </Link>
   </ItemDefinitionGroup>
-
 </Project>

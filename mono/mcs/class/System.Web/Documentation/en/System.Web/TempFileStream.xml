@@ -82,7 +82,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Read">
-      <MemberSignature Language="C#" Value="public override int Read (byte[] buffer, int offset, int count);" />
+      <MemberSignature
+        Language="C#"
+        Value="public override int Read (byte[] buffer, int offset, int count);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
@@ -170,7 +173,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Write">
-      <MemberSignature Language="C#" Value="public override void Write (byte[] buffer, int offset, int count);" />
+      <MemberSignature
+        Language="C#"
+        Value="public override void Write (byte[] buffer, int offset, int count);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
