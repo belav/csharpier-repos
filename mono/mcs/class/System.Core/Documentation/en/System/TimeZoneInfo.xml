@@ -2860,8 +2860,7 @@
           <para
             >When assigning a collection that contains <see cref="T:System.TimeZoneInfo" /> objects to a list control such as the <see cref="T:System.Windows.Forms.ListBox" /> control, the control automatically calls the <see cref="M:System.TimeZoneInfo.ToString" /> method to extract a string that describes each object to be represented in the list. As a result, you do not need to store a meaningful description of the object as a string, and the user does not need to use that string to extract the object from the collection. See <format type="text/html">
               <a href="bb7a42ab-6bd9-4c5c-b734-5546d51f8669"
-                >How to: Enumerate Time Zones Present on a Computer</a
-              >
+                >How to: Enumerate Time Zones Present on a Computer</a>
             </format> for more detail.</para
           >
         </remarks>

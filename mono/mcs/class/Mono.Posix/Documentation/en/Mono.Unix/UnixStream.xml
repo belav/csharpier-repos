@@ -111,8 +111,7 @@ class Directory {
       r.Close();
    }
 }
-</code
-        >
+</code>
         <para>Some example output is </para>
         <c>
           <para>Log Entry : 9:26:21 AM Friday, July 06, 2001</para>
@@ -285,8 +284,7 @@ class Directory {
         >
         <exception cref="T:System.ObjectDisposedException">
           The stream has been closed.
-        </exception
-        >
+        </exception>
         <exception cref="T:System.IO.IOException">
           <paramref name="stream" /> 
           refers to a pipe or FIFO.</exception
@@ -368,8 +366,7 @@ class Directory {
         >
         <exception cref="T:System.ObjectDisposedException">
           The stream has been closed.
-        </exception
-        >
+        </exception>
         <exception cref="T:System.IO.IOException">
           <paramref name="stream" /> 
           refers to a pipe or FIFO.</exception
@@ -479,8 +476,7 @@ class Directory {
         <remarks></remarks>
         <exception cref="T:System.ObjectDisposedException">
           The stream has been closed.
-        </exception
-        >
+        </exception>
       </Docs>
     </Member>
     <Member MemberName="FileSpecialAttributes">
@@ -516,8 +512,7 @@ class Directory {
         </remarks>
         <exception cref="T:System.ObjectDisposedException">
           The stream has been closed.
-        </exception
-        >
+        </exception>
       </Docs>
     </Member>
     <Member MemberName="FileType">
@@ -544,8 +539,7 @@ class Directory {
         <remarks></remarks>
         <exception cref="T:System.ObjectDisposedException">
           The stream has been closed.
-        </exception
-        >
+        </exception>
       </Docs>
     </Member>
     <Member MemberName="Finalize">
@@ -643,13 +637,11 @@ class Directory {
         >
         <exception cref="T:System.ObjectDisposedException">
           The stream has been closed.
-        </exception
-        >
+        </exception>
         <exception cref="T:System.IO.IOException">
           An I/O error occurred while reading from or writing to the file
           system.
-        </exception
-        >
+        </exception>
         <altmember cref="M:Mono.Unix.Native.Syscall.fpathconf" />
       </Docs>
     </Member>
@@ -674,8 +666,7 @@ class Directory {
         <remarks></remarks>
         <exception cref="T:System.ObjectDisposedException">
           The stream has been closed.
-        </exception
-        >
+        </exception>
       </Docs>
     </Member>
     <Member MemberName="InvalidFileDescriptor">
@@ -746,8 +737,7 @@ class Directory {
         </remarks>
         <exception cref="T:System.ObjectDisposedException">
           The stream has been closed.
-        </exception
-        >
+        </exception>
         <altmember cref="F:Mono.Unix.Native.Stat.st_gid" />
         <altmember cref="F:Mono.Unix.Native.Syscall.fstat" />
       </Docs>
@@ -770,8 +760,7 @@ class Directory {
         <remarks></remarks>
         <exception cref="T:System.ObjectDisposedException">
           The stream has been closed.
-        </exception
-        >
+        </exception>
         <altmember cref="F:Mono.Unix.Native.Stat.st_gid" />
         <altmember cref="F:Mono.Unix.Native.Syscall.fstat" />
       </Docs>
@@ -805,8 +794,7 @@ class Directory {
         </remarks>
         <exception cref="T:System.ObjectDisposedException">
           The stream has been closed.
-        </exception
-        >
+        </exception>
         <altmember cref="F:Mono.Unix.Native.Stat.st_uid" />
         <altmember cref="F:Mono.Unix.Native.Syscall.fstat" />
       </Docs>
@@ -832,8 +820,7 @@ class Directory {
         <remarks></remarks>
         <exception cref="T:System.ObjectDisposedException">
           The stream has been closed.
-        </exception
-        >
+        </exception>
         <altmember cref="F:Mono.Unix.Native.Stat.st_uid" />
         <altmember cref="F:Mono.Unix.Native.Syscall.fstat" />
       </Docs>
@@ -888,8 +875,7 @@ class Directory {
         <remarks></remarks>
         <exception cref="T:System.ObjectDisposedException">
           The stream has been closed.
-        </exception
-        >
+        </exception>
         <altmember cref="F:Mono.Unix.Native.Stat.st_mode" />
         <altmember cref="F:Mono.Unix.Native.Syscall.fstat" />
       </Docs>
@@ -1024,12 +1010,10 @@ class Directory {
         </exception>
         <exception cref="T:System.NotSupportedException">
           The stream does not support reading.
-        </exception
-        >
+        </exception>
         <exception cref="T:System.ObjectDisposedException">
           The stream has been closed.
-        </exception
-        >
+        </exception>
         <exception cref="T:System.OverflowException">
           <para>
             The file descriptor is associated with a regular file,
@@ -1161,8 +1145,7 @@ class Directory {
         </exception>
         <exception cref="T:System.ObjectDisposedException">
           The stream has been closed.
-        </exception
-        >
+        </exception>
         <exception cref="T:System.IO.IOException">
             Unspecified error while reading from 
             <see cref="P:Mono.Unix.UnixStream.Handle" />.
@@ -1256,8 +1239,7 @@ class Directory {
         </exception>
         <exception cref="T:System.ObjectDisposedException">
           The stream has been closed.
-        </exception
-        >
+        </exception>
         <exception cref="T:System.IO.IOException">
             Unspecified error while reading from 
             <see cref="P:Mono.Unix.UnixStream.Handle" />.
@@ -1347,8 +1329,7 @@ class Directory {
         </exception>
         <exception cref="T:System.ObjectDisposedException">
           The stream has been closed.
-        </exception
-        >
+        </exception>
         <exception cref="T:System.IO.IOException">
             Unspecified error while reading from 
             <see cref="P:Mono.Unix.UnixStream.Handle" />.
@@ -1453,8 +1434,7 @@ class Directory {
         >
         <exception cref="T:System.ObjectDisposedException">
           The stream has been closed.
-        </exception
-        >
+        </exception>
         <exception cref="T:System.IO.FileNotFoundException">
           A component of <see cref="P:Mono.Unix.UnixStream.Handle" /> 
           that must exist does not exist.
@@ -1533,8 +1513,7 @@ class Directory {
         >
         <exception cref="T:System.ObjectDisposedException">
           The stream has been closed.
-        </exception
-        >
+        </exception>
         <exception cref="T:System.IO.FileNotFoundException">
           A component of <see cref="P:Mono.Unix.UnixStream.Handle" /> 
           that must exist does not exist.
@@ -1610,8 +1589,7 @@ class Directory {
         >
         <exception cref="T:System.ObjectDisposedException">
           The stream has been closed.
-        </exception
-        >
+        </exception>
         <exception cref="T:System.IO.FileNotFoundException">
           A component of <see cref="P:Mono.Unix.UnixStream.Handle" /> 
           that must exist does not exist.
@@ -1836,12 +1814,10 @@ class Directory {
         >
         <exception cref="T:System.NotSupportedException">
           The stream does not support writing.
-        </exception
-        >
+        </exception>
         <exception cref="T:System.ObjectDisposedException">
           The stream has been closed.
-        </exception
-        >
+        </exception>
         <exception cref="T:System.IO.IOException">
           <para>
             There is no free space remaining on the file system

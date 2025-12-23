@@ -4,8 +4,7 @@
   <subtitle type="html">
     A &lt;em&gt;lot&lt;/em&gt; of effort
     went into making this effortless
-  </subtitle
-  >
+  </subtitle>
   <updated>2005-07-31T12:29:29Z</updated>
   <id>tag:example.org,2003:3</id>
   <link rel="alternate" type="text/html" hreflang="en" href="http://example.org/" />
@@ -13,8 +12,7 @@
   <rights>Copyright (c) 2003, Mark Pilgrim</rights>
   <generator uri="http://www.example.com/" version="1.0">
     Example Toolkit
-  </generator
-  >
+  </generator>
   <entry>
     <title>Atom draft-07 snapshot</title>
     <link rel="alternate" type="text/html" href="http://example.org/2005/04/02/atom" />

@@ -208,13 +208,11 @@
         >#!/usr/bin/env bash
 export __SCRIPT_DIR=%24( cd -- "%24( dirname -- "%24{BASH_SOURCE[0]}" )" &amp;> /dev/null &amp;&amp; pwd )
 "$__SCRIPT_DIR/d8" --snapshot_blob="$__SCRIPT_DIR/snapshot_blob.bin" "$@"
-      </_V8Script
-      >
+      </_V8Script>
       <_V8Script Condition="$([MSBuild]::IsOSPlatform('windows'))"
         >@echo off
 "%~dp0\d8.exe --snapshot_blob="%~dp0\snapshot_blob.bin" %*
-      </_V8Script
-      >
+      </_V8Script>
     </PropertyGroup>
 
     <DownloadFile

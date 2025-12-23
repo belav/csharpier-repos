@@ -88,8 +88,7 @@
             <code lang="C#">
 DSASignatureFormatter f = new DSASignatureFormatter ();
 f.SetKey (dsa);
-  </code
-            >
+  </code>
           </example>
         </remarks>
         <summary>

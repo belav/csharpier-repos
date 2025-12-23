@@ -1006,8 +1006,7 @@ class Demo {
 	}
 }
 
-</code
-          >
+</code>
           <para>
             See <see cref="T:Mono.Options.OptionSet" /> for more on this
             example.

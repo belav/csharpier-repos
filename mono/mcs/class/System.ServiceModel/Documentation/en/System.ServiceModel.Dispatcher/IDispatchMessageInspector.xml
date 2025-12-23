@@ -22,8 +22,7 @@
       <para
         >Typically, message inspectors are inserted by a service behavior (<see cref="T:System.ServiceModel.Description.IServiceBehavior" />), an endpoint behavior (<see cref="T:System.ServiceModel.Description.IEndpointBehavior" />), or a contract behavior (<see cref="T:System.ServiceModel.Description.IContractBehavior" />). The behavior then adds the message inspector to the <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.MessageInspectors" /> collection. For more information about extending the runtime using behaviors, see <format type="text/html">
           <a href="954c138a-1cd0-45a0-8abe-e4d2b8ff5400"
-            >Extending ServiceHost and the Dispatcher</a
-          >
+            >Extending ServiceHost and the Dispatcher</a>
         </format>. </para
       >
       <list type="bullet">

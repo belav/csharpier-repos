@@ -22,8 +22,7 @@
       <para
         >Use the <see cref="T:System.Runtime.Serialization.XsdDataContractExporter" /> class when you have created a Web service that incorporates data represented by common language runtime (CLR) types and when you need to export XML schemas for each type to be consumed by other Web services. That is, <see cref="T:System.Runtime.Serialization.XsdDataContractExporter" /> transforms a set of CLR types into XML schemas. (For more information about the types that can be used, see <format type="text/html">
           <a href="7381b200-437a-4506-9556-d77bf1bc3f34"
-            >Types Supported by the Data Contract Serializer</a
-          >
+            >Types Supported by the Data Contract Serializer</a>
         </format>.) The schemas can then be exposed through a Web Services Description Language (WSDL) document for use by others who need to interoperate with your service. </para
       >
       <para

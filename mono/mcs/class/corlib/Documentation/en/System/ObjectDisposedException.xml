@@ -65,8 +65,7 @@ public class ObjectDisposedExceptionTest {
       }
    }
 }
-</code
-      >
+</code>
       <para>The output is</para>
       <c>
         <para>Caught: Cannot access a closed Stream.</para>
@@ -152,8 +151,7 @@ public class ExampleDisposableObject : IDisposable {
  
  private bool isDisposed;
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>Caught: Cannot access a disposed object named "ExampleDisposableObject".</para>
@@ -357,8 +355,7 @@ public class ExampleDisposableObject : IDisposable {
  
  private bool isDisposed;
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>Caught: Oh-oh! This object has been disposed!</para>

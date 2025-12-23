@@ -48,8 +48,7 @@ public class InvalidOpExample  {
     Console.Write("{0}",enumerator.Current);
   }
 }
-   </code
-      >
+   </code>
       <para>The output is</para>
       <c>
         <para>Unhandled Exception: System.InvalidOperationException: Enumeration has not

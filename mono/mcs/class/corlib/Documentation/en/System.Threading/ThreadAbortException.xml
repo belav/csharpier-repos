@@ -74,8 +74,7 @@ class ThreadAbortTest{
     Console.WriteLine("Main ending."); 
   }
 }
-   </code
-      >
+   </code>
       <para>The output is </para>
       <c>
         <para>Thread - working.</para>

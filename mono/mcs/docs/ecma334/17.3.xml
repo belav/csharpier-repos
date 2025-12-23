@@ -81,10 +81,9 @@
       >constant-declaration</non_terminal
     > specifies the type of the members introduced by the declaration. The type is followed by a list of <non_terminal
       where="17.3"
-      >constant-declarator</non_terminal
-    >s, each of which introduces a new member. A <non_terminal where="17.3"
-      >constant-declarator</non_terminal
-    > consists of an identifier that names themember, followed by an &quot;=&quot; token, followed by a  <non_terminal
+      >constant-declarator</non_terminal>s, each of which introduces a new member. A <non_terminal
+      where="17.3"
+      >constant-declarator</non_terminal> consists of an identifier that names themember, followed by an &quot;=&quot; token, followed by a  <non_terminal
       where="14.15"
       >constant-expression</non_terminal
     > (<hyperlink>14.15</hyperlink>) that gives the value of the member. </paragraph

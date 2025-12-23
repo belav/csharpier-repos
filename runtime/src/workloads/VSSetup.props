@@ -32,8 +32,7 @@
   <PropertyGroup>
     <ManifestTeamProject Condition="'$(ManifestTeamProject)' == ''">dotnet</ManifestTeamProject>
     <ManifestRepositoryName Condition="'$(ManifestRepositoryName)' == ''"
-      >installer</ManifestRepositoryName
-    >
+      >installer</ManifestRepositoryName>
     <ManifestBuildBranch Condition="'$(ManifestBuildBranch)' == ''"
       >local_build</ManifestBuildBranch
     >

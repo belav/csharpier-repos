@@ -28,8 +28,7 @@
       <para
         >Control adapters are.NET components that manage one or more stages in the life cycle of a control for a specific browser. Extending the <see cref="T:System.Web.UI.WebControls.Adapters.HierarchicalDataBoundControlAdapter" /> class provides access to the life-cycle stages of the <see cref="T:System.Web.UI.WebControls.HierarchicalDataBoundControl" /> control. For more information, see <format type="text/html">
           <a href="4ff05ae9-4109-4352-929e-ad893895dbff"
-            >Architectural Overview of Adaptive Control Behavior</a
-          >
+            >Architectural Overview of Adaptive Control Behavior</a>
         </format>.</para
       >
       <para

@@ -51,8 +51,7 @@ public class DivideZeroTest {
    }
  }
 }
-   </code
-      >
+   </code>
       <para>The output is</para>
       <code>
 Error: System.DivideByZeroException: Attempted to divide by zero.

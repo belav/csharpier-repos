@@ -539,8 +539,7 @@ public class SByteParseClass {
                       str,SByte.Parse(str));
   }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <para>
             <c>String: " 100
@@ -2424,8 +2423,7 @@ public class SByteToStringExample {
          Console.WriteLine("{0}: {1}", str, i.ToString(str));
    }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>8</para>

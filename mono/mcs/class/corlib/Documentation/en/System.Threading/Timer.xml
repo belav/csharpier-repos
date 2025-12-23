@@ -90,8 +90,7 @@ class App {
     }
    }
 }
-</code
-      >
+</code>
       <para>An example of some output is</para>
       <c>
         <para>10:51:40.5809015 Checking Status 1.</para>

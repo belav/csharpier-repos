@@ -67,8 +67,7 @@ public class TestCondition {
     Console.WriteLine("&lt;eop&gt;"); 
   }
 }
-      </code
-        >
+      </code>
       </c>
       <para> When this code is compiled with the
       compilation-variable DEBUG defined at the callsite, the

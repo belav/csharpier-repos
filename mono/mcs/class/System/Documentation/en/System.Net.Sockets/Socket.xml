@@ -184,8 +184,7 @@ public class Server
     return true;
   }
 }
-   </code
-      >
+   </code>
       <para
         >The following code is for the client application. When
       starting the application, supply the hostname of the console running the server
@@ -328,8 +327,7 @@ public class Client {
     return true;
   }
 }
-   </code
-      >
+   </code>
       <para>The output of the server application is</para>
       <c>
         <para>Connection in progress...........server is connected.</para>
@@ -881,8 +879,7 @@ public class Client {
     .
   }
 }
-</code
-          >
+</code>
         </example>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -5189,8 +5186,7 @@ class OptionTest{
       receiveBuffer.ToString());
   }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para> Linger option is False and set to 0 seconds.</para>
@@ -5582,8 +5578,7 @@ class App {
       bytesAvail.ToString() );
   }
 }
-      </code
-          >
+      </code>
           <para>The output is</para>
           <c>
             <para>There are 0 bytes available to be read.</para>
@@ -7957,8 +7952,7 @@ class SelectTest {
       errorList.Contains(socket3) ? "" : "not " );
   }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>socket3 is placed in readList and errorList.</para>

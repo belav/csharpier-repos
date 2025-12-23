@@ -596,8 +596,7 @@ public class Int32ParseClass {
     Console.WriteLine("String: \"{0}\" &lt;Int32&gt; {1}",str,Int32.Parse(str));
   }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <para>
             <c>String: "
@@ -2449,8 +2448,7 @@ public class Int32ToStringExample {
          Console.WriteLine("{0}: {1}", str, i.ToString(str));
    }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>32</para>

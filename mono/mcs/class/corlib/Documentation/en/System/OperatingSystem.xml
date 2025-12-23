@@ -83,8 +83,7 @@ class SystemDemo
 		Console.WriteLine(o);
 	}
 }
-  </code
-            >
+  </code>
 prints
 <para>
 Microsoft Windows NT 5.1.2600.0

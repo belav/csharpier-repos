@@ -31,25 +31,21 @@
       >using-statement</non_terminal
     > is entered recursively, a new instance of the local variable is created each time, and its <non_terminal
       where="15.5.1"
-      >local-variable-initializer</non_terminal
-    >, if any, is evaluated each time. </paragraph
+      >local-variable-initializer</non_terminal>, if any, is evaluated each time. </paragraph
   >
   <paragraph
     >A local variable is not automatically initialized and thus has no default value. For the purpose of definite assignment checking, a local variable is considered initially unassigned. A <non_terminal
       where="15.5.1"
       >local-variable-declaration</non_terminal
     > may include a <non_terminal where="15.5.1"
-      >local-variable-initializer</non_terminal
-    >, in which case the variable is considered definitely assigned in its entire scope, except within the expression provided in the <non_terminal
+      >local-variable-initializer</non_terminal>, in which case the variable is considered definitely assigned in its entire scope, except within the expression provided in the <non_terminal
       where="15.5.1"
-      >local-variable-initializer</non_terminal
-    >. </paragraph
+      >local-variable-initializer</non_terminal>. </paragraph
   >
   <paragraph
     >Within the scope of a local variable, it is a compile-time error to refer to that local variable in a textual position that precedes its <non_terminal
       where="15.5.1"
-      >local-variable-declarator</non_terminal
-    >. </paragraph
+      >local-variable-declarator</non_terminal>. </paragraph
   >
   <paragraph>
     <note>[Note: The actual lifetime of a local variable is implementation-dependent. For example, a compiler might statically determine that a local variable in a block is only used for a small portion of that block. Using this analysis, the compiler could generate code that results in the variable's storage having a shorter lifetime than its containing block. </note>

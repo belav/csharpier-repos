@@ -354,8 +354,7 @@ public class UriTest {
  Console.WriteLine(myUri.ToString());
  }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>http://www.contoso.com/Hello World.htm</para>
@@ -624,8 +623,7 @@ public class UriTest {
 
  }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>Typical usage: http://www.contoso.com/index.htm
@@ -710,8 +708,7 @@ public class UriTest {
    Console.WriteLine(myUri.AbsolutePath);
  }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>/URI/Hello%20World.htm</para>
@@ -883,8 +880,7 @@ public class UriTest {
  Console.WriteLine(Uri.CheckHostName("www.contoso.com"));
  }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>Dns</para>
@@ -1558,8 +1554,7 @@ public class UriTest {
  Console.WriteLine(myUri.Fragment);
  }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>#main</para>
@@ -1795,8 +1790,7 @@ public class UriTest {
     }  
   }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>URI: http://www.contoso.com/index.htm</para>
@@ -2184,8 +2178,7 @@ public class UriTest {
  Console.WriteLine(myUri.Host);
  }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>www.contoso.com</para>
@@ -2836,8 +2829,7 @@ public class UriTest {
 
  }
 }
-</code
-          >
+</code>
           <para>The output is </para>
           <para> 
  http://127.0.0.1/index.htm is loopback?
@@ -2938,8 +2930,7 @@ public class UriTest {
           <para>
             <block subset="none" type="behaviors"
               > As described above. 
-   </block
-            >
+   </block>
           </para>
           <para>
             <block subset="none" type="overrides"
@@ -3321,8 +3312,7 @@ public class UriTest {
     Console.WriteLine(myUri.MakeRelative(new Uri ("http://www.contoso.com/index.htm")));
   }
 }
-</code
-          >
+</code>
           <para>The output is </para>
           <c>
             <para>http://www.contoso.com/Hello World.htm</para>
@@ -3710,15 +3700,13 @@ properties.
           <para>
             <block subset="none" type="default"
               > This method parses path components as defined in IETF RFC 2396. 
-</block
-            >
+</block>
           </para>
           <para>
             <block subset="none" type="overrides">
    Override this method to provide parsing for URIs in
    formats that are not defined in IETF RFC 2396.
-</block
-            >
+</block>
           </para>
           <para>
             <block subset="none" type="usage"
@@ -3781,8 +3769,7 @@ public class UriTest {
  Console.WriteLine(myUri.PathAndQuery);
  }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>/catalog/shownew.htm?date=today</para>
@@ -3889,8 +3876,7 @@ public class UriTest {
  Console.WriteLine(myUri.Query);
  }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>?date=today</para>

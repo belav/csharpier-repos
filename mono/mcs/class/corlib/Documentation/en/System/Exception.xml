@@ -67,8 +67,7 @@ class ExceptionTestClass {
  }
  } 
 }
-   </code
-      >
+   </code>
       <para>The output is</para>
       <code>
 ArithmeticException Handler: System.DivideByZeroException: Attempted to divide by zero.
@@ -696,8 +695,7 @@ ArithmeticException Handler: System.DivideByZeroException: Attempted to divide b
  }
  return back;
 }
-      </code
-          >
+      </code>
         </example>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -922,8 +920,7 @@ public class Test {
  }
 }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <code>
 In Main catch block. Caught: Error caused by trying ThrowInner.
@@ -1191,8 +1188,7 @@ public class ArgExceptionExample {
  }
  }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <code>
 Error: System.ArgumentException: Object must be of type String.

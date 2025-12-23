@@ -669,8 +669,7 @@ public class AssemblyExample {
  Console.WriteLine(a.FullName);
  } 
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>HelloWorld, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</para>
@@ -4762,8 +4761,7 @@ public class AssemblyExample {
  Console.WriteLine(a.ToString());
  } 
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>HelloWorld, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</para>

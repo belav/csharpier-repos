@@ -1504,8 +1504,7 @@ public class DnsTest {
      Console.WriteLine("Alias {0} == {1}", aliases[x], addresses[x]);
  }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para> The host name is: contoso.com</para>

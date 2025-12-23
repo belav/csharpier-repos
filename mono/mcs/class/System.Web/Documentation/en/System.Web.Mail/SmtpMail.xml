@@ -72,8 +72,7 @@ public class SmtpTest {
 	SmtpMail.Send (message);
     }
 }
-              </code
-              >
+              </code>
             </example>
           </para>
         </remarks>
@@ -136,8 +135,7 @@ public class SmtpTest {
 	SmtpMail.Send ("per@foo.bar","ola@foo.bar","Hello, E-Mail world!","This is a test mail.");
     }
 }
-              </code
-              >
+              </code>
             </example>
           </para>
         </remarks>

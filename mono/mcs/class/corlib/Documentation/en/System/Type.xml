@@ -455,8 +455,7 @@ class TestType {
  Console.WriteLine("{0} inherits from {1}", t,t.BaseType);
  }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <para>
             <c>System.Int32
@@ -655,8 +654,7 @@ public abstract class DeclaringTypeTest{
          typeof(MyClassB).GetMethod("m").DeclaringType);
    }
 }
-   </code
-          >
+   </code>
           <para> The output is </para>
           <c>
             <para>Declaring type of m is DeclaringTypeTest+MyClassA </para>
@@ -1349,8 +1347,7 @@ class TestType {
  Console.WriteLine("Full name of Array type is {0}",t.FullName);
  }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <para>
             <c>Full name of
@@ -2642,8 +2639,7 @@ class TestType {
  Console.WriteLine("{0} element type is {1}", newMe, t2==null? "null" : t2.ToString());
  }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>System.Int32[] element type is System.Int32</para>
@@ -11113,8 +11109,7 @@ class InvokeMemberExample
   
    }
 }
-</code
-          >
+</code>
           <para>The output is </para>
           <c>
             <para>The string is "A string". </para>
@@ -11423,8 +11418,7 @@ class TestType {
  Console.WriteLine("Type is {0}. IsArray? {1}", t, t.IsArray);
  }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>Type is System.Array. IsArray? False</para>
@@ -11547,8 +11541,7 @@ class ArrayTypeTest {
  Console.WriteLine("int[3,3,3] is assignable from int[2,2]? {0}",  array333Type.IsAssignableFrom(array22Type));
  }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>int[2] is assignable from int? False</para>
@@ -12034,8 +12027,7 @@ class TestType {
  Console.WriteLine("Enum is value? {0}", enumType.IsValueType);
  }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>Color is enum ? True</para>
@@ -12621,8 +12613,7 @@ class IsInstanceTest {
  Console.WriteLine("myderivedclass instance is instance of IFoo? {0}",  ifooType.IsInstanceOfType(mdc));
  }
 }
-</code
-          >
+</code>
           <para>The output is </para>
           <c>
             <para>int[] is instance of Array? True</para>
@@ -13807,8 +13798,7 @@ class IsSubclassTest {
  Console.WriteLine("IBar is subclass of IFoo? {0}", ibarType.IsSubclassOf(ifooType)); 
   }
 }
-</code
-          >
+</code>
           <para>The output is </para>
           <c>
             <para>Array is subclass of int[]? False</para>
@@ -14252,8 +14242,7 @@ System.Collections.Generic.Dictionary[System.String, Test]
         Are the constructed types equal? True
         Are the generic types equal? True
  */
-</code
-          >
+</code>
         </example>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -14686,8 +14675,7 @@ public abstract class ReflectedTypeTest {
             typeof(MyClassB).GetMethod("m").ReflectedType);
     }
 }
-</code
-          >
+</code>
           <para>The output is </para>
           <c>
             <para>Reflected type of m is ReflectedTypeTest+MyClassB</para>

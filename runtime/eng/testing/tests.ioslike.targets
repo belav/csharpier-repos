@@ -26,8 +26,7 @@
 
     <_ResetSimulatorSwitch
       Condition="('$(TargetOS)' == 'iossimulator' or '$(TargetOS)' == 'tvossimulator') and '$(IncludesTestRunner)' == 'true'"
-      >--reset-simulator</_ResetSimulatorSwitch
-    >
+      >--reset-simulator</_ResetSimulatorSwitch>
     <_SignalAppEndSwitch>--signal-app-end</_SignalAppEndSwitch>
     <_AppleSignCommand Condition="'$(TargetOS)' == 'ios' or '$(TargetOS)' == 'tvos'"
       >sign &quot;$app&quot;</_AppleSignCommand

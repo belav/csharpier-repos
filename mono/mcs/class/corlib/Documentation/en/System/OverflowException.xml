@@ -52,8 +52,7 @@ public class OverflowExample {
       }
    }
 }
-   </code
-      >
+   </code>
       <para>The output is</para>
       <code>
 Error caught: System.OverflowException: Arithmetic operation resulted in an overflow.

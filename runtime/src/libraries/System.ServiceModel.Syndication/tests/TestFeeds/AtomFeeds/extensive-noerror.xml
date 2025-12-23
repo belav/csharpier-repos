@@ -8,8 +8,7 @@
   <subtitle type="html">
     A &lt;em&gt;lot&lt;/em&gt; of effort
     went into making this effortless
-  </subtitle
-  >
+  </subtitle>
   <updated>2005-07-11T12:29:29Z</updated>
   <id>tag:contoso.com,2003:3</id>
   <link rel="alternate" type="text/html" hreflang="en" href="http://contoso.com/" />
@@ -17,8 +16,7 @@
   <rights>Contoso Rights.</rights>
   <generator uri="http://www.contoso.com/" version="1.0">
     Example Toolkit
-  </generator
-  >
+  </generator>
   <entry>
     <title>Atom draft-07 snapshot</title>
     <link rel="alternate" type="text/html" href="http://contoso.com/2005/04/02/atom" />

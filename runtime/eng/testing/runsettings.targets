@@ -26,8 +26,7 @@
     >
 
     <GenerateRunSettingsFileDependsOn Condition="'$(EnableCoverageSupport)' == 'true'"
-      >$(GenerateRunSettingsFileDependsOn);SetupCoverageFilter</GenerateRunSettingsFileDependsOn
-    >
+      >$(GenerateRunSettingsFileDependsOn);SetupCoverageFilter</GenerateRunSettingsFileDependsOn>
     <PrepareForRunDependsOn>GenerateRunSettingsFile;$(PrepareForRunDependsOn)</PrepareForRunDependsOn>
   </PropertyGroup>
 

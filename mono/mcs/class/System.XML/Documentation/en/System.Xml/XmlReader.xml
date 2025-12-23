@@ -1446,8 +1446,7 @@ containing the depth of the current node in the XML document. </para
             <block subset="none" type="overrides"
               > This property must be overridden in order
    to provide the functionality described above, as there is no default implementation.
-</block
-            >
+</block>
           </para>
         </remarks>
         <summary>
@@ -1554,8 +1553,7 @@ containing the depth of the current node in the XML document. </para
             <block subset="none" type="overrides"
               > This property must be overridden in order
    to provide the functionality described above, as there is no default implementation.
-</block
-            >
+</block>
           </para>
         </remarks>
         <summary>
@@ -1592,15 +1590,14 @@ containing the depth of the current node in the XML document. </para
           <para>
             <block subset="none" type="behaviors"
               > This method does not move the
-      reader. </block
-            >
+      reader.
+            </block>
           </para>
           <para>
             <block subset="none" type="overrides"
               > This method must be overridden in order
    to provide the functionality described above, as there is no default implementation.
-</block
-            >
+</block>
           </para>
         </remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
@@ -1841,8 +1838,7 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <para>
             <block subset="none" type="usage"
               > Use this property to determine whether the current node has any attributes.
-   </block
-            >
+   </block>
           </para>
         </remarks>
         <summary>
@@ -2359,8 +2355,7 @@ explicitly set. </para
             <block subset="none" type="overrides"
               > This property must be overridden in order
    to provide the functionality described above, as there is no default implementation.
-</block
-            >
+</block>
           </para>
         </remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
@@ -2418,6 +2413,8 @@ if the attribute is not found.</para
               
 
               
+
+              
          
          node, this method can be used to get the PUBLIC and
          SYSTEM literals.</para
@@ -2427,8 +2424,7 @@ if the attribute is not found.</para
             <block subset="none" type="overrides"
               > This property must be overridden in order
    to provide the functionality described above, as there is no default implementation.
-</block
-            >
+</block>
           </para>
         </remarks>
       </Docs>
@@ -2481,8 +2477,7 @@ attribute is not found.</para
             <block subset="none" type="overrides"
               > This property must be overridden in order
       to provide the functionality described above, as there is no default implementation.
-   </block
-            >
+   </block>
           </para>
         </remarks>
       </Docs>
@@ -2524,15 +2519,14 @@ have a name (like <see langword="Text" />, <see langword="Comment" /> , and so o
           <para>
             <block subset="none" type="behaviors"
               > As described
-      above. </block
-            >
+      above.
+            </block>
           </para>
           <para>
             <block subset="none" type="overrides"
               > This property must be overridden in order
    to provide the functionality described above, as there is no default implementation.
-</block
-            >
+</block>
           </para>
         </remarks>
         <summary>
@@ -2630,8 +2624,7 @@ have a name (like <see langword="Text" />, <see langword="Comment" /> , and so o
             <block subset="none" type="overrides"
               > This method must be overridden in order
    to provide the functionality described above, as there is no default implementation.
-</block
-            >
+</block>
           </para>
         </remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
@@ -2913,8 +2906,7 @@ have a name (like <see langword="Text" />, <see langword="Comment" /> , and so o
             <block subset="none" type="overrides"
               > This method must be overridden in order
    to provide the functionality described above, as there is no default implementation.
-</block
-            >
+</block>
           </para>
         </remarks>
         <summary>
@@ -3007,6 +2999,8 @@ have a name (like <see langword="Text" />, <see langword="Comment" /> , and so o
               
 
               
+
+              
          
          prefixed with <see cref="P:System.Xml.XmlReader.Prefix" /> and the
          ':' character. For example, <see cref="P:System.Xml.XmlReader.Name" /> is
@@ -3066,8 +3060,7 @@ have a name (like <see langword="Text" />, <see langword="Comment" /> , and so o
             <block subset="none" type="overrides"
               > This property must be overridden in order
    to provide the functionality described above, as there is no default implementation.
-</block
-            >
+</block>
           </para>
         </remarks>
         <summary>
@@ -3212,8 +3205,7 @@ have a name (like <see langword="Text" />, <see langword="Comment" /> , and so o
             <block subset="none" type="overrides"
               > This property must be overridden in order
    to provide the functionality described above, as there is no default implementation.
-</block
-            >
+</block>
           </para>
         </remarks>
         <summary>
@@ -3270,8 +3262,7 @@ containing the namespace prefix associated with the current node. </para
             <block subset="none" type="overrides"
               > This property must be overridden in order
    to provide the functionality described above, as there is no default implementation.
-</block
-            >
+</block>
           </para>
         </remarks>
         <summary>
@@ -7413,8 +7404,7 @@ containing the namespace prefix associated with the current node. </para
             <block subset="none" type="overrides"
               > This property must be overridden in order
    to provide the functionality described above, as there is no default implementation.
-</block
-            >
+</block>
           </para>
         </remarks>
         <summary>
@@ -8438,8 +8428,7 @@ enumeration. If no <c>xml:space</c> scope exists, this property defaults to
             <block subset="none" type="overrides"
               > This property must be overridden in order
    to provide the functionality described above, as there is no default implementation.
-</block
-            >
+</block>
           </para>
         </remarks>
         <summary>

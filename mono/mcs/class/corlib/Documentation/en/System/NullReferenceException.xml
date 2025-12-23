@@ -54,8 +54,7 @@ public class NullRefExample {
       }
    }
 }
-   </code
-      >
+   </code>
       <para>The output is</para>
       <code>
 Caught error: System.NullReferenceException: Object reference not set to an instance of an object.

@@ -56,8 +56,7 @@ public class IndexRangeTest {
    }
  }
 }
-   </code
-      >
+   </code>
       <para>The output is</para>
       <code>
 array[0] = 0

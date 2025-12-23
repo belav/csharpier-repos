@@ -86,8 +86,7 @@ public class TestMyClass {
         Console.WriteLine("my1 {0} my2 {1}",my1.myField, my2.myField);
     }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>my1 44 my2 44</para>

@@ -59,8 +59,7 @@
 	   &lt;WeekendDayStyle cssclass="calendar_weekend"/&gt;
 	   &lt;DayHeaderStyle cssclass="calendar_dayheader"/&gt;
 	&lt;/asp:Calendar&gt;
-  </code
-        >
+  </code>
       </example>
     </remarks>
   </Docs>

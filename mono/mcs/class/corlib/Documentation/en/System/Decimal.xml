@@ -265,8 +265,7 @@ class ConstructDecimal {
  Console.WriteLine("{{-1,-1,-1,{0}}} = {1}",partsMinValue [3],d);
  }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>{0,0,0,0} = 0</para>
@@ -1211,8 +1210,7 @@ class DecimalTest {
    Console.WriteLine("floor {0} is {1}", 3.0m, Decimal.Floor(3.0m));
  }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>floor 3.14159 is 3</para>
@@ -1338,8 +1336,7 @@ public static void Main () {
     Console.WriteLine ("d1 == d {0}", d1 == d);
 }
 }
-   </code
-          >
+   </code>
         </example>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3715,8 +3712,7 @@ class DecimalParseClass {
     Console.WriteLine("String: {0} (decimal) {1}",s3,Decimal.Parse(s3));
   }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>String: -1.001 (decimal) -1.001</para>
@@ -3891,8 +3887,7 @@ public static void Main() {
  Console.WriteLine("{0} parsed to decimal {1}",s,d);
 }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>1,000,111.99 parsed to decimal 1000111.99</para>
@@ -4286,8 +4281,7 @@ public static void Main() {
  Console.WriteLine("{0} parsed to decimal {1}",s,d);
 }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <para>
             <c>1,000,111.99
@@ -4474,8 +4468,7 @@ public static void Main() {
  Console.WriteLine("{0} parsed to decimal {1}",s,d);
 }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>1:000:111.99 parsed to decimal 1000111.99</para>
@@ -4976,8 +4969,7 @@ public static void Main() {
  Console.WriteLine("round {0} = {1}",d4, Decimal.Round(d4,2));
 }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>Rounding to 0 places...</para>
@@ -6578,8 +6570,7 @@ class test {
  fmts[i],d.ToString(fmts[i]));
  }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>1234.56789</para>
@@ -7023,8 +7014,7 @@ public static void Main() {
  Console.WriteLine("{0} truncated is {1}", d2, Decimal.Truncate(d2));
 }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>1234.56789 truncated is 1234</para>

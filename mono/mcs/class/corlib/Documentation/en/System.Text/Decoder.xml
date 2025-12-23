@@ -74,8 +74,7 @@ public class DecoderExample
          Console.Write("U+{0:x} ", (ushort)c);
    }
 }
-</code
-      >
+</code>
       <para>The output is </para>
       <c>
         <para>U+41 U+23 U+2623</para>

@@ -454,8 +454,7 @@ class Test {
 	}
 }
 
-</code
-      >
+</code>
       <para>The output (under the influence of different command-line
         arguments) is:</para>
       <code lang="sh" src="examples/greet.txt"
@@ -490,8 +489,7 @@ Hello A!
 $ mono greet.exe -r not-an-int
 greet: Could not convert string `not-an-int' to type Int32 for option `-r'.
 Try `greet --help' for more information.
-</code
-      >
+</code>
       <para>
         Notice how the output produced by <c>--help</c> uses the
         descriptions provided during <c>OptionSet</c> initialization.
@@ -610,8 +608,7 @@ class Test {
 	}
 }
 
-</code
-      >
+</code>
       <para>
         The output (under the influence of different command-line arguments) is:
       </para>
@@ -700,8 +697,7 @@ Options:
 	    Extract: False
 	       List: False
 	      Color: off
-</code
-      >
+</code>
     </example>
     <example>
       <para>
@@ -869,8 +865,7 @@ class Demo {
 	}
 }
 
-</code
-      >
+</code>
       <para>The output (under the influence of different command-line
         arguments) is:
       </para>
@@ -893,8 +888,7 @@ Key: e=f
 
 $ mono subclass.exe --map 'a\' 'b\' c 'd\' 'e\' f
 Key: a\b\c=d\e\f
-</code
-      >
+</code>
       <para>Notice:</para>
       <list type="bullet">
         <item>
@@ -1091,8 +1085,7 @@ class LocalizationDemo {
 			Console.WriteLine ("Message level: {0}", verbose);
 	}
 }
-</code
-          >
+</code>
           <para>The output (under the influence of different command-line
             arguments) is:</para>
           <code lang="sh" src="examples/localization.txt"
@@ -1122,8 +1115,7 @@ localization: Could not convert string `not-an-int' to type Int32 for option `-n
 
 $ mono localization.exe --with-hello -n not-an-int
 localization: hello:Could not convert string `not-an-int' to type Int32 for option `-n'.
-</code
-          >
+</code>
           <para>Notice:</para>
           <list type="bullet">
             <item>
@@ -2779,8 +2771,7 @@ class Test {
 	}
 }
 
-</code
-          >
+</code>
         </example>
       </Docs>
     </Member>
@@ -3140,8 +3131,7 @@ class Test {
 	}
 }
 
-</code
-          >
+</code>
           <para>
             Notice that when the above program is invoked with the
             <c>--help</c> parameter, 
@@ -3184,8 +3174,7 @@ Hello A!
 $ mono greet.exe -r not-an-int
 greet: Could not convert string `not-an-int' to type Int32 for option `-r'.
 Try `greet --help' for more information.
-</code
-          >
+</code>
         </example>
       </Docs>
     </Member>

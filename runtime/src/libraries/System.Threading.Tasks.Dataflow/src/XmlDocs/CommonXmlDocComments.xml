@@ -107,8 +107,7 @@
       >
       <param name="messageValue">
         The value of the message being offered.
-      </param
-      >
+      </param>
       <param name="source">
         The <see cref="T:System.Threading.Tasks.Dataflow.ISourceBlock`1" /> offering the message. This may be null (Nothing in Visual Basic).
       </param
@@ -214,8 +213,7 @@
       >
       <param name="messageConsumed">
         True if the message was successfully consumed. False otherwise.
-      </param
-      >
+      </param>
       <returns>
         <para>
           The value of the consumed message. This may correspond to a different <see cref="T:System.Threading.Tasks.Dataflow.DataflowMessageHeader" /> instance than was previously reserved and

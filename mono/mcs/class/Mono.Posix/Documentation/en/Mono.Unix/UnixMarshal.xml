@@ -362,8 +362,7 @@
               terminating null, and not the maximum possible number of bytes
               used for encoding any character to be used for the terminating
               null.
-            </block
-            >
+            </block>
           </para>
           <para>
             Any buffer returned by 
@@ -556,8 +555,7 @@ stringArray[] = {
     "string 2",
     NULL
 };
-          </code
-          >
+          </code>
           <para>
             The final null string will not be returned from this method; the
             above <b>stringArray</b> declaration would create an array

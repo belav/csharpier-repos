@@ -33,8 +33,7 @@
 	// zeroize the key pair from memory
 	Array.Clear (keypair, 0, keypair.Length);
 	// note: the private key still exists in the RSA instance!
-  </code
-        >
+  </code>
       </example>
     </remarks>
   </Docs>
@@ -368,8 +367,7 @@
           <example>
             <code lang="C#">
 	byte[] data = CryptoConvert.FromHex ("DEADC0DE");
-  </code
-            >
+  </code>
           </example>
         </remarks>
       </Docs>
@@ -584,8 +582,7 @@
 	byte[] data = new byte[] { 0xDE, 0xAD, 0xC0, 0xDE };
 	string s = CryptoConvert.ToHex (data);
 	// s == "DEADC0DE"
-  </code
-            >
+  </code>
           </example>
         </remarks>
       </Docs>

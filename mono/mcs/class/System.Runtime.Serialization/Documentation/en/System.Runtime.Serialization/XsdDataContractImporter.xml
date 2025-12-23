@@ -268,8 +268,7 @@
           <para
             >For more information about types that can be imported, see <format type="text/html">
               <a href="7381b200-437a-4506-9556-d77bf1bc3f34"
-                >Types Supported by the Data Contract Serializer</a
-              >
+                >Types Supported by the Data Contract Serializer</a>
             </format>.</para
           >
         </remarks>

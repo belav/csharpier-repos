@@ -58,8 +58,7 @@ public class ObsoleteAttributeExample {
     OldMethod();
   }
 }
-</code
-      >
+</code>
       <para>An example compile-time result is</para>
       <para>
         <c>ObsoleteAttributeExample.cs(8,4):

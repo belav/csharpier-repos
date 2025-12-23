@@ -43,8 +43,7 @@
             <code lang="C#">
 	DateTime now = DateTime.UtcNow;
 	ASN1 asnNow = ASN1Convert.FromOid (now);
-  </code
-            >
+  </code>
           </example>
         </remarks>
       </Docs>
@@ -75,8 +74,7 @@
             <code lang="C#">
 	int i = 16;
 	ASN1 asnSixteen = ASN1Convert.FromOid (i);
-  </code
-            >
+  </code>
           </example>
         </remarks>
       </Docs>
@@ -109,8 +107,7 @@
             <code lang="C#">
 	string oidSha1 = "1.3.14.3.2.26";
 	ASN1 asnOidSha1 = ASN1Convert.FromOid (oidSha1);
-  </code
-            >
+  </code>
           </example>
         </remarks>
       </Docs>

@@ -4257,8 +4257,7 @@ public class DateTimeTest {
      Console.WriteLine(dt);
  }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <para>
             <c>1/22/2001
@@ -4400,8 +4399,7 @@ public class DateTimeTest {
      Console.WriteLine(dt);
  }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>1/22/2001
@@ -4692,8 +4690,7 @@ public class DateTimeTest {
      Console.WriteLine(dt);
  }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <para>
             <c>1/1/0001

@@ -65,8 +65,7 @@ class Hello // any name will do for this class
         <non_terminal where="9.3.2">input-character</non_terminal>
       </name> :: <rhs
         >Any Unicode character except a <non_terminal where="9.3.2"
-          >new-line-character</non_terminal
-        >
+          >new-line-character</non_terminal>
       </rhs>
     </grammar_production>
     <grammar_production>

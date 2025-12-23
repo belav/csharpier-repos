@@ -244,8 +244,7 @@ This package is an internal implementation of the .NET Core SDK and is not meant
       _ResolveInitialSharedFrameworkContent;
       _ResolveRuntimePackContent;
       _ResolveSharedFrameworkContent;
-    </GenerateNuspecDependsOn
-    >
+    </GenerateNuspecDependsOn>
     <CrossGenDependsOn>
       ResolveReferences;
     </CrossGenDependsOn>
@@ -253,8 +252,7 @@ This package is an internal implementation of the .NET Core SDK and is not meant
       $(CrossGenDependsOn);
       _BatchCrossGenAssemblies;
       _GenerateComposites;
-    </CrossGenDependsOn
-    >
+    </CrossGenDependsOn>
     <!-- _GetBuildOutputFilesWithTfm executes in a separate context from Build, GenerateNuspec, and so on. -->
     <TargetsForTfmSpecificBuildOutput>
       $(TargetsForTfmSpecificBuildOutput);

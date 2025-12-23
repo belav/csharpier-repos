@@ -131,8 +131,7 @@
     >An event declaration that omits <non_terminal where="17.7"
       >event-accessor-declarations</non_terminal
     > defines one or more events-one for each of the <non_terminal where="17.4"
-      >variable-declarator</non_terminal
-    >s. The attributes and modifiers apply to all of the members declared by such an  <non_terminal
+      >variable-declarator</non_terminal>s. The attributes and modifiers apply to all of the members declared by such an  <non_terminal
       where="17.7"
       >event-declaration</non_terminal
     >. </paragraph

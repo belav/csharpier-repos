@@ -474,8 +474,7 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
         <para
           >Although the <see cref="T:System.Resources.ResourceManager" /> class is supported in win8_appname_long apps, we do not recommend its use. Use this class only when you develop net_portable projects that can be used with win8_appname_long apps. To retrieve resources from win8_appname_long apps, use the <see
             cref="http://go.microsoft.com/fwlink/p/?LinkId=238182"
-            >Windows.ApplicationModel.Resources.ResourceLoader</see
-          > class instead.</para
+            >Windows.ApplicationModel.Resources.ResourceLoader</see> class instead.</para
         >
       </block>
       <para
@@ -578,8 +577,7 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
             <para
               >Although the <see cref="T:System.Resources.ResourceManager" /> class is supported in win8_appname_long apps, we do not recommend its use. Use this class only when you develop net_portable projects that can be used with win8_appname_long apps. To retrieve resources from win8_appname_long apps, use the <see
                 cref="http://go.microsoft.com/fwlink/p/?LinkId=238182"
-                >Windows.ApplicationModel.Resources.ResourceLoader</see
-              > class instead.</para
+                >Windows.ApplicationModel.Resources.ResourceLoader</see> class instead.</para
             >
           </block>
           <para
@@ -643,8 +641,7 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
             <para
               >Although the <see cref="T:System.Resources.ResourceManager" /> class is supported in win8_appname_long apps, we do not recommend its use. Use this class only when you develop net_portable projects that can be used with win8_appname_long apps. To retrieve resources from win8_appname_long apps, use the <see
                 cref="http://go.microsoft.com/fwlink/p/?LinkId=238182"
-                >Windows.ApplicationModel.Resources.ResourceLoader</see
-              > class instead.</para
+                >Windows.ApplicationModel.Resources.ResourceLoader</see> class instead.</para
             >
           </block>
           <para
@@ -1419,8 +1416,7 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
             <para
               >Although the <see cref="T:System.Resources.ResourceManager" /> class is supported in win8_appname_long apps, we do not recommend its use. Use this class only when you develop net_portable projects that can be used with win8_appname_long apps. To retrieve resources from win8_appname_long apps, use the <see
                 cref="http://go.microsoft.com/fwlink/p/?LinkId=238182"
-                >Windows.ApplicationModel.Resources.ResourceLoader</see
-              > class instead.</para
+                >Windows.ApplicationModel.Resources.ResourceLoader</see> class instead.</para
             >
           </block>
           <para
@@ -1497,8 +1493,7 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
             <para
               >Although the <see cref="T:System.Resources.ResourceManager" />class is supported in win8_appname_long apps, we do not recommend its use. Use this class only when you develop net_portable projects that can be used with win8_appname_long apps. To retrieve resources from win8_appname_long apps, use the <see
                 cref="http://go.microsoft.com/fwlink/p/?LinkId=238182"
-                >Windows.ApplicationModel.Resources.ResourceLoader</see
-              > class instead.</para
+                >Windows.ApplicationModel.Resources.ResourceLoader</see> class instead.</para
             >
           </block>
           <para

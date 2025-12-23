@@ -54,8 +54,7 @@ namespace TestNameSpace
    public int myField = -1;
  }
 }
-   </code
-      >
+   </code>
       <para>The following code references the class library above, and accesses
       TestNameSpace.Class1.myField. This code is compiled into an application.</para>
       <code lang="C#"
@@ -69,8 +68,7 @@ class AppTest
     Console.WriteLine("Accessing member {0}.", test.myField);
   }
 }
-   </code
-      >
+   </code>
       <para>The output of the application is</para>
       <c>
         <para> Constructing with public field</para>
@@ -91,8 +89,7 @@ namespace TestNameSpace
    private int myField = -1;
  }
 }
-   </code
-      >
+   </code>
       <para>When the application is executed again without being recompiled, the output
       is</para>
       <c>

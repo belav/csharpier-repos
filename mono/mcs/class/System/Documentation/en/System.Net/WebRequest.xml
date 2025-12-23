@@ -58,8 +58,7 @@ public class WebRequestExample {
     Console.WriteLine(myRequest);
   }
 }
-</code
-      >
+</code>
       <para>The output is</para>
       <para>System.Net.HttpWebRequest</para>
     </example>
@@ -835,8 +834,7 @@ public class CreateDefaultExample
       Console.WriteLine("Create --&gt; {0}", textContoso);
    }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>CreateDefault --&gt; System.Net.HttpWebRequest</para>
@@ -1866,8 +1864,7 @@ public class RegisterPrefixExample
       Console.WriteLine(wr);
    }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <para>ftpWebRequest</para>
         </example>

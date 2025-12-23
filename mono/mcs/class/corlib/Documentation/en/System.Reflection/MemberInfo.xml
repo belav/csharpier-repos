@@ -173,8 +173,7 @@ public class DeclaringTypeExample {
     Console.WriteLine("Declaring type is {0}.", memInfo[0].DeclaringType);    
    }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>Reflected type is DerivedClass.</para>

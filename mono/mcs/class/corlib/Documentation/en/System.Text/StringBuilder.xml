@@ -2099,8 +2099,7 @@ public class StringBuilderTest {
       Console.WriteLine( sb.AppendFormat("temperature today was {0, 6}.", 88) ); 
   }
 }
-      </code
-          >
+      </code>
           <para>The output is</para>
           <code>The high temperature today was     88.
  </code>
@@ -2262,8 +2261,7 @@ public class StringBuilderTest {
      Console.WriteLine( sb.AppendFormat("temperature today was {0}, {1} {2}{3}.", strings) ); 
   }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <para>
             <c>The high
@@ -2430,8 +2428,7 @@ public class StringBuilderTest {
      Console.WriteLine(sb.AppendFormat(null, "temperature today was {0}, {1} {2}.", a, b, c) ); 
   }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <para>
             <c>The high
@@ -2620,8 +2617,7 @@ public class StringBuilderTest {
      Console.WriteLine( sb.AppendFormat("temperature today was {0} {1}.", "very", "high") ); 
   }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>The high temperature today was very high.</para>
@@ -2785,8 +2781,7 @@ public class StringBuilderTest {
      Console.WriteLine( sb.AppendFormat("temperature today was {0} {1} {2}.", "very", "very", "high") ); 
   }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <para>
             <c>The high
@@ -4622,8 +4617,7 @@ public class StringBuilderTest  {
       Console.WriteLine(sb);
    }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>0123456789</para>
