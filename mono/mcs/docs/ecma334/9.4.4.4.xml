@@ -29,8 +29,7 @@
         <non_terminal where="9.4.4.4">single-character</non_terminal>
       </name> :: <rhs
         >Any character except ' (U+0027), \ (U+005C), and <non_terminal where="9.3.2"
-          >new-line-character</non_terminal
-        >
+          >new-line-character</non_terminal>
       </rhs>
     </grammar_production>
     <grammar_production>

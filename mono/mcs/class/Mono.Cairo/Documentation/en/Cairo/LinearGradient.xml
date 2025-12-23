@@ -30,8 +30,7 @@ gr.Pattern =  pat;
 gr.Fill ();
 
 pat.Destroy ();
-  </code
-          >
+  </code>
         </example>
       </para>
     </remarks>

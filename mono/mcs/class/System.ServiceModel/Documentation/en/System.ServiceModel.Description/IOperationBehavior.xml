@@ -52,8 +52,7 @@
       <para
         >Typically, the developer first reviews the extensibility points to determine which customization option suits the application scenario and then implements the customization at the appropriate scope. For example, <see cref="T:System.ServiceModel.Description.IServiceBehavior" /> objects can insert customizations for all messages in an entire service and <see cref="T:System.ServiceModel.Description.IContractBehavior" /> objects can insert customizations for all messages across a specific contract, and so on. For a description of the various properties and customizations available, see <format type="text/html">
           <a href="954c138a-1cd0-45a0-8abe-e4d2b8ff5400"
-            >Extending ServiceHost and the Dispatcher</a
-          >
+            >Extending ServiceHost and the Dispatcher</a>
         </format>.</para
       >
       <para

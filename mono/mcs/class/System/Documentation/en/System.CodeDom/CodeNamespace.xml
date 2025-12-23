@@ -121,8 +121,7 @@ class CodeDomDemo {
 		return(0);
 	}
 }
-</code
-          >
+</code>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -173,8 +172,7 @@ on the namespace.</value
 CodeNamespace demoNs= new CodeNamespace("Mono.CodeDomDemo");
 demoNs.Comments.Add(new CodeCommentStatement("Demo Namespace"));
 ...
-</code
-          >
+</code>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -215,8 +213,7 @@ imports applicable to the namespace.</value
 CodeNamespace demoNs= new CodeNamespace("Mono.CodeDomDemo");
 demoNs.Imports.Add(new CodeNamespaceImport("System.Data"));
 ...
-</code
-          >
+</code>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -349,8 +346,7 @@ helloClass.IsClass=true;
 ...
 CodeNamespace testNs= new CodeNamespace("Mono.CodeDomDemo");
 testNs.Types.Add(helloClass);
-  </code
-            >
+  </code>
           </example>
         </remarks>
         <summary>

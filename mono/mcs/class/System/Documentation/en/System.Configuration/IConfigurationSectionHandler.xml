@@ -28,8 +28,7 @@
       <para
         >Important   <see cref="T:System.Configuration.IConfigurationSectionHandler" /> is deprecated in .NET Framework 2.0 and above. But, because it is used internally, it has been kept. You can find an example at <format type="text/html">
           <a href="07f68a3f-2920-4665-a824-47bda744e662"
-            >How to: Create Custom Configuration Sections Using IConfigurationSectionHandler</a
-          >
+            >How to: Create Custom Configuration Sections Using IConfigurationSectionHandler</a>
         </format>. If you use the previous example, please build it with the .NET Framework version 1.0 or 1.1.</para
       >
       <para

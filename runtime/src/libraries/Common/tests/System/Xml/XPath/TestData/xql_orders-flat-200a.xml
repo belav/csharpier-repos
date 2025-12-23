@@ -2503,8 +2503,7 @@ Crowther Way</ShipAddress
           <ShipVia Required="False">3</ShipVia>
           <Freight>87.03</Freight>
           <ShipName AllowZeroLength="False" FieldSize="Error"
-            >Furia Bacalhau e Frutos do Mar</ShipName
-          >
+            >Furia Bacalhau e Frutos do Mar</ShipName>
           <ShipAddress OriginalValue="Error">Jardim das rosas n. 32</ShipAddress>
           <ShipCity VisibleValue="Error" ColumnOrder="0" ColumnHidden="False">Lisboa</ShipCity>
           <ShipRegion></ShipRegion>
@@ -3912,8 +3911,7 @@ Stratford St. Mary</ShipAddress>
           <ShipAddress
             VisibleValue="Error"
             Description="Street address only -- no post-office box allowed."
-            >Ave. 5 de Mayo Porlamar</ShipAddress
-          >
+            >Ave. 5 de Mayo Porlamar</ShipAddress>
           <ShipCity>I. de Margarita</ShipCity>
           <ShipRegion ColumnOrder="0" ColumnHidden="False" ColumnWidth="1410"
             >Nueva Esparta</ShipRegion

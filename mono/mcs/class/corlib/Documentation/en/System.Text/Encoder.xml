@@ -76,8 +76,7 @@ public class EncoderExample
    }
 
 }
-</code
-      >
+</code>
       <para>The output is</para>
       <c>
         <para>Bytes1: '69' '110' '99' </para>

@@ -52,8 +52,7 @@ class ArrayTypeMisMatchExample {
  }
  }
 }
-   </code
-      >
+   </code>
       <para>The output is</para>
       <c>
         <para>Error: System.ArrayTypeMismatchException: Source array type cannot be

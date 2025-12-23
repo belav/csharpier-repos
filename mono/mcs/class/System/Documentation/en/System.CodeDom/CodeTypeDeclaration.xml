@@ -217,18 +217,18 @@ Implements Interface1</code>
 		memBlue.InitExpression=new CodeSnippetExpression("2");
 		colorEnum.Members.Add(memBlue);
 		colorEnum.Members.Add(new CodeMemberField(typeof(int),"Green"));
-  </code
-            >
+  </code>
 Generates the following code for the C# generator:
-<code lang="C#">
+<code
+              lang="C#"
+            >
     public enum Colors {
 
         BLUE = 2,
 
         Green,
     }
-</code
-            >
+</code>
           </example>
         </remarks>
         <summary>

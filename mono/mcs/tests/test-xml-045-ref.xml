@@ -16,19 +16,15 @@
     </member>
     <member name="M:EntryPoint.Create(System.Boolean)">
             dummy comments
-        </member
-    >
+        </member>
     <member name="M:EntryPoint.Undefine(System.Boolean)">
             dummy comments
-        </member
-    >
+        </member>
     <member name="M:EntryPoint.Remove">
             dummy comments
-        </member
-    >
+        </member>
     <member name="M:EntryPoint.Destroy(System.Boolean)">
             dummy comments
-        </member
-    >
+        </member>
   </members>
 </doc>

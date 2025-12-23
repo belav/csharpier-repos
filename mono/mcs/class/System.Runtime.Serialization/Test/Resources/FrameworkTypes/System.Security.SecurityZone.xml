@@ -1,4 +1,3 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <SecurityZone xmlns="http://schemas.datacontract.org/2004/07/System.Security"
-  >MyComputer</SecurityZone
->
+  >MyComputer</SecurityZone>

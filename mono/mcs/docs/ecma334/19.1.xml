@@ -58,13 +58,10 @@
   >
   <paragraph
     >The rank of an array type is given by the leftmost <non_terminal where="19.1"
-      >rank-specifier</non_terminal
-    > in the array-type: A <non_terminal where="19.1"
-      >rank-specifier</non_terminal
-    > indicates that the array is an array with a rank of one plus the number of &quot;,&quot; tokens in the <non_terminal
+      >rank-specifier</non_terminal> in the array-type: A <non_terminal where="19.1"
+      >rank-specifier</non_terminal> indicates that the array is an array with a rank of one plus the number of &quot;,&quot; tokens in the <non_terminal
       where="19.1"
-      >rank-specifier</non_terminal
-    >. </paragraph
+      >rank-specifier</non_terminal>. </paragraph
   >
   <paragraph
     >The element type of an array type is the type that results from deleting the leftmost rank-specifier: <list>
@@ -74,8 +71,7 @@
   </paragraph>
   <paragraph
     >In effect, the <non_terminal where="19.1"
-      >rank-specifier</non_terminal
-    >s are read from left to right before the final non-array element type. <example
+      >rank-specifier</non_terminal>s are read from left to right before the final non-array element type. <example
       >[Example: The type int[][,,][,] is a single-dimensional array of three-dimensional arrays of two-dimensional arrays of <keyword>int</keyword>. end example]</example
     >
   </paragraph>

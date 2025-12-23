@@ -64,8 +64,7 @@ if (cs == Cairo.Status.Success) {
 	m.TransformPoint (ref point2x, ref point2Y);
 	// ...
 } 
- </code
-        >
+ </code>
       </example>
     </remarks>
   </Docs>
@@ -238,8 +237,7 @@ if (cs == Cairo.Status.Success) {
       <Docs>
         <param name="radians"
           >Angle of rotation, in radians. The direction of rotation is defined such that positive angles rotate in the direction from the positive X axis toward the positive Y axis. With the default axis orientation of cairo, positive angles rotate in a clockwise direction.
-</param
-        >
+</param>
         <summary>Initialize the matrix to a transformation that rotates by the specified radians value.</summary>
         <remarks />
       </Docs>
@@ -434,8 +432,7 @@ if (cs == Cairo.Status.Success) {
       <Docs>
         <param name="radians"
           >angle of rotation, in radians. The direction of rotation is defined such that positive angles rotate in the direction from the positive X axis toward the positive Y axis. With the default axis orientation of cairo, positive angles rotate in a clockwise direction.
-</param
-        >
+</param>
         <summary>Applies rotation by radians to the transformation in the matrix. The effect of the new transformation is to first rotate the coordinates by radians, then apply the original transformation to the coordinates.</summary>
         <remarks />
       </Docs>
@@ -509,6 +506,8 @@ if (cs == Cairo.Status.Success) {
               <term>dy2 = dx1 * b + dy1 * d;</term>
             </item>
           </list>
+
+          
 
           
 

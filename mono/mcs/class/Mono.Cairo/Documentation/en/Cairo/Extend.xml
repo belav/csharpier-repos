@@ -24,8 +24,7 @@ matrix.InitScale (w * 5.0, h * 5.0);
 pattern.Matrix = matrix;
 
 gr.Pattern = pattern;
-  </code
-        >
+  </code>
       </example>
     </remarks>
   </Docs>

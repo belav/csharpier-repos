@@ -97,8 +97,7 @@
         > The scope of a parameter declared in a <non_terminal where="17.10"
           >constructor-declaration</non_terminal
         > (<hyperlink>17.10</hyperlink>) is the <non_terminal where="17.10"
-          >constructor-initializer</non_terminal
-        > and block of that <non_terminal where="17.10"
+          >constructor-initializer</non_terminal> and block of that <non_terminal where="17.10"
           >constructor-declaration</non_terminal
         >. </list_item
       >
@@ -121,21 +120,19 @@
       >
       <list_item
         > The scope of a local variable declared in a <non_terminal where="15.8.3"
-          >for-initializer</non_terminal
-        > of a for statement (<hyperlink>15.8.3</hyperlink>) is the  <non_terminal where="15.8.3"
-          >for-initializer</non_terminal
-        >, the <non_terminal where="15.8.3">for-condition</non_terminal>, the <non_terminal
+          >for-initializer</non_terminal> of a for statement (<hyperlink>15.8.3</hyperlink>) is the  <non_terminal
           where="15.8.3"
-          >for-iterator</non_terminal
-        >, and the contained statement of the for statement. </list_item
+          >for-initializer</non_terminal>, the <non_terminal where="15.8.3"
+          >for-condition</non_terminal
+        >, the <non_terminal where="15.8.3"
+          >for-iterator</non_terminal>, and the contained statement of the for statement. </list_item
       >
       <list_item
         > The scope of a local constant declared in a <non_terminal where="15.5.2"
           >local-constant-declaration</non_terminal
         > (<hyperlink>15.5.2</hyperlink>) is the block in which the declaration occurs. It is a compile-time error to refer to a local constant in a textual position that precedes its <non_terminal
           where="17.3"
-          >constant-declarator</non_terminal
-        >. </list_item
+          >constant-declarator</non_terminal>. </list_item
       >
     </list>
   </paragraph>
@@ -160,8 +157,7 @@ class A
   <paragraph
     >Within the scope of a local variable, it is a compile-time error to refer to the local variable in a textual position that precedes the <non_terminal
       where="15.5.1"
-      >local-variable-declarator</non_terminal
-    > of the local variable. <example
+      >local-variable-declarator</non_terminal> of the local variable. <example
       >[Example: For example <code_example>
         <![CDATA[
 class A  
@@ -187,12 +183,11 @@ class A
     <example
       >In the F method above, the first assignment to i specifically does not refer to the field declared in the outer scope. Rather, it refers to the local variable and it results in a compile-time error because it textually precedes the declaration of the variable. In the G method, the use of j in the initializer for the declaration of j is valid because the use does not precede the <non_terminal
         where="15.5.1"
-        >local-variable-declarator</non_terminal
-      >. In the H method, a subsequent <non_terminal where="15.5.1"
-        >local-variable-declarator</non_terminal
-      > correctly refers to a local variable declared in an earlier <non_terminal where="15.5.1"
-        >local-variable-declarator</non_terminal
-      > within the same <non_terminal where="15.5.1"
+        >local-variable-declarator</non_terminal>. In the H method, a subsequent <non_terminal
+        where="15.5.1"
+        >local-variable-declarator</non_terminal> correctly refers to a local variable declared in an earlier <non_terminal
+        where="15.5.1"
+        >local-variable-declarator</non_terminal> within the same <non_terminal where="15.5.1"
         >local-variable-declaration</non_terminal
       >. end example]</example
     >

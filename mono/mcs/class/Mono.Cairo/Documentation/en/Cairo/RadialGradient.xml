@@ -29,8 +29,7 @@ gr.Arc (0.5, 0.5, 0.3, 0, 2 * Math.PI);
 gr.Fill ();
 
 pat.Destroy ();
-  </code
-          >
+  </code>
         </example>
       </para>
     </remarks>

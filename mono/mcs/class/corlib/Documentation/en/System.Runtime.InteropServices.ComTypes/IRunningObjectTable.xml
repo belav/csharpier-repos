@@ -254,8 +254,7 @@
           <para
             >ROT references to <paramref name="punkObject" /> (weak and strong) determine object lifetime. For more information, see the documentation for the COM <see
               cref="http://go.microsoft.com/fwlink/?LinkId=163474"
-              >IRunningObjectTable::Register</see
-            > method in the MSDN library. </para
+              >IRunningObjectTable::Register</see> method in the MSDN library. </para
           >
         </remarks>
         <summary>

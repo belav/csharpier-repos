@@ -33,8 +33,7 @@
       <example>
         <code lang="c#">
 var client = new HttpClient (new CFNetworkHandler ());
-</code
-        >
+</code>
       </example>
       <para>
 

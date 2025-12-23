@@ -2305,8 +2305,7 @@ class ThreadTest{
     }
   }
 }
-   </code
-          >
+   </code>
           <para>One possible set of output is</para>
           <c>
             <para>In main. </para>

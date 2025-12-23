@@ -41,8 +41,7 @@
           <para
             >Create a key container where you can store cryptographic keys.  Key containers provide the most secure way to persist cryptographic keys and keep them secret from malicious third parties.  For more information about creating key containers, see <format type="text/html">
               <a href="0dbcbd8d-0dcf-40e9-9f0c-e3f162d35ccc"
-                >How to: Store Asymmetric Keys in a Key Container</a
-              >
+                >How to: Store Asymmetric Keys in a Key Container</a>
             </format>. </para
           >
         </item>
@@ -524,8 +523,7 @@
           <para
             >For more information about creating key containers, see <format type="text/html">
               <a href="0dbcbd8d-0dcf-40e9-9f0c-e3f162d35ccc"
-                >How to: Store Asymmetric Keys in a Key Container</a
-              >
+                >How to: Store Asymmetric Keys in a Key Container</a>
             </format>. </para
           >
         </remarks>

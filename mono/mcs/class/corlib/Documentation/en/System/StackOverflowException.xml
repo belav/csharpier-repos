@@ -54,8 +54,7 @@ public class StackOverflowExample {
       }
    }
 }
-   </code
-      >
+   </code>
       <para>The output is</para>
       <para>
         <c>Error 

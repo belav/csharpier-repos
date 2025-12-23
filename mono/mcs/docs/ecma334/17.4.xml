@@ -103,13 +103,11 @@
       >field-declaration</non_terminal
     > specifies the type of the members introduced by the declaration. The type is followed by a list of <non_terminal
       where="17.4"
-      >variable-declarator</non_terminal
-    >s, each of which introduces a new member. A <non_terminal where="17.4"
-      >variable-declarator</non_terminal
-    > consists of an identifier that names that member, optionally followed by an &quot;=&quot; token and a  <non_terminal
+      >variable-declarator</non_terminal>s, each of which introduces a new member. A <non_terminal
+      where="17.4"
+      >variable-declarator</non_terminal> consists of an identifier that names that member, optionally followed by an &quot;=&quot; token and a  <non_terminal
       where="19.6"
-      >variable-initializer</non_terminal
-    > (<hyperlink>17.4.5</hyperlink>) that gives the initial value of that member. </paragraph
+      >variable-initializer</non_terminal> (<hyperlink>17.4.5</hyperlink>) that gives the initial value of that member. </paragraph
   >
   <paragraph
     >The type of a field must be at least as accessible as the field itself (<hyperlink>10.5.4</hyperlink>). </paragraph

@@ -50,8 +50,7 @@ public class CannotUnloadAppDomainExceptionTest {
     AppDomain.Unload(ad);
   }
 }
-</code
-      >
+</code>
       <para>The output is</para>
       <code>
 Unhandled Exception: System.CannotUnloadAppDomainException: The default domain cannot be unloaded.

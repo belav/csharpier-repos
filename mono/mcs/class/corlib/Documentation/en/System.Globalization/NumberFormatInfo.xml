@@ -1123,8 +1123,7 @@ class Test {
 
     }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>$999999999,4444,333,22,1.00</para>
@@ -1206,8 +1205,7 @@ class Test {
  }
  }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>pattern # 0: ($9,999,999,999,999.00)</para>
@@ -1432,8 +1430,7 @@ class Test {
  }
  }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>pattern # 0: $9,999,999,999,999.00</para>
@@ -2193,8 +2190,7 @@ class Test {
  Console.WriteLine("{0}",data.ToString("N",nfi));
  }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>999999999,4444,333,22,1.00</para>
@@ -2271,8 +2267,7 @@ class Test {
  }
  }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>pattern # 0: (9,999,999,999,999.00)</para>
@@ -2539,8 +2534,7 @@ class Test {
  Console.WriteLine("{0}",data.ToString("P",nfi));
  }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>99999999944,4433,322,10,0.00 %</para>
@@ -2621,8 +2615,7 @@ class Test {
  }
  }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>pattern # 0: -99.00 %</para>
@@ -2802,8 +2795,7 @@ class Test {
  }
  }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>pattern # 0: 99.00 %</para>

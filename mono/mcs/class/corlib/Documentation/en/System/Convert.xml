@@ -1269,8 +1269,7 @@ class ConvertBoolTest {
         Console.WriteLine("(byte) {0} as bool = {1}",byte1,bool1);
     }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>(byte) 0 as bool = False</para>
@@ -1417,8 +1416,7 @@ class ConvertBoolTest {
         Console.WriteLine("(decimal) {0} as bool = {1}",decimal2,bool2);
     }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>(decimal) 0 as bool = False</para>
@@ -1489,8 +1487,7 @@ class ConvertBoolTest {
         Console.WriteLine("(double) {0} as bool = {1}",double2,bool2);
     }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>(double) 0 as bool = False</para>
@@ -1560,8 +1557,7 @@ class ConvertBoolTest {
         Console.WriteLine("(short) {0} as bool = {1}",short2,bool2);
     }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>(short) 0 as bool = False</para>
@@ -1631,8 +1627,7 @@ class ConvertBoolTest {
         Console.WriteLine("(int) {0} as bool = {1}",int2,bool2);
     }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>(int) 0 as bool = False</para>
@@ -1702,8 +1697,7 @@ class ConvertBoolTest {
         Console.WriteLine("(long) {0} as bool = {1}",long2,bool2);
     }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>(long) 0 as bool = False</para>
@@ -1821,8 +1815,7 @@ class ConvertBoolTest {
         Console.WriteLine("(sbyte) {0} as bool = {1}",sbyte2,bool2);
     }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>(sbyte) 0 as bool = False</para>
@@ -1892,8 +1885,7 @@ class ConvertBoolTest {
         Console.WriteLine("(float) {0} as bool = {1}",float2,bool2);
     }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>(float) 0 as bool = False</para>
@@ -1969,8 +1961,7 @@ class ConvertBoolTest {
         Console.WriteLine("(string) {0} as bool = {1}",string2,bool2);
     }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <code>
 (string) True as bool = True
@@ -2061,8 +2052,7 @@ class ConvertBoolTest {
         Console.WriteLine("(ushort) {0} as bool = {1}",ushort1,bool1);
     }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>(ushort) 0 as bool = False</para>
@@ -2138,8 +2128,7 @@ class ConvertBoolTest {
         Console.WriteLine("(uint) {0} as bool = {1}",uint1,bool1);
     }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>(uint) 0 as bool = False</para>
@@ -2215,8 +2204,7 @@ class ConvertBoolTest {
         Console.WriteLine("(ulong) {0} as bool = {1}",ulong1,bool1);
     }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>(ulong) 0 as bool = False</para>
@@ -2488,8 +2476,7 @@ class ConvertByteTest {
         Console.WriteLine("(char) {0} as byte = {1}",char2,byte2);
     }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>(char) 0 as byte = 48</para>
@@ -2610,8 +2597,7 @@ class ConvertByteTest {
         Console.WriteLine("(decimal) {0} as byte = {1}",decimal3,byte3);
     }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>(decimal) 0 as byte = 0</para>
@@ -2711,8 +2697,7 @@ class ConvertByteTest {
         Console.WriteLine("(double) {0} as byte = {1}",double3,byte3);
     }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>(double) 0 as byte = 0</para>
@@ -3038,8 +3023,7 @@ class ConvertByteTest {
         Console.WriteLine("(float) {0} as byte = {1}",float3,byte3);
     }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>(float) 0 as byte = 0</para>
@@ -3126,8 +3110,7 @@ class ConvertByteTest {
         Console.WriteLine("(string) {0} as byte = {1}",string2,byte2);
     }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>(string) +22 as byte = 22</para>
@@ -3225,8 +3208,7 @@ class ConvertByteTest {
         Console.WriteLine("(ushort) {0} as byte = {1}",ushort1,byte1);
     }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>(ushort) 0 as byte = 0</para>
@@ -3364,8 +3346,7 @@ class ConvertByteTest {
         Console.WriteLine("(ulong) {0} as byte = {1}",ulong1,byte1);
     }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>(ulong) 0 as byte = 0</para>

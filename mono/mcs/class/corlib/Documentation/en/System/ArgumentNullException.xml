@@ -53,8 +53,7 @@ class ArgumentNullTest {
  }
  }
 }
-   </code
-      >
+   </code>
       <para>The output is</para>
       <c>
         <para>Error: System.ArgumentNullException: Value cannot be null.</para>

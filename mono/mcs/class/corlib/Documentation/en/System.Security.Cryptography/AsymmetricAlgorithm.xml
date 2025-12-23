@@ -38,8 +38,7 @@
           <a href="f96284bc-7b73-44b5-ac59-fac613ad09f8">Cryptographic Services</a>
         </format>. For information about how to use the Srong Name tool (Sn.exe) to create key pairs, see <format type="text/html">
           <a href="05026813-f3bd-4d7c-9e0b-fc588eb3d114"
-            >How to: Create a Public/Private Key Pair</a
-          >
+            >How to: Create a Public/Private Key Pair</a>
         </format>. </para
       >
       <para>You can use public-key systems to form digital signatures. Digital signatures are used to help to protect the integrity of data. For example, to use a public-key system to digitally sign a message, the sender first applies a hash function to the message to create a message digest. The sender then encrypts the message digest with the sender's private key to create the sender's personal signature. Upon receiving the message and signature, the receiver decrypts the signature using the sender's public key to recover the message digest and hashes the message using the same hash algorithm that the sender used. If the message digest that the receiver computes matches the message digest received from the sender, the receiver can assume that the message was not altered while in transit. Note that anyone can verify a signature, because the sender's public key is common knowledge. This technique does not retain the secrecy of the message; for the message to be secret, it must also be encrypted. </para>

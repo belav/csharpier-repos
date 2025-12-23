@@ -638,8 +638,7 @@ class Test
 		Syscall.alarm(3);
 	}
 }
-  </code
-            >
+  </code>
           </example>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.exit" />
@@ -984,8 +983,7 @@ class Test
 		Console.Write("Hello, " + Syscall.getusername(ROOT));
 		string x = Console.ReadLine();
 	}
-  </code
-            >
+  </code>
           </example>
         </remarks>
         <altmember cref="M:Mono.Unix.UnixUser.GetUserName" />
@@ -1059,8 +1057,7 @@ class Test
             <code lang="C#">
 		int myPID = Syscall.getpid();
 		Syscall.kill(myPID,9);
-  </code
-            >
+  </code>
           </example>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.kill" />
@@ -1437,8 +1434,7 @@ public static void Main(string[] argv)
 	}
 }
 	
-  </code
-            >
+  </code>
           </example>
         </remarks>
         <altmember cref="T:Mono.Unix.UnixDirectory" />
@@ -1554,9 +1550,10 @@ public static void Main(string[] argv)
 	}
 }
 	
-  </code
-            >
+  </code>
           </example>
+
+          
 
           
 
@@ -1947,8 +1944,7 @@ class Test
 		Syscall.alarm(3);
 	}
 }
-  </code
-            >
+  </code>
           </example>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Stdlib.signal" />

@@ -6,11 +6,9 @@
   <members>
     <member name="T:Testing.Test.InternalClass">
             comment for internal class
-        </member
-    >
+        </member>
     <member name="T:Testing.Test.InternalStruct">
             comment for internal struct
-        </member
-    >
+        </member>
   </members>
 </doc>

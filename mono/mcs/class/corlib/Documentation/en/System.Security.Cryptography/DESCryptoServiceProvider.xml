@@ -69,8 +69,7 @@ DES des = DES.Create ();
 
 // not recommended
 DESCryptoServiceProvider des = new DESCryptoServiceProvider ();
-  </code
-            >
+  </code>
           </example>
         </remarks>
         <summary>

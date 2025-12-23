@@ -58,23 +58,21 @@
   </paragraph>
   <paragraph
     >Each <non_terminal where="25.6"
-      >fixed-pointer-declarator</non_terminal
-    > declares a local variable of the given <non_terminal where="25.2"
+      >fixed-pointer-declarator</non_terminal> declares a local variable of the given <non_terminal
+      where="25.2"
       >pointer-type</non_terminal
     > and initializes that local variable with the address computed by the corresponding <non_terminal
       where="25.6"
-      >fixed-pointer-initializer</non_terminal
-    >. A local variable declared in a fixed statement is accessible in any <non_terminal
+      >fixed-pointer-initializer</non_terminal>. A local variable declared in a fixed statement is accessible in any <non_terminal
       where="25.6"
-      >fixed-pointer-initializer</non_terminal
-    >s occurring to the right of that variable's declaration, and in the <non_terminal where="15"
+      >fixed-pointer-initializer</non_terminal>s occurring to the right of that variable's declaration, and in the <non_terminal
+      where="15"
       >embedded-statement</non_terminal
     > of the fixed statement. A local variable declared by a fixed statement is considered read-only. A compile-time error occurs if the embedded statement attempts to modify this local variable (via assignment or the ++ and  --operators) or pass it as a ref or out parameter. </paragraph
   >
   <paragraph
     >A <non_terminal where="25.6"
-      >fixed-pointer-initializer</non_terminal
-    > can be one of the following: <list>
+      >fixed-pointer-initializer</non_terminal> can be one of the following: <list>
       <list_item
         > The token &quot;&amp;&quot; followed by a <non_terminal where="12.4"
           >variable-reference</non_terminal
@@ -90,11 +88,9 @@
   </paragraph>
   <paragraph
     >For each address computed by a <non_terminal where="25.6"
-      >fixed-pointer-initializer</non_terminal
-    > the fixed statement ensures that the variable referenced by the address is not subject to relocation or disposal by the garbage collector for the duration of the fixed statement. For example, if the address computed by a <non_terminal
+      >fixed-pointer-initializer</non_terminal> the fixed statement ensures that the variable referenced by the address is not subject to relocation or disposal by the garbage collector for the duration of the fixed statement. For example, if the address computed by a <non_terminal
       where="25.6"
-      >fixed-pointer-initializer</non_terminal
-    > references a field of an object or an element of an array instance, the fixed statement guarantees that the containing object instance is not relocated or disposed of during the lifetime of the statement. </paragraph
+      >fixed-pointer-initializer</non_terminal> references a field of an object or an element of an array instance, the fixed statement guarantees that the containing object instance is not relocated or disposed of during the lifetime of the statement. </paragraph
   >
   <paragraph>It is the programmer's responsibility to ensure that pointers created by fixed statements do not survive beyond execution of those statements. For example, when pointers created by fixed statements are passed to external APIs, it is the programmer's responsibility to ensure that the APIs retain no memory of these pointers. </paragraph>
   <paragraph

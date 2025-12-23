@@ -22,10 +22,8 @@
       <para
         >If you reference the System.IO.Compression.FileSystem assembly in your project, you can access two extension methods for the <see cref="T:System.IO.Compression.ZipArchiveEntry" /> class. Those methods are <see cref="M:System.IO.Compression.ZipFileExtensions.ExtractToFile(System.IO.Compression.ZipArchiveEntry,System.String)" /> and <see cref="M:System.IO.Compression.ZipFileExtensions.ExtractToFile(System.IO.Compression.ZipArchiveEntry,System.String,System.Boolean)" />, and they enable you to decompress the contents of the entry to a file. The System.IO.Compression.FileSystem assembly is not available in win8. In win8_appname_long apps, you can decompress the contents of an archive by using <see cref="T:System.IO.Compression.DeflateStream" /> or <see cref="T:System.IO.Compression.GZipStream" />, or you can use the wrt types <see
           cref="http://go.microsoft.com/fwlink/p/?LinkId=246357"
-          >Compressor</see
-        > and <see cref="http://go.microsoft.com/fwlink/?LinkId=246358"
-          >Decompressor</see
-        > to compress and decompress files.</para
+          >Compressor</see> and <see cref="http://go.microsoft.com/fwlink/?LinkId=246358"
+          >Decompressor</see> to compress and decompress files.</para
       >
       <para
         >You can retrieve an entry either by iterating through the <see cref="P:System.IO.Compression.ZipArchive.Entries" /> collection in <see cref="T:System.IO.Compression.ZipArchive" />, or by calling the <see cref="M:System.IO.Compression.ZipArchive.GetEntry(System.String)" /> method in <see cref="T:System.IO.Compression.ZipArchive" />. You can create a new entry by calling <see cref="M:System.IO.Compression.ZipArchive.CreateEntry(System.String)" /> or <see cref="M:System.IO.Compression.ZipFileExtensions.CreateEntryFromFile(System.IO.Compression.ZipArchive,System.String,System.String)" />.</para

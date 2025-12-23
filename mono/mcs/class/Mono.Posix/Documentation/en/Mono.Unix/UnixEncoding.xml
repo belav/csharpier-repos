@@ -208,8 +208,7 @@
               <code lang="C#">
 public static int open (string pathname, OpenFlags flags);
 public static int open (byte[] pathname, OpenFlags flags);
-        </code
-              >
+        </code>
             </example>
             <para>(Hint: if you do want to explain the difference between these
         you're masochistic.)</para>

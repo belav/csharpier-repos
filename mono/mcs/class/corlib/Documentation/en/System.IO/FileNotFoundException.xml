@@ -54,8 +54,7 @@ class FileNotFoundExample {
     }
     }
 }
-   </code
-      >
+   </code>
       <para>The output is</para>
       <c>
         <para>Caught: Could not find file "/Eccma/examples/FileTest.cs".</para>
@@ -637,8 +636,7 @@ class FileNotFoundExample {
     }
   }
 }
-</code
-          >
+</code>
           <para>The output is </para>
           <code>
 Caught: System.IO.FileNotFoundException: Could not find file "/Eccma/examples/FileTest.cs".

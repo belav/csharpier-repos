@@ -27,8 +27,7 @@
       >interface-declaration</non_terminal
     > consists of an optional set of attributes (<hyperlink>24</hyperlink>), followed by an optional set of <non_terminal
       where="20.1.1"
-      >interface-modifier</non_terminal
-    >s (<hyperlink>20.1.1</hyperlink>), followed by the keyword interface and an identifier that names the interface, optionally followed by an optional <non_terminal
+      >interface-modifier</non_terminal>s (<hyperlink>20.1.1</hyperlink>), followed by the keyword interface and an identifier that names the interface, optionally followed by an optional <non_terminal
       where="20.1.2"
       >interface-base</non_terminal
     > specification (<hyperlink>20.1.2</hyperlink>), followed by a  <non_terminal where="20.1.3"

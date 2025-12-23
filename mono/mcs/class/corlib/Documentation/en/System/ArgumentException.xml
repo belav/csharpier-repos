@@ -53,8 +53,7 @@ public class ArgExceptionExample {
     }
   }
 }
-   </code
-      >
+   </code>
       <para>The output is</para>
       <c>
         <para>Error: System.ArgumentException: Object must be of type String.</para>

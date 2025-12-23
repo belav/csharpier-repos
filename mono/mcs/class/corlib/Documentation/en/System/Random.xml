@@ -123,8 +123,7 @@ class RandomTest {
         Console.WriteLine("The random number is {0}",rdm2.Next());
     }
 }
-   </code
-          >
+   </code>
           <c>
             <para>The output is </para>
             <para>The random number is 1990211954</para>
@@ -194,8 +193,7 @@ class RandomTest {
         
     }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para> The random number is

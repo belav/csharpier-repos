@@ -118,6 +118,8 @@ y.Equals(z) implies x.Equals(z); for any values x, y and z for  which these expr
               
 
               
+
+              
    
    , Vol. 3, by Donald E. Knuth.</block
             >

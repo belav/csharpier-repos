@@ -42,8 +42,7 @@ public class i18n
 				    "I'm {0} years old.", i), i);
     }
 }
-      </code
-        >
+      </code>
         <para>To generate the translations, use:</para>
         <code lang="sh">xgettext --from-code=UTF-8 i18n.cs -o es.po</code>
         <para
@@ -126,8 +125,7 @@ public class i18n
 				    "I'm {0} years old.", i), i);
     }
 }
-            </code
-            >
+            </code>
           </example>
         </remarks>
       </Docs>
@@ -181,8 +179,7 @@ public class i18n
 				    "I'm {0} years old.", i), i);
     }
 }
-            </code
-            >
+            </code>
           </example>
         </remarks>
       </Docs>

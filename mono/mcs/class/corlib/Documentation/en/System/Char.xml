@@ -754,8 +754,7 @@ public static void Main() {
    }
 }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>Numeric value of Unicode character 8 is 8</para>
@@ -4436,8 +4435,7 @@ public class CharToLower {
       }
    }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>Char 'A' ToLower is a</para>
@@ -4735,8 +4733,7 @@ public class CharToUpper {
       }
    }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>Char 'A' ToUpper is A</para>

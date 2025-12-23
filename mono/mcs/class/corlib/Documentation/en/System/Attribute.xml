@@ -116,8 +116,7 @@ class AuthorInfo
       Console.WriteLine();
    }
 }
-      </code
-      >
+      </code>
       <para>The output is</para>
       <c>
         <para>Author information for FirstClass</para>

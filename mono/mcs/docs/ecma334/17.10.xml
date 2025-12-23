@@ -92,8 +92,7 @@
   >
   <paragraph
     >The identifier of a <non_terminal where="17.10"
-      >constructor-declarator</non_terminal
-    > must name the class in which the instance constructor is declared. If any other name is specified, a compile-time error occurs. </paragraph
+      >constructor-declarator</non_terminal> must name the class in which the instance constructor is declared. If any other name is specified, a compile-time error occurs. </paragraph
   >
   <paragraph
     >The optional <non_terminal where="17.5.1"
@@ -109,8 +108,7 @@
   >
   <paragraph
     >The optional <non_terminal where="17.10"
-      >constructor-initializer</non_terminal
-    > specifies another instance constructor to invoke before executing the statements given in the <non_terminal
+      >constructor-initializer</non_terminal> specifies another instance constructor to invoke before executing the statements given in the <non_terminal
       where="17.10"
       >constructor-body</non_terminal
     > of this instance constructor. This is described further in <hyperlink>17.10.1</hyperlink>. </paragraph
@@ -131,7 +129,6 @@
     >Instance constructors are invoked by <non_terminal where="14.5.10.1"
       >object-creation-expression</non_terminal
     >s (<hyperlink>14.5.10.1</hyperlink>) and through  <non_terminal where="17.10"
-      >constructor-initializer</non_terminal
-    >s. </paragraph
+      >constructor-initializer</non_terminal>s. </paragraph
   >
 </clause>

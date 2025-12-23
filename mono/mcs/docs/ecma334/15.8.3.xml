@@ -58,17 +58,14 @@
   </paragraph>
   <paragraph
     >The <non_terminal where="15.8.3"
-      >for-initializer</non_terminal
-    >, if present, consists of either a <non_terminal where="15.5.1"
+      >for-initializer</non_terminal>, if present, consists of either a <non_terminal where="15.5.1"
       >local-variable-declaration</non_terminal
     > (<hyperlink>15.5.1</hyperlink>) or a list of  <non_terminal where="15.6"
       >statement-expression</non_terminal
     >s (<hyperlink>15.6</hyperlink>) separated by commas. The scope of a local variable declared by a <non_terminal
       where="15.8.3"
-      >for-initializer</non_terminal
-    > starts at the <non_terminal where="15.5.1"
-      >local-variable-declarator</non_terminal
-    > for the variable and extends to the end of the embedded statement. The scope includes the <non_terminal
+      >for-initializer</non_terminal> starts at the <non_terminal where="15.5.1"
+      >local-variable-declarator</non_terminal> for the variable and extends to the end of the embedded statement. The scope includes the <non_terminal
       where="15.8.3"
       >for-condition</non_terminal
     > and the <non_terminal where="15.8.3">for-iterator</non_terminal>. </paragraph
@@ -82,8 +79,7 @@
   >
   <paragraph
     >The <non_terminal where="15.8.3"
-      >for-iterator</non_terminal
-    >, if present, consists of a list of <non_terminal where="15.6"
+      >for-iterator</non_terminal>, if present, consists of a list of <non_terminal where="15.6"
       >statement-expression</non_terminal
     >s (<hyperlink>15.6</hyperlink>) separated by commas. </paragraph
   >
@@ -91,8 +87,7 @@
     >A for statement is executed as follows: <list>
       <list_item
         > If a <non_terminal where="15.8.3"
-          >for-initializer</non_terminal
-        > is present, the variable initializers or statement expressions are executed in the order they are written. This step is only performed once. </list_item
+          >for-initializer</non_terminal> is present, the variable initializers or statement expressions are executed in the order they are written. This step is only performed once. </list_item
       >
       <list_item
         > If a <non_terminal where="15.8.3"
@@ -104,8 +99,7 @@
           >for-condition</non_terminal
         > is not present or if the evaluation yields true, control is transferred to the embedded statement. When and if control reaches the end point of the embedded statement (possibly from execution of a continue statement), the expressions of the <non_terminal
           where="15.8.3"
-          >for-iterator</non_terminal
-        >, if any, are evaluated in sequence, and then another iteration is performed, starting with evaluation of the <non_terminal
+          >for-iterator</non_terminal>, if any, are evaluated in sequence, and then another iteration is performed, starting with evaluation of the <non_terminal
           where="15.8.3"
           >for-condition</non_terminal
         > in the step above. </list_item

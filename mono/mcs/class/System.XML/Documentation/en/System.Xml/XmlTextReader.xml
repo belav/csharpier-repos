@@ -1867,8 +1867,7 @@ public class Reader {
                       str1, str2, str3);
   }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <para> urn:datatypes</para>
           <para> int - int - int</para>

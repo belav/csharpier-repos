@@ -609,8 +609,7 @@ public static void Main() {
    Console.WriteLine("String: \"{0}\" &lt;Byte&gt; {1}",str,Byte.Parse(str));
 }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <para>
             <c>String: "
@@ -2348,8 +2347,7 @@ public class ByteToStringExample {
          Console.WriteLine("{0}: {1}", str, b.ToString(str));
    }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>8</para>

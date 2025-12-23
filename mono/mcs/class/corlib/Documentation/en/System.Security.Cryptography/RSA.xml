@@ -305,8 +305,7 @@
             <para
               >Persisting an XML string containing a private key to an insecure location is a security threat.  The security of your application can be compromised if a malicious third party can access your private key.  To safely persist a private key, use a secure key container.  For more information about persisting private keys in a key container, see <format type="text/html">
                 <a href="0dbcbd8d-0dcf-40e9-9f0c-e3f162d35ccc"
-                  >How to: Store Asymmetric Keys in a Key Container</a
-                >
+                  >How to: Store Asymmetric Keys in a Key Container</a>
               </format>. </para
             >
           </block>
@@ -398,8 +397,7 @@
             <para
               >Persisting an XML string containing a private key to an insecure location is a security threat.  The security of your application can be compromised if a malicious third party can access your private key.  To safely persist a private key, use a secure key container.  For more information about persisting private keys in a key container, see <format type="text/html">
                 <a href="0dbcbd8d-0dcf-40e9-9f0c-e3f162d35ccc"
-                  >How to: Store Asymmetric Keys in a Key Container</a
-                >
+                  >How to: Store Asymmetric Keys in a Key Container</a>
               </format>. </para
             >
           </block>

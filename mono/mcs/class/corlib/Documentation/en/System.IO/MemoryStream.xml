@@ -939,8 +939,7 @@ public class MemoryStreamTest {
 
    }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>a and b represent the same instance.</para>
@@ -1121,8 +1120,7 @@ public class MemoryStreamTest {
       }
    }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>0123456789 </para>

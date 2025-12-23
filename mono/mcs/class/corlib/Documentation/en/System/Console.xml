@@ -39,8 +39,7 @@ public class ConsoleTest {
       Console.WriteLine("!");
    }
 }
-</code
-      >
+</code>
       <para>The output for a user who entered the name "Fred" is</para>
       <c>
         <para>Hello World!</para>

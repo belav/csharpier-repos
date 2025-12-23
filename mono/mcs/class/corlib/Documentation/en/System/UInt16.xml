@@ -547,8 +547,7 @@ public class UInt16ParseClass {
     Console.WriteLine("String: \"{0}\" &lt;UInt16&gt; {1}",str,UInt16.Parse(str));
   }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <para>
             <c>String: " 100
@@ -2451,8 +2450,7 @@ public class UInt16ToStringExample {
          Console.WriteLine("{0}: {1}", str, i.ToString(str));
    }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>16</para>
