@@ -6,7 +6,10 @@
     <IncludeRemoteExecutor>true</IncludeRemoteExecutor>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(CommonTestPath)System\IO\TempDirectory.cs" Link="Common\System\IO\TempDirectory.cs" />
+    <Compile
+      Include="$(CommonTestPath)System\IO\TempDirectory.cs"
+      Link="Common\System\IO\TempDirectory.cs"
+    />
     <Compile Include="CompressedTar.Async.Tests.cs" />
     <Compile Include="CompressedTar.Tests.cs" />
     <Compile Include="SimulatedDataStream.cs" />
@@ -68,23 +71,56 @@
     <Compile Include="TarWriter\TarWriter.WriteEntry.Tests.cs" />
     <Compile Include="TarWriter\TarWriter.WriteEntry.Entry.Ustar.Tests.cs" />
     <Compile Include="TarWriter\TarWriter.WriteEntry.Entry.V7.Tests.cs" />
-    <Compile Include="$(CommonPath)DisableRuntimeMarshalling.cs" Link="Common\DisableRuntimeMarshalling.cs" />
-    <Compile Include="$(CommonTestPath)System\IO\ReparsePointUtilities.cs" Link="Common\System\IO\ReparsePointUtilities.cs" />
-    <Compile Include="$(CommonTestPath)System\IO\WrappedStream.cs" Link="Common\System\IO\WrappedStream.cs" />
+    <Compile
+      Include="$(CommonPath)DisableRuntimeMarshalling.cs"
+      Link="Common\DisableRuntimeMarshalling.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)System\IO\ReparsePointUtilities.cs"
+      Link="Common\System\IO\ReparsePointUtilities.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)System\IO\WrappedStream.cs"
+      Link="Common\System\IO\WrappedStream.cs"
+    />
   </ItemGroup>
   <!-- Windows specific files -->
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'windows'">
     <Compile Include="TarFile\TarFile.ExtractToDirectory.File.Tests.Windows.cs" />
     <Compile Include="TarFile\TarFile.ExtractToDirectoryAsync.File.Tests.Windows.cs" />
     <Compile Include="TarWriter\TarWriter.File.Base.Windows.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\Interop.BOOL.cs" Link="Common\Interop\Windows\Interop.BOOL.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\Interop.Errors.cs" Link="Common\Interop\Windows\Interop.Errors.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\Interop.Libraries.cs" Link="Common\Interop\Windows\Interop.Libraries.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\Kernel32\Interop.CreateHardLink.cs" Link="Common\Interop\Windows\Kernel32\Interop.CreateHardLink.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\Kernel32\Interop.FormatMessage.cs" Link="Common\Interop\Windows\Kernel32\Interop.FormatMessage.cs" />
-    <Compile Include="$(CommonPath)System\IO\PathInternal.Windows.cs" Link="Common\System\IO\PathInternal.Windows.cs" />
-    <Compile Include="$(CommonPath)System\IO\Win32Marshal.cs" Link="Common\System\IO\Win32Marshal.cs" />
-    <Compile Include="$(CommonPath)System\Text\ValueStringBuilder.cs" Link="Common\System\Text\ValueStringBuilder.cs" />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\Interop.BOOL.cs"
+      Link="Common\Interop\Windows\Interop.BOOL.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\Interop.Errors.cs"
+      Link="Common\Interop\Windows\Interop.Errors.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\Interop.Libraries.cs"
+      Link="Common\Interop\Windows\Interop.Libraries.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\Kernel32\Interop.CreateHardLink.cs"
+      Link="Common\Interop\Windows\Kernel32\Interop.CreateHardLink.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\Kernel32\Interop.FormatMessage.cs"
+      Link="Common\Interop\Windows\Kernel32\Interop.FormatMessage.cs"
+    />
+    <Compile
+      Include="$(CommonPath)System\IO\PathInternal.Windows.cs"
+      Link="Common\System\IO\PathInternal.Windows.cs"
+    />
+    <Compile
+      Include="$(CommonPath)System\IO\Win32Marshal.cs"
+      Link="Common\System\IO\Win32Marshal.cs"
+    />
+    <Compile
+      Include="$(CommonPath)System\Text\ValueStringBuilder.cs"
+      Link="Common\System\Text\ValueStringBuilder.cs"
+    />
   </ItemGroup>
   <!-- Unix specific files -->
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' != 'windows'">
@@ -96,19 +132,52 @@
     <Compile Include="TarWriter\TarWriter.File.Base.Unix.cs" />
     <Compile Include="TarWriter\TarWriter.WriteEntry.File.Tests.Unix.cs" />
     <Compile Include="TarWriter\TarWriter.WriteEntryAsync.File.Tests.Unix.cs" />
-    <Compile Include="$(CommonPath)Interop\Unix\Interop.Errors.cs" Link="Common\Interop\Unix\Interop.Errors.cs" />
-    <Compile Include="$(CommonPath)Interop\Unix\Interop.IOErrors.cs" Link="Common\Interop\Unix\Interop.IOErrors.cs" />
-    <Compile Include="$(CommonPath)Interop\Unix\Interop.Libraries.cs" Link="Common\Interop\Unix\Interop.Libraries.cs" />
-    <Compile Include="$(CommonPath)Interop\Unix\System.Native\Interop.DeviceFiles.cs" Link="Common\Interop\Unix\System.Native\Interop.DeviceFiles.cs" />
-    <Compile Include="$(CommonPath)Interop\Unix\System.Native\Interop.GetEUid.cs" Link="Common\Interop\Unix\System.Native\Interop.GetEUid.cs" />
-    <Compile Include="$(CommonPath)Interop\Unix\System.Native\Interop.GetPwUid.cs" Link="Common\Interop\Unix\System.Native\Interop.GetPwUid.cs" />
-    <Compile Include="$(CommonPath)Interop\Unix\System.Native\Interop.GetGroupName.cs" Link="Common\Interop\Unix\System.Native\Interop.GetGroupName.cs" />
-    <Compile Include="$(CommonPath)Interop\Unix\System.Native\Interop.Link.cs" Link="Common\Interop\Unix\System.Native\Interop.Link.cs" />
-    <Compile Include="$(CommonPath)Interop\Unix\System.Native\Interop.MkFifo.cs" Link="Common\Interop\Unix\System.Native\Interop.MkFifo.cs" />
-    <Compile Include="$(CommonPath)Interop\Unix\System.Native\Interop.Stat.cs" Link="Common\Interop\Unix\System.Native\Interop.Stat.cs" />
+    <Compile
+      Include="$(CommonPath)Interop\Unix\Interop.Errors.cs"
+      Link="Common\Interop\Unix\Interop.Errors.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Unix\Interop.IOErrors.cs"
+      Link="Common\Interop\Unix\Interop.IOErrors.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Unix\Interop.Libraries.cs"
+      Link="Common\Interop\Unix\Interop.Libraries.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Unix\System.Native\Interop.DeviceFiles.cs"
+      Link="Common\Interop\Unix\System.Native\Interop.DeviceFiles.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Unix\System.Native\Interop.GetEUid.cs"
+      Link="Common\Interop\Unix\System.Native\Interop.GetEUid.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Unix\System.Native\Interop.GetPwUid.cs"
+      Link="Common\Interop\Unix\System.Native\Interop.GetPwUid.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Unix\System.Native\Interop.GetGroupName.cs"
+      Link="Common\Interop\Unix\System.Native\Interop.GetGroupName.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Unix\System.Native\Interop.Link.cs"
+      Link="Common\Interop\Unix\System.Native\Interop.Link.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Unix\System.Native\Interop.MkFifo.cs"
+      Link="Common\Interop\Unix\System.Native\Interop.MkFifo.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Unix\System.Native\Interop.Stat.cs"
+      Link="Common\Interop\Unix\System.Native\Interop.Stat.cs"
+    />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(CommonTestPath)StreamConformanceTests\StreamConformanceTests.csproj" />
-    <PackageReference Include="System.Formats.Tar.TestData" Version="$(SystemFormatsTarTestDataVersion)" />
+    <PackageReference
+      Include="System.Formats.Tar.TestData"
+      Version="$(SystemFormatsTarTestDataVersion)"
+    />
   </ItemGroup>
 </Project>

@@ -27,12 +27,24 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="$(MicrosoftCodeAnalysisVersion)" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="$(MicrosoftCodeAnalysisVersion)" PrivateAssets="all" />
+    <PackageReference
+      Include="Microsoft.CodeAnalysis.CSharp"
+      Version="$(MicrosoftCodeAnalysisVersion)"
+      PrivateAssets="all"
+    />
+    <PackageReference
+      Include="Microsoft.CodeAnalysis.CSharp.Workspaces"
+      Version="$(MicrosoftCodeAnalysisVersion)"
+      PrivateAssets="all"
+    />
     <PackageReference Update="NETStandard.Library" PrivateAssets="all" />
   </ItemGroup>
 
-  <Target Name="SetPackageProperties" BeforeTargets="InitializeStandardNuspecProperties" DependsOnTargets="Build">
+  <Target
+    Name="SetPackageProperties"
+    BeforeTargets="InitializeStandardNuspecProperties"
+    DependsOnTargets="Build"
+  >
     <PropertyGroup>
       <!-- Make sure we create a symbols.nupkg. -->
       <IncludeSymbols>true</IncludeSymbols>
@@ -57,5 +69,4 @@
       <CustomToolNamespace>Microsoft.EntityFrameworkCore</CustomToolNamespace>
     </EmbeddedResource>
   </ItemGroup>
-
 </Project>

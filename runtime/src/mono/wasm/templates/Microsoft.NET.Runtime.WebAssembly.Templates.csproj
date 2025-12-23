@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <PackageType>Template</PackageType>
     <PackageId>Microsoft.NET.Runtime.WebAssembly.Templates</PackageId>
@@ -29,5 +28,4 @@
       <PackageVersion>$(ProductVersion)</PackageVersion>
     </PropertyGroup>
   </Target>
-
 </Project>

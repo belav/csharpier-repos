@@ -274,7 +274,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="NonVersionedProviderType">
-      <MemberSignature Language="C#" Value="public static readonly string NonVersionedProviderType;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly string NonVersionedProviderType;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>

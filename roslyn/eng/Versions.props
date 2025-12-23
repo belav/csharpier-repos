@@ -14,7 +14,10 @@
       By default the assembly version in official builds is "$(MajorVersion).$(MinorVersion).0.0".
       Keep the setting conditional. The toolset sets the assembly version to 42.42.42.42 if not set explicitly.
     -->
-    <AssemblyVersion Condition="'$(OfficialBuild)' == 'true' or '$(DotNetUseShippingVersions)' == 'true'">$(MajorVersion).$(MinorVersion).0.0</AssemblyVersion>
+    <AssemblyVersion
+      Condition="'$(OfficialBuild)' == 'true' or '$(DotNetUseShippingVersions)' == 'true'"
+      >$(MajorVersion).$(MinorVersion).0.0</AssemblyVersion
+    >
     <MicrosoftNetCompilersToolsetVersion>4.8.0-3.final</MicrosoftNetCompilersToolsetVersion>
   </PropertyGroup>
   <PropertyGroup>
@@ -316,7 +319,9 @@
       When using a bootstrap builder we don't want to use the Microsoft.Net.Compilers.Toolset package but
       rather explicitly override it.
     -->
-    <UsingToolMicrosoftNetCompilers Condition="'$(BootstrapBuildPath)' == ''">true</UsingToolMicrosoftNetCompilers>
+    <UsingToolMicrosoftNetCompilers Condition="'$(BootstrapBuildPath)' == ''"
+      >true</UsingToolMicrosoftNetCompilers
+    >
     <UseVSTestRunner>true</UseVSTestRunner>
   </PropertyGroup>
   <PropertyGroup>

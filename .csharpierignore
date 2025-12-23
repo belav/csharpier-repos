@@ -243,3 +243,4 @@ mono/mcs/class/referencesource/System.Web/Util/ArglessEventHandlerProxy.cs
 /mono/mcs/class/System.Web/Test/mainsoft/MainsoftWebApp20/do_not_delete.csproj
 /mono/mcs/class/System.Web/Test/standalone/adrotator/ads-error.xml
 /runtime/src/libraries/System.Runtime.Serialization.Xml/tests/Canonicalization/baselines/ReaderWriter_C14N_BaselineXML_Binary.xml
+**/*.cs

@@ -31,7 +31,10 @@
       </Docs>
     </Member>
     <Member MemberName="NestedMode">
-      <MemberSignature Language="C#" Value="public Commons.Xml.Nvdl.NvdlNestedMode NestedMode { set; get; };" />
+      <MemberSignature
+        Language="C#"
+        Value="public Commons.Xml.Nvdl.NvdlNestedMode NestedMode { set; get; };"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Commons.Xml.Nvdl.NvdlNestedMode</ReturnType>
@@ -43,7 +46,10 @@
       </Docs>
     </Member>
     <Member MemberName="Contexts">
-      <MemberSignature Language="C#" Value="public Commons.Xml.Nvdl.NvdlContextList Contexts { get; };" />
+      <MemberSignature
+        Language="C#"
+        Value="public Commons.Xml.Nvdl.NvdlContextList Contexts { get; };"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Commons.Xml.Nvdl.NvdlContextList</ReturnType>

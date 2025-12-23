@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <AssemblyName>Microsoft.EntityFrameworkCore.AspNet.InMemory.FunctionalTests</AssemblyName>
@@ -44,5 +43,4 @@
     <ProjectReference Include="..\EFCore.InMemory.FunctionalTests\EFCore.InMemory.FunctionalTests.csproj" />
     <ProjectReference Include="..\EFCore.AspNet.Specification.Tests\EFCore.AspNet.Specification.Tests.csproj" />
   </ItemGroup>
-
 </Project>

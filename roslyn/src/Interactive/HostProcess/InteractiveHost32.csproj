@@ -26,7 +26,11 @@
 
     Use BuiltProjectOutputGroup as the dependend target to ensure the targets has all dependencies that BuiltProjectOutputGroupOutput would have.
   -->
-  <Target Name="PublishProjectOutputGroup" DependsOnTargets="Build;BuiltProjectOutputGroup" Returns="@(_PublishProjectOutputGroup)">
+  <Target
+    Name="PublishProjectOutputGroup"
+    DependsOnTargets="Build;BuiltProjectOutputGroup"
+    Returns="@(_PublishProjectOutputGroup)"
+  >
     <ItemGroup>
       <_PublishProjectOutputGroup Include="$(TargetPath)">
         <TargetPath>$(TargetFileName)</TargetPath>
@@ -35,7 +39,10 @@
         <NgenArchitecture>X86</NgenArchitecture>
         <NgenApplication>[installDir]\Common7\IDE\$(CommonExtensionInstallationRoot)\$(LanguageServicesExtensionInstallationFolder)\InteractiveHost\Desktop\InteractiveHost32.exe</NgenApplication>
       </_PublishProjectOutputGroup>
-      <_PublishProjectOutputGroup Include="$(TargetPath).config" TargetPath="$(TargetFileName).config"/>
+      <_PublishProjectOutputGroup
+        Include="$(TargetPath).config"
+        TargetPath="$(TargetFileName).config"
+      />
     </ItemGroup>
   </Target>
 </Project>

@@ -1,10 +1,12 @@
 <Type Name="LdapSchemaElement" FullName="Novell.Directory.Ldap.LdapSchemaElement">
-  <TypeSignature Language="C#" Value="public abstract class LdapSchemaElement : Novell.Directory.Ldap.LdapAttribute, System.ICloneable, System.IComparable" />
+  <TypeSignature
+    Language="C#"
+    Value="public abstract class LdapSchemaElement : Novell.Directory.Ldap.LdapAttribute, System.ICloneable, System.IComparable"
+  />
   <AssemblyInfo>
     <AssemblyName>Novell.Directory.Ldap</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
-    <AssemblyCulture>
-    </AssemblyCulture>
+    <AssemblyCulture></AssemblyCulture>
     <Attributes>
       <Attribute>
         <AttributeName>System.Reflection.AssemblyKeyFile(KeyFile="../mono.pub")</AttributeName>
@@ -70,7 +72,10 @@
       </Docs>
     </Member>
     <Member MemberName="setQualifier">
-      <MemberSignature Language="C#" Value="public virtual void setQualifier(string name, string[] values)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void setQualifier(string name, string[] values)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -102,7 +107,10 @@
       </Docs>
     </Member>
     <Member MemberName="removeValue">
-      <MemberSignature Language="C#" Value="public virtual void removeValue(byte[] value_Renamed)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void removeValue(byte[] value_Renamed)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -153,7 +161,10 @@
       </Docs>
     </Member>
     <Member MemberName="QualifierNames">
-      <MemberSignature Language="C#" Value="public virtual System.Collections.IEnumerator QualifierNames { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Collections.IEnumerator QualifierNames { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Collections.IEnumerator</ReturnType>

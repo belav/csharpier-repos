@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <Description>ASP.NET Core HTTP feature interface definitions.</Description>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
@@ -17,5 +16,4 @@
     <Reference Include="Microsoft.Net.Http.Headers" />
     <Reference Include="System.IO.Pipelines" />
   </ItemGroup>
-
 </Project>

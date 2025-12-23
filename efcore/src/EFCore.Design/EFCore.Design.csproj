@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <Description>Shared design-time components for Entity Framework Core tools.</Description>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
@@ -54,14 +53,27 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EFCore.Relational\EFCore.Relational.csproj" PrivateAssets="contentfiles;build" />
+    <ProjectReference
+      Include="..\EFCore.Relational\EFCore.Relational.csproj"
+      PrivateAssets="contentfiles;build"
+    />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Humanizer.Core" Version="2.14.1" />
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="$(MicrosoftCodeAnalysisVersion)" />
-    <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="$(MicrosoftExtensionsDependencyModelVersion)" />
-    <PackageReference Include="Microsoft.Extensions.HostFactoryResolver.Sources" PrivateAssets="All" Version="$(MicrosoftExtensionsHostFactoryResolverSourcesVersion)" />
+    <PackageReference
+      Include="Microsoft.CodeAnalysis.CSharp.Workspaces"
+      Version="$(MicrosoftCodeAnalysisVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.Extensions.DependencyModel"
+      Version="$(MicrosoftExtensionsDependencyModelVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.Extensions.HostFactoryResolver.Sources"
+      PrivateAssets="All"
+      Version="$(MicrosoftExtensionsHostFactoryResolverSourcesVersion)"
+    />
     <PackageReference Include="Mono.TextTemplating" Version="2.2.1" />
   </ItemGroup>
 
@@ -102,5 +114,4 @@
       <DependentUpon>CSharpEntityTypeGenerator.tt</DependentUpon>
     </Compile>
   </ItemGroup>
-
 </Project>

@@ -1,12 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>$(NetCoreAppCurrent);$(NetFrameworkMinimum)</TargetFrameworks>
-    <DebuggerSupport Condition="'$(DebuggerSupport)' == '' and '$(TargetOS)' == 'browser'">true</DebuggerSupport>
+    <DebuggerSupport Condition="'$(DebuggerSupport)' == '' and '$(TargetOS)' == 'browser'"
+      >true</DebuggerSupport
+    >
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ContainerConfigurationTests.cs" />
-    <Compile Include="$(CommonTestPath)System\Diagnostics\DebuggerAttributes.cs"
-             Link="Common\System\Diagnostics\DebuggerAttributes.cs" />
+    <Compile
+      Include="$(CommonTestPath)System\Diagnostics\DebuggerAttributes.cs"
+      Link="Common\System\Diagnostics\DebuggerAttributes.cs"
+    />
     <Compile Include="ReflectionTests.cs" />
   </ItemGroup>
   <ItemGroup>

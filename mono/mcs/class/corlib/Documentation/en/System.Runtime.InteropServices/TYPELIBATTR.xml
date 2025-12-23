@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="TYPELIBATTR" FullName="System.Runtime.InteropServices.TYPELIBATTR">
   <TypeSignature Maintainer="auto" Language="C#" Value="public struct TYPELIBATTR" />
-  <TypeSignature Language="ILAsm" Value=".class public sequential serializable sealed beforefieldinit TYPELIBATTR extends System.ValueType" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public sequential serializable sealed beforefieldinit TYPELIBATTR extends System.ValueType"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -79,8 +82,14 @@
       </Docs>
     </Member>
     <Member MemberName="syskind">
-      <MemberSignature Language="C#" Value="public System.Runtime.InteropServices.SYSKIND syskind;" />
-      <MemberSignature Language="ILAsm" Value=".field public valuetype System.Runtime.InteropServices.SYSKIND syskind" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Runtime.InteropServices.SYSKIND syskind;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public valuetype System.Runtime.InteropServices.SYSKIND syskind"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -103,8 +112,14 @@
       </Docs>
     </Member>
     <Member MemberName="wLibFlags">
-      <MemberSignature Language="C#" Value="public System.Runtime.InteropServices.LIBFLAGS wLibFlags;" />
-      <MemberSignature Language="ILAsm" Value=".field public valuetype System.Runtime.InteropServices.LIBFLAGS wLibFlags" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Runtime.InteropServices.LIBFLAGS wLibFlags;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public valuetype System.Runtime.InteropServices.LIBFLAGS wLibFlags"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

@@ -4,7 +4,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="System.Data.Odbc.cs" Condition="'$(TargetFrameworkIdentifier)' != '.NETFramework'" />
-    <Compile Include="System.Data.Odbc.netframework.cs" Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'" />
+    <Compile
+      Include="System.Data.Odbc.cs"
+      Condition="'$(TargetFrameworkIdentifier)' != '.NETFramework'"
+    />
+    <Compile
+      Include="System.Data.Odbc.netframework.cs"
+      Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'"
+    />
   </ItemGroup>
 </Project>

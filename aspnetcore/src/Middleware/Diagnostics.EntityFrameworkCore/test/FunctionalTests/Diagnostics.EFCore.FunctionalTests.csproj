@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <!-- Mitigation for long path issues -->
@@ -11,5 +10,4 @@
     <Reference Include="Microsoft.AspNetCore.TestHost" />
     <Reference Include="Microsoft.EntityFrameworkCore.Sqlite" />
   </ItemGroup>
-
 </Project>

@@ -16,9 +16,11 @@
       <_LocalMicrosoftNetCoreAppRuntimePackDir>$(MicrosoftNetCoreAppRuntimePackDir)</_LocalMicrosoftNetCoreAppRuntimePackDir>
     </PropertyGroup>
     <ItemGroup>
-      <ResolvedRuntimePack PackageDirectory="$(_LocalMicrosoftNetCoreAppRuntimePackDir)"
-                           Condition="'$(_LocalMicrosoftNetCoreAppRuntimePackDir)' != '' and
-                                      '%(ResolvedRuntimePack.FrameworkName)' == 'Microsoft.NETCore.App'" />
+      <ResolvedRuntimePack
+        PackageDirectory="$(_LocalMicrosoftNetCoreAppRuntimePackDir)"
+        Condition="'$(_LocalMicrosoftNetCoreAppRuntimePackDir)' != '' and
+                                      '%(ResolvedRuntimePack.FrameworkName)' == 'Microsoft.NETCore.App'"
+      />
     </ItemGroup>
     <Message Text="Used runtime pack: %(ResolvedRuntimePack.PackageDirectory)" Importance="high" />
   </Target>

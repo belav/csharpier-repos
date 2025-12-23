@@ -31,7 +31,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="BarrettReduction">
-      <MemberSignature Language="C#" Value="public void BarrettReduction (Mono.Math.BigInteger x);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void BarrettReduction (Mono.Math.BigInteger x);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -50,7 +53,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Difference">
-      <MemberSignature Language="C#" Value="public Mono.Math.BigInteger Difference (Mono.Math.BigInteger a, Mono.Math.BigInteger b);" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Math.BigInteger Difference (Mono.Math.BigInteger a, Mono.Math.BigInteger b);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Mono.Math.BigInteger</ReturnType>
@@ -72,7 +78,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Multiply">
-      <MemberSignature Language="C#" Value="public Mono.Math.BigInteger Multiply (Mono.Math.BigInteger a, Mono.Math.BigInteger b);" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Math.BigInteger Multiply (Mono.Math.BigInteger a, Mono.Math.BigInteger b);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Mono.Math.BigInteger</ReturnType>
@@ -94,7 +103,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Pow">
-      <MemberSignature Language="C#" Value="public Mono.Math.BigInteger Pow (Mono.Math.BigInteger a, Mono.Math.BigInteger k);" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Math.BigInteger Pow (Mono.Math.BigInteger a, Mono.Math.BigInteger k);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Mono.Math.BigInteger</ReturnType>
@@ -116,7 +128,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Pow">
-      <MemberSignature Language="C#" Value="public Mono.Math.BigInteger Pow (uint b, Mono.Math.BigInteger exp);" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Math.BigInteger Pow (uint b, Mono.Math.BigInteger exp);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Mono.Math.BigInteger</ReturnType>

@@ -46,8 +46,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\MyPageWithTheme.aspx">
-    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\MyPageWithTheme.aspx"></EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Default.skin">

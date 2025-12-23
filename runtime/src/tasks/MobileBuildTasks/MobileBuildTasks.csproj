@@ -15,18 +15,25 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Build" Version="$(MicrosoftBuildVersion)" />
-    <PackageReference Include="Microsoft.Build.Tasks.Core" Version="$(MicrosoftBuildTasksCoreVersion)" />
+    <PackageReference
+      Include="Microsoft.Build.Tasks.Core"
+      Version="$(MicrosoftBuildTasksCoreVersion)"
+    />
   </ItemGroup>
 
   <Target Name="GetFilesToPackage" Returns="@(FilesToPackage)">
     <ItemGroup>
       <!-- non-net4* -->
-      <FilesToPackage Include="$(OutputPath)$(TargetFrameworkForNETCoreTasks)\$(MSBuildProjectName)*"
-                      TargetPath="tasks\$(TargetFrameworkForNETCoreTasks)" />
+      <FilesToPackage
+        Include="$(OutputPath)$(TargetFrameworkForNETCoreTasks)\$(MSBuildProjectName)*"
+        TargetPath="tasks\$(TargetFrameworkForNETCoreTasks)"
+      />
 
       <!-- for net472 we need all the dependent assemblies too, so copy from the publish folder -->
-      <FilesToPackage Include="$(OutputPath)$(TargetFrameworkForNETFrameworkTasks)\*"
-                      TargetPath="tasks\$(TargetFrameworkForNETFrameworkTasks)" />
+      <FilesToPackage
+        Include="$(OutputPath)$(TargetFrameworkForNETFrameworkTasks)\*"
+        TargetPath="tasks\$(TargetFrameworkForNETFrameworkTasks)"
+      />
     </ItemGroup>
   </Target>
 </Project>

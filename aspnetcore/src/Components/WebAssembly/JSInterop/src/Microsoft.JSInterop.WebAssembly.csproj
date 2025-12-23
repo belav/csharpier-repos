@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <Description>Abstractions and features for interop between .NET WebAssembly and JavaScript code.</Description>
@@ -24,5 +23,4 @@
   <ItemGroup>
     <InternalsVisibleTo Include="Microsoft.AspNetCore.Components.WebAssembly.Tests" />
   </ItemGroup>
-
 </Project>

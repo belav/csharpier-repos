@@ -1,10 +1,12 @@
 <Type Name="RfcSearchRequest" FullName="Novell.Directory.Ldap.Rfc2251.RfcSearchRequest">
-  <TypeSignature Language="C#" Value="public class RfcSearchRequest : Novell.Directory.Ldap.Asn1.Asn1Sequence, Novell.Directory.Ldap.Rfc2251.RfcRequest, System.Runtime.Serialization.ISerializable" />
+  <TypeSignature
+    Language="C#"
+    Value="public class RfcSearchRequest : Novell.Directory.Ldap.Asn1.Asn1Sequence, Novell.Directory.Ldap.Rfc2251.RfcRequest, System.Runtime.Serialization.ISerializable"
+  />
   <AssemblyInfo>
     <AssemblyName>Novell.Directory.Ldap</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
-    <AssemblyCulture>
-    </AssemblyCulture>
+    <AssemblyCulture></AssemblyCulture>
     <Attributes>
       <Attribute>
         <AttributeName>System.Reflection.AssemblyKeyFile(KeyFile="../mono.pub")</AttributeName>
@@ -54,7 +56,10 @@
   </Interfaces>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public RfcSearchRequest(Novell.Directory.Ldap.Rfc2251.RfcLdapDN baseObject, Novell.Directory.Ldap.Asn1.Asn1Enumerated scope, Novell.Directory.Ldap.Asn1.Asn1Enumerated derefAliases, Novell.Directory.Ldap.Asn1.Asn1Integer sizeLimit, Novell.Directory.Ldap.Asn1.Asn1Integer timeLimit, Novell.Directory.Ldap.Asn1.Asn1Boolean typesOnly, Novell.Directory.Ldap.Rfc2251.RfcFilter filter, Novell.Directory.Ldap.Rfc2251.RfcAttributeDescriptionList attributes)" />
+      <MemberSignature
+        Language="C#"
+        Value="public RfcSearchRequest(Novell.Directory.Ldap.Rfc2251.RfcLdapDN baseObject, Novell.Directory.Ldap.Asn1.Asn1Enumerated scope, Novell.Directory.Ldap.Asn1.Asn1Enumerated derefAliases, Novell.Directory.Ldap.Asn1.Asn1Integer sizeLimit, Novell.Directory.Ldap.Asn1.Asn1Integer timeLimit, Novell.Directory.Ldap.Asn1.Asn1Boolean typesOnly, Novell.Directory.Ldap.Rfc2251.RfcFilter filter, Novell.Directory.Ldap.Rfc2251.RfcAttributeDescriptionList attributes)"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="baseObject" Type="Novell.Directory.Ldap.Rfc2251.RfcLdapDN" />
@@ -64,7 +69,10 @@
         <Parameter Name="timeLimit" Type="Novell.Directory.Ldap.Asn1.Asn1Integer" />
         <Parameter Name="typesOnly" Type="Novell.Directory.Ldap.Asn1.Asn1Boolean" />
         <Parameter Name="filter" Type="Novell.Directory.Ldap.Rfc2251.RfcFilter" />
-        <Parameter Name="attributes" Type="Novell.Directory.Ldap.Rfc2251.RfcAttributeDescriptionList" />
+        <Parameter
+          Name="attributes"
+          Type="Novell.Directory.Ldap.Rfc2251.RfcAttributeDescriptionList"
+        />
       </Parameters>
       <Docs>
         <summary>To be added.</summary>
@@ -80,7 +88,10 @@
       </Docs>
     </Member>
     <Member MemberName="dupRequest">
-      <MemberSignature Language="C#" Value="public Novell.Directory.Ldap.Rfc2251.RfcRequest dupRequest(string base_Renamed, string filter, bool request)" />
+      <MemberSignature
+        Language="C#"
+        Value="public Novell.Directory.Ldap.Rfc2251.RfcRequest dupRequest(string base_Renamed, string filter, bool request)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.Rfc2251.RfcRequest</ReturnType>

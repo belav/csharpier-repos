@@ -24,14 +24,21 @@
     <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <GenerateFullPaths>true</GenerateFullPaths>
-    <EnableWindowsTargeting Condition="'$(DotNetBuildFromSource)' != 'true'">true</EnableWindowsTargeting>
+    <EnableWindowsTargeting Condition="'$(DotNetBuildFromSource)' != 'true'"
+      >true</EnableWindowsTargeting
+    >
 
     <!-- Set to non-existent file to prevent common targets from importing Microsoft.CodeAnalysis.targets -->
     <CodeAnalysisTargets>NON_EXISTENT_FILE</CodeAnalysisTargets>
 
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">15.0</VisualStudioVersion>
-    <VisualStudioReferenceMajorVersion Condition="'$(VisualStudioReferenceMajorVersion)' == ''">$(VisualStudioVersion.Substring($([System.Convert]::ToInt32(0)), $(VisualStudioVersion.IndexOf('.'))))</VisualStudioReferenceMajorVersion>
-    <VisualStudioReferenceAssemblyVersion Condition="'$(VisualStudioReferenceAssemblyVersion)' == ''">$(VisualStudioReferenceMajorVersion).0.0.0</VisualStudioReferenceAssemblyVersion>
+    <VisualStudioReferenceMajorVersion Condition="'$(VisualStudioReferenceMajorVersion)' == ''"
+      >$(VisualStudioVersion.Substring($([System.Convert]::ToInt32(0)), $(VisualStudioVersion.IndexOf('.'))))</VisualStudioReferenceMajorVersion
+    >
+    <VisualStudioReferenceAssemblyVersion
+      Condition="'$(VisualStudioReferenceAssemblyVersion)' == ''"
+      >$(VisualStudioReferenceMajorVersion).0.0.0</VisualStudioReferenceAssemblyVersion
+    >
     <MinimumVisualStudioVersion>$(VisualStudioVersion)</MinimumVisualStudioVersion>
     <MinimumMSBuildVersion>15.7.0</MinimumMSBuildVersion>
 
@@ -50,7 +57,9 @@
     <!-- VS does not require Windows PDBs to be published anymore. -->
     <PublishWindowsPdb>false</PublishWindowsPdb>
     <EnforceExtendedAnalyzerRules>false</EnforceExtendedAnalyzerRules>
-    <EnforceExtendedAnalyzerRules Condition="'$(IsAnalyzer)' == 'true'">true</EnforceExtendedAnalyzerRules>
+    <EnforceExtendedAnalyzerRules Condition="'$(IsAnalyzer)' == 'true'"
+      >true</EnforceExtendedAnalyzerRules
+    >
   </PropertyGroup>
 
   <!-- 
@@ -110,7 +119,7 @@
     <DeterministicSourcePaths>false</DeterministicSourcePaths>
     <EnableXlfLocalization>false</EnableXlfLocalization>
   </PropertyGroup>
-  
+
   <!--
     Disable Xliff if it's not necessary to generate satellite assemblies.
   -->
@@ -118,13 +127,15 @@
     <EnableXlfLocalization>false</EnableXlfLocalization>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(IsTestProject)' == 'true'" >
+  <PropertyGroup Condition="'$(IsTestProject)' == 'true'">
     <!--
       Choose default target frameworks to use for testing on Mono and Core.
       These may be overridden by projects that need to be skipped.
     -->
     <TestTargetFrameworks Condition="'$(TestRuntime)' == 'Mono'">net46;net472</TestTargetFrameworks>
-    <TestTargetFrameworks Condition="'$(TestRuntime)' == 'Core'">net6.0;net7.0</TestTargetFrameworks>
+    <TestTargetFrameworks Condition="'$(TestRuntime)' == 'Core'"
+      >net6.0;net7.0</TestTargetFrameworks
+    >
 
     <XUnitDesktopSettingsFile>$(MSBuildThisFileDirectory)..\config\xunit.runner.json</XUnitDesktopSettingsFile>
     <XUnitCoreSettingsFile>$(MSBuildThisFileDirectory)..\config\xunit.runner.json</XUnitCoreSettingsFile>
@@ -170,7 +181,10 @@
 
   <!-- Windows specific settings -->
   <PropertyGroup Condition="'$(OS)' == 'Windows_NT'">
-    <DeployExtension Condition="'$(VisualStudioVersion)' != '15.0' and '$(VisualStudioVersion)' != '16.0'">false</DeployExtension>
+    <DeployExtension
+      Condition="'$(VisualStudioVersion)' != '15.0' and '$(VisualStudioVersion)' != '16.0'"
+      >false</DeployExtension
+    >
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(DevEnvDir)' == ''">
@@ -188,10 +202,26 @@
     Analyzers
   -->
   <ItemGroup Condition="'$(DotNetBuildFromSource)' != 'true'">
-    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="$(MicrosoftCodeAnalysisNetAnalyzersVersion)" PrivateAssets="all" />
-    <PackageReference Include="Roslyn.Diagnostics.Analyzers" Version="$(RoslynDiagnosticsAnalyzersVersion)" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" Version="$(MicrosoftVisualStudioThreadingAnalyzersVersion)" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.CodeAnalysis.PerformanceSensitiveAnalyzers" Version="$(MicrosoftCodeAnalysisPerformanceSensitiveAnalyzersVersion)" PrivateAssets="all" />
+    <PackageReference
+      Include="Microsoft.CodeAnalysis.NetAnalyzers"
+      Version="$(MicrosoftCodeAnalysisNetAnalyzersVersion)"
+      PrivateAssets="all"
+    />
+    <PackageReference
+      Include="Roslyn.Diagnostics.Analyzers"
+      Version="$(RoslynDiagnosticsAnalyzersVersion)"
+      PrivateAssets="all"
+    />
+    <PackageReference
+      Include="Microsoft.VisualStudio.Threading.Analyzers"
+      Version="$(MicrosoftVisualStudioThreadingAnalyzersVersion)"
+      PrivateAssets="all"
+    />
+    <PackageReference
+      Include="Microsoft.CodeAnalysis.PerformanceSensitiveAnalyzers"
+      Version="$(MicrosoftCodeAnalysisPerformanceSensitiveAnalyzersVersion)"
+      PrivateAssets="all"
+    />
   </ItemGroup>
 
   <!-- Disable SDK supplied netanalyzers as we reference them from nugets instead -->
@@ -203,7 +233,11 @@
      Code indexing targets to help generating LSIF from indexing builds.
   -->
   <ItemGroup Condition="'$(DotNetBuildFromSource)' != 'true'">
-    <PackageReference Include="RichCodeNav.EnvVarDump" Version="$(RichCodeNavEnvVarDumpVersion)" PrivateAssets="all" />
+    <PackageReference
+      Include="RichCodeNav.EnvVarDump"
+      Version="$(RichCodeNavEnvVarDumpVersion)"
+      PrivateAssets="all"
+    />
   </ItemGroup>
 
   <!--
@@ -218,13 +252,21 @@
   <Choose>
     <When Condition="'$(Language)' == 'VB'">
       <ItemGroup Condition="'$(RoslynCheckCodeStyle)' == 'true'">
-        <PackageReference Include="Microsoft.CodeAnalysis.VisualBasic.CodeStyle" Version="$(MicrosoftCodeAnalysisVisualBasicCodeStyleVersion)" PrivateAssets="all" />
+        <PackageReference
+          Include="Microsoft.CodeAnalysis.VisualBasic.CodeStyle"
+          Version="$(MicrosoftCodeAnalysisVisualBasicCodeStyleVersion)"
+          PrivateAssets="all"
+        />
       </ItemGroup>
     </When>
 
     <When Condition="'$(Language)' == 'C#'">
       <ItemGroup Condition="'$(RoslynCheckCodeStyle)' == 'true'">
-        <PackageReference Include="Microsoft.CodeAnalysis.CSharp.CodeStyle" Version="$(MicrosoftCodeAnalysisCSharpCodeStyleVersion)" PrivateAssets="all" />
+        <PackageReference
+          Include="Microsoft.CodeAnalysis.CSharp.CodeStyle"
+          Version="$(MicrosoftCodeAnalysisCSharpCodeStyleVersion)"
+          PrivateAssets="all"
+        />
       </ItemGroup>
     </When>
   </Choose>
@@ -254,7 +296,9 @@
         <Import Include="System.Linq" />
       </ItemGroup>
       <PropertyGroup>
-        <DefineConstants Condition="'$(InitialDefineConstants)' != ''">$(InitialDefineConstants)</DefineConstants>
+        <DefineConstants Condition="'$(InitialDefineConstants)' != ''"
+          >$(InitialDefineConstants)</DefineConstants
+        >
       </PropertyGroup>
     </When>
 
@@ -277,14 +321,20 @@
         <NoWarn>$(NoWarn);1573;1591;1701</NoWarn>
       </PropertyGroup>
       <PropertyGroup>
-        <DefineConstants Condition="'$(InitialDefineConstants)' != ''">$(DefineConstants);$(InitialDefineConstants)</DefineConstants>
+        <DefineConstants Condition="'$(InitialDefineConstants)' != ''"
+          >$(DefineConstants);$(InitialDefineConstants)</DefineConstants
+        >
       </PropertyGroup>
     </When>
   </Choose>
 
   <PropertyGroup Condition="'$(DotNetBuildFromSource)' == 'true'">
     <!-- https://github.com/dotnet/roslyn/issues/38433 Vbc does not like the extra semicolon -->
-    <DefineConstants Condition="'$(DefineConstants)' != ''">DOTNET_BUILD_FROM_SOURCE;$(DefineConstants)</DefineConstants>
-    <DefineConstants Condition="'$(DefineConstants)' == ''">DOTNET_BUILD_FROM_SOURCE</DefineConstants>
+    <DefineConstants Condition="'$(DefineConstants)' != ''"
+      >DOTNET_BUILD_FROM_SOURCE;$(DefineConstants)</DefineConstants
+    >
+    <DefineConstants Condition="'$(DefineConstants)' == ''"
+      >DOTNET_BUILD_FROM_SOURCE</DefineConstants
+    >
   </PropertyGroup>
 </Project>

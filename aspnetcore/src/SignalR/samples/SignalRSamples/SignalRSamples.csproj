@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
-
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <GenerateRazorAssemblyInfo>false</GenerateRazorAssemblyInfo>
@@ -28,8 +27,13 @@
       <SignalRBrowserJSClientFiles Include="$(MSBuildThisFileDirectory)..\..\clients\ts\signalr-protocol-msgpack\dist\browser\*" />
       <SignalRWebWorkerJSClientFiles Include="$(MSBuildThisFileDirectory)..\..\clients\ts\signalr\dist\webworker\*" />
     </ItemGroup>
-    <Copy SourceFiles="@(SignalRBrowserJSClientFiles)" DestinationFolder="$(MSBuildThisFileDirectory)wwwroot\lib\signalr" />
-    <Copy SourceFiles="@(SignalRWebWorkerJSClientFiles)" DestinationFolder="$(MSBuildThisFileDirectory)wwwroot\lib\signalr-webworker"/>
+    <Copy
+      SourceFiles="@(SignalRBrowserJSClientFiles)"
+      DestinationFolder="$(MSBuildThisFileDirectory)wwwroot\lib\signalr"
+    />
+    <Copy
+      SourceFiles="@(SignalRWebWorkerJSClientFiles)"
+      DestinationFolder="$(MSBuildThisFileDirectory)wwwroot\lib\signalr-webworker"
+    />
   </Target>
-
 </Project>

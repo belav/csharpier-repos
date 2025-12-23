@@ -11,7 +11,9 @@
   <PropertyGroup>
     <HelixTimeout>00:45:00</HelixTimeout>
     <HelixTestName>$(MSBuildProjectName)--$(TargetFramework)</HelixTestName>
-    <LoggingTestingDisableFileLogging Condition="'$(IsHelixJob)' == 'true'">false</LoggingTestingDisableFileLogging>
+    <LoggingTestingDisableFileLogging Condition="'$(IsHelixJob)' == 'true'"
+      >false</LoggingTestingDisableFileLogging
+    >
     <NodeVersion>20.7.0</NodeVersion>
 
     <!--
@@ -24,6 +26,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <HelixContent Include="$(RepoRoot)eng\helix\content\**\*" Exclude="$(RepoRoot)eng\helix\content\*.in" />
+    <HelixContent
+      Include="$(RepoRoot)eng\helix\content\**\*"
+      Exclude="$(RepoRoot)eng\helix\content\*.in"
+    />
   </ItemGroup>
 </Project>

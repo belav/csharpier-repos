@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <OutputType>Exe</OutputType>
@@ -32,7 +31,10 @@
       <Link>Matching\TreeRouterMatcherBuilder.cs</Link>
     </Compile>
     <Compile Include="$(SharedSourceRoot)Metrics\TestMeterFactory.cs" LinkBase="shared" />
-    <Compile Include="..\..\test\UnitTests\TestObjects\TestServiceProvider.cs" Link="Matching\TestServiceProvider.cs" />
+    <Compile
+      Include="..\..\test\UnitTests\TestObjects\TestServiceProvider.cs"
+      Link="Matching\TestServiceProvider.cs"
+    />
   </ItemGroup>
 
   <ItemGroup>
@@ -45,5 +47,4 @@
 
     <Compile Include="$(SharedSourceRoot)BenchmarkRunner\*.cs" />
   </ItemGroup>
-
 </Project>

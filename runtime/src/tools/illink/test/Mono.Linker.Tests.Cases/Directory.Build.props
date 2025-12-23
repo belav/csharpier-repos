@@ -23,5 +23,4 @@
   <ItemGroup>
     <ProjectReference Include="$(MSBuildThisFileDirectory)..\Mono.Linker.Tests.Cases.Expectations\Mono.Linker.Tests.Cases.Expectations.csproj" />
   </ItemGroup>
-
 </Project>

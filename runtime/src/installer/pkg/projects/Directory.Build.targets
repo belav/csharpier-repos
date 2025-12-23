@@ -5,7 +5,9 @@
       If we are stabilizing set the StableVersion property for the packages.
       Needs to happen in Directory.Build.targets to allow all the pkgproj's to set Version property first.
     -->
-    <StableVersion Condition="'$(IncludePreReleaseLabelInPackageVersion)' != 'true'">$(Version)</StableVersion>
+    <StableVersion Condition="'$(IncludePreReleaseLabelInPackageVersion)' != 'true'"
+      >$(Version)</StableVersion
+    >
 
     <!--
       Explicitly re-set the symbol package output path. The pkgproj files here end up importing the targets from
@@ -16,9 +18,11 @@
     <SymbolPackageOutputPath>$(PackageOutputPath)</SymbolPackageOutputPath>
   </PropertyGroup>
 
-  <Target Name="SetTargetBasedPackageVersion"
-          BeforeTargets="GenerateNuSpec"
-          DependsOnTargets="GetProductVersions">
+  <Target
+    Name="SetTargetBasedPackageVersion"
+    BeforeTargets="GenerateNuSpec"
+    DependsOnTargets="GetProductVersions"
+  >
     <PropertyGroup>
       <Version>$(ProductVersion)</Version>
       <!--
@@ -68,7 +72,7 @@
   -->
   <Target Name="GetSymbolPackageFiles" BeforeTargets="GetPackageFiles">
     <ItemGroup Condition="'$(SymbolsSuffix)' != ''">
-      <AdditionalLibPackageExcludes Include="%2A%2A\%2A$(SymbolsSuffix)"/>
+      <AdditionalLibPackageExcludes Include="%2A%2A\%2A$(SymbolsSuffix)" />
     </ItemGroup>
 
     <ItemGroup>
@@ -82,8 +86,10 @@
 
     <ItemGroup>
       <!-- On Windows, trim ".dll" before adding ".pdb". -->
-      <WindowsNativeFile Include="@(NativeWithSymbolFile)"
-                         Condition="'%(NativeWithSymbolFile.Extension)'=='.dll' OR '%(NativeWithSymbolFile.Extension)'=='.exe'" />
+      <WindowsNativeFile
+        Include="@(NativeWithSymbolFile)"
+        Condition="'%(NativeWithSymbolFile.Extension)'=='.dll' OR '%(NativeWithSymbolFile.Extension)'=='.exe'"
+      />
       <WindowsSymbolFile Include="@(WindowsNativeFile -> '%(RootDir)%(Directory)PDB\%(Filename).pdb')" />
       <!-- Crossgened files (on windows) have both a *.pdb and a *.ni.pdb symbol file.  Include the *.ni.pdb file as well if it exists. -->
       <WindowsSymbolFile Include="@(WindowsNativeFile -> '%(RootDir)%(Directory)PDB\%(Filename).ni.pdb')" />
@@ -93,13 +99,15 @@
         no ".so" or ".dylib" extension, so we can't tell which convention its symbol files would
         use. On xplat, the symbol extension is simply appended.
       -->
-      <NonWindowsNativeFile Include="@(NativeWithSymbolFile)"
-                            Exclude="@(WindowsNativeFile)" />
+      <NonWindowsNativeFile Include="@(NativeWithSymbolFile)" Exclude="@(WindowsNativeFile)" />
 
       <NonWindowsSymbolFile Include="@(NonWindowsNativeFile -> '%(Identity)$(SymbolsSuffix)')" />
 
       <ExistingWindowsSymbolFile Include="@(WindowsSymbolFile)" Condition="Exists('%(Identity)')" />
-      <ExistingNonWindowsSymbolFile Include="@(NonWindowsSymbolFile)" Condition="Exists('%(Identity)') AND '$(SkipPackagingXplatSymbols)'!='true'" />
+      <ExistingNonWindowsSymbolFile
+        Include="@(NonWindowsSymbolFile)"
+        Condition="Exists('%(Identity)') AND '$(SkipPackagingXplatSymbols)'!='true'"
+      />
 
       <!-- Include all found symbols. -->
       <File Include="@(ExistingWindowsSymbolFile);@(ExistingNonWindowsSymbolFile)">
@@ -108,12 +116,17 @@
     </ItemGroup>
 
     <PropertyGroup>
-      <NeedsPlaceholderPdb Condition="'@(ExistingNonWindowsSymbolFile)'!='' AND '@(ExistingWindowsSymbolFile)'==''">true</NeedsPlaceholderPdb>
+      <NeedsPlaceholderPdb
+        Condition="'@(ExistingNonWindowsSymbolFile)'!='' AND '@(ExistingWindowsSymbolFile)'==''"
+        >true</NeedsPlaceholderPdb
+      >
     </PropertyGroup>
 
     <ItemGroup>
-      <File Include="$(InstallerProjectRoot)\pkg\_.pdb"
-            Condition="'$(NeedsPlaceholderPdb)'=='true' AND '$(PackageTargetRuntime)'!=''">
+      <File
+        Include="$(InstallerProjectRoot)\pkg\_.pdb"
+        Condition="'$(NeedsPlaceholderPdb)'=='true' AND '$(PackageTargetRuntime)'!=''"
+      >
         <TargetPath>runtimes/$(PackageTargetRuntime)/native</TargetPath>
         <IsSymbolFile>true</IsSymbolFile>
       </File>
@@ -124,11 +137,17 @@
        files from runtime dependencies,  this prevents folks from needing
        packages that don't apply to their local OS.
        https://github.com/dotnet/buildtools/issues/1273 -->
-  <Target Name="GetPackageIdentity" Returns="@(_PackageIdentity)" DependsOnTargets="CalculatePackageVersion">
+  <Target
+    Name="GetPackageIdentity"
+    Returns="@(_PackageIdentity)"
+    DependsOnTargets="CalculatePackageVersion"
+  >
     <ItemGroup>
       <_PackageIdentity Include="$(Id)">
         <Version>$(PackageVersion)</Version>
-        <TargetRuntime Condition="'$(PackageTargetRuntime)' != ''">$(PackageTargetRuntime)</TargetRuntime>
+        <TargetRuntime Condition="'$(PackageTargetRuntime)' != ''"
+          >$(PackageTargetRuntime)</TargetRuntime
+        >
       </_PackageIdentity>
     </ItemGroup>
   </Target>
@@ -137,13 +156,16 @@
     Create RuntimeDependencies just before they're needed. Use MSBuild to get their identities, like
     GetPkgProjPackageDependencies: this finds package id and version without any guesswork.
   -->
-  <Target Name="CreateRuntimeDependencyItems"
-          BeforeTargets="DetermineRuntimeDependencies"
-          Condition="'$(PackageTargetRuntime)' == '' and '$(HasRuntimePackages)' != 'false'">
+  <Target
+    Name="CreateRuntimeDependencyItems"
+    BeforeTargets="DetermineRuntimeDependencies"
+    Condition="'$(PackageTargetRuntime)' == '' and '$(HasRuntimePackages)' != 'false'"
+  >
     <MSBuild
       Targets="GetPackageIdentity"
       BuildInParallel="$(BuildInParallel)"
-      Projects="@(RuntimeProject -> WithMetadataValue('Extension', '.pkgproj'))">
+      Projects="@(RuntimeProject -> WithMetadataValue('Extension', '.pkgproj'))"
+    >
       <Output TaskParameter="TargetOutputs" ItemName="_runtimeDependencyIdentity" />
     </MSBuild>
 

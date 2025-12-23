@@ -17,7 +17,10 @@
        works around https://github.com/dotnet/sdk/issues/18129 -->
   <Target Name="IncludeNetStandardConflictResolution" BeforeTargets="_HandlePackageFileConflicts">
     <ItemGroup>
-      <_RuntimeAssetsForConflictResolution Include="@(Reference)" Condition="'%(Reference.NuGetPackageId)' == 'NETStandard.Library' or '%(Reference.NuGetPackageId)' == 'NETStandard.Library.Ref'" />
+      <_RuntimeAssetsForConflictResolution
+        Include="@(Reference)"
+        Condition="'%(Reference.NuGetPackageId)' == 'NETStandard.Library' or '%(Reference.NuGetPackageId)' == 'NETStandard.Library.Ref'"
+      />
     </ItemGroup>
   </Target>
 </Project>

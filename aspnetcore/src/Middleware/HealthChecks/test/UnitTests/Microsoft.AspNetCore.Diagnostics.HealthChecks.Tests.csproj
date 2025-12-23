@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <RootNamespace>Microsoft.AspNetCore.Diagnostics.HealthChecks</RootNamespace>
@@ -13,5 +12,4 @@
     <Reference Include="Microsoft.AspNetCore.Diagnostics.HealthChecks" />
     <Reference Include="Microsoft.AspNetCore.TestHost" />
   </ItemGroup>
-
 </Project>

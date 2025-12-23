@@ -42,7 +42,7 @@
     <Compile Include="..\DateTimeFormatInfo\DateTimeFormatInfoNativeCalendarName.cs" />
     <Compile Include="..\DateTimeFormatInfo\DateTimeFormatInfoPMDesignator.cs" />
     <Compile Include="..\DateTimeFormatInfo\DateTimeFormatInfoReadOnly.cs" />
-    <Compile Include="..\DateTimeFormatInfo\DateTimeFormatInfoRFC1123Pattern.cs" /> 
+    <Compile Include="..\DateTimeFormatInfo\DateTimeFormatInfoRFC1123Pattern.cs" />
     <Compile Include="..\DateTimeFormatInfo\DateTimeFormatInfoShortDatePattern.cs" />
     <Compile Include="..\DateTimeFormatInfo\DateTimeFormatInfoShortestDayNames.cs" />
     <Compile Include="..\DateTimeFormatInfo\DateTimeFormatInfoShortTimePattern.cs" />

@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFrameworks>$(DefaultNetCoreTargetFramework);$(DefaultNetFxTargetFramework)</TargetFrameworks>
   </PropertyGroup>
@@ -24,5 +23,4 @@
     <Reference Include="Microsoft.Extensions.Options.ConfigurationExtensions" />
     <Reference Include="Microsoft.Extensions.Primitives" />
   </ItemGroup>
-
 </Project>

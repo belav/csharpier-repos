@@ -1,4 +1,7 @@
-<Type Name="VisualStyleElement+TaskbarClock" FullName="System.Windows.Forms.VisualStyles.VisualStyleElement+TaskbarClock">
+<Type
+  Name="VisualStyleElement+TaskbarClock"
+  FullName="System.Windows.Forms.VisualStyles.VisualStyleElement+TaskbarClock"
+>
   <TypeSignature Language="C#" Value="public static class VisualStyleElement.TaskbarClock" />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>

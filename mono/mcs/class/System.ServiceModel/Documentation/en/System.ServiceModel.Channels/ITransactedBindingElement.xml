@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="ITransactedBindingElement" FullName="System.ServiceModel.Channels.ITransactedBindingElement">
+<Type
+  Name="ITransactedBindingElement"
+  FullName="System.ServiceModel.Channels.ITransactedBindingElement"
+>
   <TypeSignature Language="C#" Value="public interface ITransactedBindingElement" />
-  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract ITransactedBindingElement" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public interface auto ansi abstract ITransactedBindingElement"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>

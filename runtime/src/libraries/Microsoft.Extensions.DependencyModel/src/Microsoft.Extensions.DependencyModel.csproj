@@ -10,16 +10,17 @@ By default, the dependency manifest contains information about the application's
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="$(CoreLibSharedDir)\System\Numerics\Hashing\HashHelpers.cs"
-             Link="System\Numerics\Hashing\HashHelpers.cs" />
-    <Compile Include="$(CommonPath)System\ThrowHelper.cs"
-             Link="Common\System\ThrowHelper.cs" />
+    <Compile
+      Include="$(CoreLibSharedDir)\System\Numerics\Hashing\HashHelpers.cs"
+      Link="System\Numerics\Hashing\HashHelpers.cs"
+    />
+    <Compile Include="$(CommonPath)System\ThrowHelper.cs" Link="Common\System\ThrowHelper.cs" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'">
     <Compile Remove="**\*.netstandard.cs" />
   </ItemGroup>
-  
+
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'">
     <Compile Remove="**\*.netcoreapp.cs" />
     <Compile Include="$(CoreLibSharedDir)System\Diagnostics\CodeAnalysis\RequiresAssemblyFilesAttribute.cs" />
@@ -27,7 +28,7 @@ By default, the dependency manifest contains information about the application's
   </ItemGroup>
 
   <ItemGroup>
-    <InternalsVisibleTo Include="Microsoft.Extensions.DependencyModel.Tests" /> 
+    <InternalsVisibleTo Include="Microsoft.Extensions.DependencyModel.Tests" />
   </ItemGroup>
 
   <ItemGroup>
@@ -43,5 +44,4 @@ By default, the dependency manifest contains information about the application's
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
     <Reference Include="System.Runtime" />
   </ItemGroup>
-  
 </Project>

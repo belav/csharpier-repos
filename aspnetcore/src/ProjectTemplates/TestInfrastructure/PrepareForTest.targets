@@ -16,13 +16,20 @@
       <_Parameter1>Test.DefaultTargetFramework</_Parameter1>
       <_Parameter2>$(DefaultNetCoreTargetFramework)</_Parameter2>
     </AssemblyAttribute>
-    <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute" Condition="'$(ContinuousIntegrationBuild)' == 'true'">
+    <AssemblyAttribute
+      Include="System.Reflection.AssemblyMetadataAttribute"
+      Condition="'$(ContinuousIntegrationBuild)' == 'true'"
+    >
       <_Parameter1>ContinuousIntegrationBuild</_Parameter1>
       <_Parameter2>true</_Parameter2>
     </AssemblyAttribute>
   </ItemGroup>
 
-  <Target Name="PrepareForTest" BeforeTargets="GetAssemblyAttributes" Condition=" '$(DesignTimeBuild)' != 'true' ">
+  <Target
+    Name="PrepareForTest"
+    BeforeTargets="GetAssemblyAttributes"
+    Condition=" '$(DesignTimeBuild)' != 'true' "
+  >
     <PropertyGroup>
       <TestTemplateCreationFolder>$([MSBuild]::NormalizePath('$(OutputPath)$(TestTemplateCreationFolder)'))</TestTemplateCreationFolder>
       <CustomTemplateHivePath>$(TestTemplateCreationFolder)\Hives\$([System.Guid]::NewGuid())\.templateengine</CustomTemplateHivePath>
@@ -65,10 +72,18 @@
 
     <Delete Files="@(_ExistingFilesFromLastRun)" ContinueOnError="true" />
 
-    <RemoveDir Directories="$(TestTemplateCreationFolder)" Condition="Exists('$(TestTemplateCreationFolder)')" ContinueOnError="true">
+    <RemoveDir
+      Directories="$(TestTemplateCreationFolder)"
+      Condition="Exists('$(TestTemplateCreationFolder)')"
+      ContinueOnError="true"
+    >
       <Output TaskParameter="RemovedDirectories" ItemName="_CleanedUpDirectories" />
     </RemoveDir>
-    <RemoveDir Directories="$(TestPackageRestorePath)" Condition="Exists('$(TestPackageRestorePath)')" ContinueOnError="true">
+    <RemoveDir
+      Directories="$(TestPackageRestorePath)"
+      Condition="Exists('$(TestPackageRestorePath)')"
+      ContinueOnError="true"
+    >
       <Output TaskParameter="RemovedDirectories" ItemName="_CleanedUpDirectories" />
     </RemoveDir>
 
@@ -80,16 +95,20 @@
       TemplateFile="$(MSBuildThisFileDirectory)..\TestInfrastructure\Directory.Build.targets.in"
       Properties="Configuration=$(Configuration);
           RestoreAdditionalProjectSources=$([MSBuild]::Escape('$(RestoreAdditionalProjectSources);$(ArtifactsShippingPackagesDir);$(ArtifactsNonShippingPackagesDir)'))"
-      OutputPath="$(TestTemplateCreationFolder)Directory.Build.targets" />
+      OutputPath="$(TestTemplateCreationFolder)Directory.Build.targets"
+    />
 
     <GenerateFileFromTemplate
       TemplateFile="$(MSBuildThisFileDirectory)..\TestInfrastructure\Directory.Build.props.in"
       Properties="RepoRoot=$(RepoRoot);ArtifactsBinDir=$(ArtifactsBinDir)"
-      OutputPath="$(TestTemplateCreationFolder)Directory.Build.props" />
+      OutputPath="$(TestTemplateCreationFolder)Directory.Build.props"
+    />
 
     <!-- Workaround https://github.com/dotnet/core-setup/issues/6420 - there is no MSBuild setting for rollforward yet -->
-    <Copy SourceFiles="$(MSBuildThisFileDirectory)..\TestInfrastructure\runtimeconfig.norollforward.json"
+    <Copy
+      SourceFiles="$(MSBuildThisFileDirectory)..\TestInfrastructure\runtimeconfig.norollforward.json"
       DestinationFolder="$(TestTemplateCreationFolder)"
-      UseHardLinksIfPossible="true" />
+      UseHardLinksIfPossible="true"
+    />
   </Target>
 </Project>
