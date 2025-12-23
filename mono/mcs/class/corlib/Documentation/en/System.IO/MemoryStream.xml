@@ -652,8 +652,7 @@
           >The value specified for a set operation is negative or less than the current length of the stream.</exception
         >
         <exception cref="T:System.NotSupportedException"
-          >A set operation was attempted on a stream whose capacity cannot be modified. </exception
-        >
+          >A set operation was attempted on a stream whose capacity cannot be modified. </exception>
         <exception cref="T:System.ObjectDisposedException">The current stream is closed.</exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -939,8 +938,7 @@ public class MemoryStreamTest {
 
    }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>a and b represent the same instance.</para>
@@ -1121,8 +1119,7 @@ public class MemoryStreamTest {
       }
    }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>0123456789 </para>

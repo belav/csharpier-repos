@@ -66,8 +66,7 @@ public class WebResponseExample {
     myResponse.Close();
   }
 }
-</code
-      >
+</code>
     </example>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -235,8 +234,7 @@ containing the number of bytes returned from the resource.</para
           >
         </value>
         <exception cref="T:System.NotSupportedException"
-          >This property is not implemented in the derived class. </exception
-        >
+          >This property is not implemented in the derived class. </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -280,8 +278,7 @@ containing the number of bytes returned from the resource.</para
           >
         </value>
         <exception cref="T:System.NotSupportedException"
-          >This property is not implemented in the derived class. </exception
-        >
+          >This property is not implemented in the derived class. </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -454,8 +451,7 @@ containing the number of bytes returned from the resource.</para
       <Parameters />
       <Docs>
         <exception cref="T:System.NotSupportedException"
-          >This method is not implemented in the derived class. </exception
-        >
+          >This method is not implemented in the derived class. </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -511,8 +507,7 @@ containing the number of bytes returned from the resource.</para
           >
         </value>
         <exception cref="T:System.NotSupportedException"
-          >This property is not implemented in the derived class. </exception
-        >
+          >This property is not implemented in the derived class. </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -620,8 +615,7 @@ containing the number of bytes returned from the resource.</para
           >
         </value>
         <exception cref="T:System.NotSupportedException"
-          >This property is not implemented in the derived class. </exception
-        >
+          >This property is not implemented in the derived class. </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para

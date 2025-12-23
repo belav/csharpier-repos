@@ -585,8 +585,7 @@ s.CreateSymbolicLinkTo ("target.usli");</code
 symlink -&gt; target
 symlink.ufi -&gt; /full/path/to/target.ufi
 symlink.usli -&gt; target.usli
-            </code
-            >
+            </code>
           </example>
         </remarks>
         <exception cref="T:System.UnauthorizedAccessException">
@@ -1154,8 +1153,7 @@ symlink.usli -&gt; target.usli
         <exception cref="T:System.IO.IOException">
           An I/O error occurred while reading from or writing to the file
           system.
-        </exception
-        >
+        </exception>
         <exception cref="T:Mono.Unix.UnixIOException">
           <para
             >Too many symbolic links were encountered in translating 

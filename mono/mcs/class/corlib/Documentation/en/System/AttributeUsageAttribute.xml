@@ -189,8 +189,7 @@ class JohnsClass {
 
   public static void Main() {}
 }
-</code
-          >
+</code>
           <para>
             <see langword="Example #2:" />
           </para>
@@ -218,8 +217,7 @@ class JohnsClass {
 
   public static void Main() {}
 }
-</code
-          >
+</code>
           <para>This should throw an error similar to:</para>
           <para>error CS0579: Duplicate 'Author' attribute</para>
         </example>

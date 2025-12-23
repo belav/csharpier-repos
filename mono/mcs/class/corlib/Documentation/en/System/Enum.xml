@@ -500,8 +500,7 @@ public class EnumCompTo {
    Console.WriteLine(Lights.Format(typeof(Lights), 7, "g"));
   }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>4</para>
@@ -730,8 +729,7 @@ public class EnumCompTo {
    Console.WriteLine( "{0}.", Signs.GetName(typeof(Signs), Signs.Stop ));
   }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>The name of the constant with the value 4 is: Merge.</para>
@@ -831,8 +829,7 @@ public class enumGetNames {
       }
    }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>The value indexed '0' is Red.</para>
@@ -951,8 +948,7 @@ public class EnumUnderlyingTypeTest {
      Console.WriteLine("The underlying type of Colors is {0}.", t.ToString());
   }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>The underlying type of Colors is System.Int32.</para>
@@ -1036,8 +1032,7 @@ public class enumGetValues {
       }
    }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>The value of element Red is 1.</para>
@@ -1194,8 +1189,7 @@ public class enumIsDefined {
      Console.WriteLine("that '3' is defined in 'Colors'.");
   }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>It is True that '1' is defined in 'Colors'.</para>
@@ -1331,8 +1325,7 @@ public class enumTest {
     }
   }
 }
-</code
-          >
+</code>
           <para>The output is </para>
           <c>
             <para>The type of the object returned is Colors</para>

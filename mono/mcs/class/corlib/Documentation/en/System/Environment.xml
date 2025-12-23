@@ -676,8 +676,7 @@ class EnvTest:Object {
     }
   }
 }
-   </code
-          >
+   </code>
           <para>The output will vary depending on your system.</para>
         </example>
         <remarks>
@@ -976,8 +975,7 @@ class TestClass {
                         Environment.NewLine);
     }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>Hello,</para>
@@ -1256,8 +1254,7 @@ public class TestCallStack {
         t.MyMethod1();
     }
 }
-</code
-          >
+</code>
           <para>Without debug symbols the output is</para>
           <c>
             <para>TestCallStack: at System.Environment.GetStackTrace(Exception e)</para>

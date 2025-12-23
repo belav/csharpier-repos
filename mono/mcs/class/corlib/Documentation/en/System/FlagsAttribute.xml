@@ -75,8 +75,7 @@ public class enumFormat {
     Console.WriteLine("Color: {0}", c); 
   } 
 } 
-      </code
-      >
+      </code>
       <para>The output is</para>
       <c>
         <para>Position: Top, Left</para>

@@ -651,8 +651,7 @@ s.CreateSymbolicLinkTo ("target.usli");</code
 symlink -&gt; target
 symlink.ufi -&gt; /full/path/to/target.ufi
 symlink.usli -&gt; target.usli
-            </code
-            >
+            </code>
           </example>
         </remarks>
         <exception cref="System.IO.DirectoryNotFoundException">

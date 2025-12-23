@@ -58,8 +58,7 @@ public class WebRequestExample {
     Console.WriteLine(myRequest);
   }
 }
-</code
-      >
+</code>
       <para>The output is</para>
       <para>System.Net.HttpWebRequest</para>
     </example>
@@ -492,14 +491,11 @@ public class WebRequestExample {
           >
         </value>
         <exception cref="T:System.NotSupportedException"
-          >This property is not implemented in the derived class. </exception
-        >
+          >This property is not implemented in the derived class. </exception>
         <exception cref="T:System.InvalidOperationException"
-          >Data has already been written to the request stream. </exception
-        >
+          >Data has already been written to the request stream. </exception>
         <exception cref="T:System.ArgumentOutOfRangeException"
-          >This property is being set to a value less than zero. </exception
-        >
+          >This property is being set to a value less than zero. </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -542,8 +538,7 @@ public class WebRequestExample {
           >
         </value>
         <exception cref="T:System.NotSupportedException"
-          >This property is not implemented in the derived class. </exception
-        >
+          >This property is not implemented in the derived class. </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -835,8 +830,7 @@ public class CreateDefaultExample
       Console.WriteLine("Create --&gt; {0}", textContoso);
    }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>CreateDefault --&gt; System.Net.HttpWebRequest</para>
@@ -1039,8 +1033,7 @@ public class CreateDefaultExample
           >
         </value>
         <exception cref="T:System.NotSupportedException"
-          >This property is not implemented in the derived class. </exception
-        >
+          >This property is not implemented in the derived class. </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -1612,8 +1605,7 @@ public class CreateDefaultExample
           >
         </value>
         <exception cref="T:System.NotSupportedException"
-          >This property is not implemented in the derived class. </exception
-        >
+          >This property is not implemented in the derived class. </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -1685,8 +1677,7 @@ public class CreateDefaultExample
           >
         </value>
         <exception cref="T:System.NotSupportedException"
-          >This property is not implemented in the derived class. </exception
-        >
+          >This property is not implemented in the derived class. </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -1734,8 +1725,7 @@ public class CreateDefaultExample
           >
         </value>
         <exception cref="T:System.NotSupportedException"
-          >This property is not implemented in the derived class. </exception
-        >
+          >This property is not implemented in the derived class. </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -1782,8 +1772,7 @@ public class CreateDefaultExample
           <para> A <see cref="T:System.Net.IWebProxy" /> to use to access resources.</para>
         </value>
         <exception cref="T:System.NotSupportedException"
-          >This property is not implemented in the derived class. </exception
-        >
+          >This property is not implemented in the derived class. </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -1866,8 +1855,7 @@ public class RegisterPrefixExample
       Console.WriteLine(wr);
    }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <para>ftpWebRequest</para>
         </example>
@@ -1956,8 +1944,7 @@ public class RegisterPrefixExample
           >
         </value>
         <exception cref="T:System.NotSupportedException"
-          >This property is not implemented in the derived class. </exception
-        >
+          >This property is not implemented in the derived class. </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
@@ -2050,8 +2037,7 @@ public class RegisterPrefixExample
           >
         </value>
         <exception cref="T:System.NotSupportedException"
-          >This property is not implemented in the derived class. </exception
-        >
+          >This property is not implemented in the derived class. </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para

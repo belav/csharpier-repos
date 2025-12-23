@@ -38,7 +38,6 @@ WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and
             {Registry:$(FrameworkRegistryBase),$(TargetFrameworkVersion),$(AssemblyFoldersSuffix)$(AssemblyFoldersExConditions)};
             {RawFileName};
             $(OutDir)
-        </AssemblySearchPaths
-    >
+        </AssemblySearchPaths>
   </PropertyGroup>
 </Project>

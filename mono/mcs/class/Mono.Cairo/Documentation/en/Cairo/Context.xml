@@ -112,8 +112,7 @@ public class CairoGraphic : DrawingArea
                 return true;
         }
 }
-  </code
-          >
+  </code>
         </example>
       </para>
     </remarks>
@@ -146,9 +145,10 @@ Cairo.XlibSurface s = new Cairo.XlibSurface (Xdisplay,
 Cairo.Context g = new Cairo.Context (s);
 
 
-  </code
-            >
+  </code>
           </example>
+
+          
 
           
 
@@ -277,8 +277,7 @@ gr.LineWidth = 0.04;
 
 gr.Arc (xc, yc, radius, angle1, angle2);
 gr.Stroke ();
-  </code
-              >
+  </code>
             </example>
           </para>
         </remarks>
@@ -334,8 +333,7 @@ gr.LineWidth = 0.04;
 
 gr.ArcNegative (xc, yc, radius, angle1, angle2);
 gr.Stroke ();
-  </code
-              >
+  </code>
             </example>
           </para>
         </remarks>
@@ -425,8 +423,7 @@ gr.CurveTo ( new PointD (0.2, 0.9),
                   new PointD (0.5, 0.5));
 
 gr.ClosePath ();
-  </code
-            >
+  </code>
           </example>
         </remarks>
       </Docs>
@@ -1867,8 +1864,7 @@ Note that code meant to be reusable should not call Cairo.Context.ResetClip() as
       <Docs>
         <param name="angle"
           >angle (in radians) by which the user-space axes will be rotated.
-</param
-        >
+</param>
         <summary
           >Modifies the current transformation matrix (CTM) by rotating the user-space axes by <paramref name="angle" /> radians. 
 </summary
@@ -2552,8 +2548,7 @@ gr.Translate (-0.5*w, -0.5*h);
 
 image.Show (gr, 0, 0);
 image.Destroy ();
-  </code
-              >
+  </code>
             </example>
           </para>
         </remarks>

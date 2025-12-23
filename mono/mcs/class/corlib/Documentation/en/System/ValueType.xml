@@ -40,8 +40,7 @@ class Boxer {
    Console.WriteLine("Value is {0}.", 3.ToString());
   }
 }
-</code
-      >
+</code>
       <para>The output is</para>
       <c>
         <para>Value is 3.</para>

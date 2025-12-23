@@ -188,8 +188,7 @@
         </remarks>
         <exception cref="T:System.ArgumentException">
           The internal signal handler could not be registered or the signal was registered outside of Mono.Posix.
-        </exception
-        >
+        </exception>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="signum" /> is not a valid signal value.
         </exception
@@ -240,8 +239,7 @@
         </remarks>
         <exception cref="T:System.ArgumentException">
           The internal signal handler could not be registered.
-        </exception
-        >
+        </exception>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="signum" /> is not a valid signal value.
         </exception
@@ -281,8 +279,7 @@
         >
         <exception cref="T:System.ObjectDisposedException">
           The current instance has already been disposed.
-        </exception
-        >
+        </exception>
       </Docs>
     </Member>
     <Member MemberName="Dispose">
@@ -400,8 +397,7 @@
         <remarks></remarks>
         <exception cref="T:System.ObjectDisposedException">
           The current instance has already been disposed.
-        </exception
-        >
+        </exception>
       </Docs>
     </Member>
     <Member MemberName="RealTimeSignum">
@@ -440,12 +436,10 @@
         </remarks>
         <exception cref="T:System.InvalidOperationException">
           The current instance is registered for a non-realtime signal.
-        </exception
-        >
+        </exception>
         <exception cref="T:System.ObjectDisposedException">
           The current instance has already been disposed.
-        </exception
-        >
+        </exception>
       </Docs>
     </Member>
     <Member MemberName="Reset">
@@ -492,8 +486,7 @@
         </remarks>
         <exception cref="T:System.ObjectDisposedException">
           The current instance has already been disposed.
-        </exception
-        >
+        </exception>
       </Docs>
     </Member>
     <Member MemberName="Signum">
@@ -528,12 +521,10 @@
         </remarks>
         <exception cref="T:System.InvalidOperationException">
           The current instance is registered for a realtime signal.
-        </exception
-        >
+        </exception>
         <exception cref="T:System.ObjectDisposedException">
           The current instance has already been disposed.
-        </exception
-        >
+        </exception>
       </Docs>
     </Member>
     <Member MemberName="WaitAny">
@@ -781,8 +772,7 @@
         </remarks>
         <exception cref="T:System.ObjectDisposedException">
           The current instance has already been disposed.
-        </exception
-        >
+        </exception>
         <altmember cref="M:Mono.Unix.UnixSignal.WaitOne(System.Int32)" />
       </Docs>
     </Member>
@@ -850,8 +840,7 @@
         >
         <exception cref="T:System.ObjectDisposedException">
           The current instance has already been disposed.
-        </exception
-        >
+        </exception>
       </Docs>
     </Member>
     <Member MemberName="WaitOne">
@@ -922,8 +911,7 @@
         >
         <exception cref="T:System.ObjectDisposedException">
           The current instance has already been disposed.
-        </exception
-        >
+        </exception>
       </Docs>
     </Member>
   </Members>

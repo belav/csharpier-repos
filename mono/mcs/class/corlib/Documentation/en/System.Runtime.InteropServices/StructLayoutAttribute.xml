@@ -109,8 +109,7 @@ public class StructLayoutTest {
 
  }
 }
-</code
-      >
+</code>
       <para>The output is</para>
       <c>
         <para>The first point is inside the rectangle.</para>

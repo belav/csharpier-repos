@@ -65,8 +65,7 @@
 class Example {
 	[Doc ("documented field")] public string field;
 }
-</code
-        >
+</code>
       </remarks>
     </member>
     <member name="C:Mono.DocTest.DocAttribute(System.String)">

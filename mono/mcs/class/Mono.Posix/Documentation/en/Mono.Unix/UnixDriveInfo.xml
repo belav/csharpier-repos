@@ -61,8 +61,7 @@
           before returning it so that the information retrieved is as
           up-to-date as possible, but it cannot take everything into
           consideration.
-        </block
-        >
+        </block>
       </para>
       <para>
         Check the individual method and property documentation to determine 
@@ -145,8 +144,7 @@
         <exception cref="T:System.InvalidOperationException">
           There was an error retrieving the total disk space.  
           The volume may not be mounted.
-        </exception
-        >
+        </exception>
       </Docs>
     </Member>
     <Member MemberName="DriveFormat">
@@ -370,8 +368,7 @@
         <exception cref="T:System.InvalidOperationException">
           There was an error retrieving the maximum filename length.
           The volume may not be mounted.
-        </exception
-        >
+        </exception>
       </Docs>
     </Member>
     <Member MemberName="Name">
@@ -485,8 +482,7 @@
         <exception cref="T:System.InvalidOperationException">
           There was an error retrieving the total free space.  
           The volume may not be mounted.
-        </exception
-        >
+        </exception>
       </Docs>
     </Member>
     <Member MemberName="TotalSize">
@@ -512,8 +508,7 @@
         <exception cref="T:System.InvalidOperationException">
           There was an error retrieving the total size.  
           The volume may not be mounted.
-        </exception
-        >
+        </exception>
       </Docs>
     </Member>
     <Member MemberName="VolumeLabel">

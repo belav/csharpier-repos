@@ -46,8 +46,7 @@
       <para
         >You typically do not use the <see cref="T:System.Windows.Forms.AxHost" /> class directly. You can use the <format type="text/html">
           <a href="482C0D83-7144-4497-B626-87D2351B78D0"
-            >Windows Forms ActiveX Control Importer (AxImp.exe) </a
-          >
+            >Windows Forms ActiveX Control Importer (AxImp.exe) </a>
         </format> to generate the wrappers that extend <see cref="T:System.Windows.Forms.AxHost" />.</para
       >
       <para

@@ -68,8 +68,7 @@ class TestClass {
  Console.WriteLine (delInstance ("Call 2"));
  }
 }
-</code
-      >
+</code>
       <para> The output is</para>
       <c>
         <para>Static method Arg=Call 1</para>
@@ -107,8 +106,7 @@ class TestClass {
    Console.WriteLine("After Invoking delegate i = {0} return value is {1}",i, retvalue);
   }
 }
-</code
-      >
+</code>
       <para> The output is</para>
       <c>
         <para>Invoking delegate using ref value 1</para>
@@ -2218,8 +2216,7 @@ class TestClass {
     }
 }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>Invocation list targets for source:</para>
@@ -2458,8 +2455,7 @@ class TestClass {
     Console.WriteLine ("Instance target is {0}", t==null ? "null":t);
     }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>Static target is null</para>
@@ -2528,8 +2524,7 @@ class TestClass {
 
     }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>Combined 1 static, 1 instance, same class:</para>

@@ -513,8 +513,7 @@
 <example>
             <code lang="C#">
     string value = worker_request.GetKnownRequestHeader (HttpWorkerRequest.HeaderContentLength);
-  </code
-            >
+  </code>
           </example>
         </remarks>
         <summary>

@@ -194,8 +194,7 @@
           <example>
             <code lang="C#">
 compileUnit.ReferencedAssemblies.Add("System.Data");
-  </code
-            >
+  </code>
 Adds a reference to the System.Data assembly for the compile unit.
 </example
           >

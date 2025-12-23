@@ -157,8 +157,7 @@ class FormattableExample {
 
     }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>123.12345678901234 as C: $123.12</para>

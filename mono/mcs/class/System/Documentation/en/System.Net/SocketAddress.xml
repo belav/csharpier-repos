@@ -430,8 +430,7 @@ public class SocketAddressToString{
     Console.WriteLine("{0}", socketAddress.ToString());
   }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>This is a minimal SocketAddress.</para>

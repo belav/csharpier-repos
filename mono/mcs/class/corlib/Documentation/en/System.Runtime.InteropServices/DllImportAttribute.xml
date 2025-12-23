@@ -78,8 +78,7 @@ public class DllImportAttributeTest {
  Console.WriteLine( "{0:00}:{1:00}:{2:00}", st.hour, st.minute, st.second ); 
  }
 }
-</code
-      >
+</code>
       <para>When run at the given time on the given date, the output produced was</para>
       <c>
         <para>The Date and Time is: 05/16/2001 at 11:39:17</para>

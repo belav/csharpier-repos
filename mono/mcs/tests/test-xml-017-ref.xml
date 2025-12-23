@@ -6,15 +6,12 @@
   <members>
     <member name="M:Testing.Test.Foo">
             comment on method without parameter
-        </member
-    >
+        </member>
     <member name="M:Testing.Test.Foo(System.Int64,Testing.Test,System.Collections.ArrayList)">
             here is a documentation with parameters (and has same name)
-        </member
-    >
+        </member>
     <member name="M:Testing.Test.Foo(System.String[])">
             here is a documentation with parameters (and has same name)
-        </member
-    >
+        </member>
   </members>
 </doc>

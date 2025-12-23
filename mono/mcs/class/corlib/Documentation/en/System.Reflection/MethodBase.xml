@@ -179,8 +179,7 @@ class MethodAttributesExample
    }
 
 }
-      </code
-          >
+      </code>
           <para>The output is</para>
           <c>
             <para>Method MyPublicInstanceMethod is:</para>

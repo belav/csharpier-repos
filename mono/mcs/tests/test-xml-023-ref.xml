@@ -6,7 +6,6 @@
   <members>
     <member name="M:Test.Foo(Test.A,System.Int32)">
             here is a documentation
-        </member
-    >
+        </member>
   </members>
 </doc>

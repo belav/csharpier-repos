@@ -733,8 +733,7 @@ class Test
 			FilePermissions.S_IROTH;
 	}
 }
-  </code
-            >
+  </code>
           </example>
         </remarks>
       </Docs>
@@ -1295,8 +1294,7 @@ class Test
 			FilePermissions.ACCESSPERMS;
 	}
 }
-  </code
-            >
+  </code>
           </example>
         </remarks>
       </Docs>
@@ -2290,8 +2288,7 @@ class Test
 		}
 	}
 }
-  </code
-            >
+  </code>
           </example>
         </remarks>
       </Docs>
@@ -2905,8 +2902,7 @@ class Test
 		}
 	}
 }
-  </code
-            >
+  </code>
           </example>
         </remarks>
       </Docs>

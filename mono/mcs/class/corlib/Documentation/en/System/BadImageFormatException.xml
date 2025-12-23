@@ -57,8 +57,7 @@ public class BadImageExample {
     }
   } 
 }
-   </code
-      >
+   </code>
       <para>The output is</para>
       <c>
         <para>Caught: The format of the file 'calc' is invalid.</para>

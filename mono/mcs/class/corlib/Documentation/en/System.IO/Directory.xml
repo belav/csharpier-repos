@@ -1944,8 +1944,7 @@ class GetDirectoryTest {
     }
   }
 }
-</code
-          >
+</code>
           <para>The output is </para>
           <c>
             <para>Path: \ecmatest\examples\pathtests.txt Directory Root is C:\</para>

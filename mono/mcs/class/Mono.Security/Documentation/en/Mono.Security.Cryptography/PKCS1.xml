@@ -285,8 +285,7 @@
       </Parameters>
       <Docs>
         <param name="x"
-          >a byte array (named an octet string in PKCS#1) containing the encoded integer. </param
-        >
+          >a byte array (named an octet string in PKCS#1) containing the encoded integer. </param>
         <summary>Octet String to Integer primitive.</summary>
         <returns>an array of bytes representing a large non-negative integer.</returns>
         <remarks>See section 4.2 of PKCS #1 v2.1 for more details.</remarks>

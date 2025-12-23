@@ -38,8 +38,7 @@
 class Example {
 	[Doc ("documented field")] public string field;
 }
-</code
-      >
+</code>
     </remarks>
   </Docs>
   <Members>

@@ -181,8 +181,7 @@ class RequiresArgsCommand : Command {
 		}
 	}
 }
-</code
-      >
+</code>
       <para>
         The output, under the influence of different command-line arguments, is:
       </para>
@@ -313,8 +312,7 @@ Showing CommandSet completions for prefix 's':
 $ mono commands.exe completions s o
 Showing CommandSet completions for prefix 's o':
 	completion: set output
-</code
-      >
+</code>
       <para>
         The <c>commands.exe</c> output is short, informing the user that
         commands are required for use.

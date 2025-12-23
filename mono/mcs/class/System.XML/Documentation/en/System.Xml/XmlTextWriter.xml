@@ -50,8 +50,7 @@ public class WriteFragment
     xWriter.Close();           
   }
 }
-   </code
-      >
+   </code>
       <para>The output is</para>
       <para>
         <c>&lt;prefix:Element1 n1:Attr1="value1" n2:Attr2="value2" xmlns:n2="namespace2"
@@ -2337,8 +2336,7 @@ public class WriteXml
     xWriter.WriteEndDocument();
   }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <para>
             <c>&lt;?xml version="1.0" encoding=
@@ -2492,8 +2490,7 @@ public class WriteFrag {
     xtWriter.WriteString("&lt;1 &amp; 2 = 3&gt;");
   }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <para>&amp;lt;1 &amp;amp; 2 = 3&amp;gt;</para>
         </example>

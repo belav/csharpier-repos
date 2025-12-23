@@ -83,8 +83,7 @@ public static void PrintValues( IEnumerable myList ) {
     Console.WriteLine(); 
   } 
 }
-</code
-      >
+</code>
       <para>The output is </para>
       <para>
         <c>

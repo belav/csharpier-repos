@@ -15,8 +15,7 @@
       <method signature="System.Object TestMethod_12()" body="stub" value="test"></method>
       <method signature="System.Void .ctor()" body="stub" value="x"
         >>
-      </method
-      >
+      </method>
     </type>
   </assembly>
 </linker>

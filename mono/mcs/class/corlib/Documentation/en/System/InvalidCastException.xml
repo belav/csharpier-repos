@@ -52,8 +52,7 @@ public class InvalidCastExample {
    }
  }
 }
-   </code
-      >
+   </code>
       <para>The output is</para>
       <code>
 Caught: System.InvalidCastException: Specified cast is not valid.

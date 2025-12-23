@@ -58,8 +58,7 @@
     <PropertyGroup>
       <_ToolchainMissingPaths
         Condition="'$(_ToolchainMissingPaths)' == '' and ('$(WasiClang)' == '' or !Exists('$(WasiClang)'))"
-        >%24(WasiClang)=$(WasiClang) </_ToolchainMissingPaths
-      >
+        >%24(WasiClang)=$(WasiClang) </_ToolchainMissingPaths>
     </PropertyGroup>
 
     <PropertyGroup>

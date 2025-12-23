@@ -3806,8 +3806,7 @@ class test {
       fmts[i],d.ToString(fmts[i]));
   }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>1234.56789</para>

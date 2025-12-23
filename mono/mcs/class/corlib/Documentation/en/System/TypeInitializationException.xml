@@ -61,8 +61,7 @@ class TestTypeInit {
         }
     }
 }
-   </code
-      >
+   </code>
       <para>The output is</para>
       <code>
 Error: System.TypeInitializationException: The type initializer for "TypeInit" threw an exception. ---&gt; System.ApplicationException: Error in Class TypeInit

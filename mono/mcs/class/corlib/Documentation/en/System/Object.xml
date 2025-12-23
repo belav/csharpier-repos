@@ -160,8 +160,7 @@ class MyClass {
       Console.WriteLine(obj1.Equals(obj2)); 
    }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>False</para>
@@ -209,8 +208,7 @@ class Point3D: Point {
  return base.GetHashCode() ^ z;
  }
 }
-</code
-          >
+</code>
           <para
             > The <see langword="Point.Equals" /> method checks that the <paramref name="obj" />
 argument is non-null and that it references an instance of the same type as this
@@ -267,8 +265,7 @@ class Rectangle {
  return a.GetHashCode() ^ b.GetHashCode();
  }
 }
-</code
-          >
+</code>
           <para>
             <see langword="Example 4:" />
           </para>
@@ -298,8 +295,7 @@ public struct Complex {
  return !(x == y);
  }
 }
-</code
-          >
+</code>
           <para
             >Because Complex is a C# struct (a value type), it is
    known that there will be no subclasses of <see langword="Complex" />
@@ -648,8 +644,7 @@ public class MyClass {
        s1, s2, Object.Equals(s1, s2));
    }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>Object.Equals("Tom", "Carol") =&gt; False</para>
@@ -965,8 +960,7 @@ public struct Int32 {
  return value;
  }
 }
-</code
-          >
+</code>
           <para>
             <see langword="Example 2" />
           </para>
@@ -985,8 +979,7 @@ public struct Point {
  return x ^ y;
  }
 }
-</code
-          >
+</code>
           <para>
             <see langword="Example 3" />
           </para>
@@ -1024,8 +1017,7 @@ public class MyClass {
  return a.GetHashCode() ^ b.GetHashCode() ^ c.GetHashCode();
  }
 }
-</code
-          >
+</code>
           <para
             >Avoid implementing <see cref="M:System.Object.GetHashCode" /> in a manner that results in circular references. In
 other words, if AClass.GetHashCode calls BClass.GetHashCode, it should not be
@@ -1050,8 +1042,7 @@ public struct Int64 {
  return ((int)value ^ (int)(value &gt;&gt; 32));
  }
 }
-</code
-          >
+</code>
         </example>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1185,8 +1176,7 @@ public class Test {
    Console.WriteLine("MyBaseClass b = myDerived: Type is {0}", b.GetType());
    }
 }
-</code
-          >
+</code>
           <para> The output is</para>
           <c>
             <para>mybase: Type is MyBaseClass</para>
@@ -1271,8 +1261,7 @@ class MyDerivedClass: MyBaseClass {
    MyDerivedClass m2 = (MyDerivedClass) m1.MemberwiseClone();
    }
 }
-</code
-          >
+</code>
           <para>A graphical representation of m1 and m2 might look like this</para>
           <code>
 +---------------+
@@ -1381,8 +1370,7 @@ class MyClass {
    Console.WriteLine(Object.ReferenceEquals(o, p));
    }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>True</para>
@@ -1477,8 +1465,7 @@ class MyClass {
       Console.WriteLine (o.ToString());
    }
 }
-      </code
-          >
+      </code>
           <para>The output is</para>
           <para>
             <c>System.Object</c>

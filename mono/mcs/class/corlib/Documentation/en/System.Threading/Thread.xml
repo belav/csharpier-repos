@@ -2279,8 +2279,7 @@ if this thread has been started, and has not terminated; otherwise,
           >This method was invoked on a <see langword="null" /> thread reference.</exception
         >
         <exception cref="T:System.Threading.ThreadStateException"
-          >The thread has already been started. </exception
-        >
+          >The thread has already been started. </exception>
         <example>
           <para>The following example demonstrates creating a thread and starting it.</para>
           <code lang="C#"
@@ -2305,8 +2304,7 @@ class ThreadTest{
     }
   }
 }
-   </code
-          >
+   </code>
           <para>One possible set of output is</para>
           <c>
             <para>In main. </para>

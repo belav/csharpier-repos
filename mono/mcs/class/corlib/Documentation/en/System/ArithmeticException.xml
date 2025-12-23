@@ -51,8 +51,7 @@ class testNan {
    }
  }
 }
-   </code
-      >
+   </code>
       <para>The output is</para>
       <c>
         <para>Error: System.ArithmeticException: Function does not accept floating point

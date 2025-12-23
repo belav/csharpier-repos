@@ -39,8 +39,7 @@ public class ConsoleTest {
       Console.WriteLine("!");
    }
 }
-</code
-      >
+</code>
       <para>The output for a user who entered the name "Fred" is</para>
       <c>
         <para>Hello World!</para>
@@ -1788,8 +1787,7 @@ public class ConsoleTest {
       </Parameters>
       <Docs>
         <exception cref="T:System.Security.SecurityException"
-          >The caller does not have the required permission. </exception
-        >
+          >The caller does not have the required permission. </exception>
         <exception cref="T:System.ArgumentNullException">
           <paramref name="newError" /> is <see langword="null" />. </exception
         >

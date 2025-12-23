@@ -6,8 +6,7 @@
   <members>
     <member name="T:Testing.Test">
             comment without markup on class - it is allowed
-        </member
-    >
+        </member>
     <!-- Badly formed XML comment ignored for member "T:Testing.Test2" -->
     <!-- Badly formed XML comment ignored for member "T:Testing.Test3" -->
   </members>

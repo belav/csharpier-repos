@@ -473,8 +473,7 @@ DisplayGenericMethodInfo(miBound);
 MethodInfo miDef = miBound.GetGenericMethodDefinition();
 Console.WriteLine("\nThe definition is the same: {0}",
        miDef == mi);
-</code
-          >
+</code>
         </example>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -977,8 +976,7 @@ Here it is: 42
 The definition is the same: True
 
  */
-</code
-          >
+</code>
         </example>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />

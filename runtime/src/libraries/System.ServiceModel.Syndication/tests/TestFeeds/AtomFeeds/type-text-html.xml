@@ -27,7 +27,6 @@ Expect:       !Error
           Some content.
         &lt;/body>
       &lt;/html>
-    </content
-    >
+    </content>
   </entry>
 </feed>

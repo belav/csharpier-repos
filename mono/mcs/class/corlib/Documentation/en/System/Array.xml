@@ -614,8 +614,7 @@ class BinarySearchExample {
     }
   }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>The indices and elements of the array are:</para>
@@ -1348,8 +1347,7 @@ public class ArrayCloneExample {
       Console.Write( "{0,3}", i );
   }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>The elements of the first array are: 3 4 5</para>
@@ -1648,8 +1646,7 @@ public class ArrayCopyExample {
          Console.Write( "{0,3}", dAryCopy[i] );
    }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>The elements of the first array are: 3 4 5</para>
@@ -1969,8 +1966,7 @@ class ArrayCopyExample {
       Console.WriteLine();     
    }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>The elements of the array are: 0 10 20 30 40 50</para>
@@ -2312,8 +2308,7 @@ public class ArrayCopyToExample
          Console.Write("{0} ", o);
    }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <para>
             <c>The contents of the first array are:</c>
@@ -2490,8 +2485,7 @@ public class ArrayCreateInstanceExample
    }
 
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <para>
             <c>The values of the array are: 0 3 6 9 12</c>
@@ -2622,8 +2616,7 @@ public class CreateMultiDimArrayExample
       }
    }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <code>The elements of the array are:
   0   1   2   3   4
@@ -2821,8 +2814,7 @@ public class Create2DArrayExample
       }
    }
 } 
-  </code
-          >
+  </code>
           <para>The output is</para>
           <code>The elements of the array are:
  0  1  2
@@ -2966,8 +2958,7 @@ public class MultiDimNonZeroBoundExample
       }
    }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <code>The elements of the array are:
 321 322 323
@@ -3120,8 +3111,7 @@ public class Create3DArrayExample
       }
    }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <code>The elements of the array are:
   0   1   2
@@ -4114,8 +4104,7 @@ public class ArrayGetEnumerator {
          Console.Write( " {0}", sEnum.Current );
    }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <c>
             <para>The elements of the array are: 1 one 2 two 3 three</para>
@@ -4425,8 +4414,7 @@ public class ArrayGetValueExample {
          Console.Write( " '{0}' ", strAry.GetValue( i ) );
    }
 }
-   </code
-          >
+   </code>
           <para>The output is</para>
           <para>
             <c>The elements
@@ -4982,8 +4970,7 @@ public class ArrayIndexOfExample {
       Console.WriteLine( "The first occurrence of 1 is at index {0}", j );
    }
 }
-</code
-          >
+</code>
           <para> The output is</para>
           <c>
             <para>The values of the array are: 0 1 2 0 1</para>
@@ -5653,8 +5640,7 @@ public class ArrayLastIndexOfExample {
       Console.WriteLine( "The last occurrence of 1 is at index {0}", j );
    }
 }
-</code
-          >
+</code>
           <para> The output is</para>
           <c>
             <para>The values of the array are: 0 1 2 0 1</para>
@@ -6391,8 +6377,7 @@ public class ArrayReverseExample {
          Console.Write( " {0}", str );
    }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>The elements of the array are: one two three</para>
@@ -7112,8 +7097,7 @@ public class ArraySortExample {
          Console.Write( str + " " );
    }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>The original string array is: All's well that ends well</para>
@@ -7248,8 +7232,7 @@ public class ArraySortExample {
          Console.Write( str + " " );
    }
 }
-</code
-          >
+</code>
           <para>The output is</para>
           <c>
             <para>The original string array is: All's well that ends well</para>

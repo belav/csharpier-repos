@@ -2000,8 +2000,7 @@
             <block subset="none" type="overrides"
               > This method must be overridden in order
       to provide the functionality described above, as there is no default implementation.
-   </block
-            >
+   </block>
           </para>
         </remarks>
         <exception cref="T:System.ArgumentException">
@@ -4382,8 +4381,7 @@ public class Copier {
     xtReader.Close();
   }
 }
-</code
-          >
+</code>
         </example>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -6051,15 +6049,13 @@ writer.Close();</code>
           <para>
             <block subset="none" type="overrides">
       This property must be overridden in order to provide the functionality as described herein, as there is no default implementation.
-      </block
-            >
+      </block>
           </para>
           <para>
             <block subset="none" type="usage"
               >Use this property to query the current state, for
       example, whether the writer is newly initialized, writing specific XML structures, or
-      closed. </block
-            >
+      closed. </block>
           </para>
         </remarks>
         <summary>

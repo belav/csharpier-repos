@@ -51,8 +51,7 @@ catch (Exception ex)
 	baseException = ex;
 	return false;
 }
-  </code
-        >
+  </code>
       </example>
     </remarks>
     <altmember cref="T:Mono.Unix.UnixEndPoint" />
