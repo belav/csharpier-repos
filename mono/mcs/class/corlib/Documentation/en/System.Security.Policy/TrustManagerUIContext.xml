@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="TrustManagerUIContext" FullName="System.Security.Policy.TrustManagerUIContext">
   <TypeSignature Language="C#" Value="public enum TrustManagerUIContext" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed TrustManagerUIContext extends System.Enum" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed TrustManagerUIContext extends System.Enum"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -29,7 +32,10 @@
   <Members>
     <Member MemberName="Install">
       <MemberSignature Language="C#" Value="Install" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Security.Policy.TrustManagerUIContext Install = int32(0)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Security.Policy.TrustManagerUIContext Install = int32(0)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -48,7 +54,10 @@
     </Member>
     <Member MemberName="Run">
       <MemberSignature Language="C#" Value="Run" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Security.Policy.TrustManagerUIContext Run = int32(2)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Security.Policy.TrustManagerUIContext Run = int32(2)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -67,7 +76,10 @@
     </Member>
     <Member MemberName="Upgrade">
       <MemberSignature Language="C#" Value="Upgrade" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Security.Policy.TrustManagerUIContext Upgrade = int32(1)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Security.Policy.TrustManagerUIContext Upgrade = int32(1)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

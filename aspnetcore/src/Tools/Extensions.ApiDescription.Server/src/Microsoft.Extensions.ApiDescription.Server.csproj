@@ -18,17 +18,23 @@
       Publish the referenced projects when building .NET Core bits. This is not needed for full framework builds
       because publish output matches what was built.
     -->
-    <Reference Include="dotnet-getdocument"
+    <Reference
+      Include="dotnet-getdocument"
       Condition=" '$(TargetFramework)' != '$(DefaultNetFxTargetFramework)' "
       Targets="Publish"
       Private="false"
       ReferenceOutputAssembly="false"
-      SkipGetTargetFrameworkProperties="true" />
-    <Reference Include="GetDocument.Insider"
+      SkipGetTargetFrameworkProperties="true"
+    />
+    <Reference
+      Include="GetDocument.Insider"
       Private="false"
       ReferenceOutputAssembly="false"
-      SkipGetTargetFrameworkProperties="true">
-        <Targets Condition=" '$(TargetFramework)' != '$(DefaultNetFxTargetFramework)' ">Publish</Targets>
+      SkipGetTargetFrameworkProperties="true"
+    >
+      <Targets Condition=" '$(TargetFramework)' != '$(DefaultNetFxTargetFramework)' "
+        >Publish</Targets
+      >
     </Reference>
   </ItemGroup>
 

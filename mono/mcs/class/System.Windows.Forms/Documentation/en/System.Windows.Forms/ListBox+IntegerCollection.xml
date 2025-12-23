@@ -1,5 +1,8 @@
 <Type Name="ListBox+IntegerCollection" FullName="System.Windows.Forms.ListBox+IntegerCollection">
-  <TypeSignature Language="C#" Value="public class ListBox.IntegerCollection : System.Collections.IList" />
+  <TypeSignature
+    Language="C#"
+    Value="public class ListBox.IntegerCollection : System.Collections.IList"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -18,7 +21,10 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public IntegerCollection (System.Windows.Forms.ListBox owner);" />
+      <MemberSignature
+        Language="C#"
+        Value="public IntegerCollection (System.Windows.Forms.ListBox owner);"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -70,7 +76,10 @@
       </Docs>
     </Member>
     <Member MemberName="AddRange">
-      <MemberSignature Language="C#" Value="public void AddRange (System.Windows.Forms.ListBox.IntegerCollection value);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void AddRange (System.Windows.Forms.ListBox.IntegerCollection value);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -236,7 +245,10 @@
       </Docs>
     </Member>
     <Member MemberName="System.Collections.ICollection.IsSynchronized">
-      <MemberSignature Language="C#" Value="bool System.Collections.ICollection.IsSynchronized { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="bool System.Collections.ICollection.IsSynchronized { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -251,7 +263,10 @@
       </Docs>
     </Member>
     <Member MemberName="System.Collections.ICollection.SyncRoot">
-      <MemberSignature Language="C#" Value="object System.Collections.ICollection.SyncRoot { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="object System.Collections.ICollection.SyncRoot { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -266,7 +281,10 @@
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IEnumerable.GetEnumerator">
-      <MemberSignature Language="C#" Value="System.Collections.IEnumerator IEnumerable.GetEnumerator ();" />
+      <MemberSignature
+        Language="C#"
+        Value="System.Collections.IEnumerator IEnumerable.GetEnumerator ();"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -404,7 +422,10 @@
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IList.Item">
-      <MemberSignature Language="C#" Value="object System.Collections.IList.Item[int index] { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="object System.Collections.IList.Item[int index] { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

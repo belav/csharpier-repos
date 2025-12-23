@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <!-- Needed for mechanical merging of all remaining tests, this particular project may not actually need process isolation -->
     <RequiresProcessIsolation>true</RequiresProcessIsolation>
@@ -9,5 +8,4 @@
   <ItemGroup>
     <Compile Include="Pointers.cs" />
   </ItemGroup>
-
 </Project>

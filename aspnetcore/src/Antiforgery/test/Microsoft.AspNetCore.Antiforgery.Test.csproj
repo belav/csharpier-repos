@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <Nullable>enable</Nullable>
@@ -16,5 +15,4 @@
   <ItemGroup>
     <Compile Include="$(SharedSourceRoot)AntiforgeryMetadata.cs" />
   </ItemGroup>
-
 </Project>

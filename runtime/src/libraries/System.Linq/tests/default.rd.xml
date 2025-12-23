@@ -182,7 +182,10 @@
       </Type>
 
       <Type Name="System.Linq.Tests.CountTests">
-        <Method Name="NonEnumeratedCount_UnsupportedEnumerables_ShouldReturnFalse" Dynamic="Required All">
+        <Method
+          Name="NonEnumeratedCount_UnsupportedEnumerables_ShouldReturnFalse"
+          Dynamic="Required All"
+        >
           <GenericArgument Name="System.Int32, System.Runtime" />
         </Method>
 
@@ -199,7 +202,10 @@
           <GenericArgument Name="System.Decimal, System.Runtime" />
         </Method>
 
-        <Method Name="NonEnumeratedCount_SupportedEnumerables_ShouldReturnExpectedCount" Dynamic="Required All">
+        <Method
+          Name="NonEnumeratedCount_SupportedEnumerables_ShouldReturnExpectedCount"
+          Dynamic="Required All"
+        >
           <GenericArgument Name="System.Int32, System.Runtime" />
         </Method>
 
@@ -375,8 +381,10 @@
 
     <!-- xUnit does this -->
     <Assembly Name="System.Runtime">
-      <Type Name="System.IEquatable`1[[System.Linq.Tests.GroupJoinTests+JoinRec,System.Linq.Tests]]" Dynamic="Required All" />
+      <Type
+        Name="System.IEquatable`1[[System.Linq.Tests.GroupJoinTests+JoinRec,System.Linq.Tests]]"
+        Dynamic="Required All"
+      />
     </Assembly>
-
   </Application>
 </Directives>

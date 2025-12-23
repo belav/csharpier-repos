@@ -12,6 +12,9 @@
 
   <!-- Benchmarks server uses shared Fx but needs refs to OOB packages. -->
   <ItemGroup Condition="'$(BenchmarksTargetFramework)' != ''">
-    <PackageReference Include="Microsoft.AspNetCore.ConcurrencyLimiter" Version="$(MicrosoftAspNetCoreAppVersion)" />
+    <PackageReference
+      Include="Microsoft.AspNetCore.ConcurrencyLimiter"
+      Version="$(MicrosoftAspNetCoreAppVersion)"
+    />
   </ItemGroup>
 </Project>

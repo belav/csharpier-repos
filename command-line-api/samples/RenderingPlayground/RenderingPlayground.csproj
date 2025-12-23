@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net7.0</TargetFramework>
@@ -14,5 +13,4 @@
     <ProjectReference Include="..\..\src\System.CommandLine.DragonFruit\System.CommandLine.DragonFruit.csproj" />
     <ProjectReference Include="..\..\src\System.CommandLine.Rendering\System.CommandLine.Rendering.csproj" />
   </ItemGroup>
-
 </Project>

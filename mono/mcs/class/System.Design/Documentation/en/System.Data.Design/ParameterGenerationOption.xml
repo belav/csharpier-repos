@@ -11,11 +11,15 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Data.Design.ParameterGenerationOption" /> enumeration is used to tell the <see cref="T:System.Data.Design.MethodSignatureGenerator" /> the type of parameters to generate in a typed dataset.</para>
+      <para
+        >The <see cref="T:System.Data.Design.ParameterGenerationOption" /> enumeration is used to tell the <see cref="T:System.Data.Design.MethodSignatureGenerator" /> the type of parameters to generate in a typed dataset.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Sets the type of parameters that are generated in a typed <see cref="T:System.Data.DataSet" /> class.</para>
+      <para
+        >Sets the type of parameters that are generated in a typed <see cref="T:System.Data.DataSet" /> class.</para
+      >
     </summary>
   </Docs>
   <Members>

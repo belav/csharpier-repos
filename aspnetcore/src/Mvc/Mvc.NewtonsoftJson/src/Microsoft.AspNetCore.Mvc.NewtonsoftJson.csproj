@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <Description>ASP.NET Core MVC features that use Newtonsoft.Json. Includes input and output formatters for JSON and JSON PATCH.</Description>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
@@ -24,8 +23,14 @@
   <ItemGroup>
     <Compile Include="$(SharedSourceRoot)ResponseContentTypeHelper.cs" LinkBase="Shared" />
     <Compile Include="..\..\Mvc.Core\src\Infrastructure\AsyncEnumerableReader.cs" />
-    <Compile Include="$(SharedSourceRoot)ThrowHelpers\ArgumentNullThrowHelper.cs" LinkBase="Shared" />
-    <Compile Include="$(SharedSourceRoot)CallerArgument\CallerArgumentExpressionAttribute.cs" LinkBase="Shared" />
+    <Compile
+      Include="$(SharedSourceRoot)ThrowHelpers\ArgumentNullThrowHelper.cs"
+      LinkBase="Shared"
+    />
+    <Compile
+      Include="$(SharedSourceRoot)CallerArgument\CallerArgumentExpressionAttribute.cs"
+      LinkBase="Shared"
+    />
   </ItemGroup>
 
   <ItemGroup>

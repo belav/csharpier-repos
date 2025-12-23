@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
-
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
@@ -8,5 +7,4 @@
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Mvc" />
   </ItemGroup>
-
 </Project>

@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFrameworks>$(NetCoreAppCurrent);$(NetCoreAppPrevious);$(NetCoreAppMinimum);netstandard2.0;$(NetFrameworkMinimum)</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -76,5 +75,4 @@ System.Formats.Asn1.AsnWriter</PackageDescription>
     <PackageReference Include="System.ValueTuple" Version="$(SystemValueTupleVersion)" />
     <Reference Include="System.Numerics" />
   </ItemGroup>
-
 </Project>

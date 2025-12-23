@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <Description>Shared ASP.NET test suite for Entity Framework Core database providers.</Description>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
@@ -56,5 +55,4 @@
   <ItemGroup>
     <Protobuf Include="ProtoTest.proto" />
   </ItemGroup>
-
 </Project>

@@ -12,7 +12,10 @@
     <!-- This test takes a long time to complete -->
     <UnloadabilityIncompatible>true</UnloadabilityIncompatible>
     <!-- https://github.com/dotnet/runtime/issues/53321 -->
-    <JitOptimizationSensitive Condition="'$(TargetArchitecture)' == 'arm64' And '$(TargetOS)' == 'osx'">true</JitOptimizationSensitive>
+    <JitOptimizationSensitive
+      Condition="'$(TargetArchitecture)' == 'arm64' And '$(TargetOS)' == 'osx'"
+      >true</JitOptimizationSensitive
+    >
   </PropertyGroup>
   <PropertyGroup>
     <DebugType>Full</DebugType>
@@ -55,13 +58,25 @@
     </EmbeddedResource>
   </ItemGroup>
 
-  <Target Name="_CopySpmiTestsToOutput" DependsOnTargets="ResolveProjectReferences" BeforeTargets="AssignTargetPaths">
-    <Copy SourceFiles="@(_SpmiTest)" DestinationFolder="$([System.IO.Path]::GetDirectoryName('$(OutputPath)'))/$([System.IO.Path]::GetFileName('%(FileName)'))" SkipUnchangedFiles="True" />
+  <Target
+    Name="_CopySpmiTestsToOutput"
+    DependsOnTargets="ResolveProjectReferences"
+    BeforeTargets="AssignTargetPaths"
+  >
+    <Copy
+      SourceFiles="@(_SpmiTest)"
+      DestinationFolder="$([System.IO.Path]::GetDirectoryName('$(OutputPath)'))/$([System.IO.Path]::GetFileName('%(FileName)'))"
+      SkipUnchangedFiles="True"
+    />
   </Target>
 
   <!-- This target builds the executables and test running scripts for the _SpmiTestProjects
       to the output directory of the current project. -->
   <Target Name="_BuildSpmiTestProjectScripts" BeforeTargets="CreateExecuteScript">
-    <MSBuild Projects="@(_SpmiTestProjects)" Targets="CreateExecuteScript" Properties="OutputPath=$(OutputPath)\%(FileName)" />
+    <MSBuild
+      Projects="@(_SpmiTestProjects)"
+      Targets="CreateExecuteScript"
+      Properties="OutputPath=$(OutputPath)\%(FileName)"
+    />
   </Target>
 </Project>

@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <Description>ASP.NET Core middleware that enables an application to support the WsFederation authentication workflow.</Description>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
@@ -13,5 +12,4 @@
     <Reference Include="Microsoft.IdentityModel.Protocols.WsFederation" />
     <Reference Include="System.IdentityModel.Tokens.Jwt" />
   </ItemGroup>
-
 </Project>

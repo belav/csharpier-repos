@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFrameworks>netcoreapp2.0;net461</TargetFrameworks>
     <Description>Entity Framework Core Command-line Tools</Description>
@@ -64,9 +63,20 @@
     </Compile>
   </ItemGroup>
 
-  <Target Name="BuildOtherPlatforms" AfterTargets="Build" Condition=" '$(TargetFramework)' == 'net461' And '$(Platform)' == 'AnyCPU' ">
-    <MSBuild Projects="$(MSBuildProjectFullPath)" Properties="TargetFramework=$(TargetFramework);Platform=x86;Configuration=$(Configuration)" Targets="Build" />
-    <MSBuild Projects="$(MSBuildProjectFullPath)" Properties="TargetFramework=$(TargetFramework);Platform=ARM64;Configuration=$(Configuration)" Targets="Build" />
+  <Target
+    Name="BuildOtherPlatforms"
+    AfterTargets="Build"
+    Condition=" '$(TargetFramework)' == 'net461' And '$(Platform)' == 'AnyCPU' "
+  >
+    <MSBuild
+      Projects="$(MSBuildProjectFullPath)"
+      Properties="TargetFramework=$(TargetFramework);Platform=x86;Configuration=$(Configuration)"
+      Targets="Build"
+    />
+    <MSBuild
+      Projects="$(MSBuildProjectFullPath)"
+      Properties="TargetFramework=$(TargetFramework);Platform=ARM64;Configuration=$(Configuration)"
+      Targets="Build"
+    />
   </Target>
-
 </Project>

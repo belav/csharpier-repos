@@ -1,6 +1,8 @@
 <linker>
   <assembly fullname="test, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-    <type fullname="Mono.Linker.Tests.Cases.Attributes.OnlyKeepUsed.UnusedAttributePreservedViaLinkXmlIsKept/FooAttribute" preserve="all">
-    </type>
+    <type
+      fullname="Mono.Linker.Tests.Cases.Attributes.OnlyKeepUsed.UnusedAttributePreservedViaLinkXmlIsKept/FooAttribute"
+      preserve="all"
+    ></type>
   </assembly>
 </linker>

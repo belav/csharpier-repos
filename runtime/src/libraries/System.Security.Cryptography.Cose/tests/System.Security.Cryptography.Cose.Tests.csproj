@@ -31,11 +31,11 @@
     <Compile Include="CoseSignerTests.cs" />
     <Compile Include="CoseTestHelpers.cs" />
   </ItemGroup>
-  
+
   <ItemGroup>
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.15.0" />
   </ItemGroup>
-  
+
   <ItemGroup>
     <ProjectReference Include="..\src\System.Security.Cryptography.Cose.csproj" />
   </ItemGroup>

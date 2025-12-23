@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFrameworks>$(DefaultNetFxTargetFramework);$(DefaultNetCoreTargetFramework)</TargetFrameworks>
   </PropertyGroup>
@@ -14,5 +13,4 @@
     <Reference Include="Microsoft.AspNetCore.DataProtection.Abstractions" />
     <Reference Include="Microsoft.AspNetCore.DataProtection.Extensions" />
   </ItemGroup>
-
 </Project>

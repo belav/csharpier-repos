@@ -1,4 +1,7 @@
-<Type Name="AxImporter+IReferenceResolver" FullName="System.Windows.Forms.Design.AxImporter+IReferenceResolver">
+<Type
+  Name="AxImporter+IReferenceResolver"
+  FullName="System.Windows.Forms.Design.AxImporter+IReferenceResolver"
+>
   <TypeSignature Language="C#" Value="public interface AxImporter.IReferenceResolver" />
   <AssemblyInfo>
     <AssemblyName>System.Design</AssemblyName>
@@ -12,7 +15,10 @@
   </Docs>
   <Members>
     <Member MemberName="ResolveActiveXReference">
-      <MemberSignature Language="C#" Value="public string ResolveActiveXReference (System.Runtime.InteropServices.UCOMITypeLib typeLib);" />
+      <MemberSignature
+        Language="C#"
+        Value="public string ResolveActiveXReference (System.Runtime.InteropServices.UCOMITypeLib typeLib);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -32,7 +38,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ResolveComReference">
-      <MemberSignature Language="C#" Value="public string ResolveComReference (System.Reflection.AssemblyName name);" />
+      <MemberSignature
+        Language="C#"
+        Value="public string ResolveComReference (System.Reflection.AssemblyName name);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -52,7 +61,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ResolveComReference">
-      <MemberSignature Language="C#" Value="public string ResolveComReference (System.Runtime.InteropServices.UCOMITypeLib typeLib);" />
+      <MemberSignature
+        Language="C#"
+        Value="public string ResolveComReference (System.Runtime.InteropServices.UCOMITypeLib typeLib);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -72,7 +84,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ResolveManagedReference">
-      <MemberSignature Language="C#" Value="public string ResolveManagedReference (string assemName);" />
+      <MemberSignature
+        Language="C#"
+        Value="public string ResolveManagedReference (string assemName);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>

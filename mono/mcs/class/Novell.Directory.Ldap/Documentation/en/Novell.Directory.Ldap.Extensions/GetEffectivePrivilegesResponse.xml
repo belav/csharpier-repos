@@ -1,10 +1,15 @@
-<Type Name="GetEffectivePrivilegesResponse" FullName="Novell.Directory.Ldap.Extensions.GetEffectivePrivilegesResponse">
-  <TypeSignature Language="C#" Value="public class GetEffectivePrivilegesResponse : Novell.Directory.Ldap.LdapExtendedResponse" />
+<Type
+  Name="GetEffectivePrivilegesResponse"
+  FullName="Novell.Directory.Ldap.Extensions.GetEffectivePrivilegesResponse"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class GetEffectivePrivilegesResponse : Novell.Directory.Ldap.LdapExtendedResponse"
+  />
   <AssemblyInfo>
     <AssemblyName>Novell.Directory.Ldap</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
-    <AssemblyCulture>
-    </AssemblyCulture>
+    <AssemblyCulture></AssemblyCulture>
     <Attributes>
       <Attribute>
         <AttributeName>System.Reflection.AssemblyKeyFile(KeyFile="../mono.pub")</AttributeName>
@@ -47,7 +52,10 @@
   <Interfaces />
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public GetEffectivePrivilegesResponse(Novell.Directory.Ldap.Rfc2251.RfcLdapMessage rfcMessage)" />
+      <MemberSignature
+        Language="C#"
+        Value="public GetEffectivePrivilegesResponse(Novell.Directory.Ldap.Rfc2251.RfcLdapMessage rfcMessage)"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="rfcMessage" Type="Novell.Directory.Ldap.Rfc2251.RfcLdapMessage" />

@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
@@ -16,5 +15,4 @@
   <ItemGroup>
     <Reference Include="Newtonsoft.Json" PrivateAssets="All" Publish="true" />
   </ItemGroup>
-
 </Project>

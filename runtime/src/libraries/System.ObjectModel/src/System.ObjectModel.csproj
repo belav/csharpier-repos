@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(NetCoreAppCurrent)</TargetFramework>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -36,5 +35,4 @@
     <Reference Include="System.Runtime" />
     <Reference Include="System.Threading" />
   </ItemGroup>
-
 </Project>

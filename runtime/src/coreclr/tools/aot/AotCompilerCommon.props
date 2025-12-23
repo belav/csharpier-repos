@@ -8,8 +8,10 @@
 
   <ItemGroup>
     <!-- Replace this line with the documented property once https://github.com/dotnet/runtime/issues/83495 is fixed -->
-    <RuntimeHostConfigurationOption Include="System.Xml.XmlResolver.IsNetworkingEnabledByDefault"
-                                    Value="false"
-                                    Trim="true" />
+    <RuntimeHostConfigurationOption
+      Include="System.Xml.XmlResolver.IsNetworkingEnabledByDefault"
+      Value="false"
+      Trim="true"
+    />
   </ItemGroup>
 </Project>

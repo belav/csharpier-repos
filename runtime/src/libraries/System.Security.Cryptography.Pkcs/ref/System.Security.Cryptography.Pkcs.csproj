@@ -4,9 +4,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="System.Security.Cryptography.Pkcs.cs" Condition="'$(TargetFrameworkIdentifier)' != '.NETFramework'" />
-    <Compile Include="System.Security.Cryptography.Pkcs.netframework.cs" Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'" />
-    <Compile Include="System.Security.Cryptography.Pkcs.netcoreapp.cs" Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'netstandard2.1'))" />
+    <Compile
+      Include="System.Security.Cryptography.Pkcs.cs"
+      Condition="'$(TargetFrameworkIdentifier)' != '.NETFramework'"
+    />
+    <Compile
+      Include="System.Security.Cryptography.Pkcs.netframework.cs"
+      Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'"
+    />
+    <Compile
+      Include="System.Security.Cryptography.Pkcs.netcoreapp.cs"
+      Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'netstandard2.1'))"
+    />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">

@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(NetCoreAppCurrent)</TargetFramework>
     <OutputType>Exe</OutputType>
@@ -11,5 +10,4 @@
       <FileVersion>$(ProductVersion)</FileVersion>
     </PropertyGroup>
   </Target>
-
 </Project>

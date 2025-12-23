@@ -1,9 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <Description>Core components of ASP.NET Core networking protocol stack.</Description>
     <TargetFrameworks>$(DefaultNetFxTargetFramework);netstandard2.0;netstandard2.1;$(DefaultNetCoreTargetFramework)</TargetFrameworks>
-    <TargetFrameworks Condition="'$(DotNetBuildFromSource)' == 'true'">$(DefaultNetCoreTargetFramework)</TargetFrameworks>
+    <TargetFrameworks Condition="'$(DotNetBuildFromSource)' == 'true'"
+      >$(DefaultNetCoreTargetFramework)</TargetFrameworks
+    >
     <IsAspNetCoreApp>true</IsAspNetCoreApp>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageTags>aspnetcore</PackageTags>
@@ -11,7 +12,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Reference Include="Microsoft.Bcl.AsyncInterfaces" Condition="'$(TargetFramework)' != '$(DefaultNetCoreTargetFramework)'" />
+    <Reference
+      Include="Microsoft.Bcl.AsyncInterfaces"
+      Condition="'$(TargetFramework)' != '$(DefaultNetCoreTargetFramework)'"
+    />
 
     <Reference Include="Microsoft.Extensions.Features" />
     <Reference Include="System.IO.Pipelines" />
@@ -25,5 +29,4 @@
     <AdditionalFiles Include="PublicAPI/$(TargetFramework)/PublicAPI.Shipped.txt" />
     <AdditionalFiles Include="PublicAPI/$(TargetFramework)/PublicAPI.Unshipped.txt" />
   </ItemGroup>
-
 </Project>

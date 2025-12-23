@@ -1,18 +1,19 @@
 <Project>
-  <UsingTask TaskName="EmitBundleSourceFiles"
-             AssemblyFile="$(MonoTargetsTasksAssemblyPath)" />
-  <UsingTask TaskName="LibraryBuilderTask" 
-             AssemblyFile="$(LibraryBuilderTasksAssemblyPath)" />
+  <UsingTask TaskName="EmitBundleSourceFiles" AssemblyFile="$(MonoTargetsTasksAssemblyPath)" />
+  <UsingTask TaskName="LibraryBuilderTask" AssemblyFile="$(LibraryBuilderTasksAssemblyPath)" />
 
-  <Target Name="_BuildNativeLibrary"
-          Condition="'$(_IsLibraryMode)' == 'true' and '$(RunAOTCompilation)' == 'true'"
-          DependsOnTargets="_GenerateBundle">
-
+  <Target
+    Name="_BuildNativeLibrary"
+    Condition="'$(_IsLibraryMode)' == 'true' and '$(RunAOTCompilation)' == 'true'"
+    DependsOnTargets="_GenerateBundle"
+  >
     <PropertyGroup>
       <_IsSharedLibrary>false</_IsSharedLibrary>
       <_IsSharedLibrary Condition="'$(NativeLib)' == 'shared'">true</_IsSharedLibrary>
       <_UsesCustomRuntimeInitCallback>false</_UsesCustomRuntimeInitCallback>
-      <_UsesCustomRuntimeInitCallback Condition="$(CustomRuntimeInitCallback) != ''">true</_UsesCustomRuntimeInitCallback>
+      <_UsesCustomRuntimeInitCallback Condition="$(CustomRuntimeInitCallback) != ''"
+        >true</_UsesCustomRuntimeInitCallback
+      >
       <_BundlesResources>$(BundlesResources)</_BundlesResources>
       <_BundlesResources Condition="'$(_BundlesResources)' == ''">true</_BundlesResources>
     </PropertyGroup>
@@ -22,7 +23,10 @@
       <_ExtraLibrarySources Include="@(BundledSources)" />
       <_ExtraLibrarySources Include="%(_BundledResources.DestinationFile)" />
       <_ExtraLinkerArgs Include="@(_CommonLinkerArgs)" />
-      <_BundledRuntimeConfig Include="@(_BundledResources)" Condition="$([System.String]::Copy('%(Identity)').EndsWith('runtimeconfig.bin'))" />
+      <_BundledRuntimeConfig
+        Include="@(_BundledResources)"
+        Condition="$([System.String]::Copy('%(Identity)').EndsWith('runtimeconfig.bin'))"
+      />
     </ItemGroup>
 
     <LibraryBuilderTask
@@ -40,14 +44,14 @@
       RuntimeLibraries="@(_RuntimeLibraries)"
       TargetOS="$(TargetOS)"
       UsesCustomRuntimeInitCallback="$(_UsesCustomRuntimeInitCallback)"
-      UsesRuntimeInitCallback="$(_UsesRuntimeInitCallback)">
+      UsesRuntimeInitCallback="$(_UsesRuntimeInitCallback)"
+    >
       <Output TaskParameter="OutputPath" PropertyName="LibraryOutputPath" />
       <Output TaskParameter="ExportedSymbols" ItemName="LibraryRuntimeExportedSymbols" />
     </LibraryBuilderTask>
   </Target>
 
-  <Target Name="_GenerateBundle"
-          Condition="'$(BundlesResources)' != 'false'">
+  <Target Name="_GenerateBundle" Condition="'$(BundlesResources)' != 'false'">
     <PropertyGroup>
       <BundleSourceFile>mono-bundled-source.c</BundleSourceFile>
       <BundleOutputDirectory>$(BundleDir)</BundleOutputDirectory>
@@ -66,9 +70,9 @@
     <EmitBundleSourceFiles
       FilesToBundle="@(_ResourcesToBundle)"
       BundleFile="$(BundleSourceFile)"
-      OutputDirectory="$(BundleOutputDirectory)">
+      OutputDirectory="$(BundleOutputDirectory)"
+    >
       <Output TaskParameter="BundledResources" ItemName="_BundledResources" />
-     </EmitBundleSourceFiles>
+    </EmitBundleSourceFiles>
   </Target>
-
 </Project>

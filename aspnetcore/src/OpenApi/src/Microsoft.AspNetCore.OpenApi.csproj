@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -25,5 +24,4 @@
   <ItemGroup>
     <InternalsVisibleTo Include="Microsoft.AspNetCore.OpenApi.Tests" />
   </ItemGroup>
-
 </Project>

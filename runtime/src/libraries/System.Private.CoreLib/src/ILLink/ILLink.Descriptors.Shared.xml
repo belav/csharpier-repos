@@ -8,7 +8,11 @@
     </type>
   </assembly>
 
-  <assembly fullname="System.Private.CoreLib" feature="System.Runtime.InteropServices.EnableConsumingManagedCodeFromNativeHosting" featurevalue="true">
+  <assembly
+    fullname="System.Private.CoreLib"
+    feature="System.Runtime.InteropServices.EnableConsumingManagedCodeFromNativeHosting"
+    featurevalue="true"
+  >
     <!-- Native hosting accesses managed methods from
     https://github.com/dotnet/runtime/blob/bbc898f3e5678135b242faeb6eefd8b24bf04f3c/src/native/corehost/hostpolicy/hostpolicy.cpp#L527-L538
     but ComponentActivator is not trimming safe. We persist the methods only when `_EnableConsumingManagedCodeFromNativeHosting` setting
@@ -29,7 +33,12 @@
   </assembly>
 
   <!-- Properties and methods used by a debugger. -->
-  <assembly fullname="System.Private.CoreLib" feature="System.Diagnostics.Debugger.IsSupported" featurevalue="true" featuredefault="true">
+  <assembly
+    fullname="System.Private.CoreLib"
+    feature="System.Diagnostics.Debugger.IsSupported"
+    featurevalue="true"
+    featuredefault="true"
+  >
     <type fullname="System.Threading.Tasks.Task">
       <property name="ParentForDebugger" />
       <property name="StateFlagsForDebugger" />
@@ -72,7 +81,7 @@
       <method name="GetActiveTaskFromId" />
     </type>
 
-     <!-- methods used by hot reload -->
+    <!-- methods used by hot reload -->
     <type fullname="System.Reflection.Metadata.MetadataUpdater">
       <method name="GetCapabilities" />
     </type>

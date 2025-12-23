@@ -9,10 +9,22 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="System.Security.Permissions.cs" Condition="'$(TargetFrameworkIdentifier)' != '.NETFramework'" />
-    <Compile Include="System.Security.Permissions.Forwards.cs" Condition="'$(TargetFrameworkIdentifier)' != '.NETFramework'" />
-    <Compile Include="System.Security.Permissions.netcoreapp.cs" Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'" />
-    <Compile Include="System.Security.Permissions.netframework.cs" Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'" />
+    <Compile
+      Include="System.Security.Permissions.cs"
+      Condition="'$(TargetFrameworkIdentifier)' != '.NETFramework'"
+    />
+    <Compile
+      Include="System.Security.Permissions.Forwards.cs"
+      Condition="'$(TargetFrameworkIdentifier)' != '.NETFramework'"
+    />
+    <Compile
+      Include="System.Security.Permissions.netcoreapp.cs"
+      Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'"
+    />
+    <Compile
+      Include="System.Security.Permissions.netframework.cs"
+      Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'"
+    />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'">
@@ -20,7 +32,10 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETStandard'">
-    <PackageReference Include="System.Security.AccessControl" Version="$(SystemSecurityAccessControlVersion)" />
+    <PackageReference
+      Include="System.Security.AccessControl"
+      Version="$(SystemSecurityAccessControlVersion)"
+    />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">

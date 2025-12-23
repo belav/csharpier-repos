@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <Description>Output cache implementation of Microsoft.AspNetCore.OutputCaching.IOutputCacheStore using Redis.</Description>
     <TargetFrameworks>$(DefaultNetCoreTargetFramework)</TargetFrameworks>
@@ -21,8 +20,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="$(SharedSourceRoot)ThrowHelpers\ArgumentNullThrowHelper.cs" LinkBase="Shared" />
-    <Compile Include="$(SharedSourceRoot)ThrowHelpers\ObjectDisposedThrowHelper.cs" LinkBase="Shared" />
-    <Compile Include="$(SharedSourceRoot)CallerArgument\CallerArgumentExpressionAttribute.cs" LinkBase="Shared" />
+    <Compile
+      Include="$(SharedSourceRoot)ThrowHelpers\ArgumentNullThrowHelper.cs"
+      LinkBase="Shared"
+    />
+    <Compile
+      Include="$(SharedSourceRoot)ThrowHelpers\ObjectDisposedThrowHelper.cs"
+      LinkBase="Shared"
+    />
+    <Compile
+      Include="$(SharedSourceRoot)CallerArgument\CallerArgumentExpressionAttribute.cs"
+      LinkBase="Shared"
+    />
   </ItemGroup>
 </Project>

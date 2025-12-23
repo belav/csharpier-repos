@@ -5,7 +5,9 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <CLRTestPriority>1</CLRTestPriority>
     <!-- Test unsupported outside of windows -->
-    <CLRTestTargetUnsupported Condition="'$(TargetsWindows)' != 'true'">true</CLRTestTargetUnsupported>
+    <CLRTestTargetUnsupported Condition="'$(TargetsWindows)' != 'true'"
+      >true</CLRTestTargetUnsupported
+    >
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="DefaultStackCommit.cs" />

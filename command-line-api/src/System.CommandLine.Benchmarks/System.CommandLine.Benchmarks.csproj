@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -40,5 +39,4 @@
     <ProjectReference Include="..\System.CommandLine.DragonFruit\System.CommandLine.DragonFruit.csproj" />
     <ProjectReference Include="..\System.CommandLine\System.CommandLine.csproj" />
   </ItemGroup>
-
 </Project>

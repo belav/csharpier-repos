@@ -1,6 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk.Razor">
-
-  <Import Project="Sdk.props" Sdk="Yarn.MSBuild" Condition=" '$(DotNetBuildFromSource)' != 'true'" />
+  <Import
+    Project="Sdk.props"
+    Sdk="Yarn.MSBuild"
+    Condition=" '$(DotNetBuildFromSource)' != 'true'"
+  />
 
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
@@ -31,7 +34,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <YarnInputs Include="$(YarnWorkingDir)**" Exclude="$(YarnWorkingDir)node_modules\**;$(YarnWorkingDir)*.d.ts;$(YarnWorkingDir)dist\**" />
+    <YarnInputs
+      Include="$(YarnWorkingDir)**"
+      Exclude="$(YarnWorkingDir)node_modules\**;$(YarnWorkingDir)*.d.ts;$(YarnWorkingDir)dist\**"
+    />
     <YarnOutputs Include="$(YarnWorkingDir)dist\$(Configuration)\AuthenticationService.js" />
 
     <Content Remove="$(YarnWorkingDir)**" />
@@ -41,8 +47,11 @@
     <UpToDateCheckOutput Include="@(YarnOutputs)" Set="StaticWebassets" />
   </ItemGroup>
 
-  <Target Name="_CreateInteropHash" BeforeTargets="CompileInterop" Condition="'$(BuildNodeJS)' != 'false' AND '$(DesignTimeBuild)' != 'true'">
-
+  <Target
+    Name="_CreateInteropHash"
+    BeforeTargets="CompileInterop"
+    Condition="'$(BuildNodeJS)' != 'false' AND '$(DesignTimeBuild)' != 'true'"
+  >
     <PropertyGroup>
       <InteropCompilationCacheFile>$(IntermediateOutputPath)interop.cache</InteropCompilationCacheFile>
     </PropertyGroup>
@@ -51,39 +60,65 @@
       <Output TaskParameter="HashResult" PropertyName="_YarnInputsHash" />
     </Hash>
 
-     <WriteLinesToFile Lines="$(_YarnInputsHash)" File="$(InteropCompilationCacheFile)" Overwrite="True" WriteOnlyWhenDifferent="True" />
+    <WriteLinesToFile
+      Lines="$(_YarnInputsHash)"
+      File="$(InteropCompilationCacheFile)"
+      Overwrite="True"
+      WriteOnlyWhenDifferent="True"
+    />
 
     <ItemGroup>
       <FileWrites Include="$(InteropCompilationCacheFile)" />
     </ItemGroup>
-
   </Target>
 
-  <Target Name="CompileInterop" Condition="'$(BuildNodeJS)' != 'false' AND '$(DesignTimeBuild)' != 'true'" Inputs="$(InteropCompilationCacheFile)" Outputs="@(YarnOutputs)">
+  <Target
+    Name="CompileInterop"
+    Condition="'$(BuildNodeJS)' != 'false' AND '$(DesignTimeBuild)' != 'true'"
+    Inputs="$(InteropCompilationCacheFile)"
+    Outputs="@(YarnOutputs)"
+  >
     <!-- Retry yarn install if first one fails -->
-    <Yarn Command="install --mutex network $(InstallArgs) --frozen-lockfile"
-          WorkingDirectory="$(YarnWorkingDir)"
-          IgnoreStandardErrorWarningFormat="$(IgnoreYarnWarnings)"
-          IgnoreExitCode="true">
-            <Output TaskParameter="ExitCode" PropertyName="_LocalYarnExitCode" />
+    <Yarn
+      Command="install --mutex network $(InstallArgs) --frozen-lockfile"
+      WorkingDirectory="$(YarnWorkingDir)"
+      IgnoreStandardErrorWarningFormat="$(IgnoreYarnWarnings)"
+      IgnoreExitCode="true"
+    >
+      <Output TaskParameter="ExitCode" PropertyName="_LocalYarnExitCode" />
     </Yarn>
-    <Yarn Command="install --mutex network $(InstallArgs) --frozen-lockfile"
-          WorkingDirectory="$(YarnWorkingDir)"
-          IgnoreStandardErrorWarningFormat="$(IgnoreYarnWarnings)"
-          Condition="'$(_LocalYarnExitCode)' != '0'" />
-    <Yarn Command="run build:production" WorkingDirectory="$(YarnWorkingDir)" Condition="'$(Configuration)' == 'Release'" IgnoreStandardErrorWarningFormat="$(IgnoreYarnWarnings)" />
-    <Yarn Command="run build:debug" WorkingDirectory="$(YarnWorkingDir)" Condition="'$(Configuration)' == 'Debug'" IgnoreStandardErrorWarningFormat="$(IgnoreYarnWarnings)" />
+    <Yarn
+      Command="install --mutex network $(InstallArgs) --frozen-lockfile"
+      WorkingDirectory="$(YarnWorkingDir)"
+      IgnoreStandardErrorWarningFormat="$(IgnoreYarnWarnings)"
+      Condition="'$(_LocalYarnExitCode)' != '0'"
+    />
+    <Yarn
+      Command="run build:production"
+      WorkingDirectory="$(YarnWorkingDir)"
+      Condition="'$(Configuration)' == 'Release'"
+      IgnoreStandardErrorWarningFormat="$(IgnoreYarnWarnings)"
+    />
+    <Yarn
+      Command="run build:debug"
+      WorkingDirectory="$(YarnWorkingDir)"
+      Condition="'$(Configuration)' == 'Debug'"
+      IgnoreStandardErrorWarningFormat="$(IgnoreYarnWarnings)"
+    />
 
     <Message Importance="high" Text="@(_InteropBuildOutput->'Emitted %(FullPath)')" />
-
   </Target>
 
   <Target Name="IncludeCompileInteropOutput">
     <ItemGroup>
-      <_InteropBuildOutput Include="$(YarnWorkingDir)dist\$(Configuration)\**" Exclude="$(YarnWorkingDir)dist\.gitignore" />
+      <_InteropBuildOutput
+        Include="$(YarnWorkingDir)dist\$(Configuration)\**"
+        Exclude="$(YarnWorkingDir)dist\.gitignore"
+      />
     </ItemGroup>
 
-    <DefineStaticWebAssets Condition="'@(_InteropBuildOutput)' != ''"
+    <DefineStaticWebAssets
+      Condition="'@(_InteropBuildOutput)' != ''"
       SourceType="Computed"
       SourceId="$(PackageId)"
       ContentRoot="$(YarnWorkingDir)dist\$(Configuration)\"
@@ -95,17 +130,23 @@
     </DefineStaticWebAssets>
 
     <ItemGroup>
-      <_InteropBuildOutput Include="$(YarnWorkingDir)dist\$(Configuration)\**" Exclude="$(YarnWorkingDir)dist\.gitignore" />
+      <_InteropBuildOutput
+        Include="$(YarnWorkingDir)dist\$(Configuration)\**"
+        Exclude="$(YarnWorkingDir)dist\.gitignore"
+      />
       <FileWrites Include="$(_InteropBuildOutput)" />
     </ItemGroup>
   </Target>
 
-  <Import Project="Sdk.targets" Sdk="Yarn.MSBuild" Condition=" '$(DotNetBuildFromSource)' != 'true'" />
+  <Import
+    Project="Sdk.targets"
+    Sdk="Yarn.MSBuild"
+    Condition=" '$(DotNetBuildFromSource)' != 'true'"
+  />
 
   <ItemGroup>
     <EmbeddedResource Include="ILLink.Descriptors.xml">
       <LogicalName>ILLink.Descriptors.xml</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
-
 </Project>

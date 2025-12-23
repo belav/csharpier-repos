@@ -4,5 +4,4 @@
   <ItemGroup>
     <Import Remove="System.Net.Http" />
   </ItemGroup>
-
 </Project>

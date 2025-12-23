@@ -18,7 +18,7 @@
 
     <!-- VS Insertion -->
     <VisualStudioInsertionComponent>Microsoft.CodeAnalysis.LanguageServices</VisualStudioInsertionComponent>
-  
+
     <!-- ServiceHub AssemblyPath -->
     <!-- Path to our servicehub entry point dll in the vsix directory relative 
          to our servicehub.servicehub.json files in the same vsix directory -->
@@ -342,12 +342,24 @@
   </ItemGroup>
   <ItemGroup>
     <NuGetPackageToIncludeInVsix Include="Humanizer.Core" PkgDefEntry="CodeBase" />
-    <NuGetPackageToIncludeInVsix Include="Microsoft.CodeAnalysis.AnalyzerUtilities" PkgDefEntry="CodeBase" />
+    <NuGetPackageToIncludeInVsix
+      Include="Microsoft.CodeAnalysis.AnalyzerUtilities"
+      PkgDefEntry="CodeBase"
+    />
     <NuGetPackageToIncludeInVsix Include="SQLitePCLRaw.core" PkgDefEntry="CodeBase" />
     <NuGetPackageToIncludeInVsix Include="SQLitePCLRaw.bundle_green" PkgDefEntry="CodeBase" />
-    <NuGetPackageToIncludeInVsix Include="SQLitePCLRaw.provider.e_sqlite3.net45" PkgDefEntry="CodeBase" />
-    <NuGetPackageToIncludeInVsix Include="SQLitePCLRaw.provider.dynamic_cdecl" PkgDefEntry="CodeBase" />
-    <NuGetPackageToIncludeInVsix Include="Microsoft.CodeAnalysis.Elfie" PkgDefEntry="BindingRedirect" />
+    <NuGetPackageToIncludeInVsix
+      Include="SQLitePCLRaw.provider.e_sqlite3.net45"
+      PkgDefEntry="CodeBase"
+    />
+    <NuGetPackageToIncludeInVsix
+      Include="SQLitePCLRaw.provider.dynamic_cdecl"
+      PkgDefEntry="CodeBase"
+    />
+    <NuGetPackageToIncludeInVsix
+      Include="Microsoft.CodeAnalysis.Elfie"
+      PkgDefEntry="BindingRedirect"
+    />
     <NuGetPackageToIncludeInVsix Include="ICSharpCode.Decompiler" PkgDefEntry="CodeBase" />
     <!-- Code base is provided by the LSP client for released VS versions in order to ensure only 1 version of these assemblies are loaded. -->
     <NuGetPackageToIncludeInVsix Include="Microsoft.VisualStudio.LanguageServer.Protocol" />
@@ -371,14 +383,40 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.DiaSymReader.PortablePdb" Version="$(MicrosoftDiaSymReaderPortablePdbVersion)" />
-    <PackageReference Include="Microsoft.VisualStudio.Imaging.Interop.14.0.DesignTime" Version="$(MicrosoftVisualStudioImagingInterop140DesignTimeVersion)" />
-    <PackageReference Include="Microsoft.VisualStudio.SDK.Analyzers" Version="$(MicrosoftVisualStudioSDKAnalyzersVersion)" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.VisualStudio.Shell.15.0" Version="$(MicrosoftVisualStudioShell150Version)" />
-    <PackageReference Include="Microsoft.VisualStudio.Shell.Framework" Version="$(MicrosoftVisualStudioShellFrameworkVersion)" />
-    <PackageReference Include="SQLitePCLRaw.bundle_green" Version="$(SQLitePCLRawbundle_greenVersion)" />
-    <PackageReference Include="Microsoft.CodeAnalysis.AnalyzerUtilities" Version="$(MicrosoftCodeAnalysisAnalyzerUtilitiesVersion)" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.VisualStudio.Threading" Version="$(MicrosoftVisualStudioThreadingVersion)" />
+    <PackageReference
+      Include="Microsoft.DiaSymReader.PortablePdb"
+      Version="$(MicrosoftDiaSymReaderPortablePdbVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.VisualStudio.Imaging.Interop.14.0.DesignTime"
+      Version="$(MicrosoftVisualStudioImagingInterop140DesignTimeVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.VisualStudio.SDK.Analyzers"
+      Version="$(MicrosoftVisualStudioSDKAnalyzersVersion)"
+      PrivateAssets="all"
+    />
+    <PackageReference
+      Include="Microsoft.VisualStudio.Shell.15.0"
+      Version="$(MicrosoftVisualStudioShell150Version)"
+    />
+    <PackageReference
+      Include="Microsoft.VisualStudio.Shell.Framework"
+      Version="$(MicrosoftVisualStudioShellFrameworkVersion)"
+    />
+    <PackageReference
+      Include="SQLitePCLRaw.bundle_green"
+      Version="$(SQLitePCLRawbundle_greenVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.CodeAnalysis.AnalyzerUtilities"
+      Version="$(MicrosoftCodeAnalysisAnalyzerUtilitiesVersion)"
+      PrivateAssets="all"
+    />
+    <PackageReference
+      Include="Microsoft.VisualStudio.Threading"
+      Version="$(MicrosoftVisualStudioThreadingVersion)"
+    />
     <PackageReference Include="Newtonsoft.Json" Version="$(NewtonsoftJsonVersion)" />
   </ItemGroup>
 </Project>

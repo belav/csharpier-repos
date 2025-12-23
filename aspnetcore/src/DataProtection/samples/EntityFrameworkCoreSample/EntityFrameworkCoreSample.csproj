@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <OutputType>exe</OutputType>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
@@ -11,5 +10,4 @@
     <Reference Include="Microsoft.EntityFrameworkCore.SqlServer" />
     <Reference Include="Microsoft.Extensions.Logging.Console" />
   </ItemGroup>
-
 </Project>

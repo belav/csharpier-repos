@@ -9,15 +9,28 @@
     <Compile Include="EventSourceGenerator.Emitter.cs" />
     <Compile Include="EventSourceGenerator.Parser.cs" />
     <Compile Include="IntrinsicsInSystemPrivateCoreLibAnalyzer.cs" />
-    <Compile Include="$(CoreLibSharedDir)\System\Runtime\CompilerServices\IsExternalInit.cs" Link="Common\System\Runtime\CompilerServices\IsExternalInit.cs" />
+    <Compile
+      Include="$(CoreLibSharedDir)\System\Runtime\CompilerServices\IsExternalInit.cs"
+      Link="Common\System\Runtime\CompilerServices\IsExternalInit.cs"
+    />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="$(CoreLibSharedDir)System\Collections\Generic\ValueListBuilder.cs" Link="Production\ValueListBuilder.cs" />
-    <Compile Include="$(CoreLibSharedDir)System\Collections\Generic\ValueListBuilder.Pop.cs" Link="Production\ValueListBuilder.Pop.cs" />
+    <Compile
+      Include="$(CoreLibSharedDir)System\Collections\Generic\ValueListBuilder.cs"
+      Link="Production\ValueListBuilder.cs"
+    />
+    <Compile
+      Include="$(CoreLibSharedDir)System\Collections\Generic\ValueListBuilder.Pop.cs"
+      Link="Production\ValueListBuilder.Pop.cs"
+    />
   </ItemGroup>
-  
+
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" PrivateAssets="all" Version="$(MicrosoftCodeAnalysisVersion_LatestVS)" />
+    <PackageReference
+      Include="Microsoft.CodeAnalysis.CSharp"
+      PrivateAssets="all"
+      Version="$(MicrosoftCodeAnalysisVersion_LatestVS)"
+    />
   </ItemGroup>
 </Project>

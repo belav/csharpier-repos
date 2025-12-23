@@ -1,5 +1,12 @@
-<Type Name="StandardValuesCollection" FullName="System.ComponentModel.TypeConverter+StandardValuesCollection">
-  <TypeSignature Language="C#" Value="public class StandardValuesCollection : ICollection, IEnumerable" Maintainer="auto" />
+<Type
+  Name="StandardValuesCollection"
+  FullName="System.ComponentModel.TypeConverter+StandardValuesCollection"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class StandardValuesCollection : ICollection, IEnumerable"
+    Maintainer="auto"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -76,7 +83,10 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public StandardValuesCollection (Collections.ICollection values);" />
+      <MemberSignature
+        Language="C#"
+        Value="public StandardValuesCollection (Collections.ICollection values);"
+      />
       <MemberType>Constructor</MemberType>
       <ReturnValue />
       <Parameters>

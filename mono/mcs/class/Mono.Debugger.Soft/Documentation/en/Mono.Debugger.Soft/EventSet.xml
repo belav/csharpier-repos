@@ -1,6 +1,9 @@
 <Type Name="EventSet" FullName="Mono.Debugger.Soft.EventSet">
   <TypeSignature Language="C#" Value="public class EventSet" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit EventSet extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit EventSet extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>Mono.Debugger.Soft</AssemblyName>
     <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -16,7 +19,10 @@
   <Members>
     <Member MemberName="Events">
       <MemberSignature Language="C#" Value="public Mono.Debugger.Soft.Event[] Events { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class Mono.Debugger.Soft.Event[] Events" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class Mono.Debugger.Soft.Event[] Events"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -31,8 +37,14 @@
       </Docs>
     </Member>
     <Member MemberName="Item">
-      <MemberSignature Language="C#" Value="public Mono.Debugger.Soft.Event this[int index] { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class Mono.Debugger.Soft.Event Item(int32)" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Debugger.Soft.Event this[int index] { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class Mono.Debugger.Soft.Event Item(int32)"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -51,8 +63,14 @@
       </Docs>
     </Member>
     <Member MemberName="SuspendPolicy">
-      <MemberSignature Language="C#" Value="public Mono.Debugger.Soft.SuspendPolicy SuspendPolicy { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype Mono.Debugger.Soft.SuspendPolicy SuspendPolicy" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Debugger.Soft.SuspendPolicy SuspendPolicy { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype Mono.Debugger.Soft.SuspendPolicy SuspendPolicy"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -68,7 +86,10 @@
     </Member>
     <Member MemberName="vm">
       <MemberSignature Language="C#" Value="protected Mono.Debugger.Soft.VirtualMachine vm;" />
-      <MemberSignature Language="ILAsm" Value=".field family class Mono.Debugger.Soft.VirtualMachine vm" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field family class Mono.Debugger.Soft.VirtualMachine vm"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>

@@ -9,7 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\src\contentFiles\cs\netstandard2.0\EventSourceTestCollection.cs" Link="EventSourceTestCollection.cs" />
+    <Compile
+      Include="..\src\contentFiles\cs\netstandard2.0\EventSourceTestCollection.cs"
+      Link="EventSourceTestCollection.cs"
+    />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <OutputType>Exe</OutputType>
@@ -13,9 +12,8 @@
     <Reference Include="BenchmarkDotNet" />
     <Reference Include="Microsoft.AspNetCore.Server.HttpSys" />
   </ItemGroup>
-  
+
   <ItemGroup>
     <Compile Include="$(SharedSourceRoot)BenchmarkRunner\*.cs" />
   </ItemGroup>
-
 </Project>

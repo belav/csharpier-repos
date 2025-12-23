@@ -4,9 +4,8 @@ Expect:       !Error
 -->
 
 <feed xmlns="http://www.w3.org/2005/Atom">
-
   <title>Example Feed</title>
-  <link href="http://contoso.com/"/>
+  <link href="http://contoso.com/" />
   <updated>2003-12-13T18:30:02Z</updated>
   <author>
     <name>Author Name</name>
@@ -15,17 +14,16 @@ Expect:       !Error
 
   <entry>
     <title>Atom-Powered Robots Run Amok</title>
-    <link href="http://contoso.com/2003/12/13/atom03"/>
+    <link href="http://contoso.com/2003/12/13/atom03" />
     <id>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a</id>
     <updated>2003-12-13T18:30:02Z</updated>
     <summary>Some text.</summary>
 
     <contributor>
-       <name>John Smith</name>
-     </contributor>
-     <contributor>
-       <name>input name</name>
-     </contributor>
+      <name>John Smith</name>
+    </contributor>
+    <contributor>
+      <name>input name</name>
+    </contributor>
   </entry>
-
 </feed>

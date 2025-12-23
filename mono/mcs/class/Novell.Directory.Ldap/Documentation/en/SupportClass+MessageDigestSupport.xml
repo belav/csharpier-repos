@@ -3,8 +3,7 @@
   <AssemblyInfo>
     <AssemblyName>Novell.Directory.Ldap</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
-    <AssemblyCulture>
-    </AssemblyCulture>
+    <AssemblyCulture></AssemblyCulture>
     <Attributes>
       <Attribute>
         <AttributeName>System.Reflection.AssemblyKeyFile(KeyFile="../mono.pub")</AttributeName>
@@ -128,7 +127,10 @@
       </Docs>
     </Member>
     <Member MemberName="Update">
-      <MemberSignature Language="C#" Value="public void Update(byte[] newData, int offset, int count)" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Update(byte[] newData, int offset, int count)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -159,7 +161,10 @@
       </Docs>
     </Member>
     <Member MemberName="GetInstance">
-      <MemberSignature Language="C#" Value="public static SupportClass+MessageDigestSupport GetInstance(string algorithm)" />
+      <MemberSignature
+        Language="C#"
+        Value="public static SupportClass+MessageDigestSupport GetInstance(string algorithm)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>SupportClass+MessageDigestSupport</ReturnType>
@@ -175,7 +180,10 @@
       </Docs>
     </Member>
     <Member MemberName="EquivalentDigest">
-      <MemberSignature Language="C#" Value="public static bool EquivalentDigest(sbyte[] firstDigest, sbyte[] secondDigest)" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool EquivalentDigest(sbyte[] firstDigest, sbyte[] secondDigest)"
+      />
       <MemberType>Method</MemberType>
       <Attributes>
         <Attribute>
@@ -198,7 +206,10 @@
       </Docs>
     </Member>
     <Member MemberName="Algorithm">
-      <MemberSignature Language="C#" Value="public System.Security.Cryptography.HashAlgorithm Algorithm { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Security.Cryptography.HashAlgorithm Algorithm { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Security.Cryptography.HashAlgorithm</ReturnType>

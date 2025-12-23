@@ -76,7 +76,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Certificates">
-      <MemberSignature Language="C#" Value="public Mono.Security.X509.X509CertificateCollection Certificates { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Security.X509.X509CertificateCollection Certificates { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Mono.Security.X509.X509CertificateCollection</ReturnType>
@@ -92,7 +95,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ContentInfo">
-      <MemberSignature Language="C#" Value="public Mono.Security.PKCS7.ContentInfo ContentInfo { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Security.PKCS7.ContentInfo ContentInfo { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Mono.Security.PKCS7+ContentInfo</ReturnType>
@@ -157,7 +163,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="SignerInfo">
-      <MemberSignature Language="C#" Value="public Mono.Security.PKCS7.SignerInfo SignerInfo { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Security.PKCS7.SignerInfo SignerInfo { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Mono.Security.PKCS7+SignerInfo</ReturnType>
@@ -189,7 +198,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="VerifySignature">
-      <MemberSignature Language="C#" Value="public bool VerifySignature (System.Security.Cryptography.AsymmetricAlgorithm aa);" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool VerifySignature (System.Security.Cryptography.AsymmetricAlgorithm aa);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>

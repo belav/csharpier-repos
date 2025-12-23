@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFrameworks>net472</TargetFrameworks>
 
@@ -19,7 +18,10 @@
 
   <ItemGroup>
     <PackageReference Include="System.Composition" Version="$(SystemCompositionVersion)" />
-    <PackageReference Include="Microsoft.VisualStudio.ComponentModelHost" Version="$(MicrosoftVisualStudioComponentModelHostVersion)" />
+    <PackageReference
+      Include="Microsoft.VisualStudio.ComponentModelHost"
+      Version="$(MicrosoftVisualStudioComponentModelHostVersion)"
+    />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,5 +30,4 @@
     -->
     <InternalsVisibleTo Include="Templates.Editorconfig.Wizard" Key="$(MicrosoftSharedPublicKey)" />
   </ItemGroup>
-
 </Project>

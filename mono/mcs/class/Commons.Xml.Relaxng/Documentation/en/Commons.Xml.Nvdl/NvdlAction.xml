@@ -1,5 +1,8 @@
 <Type Name="NvdlAction" FullName="Commons.Xml.Nvdl.NvdlAction">
-  <TypeSignature Language="C#" Value="public abstract class NvdlAction : Commons.Xml.Nvdl.NvdlAttributable" />
+  <TypeSignature
+    Language="C#"
+    Value="public abstract class NvdlAction : Commons.Xml.Nvdl.NvdlAttributable"
+  />
   <AssemblyInfo>
     <AssemblyName>Commons.Xml.Relaxng</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
